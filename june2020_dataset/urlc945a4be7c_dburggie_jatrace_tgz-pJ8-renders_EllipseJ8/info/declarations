@@ -1,0 +1,698 @@
+Compiled from "MyImageTest.java"
+public class MyImageTest {
+  public MyImageTest();
+  public static boolean ReadWriteTest(jatrace.Color);
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "gui.java"
+public class gui {
+  public gui();
+  public static void main(java.lang.String[]);
+}
+Compiled from "Body.java"
+public abstract class jatrace.Body {
+  protected jatrace.Color color;
+  protected jatrace.Vector position;
+  protected jatrace.Vector orientation;
+  protected double reflectivity;
+  protected double specularity;
+  protected boolean matte;
+  public abstract jatrace.Vector getNormal(jatrace.Vector);
+  public abstract double intersection(jatrace.Ray);
+  public jatrace.Color getColor(jatrace.Vector);
+  public void setColor(jatrace.Color);
+  public jatrace.Vector getPosition();
+  public void setPosition(jatrace.Vector);
+  public jatrace.Vector getOrientation();
+  public void setOrientation(jatrace.Vector);
+  public double getReflectivity(jatrace.Vector);
+  public void setReflectivity(double);
+  public double getSpecularity(jatrace.Vector);
+  public void setSpecularity(double);
+  public boolean isMatte(jatrace.Vector);
+  public void setMatte(boolean);
+  public jatrace.Body();
+}
+Compiled from "Camera.java"
+public class jatrace.Camera {
+  protected jatrace.Vector position;
+  protected jatrace.Vector focus;
+  protected jatrace.Vector forward;
+  protected jatrace.Vector up;
+  protected jatrace.Vector right;
+  protected jatrace.Vector corner;
+  protected jatrace.Vector xstep;
+  protected jatrace.Vector ystep;
+  protected int ppu;
+  protected double width;
+  protected double height;
+  protected double d;
+  protected boolean delta;
+  protected boolean initLock;
+  public jatrace.Camera();
+  public jatrace.Camera(jatrace.Vector, jatrace.Vector, double, double);
+  public jatrace.Camera(jatrace.Vector, jatrace.Vector, jatrace.Vector, double, double, int);
+  public jatrace.Camera dup();
+  protected jatrace.Camera reset();
+  public jatrace.Camera resetDelta();
+  public jatrace.Camera setDelta(double);
+  public jatrace.Camera setOrientation(jatrace.Vector);
+  public jatrace.Camera setPPU(int);
+  public int getPPU();
+  public double getWidth();
+  public double getHeight();
+  public int getPixelsWide();
+  public int getPixelsTall();
+  public jatrace.Camera setWindow(double, double);
+  public jatrace.Camera setFocus(jatrace.Vector);
+  public jatrace.Camera setPosition(jatrace.Vector);
+  public jatrace.Ray getRay(int, int);
+  static {};
+}
+Compiled from "Color.java"
+public class jatrace.Color {
+  protected double red;
+  protected double green;
+  protected double blue;
+  protected double alpha;
+  public jatrace.Color();
+  public jatrace.Color(int, int, int, int);
+  public jatrace.Color(double, double, double);
+  public jatrace.Color(double, double, double, double);
+  public jatrace.Color dup();
+  public jatrace.Color copy(jatrace.Color);
+  public jatrace.Color add(jatrace.Color);
+  public int[] p();
+  public java.lang.String toString();
+  public boolean equals(jatrace.Color);
+  public jatrace.Color setRGB(double, double, double);
+  public jatrace.Color setRGBA(double, double, double, double);
+  public jatrace.Color setRGBA(int, int, int, int);
+  public jatrace.Color setalpha(double);
+  public jatrace.Color dim(double);
+  public jatrace.Color gamma(double);
+  public double getRed();
+  public double getGreen();
+  public double getBlue();
+  public int toARGB();
+  public jatrace.Color copyARGB(int);
+  public static jatrace.Color fromARGB(int);
+}
+Compiled from "LinkedBody.java"
+public class jatrace.LinkedBody {
+  public jatrace.LinkedBody(jatrace.Body);
+  public jatrace.Body b();
+  public jatrace.LinkedBody next();
+  public void insertBefore(jatrace.LinkedBody);
+  public void insertAfter(jatrace.LinkedBody);
+  public void remove();
+}
+Compiled from "Ray.java"
+public class jatrace.Ray {
+  protected jatrace.Vector origin;
+  protected jatrace.Vector direction;
+  public jatrace.Ray();
+  public jatrace.Ray(jatrace.Vector, jatrace.Vector);
+  public jatrace.Ray dup();
+  public jatrace.Ray setOrigin(jatrace.Vector);
+  public jatrace.Ray setDirection(jatrace.Vector);
+  public jatrace.Vector o();
+  public jatrace.Vector copyOriginTo(jatrace.Vector);
+  public jatrace.Vector d();
+  public jatrace.Vector copyDirectionTo(jatrace.Vector);
+  public jatrace.Vector follow(double);
+  public jatrace.Ray reflect(jatrace.Vector, jatrace.Vector);
+}
+Compiled from "Sky.java"
+public interface jatrace.Sky {
+  public abstract jatrace.Color getColor(jatrace.Vector);
+  public abstract jatrace.Vector[] getLight();
+}
+Compiled from "Tracer.java"
+public class jatrace.Tracer {
+  protected jatrace.World world;
+  protected jatrace.Camera camera;
+  protected jatrace.myImage image;
+  protected int ppu;
+  protected int width;
+  protected int height;
+  public jatrace.Tracer(jatrace.World, jatrace.Camera);
+  public jatrace.Tracer();
+  public jatrace.Tracer setSampleDepth(int);
+  public jatrace.Tracer setWorld();
+  public jatrace.Tracer setWorld(jatrace.World);
+  public jatrace.Tracer setCamera();
+  public jatrace.Tracer setCamera(jatrace.Camera);
+  public jatrace.Tracer draw(int);
+  public jatrace.Tracer draw();
+  public jatrace.Tracer write();
+  public jatrace.Tracer write(java.lang.String);
+}
+Compiled from "Vector.java"
+public class jatrace.Vector {
+  protected double x;
+  protected double y;
+  protected double z;
+  public jatrace.Vector();
+  public jatrace.Vector(double, double, double);
+  public jatrace.Vector dup();
+  public jatrace.Vector copy(jatrace.Vector);
+  public jatrace.Vector setxyz(double, double, double);
+  public jatrace.Vector trans(jatrace.Vector);
+  public jatrace.Vector trans(jatrace.Vector, double);
+  public jatrace.Vector trans(double, double, double);
+  public double dot(jatrace.Vector);
+  public static jatrace.Vector cross(jatrace.Vector, jatrace.Vector);
+  public jatrace.Vector cross(jatrace.Vector);
+  public jatrace.Vector scale(double);
+  public jatrace.Vector sub(jatrace.Vector);
+  public double len();
+  public jatrace.Vector proj(jatrace.Vector);
+  public jatrace.Vector norm();
+  public jatrace.Vector delta(double);
+  public java.lang.String toString();
+  public final jatrace.Vector minus();
+  public double getX();
+  public double getY();
+  public double getZ();
+}
+Compiled from "World.java"
+public class jatrace.World {
+  protected jatrace.LinkedBody bodies;
+  protected jatrace.Sky sky;
+  protected jatrace.Vector[] lights;
+  protected jatrace.myInterface i;
+  protected double baseBrightness;
+  static final boolean $assertionsDisabled;
+  public jatrace.World();
+  public jatrace.World(jatrace.LinkedBody, jatrace.Sky);
+  public jatrace.World(jatrace.Body[], jatrace.Sky);
+  public jatrace.World addBody(jatrace.Body);
+  public jatrace.World setSky(jatrace.Sky);
+  public jatrace.World getLights();
+  public jatrace.World setBaseBrightness(double);
+  protected void trace(jatrace.Ray);
+  protected jatrace.Color highlight(double, jatrace.Ray);
+  public jatrace.Color sample(jatrace.Ray, int, jatrace.Body);
+  public jatrace.Color sample(jatrace.Ray, int);
+  public jatrace.Color sample(jatrace.Ray);
+  static {};
+}
+Compiled from "CheckCircle.java"
+public class jatrace.bodies.CheckCircle extends jatrace.bodies.CheckPlane {
+  double radius;
+  double rSquared;
+  public jatrace.bodies.CheckCircle();
+  public jatrace.bodies.CheckCircle(jatrace.Vector, jatrace.Vector, jatrace.Vector, double);
+  public void setRadius(double);
+  public double intersection(jatrace.Ray);
+}
+Compiled from "CheckEllipse.java"
+public class jatrace.bodies.CheckEllipse extends jatrace.bodies.CheckPlane {
+  public jatrace.bodies.CheckEllipse(jatrace.Vector, jatrace.Vector, jatrace.Vector);
+  public jatrace.bodies.CheckEllipse();
+  public final void setAxes(jatrace.Vector, jatrace.Vector);
+  public final void setAxisLengths(double, double);
+  public double intersection(jatrace.Ray);
+}
+Compiled from "CheckPlane.java"
+public class jatrace.bodies.CheckPlane extends jatrace.bodies.Plane {
+  protected jatrace.Vector oX;
+  protected jatrace.Vector oY;
+  protected jatrace.Color c1;
+  protected jatrace.Color c2;
+  public jatrace.bodies.CheckPlane(jatrace.Vector, jatrace.Vector, jatrace.Vector);
+  public jatrace.bodies.CheckPlane();
+  public void setOrientation(jatrace.Vector);
+  public void setColor(jatrace.Color);
+  public void setColor(jatrace.Color, jatrace.Color);
+  public jatrace.Color getColor(jatrace.Vector);
+}
+Compiled from "Circle.java"
+public class jatrace.bodies.Circle extends jatrace.bodies.Plane {
+  double radius;
+  double rSquared;
+  public jatrace.bodies.Circle();
+  public jatrace.bodies.Circle(jatrace.Vector, jatrace.Vector, jatrace.Color, double);
+  public void setRadius(double);
+  public double intersection(jatrace.Ray);
+}
+Compiled from "Ellipse.java"
+public class jatrace.bodies.Ellipse extends jatrace.bodies.Plane {
+  public jatrace.bodies.Ellipse(jatrace.Vector, jatrace.Vector, jatrace.Color);
+  public jatrace.bodies.Ellipse();
+  public final void setAxes(jatrace.Vector, jatrace.Vector);
+  public final void setAxisLengths(double, double);
+  public double intersection(jatrace.Ray);
+}
+Compiled from "Ellipsoid.java"
+public class jatrace.bodies.Ellipsoid extends jatrace.Body {
+  public jatrace.bodies.Ellipsoid();
+  public jatrace.bodies.Ellipsoid(jatrace.Vector, jatrace.Vector, jatrace.Vector);
+  public void setOrientation(jatrace.Vector, jatrace.Vector);
+  public void setAxisLengths(double, double, double);
+  public jatrace.Vector getNormal(jatrace.Vector);
+  public double intersection(jatrace.Ray);
+}
+Compiled from "OneWayPlane.java"
+public class jatrace.bodies.OneWayPlane extends jatrace.bodies.Plane {
+  public jatrace.bodies.OneWayPlane(jatrace.Vector, jatrace.Vector, jatrace.Color);
+  public jatrace.bodies.OneWayPlane();
+  public double intersection(jatrace.Ray);
+}
+Compiled from "Plane.java"
+public class jatrace.bodies.Plane extends jatrace.Body {
+  protected jatrace.Vector position;
+  protected jatrace.Vector normal;
+  public jatrace.bodies.Plane(jatrace.Vector, jatrace.Vector, jatrace.Color);
+  public jatrace.bodies.Plane();
+  public void setNormal(jatrace.Vector);
+  public jatrace.Vector getNormal(jatrace.Vector);
+  public double intersection(jatrace.Ray);
+}
+Compiled from "Sphere.java"
+public class jatrace.bodies.Sphere extends jatrace.Body {
+  protected double radius;
+  protected double RR;
+  protected jatrace.Vector position;
+  public jatrace.bodies.Sphere();
+  public jatrace.bodies.Sphere(jatrace.Vector, double, jatrace.Color);
+  public jatrace.bodies.Sphere setRadius(double);
+  public jatrace.Vector getNormal(jatrace.Vector);
+  public double intersection(jatrace.Ray);
+}
+Compiled from "TexturedSphere.java"
+public class jatrace.bodies.TexturedSphere extends jatrace.bodies.Sphere {
+  int hitcount;
+  int misscount;
+  public jatrace.bodies.TexturedSphere();
+  public jatrace.bodies.TexturedSphere(jatrace.Vector, double, java.lang.String);
+  public void load(java.lang.String);
+  public void setCoordinates(jatrace.Vector, jatrace.Vector);
+  public jatrace.Color getColor(jatrace.Vector);
+  public void displayNumHits();
+  public double intersection(jatrace.Ray);
+}
+Compiled from "TruncatedSphere.java"
+public class jatrace.bodies.TruncatedSphere extends jatrace.bodies.Sphere {
+  protected jatrace.bodies.Plane topCap;
+  protected jatrace.bodies.Plane bottomCap;
+  protected double cosine;
+  public jatrace.bodies.TruncatedSphere(jatrace.Vector, jatrace.Vector, double, jatrace.Color);
+  public jatrace.Vector getNormal(jatrace.Vector);
+  public double intersection(jatrace.Ray);
+  public void setOrientation(jatrace.Vector);
+  public void setCosine(double);
+}
+Compiled from "Gui.java"
+public class jatrace.gui.Gui extends javax.swing.JFrame {
+  javax.swing.JPanel content;
+  javax.swing.JPanel footer;
+  javax.swing.JPanel divider;
+  jatrace.gui.body.BodyPanel bodies;
+  javax.swing.JPanel preview;
+  javax.swing.JPanel skies;
+  javax.swing.JPanel camera;
+  javax.swing.JPanel render;
+  public static void main(java.lang.String[]);
+  jatrace.gui.Gui(jatrace.gui.Gui$1);
+}
+Compiled from "Gui.java"
+final class jatrace.gui.Gui$1 implements java.lang.Runnable {
+  jatrace.gui.Gui$1();
+  public void run();
+}
+Compiled from "MyButton.java"
+public class jatrace.gui.MyButton extends javax.swing.JButton {
+  int width;
+  int height;
+  int xpos;
+  int ypos;
+  public jatrace.gui.MyButton(java.lang.String);
+  public jatrace.gui.MyButton(int, int, int, int, java.lang.String);
+  public jatrace.gui.MyButton(int, int, java.lang.String);
+  public void setText(java.lang.String);
+  public void setLocation(int, int);
+  public void setSize(int, int);
+  public int getXposition();
+  public int getYposition();
+  public int getWidth();
+  public int getHeight();
+  public java.lang.String getText();
+}
+Compiled from "MyGridPanel.java"
+public class jatrace.gui.MyGridPanel extends javax.swing.JPanel {
+  public jatrace.gui.MyGridPanel();
+}
+Compiled from "MyPanel.java"
+public class jatrace.gui.MyPanel extends javax.swing.JPanel {
+  public static jatrace.gui.MyPanel byHeightWidth(int, int);
+  public jatrace.gui.MyPanel(int, int, int, int);
+  public void setLocation(int, int);
+  public void setSize(int, int);
+  public int getXposition();
+  public int getYposition();
+  public int getWidth();
+  public int getHeight();
+  public jatrace.gui.MyPanel nextLink();
+  public jatrace.gui.MyPanel prevLink();
+  public void insertBefore(jatrace.gui.MyPanel);
+  public void insertAfter(jatrace.gui.MyPanel);
+}
+Compiled from "ScrollableGridPanel.java"
+public class jatrace.gui.ScrollableGridPanel extends javax.swing.JPanel implements javax.swing.Scrollable {
+  public jatrace.gui.ScrollableGridPanel();
+  public boolean getScrollableTracksViewportHeight();
+  public boolean getScrollableTracksViewportWidth();
+  public java.awt.Dimension getPreferredScrollableViewportSize();
+  public int getScrollableBlockIncrement(java.awt.Rectangle, int, int);
+  public int getScrollableUnitIncrement(java.awt.Rectangle, int, int);
+  static {};
+}
+Compiled from "BodyBuilder.java"
+public class jatrace.gui.body.BodyBuilder extends javax.swing.JFrame implements java.awt.event.ActionListener,java.awt.event.FocusListener {
+  public jatrace.gui.body.BodyBuilder(jatrace.gui.body.BodyPasser);
+  public void actionPerformed(java.awt.event.ActionEvent);
+  public void focusLost(java.awt.event.FocusEvent);
+  public void focusGained(java.awt.event.FocusEvent);
+}
+Compiled from "BodyButton.java"
+public class jatrace.gui.body.BodyButton extends javax.swing.JButton implements java.awt.event.ActionListener,jatrace.gui.body.BodyPasser,java.awt.event.WindowListener {
+  jatrace.gui.body.BodyBuilder bb;
+  boolean builderLocked;
+  public jatrace.gui.body.BodyButton();
+  public jatrace.Body getBody();
+  public void setBody(jatrace.Body);
+  public void actionPerformed(java.awt.event.ActionEvent);
+  public void setText(java.lang.String);
+  public java.lang.String getText();
+  public jatrace.gui.body.BodyButton getNext();
+  public void setNextBodyPasser(jatrace.gui.body.BodyPasser);
+  public void setPrevBodyPasser(jatrace.gui.body.BodyPasser);
+  public void insertBefore(jatrace.gui.body.BodyPasser);
+  public void insertAfter(jatrace.gui.body.BodyPasser);
+  public void remove();
+  public void windowActivated(java.awt.event.WindowEvent);
+  public void windowClosed(java.awt.event.WindowEvent);
+  public void windowClosing(java.awt.event.WindowEvent);
+  public void windowDeactivated(java.awt.event.WindowEvent);
+  public void windowDeiconified(java.awt.event.WindowEvent);
+  public void windowIconified(java.awt.event.WindowEvent);
+  public void windowOpened(java.awt.event.WindowEvent);
+}
+Compiled from "BodyPanel.java"
+public class jatrace.gui.body.BodyPanel extends javax.swing.JPanel implements java.awt.event.ActionListener {
+  public jatrace.gui.body.BodyPanel();
+  public void removeButton(jatrace.gui.body.BodyButton);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "BodyPasser.java"
+public interface jatrace.gui.body.BodyPasser {
+  public abstract void setText(java.lang.String);
+  public abstract java.lang.String getText();
+  public abstract void setBody(jatrace.Body);
+  public abstract jatrace.Body getBody();
+  public abstract void setPrevBodyPasser(jatrace.gui.body.BodyPasser);
+  public abstract void setNextBodyPasser(jatrace.gui.body.BodyPasser);
+  public abstract void insertBefore(jatrace.gui.body.BodyPasser);
+  public abstract void insertAfter(jatrace.gui.body.BodyPasser);
+  public abstract void remove();
+}
+Compiled from "ButtonPanel.java"
+public class jatrace.gui.body.ButtonPanel extends jatrace.gui.ScrollableGridPanel {
+  jatrace.gui.body.BodyButton head;
+  public jatrace.gui.body.ButtonPanel(jatrace.gui.body.BodyButton);
+  public void add(jatrace.gui.body.BodyButton);
+  static {};
+}
+Compiled from "BooleanBuilder.java"
+public class jatrace.gui.builders.BooleanBuilder extends javax.swing.JPanel implements java.awt.event.ItemListener {
+  public jatrace.gui.builders.BooleanBuilder(java.lang.String, boolean);
+  public boolean getTrueFalse();
+  public void setSelected(boolean);
+  public void setText(java.lang.String);
+  public void itemStateChanged(java.awt.event.ItemEvent);
+}
+Compiled from "CheckPlaneBuilder.java"
+public class jatrace.gui.builders.CheckPlaneBuilder extends jatrace.gui.ScrollableGridPanel {
+  jatrace.gui.builders.VectorBuilder position;
+  jatrace.gui.builders.VectorBuilder normal;
+  jatrace.gui.builders.VectorBuilder orientation;
+  jatrace.gui.builders.ColorBuilder color1;
+  jatrace.gui.builders.ColorBuilder color2;
+  jatrace.gui.builders.DoubleBuilder reflectivity;
+  jatrace.gui.builders.DoubleBuilder specularity;
+  jatrace.gui.builders.BooleanBuilder matte;
+  jatrace.bodies.CheckPlane plane;
+  public jatrace.gui.builders.CheckPlaneBuilder();
+  public jatrace.bodies.CheckPlane build();
+}
+Compiled from "ColorBuilder.java"
+public class jatrace.gui.builders.ColorBuilder extends javax.swing.JPanel {
+  public jatrace.Color build();
+  public jatrace.gui.builders.ColorBuilder();
+  protected void buildFromColor(jatrace.Color);
+}
+Compiled from "DoubleBuilder.java"
+public class jatrace.gui.builders.DoubleBuilder extends javax.swing.JPanel implements java.awt.event.FocusListener {
+  javax.swing.JLabel label;
+  javax.swing.JTextField field;
+  public jatrace.gui.builders.DoubleBuilder(java.lang.String, double);
+  public double getValue();
+  public double getValue(double) throws java.lang.NumberFormatException;
+  public void setValue(double);
+  public void requestFocus();
+  public void focusGained(java.awt.event.FocusEvent);
+  public void focusLost(java.awt.event.FocusEvent);
+}
+Compiled from "IntegerBuilder.java"
+public class jatrace.gui.builders.IntegerBuilder extends javax.swing.JPanel implements java.awt.event.FocusListener {
+  javax.swing.JLabel label;
+  javax.swing.JTextField field;
+  public jatrace.gui.builders.IntegerBuilder(java.lang.String, int);
+  public int getValue() throws java.lang.NumberFormatException;
+  public void setValue(int);
+  public void requestFocus();
+  public void focusGained(java.awt.event.FocusEvent);
+  public void focusLost(java.awt.event.FocusEvent);
+}
+Compiled from "PlaneBuilder.java"
+public class jatrace.gui.builders.PlaneBuilder extends jatrace.gui.ScrollableGridPanel {
+  jatrace.gui.builders.VectorBuilder position;
+  jatrace.gui.builders.VectorBuilder normal;
+  jatrace.gui.builders.ColorBuilder color;
+  jatrace.gui.builders.DoubleBuilder reflectivity;
+  jatrace.gui.builders.DoubleBuilder specularity;
+  jatrace.gui.builders.BooleanBuilder matte;
+  jatrace.bodies.Plane plane;
+  public jatrace.gui.builders.PlaneBuilder();
+  public jatrace.bodies.Plane build();
+}
+Compiled from "SphereBuilder.java"
+public class jatrace.gui.builders.SphereBuilder extends jatrace.gui.ScrollableGridPanel {
+  jatrace.gui.builders.VectorBuilder position;
+  jatrace.gui.builders.DoubleBuilder radius;
+  jatrace.gui.builders.ColorBuilder color;
+  jatrace.gui.builders.DoubleBuilder reflectivity;
+  jatrace.gui.builders.DoubleBuilder specularity;
+  jatrace.gui.builders.BooleanBuilder matte;
+  jatrace.bodies.Sphere sphere;
+  public jatrace.gui.builders.SphereBuilder();
+  public jatrace.bodies.Sphere build();
+}
+Compiled from "VectorBuilder.java"
+public class jatrace.gui.builders.VectorBuilder extends javax.swing.JPanel {
+  public jatrace.Vector build();
+  public jatrace.gui.builders.VectorBuilder();
+  protected void buildFromVector(jatrace.Vector);
+}
+Compiled from "myImage.java"
+public class jatrace.myImage {
+  protected static final int colorType;
+  protected java.awt.image.BufferedImage image;
+  protected java.awt.image.WritableRaster raster;
+  protected int width;
+  protected int height;
+  public jatrace.myImage(int, int);
+  public jatrace.myImage setPixel(int, int, jatrace.Color);
+  public jatrace.Color getPixel(int, int);
+  public int getWidth();
+  public int getHeight();
+  public static jatrace.myImage read(java.lang.String);
+  public jatrace.myImage write(java.lang.String);
+}
+Compiled from "myInterface.java"
+final class jatrace.myInterface {
+  public boolean isMatte;
+  public double exp;
+  public double distance;
+  public double reflectivity;
+  public jatrace.Vector poi;
+  public jatrace.Vector normal;
+  public jatrace.Body body;
+  public jatrace.Color color;
+  public jatrace.myInterface();
+  public jatrace.myInterface(double, jatrace.Vector, jatrace.Vector, jatrace.Body, jatrace.Color);
+  public jatrace.myInterface dup();
+  public jatrace.myInterface reset();
+  public jatrace.myInterface hit(jatrace.Body, double);
+  public jatrace.myInterface registerHit(jatrace.Ray);
+}
+Compiled from "Bluesky.java"
+public class jatrace.skies.Bluesky implements jatrace.Sky {
+  protected jatrace.Vector sun;
+  protected final jatrace.Color color;
+  public jatrace.skies.Bluesky();
+  public jatrace.skies.Bluesky(jatrace.Vector);
+  public jatrace.Color getColor(jatrace.Vector);
+  public jatrace.Vector[] getLight();
+}
+Compiled from "Horizon.java"
+public class jatrace.skies.Horizon implements jatrace.Sky {
+  protected jatrace.Vector light;
+  protected jatrace.Color color;
+  protected final double exp;
+  protected final jatrace.Vector up;
+  public jatrace.skies.Horizon();
+  public jatrace.skies.Horizon(jatrace.Vector, jatrace.Color);
+  public jatrace.Vector[] getLight();
+  public jatrace.Color getColor(jatrace.Vector);
+}
+Compiled from "PlainSky.java"
+public class jatrace.skies.PlainSky implements jatrace.Sky {
+  public jatrace.Color color;
+  public jatrace.Vector sun;
+  double delta;
+  public jatrace.skies.PlainSky(jatrace.Vector, jatrace.Color);
+  public void setDelta(double);
+  public jatrace.Color getColor(jatrace.Vector);
+  public jatrace.Vector[] getLight();
+}
+Compiled from "TexturedSky.java"
+public class jatrace.skies.TexturedSky implements jatrace.Sky {
+  protected static final jatrace.Color background;
+  protected jatrace.myImage texture;
+  protected boolean textureLoaded;
+  protected jatrace.Vector sun;
+  public jatrace.Color getColor(jatrace.Vector);
+  public void setDelta(double);
+  public void setSun(jatrace.Vector);
+  public jatrace.Vector[] getLight();
+  public jatrace.skies.TexturedSky();
+  public jatrace.skies.TexturedSky(jatrace.Vector, java.lang.String);
+  public void load(java.lang.String);
+  static {};
+}
+Compiled from "TransparentSky.java"
+public class jatrace.skies.TransparentSky implements jatrace.Sky {
+  jatrace.Vector sun;
+  public jatrace.skies.TransparentSky(jatrace.Vector);
+  public jatrace.Color getColor(jatrace.Vector);
+  public jatrace.Vector[] getLight();
+}
+Compiled from "White.java"
+public class jatrace.skies.White implements jatrace.Sky {
+  protected jatrace.Vector sun;
+  protected final jatrace.Color color;
+  public jatrace.skies.White();
+  public jatrace.Color getColor(jatrace.Vector);
+  public jatrace.Vector[] getLight();
+}
+Compiled from "Ellipse.java"
+public class renders.Ellipse extends renders.GenericRenderer {
+  public renders.Ellipse();
+  public static void main(java.lang.String[]);
+}
+Compiled from "GenericRenderer.java"
+public class renders.GenericRenderer extends jatrace.World {
+  jatrace.Vector camP;
+  jatrace.Vector camF;
+  jatrace.Vector camUp;
+  double winW;
+  double winH;
+  int pixW;
+  int pixH;
+  java.lang.String filename;
+  public final void setPPU(int);
+  public final void setPasses(int);
+  public final void setDelta(double);
+  public void parseArgs(java.lang.String[]);
+  public final void setFilenamePrefix(java.lang.String);
+  public final void setCamPosition(jatrace.Vector);
+  public final void setCamFocus(jatrace.Vector);
+  public final void setCamUp(jatrace.Vector);
+  public final void setWindow(double, double);
+  public void render();
+  public final void setDefaults();
+  public renders.GenericRenderer();
+}
+Compiled from "PlanarEllipses.java"
+public class renders.PlanarEllipses extends renders.GenericRenderer {
+  public renders.PlanarEllipses();
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "SkewRoom.java"
+public class renders.SkewRoom {
+  public renders.SkewRoom();
+  public static void main(java.lang.String[]);
+}
+Compiled from "SkyTexture.java"
+public class renders.SkyTexture extends jatrace.World {
+  public jatrace.bodies.Sphere floor;
+  public jatrace.bodies.Sphere globe;
+  public jatrace.skies.TexturedSky sky;
+  public jatrace.Camera camera;
+  public renders.SkyTexture();
+  public void render(jatrace.Camera, int);
+  public static void main(java.lang.String[]);
+}
+Compiled from "Texture.java"
+public class renders.Texture extends jatrace.World {
+  public jatrace.bodies.TexturedSphere globe;
+  public jatrace.bodies.CheckPlane floor;
+  public jatrace.Sky sky;
+  public jatrace.Camera camera;
+  public renders.Texture();
+  public void render(jatrace.Camera, int);
+  public static void main(java.lang.String[]);
+}
+Compiled from "Trunk.java"
+public class renders.Trunk extends jatrace.World {
+  public jatrace.Camera camera;
+  public jatrace.bodies.CheckPlane plane;
+  public renders.Trunk(double, int);
+  public void render(int);
+  public static void main(java.lang.String[]);
+}
+Compiled from "construct.java"
+public class renders.construct {
+  public renders.construct();
+  public static void main(java.lang.String[]);
+}
+Compiled from "poster.java"
+public class renders.poster {
+  public renders.poster();
+  public static void main(java.lang.String[]);
+}
+Compiled from "room.java"
+public class renders.room {
+  public renders.room();
+  public static void main(java.lang.String[]);
+}
+Compiled from "trans.java"
+public class renders.trans {
+  public renders.trans();
+  public static void main(java.lang.String[]);
+}
+Compiled from "testTracer.java"
+public class testTracer {
+  public testTracer();
+  public static void main(java.lang.String[]);
+}
+Compiled from "windowtest.java"
+public class windowtest {
+  public windowtest();
+  public static void main(java.lang.String[]);
+}

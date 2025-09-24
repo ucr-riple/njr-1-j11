@@ -1,0 +1,528 @@
+Compiled from "Device.java"
+public abstract class hugo.project.hospital.Device implements java.lang.Comparable<hugo.project.hospital.Device> {
+  public hugo.project.hospital.Device(java.lang.String, int);
+  public void reduceAmount(int);
+  public void addAmount(int);
+  public java.lang.String toString();
+  public java.lang.String getType();
+  public int getAmount();
+  public boolean equals(hugo.project.hospital.Device);
+  public int compareTo(hugo.project.hospital.Device);
+  public int compareTo(java.lang.Object);
+}
+Compiled from "Hospital.java"
+public class hugo.project.hospital.Hospital {
+  protected hugo.util.structure.LinkedList<hugo.project.hospital.Hospital$Department> departmentList;
+  protected hugo.util.structure.EdgeGraph<hugo.project.hospital.Hospital$Department> departmentMap;
+  protected hugo.project.hospital.Hospital$Reception reception;
+  public hugo.project.hospital.Hospital();
+  public hugo.project.hospital.Hospital$Department getDepartmentByName(java.lang.String);
+  protected hugo.project.hospital.Device deviceFactory(java.lang.String, int);
+  public java.lang.String getRoomNumberForPatientNamed(java.lang.String);
+  public void signInPatientToDepartment(hugo.project.hospital.Hospital$Patient, java.lang.String);
+  public void signOutPatient(hugo.project.hospital.Hospital$Patient);
+  public void signOutPatient(java.lang.String);
+  public void printRouteFromTo(java.lang.String, java.lang.String);
+  public void printRouteFromToAvoiding(java.lang.String, java.lang.String, java.lang.String);
+  public void printRouteFromToVia(java.lang.String, java.lang.String, java.lang.String);
+  public java.lang.String closestDepartmentToWithDevice(java.lang.String, java.lang.String);
+  public java.lang.String showRegister();
+  public java.lang.String toString();
+}
+Compiled from "Hospital.java"
+public class hugo.project.hospital.Hospital$CardiologyDepartment extends hugo.project.hospital.Hospital$Department {
+  final hugo.project.hospital.Hospital this$0;
+  public hugo.project.hospital.Hospital$CardiologyDepartment(hugo.project.hospital.Hospital);
+}
+Compiled from "Hospital.java"
+public abstract class hugo.project.hospital.Hospital$Department implements java.lang.Comparable<hugo.project.hospital.Hospital$Department> {
+  protected java.lang.String name;
+  protected hugo.project.hospital.Hospital$Department$WaitingRoom waitingRoom;
+  protected hugo.util.structure.LinkedList<hugo.project.hospital.Hospital$Department$Ward> wardsForSingle;
+  protected hugo.util.structure.LinkedList<hugo.project.hospital.Hospital$Department$Ward> wardsForMulti;
+  protected hugo.util.structure.LinkedList<hugo.project.hospital.Device> deviceList;
+  final hugo.project.hospital.Hospital this$0;
+  protected hugo.project.hospital.Hospital$Department(hugo.project.hospital.Hospital);
+  public boolean isForMultiFull();
+  public boolean isForSingleFull();
+  public boolean isFull();
+  public void addPatient(hugo.project.hospital.Hospital$Patient);
+  protected void addPatientFromWaitingRoom();
+  public void signOutPatient(hugo.project.hospital.Hospital$Reception$PatientInfo);
+  public void signOutPatient(hugo.project.hospital.Hospital$Patient);
+  public hugo.project.hospital.Device hasDevice(java.lang.String);
+  public void addDevice(java.lang.String, int);
+  public void removeDevice(java.lang.String);
+  public void removeDevice(java.lang.String, int);
+  public int compareTo(hugo.project.hospital.Hospital$Department);
+  public java.lang.String toString();
+  public java.lang.String getName();
+  public java.lang.String info();
+  public int compareTo(java.lang.Object);
+}
+Compiled from "Hospital.java"
+public abstract class hugo.project.hospital.Hospital$Department$Room {
+  protected hugo.project.hospital.RoomType roomType;
+  final hugo.project.hospital.Hospital$Department this$1;
+  protected hugo.project.hospital.Hospital$Department$Room(hugo.project.hospital.Hospital$Department);
+  public hugo.project.hospital.RoomType getRoomType();
+  public abstract java.lang.String getName();
+  public abstract void removePatient(hugo.project.hospital.Hospital$Patient);
+  public abstract java.lang.String toString();
+}
+Compiled from "Hospital.java"
+public class hugo.project.hospital.Hospital$Department$WaitingRoom extends hugo.project.hospital.Hospital$Department$Room {
+  protected hugo.util.structure.PriorityQueue<hugo.project.hospital.Hospital$Patient> waitingList;
+  final hugo.project.hospital.Hospital$Department this$1;
+  public hugo.project.hospital.Hospital$Department$WaitingRoom(hugo.project.hospital.Hospital$Department, java.lang.String);
+  public void addWaitingPatient(hugo.project.hospital.Hospital$Patient);
+  public hugo.project.hospital.Hospital$Patient popWaitingPatient();
+  public boolean noOneWaiting();
+  public int numberOfPeopleWaiting();
+  public java.lang.String getName();
+  public java.lang.String info();
+  public void removePatient(hugo.project.hospital.Hospital$Patient);
+  public java.lang.String toString();
+}
+Compiled from "Hospital.java"
+public class hugo.project.hospital.Hospital$Department$Ward extends hugo.project.hospital.Hospital$Department$Room implements java.lang.Comparable<hugo.project.hospital.Hospital$Department$Ward> {
+  protected hugo.util.structure.LinkedList<hugo.project.hospital.Hospital$Patient> patients;
+  final hugo.project.hospital.Hospital$Department this$1;
+  public hugo.project.hospital.Hospital$Department$Ward(hugo.project.hospital.Hospital$Department, int, int);
+  public boolean isFull();
+  public boolean isSingleRoom();
+  public boolean hasPatient(hugo.project.hospital.Hospital$Patient);
+  public void addPatient(hugo.project.hospital.Hospital$Patient);
+  public void removePatient(hugo.project.hospital.Hospital$Patient);
+  public int compareTo(hugo.project.hospital.Hospital$Department$Ward);
+  public java.lang.String info();
+  public java.lang.String getName();
+  public java.lang.String toString();
+  public int compareTo(java.lang.Object);
+}
+Compiled from "Hospital.java"
+public class hugo.project.hospital.Hospital$NeurologyDepartment extends hugo.project.hospital.Hospital$Department {
+  final hugo.project.hospital.Hospital this$0;
+  public hugo.project.hospital.Hospital$NeurologyDepartment(hugo.project.hospital.Hospital);
+}
+Compiled from "Hospital.java"
+public class hugo.project.hospital.Hospital$OncologyDepartment extends hugo.project.hospital.Hospital$Department {
+  final hugo.project.hospital.Hospital this$0;
+  public hugo.project.hospital.Hospital$OncologyDepartment(hugo.project.hospital.Hospital);
+}
+Compiled from "Hospital.java"
+public class hugo.project.hospital.Hospital$Patient implements java.lang.Comparable<hugo.project.hospital.Hospital$Patient> {
+  final hugo.project.hospital.Hospital this$0;
+  public hugo.project.hospital.Hospital$Patient(hugo.project.hospital.Hospital, java.lang.String, int, boolean);
+  public java.lang.String getName();
+  public int getSeverity();
+  public boolean wantsSingleRoom();
+  public int compareTo(hugo.project.hospital.Hospital$Patient);
+  public java.lang.String toString();
+  public int compareTo(java.lang.Object);
+  static java.lang.String access$000(hugo.project.hospital.Hospital$Patient);
+  static int access$100(hugo.project.hospital.Hospital$Patient);
+  static boolean access$200(hugo.project.hospital.Hospital$Patient);
+}
+Compiled from "Hospital.java"
+public class hugo.project.hospital.Hospital$PhysiotherapyDepartment extends hugo.project.hospital.Hospital$Department {
+  final hugo.project.hospital.Hospital this$0;
+  public hugo.project.hospital.Hospital$PhysiotherapyDepartment(hugo.project.hospital.Hospital);
+}
+Compiled from "Hospital.java"
+public class hugo.project.hospital.Hospital$RadiologyDepartment extends hugo.project.hospital.Hospital$Department {
+  final hugo.project.hospital.Hospital this$0;
+  public hugo.project.hospital.Hospital$RadiologyDepartment(hugo.project.hospital.Hospital);
+}
+Compiled from "Hospital.java"
+public class hugo.project.hospital.Hospital$RadiotherapyDepartment extends hugo.project.hospital.Hospital$Department {
+  final hugo.project.hospital.Hospital this$0;
+  public hugo.project.hospital.Hospital$RadiotherapyDepartment(hugo.project.hospital.Hospital);
+}
+Compiled from "Hospital.java"
+public class hugo.project.hospital.Hospital$Reception {
+  protected hugo.util.structure.BinaryTree<hugo.project.hospital.Hospital$Reception$PatientInfo> register;
+  final hugo.project.hospital.Hospital this$0;
+  public hugo.project.hospital.Hospital$Reception(hugo.project.hospital.Hospital);
+  public hugo.project.hospital.Hospital$Reception$PatientInfo getPatientInfo(java.lang.String);
+  public hugo.project.hospital.Hospital$Reception$PatientInfo getPatientInfo(hugo.project.hospital.Hospital$Patient);
+  public void addPatientInfo(hugo.project.hospital.Hospital$Patient, hugo.project.hospital.Hospital$Department, hugo.project.hospital.Hospital$Department$Room);
+  public void removePatientInfo(hugo.project.hospital.Hospital$Reception$PatientInfo);
+  public void removePatientInfo(java.lang.String);
+  public void removePatientInfo(hugo.project.hospital.Hospital$Patient);
+  public java.lang.String show();
+  public java.lang.String toString();
+}
+Compiled from "Hospital.java"
+public class hugo.project.hospital.Hospital$Reception$PatientInfo implements java.lang.Comparable<hugo.project.hospital.Hospital$Reception$PatientInfo> {
+  protected hugo.project.hospital.Hospital$Patient patient;
+  protected hugo.project.hospital.Hospital$Department department;
+  protected hugo.project.hospital.Hospital$Department$Room room;
+  final hugo.project.hospital.Hospital$Reception this$1;
+  public hugo.project.hospital.Hospital$Reception$PatientInfo(hugo.project.hospital.Hospital$Reception, hugo.project.hospital.Hospital$Patient, hugo.project.hospital.Hospital$Department, hugo.project.hospital.Hospital$Department$Room);
+  public java.lang.String getName();
+  public hugo.project.hospital.Hospital$Patient getPatient();
+  public hugo.project.hospital.Hospital$Department getDepartment();
+  public hugo.project.hospital.Hospital$Department$Room getRoom();
+  public int compareTo(hugo.project.hospital.Hospital$Reception$PatientInfo);
+  public int compareTo(java.lang.Object);
+}
+Compiled from "NeedleDevice.java"
+public class hugo.project.hospital.NeedleDevice extends hugo.project.hospital.Device {
+  public hugo.project.hospital.NeedleDevice(int);
+}
+Compiled from "ProjectTest.java"
+public class hugo.project.hospital.ProjectTest {
+  public hugo.project.hospital.ProjectTest();
+  public static void main(java.lang.String[]);
+}
+Compiled from "Hospital.java"
+final class hugo.project.hospital.RoomType extends java.lang.Enum<hugo.project.hospital.RoomType> {
+  public static final hugo.project.hospital.RoomType WAITINGROOM;
+  public static final hugo.project.hospital.RoomType WARD;
+  public static hugo.project.hospital.RoomType[] values();
+  public static hugo.project.hospital.RoomType valueOf(java.lang.String);
+  static {};
+}
+Compiled from "StethoscopeDevice.java"
+public class hugo.project.hospital.StethoscopeDevice extends hugo.project.hospital.Device {
+  public hugo.project.hospital.StethoscopeDevice(int);
+}
+Compiled from "BinaryTree.java"
+public class hugo.util.structure.BinaryTree<E extends java.lang.Comparable<E>> {
+  public hugo.util.structure.BinaryTree();
+  public void insert(E);
+  public void remove(E);
+  protected void deleteFromParent(hugo.util.structure.BinaryTree<E>.TreeNode<E>);
+  protected boolean isLeaf(hugo.util.structure.BinaryTree<E>.TreeNode<E>);
+  protected hugo.util.structure.BinaryTree<E>.TreeNode<E> minNode(hugo.util.structure.BinaryTree<E>.TreeNode<E>);
+  protected hugo.util.structure.BinaryTree<E>.TreeNode<E> maxNode(hugo.util.structure.BinaryTree<E>.TreeNode<E>);
+  public E find(E);
+  protected hugo.util.structure.BinaryTree<E>.TreeNode<E> findNode(E, hugo.util.structure.BinaryTree<E>.TreeNode<E>);
+  public java.lang.Iterable<E> BfsTraversalIterable();
+  public java.lang.Iterable<E> DfsTraversalIterable();
+  static hugo.util.structure.BinaryTree$TreeNode access$400(hugo.util.structure.BinaryTree);
+}
+Compiled from "BinaryTree.java"
+class hugo.util.structure.BinaryTree$1 implements java.lang.Iterable<E> {
+  final hugo.util.structure.BinaryTree this$0;
+  hugo.util.structure.BinaryTree$1(hugo.util.structure.BinaryTree);
+  public java.util.Iterator<E> iterator();
+}
+Compiled from "BinaryTree.java"
+class hugo.util.structure.BinaryTree$1$1 implements java.util.Iterator<E> {
+  hugo.util.structure.Queue<hugo.util.structure.BinaryTree<E>.TreeNode<E>> toDoQueue;
+  final hugo.util.structure.BinaryTree$1 this$1;
+  hugo.util.structure.BinaryTree$1$1(hugo.util.structure.BinaryTree$1);
+  public boolean hasNext();
+  public E next();
+  public void remove();
+  public java.lang.Object next();
+}
+Compiled from "BinaryTree.java"
+class hugo.util.structure.BinaryTree$1$1$1 extends hugo.util.structure.Queue<hugo.util.structure.BinaryTree<E>.TreeNode<E>> {
+  final hugo.util.structure.BinaryTree$1$1 this$2;
+  hugo.util.structure.BinaryTree$1$1$1(hugo.util.structure.BinaryTree$1$1);
+}
+Compiled from "BinaryTree.java"
+class hugo.util.structure.BinaryTree$2 implements java.lang.Iterable<E> {
+  final hugo.util.structure.BinaryTree this$0;
+  hugo.util.structure.BinaryTree$2(hugo.util.structure.BinaryTree);
+  public java.util.Iterator<E> iterator();
+}
+Compiled from "BinaryTree.java"
+class hugo.util.structure.BinaryTree$2$1 implements java.util.Iterator<E> {
+  hugo.util.structure.Stack<hugo.util.structure.BinaryTree<E>.TreeNode<E>> toDoStack;
+  final hugo.util.structure.BinaryTree$2 this$1;
+  hugo.util.structure.BinaryTree$2$1(hugo.util.structure.BinaryTree$2);
+  public boolean hasNext();
+  public E next();
+  public void remove();
+  public java.lang.Object next();
+}
+Compiled from "BinaryTree.java"
+class hugo.util.structure.BinaryTree$2$1$1 extends hugo.util.structure.Stack<hugo.util.structure.BinaryTree<E>.TreeNode<E>> {
+  final hugo.util.structure.BinaryTree$2$1 this$2;
+  hugo.util.structure.BinaryTree$2$1$1(hugo.util.structure.BinaryTree$2$1);
+}
+Compiled from "BinaryTree.java"
+public class hugo.util.structure.BinaryTree$TreeNode<E extends java.lang.Comparable<E>> implements java.lang.Comparable<hugo.util.structure.BinaryTree<E>.TreeNode<E>> {
+  final hugo.util.structure.BinaryTree this$0;
+  public hugo.util.structure.BinaryTree$TreeNode(E);
+  public hugo.util.structure.BinaryTree$TreeNode(E, hugo.util.structure.BinaryTree<E>.TreeNode<E>, hugo.util.structure.BinaryTree<E>.TreeNode<E>, hugo.util.structure.BinaryTree<E>.TreeNode<E>);
+  public hugo.util.structure.BinaryTree<E>.TreeNode<E> getLeftTree();
+  public hugo.util.structure.BinaryTree<E>.TreeNode<E> getRightTree();
+  public hugo.util.structure.BinaryTree<E>.TreeNode<E> getParentNode();
+  public E getValue();
+  public int compareTo(hugo.util.structure.BinaryTree<E>.TreeNode<E>);
+  public int compareTo(java.lang.Object);
+  static hugo.util.structure.BinaryTree$TreeNode access$002(hugo.util.structure.BinaryTree$TreeNode, hugo.util.structure.BinaryTree$TreeNode);
+  static hugo.util.structure.BinaryTree$TreeNode access$102(hugo.util.structure.BinaryTree$TreeNode, hugo.util.structure.BinaryTree$TreeNode);
+  static hugo.util.structure.BinaryTree$TreeNode access$202(hugo.util.structure.BinaryTree$TreeNode, hugo.util.structure.BinaryTree$TreeNode);
+  static java.lang.Comparable access$300(hugo.util.structure.BinaryTree$TreeNode);
+  static java.lang.Comparable access$302(hugo.util.structure.BinaryTree$TreeNode, java.lang.Comparable);
+  static hugo.util.structure.BinaryTree$TreeNode access$200(hugo.util.structure.BinaryTree$TreeNode);
+}
+Compiled from "DoubleLinkedList.java"
+public class hugo.util.structure.DoubleLinkedList<E extends java.lang.Comparable> implements java.lang.Iterable<E> {
+  public hugo.util.structure.DoubleLinkedList();
+  public void addFirst(E);
+  public void addLast(E);
+  public void removeFirst();
+  public void removeLast();
+  public E get(int);
+  public boolean contains(E);
+  public void remove(E);
+  public int size();
+  public boolean isEmpty();
+  public java.util.Iterator<E> iterator();
+  public java.lang.Iterable<E> reversedIterator();
+  static hugo.util.structure.DoubleLinkedList$DoubleLinkedListElement access$300(hugo.util.structure.DoubleLinkedList);
+  static hugo.util.structure.DoubleLinkedList$DoubleLinkedListElement access$400(hugo.util.structure.DoubleLinkedList);
+}
+Compiled from "DoubleLinkedList.java"
+class hugo.util.structure.DoubleLinkedList$1 implements java.lang.Iterable<E> {
+  final hugo.util.structure.DoubleLinkedList this$0;
+  hugo.util.structure.DoubleLinkedList$1(hugo.util.structure.DoubleLinkedList);
+  public java.util.Iterator<E> iterator();
+}
+Compiled from "DoubleLinkedList.java"
+class hugo.util.structure.DoubleLinkedList$1$1 implements java.util.Iterator<E> {
+  hugo.util.structure.DoubleLinkedList<E>.DoubleLinkedListElement element;
+  final hugo.util.structure.DoubleLinkedList$1 this$1;
+  hugo.util.structure.DoubleLinkedList$1$1(hugo.util.structure.DoubleLinkedList$1);
+  public boolean hasNext();
+  public E next();
+  public void remove();
+  public java.lang.Object next();
+}
+Compiled from "DoubleLinkedList.java"
+class hugo.util.structure.DoubleLinkedList$DoubleLinkedListElement {
+  protected hugo.util.structure.DoubleLinkedList<E>.DoubleLinkedListElement preElement;
+  protected hugo.util.structure.DoubleLinkedList<E>.DoubleLinkedListElement nextElement;
+  final hugo.util.structure.DoubleLinkedList this$0;
+  public hugo.util.structure.DoubleLinkedList$DoubleLinkedListElement(E);
+  public E value();
+  public hugo.util.structure.DoubleLinkedList<E>.DoubleLinkedListElement previous();
+  public hugo.util.structure.DoubleLinkedList<E>.DoubleLinkedListElement next();
+  public void setNext(hugo.util.structure.DoubleLinkedList<E>.DoubleLinkedListElement);
+  public void setPrevious(hugo.util.structure.DoubleLinkedList<E>.DoubleLinkedListElement);
+  public void remove();
+  hugo.util.structure.DoubleLinkedList$DoubleLinkedListElement(hugo.util.structure.DoubleLinkedList, java.lang.Comparable, hugo.util.structure.DoubleLinkedList$DoubleLinkedListElement, hugo.util.structure.DoubleLinkedList$DoubleLinkedListElement, hugo.util.structure.DoubleLinkedList$1);
+  static java.lang.Comparable access$100(hugo.util.structure.DoubleLinkedList$DoubleLinkedListElement);
+}
+Compiled from "DoubleLinkedList.java"
+class hugo.util.structure.DoubleLinkedList$DoubleLinkedListIterator implements java.util.Iterator<E> {
+  hugo.util.structure.DoubleLinkedList<E>.DoubleLinkedListElement tmp;
+  final hugo.util.structure.DoubleLinkedList this$0;
+  public boolean hasNext();
+  public E next();
+  public void remove();
+  public java.lang.Object next();
+  hugo.util.structure.DoubleLinkedList$DoubleLinkedListIterator(hugo.util.structure.DoubleLinkedList, hugo.util.structure.DoubleLinkedList$1);
+}
+Compiled from "EdgeGraph.java"
+public class hugo.util.structure.EdgeGraph<E extends java.lang.Comparable> {
+  public hugo.util.structure.EdgeGraph();
+  public hugo.util.structure.EdgeGraph<E>.Node<E> findNode(E);
+  public boolean contains(E);
+  public void addNode(E);
+  public void addEdge(E, E);
+  public hugo.util.structure.LinkedList<E> findPathVia(E, E, E);
+  public hugo.util.structure.LinkedList<E> findPath(E, E);
+  public hugo.util.structure.LinkedList<E> findPathAvoiding(E, E, E);
+  public void clearState();
+  public java.lang.String show();
+  public java.lang.Iterable<E> bfsIteratFrom(E);
+  public java.lang.Iterable<E> dfsIteratFrom(E);
+}
+Compiled from "EdgeGraph.java"
+class hugo.util.structure.EdgeGraph$BfsIterable implements java.lang.Iterable<E> {
+  final hugo.util.structure.EdgeGraph this$0;
+  public hugo.util.structure.EdgeGraph$BfsIterable(E);
+  public java.util.Iterator<E> iterator();
+}
+Compiled from "EdgeGraph.java"
+class hugo.util.structure.EdgeGraph$BfsIterable$BfsIterator implements java.util.Iterator<E> {
+  final hugo.util.structure.EdgeGraph$BfsIterable this$1;
+  public hugo.util.structure.EdgeGraph$BfsIterable$BfsIterator(E);
+  public boolean hasNext();
+  public E next();
+  public void remove();
+  public java.lang.Object next();
+}
+Compiled from "EdgeGraph.java"
+class hugo.util.structure.EdgeGraph$DfsIterable implements java.lang.Iterable<E> {
+  final hugo.util.structure.EdgeGraph this$0;
+  public hugo.util.structure.EdgeGraph$DfsIterable(E);
+  public java.util.Iterator<E> iterator();
+}
+Compiled from "EdgeGraph.java"
+class hugo.util.structure.EdgeGraph$DfsIterable$DfsIterator implements java.util.Iterator<E> {
+  final hugo.util.structure.EdgeGraph$DfsIterable this$1;
+  public hugo.util.structure.EdgeGraph$DfsIterable$DfsIterator(E);
+  public boolean hasNext();
+  public E next();
+  public void remove();
+  public java.lang.Object next();
+}
+Compiled from "EdgeGraph.java"
+public class hugo.util.structure.EdgeGraph$Edge<E extends java.lang.Comparable> implements java.lang.Comparable<hugo.util.structure.EdgeGraph<E>.Edge<E>> {
+  final hugo.util.structure.EdgeGraph this$0;
+  public hugo.util.structure.EdgeGraph$Edge(hugo.util.structure.EdgeGraph<E>.Node<E>);
+  public int compareTo(hugo.util.structure.EdgeGraph<E>.Edge<E>);
+  public int compareTo(java.lang.Object);
+  static hugo.util.structure.EdgeGraph$Node access$400(hugo.util.structure.EdgeGraph$Edge);
+}
+Compiled from "EdgeGraph.java"
+public class hugo.util.structure.EdgeGraph$Node<E extends java.lang.Comparable> implements java.lang.Comparable<hugo.util.structure.EdgeGraph<E>.Node<E>> {
+  final hugo.util.structure.EdgeGraph this$0;
+  public hugo.util.structure.EdgeGraph$Node(E);
+  public void addEdge(hugo.util.structure.EdgeGraph<E>.Edge<E>);
+  public int compareTo(hugo.util.structure.EdgeGraph<E>.Node<E>);
+  public java.lang.String toString();
+  public int compareTo(java.lang.Object);
+  static java.lang.Comparable access$000(hugo.util.structure.EdgeGraph$Node);
+  static boolean access$102(hugo.util.structure.EdgeGraph$Node, boolean);
+  static hugo.util.structure.EdgeGraph$Node access$200(hugo.util.structure.EdgeGraph$Node);
+  static hugo.util.structure.LinkedList access$300(hugo.util.structure.EdgeGraph$Node);
+  static boolean access$100(hugo.util.structure.EdgeGraph$Node);
+  static hugo.util.structure.EdgeGraph$Node access$202(hugo.util.structure.EdgeGraph$Node, hugo.util.structure.EdgeGraph$Node);
+}
+Compiled from "LinkedList.java"
+public class hugo.util.structure.LinkedList<E extends java.lang.Comparable> implements java.lang.Iterable<E> {
+  protected hugo.util.structure.LinkedList<E>.ListElement head;
+  protected int size;
+  public hugo.util.structure.LinkedList();
+  public void addFirst(E);
+  public void addLast(E);
+  public void removeFirst();
+  public void removeLast();
+  public void remove(java.lang.Comparable);
+  public E contains(java.lang.Comparable);
+  public E getFirst();
+  public E get(int);
+  public void set(int, E);
+  public E getLast();
+  public void attachToFrontOf(hugo.util.structure.LinkedList<E>);
+  public int size();
+  public boolean isEmpty();
+  public java.lang.String toString();
+  public java.util.Iterator<E> iterator();
+}
+Compiled from "LinkedList.java"
+class hugo.util.structure.LinkedList$1 {
+}
+Compiled from "LinkedList.java"
+class hugo.util.structure.LinkedList$LinkedListIterator implements java.util.Iterator<E> {
+  hugo.util.structure.LinkedList<E>.ListElement el;
+  final hugo.util.structure.LinkedList this$0;
+  public boolean hasNext();
+  public E next();
+  public void remove();
+  public java.lang.Object next();
+  hugo.util.structure.LinkedList$LinkedListIterator(hugo.util.structure.LinkedList, hugo.util.structure.LinkedList$1);
+}
+Compiled from "LinkedList.java"
+public class hugo.util.structure.LinkedList$ListElement {
+  protected E el1;
+  protected hugo.util.structure.LinkedList<E>.ListElement el2;
+  final hugo.util.structure.LinkedList this$0;
+  public hugo.util.structure.LinkedList$ListElement(E, hugo.util.structure.LinkedList<E>.ListElement);
+  public hugo.util.structure.LinkedList$ListElement(E);
+  public E first();
+  public hugo.util.structure.LinkedList<E>.ListElement rest();
+  public void setFirst(E);
+  public void setRest(hugo.util.structure.LinkedList<E>.ListElement);
+}
+Compiled from "PriorityQueue.java"
+public class hugo.util.structure.PriorityQueue<E extends java.lang.Comparable> implements java.lang.Iterable<E> {
+  public hugo.util.structure.PriorityQueue();
+  public void push(E, int);
+  public E pop();
+  public void remove(E);
+  public int size();
+  public boolean empty();
+  public java.lang.String toString();
+  public java.util.Iterator<E> iterator();
+  static hugo.util.structure.PriorityQueue$SortedLinkedList access$200(hugo.util.structure.PriorityQueue);
+}
+Compiled from "PriorityQueue.java"
+class hugo.util.structure.PriorityQueue$1 {
+}
+Compiled from "PriorityQueue.java"
+class hugo.util.structure.PriorityQueue$PriorityPair implements java.lang.Comparable {
+  final hugo.util.structure.PriorityQueue this$0;
+  public hugo.util.structure.PriorityQueue$PriorityPair(E, java.lang.Comparable);
+  public E getElement();
+  public int compareTo(java.lang.Object);
+  public java.lang.String toString();
+  static java.lang.Comparable access$000(hugo.util.structure.PriorityQueue$PriorityPair);
+}
+Compiled from "PriorityQueue.java"
+class hugo.util.structure.PriorityQueue$PriorityQueueIterator implements java.util.Iterator<E> {
+  hugo.util.structure.LinkedList$ListElement element;
+  final hugo.util.structure.PriorityQueue this$0;
+  public boolean hasNext();
+  public E next();
+  public void remove();
+  public java.lang.Object next();
+  hugo.util.structure.PriorityQueue$PriorityQueueIterator(hugo.util.structure.PriorityQueue, hugo.util.structure.PriorityQueue$1);
+}
+Compiled from "PriorityQueue.java"
+public class hugo.util.structure.PriorityQueue$SortedLinkedList extends hugo.util.structure.LinkedList<hugo.util.structure.PriorityQueue<E>.PriorityPair> {
+  final hugo.util.structure.PriorityQueue this$0;
+  protected hugo.util.structure.PriorityQueue$SortedLinkedList(hugo.util.structure.PriorityQueue);
+  public void addSorted(hugo.util.structure.PriorityQueue<E>.PriorityPair);
+}
+Compiled from "Queue.java"
+public class hugo.util.structure.Queue<E extends java.lang.Comparable> {
+  public hugo.util.structure.Queue();
+  public void push(E);
+  public E pop();
+  public E top();
+  public int size();
+  public boolean empty();
+}
+Compiled from "Stack.java"
+class hugo.util.structure.Stack<E extends java.lang.Comparable> {
+  public hugo.util.structure.Stack();
+  public void push(E);
+  public E pop();
+  public E top();
+  public int size();
+  public boolean empty();
+}
+Compiled from "Vector.java"
+public class hugo.util.structure.Vector<E extends java.lang.Comparable> implements java.lang.Iterable<E> {
+  protected java.lang.Object[] data;
+  protected int count;
+  public hugo.util.structure.Vector(int);
+  public int size();
+  public boolean isEmpty();
+  public java.lang.Object get(int);
+  public void set(int, java.lang.Object);
+  public boolean contains(java.lang.Object);
+  public void addFirst(java.lang.Object);
+  public void addLast(java.lang.Object);
+  public java.lang.Object getFirst();
+  public java.lang.Object getLast();
+  public void remove(E);
+  public void removeLast();
+  public void removeFirst();
+  public void reverse();
+  public hugo.util.structure.Vector doubleV();
+  public java.util.Iterator<E> iterator();
+}
+Compiled from "Vector.java"
+class hugo.util.structure.Vector$1 {
+}
+Compiled from "Vector.java"
+class hugo.util.structure.Vector$VectorIterator<E> implements java.util.Iterator<E> {
+  int index;
+  final hugo.util.structure.Vector this$0;
+  public boolean hasNext();
+  public E next();
+  public void remove();
+  hugo.util.structure.Vector$VectorIterator(hugo.util.structure.Vector, hugo.util.structure.Vector$1);
+}

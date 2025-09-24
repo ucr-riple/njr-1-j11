@@ -1,0 +1,265 @@
+Compiled from "ActionTest.java"
+public class ActionTest extends junit.framework.TestCase {
+  public ActionTest();
+  public void testFindPossibleInstances();
+  public static void main(java.lang.String[]);
+}
+Compiled from "PlanningProblemTest.java"
+public class PlanningProblemTest extends junit.framework.TestCase {
+  public PlanningProblemTest();
+  public void testHanoiTowers() throws java.lang.Exception;
+  public void testSingleStep();
+  public static void main(java.lang.String[]);
+}
+Compiled from "Action.java"
+public class cz.matfyz.sykora.planning.Action implements java.lang.Comparable<cz.matfyz.sykora.planning.Action> {
+  static final boolean $assertionsDisabled;
+  public int compareTo(cz.matfyz.sykora.planning.Action);
+  public boolean equals(java.lang.Object);
+  public void findPossibleInstances(cz.matfyz.sykora.planning.graph.PredicateLayer, java.util.Set<cz.matfyz.sykora.planning.Action>);
+  public void findPossibleInstances(cz.matfyz.sykora.planning.graph.PredicateLayer, java.util.Set<cz.matfyz.sykora.planning.Action>, java.util.Map<cz.matfyz.sykora.planning.predicate.Predicate, cz.matfyz.sykora.planning.ActionList>);
+  public java.lang.String getActionName();
+  public cz.matfyz.sykora.planning.predicate.PredicateSet getNegativeEffects();
+  public cz.matfyz.sykora.planning.predicate.PredicateSet getPositiveEffects();
+  public cz.matfyz.sykora.planning.predicate.PredicateSet getPreconditions();
+  public cz.matfyz.sykora.planning.Action groundedClone();
+  public boolean isGrounded();
+  public java.lang.String toString();
+  public static cz.matfyz.sykora.planning.Action noOpAction(cz.matfyz.sykora.planning.predicate.Predicate);
+  public static cz.matfyz.sykora.planning.Action parse(java.lang.String);
+  public cz.matfyz.sykora.planning.Action(java.lang.String, cz.matfyz.sykora.planning.predicate.PredicateSet, cz.matfyz.sykora.planning.predicate.PredicateSet, cz.matfyz.sykora.planning.predicate.PredicateSet);
+  public int compareTo(java.lang.Object);
+  static {};
+}
+Compiled from "ActionList.java"
+public class cz.matfyz.sykora.planning.ActionList extends java.util.ArrayList<cz.matfyz.sykora.planning.Action> {
+  public cz.matfyz.sykora.planning.ActionList();
+  public cz.matfyz.sykora.planning.predicate.PredicateSet getPreconditions();
+  public cz.matfyz.sykora.planning.ActionList getPureList();
+}
+Compiled from "Planner.java"
+public final class cz.matfyz.sykora.planning.Planner {
+  public cz.matfyz.sykora.planning.Planner();
+  public static void printUsage();
+  public static void main(java.lang.String[]);
+}
+Compiled from "PlanningProblem.java"
+public class cz.matfyz.sykora.planning.PlanningProblem {
+  static final boolean $assertionsDisabled;
+  protected cz.matfyz.sykora.planning.PlanningProblem$BiLayer buildNextLayer();
+  public cz.matfyz.sykora.planning.ActionList findSerialPlan();
+  public cz.matfyz.sykora.planning.graph.ActionLayer getLastActionLayer();
+  public cz.matfyz.sykora.planning.PlanningProblem$BiLayer getLastLayers();
+  public cz.matfyz.sykora.planning.graph.PredicateLayer getLastPredicateLayer();
+  public void initialize(java.lang.String) throws java.io.IOException, cz.matfyz.sykora.planning.predicate.PredicateParser$TokenException;
+  public void initialize(java.io.Reader) throws java.io.IOException, cz.matfyz.sykora.planning.predicate.PredicateParser$TokenException;
+  public void initialize(java.lang.Iterable<cz.matfyz.sykora.planning.Action>, cz.matfyz.sykora.planning.predicate.PredicateSet, cz.matfyz.sykora.planning.predicate.PredicateSet);
+  public boolean isGoalsFulfilled();
+  public boolean singleStep();
+  public cz.matfyz.sykora.planning.ActionList solve();
+  protected boolean verifyGoals();
+  public cz.matfyz.sykora.planning.PlanningProblem(boolean);
+  static {};
+}
+Compiled from "PlanningProblem.java"
+public class cz.matfyz.sykora.planning.PlanningProblem$BiLayer {
+  final cz.matfyz.sykora.planning.PlanningProblem this$0;
+  public void addNoGood(cz.matfyz.sykora.planning.predicate.PredicateSet);
+  public cz.matfyz.sykora.planning.graph.ActionLayer getActions();
+  public int getNoGoodSize();
+  public cz.matfyz.sykora.planning.graph.PredicateLayer getPredicates();
+  public java.util.Map<cz.matfyz.sykora.planning.predicate.Predicate, cz.matfyz.sykora.planning.ActionList> getSupport();
+  public boolean isNoGood(cz.matfyz.sykora.planning.predicate.PredicateSet);
+  public cz.matfyz.sykora.planning.PlanningProblem$BiLayer(cz.matfyz.sykora.planning.PlanningProblem, cz.matfyz.sykora.planning.predicate.PredicateSet);
+  public cz.matfyz.sykora.planning.PlanningProblem$BiLayer(cz.matfyz.sykora.planning.graph.ActionLayer, cz.matfyz.sykora.planning.graph.PredicateLayer, java.util.Map<cz.matfyz.sykora.planning.predicate.Predicate, cz.matfyz.sykora.planning.ActionList>);
+}
+Compiled from "ActionLayer.java"
+public class cz.matfyz.sykora.planning.graph.ActionLayer implements java.lang.Iterable<cz.matfyz.sykora.planning.Action> {
+  public void addAction(cz.matfyz.sykora.planning.Action);
+  public void addMutex(cz.matfyz.sykora.planning.Action, cz.matfyz.sykora.planning.Action);
+  public cz.matfyz.sykora.planning.graph.PredicateLayer buildPredicateLayer(java.util.Map<cz.matfyz.sykora.planning.predicate.Predicate, cz.matfyz.sykora.planning.ActionList>);
+  public void findMutexActions();
+  public java.util.Set<cz.matfyz.sykora.planning.graph.ActionLayer$ActionPair> getMutexPairs();
+  public boolean isMutex(cz.matfyz.sykora.planning.Action, cz.matfyz.sykora.planning.Action);
+  public java.util.Iterator<cz.matfyz.sykora.planning.Action> iterator();
+  public cz.matfyz.sykora.planning.graph.ActionLayer();
+  public cz.matfyz.sykora.planning.graph.ActionLayer(java.lang.Iterable<cz.matfyz.sykora.planning.Action>);
+}
+Compiled from "ActionLayer.java"
+public class cz.matfyz.sykora.planning.graph.ActionLayer$ActionPair implements java.lang.Comparable<cz.matfyz.sykora.planning.graph.ActionLayer$ActionPair> {
+  public int compareTo(cz.matfyz.sykora.planning.graph.ActionLayer$ActionPair);
+  public cz.matfyz.sykora.planning.Action getFirst();
+  public cz.matfyz.sykora.planning.Action getSecond();
+  public void reset(cz.matfyz.sykora.planning.Action, cz.matfyz.sykora.planning.Action);
+  public java.lang.String toString();
+  public cz.matfyz.sykora.planning.graph.ActionLayer$ActionPair(cz.matfyz.sykora.planning.Action, cz.matfyz.sykora.planning.Action);
+  public int compareTo(java.lang.Object);
+}
+Compiled from "PredicateLayer.java"
+public class cz.matfyz.sykora.planning.graph.PredicateLayer extends cz.matfyz.sykora.planning.predicate.PredicateSet {
+  public java.util.TreeSet<cz.matfyz.sykora.planning.graph.PredicateLayer$PredicatePair> mutexes;
+  public void addMutex(cz.matfyz.sykora.planning.predicate.Predicate, cz.matfyz.sykora.planning.predicate.Predicate);
+  public cz.matfyz.sykora.planning.graph.ActionLayer buildActionLayer(java.lang.Iterable<cz.matfyz.sykora.planning.Action>);
+  public boolean contains(cz.matfyz.sykora.planning.predicate.PredicateSet);
+  public boolean equals(java.lang.Object);
+  public java.util.Set<cz.matfyz.sykora.planning.graph.PredicateLayer$PredicatePair> getMutexPairs();
+  public boolean isMutex(cz.matfyz.sykora.planning.predicate.Predicate, cz.matfyz.sykora.planning.predicate.Predicate);
+  public cz.matfyz.sykora.planning.graph.PredicateLayer();
+}
+Compiled from "PredicateLayer.java"
+public class cz.matfyz.sykora.planning.graph.PredicateLayer$PredicatePair implements java.lang.Comparable<cz.matfyz.sykora.planning.graph.PredicateLayer$PredicatePair> {
+  public int compareTo(cz.matfyz.sykora.planning.graph.PredicateLayer$PredicatePair);
+  public boolean equals(java.lang.Object);
+  public final cz.matfyz.sykora.planning.predicate.Predicate getFirst();
+  public final cz.matfyz.sykora.planning.predicate.Predicate getSecond();
+  public void reset(cz.matfyz.sykora.planning.predicate.Predicate, cz.matfyz.sykora.planning.predicate.Predicate);
+  public java.lang.String toString();
+  public cz.matfyz.sykora.planning.graph.PredicateLayer$PredicatePair(cz.matfyz.sykora.planning.predicate.Predicate, cz.matfyz.sykora.planning.predicate.Predicate);
+  public int compareTo(java.lang.Object);
+  static cz.matfyz.sykora.planning.predicate.Predicate access$000(cz.matfyz.sykora.planning.graph.PredicateLayer$PredicatePair);
+  static cz.matfyz.sykora.planning.predicate.Predicate access$100(cz.matfyz.sykora.planning.graph.PredicateLayer$PredicatePair);
+}
+Compiled from "Predicate.java"
+public class cz.matfyz.sykora.planning.predicate.Predicate implements java.lang.Comparable<cz.matfyz.sykora.planning.predicate.Predicate> {
+  public cz.matfyz.sykora.planning.predicate.ValueBinding[] parameters;
+  static final boolean $assertionsDisabled;
+  public void clearBindings();
+  public int compareTo(cz.matfyz.sykora.planning.predicate.Predicate);
+  public boolean equals(java.lang.Object);
+  public final cz.matfyz.sykora.planning.predicate.ValueBinding getParameter(int);
+  public final int getParameterCount();
+  public java.lang.String getPredicateName();
+  public cz.matfyz.sykora.planning.predicate.Predicate groundedClone();
+  public boolean isGrounded();
+  public java.lang.String toString();
+  public boolean unifyWith(cz.matfyz.sykora.planning.predicate.Predicate, java.util.List<cz.matfyz.sykora.planning.predicate.ValueBinding>);
+  public static cz.matfyz.sykora.planning.predicate.Predicate parse(java.lang.String);
+  public cz.matfyz.sykora.planning.predicate.Predicate(java.lang.String, int);
+  public cz.matfyz.sykora.planning.predicate.Predicate(java.lang.String, cz.matfyz.sykora.planning.predicate.ValueBinding[]);
+  public int compareTo(java.lang.Object);
+  static {};
+}
+Compiled from "PredicateParser.java"
+public class cz.matfyz.sykora.planning.predicate.PredicateParser {
+  static final boolean $assertionsDisabled;
+  public cz.matfyz.sykora.planning.predicate.PredicateParser$Token nextToken() throws java.io.IOException;
+  public java.lang.Object parse() throws java.io.IOException, cz.matfyz.sykora.planning.predicate.PredicateParser$TokenException;
+  public cz.matfyz.sykora.planning.Action parseAction() throws java.io.IOException, cz.matfyz.sykora.planning.predicate.PredicateParser$TokenException;
+  public cz.matfyz.sykora.planning.Action parseAction(java.util.Hashtable<java.lang.String, cz.matfyz.sykora.planning.predicate.ValueBinding>) throws java.io.IOException, cz.matfyz.sykora.planning.predicate.PredicateParser$TokenException;
+  protected cz.matfyz.sykora.planning.Action parseAction(java.lang.String, java.util.Hashtable<java.lang.String, cz.matfyz.sykora.planning.predicate.ValueBinding>) throws java.io.IOException, cz.matfyz.sykora.planning.predicate.PredicateParser$TokenException;
+  public cz.matfyz.sykora.planning.predicate.Predicate parsePredicate() throws java.io.IOException, cz.matfyz.sykora.planning.predicate.PredicateParser$TokenException;
+  public cz.matfyz.sykora.planning.predicate.Predicate parsePredicate(boolean) throws java.io.IOException, cz.matfyz.sykora.planning.predicate.PredicateParser$TokenException;
+  public cz.matfyz.sykora.planning.predicate.Predicate parsePredicate(java.util.Hashtable<java.lang.String, cz.matfyz.sykora.planning.predicate.ValueBinding>, boolean) throws java.io.IOException, cz.matfyz.sykora.planning.predicate.PredicateParser$TokenException;
+  public cz.matfyz.sykora.planning.predicate.Predicate parsePredicate(java.lang.String, java.util.Hashtable<java.lang.String, cz.matfyz.sykora.planning.predicate.ValueBinding>, boolean) throws java.io.IOException, cz.matfyz.sykora.planning.predicate.PredicateParser$TokenException;
+  public void pushToken(cz.matfyz.sykora.planning.predicate.PredicateParser$Token);
+  protected void skipWhiteSpace() throws java.io.IOException;
+  public cz.matfyz.sykora.planning.predicate.PredicateParser(java.io.Reader);
+  public cz.matfyz.sykora.planning.predicate.PredicateParser(java.lang.String);
+  static {};
+}
+Compiled from "PredicateParser.java"
+class cz.matfyz.sykora.planning.predicate.PredicateParser$1 {
+  static final int[] $SwitchMap$cz$matfyz$sykora$planning$predicate$PredicateParser$Token$Type;
+  static {};
+}
+Compiled from "PredicateParser.java"
+public class cz.matfyz.sykora.planning.predicate.PredicateParser$Token {
+  public final java.lang.String getTokenText();
+  public final cz.matfyz.sykora.planning.predicate.PredicateParser$Token$Type getTokenType();
+  public cz.matfyz.sykora.planning.predicate.PredicateParser$Token(cz.matfyz.sykora.planning.predicate.PredicateParser$Token$Type);
+  public cz.matfyz.sykora.planning.predicate.PredicateParser$Token(cz.matfyz.sykora.planning.predicate.PredicateParser$Token$Type, java.lang.String);
+}
+Compiled from "PredicateParser.java"
+public final class cz.matfyz.sykora.planning.predicate.PredicateParser$Token$Type extends java.lang.Enum<cz.matfyz.sykora.planning.predicate.PredicateParser$Token$Type> {
+  public static final cz.matfyz.sykora.planning.predicate.PredicateParser$Token$Type IDENTIFIER;
+  public static final cz.matfyz.sykora.planning.predicate.PredicateParser$Token$Type LEFT_PARENTHESIS;
+  public static final cz.matfyz.sykora.planning.predicate.PredicateParser$Token$Type RIGHT_PARENTHESIS;
+  public static final cz.matfyz.sykora.planning.predicate.PredicateParser$Token$Type COMMA;
+  public static final cz.matfyz.sykora.planning.predicate.PredicateParser$Token$Type DOT;
+  public static final cz.matfyz.sykora.planning.predicate.PredicateParser$Token$Type QUADDOT;
+  public static final cz.matfyz.sykora.planning.predicate.PredicateParser$Token$Type ARROW;
+  public static cz.matfyz.sykora.planning.predicate.PredicateParser$Token$Type[] values();
+  public static cz.matfyz.sykora.planning.predicate.PredicateParser$Token$Type valueOf(java.lang.String);
+  static {};
+}
+Compiled from "PredicateParser.java"
+public class cz.matfyz.sykora.planning.predicate.PredicateParser$TokenException extends java.lang.Exception {
+  final cz.matfyz.sykora.planning.predicate.PredicateParser this$0;
+  public cz.matfyz.sykora.planning.predicate.PredicateParser$TokenException(cz.matfyz.sykora.planning.predicate.PredicateParser);
+  public cz.matfyz.sykora.planning.predicate.PredicateParser$TokenException(cz.matfyz.sykora.planning.predicate.PredicateParser, java.lang.String);
+  public cz.matfyz.sykora.planning.predicate.PredicateParser$TokenException(cz.matfyz.sykora.planning.predicate.PredicateParser, java.lang.String, java.lang.Throwable);
+  public cz.matfyz.sykora.planning.predicate.PredicateParser$TokenException(cz.matfyz.sykora.planning.predicate.PredicateParser, java.lang.Throwable);
+}
+Compiled from "PredicateParser.java"
+public class cz.matfyz.sykora.planning.predicate.PredicateParser$UnexpectedEndOfInputException extends cz.matfyz.sykora.planning.predicate.PredicateParser$TokenException {
+  final cz.matfyz.sykora.planning.predicate.PredicateParser this$0;
+  public cz.matfyz.sykora.planning.predicate.PredicateParser$UnexpectedEndOfInputException(cz.matfyz.sykora.planning.predicate.PredicateParser);
+  public cz.matfyz.sykora.planning.predicate.PredicateParser$UnexpectedEndOfInputException(cz.matfyz.sykora.planning.predicate.PredicateParser, java.lang.String);
+}
+Compiled from "PredicateParser.java"
+public class cz.matfyz.sykora.planning.predicate.PredicateParser$UnexpectedTokenException extends cz.matfyz.sykora.planning.predicate.PredicateParser$TokenException {
+  final cz.matfyz.sykora.planning.predicate.PredicateParser this$0;
+  public cz.matfyz.sykora.planning.predicate.PredicateParser$Token getToken();
+  public cz.matfyz.sykora.planning.predicate.PredicateParser$UnexpectedTokenException(cz.matfyz.sykora.planning.predicate.PredicateParser, cz.matfyz.sykora.planning.predicate.PredicateParser$Token, java.lang.String);
+}
+Compiled from "PredicateSet.java"
+public class cz.matfyz.sykora.planning.predicate.PredicateSet implements java.lang.Comparable<cz.matfyz.sykora.planning.predicate.PredicateSet>, java.lang.Iterable<cz.matfyz.sykora.planning.predicate.Predicate> {
+  public void add(cz.matfyz.sykora.planning.predicate.Predicate);
+  public void add(java.lang.Iterable<cz.matfyz.sykora.planning.predicate.Predicate>);
+  public void clear();
+  public void clearBindings();
+  public int compareTo(cz.matfyz.sykora.planning.predicate.PredicateSet);
+  public boolean contains(cz.matfyz.sykora.planning.predicate.Predicate);
+  public boolean contains(cz.matfyz.sykora.planning.predicate.PredicateSet);
+  public cz.matfyz.sykora.planning.predicate.Predicate getPredicate(int);
+  public int getPredicateCount();
+  public java.util.Iterator<cz.matfyz.sykora.planning.predicate.Predicate> iterator();
+  public boolean isGrounded();
+  public void remove(cz.matfyz.sykora.planning.predicate.Predicate);
+  public java.lang.String toString();
+  public cz.matfyz.sykora.planning.predicate.PredicateSet();
+  public int compareTo(java.lang.Object);
+}
+Compiled from "ValueBinding.java"
+public class cz.matfyz.sykora.planning.predicate.ValueBinding {
+  static final boolean $assertionsDisabled;
+  public void addDistinctBinding(cz.matfyz.sykora.planning.predicate.ValueBinding);
+  public boolean bind(java.lang.String);
+  public boolean bind(cz.matfyz.sykora.planning.predicate.ValueBinding);
+  public void clear();
+  public boolean equals(java.lang.Object);
+  public java.lang.String getValue();
+  public boolean isBound();
+  public cz.matfyz.sykora.planning.predicate.ValueBinding();
+  public cz.matfyz.sykora.planning.predicate.ValueBinding(java.lang.String);
+  static {};
+}
+Compiled from "ActionLayerTest.java"
+public class graph.ActionLayerTest extends junit.framework.TestCase {
+  public graph.ActionLayerTest();
+  public void testBuildPredicateLayer();
+}
+Compiled from "PredicateLayerTest.java"
+public class graph.PredicateLayerTest extends junit.framework.TestCase {
+  public graph.PredicateLayerTest();
+  public void testBuildActionLayer();
+  public void testContains();
+}
+Compiled from "PredicateParserTest.java"
+public class predicate.PredicateParserTest extends junit.framework.TestCase {
+  public predicate.PredicateParserTest();
+  public void testParseAction() throws java.lang.Exception;
+  public void testParsePredicate() throws java.lang.Exception;
+}
+Compiled from "PredicateTest.java"
+public class predicate.PredicateTest extends junit.framework.TestCase {
+  public predicate.PredicateTest();
+  public void testUnifyWith_Simple();
+  public void testUnifyWith_Advanced();
+}
+Compiled from "ValueBindingTest.java"
+public class predicate.ValueBindingTest extends junit.framework.TestCase {
+  public predicate.ValueBindingTest();
+  public void testSetValueSimple();
+  public void testSetValueForBoundVariables();
+}

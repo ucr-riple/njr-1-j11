@@ -1,0 +1,937 @@
+Compiled from "AbstractTest.java"
+public abstract class com.strategy.AbstractTest {
+  public com.strategy.AbstractTest();
+  public void before();
+  public void after();
+}
+Compiled from "HasDebugFlag.java"
+public interface com.strategy.api.HasDebugFlag {
+}
+Compiled from "Board.java"
+public interface com.strategy.api.board.Board {
+  public abstract com.strategy.api.field.Field getField(int, int);
+  public abstract com.strategy.api.field.Field getField(com.strategy.util.RowConstant, java.lang.Integer);
+  public abstract com.strategy.api.field.Field getField(int);
+  public abstract void setField(com.strategy.api.field.Field);
+  public abstract int getColumns();
+  public abstract int getRows();
+  public abstract int getBoardSize();
+  public abstract java.util.Collection<com.strategy.api.logic.Position> getPositions();
+  public abstract boolean isValidField(int, int);
+  public abstract boolean isValidField(int);
+  public abstract boolean isValidField(com.strategy.api.logic.Position);
+  public abstract boolean isEmptyField(int);
+  public abstract java.lang.String toIndexString();
+  public abstract java.lang.String toRowColString();
+  public abstract java.lang.String toRatingString(double[], int);
+  public abstract java.lang.String toRowConstantString();
+  public abstract java.lang.String toMarkLastTurnString(java.lang.Integer);
+}
+Compiled from "BDDFieldVisitor.java"
+public interface com.strategy.api.field.BDDFieldVisitor extends com.strategy.api.field.FieldVisitor {
+  public abstract net.sf.javabdd.BDD getBDD();
+}
+Compiled from "BlackStone.java"
+public class com.strategy.api.field.BlackStone implements com.strategy.api.field.StoneField {
+  public com.strategy.api.field.BlackStone(com.strategy.api.logic.Position, java.lang.Integer);
+  public com.strategy.api.logic.Position getPosition();
+  public java.lang.Integer getIndex();
+  public void accept(com.strategy.api.field.FieldVisitor);
+  public java.lang.String toString();
+}
+Compiled from "EmptyField.java"
+public class com.strategy.api.field.EmptyField implements com.strategy.api.field.Field {
+  public com.strategy.api.field.EmptyField(com.strategy.api.logic.Position, java.lang.Integer);
+  public com.strategy.api.logic.Position getPosition();
+  public java.lang.Integer getIndex();
+  public void accept(com.strategy.api.field.FieldVisitor);
+  public java.lang.String toString();
+}
+Compiled from "Field.java"
+public interface com.strategy.api.field.Field {
+  public abstract void accept(com.strategy.api.field.FieldVisitor);
+  public abstract com.strategy.api.logic.Position getPosition();
+  public abstract java.lang.Integer getIndex();
+}
+Compiled from "FieldVisitor.java"
+public interface com.strategy.api.field.FieldVisitor {
+  public abstract void visit(com.strategy.api.field.EmptyField);
+  public abstract void visit(com.strategy.api.field.WhiteStone);
+  public abstract void visit(com.strategy.api.field.BlackStone);
+}
+Compiled from "StoneField.java"
+public interface com.strategy.api.field.StoneField extends com.strategy.api.field.Field {
+}
+Compiled from "WhiteStone.java"
+public class com.strategy.api.field.WhiteStone implements com.strategy.api.field.StoneField {
+  public com.strategy.api.field.WhiteStone(com.strategy.api.logic.Position, java.lang.Integer);
+  public com.strategy.api.logic.Position getPosition();
+  public java.lang.Integer getIndex();
+  public void accept(com.strategy.api.field.FieldVisitor);
+  public java.lang.String toString();
+}
+Compiled from "GtpCommands.java"
+public class com.strategy.api.interpreter.GtpCommands {
+  public static final java.lang.String CMD_BOARDSIZE;
+  public static final java.lang.String CMD_PLAYGAME;
+  public static final java.lang.String CMD_GENMOVE;
+  public com.strategy.api.interpreter.GtpCommands();
+}
+Compiled from "GtpInterpreter.java"
+public class com.strategy.api.interpreter.GtpInterpreter extends java.lang.Thread {
+  public com.strategy.api.interpreter.GtpInterpreter();
+  public void run();
+  static {};
+}
+Compiled from "InterpreterCommands.java"
+public class com.strategy.api.interpreter.InterpreterCommands {
+  static final java.lang.String CMD_PREFIX;
+  static final java.lang.String CMD_REDO;
+  static final java.lang.String CMD_THINK;
+  static final java.lang.String CMD_WHITE;
+  static final java.lang.String CMD_BLACK;
+  static final java.lang.String CMD_EXIT;
+  static final java.lang.String CMD_HELP;
+  static final java.lang.String CMD_MEM;
+  static final java.lang.String CMD_NUMBERS;
+  static final java.lang.String CMD_COORDINATES;
+  static final java.lang.String CMD_RATING;
+  static final java.lang.String CMD_SWAP;
+  static final java.lang.String CMD_SWITCH;
+  static final java.lang.String CMD_NODES;
+  static final java.lang.String CMD_BDD;
+  static final java.lang.String CMD_VALUE;
+  static final java.lang.String CMD_SOLUTIONS;
+  static final java.lang.String CMD_PREDICT;
+  public com.strategy.api.interpreter.InterpreterCommands();
+  static {};
+}
+Compiled from "InterpreterManager.java"
+public class com.strategy.api.interpreter.InterpreterManager {
+  public com.strategy.api.interpreter.InterpreterManager();
+  public static void scheduleInterpreter(java.lang.Thread);
+  static void exit();
+  static {};
+}
+Compiled from "StrategyInterpreter.java"
+public class com.strategy.api.interpreter.StrategyInterpreter extends java.lang.Thread {
+  public com.strategy.api.interpreter.StrategyInterpreter(com.strategy.api.board.Board, com.strategy.util.StoneColor, com.strategy.api.logic.prediction.Prediction);
+  public void run();
+  static {};
+}
+Compiled from "BddCache.java"
+public interface com.strategy.api.logic.BddCache extends com.strategy.api.HasDebugFlag {
+  public abstract net.sf.javabdd.BDD restore(com.strategy.util.StoneColor, com.strategy.api.logic.Position, com.strategy.api.logic.Position, int);
+  public abstract net.sf.javabdd.BDD store(com.strategy.util.StoneColor, com.strategy.api.logic.Position, com.strategy.api.logic.Position, int, net.sf.javabdd.BDD);
+  public abstract boolean isCached(com.strategy.util.StoneColor, com.strategy.api.logic.Position, com.strategy.api.logic.Position, int);
+  public abstract void free();
+}
+Compiled from "BddCache.java"
+public class com.strategy.api.logic.BddCache$BDDCacheStatus {
+  public com.strategy.api.logic.BddCache$BDDCacheStatus();
+  public void incrementStores();
+  public void incrementRestores();
+  public java.lang.String toString();
+}
+Compiled from "BddCache.java"
+public class com.strategy.api.logic.BddCache$BddCacheIndex {
+  public static com.strategy.api.logic.BddCache$BddCacheIndex getIndex(com.strategy.util.StoneColor, com.strategy.api.logic.Position, com.strategy.api.logic.Position, int);
+  public java.lang.String toString();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+}
+Compiled from "BoardAnalyzer.java"
+public interface com.strategy.api.logic.BoardAnalyzer {
+  public abstract net.sf.javabdd.BDD getPath(com.strategy.api.logic.Position, com.strategy.api.logic.Position, com.strategy.util.StoneColor);
+  public abstract void log();
+  public abstract void done();
+  public abstract net.sf.javabdd.BDDFactory getFactory();
+}
+Compiled from "BoardTransformer.java"
+public interface com.strategy.api.logic.BoardTransformer {
+  public abstract java.util.Map<com.strategy.api.logic.Position, net.sf.javabdd.BDD> getBDDBoard();
+}
+Compiled from "GtpWrapper.java"
+public class com.strategy.api.logic.GtpWrapper {
+  public static java.lang.String SEPARATOR;
+  public com.strategy.api.logic.GtpWrapper();
+  public void setBoardSize(java.lang.Integer);
+  public void setMoves(java.lang.String);
+  public java.lang.String getResponse();
+  public java.lang.String getPredictedMoves();
+  static {};
+}
+Compiled from "PathCalculator.java"
+public interface com.strategy.api.logic.PathCalculator {
+  public abstract net.sf.javabdd.BDD getPath(com.strategy.api.logic.Position, com.strategy.api.logic.Position, com.strategy.util.StoneColor);
+  public abstract void log();
+  public abstract void done();
+}
+Compiled from "Position.java"
+public interface com.strategy.api.logic.Position {
+  public abstract boolean isNeighbour(com.strategy.api.logic.Position);
+  public abstract void setVisited();
+  public abstract void setSeen(boolean);
+  public abstract boolean isSeen();
+  public abstract int getCol();
+  public abstract int getRow();
+  public abstract com.strategy.api.logic.Position getNorth();
+  public abstract com.strategy.api.logic.Position getNorthWest();
+  public abstract com.strategy.api.logic.Position getEast();
+  public abstract com.strategy.api.logic.Position getNorthEast();
+  public abstract com.strategy.api.logic.Position getSouth();
+  public abstract com.strategy.api.logic.Position getSouthWest();
+  public abstract com.strategy.api.logic.Position getWest();
+  public abstract com.strategy.api.logic.Position getSouthEast();
+  public abstract java.util.List<com.strategy.api.logic.Position> getNeighbors();
+}
+Compiled from "Evaluation.java"
+public interface com.strategy.api.logic.evaluation.Evaluation {
+  public abstract double getAverageRating();
+  public abstract int getBestIndex();
+  public abstract double[] getRating();
+  public abstract com.strategy.util.StoneColor getColor();
+  public abstract void log();
+}
+Compiled from "Prediction.java"
+public interface com.strategy.api.logic.prediction.Prediction extends com.strategy.api.HasDebugFlag {
+  public abstract java.lang.Integer answerTurn(int, com.strategy.util.StoneColor);
+  public abstract java.lang.Integer doCalculatedTurn(com.strategy.util.StoneColor);
+  public abstract void doManualTurn(int, com.strategy.util.StoneColor);
+  public abstract boolean isWinWhite();
+  public abstract boolean isWinBlack();
+  public abstract java.lang.Integer getLastTurn();
+  public abstract com.strategy.api.logic.evaluation.Evaluation getEvaluation(com.strategy.util.StoneColor);
+  public abstract java.util.List<com.strategy.util.Turn> getTurnsSoFar();
+  public abstract com.strategy.api.logic.situation.Situation getWhite();
+  public abstract com.strategy.api.logic.situation.Situation getBlack();
+  public abstract java.util.List<com.strategy.util.PredictedMove> getPrediction(com.strategy.util.StoneColor);
+}
+Compiled from "ConditionCalculator.java"
+public interface com.strategy.api.logic.situation.ConditionCalculator {
+  public abstract net.sf.javabdd.BDD getBdd();
+}
+Compiled from "Situation.java"
+public interface com.strategy.api.logic.situation.Situation {
+  public abstract net.sf.javabdd.BDD getWinningCondition();
+  public abstract com.strategy.api.board.Board getBoard();
+  public abstract com.strategy.util.StoneColor getStoneColor();
+  public abstract void update(int, com.strategy.util.StoneColor);
+}
+Compiled from "StrategyHavannah.java"
+public class com.strategy.havannah.StrategyHavannah {
+  public com.strategy.havannah.StrategyHavannah();
+  public static void main(java.lang.String[]);
+}
+Compiled from "TestBoardProvider.java"
+public class com.strategy.havannah.TestBoardProvider {
+  public static int[][] BOARD_10;
+  public static int[][] BOARD_7;
+  public static int[][] BOARD_6;
+  public static int[][] BOARD_5;
+  public static int[][] BOARD_4;
+  public static int[][] BOARD_3;
+  public static int[][] BOARD_2;
+  public com.strategy.havannah.TestBoardProvider();
+  public static int[][] getBoard(int);
+  static {};
+}
+Compiled from "BoardHavannah.java"
+public class com.strategy.havannah.board.BoardHavannah implements com.strategy.api.board.Board {
+  public static com.strategy.api.board.Board createInstance(java.util.Map<com.strategy.api.logic.Position, java.lang.Integer>, int);
+  public static com.strategy.api.board.Board createInstance(int[][], int);
+  public static com.strategy.api.board.Board createInstance(int[][], int, java.util.List<com.strategy.util.Turn>);
+  public com.strategy.api.field.Field getField(int, int);
+  public com.strategy.api.field.Field getField(com.strategy.util.RowConstant, java.lang.Integer);
+  public com.strategy.api.field.Field getField(int);
+  public void setField(com.strategy.api.field.Field);
+  public int getColumns();
+  public int getRows();
+  public int getBoardSize();
+  public java.util.Collection<com.strategy.api.logic.Position> getPositions();
+  public boolean isValidField(int, int);
+  public boolean isValidField(int);
+  public boolean isValidField(com.strategy.api.logic.Position);
+  public boolean isEmptyField(int);
+  public java.lang.String toString();
+  public java.lang.String toMarkLastTurnString(java.lang.Integer);
+  public java.lang.String toIndexString();
+  public java.lang.String toRowColString();
+  public java.lang.String toRowConstantString();
+  public java.lang.String toRatingString(double[], int);
+}
+Compiled from "BoardHavannahTest.java"
+public class com.strategy.havannah.board.BoardHavannahTest {
+  public com.strategy.havannah.board.BoardHavannahTest();
+  public void testValidFieldConstruction();
+  public void testCornerCalculation();
+  public void testBoardConstruction();
+  public void testPathCalculation();
+  static {};
+}
+Compiled from "TurnFieldVisitor.java"
+public class com.strategy.havannah.field.TurnFieldVisitor implements com.strategy.api.field.FieldVisitor {
+  public com.strategy.havannah.field.TurnFieldVisitor(net.sf.javabdd.BDD, com.strategy.util.StoneColor);
+  public net.sf.javabdd.BDD getWin();
+  public void visit(com.strategy.api.field.EmptyField);
+  public void visit(com.strategy.api.field.WhiteStone);
+  public void visit(com.strategy.api.field.BlackStone);
+}
+Compiled from "BddCacheHavannah.java"
+public class com.strategy.havannah.logic.BddCacheHavannah implements com.strategy.api.logic.BddCache {
+  public com.strategy.havannah.logic.BddCacheHavannah();
+  public net.sf.javabdd.BDD restore(com.strategy.util.StoneColor, com.strategy.api.logic.Position, com.strategy.api.logic.Position, int);
+  public net.sf.javabdd.BDD store(com.strategy.util.StoneColor, com.strategy.api.logic.Position, com.strategy.api.logic.Position, int, net.sf.javabdd.BDD);
+  public boolean isCached(com.strategy.util.StoneColor, com.strategy.api.logic.Position, com.strategy.api.logic.Position, int);
+  public void free();
+}
+Compiled from "BddCacheHavannah.java"
+class com.strategy.havannah.logic.BddCacheHavannah$1 implements com.google.common.cache.RemovalListener<com.strategy.api.logic.BddCache$BddCacheIndex, net.sf.javabdd.BDD> {
+  final com.strategy.havannah.logic.BddCacheHavannah this$0;
+  com.strategy.havannah.logic.BddCacheHavannah$1(com.strategy.havannah.logic.BddCacheHavannah);
+  public void onRemoval(com.google.common.cache.RemovalNotification<com.strategy.api.logic.BddCache$BddCacheIndex, net.sf.javabdd.BDD>);
+}
+Compiled from "BoardAnalyzerHavannah.java"
+public class com.strategy.havannah.logic.BoardAnalyzerHavannah implements com.strategy.api.logic.BoardAnalyzer {
+  public com.strategy.havannah.logic.BoardAnalyzerHavannah(com.strategy.api.board.Board);
+  public net.sf.javabdd.BDD getPath(com.strategy.api.logic.Position, com.strategy.api.logic.Position, com.strategy.util.StoneColor);
+  public void log();
+  public void done();
+  public net.sf.javabdd.BDDFactory getFactory();
+}
+Compiled from "PathCalculatorProvider.java"
+public class com.strategy.havannah.logic.PathCalculatorProvider {
+  public com.strategy.havannah.logic.PathCalculatorProvider();
+}
+Compiled from "PathCalculatorProvider.java"
+class com.strategy.havannah.logic.PathCalculatorProvider$1 {
+}
+Compiled from "PathCalculatorProvider.java"
+public abstract class com.strategy.havannah.logic.PathCalculatorProvider$PathCalculatorKey extends java.lang.Enum<com.strategy.havannah.logic.PathCalculatorProvider$PathCalculatorKey> {
+  public static final com.strategy.havannah.logic.PathCalculatorProvider$PathCalculatorKey RECURSIVE;
+  public static final com.strategy.havannah.logic.PathCalculatorProvider$PathCalculatorKey ITERATIVE;
+  public static com.strategy.havannah.logic.PathCalculatorProvider$PathCalculatorKey[] values();
+  public static com.strategy.havannah.logic.PathCalculatorProvider$PathCalculatorKey valueOf(java.lang.String);
+  public java.lang.String getKey();
+  public static com.strategy.havannah.logic.PathCalculatorProvider$PathCalculatorKey parse(java.lang.String);
+  public abstract com.strategy.api.logic.PathCalculator provide(net.sf.javabdd.BDDFactory, com.strategy.api.board.Board);
+  com.strategy.havannah.logic.PathCalculatorProvider$PathCalculatorKey(java.lang.String, int, java.lang.String, com.strategy.havannah.logic.PathCalculatorProvider$1);
+  static {};
+}
+Compiled from "PathCalculatorProvider.java"
+final class com.strategy.havannah.logic.PathCalculatorProvider$PathCalculatorKey$1 extends com.strategy.havannah.logic.PathCalculatorProvider$PathCalculatorKey {
+  com.strategy.havannah.logic.PathCalculatorProvider$PathCalculatorKey$1(java.lang.String, int, java.lang.String);
+  public com.strategy.api.logic.PathCalculator provide(net.sf.javabdd.BDDFactory, com.strategy.api.board.Board);
+}
+Compiled from "PathCalculatorProvider.java"
+final class com.strategy.havannah.logic.PathCalculatorProvider$PathCalculatorKey$2 extends com.strategy.havannah.logic.PathCalculatorProvider$PathCalculatorKey {
+  com.strategy.havannah.logic.PathCalculatorProvider$PathCalculatorKey$2(java.lang.String, int, java.lang.String);
+  public com.strategy.api.logic.PathCalculator provide(net.sf.javabdd.BDDFactory, com.strategy.api.board.Board);
+}
+Compiled from "PathsIter.java"
+public class com.strategy.havannah.logic.PathsIter implements com.strategy.api.logic.PathCalculator {
+  public com.strategy.havannah.logic.PathsIter(net.sf.javabdd.BDDFactory, com.strategy.api.board.Board);
+  public net.sf.javabdd.BDD getPath(com.strategy.api.logic.Position, com.strategy.api.logic.Position, com.strategy.util.StoneColor);
+  public void log();
+  public void done();
+}
+Compiled from "PathsRec.java"
+public class com.strategy.havannah.logic.PathsRec implements com.strategy.api.logic.PathCalculator {
+  public com.strategy.havannah.logic.PathsRec(net.sf.javabdd.BDDFactory, com.strategy.api.board.Board);
+  public net.sf.javabdd.BDD getPath(com.strategy.api.logic.Position, com.strategy.api.logic.Position, com.strategy.util.StoneColor);
+  public void log();
+  public void done();
+}
+Compiled from "PositionHexagon.java"
+public class com.strategy.havannah.logic.PositionHexagon implements com.strategy.api.logic.Position {
+  public static com.strategy.api.logic.Position get(int, int);
+  public com.strategy.havannah.logic.PositionHexagon(int, int);
+  public int getRow();
+  public int getCol();
+  public boolean isSeen();
+  public void setSeen(boolean);
+  public void setVisited();
+  public boolean isNeighbour(com.strategy.api.logic.Position);
+  public com.strategy.api.logic.Position getNorth();
+  public com.strategy.api.logic.Position getSouth();
+  public com.strategy.api.logic.Position getNorthWest();
+  public com.strategy.api.logic.Position getSouthWest();
+  public com.strategy.api.logic.Position getNorthEast();
+  public com.strategy.api.logic.Position getSouthEast();
+  public com.strategy.api.logic.Position getEast();
+  public com.strategy.api.logic.Position getWest();
+  public java.util.List<com.strategy.api.logic.Position> getNeighbors();
+  public java.lang.String toString();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+}
+Compiled from "PositionHexagonTest.java"
+public class com.strategy.havannah.logic.PositionHexagonTest {
+  public com.strategy.havannah.logic.PositionHexagonTest();
+  public void test();
+}
+Compiled from "EvaluationHavannah.java"
+public class com.strategy.havannah.logic.evaluation.EvaluationHavannah implements com.strategy.api.logic.evaluation.Evaluation {
+  public static com.strategy.api.logic.evaluation.Evaluation create(com.strategy.api.logic.situation.Situation, com.strategy.api.logic.situation.Situation, com.strategy.util.StoneColor);
+  public static com.strategy.api.logic.evaluation.Evaluation create(com.strategy.api.board.Board, net.sf.javabdd.BDD, net.sf.javabdd.BDD, com.strategy.util.StoneColor);
+  public double getAverageRating();
+  public int getBestIndex();
+  public double[] getRating();
+  public void log();
+  public com.strategy.util.StoneColor getColor();
+}
+Compiled from "EvaluationTest.java"
+public class com.strategy.havannah.logic.evaluation.EvaluationTest extends com.strategy.AbstractTest {
+  public com.strategy.havannah.logic.evaluation.EvaluationTest();
+  public void testEvaluation();
+  public void testFork();
+  public void testHgf();
+}
+Compiled from "TestBoardEvaluationProvider.java"
+public class com.strategy.havannah.logic.evaluation.TestBoardEvaluationProvider {
+  public static int[][] BOARD_EMPTY;
+  public static int[][] BOARD_FORK;
+  public static int[][] BOARD_BRIDGE;
+  public static int[][] BOARD_RING;
+  public com.strategy.havannah.logic.evaluation.TestBoardEvaluationProvider();
+  static {};
+}
+Compiled from "PredictionHavannah.java"
+public class com.strategy.havannah.logic.prediction.PredictionHavannah implements com.strategy.api.logic.prediction.Prediction {
+  public com.strategy.havannah.logic.prediction.PredictionHavannah(com.strategy.api.board.Board);
+  public com.strategy.havannah.logic.prediction.PredictionHavannah(com.strategy.api.board.Board, int, java.util.List<com.strategy.util.Turn>);
+  public boolean isWinWhite();
+  public boolean isWinBlack();
+  public java.lang.Integer getLastTurn();
+  public com.strategy.api.logic.evaluation.Evaluation getEvaluation(com.strategy.util.StoneColor);
+  public java.util.List<com.strategy.util.Turn> getTurnsSoFar();
+  public com.strategy.api.logic.situation.Situation getWhite();
+  public com.strategy.api.logic.situation.Situation getBlack();
+  public java.util.List<com.strategy.util.PredictedMove> getPrediction(com.strategy.util.StoneColor);
+  public java.lang.Integer doCalculatedTurn(com.strategy.util.StoneColor);
+  public java.lang.Integer answerTurn(int, com.strategy.util.StoneColor);
+  public void doManualTurn(int, com.strategy.util.StoneColor);
+}
+Compiled from "PredictionTest.java"
+public class com.strategy.havannah.logic.prediction.PredictionTest {
+  public com.strategy.havannah.logic.prediction.PredictionTest();
+  public void before();
+  public void doAfter();
+  public void testNextField4();
+  public void testNextField5();
+}
+Compiled from "BridgeCondidtionCalculatorTest.java"
+public class com.strategy.havannah.logic.situation.BridgeCondidtionCalculatorTest extends com.strategy.AbstractTest {
+  public com.strategy.havannah.logic.situation.BridgeCondidtionCalculatorTest();
+  public void testBridge5();
+  public void testBridge14();
+}
+Compiled from "BridgeConditionCalculator.java"
+public class com.strategy.havannah.logic.situation.BridgeConditionCalculator implements com.strategy.api.logic.situation.ConditionCalculator,com.strategy.api.HasDebugFlag {
+  public com.strategy.havannah.logic.situation.BridgeConditionCalculator(com.strategy.api.logic.BoardAnalyzer, com.strategy.api.board.Board, com.strategy.util.StoneColor);
+  public net.sf.javabdd.BDD getBdd();
+}
+Compiled from "CornerFieldCategory.java"
+public final class com.strategy.havannah.logic.situation.CornerFieldCategory extends java.lang.Enum<com.strategy.havannah.logic.situation.CornerFieldCategory> {
+  public static final com.strategy.havannah.logic.situation.CornerFieldCategory C1;
+  public static final com.strategy.havannah.logic.situation.CornerFieldCategory C2;
+  public static final com.strategy.havannah.logic.situation.CornerFieldCategory C3;
+  public static final com.strategy.havannah.logic.situation.CornerFieldCategory C4;
+  public static final com.strategy.havannah.logic.situation.CornerFieldCategory C5;
+  public static final com.strategy.havannah.logic.situation.CornerFieldCategory C6;
+  public static com.strategy.havannah.logic.situation.CornerFieldCategory[] values();
+  public static com.strategy.havannah.logic.situation.CornerFieldCategory valueOf(java.lang.String);
+  public boolean contains(com.strategy.api.logic.Position, com.strategy.api.board.Board);
+  static {};
+}
+Compiled from "CornerFieldCategory.java"
+class com.strategy.havannah.logic.situation.CornerFieldCategory$1 {
+  static final int[] $SwitchMap$com$strategy$havannah$logic$situation$CornerFieldCategory;
+  static {};
+}
+Compiled from "CornerFieldPredicate.java"
+public class com.strategy.havannah.logic.situation.CornerFieldPredicate implements com.google.common.base.Predicate<com.strategy.api.logic.Position> {
+  public com.strategy.havannah.logic.situation.CornerFieldPredicate(com.strategy.api.board.Board);
+  public boolean apply(com.strategy.api.logic.Position);
+  public boolean apply(java.lang.Object);
+}
+Compiled from "EdgeFieldCategory.java"
+public final class com.strategy.havannah.logic.situation.EdgeFieldCategory extends java.lang.Enum<com.strategy.havannah.logic.situation.EdgeFieldCategory> {
+  public static final com.strategy.havannah.logic.situation.EdgeFieldCategory E1;
+  public static final com.strategy.havannah.logic.situation.EdgeFieldCategory E2;
+  public static final com.strategy.havannah.logic.situation.EdgeFieldCategory E3;
+  public static final com.strategy.havannah.logic.situation.EdgeFieldCategory E4;
+  public static final com.strategy.havannah.logic.situation.EdgeFieldCategory E5;
+  public static final com.strategy.havannah.logic.situation.EdgeFieldCategory E6;
+  public static com.strategy.havannah.logic.situation.EdgeFieldCategory[] values();
+  public static com.strategy.havannah.logic.situation.EdgeFieldCategory valueOf(java.lang.String);
+  public boolean contains(com.strategy.api.logic.Position, com.strategy.api.board.Board);
+  static {};
+}
+Compiled from "EdgeFieldCategory.java"
+class com.strategy.havannah.logic.situation.EdgeFieldCategory$1 {
+  static final int[] $SwitchMap$com$strategy$havannah$logic$situation$EdgeFieldCategory;
+  static {};
+}
+Compiled from "EdgeFieldPredicate.java"
+public class com.strategy.havannah.logic.situation.EdgeFieldPredicate implements com.google.common.base.Predicate<com.strategy.api.logic.Position> {
+  public com.strategy.havannah.logic.situation.EdgeFieldPredicate(com.strategy.havannah.logic.situation.EdgeFieldCategory, com.strategy.api.board.Board);
+  public boolean apply(com.strategy.api.logic.Position);
+  public boolean apply(java.lang.Object);
+}
+Compiled from "ForkCondidtionCalculatorTest.java"
+public class com.strategy.havannah.logic.situation.ForkCondidtionCalculatorTest extends com.strategy.AbstractTest {
+  public com.strategy.havannah.logic.situation.ForkCondidtionCalculatorTest();
+  public static void doBefore();
+  public void testFork1();
+  public void testFork6();
+  public void testSamplePredictForkInOneTurn();
+  public void testHgfPredictForkInOneTurn() throws com.strategy.util.GameParser$GameParserException;
+  public static void doAfter();
+}
+Compiled from "ForkConditionCalculator.java"
+public class com.strategy.havannah.logic.situation.ForkConditionCalculator implements com.strategy.api.logic.situation.ConditionCalculator,com.strategy.api.HasDebugFlag {
+  public com.strategy.havannah.logic.situation.ForkConditionCalculator(com.strategy.api.logic.BoardAnalyzer, com.strategy.api.board.Board, com.strategy.util.StoneColor);
+  public net.sf.javabdd.BDD getBdd();
+}
+Compiled from "InnerFieldPredicate.java"
+public class com.strategy.havannah.logic.situation.InnerFieldPredicate implements com.google.common.base.Predicate<com.strategy.api.logic.Position> {
+  public com.strategy.havannah.logic.situation.InnerFieldPredicate(com.strategy.api.board.Board);
+  public boolean apply(com.strategy.api.logic.Position);
+  public boolean apply(java.lang.Object);
+}
+Compiled from "RingConditionCalculator.java"
+public class com.strategy.havannah.logic.situation.RingConditionCalculator implements com.strategy.api.logic.situation.ConditionCalculator,com.strategy.api.HasDebugFlag {
+  public com.strategy.havannah.logic.situation.RingConditionCalculator(com.strategy.api.logic.BoardAnalyzer, com.strategy.api.board.Board, com.strategy.util.StoneColor);
+  public net.sf.javabdd.BDD getBdd();
+}
+Compiled from "RingConditionCalculatorTest.java"
+public class com.strategy.havannah.logic.situation.RingConditionCalculatorTest extends com.strategy.AbstractTest {
+  public com.strategy.havannah.logic.situation.RingConditionCalculatorTest();
+  public static void doBefore();
+  public void testHgfHasRing() throws com.strategy.util.GameParser$GameParserException;
+  public void testHgfHasRingInOneTurn() throws com.strategy.util.GameParser$GameParserException;
+  public void testHgfHasRingInOneTurnWithAllConditions() throws com.strategy.util.GameParser$GameParserException;
+  public void testHgfPredictRingInOneTurn() throws com.strategy.util.GameParser$GameParserException;
+  public static void doAfter();
+}
+Compiled from "SituationHavannah.java"
+public class com.strategy.havannah.logic.situation.SituationHavannah implements com.strategy.api.logic.situation.Situation {
+  public com.strategy.havannah.logic.situation.SituationHavannah(com.strategy.api.logic.BoardAnalyzer, com.strategy.api.board.Board, com.strategy.util.StoneColor);
+  public net.sf.javabdd.BDD getWinningCondition();
+  public com.strategy.api.board.Board getBoard();
+  public com.strategy.util.StoneColor getStoneColor();
+  public void update(int, com.strategy.util.StoneColor);
+}
+Compiled from "SituationPerformanceTest.java"
+public class com.strategy.havannah.logic.situation.SituationPerformanceTest {
+  public com.strategy.havannah.logic.situation.SituationPerformanceTest();
+  public static void before();
+  public void doAfter();
+  public void testBoard3();
+  public void testBoard4();
+  public void testBoard5();
+  public void testBoard6();
+  public void testBoard7();
+  public void testSuperTurn();
+}
+Compiled from "TestBoardProviderConditions.java"
+public class com.strategy.havannah.logic.situation.TestBoardProviderConditions {
+  public static int[][] BOARD_EMPTY;
+  public static int[][] BOARD_BRIDGE_5;
+  public static int[][] BOARD_BRIDGE_WON;
+  public static int[][] BOARD_BRIDGE_14;
+  public static int[][] BOARD_FORK_1;
+  public static int[][] BOARD_FORK_6;
+  public static int[][] BOARD_RING_1;
+  public static int[][] BOARD_RING_1_OTHER;
+  public static int[][] BOARD_RING_2;
+  public com.strategy.havannah.logic.situation.TestBoardProviderConditions();
+  static {};
+}
+Compiled from "Strategy.java"
+public class com.strategy.prototype.Strategy {
+  public com.strategy.prototype.Strategy();
+  public static void main(java.lang.String[]);
+}
+Compiled from "BoardPrototype.java"
+public class com.strategy.prototype.board.BoardPrototype implements com.strategy.api.board.Board {
+  public static com.strategy.api.board.Board createInstance(int[][]);
+  public com.strategy.api.field.Field getField(int, int);
+  public com.strategy.api.field.Field getField(com.strategy.util.RowConstant, java.lang.Integer);
+  public com.strategy.api.field.Field getField(int);
+  public void setField(com.strategy.api.field.Field);
+  public int getColumns();
+  public int getRows();
+  public int getBoardSize();
+  public java.util.Collection<com.strategy.api.logic.Position> getPositions();
+  public boolean isValidField(int, int);
+  public boolean isValidField(int);
+  public boolean isValidField(com.strategy.api.logic.Position);
+  public boolean isEmptyField(int);
+  public java.lang.String toString();
+  public java.lang.String toMarkLastTurnString(java.lang.Integer);
+  public java.lang.String toIndexString();
+  public java.lang.String toRowColString();
+  public java.lang.String toRatingString(double[], int);
+  public java.lang.String toRowConstantString();
+}
+Compiled from "BoardPrototypeTest.java"
+public class com.strategy.prototype.board.BoardPrototypeTest {
+  public com.strategy.prototype.board.BoardPrototypeTest();
+  public void init();
+  public void testModelCountSample();
+  public void testModelCountChanging();
+  public void testModelCountBigBoard();
+}
+Compiled from "BddCachePrototype.java"
+public class com.strategy.prototype.logic.BddCachePrototype implements com.strategy.api.logic.BddCache {
+  public com.strategy.prototype.logic.BddCachePrototype();
+  public net.sf.javabdd.BDD restore(com.strategy.util.StoneColor, com.strategy.api.logic.Position, com.strategy.api.logic.Position, int);
+  public net.sf.javabdd.BDD store(com.strategy.util.StoneColor, com.strategy.api.logic.Position, com.strategy.api.logic.Position, int, net.sf.javabdd.BDD);
+  public boolean isCached(com.strategy.util.StoneColor, com.strategy.api.logic.Position, com.strategy.api.logic.Position, int);
+  public void free();
+}
+Compiled from "BoardAnalizerPrototype.java"
+public class com.strategy.prototype.logic.BoardAnalizerPrototype implements com.strategy.api.logic.BoardAnalyzer {
+  public com.strategy.prototype.logic.BoardAnalizerPrototype(com.strategy.api.board.Board);
+  public net.sf.javabdd.BDD getPath(com.strategy.api.logic.Position, com.strategy.api.logic.Position);
+  public net.sf.javabdd.BDD getPath(com.strategy.api.logic.Position, com.strategy.api.logic.Position, boolean);
+  public void log();
+  public void done();
+  public net.sf.javabdd.BDDFactory getFactory();
+  public net.sf.javabdd.BDD getPath(com.strategy.api.logic.Position, com.strategy.api.logic.Position, com.strategy.util.StoneColor);
+}
+Compiled from "BoardTransformerPrototype.java"
+public class com.strategy.prototype.logic.BoardTransformerPrototype extends com.strategy.util.AbstractBoardTransformer {
+  public com.strategy.prototype.logic.BoardTransformerPrototype(com.strategy.api.board.Board, net.sf.javabdd.BDDFactory);
+  protected com.strategy.api.logic.Position getPositionInstance(int, int);
+  protected com.strategy.api.field.BDDFieldVisitor getBDDFieldVisitor();
+  protected com.strategy.api.board.Board getBoard();
+}
+Compiled from "PositionSquare.java"
+public class com.strategy.prototype.logic.PositionSquare implements com.strategy.api.logic.Position {
+  public static com.strategy.api.logic.Position get(int, int);
+  public com.strategy.prototype.logic.PositionSquare(int, int);
+  public int getRow();
+  public int getCol();
+  public boolean isSeen();
+  public void setSeen(boolean);
+  public void setVisited();
+  public boolean isNeighbour(com.strategy.api.logic.Position);
+  public com.strategy.api.logic.Position getNorth();
+  public com.strategy.api.logic.Position getSouth();
+  public com.strategy.api.logic.Position getWest();
+  public com.strategy.api.logic.Position getEast();
+  public com.strategy.api.logic.Position getNorthWest();
+  public com.strategy.api.logic.Position getNorthEast();
+  public com.strategy.api.logic.Position getSouthWest();
+  public com.strategy.api.logic.Position getSouthEast();
+  public java.util.List<com.strategy.api.logic.Position> getNeighbors();
+  public java.lang.String toString();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+}
+Compiled from "AbstractBoardTransformer.java"
+public abstract class com.strategy.util.AbstractBoardTransformer implements com.strategy.api.logic.BoardTransformer {
+  public com.strategy.util.AbstractBoardTransformer();
+  protected abstract com.strategy.api.logic.Position getPositionInstance(int, int);
+  protected abstract com.strategy.api.field.BDDFieldVisitor getBDDFieldVisitor();
+  protected abstract com.strategy.api.board.Board getBoard();
+  public java.util.Map<com.strategy.api.logic.Position, net.sf.javabdd.BDD> getBDDBoard();
+}
+Compiled from "BddFactoryProvider.java"
+public class com.strategy.util.BddFactoryProvider {
+  public com.strategy.util.BddFactoryProvider();
+  public static net.sf.javabdd.BDDFactory getOrCreateBddFactory(com.strategy.api.board.Board);
+  public static void reset();
+  static {};
+}
+Compiled from "ColorDependingBDDFieldVisitor.java"
+public class com.strategy.util.ColorDependingBDDFieldVisitor implements com.strategy.api.field.BDDFieldVisitor {
+  public com.strategy.util.ColorDependingBDDFieldVisitor(net.sf.javabdd.BDDFactory);
+  public net.sf.javabdd.BDD getBDD();
+  public void visit(com.strategy.api.field.EmptyField);
+  public void visit(com.strategy.api.field.WhiteStone);
+  public void visit(com.strategy.api.field.BlackStone);
+}
+Compiled from "ColorFieldVisitor.java"
+public class com.strategy.util.ColorFieldVisitor implements com.strategy.api.field.FieldVisitor {
+  public com.strategy.util.ColorFieldVisitor();
+  public com.strategy.util.StoneColor getColor();
+  public void visit(com.strategy.api.field.EmptyField);
+  public void visit(com.strategy.api.field.WhiteStone);
+  public void visit(com.strategy.api.field.BlackStone);
+}
+Compiled from "Debug.java"
+public class com.strategy.util.Debug {
+  public static com.strategy.util.Debug create(java.lang.String);
+  public void log();
+}
+Compiled from "FieldGenerator.java"
+public class com.strategy.util.FieldGenerator {
+  public com.strategy.util.FieldGenerator();
+  public static com.strategy.api.field.Field create(java.lang.Integer, com.strategy.api.logic.Position, java.lang.Integer);
+}
+Compiled from "FirstMoveProvider.java"
+public class com.strategy.util.FirstMoveProvider {
+  public com.strategy.util.FirstMoveProvider();
+  public static int[] getMoves(int);
+  static {};
+}
+Compiled from "GameParser.java"
+public class com.strategy.util.GameParser {
+  public com.strategy.util.GameParser(java.io.InputStream) throws com.strategy.util.GameParser$GameParserException;
+  public java.lang.Integer getBoardSize();
+  public java.util.List<com.strategy.util.Turn> getTurns();
+}
+Compiled from "GameParser.java"
+public class com.strategy.util.GameParser$GameParserException extends java.lang.Exception {
+  final com.strategy.util.GameParser this$0;
+  public com.strategy.util.GameParser$GameParserException(com.strategy.util.GameParser);
+  public com.strategy.util.GameParser$GameParserException(com.strategy.util.GameParser, java.lang.String);
+  public com.strategy.util.GameParser$GameParserException(com.strategy.util.GameParser, java.lang.String, java.lang.Throwable);
+}
+Compiled from "GameParserTest.java"
+public class com.strategy.util.GameParserTest {
+  public com.strategy.util.GameParserTest();
+  public void test();
+}
+Compiled from "Output.java"
+public class com.strategy.util.Output {
+  public com.strategy.util.Output();
+  public static void setDebug(java.lang.Class<? extends com.strategy.api.HasDebugFlag>, boolean);
+  public static void print(java.lang.String, java.lang.Class<? extends com.strategy.api.HasDebugFlag>);
+  public static void setPrintStream(java.io.PrintStream);
+  static {};
+}
+Compiled from "PredictedMove.java"
+public class com.strategy.util.PredictedMove implements java.lang.Comparable<com.strategy.util.PredictedMove> {
+  public static com.strategy.util.PredictedMove create(com.strategy.util.Turn, int, double);
+  public static com.strategy.util.PredictedMove create(int, int, com.strategy.util.StoneColor, double);
+  public int getFieldIndex();
+  public com.strategy.util.Turn getTurn();
+  public double getValue();
+  public java.lang.String toString();
+  public int compareTo(com.strategy.util.PredictedMove);
+  public int compareTo(java.lang.Object);
+}
+Compiled from "PrimitiveBoardProvider.java"
+public class com.strategy.util.PrimitiveBoardProvider {
+  public static int[][] BOARD_10;
+  public static int[][] BOARD_7;
+  public static int[][] BOARD_6;
+  public static int[][] BOARD_5;
+  public static int[][] BOARD_4;
+  public static int[][] BOARD_3;
+  public static int[][] BOARD_2;
+  public com.strategy.util.PrimitiveBoardProvider();
+  public static int[][] getBoard(int);
+  static {};
+}
+Compiled from "RowConstant.java"
+public final class com.strategy.util.RowConstant extends java.lang.Enum<com.strategy.util.RowConstant> {
+  public static final com.strategy.util.RowConstant A;
+  public static final com.strategy.util.RowConstant B;
+  public static final com.strategy.util.RowConstant C;
+  public static final com.strategy.util.RowConstant D;
+  public static final com.strategy.util.RowConstant E;
+  public static final com.strategy.util.RowConstant F;
+  public static final com.strategy.util.RowConstant G;
+  public static final com.strategy.util.RowConstant H;
+  public static final com.strategy.util.RowConstant I;
+  public static final com.strategy.util.RowConstant J;
+  public static final com.strategy.util.RowConstant K;
+  public static final com.strategy.util.RowConstant L;
+  public static final com.strategy.util.RowConstant M;
+  public static final com.strategy.util.RowConstant N;
+  public static final com.strategy.util.RowConstant O;
+  public static final com.strategy.util.RowConstant P;
+  public static final com.strategy.util.RowConstant Q;
+  public static final com.strategy.util.RowConstant R;
+  public static final com.strategy.util.RowConstant S;
+  public static final com.strategy.util.RowConstant T;
+  public static final com.strategy.util.RowConstant U;
+  public static final com.strategy.util.RowConstant V;
+  public static final com.strategy.util.RowConstant W;
+  public static final com.strategy.util.RowConstant X;
+  public static final com.strategy.util.RowConstant Y;
+  public static final com.strategy.util.RowConstant Z;
+  public static com.strategy.util.RowConstant[] values();
+  public static com.strategy.util.RowConstant valueOf(java.lang.String);
+  public int getLetterIndex();
+  public static java.lang.Integer parseToLetterIndex(java.lang.String);
+  public static com.strategy.util.RowConstant parseToConstant(java.lang.String);
+  public static com.strategy.util.RowConstant getForLetterIndex(int);
+  public static com.strategy.util.RowConstant parse(int, int);
+  public static java.lang.Integer parseToCoordNumber(int, int);
+  public static java.lang.String parseToCoordString(int, int);
+  static {};
+}
+Compiled from "RowConstantTest.java"
+public class com.strategy.util.RowConstantTest {
+  public com.strategy.util.RowConstantTest();
+  public void test();
+}
+Compiled from "StoneColor.java"
+public final class com.strategy.util.StoneColor extends java.lang.Enum<com.strategy.util.StoneColor> {
+  public static final com.strategy.util.StoneColor WHITE;
+  public static final com.strategy.util.StoneColor BLACK;
+  public static final com.strategy.util.StoneColor EMPTY;
+  public static com.strategy.util.StoneColor[] values();
+  public static com.strategy.util.StoneColor valueOf(java.lang.String);
+  public int getPrimitive();
+  public static com.strategy.util.StoneColor parse(int);
+  public static com.strategy.util.StoneColor parse(java.lang.String);
+  public com.strategy.util.StoneColor getOpposite();
+  static {};
+}
+Compiled from "StoneColor.java"
+class com.strategy.util.StoneColor$1 {
+  static final int[] $SwitchMap$com$strategy$util$StoneColor;
+  static {};
+}
+Compiled from "TestMain.java"
+public class com.strategy.util.TestMain {
+  public com.strategy.util.TestMain();
+  public static void main(java.lang.String[]) throws java.io.FileNotFoundException;
+  static {};
+}
+Compiled from "Turn.java"
+public class com.strategy.util.Turn {
+  public com.strategy.util.Turn(com.strategy.util.RowConstant, int, com.strategy.util.StoneColor);
+  public com.strategy.util.StoneColor getColor();
+  public com.strategy.util.RowConstant getCoord();
+  public int getCoordNumber();
+  public java.lang.String toString();
+}
+Compiled from "Valuation.java"
+public class com.strategy.util.Valuation {
+  public com.strategy.util.Valuation();
+  public static double compute(net.sf.javabdd.BDD, net.sf.javabdd.BDD, int);
+}
+Compiled from "EvaluationFormatter.java"
+public class com.strategy.util.formatter.EvaluationFormatter {
+  public com.strategy.util.formatter.EvaluationFormatter(int);
+  public java.lang.String format(int, double);
+  public java.lang.String space();
+}
+Compiled from "FieldIndexFormatter.java"
+public class com.strategy.util.formatter.FieldIndexFormatter {
+  public com.strategy.util.formatter.FieldIndexFormatter();
+  public java.lang.String format(int);
+  public java.lang.String space();
+}
+Compiled from "And.java"
+public class com.strategy.util.operation.And implements com.strategy.util.operation.Op {
+  public com.strategy.util.operation.And();
+  public net.sf.javabdd.BDD apply(net.sf.javabdd.BDD, net.sf.javabdd.BDD);
+}
+Compiled from "Id.java"
+public class com.strategy.util.operation.Id implements com.strategy.util.operation.Op {
+  public com.strategy.util.operation.Id();
+  public net.sf.javabdd.BDD apply(net.sf.javabdd.BDD, net.sf.javabdd.BDD);
+}
+Compiled from "Logging.java"
+public class com.strategy.util.operation.Logging {
+  public static com.strategy.util.operation.Logging create(java.lang.String);
+  public net.sf.javabdd.BDD andLog(net.sf.javabdd.BDD, net.sf.javabdd.BDD);
+  public net.sf.javabdd.BDD orLog(net.sf.javabdd.BDD, net.sf.javabdd.BDD);
+  public net.sf.javabdd.BDD restrictLog(net.sf.javabdd.BDD, net.sf.javabdd.BDD);
+  public net.sf.javabdd.BDD id(net.sf.javabdd.BDD);
+  public double satCountLog(net.sf.javabdd.BDD);
+  public double pathCountLog(net.sf.javabdd.BDD);
+  public double nodeCountLog(net.sf.javabdd.BDD);
+  public void log();
+}
+Compiled from "Nodes.java"
+public class com.strategy.util.operation.Nodes implements com.strategy.util.operation.UnaryOp {
+  public com.strategy.util.operation.Nodes();
+  public double apply(net.sf.javabdd.BDD);
+}
+Compiled from "Op.java"
+public interface com.strategy.util.operation.Op {
+  public static final com.strategy.util.operation.Op AND;
+  public static final com.strategy.util.operation.Op OR;
+  public static final com.strategy.util.operation.Op RESTRICT;
+  public static final com.strategy.util.operation.Op ID;
+  public abstract net.sf.javabdd.BDD apply(net.sf.javabdd.BDD, net.sf.javabdd.BDD);
+  static {};
+}
+Compiled from "Or.java"
+public class com.strategy.util.operation.Or implements com.strategy.util.operation.Op {
+  public com.strategy.util.operation.Or();
+  public net.sf.javabdd.BDD apply(net.sf.javabdd.BDD, net.sf.javabdd.BDD);
+}
+Compiled from "Paths.java"
+public class com.strategy.util.operation.Paths implements com.strategy.util.operation.UnaryOp {
+  public com.strategy.util.operation.Paths();
+  public double apply(net.sf.javabdd.BDD);
+}
+Compiled from "Restrict.java"
+public class com.strategy.util.operation.Restrict implements com.strategy.util.operation.Op {
+  public com.strategy.util.operation.Restrict();
+  public net.sf.javabdd.BDD apply(net.sf.javabdd.BDD, net.sf.javabdd.BDD);
+}
+Compiled from "Sats.java"
+public class com.strategy.util.operation.Sats implements com.strategy.util.operation.UnaryOp {
+  public com.strategy.util.operation.Sats();
+  public double apply(net.sf.javabdd.BDD);
+}
+Compiled from "UnaryOp.java"
+public interface com.strategy.util.operation.UnaryOp {
+  public static final com.strategy.util.operation.UnaryOp SATS;
+  public static final com.strategy.util.operation.UnaryOp PATHS;
+  public static final com.strategy.util.operation.UnaryOp NODES;
+  public abstract double apply(net.sf.javabdd.BDD);
+  static {};
+}
+Compiled from "EmptyPositionFilter.java"
+public class com.strategy.util.predicates.EmptyPositionFilter implements com.google.common.base.Predicate<com.strategy.api.logic.Position> {
+  public com.strategy.util.predicates.EmptyPositionFilter(com.strategy.api.board.Board);
+  public boolean apply(com.strategy.api.logic.Position);
+  public boolean apply(java.lang.Object);
+}
+Compiled from "ValidPositionFilter.java"
+public class com.strategy.util.predicates.ValidPositionFilter implements com.google.common.base.Predicate<com.strategy.api.logic.Position> {
+  public com.strategy.util.predicates.ValidPositionFilter(com.strategy.api.board.Board);
+  public boolean apply(com.strategy.api.logic.Position);
+  public boolean apply(java.lang.Object);
+}
+Compiled from "ArgumentStrings.java"
+public class com.strategy.util.preferences.ArgumentStrings {
+  protected static final java.lang.String PAR_GENERATE_FILES;
+  protected static final java.lang.String PAR_AVOID_FILES;
+  protected static final java.lang.String PAR_MODE;
+  protected static final java.lang.String PAR_BOARD_SIZE;
+  protected static final java.lang.String PAR_TURNS;
+  protected static final java.lang.String PAR_TURNS_STRING;
+  protected static final java.lang.String PAR_OUT;
+  protected static final java.lang.String PAR_ALG;
+  protected static final java.lang.String PAR_HELP;
+  public com.strategy.util.preferences.ArgumentStrings();
+}
+Compiled from "Preferences.java"
+public class com.strategy.util.preferences.Preferences {
+  public static com.strategy.util.preferences.Preferences createInstance(java.lang.String[]);
+  public static com.strategy.util.preferences.Preferences getInstance();
+  void setHelp(boolean);
+  public boolean isHelp();
+  public boolean isGenerateFiles();
+  public void setGenerateFiles(boolean);
+  public boolean isAvoidFiles();
+  public boolean isModeInterpreter();
+  public int getBoardSize();
+  public java.util.List<com.strategy.util.Turn> getTurns();
+  public java.io.PrintStream getOut();
+  public void setOut(java.io.PrintStream);
+  public com.strategy.havannah.logic.PathCalculatorProvider$PathCalculatorKey getAlg();
+  public void setAlg(com.strategy.havannah.logic.PathCalculatorProvider$PathCalculatorKey);
+  static {};
+}
+Compiled from "Preferences.java"
+class com.strategy.util.preferences.Preferences$ParameterPredicate implements com.google.common.base.Predicate<java.lang.String> {
+  public com.strategy.util.preferences.Preferences$ParameterPredicate(java.lang.String);
+  public boolean apply(java.lang.String);
+  public boolean apply(java.lang.Object);
+}

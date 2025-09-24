@@ -1,0 +1,1382 @@
+Compiled from "ActionExecutor.java"
+public class risiko.ActionExecutor extends risiko.actions.util.actionSwitch<risiko.gamestate.State> {
+  public risiko.ActionExecutor(risiko.board.Board, risiko.gamestate.State);
+  public risiko.gamestate.State execute(risiko.actions.Action);
+  public risiko.gamestate.State caseAtack(risiko.actions.Atack);
+  public risiko.gamestate.State caseSetTroops(risiko.actions.SetTroops);
+  public risiko.gamestate.State caseCoinCards(risiko.actions.CoinCards);
+  public risiko.gamestate.State caseMoveTroops(risiko.actions.MoveTroops);
+  public risiko.gamestate.State caseAddPlayer(risiko.actions.AddPlayer);
+  public risiko.gamestate.State caseStartGame(risiko.actions.StartGame);
+  public risiko.gamestate.State caseRemovePlayer(risiko.actions.RemovePlayer);
+  public java.lang.Object caseStartGame(risiko.actions.StartGame);
+  public java.lang.Object caseAddPlayer(risiko.actions.AddPlayer);
+  public java.lang.Object caseMoveTroops(risiko.actions.MoveTroops);
+  public java.lang.Object caseRemovePlayer(risiko.actions.RemovePlayer);
+  public java.lang.Object caseCoinCards(risiko.actions.CoinCards);
+  public java.lang.Object caseSetTroops(risiko.actions.SetTroops);
+  public java.lang.Object caseAtack(risiko.actions.Atack);
+}
+Compiled from "Engine.java"
+public class risiko.Engine {
+  public risiko.Engine();
+  protected static void printDiagnostic(org.eclipse.emf.common.util.Diagnostic, java.lang.String);
+  protected org.eclipse.emf.ecore.resource.ResourceSet initializeResourceSet();
+  public org.eclipse.emf.ecore.resource.ResourceSet getResourceSet();
+  public void executeAction(java.io.InputStream, java.io.OutputStream) throws java.io.IOException;
+  public void getBoard(java.io.OutputStream) throws java.io.IOException;
+  public void setBoard(java.io.InputStream) throws java.io.IOException, java.lang.RuntimeException;
+  public void getState(java.io.OutputStream) throws java.io.IOException;
+  public void setState(java.io.InputStream) throws java.io.IOException;
+}
+Compiled from "EngineTest.java"
+public class risiko.EngineTest {
+  public risiko.EngineTest();
+  public static void main(java.lang.String[]) throws java.io.FileNotFoundException, java.io.IOException, java.lang.RuntimeException;
+}
+Compiled from "ExecutorFactory.java"
+public final class risiko.ExecutorFactory {
+  public risiko.ExecutorFactory();
+  public static risiko.ActionExecutor getExecutor(risiko.board.Board, risiko.gamestate.State);
+}
+Compiled from "ExecutorTest.java"
+public class risiko.ExecutorTest {
+  static final boolean $assertionsDisabled;
+  public risiko.ExecutorTest();
+  public static void main(java.lang.String[]) throws java.io.FileNotFoundException, java.io.IOException;
+  protected static org.eclipse.emf.ecore.resource.ResourceSet initializeResourceSet();
+  static {};
+}
+Compiled from "GameMonitor.java"
+public class risiko.GameMonitor {
+  public risiko.GameMonitor();
+  public void validate(org.eclipse.emf.ecore.EObject);
+  protected static void printDiagnostic(org.eclipse.emf.common.util.Diagnostic, java.lang.String);
+  protected org.eclipse.emf.ecore.resource.ResourceSet initializeResourceSet();
+  public org.eclipse.emf.ecore.resource.ResourceSet getResourceSet();
+  public int addActions(java.io.InputStream) throws java.io.IOException;
+  public void addAction(risiko.actions.Action);
+  public void getBoard(java.io.OutputStream) throws java.io.IOException;
+  public void setBoard(java.io.InputStream) throws java.io.IOException;
+  public void getState(java.io.OutputStream) throws java.io.IOException;
+  public void setState(java.io.InputStream) throws java.io.IOException;
+  public java.util.List<org.eclipse.emf.ecore.EObject> parseAndHandle(java.io.InputStream) throws java.io.IOException;
+  public void serialize(org.eclipse.emf.ecore.EObject, java.io.OutputStream);
+  public risiko.board.Board getBoard();
+  public void setBoard(risiko.board.Board);
+  public risiko.gamestate.State getState();
+  public void setState(risiko.gamestate.State);
+  public org.eclipse.emf.ecore.resource.Resource getBoardResource();
+  public org.eclipse.emf.ecore.resource.Resource getStateResource();
+  public org.eclipse.emf.ecore.resource.Resource getActionResource();
+  public org.eclipse.emf.ecore.resource.Resource getInputResource();
+  public java.util.List<risiko.actions.Action> getActions();
+  static {};
+}
+Compiled from "XMI2XMLtransformer.java"
+public class risiko.XMI2XMLtransformer {
+  public risiko.XMI2XMLtransformer();
+  public static void main(java.lang.String[]) throws java.io.FileNotFoundException, java.io.IOException;
+  protected static org.eclipse.emf.ecore.resource.ResourceSet initializeResourceSet(org.eclipse.emf.ecore.resource.Resource$Factory);
+}
+Compiled from "Action.java"
+public interface risiko.actions.Action extends org.eclipse.emf.ecore.EObject {
+}
+Compiled from "AddPlayer.java"
+public interface risiko.actions.AddPlayer extends risiko.actions.Action {
+  public abstract org.eclipse.emf.common.util.EList<risiko.gamestate.Player> getPlayers();
+}
+Compiled from "Atack.java"
+public interface risiko.actions.Atack extends risiko.actions.InGameAction {
+  public abstract int getTroops();
+  public abstract void setTroops(int);
+  public abstract risiko.board.Border getBorder();
+  public abstract void setBorder(risiko.board.Border);
+  public abstract boolean isDirection();
+  public abstract void setDirection(boolean);
+}
+Compiled from "CoinCards.java"
+public interface risiko.actions.CoinCards extends risiko.actions.InGameAction {
+  public abstract org.eclipse.emf.common.util.EList<risiko.board.Card> getCards();
+}
+Compiled from "DrawCard.java"
+public interface risiko.actions.DrawCard extends risiko.actions.InGameAction {
+}
+Compiled from "InGameAction.java"
+public interface risiko.actions.InGameAction extends risiko.actions.Action {
+  public abstract risiko.gamestate.Player getPlayer();
+  public abstract void setPlayer(risiko.gamestate.Player);
+}
+Compiled from "MoveTroops.java"
+public interface risiko.actions.MoveTroops extends risiko.actions.InGameAction {
+  public abstract risiko.board.Country getFrom();
+  public abstract void setFrom(risiko.board.Country);
+  public abstract risiko.board.Country getTo();
+  public abstract void setTo(risiko.board.Country);
+  public abstract int getTroops();
+  public abstract void setTroops(int);
+}
+Compiled from "RemovePlayer.java"
+public interface risiko.actions.RemovePlayer extends risiko.actions.Action {
+  public abstract org.eclipse.emf.common.util.EList<risiko.gamestate.Player> getPlayers();
+}
+Compiled from "SetTroops.java"
+public interface risiko.actions.SetTroops extends risiko.actions.InGameAction {
+  public abstract risiko.board.Country getCountry();
+  public abstract void setCountry(risiko.board.Country);
+  public abstract int getTroops();
+  public abstract void setTroops(int);
+}
+Compiled from "StartGame.java"
+public interface risiko.actions.StartGame extends risiko.actions.Action {
+}
+Compiled from "actionFactory.java"
+public interface risiko.actions.actionFactory extends org.eclipse.emf.ecore.EFactory {
+  public static final risiko.actions.actionFactory eINSTANCE;
+  public abstract risiko.actions.Atack createAtack();
+  public abstract risiko.actions.SetTroops createSetTroops();
+  public abstract risiko.actions.CoinCards createCoinCards();
+  public abstract risiko.actions.MoveTroops createMoveTroops();
+  public abstract risiko.actions.AddPlayer createAddPlayer();
+  public abstract risiko.actions.StartGame createStartGame();
+  public abstract risiko.actions.RemovePlayer createRemovePlayer();
+  public abstract risiko.actions.DrawCard createDrawCard();
+  public abstract risiko.actions.actionPackage getactionPackage();
+  static {};
+}
+Compiled from "actionPackage.java"
+public interface risiko.actions.actionPackage extends org.eclipse.emf.ecore.EPackage {
+  public static final java.lang.String eNAME;
+  public static final java.lang.String eNS_URI;
+  public static final java.lang.String eNS_PREFIX;
+  public static final risiko.actions.actionPackage eINSTANCE;
+  public static final int ACTION;
+  public static final int ACTION_FEATURE_COUNT;
+  public static final int ACTION_OPERATION_COUNT;
+  public static final int IN_GAME_ACTION;
+  public static final int IN_GAME_ACTION__PLAYER;
+  public static final int IN_GAME_ACTION_FEATURE_COUNT;
+  public static final int IN_GAME_ACTION_OPERATION_COUNT;
+  public static final int ATACK;
+  public static final int ATACK__PLAYER;
+  public static final int ATACK__TROOPS;
+  public static final int ATACK__BORDER;
+  public static final int ATACK__DIRECTION;
+  public static final int ATACK_FEATURE_COUNT;
+  public static final int ATACK_OPERATION_COUNT;
+  public static final int SET_TROOPS;
+  public static final int SET_TROOPS__PLAYER;
+  public static final int SET_TROOPS__COUNTRY;
+  public static final int SET_TROOPS__TROOPS;
+  public static final int SET_TROOPS_FEATURE_COUNT;
+  public static final int SET_TROOPS_OPERATION_COUNT;
+  public static final int COIN_CARDS;
+  public static final int COIN_CARDS__PLAYER;
+  public static final int COIN_CARDS__CARDS;
+  public static final int COIN_CARDS_FEATURE_COUNT;
+  public static final int COIN_CARDS_OPERATION_COUNT;
+  public static final int MOVE_TROOPS;
+  public static final int MOVE_TROOPS__PLAYER;
+  public static final int MOVE_TROOPS__FROM;
+  public static final int MOVE_TROOPS__TO;
+  public static final int MOVE_TROOPS__TROOPS;
+  public static final int MOVE_TROOPS_FEATURE_COUNT;
+  public static final int MOVE_TROOPS_OPERATION_COUNT;
+  public static final int ADD_PLAYER;
+  public static final int ADD_PLAYER__PLAYERS;
+  public static final int ADD_PLAYER_FEATURE_COUNT;
+  public static final int ADD_PLAYER_OPERATION_COUNT;
+  public static final int START_GAME;
+  public static final int START_GAME_FEATURE_COUNT;
+  public static final int START_GAME_OPERATION_COUNT;
+  public static final int REMOVE_PLAYER;
+  public static final int REMOVE_PLAYER__PLAYERS;
+  public static final int REMOVE_PLAYER_FEATURE_COUNT;
+  public static final int REMOVE_PLAYER_OPERATION_COUNT;
+  public static final int DRAW_CARD;
+  public static final int DRAW_CARD__PLAYER;
+  public static final int DRAW_CARD_FEATURE_COUNT;
+  public static final int DRAW_CARD_OPERATION_COUNT;
+  public abstract org.eclipse.emf.ecore.EClass getAtack();
+  public abstract org.eclipse.emf.ecore.EAttribute getAtack_Troops();
+  public abstract org.eclipse.emf.ecore.EReference getAtack_Border();
+  public abstract org.eclipse.emf.ecore.EAttribute getAtack_Direction();
+  public abstract org.eclipse.emf.ecore.EClass getSetTroops();
+  public abstract org.eclipse.emf.ecore.EReference getSetTroops_Country();
+  public abstract org.eclipse.emf.ecore.EAttribute getSetTroops_Troops();
+  public abstract org.eclipse.emf.ecore.EClass getCoinCards();
+  public abstract org.eclipse.emf.ecore.EReference getCoinCards_Cards();
+  public abstract org.eclipse.emf.ecore.EClass getInGameAction();
+  public abstract org.eclipse.emf.ecore.EReference getInGameAction_Player();
+  public abstract org.eclipse.emf.ecore.EClass getAction();
+  public abstract org.eclipse.emf.ecore.EClass getRemovePlayer();
+  public abstract org.eclipse.emf.ecore.EReference getRemovePlayer_Players();
+  public abstract org.eclipse.emf.ecore.EClass getDrawCard();
+  public abstract org.eclipse.emf.ecore.EClass getMoveTroops();
+  public abstract org.eclipse.emf.ecore.EReference getMoveTroops_From();
+  public abstract org.eclipse.emf.ecore.EReference getMoveTroops_To();
+  public abstract org.eclipse.emf.ecore.EAttribute getMoveTroops_Troops();
+  public abstract org.eclipse.emf.ecore.EClass getAddPlayer();
+  public abstract org.eclipse.emf.ecore.EReference getAddPlayer_Players();
+  public abstract org.eclipse.emf.ecore.EClass getStartGame();
+  public abstract risiko.actions.actionFactory getactionFactory();
+  static {};
+}
+Compiled from "actionPackage.java"
+public interface risiko.actions.actionPackage$Literals {
+  public static final org.eclipse.emf.ecore.EClass ATACK;
+  public static final org.eclipse.emf.ecore.EAttribute ATACK__TROOPS;
+  public static final org.eclipse.emf.ecore.EReference ATACK__BORDER;
+  public static final org.eclipse.emf.ecore.EAttribute ATACK__DIRECTION;
+  public static final org.eclipse.emf.ecore.EClass SET_TROOPS;
+  public static final org.eclipse.emf.ecore.EReference SET_TROOPS__COUNTRY;
+  public static final org.eclipse.emf.ecore.EAttribute SET_TROOPS__TROOPS;
+  public static final org.eclipse.emf.ecore.EClass COIN_CARDS;
+  public static final org.eclipse.emf.ecore.EReference COIN_CARDS__CARDS;
+  public static final org.eclipse.emf.ecore.EClass IN_GAME_ACTION;
+  public static final org.eclipse.emf.ecore.EReference IN_GAME_ACTION__PLAYER;
+  public static final org.eclipse.emf.ecore.EClass ACTION;
+  public static final org.eclipse.emf.ecore.EClass REMOVE_PLAYER;
+  public static final org.eclipse.emf.ecore.EReference REMOVE_PLAYER__PLAYERS;
+  public static final org.eclipse.emf.ecore.EClass DRAW_CARD;
+  public static final org.eclipse.emf.ecore.EClass MOVE_TROOPS;
+  public static final org.eclipse.emf.ecore.EReference MOVE_TROOPS__FROM;
+  public static final org.eclipse.emf.ecore.EReference MOVE_TROOPS__TO;
+  public static final org.eclipse.emf.ecore.EAttribute MOVE_TROOPS__TROOPS;
+  public static final org.eclipse.emf.ecore.EClass ADD_PLAYER;
+  public static final org.eclipse.emf.ecore.EReference ADD_PLAYER__PLAYERS;
+  public static final org.eclipse.emf.ecore.EClass START_GAME;
+  static {};
+}
+Compiled from "ActionImpl.java"
+public abstract class risiko.actions.impl.ActionImpl extends org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container implements risiko.actions.Action {
+  protected risiko.actions.impl.ActionImpl();
+  protected org.eclipse.emf.ecore.EClass eStaticClass();
+}
+Compiled from "AddPlayerImpl.java"
+public class risiko.actions.impl.AddPlayerImpl extends risiko.actions.impl.ActionImpl implements risiko.actions.AddPlayer {
+  protected org.eclipse.emf.common.util.EList<risiko.gamestate.Player> players;
+  protected risiko.actions.impl.AddPlayerImpl();
+  protected org.eclipse.emf.ecore.EClass eStaticClass();
+  public org.eclipse.emf.common.util.EList<risiko.gamestate.Player> getPlayers();
+  public org.eclipse.emf.common.notify.NotificationChain eInverseRemove(org.eclipse.emf.ecore.InternalEObject, int, org.eclipse.emf.common.notify.NotificationChain);
+  public java.lang.Object eGet(int, boolean, boolean);
+  public void eSet(int, java.lang.Object);
+  public void eUnset(int);
+  public boolean eIsSet(int);
+}
+Compiled from "AtackImpl.java"
+public class risiko.actions.impl.AtackImpl extends risiko.actions.impl.InGameActionImpl implements risiko.actions.Atack {
+  protected static final int TROOPS_EDEFAULT;
+  protected int troops;
+  protected risiko.board.Border border;
+  protected static final boolean DIRECTION_EDEFAULT;
+  protected boolean direction;
+  protected risiko.actions.impl.AtackImpl();
+  protected org.eclipse.emf.ecore.EClass eStaticClass();
+  public int getTroops();
+  public void setTroops(int);
+  public risiko.board.Border getBorder();
+  public risiko.board.Border basicGetBorder();
+  public void setBorder(risiko.board.Border);
+  public boolean isDirection();
+  public void setDirection(boolean);
+  public java.lang.Object eGet(int, boolean, boolean);
+  public void eSet(int, java.lang.Object);
+  public void eUnset(int);
+  public boolean eIsSet(int);
+  public java.lang.String toString();
+}
+Compiled from "CoinCardsImpl.java"
+public class risiko.actions.impl.CoinCardsImpl extends risiko.actions.impl.InGameActionImpl implements risiko.actions.CoinCards {
+  protected org.eclipse.emf.common.util.EList<risiko.board.Card> cards;
+  protected risiko.actions.impl.CoinCardsImpl();
+  protected org.eclipse.emf.ecore.EClass eStaticClass();
+  public org.eclipse.emf.common.util.EList<risiko.board.Card> getCards();
+  public java.lang.Object eGet(int, boolean, boolean);
+  public void eSet(int, java.lang.Object);
+  public void eUnset(int);
+  public boolean eIsSet(int);
+}
+Compiled from "DrawCardImpl.java"
+public class risiko.actions.impl.DrawCardImpl extends risiko.actions.impl.InGameActionImpl implements risiko.actions.DrawCard {
+  protected risiko.actions.impl.DrawCardImpl();
+  protected org.eclipse.emf.ecore.EClass eStaticClass();
+}
+Compiled from "InGameActionImpl.java"
+public abstract class risiko.actions.impl.InGameActionImpl extends risiko.actions.impl.ActionImpl implements risiko.actions.InGameAction {
+  protected risiko.gamestate.Player player;
+  protected risiko.actions.impl.InGameActionImpl();
+  protected org.eclipse.emf.ecore.EClass eStaticClass();
+  public risiko.gamestate.Player getPlayer();
+  public risiko.gamestate.Player basicGetPlayer();
+  public void setPlayer(risiko.gamestate.Player);
+  public java.lang.Object eGet(int, boolean, boolean);
+  public void eSet(int, java.lang.Object);
+  public void eUnset(int);
+  public boolean eIsSet(int);
+}
+Compiled from "MoveTroopsImpl.java"
+public class risiko.actions.impl.MoveTroopsImpl extends risiko.actions.impl.InGameActionImpl implements risiko.actions.MoveTroops {
+  protected risiko.board.Country from;
+  protected risiko.board.Country to;
+  protected static final int TROOPS_EDEFAULT;
+  protected int troops;
+  protected risiko.actions.impl.MoveTroopsImpl();
+  protected org.eclipse.emf.ecore.EClass eStaticClass();
+  public risiko.board.Country getFrom();
+  public risiko.board.Country basicGetFrom();
+  public void setFrom(risiko.board.Country);
+  public risiko.board.Country getTo();
+  public risiko.board.Country basicGetTo();
+  public void setTo(risiko.board.Country);
+  public int getTroops();
+  public void setTroops(int);
+  public java.lang.Object eGet(int, boolean, boolean);
+  public void eSet(int, java.lang.Object);
+  public void eUnset(int);
+  public boolean eIsSet(int);
+  public java.lang.String toString();
+}
+Compiled from "RemovePlayerImpl.java"
+public class risiko.actions.impl.RemovePlayerImpl extends risiko.actions.impl.ActionImpl implements risiko.actions.RemovePlayer {
+  protected org.eclipse.emf.common.util.EList<risiko.gamestate.Player> players;
+  protected risiko.actions.impl.RemovePlayerImpl();
+  protected org.eclipse.emf.ecore.EClass eStaticClass();
+  public org.eclipse.emf.common.util.EList<risiko.gamestate.Player> getPlayers();
+  public java.lang.Object eGet(int, boolean, boolean);
+  public void eSet(int, java.lang.Object);
+  public void eUnset(int);
+  public boolean eIsSet(int);
+}
+Compiled from "SetTroopsImpl.java"
+public class risiko.actions.impl.SetTroopsImpl extends risiko.actions.impl.InGameActionImpl implements risiko.actions.SetTroops {
+  protected risiko.board.Country country;
+  protected static final int TROOPS_EDEFAULT;
+  protected int troops;
+  protected risiko.actions.impl.SetTroopsImpl();
+  protected org.eclipse.emf.ecore.EClass eStaticClass();
+  public risiko.board.Country getCountry();
+  public risiko.board.Country basicGetCountry();
+  public void setCountry(risiko.board.Country);
+  public int getTroops();
+  public void setTroops(int);
+  public java.lang.Object eGet(int, boolean, boolean);
+  public void eSet(int, java.lang.Object);
+  public void eUnset(int);
+  public boolean eIsSet(int);
+  public java.lang.String toString();
+}
+Compiled from "StartGameImpl.java"
+public class risiko.actions.impl.StartGameImpl extends risiko.actions.impl.ActionImpl implements risiko.actions.StartGame {
+  protected risiko.actions.impl.StartGameImpl();
+  protected org.eclipse.emf.ecore.EClass eStaticClass();
+}
+Compiled from "actionFactoryImpl.java"
+public class risiko.actions.impl.actionFactoryImpl extends org.eclipse.emf.ecore.impl.EFactoryImpl implements risiko.actions.actionFactory {
+  public static risiko.actions.actionFactory init();
+  public risiko.actions.impl.actionFactoryImpl();
+  public org.eclipse.emf.ecore.EObject create(org.eclipse.emf.ecore.EClass);
+  public risiko.actions.Atack createAtack();
+  public risiko.actions.SetTroops createSetTroops();
+  public risiko.actions.CoinCards createCoinCards();
+  public risiko.actions.MoveTroops createMoveTroops();
+  public risiko.actions.AddPlayer createAddPlayer();
+  public risiko.actions.StartGame createStartGame();
+  public risiko.actions.RemovePlayer createRemovePlayer();
+  public risiko.actions.DrawCard createDrawCard();
+  public risiko.actions.actionPackage getactionPackage();
+  public static risiko.actions.actionPackage getPackage();
+}
+Compiled from "actionPackageImpl.java"
+public class risiko.actions.impl.actionPackageImpl extends org.eclipse.emf.ecore.impl.EPackageImpl implements risiko.actions.actionPackage {
+  public static risiko.actions.actionPackage init();
+  public org.eclipse.emf.ecore.EClass getAtack();
+  public org.eclipse.emf.ecore.EAttribute getAtack_Troops();
+  public org.eclipse.emf.ecore.EReference getAtack_Border();
+  public org.eclipse.emf.ecore.EAttribute getAtack_Direction();
+  public org.eclipse.emf.ecore.EClass getSetTroops();
+  public org.eclipse.emf.ecore.EReference getSetTroops_Country();
+  public org.eclipse.emf.ecore.EAttribute getSetTroops_Troops();
+  public org.eclipse.emf.ecore.EClass getCoinCards();
+  public org.eclipse.emf.ecore.EReference getCoinCards_Cards();
+  public org.eclipse.emf.ecore.EClass getInGameAction();
+  public org.eclipse.emf.ecore.EReference getInGameAction_Player();
+  public org.eclipse.emf.ecore.EClass getAction();
+  public org.eclipse.emf.ecore.EClass getRemovePlayer();
+  public org.eclipse.emf.ecore.EReference getRemovePlayer_Players();
+  public org.eclipse.emf.ecore.EClass getDrawCard();
+  public org.eclipse.emf.ecore.EClass getMoveTroops();
+  public org.eclipse.emf.ecore.EReference getMoveTroops_From();
+  public org.eclipse.emf.ecore.EReference getMoveTroops_To();
+  public org.eclipse.emf.ecore.EAttribute getMoveTroops_Troops();
+  public org.eclipse.emf.ecore.EClass getAddPlayer();
+  public org.eclipse.emf.ecore.EReference getAddPlayer_Players();
+  public org.eclipse.emf.ecore.EClass getStartGame();
+  public risiko.actions.actionFactory getactionFactory();
+  public void createPackageContents();
+  public void initializePackageContents();
+  static {};
+}
+Compiled from "actionAdapterFactory.java"
+public class risiko.actions.util.actionAdapterFactory extends org.eclipse.emf.common.notify.impl.AdapterFactoryImpl {
+  protected static risiko.actions.actionPackage modelPackage;
+  protected risiko.actions.util.actionSwitch<org.eclipse.emf.common.notify.Adapter> modelSwitch;
+  public risiko.actions.util.actionAdapterFactory();
+  public boolean isFactoryForType(java.lang.Object);
+  public org.eclipse.emf.common.notify.Adapter createAdapter(org.eclipse.emf.common.notify.Notifier);
+  public org.eclipse.emf.common.notify.Adapter createAtackAdapter();
+  public org.eclipse.emf.common.notify.Adapter createSetTroopsAdapter();
+  public org.eclipse.emf.common.notify.Adapter createCoinCardsAdapter();
+  public org.eclipse.emf.common.notify.Adapter createInGameActionAdapter();
+  public org.eclipse.emf.common.notify.Adapter createActionAdapter();
+  public org.eclipse.emf.common.notify.Adapter createRemovePlayerAdapter();
+  public org.eclipse.emf.common.notify.Adapter createDrawCardAdapter();
+  public org.eclipse.emf.common.notify.Adapter createMoveTroopsAdapter();
+  public org.eclipse.emf.common.notify.Adapter createAddPlayerAdapter();
+  public org.eclipse.emf.common.notify.Adapter createStartGameAdapter();
+  public org.eclipse.emf.common.notify.Adapter createEObjectAdapter();
+}
+Compiled from "actionAdapterFactory.java"
+class risiko.actions.util.actionAdapterFactory$1 extends risiko.actions.util.actionSwitch<org.eclipse.emf.common.notify.Adapter> {
+  final risiko.actions.util.actionAdapterFactory this$0;
+  risiko.actions.util.actionAdapterFactory$1(risiko.actions.util.actionAdapterFactory);
+  public org.eclipse.emf.common.notify.Adapter caseAtack(risiko.actions.Atack);
+  public org.eclipse.emf.common.notify.Adapter caseSetTroops(risiko.actions.SetTroops);
+  public org.eclipse.emf.common.notify.Adapter caseCoinCards(risiko.actions.CoinCards);
+  public org.eclipse.emf.common.notify.Adapter caseInGameAction(risiko.actions.InGameAction);
+  public org.eclipse.emf.common.notify.Adapter caseMoveTroops(risiko.actions.MoveTroops);
+  public org.eclipse.emf.common.notify.Adapter caseAddPlayer(risiko.actions.AddPlayer);
+  public org.eclipse.emf.common.notify.Adapter caseStartGame(risiko.actions.StartGame);
+  public org.eclipse.emf.common.notify.Adapter caseAction(risiko.actions.Action);
+  public org.eclipse.emf.common.notify.Adapter caseRemovePlayer(risiko.actions.RemovePlayer);
+  public org.eclipse.emf.common.notify.Adapter caseDrawCard(risiko.actions.DrawCard);
+  public org.eclipse.emf.common.notify.Adapter defaultCase(org.eclipse.emf.ecore.EObject);
+  public java.lang.Object defaultCase(org.eclipse.emf.ecore.EObject);
+  public java.lang.Object caseStartGame(risiko.actions.StartGame);
+  public java.lang.Object caseAddPlayer(risiko.actions.AddPlayer);
+  public java.lang.Object caseMoveTroops(risiko.actions.MoveTroops);
+  public java.lang.Object caseDrawCard(risiko.actions.DrawCard);
+  public java.lang.Object caseRemovePlayer(risiko.actions.RemovePlayer);
+  public java.lang.Object caseAction(risiko.actions.Action);
+  public java.lang.Object caseInGameAction(risiko.actions.InGameAction);
+  public java.lang.Object caseCoinCards(risiko.actions.CoinCards);
+  public java.lang.Object caseSetTroops(risiko.actions.SetTroops);
+  public java.lang.Object caseAtack(risiko.actions.Atack);
+}
+Compiled from "actionSwitch.java"
+public class risiko.actions.util.actionSwitch<T> extends org.eclipse.emf.ecore.util.Switch<T> {
+  protected static risiko.actions.actionPackage modelPackage;
+  public risiko.actions.util.actionSwitch();
+  protected boolean isSwitchFor(org.eclipse.emf.ecore.EPackage);
+  protected T doSwitch(int, org.eclipse.emf.ecore.EObject);
+  public T caseAtack(risiko.actions.Atack);
+  public T caseSetTroops(risiko.actions.SetTroops);
+  public T caseCoinCards(risiko.actions.CoinCards);
+  public T caseInGameAction(risiko.actions.InGameAction);
+  public T caseAction(risiko.actions.Action);
+  public T caseRemovePlayer(risiko.actions.RemovePlayer);
+  public T caseDrawCard(risiko.actions.DrawCard);
+  public T caseMoveTroops(risiko.actions.MoveTroops);
+  public T caseAddPlayer(risiko.actions.AddPlayer);
+  public T caseStartGame(risiko.actions.StartGame);
+  public T defaultCase(org.eclipse.emf.ecore.EObject);
+}
+Compiled from "Board.java"
+public interface risiko.board.Board extends org.eclipse.emf.ecore.EObject {
+  public abstract org.eclipse.emf.common.util.EList<risiko.board.Country> getCountries();
+  public abstract org.eclipse.emf.common.util.EList<risiko.board.Border> getBorders();
+  public abstract org.eclipse.emf.common.util.EList<risiko.board.Continent> getContinents();
+  public abstract org.eclipse.emf.common.util.EList<java.lang.Integer> getAdditionalTroops();
+  public abstract org.eclipse.emf.common.util.EList<risiko.board.Card> getCards();
+  public abstract org.eclipse.emf.common.util.EList<java.lang.Integer> getInitialTroops();
+}
+Compiled from "Border.java"
+public interface risiko.board.Border extends org.eclipse.emf.ecore.EObject {
+  public abstract org.eclipse.emf.common.util.EList<risiko.board.Country> getCountry();
+  public abstract risiko.board.BorderType getType();
+  public abstract void setType(risiko.board.BorderType);
+}
+Compiled from "BorderType.java"
+public final class risiko.board.BorderType extends java.lang.Enum<risiko.board.BorderType> implements org.eclipse.emf.common.util.Enumerator {
+  public static final risiko.board.BorderType LAND;
+  public static final risiko.board.BorderType SEA;
+  public static final int LAND_VALUE;
+  public static final int SEA_VALUE;
+  public static final java.util.List<risiko.board.BorderType> VALUES;
+  public static risiko.board.BorderType[] values();
+  public static risiko.board.BorderType valueOf(java.lang.String);
+  public static risiko.board.BorderType get(java.lang.String);
+  public static risiko.board.BorderType getByName(java.lang.String);
+  public static risiko.board.BorderType get(int);
+  public int getValue();
+  public java.lang.String getName();
+  public java.lang.String getLiteral();
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "Card.java"
+public interface risiko.board.Card extends org.eclipse.emf.ecore.EObject {
+  public abstract risiko.board.CardSymbol getSymbol();
+  public abstract void setSymbol(risiko.board.CardSymbol);
+  public abstract risiko.board.Country getCountry();
+  public abstract void setCountry(risiko.board.Country);
+}
+Compiled from "CardSymbol.java"
+public final class risiko.board.CardSymbol extends java.lang.Enum<risiko.board.CardSymbol> implements org.eclipse.emf.common.util.Enumerator {
+  public static final risiko.board.CardSymbol INFANTERIE;
+  public static final risiko.board.CardSymbol KAVALLERIE;
+  public static final risiko.board.CardSymbol ARTILLERIE;
+  public static final risiko.board.CardSymbol JOKER;
+  public static final int INFANTERIE_VALUE;
+  public static final int KAVALLERIE_VALUE;
+  public static final int ARTILLERIE_VALUE;
+  public static final int JOKER_VALUE;
+  public static final java.util.List<risiko.board.CardSymbol> VALUES;
+  public static risiko.board.CardSymbol[] values();
+  public static risiko.board.CardSymbol valueOf(java.lang.String);
+  public static risiko.board.CardSymbol get(java.lang.String);
+  public static risiko.board.CardSymbol getByName(java.lang.String);
+  public static risiko.board.CardSymbol get(int);
+  public int getValue();
+  public java.lang.String getName();
+  public java.lang.String getLiteral();
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "Continent.java"
+public interface risiko.board.Continent extends org.eclipse.emf.ecore.EObject {
+  public abstract org.eclipse.emf.common.util.EList<risiko.board.Country> getCountry();
+  public abstract int getAdditionalTroops();
+  public abstract void setAdditionalTroops(int);
+  public abstract java.lang.String getName();
+  public abstract void setName(java.lang.String);
+}
+Compiled from "Country.java"
+public interface risiko.board.Country extends org.eclipse.emf.ecore.EObject {
+  public abstract org.eclipse.emf.common.util.EList<risiko.board.Border> getBorder();
+  public abstract java.lang.String getName();
+  public abstract void setName(java.lang.String);
+  public abstract risiko.board.Continent getContinent();
+  public abstract void setContinent(risiko.board.Continent);
+}
+Compiled from "boardFactory.java"
+public interface risiko.board.boardFactory extends org.eclipse.emf.ecore.EFactory {
+  public static final risiko.board.boardFactory eINSTANCE;
+  public abstract risiko.board.Board createBoard();
+  public abstract risiko.board.Country createCountry();
+  public abstract risiko.board.Border createBorder();
+  public abstract risiko.board.Continent createContinent();
+  public abstract risiko.board.Card createCard();
+  public abstract risiko.board.boardPackage getboardPackage();
+  static {};
+}
+Compiled from "boardPackage.java"
+public interface risiko.board.boardPackage extends org.eclipse.emf.ecore.EPackage {
+  public static final java.lang.String eNAME;
+  public static final java.lang.String eNS_URI;
+  public static final java.lang.String eNS_PREFIX;
+  public static final risiko.board.boardPackage eINSTANCE;
+  public static final int BOARD;
+  public static final int BOARD__COUNTRIES;
+  public static final int BOARD__BORDERS;
+  public static final int BOARD__CONTINENTS;
+  public static final int BOARD__ADDITIONAL_TROOPS;
+  public static final int BOARD__CARDS;
+  public static final int BOARD__INITIAL_TROOPS;
+  public static final int BOARD_FEATURE_COUNT;
+  public static final int BOARD_OPERATION_COUNT;
+  public static final int COUNTRY;
+  public static final int COUNTRY__BORDER;
+  public static final int COUNTRY__NAME;
+  public static final int COUNTRY__CONTINENT;
+  public static final int COUNTRY_FEATURE_COUNT;
+  public static final int COUNTRY_OPERATION_COUNT;
+  public static final int BORDER;
+  public static final int BORDER__COUNTRY;
+  public static final int BORDER__TYPE;
+  public static final int BORDER_FEATURE_COUNT;
+  public static final int BORDER_OPERATION_COUNT;
+  public static final int CONTINENT;
+  public static final int CONTINENT__COUNTRY;
+  public static final int CONTINENT__ADDITIONAL_TROOPS;
+  public static final int CONTINENT__NAME;
+  public static final int CONTINENT_FEATURE_COUNT;
+  public static final int CONTINENT_OPERATION_COUNT;
+  public static final int CARD;
+  public static final int CARD__SYMBOL;
+  public static final int CARD__COUNTRY;
+  public static final int CARD_FEATURE_COUNT;
+  public static final int CARD_OPERATION_COUNT;
+  public static final int BORDER_TYPE;
+  public static final int CARD_SYMBOL;
+  public abstract org.eclipse.emf.ecore.EClass getBoard();
+  public abstract org.eclipse.emf.ecore.EReference getBoard_Countries();
+  public abstract org.eclipse.emf.ecore.EReference getBoard_Borders();
+  public abstract org.eclipse.emf.ecore.EReference getBoard_Continents();
+  public abstract org.eclipse.emf.ecore.EAttribute getBoard_AdditionalTroops();
+  public abstract org.eclipse.emf.ecore.EReference getBoard_Cards();
+  public abstract org.eclipse.emf.ecore.EAttribute getBoard_InitialTroops();
+  public abstract org.eclipse.emf.ecore.EClass getCountry();
+  public abstract org.eclipse.emf.ecore.EReference getCountry_Border();
+  public abstract org.eclipse.emf.ecore.EAttribute getCountry_Name();
+  public abstract org.eclipse.emf.ecore.EReference getCountry_Continent();
+  public abstract org.eclipse.emf.ecore.EClass getBorder();
+  public abstract org.eclipse.emf.ecore.EReference getBorder_Country();
+  public abstract org.eclipse.emf.ecore.EAttribute getBorder_Type();
+  public abstract org.eclipse.emf.ecore.EClass getContinent();
+  public abstract org.eclipse.emf.ecore.EReference getContinent_Country();
+  public abstract org.eclipse.emf.ecore.EAttribute getContinent_AdditionalTroops();
+  public abstract org.eclipse.emf.ecore.EAttribute getContinent_Name();
+  public abstract org.eclipse.emf.ecore.EClass getCard();
+  public abstract org.eclipse.emf.ecore.EAttribute getCard_Symbol();
+  public abstract org.eclipse.emf.ecore.EReference getCard_Country();
+  public abstract org.eclipse.emf.ecore.EEnum getBorderType();
+  public abstract org.eclipse.emf.ecore.EEnum getCardSymbol();
+  public abstract risiko.board.boardFactory getboardFactory();
+  static {};
+}
+Compiled from "boardPackage.java"
+public interface risiko.board.boardPackage$Literals {
+  public static final org.eclipse.emf.ecore.EClass BOARD;
+  public static final org.eclipse.emf.ecore.EReference BOARD__COUNTRIES;
+  public static final org.eclipse.emf.ecore.EReference BOARD__BORDERS;
+  public static final org.eclipse.emf.ecore.EReference BOARD__CONTINENTS;
+  public static final org.eclipse.emf.ecore.EAttribute BOARD__ADDITIONAL_TROOPS;
+  public static final org.eclipse.emf.ecore.EReference BOARD__CARDS;
+  public static final org.eclipse.emf.ecore.EAttribute BOARD__INITIAL_TROOPS;
+  public static final org.eclipse.emf.ecore.EClass COUNTRY;
+  public static final org.eclipse.emf.ecore.EReference COUNTRY__BORDER;
+  public static final org.eclipse.emf.ecore.EAttribute COUNTRY__NAME;
+  public static final org.eclipse.emf.ecore.EReference COUNTRY__CONTINENT;
+  public static final org.eclipse.emf.ecore.EClass BORDER;
+  public static final org.eclipse.emf.ecore.EReference BORDER__COUNTRY;
+  public static final org.eclipse.emf.ecore.EAttribute BORDER__TYPE;
+  public static final org.eclipse.emf.ecore.EClass CONTINENT;
+  public static final org.eclipse.emf.ecore.EReference CONTINENT__COUNTRY;
+  public static final org.eclipse.emf.ecore.EAttribute CONTINENT__ADDITIONAL_TROOPS;
+  public static final org.eclipse.emf.ecore.EAttribute CONTINENT__NAME;
+  public static final org.eclipse.emf.ecore.EClass CARD;
+  public static final org.eclipse.emf.ecore.EAttribute CARD__SYMBOL;
+  public static final org.eclipse.emf.ecore.EReference CARD__COUNTRY;
+  public static final org.eclipse.emf.ecore.EEnum BORDER_TYPE;
+  public static final org.eclipse.emf.ecore.EEnum CARD_SYMBOL;
+  static {};
+}
+Compiled from "BoardImpl.java"
+public class risiko.board.impl.BoardImpl extends org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container implements risiko.board.Board {
+  protected org.eclipse.emf.common.util.EList<risiko.board.Country> countries;
+  protected org.eclipse.emf.common.util.EList<risiko.board.Border> borders;
+  protected org.eclipse.emf.common.util.EList<risiko.board.Continent> continents;
+  protected org.eclipse.emf.common.util.EList<java.lang.Integer> additionalTroops;
+  protected org.eclipse.emf.common.util.EList<risiko.board.Card> cards;
+  protected org.eclipse.emf.common.util.EList<java.lang.Integer> initialTroops;
+  protected risiko.board.impl.BoardImpl();
+  protected org.eclipse.emf.ecore.EClass eStaticClass();
+  public org.eclipse.emf.common.util.EList<risiko.board.Country> getCountries();
+  public org.eclipse.emf.common.util.EList<risiko.board.Border> getBorders();
+  public org.eclipse.emf.common.util.EList<risiko.board.Continent> getContinents();
+  public org.eclipse.emf.common.util.EList<java.lang.Integer> getAdditionalTroops();
+  public org.eclipse.emf.common.util.EList<risiko.board.Card> getCards();
+  public org.eclipse.emf.common.util.EList<java.lang.Integer> getInitialTroops();
+  public org.eclipse.emf.common.notify.NotificationChain eInverseRemove(org.eclipse.emf.ecore.InternalEObject, int, org.eclipse.emf.common.notify.NotificationChain);
+  public java.lang.Object eGet(int, boolean, boolean);
+  public void eSet(int, java.lang.Object);
+  public void eUnset(int);
+  public boolean eIsSet(int);
+  public java.lang.String toString();
+}
+Compiled from "BorderImpl.java"
+public class risiko.board.impl.BorderImpl extends org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container implements risiko.board.Border {
+  protected org.eclipse.emf.common.util.EList<risiko.board.Country> country;
+  protected static final risiko.board.BorderType TYPE_EDEFAULT;
+  protected risiko.board.BorderType type;
+  protected risiko.board.impl.BorderImpl();
+  protected org.eclipse.emf.ecore.EClass eStaticClass();
+  public org.eclipse.emf.common.util.EList<risiko.board.Country> getCountry();
+  public risiko.board.BorderType getType();
+  public void setType(risiko.board.BorderType);
+  public org.eclipse.emf.common.notify.NotificationChain eInverseAdd(org.eclipse.emf.ecore.InternalEObject, int, org.eclipse.emf.common.notify.NotificationChain);
+  public org.eclipse.emf.common.notify.NotificationChain eInverseRemove(org.eclipse.emf.ecore.InternalEObject, int, org.eclipse.emf.common.notify.NotificationChain);
+  public java.lang.Object eGet(int, boolean, boolean);
+  public void eSet(int, java.lang.Object);
+  public void eUnset(int);
+  public boolean eIsSet(int);
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "CardImpl.java"
+public class risiko.board.impl.CardImpl extends org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container implements risiko.board.Card {
+  protected static final risiko.board.CardSymbol SYMBOL_EDEFAULT;
+  protected risiko.board.CardSymbol symbol;
+  protected risiko.board.Country country;
+  protected risiko.board.impl.CardImpl();
+  protected org.eclipse.emf.ecore.EClass eStaticClass();
+  public risiko.board.CardSymbol getSymbol();
+  public void setSymbol(risiko.board.CardSymbol);
+  public risiko.board.Country getCountry();
+  public risiko.board.Country basicGetCountry();
+  public void setCountry(risiko.board.Country);
+  public java.lang.Object eGet(int, boolean, boolean);
+  public void eSet(int, java.lang.Object);
+  public void eUnset(int);
+  public boolean eIsSet(int);
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "ContinentImpl.java"
+public class risiko.board.impl.ContinentImpl extends org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container implements risiko.board.Continent {
+  protected org.eclipse.emf.common.util.EList<risiko.board.Country> country;
+  protected static final int ADDITIONAL_TROOPS_EDEFAULT;
+  protected int additionalTroops;
+  protected static final java.lang.String NAME_EDEFAULT;
+  protected java.lang.String name;
+  protected risiko.board.impl.ContinentImpl();
+  protected org.eclipse.emf.ecore.EClass eStaticClass();
+  public org.eclipse.emf.common.util.EList<risiko.board.Country> getCountry();
+  public int getAdditionalTroops();
+  public void setAdditionalTroops(int);
+  public java.lang.String getName();
+  public void setName(java.lang.String);
+  public org.eclipse.emf.common.notify.NotificationChain eInverseAdd(org.eclipse.emf.ecore.InternalEObject, int, org.eclipse.emf.common.notify.NotificationChain);
+  public org.eclipse.emf.common.notify.NotificationChain eInverseRemove(org.eclipse.emf.ecore.InternalEObject, int, org.eclipse.emf.common.notify.NotificationChain);
+  public java.lang.Object eGet(int, boolean, boolean);
+  public void eSet(int, java.lang.Object);
+  public void eUnset(int);
+  public boolean eIsSet(int);
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "CountryImpl.java"
+public class risiko.board.impl.CountryImpl extends org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container implements risiko.board.Country {
+  protected org.eclipse.emf.common.util.EList<risiko.board.Border> border;
+  protected static final java.lang.String NAME_EDEFAULT;
+  protected java.lang.String name;
+  protected risiko.board.Continent continent;
+  protected risiko.board.impl.CountryImpl();
+  protected org.eclipse.emf.ecore.EClass eStaticClass();
+  public org.eclipse.emf.common.util.EList<risiko.board.Border> getBorder();
+  public java.lang.String getName();
+  public void setName(java.lang.String);
+  public risiko.board.Continent getContinent();
+  public risiko.board.Continent basicGetContinent();
+  public org.eclipse.emf.common.notify.NotificationChain basicSetContinent(risiko.board.Continent, org.eclipse.emf.common.notify.NotificationChain);
+  public void setContinent(risiko.board.Continent);
+  public org.eclipse.emf.common.notify.NotificationChain eInverseAdd(org.eclipse.emf.ecore.InternalEObject, int, org.eclipse.emf.common.notify.NotificationChain);
+  public org.eclipse.emf.common.notify.NotificationChain eInverseRemove(org.eclipse.emf.ecore.InternalEObject, int, org.eclipse.emf.common.notify.NotificationChain);
+  public java.lang.Object eGet(int, boolean, boolean);
+  public void eSet(int, java.lang.Object);
+  public void eUnset(int);
+  public boolean eIsSet(int);
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "boardFactoryImpl.java"
+public class risiko.board.impl.boardFactoryImpl extends org.eclipse.emf.ecore.impl.EFactoryImpl implements risiko.board.boardFactory {
+  public static risiko.board.boardFactory init();
+  public risiko.board.impl.boardFactoryImpl();
+  public org.eclipse.emf.ecore.EObject create(org.eclipse.emf.ecore.EClass);
+  public java.lang.Object createFromString(org.eclipse.emf.ecore.EDataType, java.lang.String);
+  public java.lang.String convertToString(org.eclipse.emf.ecore.EDataType, java.lang.Object);
+  public risiko.board.Board createBoard();
+  public risiko.board.Country createCountry();
+  public risiko.board.Border createBorder();
+  public risiko.board.Continent createContinent();
+  public risiko.board.Card createCard();
+  public risiko.board.BorderType createBorderTypeFromString(org.eclipse.emf.ecore.EDataType, java.lang.String);
+  public java.lang.String convertBorderTypeToString(org.eclipse.emf.ecore.EDataType, java.lang.Object);
+  public risiko.board.CardSymbol createCardSymbolFromString(org.eclipse.emf.ecore.EDataType, java.lang.String);
+  public java.lang.String convertCardSymbolToString(org.eclipse.emf.ecore.EDataType, java.lang.Object);
+  public risiko.board.boardPackage getboardPackage();
+  public static risiko.board.boardPackage getPackage();
+}
+Compiled from "boardPackageImpl.java"
+public class risiko.board.impl.boardPackageImpl extends org.eclipse.emf.ecore.impl.EPackageImpl implements risiko.board.boardPackage {
+  public static risiko.board.boardPackage init();
+  public org.eclipse.emf.ecore.EClass getBoard();
+  public org.eclipse.emf.ecore.EReference getBoard_Countries();
+  public org.eclipse.emf.ecore.EReference getBoard_Borders();
+  public org.eclipse.emf.ecore.EReference getBoard_Continents();
+  public org.eclipse.emf.ecore.EAttribute getBoard_AdditionalTroops();
+  public org.eclipse.emf.ecore.EReference getBoard_Cards();
+  public org.eclipse.emf.ecore.EAttribute getBoard_InitialTroops();
+  public org.eclipse.emf.ecore.EClass getCountry();
+  public org.eclipse.emf.ecore.EReference getCountry_Border();
+  public org.eclipse.emf.ecore.EAttribute getCountry_Name();
+  public org.eclipse.emf.ecore.EReference getCountry_Continent();
+  public org.eclipse.emf.ecore.EClass getBorder();
+  public org.eclipse.emf.ecore.EReference getBorder_Country();
+  public org.eclipse.emf.ecore.EAttribute getBorder_Type();
+  public org.eclipse.emf.ecore.EClass getContinent();
+  public org.eclipse.emf.ecore.EReference getContinent_Country();
+  public org.eclipse.emf.ecore.EAttribute getContinent_AdditionalTroops();
+  public org.eclipse.emf.ecore.EAttribute getContinent_Name();
+  public org.eclipse.emf.ecore.EClass getCard();
+  public org.eclipse.emf.ecore.EAttribute getCard_Symbol();
+  public org.eclipse.emf.ecore.EReference getCard_Country();
+  public org.eclipse.emf.ecore.EEnum getBorderType();
+  public org.eclipse.emf.ecore.EEnum getCardSymbol();
+  public risiko.board.boardFactory getboardFactory();
+  public void createPackageContents();
+  public void initializePackageContents();
+  static {};
+}
+Compiled from "boardAdapterFactory.java"
+public class risiko.board.util.boardAdapterFactory extends org.eclipse.emf.common.notify.impl.AdapterFactoryImpl {
+  protected static risiko.board.boardPackage modelPackage;
+  protected risiko.board.util.boardSwitch<org.eclipse.emf.common.notify.Adapter> modelSwitch;
+  public risiko.board.util.boardAdapterFactory();
+  public boolean isFactoryForType(java.lang.Object);
+  public org.eclipse.emf.common.notify.Adapter createAdapter(org.eclipse.emf.common.notify.Notifier);
+  public org.eclipse.emf.common.notify.Adapter createBoardAdapter();
+  public org.eclipse.emf.common.notify.Adapter createCountryAdapter();
+  public org.eclipse.emf.common.notify.Adapter createBorderAdapter();
+  public org.eclipse.emf.common.notify.Adapter createContinentAdapter();
+  public org.eclipse.emf.common.notify.Adapter createCardAdapter();
+  public org.eclipse.emf.common.notify.Adapter createEObjectAdapter();
+}
+Compiled from "boardAdapterFactory.java"
+class risiko.board.util.boardAdapterFactory$1 extends risiko.board.util.boardSwitch<org.eclipse.emf.common.notify.Adapter> {
+  final risiko.board.util.boardAdapterFactory this$0;
+  risiko.board.util.boardAdapterFactory$1(risiko.board.util.boardAdapterFactory);
+  public org.eclipse.emf.common.notify.Adapter caseBoard(risiko.board.Board);
+  public org.eclipse.emf.common.notify.Adapter caseCountry(risiko.board.Country);
+  public org.eclipse.emf.common.notify.Adapter caseBorder(risiko.board.Border);
+  public org.eclipse.emf.common.notify.Adapter caseContinent(risiko.board.Continent);
+  public org.eclipse.emf.common.notify.Adapter caseCard(risiko.board.Card);
+  public org.eclipse.emf.common.notify.Adapter defaultCase(org.eclipse.emf.ecore.EObject);
+  public java.lang.Object defaultCase(org.eclipse.emf.ecore.EObject);
+  public java.lang.Object caseCard(risiko.board.Card);
+  public java.lang.Object caseContinent(risiko.board.Continent);
+  public java.lang.Object caseBorder(risiko.board.Border);
+  public java.lang.Object caseCountry(risiko.board.Country);
+  public java.lang.Object caseBoard(risiko.board.Board);
+}
+Compiled from "boardSwitch.java"
+public class risiko.board.util.boardSwitch<T> extends org.eclipse.emf.ecore.util.Switch<T> {
+  protected static risiko.board.boardPackage modelPackage;
+  public risiko.board.util.boardSwitch();
+  protected boolean isSwitchFor(org.eclipse.emf.ecore.EPackage);
+  protected T doSwitch(int, org.eclipse.emf.ecore.EObject);
+  public T caseBoard(risiko.board.Board);
+  public T caseCountry(risiko.board.Country);
+  public T caseBorder(risiko.board.Border);
+  public T caseContinent(risiko.board.Continent);
+  public T caseCard(risiko.board.Card);
+  public T defaultCase(org.eclipse.emf.ecore.EObject);
+}
+Compiled from "CountryState.java"
+public interface risiko.gamestate.CountryState extends org.eclipse.emf.ecore.EObject {
+  public abstract risiko.gamestate.Player getPlayer();
+  public abstract void setPlayer(risiko.gamestate.Player);
+  public abstract risiko.board.Country getCountry();
+  public abstract void setCountry(risiko.board.Country);
+  public abstract int getTroops();
+  public abstract void setTroops(int);
+}
+Compiled from "GameState.java"
+public final class risiko.gamestate.GameState extends java.lang.Enum<risiko.gamestate.GameState> implements org.eclipse.emf.common.util.Enumerator {
+  public static final risiko.gamestate.GameState ACCEPTING_PLAYERS;
+  public static final risiko.gamestate.GameState INITIAL_TROOP_DISTRIBUTION;
+  public static final risiko.gamestate.GameState PLAY;
+  public static final risiko.gamestate.GameState GAME_OVER;
+  public static final int ACCEPTING_PLAYERS_VALUE;
+  public static final int INITIAL_TROOP_DISTRIBUTION_VALUE;
+  public static final int PLAY_VALUE;
+  public static final int GAME_OVER_VALUE;
+  public static final java.util.List<risiko.gamestate.GameState> VALUES;
+  public static risiko.gamestate.GameState[] values();
+  public static risiko.gamestate.GameState valueOf(java.lang.String);
+  public static risiko.gamestate.GameState get(java.lang.String);
+  public static risiko.gamestate.GameState getByName(java.lang.String);
+  public static risiko.gamestate.GameState get(int);
+  public int getValue();
+  public java.lang.String getName();
+  public java.lang.String getLiteral();
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "Player.java"
+public interface risiko.gamestate.Player extends org.eclipse.emf.ecore.EObject {
+  public abstract org.eclipse.emf.common.util.EList<risiko.gamestate.CountryState> getOwnedCountries();
+  public abstract org.eclipse.emf.common.util.EList<risiko.board.Card> getOwnedCards();
+  public abstract java.lang.String getName();
+  public abstract void setName(java.lang.String);
+  public abstract int getTotalTroops();
+  public abstract void setTotalTroops(int);
+}
+Compiled from "State.java"
+public interface risiko.gamestate.State extends org.eclipse.emf.ecore.EObject {
+  public abstract org.eclipse.emf.common.util.EList<risiko.gamestate.Player> getPlayers();
+  public abstract org.eclipse.emf.common.util.EMap<risiko.board.Country, risiko.gamestate.CountryState> getCountryState();
+  public abstract risiko.gamestate.Player getTurn();
+  public abstract void setTurn(risiko.gamestate.Player);
+  public abstract risiko.gamestate.TurnPhase getPhase();
+  public abstract void setPhase(risiko.gamestate.TurnPhase);
+  public abstract risiko.gamestate.GameState getState();
+  public abstract void setState(risiko.gamestate.GameState);
+  public abstract int getTroopsToSet();
+  public abstract void setTroopsToSet(int);
+  public abstract boolean isConqueredCountry();
+  public abstract void setConqueredCountry(boolean);
+}
+Compiled from "TurnPhase.java"
+public final class risiko.gamestate.TurnPhase extends java.lang.Enum<risiko.gamestate.TurnPhase> implements org.eclipse.emf.common.util.Enumerator {
+  public static final risiko.gamestate.TurnPhase GAIN_TROOPS;
+  public static final risiko.gamestate.TurnPhase SET_TROOPS;
+  public static final risiko.gamestate.TurnPhase FIGHT;
+  public static final risiko.gamestate.TurnPhase MOVE_TROOPS;
+  public static final int GAIN_TROOPS_VALUE;
+  public static final int SET_TROOPS_VALUE;
+  public static final int FIGHT_VALUE;
+  public static final int MOVE_TROOPS_VALUE;
+  public static final java.util.List<risiko.gamestate.TurnPhase> VALUES;
+  public static risiko.gamestate.TurnPhase[] values();
+  public static risiko.gamestate.TurnPhase valueOf(java.lang.String);
+  public static risiko.gamestate.TurnPhase get(java.lang.String);
+  public static risiko.gamestate.TurnPhase getByName(java.lang.String);
+  public static risiko.gamestate.TurnPhase get(int);
+  public int getValue();
+  public java.lang.String getName();
+  public java.lang.String getLiteral();
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "CountryStateImpl.java"
+public class risiko.gamestate.impl.CountryStateImpl extends org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container implements risiko.gamestate.CountryState {
+  protected risiko.gamestate.Player player;
+  protected risiko.board.Country country;
+  protected static final int TROOPS_EDEFAULT;
+  protected int troops;
+  protected risiko.gamestate.impl.CountryStateImpl();
+  protected org.eclipse.emf.ecore.EClass eStaticClass();
+  public risiko.gamestate.Player getPlayer();
+  public risiko.gamestate.Player basicGetPlayer();
+  public org.eclipse.emf.common.notify.NotificationChain basicSetPlayer(risiko.gamestate.Player, org.eclipse.emf.common.notify.NotificationChain);
+  public void setPlayer(risiko.gamestate.Player);
+  public risiko.board.Country getCountry();
+  public risiko.board.Country basicGetCountry();
+  public void setCountry(risiko.board.Country);
+  public int getTroops();
+  public void setTroops(int);
+  public org.eclipse.emf.common.notify.NotificationChain eInverseAdd(org.eclipse.emf.ecore.InternalEObject, int, org.eclipse.emf.common.notify.NotificationChain);
+  public org.eclipse.emf.common.notify.NotificationChain eInverseRemove(org.eclipse.emf.ecore.InternalEObject, int, org.eclipse.emf.common.notify.NotificationChain);
+  public java.lang.Object eGet(int, boolean, boolean);
+  public void eSet(int, java.lang.Object);
+  public void eUnset(int);
+  public boolean eIsSet(int);
+  public java.lang.String toString();
+}
+Compiled from "CountryToCountryStateMapImpl.java"
+public class risiko.gamestate.impl.CountryToCountryStateMapImpl extends org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container implements org.eclipse.emf.common.util.BasicEMap$Entry<risiko.board.Country, risiko.gamestate.CountryState> {
+  protected risiko.board.Country key;
+  protected risiko.gamestate.CountryState value;
+  protected int hash;
+  protected risiko.gamestate.impl.CountryToCountryStateMapImpl();
+  protected org.eclipse.emf.ecore.EClass eStaticClass();
+  public risiko.board.Country getTypedKey();
+  public risiko.board.Country basicGetTypedKey();
+  public void setTypedKey(risiko.board.Country);
+  public risiko.gamestate.CountryState getTypedValue();
+  public org.eclipse.emf.common.notify.NotificationChain basicSetTypedValue(risiko.gamestate.CountryState, org.eclipse.emf.common.notify.NotificationChain);
+  public void setTypedValue(risiko.gamestate.CountryState);
+  public org.eclipse.emf.common.notify.NotificationChain eInverseRemove(org.eclipse.emf.ecore.InternalEObject, int, org.eclipse.emf.common.notify.NotificationChain);
+  public java.lang.Object eGet(int, boolean, boolean);
+  public void eSet(int, java.lang.Object);
+  public void eUnset(int);
+  public boolean eIsSet(int);
+  public int getHash();
+  public void setHash(int);
+  public risiko.board.Country getKey();
+  public void setKey(risiko.board.Country);
+  public risiko.gamestate.CountryState getValue();
+  public risiko.gamestate.CountryState setValue(risiko.gamestate.CountryState);
+  public org.eclipse.emf.common.util.EMap<risiko.board.Country, risiko.gamestate.CountryState> getEMap();
+  public void setKey(java.lang.Object);
+  public java.lang.Object setValue(java.lang.Object);
+  public java.lang.Object getValue();
+  public java.lang.Object getKey();
+}
+Compiled from "PlayerImpl.java"
+public class risiko.gamestate.impl.PlayerImpl extends org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container implements risiko.gamestate.Player {
+  protected org.eclipse.emf.common.util.EList<risiko.gamestate.CountryState> ownedCountries;
+  protected org.eclipse.emf.common.util.EList<risiko.board.Card> ownedCards;
+  protected static final java.lang.String NAME_EDEFAULT;
+  protected java.lang.String name;
+  protected static final int TOTAL_TROOPS_EDEFAULT;
+  protected risiko.gamestate.impl.PlayerImpl();
+  protected org.eclipse.emf.ecore.EClass eStaticClass();
+  public org.eclipse.emf.common.util.EList<risiko.gamestate.CountryState> getOwnedCountries();
+  public org.eclipse.emf.common.util.EList<risiko.board.Card> getOwnedCards();
+  public java.lang.String getName();
+  public void setName(java.lang.String);
+  public int getTotalTroops();
+  public void setTotalTroops(int);
+  public org.eclipse.emf.common.notify.NotificationChain eInverseAdd(org.eclipse.emf.ecore.InternalEObject, int, org.eclipse.emf.common.notify.NotificationChain);
+  public org.eclipse.emf.common.notify.NotificationChain eInverseRemove(org.eclipse.emf.ecore.InternalEObject, int, org.eclipse.emf.common.notify.NotificationChain);
+  public java.lang.Object eGet(int, boolean, boolean);
+  public void eSet(int, java.lang.Object);
+  public void eUnset(int);
+  public boolean eIsSet(int);
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "StateImpl.java"
+public class risiko.gamestate.impl.StateImpl extends org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container implements risiko.gamestate.State {
+  protected org.eclipse.emf.common.util.EList<risiko.gamestate.Player> players;
+  protected org.eclipse.emf.common.util.EMap<risiko.board.Country, risiko.gamestate.CountryState> countryState;
+  protected risiko.gamestate.Player turn;
+  protected static final risiko.gamestate.TurnPhase PHASE_EDEFAULT;
+  protected risiko.gamestate.TurnPhase phase;
+  protected static final risiko.gamestate.GameState STATE_EDEFAULT;
+  protected risiko.gamestate.GameState state;
+  protected static final int TROOPS_TO_SET_EDEFAULT;
+  protected int troopsToSet;
+  protected static final boolean CONQUERED_COUNTRY_EDEFAULT;
+  protected boolean conqueredCountry;
+  protected risiko.gamestate.impl.StateImpl();
+  protected org.eclipse.emf.ecore.EClass eStaticClass();
+  public org.eclipse.emf.common.util.EList<risiko.gamestate.Player> getPlayers();
+  public org.eclipse.emf.common.util.EMap<risiko.board.Country, risiko.gamestate.CountryState> getCountryState();
+  public risiko.gamestate.Player getTurn();
+  public void setTurn(risiko.gamestate.Player);
+  public risiko.gamestate.TurnPhase getPhase();
+  public void setPhase(risiko.gamestate.TurnPhase);
+  public risiko.gamestate.GameState getState();
+  public void setState(risiko.gamestate.GameState);
+  public int getTroopsToSet();
+  public void setTroopsToSet(int);
+  public boolean isConqueredCountry();
+  public void setConqueredCountry(boolean);
+  public org.eclipse.emf.common.notify.NotificationChain eInverseRemove(org.eclipse.emf.ecore.InternalEObject, int, org.eclipse.emf.common.notify.NotificationChain);
+  public java.lang.Object eGet(int, boolean, boolean);
+  public void eSet(int, java.lang.Object);
+  public void eUnset(int);
+  public boolean eIsSet(int);
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "stateFactoryImpl.java"
+public class risiko.gamestate.impl.stateFactoryImpl extends org.eclipse.emf.ecore.impl.EFactoryImpl implements risiko.gamestate.stateFactory {
+  public static risiko.gamestate.stateFactory init();
+  public risiko.gamestate.impl.stateFactoryImpl();
+  public org.eclipse.emf.ecore.EObject create(org.eclipse.emf.ecore.EClass);
+  public java.lang.Object createFromString(org.eclipse.emf.ecore.EDataType, java.lang.String);
+  public java.lang.String convertToString(org.eclipse.emf.ecore.EDataType, java.lang.Object);
+  public risiko.gamestate.Player createPlayer();
+  public risiko.gamestate.State createState();
+  public risiko.gamestate.CountryState createCountryState();
+  public java.util.Map$Entry<risiko.board.Country, risiko.gamestate.CountryState> createCountryToCountryStateMap();
+  public risiko.gamestate.TurnPhase createTurnPhaseFromString(org.eclipse.emf.ecore.EDataType, java.lang.String);
+  public java.lang.String convertTurnPhaseToString(org.eclipse.emf.ecore.EDataType, java.lang.Object);
+  public risiko.gamestate.GameState createGameStateFromString(org.eclipse.emf.ecore.EDataType, java.lang.String);
+  public java.lang.String convertGameStateToString(org.eclipse.emf.ecore.EDataType, java.lang.Object);
+  public risiko.gamestate.statePackage getstatePackage();
+  public static risiko.gamestate.statePackage getPackage();
+}
+Compiled from "statePackageImpl.java"
+public class risiko.gamestate.impl.statePackageImpl extends org.eclipse.emf.ecore.impl.EPackageImpl implements risiko.gamestate.statePackage {
+  public static risiko.gamestate.statePackage init();
+  public org.eclipse.emf.ecore.EClass getPlayer();
+  public org.eclipse.emf.ecore.EReference getPlayer_OwnedCountries();
+  public org.eclipse.emf.ecore.EReference getPlayer_OwnedCards();
+  public org.eclipse.emf.ecore.EAttribute getPlayer_Name();
+  public org.eclipse.emf.ecore.EAttribute getPlayer_TotalTroops();
+  public org.eclipse.emf.ecore.EClass getState();
+  public org.eclipse.emf.ecore.EReference getState_Players();
+  public org.eclipse.emf.ecore.EReference getState_CountryState();
+  public org.eclipse.emf.ecore.EReference getState_Turn();
+  public org.eclipse.emf.ecore.EAttribute getState_Phase();
+  public org.eclipse.emf.ecore.EAttribute getState_State();
+  public org.eclipse.emf.ecore.EAttribute getState_TroopsToSet();
+  public org.eclipse.emf.ecore.EAttribute getState_ConqueredCountry();
+  public org.eclipse.emf.ecore.EClass getCountryState();
+  public org.eclipse.emf.ecore.EReference getCountryState_Player();
+  public org.eclipse.emf.ecore.EReference getCountryState_Country();
+  public org.eclipse.emf.ecore.EAttribute getCountryState_Troops();
+  public org.eclipse.emf.ecore.EClass getCountryToCountryStateMap();
+  public org.eclipse.emf.ecore.EReference getCountryToCountryStateMap_Key();
+  public org.eclipse.emf.ecore.EReference getCountryToCountryStateMap_Value();
+  public org.eclipse.emf.ecore.EEnum getTurnPhase();
+  public org.eclipse.emf.ecore.EEnum getGameState();
+  public risiko.gamestate.stateFactory getstateFactory();
+  public void createPackageContents();
+  public void initializePackageContents();
+  protected void createEcoreAnnotations();
+  protected void createOCLAnnotations();
+  static {};
+}
+Compiled from "statePackageImpl.java"
+final class risiko.gamestate.impl.statePackageImpl$1 implements org.eclipse.emf.ecore.EValidator$Descriptor {
+  risiko.gamestate.impl.statePackageImpl$1();
+  public org.eclipse.emf.ecore.EValidator getEValidator();
+}
+Compiled from "stateFactory.java"
+public interface risiko.gamestate.stateFactory extends org.eclipse.emf.ecore.EFactory {
+  public static final risiko.gamestate.stateFactory eINSTANCE;
+  public abstract risiko.gamestate.Player createPlayer();
+  public abstract risiko.gamestate.State createState();
+  public abstract risiko.gamestate.CountryState createCountryState();
+  public abstract risiko.gamestate.statePackage getstatePackage();
+  static {};
+}
+Compiled from "statePackage.java"
+public interface risiko.gamestate.statePackage extends org.eclipse.emf.ecore.EPackage {
+  public static final java.lang.String eNAME;
+  public static final java.lang.String eNS_URI;
+  public static final java.lang.String eNS_PREFIX;
+  public static final risiko.gamestate.statePackage eINSTANCE;
+  public static final int PLAYER;
+  public static final int PLAYER__OWNED_COUNTRIES;
+  public static final int PLAYER__OWNED_CARDS;
+  public static final int PLAYER__NAME;
+  public static final int PLAYER__TOTAL_TROOPS;
+  public static final int PLAYER_FEATURE_COUNT;
+  public static final int PLAYER_OPERATION_COUNT;
+  public static final int STATE;
+  public static final int STATE__PLAYERS;
+  public static final int STATE__COUNTRY_STATE;
+  public static final int STATE__TURN;
+  public static final int STATE__PHASE;
+  public static final int STATE__STATE;
+  public static final int STATE__TROOPS_TO_SET;
+  public static final int STATE__CONQUERED_COUNTRY;
+  public static final int STATE_FEATURE_COUNT;
+  public static final int STATE_OPERATION_COUNT;
+  public static final int COUNTRY_STATE;
+  public static final int COUNTRY_STATE__PLAYER;
+  public static final int COUNTRY_STATE__COUNTRY;
+  public static final int COUNTRY_STATE__TROOPS;
+  public static final int COUNTRY_STATE_FEATURE_COUNT;
+  public static final int COUNTRY_STATE_OPERATION_COUNT;
+  public static final int COUNTRY_TO_COUNTRY_STATE_MAP;
+  public static final int COUNTRY_TO_COUNTRY_STATE_MAP__KEY;
+  public static final int COUNTRY_TO_COUNTRY_STATE_MAP__VALUE;
+  public static final int COUNTRY_TO_COUNTRY_STATE_MAP_FEATURE_COUNT;
+  public static final int COUNTRY_TO_COUNTRY_STATE_MAP_OPERATION_COUNT;
+  public static final int TURN_PHASE;
+  public static final int GAME_STATE;
+  public abstract org.eclipse.emf.ecore.EClass getPlayer();
+  public abstract org.eclipse.emf.ecore.EReference getPlayer_OwnedCountries();
+  public abstract org.eclipse.emf.ecore.EReference getPlayer_OwnedCards();
+  public abstract org.eclipse.emf.ecore.EAttribute getPlayer_Name();
+  public abstract org.eclipse.emf.ecore.EAttribute getPlayer_TotalTroops();
+  public abstract org.eclipse.emf.ecore.EClass getState();
+  public abstract org.eclipse.emf.ecore.EReference getState_Players();
+  public abstract org.eclipse.emf.ecore.EReference getState_CountryState();
+  public abstract org.eclipse.emf.ecore.EReference getState_Turn();
+  public abstract org.eclipse.emf.ecore.EAttribute getState_Phase();
+  public abstract org.eclipse.emf.ecore.EAttribute getState_State();
+  public abstract org.eclipse.emf.ecore.EAttribute getState_TroopsToSet();
+  public abstract org.eclipse.emf.ecore.EAttribute getState_ConqueredCountry();
+  public abstract org.eclipse.emf.ecore.EClass getCountryState();
+  public abstract org.eclipse.emf.ecore.EReference getCountryState_Player();
+  public abstract org.eclipse.emf.ecore.EReference getCountryState_Country();
+  public abstract org.eclipse.emf.ecore.EAttribute getCountryState_Troops();
+  public abstract org.eclipse.emf.ecore.EClass getCountryToCountryStateMap();
+  public abstract org.eclipse.emf.ecore.EReference getCountryToCountryStateMap_Key();
+  public abstract org.eclipse.emf.ecore.EReference getCountryToCountryStateMap_Value();
+  public abstract org.eclipse.emf.ecore.EEnum getTurnPhase();
+  public abstract org.eclipse.emf.ecore.EEnum getGameState();
+  public abstract risiko.gamestate.stateFactory getstateFactory();
+  static {};
+}
+Compiled from "statePackage.java"
+public interface risiko.gamestate.statePackage$Literals {
+  public static final org.eclipse.emf.ecore.EClass PLAYER;
+  public static final org.eclipse.emf.ecore.EReference PLAYER__OWNED_COUNTRIES;
+  public static final org.eclipse.emf.ecore.EReference PLAYER__OWNED_CARDS;
+  public static final org.eclipse.emf.ecore.EAttribute PLAYER__NAME;
+  public static final org.eclipse.emf.ecore.EAttribute PLAYER__TOTAL_TROOPS;
+  public static final org.eclipse.emf.ecore.EClass STATE;
+  public static final org.eclipse.emf.ecore.EReference STATE__PLAYERS;
+  public static final org.eclipse.emf.ecore.EReference STATE__COUNTRY_STATE;
+  public static final org.eclipse.emf.ecore.EReference STATE__TURN;
+  public static final org.eclipse.emf.ecore.EAttribute STATE__PHASE;
+  public static final org.eclipse.emf.ecore.EAttribute STATE__STATE;
+  public static final org.eclipse.emf.ecore.EAttribute STATE__TROOPS_TO_SET;
+  public static final org.eclipse.emf.ecore.EAttribute STATE__CONQUERED_COUNTRY;
+  public static final org.eclipse.emf.ecore.EClass COUNTRY_STATE;
+  public static final org.eclipse.emf.ecore.EReference COUNTRY_STATE__PLAYER;
+  public static final org.eclipse.emf.ecore.EReference COUNTRY_STATE__COUNTRY;
+  public static final org.eclipse.emf.ecore.EAttribute COUNTRY_STATE__TROOPS;
+  public static final org.eclipse.emf.ecore.EClass COUNTRY_TO_COUNTRY_STATE_MAP;
+  public static final org.eclipse.emf.ecore.EReference COUNTRY_TO_COUNTRY_STATE_MAP__KEY;
+  public static final org.eclipse.emf.ecore.EReference COUNTRY_TO_COUNTRY_STATE_MAP__VALUE;
+  public static final org.eclipse.emf.ecore.EEnum TURN_PHASE;
+  public static final org.eclipse.emf.ecore.EEnum GAME_STATE;
+  static {};
+}
+Compiled from "stateAdapterFactory.java"
+public class risiko.gamestate.util.stateAdapterFactory extends org.eclipse.emf.common.notify.impl.AdapterFactoryImpl {
+  protected static risiko.gamestate.statePackage modelPackage;
+  protected risiko.gamestate.util.stateSwitch<org.eclipse.emf.common.notify.Adapter> modelSwitch;
+  public risiko.gamestate.util.stateAdapterFactory();
+  public boolean isFactoryForType(java.lang.Object);
+  public org.eclipse.emf.common.notify.Adapter createAdapter(org.eclipse.emf.common.notify.Notifier);
+  public org.eclipse.emf.common.notify.Adapter createPlayerAdapter();
+  public org.eclipse.emf.common.notify.Adapter createStateAdapter();
+  public org.eclipse.emf.common.notify.Adapter createCountryStateAdapter();
+  public org.eclipse.emf.common.notify.Adapter createCountryToCountryStateMapAdapter();
+  public org.eclipse.emf.common.notify.Adapter createEObjectAdapter();
+}
+Compiled from "stateAdapterFactory.java"
+class risiko.gamestate.util.stateAdapterFactory$1 extends risiko.gamestate.util.stateSwitch<org.eclipse.emf.common.notify.Adapter> {
+  final risiko.gamestate.util.stateAdapterFactory this$0;
+  risiko.gamestate.util.stateAdapterFactory$1(risiko.gamestate.util.stateAdapterFactory);
+  public org.eclipse.emf.common.notify.Adapter casePlayer(risiko.gamestate.Player);
+  public org.eclipse.emf.common.notify.Adapter caseState(risiko.gamestate.State);
+  public org.eclipse.emf.common.notify.Adapter caseCountryState(risiko.gamestate.CountryState);
+  public org.eclipse.emf.common.notify.Adapter caseCountryToCountryStateMap(java.util.Map$Entry<risiko.board.Country, risiko.gamestate.CountryState>);
+  public org.eclipse.emf.common.notify.Adapter defaultCase(org.eclipse.emf.ecore.EObject);
+  public java.lang.Object defaultCase(org.eclipse.emf.ecore.EObject);
+  public java.lang.Object caseCountryToCountryStateMap(java.util.Map$Entry);
+  public java.lang.Object caseCountryState(risiko.gamestate.CountryState);
+  public java.lang.Object caseState(risiko.gamestate.State);
+  public java.lang.Object casePlayer(risiko.gamestate.Player);
+}
+Compiled from "stateSwitch.java"
+public class risiko.gamestate.util.stateSwitch<T> extends org.eclipse.emf.ecore.util.Switch<T> {
+  protected static risiko.gamestate.statePackage modelPackage;
+  public risiko.gamestate.util.stateSwitch();
+  protected boolean isSwitchFor(org.eclipse.emf.ecore.EPackage);
+  protected T doSwitch(int, org.eclipse.emf.ecore.EObject);
+  public T casePlayer(risiko.gamestate.Player);
+  public T caseState(risiko.gamestate.State);
+  public T caseCountryState(risiko.gamestate.CountryState);
+  public T caseCountryToCountryStateMap(java.util.Map$Entry<risiko.board.Country, risiko.gamestate.CountryState>);
+  public T defaultCase(org.eclipse.emf.ecore.EObject);
+}
+Compiled from "stateValidator.java"
+public class risiko.gamestate.util.stateValidator extends org.eclipse.emf.ecore.util.EObjectValidator {
+  public static final risiko.gamestate.util.stateValidator INSTANCE;
+  public static final java.lang.String DIAGNOSTIC_SOURCE;
+  protected static final int DIAGNOSTIC_CODE_COUNT;
+  protected static final java.lang.String STATE__COUNTRY_TO_STATE_MAP_IS_ACCURATE__EEXPRESSION;
+  public risiko.gamestate.util.stateValidator();
+  protected org.eclipse.emf.ecore.EPackage getEPackage();
+  protected boolean validate(int, java.lang.Object, org.eclipse.emf.common.util.DiagnosticChain, java.util.Map<java.lang.Object, java.lang.Object>);
+  public boolean validatePlayer(risiko.gamestate.Player, org.eclipse.emf.common.util.DiagnosticChain, java.util.Map<java.lang.Object, java.lang.Object>);
+  public boolean validateState(risiko.gamestate.State, org.eclipse.emf.common.util.DiagnosticChain, java.util.Map<java.lang.Object, java.lang.Object>);
+  public boolean validateState_countryToStateMapIsAccurate(risiko.gamestate.State, org.eclipse.emf.common.util.DiagnosticChain, java.util.Map<java.lang.Object, java.lang.Object>);
+  public boolean validateCountryState(risiko.gamestate.CountryState, org.eclipse.emf.common.util.DiagnosticChain, java.util.Map<java.lang.Object, java.lang.Object>);
+  public boolean validateCountryToCountryStateMap(java.util.Map$Entry<?, ?>, org.eclipse.emf.common.util.DiagnosticChain, java.util.Map<java.lang.Object, java.lang.Object>);
+  public boolean validateTurnPhase(risiko.gamestate.TurnPhase, org.eclipse.emf.common.util.DiagnosticChain, java.util.Map<java.lang.Object, java.lang.Object>);
+  public boolean validateGameState(risiko.gamestate.GameState, org.eclipse.emf.common.util.DiagnosticChain, java.util.Map<java.lang.Object, java.lang.Object>);
+  public org.eclipse.emf.common.util.ResourceLocator getResourceLocator();
+  static {};
+}
+Compiled from "Client.java"
+public class risiko.main.Client implements java.lang.Runnable {
+  java.nio.channels.SocketChannel s;
+  public risiko.main.Client();
+  public static void main(java.lang.String[]);
+  public void run();
+}
+Compiled from "Client2.java"
+public class risiko.main.Client2 implements java.lang.Runnable {
+  java.nio.channels.SocketChannel s;
+  public static void main(java.lang.String[]);
+  risiko.main.Client2(java.net.SocketAddress) throws java.io.IOException;
+  public void run();
+}
+Compiled from "ClientState.java"
+public class risiko.main.ClientState {
+  risiko.main.ClientState(java.lang.String);
+  java.lang.String getName();
+  java.lang.String getBuffer();
+  void setBuffer(java.lang.String);
+  public java.lang.String getOutputBuffer();
+  public void setOutputBuffer(java.lang.String);
+}
+Compiled from "Main.java"
+public class risiko.main.Main {
+  static risiko.Engine engine;
+  risiko.main.Main() throws java.io.IOException, java.lang.RuntimeException;
+  public static void main(java.lang.String[]) throws java.io.IOException;
+  static {};
+}
+Compiled from "MainNio.java"
+public class risiko.main.MainNio implements java.lang.Runnable {
+  risiko.main.MainNio(int) throws java.io.IOException;
+  public void run();
+  public static void main(java.lang.String[]) throws java.io.IOException;
+}
+Compiled from "MainThread.java"
+public class risiko.main.MainThread implements java.lang.Runnable {
+  java.net.Socket cs;
+  risiko.Engine engine;
+  risiko.main.MainThread(java.net.Socket, risiko.Engine);
+  public void run();
+}
+Compiled from "MainThreadNio.java"
+public class risiko.main.MainThreadNio implements java.lang.Runnable {
+  java.nio.channels.Selector sel;
+  public risiko.main.MainThreadNio();
+  public void run();
+  public boolean registerClient(java.nio.channels.SocketChannel);
+}
+Compiled from "NioChatServer.java"
+public class risiko.main.NioChatServer implements java.lang.Runnable {
+  risiko.main.NioChatServer(int) throws java.io.IOException;
+  public void run();
+  public static void main(java.lang.String[]) throws java.io.IOException;
+}
+Compiled from "ClientConnector.java"
+public class risiko.tcp.ClientConnector implements java.lang.Runnable,risiko.tcp.TcpListener {
+  protected java.util.List<risiko.tcp.ConnectorListener> listeners;
+  protected risiko.GameMonitor game;
+  protected risiko.tcp.ClientTcp tcp;
+  public risiko.tcp.ClientConnector();
+  public void registerListener(risiko.tcp.ConnectorListener);
+  public void deregisterListener(risiko.tcp.ConnectorListener);
+  public java.util.List<risiko.tcp.ConnectorListener> getListeners();
+  protected org.eclipse.emf.ecore.resource.ResourceSet initializeResourceSet();
+  public risiko.GameMonitor getGame();
+  public void setGame(risiko.GameMonitor);
+  public boolean send(org.eclipse.emf.ecore.EObject, java.nio.channels.SelectionKey);
+  public void run();
+  public void handleIncomming(java.lang.String, java.nio.channels.SelectionKey);
+  public void handleOutgoing(java.lang.String, java.nio.channels.SelectionKey);
+}
+Compiled from "ClientConnectorTest.java"
+public class risiko.tcp.ClientConnectorTest implements risiko.tcp.ConnectorListener {
+  risiko.tcp.ClientConnector con;
+  public risiko.tcp.ClientConnectorTest();
+  public static void main(java.lang.String[]);
+  public void handleIncomming(org.eclipse.emf.ecore.EObject, java.nio.channels.SelectionKey);
+  public void handleOutgoing(org.eclipse.emf.ecore.EObject, java.nio.channels.SelectionKey);
+}
+Compiled from "ClientState.java"
+public class risiko.tcp.ClientState {
+  risiko.tcp.ClientState(java.lang.String);
+  java.lang.String getName();
+  java.lang.String getBuffer();
+  void setBuffer(java.lang.String);
+  public java.lang.String getOutputBuffer();
+  public void setOutputBuffer(java.lang.String);
+}
+Compiled from "ClientTcp.java"
+public class risiko.tcp.ClientTcp implements java.lang.Runnable {
+  protected static final int DEFAULT_PORT;
+  protected static final java.lang.String DEFAULT_IP;
+  protected java.net.SocketAddress serverAdress;
+  protected java.util.LinkedList<risiko.tcp.TcpListener> listeners;
+  risiko.tcp.ClientTcp();
+  risiko.tcp.ClientTcp(java.net.SocketAddress);
+  public void deregisterListener(risiko.tcp.TcpListener);
+  public void registerListener(risiko.tcp.TcpListener);
+  public void run();
+  public boolean send(java.lang.String, java.nio.channels.SelectionKey);
+  static {};
+}
+Compiled from "ConnectorListener.java"
+public interface risiko.tcp.ConnectorListener {
+  public abstract void handleIncomming(org.eclipse.emf.ecore.EObject, java.nio.channels.SelectionKey);
+  public abstract void handleOutgoing(org.eclipse.emf.ecore.EObject, java.nio.channels.SelectionKey);
+}
+Compiled from "TcpListener.java"
+public interface risiko.tcp.TcpListener {
+  public abstract void handleIncomming(java.lang.String, java.nio.channels.SelectionKey);
+  public abstract void handleOutgoing(java.lang.String, java.nio.channels.SelectionKey);
+}

@@ -1,0 +1,1129 @@
+Compiled from "AppliedDecision.java"
+public abstract class hobo.AppliedDecision {
+  protected hobo.Decision decision;
+  protected hobo.State state;
+  protected hobo.MersenneTwisterFast old_random;
+  protected int old_player;
+  protected boolean undone;
+  public hobo.AppliedDecision(hobo.Decision, hobo.State);
+  public void undo();
+}
+Compiled from "Belief.java"
+public class hobo.Belief {
+  java.util.List<java.lang.Double> reality_likelihoods;
+  static final boolean $assertionsDisabled;
+  public hobo.Belief(int, long, double);
+  public void initialize(hobo.State);
+  public void update(hobo.Event);
+  public double averageLikelihoodOfReality();
+  public void update(hobo.DrawCardDecision, hobo.DrawCardDecision$AppliedDecision, hobo.State);
+  public void update(hobo.ClaimRailwayDecision, hobo.ClaimRailwayDecision$AppliedDecision, hobo.State);
+  public void update(hobo.DrawMissionsDecision, hobo.DrawMissionsDecision$AppliedDecision, hobo.State);
+  public void update(hobo.KeepMissionsDecision, hobo.KeepMissionsDecision$AppliedDecision, hobo.State);
+  public hobo.State maximumLikelihoodState(hobo.State);
+  public hobo.State sample(hobo.State);
+  public double likelihoodOf(hobo.State);
+  public double zeroKnowledgeLikelihoodOf(hobo.State);
+  public void sampleCards(hobo.State);
+  public double likelihoodOfCards(hobo.State);
+  public void sampleMissions(hobo.State);
+  public void maximumLikelihoodMissions(hobo.State);
+  public double likelihoodOfMissions(hobo.State);
+  public void requireSanity(hobo.State);
+  static int access$100(hobo.Belief);
+  static hobo.CardBag access$200(hobo.Belief);
+  static {};
+}
+Compiled from "Belief.java"
+class hobo.Belief$PlayerBelief {
+  final hobo.Belief this$0;
+  public hobo.Belief$PlayerBelief(hobo.Belief, hobo.PlayerState);
+  static hobo.CardBag access$000(hobo.Belief$PlayerBelief);
+}
+Compiled from "CardBag.java"
+public class hobo.CardBag implements java.lang.Cloneable, java.lang.Iterable<hobo.Color> {
+  static final boolean $assertionsDisabled;
+  public hobo.CardBag();
+  public hobo.CardBag(hobo.Color...);
+  public hobo.CardBag(hobo.CardBag);
+  public hobo.CardBag clone();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public int size();
+  public boolean isEmpty();
+  public void add(hobo.Color);
+  public void add(hobo.Color, int);
+  public void addAll(hobo.CardBag);
+  public void remove(hobo.Color);
+  public void removeAll(hobo.CardBag);
+  public boolean contains(hobo.Color);
+  public boolean containsAll(hobo.CardBag);
+  public boolean equals(hobo.CardBag);
+  public hobo.Color arbitraryNonWildcard();
+  public int count(hobo.Color);
+  public double entropy();
+  public double maxEntropy();
+  public double utilityAsHand();
+  public hobo.Color draw(hobo.MersenneTwisterFast);
+  public hobo.Color sample(hobo.MersenneTwisterFast);
+  public hobo.CardBag sample(int, hobo.MersenneTwisterFast);
+  public hobo.CardBag remove_sample(int, hobo.MersenneTwisterFast);
+  public double probabilityOfSample(hobo.CardBag);
+  public hobo.Color cardOnTop(hobo.MersenneTwisterFast);
+  public hobo.CardBag draw(int, hobo.MersenneTwisterFast);
+  public hobo.Color draw(hobo.Color);
+  public void addAll(java.util.Collection<hobo.Color>);
+  public java.lang.String toString();
+  public java.util.Iterator<hobo.Color> iterator();
+  public int countEquivalent(hobo.Color);
+  public boolean allEquivalent();
+  public hobo.CardBag cardsToClaim(hobo.Railway);
+  public hobo.CardBag cardsToClaim(hobo.Railway, hobo.Color);
+  public boolean canAfford(hobo.Railway);
+  public int[] multiplicities();
+  public hobo.Color[] availableColors();
+  public static void requireIteratorFinitude();
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+  static int[] access$000(hobo.CardBag);
+  static {};
+}
+Compiled from "CardBag.java"
+class hobo.CardBag$1 implements java.util.Iterator<hobo.Color> {
+  final hobo.CardBag this$0;
+  hobo.CardBag$1(hobo.CardBag);
+  public boolean hasNext();
+  public hobo.Color next();
+  public void remove();
+  public java.lang.Object next();
+}
+Compiled from "City.java"
+public final class hobo.City extends java.lang.Enum<hobo.City> {
+  public static final hobo.City Vancouver;
+  public static final hobo.City Calgary;
+  public static final hobo.City Winnipeg;
+  public static final hobo.City SaultStMarie;
+  public static final hobo.City Montreal;
+  public static final hobo.City Seattle;
+  public static final hobo.City Helena;
+  public static final hobo.City Duluth;
+  public static final hobo.City Toronto;
+  public static final hobo.City Boston;
+  public static final hobo.City Portland;
+  public static final hobo.City NewYork;
+  public static final hobo.City Omaha;
+  public static final hobo.City Chicago;
+  public static final hobo.City Pittsburgh;
+  public static final hobo.City SaltLakeCity;
+  public static final hobo.City Denver;
+  public static final hobo.City KansasCity;
+  public static final hobo.City StLouis;
+  public static final hobo.City Nashville;
+  public static final hobo.City Raleigh;
+  public static final hobo.City Washington;
+  public static final hobo.City SanFrancisco;
+  public static final hobo.City LasVegas;
+  public static final hobo.City SantaFe;
+  public static final hobo.City OklahomaCity;
+  public static final hobo.City LittleRock;
+  public static final hobo.City Atlanta;
+  public static final hobo.City Charleston;
+  public static final hobo.City LosAngeles;
+  public static final hobo.City Phoenix;
+  public static final hobo.City ElPaso;
+  public static final hobo.City Dallas;
+  public static final hobo.City Houston;
+  public static final hobo.City NewOrleans;
+  public static final hobo.City Miami;
+  public static final hobo.City[] all;
+  public final double x;
+  public final double y;
+  public double[] distances;
+  public java.util.Set<hobo.Railway> railways;
+  public static hobo.City[] values();
+  public static hobo.City valueOf(java.lang.String);
+  public static hobo.City designated_by(java.lang.String);
+  public void registerRailway(hobo.Railway);
+  public hobo.Railway railwayTo(hobo.City, hobo.Color);
+  public hobo.Railway railwayTo(hobo.City);
+  static {};
+}
+Compiled from "ClaimRailwayDecision.java"
+public class hobo.ClaimRailwayDecision extends hobo.Decision {
+  public final hobo.Railway railway;
+  public final hobo.CardBag cards;
+  public hobo.ClaimRailwayDecision(int, hobo.Railway, hobo.CardBag);
+  public java.lang.String toString();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public static java.util.Set<hobo.Decision> availableTo(hobo.State, hobo.PlayerState, java.util.Set<hobo.Decision>);
+  public java.lang.String reasonForIllegality(hobo.State);
+  public hobo.ClaimRailwayDecision$AppliedDecision apply(hobo.State, java.lang.Object, boolean);
+  public hobo.AppliedDecision apply(hobo.State, java.lang.Object, boolean);
+  static {};
+}
+Compiled from "ClaimRailwayDecision.java"
+public class hobo.ClaimRailwayDecision$AppliedDecision extends hobo.AppliedDecision {
+  final hobo.ClaimRailwayDecision this$0;
+  public hobo.ClaimRailwayDecision$AppliedDecision(hobo.ClaimRailwayDecision, hobo.Decision, hobo.State);
+  public void undo();
+  public java.lang.String toString();
+}
+Compiled from "Color.java"
+public final class hobo.Color extends java.lang.Enum<hobo.Color> {
+  public static final hobo.Color BLACK;
+  public static final hobo.Color WHITE;
+  public static final hobo.Color YELLOW;
+  public static final hobo.Color GREEN;
+  public static final hobo.Color RED;
+  public static final hobo.Color BLUE;
+  public static final hobo.Color ORANGE;
+  public static final hobo.Color PURPLE;
+  public static final hobo.Color GREY;
+  public static final hobo.Color[] all;
+  public final java.awt.Color awtColor;
+  public static hobo.Color[] values();
+  public static hobo.Color valueOf(java.lang.String);
+  public static hobo.Color designated_by(java.lang.String);
+  static {};
+}
+Compiled from "Decision.java"
+public abstract class hobo.Decision {
+  public int player;
+  public hobo.Decision();
+  public boolean isLegal(hobo.State);
+  public boolean isLegalForPlayer(hobo.State);
+  public void requireLegal(hobo.State);
+  public abstract java.lang.String reasonForIllegality(hobo.State);
+  public abstract hobo.AppliedDecision apply(hobo.State, java.lang.Object, boolean);
+  public java.lang.Object[] outcomeDesignators(hobo.State);
+  public double outcomeLikelihood(hobo.State, java.lang.Object);
+  public hobo.AppliedDecision apply(hobo.State, boolean);
+  static {};
+}
+Compiled from "DrawCardDecision.java"
+public class hobo.DrawCardDecision extends hobo.Decision {
+  public final hobo.Color color;
+  public hobo.DrawCardDecision(int);
+  public hobo.DrawCardDecision(int, hobo.Color);
+  public java.lang.String toString();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public static java.util.Set<hobo.Decision> availableTo(hobo.State, hobo.PlayerState, java.util.Set<hobo.Decision>);
+  public java.lang.String reasonForIllegality(hobo.State);
+  public java.lang.Object[] outcomeDesignators(hobo.State);
+  public double outcomeLikelihood(hobo.State, java.lang.Object);
+  public hobo.DrawCardDecision$AppliedDecision apply(hobo.State, java.lang.Object, boolean);
+  public hobo.AppliedDecision apply(hobo.State, java.lang.Object, boolean);
+  static {};
+}
+Compiled from "DrawCardDecision.java"
+public class hobo.DrawCardDecision$AppliedDecision extends hobo.AppliedDecision {
+  public hobo.Color old_drawn_card;
+  public hobo.Color drawn_card;
+  public boolean was_last_draw;
+  final hobo.DrawCardDecision this$0;
+  public hobo.DrawCardDecision$AppliedDecision(hobo.DrawCardDecision, hobo.Decision, hobo.State);
+  public void undo();
+  public java.lang.String toString();
+}
+Compiled from "DrawMissionsDecision.java"
+public class hobo.DrawMissionsDecision extends hobo.Decision {
+  static final boolean $assertionsDisabled;
+  public hobo.DrawMissionsDecision(int);
+  public java.lang.String toString();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public java.lang.String reasonForIllegality(hobo.State);
+  public java.lang.Object[] outcomeDesignators(hobo.State);
+  public double outcomeLikelihood(hobo.State, java.lang.Object);
+  public hobo.DrawMissionsDecision$AppliedDecision apply(hobo.State, java.lang.Object, boolean);
+  public static java.util.Set<hobo.Decision> availableTo(hobo.State, hobo.PlayerState, java.util.Set<hobo.Decision>);
+  public hobo.AppliedDecision apply(hobo.State, java.lang.Object, boolean);
+  static {};
+}
+Compiled from "DrawMissionsDecision.java"
+public class hobo.DrawMissionsDecision$AppliedDecision extends hobo.AppliedDecision {
+  public java.util.Set<hobo.Mission> drawn_missions;
+  final hobo.DrawMissionsDecision this$0;
+  public hobo.DrawMissionsDecision$AppliedDecision(hobo.DrawMissionsDecision, hobo.Decision, hobo.State);
+  public void undo();
+  public java.lang.String toString();
+}
+Compiled from "EvaluatedDecision.java"
+public class hobo.EvaluatedDecision {
+  public final hobo.Decision decision;
+  public final double utility;
+  public hobo.EvaluatedDecision(hobo.Decision, double);
+  public java.lang.String toString();
+}
+Compiled from "Event.java"
+public class hobo.Event {
+  public final hobo.State state;
+  public final hobo.Player player;
+  public final hobo.Decision decision;
+  public final hobo.AppliedDecision applied_decision;
+  public hobo.Event(hobo.State, hobo.Player, hobo.Decision, hobo.AppliedDecision);
+  public java.lang.String toString();
+}
+Compiled from "FileHandler.java"
+public class hobo.FileHandler {
+  public hobo.FileHandler(java.lang.String);
+  public void writeFile(java.lang.String);
+}
+Compiled from "Function.java"
+public interface hobo.Function<X, Y> {
+  public abstract Y call(X);
+}
+Compiled from "Game.java"
+public class hobo.Game {
+  public final hobo.State state;
+  public final hobo.Player[] players;
+  public int ndecisions;
+  public hobo.Game(java.lang.String, hobo.Player...);
+  public hobo.State getState();
+  public void play();
+  public void advance();
+  public void printScores();
+  public java.lang.String returnScores();
+  public hobo.PlayerState whoWon();
+  public int[] scores();
+  public void abort();
+  public void notifyPlayers(hobo.Event);
+  public void registerObserver(hobo.GameObserver);
+  public void notifyObservers(hobo.Event);
+}
+Compiled from "GameObserver.java"
+public interface hobo.GameObserver {
+  public abstract void observe(hobo.Event);
+}
+Compiled from "HumanPlayer.java"
+public class hobo.HumanPlayer extends hobo.Player {
+  public hobo.HumanPlayer(java.lang.String);
+  public hobo.HumanPlayer(java.lang.String, hobo.PlayerInteraction);
+  public void setUI(hobo.PlayerInteraction);
+  public static hobo.HumanPlayer fromConfiguration(java.lang.String);
+  public hobo.Decision decide(hobo.State);
+  public void illegal(hobo.State, hobo.Decision, java.lang.String);
+  public void loss(hobo.State);
+  public void win(hobo.State);
+  public void draw(hobo.State);
+  public void setDecisionTime(int);
+  public void setVerbose(boolean);
+}
+Compiled from "IllegalDecisionException.java"
+public class hobo.IllegalDecisionException extends java.lang.RuntimeException {
+  public final java.lang.String reason;
+  public hobo.IllegalDecisionException(java.lang.String);
+  public java.lang.String toString();
+}
+Compiled from "KeepMissionsDecision.java"
+public class hobo.KeepMissionsDecision extends hobo.Decision {
+  public final java.util.Set<hobo.Mission> missions;
+  public hobo.KeepMissionsDecision(int, java.util.Set<hobo.Mission>);
+  public java.lang.String toString();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public static java.util.Set<hobo.Decision> availableTo(hobo.State, hobo.PlayerState, java.util.Set<hobo.Decision>);
+  public java.lang.String reasonForIllegality(hobo.State);
+  public hobo.KeepMissionsDecision$AppliedDecision apply(hobo.State, java.lang.Object, boolean);
+  public hobo.AppliedDecision apply(hobo.State, java.lang.Object, boolean);
+  static {};
+}
+Compiled from "KeepMissionsDecision.java"
+public class hobo.KeepMissionsDecision$AppliedDecision extends hobo.AppliedDecision {
+  public java.util.Set<hobo.Mission> drawn_missions;
+  final hobo.KeepMissionsDecision this$0;
+  public hobo.KeepMissionsDecision$AppliedDecision(hobo.KeepMissionsDecision, hobo.Decision, hobo.State);
+  public void undo();
+  public java.lang.String toString();
+}
+Compiled from "Main.java"
+public class hobo.Main {
+  public hobo.Main();
+  public static void main(java.lang.String[]);
+  public static void headless();
+  public static void textual();
+  public static void graphical();
+}
+Compiled from "Main.java"
+final class hobo.Main$1 implements java.lang.Runnable {
+  static final boolean $assertionsDisabled;
+  hobo.Main$1();
+  public void run();
+  public javax.swing.JFrame setupNewGameFrame();
+  public void newGame(java.lang.String...);
+  public void newGame(java.lang.String, hobo.Player[]);
+  static javax.swing.JFrame access$000(hobo.Main$1);
+  static {};
+}
+Compiled from "Main.java"
+class hobo.Main$1$1 implements java.awt.event.ActionListener {
+  final hobo.Main$1 this$0;
+  hobo.Main$1$1(hobo.Main$1);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "Main.java"
+class hobo.Main$1$2 implements java.awt.event.ActionListener {
+  final javax.swing.JTextField[] val$fields;
+  final javax.swing.JFrame val$f;
+  final hobo.Main$1 this$0;
+  hobo.Main$1$2(hobo.Main$1, javax.swing.JTextField[], javax.swing.JFrame);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "Main.java"
+class hobo.Main$1$3 implements hobo.GameObserver {
+  final hobo.graphics.GamePanel val$gp;
+  final hobo.Game val$g;
+  final hobo.Main$1 this$0;
+  hobo.Main$1$3(hobo.Main$1, hobo.graphics.GamePanel, hobo.Game);
+  public void observe(hobo.Event);
+}
+Compiled from "Main.java"
+class hobo.Main$1$3$1 implements java.lang.Runnable {
+  final hobo.Event val$e;
+  final hobo.Main$1$3 this$1;
+  hobo.Main$1$3$1(hobo.Main$1$3, hobo.Event);
+  public void run();
+}
+Compiled from "Main.java"
+class hobo.Main$1$4 implements java.lang.Runnable {
+  final hobo.Game val$g;
+  final hobo.Main$1 this$0;
+  hobo.Main$1$4(hobo.Main$1, hobo.Game);
+  public void run();
+}
+Compiled from "MersenneTwisterFast.java"
+public class hobo.MersenneTwisterFast implements java.io.Serializable,java.lang.Cloneable {
+  public strictfp hobo.MersenneTwisterFast clone();
+  public strictfp boolean stateEquals(java.lang.Object);
+  public strictfp void readState(java.io.DataInputStream) throws java.io.IOException;
+  public strictfp void writeState(java.io.DataOutputStream) throws java.io.IOException;
+  public strictfp hobo.MersenneTwisterFast();
+  public strictfp hobo.MersenneTwisterFast(long);
+  public strictfp hobo.MersenneTwisterFast(hobo.MersenneTwisterFast);
+  public strictfp hobo.MersenneTwisterFast(int[]);
+  public synchronized strictfp void setSeed(long);
+  public synchronized strictfp void setSeed(int[]);
+  public final strictfp int nextInt();
+  public final strictfp short nextShort();
+  public final strictfp char nextChar();
+  public final strictfp boolean nextBoolean();
+  public final strictfp boolean nextBoolean(float);
+  public final strictfp boolean nextBoolean(double);
+  public final strictfp byte nextByte();
+  public final strictfp void nextBytes(byte[]);
+  public final strictfp long nextLong();
+  public final strictfp long nextLong(long);
+  public final strictfp double nextDouble();
+  public strictfp double nextDouble(boolean, boolean);
+  public final strictfp double nextGaussian();
+  public final strictfp float nextFloat();
+  public strictfp double nextFloat(boolean, boolean);
+  public final strictfp int nextInt(int);
+  public static strictfp void main(java.lang.String[]);
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "MinimaxPlayer.java"
+public class hobo.MinimaxPlayer extends hobo.Player {
+  java.util.List<java.util.Set<hobo.Mission>> completedMissions;
+  java.util.Deque<java.util.Set<hobo.Mission>> completions;
+  static final boolean $assertionsDisabled;
+  public hobo.MinimaxPlayer(java.lang.String, double, boolean, boolean, int, int, double, double, double, double, double);
+  public static hobo.MinimaxPlayer fromConfiguration(java.lang.String);
+  public void setDecisionTime(int);
+  public void setVerbose(boolean);
+  public void output(java.lang.String);
+  public hobo.Decision decide(hobo.State);
+  public hobo.EvaluatedDecision minimax(hobo.State, int, int, double, double, boolean[]) throws hobo.OutOfTimeException;
+  public java.util.Set<hobo.EvaluatedDecision> evaluateDecisions(java.util.Set<hobo.Decision>, hobo.State);
+  public void recallKillerMoves(int, hobo.State, java.util.Set<hobo.Decision>);
+  public double utility(hobo.State, boolean[]);
+  public double utility(hobo.State, hobo.PlayerState);
+  public double averageBranchingFactor();
+  public double averageDepth();
+  public double averageNodesPerDecision();
+  public double[] statistics();
+  static boolean access$002(hobo.MinimaxPlayer, boolean);
+  static {};
+}
+Compiled from "MinimaxPlayer.java"
+class hobo.MinimaxPlayer$1 extends java.util.TimerTask {
+  final hobo.MinimaxPlayer this$0;
+  hobo.MinimaxPlayer$1(hobo.MinimaxPlayer);
+  public void run();
+}
+Compiled from "MinimaxPlayer.java"
+class hobo.MinimaxPlayer$2 extends java.util.TimerTask {
+  final hobo.MinimaxPlayer this$0;
+  hobo.MinimaxPlayer$2(hobo.MinimaxPlayer);
+  public void run();
+}
+Compiled from "Mission.java"
+public final class hobo.Mission extends java.lang.Enum<hobo.Mission> {
+  public static final hobo.Mission LosAngeles_NewYork;
+  public static final hobo.Mission Seattle_NewYork;
+  public static final hobo.Mission Vancouver_SantaFe;
+  public static final hobo.Mission LosAngeles_Miami;
+  public static final hobo.Mission LosAngeles_Chicago;
+  public static final hobo.Mission Montreal_Atlanta;
+  public static final hobo.Mission Dallas_NewYork;
+  public static final hobo.Mission Calgary_Phoenix;
+  public static final hobo.Mission Denver_ElPaso;
+  public static final hobo.Mission Winnipeg_LittleRock;
+  public static final hobo.Mission NewYork_Atlanta;
+  public static final hobo.Mission Chicago_SantaFe;
+  public static final hobo.Mission Duluth_ElPaso;
+  public static final hobo.Mission Boston_Miami;
+  public static final hobo.Mission Calgary_SaltLakeCity;
+  public static final hobo.Mission Portland_Nashville;
+  public static final hobo.Mission Portland_Phoenix;
+  public static final hobo.Mission Denver_Pittsburgh;
+  public static final hobo.Mission Montreal_NewOrleans;
+  public static final hobo.Mission Vancouver_Montreal;
+  public static final hobo.Mission Helena_LosAngeles;
+  public static final hobo.Mission Seattle_LosAngeles;
+  public static final hobo.Mission SaultStMarie_OklahomaCity;
+  public static final hobo.Mission SaultStMarie_Nashville;
+  public static final hobo.Mission Chicago_NewOrleans;
+  public static final hobo.Mission Toronto_Miami;
+  public static final hobo.Mission SanFrancisco_Atlanta;
+  public static final hobo.Mission Winnipeg_Houston;
+  public static final hobo.Mission Duluth_Houston;
+  public static final hobo.Mission KansasCity_Houston;
+  public static final hobo.Mission[] all;
+  public static final boolean[][] intersections;
+  public final hobo.City source;
+  public final hobo.City destination;
+  public final int value;
+  public final java.lang.String imagePath;
+  public double[] railwayRelevance;
+  public static hobo.Mission[] values();
+  public static hobo.Mission valueOf(java.lang.String);
+  public void initiateRelevance();
+  public static hobo.Mission connecting(hobo.City, hobo.City);
+  public boolean connects(hobo.City);
+  public boolean connects(hobo.City, hobo.City);
+  public java.lang.String toString();
+  public java.lang.String coordinatesString();
+  static {};
+}
+Compiled from "MonteCarloPlayer.java"
+public class hobo.MonteCarloPlayer extends hobo.Player {
+  public hobo.MonteCarloPlayer(java.lang.String, long, int, int, double, double, double, double, boolean, boolean, boolean, boolean);
+  public static hobo.MonteCarloPlayer fromConfiguration(java.lang.String);
+  public void setDecisionTime(int);
+  public void setVerbose(boolean);
+  public double averageNodesPerDecision();
+  public double averageSimulations();
+  public double[] statistics();
+  public hobo.Decision decide(hobo.State);
+  public java.util.Set<hobo.EvaluatedDecision> evaluateDecisions(java.util.Set<hobo.Decision>, hobo.State);
+  public hobo.MonteCarloPlayer$Node buildTree(hobo.State, java.util.Set<hobo.Decision>);
+  static boolean access$002(hobo.MonteCarloPlayer, boolean);
+  static boolean access$200(hobo.MonteCarloPlayer);
+  static double access$300(hobo.MonteCarloPlayer);
+  static hobo.MersenneTwisterFast access$400(hobo.MonteCarloPlayer);
+  static int access$500(hobo.MonteCarloPlayer);
+  static double access$600(hobo.MonteCarloPlayer);
+  static long access$708(hobo.MonteCarloPlayer);
+  static boolean access$800(hobo.MonteCarloPlayer);
+  static double access$900(hobo.MonteCarloPlayer);
+  static double access$1000(hobo.MonteCarloPlayer);
+}
+Compiled from "MonteCarloPlayer.java"
+class hobo.MonteCarloPlayer$1 extends java.util.TimerTask {
+  final hobo.MonteCarloPlayer this$0;
+  hobo.MonteCarloPlayer$1(hobo.MonteCarloPlayer);
+  public void run();
+}
+Compiled from "MonteCarloPlayer.java"
+class hobo.MonteCarloPlayer$Node {
+  static final boolean $assertionsDisabled;
+  final hobo.MonteCarloPlayer this$0;
+  public hobo.MonteCarloPlayer$Node(hobo.MonteCarloPlayer, boolean);
+  public hobo.Decision decide();
+  public java.util.Set<hobo.EvaluatedDecision> evaluatedDecisions();
+  public double expectedValue();
+  public hobo.MonteCarloPlayer$Node childFor(hobo.Decision);
+  public hobo.MonteCarloPlayer$Node childFor(int);
+  public void fullyExpand();
+  public int populate(hobo.State, hobo.Decision);
+  public int playout(hobo.State, hobo.Decision);
+  public hobo.Decision chooseDecision(hobo.State);
+  public hobo.Decision sample(java.util.Set<hobo.Decision>, hobo.State);
+  public double weight(hobo.Decision, hobo.State);
+  public java.lang.String toString();
+  public void printStatistics();
+  static java.util.Set access$102(hobo.MonteCarloPlayer$Node, java.util.Set);
+  static {};
+}
+Compiled from "MonteCarloPlayer.java"
+class hobo.MonteCarloPlayer$Node$1 implements java.util.Comparator<java.util.Map$Entry<hobo.Decision, hobo.MonteCarloPlayer$Node>> {
+  final hobo.MonteCarloPlayer$Node this$1;
+  hobo.MonteCarloPlayer$Node$1(hobo.MonteCarloPlayer$Node);
+  public int compare(java.util.Map$Entry<hobo.Decision, hobo.MonteCarloPlayer$Node>, java.util.Map$Entry<hobo.Decision, hobo.MonteCarloPlayer$Node>);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "OutOfTimeException.java"
+public class hobo.OutOfTimeException extends java.lang.Exception {
+  public hobo.OutOfTimeException();
+}
+Compiled from "ParameterTuning.java"
+public class hobo.ParameterTuning {
+  public static final hobo.MersenneTwisterFast random;
+  public hobo.ParameterTuning();
+  public static void main(java.lang.String[]);
+  public static void tuneMCTS();
+  public static void tuneMinimax();
+  public static void tuneBelief();
+  public static void tuneByCrossEntropy(int, int, int, double[], double[], hobo.Function<double[], java.lang.Double>);
+  static {};
+}
+Compiled from "ParameterTuning.java"
+final class hobo.ParameterTuning$1 implements hobo.Function<double[], java.lang.Double> {
+  hobo.ParameterTuning$1();
+  public java.lang.Double call(double[]);
+  public java.lang.Object call(java.lang.Object);
+}
+Compiled from "ParameterTuning.java"
+final class hobo.ParameterTuning$2 implements hobo.Function<double[], java.lang.Double> {
+  hobo.ParameterTuning$2();
+  public java.lang.Double call(double[]);
+  public java.lang.Object call(java.lang.Object);
+}
+Compiled from "ParameterTuning.java"
+final class hobo.ParameterTuning$3 implements hobo.Function<double[], java.lang.Double> {
+  hobo.ParameterTuning$3();
+  public java.lang.Double call(double[]);
+  public java.lang.Object call(java.lang.Object);
+}
+Compiled from "ParameterTuning.java"
+final class hobo.ParameterTuning$4 implements java.util.concurrent.Callable<java.lang.Double> {
+  final hobo.Function val$evaluation;
+  final double[][] val$population;
+  final int val$j;
+  hobo.ParameterTuning$4(hobo.Function, double[][], int);
+  public java.lang.Double call();
+  public java.lang.Object call() throws java.lang.Exception;
+}
+Compiled from "ParameterTuning.java"
+final class hobo.ParameterTuning$5 implements java.util.Comparator<java.lang.Integer> {
+  final double[] val$evaluations;
+  hobo.ParameterTuning$5(double[]);
+  public int compare(java.lang.Integer, java.lang.Integer);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "Player.java"
+public abstract class hobo.Player {
+  protected java.lang.String name;
+  protected int handle;
+  public hobo.Player();
+  public java.lang.String name();
+  public java.lang.String toString();
+  public void setHandle(int);
+  public abstract void setDecisionTime(int);
+  public abstract void setVerbose(boolean);
+  public void perceive(hobo.Event);
+  public abstract hobo.Decision decide(hobo.State);
+  public void loss(hobo.State);
+  public void win(hobo.State);
+  public void draw(hobo.State);
+  public void illegal(hobo.State, hobo.Decision, java.lang.String);
+  public static hobo.Player fromConfiguration(java.lang.String);
+  public double[] statistics();
+  public java.util.Set<hobo.EvaluatedDecision> evaluateDecisions(java.util.Set<hobo.Decision>, hobo.State);
+}
+Compiled from "PlayerInteraction.java"
+public interface hobo.PlayerInteraction extends hobo.GameObserver {
+  public abstract hobo.Decision askDecision(hobo.Player, hobo.State);
+  public abstract void tellIllegal(hobo.Player, hobo.State, hobo.Decision, java.lang.String);
+  public abstract void tellLoss(hobo.Player, hobo.State);
+  public abstract void tellDraw(hobo.Player, hobo.State);
+  public abstract void tellWin(hobo.Player, hobo.State);
+}
+Compiled from "PlayerState.java"
+public class hobo.PlayerState implements java.lang.Cloneable {
+  public static int next_color_index;
+  public static final int INITIAL_NCARS;
+  public static final int MIN_NCARS;
+  public final int handle;
+  public final java.lang.String name;
+  public final hobo.Color color;
+  public int ncars;
+  public int score;
+  public hobo.CardBag hand;
+  public java.util.Set<hobo.Mission> missions;
+  public java.util.Set<hobo.Railway> railways;
+  public hobo.Color drawn_card;
+  public java.util.Set<hobo.Mission> drawn_missions;
+  public hobo.PlayerState clone();
+  public boolean equals(java.lang.Object);
+  public hobo.PlayerState(int, java.lang.String, hobo.Color);
+  public boolean missionCompleted(hobo.Mission);
+  public boolean almostOutOfCars();
+  public int finalScore();
+  public void claim(hobo.Railway);
+  public void unclaim(hobo.Railway);
+  public void receiveMissions(java.util.Set<hobo.Mission>);
+  public void unreceiveMissions(java.util.Set<hobo.Mission>);
+  public java.util.Set<hobo.Mission> missionsCompletedBy(hobo.Railway, java.util.Set<hobo.Mission>);
+  public java.util.Set<hobo.City> citiesConnectedTo(hobo.City, java.util.Set<hobo.City>);
+  public int getMissionPoints();
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+  static {};
+}
+Compiled from "Railway.java"
+public final class hobo.Railway extends java.lang.Enum<hobo.Railway> {
+  public static final hobo.Railway Vancouver_Calgary_1;
+  public static final hobo.Railway Vancouver_Seattle_1;
+  public static final hobo.Railway Vancouver_Seattle_2;
+  public static final hobo.Railway Calgary_Winnipeg_1;
+  public static final hobo.Railway Seattle_Calgary_1;
+  public static final hobo.Railway Calgary_Helena_1;
+  public static final hobo.Railway Winnipeg_SaultStMarie_1;
+  public static final hobo.Railway Helena_Winnipeg_1;
+  public static final hobo.Railway Winnipeg_Duluth_1;
+  public static final hobo.Railway SaultStMarie_Montreal_1;
+  public static final hobo.Railway Duluth_SaultStMarie_1;
+  public static final hobo.Railway SaultStMarie_Toronto_1;
+  public static final hobo.Railway Montreal_Boston_1;
+  public static final hobo.Railway Montreal_Boston_2;
+  public static final hobo.Railway Toronto_Montreal_1;
+  public static final hobo.Railway Montreal_NewYork_1;
+  public static final hobo.Railway Portland_Seattle_1;
+  public static final hobo.Railway Portland_Seattle_2;
+  public static final hobo.Railway Seattle_Helena_1;
+  public static final hobo.Railway SaltLakeCity_Helena_1;
+  public static final hobo.Railway Helena_Denver_1;
+  public static final hobo.Railway Helena_Omaha_1;
+  public static final hobo.Railway Helena_Duluth_1;
+  public static final hobo.Railway Omaha_Duluth_1;
+  public static final hobo.Railway Omaha_Duluth_2;
+  public static final hobo.Railway Duluth_Chicago_1;
+  public static final hobo.Railway Duluth_Toronto_1;
+  public static final hobo.Railway Chicago_Toronto_1;
+  public static final hobo.Railway Toronto_Pittsburgh_1;
+  public static final hobo.Railway Pittsburgh_NewYork_1;
+  public static final hobo.Railway Pittsburgh_NewYork_2;
+  public static final hobo.Railway NewYork_Washington_1;
+  public static final hobo.Railway NewYork_Washington_2;
+  public static final hobo.Railway NewYork_Boston_1;
+  public static final hobo.Railway NewYork_Boston_2;
+  public static final hobo.Railway SanFrancisco_Portland_2;
+  public static final hobo.Railway SanFrancisco_Portland_1;
+  public static final hobo.Railway Portland_SaltLakeCity_1;
+  public static final hobo.Railway SanFrancisco_SaltLakeCity_1;
+  public static final hobo.Railway SanFrancisco_SaltLakeCity_2;
+  public static final hobo.Railway LasVegas_SaltLakeCity_1;
+  public static final hobo.Railway SaltLakeCity_Denver_2;
+  public static final hobo.Railway SaltLakeCity_Denver_1;
+  public static final hobo.Railway Phoenix_Denver_1;
+  public static final hobo.Railway SantaFe_Denver_1;
+  public static final hobo.Railway Denver_OklahomaCity_1;
+  public static final hobo.Railway Denver_KansasCity_2;
+  public static final hobo.Railway Denver_KansasCity_1;
+  public static final hobo.Railway Denver_Omaha_1;
+  public static final hobo.Railway Omaha_KansasCity_1;
+  public static final hobo.Railway Omaha_KansasCity_2;
+  public static final hobo.Railway Omaha_Chicago_1;
+  public static final hobo.Railway StLouis_Chicago_1;
+  public static final hobo.Railway StLouis_Chicago_2;
+  public static final hobo.Railway Chicago_Pittsburgh_2;
+  public static final hobo.Railway Chicago_Pittsburgh_1;
+  public static final hobo.Railway StLouis_Pittsburgh_1;
+  public static final hobo.Railway Nashville_Pittsburgh_1;
+  public static final hobo.Railway Pittsburgh_Raleigh_1;
+  public static final hobo.Railway Pittsburgh_Washington_1;
+  public static final hobo.Railway OklahomaCity_KansasCity_1;
+  public static final hobo.Railway OklahomaCity_KansasCity_2;
+  public static final hobo.Railway KansasCity_StLouis_2;
+  public static final hobo.Railway KansasCity_StLouis_1;
+  public static final hobo.Railway LittleRock_StLouis_1;
+  public static final hobo.Railway StLouis_Nashville_1;
+  public static final hobo.Railway SanFrancisco_LosAngeles_2;
+  public static final hobo.Railway SanFrancisco_LosAngeles_1;
+  public static final hobo.Railway LosAngeles_LasVegas_1;
+  public static final hobo.Railway Phoenix_SantaFe_1;
+  public static final hobo.Railway ElPaso_SantaFe_1;
+  public static final hobo.Railway SantaFe_OklahomaCity_1;
+  public static final hobo.Railway ElPaso_OklahomaCity_1;
+  public static final hobo.Railway OklahomaCity_Dallas_1;
+  public static final hobo.Railway OklahomaCity_Dallas_2;
+  public static final hobo.Railway OklahomaCity_LittleRock_1;
+  public static final hobo.Railway Dallas_LittleRock_1;
+  public static final hobo.Railway LittleRock_NewOrleans_1;
+  public static final hobo.Railway LittleRock_Nashville_1;
+  public static final hobo.Railway Nashville_Atlanta_1;
+  public static final hobo.Railway Nashville_Raleigh_1;
+  public static final hobo.Railway Atlanta_Raleigh_1;
+  public static final hobo.Railway Atlanta_Raleigh_2;
+  public static final hobo.Railway Raleigh_Charleston_1;
+  public static final hobo.Railway Raleigh_Washington_1;
+  public static final hobo.Railway Raleigh_Washington_2;
+  public static final hobo.Railway NewOrleans_Atlanta_2;
+  public static final hobo.Railway NewOrleans_Atlanta_1;
+  public static final hobo.Railway Atlanta_Miami_1;
+  public static final hobo.Railway Atlanta_Charleston_1;
+  public static final hobo.Railway Charleston_Miami_1;
+  public static final hobo.Railway LosAngeles_Phoenix_1;
+  public static final hobo.Railway LosAngeles_ElPaso_1;
+  public static final hobo.Railway Phoenix_ElPaso_1;
+  public static final hobo.Railway ElPaso_Dallas_1;
+  public static final hobo.Railway ElPaso_Houston_1;
+  public static final hobo.Railway Dallas_Houston_1;
+  public static final hobo.Railway Dallas_Houston_2;
+  public static final hobo.Railway Houston_NewOrleans_1;
+  public static final hobo.Railway Miami_NewOrleans_1;
+  public static final hobo.Railway[] all;
+  public static final java.util.Set<hobo.Railway> emptySet;
+  public final hobo.City source;
+  public final hobo.City destination;
+  public final int length;
+  public final hobo.Color color;
+  public hobo.Railway dual;
+  public final java.lang.String imagePath;
+  public static final int MAX_SCORE;
+  public static hobo.Railway[] values();
+  public static hobo.Railway valueOf(java.lang.String);
+  public boolean connects(hobo.City, hobo.City);
+  public boolean connects(hobo.City);
+  public hobo.City otherCity(hobo.City);
+  public boolean costs(hobo.CardBag);
+  public int score();
+  public java.lang.String toString();
+  public double relevanceFor(hobo.Mission);
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "RandomPlayer.java"
+public class hobo.RandomPlayer extends hobo.Player {
+  public hobo.RandomPlayer(java.lang.String, long);
+  public static hobo.RandomPlayer fromConfiguration(java.lang.String);
+  public hobo.Decision decide(hobo.State);
+  public void setDecisionTime(int);
+  public void setVerbose(boolean);
+}
+Compiled from "State.java"
+public class hobo.State implements java.lang.Cloneable {
+  public static final int NCARDS_PER_COLOR;
+  public static final int INITIAL_HAND_SIZE;
+  public static final int INITIAL_MISSION_COUNT;
+  public static final int OPEN_DECK_SIZE;
+  public static final hobo.CardBag INITIAL_DECK;
+  public hobo.MersenneTwisterFast random;
+  public java.util.Map<hobo.Railway, java.lang.Integer> owner_by_railway;
+  public hobo.CardBag deck;
+  public hobo.CardBag open_deck;
+  public hobo.CardBag discarded;
+  public java.util.Set<hobo.Mission> missions;
+  public final java.util.Deque<hobo.CardBag> deck_restorations;
+  public final java.util.Deque<hobo.CardBag> discardeds;
+  public hobo.State(hobo.State);
+  public hobo.State(java.lang.String[], long);
+  public static hobo.State fromConfiguration(java.lang.String, java.lang.String...);
+  public hobo.State clone();
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+  public void setup();
+  public void switchTurns();
+  public void unswitchTurns();
+  public void switchToPlayer(int);
+  public int[] players();
+  public java.util.List<hobo.PlayerState> playerStates();
+  public int currentPlayer();
+  public hobo.PlayerState currentPlayerState();
+  public hobo.PlayerState playerState(int);
+  public boolean gameOver();
+  public boolean isDraw();
+  public int winner();
+  public int aheadness(int);
+  public boolean isClaimed(hobo.Railway);
+  public java.util.Set<hobo.Railway> usableRailwaysFor(int);
+  public java.util.Set<hobo.Railway> freeRailways();
+  public hobo.CardBag openCards();
+  public void restoreDecks();
+  public void unrestoreDecks();
+  public hobo.AppliedDecision applyDecision(hobo.Decision) throws hobo.IllegalDecisionException;
+  public java.util.Set<hobo.Decision> allPossibleDecisions();
+  public java.util.Set<hobo.Decision> allPossibleDecisionsFor(int);
+  public boolean farFromOver();
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+  static {};
+}
+Compiled from "State.java"
+final class hobo.State$1 extends hobo.CardBag {
+  hobo.State$1();
+}
+Compiled from "TestingEnviroment.java"
+public class hobo.TestingEnviroment {
+  hobo.FileHandler fileHandler;
+  public hobo.TestingEnviroment();
+  public static void main(java.lang.String[]);
+}
+Compiled from "TextualPlayerInteraction.java"
+public class hobo.TextualPlayerInteraction implements hobo.PlayerInteraction {
+  public hobo.TextualPlayerInteraction();
+  public void observe(hobo.Event);
+  public hobo.Decision askDecision(hobo.Player, hobo.State);
+  public hobo.Decision interpret(java.lang.String[], int);
+  public void tellIllegal(hobo.Player, hobo.State, hobo.Decision, java.lang.String);
+  public void tellLoss(hobo.Player, hobo.State);
+  public void tellDraw(hobo.Player, hobo.State);
+  public void tellWin(hobo.Player, hobo.State);
+  public java.lang.String[] get_words();
+  public hobo.CardBag cards_designated_by(java.lang.String);
+}
+Compiled from "Tournament.java"
+public class hobo.Tournament {
+  public hobo.Tournament();
+  public static void main(java.lang.String[]);
+  public static void play();
+}
+Compiled from "Tournament.java"
+final class hobo.Tournament$1 implements java.util.concurrent.Callable<java.lang.String> {
+  final java.lang.String[] val$player_configurations;
+  final int val$k;
+  final int val$l;
+  hobo.Tournament$1(java.lang.String[], int, int);
+  public java.lang.String call();
+  public java.lang.Object call() throws java.lang.Exception;
+}
+Compiled from "UncertainPlayer.java"
+public class hobo.UncertainPlayer extends hobo.Player {
+  public hobo.Belief belief;
+  public hobo.UncertainPlayer(java.lang.String, hobo.Player, int, int, long, double, boolean);
+  public static hobo.UncertainPlayer fromConfiguration(java.lang.String);
+  public void perceive(hobo.Event);
+  public hobo.Decision decide(hobo.State);
+  public void setHandle(int);
+  public void setDecisionTime(int);
+  public void setVerbose(boolean);
+  public hobo.Decision decideByAssumption(hobo.State);
+  public hobo.Decision decideBySampling(hobo.State);
+  public double[] statistics();
+}
+Compiled from "Util.java"
+public class hobo.Util {
+  static final boolean $assertionsDisabled;
+  public hobo.Util();
+  public static <E extends java.lang.Enum<E>> java.util.Set<java.util.Set<E>> powerset(java.util.Set<E>, java.util.Set<E>);
+  public static <E extends java.lang.Enum<E>> java.util.Set<E> with(E, java.util.Set<E>);
+  public static <E> E sample(java.util.Set<E>, hobo.MersenneTwisterFast);
+  public static <E> java.util.Set<E> sample(java.util.Set<E>, int, hobo.MersenneTwisterFast, java.util.Set<E>);
+  public static <E> java.util.Set<E> remove_sample(java.util.Set<E>, int, hobo.MersenneTwisterFast, java.util.Set<E>);
+  public static <E> E arb(java.util.Set<E>);
+  public static int pathCost(java.util.List<hobo.Railway>, java.util.Set<hobo.Railway>);
+  public static java.util.List<hobo.Railway> shortestPath(hobo.City, hobo.City, java.util.Set<hobo.Railway>, java.util.Set<hobo.Railway>);
+  public static hobo.City getClosestCity(java.util.Set<hobo.Railway>, hobo.City);
+  public static java.util.Set<java.util.Set<hobo.Mission>> clusterMissions(java.util.Set<hobo.Mission>);
+  public static java.util.Set<hobo.Railway> getSpanningTree(java.util.Set<hobo.Mission>, java.util.Set<hobo.Railway>, java.util.Set<hobo.Railway>);
+  public static boolean segmentsIntersect(double[], double[], double[], double[]);
+  public static boolean lineIntersect(hobo.Mission, hobo.Mission);
+  public static double log2(double);
+  public static double logsig(double);
+  public static java.util.Map<java.lang.String, java.lang.String> parseConfiguration(java.lang.String);
+  public static double segmentAlongness(double[], double[], double[], double[]);
+  public static double distanceOfPointToSegment(double[], double[], double[]);
+  public static double[] unit(double[]);
+  public static double norm(double[]);
+  public static double dot(double[], double[]);
+  public static double[] times(double, double[]);
+  public static double[] plus(double[], double[]);
+  public static double[] minus(double[], double[]);
+  public static long binomial_coefficient(int, int);
+  public static double multivariate_hypergeometric(int[], int[]);
+  public static double factorial_divide(int, int);
+  public static long factorial(int);
+  public static void normalize(double[]);
+  public static void normalize(double[][]);
+  public static double[][] clone(double[][]);
+  public static double[] toArrayOfPrimitives(java.util.Collection<java.lang.Double>);
+  public static double stdev(double[]);
+  public static double mean(double[]);
+  public static double stableSum(double[]);
+  public static double stableSum(double[], int, int);
+  public static double[][] transpose(double[][]);
+  static {};
+}
+Compiled from "Util.java"
+class hobo.Util$AStarNode implements java.lang.Comparable<hobo.Util$AStarNode> {
+  public final hobo.Railway railway;
+  public final hobo.City city;
+  public final hobo.Util$AStarNode prev;
+  public double f;
+  public double g;
+  public double h;
+  public hobo.Util$AStarNode(hobo.City, hobo.Railway, hobo.Util$AStarNode, hobo.City, java.util.Set<hobo.Railway>);
+  public int compareTo(hobo.Util$AStarNode);
+  public java.util.List<hobo.Railway> reconstructPath();
+  public java.lang.String toString();
+  public int compareTo(java.lang.Object);
+}
+Compiled from "Visualization.java"
+public interface hobo.Visualization {
+  public abstract void reflect(hobo.State);
+}
+Compiled from "CityPanel.java"
+public class hobo.graphics.CityPanel extends javax.swing.JPanel implements hobo.Visualization {
+  public hobo.graphics.CityPanel(hobo.City, hobo.graphics.GamePanel, hobo.graphics.MapPanel);
+  public void reflect(hobo.State);
+  public void paintComponent(java.awt.Graphics);
+  static java.util.Set access$000(hobo.graphics.CityPanel);
+  static {};
+}
+Compiled from "CityPanel.java"
+class hobo.graphics.CityPanel$1 extends java.awt.event.MouseAdapter {
+  final hobo.graphics.GamePanel val$gamePanel;
+  final hobo.City val$city;
+  final hobo.graphics.MapPanel val$mapPanel;
+  final hobo.graphics.CityPanel this$0;
+  hobo.graphics.CityPanel$1(hobo.graphics.CityPanel, hobo.graphics.GamePanel, hobo.City, hobo.graphics.MapPanel);
+  public void mouseClicked(java.awt.event.MouseEvent);
+  public void mouseEntered(java.awt.event.MouseEvent);
+  public void mouseExited(java.awt.event.MouseEvent);
+}
+Compiled from "DecksPanel.java"
+public class hobo.graphics.DecksPanel extends javax.swing.JPanel implements hobo.Visualization {
+  public hobo.graphics.DecksPanel(hobo.graphics.GamePanel);
+  public void reflect(hobo.State);
+}
+Compiled from "GamePanel.java"
+public class hobo.graphics.GamePanel extends javax.swing.JLayeredPane implements hobo.Visualization {
+  public hobo.graphics.GamePanel();
+  public void reflect(hobo.State);
+  public hobo.PlayerInteraction getUserInterface();
+  public void claim(hobo.Railway);
+  public void drawMissions();
+  public void keepMissions(java.util.Set<hobo.Mission>);
+  public void drawCard(hobo.Color);
+  public void message(java.lang.String);
+  public void registerDecision(hobo.Decision);
+  public hobo.Decision getDecision();
+  public boolean awaitingDecision();
+}
+Compiled from "GamePanel.java"
+class hobo.graphics.GamePanel$1 implements javax.swing.ListCellRenderer {
+  final hobo.PlayerState val$ps;
+  final hobo.graphics.GamePanel this$0;
+  hobo.graphics.GamePanel$1(hobo.graphics.GamePanel, hobo.PlayerState);
+  public java.awt.Component getListCellRendererComponent(javax.swing.JList, java.lang.Object, int, boolean, boolean);
+}
+Compiled from "GamePanel.java"
+class hobo.graphics.GamePanel$2 implements hobo.PlayerInteraction {
+  final hobo.graphics.GamePanel this$0;
+  hobo.graphics.GamePanel$2(hobo.graphics.GamePanel);
+  public hobo.Decision askDecision(hobo.Player, hobo.State);
+  public void tellIllegal(hobo.Player, hobo.State, hobo.Decision, java.lang.String);
+  public void tellDraw(hobo.Player, hobo.State);
+  public void tellLoss(hobo.Player, hobo.State);
+  public void tellWin(hobo.Player, hobo.State);
+  public void observe(hobo.Event);
+}
+Compiled from "HandCardPanel.java"
+public class hobo.graphics.HandCardPanel extends javax.swing.JPanel {
+  public final hobo.Color color;
+  public hobo.graphics.HandCardPanel(hobo.Color);
+  public void setQuantity(int);
+  public void markSelected();
+  public void markNotSelected();
+  public void paintComponent(java.awt.Graphics);
+}
+Compiled from "HandPanel.java"
+public class hobo.graphics.HandPanel extends javax.swing.JPanel implements hobo.Visualization {
+  public hobo.graphics.HandPanel(hobo.graphics.GamePanel);
+  public void reflect(hobo.State);
+  public hobo.Color selection();
+  static hobo.Color access$002(hobo.graphics.HandPanel, hobo.Color);
+  static java.util.List access$100(hobo.graphics.HandPanel);
+}
+Compiled from "HandPanel.java"
+class hobo.graphics.HandPanel$1 extends java.awt.event.MouseAdapter {
+  final hobo.Color val$c;
+  final hobo.graphics.HandCardPanel val$hcp;
+  final hobo.graphics.HandPanel this$0;
+  hobo.graphics.HandPanel$1(hobo.graphics.HandPanel, hobo.Color, hobo.graphics.HandCardPanel);
+  public void mouseClicked(java.awt.event.MouseEvent);
+}
+Compiled from "MapPanel.java"
+public class hobo.graphics.MapPanel extends javax.swing.JPanel implements hobo.Visualization {
+  public hobo.graphics.MapPanel(hobo.graphics.GamePanel);
+  public void paintComponent(java.awt.Graphics);
+  public void clearVisible();
+  public void makeVisible(java.util.Collection<hobo.Railway>);
+  public void reflect(hobo.State);
+}
+Compiled from "MissionChooserFrame.java"
+public class hobo.graphics.MissionChooserFrame extends javax.swing.JFrame {
+  public hobo.graphics.MissionChooserFrame(java.util.Collection<hobo.Mission>, hobo.graphics.GamePanel);
+}
+Compiled from "MissionChooserFrame.java"
+class hobo.graphics.MissionChooserFrame$1 implements java.awt.event.ActionListener {
+  final javax.swing.JList val$list;
+  final hobo.graphics.GamePanel val$gamePanel;
+  final hobo.graphics.MissionChooserFrame this$0;
+  hobo.graphics.MissionChooserFrame$1(hobo.graphics.MissionChooserFrame, javax.swing.JList, hobo.graphics.GamePanel);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "MissionsPanel.java"
+public class hobo.graphics.MissionsPanel extends javax.swing.JPanel implements hobo.Visualization {
+  public hobo.graphics.MissionsPanel(hobo.graphics.GamePanel);
+  public void reflect(hobo.State);
+}
+Compiled from "MissionsPanel.java"
+class hobo.graphics.MissionsPanel$1 implements java.awt.event.ActionListener {
+  final hobo.graphics.GamePanel val$gamePanel;
+  final hobo.graphics.MissionsPanel this$0;
+  hobo.graphics.MissionsPanel$1(hobo.graphics.MissionsPanel, hobo.graphics.GamePanel);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "PlayerPanel.java"
+public class hobo.graphics.PlayerPanel extends javax.swing.JPanel implements hobo.Visualization {
+  public final int handle;
+  public javax.swing.JLabel name;
+  public javax.swing.JLabel points;
+  public javax.swing.JLabel turn;
+  public hobo.graphics.PlayerPanel(int);
+  public void reflect(hobo.State);
+}
+Compiled from "PlayersPanel.java"
+public class hobo.graphics.PlayersPanel extends javax.swing.JPanel implements hobo.Visualization {
+  public hobo.graphics.PlayersPanel(hobo.graphics.GamePanel);
+  public void reflect(hobo.State);
+}
+Compiled from "RailChooserFrame.java"
+public class hobo.graphics.RailChooserFrame extends javax.swing.JFrame {
+  public hobo.graphics.RailChooserFrame(hobo.City, java.util.Collection<hobo.Railway>, hobo.graphics.GamePanel, hobo.graphics.MapPanel);
+}
+Compiled from "RailChooserFrame.java"
+class hobo.graphics.RailChooserFrame$1 implements java.awt.event.ActionListener {
+  final hobo.graphics.GamePanel val$gamePanel;
+  final hobo.Railway val$r;
+  final hobo.graphics.RailChooserFrame this$0;
+  hobo.graphics.RailChooserFrame$1(hobo.graphics.RailChooserFrame, hobo.graphics.GamePanel, hobo.Railway);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "Toast.java"
+public class hobo.graphics.Toast extends javax.swing.JLabel {
+  public hobo.graphics.Toast(java.lang.String);
+}
+Compiled from "Toast.java"
+class hobo.graphics.Toast$1 extends java.util.TimerTask {
+  final java.awt.Component val$that;
+  final hobo.graphics.Toast this$0;
+  hobo.graphics.Toast$1(hobo.graphics.Toast, java.awt.Component);
+  public void run();
+}
+Compiled from "TrainCardPanel.java"
+public class hobo.graphics.TrainCardPanel extends javax.swing.JPanel {
+  public hobo.graphics.TrainCardPanel(hobo.graphics.GamePanel, hobo.Color);
+  public static java.lang.String imagePath(hobo.Color);
+  public void paintComponent(java.awt.Graphics);
+}
+Compiled from "TrainCardPanel.java"
+class hobo.graphics.TrainCardPanel$1 extends java.awt.event.MouseAdapter {
+  final hobo.graphics.GamePanel val$gamePanel;
+  final hobo.Color val$color;
+  final hobo.graphics.TrainCardPanel this$0;
+  hobo.graphics.TrainCardPanel$1(hobo.graphics.TrainCardPanel, hobo.graphics.GamePanel, hobo.Color);
+  public void mouseClicked(java.awt.event.MouseEvent);
+}

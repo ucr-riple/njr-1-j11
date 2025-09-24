@@ -1,0 +1,221 @@
+Compiled from "ConnectionShaper.java"
+public class UDPConnector.ConnectionShaper implements UDPConnector.ConnectorInterface {
+  UDPConnector.ConnectorInterface m_connectionToShape;
+  int m_sendDelayInMs;
+  int m_sendJitterInMs;
+  int m_packetsToDropPer10000;
+  UDPConnector.ConnectionShaper(UDPConnector.ConnectorInterface, int, int, int);
+  public void SetPeerAddress(java.net.InetAddress, int);
+  public java.util.List<byte[]> Receive(int);
+  public boolean Send(java.lang.String) throws java.lang.Exception;
+  public boolean Send(byte[]) throws java.lang.Exception;
+  public boolean AddReceiveNotify(UDPConnector.ConnectorInterface$ReceiveNotifyInterface);
+  public void StopReceiveThread();
+  public void StartReceiveThread();
+}
+Compiled from "ConnectionShaper.java"
+class UDPConnector.ConnectionShaper$ShapedSendTask implements java.lang.Runnable {
+  java.lang.String m_stringToSend;
+  byte[] m_bufferToSend;
+  boolean m_sendBuffer;
+  final UDPConnector.ConnectionShaper this$0;
+  UDPConnector.ConnectionShaper$ShapedSendTask(UDPConnector.ConnectionShaper, java.lang.String);
+  UDPConnector.ConnectionShaper$ShapedSendTask(UDPConnector.ConnectionShaper, byte[]);
+  public void run();
+}
+Compiled from "ConnectorInterface.java"
+public interface UDPConnector.ConnectorInterface {
+  public abstract void SetPeerAddress(java.net.InetAddress, int);
+  public abstract java.util.List<byte[]> Receive(int);
+  public abstract boolean Send(java.lang.String) throws java.lang.Exception;
+  public abstract boolean Send(byte[]) throws java.lang.Exception;
+  public abstract boolean AddReceiveNotify(UDPConnector.ConnectorInterface$ReceiveNotifyInterface);
+  public abstract void StartReceiveThread();
+  public abstract void StopReceiveThread();
+}
+Compiled from "ConnectorInterface.java"
+public interface UDPConnector.ConnectorInterface$ReceiveNotifyInterface {
+  public abstract void Notify(UDPConnector.ConnectorInterface);
+}
+Compiled from "DtcpPacket.java"
+public class UDPConnector.DtcpPacket {
+  public int AckSeqNum;
+  public int NewRightWindowEdge;
+  public short NewDataRate;
+  public short NewDataPeriodInMs;
+  public static final int HEADER_LENGTH;
+  public UDPConnector.DtcpPacket();
+  public UDPConnector.DtcpPacket(short, short, short, short, byte, byte, byte, int, byte[]);
+  public UDPConnector.DtcpPacket(short, short, short, short, byte, byte[]);
+  public UDPConnector.DtcpPacket(short, short, short, short, byte);
+  public UDPConnector.DtcpPacket(byte[]);
+  public UDPConnector.DtcpPacket(short, short, byte[]);
+  public byte[] toBytes();
+  public void printDTPHeader();
+  public synchronized org.apache.commons.logging.Log getLog();
+  public synchronized void setLog(org.apache.commons.logging.Log);
+  public synchronized short getDestAddr();
+  public synchronized void setDestAddr(short);
+  public synchronized short getSrcAddr();
+  public synchronized void setSrcAddr(short);
+  public synchronized short getDestCEPid();
+  public synchronized void setDestCEPid(short);
+  public synchronized short getSrcCEPid();
+  public synchronized void setSrcCEPid(short);
+  public synchronized byte getQosid();
+  public synchronized void setQosid(byte);
+  public synchronized byte getPdu_type();
+  public synchronized void setPdu_type(byte);
+  public synchronized byte getFlags();
+  public synchronized void setFlags(byte);
+  public synchronized int getSeqNum();
+  public synchronized void setSeqNum(int);
+  public synchronized byte[] getPayload();
+  public synchronized void setPayload(byte[]);
+  public synchronized int getLength();
+  public synchronized void setLength(int);
+}
+Compiled from "EfcpConnector.java"
+public class UDPConnector.EfcpConnector implements UDPConnector.ConnectorInterface {
+  UDPConnector.ConnectorInterface m_innerConnection;
+  UDPConnector.EfcpPolicyInfo m_policyInfo;
+  static java.util.concurrent.ScheduledThreadPoolExecutor s_timedTaskExecutor;
+  java.util.Map<java.lang.Integer, java.util.concurrent.ScheduledFuture> m_senderRetransmitQueue;
+  java.util.Queue<UDPConnector.DtcpPacket> m_senderClosedWindowQueue;
+  java.util.Date m_senderRateCurrentPeriodStartTime;
+  int m_senderSendsSoFarThisPeriod;
+  int m_senderLastPacketAcked;
+  int m_senderNextSequenceNumber;
+  int m_senderRightWindowEdge;
+  final java.util.List<byte[]> m_receiverPacketsReady;
+  java.util.Map<java.lang.Integer, byte[]> m_receiverPacketsOutOfOrder;
+  int m_receiverNextPacketToDeliver;
+  int m_receiverWindowSize;
+  public void SetPeerAddress(java.net.InetAddress, int);
+  public java.util.List<byte[]> Receive(int);
+  public boolean Send(java.lang.String) throws java.lang.Exception;
+  protected boolean IsRateBasedFlowControlWindowOpen();
+  protected void RateBasedFlowSend();
+  public boolean Send(byte[]) throws java.lang.Exception;
+  boolean SendPacket(UDPConnector.DtcpPacket) throws java.lang.Exception;
+  public boolean AddReceiveNotify(UDPConnector.ConnectorInterface$ReceiveNotifyInterface);
+  public void StopReceiveThread();
+  public void StartReceiveThread();
+  UDPConnector.EfcpConnector(UDPConnector.ConnectorInterface, UDPConnector.EfcpPolicyInfo);
+  static {};
+}
+Compiled from "EfcpConnector.java"
+class UDPConnector.EfcpConnector$PacketReceivedEvent implements UDPConnector.ConnectorInterface$ReceiveNotifyInterface {
+  final UDPConnector.EfcpConnector this$0;
+  UDPConnector.EfcpConnector$PacketReceivedEvent(UDPConnector.EfcpConnector);
+  public void Notify(UDPConnector.ConnectorInterface);
+  void SendAck();
+  void ReceiveAck(int);
+  void ReceiveFlowControl(UDPConnector.DtcpPacket);
+}
+Compiled from "EfcpConnector.java"
+class UDPConnector.EfcpConnector$RatePeriodExpiredEvent implements java.lang.Runnable {
+  java.util.Date m_scheduleTime;
+  final UDPConnector.EfcpConnector this$0;
+  UDPConnector.EfcpConnector$RatePeriodExpiredEvent(UDPConnector.EfcpConnector, java.util.Date);
+  public void run();
+}
+Compiled from "EfcpConnector.java"
+class UDPConnector.EfcpConnector$RetransmitEvent implements java.lang.Runnable {
+  UDPConnector.DtcpPacket m_packetToRetransmit;
+  int m_timesRestransmitted;
+  java.util.concurrent.ScheduledFuture m_selfCancelHandle;
+  final UDPConnector.EfcpConnector this$0;
+  UDPConnector.EfcpConnector$RetransmitEvent(UDPConnector.EfcpConnector, UDPConnector.DtcpPacket);
+  void SetSelfCancelHandle(java.util.concurrent.ScheduledFuture);
+  public void run();
+}
+Compiled from "EfcpConnectorManager.java"
+public class UDPConnector.EfcpConnectorManager {
+  java.util.Map<java.lang.Integer, UDPConnector.ConnectorInterface> m_connMap;
+  int m_lastHandleValue;
+  public UDPConnector.EfcpConnectorManager();
+  public int AllocateFlow(int, int, java.net.InetAddress, boolean, boolean);
+  public boolean DeallocateFlow(int);
+  public boolean Send(int, byte[]);
+  public boolean Send(int, java.lang.String);
+  public java.util.List<byte[]> Receive(int, int);
+}
+Compiled from "EfcpConsts.java"
+public class UDPConnector.EfcpConsts {
+  public static final byte PDU_TYPE_EFCP;
+  public static final byte PDU_TYPE_DATA;
+  public static final byte PDU_TYPE_CONTROL;
+  public static final byte PDU_TYPE_SELECTIVE_ACK;
+  public static final byte PDU_TYPE_NACK;
+  public static final byte PDU_TYPE_FLOW_ONLY;
+  public static final byte PDU_TYPE_ACK_ONLY;
+  public static final byte PDU_TYPE_FLOW_ACK;
+  public static final int PDU_TYPE_MANAGEMENT;
+  public static final int PDU_TYPE_IDENTIFYSENDER;
+  public UDPConnector.EfcpConsts();
+}
+Compiled from "EfcpPolicyInfo.java"
+public class UDPConnector.EfcpPolicyInfo {
+  public boolean RetransmitEnabled;
+  public int RetransmitDelayInMs;
+  public int RetransmitMaxTimes;
+  public int AckDelayInMs;
+  public boolean WindowFlowControlEnabled;
+  public int WindowDefaultInitialSize;
+  public int ClosedWindowQueueMaxSize;
+  public boolean RateFlowControlEnabled;
+  public short RateDefaultPaketsPerPeriod;
+  public short RateDefaultPeriodInMs;
+  public UDPConnector.EfcpPolicyInfo();
+}
+Compiled from "UdpConnectionManager.java"
+public class UDPConnector.UdpConnectionManager {
+  java.util.Map<java.lang.Integer, UDPConnector.UdpConnector> m_connMap;
+  int m_lastHandleValue;
+  public UDPConnector.UdpConnectionManager();
+  public int AllocateFlow(int, int, java.net.InetAddress);
+  public boolean DeallocateFlow(int);
+  public boolean Send(int, byte[]);
+  public boolean Send(int, java.lang.String);
+  public java.util.List<byte[]> Receive(int);
+}
+Compiled from "UdpConnector.java"
+public class UDPConnector.UdpConnector implements UDPConnector.ConnectorInterface {
+  boolean m_isPeerSet;
+  java.net.InetAddress m_peerAddress;
+  int m_peerPort;
+  int m_portToListenOn;
+  final byte[][] m_receiveBuffer;
+  int m_receiveBufferReadIndex;
+  int m_receiveBufferWriteIndex;
+  int m_packetsReady;
+  java.util.List<UDPConnector.ConnectorInterface$ReceiveNotifyInterface> m_notifyOnReceive;
+  java.lang.Thread m_receiverThread;
+  java.net.DatagramSocket m_recvSocket;
+  boolean m_StopReceiveThread;
+  public UDPConnector.UdpConnector(int);
+  public UDPConnector.UdpConnector(int, int, int);
+  public void SetPeerAddress(java.net.InetAddress, int);
+  public boolean AddReceiveNotify(UDPConnector.ConnectorInterface$ReceiveNotifyInterface);
+  public java.util.List<byte[]> Receive(int);
+  public boolean Send(java.lang.String) throws java.lang.Exception;
+  public boolean Send(byte[]) throws java.lang.Exception;
+  public void StopReceiveThread();
+  public void StartReceiveThread();
+}
+Compiled from "UdpConnector.java"
+class UDPConnector.UdpConnector$ReceiverThreadTask implements java.lang.Runnable {
+  boolean exceptionCaught;
+  int m_packetsDroppedDueToBufferFull;
+  static final boolean $assertionsDisabled;
+  final UDPConnector.UdpConnector this$0;
+  UDPConnector.UdpConnector$ReceiverThreadTask(UDPConnector.UdpConnector);
+  public void run();
+  static {};
+}
+Compiled from "UdpConnectorTest.java"
+public class UDPConnector.UdpConnectorTest {
+  public UDPConnector.UdpConnectorTest();
+  public static void main(java.lang.String[]);
+}

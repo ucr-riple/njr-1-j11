@@ -1,0 +1,368 @@
+Compiled from "Algorithm.java"
+public interface algorithms.Algorithm {
+  public abstract boolean pseudoConstructor();
+  public abstract boolean execute(double);
+  public abstract double[] getArbCosts();
+  public abstract double[] getTerViolatedCosts();
+  public abstract int getArbMaxOutDegree();
+  public abstract java.lang.String getName();
+  public abstract double[] getSPCosts();
+  public abstract double[] getSpannerQuant();
+  public abstract double[] getViolatedTerSpannerQuant();
+  public abstract double getTotalTerminalsCVR(double[], double[]);
+  public abstract double getSecondPhaseTerminalsCVR(double[], double[]);
+  public abstract double getViolatedTerminalsCVR(double[], double[]);
+  public abstract double getViolatedNodesRatio();
+  public abstract double getTermCoverFstPhRatio();
+}
+Compiled from "ApproximationAlgorithm.java"
+public class algorithms.ApproximationAlgorithm extends algorithms.MSCBasedAlgorithm implements algorithms.Algorithm {
+  int sourceIndex;
+  dataStructure.AdjList localAdjl;
+  java.util.ArrayList<java.lang.Integer> roots;
+  int[] violatedTer;
+  boolean finalMatrix;
+  double qtViolated;
+  double violatedCVR;
+  protected void clearVar();
+  public algorithms.ApproximationAlgorithm(int, double, int, int[], double[], dataStructure.PositionTable, dataStructure.Weight);
+  public boolean execute(double);
+  public java.lang.String getName();
+  public double getTotalTerminalsCVR(double[], double[]);
+  public double getSecondPhaseTerminalsCVR(double[], double[]);
+  public double getViolatedTerminalsCVR(double[], double[]);
+  public double getViolatedNodesRatio();
+  public double[] getArbCosts();
+  public double[] getTerViolatedCosts();
+  public double[] getViolatedTerSpannerQuant();
+  public int getArbMaxOutDegree();
+}
+Compiled from "DSMDStAlgorithm.java"
+public class algorithms.DSMDStAlgorithm {
+  int size;
+  dataStructure.PositionTable pt;
+  double mprange;
+  dataStructure.Weight edgeWeight;
+  int qtTerminalsLeft;
+  dataStructure.AdjList globalAdjl;
+  dataStructure.AdjList uninformedAdjl;
+  int source;
+  int[] terminals;
+  double[] spTerCosts;
+  double[][] spannerQuant;
+  double[] spCosts;
+  double delayMax;
+  dataStructure.AdjMatrix globalAdjMatrix;
+  dataStructure.AdjList arborescence;
+  dataStructure.AdjList arborescenceSPT;
+  public algorithms.DSMDStAlgorithm(int, double, int, int[], double[], dataStructure.PositionTable, dataStructure.Weight);
+  public double[] getSpannerQuant();
+  public double[] getSpannerQuant(int[]);
+  protected void clearVar();
+  public boolean pseudoConstructor();
+  public void preExecute(double);
+  public double getTermCoverFstPhRatio();
+  protected int getMaxOutDegree(dataStructure.AdjList);
+  protected double[] getCosts(dataStructure.AdjMatrix, int[]);
+  public double[] getSPCosts();
+  double distance(int, int);
+  public boolean beforeExecute();
+  protected boolean setSpannerQuant();
+  protected boolean buildLocalInformation();
+  protected boolean checkDelayConstrainedPaths(dataStructure.AdjMatrix, double);
+  protected dataStructure.AdjList buildSPT2Terminals(dataStructure.AdjMatrix, dataStructure.AdjList, int[]);
+}
+Compiled from "MSCBasedAlgorithm.java"
+public class algorithms.MSCBasedAlgorithm extends algorithms.DSMDStAlgorithm {
+  dataStructure.AdjMatrix uninformedAdjMatrix;
+  java.util.HashSet informedSet;
+  java.util.ArrayList<java.lang.Integer> uninformedTerminals;
+  java.util.ArrayList<java.lang.Double> uninformedTerminalsDelay;
+  msc.Greedy greedy;
+  java.util.ArrayList<msc.ElkinItem> chosenItem;
+  java.util.HashSet<msc.PseudoNode> chosenPseudo;
+  java.util.HashSet<msc.PseudoNode> realChosenPseudo;
+  dataStructure.AdjList quasiArborescence;
+  protected void clearVar();
+  public algorithms.MSCBasedAlgorithm(int, double, int, int[], double[], dataStructure.PositionTable, dataStructure.Weight);
+  protected void updateInformedSet(dataStructure.AdjList, int);
+  public java.util.ArrayList<msc.Group> setMSCGroups(java.util.HashSet, java.util.ArrayList<java.lang.Integer>, boolean);
+  public java.util.ArrayList<java.lang.Integer> procDistDom(java.util.ArrayList<msc.Group>, java.util.ArrayList<msc.ElkinItem>);
+  public void addingTreesForDomSet(java.util.ArrayList<java.lang.Integer>);
+  public java.util.ArrayList<java.lang.Integer> applyDistDomProcedure(java.util.HashSet, java.util.ArrayList<msc.ElkinItem>);
+  protected java.util.ArrayList<java.lang.Integer> setMSCGroupParametrized(java.util.HashSet, msc.Group, int, java.util.ArrayList<java.lang.Integer>, java.util.ArrayList<java.lang.Double>, boolean);
+}
+Compiled from "SIM.java"
+public class algorithms.SIM extends algorithms.MSCBasedAlgorithm implements algorithms.Algorithm {
+  java.util.ArrayList<support.S2DDelay> sortedTerminals;
+  int[] violatedTerminals;
+  boolean flagViolatedTerminals;
+  boolean finalMatrix;
+  double qtViolated;
+  public algorithms.SIM(int, double, int, int[], double[], dataStructure.PositionTable, dataStructure.Weight);
+  protected void clearVar();
+  public boolean execute(double);
+  public void executeSPT();
+  public int getSPTMaxOutDegree();
+  public double[] getSPTCosts();
+  public int getArbMaxOutDegree();
+  public double getTotalTerminalsCVR(double[], double[]);
+  public double getSecondPhaseTerminalsCVR(double[], double[]);
+  public double getViolatedTerminalsCVR(double[], double[]);
+  public double getViolatedNodesRatio();
+  public double[] getArbCosts();
+  public double[] getTerViolatedCosts();
+  public double[] getViolatedTerSpannerQuant();
+  void deleteCoveredTerminals();
+  public java.lang.String getName();
+}
+Compiled from "SPT.java"
+public class algorithms.SPT extends algorithms.DSMDStAlgorithm implements algorithms.Algorithm {
+  dataStructure.AdjMatrix arbAdjMatrix;
+  public algorithms.SPT(int, double, int, int[], double[], dataStructure.PositionTable, dataStructure.Weight);
+  protected void clearVar();
+  public boolean execute(double);
+  public int getArbMaxOutDegree();
+  public double[] getArbCosts();
+  public double[] getTerViolatedCosts();
+  public double[] getViolatedTerSpannerQuant();
+  public java.lang.String getName();
+  public double getSecondPhaseTerminalsCVR(double[], double[]);
+  public double getTotalTerminalsCVR(double[], double[]);
+  public double getViolatedNodesRatio();
+  public double getViolatedTerminalsCVR(double[], double[]);
+}
+Compiled from "ALNode.java"
+public class dataStructure.ALNode {
+  int vid;
+  double weight;
+  dataStructure.ALNode prox;
+  dataStructure.ALNode(int, double);
+  public int getVid();
+  public double getWeight();
+  public dataStructure.ALNode getProx();
+  public void setWeight(double);
+  public void setProx(dataStructure.ALNode);
+}
+Compiled from "AdjList.java"
+public class dataStructure.AdjList {
+  int nv;
+  dataStructure.ALNode[] adjl;
+  dataStructure.ALNode[] tempAdjl;
+  double[] PrimKeys;
+  int[] PrimParent;
+  int INFINITO;
+  public dataStructure.AdjList(int);
+  public int getNumberOfVertices();
+  public void setNumberOfVertices(int);
+  public int getOutDegree(int);
+  public dataStructure.ALNode getList(int);
+  public void setList(dataStructure.ALNode, int);
+  public void deleteTemporaryNode(int);
+  public void restoreFromTemporaryList();
+  public void deleteNode(int);
+  public void insertEdge(int, int, double);
+  public void checkInsertEdge(int, int, double);
+  public void printTree(int);
+  public void printAdjList();
+  public void setWeight(dataStructure.Weight);
+  public void checkCopyList(dataStructure.AdjList, int);
+  public void copyList(dataStructure.AdjList, int);
+  public void readFromTopologyFile(java.lang.String, dataStructure.PositionTable);
+  public void MSTPrim();
+  public void printMST();
+  public void plotMST(dataStructure.PositionTable, java.lang.String);
+}
+Compiled from "AdjMatrix.java"
+public class dataStructure.AdjMatrix {
+  double[][] AM;
+  int size;
+  double[][] MCPmatrix;
+  int[][] P;
+  double[][] MCPmatrix2Check;
+  int[][] P2Check;
+  int lastPossibleRoot;
+  boolean violatedNodesFlag;
+  dataStructure.AdjList local2CheckAdjList;
+  java.util.HashSet prohibitedNodes;
+  java.util.HashSet allowedNodes;
+  java.util.Map<java.lang.Integer, java.lang.Integer> prohibitedIndexMap;
+  public static final int INFINITO;
+  dataStructure.AdjList localAdjList;
+  public dataStructure.AdjMatrix(int);
+  public void makeEmpty();
+  public int getSize();
+  public void refillMatrix();
+  public void fillMatrixFromAdjList(dataStructure.AdjList);
+  public void printAdjMatrix();
+  dataStructure.ALNode insertInList(dataStructure.ALNode, int, double);
+  dataStructure.ALNode checkAndInsertInList(dataStructure.ALNode, int, double);
+  public double[][] getP2PCost();
+  public int[][] getP2PPath();
+  public double getMatrixCost(int, int, double[][]);
+  public dataStructure.AdjList getSqrtKUninformedTerminalsTreeWithRestriction(dataStructure.AdjMatrix, int[], double[], double, int[], int[], int, java.util.HashSet<java.lang.Integer>, dataStructure.Weight, dataStructure.AdjList);
+  public dataStructure.ALNode getReducedNeibrsFromMCPMatrix(int);
+  public void printSP(int, int);
+  public void minCostPaths();
+  public void printPMatrix();
+  public void printMCPmatrix();
+  public void plotMCPgraph(dataStructure.PositionTable, java.lang.String);
+  public void printMinCostPath(int, int);
+}
+Compiled from "PositionTable.java"
+public class dataStructure.PositionTable {
+  int size;
+  dataStructure.PositionTableEntry[] ptable;
+  public dataStructure.PositionTable(int);
+  public void insertEntry(int, double, double);
+  public double getX(int);
+  public double getY(int);
+  public void readFromTopologyFile(java.lang.String);
+  public void print();
+}
+Compiled from "PositionTableEntry.java"
+public class dataStructure.PositionTableEntry {
+  double x;
+  double y;
+  public dataStructure.PositionTableEntry();
+  public void setX(double);
+  public void setY(double);
+  public double getX();
+  public double getY();
+}
+Compiled from "Weight.java"
+public class dataStructure.Weight {
+  dataStructure.PositionTable pt;
+  double elecTx;
+  double elecRx;
+  double epsilon;
+  double pathLossExp;
+  public dataStructure.Weight(double, double, double, double, dataStructure.PositionTable);
+  public static double round(double, int, int);
+  public static double roundTwoDecimals(double);
+  double distance(int, int);
+  int nodesInRange(int, int, dataStructure.AdjList);
+  public double getWeight(int, int, dataStructure.AdjList);
+}
+Compiled from "Graph.java"
+public class main.Graph {
+  public static final double[] SPANNER_FACTORS;
+  public static final int FIRST_NET_SIZE;
+  public static final int FIRST_TERMINAL_SIZE;
+  public static final int INC_NET_SIZE;
+  public static final int INC_TERMINAL_SIZE;
+  public static final int NUMBER_OF_NET_SIZES;
+  public static final int NUMBER_OF_TERMINAL_SET_SIZES;
+  public static final int SOURCE_ID;
+  public static final int NUMBER_OF_RUNS_SIZES;
+  public static final int FIELD_X;
+  public static final int FIELD_Y;
+  public main.Graph();
+  public static int[] getNetSizes();
+  public static int[] getSetSizes(int, int, int);
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "ElkinItem.java"
+public class msc.ElkinItem {
+  msc.PseudoNode pseudo;
+  msc.Node node;
+  public msc.ElkinItem(msc.PseudoNode, msc.Node);
+  public msc.Node getNode();
+  public msc.PseudoNode getPseudo();
+  public msc.ElkinItem copy();
+  public void print();
+  public boolean equals(java.lang.Object);
+}
+Compiled from "Greedy.java"
+public class msc.Greedy {
+  java.util.ArrayList<msc.Set> finalSets;
+  java.util.ArrayList<msc.ElkinItem> X;
+  java.util.ArrayList<msc.Group> G;
+  dataStructure.AdjList list;
+  public msc.Greedy(java.util.ArrayList<msc.ElkinItem>, java.util.ArrayList<msc.Group>, dataStructure.AdjList);
+  public java.util.ArrayList<msc.Set> MSCGreedyBasedSol();
+}
+Compiled from "Group.java"
+public class msc.Group {
+  java.util.ArrayList<msc.Set> sets;
+  int id;
+  int marked;
+  public msc.Group();
+  public void print();
+  public void addSet(msc.Set);
+  public msc.Set getSet(int);
+  java.util.Iterator<msc.Set> iterator();
+  public int size();
+  public int getId();
+  public int marked();
+  public void mark();
+  public void unMark();
+  static {};
+}
+Compiled from "Item.java"
+public abstract class msc.Item {
+  public msc.Item();
+  public abstract msc.Node getNode();
+  public abstract boolean equals(msc.Item);
+}
+Compiled from "Node.java"
+public class msc.Node {
+  int id;
+  public msc.Node(int);
+  public int getId();
+}
+Compiled from "PseudoNode.java"
+public class msc.PseudoNode {
+  msc.Node v;
+  msc.Node u;
+  public msc.PseudoNode(msc.Node, msc.Node);
+  public msc.Node getInformed();
+  public msc.Node getUninformed();
+  public boolean equals(msc.PseudoNode);
+}
+Compiled from "Set.java"
+public class msc.Set {
+  java.util.ArrayList<msc.ElkinItem> items;
+  public msc.Set();
+  public void addItem(msc.ElkinItem);
+  public int size();
+  public java.util.ArrayList<msc.ElkinItem> getItems();
+  java.util.Iterator<msc.ElkinItem> iterator();
+  public void print();
+  public boolean contain(msc.ElkinItem);
+  public int intersection(java.util.ArrayList<msc.ElkinItem>);
+}
+Compiled from "DegreeComparator.java"
+public class support.DegreeComparator implements java.util.Comparator<support.NodeDegree> {
+  public support.DegreeComparator();
+  public int compare(support.NodeDegree, support.NodeDegree);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "NodeDegree.java"
+public class support.NodeDegree {
+  int id;
+  int degree;
+  public support.NodeDegree(int, int);
+  public int getId();
+  public int getDegree();
+}
+Compiled from "S2DDelay.java"
+public class support.S2DDelay {
+  int source;
+  int destination;
+  int linkNode;
+  double shortestDelay;
+  public support.S2DDelay(int, int, double);
+  public void addLinkNode(int);
+  public int getLinkNode();
+  public double getDelay();
+  public int getSource();
+  public int getDestination();
+}
+Compiled from "S2DDelayComparator.java"
+public class support.S2DDelayComparator implements java.util.Comparator<support.S2DDelay> {
+  public support.S2DDelayComparator();
+  public int compare(support.S2DDelay, support.S2DDelay);
+  public int compare(java.lang.Object, java.lang.Object);
+}

@@ -1,0 +1,1467 @@
+Compiled from "AbstractProduction.java"
+public abstract class erilex.AbstractProduction implements erilex.Production {
+  public erilex.codegen.Type envType;
+  public erilex.codegen.Type typeType;
+  public java.lang.String name;
+  public java.lang.String prodName;
+  public erilex.Handler handler;
+  public boolean lexer;
+  public java.util.Set<java.lang.Integer> first;
+  public erilex.Grammar grammar;
+  public java.lang.String env;
+  public java.lang.String type;
+  public int arity;
+  public java.util.Set<java.lang.String> keywords;
+  public static boolean DEBUG;
+  public erilex.Production optimize();
+  public erilex.AbstractProduction(java.lang.String, erilex.Grammar);
+  public boolean isLexer();
+  public void setLexer(boolean);
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public void setName(java.lang.String);
+  public java.lang.String getName();
+  public void setProdName(java.lang.String);
+  public java.lang.String getProdName();
+  public final boolean match(erilex.data.CharStream, boolean, boolean);
+  public void setFirst(java.util.Set<java.lang.Object>);
+  public java.util.Set<java.lang.Integer> getFirst();
+  public java.util.Set<java.lang.Integer> getFirst(java.util.Set<java.lang.Object>);
+  public erilex.Production duplicate(erilex.Grammar);
+  public abstract erilex.Production doDuplicate(erilex.Grammar);
+  public abstract boolean doMatch(erilex.data.CharStream, boolean, boolean);
+  public abstract java.util.Set<java.lang.Integer> computeFirst(java.util.Set<java.lang.Object>);
+  static {};
+}
+Compiled from "BinaryOp.java"
+public interface erilex.BinaryOp {
+  public abstract void setB(erilex.Production);
+}
+Compiled from "ChainHandler.java"
+public class erilex.ChainHandler implements erilex.Handler {
+  erilex.Handler[] handlers;
+  public erilex.ChainHandler(erilex.Handler...);
+  public void handle(erilex.Production, erilex.data.CharStream, erilex.data.CharStream$Label, erilex.data.CharStream$Label);
+  public void start(erilex.Production, erilex.data.CharStream);
+  public void failed(erilex.Production, erilex.data.CharStream);
+}
+Compiled from "DefaultHandler.java"
+public class erilex.DefaultHandler implements erilex.Handler {
+  public erilex.DefaultHandler();
+  public void handle(erilex.Production, erilex.data.CharStream, erilex.data.CharStream$Label, erilex.data.CharStream$Label);
+  public void start(erilex.Production, erilex.data.CharStream);
+  public void failed(erilex.Production, erilex.data.CharStream);
+}
+Compiled from "FSet.java"
+public class erilex.FSet extends erilex.AbstractProduction {
+  char[] chars;
+  boolean in;
+  public erilex.FSet(char[], boolean, java.lang.String, erilex.Grammar);
+  public boolean doMatch(erilex.data.CharStream, boolean, boolean);
+  public java.util.Set<java.lang.Integer> computeFirst(java.util.Set<java.lang.Object>);
+  public erilex.data.generic.MaybeBoolean isLL1();
+  public java.lang.String toString();
+  public erilex.Production doDuplicate(erilex.Grammar);
+}
+Compiled from "Global.java"
+public class erilex.Global {
+  public static java.util.SortedMap<java.lang.String, erilex.Production> ruleMap;
+  public static erilex.Handler handler;
+  public erilex.Global();
+  static {};
+}
+Compiled from "Grammar.java"
+public class erilex.Grammar {
+  public java.util.SortedMap<java.lang.String, erilex.Production> ruleMap;
+  public erilex.Handler handler;
+  public erilex.Production ignore;
+  public erilex.Production ignoreStar;
+  public java.lang.String startSymbol;
+  public erilex.Grammar();
+  public boolean parse(java.lang.String, erilex.data.CharStream);
+  public boolean parse(java.lang.String, java.lang.String);
+  public boolean parse(java.lang.String);
+  public void dumpRuleMap();
+  public boolean isLL1(java.lang.String);
+}
+Compiled from "Handler.java"
+public interface erilex.Handler {
+  public abstract void handle(erilex.Production, erilex.data.CharStream, erilex.data.CharStream$Label, erilex.data.CharStream$Label);
+  public abstract void start(erilex.Production, erilex.data.CharStream);
+  public abstract void failed(erilex.Production, erilex.data.CharStream);
+}
+Compiled from "Language.java"
+public class erilex.Language {
+  public erilex.Grammar g;
+  public erilex.SemanticsCollection s;
+  public erilex.Language();
+}
+Compiled from "MultiOr.java"
+public class erilex.MultiOr extends erilex.AbstractProduction implements erilex.BinaryOp {
+  public java.util.List<erilex.Production> disjuncts;
+  public erilex.MultiOr(java.util.List<erilex.Production>, java.lang.String, java.lang.String, erilex.Grammar);
+  public boolean doMatch(erilex.data.CharStream, boolean, boolean);
+  public void setB(erilex.Production);
+  public java.lang.String toString();
+  public java.util.Set<java.lang.Integer> computeFirst(java.util.Set<java.lang.Object>);
+  public erilex.data.generic.MaybeBoolean isLL1();
+  public erilex.Production doDuplicate(erilex.Grammar);
+}
+Compiled from "MultiSeq.java"
+public class erilex.MultiSeq extends erilex.AbstractProduction implements erilex.BinaryOp {
+  public java.util.List<erilex.Production> disjuncts;
+  public erilex.MultiSeq(java.util.List<erilex.Production>, java.lang.String, java.lang.String, erilex.Grammar);
+  public boolean doMatch(erilex.data.CharStream, boolean, boolean);
+  public void setB(erilex.Production);
+  public java.lang.String toString();
+  public java.util.Set<java.lang.Integer> computeFirst(java.util.Set<java.lang.Object>);
+  public erilex.data.generic.MaybeBoolean isLL1();
+  public erilex.MultiSeq doDuplicate(erilex.Grammar);
+  public erilex.Production doDuplicate(erilex.Grammar);
+}
+Compiled from "MultiSeq.java"
+class erilex.MultiSeq$1 {
+  static final int[] $SwitchMap$erilex$data$generic$MaybeBoolean;
+  static {};
+}
+Compiled from "NonTerminal.java"
+public class erilex.NonTerminal extends erilex.AbstractProduction {
+  public java.lang.String refName;
+  public java.lang.String group;
+  public erilex.NonTerminal(java.lang.String, java.util.Map<java.lang.String, erilex.Production>, java.lang.String, erilex.Grammar);
+  public erilex.NonTerminal(java.lang.String, java.lang.String, erilex.Grammar);
+  public erilex.NonTerminal(java.lang.String, java.lang.String, java.lang.String, erilex.Grammar);
+  public boolean doMatch(erilex.data.CharStream, boolean, boolean);
+  public java.lang.String toString();
+  public java.util.Set<java.lang.Integer> computeFirst(java.util.Set<java.lang.Object>);
+  public erilex.data.generic.MaybeBoolean isLL1();
+  public erilex.Production doDuplicate(erilex.Grammar);
+}
+Compiled from "Optional.java"
+public class erilex.Optional extends erilex.AbstractProduction {
+  erilex.Production a;
+  public erilex.Production optimize();
+  public erilex.Optional(erilex.Production, java.lang.String, erilex.Grammar);
+  public boolean doMatch(erilex.data.CharStream, boolean, boolean);
+  public java.lang.String toString();
+  public java.util.Set<java.lang.Integer> computeFirst(java.util.Set<java.lang.Object>);
+  public erilex.data.generic.MaybeBoolean isLL1();
+  public erilex.Production doDuplicate(erilex.Grammar);
+}
+Compiled from "Or.java"
+public class erilex.Or extends erilex.AbstractProduction implements erilex.BinaryOp {
+  public erilex.Production a;
+  public erilex.Production b;
+  public erilex.Production optimize();
+  public erilex.Or(erilex.Production, erilex.Production, java.lang.String, erilex.Grammar);
+  public boolean doMatch(erilex.data.CharStream, boolean, boolean);
+  public void setB(erilex.Production);
+  public java.lang.String toString();
+  public java.util.Set<java.lang.Integer> computeFirst(java.util.Set<java.lang.Object>);
+  public erilex.data.generic.MaybeBoolean isLL1();
+  public erilex.Production doDuplicate(erilex.Grammar);
+}
+Compiled from "PartialApp.java"
+public class erilex.PartialApp {
+  erilex.BinaryOp b;
+  public erilex.PartialApp(erilex.BinaryOp);
+  public void app(erilex.Production);
+}
+Compiled from "Production.java"
+public interface erilex.Production {
+  public abstract boolean match(erilex.data.CharStream, boolean, boolean);
+  public abstract java.lang.String getName();
+  public abstract void setName(java.lang.String);
+  public abstract java.lang.String getProdName();
+  public abstract void setProdName(java.lang.String);
+  public abstract void setLexer(boolean);
+  public abstract boolean isLexer();
+  public abstract void setFirst(java.util.Set<java.lang.Object>);
+  public abstract java.util.Set<java.lang.Integer> getFirst(java.util.Set<java.lang.Object>);
+  public abstract erilex.data.generic.MaybeBoolean isLL1();
+  public abstract erilex.Production duplicate(erilex.Grammar);
+  public abstract java.util.Set<java.lang.Integer> getFirst();
+  public abstract erilex.Production optimize();
+}
+Compiled from "Range.java"
+public class erilex.Range extends erilex.AbstractProduction {
+  public char a;
+  public char b;
+  public erilex.Range(char, char, java.lang.String, erilex.Grammar);
+  public boolean doMatch(erilex.data.CharStream, boolean, boolean);
+  public java.lang.String toString();
+  public java.util.Set<java.lang.Integer> computeFirst(java.util.Set<java.lang.Object>);
+  public erilex.data.generic.MaybeBoolean isLL1();
+  public erilex.Production doDuplicate(erilex.Grammar);
+}
+Compiled from "ReverseSet.java"
+public class erilex.ReverseSet<E> implements java.util.Set<E> {
+  java.util.Set<E> set;
+  boolean reverse;
+  public erilex.ReverseSet(java.util.Set<E>, boolean);
+  erilex.ReverseSet(erilex.ReverseSet<E>);
+  public int size();
+  public boolean isEmpty();
+  public boolean contains(java.lang.Object);
+  public java.util.Iterator<E> iterator();
+  public java.lang.Object[] toArray();
+  public <T> T[] toArray(T[]);
+  public boolean add(E);
+  public boolean remove(java.lang.Object);
+  public boolean containsAll(java.util.Collection<?>);
+  public boolean addAll(java.util.Collection<? extends E>);
+  public boolean retainAll(java.util.Collection<?>);
+  public boolean removeAll(java.util.Collection<?>);
+  public java.lang.String toString();
+  public void clear();
+}
+Compiled from "SemanticsCollection.java"
+public class erilex.SemanticsCollection {
+  public java.util.SortedMap<java.lang.String, erilex.tree.DeepTreeTransformer> treeTransformerMap;
+  public erilex.SemanticsCollection();
+  public void setTrans(java.lang.String, erilex.codegen.Type);
+  public <S> void setTrans(java.lang.String, java.lang.String, java.lang.String, erilex.tree.ASTTreeTransformer<S>);
+  public void setTrans(java.lang.String, java.lang.String, java.lang.String, java.lang.String[], erilex.codegen.IExpression);
+  public <S> S trans(java.lang.String, erilex.data.generic.Tree, S);
+  public java.util.List<erilex.codegen.Method> evaluatorsCode(erilex.codegen.NameEmbedding, java.util.Map<java.lang.String, java.lang.String>);
+  public static java.lang.String encode(java.lang.String, java.lang.String);
+  public static java.lang.String[] decode(java.lang.String);
+}
+Compiled from "Seq.java"
+public class erilex.Seq extends erilex.AbstractProduction implements erilex.BinaryOp {
+  public erilex.Production a;
+  public erilex.Production b;
+  public erilex.Seq(erilex.Production, erilex.Production, java.lang.String, erilex.Grammar);
+  public erilex.Production optimize();
+  public boolean doMatch(erilex.data.CharStream, boolean, boolean);
+  public void setB(erilex.Production);
+  public java.lang.String toString();
+  public java.util.Set<java.lang.Integer> computeFirst(java.util.Set<java.lang.Object>);
+  public erilex.data.generic.MaybeBoolean isLL1();
+  public erilex.Seq doDuplicate(erilex.Grammar);
+  public erilex.Production doDuplicate(erilex.Grammar);
+}
+Compiled from "Seq.java"
+class erilex.Seq$1 {
+  static final int[] $SwitchMap$erilex$data$generic$MaybeBoolean;
+  static {};
+}
+Compiled from "Star.java"
+public class erilex.Star extends erilex.AbstractProduction {
+  public erilex.Production a;
+  public erilex.Production optimize();
+  public erilex.Star(erilex.Production, java.lang.String, erilex.Grammar);
+  public boolean doMatch(erilex.data.CharStream, boolean, boolean);
+  public java.lang.String toString();
+  public java.util.Set<java.lang.Integer> computeFirst(java.util.Set<java.lang.Object>);
+  public erilex.data.generic.MaybeBoolean isLL1();
+  public erilex.Production doDuplicate(erilex.Grammar);
+}
+Compiled from "Terminal.java"
+public class erilex.Terminal extends erilex.AbstractProduction {
+  public java.lang.String text;
+  public erilex.Terminal(java.lang.String, java.lang.String, erilex.Grammar);
+  public erilex.Terminal(java.lang.String, erilex.Grammar);
+  public erilex.Terminal duplicate();
+  public boolean doMatch(erilex.data.CharStream, boolean, boolean);
+  public java.lang.String toString();
+  public java.util.Set<java.lang.Integer> computeFirst(java.util.Set<java.lang.Object>);
+  public erilex.data.generic.MaybeBoolean isLL1();
+  public erilex.Production doDuplicate(erilex.Grammar);
+}
+Compiled from "Utils.java"
+public class erilex.Utils {
+  public static boolean suppressWarning;
+  public erilex.Utils();
+  public static void warning(java.lang.Object, java.lang.String);
+  public static void error(java.lang.Object, java.lang.String);
+  public static void info(java.lang.Object, java.lang.String);
+  public static java.lang.String encode(java.lang.String);
+  public static <T> java.lang.Class<T> getType(T);
+  public static void printTree(erilex.data.generic.Tree, java.lang.String, java.lang.String);
+  public static void printError(erilex.data.CharStream);
+  public static void printError(erilex.data.CharStream, long, long);
+  public static java.lang.String errorMsg(erilex.data.CharStream, long, long, java.lang.String);
+  static {};
+}
+Compiled from "Builder.java"
+public interface erilex.builder.Builder<T> {
+  public abstract erilex.Production build();
+  public abstract T exp(erilex.Production);
+}
+Compiled from "ExpressionBuilder.java"
+public class erilex.builder.ExpressionBuilder<T extends erilex.builder.Builder<N>, N> implements erilex.builder.Builder<erilex.builder.ExtendedExpressionBuilder<T, N>> {
+  public erilex.builder.ExpressionBuilder(T, erilex.Grammar);
+  public erilex.builder.ExpressionBuilder(T, java.lang.String, erilex.Grammar);
+  public erilex.Production build();
+  public erilex.builder.ExpressionBuilder<erilex.builder.ExpressionBuilder<T, N>, erilex.builder.ExtendedExpressionBuilder<T, N>> start();
+  public erilex.builder.ExpressionBuilder<erilex.builder.ExpressionBuilder<T, N>, erilex.builder.ExtendedExpressionBuilder<T, N>> start(java.lang.String);
+  public erilex.builder.ExtendedExpressionBuilder<T, N> exp(erilex.Production);
+  public erilex.builder.ExtendedExpressionBuilder<T, N> nt(java.lang.String);
+  public erilex.builder.ExtendedExpressionBuilder<T, N> nt(java.lang.String, java.lang.String);
+  public erilex.builder.ExtendedExpressionBuilder<T, N> nt(java.lang.String, java.lang.String, java.lang.String);
+  public erilex.builder.ExtendedExpressionBuilder<T, N> nt(java.lang.String, java.lang.String, java.lang.String, java.lang.String);
+  public erilex.builder.ExtendedExpressionBuilder<T, N> t(java.lang.String);
+  public erilex.builder.ExtendedExpressionBuilder<T, N> at(char);
+  public erilex.builder.ExtendedExpressionBuilder<T, N> range(char, char);
+  public erilex.builder.ExtendedExpressionBuilder<T, N> oneOf(char...);
+  public erilex.builder.ExtendedExpressionBuilder<T, N> noneOf(char...);
+  public java.lang.Object exp(erilex.Production);
+}
+Compiled from "ExtendedExpressionBuilder.java"
+public class erilex.builder.ExtendedExpressionBuilder<T extends erilex.builder.Builder<N>, N> implements erilex.builder.Builder<erilex.builder.ExtendedExpressionBuilder<T, N>> {
+  public boolean openOr;
+  public erilex.builder.ExtendedExpressionBuilder(T, erilex.Production, java.lang.String, erilex.Grammar);
+  public erilex.builder.ExtendedExpressionBuilder(T, erilex.Production, boolean, java.lang.String, erilex.Grammar);
+  public erilex.Production build();
+  public erilex.builder.ExpressionBuilder<erilex.builder.PartialExpressionBuilder<T, N>, erilex.builder.ExtendedExpressionBuilder<T, N>> start();
+  public erilex.builder.ExpressionBuilder<erilex.builder.PartialExpressionBuilder<T, N>, erilex.builder.ExtendedExpressionBuilder<T, N>> start(java.lang.String);
+  public N end();
+  public erilex.builder.ExtendedExpressionBuilder<T, N> exp(erilex.Production);
+  public erilex.builder.PartialExpressionBuilder<T, N> or();
+  public erilex.builder.PartialExpressionBuilder<T, N> seq();
+  public erilex.builder.ExtendedExpressionBuilder<T, N> star();
+  public erilex.builder.ExtendedExpressionBuilder<T, N> plus();
+  public erilex.builder.ExtendedExpressionBuilder<T, N> optional();
+  public erilex.builder.ExtendedExpressionBuilder<T, N> t(java.lang.String);
+  public erilex.builder.ExtendedExpressionBuilder<T, N> range(char, char);
+  public erilex.builder.ExtendedExpressionBuilder<T, N> nt(java.lang.String);
+  public erilex.builder.ExtendedExpressionBuilder<T, N> nt(java.lang.String, java.lang.String);
+  public erilex.builder.ExtendedExpressionBuilder<T, N> nt(java.lang.String, java.lang.String, java.lang.String);
+  public erilex.builder.ExtendedExpressionBuilder<T, N> nt(java.lang.String, erilex.codegen.Type, erilex.codegen.Type);
+  public erilex.builder.ExtendedExpressionBuilder<T, N> nt(java.lang.String, java.lang.String, java.lang.String, java.lang.String);
+  public erilex.builder.ExtendedExpressionBuilder<T, N> at(char);
+  public erilex.builder.ExtendedExpressionBuilder<T, N> oneOf(char...);
+  public erilex.builder.ExtendedExpressionBuilder<T, N> noneOf(char...);
+  public java.lang.Object exp(erilex.Production);
+}
+Compiled from "IgnoreBuilder.java"
+public class erilex.builder.IgnoreBuilder implements erilex.builder.Builder<java.lang.Object> {
+  public erilex.builder.IgnoreBuilder(erilex.Grammar);
+  public erilex.builder.ExpressionBuilder<erilex.builder.RuleBuilder, java.lang.Object> start();
+  public erilex.Production build();
+  public java.lang.Object exp(erilex.Production);
+}
+Compiled from "LanguageBuilder.java"
+public class erilex.builder.LanguageBuilder<S> extends erilex.Grammar {
+  public erilex.SemanticsCollection semantics;
+  public erilex.builder.LanguageBuilder();
+  public erilex.builder.LanguageBuilder(boolean);
+  public erilex.builder.RuleBuilder def(java.lang.String);
+  public erilex.builder.RuleBuilder auxdef(java.lang.String);
+  public erilex.builder.RuleBuilder lex(java.lang.String);
+  public erilex.builder.RuleBuilder auxlex(java.lang.String);
+  public erilex.builder.IgnoreBuilder ignore();
+  public void copy(erilex.Grammar);
+  public erilex.builder.tree.TransformerBuilder<S> trans(java.lang.String, java.lang.String, java.lang.String, java.lang.String...);
+  public erilex.builder.tree.TransformerBuilder<S> trans(java.lang.String, java.lang.String);
+}
+Compiled from "PartialExpressionBuilder.java"
+public class erilex.builder.PartialExpressionBuilder<T extends erilex.builder.Builder<N>, N> implements erilex.builder.Builder<erilex.builder.ExtendedExpressionBuilder<T, N>> {
+  public erilex.builder.PartialExpressionBuilder(T, erilex.Production, erilex.PartialApp, java.lang.String, erilex.Grammar);
+  public erilex.Production build();
+  public erilex.builder.ExpressionBuilder<erilex.builder.PartialExpressionBuilder<T, N>, erilex.builder.ExtendedExpressionBuilder<T, N>> start();
+  public erilex.builder.ExpressionBuilder<erilex.builder.PartialExpressionBuilder<T, N>, erilex.builder.ExtendedExpressionBuilder<T, N>> start(java.lang.String);
+  public erilex.builder.ExtendedExpressionBuilder<T, N> exp(erilex.Production);
+  public erilex.builder.ExtendedExpressionBuilder<T, N> nt(java.lang.String);
+  public erilex.builder.ExtendedExpressionBuilder<T, N> nt(java.lang.String, java.lang.String);
+  public erilex.builder.ExtendedExpressionBuilder<T, N> nt(java.lang.String, java.lang.String, java.lang.String);
+  public erilex.builder.ExtendedExpressionBuilder<T, N> nt(java.lang.String, erilex.codegen.Type, erilex.codegen.Type);
+  public erilex.builder.ExtendedExpressionBuilder<T, N> nt(java.lang.String, java.lang.String, java.lang.String, java.lang.String);
+  public erilex.builder.ExtendedExpressionBuilder<T, N> t(java.lang.String);
+  public erilex.builder.ExtendedExpressionBuilder<T, N> range(char, char);
+  public erilex.builder.ExtendedExpressionBuilder<T, N> oneOf(char...);
+  public erilex.builder.ExtendedExpressionBuilder<T, N> noneOf(char...);
+  public erilex.builder.ExtendedExpressionBuilder<T, N> at(char);
+  public java.lang.Object exp(erilex.Production);
+}
+Compiled from "RuleBuilder.java"
+public class erilex.builder.RuleBuilder implements erilex.builder.Builder<java.lang.Object> {
+  public erilex.builder.RuleBuilder(java.lang.String, erilex.Grammar);
+  erilex.builder.RuleBuilder(java.lang.String, boolean, boolean, erilex.Grammar);
+  public erilex.builder.ExpressionBuilder<erilex.builder.RuleBuilder, java.lang.Object> start();
+  public erilex.builder.ExpressionBuilder<erilex.builder.RuleBuilder, java.lang.Object> start(int);
+  public erilex.builder.ExpressionBuilder<erilex.builder.RuleBuilder, java.lang.Object> start(int, java.lang.String, java.lang.String);
+  public erilex.builder.ExpressionBuilder<erilex.builder.RuleBuilder, java.lang.Object> start(int, erilex.codegen.Type, erilex.codegen.Type);
+  public erilex.Production build();
+  public java.lang.Object exp(erilex.Production);
+}
+Compiled from "TransformerBuilder.java"
+public class erilex.builder.tree.TransformerBuilder<S> {
+  java.lang.String refName;
+  java.lang.String t;
+  java.lang.String trN;
+  java.lang.String[] vars;
+  erilex.SemanticsCollection sem;
+  public erilex.builder.tree.TransformerBuilder(java.lang.String, java.lang.String, java.lang.String[], erilex.SemanticsCollection, java.lang.String);
+  public void by(erilex.tree.ASTTreeTransformer<S>);
+  public void by(java.lang.String);
+}
+Compiled from "CalculatorGrammar.java"
+public class erilex.calculator.CalculatorGrammar extends erilex.builder.LanguageBuilder<java.util.Stack<java.math.BigInteger>> {
+  erilex.calculator.CalculatorHandler calculatorHandler;
+  erilex.tree.TreeBuildingHandler treeBuildingHandler;
+  public erilex.calculator.CalculatorGrammar();
+}
+Compiled from "CalculatorGrammar.java"
+class erilex.calculator.CalculatorGrammar$1 extends erilex.tree.TreeTransformerAdapter<java.util.Stack<java.math.BigInteger>> {
+  final erilex.calculator.CalculatorGrammar this$0;
+  erilex.calculator.CalculatorGrammar$1(erilex.calculator.CalculatorGrammar);
+  public java.util.Stack<java.math.BigInteger> transformAfter(erilex.data.generic.Tree<erilex.tree.ASTValueData>, java.util.Stack<java.math.BigInteger>);
+  public java.lang.Object transformAfter(erilex.data.generic.Tree, java.lang.Object);
+}
+Compiled from "CalculatorGrammar.java"
+class erilex.calculator.CalculatorGrammar$2 extends erilex.tree.TreeTransformerAdapter<java.util.Stack<java.math.BigInteger>> {
+  final erilex.calculator.CalculatorGrammar this$0;
+  erilex.calculator.CalculatorGrammar$2(erilex.calculator.CalculatorGrammar);
+  public java.util.Stack<java.math.BigInteger> transformAfter(erilex.data.generic.Tree<erilex.tree.ASTValueData>, java.util.Stack<java.math.BigInteger>);
+  public java.lang.Object transformAfter(erilex.data.generic.Tree, java.lang.Object);
+}
+Compiled from "CalculatorGrammar.java"
+class erilex.calculator.CalculatorGrammar$3 extends erilex.tree.TreeTransformerAdapter<java.util.Stack<java.math.BigInteger>> {
+  final erilex.calculator.CalculatorGrammar this$0;
+  erilex.calculator.CalculatorGrammar$3(erilex.calculator.CalculatorGrammar);
+  public java.util.Stack<java.math.BigInteger> transformAfter(erilex.data.generic.Tree<erilex.tree.ASTValueData>, java.util.Stack<java.math.BigInteger>);
+  public java.lang.Object transformAfter(erilex.data.generic.Tree, java.lang.Object);
+}
+Compiled from "CalculatorGrammar.java"
+class erilex.calculator.CalculatorGrammar$4 extends erilex.tree.TreeTransformerAdapter<java.util.Stack<java.math.BigInteger>> {
+  final erilex.calculator.CalculatorGrammar this$0;
+  erilex.calculator.CalculatorGrammar$4(erilex.calculator.CalculatorGrammar);
+  public java.util.Stack<java.math.BigInteger> transformAfter(erilex.data.generic.Tree<erilex.tree.ASTValueData>, java.util.Stack<java.math.BigInteger>);
+  public java.lang.Object transformAfter(erilex.data.generic.Tree, java.lang.Object);
+}
+Compiled from "CalculatorGrammar.java"
+class erilex.calculator.CalculatorGrammar$5 extends erilex.tree.TreeTransformerAdapter<java.util.Stack<java.math.BigInteger>> {
+  final erilex.calculator.CalculatorGrammar this$0;
+  erilex.calculator.CalculatorGrammar$5(erilex.calculator.CalculatorGrammar);
+  public java.util.Stack<java.math.BigInteger> transformAfter(erilex.data.generic.Tree<erilex.tree.ASTValueData>, java.util.Stack<java.math.BigInteger>);
+  public java.lang.Object transformAfter(erilex.data.generic.Tree, java.lang.Object);
+}
+Compiled from "CalculatorGrammar.java"
+class erilex.calculator.CalculatorGrammar$6 extends erilex.tree.TreeTransformerAdapter {
+  final erilex.calculator.CalculatorGrammar this$0;
+  erilex.calculator.CalculatorGrammar$6(erilex.calculator.CalculatorGrammar);
+  public java.lang.Object transformAfter(erilex.data.generic.Tree, java.lang.Object);
+}
+Compiled from "CalculatorGrammar.java"
+class erilex.calculator.CalculatorGrammar$7 extends erilex.tree.TreeTransformerAdapter {
+  final erilex.calculator.CalculatorGrammar this$0;
+  erilex.calculator.CalculatorGrammar$7(erilex.calculator.CalculatorGrammar);
+  public java.lang.Object transformAfter(erilex.data.generic.Tree, java.lang.Object);
+}
+Compiled from "CalculatorHandler.java"
+public class erilex.calculator.CalculatorHandler implements erilex.Handler {
+  public java.math.BigInteger res;
+  public erilex.calculator.CalculatorHandler();
+  public void handle(erilex.Production, erilex.data.CharStream, erilex.data.CharStream$Label, erilex.data.CharStream$Label);
+  public void start(erilex.Production, erilex.data.CharStream);
+  public void failed(erilex.Production, erilex.data.CharStream);
+  public static java.math.BigInteger factorial(java.math.BigInteger);
+}
+Compiled from "Main.java"
+public class erilex.calculator.Main {
+  public erilex.calculator.Main();
+  public static void main(java.lang.String[]);
+}
+Compiled from "Abstraction.java"
+public class erilex.codegen.Abstraction implements erilex.codegen.IExpression {
+  erilex.codegen.Variable var;
+  erilex.codegen.Type rType;
+  java.util.List<erilex.codegen.Statement> mBody;
+  public erilex.codegen.Abstraction(java.lang.String, erilex.codegen.Type, erilex.codegen.Type, erilex.codegen.Statement...);
+  public erilex.codegen.Abstraction(java.lang.String, java.lang.String, java.lang.String, erilex.codegen.Type, erilex.codegen.Type, erilex.codegen.Statement...);
+  public void codeGen(java.io.Writer, java.lang.String) throws java.io.IOException;
+  public void renameVar(java.lang.String, java.lang.String);
+}
+Compiled from "And.java"
+public class erilex.codegen.And implements erilex.codegen.IExpression {
+  public erilex.codegen.IExpression a;
+  public erilex.codegen.IExpression b;
+  public erilex.codegen.And(erilex.codegen.IExpression, erilex.codegen.IExpression);
+  public void codeGen(java.io.Writer, java.lang.String) throws java.io.IOException;
+  public void renameVar(java.lang.String, java.lang.String);
+}
+Compiled from "App.java"
+public class erilex.codegen.App implements erilex.codegen.IExpression {
+  erilex.codegen.IExpression f;
+  erilex.codegen.IExpression[] x;
+  public erilex.codegen.App(erilex.codegen.IExpression, erilex.codegen.IExpression...);
+  public void codeGen(java.io.Writer, java.lang.String) throws java.io.IOException;
+  public void renameVar(java.lang.String, java.lang.String);
+}
+Compiled from "Assignment.java"
+public class erilex.codegen.Assignment extends erilex.codegen.Statement {
+  public java.lang.String vName;
+  public erilex.codegen.IExpression exp;
+  public erilex.codegen.Assignment(java.lang.String, erilex.codegen.IExpression);
+  public void codeGen(java.io.Writer, java.lang.String) throws java.io.IOException;
+  public void renameVar(java.lang.String, java.lang.String);
+}
+Compiled from "Blob.java"
+public class erilex.codegen.Blob extends erilex.codegen.Statement implements erilex.codegen.IExpression {
+  public erilex.codegen.Blob(java.lang.String);
+  public void codeGen(java.io.Writer, java.lang.String) throws java.io.IOException;
+  public void renameVar(java.lang.String, java.lang.String);
+}
+Compiled from "Block.java"
+public class erilex.codegen.Block extends erilex.codegen.Statement {
+  public erilex.codegen.Statement[] st;
+  public erilex.codegen.Block(erilex.codegen.Statement...);
+  public void codeGen(java.io.Writer, java.lang.String) throws java.io.IOException;
+  public void renameVar(java.lang.String, java.lang.String);
+}
+Compiled from "CGUtils.java"
+public class erilex.codegen.CGUtils {
+  public erilex.codegen.CGUtils();
+  public static void printGrammarRules(erilex.codegen.LanguageGenerator);
+  public static void printTypingRules(erilex.codegen.LanguageGenerator);
+}
+Compiled from "Class.java"
+public class erilex.codegen.Class {
+  public java.lang.String pack;
+  public boolean abs;
+  public java.lang.String name;
+  public erilex.codegen.Type[] superType;
+  public java.util.List<java.lang.String> params;
+  public java.util.List<erilex.codegen.Method> methods;
+  public java.util.List<erilex.codegen.Variable> fields;
+  public java.util.List<erilex.codegen.Class> classes;
+  public static final java.lang.String PRE;
+  public boolean inner;
+  public boolean isStatic;
+  public java.lang.String[] imports;
+  public java.lang.String[] staticImports;
+  public boolean inter;
+  public erilex.codegen.Type getType();
+  public erilex.codegen.Class(java.lang.String, boolean, java.lang.String, erilex.codegen.Type...);
+  public erilex.codegen.Class(java.lang.String, boolean, java.lang.String);
+  public erilex.codegen.Class(java.lang.String, java.lang.String);
+  public erilex.codegen.Class(java.lang.String);
+  public erilex.codegen.Class(boolean, java.lang.String, erilex.codegen.Type...);
+  public erilex.codegen.Class(java.lang.String, java.lang.String, erilex.codegen.Type...);
+  public erilex.codegen.Class(java.lang.String, erilex.codegen.Type...);
+  public void writeToFile(java.lang.String) throws java.io.IOException;
+  public void codeGen(java.io.Writer, java.lang.String) throws java.io.IOException;
+  public void renameVar(java.lang.String, java.lang.String);
+  public void codeGen(java.io.Writer) throws java.io.IOException;
+}
+Compiled from "Cns.java"
+public class erilex.codegen.Cns implements erilex.codegen.IExpression {
+  erilex.codegen.IExpression a;
+  erilex.codegen.IExpression b;
+  public erilex.codegen.Cns(erilex.codegen.IExpression, erilex.codegen.IExpression);
+  public void codeGen(java.io.Writer, java.lang.String) throws java.io.IOException;
+  public void renameVar(java.lang.String, java.lang.String);
+}
+Compiled from "Conversion.java"
+public class erilex.codegen.Conversion implements erilex.codegen.IExpression {
+  erilex.codegen.Type type;
+  erilex.codegen.IExpression exp;
+  public erilex.codegen.Conversion(erilex.codegen.Type, erilex.codegen.IExpression);
+  public void codeGen(java.io.Writer, java.lang.String) throws java.io.IOException;
+  public void renameVar(java.lang.String, java.lang.String);
+}
+Compiled from "ExprStatement.java"
+public class erilex.codegen.ExprStatement extends erilex.codegen.Statement {
+  public erilex.codegen.IExpression exp;
+  public erilex.codegen.ExprStatement(erilex.codegen.IExpression);
+  public void codeGen(java.io.Writer, java.lang.String) throws java.io.IOException;
+  public void renameVar(java.lang.String, java.lang.String);
+}
+Compiled from "FieldAccess.java"
+public class erilex.codegen.FieldAccess implements erilex.codegen.IExpression {
+  erilex.codegen.IExpression source;
+  java.lang.String methodname;
+  public erilex.codegen.FieldAccess(erilex.codegen.IExpression, java.lang.String);
+  public void codeGen(java.io.Writer, java.lang.String) throws java.io.IOException;
+  public void renameVar(java.lang.String, java.lang.String);
+}
+Compiled from "Generator.java"
+public class erilex.codegen.Generator {
+  public static final java.lang.String ACCEPT;
+  public static final java.lang.String STATE;
+  public static final java.lang.String TRANSFORM;
+  public static final java.lang.String VISITORPARAM;
+  public erilex.codegen.NameEmbedding t;
+  public erilex.codegen.NameEmbedding d;
+  public erilex.codegen.NameEmbedding e;
+  public static final java.lang.String FUNCTION;
+  public static final java.lang.String APPLY;
+  public static final java.lang.String VISITOR;
+  public static final java.lang.String VISIT;
+  public static final erilex.codegen.Type Void;
+  public static final erilex.codegen.Type Visitor;
+  public static final erilex.codegen.Type Chi;
+  public final erilex.codegen.Type DefaultChi;
+  public static final erilex.codegen.Type natChi;
+  public static final erilex.codegen.Type Eta;
+  public static final erilex.codegen.Type Sigma;
+  public static final erilex.codegen.Type Kappa;
+  public java.lang.String pack;
+  public java.util.HashMap<java.lang.String, erilex.codegen.Class> classMap;
+  public erilex.codegen.Generator(erilex.codegen.NameEmbedding, erilex.codegen.NameEmbedding, erilex.codegen.NameEmbedding, erilex.codegen.Type, java.lang.String);
+  public static erilex.codegen.Type fun(erilex.codegen.Type, erilex.codegen.Type);
+  public static erilex.codegen.Type pair(erilex.codegen.Type, erilex.codegen.Type);
+  public void addFV(erilex.codegen.Type, java.util.List<erilex.codegen.Type>);
+  public static erilex.codegen.Type cons(java.lang.String, erilex.codegen.Type...);
+  public static erilex.codegen.Type consnat(java.lang.Class, erilex.codegen.Type...);
+  public static erilex.codegen.Type consnatfuture(java.lang.String, erilex.codegen.Type...);
+  public static erilex.codegen.Type conswild(java.lang.String, erilex.codegen.Type);
+  public java.lang.String dd(java.lang.String);
+  public java.lang.String ee(java.lang.String);
+  public java.lang.String dt(java.lang.String);
+  public erilex.codegen.Class en_e_L(java.lang.String, java.lang.String, boolean, java.lang.String...);
+  public erilex.codegen.Class en_t_L(java.lang.String, java.lang.String, boolean, java.lang.String...);
+  public erilex.codegen.Class en_d_L(erilex.codegen.Judgement, java.lang.String, int, erilex.codegen.Variable[], erilex.codegen.Type, erilex.codegen.TypeFunction, erilex.codegen.Judgement...);
+  public erilex.codegen.Class en_e_L(erilex.codegen.ProductionRule, boolean);
+  public erilex.codegen.Class en_t_L(erilex.codegen.ProductionRule, boolean);
+  public erilex.codegen.Class en_e_L(erilex.codegen.TypingRule);
+  public erilex.codegen.Class en_d_L(erilex.codegen.TypingRule, erilex.codegen.Variable[], erilex.codegen.Type, erilex.codegen.TypeFunction);
+  public erilex.codegen.Class en_e_L(erilex.codegen.Judgement, java.lang.String, int, erilex.codegen.Judgement...);
+  public erilex.codegen.Class en_d_L(java.lang.String, erilex.codegen.Variable[], erilex.codegen.Type, erilex.codegen.TypeFunction, java.lang.String);
+  public erilex.codegen.Class en_d_eq_axiom(java.lang.String, erilex.codegen.TypeFunction);
+  public static java.util.List<java.lang.String> toStringList(java.util.List<erilex.codegen.Type>);
+  public static erilex.codegen.Type tvar(java.lang.String);
+  public erilex.codegen.Type en_t_S(erilex.codegen.Type);
+  public erilex.codegen.Type en_e_S(erilex.codegen.Type);
+  public erilex.codegen.Class en_e_F();
+  public erilex.codegen.Class en_e_F2();
+  public erilex.codegen.Class en_e_F3();
+  public erilex.codegen.Class en_e_ID();
+  public erilex.codegen.Class en_e_Bot();
+  public erilex.codegen.Class enc_d_Visitor(erilex.codegen.Variable[], erilex.codegen.Type, erilex.codegen.TypeFunction, erilex.codegen.Class...);
+  public erilex.codegen.Class enc_d_VisitorImpl(java.lang.String, erilex.codegen.Variable[], erilex.codegen.Type, erilex.codegen.TypeFunction, java.util.Map<java.lang.String, ?>, erilex.codegen.Class[]);
+  public erilex.codegen.Class enc_d_VisitorImpl2(java.lang.String, erilex.codegen.Variable[], erilex.codegen.Type, java.lang.String, java.lang.String, erilex.codegen.Class[]);
+  public erilex.codegen.Class enc_e_Utils(java.lang.String, erilex.codegen.Type);
+  public static java.lang.String getLongName(java.lang.Class<?>);
+  public void removeFV(java.util.ArrayList<erilex.codegen.Type>, erilex.codegen.Type);
+  public erilex.codegen.Type vcons(erilex.codegen.TypeFunction, erilex.codegen.Type);
+  public erilex.codegen.Type nat(boolean, java.lang.String, erilex.codegen.Type, erilex.codegen.Type);
+  public static erilex.codegen.Judgement judgement(java.lang.String);
+  static {};
+}
+Compiled from "GeneratorUtils.java"
+public class erilex.codegen.GeneratorUtils {
+  public erilex.codegen.GeneratorUtils();
+  public static erilex.codegen.VariableExpression varExp(java.lang.String);
+  public static erilex.codegen.FieldAccess fAcc(erilex.codegen.IExpression, java.lang.String);
+}
+Compiled from "GenericTreeTransformer.java"
+public abstract class erilex.codegen.GenericTreeTransformer<D, S> {
+  public erilex.codegen.GenericTreeTransformer subtreeTrans;
+  public erilex.codegen.GenericTreeTransformer();
+  public abstract S transform(D, S);
+  public void setSubtreeTransformer(erilex.codegen.GenericTreeTransformer);
+}
+Compiled from "Hd.java"
+public class erilex.codegen.Hd implements erilex.codegen.IExpression {
+  erilex.codegen.IExpression cond;
+  public erilex.codegen.Hd(erilex.codegen.IExpression);
+  public void codeGen(java.io.Writer, java.lang.String) throws java.io.IOException;
+  public void renameVar(java.lang.String, java.lang.String);
+}
+Compiled from "IExpression.java"
+public interface erilex.codegen.IExpression {
+  public abstract void codeGen(java.io.Writer, java.lang.String) throws java.io.IOException;
+  public abstract void renameVar(java.lang.String, java.lang.String);
+}
+Compiled from "If.java"
+public class erilex.codegen.If implements erilex.codegen.IExpression {
+  erilex.codegen.IExpression cond;
+  erilex.codegen.IExpression a;
+  erilex.codegen.IExpression b;
+  public erilex.codegen.If(erilex.codegen.IExpression, erilex.codegen.IExpression, erilex.codegen.IExpression);
+  public void codeGen(java.io.Writer, java.lang.String) throws java.io.IOException;
+  public void renameVar(java.lang.String, java.lang.String);
+}
+Compiled from "IfStatement.java"
+public class erilex.codegen.IfStatement extends erilex.codegen.Statement {
+  erilex.codegen.IExpression cond;
+  erilex.codegen.Statement a;
+  erilex.codegen.Statement b;
+  public erilex.codegen.IfStatement(erilex.codegen.IExpression, erilex.codegen.Statement, erilex.codegen.Statement);
+  public void codeGen(java.io.Writer, java.lang.String) throws java.io.IOException;
+  public void renameVar(java.lang.String, java.lang.String);
+}
+Compiled from "Invocation.java"
+public class erilex.codegen.Invocation implements erilex.codegen.IExpression {
+  erilex.codegen.IExpression source;
+  java.lang.String methodname;
+  erilex.codegen.IExpression[] args;
+  erilex.codegen.Type[] typeArgs;
+  erilex.codegen.IExpression[] impArgs;
+  public erilex.codegen.Invocation(erilex.codegen.IExpression, java.lang.String, erilex.codegen.IExpression...);
+  public erilex.codegen.Invocation(erilex.codegen.IExpression, java.lang.String, erilex.codegen.IExpression[], erilex.codegen.Type[], erilex.codegen.IExpression[]);
+  public void codeGen(java.io.Writer, java.lang.String) throws java.io.IOException;
+  public void renameVar(java.lang.String, java.lang.String);
+}
+Compiled from "JavaParser.java"
+public class erilex.codegen.JavaParser extends erilex.builder.LanguageBuilder {
+  public static final java.lang.String BLOCK;
+  public static final java.lang.String CLASSDEF;
+  public static final java.lang.String COMMENTS;
+  public static final java.lang.String PROG;
+  public static final java.lang.String CATEGORY;
+  public static final java.lang.String EXTENDSCLAUSE;
+  public static final java.lang.String IDENTIFIER;
+  public static final java.lang.String IMPLEMENTSCLAUSE;
+  public static final java.lang.String LETTERUNDERSCORE;
+  public static final java.lang.String LETTERUNDERSCOREDIGIT;
+  public static final java.lang.String MEMBER;
+  public static final java.lang.String PARAMETER;
+  public static final java.lang.String PARAMETERLIST;
+  public static final java.lang.String SCOPEMODIFIER;
+  public static final java.lang.String TYPE;
+  public static final java.lang.String WHITESPACE;
+  public erilex.codegen.JavaParser();
+  public static void main(java.lang.String[]) throws java.io.FileNotFoundException;
+}
+Compiled from "Judgement.java"
+public class erilex.codegen.Judgement {
+  erilex.codegen.Type env;
+  erilex.codegen.Type t;
+  java.lang.String e;
+  public erilex.codegen.Judgement(java.lang.String);
+  public erilex.codegen.Judgement(java.lang.String, erilex.codegen.Type);
+  public erilex.codegen.Judgement(erilex.codegen.Type, java.lang.String, erilex.codegen.Type);
+  public java.lang.String toString();
+  public java.lang.String toString(java.lang.String);
+}
+Compiled from "LanguageGenerator.java"
+public class erilex.codegen.LanguageGenerator {
+  public erilex.codegen.NameEmbedding t;
+  public erilex.codegen.NameEmbedding d;
+  public erilex.codegen.NameEmbedding e;
+  public erilex.Grammar E;
+  public erilex.Grammar T;
+  public erilex.Grammar G;
+  public erilex.SemanticsCollection SC;
+  public erilex.tree.DeepTreeTransformer S;
+  public java.lang.String path;
+  public java.lang.String pack;
+  public boolean parameterized;
+  public java.lang.String enil;
+  public final erilex.codegen.Type dchi;
+  public java.util.Map<java.lang.String, java.lang.String> natTypeMap;
+  public java.util.Map<java.lang.String, erilex.tree.DeepTreeTransformer> dttMap;
+  public java.util.Set<java.lang.String> funSet;
+  public erilex.codegen.Judgement[] array0;
+  public static java.lang.String[] array1;
+  erilex.codegen.Class[] ds;
+  public erilex.codegen.LanguageGenerator(erilex.codegen.NameEmbedding, erilex.codegen.NameEmbedding, erilex.codegen.NameEmbedding, erilex.Grammar, java.lang.String, erilex.Grammar, erilex.codegen.Type, erilex.Grammar, erilex.tree.DeepTreeTransformer, erilex.SemanticsCollection, java.util.Map<java.lang.String, java.lang.String>, java.util.Set<java.lang.String>, java.lang.String, java.lang.String);
+  public erilex.codegen.LanguageGenerator(erilex.codegen.NameEmbedding, erilex.codegen.NameEmbedding, erilex.codegen.NameEmbedding, erilex.Grammar, java.lang.String, erilex.Grammar, erilex.codegen.Type, erilex.Grammar, java.lang.String, java.lang.String);
+  public static void breakOrList(erilex.Production, java.util.List<erilex.Production>);
+  public static void breakSeqList(erilex.Production, java.util.List<erilex.Production>);
+  public void generate() throws java.io.IOException;
+  public void generate2() throws java.io.IOException;
+  public erilex.codegen.Type parseEnv(erilex.Production);
+  public static erilex.codegen.Type parseType(erilex.codegen.NameEmbedding, erilex.Grammar, java.lang.String, erilex.codegen.Type);
+  public erilex.codegen.Type parseType(erilex.Production);
+  public java.util.List<erilex.codegen.TypingRule> toTypingRules(erilex.Grammar);
+  public static java.util.List<erilex.codegen.ProductionRule> toGrammarRules(erilex.Grammar);
+  public void generate_db(java.lang.String, java.lang.String) throws java.io.IOException;
+  public void generate_e(java.lang.String, java.lang.String) throws java.io.IOException;
+  public void generate_t(java.lang.String, java.lang.String) throws java.io.IOException;
+  public void generate_s(java.lang.String, java.lang.String) throws java.io.IOException;
+  public void generate_s2(java.lang.String, java.lang.String) throws java.io.IOException;
+  static {};
+}
+Compiled from "Method.java"
+public class erilex.codegen.Method {
+  public java.lang.String annotation;
+  public boolean cons;
+  public boolean abs;
+  public erilex.codegen.Type rType;
+  public java.lang.String name;
+  public java.util.List<java.lang.String> typeParams;
+  public java.util.List<erilex.codegen.Variable> params;
+  public java.util.List<erilex.codegen.Statement> mBody;
+  public boolean isStatic;
+  public erilex.codegen.Method(java.lang.String);
+  public erilex.codegen.Method(erilex.codegen.Type, java.lang.String);
+  public erilex.codegen.Method(erilex.codegen.Type, java.lang.String, erilex.codegen.Type, java.lang.String, erilex.codegen.Statement);
+  public void codeGen(java.io.Writer, java.lang.String) throws java.io.IOException;
+  public erilex.codegen.Method(boolean, erilex.codegen.Type, java.lang.String);
+  public void renameVar(java.lang.String, java.lang.String);
+}
+Compiled from "NameEmbedding.java"
+public class erilex.codegen.NameEmbedding {
+  public static final java.lang.String T_PREFIX;
+  public static final java.lang.String D_PREFIX;
+  public static final java.lang.String E_PREFIX;
+  public static final java.lang.String TLT_PREFIX;
+  public static final java.lang.String TLD_PREFIX;
+  public static final java.lang.String TLE_PREFIX;
+  public static final java.lang.String TrLT_PREFIX;
+  public static final java.lang.String TrLD_PREFIX;
+  public static final java.lang.String TrLE_PREFIX;
+  java.util.HashMap<java.lang.String, java.lang.String> specialChars;
+  java.util.HashMap<java.lang.String, java.lang.Boolean> natMap;
+  java.util.HashMap<java.lang.String, java.lang.Boolean> varMap;
+  public java.lang.String prefix;
+  public boolean getnat(java.lang.String);
+  public erilex.codegen.NameEmbedding(java.lang.String);
+  public erilex.codegen.NameEmbedding(erilex.codegen.NameEmbedding);
+  public void add(java.lang.String, java.lang.String);
+  public void add(java.lang.String, java.lang.String, boolean, boolean);
+  public void addVar(java.lang.String, java.lang.String);
+  public void addNatVar(java.lang.String, java.lang.String);
+  public void addNat(java.lang.String, java.lang.String);
+  public java.lang.String get(java.lang.String);
+  public java.lang.String getNat(java.lang.String);
+  public boolean nat(java.lang.String);
+  public boolean var(java.lang.String);
+}
+Compiled from "ObjectCreation.java"
+public class erilex.codegen.ObjectCreation implements erilex.codegen.IExpression {
+  erilex.codegen.Type type;
+  erilex.codegen.IExpression[] args;
+  public erilex.codegen.ObjectCreation(erilex.codegen.Type, erilex.codegen.IExpression...);
+  public erilex.codegen.ObjectCreation(erilex.codegen.Type, erilex.codegen.IExpression[], erilex.codegen.Method...);
+  public void codeGen(java.io.Writer, java.lang.String) throws java.io.IOException;
+  public void renameVar(java.lang.String, java.lang.String);
+}
+Compiled from "ProductionRule.java"
+public class erilex.codegen.ProductionRule {
+  public java.lang.String conseq;
+  public java.lang.String a;
+  public int p;
+  public java.lang.String[] antece;
+  public erilex.codegen.ProductionRule(java.lang.String, java.lang.String, java.lang.String[]);
+  public erilex.codegen.ProductionRule(java.lang.String, java.lang.String, int, java.lang.String[]);
+  public java.lang.String toString();
+}
+Compiled from "Return.java"
+public class erilex.codegen.Return extends erilex.codegen.Statement {
+  public erilex.codegen.IExpression exp;
+  public erilex.codegen.Return(erilex.codegen.IExpression);
+  public void codeGen(java.io.Writer, java.lang.String) throws java.io.IOException;
+  public void renameVar(java.lang.String, java.lang.String);
+}
+Compiled from "SemanticsBuilder.java"
+public class erilex.codegen.SemanticsBuilder<D extends erilex.data.generic.Tree, S> extends erilex.tree.DeepTreeTransformer<D, S> {
+  public erilex.codegen.SemanticsBuilder(erilex.codegen.Type);
+  public <C extends erilex.codegen.GenericTreeTransformer<D, S>> void trans(java.lang.Class<D>, java.lang.Class<? extends erilex.codegen.GenericTreeTransformer<D, S>>);
+  public <C extends erilex.codegen.GenericTreeTransformer<D, S>> void trans(java.lang.String, java.lang.Class<C>);
+}
+Compiled from "Statement.java"
+public abstract class erilex.codegen.Statement implements erilex.codegen.IExpression {
+  public erilex.codegen.Statement();
+  public abstract void codeGen(java.io.Writer, java.lang.String) throws java.io.IOException;
+  public abstract void renameVar(java.lang.String, java.lang.String);
+}
+Compiled from "Term.java"
+public class erilex.codegen.Term {
+  public boolean var;
+  public boolean nat;
+  public java.lang.String cons;
+  public erilex.codegen.Term[] params;
+  public erilex.codegen.Term(java.lang.String, erilex.codegen.Term...);
+  public erilex.codegen.Term(boolean, boolean, java.lang.String, erilex.codegen.Term...);
+  public erilex.codegen.Term(boolean, java.lang.String, erilex.codegen.Term...);
+  public void codeGen(java.io.Writer) throws java.io.IOException;
+  public java.util.List<java.lang.String> fv();
+  public erilex.codegen.Term addPrefix(java.lang.String);
+  public static erilex.codegen.Term[] addPrefix(erilex.codegen.Term[], java.lang.String);
+}
+Compiled from "Tl.java"
+public class erilex.codegen.Tl implements erilex.codegen.IExpression {
+  erilex.codegen.IExpression cond;
+  public erilex.codegen.Tl(erilex.codegen.IExpression);
+  public void codeGen(java.io.Writer, java.lang.String) throws java.io.IOException;
+  public void renameVar(java.lang.String, java.lang.String);
+}
+Compiled from "Type.java"
+public class erilex.codegen.Type extends erilex.codegen.TypeFunction {
+  public boolean var;
+  public boolean nat;
+  public boolean box;
+  public java.lang.String cons;
+  public erilex.codegen.Type[] params;
+  public boolean wildcard;
+  public erilex.codegen.Type superType;
+  public erilex.codegen.Type map(erilex.codegen.Type);
+  public erilex.codegen.Type(boolean, boolean, boolean, java.lang.String, erilex.codegen.Type...);
+  public erilex.codegen.Type(java.lang.String, erilex.codegen.Type...);
+  public erilex.codegen.Type(boolean, boolean, java.lang.String, erilex.codegen.Type...);
+  public erilex.codegen.Type(java.lang.String, boolean, erilex.codegen.Type);
+  public erilex.codegen.Type(boolean, java.lang.String, erilex.codegen.Type...);
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public void codeGen(java.io.Writer, java.lang.String) throws java.io.IOException;
+  public java.lang.String unparse();
+  public java.util.List<erilex.codegen.Type> fv();
+  public erilex.codegen.Type renameVar(java.lang.String, java.lang.String);
+  public erilex.codegen.Type addPrefix(erilex.codegen.NameEmbedding);
+  public static erilex.codegen.Type[] addPrefix(erilex.codegen.Type[], erilex.codegen.NameEmbedding);
+  public erilex.codegen.Type toRawType();
+  public java.lang.String toStringCodeGen();
+  public java.lang.String toString();
+  public erilex.codegen.Type setParams(erilex.codegen.Type...);
+}
+Compiled from "TypeFunction.java"
+public class erilex.codegen.TypeFunction {
+  java.util.HashMap<erilex.codegen.Type, erilex.codegen.Type> typeMap;
+  public erilex.codegen.TypeFunction();
+  public void add(erilex.codegen.Type, erilex.codegen.Type);
+  public erilex.codegen.Type map(erilex.codegen.Type);
+}
+Compiled from "TypingRule.java"
+public class erilex.codegen.TypingRule {
+  public static final char circOne;
+  public erilex.codegen.Judgement conseq;
+  public java.lang.String a;
+  public int p;
+  public erilex.codegen.Judgement[] antece;
+  public erilex.codegen.TypingRule(erilex.codegen.Judgement, java.lang.String, erilex.codegen.Judgement[]);
+  public erilex.codegen.TypingRule(erilex.codegen.Judgement, java.lang.String, int, erilex.codegen.Judgement[]);
+  public java.lang.String toString();
+}
+Compiled from "Variable.java"
+public class erilex.codegen.Variable {
+  public java.lang.String annotation;
+  public erilex.codegen.Type type;
+  public java.lang.String name;
+  public erilex.codegen.IExpression init;
+  public erilex.codegen.Variable(java.lang.String, erilex.codegen.Type, java.lang.String);
+  public erilex.codegen.Variable(erilex.codegen.Type, java.lang.String);
+  public void codeGen(java.io.Writer, java.lang.String) throws java.io.IOException;
+}
+Compiled from "VariableExpression.java"
+public class erilex.codegen.VariableExpression implements erilex.codegen.IExpression {
+  public java.lang.String name;
+  public void codeGen(java.io.Writer, java.lang.String) throws java.io.IOException;
+  public erilex.codegen.VariableExpression(java.lang.String);
+  public void renameVar(java.lang.String, java.lang.String);
+}
+Compiled from "WhileStatement.java"
+public class erilex.codegen.WhileStatement extends erilex.codegen.Statement {
+  erilex.codegen.IExpression cond;
+  erilex.codegen.Statement a;
+  public erilex.codegen.WhileStatement(erilex.codegen.IExpression, erilex.codegen.Statement);
+  public void codeGen(java.io.Writer, java.lang.String) throws java.io.IOException;
+  public void renameVar(java.lang.String, java.lang.String);
+}
+Compiled from "TransformerLanguageGenerator.java"
+public class erilex.codegen.embedded.TransformerLanguageGenerator {
+  public static final java.lang.String ANY;
+  public static final java.lang.String OL_PREFIX;
+  public static final java.lang.String NODE_TYPE;
+  public static final java.lang.String TRL_NODE_CONS;
+  public erilex.builder.LanguageBuilder<java.lang.Object> T;
+  public erilex.builder.LanguageBuilder<java.lang.Object> E;
+  public erilex.builder.LanguageBuilder<java.lang.Object> G;
+  public final erilex.codegen.SemanticsBuilder<erilex.data.generic.Tree<erilex.tree.ASTValueData>, erilex.data.generic.Pair<erilex.Grammar, erilex.tree.DeepTreeTransformer>> S;
+  public erilex.codegen.NameEmbedding t;
+  public erilex.codegen.NameEmbedding d;
+  public erilex.codegen.NameEmbedding e;
+  erilex.codegen.NameEmbedding OLt;
+  erilex.codegen.NameEmbedding OLd;
+  erilex.Grammar OLT;
+  erilex.Grammar OLG;
+  erilex.codegen.Type state;
+  java.lang.String path;
+  java.lang.String pack;
+  public erilex.codegen.LanguageGenerator tgg;
+  public final erilex.codegen.Type dchi;
+  final erilex.codegen.Type dnchi;
+  final erilex.codegen.Type dchi1;
+  final erilex.codegen.Type dchi2;
+  public void grammar(erilex.codegen.NameEmbedding, erilex.codegen.NameEmbedding, erilex.Grammar, erilex.Grammar);
+  public erilex.codegen.embedded.TransformerLanguageGenerator(erilex.codegen.NameEmbedding, erilex.codegen.NameEmbedding, erilex.Grammar, erilex.Grammar, erilex.codegen.Type, erilex.codegen.Type[], erilex.codegen.Type, java.lang.String, java.lang.String);
+  public void generate() throws java.io.IOException;
+  public erilex.codegen.Type getAbstactProductionOriginalTypeStr(erilex.AbstractProduction, erilex.Grammar, erilex.codegen.NameEmbedding, erilex.codegen.Type);
+  public erilex.codegen.Type getNodeTypeStr(erilex.codegen.NameEmbedding, erilex.codegen.NameEmbedding, erilex.Grammar, erilex.NonTerminal);
+  public static java.lang.String getNodeEnvStr(erilex.NonTerminal);
+  public void types(erilex.codegen.NameEmbedding, erilex.builder.LanguageBuilder, java.lang.String);
+}
+Compiled from "TransformerLanguageGenerator.java"
+public class erilex.codegen.embedded.TransformerLanguageGenerator$Eval {
+  erilex.Grammar OLG;
+  java.util.HashMap<java.lang.String, erilex.data.generic.Pair<java.lang.String, java.lang.Integer>[]> parameterMap;
+  int vStack;
+  int cStack;
+  erilex.codegen.Type tObj;
+  public erilex.codegen.embedded.TransformerLanguageGenerator$Eval(erilex.Grammar);
+  public erilex.data.generic.Tree<erilex.tree.ASTValueData> eval(erilex.data.generic.Pair, erilex.data.generic.Tree<erilex.tree.ASTValueData>);
+  public erilex.codegen.IExpression gen(erilex.data.generic.Pair, erilex.data.generic.Tree<erilex.tree.ASTValueData>);
+  public erilex.data.generic.Tree<erilex.tree.ASTValueData> subst(int, erilex.data.generic.Tree<erilex.tree.ASTValueData>, erilex.data.generic.Tree<erilex.tree.ASTValueData>);
+  public java.lang.Object lookup(erilex.data.generic.Pair, erilex.data.generic.Tree<erilex.tree.ASTValueData>);
+}
+Compiled from "TransformerLanguageGenerator.java"
+public class erilex.codegen.embedded.TransformerLanguageGenerator$TT extends erilex.codegen.GenericTreeTransformer<erilex.data.generic.Tree<erilex.tree.ASTValueData>, erilex.data.generic.Pair<erilex.Grammar, erilex.tree.DeepTreeTransformer>> {
+  public erilex.codegen.embedded.TransformerLanguageGenerator$TT();
+  public erilex.data.generic.Pair<erilex.Grammar, erilex.tree.DeepTreeTransformer> transform(erilex.data.generic.Tree<erilex.tree.ASTValueData>, erilex.data.generic.Pair<erilex.Grammar, erilex.tree.DeepTreeTransformer>);
+  public java.lang.Object transform(java.lang.Object, java.lang.Object);
+}
+Compiled from "TransformerLanguageGeneratorStringMode.java"
+public class erilex.codegen.embedded.TransformerLanguageGeneratorStringMode<State> {
+  public static final java.lang.String BY;
+  public static final java.lang.String by;
+  public static final java.lang.String JUDGEMENT;
+  public static final java.lang.String Trans;
+  public erilex.builder.LanguageBuilder<erilex.tree.DeepTreeTransformer> TrL;
+  public erilex.codegen.SemanticsBuilder<erilex.data.generic.Tree<java.lang.String>, erilex.tree.DeepTreeTransformer> TrLS;
+  erilex.builder.LanguageBuilder<java.lang.Object> TrLT;
+  erilex.builder.LanguageBuilder<java.lang.Object> TrLE;
+  erilex.Grammar E;
+  erilex.Grammar T;
+  erilex.Grammar G;
+  java.lang.String ss;
+  erilex.codegen.NameEmbedding d;
+  java.lang.Class<State> state;
+  public final erilex.codegen.Type dchi;
+  public erilex.codegen.embedded.TransformerLanguageGeneratorStringMode(erilex.codegen.NameEmbedding, erilex.codegen.NameEmbedding, erilex.codegen.NameEmbedding, erilex.Grammar, erilex.Grammar, erilex.Grammar, java.lang.String, erilex.codegen.Type, java.lang.Class<State>, java.lang.String, java.lang.String, java.lang.String);
+  public void genTransformerL();
+  public void generate() throws java.io.IOException;
+}
+Compiled from "TransformerLanguageGeneratorStringMode.java"
+public class erilex.codegen.embedded.TransformerLanguageGeneratorStringMode$TT extends erilex.codegen.GenericTreeTransformer<erilex.data.generic.Tree<java.lang.String>, erilex.tree.DeepTreeTransformer> {
+  public erilex.codegen.embedded.TransformerLanguageGeneratorStringMode$TT();
+  public erilex.tree.DeepTreeTransformer transform(erilex.data.generic.Tree<java.lang.String>, erilex.tree.DeepTreeTransformer);
+  public java.lang.Object transform(java.lang.Object, java.lang.Object);
+}
+Compiled from "TypingLanguageGenerator.java"
+public class erilex.codegen.embedded.TypingLanguageGenerator {
+  public static final java.lang.String IMPLY;
+  public static final java.lang.String imply;
+  public static final java.lang.String JUDGEMENT;
+  public static final java.lang.String Clause;
+  public erilex.builder.LanguageBuilder<erilex.Grammar[]> TL;
+  public erilex.codegen.SemanticsBuilder<erilex.data.generic.Tree<erilex.tree.ASTValueData>, erilex.Grammar[]> TLS;
+  erilex.Grammar E;
+  erilex.Grammar T;
+  erilex.Grammar G;
+  java.lang.String ss;
+  java.lang.String path;
+  java.lang.String pack;
+  erilex.codegen.NameEmbedding t;
+  erilex.codegen.NameEmbedding d;
+  erilex.codegen.NameEmbedding e;
+  public final erilex.codegen.Type dchi;
+  public erilex.codegen.LanguageGenerator generator;
+  erilex.builder.LanguageBuilder<java.lang.Object> TLT;
+  erilex.builder.LanguageBuilder<java.lang.Object> TLE;
+  public void genTypingL();
+  public void generate() throws java.io.IOException;
+  public erilex.codegen.embedded.TypingLanguageGenerator(erilex.codegen.NameEmbedding, erilex.Grammar, erilex.Grammar, erilex.Grammar, java.lang.String, erilex.codegen.Type, java.lang.String, java.lang.String);
+  public erilex.codegen.embedded.TypingLanguageGenerator(erilex.codegen.NameEmbedding, erilex.codegen.NameEmbedding, erilex.codegen.NameEmbedding, erilex.Grammar, erilex.Grammar, erilex.Grammar, java.lang.String, erilex.codegen.Type, java.lang.String, java.lang.String);
+  public static java.lang.String toTypeString(erilex.data.generic.Tree<erilex.tree.ASTValueData>);
+}
+Compiled from "TypingLanguageGenerator.java"
+public class erilex.codegen.embedded.TypingLanguageGenerator$TT extends erilex.codegen.GenericTreeTransformer<erilex.data.generic.Tree<erilex.tree.ASTValueData>, erilex.Grammar[]> {
+  public erilex.codegen.embedded.TypingLanguageGenerator$TT();
+  public erilex.Grammar[] transform(erilex.data.generic.Tree<erilex.tree.ASTValueData>, erilex.Grammar[]);
+  public static erilex.codegen.Type toType(erilex.data.generic.Tree<erilex.tree.ASTValueData>, erilex.codegen.NameEmbedding);
+  public java.lang.Object transform(java.lang.Object, java.lang.Object);
+}
+Compiled from "Lst.java"
+public class erilex.codegen.ex.Lst<V> {
+  public boolean nil;
+  public V hd;
+  public erilex.codegen.ex.Lst<V> tl;
+  public erilex.codegen.ex.Lst();
+  public erilex.codegen.ex.Lst(V, erilex.codegen.ex.Lst<V>);
+}
+Compiled from "STLCTyL.java"
+public class erilex.codegen.ex.STLCTyL {
+  public static erilex.builder.LanguageBuilder<java.lang.Object> T;
+  public static erilex.builder.LanguageBuilder<java.lang.Object> E;
+  public static erilex.builder.LanguageBuilder<java.lang.Object> G;
+  public static java.lang.String packty;
+  public static java.lang.String packtr;
+  public static java.lang.String packLang;
+  public static java.lang.String packLangVisitor;
+  public erilex.codegen.ex.STLCTyL();
+  public static void grammar(erilex.codegen.NameEmbedding, erilex.codegen.NameEmbedding, erilex.codegen.NameEmbedding);
+  public static void main(java.lang.String[]) throws java.io.IOException;
+  public static void printGrammarRules(erilex.codegen.LanguageGenerator, erilex.Grammar);
+  public static void printTypingRules(erilex.codegen.LanguageGenerator, erilex.Grammar);
+  static {};
+}
+Compiled from "TreeTransformerBuilder.java"
+public class erilex.codegen.ex.TreeTransformerBuilder {
+  erilex.builder.LanguageBuilder<java.lang.Object> G;
+  erilex.builder.LanguageBuilder<java.lang.Object> T;
+  erilex.builder.LanguageBuilder<java.lang.Object> E;
+  public erilex.codegen.ex.TreeTransformerBuilder();
+}
+Compiled from "TypingLanguageMain.java"
+public class erilex.codegen.ex.TypingLanguageMain {
+  public erilex.codegen.ex.TypingLanguageMain();
+  public static void main(java.lang.String[]) throws java.io.IOException;
+}
+Compiled from "CharArray.java"
+public class erilex.data.CharArray implements erilex.data.CharStream {
+  public erilex.data.CharArray(char[]);
+  public int next();
+  public erilex.data.CharArray$CharArrayLabel mark();
+  public void reset(erilex.data.CharStream$Label);
+  public java.lang.String getString(erilex.data.CharStream$Label, erilex.data.CharStream$Label);
+  public void unmark(erilex.data.CharStream$Label);
+  public long position();
+  public int lookahead(int);
+  public java.lang.String toString();
+  public long maxMarkedPosition();
+  public void seek(long);
+  public erilex.data.CharStream$Label mark();
+}
+Compiled from "CharArray.java"
+public class erilex.data.CharArray$CharArrayLabel implements erilex.data.CharStream$Label {
+  final erilex.data.CharArray this$0;
+  public erilex.data.CharArray$CharArrayLabel(erilex.data.CharArray, long);
+  public long getPosition();
+}
+Compiled from "CharStream.java"
+public interface erilex.data.CharStream {
+  public abstract int next();
+  public abstract erilex.data.CharStream$Label mark();
+  public abstract void unmark(erilex.data.CharStream$Label);
+  public abstract long position();
+  public abstract void reset(erilex.data.CharStream$Label);
+  public abstract java.lang.String getString(erilex.data.CharStream$Label, erilex.data.CharStream$Label);
+  public abstract long maxMarkedPosition();
+  public abstract int lookahead(int);
+  public abstract void seek(long);
+}
+Compiled from "CharStream.java"
+public interface erilex.data.CharStream$Label {
+  public abstract long getPosition();
+}
+Compiled from "FileStream.java"
+public class erilex.data.FileStream implements erilex.data.CharStream {
+  java.io.File file;
+  public long position;
+  erilex.data.FileStream$FileStreamLabel[] labelMap;
+  public erilex.data.FileStream(java.io.File) throws java.io.FileNotFoundException;
+  public int next();
+  public erilex.data.FileStream$FileStreamLabel mark();
+  public void reset(erilex.data.CharStream$Label);
+  public java.lang.String getString(erilex.data.CharStream$Label, erilex.data.CharStream$Label);
+  public void unmark(erilex.data.CharStream$Label);
+  public long position();
+  public int lookahead(int);
+  public long maxMarkedPosition();
+  public void seek(long);
+  public erilex.data.CharStream$Label mark();
+}
+Compiled from "FileStream.java"
+public class erilex.data.FileStream$FileStreamLabel implements erilex.data.CharStream$Label {
+  final erilex.data.FileStream this$0;
+  public erilex.data.FileStream$FileStreamLabel(erilex.data.FileStream, long);
+  public long getPosition();
+}
+Compiled from "MaybeBoolean.java"
+public final class erilex.data.generic.MaybeBoolean extends java.lang.Enum<erilex.data.generic.MaybeBoolean> {
+  public static final erilex.data.generic.MaybeBoolean t;
+  public static final erilex.data.generic.MaybeBoolean f;
+  public static final erilex.data.generic.MaybeBoolean unsure;
+  public static erilex.data.generic.MaybeBoolean[] values();
+  public static erilex.data.generic.MaybeBoolean valueOf(java.lang.String);
+  static {};
+}
+Compiled from "Pair.java"
+public class erilex.data.generic.Pair<S, T> {
+  public S fst;
+  public T snd;
+  public erilex.data.generic.Pair(S, T);
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+}
+Compiled from "Quadruple.java"
+public class erilex.data.generic.Quadruple<U, V, W, X> {
+  public U first;
+  public V second;
+  public W third;
+  public X fourth;
+  public erilex.data.generic.Quadruple(U, V, W, X);
+  public U first();
+  public V second();
+  public W third();
+  public X fourth();
+}
+Compiled from "Tree.java"
+public class erilex.data.generic.Tree<T> {
+  public erilex.data.generic.Tree<T>[] subtrees;
+  public T val;
+  public erilex.data.generic.Tree(T, erilex.data.generic.Tree<T>...);
+  public int degree();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+}
+Compiled from "Triple.java"
+public class erilex.data.generic.Triple<U, V, W> {
+  public U first;
+  public V second;
+  public W third;
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public java.lang.Object[] toArray();
+  public final U first();
+  public final V second();
+  public final W third();
+  public erilex.data.generic.Triple(U, V, W);
+}
+Compiled from "ESL.java"
+public class erilex.esl.ESL extends erilex.builder.LanguageBuilder<erilex.esl.SupportCodeGenerator> {
+  public static final java.lang.String Antecedent;
+  public static final java.lang.String Assignment;
+  public static final java.lang.String AssignmentLine;
+  public static final java.lang.String BLOCK;
+  public static final java.lang.String BLOCK2;
+  public static final java.lang.String CHAR;
+  public static final java.lang.String COMMENT;
+  public static final java.lang.String Dashes;
+  public static final java.lang.String DefinitionLine;
+  public static final java.lang.String DIGIT;
+  public static final java.lang.String EOL;
+  public static final java.lang.String EvaluationRule;
+  public static final java.lang.String JAVACODEBLOCK;
+  public static final java.lang.String Judgment;
+  public static final java.lang.String LETTER;
+  public static final java.lang.String ID;
+  public static final java.lang.String NAME;
+  public static final java.lang.String STYPE;
+  public static final java.lang.String TYPE;
+  public static final java.lang.String NONEOL;
+  public static final java.lang.String Postcedent;
+  public static final java.lang.String ProductionLine;
+  public static final java.lang.String Production;
+  public static final java.lang.String STRING;
+  public static final java.lang.String STRING2;
+  public static final java.lang.String Spec;
+  public static final java.lang.String TypingRule;
+  public static final java.lang.String Term;
+  public erilex.esl.ESL$HostLanguage target;
+  public java.util.Map<erilex.data.generic.Pair<java.lang.String, java.lang.String>, java.lang.Object[]> prodTable;
+  public java.util.Map<erilex.data.generic.Pair<java.lang.String, java.lang.String>, java.lang.Object[]> trTable;
+  public java.util.Map<java.lang.String, java.lang.String> varTable;
+  public java.util.List<java.lang.String> tvarList;
+  public java.util.List<java.lang.String> evarList;
+  public java.util.Map<java.lang.String, java.lang.String> ntTransTable;
+  public java.util.Set<java.lang.String> ntSet;
+  public java.lang.String[] getKeywords();
+  public boolean isKeyword(java.lang.String);
+  public java.lang.String mapKeyword(java.lang.String);
+  public erilex.esl.ESL();
+  public java.lang.Object[] parseProduciton(erilex.data.generic.Tree<erilex.tree.ASTValueData>);
+  public java.lang.String[] parseJudgment(erilex.data.generic.Tree<erilex.tree.ASTValueData>);
+  public java.lang.String[] parsePostcedent(erilex.data.generic.Tree<erilex.tree.ASTValueData>);
+  public static java.lang.String concat(erilex.data.generic.Tree<erilex.tree.ASTValueData>, java.lang.String);
+  public static java.lang.String[] mapText(erilex.data.generic.Tree<erilex.tree.ASTValueData>);
+  public static void main(java.lang.String[]) throws java.io.FileNotFoundException, java.io.IOException;
+  static void access$100(erilex.esl.ESL, erilex.esl.SupportCodeGenerator);
+  static void access$200(erilex.esl.ESL, erilex.esl.SupportCodeGenerator);
+  static void access$300(erilex.esl.ESL, erilex.esl.SupportCodeGenerator);
+  static void access$400(erilex.esl.ESL, erilex.esl.SupportCodeGenerator);
+}
+Compiled from "ESL.java"
+class erilex.esl.ESL$1 extends erilex.tree.TreeTransformerAdapter<erilex.esl.SupportCodeGenerator> {
+  final erilex.esl.ESL this$0;
+  erilex.esl.ESL$1(erilex.esl.ESL);
+  public erilex.esl.SupportCodeGenerator transform(erilex.data.generic.Tree<erilex.tree.ASTValueData>, erilex.esl.SupportCodeGenerator);
+  public java.lang.Object transform(erilex.data.generic.Tree, java.lang.Object);
+  public java.lang.Object transform(java.lang.Object, java.lang.Object);
+}
+Compiled from "ESL.java"
+class erilex.esl.ESL$2 extends erilex.tree.TreeTransformerAdapter<erilex.esl.SupportCodeGenerator> {
+  final erilex.esl.ESL this$0;
+  erilex.esl.ESL$2(erilex.esl.ESL);
+  public erilex.esl.SupportCodeGenerator transform(erilex.data.generic.Tree<erilex.tree.ASTValueData>, erilex.esl.SupportCodeGenerator);
+  public java.lang.Object transform(erilex.data.generic.Tree, java.lang.Object);
+  public java.lang.Object transform(java.lang.Object, java.lang.Object);
+}
+Compiled from "ESL.java"
+class erilex.esl.ESL$3 extends erilex.tree.TreeTransformerAdapter<erilex.esl.SupportCodeGenerator> {
+  final erilex.esl.ESL this$0;
+  erilex.esl.ESL$3(erilex.esl.ESL);
+  public erilex.esl.SupportCodeGenerator transform(erilex.data.generic.Tree<erilex.tree.ASTValueData>, erilex.esl.SupportCodeGenerator);
+  public java.lang.Object transform(erilex.data.generic.Tree, java.lang.Object);
+  public java.lang.Object transform(java.lang.Object, java.lang.Object);
+}
+Compiled from "ESL.java"
+class erilex.esl.ESL$4 extends erilex.tree.TreeTransformerAdapter<erilex.esl.SupportCodeGenerator> {
+  final erilex.esl.ESL this$0;
+  erilex.esl.ESL$4(erilex.esl.ESL);
+  public erilex.esl.SupportCodeGenerator transform(erilex.data.generic.Tree<erilex.tree.ASTValueData>, erilex.esl.SupportCodeGenerator);
+  public java.lang.Object transform(erilex.data.generic.Tree, java.lang.Object);
+  public java.lang.Object transform(java.lang.Object, java.lang.Object);
+}
+Compiled from "ESL.java"
+class erilex.esl.ESL$5 extends erilex.tree.TreeTransformerAdapter<erilex.esl.SupportCodeGenerator> {
+  final erilex.esl.ESL this$0;
+  erilex.esl.ESL$5(erilex.esl.ESL);
+  public erilex.esl.SupportCodeGenerator transform(erilex.data.generic.Tree<erilex.tree.ASTValueData>, erilex.esl.SupportCodeGenerator);
+  public java.lang.Object transform(erilex.data.generic.Tree, java.lang.Object);
+  public java.lang.Object transform(java.lang.Object, java.lang.Object);
+}
+Compiled from "ESL.java"
+class erilex.esl.ESL$6 extends erilex.tree.TreeTransformerAdapter<erilex.esl.SupportCodeGenerator> {
+  final erilex.esl.ESL this$0;
+  erilex.esl.ESL$6(erilex.esl.ESL);
+  public erilex.esl.SupportCodeGenerator transform(erilex.data.generic.Tree<erilex.tree.ASTValueData>, erilex.esl.SupportCodeGenerator);
+  public java.lang.Object transform(erilex.data.generic.Tree, java.lang.Object);
+  public java.lang.Object transform(java.lang.Object, java.lang.Object);
+}
+Compiled from "ESL.java"
+public abstract class erilex.esl.ESL$HostLanguage extends java.lang.Enum<erilex.esl.ESL$HostLanguage> {
+  public static final erilex.esl.ESL$HostLanguage Java;
+  public static final erilex.esl.ESL$HostLanguage Scala;
+  public static erilex.esl.ESL$HostLanguage[] values();
+  public static erilex.esl.ESL$HostLanguage valueOf(java.lang.String);
+  public abstract java.lang.String[] getKeywords();
+  erilex.esl.ESL$HostLanguage(java.lang.String, int, erilex.esl.ESL$1);
+  static {};
+}
+Compiled from "ESL.java"
+final class erilex.esl.ESL$HostLanguage$1 extends erilex.esl.ESL$HostLanguage {
+  public final java.lang.String[] keywords;
+  erilex.esl.ESL$HostLanguage$1(java.lang.String, int);
+  public java.lang.String[] getKeywords();
+}
+Compiled from "ESL.java"
+final class erilex.esl.ESL$HostLanguage$2 extends erilex.esl.ESL$HostLanguage {
+  public final java.lang.String[] keywords;
+  erilex.esl.ESL$HostLanguage$2(java.lang.String, int);
+  public java.lang.String[] getKeywords();
+}
+Compiled from "SupportCodeGenerator.java"
+public class erilex.esl.SupportCodeGenerator {
+  public static final java.lang.String __NAT;
+  erilex.codegen.NameEmbedding t;
+  erilex.codegen.NameEmbedding d;
+  erilex.codegen.NameEmbedding e;
+  erilex.builder.LanguageBuilder E;
+  erilex.builder.LanguageBuilder T;
+  erilex.builder.LanguageBuilder G;
+  public java.util.Map<java.lang.String, java.lang.String> natTypeMap;
+  public java.util.Set<java.lang.String> funSet;
+  public static erilex.esl.SupportCodeGenerator defaultSCG;
+  public boolean typing;
+  erilex.codegen.Type dChi;
+  java.lang.String startType;
+  java.lang.String startEnv;
+  java.util.List<java.lang.String> evalatorName;
+  java.lang.String stateName;
+  java.lang.String defaultEval;
+  erilex.tree.DeepTreeTransformer<erilex.data.generic.Tree, java.lang.Object> dtt;
+  java.lang.String path;
+  java.lang.String pack;
+  public erilex.esl.SupportCodeGenerator();
+  public void setStartSymbol(java.lang.String);
+  public void defTermVar(java.lang.String);
+  public void defType(java.lang.String, java.lang.String, java.lang.String...);
+  public void defTypeVar(java.lang.String, java.lang.String);
+  public void defTypeNat(java.lang.String, java.lang.String);
+  public void defEnv(java.lang.String, java.lang.String, java.lang.String...);
+  public void defEnvVar(java.lang.String, java.lang.String);
+  public void setStartTypeAndEnv(java.lang.String, java.lang.String);
+  public void defTypingRule(java.lang.String, int, java.lang.String, java.lang.String, java.lang.String, java.lang.String...);
+  public void setDefaultEvaluator(java.lang.String);
+  public void defEvaluator(java.lang.String, java.lang.String, erilex.codegen.Variable...);
+  public void defEvaluatorComponent(java.lang.String, java.lang.String, java.lang.String, java.lang.String[], java.lang.String);
+  public java.lang.String getPack();
+  public void setPack(java.lang.String);
+  public java.lang.String getPath();
+  public void setPath(java.lang.String);
+  public void generate() throws java.io.IOException;
+  public void defTypeFun(java.lang.String, java.lang.String, java.lang.String[]);
+  static {};
+}
+Compiled from "TestEvaluatorCode.java"
+public class erilex.esl.TestEvaluatorCode {
+  public erilex.esl.TestEvaluatorCode();
+  public static void main(java.lang.String[]) throws java.io.IOException;
+}
+Compiled from "ASTTreeTransformer.java"
+public abstract class erilex.tree.ASTTreeTransformer<S> extends erilex.codegen.GenericTreeTransformer<erilex.data.generic.Tree<erilex.tree.ASTValueData>, S> {
+  public erilex.tree.ASTTreeTransformer();
+  public S subtreeTransformer(erilex.data.generic.Tree<erilex.tree.ASTValueData>, S);
+}
+Compiled from "ASTTreeVisitor.java"
+public interface erilex.tree.ASTTreeVisitor<S, R> {
+  public abstract R visit(erilex.data.generic.Tree<erilex.tree.ASTValueData>, S);
+}
+Compiled from "ASTValueData.java"
+public class erilex.tree.ASTValueData {
+  public erilex.Production p;
+  public long start;
+  public long finish;
+  public java.lang.String group;
+  public java.lang.String text;
+  public java.lang.String name;
+  public java.lang.Object obj;
+  public erilex.tree.ASTValueData(java.lang.String, java.lang.String);
+  public erilex.tree.ASTValueData(java.lang.String, java.lang.String, java.lang.Object);
+  public erilex.tree.ASTValueData(erilex.Production, long, long, java.lang.String, java.lang.String);
+  public erilex.tree.ASTValueData(erilex.Production, long, long, java.lang.String);
+  public java.lang.String toString();
+}
+Compiled from "DeepTreeTransformer.java"
+public class erilex.tree.DeepTreeTransformer<D extends erilex.data.generic.Tree, S> extends erilex.codegen.GenericTreeTransformer<D, S> {
+  public java.lang.String name;
+  public erilex.codegen.Type rType;
+  public java.util.HashMap<java.lang.String, erilex.codegen.GenericTreeTransformer<D, S>> transMap;
+  public java.util.HashMap<java.lang.String, java.lang.Class<? extends erilex.codegen.GenericTreeTransformer<D, S>>> transClassMap;
+  public java.util.HashMap<java.lang.String, erilex.codegen.IExpression> transExprMap;
+  public java.util.HashMap<java.lang.String, java.lang.String[]> transVarMap;
+  public erilex.codegen.Variable[] state;
+  public erilex.codegen.TypeFunction valueTypeFuncRaw;
+  public erilex.tree.DeepTreeTransformer(erilex.codegen.Type, erilex.codegen.TypeFunction);
+  public erilex.tree.DeepTreeTransformer(erilex.codegen.Type, java.lang.String);
+  public erilex.tree.DeepTreeTransformer(erilex.codegen.Type, java.lang.String, erilex.codegen.Variable...);
+  public S transform(D, S);
+  public <C extends erilex.codegen.GenericTreeTransformer<D, S>> void addTransformer(java.lang.String, java.lang.Class<C>);
+  public void addTransformer(java.lang.String, erilex.codegen.GenericTreeTransformer<D, S>);
+  public void addTransformer(java.lang.String, erilex.codegen.IExpression, java.lang.String...);
+  public erilex.codegen.Method evaluatorCode(erilex.codegen.NameEmbedding, java.util.Map<java.lang.String, java.lang.String>);
+  public java.lang.Object transform(java.lang.Object, java.lang.Object);
+}
+Compiled from "TreeBuildingHandler.java"
+public class erilex.tree.TreeBuildingHandler implements erilex.Handler {
+  java.util.Stack<java.util.Stack<erilex.data.generic.Tree<erilex.tree.ASTValueData>>> stack;
+  java.util.Stack<erilex.data.generic.Tree<erilex.tree.ASTValueData>> top;
+  erilex.data.generic.Tree<erilex.tree.ASTValueData> ast;
+  public boolean longText;
+  public erilex.tree.TreeBuildingHandler();
+  public void handle(erilex.Production, erilex.data.CharStream, erilex.data.CharStream$Label, erilex.data.CharStream$Label);
+  public void start(erilex.Production, erilex.data.CharStream);
+  public void failed(erilex.Production, erilex.data.CharStream);
+  public erilex.data.generic.Tree<erilex.tree.ASTValueData> getAST();
+  public erilex.data.generic.Tree<erilex.tree.ASTValueData> getASTandReset();
+  public void reset();
+}
+Compiled from "TreeTransformerAdapter.java"
+public class erilex.tree.TreeTransformerAdapter<S> extends erilex.tree.ASTTreeTransformer<S> {
+  public erilex.tree.TreeTransformerAdapter();
+  public S transformBefore(erilex.data.generic.Tree<erilex.tree.ASTValueData>, S);
+  public S transformAfter(erilex.data.generic.Tree<erilex.tree.ASTValueData>, S);
+  public S transform(erilex.data.generic.Tree<erilex.tree.ASTValueData>, S);
+  public java.lang.Object transform(java.lang.Object, java.lang.Object);
+}
+Compiled from "TreeUtils.java"
+public class erilex.tree.TreeUtils {
+  public erilex.tree.TreeUtils();
+  public static java.util.List<erilex.data.generic.Tree<erilex.tree.ASTValueData>> getGroup(erilex.data.generic.Tree<erilex.tree.ASTValueData>, java.lang.String);
+  public static erilex.data.generic.Tree<erilex.tree.ASTValueData> firstPath(erilex.data.generic.Tree<erilex.tree.ASTValueData>, java.lang.String...);
+  public static java.util.List<erilex.data.generic.Tree<erilex.tree.ASTValueData>> groupPath(erilex.data.generic.Tree<erilex.tree.ASTValueData>, java.lang.String...);
+  public static java.util.List<erilex.data.generic.Tree<erilex.tree.ASTValueData>> getGroupByVal(erilex.data.generic.Tree<erilex.tree.ASTValueData>, java.lang.String);
+  public static erilex.data.generic.Tree<erilex.tree.ASTValueData> newNode(java.lang.String, erilex.data.generic.Tree<erilex.tree.ASTValueData>...);
+  public static erilex.data.generic.Tree<erilex.tree.ASTValueData> replaceSubtrees(erilex.data.generic.Tree<erilex.tree.ASTValueData>, erilex.data.generic.Tree<erilex.tree.ASTValueData>...);
+  public static erilex.data.generic.Tree<erilex.tree.ASTValueData> replaceSubtrees(erilex.data.generic.Tree<erilex.tree.ASTValueData>, int, int, erilex.data.generic.Tree<erilex.tree.ASTValueData>...);
+  public static erilex.data.generic.Tree<erilex.tree.ASTValueData> createNode(java.lang.String, java.lang.String, erilex.data.generic.Tree<erilex.tree.ASTValueData>...);
+  public static java.lang.String text(erilex.data.generic.Tree<erilex.tree.ASTValueData>);
+  public static java.lang.String name(erilex.data.generic.Tree<erilex.tree.ASTValueData>);
+  public static long start(erilex.data.generic.Tree<erilex.tree.ASTValueData>);
+  public static long finish(erilex.data.generic.Tree<erilex.tree.ASTValueData>);
+  public static <S> S first(java.util.List<S>);
+  public static <S> S last(java.util.List<S>);
+  public static <S> java.util.List<S> tail(java.util.List<S>);
+  public static erilex.codegen.Type toType(erilex.data.generic.Tree<erilex.tree.ASTValueData>, erilex.codegen.NameEmbedding);
+}
+Compiled from "TypeEnvironment.java"
+public class erilex.tree.type.TypeEnvironment extends java.util.HashMap<java.lang.String, erilex.data.generic.Tree<erilex.tree.ASTValueData>> {
+  public erilex.tree.type.TypeEnvironment();
+}

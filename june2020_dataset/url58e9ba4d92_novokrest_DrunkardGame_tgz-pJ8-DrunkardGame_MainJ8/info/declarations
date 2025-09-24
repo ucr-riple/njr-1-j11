@@ -1,0 +1,431 @@
+Compiled from "BeggarFactory.java"
+public class DrunkardGame.Factories.BeggarFactory extends DrunkardGame.Factories.MovingObjectFactory {
+  public DrunkardGame.Factories.BeggarFactory(int, int);
+  public DrunkardGame.GameObjects.CommonObjects.GameMovingObject makeObject();
+}
+Compiled from "DrunkardFactory.java"
+public class DrunkardGame.Factories.DrunkardFactory extends DrunkardGame.Factories.MovingObjectFactory {
+  public DrunkardGame.Factories.DrunkardFactory(int, int);
+  public DrunkardGame.GameObjects.CommonObjects.GameMovingObject makeObject();
+}
+Compiled from "MovingObjectFactory.java"
+public abstract class DrunkardGame.Factories.MovingObjectFactory implements DrunkardGame.GameInterfaces.IGameFactory,DrunkardGame.GameInterfaces.IGameVisitor {
+  int movingObjectX;
+  int movingObjectY;
+  boolean canCreate;
+  public DrunkardGame.Factories.MovingObjectFactory(int, int);
+  abstract DrunkardGame.GameObjects.CommonObjects.GameMovingObject makeObject();
+  public DrunkardGame.GameObjects.CommonObjects.GameMovingObject getObject(DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.CommonObjects.GameObject, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.Border, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.Bottle, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.Column, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.GlassPoint, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.Lamppost, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.PoliceStation, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.Pub, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.MovableObjects.Drunkard, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameInterfaces.IGameState, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.States.DrunkardStates.DrunkardWalkingState, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.States.DrunkardStates.DrunkardLyingState, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.States.DrunkardStates.DrunkardSleepingState, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.MovableObjects.Beggar, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.MovableObjects.Policeman, DrunkardGame.GameObjects.CommonObjects.Field);
+}
+Compiled from "PolicemanFactory.java"
+public class DrunkardGame.Factories.PolicemanFactory extends DrunkardGame.Factories.MovingObjectFactory {
+  public DrunkardGame.Factories.PolicemanFactory(int, int);
+  public DrunkardGame.GameObjects.CommonObjects.GameMovingObject makeObject();
+}
+Compiled from "IGameFactory.java"
+public interface DrunkardGame.GameInterfaces.IGameFactory {
+  public abstract DrunkardGame.GameObjects.CommonObjects.GameMovingObject getObject(DrunkardGame.GameObjects.CommonObjects.Field);
+}
+Compiled from "IGameMoving.java"
+public interface DrunkardGame.GameInterfaces.IGameMoving {
+  public abstract void makeStep(DrunkardGame.GameObjects.CommonObjects.Field);
+}
+Compiled from "IGameObservable.java"
+public interface DrunkardGame.GameInterfaces.IGameObservable {
+  public abstract void registerGameObject(DrunkardGame.GameObjects.CommonObjects.GameMovingObject);
+  public abstract void notifyAboutStep();
+}
+Compiled from "IGamePrintable.java"
+public interface DrunkardGame.GameInterfaces.IGamePrintable {
+  public abstract void print();
+}
+Compiled from "IGameState.java"
+public interface DrunkardGame.GameInterfaces.IGameState extends DrunkardGame.GameInterfaces.IGameVisitor {
+  public abstract void makeStepHandle(DrunkardGame.GameObjects.CommonObjects.Field);
+}
+Compiled from "IGameStrategy.java"
+public interface DrunkardGame.GameInterfaces.IGameStrategy {
+  public abstract DrunkardGame.GameObjects.CommonObjects.Coordinates getOptimalStep(DrunkardGame.GameObjects.CommonObjects.Coordinates, DrunkardGame.GameObjects.CommonObjects.Field);
+}
+Compiled from "IGameVisitable.java"
+public interface DrunkardGame.GameInterfaces.IGameVisitable {
+  public abstract void accept(DrunkardGame.GameInterfaces.IGameVisitor, DrunkardGame.GameObjects.CommonObjects.Field);
+}
+Compiled from "IGameVisitor.java"
+public interface DrunkardGame.GameInterfaces.IGameVisitor {
+  public abstract void visit(DrunkardGame.GameObjects.CommonObjects.GameObject, DrunkardGame.GameObjects.CommonObjects.Field);
+  public abstract void visit(DrunkardGame.GameObjects.StaticObjects.Border, DrunkardGame.GameObjects.CommonObjects.Field);
+  public abstract void visit(DrunkardGame.GameObjects.StaticObjects.Bottle, DrunkardGame.GameObjects.CommonObjects.Field);
+  public abstract void visit(DrunkardGame.GameObjects.StaticObjects.Column, DrunkardGame.GameObjects.CommonObjects.Field);
+  public abstract void visit(DrunkardGame.GameObjects.StaticObjects.GlassPoint, DrunkardGame.GameObjects.CommonObjects.Field);
+  public abstract void visit(DrunkardGame.GameObjects.StaticObjects.Lamppost, DrunkardGame.GameObjects.CommonObjects.Field);
+  public abstract void visit(DrunkardGame.GameObjects.StaticObjects.PoliceStation, DrunkardGame.GameObjects.CommonObjects.Field);
+  public abstract void visit(DrunkardGame.GameObjects.StaticObjects.Pub, DrunkardGame.GameObjects.CommonObjects.Field);
+  public abstract void visit(DrunkardGame.GameObjects.MovableObjects.Drunkard, DrunkardGame.GameObjects.CommonObjects.Field);
+  public abstract void visit(DrunkardGame.GameInterfaces.IGameState, DrunkardGame.GameObjects.CommonObjects.Field);
+  public abstract void visit(DrunkardGame.States.DrunkardStates.DrunkardWalkingState, DrunkardGame.GameObjects.CommonObjects.Field);
+  public abstract void visit(DrunkardGame.States.DrunkardStates.DrunkardLyingState, DrunkardGame.GameObjects.CommonObjects.Field);
+  public abstract void visit(DrunkardGame.States.DrunkardStates.DrunkardSleepingState, DrunkardGame.GameObjects.CommonObjects.Field);
+  public abstract void visit(DrunkardGame.GameObjects.MovableObjects.Beggar, DrunkardGame.GameObjects.CommonObjects.Field);
+  public abstract void visit(DrunkardGame.GameObjects.MovableObjects.Policeman, DrunkardGame.GameObjects.CommonObjects.Field);
+}
+Compiled from "Coordinates.java"
+public class DrunkardGame.GameObjects.CommonObjects.Coordinates {
+  int X;
+  int Y;
+  public DrunkardGame.GameObjects.CommonObjects.Coordinates(int, int);
+  public DrunkardGame.GameObjects.CommonObjects.Coordinates(DrunkardGame.GameObjects.CommonObjects.Coordinates);
+  public int getX();
+  public int getY();
+  void setX(int);
+  void setY(int);
+}
+Compiled from "Field.java"
+public class DrunkardGame.GameObjects.CommonObjects.Field {
+  int rowCount;
+  int columnCount;
+  DrunkardGame.GameObjects.CommonObjects.GameObject[][] tableObjects;
+  DrunkardGame.GameObjects.StaticObjects.Column column;
+  DrunkardGame.GameObjects.StaticObjects.Lamppost lamppost;
+  DrunkardGame.GameObjects.StaticObjects.Pub pub;
+  DrunkardGame.GameObjects.StaticObjects.PoliceStation policeStation;
+  DrunkardGame.GameObjects.StaticObjects.GlassPoint glassPoint;
+  public DrunkardGame.GameObjects.CommonObjects.Field(int, int);
+  public int getRowCount();
+  public int getColumnCount();
+  public DrunkardGame.GameObjects.StaticObjects.Lamppost getLamppost();
+  public DrunkardGame.GameObjects.CommonObjects.GameObject getObject(int, int);
+  public DrunkardGame.GameObjects.CommonObjects.GameObject getObject(DrunkardGame.GameObjects.CommonObjects.Coordinates);
+  public void register(DrunkardGame.GameObjects.CommonObjects.GameObject);
+  public void unregister(DrunkardGame.GameObjects.CommonObjects.Coordinates);
+  public void swapGameObject(DrunkardGame.GameObjects.CommonObjects.Coordinates, DrunkardGame.GameObjects.CommonObjects.Coordinates);
+  public void print();
+}
+Compiled from "Game.java"
+public class DrunkardGame.GameObjects.CommonObjects.Game implements DrunkardGame.GameInterfaces.IGameObservable {
+  public int step;
+  DrunkardGame.GameObjects.CommonObjects.Field field;
+  java.util.ArrayList<DrunkardGame.GameObjects.CommonObjects.GameMovingObject> movingObjects;
+  DrunkardGame.GameInterfaces.IGameFactory drunkardFactory;
+  DrunkardGame.GameInterfaces.IGameFactory policemanFactory;
+  DrunkardGame.GameInterfaces.IGameFactory beggarFactory;
+  public DrunkardGame.GameObjects.CommonObjects.Game();
+  public void start();
+  public void registerGameObject(DrunkardGame.GameObjects.CommonObjects.GameMovingObject);
+  public void notifyAboutStep();
+}
+Compiled from "GameMovingObject.java"
+public class DrunkardGame.GameObjects.CommonObjects.GameMovingObject extends DrunkardGame.GameObjects.CommonObjects.GameObject implements DrunkardGame.GameInterfaces.IGameMoving {
+  public DrunkardGame.GameObjects.CommonObjects.GameMovingObject(int, int);
+  public void makeStep(DrunkardGame.GameObjects.CommonObjects.Field);
+}
+Compiled from "GameObject.java"
+public class DrunkardGame.GameObjects.CommonObjects.GameObject implements DrunkardGame.GameInterfaces.IGameVisitable,DrunkardGame.GameInterfaces.IGamePrintable {
+  DrunkardGame.GameObjects.CommonObjects.Coordinates coordinates;
+  public DrunkardGame.GameObjects.CommonObjects.GameObject(int, int);
+  public DrunkardGame.GameObjects.CommonObjects.Coordinates getCoordinates();
+  public int getX();
+  public int getY();
+  public void setCoordinates(DrunkardGame.GameObjects.CommonObjects.Coordinates);
+  public void accept(DrunkardGame.GameInterfaces.IGameVisitor, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void print();
+}
+Compiled from "Beggar.java"
+public class DrunkardGame.GameObjects.MovableObjects.Beggar extends DrunkardGame.GameObjects.CommonObjects.GameMovingObject implements DrunkardGame.GameInterfaces.IGameMoving,DrunkardGame.GameInterfaces.IGameVisitable {
+  int money;
+  DrunkardGame.GameInterfaces.IGameState beggarState;
+  public DrunkardGame.GameObjects.MovableObjects.Beggar(int, int);
+  public int getMoney();
+  public void setMoney(int);
+  public void spendSomeMoney(int);
+  public void setState(DrunkardGame.GameInterfaces.IGameState);
+  public void makeStep(DrunkardGame.GameObjects.CommonObjects.Field);
+  public void accept(DrunkardGame.GameInterfaces.IGameVisitor, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void print();
+}
+Compiled from "Drunkard.java"
+public class DrunkardGame.GameObjects.MovableObjects.Drunkard extends DrunkardGame.GameObjects.CommonObjects.GameMovingObject implements DrunkardGame.GameInterfaces.IGameMoving,DrunkardGame.GameInterfaces.IGameVisitable {
+  boolean hasBottle;
+  public DrunkardGame.States.DrunkardStates.DrunkardState drunkardState;
+  public DrunkardGame.GameObjects.MovableObjects.Drunkard(int, int);
+  public void setState(DrunkardGame.States.DrunkardStates.DrunkardState);
+  public void tryToLoseBottle(DrunkardGame.GameObjects.CommonObjects.Coordinates, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void makeStep(DrunkardGame.GameObjects.CommonObjects.Field);
+  public void accept(DrunkardGame.GameInterfaces.IGameVisitor, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void print();
+}
+Compiled from "Policeman.java"
+public class DrunkardGame.GameObjects.MovableObjects.Policeman extends DrunkardGame.GameObjects.CommonObjects.GameMovingObject implements DrunkardGame.GameInterfaces.IGameMoving {
+  boolean withDrunkard;
+  DrunkardGame.GameInterfaces.IGameState state;
+  public DrunkardGame.GameObjects.MovableObjects.Policeman(int, int);
+  public void setState(DrunkardGame.GameInterfaces.IGameState);
+  public void makeStep(DrunkardGame.GameObjects.CommonObjects.Field);
+  public void accept(DrunkardGame.GameInterfaces.IGameVisitor, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void print();
+}
+Compiled from "Border.java"
+public class DrunkardGame.GameObjects.StaticObjects.Border extends DrunkardGame.GameObjects.CommonObjects.GameObject implements DrunkardGame.GameInterfaces.IGameVisitable {
+  public DrunkardGame.GameObjects.StaticObjects.Border(int, int);
+  public void accept(DrunkardGame.GameInterfaces.IGameVisitor, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void print();
+}
+Compiled from "Bottle.java"
+public class DrunkardGame.GameObjects.StaticObjects.Bottle extends DrunkardGame.GameObjects.CommonObjects.GameObject {
+  public DrunkardGame.GameObjects.StaticObjects.Bottle(int, int);
+  public void accept(DrunkardGame.GameInterfaces.IGameVisitor, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void print();
+}
+Compiled from "Column.java"
+public class DrunkardGame.GameObjects.StaticObjects.Column extends DrunkardGame.GameObjects.CommonObjects.GameObject {
+  public DrunkardGame.GameObjects.StaticObjects.Column(int, int);
+  public void accept(DrunkardGame.GameInterfaces.IGameVisitor, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void print();
+}
+Compiled from "GlassPoint.java"
+public class DrunkardGame.GameObjects.StaticObjects.GlassPoint extends DrunkardGame.GameObjects.CommonObjects.GameObject {
+  public DrunkardGame.GameObjects.StaticObjects.GlassPoint(int, int);
+  public void accept(DrunkardGame.GameInterfaces.IGameVisitor, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void print();
+}
+Compiled from "Lamppost.java"
+public class DrunkardGame.GameObjects.StaticObjects.Lamppost extends DrunkardGame.GameObjects.CommonObjects.GameObject {
+  final int lightingRadius;
+  public DrunkardGame.GameObjects.StaticObjects.Lamppost(int, int);
+  public int getLightingRadius();
+  public void accept(DrunkardGame.GameInterfaces.IGameVisitor, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void print();
+}
+Compiled from "PoliceStation.java"
+public class DrunkardGame.GameObjects.StaticObjects.PoliceStation extends DrunkardGame.GameObjects.CommonObjects.GameObject {
+  public DrunkardGame.GameObjects.StaticObjects.PoliceStation(int, int);
+  public void accept(DrunkardGame.GameInterfaces.IGameVisitor, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void print();
+}
+Compiled from "Pub.java"
+public class DrunkardGame.GameObjects.StaticObjects.Pub extends DrunkardGame.GameObjects.CommonObjects.GameObject {
+  public DrunkardGame.GameObjects.StaticObjects.Pub(int, int);
+  public void accept(DrunkardGame.GameInterfaces.IGameVisitor, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void print();
+}
+Compiled from "Main.java"
+public class DrunkardGame.Main {
+  public DrunkardGame.Main();
+  public static void main(java.lang.String[]);
+}
+Compiled from "BeggarFindingBottleState.java"
+public class DrunkardGame.States.BeggarStates.BeggarFindingBottleState extends DrunkardGame.States.BeggarStates.BeggarState {
+  public DrunkardGame.States.BeggarStates.BeggarFindingBottleState(DrunkardGame.GameObjects.MovableObjects.Beggar);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.Bottle, DrunkardGame.GameObjects.CommonObjects.Field);
+}
+Compiled from "BeggarGoingToGlassPointState.java"
+public class DrunkardGame.States.BeggarStates.BeggarGoingToGlassPointState extends DrunkardGame.States.BeggarStates.BeggarState {
+  public DrunkardGame.States.BeggarStates.BeggarGoingToGlassPointState(DrunkardGame.GameObjects.MovableObjects.Beggar);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.GlassPoint, DrunkardGame.GameObjects.CommonObjects.Field);
+}
+Compiled from "BeggarSpendingMoneyState.java"
+public class DrunkardGame.States.BeggarStates.BeggarSpendingMoneyState extends DrunkardGame.States.BeggarStates.BeggarState {
+  public DrunkardGame.States.BeggarStates.BeggarSpendingMoneyState(DrunkardGame.GameObjects.MovableObjects.Beggar);
+  public void makeStepHandle(DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.CommonObjects.GameObject, DrunkardGame.GameObjects.CommonObjects.Field);
+}
+Compiled from "BeggarState.java"
+public class DrunkardGame.States.BeggarStates.BeggarState implements DrunkardGame.GameInterfaces.IGameState {
+  DrunkardGame.GameObjects.MovableObjects.Beggar beggar;
+  DrunkardGame.GameInterfaces.IGameStrategy beggarStrategy;
+  public DrunkardGame.States.BeggarStates.BeggarState(DrunkardGame.GameObjects.MovableObjects.Beggar);
+  public void makeStepHandle(DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.CommonObjects.GameObject, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.Border, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.Bottle, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.Column, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.GlassPoint, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.Lamppost, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.PoliceStation, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.Pub, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.MovableObjects.Drunkard, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameInterfaces.IGameState, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.States.DrunkardStates.DrunkardWalkingState, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.States.DrunkardStates.DrunkardLyingState, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.States.DrunkardStates.DrunkardSleepingState, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.MovableObjects.Beggar, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.MovableObjects.Policeman, DrunkardGame.GameObjects.CommonObjects.Field);
+}
+Compiled from "DrunkardInPrisonState.java"
+public class DrunkardGame.States.DrunkardStates.DrunkardInPrisonState extends DrunkardGame.States.DrunkardStates.DrunkardState {
+  public DrunkardGame.States.DrunkardStates.DrunkardInPrisonState(DrunkardGame.GameObjects.MovableObjects.Drunkard);
+}
+Compiled from "DrunkardLyingState.java"
+public class DrunkardGame.States.DrunkardStates.DrunkardLyingState extends DrunkardGame.States.DrunkardStates.DrunkardState {
+  public DrunkardGame.States.DrunkardStates.DrunkardLyingState(DrunkardGame.GameObjects.MovableObjects.Drunkard);
+  public void accept(DrunkardGame.GameInterfaces.IGameVisitor, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void print();
+}
+Compiled from "DrunkardSleepingState.java"
+public class DrunkardGame.States.DrunkardStates.DrunkardSleepingState extends DrunkardGame.States.DrunkardStates.DrunkardState {
+  public DrunkardGame.States.DrunkardStates.DrunkardSleepingState(DrunkardGame.GameObjects.MovableObjects.Drunkard);
+  public void accept(DrunkardGame.GameInterfaces.IGameVisitor, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void print();
+}
+Compiled from "DrunkardState.java"
+public abstract class DrunkardGame.States.DrunkardStates.DrunkardState implements DrunkardGame.GameInterfaces.IGameState,DrunkardGame.GameInterfaces.IGameVisitable,DrunkardGame.GameInterfaces.IGamePrintable {
+  DrunkardGame.GameObjects.MovableObjects.Drunkard drunkard;
+  DrunkardGame.GameInterfaces.IGameStrategy drunkardStrategy;
+  public DrunkardGame.States.DrunkardStates.DrunkardState(DrunkardGame.GameObjects.MovableObjects.Drunkard);
+  public DrunkardGame.GameObjects.CommonObjects.Coordinates getCoordinates();
+  public void makeStepHandle(DrunkardGame.GameObjects.CommonObjects.Field);
+  public void accept(DrunkardGame.GameInterfaces.IGameVisitor, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void print();
+  public void visit(DrunkardGame.GameObjects.CommonObjects.GameObject, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.Border, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.Bottle, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.Column, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.GlassPoint, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.Lamppost, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.PoliceStation, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.Pub, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.MovableObjects.Drunkard, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameInterfaces.IGameState, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.States.DrunkardStates.DrunkardWalkingState, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.States.DrunkardStates.DrunkardLyingState, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.States.DrunkardStates.DrunkardSleepingState, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.MovableObjects.Beggar, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.MovableObjects.Policeman, DrunkardGame.GameObjects.CommonObjects.Field);
+}
+Compiled from "DrunkardWalkingState.java"
+public class DrunkardGame.States.DrunkardStates.DrunkardWalkingState extends DrunkardGame.States.DrunkardStates.DrunkardState {
+  public DrunkardGame.States.DrunkardStates.DrunkardWalkingState(DrunkardGame.GameObjects.MovableObjects.Drunkard);
+  public void makeStepHandle(DrunkardGame.GameObjects.CommonObjects.Field);
+  public void accept(DrunkardGame.GameInterfaces.IGameVisitor, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.CommonObjects.GameObject, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.Bottle, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.Column, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.States.DrunkardStates.DrunkardLyingState, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.States.DrunkardStates.DrunkardSleepingState, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void print();
+}
+Compiled from "GoingToDrunkardState.java"
+public class DrunkardGame.States.PolicemanStates.GoingToDrunkardState extends DrunkardGame.States.PolicemanStates.PolicemanState {
+  public DrunkardGame.States.PolicemanStates.GoingToDrunkardState(DrunkardGame.GameObjects.MovableObjects.Policeman);
+  public void visit(DrunkardGame.States.DrunkardStates.DrunkardLyingState, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.States.DrunkardStates.DrunkardSleepingState, DrunkardGame.GameObjects.CommonObjects.Field);
+}
+Compiled from "GoingToPoliceStationState.java"
+public class DrunkardGame.States.PolicemanStates.GoingToPoliceStationState extends DrunkardGame.States.PolicemanStates.PolicemanState {
+  public DrunkardGame.States.PolicemanStates.GoingToPoliceStationState(DrunkardGame.GameObjects.MovableObjects.Policeman);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.PoliceStation, DrunkardGame.GameObjects.CommonObjects.Field);
+}
+Compiled from "PolicemanState.java"
+public class DrunkardGame.States.PolicemanStates.PolicemanState implements DrunkardGame.GameInterfaces.IGameState {
+  DrunkardGame.GameObjects.MovableObjects.Policeman policeman;
+  DrunkardGame.GameInterfaces.IGameStrategy strategy;
+  public DrunkardGame.States.PolicemanStates.PolicemanState(DrunkardGame.GameObjects.MovableObjects.Policeman);
+  public void makeStepHandle(DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.CommonObjects.GameObject, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.Border, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.Bottle, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.Column, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.GlassPoint, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.Lamppost, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.PoliceStation, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.Pub, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.MovableObjects.Drunkard, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameInterfaces.IGameState, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.States.DrunkardStates.DrunkardWalkingState, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.States.DrunkardStates.DrunkardLyingState, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.States.DrunkardStates.DrunkardSleepingState, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.MovableObjects.Beggar, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.MovableObjects.Policeman, DrunkardGame.GameObjects.CommonObjects.Field);
+}
+Compiled from "WaitingState.java"
+public class DrunkardGame.States.PolicemanStates.WaitingState extends DrunkardGame.States.PolicemanStates.PolicemanState {
+  public DrunkardGame.States.PolicemanStates.WaitingState(DrunkardGame.GameObjects.MovableObjects.Policeman);
+  public void makeStepHandle(DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.CommonObjects.GameObject, DrunkardGame.GameObjects.CommonObjects.Field);
+}
+Compiled from "BottleFinderStrategy.java"
+public class DrunkardGame.Strategies.BeggarStrategies.BottleFinderStrategy extends DrunkardGame.Strategies.FinderStrategy {
+  public DrunkardGame.Strategies.BeggarStrategies.BottleFinderStrategy();
+  public void visit(DrunkardGame.GameObjects.StaticObjects.Bottle, DrunkardGame.GameObjects.CommonObjects.Field);
+}
+Compiled from "GlassPointFinderStrategy.java"
+public class DrunkardGame.Strategies.BeggarStrategies.GlassPointFinderStrategy extends DrunkardGame.Strategies.FinderStrategy {
+  public DrunkardGame.Strategies.BeggarStrategies.GlassPointFinderStrategy();
+  public void visit(DrunkardGame.GameObjects.StaticObjects.GlassPoint, DrunkardGame.GameObjects.CommonObjects.Field);
+}
+Compiled from "DrunkardWalkingStrategy.java"
+public class DrunkardGame.Strategies.DrunkardStrategies.DrunkardWalkingStrategy implements DrunkardGame.GameInterfaces.IGameStrategy {
+  public DrunkardGame.Strategies.DrunkardStrategies.DrunkardWalkingStrategy();
+  public DrunkardGame.GameObjects.CommonObjects.Coordinates getOptimalStep(DrunkardGame.GameObjects.CommonObjects.Coordinates, DrunkardGame.GameObjects.CommonObjects.Field);
+}
+Compiled from "FinderStrategy.java"
+public abstract class DrunkardGame.Strategies.FinderStrategy implements DrunkardGame.GameInterfaces.IGameVisitor,DrunkardGame.GameInterfaces.IGameStrategy {
+  protected DrunkardGame.GameObjects.CommonObjects.Coordinates targetObjectCoordinates;
+  protected boolean[][] isVisit;
+  protected DrunkardGame.GameObjects.CommonObjects.GameObject[][] predecessors;
+  protected java.util.Queue<DrunkardGame.GameObjects.CommonObjects.GameObject> objectsForVisit;
+  public DrunkardGame.Strategies.FinderStrategy();
+  public DrunkardGame.GameObjects.CommonObjects.Coordinates getOptimalStep(DrunkardGame.GameObjects.CommonObjects.Coordinates, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.CommonObjects.GameObject, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.Border, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.Bottle, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.Column, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.GlassPoint, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.Lamppost, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.PoliceStation, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.Pub, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.MovableObjects.Drunkard, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameInterfaces.IGameState, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.States.DrunkardStates.DrunkardWalkingState, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.States.DrunkardStates.DrunkardLyingState, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.States.DrunkardStates.DrunkardSleepingState, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.MovableObjects.Beggar, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.MovableObjects.Policeman, DrunkardGame.GameObjects.CommonObjects.Field);
+}
+Compiled from "DrunkardFinderStrategy.java"
+public class DrunkardGame.Strategies.PolicemanStrategy.DrunkardFinderStrategy extends DrunkardGame.Strategies.FinderStrategy {
+  public DrunkardGame.Strategies.PolicemanStrategy.DrunkardFinderStrategy();
+  public void visit(DrunkardGame.States.DrunkardStates.DrunkardLyingState, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.States.DrunkardStates.DrunkardSleepingState, DrunkardGame.GameObjects.CommonObjects.Field);
+}
+Compiled from "PoliceStationFinderStrategy.java"
+public class DrunkardGame.Strategies.PolicemanStrategy.PoliceStationFinderStrategy extends DrunkardGame.Strategies.FinderStrategy {
+  public DrunkardGame.Strategies.PolicemanStrategy.PoliceStationFinderStrategy();
+  public void visit(DrunkardGame.GameObjects.StaticObjects.PoliceStation, DrunkardGame.GameObjects.CommonObjects.Field);
+}
+Compiled from "WaitingStrategy.java"
+public class DrunkardGame.Strategies.PolicemanStrategy.WaitingStrategy implements DrunkardGame.GameInterfaces.IGameStrategy,DrunkardGame.GameInterfaces.IGameVisitor {
+  DrunkardGame.GameObjects.CommonObjects.Coordinates drunkardCoordinate;
+  public DrunkardGame.Strategies.PolicemanStrategy.WaitingStrategy();
+  public DrunkardGame.GameObjects.CommonObjects.Coordinates getOptimalStep(DrunkardGame.GameObjects.CommonObjects.Coordinates, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.CommonObjects.GameObject, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.Border, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.Bottle, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.Column, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.GlassPoint, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.Lamppost, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.PoliceStation, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.StaticObjects.Pub, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.MovableObjects.Drunkard, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameInterfaces.IGameState, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.States.DrunkardStates.DrunkardWalkingState, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.States.DrunkardStates.DrunkardLyingState, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.States.DrunkardStates.DrunkardSleepingState, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.MovableObjects.Beggar, DrunkardGame.GameObjects.CommonObjects.Field);
+  public void visit(DrunkardGame.GameObjects.MovableObjects.Policeman, DrunkardGame.GameObjects.CommonObjects.Field);
+}

@@ -1,0 +1,275 @@
+Compiled from "ArgHolder.java"
+public class org.argparser.ArgHolder<V> implements java.lang.Cloneable, java.io.Serializable {
+  public static final org.argparser.ArgHolder<java.lang.Boolean> createBooleanHolder();
+  public static final org.argparser.ArgHolder<java.lang.Double> createDoubleHolder();
+  public static final org.argparser.ArgHolder<java.lang.Float> createFloatHolder();
+  public static final org.argparser.ArgHolder<java.lang.Integer> createIntHolder();
+  public static final org.argparser.ArgHolder<java.lang.Long> createLongHolder();
+  public static final org.argparser.ArgHolder<java.lang.Short> createShortHolder();
+  public static final org.argparser.ArgHolder<java.lang.String> createStringHolder();
+  public static final org.argparser.ArgHolder<java.lang.String> createStringHolder(java.lang.String);
+  public org.argparser.ArgHolder(org.argparser.ArgHolder<V>);
+  public org.argparser.ArgHolder(java.lang.Class<V>);
+  public org.argparser.ArgHolder(V);
+  public org.argparser.ArgHolder<V> clone();
+  public boolean equals(java.lang.Object);
+  public V getDefaultValue();
+  public java.lang.Class<V> getType();
+  public V getValue();
+  public V getFinalValue();
+  public int hashCode();
+  public boolean isSetDefaultValue();
+  public boolean isSetValue();
+  public void setValue(V);
+  public java.lang.String toString();
+  public void unsetValue();
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "ArgParseException.java"
+public class org.argparser.ArgParseException extends java.io.IOException {
+  public org.argparser.ArgParseException(java.lang.String);
+  public org.argparser.ArgParseException(java.lang.String, java.lang.String);
+}
+Compiled from "ArgParser.java"
+public class org.argparser.ArgParser {
+  boolean helpOptionsEnabled;
+  public static int EXIT_ON_ERROR;
+  public static int EXIT_ON_UNMATCHED;
+  public static java.lang.String getValidConversionCodes();
+  public org.argparser.ArgParser(java.lang.String);
+  public org.argparser.ArgParser(java.lang.String, boolean);
+  public java.lang.String getSynopsisString();
+  public void setSynopsisString(java.lang.String);
+  public boolean getHelpOptionsEnabled();
+  public void setHelpOptionsEnabled(boolean);
+  public java.io.PrintStream getDefaultPrintStream();
+  public void setDefaultPrintStream(java.io.PrintStream);
+  public int getHelpIndentation();
+  public void setHelpIndentation(int);
+  public int getConsoleColumns();
+  public void setConsoleColumns(int);
+  public void addOption(java.lang.String, java.lang.Object, boolean) throws java.lang.IllegalArgumentException;
+  public void addOption(java.lang.String, java.lang.Object) throws java.lang.IllegalArgumentException;
+  public void addDelimiter(java.lang.String);
+  public org.argparser.ArgParser$Record lastMatchRecord();
+  protected java.lang.Object getResultHolder(java.lang.String);
+  protected java.lang.String getOptionName(java.lang.String);
+  protected java.lang.String getOptionRangeDesc(java.lang.String);
+  protected java.lang.String getOptionTypeName(java.lang.String);
+  public static void stringToArgs(java.util.Vector<java.lang.String>, java.lang.String, boolean) throws org.argparser.StringScanException;
+  public static java.lang.String[] prependArgs(java.io.Reader, java.lang.String[]) throws java.io.IOException;
+  public static java.lang.String[] prependArgs(java.io.File, java.lang.String[]) throws java.io.IOException;
+  protected void setError(java.lang.String);
+  public void printErrorAndExit(java.lang.String);
+  public void matchAllArgs(java.lang.String[]);
+  public java.lang.String[] matchAllArgs(java.lang.String[], int, int);
+  public int matchArg(java.lang.String[], int) throws org.argparser.ArgParseException;
+  public static java.lang.String getLongestCommonPrefix(java.lang.String, java.lang.String);
+  public static java.lang.String insertLineBreaks(java.lang.String, int, java.lang.String, java.lang.String, boolean);
+  public java.lang.String getHelpMessage();
+  public java.lang.String getErrorMessage();
+  public java.lang.String getUnmatchedArgument();
+  static {};
+}
+Compiled from "ArgParser.java"
+class org.argparser.ArgParser$NameDesc {
+  org.argparser.ArgParser$NameDesc();
+  public java.lang.String getName();
+  public boolean isOneWord();
+  public org.argparser.ArgParser$NameDesc getNext();
+  static java.lang.String access$200(org.argparser.ArgParser$NameDesc);
+  static java.lang.String access$202(org.argparser.ArgParser$NameDesc, java.lang.String);
+  static org.argparser.ArgParser$NameDesc access$602(org.argparser.ArgParser$NameDesc, org.argparser.ArgParser$NameDesc);
+  static boolean access$702(org.argparser.ArgParser$NameDesc, boolean);
+  static boolean access$700(org.argparser.ArgParser$NameDesc);
+  static org.argparser.ArgParser$NameDesc access$600(org.argparser.ArgParser$NameDesc);
+}
+Compiled from "ArgParser.java"
+class org.argparser.ArgParser$RangeAtom {
+  final org.argparser.ArgParser this$0;
+  public org.argparser.ArgParser$RangePnt getLow();
+  public org.argparser.ArgParser$RangePnt getHigh();
+  public org.argparser.ArgParser$RangeAtom getNext();
+  public org.argparser.ArgParser$RangeAtom(org.argparser.ArgParser, org.argparser.ArgParser$RangePnt, org.argparser.ArgParser$RangePnt, int) throws java.lang.IllegalArgumentException;
+  public org.argparser.ArgParser$RangeAtom(org.argparser.ArgParser, org.argparser.ArgParser$RangePnt) throws java.lang.IllegalArgumentException;
+  public boolean match(double);
+  public boolean match(long);
+  public boolean match(java.lang.String);
+  public boolean matchIgnoreCase(java.lang.String);
+  public boolean match(boolean);
+  public java.lang.String toString();
+  static org.argparser.ArgParser$RangeAtom access$000(org.argparser.ArgParser$RangeAtom);
+  static org.argparser.ArgParser$RangeAtom access$002(org.argparser.ArgParser$RangeAtom, org.argparser.ArgParser$RangeAtom);
+  static org.argparser.ArgParser$RangePnt access$1100(org.argparser.ArgParser$RangeAtom);
+}
+Compiled from "ArgParser.java"
+class org.argparser.ArgParser$RangePnt {
+  double dval;
+  long lval;
+  java.lang.String sval;
+  boolean bval;
+  boolean closed;
+  public org.argparser.ArgParser$RangePnt(java.lang.String, boolean);
+  public org.argparser.ArgParser$RangePnt(double, boolean);
+  public org.argparser.ArgParser$RangePnt(long, boolean);
+  public org.argparser.ArgParser$RangePnt(boolean, boolean);
+  public org.argparser.ArgParser$RangePnt(org.argparser.StringScanner, int) throws java.lang.IllegalArgumentException;
+  public void setClosed(boolean);
+  public boolean getClosed();
+  public int compareTo(double);
+  public int compareTo(long);
+  public int compareTo(java.lang.String);
+  public int compareToIgnoreCase(java.lang.String);
+  public int compareTo(boolean);
+  public java.lang.String toString();
+}
+Compiled from "ArgParser.java"
+class org.argparser.ArgParser$Record {
+  public static final int DELIM;
+  public static final int NOTYPE;
+  public static final int BOOLEAN;
+  public static final int CHAR;
+  public static final int INT;
+  public static final int LONG;
+  public static final int FLOAT;
+  public static final int DOUBLE;
+  public static final int STRING;
+  final org.argparser.ArgParser this$0;
+  org.argparser.ArgParser$Record(org.argparser.ArgParser);
+  public int getNumValues();
+  public java.lang.String getHelpMsg();
+  public char getConvertCode();
+  public org.argparser.ArgParser$NameDesc firstNameDesc();
+  public org.argparser.ArgParser$RangeAtom firstRangeAtom();
+  public int numRangeAtoms();
+  public void addRangeAtom(org.argparser.ArgParser$RangeAtom);
+  public boolean withinRange(double);
+  public boolean withinRange(long);
+  public boolean withinRange(java.lang.String);
+  public boolean withinRange(boolean);
+  public java.lang.String valTypeName();
+  public void scanValue(java.lang.Object, java.lang.String, java.lang.String, int) throws org.argparser.ArgParseException;
+  public boolean isVisible();
+  public void setVisible(boolean);
+  static org.argparser.ArgParser$NameDesc access$100(org.argparser.ArgParser$Record);
+  static char access$300(org.argparser.ArgParser$Record);
+  static int access$400(org.argparser.ArgParser$Record);
+  static java.lang.String access$502(org.argparser.ArgParser$Record, java.lang.String);
+  static org.argparser.ArgParser$NameDesc access$102(org.argparser.ArgParser$Record, org.argparser.ArgParser$NameDesc);
+  static char access$302(org.argparser.ArgParser$Record, char);
+  static int access$402(org.argparser.ArgParser$Record, int);
+  static java.lang.Object access$802(org.argparser.ArgParser$Record, java.lang.Object);
+  static org.argparser.ArgParser$RangeAtom access$900(org.argparser.ArgParser$Record);
+  static boolean access$1002(org.argparser.ArgParser$Record, boolean);
+  static int access$1202(org.argparser.ArgParser$Record, int);
+  static int access$1200(org.argparser.ArgParser$Record);
+  static java.lang.String access$1302(org.argparser.ArgParser$Record, java.lang.String);
+  static java.lang.String access$1402(org.argparser.ArgParser$Record, java.lang.String);
+  static java.lang.Object access$800(org.argparser.ArgParser$Record);
+  static java.lang.String access$500(org.argparser.ArgParser$Record);
+  static boolean access$1000(org.argparser.ArgParser$Record);
+  static java.lang.String access$1300(org.argparser.ArgParser$Record);
+  static java.lang.String access$1400(org.argparser.ArgParser$Record);
+}
+Compiled from "ArgParserTest.java"
+public class org.argparser.ArgParserTest {
+  org.argparser.ArgParser parser;
+  static final boolean CLOSED;
+  static final boolean OPEN;
+  static final boolean ONE_WORD;
+  static final boolean MULTI_WORD;
+  org.argparser.ArgParserTest();
+  static void checkException(java.lang.Exception, java.lang.String);
+  void checkPrintHelp(java.lang.String);
+  void checkAdd(java.lang.String, java.lang.Object, java.lang.String);
+  void add(java.lang.String, java.lang.Object);
+  void checkStringArray(java.lang.String, java.lang.String[], java.lang.String[]);
+  void checkAdd(java.lang.String, java.lang.Object, int, int, java.lang.Object, org.argparser.ArgParserTest$RngCheck[], java.lang.String, java.lang.String);
+  double getDoubleValue(java.lang.Object, int);
+  long getLongValue(java.lang.Object, int);
+  java.lang.String getStringValue(java.lang.Object, int);
+  boolean getBooleanValue(java.lang.Object, int);
+  char getCharValue(java.lang.Object, int);
+  void checkMatch(java.lang.String[], int, java.lang.String);
+  void checkMatch(java.lang.String[], int, int, long, int);
+  void checkMatch(java.lang.String[], int, int, double, int);
+  void checkMatch(java.lang.String[], int, int, java.lang.String, int);
+  void checkMatch(java.lang.String[], int, int, boolean, int);
+  void checkMatch(java.lang.String[], int, int, char, int);
+  void checkMatch(java.lang.String[], int, int, java.lang.Object, int);
+  void checkMatch(org.argparser.ArgParserTest$MTest, boolean);
+  void checkMatches(org.argparser.ArgParserTest$MTest[], boolean);
+  java.lang.Object getMatchResult(java.lang.String[], int, int, java.lang.String, int);
+  public static void main(java.lang.String[]);
+  static void access$000(boolean, java.lang.String);
+}
+Compiled from "ArgParserTest.java"
+class org.argparser.ArgParserTest$MErr {
+  int code;
+  java.lang.String valStr;
+  org.argparser.ArgParserTest$MErr(int, java.lang.String);
+}
+Compiled from "ArgParserTest.java"
+class org.argparser.ArgParserTest$MTest {
+  java.lang.String args;
+  java.lang.Object result;
+  int resultIdx;
+  org.argparser.ArgParserTest$MTest(java.lang.String, java.lang.Object);
+  org.argparser.ArgParserTest$MTest(java.lang.String, java.lang.Object, int);
+}
+Compiled from "ArgParserTest.java"
+class org.argparser.ArgParserTest$RngCheck {
+  org.argparser.ArgParser$RangePnt low;
+  org.argparser.ArgParser$RangePnt high;
+  int type;
+  org.argparser.ArgParserTest$RngCheck(java.lang.String);
+  org.argparser.ArgParserTest$RngCheck(double);
+  org.argparser.ArgParserTest$RngCheck(long);
+  org.argparser.ArgParserTest$RngCheck(boolean);
+  org.argparser.ArgParserTest$RngCheck(java.lang.String, boolean, java.lang.String, boolean);
+  org.argparser.ArgParserTest$RngCheck(double, boolean, double, boolean);
+  org.argparser.ArgParserTest$RngCheck(long, boolean, long, boolean);
+  void check(org.argparser.ArgParser$RangeAtom);
+}
+Compiled from "SimpleExample.java"
+public class org.argparser.SimpleExample {
+  public org.argparser.SimpleExample();
+  public static void main(java.lang.String[]);
+}
+Compiled from "StringScanException.java"
+class org.argparser.StringScanException extends java.io.IOException {
+  int failIdx;
+  public org.argparser.StringScanException(java.lang.String);
+  public org.argparser.StringScanException(int, java.lang.String);
+  public int getFailIndex();
+}
+Compiled from "StringScanner.java"
+class org.argparser.StringScanner {
+  public org.argparser.StringScanner(java.lang.String);
+  public int getIndex();
+  public void setIndex(int);
+  public void setStringDelimiters(java.lang.String);
+  public java.lang.String getStringDelimiters();
+  public char scanChar() throws org.argparser.StringScanException;
+  public char scanQuotedChar() throws org.argparser.StringScanException;
+  public char scanUnquotedChar() throws org.argparser.StringScanException;
+  public java.lang.String scanQuotedString() throws org.argparser.StringScanException;
+  public java.lang.String scanNonWhiteSpaceString() throws org.argparser.StringScanException;
+  public java.lang.String scanString() throws org.argparser.StringScanException;
+  public java.lang.String getString() throws org.argparser.StringScanException;
+  public long scanInt() throws org.argparser.StringScanException;
+  public long scanInt(int) throws org.argparser.StringScanException;
+  public long scanInt(int, boolean) throws org.argparser.StringScanException;
+  public double scanDouble() throws org.argparser.StringScanException;
+  public boolean scanBoolean() throws org.argparser.StringScanException;
+  public boolean matchString(java.lang.String);
+  public boolean matchDigits();
+  public void skipWhiteSpace();
+  public boolean atEnd();
+  public boolean atBeginning();
+  public void ungetc();
+  public char getc();
+  public char peekc();
+  public java.lang.String substring(int, int);
+  public java.lang.String substring(int);
+}

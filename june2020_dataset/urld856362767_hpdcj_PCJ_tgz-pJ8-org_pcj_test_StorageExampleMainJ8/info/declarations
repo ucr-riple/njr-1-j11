@@ -1,0 +1,1069 @@
+Compiled from "Group.java"
+public interface org.pcj.Group {
+  public abstract int myId();
+  public abstract int threadCount();
+  public abstract java.lang.String getGroupName();
+  public abstract org.pcj.PcjFuture<java.lang.Void> asyncBarrier();
+  public abstract org.pcj.PcjFuture<java.lang.Void> asyncBarrier(int);
+  public abstract <T> org.pcj.PcjFuture<T> asyncGet(int, java.lang.Enum<?>, int...);
+  public abstract <T> org.pcj.PcjFuture<java.lang.Void> asyncPut(T, int, java.lang.Enum<?>, int...);
+  public abstract <T> org.pcj.PcjFuture<java.lang.Void> asyncBroadcast(T, java.lang.Enum<?>);
+}
+Compiled from "NodesDescription.java"
+public class org.pcj.NodesDescription {
+  public org.pcj.NodesDescription(java.lang.String) throws java.io.IOException;
+  public org.pcj.NodesDescription(java.io.File) throws java.io.IOException;
+  public org.pcj.NodesDescription(java.lang.String[]);
+  public org.pcj.internal.NodeInfo getNode0();
+  public org.pcj.internal.NodeInfo getCurrentJvm();
+  public java.util.Collection<org.pcj.internal.NodeInfo> getAllNodes();
+  public int getAllNodesThreadCount();
+}
+Compiled from "PCJ.java"
+public final class org.pcj.PCJ extends org.pcj.internal.InternalPCJ {
+  public static void start(java.lang.Class<? extends org.pcj.StartPoint>, org.pcj.NodesDescription);
+  public static void deploy(java.lang.Class<? extends org.pcj.StartPoint>, org.pcj.NodesDescription);
+  public static int getNodeId();
+  public static int getNodeCount();
+  public static int myId();
+  public static int threadCount();
+  public static org.pcj.Group getGlobalGroup();
+  public static java.lang.Object registerStorage(java.lang.Class<? extends java.lang.Enum<?>>) throws java.lang.InstantiationException, java.lang.IllegalAccessException, java.lang.NoSuchFieldException;
+  public static java.lang.Object getStorageObject(java.lang.Class<? extends java.lang.Enum<?>>);
+  public static org.pcj.PcjFuture<java.lang.Void> asyncBarrier();
+  public static void barrier();
+  public static org.pcj.PcjFuture<java.lang.Void> asyncBarrier(int);
+  public static void barrier(int);
+  public static int monitor(java.lang.Enum<?>);
+  public static int waitFor(java.lang.Enum<?>);
+  public static int waitFor(java.lang.Enum<?>, int);
+  public static int waitFor(java.lang.Enum<?>, int, long, java.util.concurrent.TimeUnit) throws java.util.concurrent.TimeoutException;
+  public static <T> T getLocal(java.lang.Enum<?>, int...);
+  public static <T> void putLocal(java.lang.Enum<?>, T, int...) throws java.lang.ClassCastException;
+  public static <T> org.pcj.PcjFuture<T> asyncGet(int, java.lang.Enum<?>, int...);
+  public static <T> T get(int, java.lang.Enum<?>, int...) throws org.pcj.PcjRuntimeException;
+  public static <T> org.pcj.PcjFuture<java.lang.Void> asyncPut(T, int, java.lang.Enum<?>, int...);
+  public static <T> void put(T, int, java.lang.Enum<?>, int...) throws org.pcj.PcjRuntimeException;
+  public static <T> org.pcj.PcjFuture<java.lang.Void> asyncBroadcast(T, java.lang.Enum<?>);
+  public static <T> void broadcast(T, java.lang.Enum<?>);
+  public static org.pcj.Group join(java.lang.String);
+}
+Compiled from "PcjFuture.java"
+public interface org.pcj.PcjFuture<T> extends java.util.concurrent.Future<T> {
+  public abstract T get() throws org.pcj.PcjRuntimeException;
+  public abstract T get(long, java.util.concurrent.TimeUnit) throws java.util.concurrent.TimeoutException, org.pcj.PcjRuntimeException;
+  public abstract boolean isDone();
+  public boolean isCancelled();
+  public boolean cancel(boolean);
+}
+Compiled from "PcjRuntimeException.java"
+public class org.pcj.PcjRuntimeException extends java.lang.RuntimeException {
+  public org.pcj.PcjRuntimeException();
+  public org.pcj.PcjRuntimeException(java.lang.String);
+  public org.pcj.PcjRuntimeException(java.lang.String, java.lang.Throwable);
+  public org.pcj.PcjRuntimeException(java.lang.Throwable);
+  protected org.pcj.PcjRuntimeException(java.lang.String, java.lang.Throwable, boolean, boolean);
+}
+Compiled from "RegisterStorage.java"
+public interface org.pcj.RegisterStorage extends java.lang.annotation.Annotation {
+  public abstract java.lang.Class<? extends java.lang.Enum<?>> value();
+}
+Compiled from "StartPoint.java"
+public interface org.pcj.StartPoint {
+  public abstract void main() throws java.lang.Throwable;
+}
+Compiled from "Storage.java"
+public interface org.pcj.Storage extends java.lang.annotation.Annotation {
+  public abstract java.lang.Class<?> value();
+}
+Compiled from "Bitmask.java"
+public final class org.pcj.internal.Bitmask {
+  public org.pcj.internal.Bitmask();
+  public org.pcj.internal.Bitmask(int);
+  public org.pcj.internal.Bitmask(org.pcj.internal.Bitmask);
+  public synchronized int getSize();
+  public synchronized void setSize(int);
+  public synchronized void enlarge(int);
+  public synchronized void set(int);
+  public synchronized void clear(int);
+  public synchronized void clear();
+  public synchronized boolean isSet();
+  public synchronized boolean isSet(int);
+  public synchronized boolean isSet(org.pcj.internal.Bitmask);
+  public java.lang.String toString();
+}
+Compiled from "Configuration.java"
+public final class org.pcj.internal.Configuration {
+  public static final int BACKLOG_COUNT;
+  public static final int RETRY_COUNT;
+  public static final int RETRY_DELAY;
+  public static final int DEFAULT_PORT;
+  public static final int CHUNK_SIZE;
+  public static final int INIT_MAXTIME;
+  public org.pcj.internal.Configuration();
+  static {};
+}
+Compiled from "DeployPCJ.java"
+public final class org.pcj.internal.DeployPCJ {
+  public static void main(java.lang.String[]) throws java.io.IOException, java.lang.ClassNotFoundException;
+  public static void deploy(java.lang.Class<? extends org.pcj.StartPoint>, org.pcj.NodesDescription);
+  static {};
+}
+Compiled from "InternalCommonGroup.java"
+public class org.pcj.internal.InternalCommonGroup {
+  public static final int GLOBAL_GROUP_ID;
+  public static final java.lang.String GLOBAL_GROUP_NAME;
+  public org.pcj.internal.InternalCommonGroup(org.pcj.internal.InternalCommonGroup);
+  public org.pcj.internal.InternalCommonGroup(int, int, java.lang.String);
+  public java.util.List<java.lang.Integer> getPhysicalIds();
+  protected final int getGroupId();
+  public final java.lang.String getGroupName();
+  public final int getGroupMasterNode();
+  public final int getParentNode();
+  public final java.util.List<java.lang.Integer> getChildrenNodes();
+  protected final org.pcj.internal.Bitmask getPhysicalBitmask();
+  protected int myId();
+  public final int threadCount();
+  public final int[] getLocalThreadsId();
+  public final int getGlobalThreadId(int) throws java.util.NoSuchElementException;
+  public final int getGroupThreadId(int) throws java.util.NoSuchElementException;
+  public final int addNewThread(int);
+  public final void addThread(int, int);
+  public java.util.Map<java.lang.Integer, java.lang.Integer> getThreadsMapping();
+  protected final org.pcj.internal.futures.GroupBarrierState barrier(int, int);
+  public final org.pcj.internal.futures.GroupBarrierState getBarrierState(int);
+  public final org.pcj.internal.futures.GroupBarrierState removeBarrierState(int);
+  public org.pcj.internal.futures.GroupJoinState getGroupJoinState(int, int, java.util.List<java.lang.Integer>);
+  public org.pcj.internal.futures.GroupJoinState removeGroupJoinState(int, int);
+}
+Compiled from "InternalCommonGroup.java"
+public class org.pcj.internal.InternalCommonGroup$CommunicationTree {
+  public org.pcj.internal.InternalCommonGroup$CommunicationTree(int);
+  public int getRootNode();
+  public void setParentNode(int);
+  public int getParentNode();
+  public java.util.List<java.lang.Integer> getChildrenNodes();
+}
+Compiled from "InternalGroup.java"
+public final class org.pcj.internal.InternalGroup extends org.pcj.internal.InternalCommonGroup implements org.pcj.Group {
+  public org.pcj.internal.InternalGroup(int, org.pcj.internal.InternalCommonGroup);
+  public int myId();
+  public org.pcj.PcjFuture<java.lang.Void> asyncBarrier();
+  public org.pcj.PcjFuture<java.lang.Void> asyncBarrier(int);
+  public org.pcj.internal.futures.PeerBarrierState getPeerBarrierState(int);
+  public <T> org.pcj.PcjFuture<T> asyncGet(int, java.lang.Enum<?>, int...);
+  public org.pcj.internal.futures.GetVariable removeGetVariable(int);
+  public <T> org.pcj.PcjFuture<java.lang.Void> asyncPut(T, int, java.lang.Enum<?>, int...);
+  public org.pcj.internal.futures.PutVariable removePutVariable(int);
+  public <T> org.pcj.PcjFuture<java.lang.Void> asyncBroadcast(T, java.lang.Enum<?>);
+  public final org.pcj.internal.futures.BroadcastState getBroadcastState(int);
+  public org.pcj.internal.futures.BroadcastState removeBroadcastState(int);
+}
+Compiled from "InternalPCJ.java"
+public abstract class org.pcj.internal.InternalPCJ {
+  protected org.pcj.internal.InternalPCJ();
+  protected static void start(java.lang.Class<? extends org.pcj.StartPoint>, org.pcj.NodesDescription);
+  protected static void start(java.lang.Class<? extends org.pcj.StartPoint>, org.pcj.internal.NodeInfo, org.pcj.internal.NodeInfo, int);
+  public static org.pcj.internal.Networker getNetworker();
+  public static org.pcj.internal.NodeData getNodeData();
+  public static java.nio.channels.SocketChannel getLoopbackSocketChannel();
+  protected static org.pcj.internal.InternalGroup join(int, java.lang.String);
+  static {};
+}
+Compiled from "InternalStorages.java"
+public class org.pcj.internal.InternalStorages {
+  public org.pcj.internal.InternalStorages();
+  public java.lang.Object registerStorage(java.lang.Class<? extends java.lang.Enum<?>>);
+  public java.lang.Object getStorage(java.lang.Class<? extends java.lang.Enum<?>>);
+  public final <T> T get(java.lang.Enum<?>, int...) throws java.lang.ArrayIndexOutOfBoundsException, java.lang.ClassCastException;
+  public final <T> T get(java.lang.String, java.lang.String, int...) throws java.lang.ArrayIndexOutOfBoundsException, java.lang.ClassCastException;
+  public final <T> void put(java.lang.Enum<?>, T, int...) throws java.lang.ArrayIndexOutOfBoundsException, java.lang.ClassCastException, java.lang.NullPointerException;
+  public final <T> void put(java.lang.String, java.lang.String, T, int...) throws java.lang.ArrayIndexOutOfBoundsException, java.lang.ClassCastException, java.lang.NullPointerException;
+  public final int monitor(java.lang.Enum<?>);
+  public final int waitFor(java.lang.Enum<?>, int);
+  public final int waitFor(java.lang.Enum<?>, int, long, java.util.concurrent.TimeUnit) throws java.util.concurrent.TimeoutException;
+}
+Compiled from "InternalStorages.java"
+class org.pcj.internal.InternalStorages$StorageField {
+  final org.pcj.internal.InternalStorages this$0;
+  public org.pcj.internal.InternalStorages$StorageField(org.pcj.internal.InternalStorages, java.lang.reflect.Field, java.lang.Object);
+  public java.lang.Class<?> getType();
+  public java.util.concurrent.atomic.AtomicInteger getModificationCount();
+  public java.lang.Object getValue();
+  public void setValue(java.lang.Object);
+}
+Compiled from "Networker.java"
+public final class org.pcj.internal.Networker {
+  protected org.pcj.internal.Networker(int);
+  void startup();
+  java.nio.channels.ServerSocketChannel bind(java.net.InetAddress, int, int) throws java.io.IOException;
+  public java.nio.channels.SocketChannel connectTo(java.net.InetAddress, int) throws java.io.IOException, java.lang.InterruptedException;
+  void shutdown();
+  public void send(java.nio.channels.SocketChannel, org.pcj.internal.message.Message);
+  public void processMessageBytes(java.nio.channels.SocketChannel, org.pcj.internal.network.MessageBytesInputStream);
+  static java.util.logging.Logger access$000();
+  static {};
+}
+Compiled from "Networker.java"
+class org.pcj.internal.Networker$1 implements java.util.concurrent.ThreadFactory {
+  final org.pcj.internal.Networker this$0;
+  org.pcj.internal.Networker$1(org.pcj.internal.Networker);
+  public java.lang.Thread newThread(java.lang.Runnable);
+}
+Compiled from "Networker.java"
+class org.pcj.internal.Networker$WorkerTask implements java.lang.Runnable {
+  public org.pcj.internal.Networker$WorkerTask(java.nio.channels.SocketChannel, org.pcj.internal.message.Message, org.pcj.internal.network.MessageDataInputStream);
+  public void run();
+}
+Compiled from "NodeData.java"
+public final class org.pcj.internal.NodeData {
+  public org.pcj.internal.NodeData(java.nio.channels.SocketChannel, boolean);
+  public org.pcj.internal.NodeData$Node0Data getNode0Data();
+  public java.nio.channels.SocketChannel getNode0Socket();
+  public org.pcj.internal.InternalCommonGroup createGroup(int, int, java.lang.String);
+  public org.pcj.internal.InternalCommonGroup getGroupById(int);
+  public org.pcj.internal.InternalCommonGroup getGroupByName(java.lang.String);
+  public java.util.concurrent.ConcurrentMap<java.lang.Integer, java.nio.channels.SocketChannel> getSocketChannelByPhysicalId();
+  public void setPhysicalId(int, int);
+  public int getPhysicalId(int);
+  public void putPcjThread(org.pcj.internal.PcjThread);
+  public org.pcj.internal.PcjThread getPcjThread(int);
+  public int getPhysicalId();
+  public void setPhysicalId(int);
+  public int getTotalNodeCount();
+  public void setTotalNodeCount(int);
+  public org.pcj.internal.futures.WaitObject getGlobalWaitObject();
+  public java.util.concurrent.atomic.AtomicInteger getGroupJoinCounter();
+  public org.pcj.internal.futures.GroupJoinQuery getGroupJoinQuery(int);
+  public org.pcj.internal.futures.GroupJoinQuery removeGroupJoinQuery(int);
+}
+Compiled from "NodeData.java"
+public class org.pcj.internal.NodeData$Node0Data {
+  public org.pcj.internal.NodeData$Node0Data();
+  public int getAllNodesThreadCount();
+  void setAllNodesThreadCount(int);
+  public java.util.concurrent.atomic.AtomicInteger getConnectedNodeCount();
+  public java.util.concurrent.atomic.AtomicInteger getConnectedThreadCount();
+  public java.util.concurrent.ConcurrentMap<java.lang.Integer, org.pcj.internal.NodeInfo> getNodeInfoByPhysicalId();
+  public org.pcj.internal.Bitmask getHelloBitmask();
+  public org.pcj.internal.Bitmask getFinishedBitmask();
+  public int getGroupId(java.lang.String);
+  public int getGroupMaster(int, int);
+  public java.util.concurrent.ConcurrentMap<java.lang.Integer, java.lang.Integer> getPhysicalIdByThreadId();
+}
+Compiled from "NodeInfo.java"
+public class org.pcj.internal.NodeInfo implements java.io.Serializable {
+  public org.pcj.internal.NodeInfo(java.lang.String, int);
+  public org.pcj.internal.NodeInfo(java.lang.String, int, int[]);
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+  public java.lang.String getHostname();
+  public int getPort();
+  public int[] getThreadIds();
+  public void addThreadId(int);
+  public boolean isLocalAddress();
+}
+Compiled from "PcjThread.java"
+public class org.pcj.internal.PcjThread extends java.lang.Thread {
+  org.pcj.internal.PcjThread(int, java.lang.Class<? extends org.pcj.StartPoint>, org.pcj.internal.PcjThreadData);
+  public void run();
+  public int getThreadId();
+  public java.lang.Throwable getThrowable();
+  public static org.pcj.internal.PcjThreadData getCurrentThreadData();
+  public org.pcj.internal.PcjThreadData getThreadData();
+}
+Compiled from "PcjThread.java"
+class org.pcj.internal.PcjThread$PcjThreadGroup extends java.lang.ThreadGroup {
+  public org.pcj.internal.PcjThread$PcjThreadGroup(java.lang.String, org.pcj.internal.PcjThreadData);
+  public org.pcj.internal.PcjThreadData getThreadData();
+}
+Compiled from "PcjThreadData.java"
+public final class org.pcj.internal.PcjThreadData {
+  org.pcj.internal.PcjThreadData(org.pcj.internal.InternalGroup);
+  public void addGroup(org.pcj.internal.InternalGroup);
+  public org.pcj.Group getGlobalGroup();
+  public org.pcj.internal.InternalStorages getStorages();
+  public org.pcj.internal.InternalGroup getGroupById(int);
+  public org.pcj.internal.InternalGroup getGroupByName(java.lang.String);
+}
+Compiled from "PrimitiveTypes.java"
+public final class org.pcj.internal.PrimitiveTypes {
+  public org.pcj.internal.PrimitiveTypes();
+  public static boolean isBoxedClass(java.lang.Class<?>);
+  public static java.lang.Object defaultValue(java.lang.Class<?>);
+  public static <T> java.lang.Object convert(java.lang.Class<?>, T);
+  public static <T> double convertToDouble(T);
+  public static <T> float convertToFloat(T);
+  public static <T> long convertToLong(T);
+  public static <T> int convertToInt(T);
+  public static <T> char convertToChar(T);
+  public static <T> short convertToShort(T);
+  public static <T> byte convertToByte(T);
+  public static <T> boolean convertToBoolean(T);
+  static {};
+}
+Compiled from "RegisterStorageRepeatableContainer.java"
+public interface org.pcj.internal.RegisterStorageRepeatableContainer extends java.lang.annotation.Annotation {
+  public abstract org.pcj.RegisterStorage[] value();
+}
+Compiled from "StorageAnnotationProcessor.java"
+public class org.pcj.internal.StorageAnnotationProcessor extends javax.annotation.processing.AbstractProcessor {
+  public org.pcj.internal.StorageAnnotationProcessor();
+  public synchronized void init(javax.annotation.processing.ProcessingEnvironment);
+  public boolean process(java.util.Set<? extends javax.lang.model.element.TypeElement>, javax.annotation.processing.RoundEnvironment);
+}
+Compiled from "BroadcastState.java"
+public class org.pcj.internal.futures.BroadcastState extends org.pcj.internal.futures.InternalFuture<java.lang.Void> implements org.pcj.PcjFuture<java.lang.Void> {
+  public org.pcj.internal.futures.BroadcastState(org.pcj.internal.Bitmask);
+  public void addException(java.lang.Exception);
+  public void signalException(java.lang.Exception);
+  public void signalDone();
+  public boolean isDone();
+  public java.lang.Void get() throws org.pcj.PcjRuntimeException;
+  public java.lang.Void get(long, java.util.concurrent.TimeUnit) throws java.util.concurrent.TimeoutException, org.pcj.PcjRuntimeException;
+  public synchronized boolean processPhysical(int);
+  public boolean isExceptionOccurs();
+  public java.util.Queue<java.lang.Exception> getExceptions();
+  public java.lang.Object get(long, java.util.concurrent.TimeUnit) throws java.util.concurrent.TimeoutException, org.pcj.PcjRuntimeException;
+  public java.lang.Object get() throws org.pcj.PcjRuntimeException;
+}
+Compiled from "GetVariable.java"
+public class org.pcj.internal.futures.GetVariable<T> extends org.pcj.internal.futures.InternalFuture<T> implements org.pcj.PcjFuture<T> {
+  public org.pcj.internal.futures.GetVariable();
+  public void signalDone(java.lang.Object);
+  public void signalException(java.lang.Exception);
+  public boolean isDone();
+  public T get() throws org.pcj.PcjRuntimeException;
+  public T get(long, java.util.concurrent.TimeUnit) throws java.util.concurrent.TimeoutException, org.pcj.PcjRuntimeException;
+}
+Compiled from "GroupBarrierState.java"
+public class org.pcj.internal.futures.GroupBarrierState extends org.pcj.internal.futures.InternalFuture<java.lang.Void> implements org.pcj.PcjFuture<java.lang.Void> {
+  public org.pcj.internal.futures.GroupBarrierState(int, int, org.pcj.internal.Bitmask, java.util.List<java.lang.Integer>);
+  public void signalDone();
+  public boolean isDone();
+  public java.lang.Void get() throws org.pcj.PcjRuntimeException;
+  public java.lang.Void get(long, java.util.concurrent.TimeUnit) throws java.util.concurrent.TimeoutException, org.pcj.PcjRuntimeException;
+  public synchronized void processPhysical(int);
+  public synchronized void processLocal(int);
+  public java.lang.Object get(long, java.util.concurrent.TimeUnit) throws java.util.concurrent.TimeoutException, org.pcj.PcjRuntimeException;
+  public java.lang.Object get() throws org.pcj.PcjRuntimeException;
+}
+Compiled from "GroupJoinQuery.java"
+public class org.pcj.internal.futures.GroupJoinQuery {
+  public org.pcj.internal.futures.GroupJoinQuery();
+  public org.pcj.internal.futures.WaitObject getWaitObject();
+  public int getGroupId();
+  public void setGroupId(int);
+  public int getGroupMasterId();
+  public void setGroupMasterId(int);
+  public int getGroupThreadId();
+  public void setGroupThreadId(int);
+}
+Compiled from "GroupJoinState.java"
+public class org.pcj.internal.futures.GroupJoinState {
+  public org.pcj.internal.futures.GroupJoinState(int, int, int, java.util.List<java.lang.Integer>);
+  public synchronized boolean processPhysical(int);
+}
+Compiled from "InternalFuture.java"
+public abstract class org.pcj.internal.futures.InternalFuture<T> {
+  protected org.pcj.internal.futures.InternalFuture();
+  protected boolean isSignaled();
+  protected void signalDone();
+  protected void await() throws java.lang.InterruptedException;
+  protected void await(long, java.util.concurrent.TimeUnit) throws java.util.concurrent.TimeoutException, java.lang.InterruptedException;
+}
+Compiled from "PeerBarrierState.java"
+public class org.pcj.internal.futures.PeerBarrierState {
+  public org.pcj.internal.futures.PeerBarrierState();
+  public org.pcj.PcjFuture<java.lang.Void> mineBarrier();
+  public org.pcj.PcjFuture<java.lang.Void> peerBarrier();
+}
+Compiled from "PeerBarrierState.java"
+class org.pcj.internal.futures.PeerBarrierState$1 {
+}
+Compiled from "PeerBarrierState.java"
+class org.pcj.internal.futures.PeerBarrierState$PeerBarrierStateFuture extends org.pcj.internal.futures.InternalFuture<java.lang.Void> implements org.pcj.PcjFuture<java.lang.Void> {
+  public void signalDone();
+  public boolean isDone();
+  public java.lang.Void get() throws org.pcj.PcjRuntimeException;
+  public java.lang.Void get(long, java.util.concurrent.TimeUnit) throws java.util.concurrent.TimeoutException, org.pcj.PcjRuntimeException;
+  public java.lang.Object get(long, java.util.concurrent.TimeUnit) throws java.util.concurrent.TimeoutException, org.pcj.PcjRuntimeException;
+  public java.lang.Object get() throws org.pcj.PcjRuntimeException;
+  org.pcj.internal.futures.PeerBarrierState$PeerBarrierStateFuture(org.pcj.internal.futures.PeerBarrierState$1);
+}
+Compiled from "PutVariable.java"
+public class org.pcj.internal.futures.PutVariable extends org.pcj.internal.futures.InternalFuture<java.lang.Void> implements org.pcj.PcjFuture<java.lang.Void> {
+  public org.pcj.internal.futures.PutVariable();
+  public void signalException(java.lang.Exception);
+  public void signalDone();
+  public boolean isDone();
+  public java.lang.Void get() throws org.pcj.PcjRuntimeException;
+  public java.lang.Void get(long, java.util.concurrent.TimeUnit) throws java.util.concurrent.TimeoutException, org.pcj.PcjRuntimeException;
+  public java.lang.Object get(long, java.util.concurrent.TimeUnit) throws java.util.concurrent.TimeoutException, org.pcj.PcjRuntimeException;
+  public java.lang.Object get() throws org.pcj.PcjRuntimeException;
+}
+Compiled from "WaitObject.java"
+public final class org.pcj.internal.futures.WaitObject {
+  public org.pcj.internal.futures.WaitObject();
+  public void lock();
+  public void unlock();
+  public void await() throws java.lang.InterruptedException;
+  public void signal();
+  public void signalAll();
+}
+Compiled from "Message.java"
+public abstract class org.pcj.internal.message.Message implements java.io.Serializable {
+  protected static final java.util.logging.Logger LOGGER;
+  org.pcj.internal.message.Message(org.pcj.internal.message.MessageType);
+  public org.pcj.internal.message.MessageType getType();
+  public java.lang.String toString();
+  public abstract void write(org.pcj.internal.network.MessageDataOutputStream) throws java.io.IOException;
+  public abstract void execute(java.nio.channels.SocketChannel, org.pcj.internal.network.MessageDataInputStream) throws java.io.IOException;
+  static {};
+}
+Compiled from "MessageBye.java"
+public final class org.pcj.internal.message.MessageBye extends org.pcj.internal.message.Message {
+  public org.pcj.internal.message.MessageBye();
+  public org.pcj.internal.message.MessageBye(int);
+  public void write(org.pcj.internal.network.MessageDataOutputStream) throws java.io.IOException;
+  public void execute(java.nio.channels.SocketChannel, org.pcj.internal.network.MessageDataInputStream) throws java.io.IOException;
+}
+Compiled from "MessageByeCompleted.java"
+public final class org.pcj.internal.message.MessageByeCompleted extends org.pcj.internal.message.Message {
+  public org.pcj.internal.message.MessageByeCompleted();
+  public void write(org.pcj.internal.network.MessageDataOutputStream) throws java.io.IOException;
+  public void execute(java.nio.channels.SocketChannel, org.pcj.internal.network.MessageDataInputStream);
+}
+Compiled from "MessageGroupBarrierGo.java"
+public final class org.pcj.internal.message.MessageGroupBarrierGo extends org.pcj.internal.message.Message {
+  public org.pcj.internal.message.MessageGroupBarrierGo();
+  public org.pcj.internal.message.MessageGroupBarrierGo(int, int);
+  public void write(org.pcj.internal.network.MessageDataOutputStream) throws java.io.IOException;
+  public void execute(java.nio.channels.SocketChannel, org.pcj.internal.network.MessageDataInputStream) throws java.io.IOException;
+}
+Compiled from "MessageGroupBarrierWaiting.java"
+public final class org.pcj.internal.message.MessageGroupBarrierWaiting extends org.pcj.internal.message.Message {
+  public org.pcj.internal.message.MessageGroupBarrierWaiting();
+  public org.pcj.internal.message.MessageGroupBarrierWaiting(int, int, int);
+  public void write(org.pcj.internal.network.MessageDataOutputStream) throws java.io.IOException;
+  public void execute(java.nio.channels.SocketChannel, org.pcj.internal.network.MessageDataInputStream) throws java.io.IOException;
+}
+Compiled from "MessageGroupJoinAnswer.java"
+public class org.pcj.internal.message.MessageGroupJoinAnswer extends org.pcj.internal.message.Message {
+  public org.pcj.internal.message.MessageGroupJoinAnswer();
+  public org.pcj.internal.message.MessageGroupJoinAnswer(int, java.lang.String, int, int);
+  public void write(org.pcj.internal.network.MessageDataOutputStream) throws java.io.IOException;
+  public void execute(java.nio.channels.SocketChannel, org.pcj.internal.network.MessageDataInputStream) throws java.io.IOException;
+}
+Compiled from "MessageGroupJoinConfirm.java"
+public class org.pcj.internal.message.MessageGroupJoinConfirm extends org.pcj.internal.message.Message {
+  public org.pcj.internal.message.MessageGroupJoinConfirm();
+  public org.pcj.internal.message.MessageGroupJoinConfirm(int, int, int, int);
+  public void write(org.pcj.internal.network.MessageDataOutputStream) throws java.io.IOException;
+  public void execute(java.nio.channels.SocketChannel, org.pcj.internal.network.MessageDataInputStream) throws java.io.IOException;
+}
+Compiled from "MessageGroupJoinInform.java"
+public class org.pcj.internal.message.MessageGroupJoinInform extends org.pcj.internal.message.Message {
+  public org.pcj.internal.message.MessageGroupJoinInform();
+  public org.pcj.internal.message.MessageGroupJoinInform(int, int, int, java.util.Map<java.lang.Integer, java.lang.Integer>);
+  public void write(org.pcj.internal.network.MessageDataOutputStream) throws java.io.IOException;
+  public void execute(java.nio.channels.SocketChannel, org.pcj.internal.network.MessageDataInputStream) throws java.io.IOException;
+}
+Compiled from "MessageGroupJoinQuery.java"
+public class org.pcj.internal.message.MessageGroupJoinQuery extends org.pcj.internal.message.Message {
+  public org.pcj.internal.message.MessageGroupJoinQuery();
+  public org.pcj.internal.message.MessageGroupJoinQuery(int, int, java.lang.String);
+  public void write(org.pcj.internal.network.MessageDataOutputStream) throws java.io.IOException;
+  public void execute(java.nio.channels.SocketChannel, org.pcj.internal.network.MessageDataInputStream) throws java.io.IOException;
+}
+Compiled from "MessageGroupJoinRequest.java"
+public class org.pcj.internal.message.MessageGroupJoinRequest extends org.pcj.internal.message.Message {
+  public org.pcj.internal.message.MessageGroupJoinRequest();
+  public org.pcj.internal.message.MessageGroupJoinRequest(int, java.lang.String, int, int, int);
+  public void write(org.pcj.internal.network.MessageDataOutputStream) throws java.io.IOException;
+  public void execute(java.nio.channels.SocketChannel, org.pcj.internal.network.MessageDataInputStream) throws java.io.IOException;
+}
+Compiled from "MessageGroupJoinResponse.java"
+public class org.pcj.internal.message.MessageGroupJoinResponse extends org.pcj.internal.message.Message {
+  public org.pcj.internal.message.MessageGroupJoinResponse();
+  public org.pcj.internal.message.MessageGroupJoinResponse(int, int, int, int);
+  public void write(org.pcj.internal.network.MessageDataOutputStream) throws java.io.IOException;
+  public void execute(java.nio.channels.SocketChannel, org.pcj.internal.network.MessageDataInputStream) throws java.io.IOException;
+}
+Compiled from "MessageHello.java"
+public final class org.pcj.internal.message.MessageHello extends org.pcj.internal.message.Message {
+  public org.pcj.internal.message.MessageHello();
+  public org.pcj.internal.message.MessageHello(int, int[]);
+  public void write(org.pcj.internal.network.MessageDataOutputStream) throws java.io.IOException;
+  public void execute(java.nio.channels.SocketChannel, org.pcj.internal.network.MessageDataInputStream) throws java.io.IOException;
+}
+Compiled from "MessageHelloBonjour.java"
+public final class org.pcj.internal.message.MessageHelloBonjour extends org.pcj.internal.message.Message {
+  public org.pcj.internal.message.MessageHelloBonjour();
+  public org.pcj.internal.message.MessageHelloBonjour(int);
+  public void write(org.pcj.internal.network.MessageDataOutputStream) throws java.io.IOException;
+  public void execute(java.nio.channels.SocketChannel, org.pcj.internal.network.MessageDataInputStream) throws java.io.IOException;
+}
+Compiled from "MessageHelloCompleted.java"
+public final class org.pcj.internal.message.MessageHelloCompleted extends org.pcj.internal.message.Message {
+  public org.pcj.internal.message.MessageHelloCompleted();
+  public org.pcj.internal.message.MessageHelloCompleted(int);
+  public void write(org.pcj.internal.network.MessageDataOutputStream) throws java.io.IOException;
+  public void execute(java.nio.channels.SocketChannel, org.pcj.internal.network.MessageDataInputStream) throws java.io.IOException;
+}
+Compiled from "MessageHelloGo.java"
+public final class org.pcj.internal.message.MessageHelloGo extends org.pcj.internal.message.Message {
+  public org.pcj.internal.message.MessageHelloGo();
+  public org.pcj.internal.message.MessageHelloGo(int, int[]);
+  public void write(org.pcj.internal.network.MessageDataOutputStream) throws java.io.IOException;
+  public void execute(java.nio.channels.SocketChannel, org.pcj.internal.network.MessageDataInputStream);
+}
+Compiled from "MessageHelloInform.java"
+public final class org.pcj.internal.message.MessageHelloInform extends org.pcj.internal.message.Message {
+  public org.pcj.internal.message.MessageHelloInform();
+  public org.pcj.internal.message.MessageHelloInform(int, java.util.Map<java.lang.Integer, org.pcj.internal.NodeInfo>);
+  public void write(org.pcj.internal.network.MessageDataOutputStream) throws java.io.IOException;
+  public void execute(java.nio.channels.SocketChannel, org.pcj.internal.network.MessageDataInputStream) throws java.io.IOException;
+}
+Compiled from "MessagePeerBarrier.java"
+public final class org.pcj.internal.message.MessagePeerBarrier extends org.pcj.internal.message.Message {
+  public org.pcj.internal.message.MessagePeerBarrier();
+  public org.pcj.internal.message.MessagePeerBarrier(int, int, int);
+  public void write(org.pcj.internal.network.MessageDataOutputStream) throws java.io.IOException;
+  public void execute(java.nio.channels.SocketChannel, org.pcj.internal.network.MessageDataInputStream) throws java.io.IOException;
+}
+Compiled from "MessageType.java"
+public abstract class org.pcj.internal.message.MessageType extends java.lang.Enum<org.pcj.internal.message.MessageType> {
+  public static final org.pcj.internal.message.MessageType HELLO;
+  public static final org.pcj.internal.message.MessageType HELLO_INFORM;
+  public static final org.pcj.internal.message.MessageType HELLO_BONJOUR;
+  public static final org.pcj.internal.message.MessageType HELLO_COMPLETED;
+  public static final org.pcj.internal.message.MessageType HELLO_GO;
+  public static final org.pcj.internal.message.MessageType BYE;
+  public static final org.pcj.internal.message.MessageType BYE_COMPLETED;
+  public static final org.pcj.internal.message.MessageType GROUP_BARRIER_WAITING;
+  public static final org.pcj.internal.message.MessageType GROUP_BARRIER_GO;
+  public static final org.pcj.internal.message.MessageType PEER_BARRIER;
+  public static final org.pcj.internal.message.MessageType GROUP_JOIN_QUERY;
+  public static final org.pcj.internal.message.MessageType GROUP_JOIN_ANSWER;
+  public static final org.pcj.internal.message.MessageType GROUP_JOIN_REQUEST;
+  public static final org.pcj.internal.message.MessageType GROUP_JOIN_INFORM;
+  public static final org.pcj.internal.message.MessageType GROUP_JOIN_CONFIRM;
+  public static final org.pcj.internal.message.MessageType GROUP_JOIN_RESPONSE;
+  public static final org.pcj.internal.message.MessageType VALUE_GET_REQUEST;
+  public static final org.pcj.internal.message.MessageType VALUE_GET_RESPONSE;
+  public static final org.pcj.internal.message.MessageType VALUE_PUT_REQUEST;
+  public static final org.pcj.internal.message.MessageType VALUE_PUT_RESPONSE;
+  public static final org.pcj.internal.message.MessageType VALUE_BROADCAST_REQUEST;
+  public static final org.pcj.internal.message.MessageType VALUE_BROADCAST_BYTES;
+  public static final org.pcj.internal.message.MessageType VALUE_BROADCAST_INFORM;
+  public static final org.pcj.internal.message.MessageType UNKNOWN;
+  public static org.pcj.internal.message.MessageType[] values();
+  public static org.pcj.internal.message.MessageType valueOf(java.lang.String);
+  public static org.pcj.internal.message.MessageType valueOf(byte);
+  public byte getId();
+  public abstract org.pcj.internal.message.Message create();
+  org.pcj.internal.message.MessageType(java.lang.String, int, byte, org.pcj.internal.message.MessageType$1);
+  static {};
+}
+Compiled from "MessageType.java"
+final class org.pcj.internal.message.MessageType$1 extends org.pcj.internal.message.MessageType {
+  org.pcj.internal.message.MessageType$1(java.lang.String, int, byte);
+  public org.pcj.internal.message.MessageHello create();
+  public org.pcj.internal.message.Message create();
+}
+Compiled from "MessageType.java"
+final class org.pcj.internal.message.MessageType$10 extends org.pcj.internal.message.MessageType {
+  org.pcj.internal.message.MessageType$10(java.lang.String, int, byte);
+  public org.pcj.internal.message.MessagePeerBarrier create();
+  public org.pcj.internal.message.Message create();
+}
+Compiled from "MessageType.java"
+final class org.pcj.internal.message.MessageType$11 extends org.pcj.internal.message.MessageType {
+  org.pcj.internal.message.MessageType$11(java.lang.String, int, byte);
+  public org.pcj.internal.message.MessageGroupJoinQuery create();
+  public org.pcj.internal.message.Message create();
+}
+Compiled from "MessageType.java"
+final class org.pcj.internal.message.MessageType$12 extends org.pcj.internal.message.MessageType {
+  org.pcj.internal.message.MessageType$12(java.lang.String, int, byte);
+  public org.pcj.internal.message.MessageGroupJoinAnswer create();
+  public org.pcj.internal.message.Message create();
+}
+Compiled from "MessageType.java"
+final class org.pcj.internal.message.MessageType$13 extends org.pcj.internal.message.MessageType {
+  org.pcj.internal.message.MessageType$13(java.lang.String, int, byte);
+  public org.pcj.internal.message.MessageGroupJoinRequest create();
+  public org.pcj.internal.message.Message create();
+}
+Compiled from "MessageType.java"
+final class org.pcj.internal.message.MessageType$14 extends org.pcj.internal.message.MessageType {
+  org.pcj.internal.message.MessageType$14(java.lang.String, int, byte);
+  public org.pcj.internal.message.MessageGroupJoinInform create();
+  public org.pcj.internal.message.Message create();
+}
+Compiled from "MessageType.java"
+final class org.pcj.internal.message.MessageType$15 extends org.pcj.internal.message.MessageType {
+  org.pcj.internal.message.MessageType$15(java.lang.String, int, byte);
+  public org.pcj.internal.message.MessageGroupJoinConfirm create();
+  public org.pcj.internal.message.Message create();
+}
+Compiled from "MessageType.java"
+final class org.pcj.internal.message.MessageType$16 extends org.pcj.internal.message.MessageType {
+  org.pcj.internal.message.MessageType$16(java.lang.String, int, byte);
+  public org.pcj.internal.message.MessageGroupJoinResponse create();
+  public org.pcj.internal.message.Message create();
+}
+Compiled from "MessageType.java"
+final class org.pcj.internal.message.MessageType$17 extends org.pcj.internal.message.MessageType {
+  org.pcj.internal.message.MessageType$17(java.lang.String, int, byte);
+  public org.pcj.internal.message.MessageValueGetRequest create();
+  public org.pcj.internal.message.Message create();
+}
+Compiled from "MessageType.java"
+final class org.pcj.internal.message.MessageType$18 extends org.pcj.internal.message.MessageType {
+  org.pcj.internal.message.MessageType$18(java.lang.String, int, byte);
+  public org.pcj.internal.message.MessageValueGetResponse create();
+  public org.pcj.internal.message.Message create();
+}
+Compiled from "MessageType.java"
+final class org.pcj.internal.message.MessageType$19 extends org.pcj.internal.message.MessageType {
+  org.pcj.internal.message.MessageType$19(java.lang.String, int, byte);
+  public org.pcj.internal.message.MessageValuePutRequest create();
+  public org.pcj.internal.message.Message create();
+}
+Compiled from "MessageType.java"
+final class org.pcj.internal.message.MessageType$2 extends org.pcj.internal.message.MessageType {
+  org.pcj.internal.message.MessageType$2(java.lang.String, int, byte);
+  public org.pcj.internal.message.MessageHelloInform create();
+  public org.pcj.internal.message.Message create();
+}
+Compiled from "MessageType.java"
+final class org.pcj.internal.message.MessageType$20 extends org.pcj.internal.message.MessageType {
+  org.pcj.internal.message.MessageType$20(java.lang.String, int, byte);
+  public org.pcj.internal.message.MessageValuePutResponse create();
+  public org.pcj.internal.message.Message create();
+}
+Compiled from "MessageType.java"
+final class org.pcj.internal.message.MessageType$21 extends org.pcj.internal.message.MessageType {
+  org.pcj.internal.message.MessageType$21(java.lang.String, int, byte);
+  public org.pcj.internal.message.MessageValueBroadcastRequest create();
+  public org.pcj.internal.message.Message create();
+}
+Compiled from "MessageType.java"
+final class org.pcj.internal.message.MessageType$22 extends org.pcj.internal.message.MessageType {
+  org.pcj.internal.message.MessageType$22(java.lang.String, int, byte);
+  public org.pcj.internal.message.MessageValueBroadcastBytes create();
+  public org.pcj.internal.message.Message create();
+}
+Compiled from "MessageType.java"
+final class org.pcj.internal.message.MessageType$23 extends org.pcj.internal.message.MessageType {
+  org.pcj.internal.message.MessageType$23(java.lang.String, int, byte);
+  public org.pcj.internal.message.MessageValueBroadcastInform create();
+  public org.pcj.internal.message.Message create();
+}
+Compiled from "MessageType.java"
+final class org.pcj.internal.message.MessageType$24 extends org.pcj.internal.message.MessageType {
+  org.pcj.internal.message.MessageType$24(java.lang.String, int, byte);
+  public org.pcj.internal.message.MessageUnknown create();
+  public org.pcj.internal.message.Message create();
+}
+Compiled from "MessageType.java"
+final class org.pcj.internal.message.MessageType$3 extends org.pcj.internal.message.MessageType {
+  org.pcj.internal.message.MessageType$3(java.lang.String, int, byte);
+  public org.pcj.internal.message.MessageHelloBonjour create();
+  public org.pcj.internal.message.Message create();
+}
+Compiled from "MessageType.java"
+final class org.pcj.internal.message.MessageType$4 extends org.pcj.internal.message.MessageType {
+  org.pcj.internal.message.MessageType$4(java.lang.String, int, byte);
+  public org.pcj.internal.message.MessageHelloCompleted create();
+  public org.pcj.internal.message.Message create();
+}
+Compiled from "MessageType.java"
+final class org.pcj.internal.message.MessageType$5 extends org.pcj.internal.message.MessageType {
+  org.pcj.internal.message.MessageType$5(java.lang.String, int, byte);
+  public org.pcj.internal.message.MessageHelloGo create();
+  public org.pcj.internal.message.Message create();
+}
+Compiled from "MessageType.java"
+final class org.pcj.internal.message.MessageType$6 extends org.pcj.internal.message.MessageType {
+  org.pcj.internal.message.MessageType$6(java.lang.String, int, byte);
+  public org.pcj.internal.message.MessageBye create();
+  public org.pcj.internal.message.Message create();
+}
+Compiled from "MessageType.java"
+final class org.pcj.internal.message.MessageType$7 extends org.pcj.internal.message.MessageType {
+  org.pcj.internal.message.MessageType$7(java.lang.String, int, byte);
+  public org.pcj.internal.message.MessageByeCompleted create();
+  public org.pcj.internal.message.Message create();
+}
+Compiled from "MessageType.java"
+final class org.pcj.internal.message.MessageType$8 extends org.pcj.internal.message.MessageType {
+  org.pcj.internal.message.MessageType$8(java.lang.String, int, byte);
+  public org.pcj.internal.message.MessageGroupBarrierWaiting create();
+  public org.pcj.internal.message.Message create();
+}
+Compiled from "MessageType.java"
+final class org.pcj.internal.message.MessageType$9 extends org.pcj.internal.message.MessageType {
+  org.pcj.internal.message.MessageType$9(java.lang.String, int, byte);
+  public org.pcj.internal.message.MessageGroupBarrierGo create();
+  public org.pcj.internal.message.Message create();
+}
+Compiled from "MessageUnknown.java"
+public final class org.pcj.internal.message.MessageUnknown extends org.pcj.internal.message.Message {
+  public org.pcj.internal.message.MessageUnknown();
+  public void write(org.pcj.internal.network.MessageDataOutputStream);
+  public void execute(java.nio.channels.SocketChannel, org.pcj.internal.network.MessageDataInputStream) throws java.io.IOException;
+}
+Compiled from "MessageValueBroadcastBytes.java"
+public final class org.pcj.internal.message.MessageValueBroadcastBytes extends org.pcj.internal.message.Message {
+  public org.pcj.internal.message.MessageValueBroadcastBytes();
+  public org.pcj.internal.message.MessageValueBroadcastBytes(int, int, int, java.lang.String, java.lang.String, org.pcj.internal.network.CloneInputStream);
+  public void write(org.pcj.internal.network.MessageDataOutputStream) throws java.io.IOException;
+  public void execute(java.nio.channels.SocketChannel, org.pcj.internal.network.MessageDataInputStream) throws java.io.IOException;
+}
+Compiled from "MessageValueBroadcastInform.java"
+public final class org.pcj.internal.message.MessageValueBroadcastInform extends org.pcj.internal.message.Message {
+  public org.pcj.internal.message.MessageValueBroadcastInform();
+  public org.pcj.internal.message.MessageValueBroadcastInform(int, int, int, int, java.util.Queue<java.lang.Exception>);
+  public void write(org.pcj.internal.network.MessageDataOutputStream) throws java.io.IOException;
+  public void execute(java.nio.channels.SocketChannel, org.pcj.internal.network.MessageDataInputStream) throws java.io.IOException;
+}
+Compiled from "MessageValueBroadcastRequest.java"
+public final class org.pcj.internal.message.MessageValueBroadcastRequest extends org.pcj.internal.message.Message {
+  public org.pcj.internal.message.MessageValueBroadcastRequest();
+  public org.pcj.internal.message.MessageValueBroadcastRequest(int, int, int, java.lang.String, java.lang.String, java.lang.Object);
+  public void write(org.pcj.internal.network.MessageDataOutputStream) throws java.io.IOException;
+  public void execute(java.nio.channels.SocketChannel, org.pcj.internal.network.MessageDataInputStream) throws java.io.IOException;
+}
+Compiled from "MessageValueGetRequest.java"
+public final class org.pcj.internal.message.MessageValueGetRequest extends org.pcj.internal.message.Message {
+  public org.pcj.internal.message.MessageValueGetRequest();
+  public org.pcj.internal.message.MessageValueGetRequest(int, int, int, int, java.lang.String, java.lang.String, int[]);
+  public void write(org.pcj.internal.network.MessageDataOutputStream) throws java.io.IOException;
+  public void execute(java.nio.channels.SocketChannel, org.pcj.internal.network.MessageDataInputStream) throws java.io.IOException;
+}
+Compiled from "MessageValueGetResponse.java"
+class org.pcj.internal.message.MessageValueGetResponse extends org.pcj.internal.message.Message {
+  public org.pcj.internal.message.MessageValueGetResponse();
+  public org.pcj.internal.message.MessageValueGetResponse(int, int, int, java.lang.Object);
+  public void setException(java.lang.Exception);
+  public void write(org.pcj.internal.network.MessageDataOutputStream) throws java.io.IOException;
+  public void execute(java.nio.channels.SocketChannel, org.pcj.internal.network.MessageDataInputStream) throws java.io.IOException;
+}
+Compiled from "MessageValuePutRequest.java"
+public final class org.pcj.internal.message.MessageValuePutRequest extends org.pcj.internal.message.Message {
+  public org.pcj.internal.message.MessageValuePutRequest();
+  public org.pcj.internal.message.MessageValuePutRequest(int, int, int, int, java.lang.String, java.lang.String, int[], java.lang.Object);
+  public void write(org.pcj.internal.network.MessageDataOutputStream) throws java.io.IOException;
+  public void execute(java.nio.channels.SocketChannel, org.pcj.internal.network.MessageDataInputStream) throws java.io.IOException;
+}
+Compiled from "MessageValuePutResponse.java"
+class org.pcj.internal.message.MessageValuePutResponse extends org.pcj.internal.message.Message {
+  public org.pcj.internal.message.MessageValuePutResponse();
+  public org.pcj.internal.message.MessageValuePutResponse(int, int, int);
+  public void setException(java.lang.Exception);
+  public void write(org.pcj.internal.network.MessageDataOutputStream) throws java.io.IOException;
+  public void execute(java.nio.channels.SocketChannel, org.pcj.internal.network.MessageDataInputStream) throws java.io.IOException;
+}
+Compiled from "CloneInputStream.java"
+public class org.pcj.internal.network.CloneInputStream extends java.io.InputStream {
+  public static org.pcj.internal.network.CloneInputStream clone(java.io.InputStream) throws java.io.IOException;
+  public void reset();
+  public int read();
+  public long getLength();
+  public static org.pcj.internal.network.CloneInputStream readFrom(org.pcj.internal.network.MessageDataInputStream) throws java.io.IOException;
+  public void writeInto(org.pcj.internal.network.MessageDataOutputStream) throws java.io.IOException;
+  static {};
+}
+Compiled from "LoopbackMessageBytesStream.java"
+public class org.pcj.internal.network.LoopbackMessageBytesStream implements java.lang.AutoCloseable {
+  public org.pcj.internal.network.LoopbackMessageBytesStream(org.pcj.internal.message.Message);
+  public org.pcj.internal.network.LoopbackMessageBytesStream(org.pcj.internal.message.Message, int);
+  public void writeMessage() throws java.io.IOException;
+  public org.pcj.internal.network.MessageDataInputStream getMessageDataInputStream();
+  public void close() throws java.io.IOException;
+}
+Compiled from "LoopbackMessageBytesStream.java"
+class org.pcj.internal.network.LoopbackMessageBytesStream$LoopbackInputStream extends java.io.InputStream {
+  public org.pcj.internal.network.LoopbackMessageBytesStream$LoopbackInputStream(java.util.Queue<java.nio.ByteBuffer>);
+  public void close();
+  public boolean isClosed();
+  public int read();
+  public int read(byte[]);
+  public int read(byte[], int, int);
+}
+Compiled from "LoopbackMessageBytesStream.java"
+class org.pcj.internal.network.LoopbackMessageBytesStream$LoopbackOutputStream extends java.io.OutputStream {
+  public org.pcj.internal.network.LoopbackMessageBytesStream$LoopbackOutputStream(java.util.Queue<java.nio.ByteBuffer>, int);
+  public void flush();
+  public void close() throws java.io.IOException;
+  public boolean isClosed();
+  public void write(int);
+  public void write(byte[]);
+  public void write(byte[], int, int);
+}
+Compiled from "LoopbackSocketChannel.java"
+public final class org.pcj.internal.network.LoopbackSocketChannel extends java.nio.channels.SocketChannel {
+  public static java.nio.channels.SocketChannel getInstance();
+  public int read(java.nio.ByteBuffer) throws java.io.IOException;
+  public long read(java.nio.ByteBuffer[], int, int) throws java.io.IOException;
+  public int write(java.nio.ByteBuffer) throws java.io.IOException;
+  public long write(java.nio.ByteBuffer[], int, int) throws java.io.IOException;
+  public java.nio.channels.SocketChannel bind(java.net.SocketAddress) throws java.io.IOException;
+  public boolean connect(java.net.SocketAddress) throws java.io.IOException;
+  public boolean isConnectionPending();
+  public boolean isConnected();
+  public boolean finishConnect() throws java.io.IOException;
+  public java.nio.channels.SocketChannel shutdownInput() throws java.io.IOException;
+  public java.nio.channels.SocketChannel shutdownOutput() throws java.io.IOException;
+  public java.net.Socket socket();
+  public java.net.SocketAddress getLocalAddress() throws java.io.IOException;
+  public java.net.SocketAddress getRemoteAddress() throws java.io.IOException;
+  public java.util.Set<java.net.SocketOption<?>> supportedOptions();
+  public <T> T getOption(java.net.SocketOption<T>) throws java.io.IOException;
+  public <T> java.nio.channels.SocketChannel setOption(java.net.SocketOption<T>, T) throws java.io.IOException;
+  protected void implCloseSelectableChannel() throws java.io.IOException;
+  protected void implConfigureBlocking(boolean) throws java.io.IOException;
+  public java.lang.String toString();
+  public java.nio.channels.NetworkChannel setOption(java.net.SocketOption, java.lang.Object) throws java.io.IOException;
+  public java.nio.channels.NetworkChannel bind(java.net.SocketAddress) throws java.io.IOException;
+  org.pcj.internal.network.LoopbackSocketChannel(org.pcj.internal.network.LoopbackSocketChannel$1);
+}
+Compiled from "LoopbackSocketChannel.java"
+class org.pcj.internal.network.LoopbackSocketChannel$1 {
+}
+Compiled from "LoopbackSocketChannel.java"
+class org.pcj.internal.network.LoopbackSocketChannel$LoopbackSocketAddress extends java.net.SocketAddress {
+  public java.lang.String toString();
+  org.pcj.internal.network.LoopbackSocketChannel$LoopbackSocketAddress(org.pcj.internal.network.LoopbackSocketChannel$1);
+}
+Compiled from "LoopbackSocketChannel.java"
+class org.pcj.internal.network.LoopbackSocketChannel$LoopbackSocketChannelHolder {
+  static java.nio.channels.SocketChannel access$200();
+  static {};
+}
+Compiled from "MessageBytesInputStream.java"
+public class org.pcj.internal.network.MessageBytesInputStream {
+  public org.pcj.internal.network.MessageBytesInputStream();
+  public void offerNextBytes(java.nio.ByteBuffer);
+  public boolean isClosed();
+  public org.pcj.internal.network.MessageDataInputStream getMessageDataInputStream();
+  public final void reset();
+}
+Compiled from "MessageBytesInputStream.java"
+class org.pcj.internal.network.MessageBytesInputStream$MessageInputStream extends java.io.InputStream {
+  public org.pcj.internal.network.MessageBytesInputStream$MessageInputStream();
+  public void close();
+  public boolean isClosed();
+  public int read();
+  public int read(byte[]);
+  public int read(byte[], int, int);
+  static boolean access$000(org.pcj.internal.network.MessageBytesInputStream$MessageInputStream, java.nio.ByteBuffer);
+}
+Compiled from "MessageBytesOutputStream.java"
+public class org.pcj.internal.network.MessageBytesOutputStream implements java.lang.AutoCloseable {
+  public org.pcj.internal.network.MessageBytesOutputStream(org.pcj.internal.message.Message) throws java.io.IOException;
+  public org.pcj.internal.network.MessageBytesOutputStream(org.pcj.internal.message.Message, int);
+  public void writeMessage() throws java.io.IOException;
+  public org.pcj.internal.message.Message getMessage();
+  public boolean isClosed();
+  public void close() throws java.io.IOException;
+  public java.nio.ByteBuffer getNextBytes();
+}
+Compiled from "MessageBytesOutputStream.java"
+class org.pcj.internal.network.MessageBytesOutputStream$MessageOutputStream extends java.io.OutputStream {
+  public org.pcj.internal.network.MessageBytesOutputStream$MessageOutputStream(int);
+  public void flush();
+  public void close() throws java.io.IOException;
+  public boolean isClosed();
+  public void write(int);
+  public void write(byte[]);
+  public void write(byte[], int, int);
+  static java.nio.ByteBuffer access$000(org.pcj.internal.network.MessageBytesOutputStream$MessageOutputStream);
+  static java.nio.ByteBuffer access$100(org.pcj.internal.network.MessageBytesOutputStream$MessageOutputStream);
+}
+Compiled from "MessageDataInputStream.java"
+public class org.pcj.internal.network.MessageDataInputStream extends java.io.InputStream {
+  public org.pcj.internal.network.MessageDataInputStream(java.io.InputStream);
+  public int read() throws java.io.IOException;
+  public void close() throws java.io.IOException;
+  public boolean readBoolean() throws java.io.IOException;
+  public byte readByte() throws java.io.IOException;
+  public byte[] readByteArray() throws java.io.IOException;
+  public double readDouble() throws java.io.IOException;
+  public double[] readDoubleArray() throws java.io.IOException;
+  public float readFloat() throws java.io.IOException;
+  public float[] readFloatArray() throws java.io.IOException;
+  public int readInt() throws java.io.IOException;
+  public int[] readIntArray() throws java.io.IOException;
+  public long readLong() throws java.io.IOException;
+  public long[] readLongArray() throws java.io.IOException;
+  public java.lang.String readString() throws java.io.IOException;
+  public java.lang.Object readObject() throws java.io.IOException, java.lang.ClassNotFoundException;
+}
+Compiled from "MessageDataOutputStream.java"
+public class org.pcj.internal.network.MessageDataOutputStream extends java.io.OutputStream {
+  public org.pcj.internal.network.MessageDataOutputStream(java.io.OutputStream);
+  public void write(int) throws java.io.IOException;
+  public void close() throws java.io.IOException;
+  public void writeBoolean(boolean) throws java.io.IOException;
+  public void writeByte(byte) throws java.io.IOException;
+  public void writeByteArray(byte[]) throws java.io.IOException;
+  public void writeDouble(double) throws java.io.IOException;
+  public void writeDoubleArray(double[]) throws java.io.IOException;
+  public void writeFloat(float) throws java.io.IOException;
+  public void writeFloatArray(float[]) throws java.io.IOException;
+  public void writeInt(int) throws java.io.IOException;
+  public void writeIntArray(int[]) throws java.io.IOException;
+  public void writeLong(long) throws java.io.IOException;
+  public void writeLongArray(long[]) throws java.io.IOException;
+  public void writeString(java.lang.String) throws java.io.IOException;
+  public void writeObject(java.lang.Object) throws java.io.IOException;
+}
+Compiled from "SelectorProc.java"
+public class org.pcj.internal.network.SelectorProc implements java.lang.Runnable {
+  public org.pcj.internal.network.SelectorProc();
+  public java.nio.channels.ServerSocketChannel bind(java.net.InetAddress, int, int) throws java.io.IOException;
+  public java.nio.channels.SocketChannel connectTo(java.net.InetAddress, int) throws java.io.IOException;
+  public void writeMessage(java.nio.channels.SocketChannel, org.pcj.internal.message.Message) throws java.io.IOException;
+  public void closeAllSockets() throws java.io.IOException;
+  public void run();
+  static {};
+}
+Compiled from "SelectorProc.java"
+class org.pcj.internal.network.SelectorProc$InterestChange {
+  public org.pcj.internal.network.SelectorProc$InterestChange(java.nio.channels.SelectableChannel, int);
+  static java.nio.channels.SelectableChannel access$000(org.pcj.internal.network.SelectorProc$InterestChange);
+  static int access$100(org.pcj.internal.network.SelectorProc$InterestChange);
+}
+Compiled from "GroupJoinTest.java"
+public class org.pcj.test.GroupJoinTest implements org.pcj.StartPoint {
+  public org.pcj.test.GroupJoinTest();
+  public static void main(java.lang.String[]) throws java.lang.InterruptedException;
+  public void main() throws java.lang.Throwable;
+}
+Compiled from "MultipleJvms.java"
+public class org.pcj.test.MultipleJvms {
+  public org.pcj.test.MultipleJvms();
+  public static void main(java.lang.String[]) throws java.io.IOException, java.lang.InterruptedException;
+}
+Compiled from "MyTest.java"
+public class org.pcj.test.MyTest extends org.pcj.internal.InternalStorages implements org.pcj.StartPoint {
+  double a;
+  double b;
+  java.lang.Double c;
+  public org.pcj.test.MyTest();
+  public static void main(java.lang.String[]) throws java.lang.InterruptedException;
+  public void main() throws java.lang.Throwable;
+}
+Compiled from "MyTest.java"
+final class org.pcj.test.MyTest$SharedEnum extends java.lang.Enum<org.pcj.test.MyTest$SharedEnum> {
+  public static final org.pcj.test.MyTest$SharedEnum a;
+  public static final org.pcj.test.MyTest$SharedEnum b;
+  public static final org.pcj.test.MyTest$SharedEnum c;
+  public static org.pcj.test.MyTest$SharedEnum[] values();
+  public static org.pcj.test.MyTest$SharedEnum valueOf(java.lang.String);
+  static {};
+}
+Compiled from "PcjExamplePiInt.java"
+public class org.pcj.test.PcjExamplePiInt implements org.pcj.StartPoint {
+  double sum;
+  public org.pcj.test.PcjExamplePiInt();
+  public void main() throws java.lang.Throwable;
+  public static void main(java.lang.String[]);
+}
+Compiled from "PcjExamplePiInt.java"
+final class org.pcj.test.PcjExamplePiInt$SharedEnum extends java.lang.Enum<org.pcj.test.PcjExamplePiInt$SharedEnum> {
+  public static final org.pcj.test.PcjExamplePiInt$SharedEnum sum;
+  public static org.pcj.test.PcjExamplePiInt$SharedEnum[] values();
+  public static org.pcj.test.PcjExamplePiInt$SharedEnum valueOf(java.lang.String);
+  static {};
+}
+Compiled from "PcjExamplePiMC.java"
+public class org.pcj.test.PcjExamplePiMC implements org.pcj.StartPoint {
+  long circleCount;
+  public org.pcj.test.PcjExamplePiMC();
+  public void main();
+  public static void main(java.lang.String[]);
+}
+Compiled from "PcjExamplePiMC.java"
+final class org.pcj.test.PcjExamplePiMC$SharedEnum extends java.lang.Enum<org.pcj.test.PcjExamplePiMC$SharedEnum> {
+  public static final org.pcj.test.PcjExamplePiMC$SharedEnum circleCount;
+  public static org.pcj.test.PcjExamplePiMC$SharedEnum[] values();
+  public static org.pcj.test.PcjExamplePiMC$SharedEnum valueOf(java.lang.String);
+  static {};
+}
+Compiled from "PcjMicroBenchmarkBarrier.java"
+public class org.pcj.test.PcjMicroBenchmarkBarrier implements org.pcj.StartPoint {
+  public org.pcj.test.PcjMicroBenchmarkBarrier();
+  public void main();
+  public static void main(java.lang.String[]);
+}
+Compiled from "PcjMicroBenchmarkBroadcast.java"
+public class org.pcj.test.PcjMicroBenchmarkBroadcast implements org.pcj.StartPoint {
+  double[] a;
+  public org.pcj.test.PcjMicroBenchmarkBroadcast();
+  public void main();
+  public static void main(java.lang.String[]);
+}
+Compiled from "PcjMicroBenchmarkBroadcast.java"
+final class org.pcj.test.PcjMicroBenchmarkBroadcast$SharedEnum extends java.lang.Enum<org.pcj.test.PcjMicroBenchmarkBroadcast$SharedEnum> {
+  public static final org.pcj.test.PcjMicroBenchmarkBroadcast$SharedEnum a;
+  public static org.pcj.test.PcjMicroBenchmarkBroadcast$SharedEnum[] values();
+  public static org.pcj.test.PcjMicroBenchmarkBroadcast$SharedEnum valueOf(java.lang.String);
+  static {};
+}
+Compiled from "PcjMicroBenchmarkPingPong.java"
+public class org.pcj.test.PcjMicroBenchmarkPingPong implements org.pcj.StartPoint {
+  double[] a;
+  public org.pcj.test.PcjMicroBenchmarkPingPong();
+  public void main();
+  public static void main(java.lang.String[]);
+}
+Compiled from "PcjMicroBenchmarkPingPong.java"
+final class org.pcj.test.PcjMicroBenchmarkPingPong$StorageEnum extends java.lang.Enum<org.pcj.test.PcjMicroBenchmarkPingPong$StorageEnum> {
+  public static final org.pcj.test.PcjMicroBenchmarkPingPong$StorageEnum a;
+  public static org.pcj.test.PcjMicroBenchmarkPingPong$StorageEnum[] values();
+  public static org.pcj.test.PcjMicroBenchmarkPingPong$StorageEnum valueOf(java.lang.String);
+  static {};
+}
+Compiled from "SizesTest.java"
+public class org.pcj.test.SizesTest implements org.pcj.StartPoint {
+  byte[] b;
+  public org.pcj.test.SizesTest();
+  public static void main(java.lang.String[]) throws java.lang.InterruptedException;
+  public void main() throws java.lang.Throwable;
+}
+Compiled from "SizesTest.java"
+final class org.pcj.test.SizesTest$SharedEnum extends java.lang.Enum<org.pcj.test.SizesTest$SharedEnum> {
+  public static final org.pcj.test.SizesTest$SharedEnum b;
+  public static org.pcj.test.SizesTest$SharedEnum[] values();
+  public static org.pcj.test.SizesTest$SharedEnum valueOf(java.lang.String);
+  static {};
+}
+Compiled from "StorageExample.java"
+public class org.pcj.test.StorageExample implements org.pcj.StartPoint {
+  int[] x;
+  static final double[] STATIC_TEST;
+  double avg;
+  float obiekt_nie_w_Enum_wiec_nie_Shared;
+  public org.pcj.test.StorageExample();
+  public void main() throws java.lang.Throwable;
+  static {};
+}
+Compiled from "StorageExample.java"
+final class org.pcj.test.StorageExample$SharedEnum extends java.lang.Enum<org.pcj.test.StorageExample$SharedEnum> {
+  public static final org.pcj.test.StorageExample$SharedEnum x;
+  public static final org.pcj.test.StorageExample$SharedEnum avg;
+  public static org.pcj.test.StorageExample$SharedEnum[] values();
+  public static org.pcj.test.StorageExample$SharedEnum valueOf(java.lang.String);
+  static {};
+}
+Compiled from "StorageExampleMain.java"
+public class org.pcj.test.StorageExampleMain {
+  public org.pcj.test.StorageExampleMain();
+  public static void main(java.lang.String[]);
+}

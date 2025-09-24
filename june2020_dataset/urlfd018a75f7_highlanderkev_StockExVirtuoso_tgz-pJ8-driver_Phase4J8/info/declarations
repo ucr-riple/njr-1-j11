@@ -1,0 +1,807 @@
+Compiled from "ProductBook.java"
+public class book.ProductBook {
+  public book.ProductBook(java.lang.String) throws java.lang.Exception;
+  public java.lang.String getProduct();
+  public synchronized java.util.ArrayList<tradable.TradableDTO> getOrdersWithRemainingQty(java.lang.String) throws java.lang.Exception;
+  public synchronized void checkTooLateToCancel(java.lang.String) throws book.utils.OrderNotFoundException, java.lang.Exception;
+  public synchronized java.lang.String[][] getBookDepth() throws java.lang.Exception;
+  public synchronized publishers.MarketDataDTO getMarketData() throws java.lang.Exception;
+  public synchronized void addOldEntry(tradable.Tradable) throws java.lang.Exception;
+  public synchronized void openMarket() throws java.lang.Exception;
+  public synchronized void closeMarket() throws java.lang.Exception;
+  public synchronized void cancelOrder(constants.BookSide, java.lang.String) throws java.lang.Exception;
+  public synchronized void cancelQuote(java.lang.String) throws java.lang.Exception;
+  public synchronized void addToBook(tradable.Quote) throws book.utils.DataValidationException, java.lang.Exception;
+  public synchronized void addToBook(tradable.Order) throws java.lang.Exception;
+  public synchronized void updateCurrentMarket() throws java.lang.Exception;
+}
+Compiled from "ProductBookSide.java"
+public class book.ProductBookSide {
+  public book.ProductBookSide(book.ProductBook, constants.BookSide) throws java.lang.Exception;
+  public synchronized java.util.ArrayList<tradable.TradableDTO> getOrdersWithRemainingQty(java.lang.String) throws java.lang.Exception;
+  synchronized java.util.ArrayList<tradable.Tradable> getEntriesAtTopOfBook();
+  public synchronized java.lang.String[] getBookDepth() throws java.lang.Exception;
+  synchronized java.util.ArrayList<tradable.Tradable> getEntriesAtPrice(price.Price);
+  public synchronized boolean hasMarketPrice();
+  public synchronized boolean hasOnlyMarketPrice();
+  public synchronized price.Price topOfBookPrice();
+  public synchronized int topOfBookVolume();
+  public synchronized boolean isEmpty();
+  public synchronized void cancelAll() throws java.lang.Exception;
+  public synchronized tradable.TradableDTO removeQuote(java.lang.String) throws java.lang.Exception;
+  public synchronized void submitOrderCancel(java.lang.String) throws java.lang.Exception;
+  public synchronized void submitQuoteCancel(java.lang.String) throws java.lang.Exception;
+  public void addOldEntry(tradable.Tradable) throws java.lang.Exception;
+  public synchronized void addToBook(tradable.Tradable) throws java.lang.Exception;
+  public java.util.HashMap<java.lang.String, publishers.FillMessage> tryTrade(tradable.Tradable) throws java.lang.Exception;
+  public synchronized java.util.HashMap<java.lang.String, publishers.FillMessage> trySellAgainstBuySideTrade(tradable.Tradable) throws java.lang.Exception;
+  public synchronized java.util.HashMap<java.lang.String, publishers.FillMessage> tryBuyAgainstSellSideTrade(tradable.Tradable) throws java.lang.Exception;
+  public synchronized void clearIfEmpty(price.Price) throws java.lang.Exception;
+  public synchronized void removeTradable(tradable.Tradable) throws java.lang.Exception;
+}
+Compiled from "ProductService.java"
+public class book.ProductService {
+  public static synchronized book.ProductService getInstance();
+  public synchronized java.util.ArrayList<tradable.TradableDTO> getOrdersWithRemainingQty(java.lang.String, java.lang.String) throws book.utils.OrderNotFoundException, java.lang.Exception;
+  public synchronized publishers.MarketDataDTO getMarketData(java.lang.String) throws book.utils.OrderNotFoundException, java.lang.Exception;
+  public synchronized constants.MarketState getMarketState();
+  public synchronized java.lang.String[][] getBookDepth(java.lang.String) throws book.utils.NoSuchProductException, java.lang.Exception;
+  public synchronized java.util.ArrayList<java.lang.String> getProductList();
+  public synchronized void setMarketState(constants.MarketState) throws java.lang.Exception;
+  public synchronized void createProduct(java.lang.String) throws book.utils.ProductAlreadyExistsException, java.lang.Exception;
+  public synchronized void submitQuote(tradable.Quote) throws book.utils.InvalidMarketStateException, book.utils.NoSuchProductException, java.lang.Exception;
+  public synchronized java.lang.String submitOrder(tradable.Order) throws book.utils.NoSuchProductException, book.utils.InvalidMarketStateException, java.lang.Exception;
+  public synchronized void submitOrderCancel(java.lang.String, constants.BookSide, java.lang.String) throws book.utils.NoSuchProductException, book.utils.InvalidMarketStateException, java.lang.Exception;
+  public synchronized void submitQuoteCancel(java.lang.String, java.lang.String) throws book.utils.NoSuchProductException, book.utils.InvalidMarketStateException, java.lang.Exception;
+  static {};
+}
+Compiled from "TradeProcessor.java"
+public interface book.TradeProcessor {
+  public abstract java.util.HashMap<java.lang.String, publishers.FillMessage> doTrade(tradable.Tradable) throws java.lang.Exception;
+}
+Compiled from "TradeProcessorFactory.java"
+public class book.TradeProcessorFactory {
+  public book.TradeProcessorFactory();
+  public static book.TradeProcessor makeTradeProcessor(book.ProductBookSide) throws java.lang.Exception;
+}
+Compiled from "TradeProcessorPriceTimeImpl.java"
+public class book.TradeProcessorPriceTimeImpl implements book.TradeProcessor {
+  public book.TradeProcessorPriceTimeImpl(book.ProductBookSide) throws java.lang.Exception;
+  public java.util.HashMap<java.lang.String, publishers.FillMessage> doTrade(tradable.Tradable) throws java.lang.Exception;
+}
+Compiled from "DataValidationException.java"
+public class book.utils.DataValidationException extends java.lang.Exception {
+  public book.utils.DataValidationException(java.lang.String);
+}
+Compiled from "InvalidMarketStateException.java"
+public class book.utils.InvalidMarketStateException extends java.lang.Exception {
+  public book.utils.InvalidMarketStateException(java.lang.String);
+}
+Compiled from "InvalidMarketStateTransition.java"
+public class book.utils.InvalidMarketStateTransition extends java.lang.Exception {
+  public book.utils.InvalidMarketStateTransition(java.lang.String);
+}
+Compiled from "NoSuchProductException.java"
+public class book.utils.NoSuchProductException extends java.lang.Exception {
+  public book.utils.NoSuchProductException(java.lang.String);
+}
+Compiled from "OrderNotFoundException.java"
+public class book.utils.OrderNotFoundException extends java.lang.Exception {
+  public book.utils.OrderNotFoundException(java.lang.String);
+}
+Compiled from "ProductAlreadyExistsException.java"
+public class book.utils.ProductAlreadyExistsException extends java.lang.Exception {
+  public book.utils.ProductAlreadyExistsException(java.lang.String);
+}
+Compiled from "Position.java"
+public class client.Position {
+  public client.Position() throws java.lang.Exception;
+  public void updatePosition(java.lang.String, price.Price, constants.BookSide, int) throws java.lang.Exception;
+  public void updateLastSale(java.lang.String, price.Price) throws java.lang.Exception;
+  public int getStockPositionVolume(java.lang.String);
+  public java.util.ArrayList<java.lang.String> getHoldings();
+  public price.Price getStockPositionValue(java.lang.String) throws java.lang.Exception;
+  public price.Price getAccountCosts();
+  public price.Price getAllStockValue() throws java.lang.Exception;
+  public price.Price getNetAccountValue() throws java.lang.Exception;
+}
+Compiled from "TradableUserData.java"
+public class client.TradableUserData {
+  public client.TradableUserData(java.lang.String, java.lang.String, constants.BookSide, java.lang.String) throws exceptions.InvalidValueException;
+  public java.lang.String getUser();
+  public java.lang.String getProduct();
+  public constants.BookSide getSide();
+  public java.lang.String getId();
+  public java.lang.String toString();
+}
+Compiled from "User.java"
+public interface client.User {
+  public abstract java.lang.String getUserName();
+  public abstract void acceptLastSale(java.lang.String, price.Price, int);
+  public abstract void acceptMessage(publishers.FillMessage);
+  public abstract void acceptMessage(publishers.CancelMessage);
+  public abstract void acceptMarketMessage(java.lang.String);
+  public abstract void acceptTicker(java.lang.String, price.Price, char);
+  public abstract void acceptCurrentMarket(java.lang.String, price.Price, int, price.Price, int);
+  public abstract void connect() throws java.lang.Exception;
+  public abstract void disConnect() throws java.lang.Exception;
+  public abstract void showMarketDisplay() throws java.lang.Exception;
+  public abstract java.lang.String submitOrder(java.lang.String, price.Price, int, constants.BookSide) throws java.lang.Exception;
+  public abstract void submitOrderCancel(java.lang.String, constants.BookSide, java.lang.String) throws java.lang.Exception;
+  public abstract void submitQuote(java.lang.String, price.Price, int, price.Price, int) throws java.lang.Exception;
+  public abstract void submitQuoteCancel(java.lang.String) throws java.lang.Exception;
+  public abstract void subscribeCurrentMarket(java.lang.String) throws java.lang.Exception;
+  public abstract void subscribeLastSale(java.lang.String) throws java.lang.Exception;
+  public abstract void subscribeMessages(java.lang.String) throws java.lang.Exception;
+  public abstract void subscribeTicker(java.lang.String) throws java.lang.Exception;
+  public abstract price.Price getAllStockValue() throws java.lang.Exception;
+  public abstract price.Price getAccountCosts() throws java.lang.Exception;
+  public abstract price.Price getNetAccountValue() throws java.lang.Exception;
+  public abstract java.lang.String[][] getBookDepth(java.lang.String) throws java.lang.Exception;
+  public abstract java.lang.String getMarketState() throws java.lang.Exception;
+  public abstract java.util.ArrayList<client.TradableUserData> getOrderIds();
+  public abstract java.util.ArrayList<java.lang.String> getProductList();
+  public abstract price.Price getStockPositionValue(java.lang.String) throws java.lang.Exception;
+  public abstract int getStockPositionVolume(java.lang.String) throws java.lang.Exception;
+  public abstract java.util.ArrayList<java.lang.String> getHoldings();
+  public abstract java.util.ArrayList<tradable.TradableDTO> getOrdersWithRemainingQty(java.lang.String) throws java.lang.Exception;
+}
+Compiled from "UserCommandService.java"
+public class client.UserCommandService {
+  public static synchronized client.UserCommandService getInstance();
+  public synchronized long connect(client.User) throws client.utils.AlreadyConnectedException;
+  public synchronized void disConnect(java.lang.String, long) throws java.lang.Exception;
+  public java.lang.String[][] getBookDepth(java.lang.String, long, java.lang.String) throws java.lang.Exception;
+  public java.lang.String getMarketState(java.lang.String, long) throws java.lang.Exception;
+  public synchronized java.util.ArrayList<tradable.TradableDTO> getOrdersWithRemainingQty(java.lang.String, long, java.lang.String) throws java.lang.Exception;
+  public java.util.ArrayList<java.lang.String> getProducts(java.lang.String, long) throws java.lang.Exception;
+  public java.lang.String submitOrder(java.lang.String, long, java.lang.String, price.Price, int, constants.BookSide) throws java.lang.Exception;
+  public void submitOrderCancel(java.lang.String, long, java.lang.String, constants.BookSide, java.lang.String) throws java.lang.Exception;
+  public void submitQuote(java.lang.String, long, java.lang.String, price.Price, int, price.Price, int) throws java.lang.Exception;
+  public void submitQuoteCancel(java.lang.String, long, java.lang.String) throws java.lang.Exception;
+  public void subscribeCurrentMarket(java.lang.String, long, java.lang.String) throws java.lang.Exception;
+  public void subscribeLastSale(java.lang.String, long, java.lang.String) throws client.utils.UserNotConnectedException, java.lang.Exception;
+  public void subscribeMessages(java.lang.String, long, java.lang.String) throws client.utils.UserNotConnectedException, java.lang.Exception;
+  public void subscribeTicker(java.lang.String, long, java.lang.String) throws client.utils.UserNotConnectedException, java.lang.Exception;
+  public void unSubscribeCurrentMarket(java.lang.String, long, java.lang.String) throws client.utils.UserNotConnectedException, java.lang.Exception;
+  public void unSubscribeLastSale(java.lang.String, long, java.lang.String) throws client.utils.UserNotConnectedException, java.lang.Exception;
+  public void unSubscribeTicker(java.lang.String, long, java.lang.String) throws client.utils.UserNotConnectedException, java.lang.Exception;
+  public void unSubscribeMessages(java.lang.String, long, java.lang.String) throws client.utils.UserNotConnectedException, java.lang.Exception;
+  static {};
+}
+Compiled from "UserImpl.java"
+public class client.UserImpl implements client.User {
+  public client.UserImpl(java.lang.String) throws java.lang.Exception;
+  public java.lang.String getUserName();
+  public void acceptLastSale(java.lang.String, price.Price, int);
+  public void acceptMessage(publishers.FillMessage);
+  public void acceptMessage(publishers.CancelMessage);
+  public void acceptMarketMessage(java.lang.String);
+  public void acceptTicker(java.lang.String, price.Price, char);
+  public void acceptCurrentMarket(java.lang.String, price.Price, int, price.Price, int);
+  public void connect() throws java.lang.Exception;
+  public void disConnect() throws java.lang.Exception;
+  public void showMarketDisplay() throws client.utils.UserNotConnectedException;
+  public java.lang.String submitOrder(java.lang.String, price.Price, int, constants.BookSide) throws java.lang.Exception;
+  public void submitOrderCancel(java.lang.String, constants.BookSide, java.lang.String) throws java.lang.Exception;
+  public void submitQuote(java.lang.String, price.Price, int, price.Price, int) throws java.lang.Exception;
+  public void submitQuoteCancel(java.lang.String) throws java.lang.Exception;
+  public void subscribeCurrentMarket(java.lang.String) throws java.lang.Exception;
+  public void subscribeLastSale(java.lang.String) throws java.lang.Exception;
+  public void subscribeMessages(java.lang.String) throws java.lang.Exception;
+  public void subscribeTicker(java.lang.String) throws java.lang.Exception;
+  public price.Price getAllStockValue() throws java.lang.Exception;
+  public price.Price getAccountCosts() throws java.lang.Exception;
+  public price.Price getNetAccountValue() throws java.lang.Exception;
+  public java.lang.String[][] getBookDepth(java.lang.String) throws java.lang.Exception;
+  public java.lang.String getMarketState() throws java.lang.Exception;
+  public java.util.ArrayList<client.TradableUserData> getOrderIds();
+  public java.util.ArrayList<java.lang.String> getProductList();
+  public price.Price getStockPositionValue(java.lang.String) throws java.lang.Exception;
+  public int getStockPositionVolume(java.lang.String) throws java.lang.Exception;
+  public java.util.ArrayList<java.lang.String> getHoldings();
+  public java.util.ArrayList<tradable.TradableDTO> getOrdersWithRemainingQty(java.lang.String) throws java.lang.Exception;
+}
+Compiled from "UserSim.java"
+public class client.UserSim implements java.lang.Runnable {
+  public client.UserSim(long, client.User, boolean);
+  public void run();
+}
+Compiled from "UserSimSettings.java"
+public class client.UserSimSettings {
+  public static final double priceVariance;
+  public static final double volumeVariance;
+  public static void addProductData(java.lang.String, double, double, int);
+  public static double getBuyPriceBase(java.lang.String);
+  public static double getSellPriceBase(java.lang.String);
+  public static int getVolumeBase(java.lang.String);
+  static {};
+}
+Compiled from "AlreadyConnectedException.java"
+public class client.utils.AlreadyConnectedException extends java.lang.Exception {
+  public client.utils.AlreadyConnectedException(java.lang.String);
+}
+Compiled from "InvalidConnectionIdException.java"
+public class client.utils.InvalidConnectionIdException extends java.lang.Exception {
+  public client.utils.InvalidConnectionIdException(java.lang.String);
+}
+Compiled from "UserHoldingsException.java"
+public class client.utils.UserHoldingsException extends java.lang.Exception {
+  public client.utils.UserHoldingsException(java.lang.String);
+}
+Compiled from "UserNotConnectedException.java"
+public class client.utils.UserNotConnectedException extends java.lang.Exception {
+  public client.utils.UserNotConnectedException(java.lang.String);
+}
+Compiled from "BookSide.java"
+public final class constants.BookSide extends java.lang.Enum<constants.BookSide> {
+  public static final constants.BookSide BUY;
+  public static final constants.BookSide SELL;
+  public static constants.BookSide[] values();
+  public static constants.BookSide valueOf(java.lang.String);
+  public java.lang.String getBookSide();
+  static {};
+}
+Compiled from "MarketState.java"
+public final class constants.MarketState extends java.lang.Enum<constants.MarketState> {
+  public static final constants.MarketState CLOSED;
+  public static final constants.MarketState OPEN;
+  public static final constants.MarketState PREOPEN;
+  public static constants.MarketState[] values();
+  public static constants.MarketState valueOf(java.lang.String);
+  public java.lang.String getMarketState();
+  static {};
+}
+Compiled from "RuntimeInputException.java"
+public class constants.utils.RuntimeInputException extends java.lang.RuntimeException {
+  public constants.utils.RuntimeInputException(java.lang.String);
+}
+Compiled from "MainAutomatedTest.java"
+public class driver.MainAutomatedTest {
+  public static java.util.concurrent.CountDownLatch countDownLatch;
+  public driver.MainAutomatedTest();
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+  public static synchronized void simDone();
+}
+Compiled from "MainManualTest.java"
+public class driver.MainManualTest {
+  public static java.util.concurrent.CountDownLatch countDownLatch;
+  public driver.MainManualTest();
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+}
+Compiled from "Phase1.java"
+public class driver.Phase1 {
+  public driver.Phase1();
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+  static {};
+}
+Compiled from "Phase2.java"
+public class driver.Phase2 {
+  public driver.Phase2();
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+}
+Compiled from "Phase3.java"
+public class driver.Phase3 {
+  public driver.Phase3();
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+}
+Compiled from "Phase3.java"
+class driver.Phase3$UserImpl implements client.User {
+  public driver.Phase3$UserImpl(java.lang.String);
+  public java.lang.String getUserName();
+  public void acceptLastSale(java.lang.String, price.Price, int);
+  public void acceptMessage(publishers.FillMessage);
+  public void acceptMessage(publishers.CancelMessage);
+  public void acceptMarketMessage(java.lang.String);
+  public void acceptTicker(java.lang.String, price.Price, char);
+  public void acceptCurrentMarket(java.lang.String, price.Price, int, price.Price, int);
+  public void connect() throws java.lang.Exception;
+  public void disConnect() throws java.lang.Exception;
+  public void showMarketDisplay() throws java.lang.Exception;
+  public java.lang.String submitOrder(java.lang.String, price.Price, int, constants.BookSide) throws java.lang.Exception;
+  public void submitOrderCancel(java.lang.String, constants.BookSide, java.lang.String) throws java.lang.Exception;
+  public void submitQuote(java.lang.String, price.Price, int, price.Price, int) throws java.lang.Exception;
+  public void submitQuoteCancel(java.lang.String) throws java.lang.Exception;
+  public void subscribeCurrentMarket(java.lang.String) throws java.lang.Exception;
+  public void subscribeLastSale(java.lang.String) throws java.lang.Exception;
+  public void subscribeMessages(java.lang.String) throws java.lang.Exception;
+  public void subscribeTicker(java.lang.String) throws java.lang.Exception;
+  public price.Price getAllStockValue() throws java.lang.Exception;
+  public price.Price getAccountCosts() throws java.lang.Exception;
+  public price.Price getNetAccountValue() throws java.lang.Exception;
+  public java.lang.String[][] getBookDepth(java.lang.String) throws java.lang.Exception;
+  public java.lang.String getMarketState() throws java.lang.Exception;
+  public java.util.ArrayList<client.TradableUserData> getOrderIds();
+  public java.util.ArrayList<java.lang.String> getProductList();
+  public price.Price getStockPositionValue(java.lang.String) throws java.lang.Exception;
+  public int getStockPositionVolume(java.lang.String) throws java.lang.Exception;
+  public java.util.ArrayList<java.lang.String> getHoldings();
+  public java.util.ArrayList<tradable.TradableDTO> getOrdersWithRemainingQty(java.lang.String) throws java.lang.Exception;
+}
+Compiled from "Phase4.java"
+public class driver.Phase4 {
+  public driver.Phase4();
+  public static void main(java.lang.String[]);
+}
+Compiled from "Phase4.java"
+class driver.Phase4$UserImpl implements client.User {
+  public driver.Phase4$UserImpl(java.lang.String);
+  public java.lang.String getUserName();
+  public void acceptLastSale(java.lang.String, price.Price, int);
+  public void acceptMessage(publishers.FillMessage);
+  public void acceptMessage(publishers.CancelMessage);
+  public void acceptMarketMessage(java.lang.String);
+  public void acceptTicker(java.lang.String, price.Price, char);
+  public void acceptCurrentMarket(java.lang.String, price.Price, int, price.Price, int);
+  public void connect() throws java.lang.Exception;
+  public void disConnect() throws java.lang.Exception;
+  public void showMarketDisplay() throws java.lang.Exception;
+  public java.lang.String submitOrder(java.lang.String, price.Price, int, constants.BookSide) throws java.lang.Exception;
+  public void submitOrderCancel(java.lang.String, constants.BookSide, java.lang.String) throws java.lang.Exception;
+  public void submitQuote(java.lang.String, price.Price, int, price.Price, int) throws java.lang.Exception;
+  public void submitQuoteCancel(java.lang.String) throws java.lang.Exception;
+  public void subscribeCurrentMarket(java.lang.String) throws java.lang.Exception;
+  public void subscribeLastSale(java.lang.String) throws java.lang.Exception;
+  public void subscribeMessages(java.lang.String) throws java.lang.Exception;
+  public void subscribeTicker(java.lang.String) throws java.lang.Exception;
+  public price.Price getAllStockValue() throws java.lang.Exception;
+  public price.Price getAccountCosts() throws java.lang.Exception;
+  public price.Price getNetAccountValue() throws java.lang.Exception;
+  public java.lang.String[][] getBookDepth(java.lang.String) throws java.lang.Exception;
+  public java.lang.String getMarketState() throws java.lang.Exception;
+  public java.util.ArrayList<client.TradableUserData> getOrderIds();
+  public java.util.ArrayList<java.lang.String> getProductList();
+  public price.Price getStockPositionValue(java.lang.String) throws java.lang.Exception;
+  public int getStockPositionVolume(java.lang.String) throws java.lang.Exception;
+  public java.util.ArrayList<java.lang.String> getHoldings();
+  public java.util.ArrayList<tradable.TradableDTO> getOrdersWithRemainingQty(java.lang.String) throws java.lang.Exception;
+}
+Compiled from "Phase5.java"
+public class driver.Phase5 {
+  public driver.Phase5();
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "ExceptionHandler.java"
+public class exceptions.ExceptionHandler {
+  public exceptions.ExceptionHandler();
+  public static boolean checkObject(java.lang.Object, java.lang.String) throws exceptions.InvalidValueException;
+  public static boolean checkPriceInput(java.lang.String, java.lang.String) throws exceptions.InvalidValueException;
+  public static boolean checkString(java.lang.String, java.lang.String) throws exceptions.InvalidValueException;
+  public static boolean checkLongNegative(java.lang.Long, java.lang.String) throws exceptions.InvalidValueException;
+  public static boolean checkLongZero(java.lang.Long, java.lang.String) throws exceptions.InvalidValueException;
+  public static boolean checkIntNegative(int, java.lang.String) throws exceptions.InvalidValueException;
+  public static boolean checkIntZero(int, java.lang.String) throws exceptions.InvalidValueException;
+}
+Compiled from "InvalidValueException.java"
+public class exceptions.InvalidValueException extends java.lang.Exception {
+  public exceptions.InvalidValueException(java.lang.String);
+}
+Compiled from "BookDepthDisplay.java"
+public class gui.BookDepthDisplay extends javax.swing.JFrame {
+  public gui.BookDepthDisplay(gui.MarketDisplay);
+  public void setVisible(java.lang.String);
+}
+Compiled from "MarketDisplay.java"
+public class gui.MarketDisplay extends javax.swing.JFrame {
+  gui.MarketDisplay(client.User, gui.UserDisplayManager);
+  client.User getUser();
+  void updateMarketData(java.lang.String, price.Price, int, price.Price, int) throws java.lang.Exception;
+  void updateLastSale(java.lang.String, price.Price, int) throws java.lang.Exception;
+  void updateMarketActivity(java.lang.String);
+  void updateMarketState(java.lang.String);
+  void updateTicker(java.lang.String, price.Price, char);
+  static void access$000(gui.MarketDisplay, java.awt.event.ActionEvent) throws java.lang.Exception;
+  static void access$100(gui.MarketDisplay, java.awt.event.ActionEvent);
+  static void access$200(gui.MarketDisplay, java.awt.event.ActionEvent);
+  static int access$300(gui.MarketDisplay);
+  static javax.swing.JTable access$400(gui.MarketDisplay);
+  static javax.swing.JLabel access$500(gui.MarketDisplay);
+  static gui.QuoteEntryDisplay access$600(gui.MarketDisplay);
+  static client.User access$700(gui.MarketDisplay);
+  static gui.OrderEntryDisplay access$800(gui.MarketDisplay);
+  static gui.OrderCancelDisplay access$900(gui.MarketDisplay);
+  static gui.BookDepthDisplay access$1000(gui.MarketDisplay);
+  static int access$302(gui.MarketDisplay, int);
+  static javax.swing.JPopupMenu access$1100(gui.MarketDisplay);
+  static {};
+}
+Compiled from "MarketDisplay.java"
+class gui.MarketDisplay$1 implements java.awt.event.ActionListener {
+  final gui.MarketDisplay this$0;
+  gui.MarketDisplay$1(gui.MarketDisplay);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "MarketDisplay.java"
+class gui.MarketDisplay$2 extends javax.swing.table.DefaultTableModel {
+  java.lang.Class[] types;
+  boolean[] canEdit;
+  final gui.MarketDisplay this$0;
+  gui.MarketDisplay$2(gui.MarketDisplay, java.lang.Object[][], java.lang.Object[]);
+  public java.lang.Class getColumnClass(int);
+  public boolean isCellEditable(int, int);
+}
+Compiled from "MarketDisplay.java"
+class gui.MarketDisplay$3 implements java.awt.event.ActionListener {
+  final gui.MarketDisplay this$0;
+  gui.MarketDisplay$3(gui.MarketDisplay);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "MarketDisplay.java"
+class gui.MarketDisplay$4 implements java.awt.event.ActionListener {
+  final gui.MarketDisplay this$0;
+  gui.MarketDisplay$4(gui.MarketDisplay);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "MarketDisplay.java"
+class gui.MarketDisplay$MenuActionListener implements java.awt.event.ActionListener {
+  final gui.MarketDisplay this$0;
+  gui.MarketDisplay$MenuActionListener(gui.MarketDisplay);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "MarketDisplay.java"
+class gui.MarketDisplay$PopupListener extends java.awt.event.MouseAdapter {
+  final gui.MarketDisplay this$0;
+  gui.MarketDisplay$PopupListener(gui.MarketDisplay);
+  public void mousePressed(java.awt.event.MouseEvent);
+  public void mouseReleased(java.awt.event.MouseEvent);
+}
+Compiled from "MarketTableCellRenderer.java"
+public class gui.MarketTableCellRenderer extends javax.swing.table.DefaultTableCellRenderer {
+  public gui.MarketTableCellRenderer(double);
+  public java.awt.Component getTableCellRendererComponent(javax.swing.JTable, java.lang.Object, boolean, boolean, int, int);
+}
+Compiled from "OrderCancelDisplay.java"
+public class gui.OrderCancelDisplay extends javax.swing.JFrame {
+  public gui.OrderCancelDisplay(gui.MarketDisplay);
+  public void setVisible(java.lang.String, java.util.ArrayList<tradable.TradableDTO>);
+  static void access$000(gui.OrderCancelDisplay, java.awt.event.ActionEvent);
+  static void access$100(gui.OrderCancelDisplay, java.awt.event.ActionEvent);
+  static void access$200(gui.OrderCancelDisplay, java.awt.event.ActionEvent);
+}
+Compiled from "OrderCancelDisplay.java"
+class gui.OrderCancelDisplay$1 implements java.awt.event.ActionListener {
+  final gui.OrderCancelDisplay this$0;
+  gui.OrderCancelDisplay$1(gui.OrderCancelDisplay);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "OrderCancelDisplay.java"
+class gui.OrderCancelDisplay$2 implements java.awt.event.ActionListener {
+  final gui.OrderCancelDisplay this$0;
+  gui.OrderCancelDisplay$2(gui.OrderCancelDisplay);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "OrderCancelDisplay.java"
+class gui.OrderCancelDisplay$3 implements java.awt.event.ActionListener {
+  final gui.OrderCancelDisplay this$0;
+  gui.OrderCancelDisplay$3(gui.OrderCancelDisplay);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "OrderEntryDisplay.java"
+public class gui.OrderEntryDisplay extends javax.swing.JFrame {
+  public gui.OrderEntryDisplay(gui.MarketDisplay);
+  public void setVisible(java.lang.String);
+  static void access$000(gui.OrderEntryDisplay, java.awt.event.ActionEvent);
+  static void access$100(gui.OrderEntryDisplay, java.awt.event.ActionEvent);
+  static void access$200(gui.OrderEntryDisplay, java.awt.event.ActionEvent);
+  static void access$300(gui.OrderEntryDisplay, java.awt.event.ActionEvent);
+  static void access$400(gui.OrderEntryDisplay, java.awt.event.ActionEvent);
+}
+Compiled from "OrderEntryDisplay.java"
+class gui.OrderEntryDisplay$1 implements java.awt.event.ActionListener {
+  final gui.OrderEntryDisplay this$0;
+  gui.OrderEntryDisplay$1(gui.OrderEntryDisplay);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "OrderEntryDisplay.java"
+class gui.OrderEntryDisplay$2 implements java.awt.event.ActionListener {
+  final gui.OrderEntryDisplay this$0;
+  gui.OrderEntryDisplay$2(gui.OrderEntryDisplay);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "OrderEntryDisplay.java"
+class gui.OrderEntryDisplay$3 implements java.awt.event.ActionListener {
+  final gui.OrderEntryDisplay this$0;
+  gui.OrderEntryDisplay$3(gui.OrderEntryDisplay);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "OrderEntryDisplay.java"
+class gui.OrderEntryDisplay$4 implements java.awt.event.ActionListener {
+  final gui.OrderEntryDisplay this$0;
+  gui.OrderEntryDisplay$4(gui.OrderEntryDisplay);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "OrderEntryDisplay.java"
+class gui.OrderEntryDisplay$5 implements java.awt.event.ActionListener {
+  final gui.OrderEntryDisplay this$0;
+  gui.OrderEntryDisplay$5(gui.OrderEntryDisplay);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "OrderEntryDisplay.java"
+class gui.OrderEntryDisplay$GUIDataException extends java.lang.Exception {
+  final gui.OrderEntryDisplay this$0;
+  public gui.OrderEntryDisplay$GUIDataException(gui.OrderEntryDisplay, java.lang.String);
+}
+Compiled from "PositionDisplay.java"
+public class gui.PositionDisplay extends javax.swing.JFrame {
+  public gui.PositionDisplay();
+  public void updateAccountBalance(price.Price);
+  public void updateStockValue(price.Price);
+  public void updateAccountValue(price.Price);
+  public void updatePositions(java.util.ArrayList<java.lang.String[]>);
+}
+Compiled from "PositionDisplay.java"
+class gui.PositionDisplay$1 extends javax.swing.table.DefaultTableModel {
+  java.lang.Class[] types;
+  boolean[] canEdit;
+  final gui.PositionDisplay this$0;
+  gui.PositionDisplay$1(gui.PositionDisplay, java.lang.Object[][], java.lang.Object[]);
+  public java.lang.Class getColumnClass(int);
+  public boolean isCellEditable(int, int);
+}
+Compiled from "PositionTableCellRenderer.java"
+public class gui.PositionTableCellRenderer extends javax.swing.table.DefaultTableCellRenderer {
+  public gui.PositionTableCellRenderer();
+  public java.awt.Component getTableCellRendererComponent(javax.swing.JTable, java.lang.Object, boolean, boolean, int, int);
+}
+Compiled from "QuoteEntryDisplay.java"
+public class gui.QuoteEntryDisplay extends javax.swing.JFrame {
+  public gui.QuoteEntryDisplay(gui.MarketDisplay);
+  public void setVisible(java.lang.String);
+  static void access$000(gui.QuoteEntryDisplay, java.awt.event.ActionEvent);
+  static void access$100(gui.QuoteEntryDisplay, java.awt.event.FocusEvent);
+  static void access$200(gui.QuoteEntryDisplay, java.awt.event.ActionEvent);
+  static void access$300(gui.QuoteEntryDisplay, java.awt.event.ActionEvent);
+  static void access$400(gui.QuoteEntryDisplay, java.awt.event.ActionEvent);
+}
+Compiled from "QuoteEntryDisplay.java"
+class gui.QuoteEntryDisplay$1 implements java.awt.event.ActionListener {
+  final gui.QuoteEntryDisplay this$0;
+  gui.QuoteEntryDisplay$1(gui.QuoteEntryDisplay);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "QuoteEntryDisplay.java"
+class gui.QuoteEntryDisplay$2 extends java.awt.event.FocusAdapter {
+  final gui.QuoteEntryDisplay this$0;
+  gui.QuoteEntryDisplay$2(gui.QuoteEntryDisplay);
+  public void focusLost(java.awt.event.FocusEvent);
+}
+Compiled from "QuoteEntryDisplay.java"
+class gui.QuoteEntryDisplay$3 implements java.awt.event.ActionListener {
+  final gui.QuoteEntryDisplay this$0;
+  gui.QuoteEntryDisplay$3(gui.QuoteEntryDisplay);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "QuoteEntryDisplay.java"
+class gui.QuoteEntryDisplay$4 implements java.awt.event.ActionListener {
+  final gui.QuoteEntryDisplay this$0;
+  gui.QuoteEntryDisplay$4(gui.QuoteEntryDisplay);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "QuoteEntryDisplay.java"
+class gui.QuoteEntryDisplay$5 implements java.awt.event.ActionListener {
+  final gui.QuoteEntryDisplay this$0;
+  gui.QuoteEntryDisplay$5(gui.QuoteEntryDisplay);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "QuoteEntryDisplay.java"
+class gui.QuoteEntryDisplay$GUIDataException extends java.lang.Exception {
+  final gui.QuoteEntryDisplay this$0;
+  public gui.QuoteEntryDisplay$GUIDataException(gui.QuoteEntryDisplay, java.lang.String);
+}
+Compiled from "UserDisplayManager.java"
+public class gui.UserDisplayManager {
+  public gui.UserDisplayManager(client.User);
+  public void showMarketDisplay() throws client.utils.UserNotConnectedException;
+  public void updateMarketData(java.lang.String, price.Price, int, price.Price, int) throws java.lang.Exception;
+  public void updateLastSale(java.lang.String, price.Price, int) throws java.lang.Exception;
+  public void updateTicker(java.lang.String, price.Price, char);
+  public void updateMarketActivity(java.lang.String);
+  public void updateMarketState(java.lang.String);
+}
+Compiled from "Price.java"
+public final class price.Price implements java.lang.Comparable<price.Price> {
+  price.Price(long);
+  price.Price();
+  public price.Price add(price.Price) throws price.utils.InvalidPriceOperation;
+  public price.Price subtract(price.Price) throws price.utils.InvalidPriceOperation;
+  public price.Price multiply(int) throws price.utils.InvalidPriceOperation;
+  public int compareTo(price.Price);
+  public boolean greaterOrEqual(price.Price);
+  public boolean greaterThan(price.Price);
+  public boolean lessOrEqual(price.Price);
+  public boolean lessThan(price.Price);
+  public boolean equals(price.Price);
+  public boolean isMarket();
+  public boolean isNegative();
+  public java.lang.String toString();
+  public int compareTo(java.lang.Object);
+}
+Compiled from "PriceFactory.java"
+public class price.PriceFactory {
+  public price.PriceFactory();
+  public static price.Price makeLimitPrice(java.lang.String) throws java.lang.Exception;
+  public static price.Price makeLimitPrice(long);
+  public static price.Price makeMarketPrice();
+  static {};
+}
+Compiled from "InvalidPriceOperation.java"
+public class price.utils.InvalidPriceOperation extends java.lang.Exception {
+  public price.utils.InvalidPriceOperation(java.lang.String);
+}
+Compiled from "CancelMessage.java"
+public class publishers.CancelMessage extends publishers.Messenger implements java.lang.Comparable<publishers.CancelMessage>, publishers.Message {
+  public publishers.CancelMessage(java.lang.String, java.lang.String, price.Price, int, java.lang.String, constants.BookSide, java.lang.String) throws java.lang.Exception;
+  public int compareTo(publishers.CancelMessage);
+  public int compareTo(java.lang.Object);
+}
+Compiled from "CurrentMarketPublisher.java"
+public class publishers.CurrentMarketPublisher implements publishers.Publisher {
+  public static synchronized publishers.CurrentMarketPublisher getInstance();
+  public synchronized void publishCurrentMarket(publishers.MarketDataDTO) throws java.lang.Exception;
+  public synchronized void subscribe(client.User, java.lang.String) throws java.lang.Exception;
+  public synchronized void unSubscribe(client.User, java.lang.String) throws java.lang.Exception;
+}
+Compiled from "FillMessage.java"
+public class publishers.FillMessage extends publishers.Messenger implements java.lang.Comparable<publishers.FillMessage>, publishers.Message {
+  public publishers.FillMessage(java.lang.String, java.lang.String, price.Price, int, java.lang.String, constants.BookSide, java.lang.String) throws java.lang.Exception;
+  public int compareTo(publishers.FillMessage);
+  public java.lang.String toString();
+  public int compareTo(java.lang.Object);
+}
+Compiled from "LastSalePublisher.java"
+public class publishers.LastSalePublisher implements publishers.Publisher {
+  public static synchronized publishers.LastSalePublisher getInstance();
+  public synchronized void publishLastSale(java.lang.String, price.Price, int) throws java.lang.Exception;
+  public synchronized void subscribe(client.User, java.lang.String) throws java.lang.Exception;
+  public synchronized void unSubscribe(client.User, java.lang.String) throws java.lang.Exception;
+}
+Compiled from "MarketDataDTO.java"
+public class publishers.MarketDataDTO {
+  public java.lang.String product;
+  public price.Price buyPrice;
+  public int buyVolume;
+  public price.Price sellPrice;
+  public int sellVolume;
+  public publishers.MarketDataDTO(java.lang.String, price.Price, int, price.Price, int);
+  public java.lang.String toString();
+}
+Compiled from "MarketMessage.java"
+public class publishers.MarketMessage {
+  public publishers.MarketMessage(constants.MarketState) throws java.lang.Exception;
+  public constants.MarketState getState();
+  public java.lang.String toString();
+}
+Compiled from "Message.java"
+public interface publishers.Message {
+  public abstract java.lang.String getUser();
+  public abstract java.lang.String getProduct();
+  public abstract price.Price getPrice() throws java.lang.Exception;
+  public abstract void setVolume(int) throws java.lang.Exception;
+  public abstract int getVolume();
+  public abstract void setDetails(java.lang.String) throws java.lang.Exception;
+  public abstract java.lang.String getDetails();
+  public abstract constants.BookSide getSide();
+  public abstract java.lang.String getId();
+}
+Compiled from "MessagePublisher.java"
+public class publishers.MessagePublisher implements publishers.Publisher {
+  public static synchronized publishers.MessagePublisher getInstance();
+  public synchronized void publishCancel(publishers.CancelMessage);
+  public synchronized void publishFill(publishers.FillMessage);
+  public synchronized void publishMarketMessage(publishers.MarketMessage);
+  public synchronized void subscribe(client.User, java.lang.String) throws java.lang.Exception;
+  public synchronized void unSubscribe(client.User, java.lang.String) throws java.lang.Exception;
+}
+Compiled from "Messenger.java"
+public class publishers.Messenger implements publishers.Message {
+  public java.lang.String id;
+  protected publishers.Messenger(java.lang.String, java.lang.String, price.Price, int, java.lang.String, constants.BookSide, java.lang.String) throws java.lang.Exception;
+  public java.lang.String getUser();
+  public java.lang.String getProduct();
+  public price.Price getPrice() throws java.lang.Exception;
+  protected java.lang.String getPriceString();
+  public void setVolume(int) throws java.lang.Exception;
+  public int getVolume();
+  public void setDetails(java.lang.String) throws java.lang.Exception;
+  public java.lang.String getDetails();
+  public constants.BookSide getSide();
+  public java.lang.String getId();
+  public java.lang.String toString();
+}
+Compiled from "Publisher.java"
+public interface publishers.Publisher {
+  public abstract void subscribe(client.User, java.lang.String) throws java.lang.Exception;
+  public abstract void unSubscribe(client.User, java.lang.String) throws java.lang.Exception;
+}
+Compiled from "PublisherImpl.java"
+public class publishers.PublisherImpl implements publishers.Publisher {
+  public publishers.PublisherImpl();
+  public synchronized void subscribe(client.User, java.lang.String) throws publishers.utils.InvalidSubscriptionException;
+  public synchronized void unSubscribe(client.User, java.lang.String) throws publishers.utils.InvalidSubscriptionException;
+  public synchronized java.util.HashMap getSubscribers();
+}
+Compiled from "TickerPublisher.java"
+public class publishers.TickerPublisher implements publishers.Publisher {
+  public static synchronized publishers.TickerPublisher getInstance();
+  public synchronized void publishTicker(java.lang.String, price.Price) throws java.lang.Exception;
+  public synchronized void subscribe(client.User, java.lang.String) throws java.lang.Exception;
+  public synchronized void unSubscribe(client.User, java.lang.String) throws java.lang.Exception;
+  static {};
+}
+Compiled from "InvalidMarketStateException.java"
+public class publishers.utils.InvalidMarketStateException extends java.lang.Exception {
+  public publishers.utils.InvalidMarketStateException(java.lang.String);
+}
+Compiled from "InvalidSubscriptionException.java"
+public class publishers.utils.InvalidSubscriptionException extends java.lang.Exception {
+  public publishers.utils.InvalidSubscriptionException(java.lang.String);
+}
+Compiled from "Order.java"
+public class tradable.Order extends tradable.Trader implements tradable.Tradable {
+  public tradable.Order(java.lang.String, java.lang.String, price.Price, int, constants.BookSide) throws java.lang.Exception;
+}
+Compiled from "Quote.java"
+public class tradable.Quote {
+  public tradable.Quote(java.lang.String, java.lang.String, price.Price, int, price.Price, int) throws java.lang.Exception;
+  public java.lang.String getUserName();
+  public java.lang.String getProduct();
+  public tradable.QuoteSide getQuoteSide(constants.BookSide) throws java.lang.Exception;
+  public java.lang.String toString();
+}
+Compiled from "QuoteSide.java"
+public class tradable.QuoteSide extends tradable.Trader implements tradable.Tradable {
+  public tradable.QuoteSide(java.lang.String, java.lang.String, price.Price, int, constants.BookSide) throws java.lang.Exception;
+  public tradable.QuoteSide(tradable.QuoteSide) throws java.lang.Exception;
+  public java.lang.String toString();
+}
+Compiled from "Tradable.java"
+public interface tradable.Tradable {
+  public abstract java.lang.String getProduct();
+  public abstract price.Price getPrice() throws java.lang.Exception;
+  public abstract int getOriginalVolume();
+  public abstract int getRemainingVolume();
+  public abstract int getCancelledVolume();
+  public abstract void setCancelledVolume(int) throws java.lang.Exception;
+  public abstract void setRemainingVolume(int) throws java.lang.Exception;
+  public abstract java.lang.String getUser();
+  public abstract constants.BookSide getSide();
+  public abstract boolean isQuote();
+  public abstract java.lang.String getId();
+}
+Compiled from "TradableDTO.java"
+public class tradable.TradableDTO {
+  public java.lang.String product;
+  public price.Price price;
+  public int originalVolume;
+  public int remainingVolume;
+  public int cancelledVolume;
+  public java.lang.String user;
+  public constants.BookSide side;
+  public boolean isQuote;
+  public java.lang.String id;
+  public tradable.TradableDTO(java.lang.String, price.Price, int, int, int, java.lang.String, constants.BookSide, boolean, java.lang.String);
+  public tradable.TradableDTO(tradable.Tradable) throws java.lang.Exception;
+  public java.lang.String toString();
+}
+Compiled from "Trader.java"
+public class tradable.Trader implements tradable.Tradable {
+  protected tradable.Trader(java.lang.String, java.lang.String, price.Price, int, constants.BookSide, boolean) throws java.lang.Exception;
+  public java.lang.String getProduct();
+  public price.Price getPrice() throws java.lang.Exception;
+  protected java.lang.String getPriceString();
+  public int getOriginalVolume();
+  public void setRemainingVolume(int) throws java.lang.Exception, tradable.utils.InvalidVolumeException;
+  public int getRemainingVolume();
+  public void setCancelledVolume(int) throws tradable.utils.InvalidVolumeException, java.lang.Exception;
+  public int getCancelledVolume();
+  public java.lang.String getUser();
+  public constants.BookSide getSide();
+  public boolean isQuote();
+  public java.lang.String getId();
+  public java.lang.String toString();
+}
+Compiled from "InvalidVolumeException.java"
+public class tradable.utils.InvalidVolumeException extends java.lang.Exception {
+  public tradable.utils.InvalidVolumeException(java.lang.String);
+}

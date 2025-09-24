@@ -1,0 +1,351 @@
+Compiled from "AbstractAgent.java"
+public interface com.lagodiuk.agent.AbstractAgent {
+  public abstract void interact(com.lagodiuk.agent.AgentsEnvironment);
+  public abstract double getX();
+  public abstract double getY();
+  public abstract void setX(double);
+  public abstract void setY(double);
+}
+Compiled from "Agent.java"
+public class com.lagodiuk.agent.Agent implements com.lagodiuk.agent.AbstractAgent {
+  public com.lagodiuk.agent.Agent(double, double, double);
+  public void move();
+  public double getX();
+  public double getY();
+  public void setX(double);
+  public void setY(double);
+  public double getSpeed();
+  public void setSpeed(double);
+  public double getAngle();
+  public void setAngle(double);
+  public double getRx();
+  public double getRy();
+  public void interact(com.lagodiuk.agent.AgentsEnvironment);
+}
+Compiled from "AgentsEnvironment.java"
+public class com.lagodiuk.agent.AgentsEnvironment {
+  public com.lagodiuk.agent.AgentsEnvironment(int, int);
+  public void addListener(com.lagodiuk.agent.AgentsEnvironmentObserver);
+  public int getWidth();
+  public int getHeight();
+  public synchronized void timeStep();
+  public java.util.List<com.lagodiuk.agent.AbstractAgent> getAgents();
+  public synchronized void addAgent(com.lagodiuk.agent.AbstractAgent);
+  public synchronized void removeAgent(com.lagodiuk.agent.AbstractAgent);
+  public <T extends com.lagodiuk.agent.AbstractAgent> java.lang.Iterable<T> filter(java.lang.Class<T>);
+}
+Compiled from "AgentsEnvironmentObserver.java"
+public interface com.lagodiuk.agent.AgentsEnvironmentObserver {
+  public abstract void notify(com.lagodiuk.agent.AgentsEnvironment);
+}
+Compiled from "Food.java"
+public class com.lagodiuk.agent.Food implements com.lagodiuk.agent.AbstractAgent {
+  public com.lagodiuk.agent.Food(double, double);
+  public double getX();
+  public double getY();
+  public void setX(double);
+  public void setY(double);
+  public void interact(com.lagodiuk.agent.AgentsEnvironment);
+}
+Compiled from "MovingFood.java"
+public class com.lagodiuk.agent.MovingFood extends com.lagodiuk.agent.Food {
+  public com.lagodiuk.agent.MovingFood(double, double, double, double);
+  public void interact(com.lagodiuk.agent.AgentsEnvironment);
+  protected void move(com.lagodiuk.agent.AgentsEnvironment);
+}
+Compiled from "EatenFoodObserver.java"
+public class com.lagodiuk.agent.evolution.EatenFoodObserver implements com.lagodiuk.agent.AgentsEnvironmentObserver {
+  protected static final double minEatDistance;
+  protected static final double maxFishesDistance;
+  public com.lagodiuk.agent.evolution.EatenFoodObserver();
+  public void notify(com.lagodiuk.agent.AgentsEnvironment);
+  protected void removeEatenAndCreateNewFood(com.lagodiuk.agent.AgentsEnvironment, java.util.List<com.lagodiuk.agent.Food>);
+  protected void addRandomPieceOfFood(com.lagodiuk.agent.AgentsEnvironment);
+  public double getScore();
+  protected double module(double, double);
+}
+Compiled from "Main.java"
+public class com.lagodiuk.agent.evolution.Main {
+  public com.lagodiuk.agent.evolution.Main();
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+  protected static void initializeChangingFoodTypeFunctionality();
+  public static void initializeRegenerateFoodCheckboxFunctionality();
+  static java.awt.image.BufferedImage access$000();
+  static javax.swing.JPanel access$100();
+  static boolean access$200();
+  static com.lagodiuk.agent.Food access$300(int, int);
+  static void access$400();
+  static boolean access$500();
+  static boolean access$502(boolean);
+  static boolean access$602(boolean);
+  static boolean access$600();
+  static com.lagodiuk.agent.AgentsEnvironment access$700();
+  static void access$800();
+  static boolean access$202(boolean);
+  static javax.swing.JFrame access$900();
+  static javax.swing.JFileChooser access$1000();
+  static java.util.prefs.Preferences access$1100();
+  static void access$1200(com.lagodiuk.nn.NeuralNetwork);
+  static com.lagodiuk.ga.GeneticAlgorithm access$1300();
+  static void access$1400(int, int, com.lagodiuk.nn.genetic.OptimizableNeuralNetwork);
+  static int access$1502(int);
+  static int access$1500();
+  static javax.swing.JLabel access$1600();
+  static javax.swing.JProgressBar access$1700();
+  static javax.swing.JTextField access$1800();
+  static javax.swing.JButton access$1900();
+  static java.util.Random access$2000();
+  static javax.swing.JButton access$2100();
+  static {};
+}
+Compiled from "Main.java"
+final class com.lagodiuk.agent.evolution.Main$1 implements java.lang.Runnable {
+  com.lagodiuk.agent.evolution.Main$1();
+  public void run();
+}
+Compiled from "Main.java"
+final class com.lagodiuk.agent.evolution.Main$10 implements java.awt.event.ActionListener {
+  com.lagodiuk.agent.evolution.Main$10();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "Main.java"
+final class com.lagodiuk.agent.evolution.Main$11 implements com.lagodiuk.ga.IterartionListener<com.lagodiuk.nn.genetic.OptimizableNeuralNetwork, java.lang.Double> {
+  com.lagodiuk.agent.evolution.Main$11();
+  public void update(com.lagodiuk.ga.GeneticAlgorithm<com.lagodiuk.nn.genetic.OptimizableNeuralNetwork, java.lang.Double>);
+}
+Compiled from "Main.java"
+final class com.lagodiuk.agent.evolution.Main$2 extends com.lagodiuk.agent.evolution.EatenFoodObserver {
+  com.lagodiuk.agent.evolution.Main$2();
+  protected void addRandomPieceOfFood(com.lagodiuk.agent.AgentsEnvironment);
+}
+Compiled from "Main.java"
+final class com.lagodiuk.agent.evolution.Main$3 implements java.awt.event.ItemListener {
+  com.lagodiuk.agent.evolution.Main$3();
+  public void itemStateChanged(java.awt.event.ItemEvent);
+}
+Compiled from "Main.java"
+final class com.lagodiuk.agent.evolution.Main$4 implements java.awt.event.ActionListener {
+  com.lagodiuk.agent.evolution.Main$4();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "Main.java"
+final class com.lagodiuk.agent.evolution.Main$5 implements java.awt.event.ActionListener {
+  com.lagodiuk.agent.evolution.Main$5();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "Main.java"
+final class com.lagodiuk.agent.evolution.Main$6 implements java.awt.event.ActionListener {
+  com.lagodiuk.agent.evolution.Main$6();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "Main.java"
+final class com.lagodiuk.agent.evolution.Main$7 implements java.awt.event.ActionListener {
+  com.lagodiuk.agent.evolution.Main$7();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "Main.java"
+final class com.lagodiuk.agent.evolution.Main$8 implements java.awt.event.ActionListener {
+  com.lagodiuk.agent.evolution.Main$8();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "Main.java"
+class com.lagodiuk.agent.evolution.Main$8$1 implements java.lang.Runnable {
+  final int val$iterCount;
+  final com.lagodiuk.agent.evolution.Main$8 this$0;
+  com.lagodiuk.agent.evolution.Main$8$1(com.lagodiuk.agent.evolution.Main$8, int);
+  public void run();
+}
+Compiled from "Main.java"
+class com.lagodiuk.agent.evolution.Main$8$1$1 implements com.lagodiuk.ga.IterartionListener<com.lagodiuk.nn.genetic.OptimizableNeuralNetwork, java.lang.Double> {
+  final com.lagodiuk.agent.evolution.Main$8$1 this$1;
+  com.lagodiuk.agent.evolution.Main$8$1$1(com.lagodiuk.agent.evolution.Main$8$1);
+  public void update(com.lagodiuk.ga.GeneticAlgorithm<com.lagodiuk.nn.genetic.OptimizableNeuralNetwork, java.lang.Double>);
+}
+Compiled from "Main.java"
+class com.lagodiuk.agent.evolution.Main$8$1$1$1 implements java.lang.Runnable {
+  final int val$iteration;
+  final com.lagodiuk.agent.evolution.Main$8$1$1 this$2;
+  com.lagodiuk.agent.evolution.Main$8$1$1$1(com.lagodiuk.agent.evolution.Main$8$1$1, int);
+  public void run();
+}
+Compiled from "Main.java"
+class com.lagodiuk.agent.evolution.Main$8$1$2 implements java.lang.Runnable {
+  final com.lagodiuk.agent.evolution.Main$8$1 this$1;
+  com.lagodiuk.agent.evolution.Main$8$1$2(com.lagodiuk.agent.evolution.Main$8$1);
+  public void run();
+}
+Compiled from "Main.java"
+final class com.lagodiuk.agent.evolution.Main$9 extends java.awt.event.MouseAdapter {
+  com.lagodiuk.agent.evolution.Main$9();
+  public void mouseClicked(java.awt.event.MouseEvent);
+}
+Compiled from "NeuralNetworkDrivenAgent.java"
+public class com.lagodiuk.agent.evolution.NeuralNetworkDrivenAgent extends com.lagodiuk.agent.Agent {
+  protected static final double maxAgentsDistance;
+  public com.lagodiuk.agent.evolution.NeuralNetworkDrivenAgent(double, double, double);
+  public synchronized void setBrain(com.lagodiuk.nn.NeuralNetwork);
+  public synchronized void interact(com.lagodiuk.agent.AgentsEnvironment);
+  protected java.util.List<java.lang.Double> createNnInputs(com.lagodiuk.agent.AgentsEnvironment);
+  protected boolean inSight(com.lagodiuk.agent.AbstractAgent);
+  protected double distanceTo(com.lagodiuk.agent.AbstractAgent);
+  protected double cosTeta(double, double, double, double);
+  protected double module(double, double);
+  protected double pseudoScalarProduct(double, double, double, double);
+  public static com.lagodiuk.nn.genetic.OptimizableNeuralNetwork randomNeuralNetworkBrain();
+}
+Compiled from "TournamentEnvironmentFitness.java"
+public class com.lagodiuk.agent.evolution.TournamentEnvironmentFitness implements com.lagodiuk.ga.Fitness<com.lagodiuk.nn.genetic.OptimizableNeuralNetwork, java.lang.Double> {
+  public com.lagodiuk.agent.evolution.TournamentEnvironmentFitness();
+  public java.lang.Double calculate(com.lagodiuk.nn.genetic.OptimizableNeuralNetwork);
+  protected com.lagodiuk.agent.Food newPieceOfFood(int, int);
+  public java.lang.Comparable calculate(com.lagodiuk.ga.Chromosome);
+  static {};
+}
+Compiled from "TournamentEnvironmentFitness.java"
+class com.lagodiuk.agent.evolution.TournamentEnvironmentFitness$1 extends com.lagodiuk.agent.evolution.EatenFoodObserver {
+  final com.lagodiuk.agent.evolution.TournamentEnvironmentFitness this$0;
+  com.lagodiuk.agent.evolution.TournamentEnvironmentFitness$1(com.lagodiuk.agent.evolution.TournamentEnvironmentFitness);
+  protected void addRandomPieceOfFood(com.lagodiuk.agent.AgentsEnvironment);
+}
+Compiled from "Visualizator.java"
+public class com.lagodiuk.agent.evolution.Visualizator {
+  public com.lagodiuk.agent.evolution.Visualizator();
+  public static void paintEnvironment(java.awt.Graphics2D, com.lagodiuk.agent.AgentsEnvironment);
+  static {};
+}
+Compiled from "Links.java"
+public class com.lagodiuk.nn.Links implements java.lang.Cloneable {
+  public com.lagodiuk.nn.Links();
+  public java.util.Collection<java.lang.Integer> getReceivers(int);
+  public java.lang.Double getWeight(int, int);
+  public void addWeight(int, int, double);
+  public java.util.List<java.lang.Double> getAllWeights();
+  public void setAllWeights(java.util.List<java.lang.Double>);
+  public com.lagodiuk.nn.Links clone();
+  public java.lang.String toString();
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "NeuralNetwork.java"
+public class com.lagodiuk.nn.NeuralNetwork implements java.lang.Cloneable {
+  protected java.util.List<com.lagodiuk.nn.Neuron> neurons;
+  protected com.lagodiuk.nn.Links neuronsLinks;
+  protected int activationIterations;
+  public com.lagodiuk.nn.NeuralNetwork();
+  public com.lagodiuk.nn.NeuralNetwork(int);
+  public void setNeuronFunction(int, com.lagodiuk.nn.ThresholdFunction, java.util.List<java.lang.Double>);
+  public void addLink(int, int, double);
+  public void putSignalToNeuron(int, double);
+  public double getAfterActivationSignal(int);
+  public void activate();
+  public java.util.List<java.lang.Double> getWeightsOfLinks();
+  public void setWeightsOfLinks(java.util.List<java.lang.Double>);
+  public java.util.List<com.lagodiuk.nn.Neuron> getNeurons();
+  public int getNeuronsCount();
+  public void setNeurons(java.util.List<com.lagodiuk.nn.Neuron>);
+  public int getActivationIterations();
+  public void setActivationIterations(int);
+  public com.lagodiuk.nn.Links getNeuronsLinks();
+  public com.lagodiuk.nn.NeuralNetwork clone();
+  public java.lang.String toString();
+  public static void marsall(com.lagodiuk.nn.NeuralNetwork, java.io.OutputStream) throws java.lang.Exception;
+  public static com.lagodiuk.nn.NeuralNetwork unmarsall(java.io.InputStream) throws java.lang.Exception;
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "Neuron.java"
+public class com.lagodiuk.nn.Neuron implements java.lang.Cloneable {
+  public com.lagodiuk.nn.Neuron();
+  public com.lagodiuk.nn.Neuron(com.lagodiuk.nn.ThresholdFunction, java.util.List<java.lang.Double>);
+  public void setFunctionAndParams(com.lagodiuk.nn.ThresholdFunction, java.util.List<java.lang.Double>);
+  public void addSignal(double);
+  public void activate();
+  public double getAfterActivationSignal();
+  public com.lagodiuk.nn.ThresholdFunction getFunction();
+  public java.util.List<java.lang.Double> getParams();
+  public com.lagodiuk.nn.Neuron clone();
+  public java.lang.String toString();
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "TestNeuralNetworkBasics.java"
+public class com.lagodiuk.nn.TestNeuralNetworkBasics {
+  public com.lagodiuk.nn.TestNeuralNetworkBasics();
+  public void testXOR();
+  public void testLinks();
+  public void testTransformingToXml();
+}
+Compiled from "ThresholdFunction.java"
+public class com.lagodiuk.nn.ThresholdFunction extends java.lang.Enum<com.lagodiuk.nn.ThresholdFunction> {
+  public static final com.lagodiuk.nn.ThresholdFunction LINEAR;
+  public static final com.lagodiuk.nn.ThresholdFunction SIGN;
+  public static final com.lagodiuk.nn.ThresholdFunction SIGMA;
+  public static com.lagodiuk.nn.ThresholdFunction[] values();
+  public static com.lagodiuk.nn.ThresholdFunction valueOf(java.lang.String);
+  public static com.lagodiuk.nn.ThresholdFunction getRandomFunction();
+  public double calculate(double, java.util.List<java.lang.Double>);
+  public java.util.List<java.lang.Double> getDefaultParams();
+  com.lagodiuk.nn.ThresholdFunction(java.lang.String, int, com.lagodiuk.nn.ThresholdFunction$1);
+  static {};
+}
+Compiled from "ThresholdFunction.java"
+final class com.lagodiuk.nn.ThresholdFunction$1 extends com.lagodiuk.nn.ThresholdFunction {
+  com.lagodiuk.nn.ThresholdFunction$1(java.lang.String, int);
+  public double calculate(double, java.util.List<java.lang.Double>);
+  public java.util.List<java.lang.Double> getDefaultParams();
+}
+Compiled from "ThresholdFunction.java"
+final class com.lagodiuk.nn.ThresholdFunction$2 extends com.lagodiuk.nn.ThresholdFunction {
+  com.lagodiuk.nn.ThresholdFunction$2(java.lang.String, int);
+  public double calculate(double, java.util.List<java.lang.Double>);
+  public java.util.List<java.lang.Double> getDefaultParams();
+}
+Compiled from "ThresholdFunction.java"
+final class com.lagodiuk.nn.ThresholdFunction$3 extends com.lagodiuk.nn.ThresholdFunction {
+  com.lagodiuk.nn.ThresholdFunction$3(java.lang.String, int);
+  public double calculate(double, java.util.List<java.lang.Double>);
+  public java.util.List<java.lang.Double> getDefaultParams();
+}
+Compiled from "OptimizableNeuralNetwork.java"
+public class com.lagodiuk.nn.genetic.OptimizableNeuralNetwork extends com.lagodiuk.nn.NeuralNetwork implements com.lagodiuk.ga.Chromosome<com.lagodiuk.nn.genetic.OptimizableNeuralNetwork>, java.lang.Cloneable {
+  public com.lagodiuk.nn.genetic.OptimizableNeuralNetwork();
+  public com.lagodiuk.nn.genetic.OptimizableNeuralNetwork(int);
+  public com.lagodiuk.nn.genetic.OptimizableNeuralNetwork(com.lagodiuk.nn.NeuralNetwork);
+  public java.util.List<com.lagodiuk.nn.genetic.OptimizableNeuralNetwork> crossover(com.lagodiuk.nn.genetic.OptimizableNeuralNetwork);
+  public com.lagodiuk.nn.genetic.OptimizableNeuralNetwork mutate();
+  public com.lagodiuk.nn.genetic.OptimizableNeuralNetwork clone();
+  public com.lagodiuk.nn.NeuralNetwork clone();
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+  public com.lagodiuk.ga.Chromosome mutate();
+  public java.util.List crossover(com.lagodiuk.ga.Chromosome);
+  static {};
+}
+Compiled from "Launcher.java"
+public class com.lagodiuk.nn.genetic.demo.Launcher {
+  public com.lagodiuk.nn.genetic.demo.Launcher();
+  public static void main(java.lang.String[]);
+}
+Compiled from "Launcher.java"
+final class com.lagodiuk.nn.genetic.demo.Launcher$1 implements com.lagodiuk.ga.Fitness<com.lagodiuk.nn.genetic.OptimizableNeuralNetwork, java.lang.Double> {
+  com.lagodiuk.nn.genetic.demo.Launcher$1();
+  public java.lang.Double calculate(com.lagodiuk.nn.genetic.OptimizableNeuralNetwork);
+  public java.lang.Comparable calculate(com.lagodiuk.ga.Chromosome);
+}
+Compiled from "Launcher.java"
+final class com.lagodiuk.nn.genetic.demo.Launcher$2 implements com.lagodiuk.ga.IterartionListener<com.lagodiuk.nn.genetic.OptimizableNeuralNetwork, java.lang.Double> {
+  com.lagodiuk.nn.genetic.demo.Launcher$2();
+  public void update(com.lagodiuk.ga.GeneticAlgorithm<com.lagodiuk.nn.genetic.OptimizableNeuralNetwork, java.lang.Double>);
+}
+Compiled from "MapAdapter.java"
+public class com.lagodiuk.nn.serializing.xml.MapAdapter extends javax.xml.bind.annotation.adapters.XmlAdapter<com.lagodiuk.nn.serializing.xml.MapElement[], java.util.Map<java.lang.Integer, java.util.Map<java.lang.Integer, java.lang.Double>>> {
+  public com.lagodiuk.nn.serializing.xml.MapAdapter();
+  public com.lagodiuk.nn.serializing.xml.MapElement[] marshal(java.util.Map<java.lang.Integer, java.util.Map<java.lang.Integer, java.lang.Double>>) throws java.lang.Exception;
+  public java.util.Map<java.lang.Integer, java.util.Map<java.lang.Integer, java.lang.Double>> unmarshal(com.lagodiuk.nn.serializing.xml.MapElement[]) throws java.lang.Exception;
+  public java.lang.Object marshal(java.lang.Object) throws java.lang.Exception;
+  public java.lang.Object unmarshal(java.lang.Object) throws java.lang.Exception;
+}
+Compiled from "MapElement.java"
+public class com.lagodiuk.nn.serializing.xml.MapElement {
+  public java.lang.Integer from;
+  public java.lang.Integer to;
+  public java.lang.Double weight;
+  public com.lagodiuk.nn.serializing.xml.MapElement();
+  public com.lagodiuk.nn.serializing.xml.MapElement(java.lang.Integer, java.lang.Integer, java.lang.Double);
+}

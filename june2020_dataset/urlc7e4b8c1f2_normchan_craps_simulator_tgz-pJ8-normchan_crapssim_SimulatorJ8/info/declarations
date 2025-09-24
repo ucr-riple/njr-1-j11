@@ -1,0 +1,507 @@
+Compiled from "Simulator.java"
+public class normchan.crapssim.Simulator {
+  public normchan.crapssim.Simulator();
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "Dice.java"
+public class normchan.crapssim.engine.Dice extends java.util.Observable {
+  protected int die1;
+  protected int die2;
+  public normchan.crapssim.engine.Dice();
+  public void roll();
+  protected void shakeDice();
+  protected void announceRoll();
+  public int getTotal();
+  public int getDie1();
+  public int getDie2();
+  public boolean isHardWay();
+  public boolean toggleTrickDice();
+  public boolean isTrickDice();
+}
+Compiled from "GameManager.java"
+public class normchan.crapssim.engine.GameManager {
+  public static int INITIAL_BALANCE;
+  public static int MIN_BET;
+  public static int MAX_BET;
+  public normchan.crapssim.engine.GameManager(normchan.crapssim.engine.Dice, java.lang.Class<? extends normchan.crapssim.simulation.strategy.PlayerStrategy>) throws java.lang.SecurityException, java.lang.NoSuchMethodException, java.lang.IllegalArgumentException, java.lang.InstantiationException, java.lang.IllegalAccessException, java.lang.reflect.InvocationTargetException;
+  public void resetPlayer();
+  public normchan.crapssim.engine.Player getPlayer();
+  public normchan.crapssim.engine.Layout getLayout();
+  public boolean isLogGameDetails();
+  public void setLogGameDetails(boolean);
+  public void addResult(normchan.crapssim.simulation.tracker.ResultTracker$Stats);
+  public void aggregateResults();
+  static {};
+}
+Compiled from "Layout.java"
+public class normchan.crapssim.engine.Layout extends java.util.Observable {
+  public normchan.crapssim.engine.Layout(normchan.crapssim.engine.Dice);
+  public synchronized void addObserver(java.util.Observer);
+  public synchronized void deleteObserver(java.util.Observer);
+  public void roll();
+  public java.util.List<normchan.crapssim.engine.bets.Bet> getBets();
+  public int getAmountAtRisk();
+  public normchan.crapssim.engine.bets.PassLine getPassLine();
+  public normchan.crapssim.engine.bets.NumberBet getNumberBetOn(java.lang.Class, int);
+  public normchan.crapssim.engine.bets.Place getPlaceOn(int);
+  public normchan.crapssim.engine.bets.Buy getBuyOn(int);
+  public normchan.crapssim.engine.bets.Lay getLayOn(int);
+  public normchan.crapssim.engine.bets.PassOrCome getPassOrComeOn(int);
+  public normchan.crapssim.engine.bets.Come getComeOn(int);
+  public normchan.crapssim.engine.bets.HardWay getHardWayOn(int);
+  public void addBet(normchan.crapssim.engine.bets.Bet);
+  public void removeBet(normchan.crapssim.engine.bets.Bet);
+  public normchan.crapssim.engine.Dice getDice();
+  public boolean isNumberEstablished();
+  public int getNumber();
+}
+Compiled from "LoadedDice.java"
+public class normchan.crapssim.engine.LoadedDice extends normchan.crapssim.engine.Dice {
+  java.util.Queue<int[]> pairs;
+  public normchan.crapssim.engine.LoadedDice(int[][]);
+  public void roll();
+  public boolean toggleTrickDice();
+  public boolean isTrickDice();
+  public static void main(java.lang.String[]);
+}
+Compiled from "LoadedDice.java"
+class normchan.crapssim.engine.LoadedDice$1 {
+}
+Compiled from "LoadedDice.java"
+class normchan.crapssim.engine.LoadedDice$TestObserver implements java.util.Observer {
+  public void update(java.util.Observable, java.lang.Object);
+  normchan.crapssim.engine.LoadedDice$TestObserver(normchan.crapssim.engine.LoadedDice$1);
+}
+Compiled from "Logger.java"
+public class normchan.crapssim.engine.Logger implements java.util.Observer {
+  public normchan.crapssim.engine.Logger(normchan.crapssim.engine.GameManager);
+  public void update(java.util.Observable, java.lang.Object);
+}
+Compiled from "NoSevenDice.java"
+public class normchan.crapssim.engine.NoSevenDice extends normchan.crapssim.engine.Dice {
+  public normchan.crapssim.engine.NoSevenDice(int);
+  public void roll();
+  public boolean toggleTrickDice();
+  public boolean isTrickDice();
+}
+Compiled from "Player.java"
+public class normchan.crapssim.engine.Player extends java.util.Observable {
+  public normchan.crapssim.engine.Player(int);
+  public boolean isBroke();
+  public int getBalance();
+  public void setBalance(int);
+  public void addFunds(int);
+  public void makeBet();
+  public void deduct(int);
+  public void payOff(int);
+  public void sendStatusUpdate();
+  public void sessionStart();
+  public void sessionComplete();
+  public normchan.crapssim.simulation.strategy.PlayerStrategy getStrategy();
+  public void setStrategy(normchan.crapssim.simulation.strategy.PlayerStrategy);
+}
+Compiled from "AnyCraps.java"
+public class normchan.crapssim.engine.bets.AnyCraps extends normchan.crapssim.engine.bets.Bet {
+  public normchan.crapssim.engine.bets.AnyCraps(normchan.crapssim.engine.Layout, normchan.crapssim.engine.Player, int);
+  public boolean diceRolled();
+}
+Compiled from "AnySeven.java"
+public class normchan.crapssim.engine.bets.AnySeven extends normchan.crapssim.engine.bets.Bet {
+  public normchan.crapssim.engine.bets.AnySeven(normchan.crapssim.engine.Layout, normchan.crapssim.engine.Player, int);
+  public boolean diceRolled();
+}
+Compiled from "Bet.java"
+public abstract class normchan.crapssim.engine.bets.Bet extends java.util.Observable {
+  protected final normchan.crapssim.engine.Layout layout;
+  protected final normchan.crapssim.engine.Player player;
+  protected int mainBet;
+  protected int price;
+  public normchan.crapssim.engine.bets.Bet(normchan.crapssim.engine.Layout, normchan.crapssim.engine.Player, int);
+  protected void checkBetLimits();
+  protected void betWon();
+  protected void betWon(int);
+  protected void betLost();
+  protected void betPushed();
+  public int getMainBet();
+  public int getTotalAmount();
+  protected int calculatePrice(int);
+  protected int calculateVig(int);
+  public void retractBet();
+  public void updateBet(int);
+  protected void notifyObservers(normchan.crapssim.engine.event.GameEvent);
+  public java.lang.String toString();
+  public abstract boolean diceRolled();
+}
+Compiled from "Buy.java"
+public class normchan.crapssim.engine.bets.Buy extends normchan.crapssim.engine.bets.FixedNumberBet {
+  public normchan.crapssim.engine.bets.Buy(normchan.crapssim.engine.Layout, normchan.crapssim.engine.Player, int, int);
+  public boolean diceRolled();
+  protected void betWon();
+}
+Compiled from "Come.java"
+public class normchan.crapssim.engine.bets.Come extends normchan.crapssim.engine.bets.PassOrCome {
+  protected boolean oddsWorkingOnComeOut;
+  public normchan.crapssim.engine.bets.Come(normchan.crapssim.engine.Layout, normchan.crapssim.engine.Player, int);
+  public normchan.crapssim.engine.bets.Come(normchan.crapssim.engine.Layout, normchan.crapssim.engine.Player, int, boolean);
+  protected void betWon();
+  protected void betLost();
+  public java.lang.String toString();
+}
+Compiled from "Dont.java"
+public class normchan.crapssim.engine.bets.Dont extends normchan.crapssim.engine.bets.Bet implements normchan.crapssim.engine.bets.NumberBet {
+  protected int oddsBet;
+  protected int number;
+  public normchan.crapssim.engine.bets.Dont(normchan.crapssim.engine.Layout, normchan.crapssim.engine.Player, int);
+  public boolean diceRolled();
+  protected void betWon();
+  public boolean isNumberEstablished();
+  public int getNumber();
+  public int getOddsBetMultiple(int);
+  public int getMaxOddsBet();
+  public int getOddsBet();
+  public void updateOddsBet(int);
+  public void updateBet(int);
+  public java.lang.String toString();
+}
+Compiled from "DontCome.java"
+public class normchan.crapssim.engine.bets.DontCome extends normchan.crapssim.engine.bets.Dont {
+  protected boolean oddsWorkingOnComeOut;
+  public normchan.crapssim.engine.bets.DontCome(normchan.crapssim.engine.Layout, normchan.crapssim.engine.Player, int);
+  public normchan.crapssim.engine.bets.DontCome(normchan.crapssim.engine.Layout, normchan.crapssim.engine.Player, int, boolean);
+  protected void betWon();
+  protected void betLost();
+}
+Compiled from "DontPass.java"
+public class normchan.crapssim.engine.bets.DontPass extends normchan.crapssim.engine.bets.Dont {
+  public normchan.crapssim.engine.bets.DontPass(normchan.crapssim.engine.Layout, normchan.crapssim.engine.Player, int);
+}
+Compiled from "Field.java"
+public class normchan.crapssim.engine.bets.Field extends normchan.crapssim.engine.bets.Bet {
+  public normchan.crapssim.engine.bets.Field(normchan.crapssim.engine.Layout, normchan.crapssim.engine.Player, int);
+  public boolean diceRolled();
+}
+Compiled from "FixedNumberBet.java"
+public abstract class normchan.crapssim.engine.bets.FixedNumberBet extends normchan.crapssim.engine.bets.Bet implements normchan.crapssim.engine.bets.NumberBet {
+  protected final int number;
+  public normchan.crapssim.engine.bets.FixedNumberBet(normchan.crapssim.engine.Layout, normchan.crapssim.engine.Player, int, int);
+  public abstract boolean diceRolled();
+  public int getNumber();
+  public java.lang.String toString();
+}
+Compiled from "HardWay.java"
+public class normchan.crapssim.engine.bets.HardWay extends normchan.crapssim.engine.bets.FixedNumberBet {
+  public normchan.crapssim.engine.bets.HardWay(normchan.crapssim.engine.Layout, normchan.crapssim.engine.Player, int, int);
+  public boolean diceRolled();
+  protected void betWon();
+}
+Compiled from "Lay.java"
+public class normchan.crapssim.engine.bets.Lay extends normchan.crapssim.engine.bets.FixedNumberBet {
+  public normchan.crapssim.engine.bets.Lay(normchan.crapssim.engine.Layout, normchan.crapssim.engine.Player, int, int);
+  public boolean diceRolled();
+  protected void betWon();
+}
+Compiled from "NumberBet.java"
+public interface normchan.crapssim.engine.bets.NumberBet {
+  public abstract int getNumber();
+}
+Compiled from "PassLine.java"
+public class normchan.crapssim.engine.bets.PassLine extends normchan.crapssim.engine.bets.PassOrCome {
+  public normchan.crapssim.engine.bets.PassLine(normchan.crapssim.engine.Layout, normchan.crapssim.engine.Player, int);
+  protected void betWon(int);
+}
+Compiled from "PassOrCome.java"
+public abstract class normchan.crapssim.engine.bets.PassOrCome extends normchan.crapssim.engine.bets.Bet implements normchan.crapssim.engine.bets.NumberBet {
+  protected int oddsBet;
+  protected int number;
+  public normchan.crapssim.engine.bets.PassOrCome(normchan.crapssim.engine.Layout, normchan.crapssim.engine.Player, int);
+  public boolean diceRolled();
+  protected void betWon();
+  public void retractBet();
+  public boolean isNumberEstablished();
+  public int getNumber();
+  public int getMaxOddsBet();
+  public int getOddsBet();
+  public int getTotalAmount();
+  public void updateOddsBet(int);
+  public void updateBet(int);
+  public java.lang.String toString();
+}
+Compiled from "Place.java"
+public class normchan.crapssim.engine.bets.Place extends normchan.crapssim.engine.bets.FixedNumberBet {
+  public normchan.crapssim.engine.bets.Place(normchan.crapssim.engine.Layout, normchan.crapssim.engine.Player, int, int);
+  public boolean diceRolled();
+  protected void betWon();
+}
+Compiled from "BetEvent.java"
+public class normchan.crapssim.engine.event.BetEvent extends normchan.crapssim.engine.event.GameEvent {
+  public normchan.crapssim.engine.event.BetEvent(normchan.crapssim.engine.event.BetEvent$EventType, java.lang.String);
+  public normchan.crapssim.engine.event.BetEvent(normchan.crapssim.engine.event.BetEvent$EventType, java.lang.String, int);
+  public normchan.crapssim.engine.event.BetEvent$EventType getType();
+  public int getAmount();
+}
+Compiled from "BetEvent.java"
+public final class normchan.crapssim.engine.event.BetEvent$EventType extends java.lang.Enum<normchan.crapssim.engine.event.BetEvent$EventType> {
+  public static final normchan.crapssim.engine.event.BetEvent$EventType UPDATE;
+  public static final normchan.crapssim.engine.event.BetEvent$EventType RETRACT;
+  public static final normchan.crapssim.engine.event.BetEvent$EventType WIN;
+  public static final normchan.crapssim.engine.event.BetEvent$EventType LOSS;
+  public static final normchan.crapssim.engine.event.BetEvent$EventType PUSH;
+  public static final normchan.crapssim.engine.event.BetEvent$EventType NUMBER_ESTABLISHED;
+  public static final normchan.crapssim.engine.event.BetEvent$EventType POINT_MADE;
+  public static normchan.crapssim.engine.event.BetEvent$EventType[] values();
+  public static normchan.crapssim.engine.event.BetEvent$EventType valueOf(java.lang.String);
+  static {};
+}
+Compiled from "GameEvent.java"
+public class normchan.crapssim.engine.event.GameEvent {
+  public normchan.crapssim.engine.event.GameEvent(java.lang.String);
+  public java.lang.String getMessage();
+}
+Compiled from "NewBetEvent.java"
+public class normchan.crapssim.engine.event.NewBetEvent extends normchan.crapssim.engine.event.GameEvent {
+  public normchan.crapssim.engine.event.NewBetEvent(normchan.crapssim.engine.bets.Bet, java.lang.String);
+  public normchan.crapssim.engine.bets.Bet getBet();
+}
+Compiled from "RollCompleteEvent.java"
+public class normchan.crapssim.engine.event.RollCompleteEvent extends normchan.crapssim.engine.event.GameEvent {
+  public normchan.crapssim.engine.event.RollCompleteEvent(java.lang.String);
+}
+Compiled from "SessionEvent.java"
+public class normchan.crapssim.engine.event.SessionEvent extends normchan.crapssim.engine.event.GameEvent {
+  public normchan.crapssim.engine.event.SessionEvent(normchan.crapssim.engine.event.SessionEvent$EventType, java.lang.String);
+  public normchan.crapssim.engine.event.SessionEvent$EventType getType();
+}
+Compiled from "SessionEvent.java"
+public final class normchan.crapssim.engine.event.SessionEvent$EventType extends java.lang.Enum<normchan.crapssim.engine.event.SessionEvent$EventType> {
+  public static final normchan.crapssim.engine.event.SessionEvent$EventType BEGIN;
+  public static final normchan.crapssim.engine.event.SessionEvent$EventType END;
+  public static normchan.crapssim.engine.event.SessionEvent$EventType[] values();
+  public static normchan.crapssim.engine.event.SessionEvent$EventType valueOf(java.lang.String);
+  static {};
+}
+Compiled from "SevenOutEvent.java"
+public class normchan.crapssim.engine.event.SevenOutEvent extends normchan.crapssim.engine.event.RollCompleteEvent {
+  public normchan.crapssim.engine.event.SevenOutEvent(java.lang.String);
+}
+Compiled from "BankruptException.java"
+public class normchan.crapssim.engine.exception.BankruptException extends java.lang.RuntimeException {
+  public normchan.crapssim.engine.exception.BankruptException();
+  public normchan.crapssim.engine.exception.BankruptException(java.lang.String);
+  public normchan.crapssim.engine.exception.BankruptException(java.lang.Throwable);
+  public normchan.crapssim.engine.exception.BankruptException(java.lang.String, java.lang.Throwable);
+}
+Compiled from "InvalidBetException.java"
+public class normchan.crapssim.engine.exception.InvalidBetException extends java.lang.RuntimeException {
+  public normchan.crapssim.engine.exception.InvalidBetException();
+  public normchan.crapssim.engine.exception.InvalidBetException(java.lang.String);
+  public normchan.crapssim.engine.exception.InvalidBetException(java.lang.Throwable);
+  public normchan.crapssim.engine.exception.InvalidBetException(java.lang.String, java.lang.Throwable);
+}
+Compiled from "BetNormalizer.java"
+public class normchan.crapssim.engine.util.BetNormalizer {
+  public normchan.crapssim.engine.util.BetNormalizer();
+  public static int normalizePlaceBet(int, int);
+  public static int normalizeOddsBet(int, int);
+  public static int normalizeBuyBet(int, int);
+  public static int normalizeLayBet(int, int);
+  static {};
+}
+Compiled from "Controller.java"
+public class normchan.crapssim.simulation.Controller {
+  protected normchan.crapssim.engine.GameManager manager;
+  public normchan.crapssim.simulation.Controller();
+  public void setManager(normchan.crapssim.engine.GameManager);
+  public void reset();
+  public void run();
+}
+Compiled from "SimpleController.java"
+public class normchan.crapssim.simulation.SimpleController extends normchan.crapssim.simulation.Controller {
+  public normchan.crapssim.simulation.SimpleController();
+  public boolean isSimulationComplete();
+}
+Compiled from "BuyStrategy.java"
+public class normchan.crapssim.simulation.strategy.BuyStrategy extends normchan.crapssim.simulation.strategy.PlayerStrategy {
+  public normchan.crapssim.simulation.strategy.BuyStrategy(normchan.crapssim.engine.GameManager);
+  public void bet();
+  static {};
+}
+Compiled from "ComePassStrategy.java"
+public class normchan.crapssim.simulation.strategy.ComePassStrategy extends normchan.crapssim.simulation.strategy.PlayerStrategy {
+  public normchan.crapssim.simulation.strategy.ComePassStrategy(normchan.crapssim.engine.GameManager);
+  public void bet();
+}
+Compiled from "ControlComeOutHedgeStrategy10.java"
+public class normchan.crapssim.simulation.strategy.ControlComeOutHedgeStrategy10 extends normchan.crapssim.simulation.strategy.ProgressiveComeOutHedgeStrategy10 {
+  public normchan.crapssim.simulation.strategy.ControlComeOutHedgeStrategy10(normchan.crapssim.engine.GameManager);
+}
+Compiled from "DontStrategy.java"
+public class normchan.crapssim.simulation.strategy.DontStrategy extends normchan.crapssim.simulation.strategy.PlayerStrategy {
+  public normchan.crapssim.simulation.strategy.DontStrategy(normchan.crapssim.engine.GameManager);
+  public void bet();
+}
+Compiled from "FieldStrategy.java"
+public class normchan.crapssim.simulation.strategy.FieldStrategy extends normchan.crapssim.simulation.strategy.PlayerStrategy {
+  public normchan.crapssim.simulation.strategy.FieldStrategy(normchan.crapssim.engine.GameManager);
+  public void bet();
+}
+Compiled from "HardWaysStrategy.java"
+public class normchan.crapssim.simulation.strategy.HardWaysStrategy extends normchan.crapssim.simulation.strategy.PlayerStrategy {
+  public normchan.crapssim.simulation.strategy.HardWaysStrategy(normchan.crapssim.engine.GameManager);
+  public void bet();
+}
+Compiled from "LayStrategy.java"
+public class normchan.crapssim.simulation.strategy.LayStrategy extends normchan.crapssim.simulation.strategy.PlayerStrategy {
+  public normchan.crapssim.simulation.strategy.LayStrategy(normchan.crapssim.engine.GameManager);
+  public void bet();
+  static {};
+}
+Compiled from "MaxStrategy.java"
+public class normchan.crapssim.simulation.strategy.MaxStrategy extends normchan.crapssim.simulation.strategy.PlayerStrategy {
+  public normchan.crapssim.simulation.strategy.MaxStrategy(normchan.crapssim.engine.GameManager);
+  public void bet();
+}
+Compiled from "MaxStrategy2.java"
+public class normchan.crapssim.simulation.strategy.MaxStrategy2 extends normchan.crapssim.simulation.strategy.PlayerStrategy {
+  public normchan.crapssim.simulation.strategy.MaxStrategy2(normchan.crapssim.engine.GameManager);
+  public void bet();
+}
+Compiled from "OptimalStrategy1.java"
+public class normchan.crapssim.simulation.strategy.OptimalStrategy1 extends normchan.crapssim.simulation.strategy.PlayerStrategy {
+  public normchan.crapssim.simulation.strategy.OptimalStrategy1(normchan.crapssim.engine.GameManager);
+  public void bet();
+  public void update(java.util.Observable, java.lang.Object);
+}
+Compiled from "OptimalStrategy2.java"
+public class normchan.crapssim.simulation.strategy.OptimalStrategy2 extends normchan.crapssim.simulation.strategy.PlayerStrategy {
+  public normchan.crapssim.simulation.strategy.OptimalStrategy2(normchan.crapssim.engine.GameManager);
+  public void bet();
+  public void update(java.util.Observable, java.lang.Object);
+}
+Compiled from "PassAnyCrapStrategy.java"
+public class normchan.crapssim.simulation.strategy.PassAnyCrapStrategy extends normchan.crapssim.simulation.strategy.PlayerStrategy {
+  public normchan.crapssim.simulation.strategy.PassAnyCrapStrategy(normchan.crapssim.engine.GameManager);
+  public void bet();
+}
+Compiled from "PassLineStrategy.java"
+public class normchan.crapssim.simulation.strategy.PassLineStrategy extends normchan.crapssim.simulation.strategy.PlayerStrategy {
+  public normchan.crapssim.simulation.strategy.PassLineStrategy(normchan.crapssim.engine.GameManager);
+  public void bet();
+}
+Compiled from "PlayerStrategy.java"
+public abstract class normchan.crapssim.simulation.strategy.PlayerStrategy extends java.util.Observable implements java.util.Observer {
+  protected normchan.crapssim.engine.Player player;
+  protected normchan.crapssim.engine.Layout layout;
+  public normchan.crapssim.simulation.strategy.PlayerStrategy(normchan.crapssim.engine.Player, normchan.crapssim.engine.Layout);
+  protected void handlePlaceBet(int, int);
+  protected void handleBuyBet(int, int);
+  protected void handleLayBet(int, int);
+  protected void handleHardWayBet(int, int);
+  public void update(java.util.Observable, java.lang.Object);
+  public abstract void bet();
+}
+Compiled from "ProgressiveComeOutHedgeStrategy10.java"
+public class normchan.crapssim.simulation.strategy.ProgressiveComeOutHedgeStrategy10 extends normchan.crapssim.simulation.strategy.ProgressiveRollStrategy10 {
+  public normchan.crapssim.simulation.strategy.ProgressiveComeOutHedgeStrategy10(normchan.crapssim.engine.GameManager);
+  public normchan.crapssim.simulation.strategy.ProgressiveComeOutHedgeStrategy10(normchan.crapssim.engine.GameManager, boolean);
+  protected void beforeRoll();
+  public void update(java.util.Observable, java.lang.Object);
+}
+Compiled from "ProgressiveHedgeStrategy10.java"
+public class normchan.crapssim.simulation.strategy.ProgressiveHedgeStrategy10 extends normchan.crapssim.simulation.strategy.ProgressiveRollStrategy10 {
+  public normchan.crapssim.simulation.strategy.ProgressiveHedgeStrategy10(normchan.crapssim.engine.GameManager);
+  protected void beforeRoll();
+  public void update(java.util.Observable, java.lang.Object);
+  protected int getCurrentWinLoss();
+}
+Compiled from "ProgressiveRollStrategy.java"
+public abstract class normchan.crapssim.simulation.strategy.ProgressiveRollStrategy extends normchan.crapssim.simulation.strategy.PlayerStrategy {
+  protected static final int STARTING_ODDS;
+  protected static final int COME_BET_FOLD;
+  protected final int unitSize;
+  protected int startBalance;
+  protected java.util.Map<java.lang.Integer, java.lang.Integer> lastBets;
+  public normchan.crapssim.simulation.strategy.ProgressiveRollStrategy(normchan.crapssim.engine.GameManager, int);
+  public void bet();
+  protected void addBet(normchan.crapssim.engine.bets.Bet);
+  protected int getCurrentWinLoss();
+  protected boolean shouldBetCome(int);
+  public void update(java.util.Observable, java.lang.Object);
+  protected void handleNumberEstablished(normchan.crapssim.engine.bets.PassOrCome);
+  protected abstract void beforeRoll();
+}
+Compiled from "ProgressiveRollStrategy10.java"
+public class normchan.crapssim.simulation.strategy.ProgressiveRollStrategy10 extends normchan.crapssim.simulation.strategy.ProgressiveRollStrategy {
+  public normchan.crapssim.simulation.strategy.ProgressiveRollStrategy10(normchan.crapssim.engine.GameManager);
+  protected void beforeRoll();
+}
+Compiled from "ProgressiveRollStrategy5.java"
+public class normchan.crapssim.simulation.strategy.ProgressiveRollStrategy5 extends normchan.crapssim.simulation.strategy.ProgressiveRollStrategy {
+  public normchan.crapssim.simulation.strategy.ProgressiveRollStrategy5(normchan.crapssim.engine.GameManager);
+  protected void beforeRoll();
+  protected void handleNumberEstablished(normchan.crapssim.engine.bets.PassOrCome);
+}
+Compiled from "SuckerStrategy.java"
+public class normchan.crapssim.simulation.strategy.SuckerStrategy extends normchan.crapssim.simulation.strategy.PlayerStrategy {
+  public normchan.crapssim.simulation.strategy.SuckerStrategy(normchan.crapssim.engine.GameManager);
+  public void bet();
+}
+Compiled from "ComparisonTracker.java"
+public class normchan.crapssim.simulation.tracker.ComparisonTracker implements normchan.crapssim.simulation.tracker.Tracker {
+  public normchan.crapssim.simulation.tracker.PlayerTracker getTracker1();
+  public normchan.crapssim.simulation.tracker.PlayerTracker getTracker2();
+  public normchan.crapssim.simulation.tracker.ComparisonTracker(normchan.crapssim.engine.GameManager, normchan.crapssim.engine.GameManager, int);
+  public void calculateStats();
+  public void printResults(java.io.PrintStream);
+}
+Compiled from "PlayerTracker.java"
+public class normchan.crapssim.simulation.tracker.PlayerTracker implements normchan.crapssim.simulation.tracker.Tracker,java.util.Observer {
+  public normchan.crapssim.simulation.tracker.PlayerTracker$Stats getStats();
+  public normchan.crapssim.simulation.tracker.PlayerTracker(normchan.crapssim.engine.GameManager, int);
+  public void printResults(java.io.PrintStream);
+  public void calculateStats();
+  public void update(java.util.Observable, java.lang.Object);
+}
+Compiled from "PlayerTracker.java"
+class normchan.crapssim.simulation.tracker.PlayerTracker$1 {
+}
+Compiled from "PlayerTracker.java"
+class normchan.crapssim.simulation.tracker.PlayerTracker$Stats {
+  int min;
+  int max;
+  double mean;
+  double stdDeviation;
+  double avgLosingBalance;
+  double avgWinningBalance;
+  double winPercentage;
+  int wins;
+  int losses;
+  final normchan.crapssim.simulation.tracker.PlayerTracker this$0;
+  normchan.crapssim.simulation.tracker.PlayerTracker$Stats(normchan.crapssim.simulation.tracker.PlayerTracker, normchan.crapssim.simulation.tracker.PlayerTracker$1);
+}
+Compiled from "ResultAggregator.java"
+public class normchan.crapssim.simulation.tracker.ResultAggregator {
+  public normchan.crapssim.simulation.tracker.ResultAggregator();
+  public void addResult(normchan.crapssim.simulation.tracker.ResultTracker$Stats);
+  public void printResults(java.io.PrintStream);
+}
+Compiled from "ResultTracker.java"
+public class normchan.crapssim.simulation.tracker.ResultTracker implements normchan.crapssim.simulation.tracker.Tracker,java.util.Observer {
+  public normchan.crapssim.simulation.tracker.ResultTracker(normchan.crapssim.engine.GameManager);
+  public void cleanup();
+  public void calculateStats();
+  public void printResults(java.io.PrintStream);
+  public void update(java.util.Observable, java.lang.Object);
+}
+Compiled from "ResultTracker.java"
+public class normchan.crapssim.simulation.tracker.ResultTracker$Stats {
+  int winAmount;
+  int lossAmount;
+  final normchan.crapssim.simulation.tracker.ResultTracker this$0;
+  public normchan.crapssim.simulation.tracker.ResultTracker$Stats(normchan.crapssim.simulation.tracker.ResultTracker);
+}
+Compiled from "Tracker.java"
+public interface normchan.crapssim.simulation.tracker.Tracker {
+  public abstract void calculateStats();
+  public abstract void printResults(java.io.PrintStream);
+}

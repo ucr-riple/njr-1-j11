@@ -1,0 +1,474 @@
+Compiled from "Callbacks.java"
+public final class org.twentygototen.pipeline.Callbacks {
+  public static final org.twentygototen.pipeline.Callbacks$Callback<java.lang.Object> NOOP;
+  public org.twentygototen.pipeline.Callbacks();
+  static <O> org.twentygototen.pipeline.Callbacks$Callback<O> sysout();
+  static <O> org.twentygototen.pipeline.Callbacks$Callback<O> syserr();
+  static {};
+}
+Compiled from "Callbacks.java"
+final class org.twentygototen.pipeline.Callbacks$1 extends org.twentygototen.pipeline.Callbacks$Callback<java.lang.Object> {
+  org.twentygototen.pipeline.Callbacks$1();
+  public void onFailure(java.lang.RuntimeException);
+  public void onSuccess(java.lang.Object);
+  public void onComplete();
+}
+Compiled from "Callbacks.java"
+public abstract class org.twentygototen.pipeline.Callbacks$Callback<I> {
+  public org.twentygototen.pipeline.Callbacks$Callback();
+  public abstract void onSuccess(I);
+  public abstract void onFailure(java.lang.RuntimeException);
+  public abstract void onComplete();
+}
+Compiled from "Callbacks.java"
+public final class org.twentygototen.pipeline.Callbacks$FutureResult<O> extends org.twentygototen.pipeline.Callbacks$Callback<O> {
+  final java.util.concurrent.BlockingQueue<O> queue;
+  final java.util.concurrent.atomic.AtomicReference<java.lang.RuntimeException> error;
+  final java.util.concurrent.atomic.AtomicBoolean ended;
+  public org.twentygototen.pipeline.Callbacks$FutureResult();
+  public O get();
+  public void onSuccess(O);
+  public void onFailure(java.lang.RuntimeException);
+  public void onComplete();
+}
+Compiled from "Callbacks.java"
+public final class org.twentygototen.pipeline.Callbacks$PrintCallback<O> extends org.twentygototen.pipeline.Callbacks$Callback<O> {
+  public org.twentygototen.pipeline.Callbacks$PrintCallback(java.io.PrintStream);
+  public void onFailure(java.lang.RuntimeException);
+  public void onSuccess(O);
+  public void onComplete();
+}
+Compiled from "Callbacks.java"
+public final class org.twentygototen.pipeline.Callbacks$SinkCallback<O> extends org.twentygototen.pipeline.Callbacks$Callback<O> {
+  public org.twentygototen.pipeline.Callbacks$SinkCallback(org.twentygototen.pipeline.Pipeline$Sink<? super O>);
+  public void onFailure(java.lang.RuntimeException);
+  public void onSuccess(O);
+  public void onComplete();
+}
+Compiled from "Example.java"
+class org.twentygototen.pipeline.Example {
+  org.twentygototen.pipeline.Example();
+  public static void main(java.lang.String[]);
+}
+Compiled from "Example.java"
+final class org.twentygototen.pipeline.Example$1 extends org.twentygototen.pipeline.pipes.SyncPipe<java.lang.Integer, java.lang.Integer> {
+  org.twentygototen.pipeline.Example$1();
+  public java.lang.Integer process(java.lang.Integer);
+  public java.lang.Object process(java.lang.Object);
+}
+Compiled from "Example.java"
+final class org.twentygototen.pipeline.Example$2 extends org.twentygototen.pipeline.pipes.AsyncPipe<java.lang.Integer, java.lang.String> {
+  org.twentygototen.pipeline.Example$2();
+  public void processAsync(java.lang.Integer, org.twentygototen.pipeline.Callbacks$Callback<? super java.lang.String>);
+  public void processAsync(java.lang.Object, org.twentygototen.pipeline.Callbacks$Callback);
+}
+Compiled from "Example.java"
+final class org.twentygototen.pipeline.Example$3 implements java.io.FileFilter {
+  org.twentygototen.pipeline.Example$3();
+  public boolean accept(java.io.File);
+}
+Compiled from "Example.java"
+final class org.twentygototen.pipeline.Example$4 extends org.twentygototen.pipeline.pipes.SyncPipe<java.util.List<?>, java.lang.Integer> {
+  org.twentygototen.pipeline.Example$4();
+  public java.lang.Integer process(java.util.List<?>);
+  public java.lang.Object process(java.lang.Object);
+}
+Compiled from "Example.java"
+final class org.twentygototen.pipeline.Example$5 implements org.twentygototen.pipeline.pipes.AggregatePipe$Aggregate<org.twentygototen.pipeline.util.Pair<java.io.File, java.lang.Integer>, java.lang.Integer> {
+  org.twentygototen.pipeline.Example$5();
+  public void aggregate(org.twentygototen.pipeline.util.Pair<java.io.File, java.lang.Integer>);
+  public java.lang.Integer result();
+  public java.lang.Object result();
+  public void aggregate(java.lang.Object);
+}
+Compiled from "Example.java"
+class org.twentygototen.pipeline.Example$Mod extends org.twentygototen.pipeline.pipes.SyncPipe<java.lang.Integer, java.lang.Integer> {
+  public org.twentygototen.pipeline.Example$Mod(int);
+  public java.lang.Integer process(java.lang.Integer);
+  public java.lang.Object process(java.lang.Object);
+}
+Compiled from "Pipeline.java"
+public final class org.twentygototen.pipeline.Pipeline {
+  public org.twentygototen.pipeline.Pipeline();
+  public static <I> org.twentygototen.pipeline.Pipeline$Pipe<I, I> identity();
+  static <O> org.twentygototen.pipeline.Pipeline$Source<java.util.List<O>> pour(O...);
+  static <O> org.twentygototen.pipeline.Pipeline$Source<O> pour(O);
+  static <I, O> org.twentygototen.pipeline.pipes.PipeList<I, O> asList(org.twentygototen.pipeline.Pipeline$Pipe...);
+  static <I, O> org.twentygototen.pipeline.pipes.PipeList<I, O> asList(java.util.List<? extends org.twentygototen.pipeline.Pipeline$Pipe<I, O>>);
+  public static org.twentygototen.pipeline.Pipeline$Sink<java.lang.Object> sysout();
+  public static org.twentygototen.pipeline.Pipeline$Sink<java.lang.Object> syserr();
+  public static <I, O, O2> org.twentygototen.pipeline.Pipeline$Pipe<I, O2> next(org.twentygototen.pipeline.Pipeline$Pipe<I, O>, org.twentygototen.pipeline.Pipeline$Pipe<? super O, O2>);
+  public static final <I, O> org.twentygototen.pipeline.Pipeline$Pipe<I, O> tee(org.twentygototen.pipeline.Pipeline$Pipe<I, O>, org.twentygototen.pipeline.Callbacks$Callback<? super O>);
+  public static final <I, O> org.twentygototen.pipeline.Pipeline$Pipe<java.util.List<I>, java.util.List<O>> map(org.twentygototen.pipeline.Pipeline$Pipe<I, O>);
+  public static <O> org.twentygototen.pipeline.Pipeline$Block sink(org.twentygototen.pipeline.Pipeline$Source<O>, org.twentygototen.pipeline.Pipeline$Sink<? super O>);
+  public static <I, O> org.twentygototen.pipeline.Pipeline$Pipe<? super org.twentygototen.pipeline.util.Pair<I, O>, org.twentygototen.pipeline.util.Pair<O, I>> swap();
+  static <I, O> org.twentygototen.pipeline.Pipeline$Pipe<I, O> aggregate(org.twentygototen.pipeline.pipes.AggregatePipe$Aggregate<I, O>);
+}
+Compiled from "Pipeline.java"
+final class org.twentygototen.pipeline.Pipeline$1 extends org.twentygototen.pipeline.sources.SyncSource<O> {
+  java.util.concurrent.atomic.AtomicBoolean done;
+  final java.lang.Object val$object;
+  org.twentygototen.pipeline.Pipeline$1(java.lang.Object);
+  public O emit();
+}
+Compiled from "Pipeline.java"
+final class org.twentygototen.pipeline.Pipeline$2 extends org.twentygototen.pipeline.pipes.SyncPipe<java.util.List<I>, java.util.List<O>> {
+  final org.twentygototen.pipeline.Pipeline$Pipe val$pipe;
+  org.twentygototen.pipeline.Pipeline$2(org.twentygototen.pipeline.Pipeline$Pipe);
+  public java.util.List<O> process(java.util.List<I>);
+  public java.lang.Object process(java.lang.Object);
+}
+Compiled from "Pipeline.java"
+final class org.twentygototen.pipeline.Pipeline$3 implements org.twentygototen.pipeline.Pipeline$Block {
+  final org.twentygototen.pipeline.Pipeline$Source val$source;
+  final org.twentygototen.pipeline.Pipeline$Sink val$sink;
+  org.twentygototen.pipeline.Pipeline$3(org.twentygototen.pipeline.Pipeline$Source, org.twentygototen.pipeline.Pipeline$Sink);
+  public void run();
+}
+Compiled from "Pipeline.java"
+final class org.twentygototen.pipeline.Pipeline$4 extends org.twentygototen.pipeline.pipes.SyncPipe<org.twentygototen.pipeline.util.Pair<I, O>, org.twentygototen.pipeline.util.Pair<O, I>> {
+  org.twentygototen.pipeline.Pipeline$4();
+  public org.twentygototen.pipeline.util.Pair<O, I> process(org.twentygototen.pipeline.util.Pair<I, O>);
+  public java.lang.Object process(java.lang.Object);
+}
+Compiled from "Pipeline.java"
+public interface org.twentygototen.pipeline.Pipeline$Block extends java.lang.Runnable {
+}
+Compiled from "Pipeline.java"
+public interface org.twentygototen.pipeline.Pipeline$Pipe<I, O> {
+  public abstract O process(I);
+  public abstract void processAsync(I, org.twentygototen.pipeline.Callbacks$Callback<? super O>);
+  public abstract <O2> org.twentygototen.pipeline.Pipeline$Pipe<I, O2> next(org.twentygototen.pipeline.Pipeline$Pipe<? super O, O2>);
+  public abstract org.twentygototen.pipeline.Pipeline$Sink<I> next(org.twentygototen.pipeline.Pipeline$Sink<? super O>);
+  public abstract org.twentygototen.pipeline.Pipeline$Pipe<I, O> tee(org.twentygototen.pipeline.Callbacks$Callback<? super O>);
+  public abstract void complete();
+}
+Compiled from "Pipeline.java"
+public interface org.twentygototen.pipeline.Pipeline$Sink<I> {
+  public abstract void consume(I);
+  public abstract void complete();
+}
+Compiled from "Pipeline.java"
+public interface org.twentygototen.pipeline.Pipeline$Source<O> {
+  public abstract O emit();
+  public abstract void emitAsync(org.twentygototen.pipeline.Callbacks$Callback<? super O>);
+  public abstract <O2> org.twentygototen.pipeline.Pipeline$Source<O2> next(org.twentygototen.pipeline.Pipeline$Pipe<? super O, O2>);
+  public abstract org.twentygototen.pipeline.Pipeline$Block next(org.twentygototen.pipeline.Pipeline$Sink<? super O>);
+  public abstract org.twentygototen.pipeline.Pipeline$Source<O> tee(org.twentygototen.pipeline.Callbacks$Callback<? super O>);
+}
+Compiled from "AbstractPipe.java"
+public abstract class org.twentygototen.pipeline.pipes.AbstractPipe<I, O> implements org.twentygototen.pipeline.Pipeline$Pipe<I, O> {
+  public org.twentygototen.pipeline.pipes.AbstractPipe();
+  public final <O2> org.twentygototen.pipeline.Pipeline$Pipe<I, O2> next(org.twentygototen.pipeline.Pipeline$Pipe<? super O, O2>);
+  public final org.twentygototen.pipeline.Pipeline$Sink<I> next(org.twentygototen.pipeline.Pipeline$Sink<? super O>);
+  public final org.twentygototen.pipeline.Pipeline$Pipe<I, O> tee(org.twentygototen.pipeline.Callbacks$Callback<? super O>);
+}
+Compiled from "AbstractPipe.java"
+class org.twentygototen.pipeline.pipes.AbstractPipe$1 implements org.twentygototen.pipeline.Pipeline$Sink<I> {
+  final org.twentygototen.pipeline.Pipeline$Sink val$sink;
+  final org.twentygototen.pipeline.pipes.AbstractPipe this$0;
+  org.twentygototen.pipeline.pipes.AbstractPipe$1(org.twentygototen.pipeline.pipes.AbstractPipe, org.twentygototen.pipeline.Pipeline$Sink);
+  public void consume(I);
+  public void complete();
+}
+Compiled from "AbstractPipe.java"
+class org.twentygototen.pipeline.pipes.AbstractPipe$1$1 extends org.twentygototen.pipeline.Callbacks$Callback<O> {
+  final org.twentygototen.pipeline.pipes.AbstractPipe$1 this$1;
+  org.twentygototen.pipeline.pipes.AbstractPipe$1$1(org.twentygototen.pipeline.pipes.AbstractPipe$1);
+  public void onComplete();
+  public void onFailure(java.lang.RuntimeException);
+  public void onSuccess(O);
+}
+Compiled from "AggregatePipe.java"
+public final class org.twentygototen.pipeline.pipes.AggregatePipe<I, O> extends org.twentygototen.pipeline.pipes.AsyncPipe<I, O> {
+  public org.twentygototen.pipeline.pipes.AggregatePipe(org.twentygototen.pipeline.pipes.AggregatePipe$Aggregate<I, O>);
+  public void complete();
+  public void processAsync(I, org.twentygototen.pipeline.Callbacks$Callback<? super O>);
+}
+Compiled from "AggregatePipe.java"
+public interface org.twentygototen.pipeline.pipes.AggregatePipe$Aggregate<I, O> {
+  public abstract void aggregate(I);
+  public abstract O result();
+}
+Compiled from "AsyncPipe.java"
+public abstract class org.twentygototen.pipeline.pipes.AsyncPipe<I, O> extends org.twentygototen.pipeline.pipes.AbstractPipe<I, O> {
+  public org.twentygototen.pipeline.pipes.AsyncPipe();
+  public final O process(I);
+  public abstract void processAsync(I, org.twentygototen.pipeline.Callbacks$Callback<? super O>);
+  public void complete();
+}
+Compiled from "FileReaderPipe.java"
+public final class org.twentygototen.pipeline.pipes.FileReaderPipe extends org.twentygototen.pipeline.pipes.SyncPipe<java.io.File, org.twentygototen.pipeline.util.Pair<java.io.File, java.util.List<java.lang.String>>> {
+  public org.twentygototen.pipeline.pipes.FileReaderPipe();
+  public final org.twentygototen.pipeline.util.Pair<java.io.File, java.util.List<java.lang.String>> process(java.io.File);
+  public java.lang.Object process(java.lang.Object);
+}
+Compiled from "IdentityPipe.java"
+public final class org.twentygototen.pipeline.pipes.IdentityPipe<I> implements org.twentygototen.pipeline.Pipeline$Pipe<I, I> {
+  public org.twentygototen.pipeline.pipes.IdentityPipe();
+  public I process(I);
+  public void complete();
+  public void processAsync(I, org.twentygototen.pipeline.Callbacks$Callback<? super I>);
+  public <O2> org.twentygototen.pipeline.Pipeline$Pipe<I, O2> next(org.twentygototen.pipeline.Pipeline$Pipe<? super I, O2>);
+  public org.twentygototen.pipeline.Pipeline$Sink<I> next(org.twentygototen.pipeline.Pipeline$Sink<? super I>);
+  public org.twentygototen.pipeline.Pipeline$Pipe<I, I> tee(org.twentygototen.pipeline.Callbacks$Callback<? super I>);
+}
+Compiled from "IdentityPipe.java"
+class org.twentygototen.pipeline.pipes.IdentityPipe$1 extends org.twentygototen.pipeline.pipes.AsyncPipe<I, O2> {
+  final org.twentygototen.pipeline.Pipeline$Pipe val$pipe;
+  final org.twentygototen.pipeline.pipes.IdentityPipe this$0;
+  org.twentygototen.pipeline.pipes.IdentityPipe$1(org.twentygototen.pipeline.pipes.IdentityPipe, org.twentygototen.pipeline.Pipeline$Pipe);
+  public void processAsync(I, org.twentygototen.pipeline.Callbacks$Callback<? super O2>);
+}
+Compiled from "IdentityPipe.java"
+class org.twentygototen.pipeline.pipes.IdentityPipe$2 implements org.twentygototen.pipeline.Pipeline$Sink<I> {
+  final org.twentygototen.pipeline.Pipeline$Sink val$sink;
+  final org.twentygototen.pipeline.pipes.IdentityPipe this$0;
+  org.twentygototen.pipeline.pipes.IdentityPipe$2(org.twentygototen.pipeline.pipes.IdentityPipe, org.twentygototen.pipeline.Pipeline$Sink);
+  public void consume(I);
+  public void complete();
+}
+Compiled from "JoinedPipe.java"
+public final class org.twentygototen.pipeline.pipes.JoinedPipe<I, O2, O> extends org.twentygototen.pipeline.pipes.AsyncPipe<I, O2> {
+  public org.twentygototen.pipeline.pipes.JoinedPipe(org.twentygototen.pipeline.Pipeline$Pipe<I, O>, org.twentygototen.pipeline.Pipeline$Pipe<? super O, O2>);
+  public void processAsync(I, org.twentygototen.pipeline.Callbacks$Callback<? super O2>);
+  public void complete();
+  static org.twentygototen.pipeline.Pipeline$Pipe access$000(org.twentygototen.pipeline.pipes.JoinedPipe);
+}
+Compiled from "JoinedPipe.java"
+class org.twentygototen.pipeline.pipes.JoinedPipe$1 extends org.twentygototen.pipeline.Callbacks$Callback<O> {
+  final org.twentygototen.pipeline.Callbacks$Callback val$callback;
+  final org.twentygototen.pipeline.pipes.JoinedPipe this$0;
+  org.twentygototen.pipeline.pipes.JoinedPipe$1(org.twentygototen.pipeline.pipes.JoinedPipe, org.twentygototen.pipeline.Callbacks$Callback);
+  public void onSuccess(O);
+  public void onFailure(java.lang.RuntimeException);
+  public void onComplete();
+}
+Compiled from "PipeList.java"
+public class org.twentygototen.pipeline.pipes.PipeList<I, O> extends org.twentygototen.pipeline.pipes.AsyncPipe<java.util.List<I>, java.util.List<O>> implements java.util.List<org.twentygototen.pipeline.Pipeline$Pipe<I, O>> {
+  public org.twentygototen.pipeline.pipes.PipeList();
+  public static final <A> org.twentygototen.pipeline.Pipeline$Pipe<java.util.List<A>, java.util.List<A>> head(org.twentygototen.pipeline.Pipeline$Pipe<? super A, A>);
+  public static final <A> org.twentygototen.pipeline.Pipeline$Pipe<java.util.List<A>, java.util.List<A>> tail(org.twentygototen.pipeline.Pipeline$Pipe<java.util.List<A>, java.util.List<A>>);
+  public void processAsync(java.util.List<I>, org.twentygototen.pipeline.Callbacks$Callback<? super java.util.List<O>>);
+  public void complete();
+  public boolean add(org.twentygototen.pipeline.Pipeline$Pipe<I, O>);
+  public void add(int, org.twentygototen.pipeline.Pipeline$Pipe<I, O>);
+  public boolean addAll(java.util.Collection<? extends org.twentygototen.pipeline.Pipeline$Pipe<I, O>>);
+  public boolean addAll(int, java.util.Collection<? extends org.twentygototen.pipeline.Pipeline$Pipe<I, O>>);
+  public void clear();
+  public boolean contains(java.lang.Object);
+  public boolean containsAll(java.util.Collection<?>);
+  public org.twentygototen.pipeline.Pipeline$Pipe<I, O> get(int);
+  public int indexOf(java.lang.Object);
+  public boolean isEmpty();
+  public java.util.Iterator<org.twentygototen.pipeline.Pipeline$Pipe<I, O>> iterator();
+  public int lastIndexOf(java.lang.Object);
+  public java.util.ListIterator<org.twentygototen.pipeline.Pipeline$Pipe<I, O>> listIterator();
+  public java.util.ListIterator<org.twentygototen.pipeline.Pipeline$Pipe<I, O>> listIterator(int);
+  public boolean remove(java.lang.Object);
+  public org.twentygototen.pipeline.Pipeline$Pipe<I, O> remove(int);
+  public boolean removeAll(java.util.Collection<?>);
+  public boolean retainAll(java.util.Collection<?>);
+  public org.twentygototen.pipeline.Pipeline$Pipe<I, O> set(int, org.twentygototen.pipeline.Pipeline$Pipe<I, O>);
+  public int size();
+  public java.util.List<org.twentygototen.pipeline.Pipeline$Pipe<I, O>> subList(int, int);
+  public java.lang.Object[] toArray();
+  public <T> T[] toArray(T[]);
+  public void processAsync(java.lang.Object, org.twentygototen.pipeline.Callbacks$Callback);
+  public java.lang.Object remove(int);
+  public void add(int, java.lang.Object);
+  public java.lang.Object set(int, java.lang.Object);
+  public java.lang.Object get(int);
+  public boolean add(java.lang.Object);
+}
+Compiled from "PipeList.java"
+final class org.twentygototen.pipeline.pipes.PipeList$1 extends org.twentygototen.pipeline.pipes.AsyncPipe<java.util.List<A>, java.util.List<A>> {
+  final org.twentygototen.pipeline.Pipeline$Pipe val$pipe;
+  org.twentygototen.pipeline.pipes.PipeList$1(org.twentygototen.pipeline.Pipeline$Pipe);
+  public void processAsync(java.util.List<A>, org.twentygototen.pipeline.Callbacks$Callback<? super java.util.List<A>>);
+  public void processAsync(java.lang.Object, org.twentygototen.pipeline.Callbacks$Callback);
+}
+Compiled from "PipeList.java"
+class org.twentygototen.pipeline.pipes.PipeList$1$1 extends org.twentygototen.pipeline.Callbacks$Callback<A> {
+  final org.twentygototen.pipeline.Callbacks$Callback val$callback;
+  final java.util.List val$input;
+  final org.twentygototen.pipeline.pipes.PipeList$1 this$0;
+  org.twentygototen.pipeline.pipes.PipeList$1$1(org.twentygototen.pipeline.pipes.PipeList$1, org.twentygototen.pipeline.Callbacks$Callback, java.util.List);
+  public void onComplete();
+  public void onFailure(java.lang.RuntimeException);
+  public void onSuccess(A);
+}
+Compiled from "PipeList.java"
+final class org.twentygototen.pipeline.pipes.PipeList$2 extends org.twentygototen.pipeline.pipes.AsyncPipe<java.util.List<A>, java.util.List<A>> {
+  final org.twentygototen.pipeline.Pipeline$Pipe val$pipe;
+  org.twentygototen.pipeline.pipes.PipeList$2(org.twentygototen.pipeline.Pipeline$Pipe);
+  public void processAsync(java.util.List<A>, org.twentygototen.pipeline.Callbacks$Callback<? super java.util.List<A>>);
+  public void processAsync(java.lang.Object, org.twentygototen.pipeline.Callbacks$Callback);
+}
+Compiled from "PipeList.java"
+class org.twentygototen.pipeline.pipes.PipeList$2$1 extends org.twentygototen.pipeline.Callbacks$Callback<java.util.List<A>> {
+  final org.twentygototen.pipeline.Callbacks$Callback val$callback;
+  final java.util.List val$input;
+  final org.twentygototen.pipeline.pipes.PipeList$2 this$0;
+  org.twentygototen.pipeline.pipes.PipeList$2$1(org.twentygototen.pipeline.pipes.PipeList$2, org.twentygototen.pipeline.Callbacks$Callback, java.util.List);
+  public void onComplete();
+  public void onFailure(java.lang.RuntimeException);
+  public void onSuccess(java.util.List<A>);
+  public void onSuccess(java.lang.Object);
+}
+Compiled from "PipeList.java"
+class org.twentygototen.pipeline.pipes.PipeList$3 extends org.twentygototen.pipeline.Callbacks$Callback<O> {
+  final java.util.concurrent.atomic.AtomicInteger val$count;
+  final org.twentygototen.pipeline.Callbacks$Callback val$callback;
+  final java.util.ArrayList val$output;
+  final int val$j;
+  final org.twentygototen.pipeline.pipes.PipeList this$0;
+  org.twentygototen.pipeline.pipes.PipeList$3(org.twentygototen.pipeline.pipes.PipeList, java.util.concurrent.atomic.AtomicInteger, org.twentygototen.pipeline.Callbacks$Callback, java.util.ArrayList, int);
+  public void onFailure(java.lang.RuntimeException);
+  public void onSuccess(O);
+  public void onComplete();
+}
+Compiled from "PipeTee.java"
+public final class org.twentygototen.pipeline.pipes.PipeTee<I, O> extends org.twentygototen.pipeline.pipes.AsyncPipe<I, O> {
+  public org.twentygototen.pipeline.pipes.PipeTee(org.twentygototen.pipeline.Pipeline$Pipe<I, O>, org.twentygototen.pipeline.Callbacks$Callback<? super O>);
+  public void complete();
+  public void processAsync(I, org.twentygototen.pipeline.Callbacks$Callback<? super O>);
+  static org.twentygototen.pipeline.Callbacks$Callback access$000(org.twentygototen.pipeline.pipes.PipeTee);
+}
+Compiled from "PipeTee.java"
+class org.twentygototen.pipeline.pipes.PipeTee$1 extends org.twentygototen.pipeline.Callbacks$Callback<O> {
+  final org.twentygototen.pipeline.Callbacks$Callback val$call;
+  final org.twentygototen.pipeline.pipes.PipeTee this$0;
+  org.twentygototen.pipeline.pipes.PipeTee$1(org.twentygototen.pipeline.pipes.PipeTee, org.twentygototen.pipeline.Callbacks$Callback);
+  public void onComplete();
+  public void onFailure(java.lang.RuntimeException);
+  public void onSuccess(O);
+}
+Compiled from "SortPipe.java"
+public class org.twentygototen.pipeline.pipes.SortPipe<I extends java.lang.Comparable<I>> extends org.twentygototen.pipeline.pipes.SyncPipe<java.util.List<I>, java.util.List<I>> {
+  public org.twentygototen.pipeline.pipes.SortPipe();
+  public org.twentygototen.pipeline.pipes.SortPipe(java.util.Comparator<I>);
+  public java.util.List<I> process(java.util.List<I>);
+  public java.lang.Object process(java.lang.Object);
+}
+Compiled from "SyncPipe.java"
+public abstract class org.twentygototen.pipeline.pipes.SyncPipe<I, O> extends org.twentygototen.pipeline.pipes.AbstractPipe<I, O> {
+  public org.twentygototen.pipeline.pipes.SyncPipe();
+  public abstract O process(I);
+  public void complete();
+  public final void processAsync(I, org.twentygototen.pipeline.Callbacks$Callback<? super O>);
+}
+Compiled from "PrintStreamSink.java"
+public class org.twentygototen.pipeline.sinks.PrintStreamSink implements org.twentygototen.pipeline.Pipeline$Sink<java.lang.Object> {
+  public org.twentygototen.pipeline.sinks.PrintStreamSink(java.io.PrintStream);
+  public void consume(java.lang.Object);
+  public void complete();
+}
+Compiled from "AsyncSource.java"
+public abstract class org.twentygototen.pipeline.sources.AsyncSource<O> implements org.twentygototen.pipeline.Pipeline$Source<O> {
+  public org.twentygototen.pipeline.sources.AsyncSource();
+  public abstract void emitAsync(org.twentygototen.pipeline.Callbacks$Callback<? super O>);
+  public O emit();
+  public org.twentygototen.pipeline.Pipeline$Block next(org.twentygototen.pipeline.Pipeline$Sink<? super O>);
+  public <O2> org.twentygototen.pipeline.Pipeline$Source<O2> next(org.twentygototen.pipeline.Pipeline$Pipe<? super O, O2>);
+  public final org.twentygototen.pipeline.Pipeline$Source<O> tee(org.twentygototen.pipeline.Callbacks$Callback<? super O>);
+}
+Compiled from "DirectoryList.java"
+public final class org.twentygototen.pipeline.sources.DirectoryList extends org.twentygototen.pipeline.sources.AsyncSource<java.io.File> {
+  public org.twentygototen.pipeline.sources.DirectoryList(java.io.File);
+  public org.twentygototen.pipeline.sources.DirectoryList(java.io.File, java.io.FileFilter);
+  public void emitAsync(org.twentygototen.pipeline.Callbacks$Callback<? super java.io.File>);
+  public void walkTree(java.io.File, org.twentygototen.pipeline.Callbacks$Callback<? super java.io.File>);
+}
+Compiled from "SourceTee.java"
+public class org.twentygototen.pipeline.sources.SourceTee<O> implements org.twentygototen.pipeline.Pipeline$Source<O> {
+  public org.twentygototen.pipeline.sources.SourceTee(org.twentygototen.pipeline.Pipeline$Source<O>, org.twentygototen.pipeline.Callbacks$Callback<? super O>);
+  public <O2> org.twentygototen.pipeline.Pipeline$Source<O2> next(org.twentygototen.pipeline.Pipeline$Pipe<? super O, O2>);
+  public org.twentygototen.pipeline.Pipeline$Block next(org.twentygototen.pipeline.Pipeline$Sink<? super O>);
+  public void emitAsync(org.twentygototen.pipeline.Callbacks$Callback<? super O>);
+  public org.twentygototen.pipeline.Pipeline$Source<O> tee(org.twentygototen.pipeline.Callbacks$Callback<? super O>);
+  public O emit();
+  static org.twentygototen.pipeline.Callbacks$Callback access$000(org.twentygototen.pipeline.sources.SourceTee);
+}
+Compiled from "SourceTee.java"
+class org.twentygototen.pipeline.sources.SourceTee$1 extends org.twentygototen.pipeline.Callbacks$Callback<O> {
+  final org.twentygototen.pipeline.Callbacks$Callback val$output;
+  final org.twentygototen.pipeline.sources.SourceTee this$0;
+  org.twentygototen.pipeline.sources.SourceTee$1(org.twentygototen.pipeline.sources.SourceTee, org.twentygototen.pipeline.Callbacks$Callback);
+  public void onSuccess(O);
+  public void onFailure(java.lang.RuntimeException);
+  public void onComplete();
+}
+Compiled from "SourceWithPipe.java"
+class org.twentygototen.pipeline.sources.SourceWithPipe<I, O> implements org.twentygototen.pipeline.Pipeline$Source<O> {
+  public org.twentygototen.pipeline.sources.SourceWithPipe(org.twentygototen.pipeline.Pipeline$Source<? extends I>, org.twentygototen.pipeline.Pipeline$Pipe<? super I, O>);
+  public O emit();
+  public void emitAsync(org.twentygototen.pipeline.Callbacks$Callback<? super O>);
+  public <O2> org.twentygototen.pipeline.Pipeline$Source<O2> next(org.twentygototen.pipeline.Pipeline$Pipe<? super O, O2>);
+  public org.twentygototen.pipeline.Pipeline$Block next(org.twentygototen.pipeline.Pipeline$Sink<? super O>);
+  public org.twentygototen.pipeline.Pipeline$Source<O> tee(org.twentygototen.pipeline.Callbacks$Callback<? super O>);
+  static org.twentygototen.pipeline.Pipeline$Pipe access$000(org.twentygototen.pipeline.sources.SourceWithPipe);
+}
+Compiled from "SourceWithPipe.java"
+class org.twentygototen.pipeline.sources.SourceWithPipe$1 extends org.twentygototen.pipeline.Callbacks$Callback<I> {
+  final org.twentygototen.pipeline.Callbacks$Callback val$output;
+  final org.twentygototen.pipeline.sources.SourceWithPipe this$0;
+  org.twentygototen.pipeline.sources.SourceWithPipe$1(org.twentygototen.pipeline.sources.SourceWithPipe, org.twentygototen.pipeline.Callbacks$Callback);
+  public void onComplete();
+  public void onFailure(java.lang.RuntimeException);
+  public void onSuccess(I);
+}
+Compiled from "SyncSource.java"
+public abstract class org.twentygototen.pipeline.sources.SyncSource<O> implements org.twentygototen.pipeline.Pipeline$Source<O> {
+  public org.twentygototen.pipeline.sources.SyncSource();
+  public abstract O emit();
+  public void emitAsync(org.twentygototen.pipeline.Callbacks$Callback<? super O>);
+  public org.twentygototen.pipeline.Pipeline$Block next(org.twentygototen.pipeline.Pipeline$Sink<? super O>);
+  public <O2> org.twentygototen.pipeline.Pipeline$Source<O2> next(org.twentygototen.pipeline.Pipeline$Pipe<? super O, O2>);
+  public final org.twentygototen.pipeline.Pipeline$Source<O> tee(org.twentygototen.pipeline.Callbacks$Callback<? super O>);
+}
+Compiled from "Pair.java"
+public class org.twentygototen.pipeline.util.Pair<I, O> {
+  public final I first;
+  public final O second;
+  public final java.lang.String toString();
+  public final org.twentygototen.pipeline.util.Pair<O, I> swap();
+  public static final <I, O> org.twentygototen.pipeline.util.Pair<I, O> make(I, O);
+  public static final <A, B, C> org.twentygototen.pipeline.Pipeline$Pipe<? super org.twentygototen.pipeline.util.Pair<A, B>, org.twentygototen.pipeline.util.Pair<C, B>> first(org.twentygototen.pipeline.Pipeline$Pipe<? super A, C>);
+  public static final <A, B, C> org.twentygototen.pipeline.Pipeline$Pipe<? super org.twentygototen.pipeline.util.Pair<A, B>, org.twentygototen.pipeline.util.Pair<A, C>> second(org.twentygototen.pipeline.Pipeline$Pipe<? super B, C>);
+  org.twentygototen.pipeline.util.Pair(java.lang.Object, java.lang.Object, org.twentygototen.pipeline.util.Pair$1);
+}
+Compiled from "Pair.java"
+final class org.twentygototen.pipeline.util.Pair$1 extends org.twentygototen.pipeline.pipes.AsyncPipe<org.twentygototen.pipeline.util.Pair<A, B>, org.twentygototen.pipeline.util.Pair<C, B>> {
+  final org.twentygototen.pipeline.Pipeline$Pipe val$arrow;
+  org.twentygototen.pipeline.util.Pair$1(org.twentygototen.pipeline.Pipeline$Pipe);
+  public void processAsync(org.twentygototen.pipeline.util.Pair<A, B>, org.twentygototen.pipeline.Callbacks$Callback<? super org.twentygototen.pipeline.util.Pair<C, B>>);
+  public void processAsync(java.lang.Object, org.twentygototen.pipeline.Callbacks$Callback);
+}
+Compiled from "Pair.java"
+class org.twentygototen.pipeline.util.Pair$1$1 extends org.twentygototen.pipeline.Callbacks$Callback<C> {
+  final org.twentygototen.pipeline.Callbacks$Callback val$callback;
+  final org.twentygototen.pipeline.util.Pair val$inputPair;
+  final org.twentygototen.pipeline.util.Pair$1 this$0;
+  org.twentygototen.pipeline.util.Pair$1$1(org.twentygototen.pipeline.util.Pair$1, org.twentygototen.pipeline.Callbacks$Callback, org.twentygototen.pipeline.util.Pair);
+  public void onComplete();
+  public void onFailure(java.lang.RuntimeException);
+  public void onSuccess(C);
+}
+Compiled from "Pair.java"
+final class org.twentygototen.pipeline.util.Pair$2 extends org.twentygototen.pipeline.pipes.AsyncPipe<org.twentygototen.pipeline.util.Pair<A, B>, org.twentygototen.pipeline.util.Pair<A, C>> {
+  final org.twentygototen.pipeline.Pipeline$Pipe val$arrow;
+  org.twentygototen.pipeline.util.Pair$2(org.twentygototen.pipeline.Pipeline$Pipe);
+  public void processAsync(org.twentygototen.pipeline.util.Pair<A, B>, org.twentygototen.pipeline.Callbacks$Callback<? super org.twentygototen.pipeline.util.Pair<A, C>>);
+  public void processAsync(java.lang.Object, org.twentygototen.pipeline.Callbacks$Callback);
+}
+Compiled from "Pair.java"
+class org.twentygototen.pipeline.util.Pair$2$1 extends org.twentygototen.pipeline.Callbacks$Callback<C> {
+  final org.twentygototen.pipeline.Callbacks$Callback val$callback;
+  final org.twentygototen.pipeline.util.Pair val$inputPair;
+  final org.twentygototen.pipeline.util.Pair$2 this$0;
+  org.twentygototen.pipeline.util.Pair$2$1(org.twentygototen.pipeline.util.Pair$2, org.twentygototen.pipeline.Callbacks$Callback, org.twentygototen.pipeline.util.Pair);
+  public void onComplete();
+  public void onFailure(java.lang.RuntimeException);
+  public void onSuccess(C);
+}

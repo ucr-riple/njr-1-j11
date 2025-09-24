@@ -1,0 +1,25 @@
+package Instrucoes;
+
+public enum TipoInstrucao {
+
+	CHAR,
+	CHOICE,
+	COMMIT,
+	BACKCOMMIT,
+	PARTIALCOMMIT,
+	ANY,
+	CHARSET,
+	RETURN,
+	CALL,
+	JUMP,
+	END,
+	FAIL,
+	FAILTWICE,
+	CAPTURE,
+	SPAN,
+	FIND,
+	TESTCHAR,
+	TESTCHARSET,
+	TESTANY
+	
+}

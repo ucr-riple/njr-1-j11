@@ -1,0 +1,348 @@
+Compiled from "Main.java"
+public class net.suetholz.pos.Main {
+  public net.suetholz.pos.Main();
+  public static void main(java.lang.String[]);
+}
+Compiled from "PosRegister.java"
+public class net.suetholz.pos.PosRegister {
+  public net.suetholz.pos.PosRegister(int, net.suetholz.pos.api.StoreStrategy, net.suetholz.pos.api.SaleInputStrategy, net.suetholz.pos.api.SaleOutputStrategy);
+  public final int getRegisterId();
+  public final void setRegisterId(int);
+  public final net.suetholz.pos.api.StoreStrategy getStore();
+  public final void setStore(net.suetholz.pos.api.StoreStrategy);
+  public final net.suetholz.pos.api.SaleStrategy getCurrentSale();
+  public final net.suetholz.pos.api.SaleInputStrategy getLineInput();
+  public final void setLineInput(net.suetholz.pos.api.SaleInputStrategy);
+  public final net.suetholz.pos.api.SaleOutputStrategy getReceiptOutput();
+  public final void setReceiptOutput(net.suetholz.pos.api.SaleOutputStrategy);
+  public final void setKeepRunning(boolean);
+  public final void run();
+}
+Compiled from "Product.java"
+public class net.suetholz.pos.Product {
+  public net.suetholz.pos.Product(java.lang.String, java.lang.String, java.lang.String, double);
+  public final java.lang.String getId();
+  public final void setId(java.lang.String);
+  public final java.lang.String getDescription();
+  public final void setDescription(java.lang.String);
+  public final java.lang.String getDepartment();
+  public final void setDepartment(java.lang.String);
+  public final double getUnitPrice();
+  public final void setUnitPrice(double);
+  public final net.suetholz.pos.api.DiscountStrategy getDiscount();
+  public final void setDiscount(net.suetholz.pos.api.DiscountStrategy);
+  public final double getDiscountAmount(int);
+}
+Compiled from "CustomerStrategy.java"
+public interface net.suetholz.pos.api.CustomerStrategy {
+  public abstract java.lang.String getName();
+  public abstract java.lang.String getCreditCardLastFour();
+  public abstract java.lang.String getGreeting(net.suetholz.pos.api.StoreStrategy);
+  public abstract java.lang.String getThankYou(net.suetholz.pos.api.StoreStrategy);
+}
+Compiled from "DiscountStrategy.java"
+public interface net.suetholz.pos.api.DiscountStrategy {
+  public abstract double getDiscountAmount(int, double);
+  public abstract java.lang.String getDescription();
+}
+Compiled from "LineItemStrategy.java"
+public interface net.suetholz.pos.api.LineItemStrategy {
+  public abstract net.suetholz.pos.Product getProduct();
+  public abstract java.lang.String getProductId();
+  public abstract java.lang.String getProductDesc();
+  public abstract int getQuantity();
+  public abstract double getUnitCost();
+  public abstract double getDiscountAmount();
+  public abstract double getExtendedAmount();
+}
+Compiled from "PersistantStorageStrategy.java"
+public interface net.suetholz.pos.api.PersistantStorageStrategy {
+  public abstract net.suetholz.pos.api.CustomerStrategy lookupCustomer(java.lang.String);
+  public abstract net.suetholz.pos.Product lookupProduct(java.lang.String);
+}
+Compiled from "PosEntryStrategy.java"
+public interface net.suetholz.pos.api.PosEntryStrategy {
+  public abstract void processEntry(net.suetholz.pos.api.StoreStrategy, net.suetholz.pos.api.SaleStrategy, net.suetholz.pos.api.SaleOutputStrategy);
+}
+Compiled from "SaleInputStrategy.java"
+public interface net.suetholz.pos.api.SaleInputStrategy {
+  public abstract net.suetholz.pos.api.PosEntryStrategy getInput();
+}
+Compiled from "SaleOutputStrategy.java"
+public interface net.suetholz.pos.api.SaleOutputStrategy {
+  public abstract void outputReceipt(net.suetholz.pos.api.StoreStrategy, net.suetholz.pos.api.SaleStrategy);
+}
+Compiled from "SaleStrategy.java"
+public interface net.suetholz.pos.api.SaleStrategy {
+  public abstract net.suetholz.pos.api.CustomerStrategy getCustomer();
+  public abstract void setCustomer(net.suetholz.pos.api.CustomerStrategy);
+  public abstract net.suetholz.pos.api.LineItemStrategy[] getLineItems();
+  public abstract void addLineItem(net.suetholz.pos.api.LineItemStrategy);
+  public abstract int getLineItemsLength();
+  public abstract java.lang.String getLineItemId(int);
+  public abstract java.lang.String getLineItemDesc(int);
+  public abstract double getLineItemUnitPrice(int);
+  public abstract int getLineItemQuantity(int);
+  public abstract double getLineItemExtendedAmount(int);
+  public abstract double getLineItemDiscountAmount(int);
+  public abstract java.lang.String getGreeting(net.suetholz.pos.api.StoreStrategy);
+  public abstract java.lang.String getThankYou(net.suetholz.pos.api.StoreStrategy);
+  public abstract double getSubTotalAmount();
+  public abstract double getTotalTaxAmount(net.suetholz.pos.api.StoreStrategy);
+  public abstract double getTotalDiscountAmount();
+  public abstract double getTotalSaleAmount();
+  public abstract double getTotalAmountDue(net.suetholz.pos.api.StoreStrategy);
+  public abstract void setAmountTendered(double);
+  public abstract double getAmountTenderd();
+  public abstract double getChangeAmount(net.suetholz.pos.api.StoreStrategy);
+  public abstract boolean isComplete();
+  public abstract void clearSale();
+}
+Compiled from "StoreStrategy.java"
+public interface net.suetholz.pos.api.StoreStrategy {
+  public abstract java.lang.String getGreeting();
+  public abstract java.lang.String getThankYou();
+  public abstract java.lang.String getName();
+  public abstract java.lang.String getLocation();
+  public abstract double getTaxRate();
+  public abstract net.suetholz.pos.api.SaleStrategy allocateSale();
+  public abstract void newSale(net.suetholz.pos.api.SaleStrategy);
+  public abstract void saveSale(net.suetholz.pos.api.SaleStrategy);
+  public abstract void voidSale(net.suetholz.pos.api.SaleStrategy);
+}
+Compiled from "BasicCustomer.java"
+public class net.suetholz.pos.customer.BasicCustomer implements net.suetholz.pos.api.CustomerStrategy {
+  public net.suetholz.pos.customer.BasicCustomer(java.lang.String);
+  public final java.lang.String getCcLastFour();
+  public final void setCcLastFour(java.lang.String);
+  public final void setName(java.lang.String);
+  public final java.lang.String getName();
+  public final java.lang.String getCreditCardLastFour();
+  public final java.lang.String getGreeting(net.suetholz.pos.api.StoreStrategy);
+  public final java.lang.String getThankYou(net.suetholz.pos.api.StoreStrategy);
+}
+Compiled from "CorporateCustomer.java"
+public class net.suetholz.pos.customer.CorporateCustomer implements net.suetholz.pos.api.CustomerStrategy {
+  public net.suetholz.pos.customer.CorporateCustomer(java.lang.String, java.lang.String);
+  public final java.lang.String getName();
+  public final java.lang.String getCreditCardLastFour();
+  public final java.lang.String getGreeting(net.suetholz.pos.api.StoreStrategy);
+  public final java.lang.String getThankYou(net.suetholz.pos.api.StoreStrategy);
+}
+Compiled from "PreferredCustomer.java"
+public class net.suetholz.pos.customer.PreferredCustomer implements net.suetholz.pos.api.CustomerStrategy {
+  public net.suetholz.pos.customer.PreferredCustomer(java.lang.String, java.lang.String);
+  public final java.lang.String getCcLastFour();
+  public final void setCcLastFour(java.lang.String);
+  public final void setId(java.lang.String);
+  public final java.lang.String getId();
+  public final void setName(java.lang.String);
+  public final void setDiscount(net.suetholz.pos.api.DiscountStrategy);
+  public final net.suetholz.pos.api.DiscountStrategy getDiscount();
+  public final java.lang.String getName();
+  public final java.lang.String getCreditCardLastFour();
+  public final java.lang.String getGreeting(net.suetholz.pos.api.StoreStrategy);
+  public final java.lang.String getThankYou(net.suetholz.pos.api.StoreStrategy);
+}
+Compiled from "DiscountByFlatRate.java"
+public class net.suetholz.pos.discounts.DiscountByFlatRate implements net.suetholz.pos.api.DiscountStrategy {
+  public net.suetholz.pos.discounts.DiscountByFlatRate(java.lang.String, double);
+  public final double getDiscountAmount();
+  public final void setDiscountAmount(double);
+  public final java.lang.String getDescription();
+  public final void setDescription(java.lang.String);
+  public final double getDiscountAmount(int, double);
+}
+Compiled from "DiscountByPercentage.java"
+public class net.suetholz.pos.discounts.DiscountByPercentage implements net.suetholz.pos.api.DiscountStrategy {
+  public net.suetholz.pos.discounts.DiscountByPercentage(java.lang.String, double);
+  public final double getPctgDiscountPerItem();
+  public final void setPctgDiscountPerItem(double);
+  public final java.lang.String getDescription();
+  public final void setDescription(java.lang.String);
+  public final double getDiscountAmount(int, double);
+}
+Compiled from "DiscountByQuantity.java"
+public class net.suetholz.pos.discounts.DiscountByQuantity implements net.suetholz.pos.api.DiscountStrategy {
+  public net.suetholz.pos.discounts.DiscountByQuantity(java.lang.String, int, double);
+  public final int getMinQuantity();
+  public final void setMinQuantity(int);
+  public final double getDiscountAmount();
+  public final void setDiscountAmount(double);
+  public final java.lang.String getDescription();
+  public final void setDescription(java.lang.String);
+  public final double getDiscountAmount(int, double);
+}
+Compiled from "NoDiscount.java"
+public class net.suetholz.pos.discounts.NoDiscount implements net.suetholz.pos.api.DiscountStrategy {
+  public net.suetholz.pos.discounts.NoDiscount(java.lang.String);
+  public final java.lang.String getDescription();
+  public final void setDescription(java.lang.String);
+  public final double getDiscountAmount(int, double);
+}
+Compiled from "PosEntryAmountTendered.java"
+public class net.suetholz.pos.entries.PosEntryAmountTendered implements net.suetholz.pos.api.PosEntryStrategy {
+  public net.suetholz.pos.entries.PosEntryAmountTendered(double);
+  public final double getAmountTendered();
+  public final void setAmountTendered(double);
+  public final void processEntry(net.suetholz.pos.api.StoreStrategy, net.suetholz.pos.api.SaleStrategy, net.suetholz.pos.api.SaleOutputStrategy);
+}
+Compiled from "PosEntryClearKey.java"
+public class net.suetholz.pos.entries.PosEntryClearKey implements net.suetholz.pos.api.PosEntryStrategy {
+  public net.suetholz.pos.entries.PosEntryClearKey();
+  public final void processEntry(net.suetholz.pos.api.StoreStrategy, net.suetholz.pos.api.SaleStrategy, net.suetholz.pos.api.SaleOutputStrategy);
+}
+Compiled from "PosEntryCustomer.java"
+public class net.suetholz.pos.entries.PosEntryCustomer implements net.suetholz.pos.api.PosEntryStrategy {
+  public net.suetholz.pos.entries.PosEntryCustomer(net.suetholz.pos.api.CustomerStrategy);
+  public final net.suetholz.pos.api.CustomerStrategy getCustomer();
+  public final void setCustomer(net.suetholz.pos.api.CustomerStrategy);
+  public final void processEntry(net.suetholz.pos.api.StoreStrategy, net.suetholz.pos.api.SaleStrategy, net.suetholz.pos.api.SaleOutputStrategy);
+}
+Compiled from "PosEntryProductNQuantity.java"
+public class net.suetholz.pos.entries.PosEntryProductNQuantity implements net.suetholz.pos.api.PosEntryStrategy {
+  net.suetholz.pos.api.LineItemStrategy lineItem;
+  public net.suetholz.pos.entries.PosEntryProductNQuantity(net.suetholz.pos.api.LineItemStrategy);
+  public final net.suetholz.pos.api.LineItemStrategy getLineItem();
+  public final void setLineItem(net.suetholz.pos.api.LineItemStrategy);
+  public final void processEntry(net.suetholz.pos.api.StoreStrategy, net.suetholz.pos.api.SaleStrategy, net.suetholz.pos.api.SaleOutputStrategy);
+}
+Compiled from "FakeRegisterInput.java"
+public class net.suetholz.pos.input.FakeRegisterInput implements net.suetholz.pos.api.SaleInputStrategy {
+  public net.suetholz.pos.input.FakeRegisterInput(net.suetholz.pos.api.PersistantStorageStrategy);
+  public final void addEntry(net.suetholz.pos.api.PosEntryStrategy);
+  public final void addClearKey();
+  public final void addAmountTendered(double);
+  public final void addCustomer(java.lang.String);
+  public final void addProductNQuantity(java.lang.String, int);
+  public final net.suetholz.pos.api.PosEntryStrategy getInput();
+}
+Compiled from "BasicLineItem.java"
+public class net.suetholz.pos.lineitem.BasicLineItem implements net.suetholz.pos.api.LineItemStrategy {
+  public net.suetholz.pos.lineitem.BasicLineItem(net.suetholz.pos.Product, int);
+  public final void setProduct(net.suetholz.pos.Product);
+  public final net.suetholz.pos.Product getProduct();
+  public final java.lang.String getProductId();
+  public final java.lang.String getProductDesc();
+  public final void setQuantity(int);
+  public int getQuantity();
+  public final double getUnitCost();
+  public final double getDiscountAmount();
+  public final double getExtendedAmount();
+}
+Compiled from "ReceiptConsoleOuput.java"
+public class net.suetholz.pos.output.ReceiptConsoleOuput implements net.suetholz.pos.api.SaleOutputStrategy {
+  public net.suetholz.pos.output.ReceiptConsoleOuput();
+  public final void outputReceipt(net.suetholz.pos.api.StoreStrategy, net.suetholz.pos.api.SaleStrategy);
+}
+Compiled from "BasicSale.java"
+public class net.suetholz.pos.sales.BasicSale implements net.suetholz.pos.api.SaleStrategy {
+  public net.suetholz.pos.sales.BasicSale();
+  public final net.suetholz.pos.api.CustomerStrategy getCustomer();
+  public final void setCustomer(net.suetholz.pos.api.CustomerStrategy);
+  public final net.suetholz.pos.api.LineItemStrategy[] getLineItems();
+  public final void addLineItem(net.suetholz.pos.api.LineItemStrategy);
+  public final java.lang.String getGreeting(net.suetholz.pos.api.StoreStrategy);
+  public final java.lang.String getThankYou(net.suetholz.pos.api.StoreStrategy);
+  public final int getLineItemsLength();
+  public final java.lang.String getLineItemId(int);
+  public final java.lang.String getLineItemDesc(int);
+  public final double getLineItemUnitPrice(int);
+  public final int getLineItemQuantity(int);
+  public final double getLineItemExtendedAmount(int);
+  public final double getLineItemDiscountAmount(int);
+  public final double getSubTotalAmount();
+  public final double getTotalTaxAmount(net.suetholz.pos.api.StoreStrategy);
+  public final double getTotalDiscountAmount();
+  public final double getTotalSaleAmount();
+  public final double getTotalAmountDue(net.suetholz.pos.api.StoreStrategy);
+  public final void setAmountTendered(double);
+  public final double getAmountTenderd();
+  public final double getChangeAmount(net.suetholz.pos.api.StoreStrategy);
+  public final boolean isComplete();
+  public final void clearSale();
+}
+Compiled from "FakePersistantCustomer.java"
+public class net.suetholz.pos.storage.FakePersistantCustomer {
+  public net.suetholz.pos.storage.FakePersistantCustomer(java.lang.String, java.lang.String, net.suetholz.pos.storage.FakePersistantCustomerType, java.lang.String);
+  public final java.lang.String getId();
+  public final java.lang.String getName();
+  public final net.suetholz.pos.storage.FakePersistantCustomerType getCustType();
+  public final java.lang.String getDiscId();
+  public final void setCustomer(net.suetholz.pos.api.CustomerStrategy);
+  public final net.suetholz.pos.api.CustomerStrategy getCustomer();
+}
+Compiled from "FakePersistantCustomerType.java"
+public final class net.suetholz.pos.storage.FakePersistantCustomerType extends java.lang.Enum<net.suetholz.pos.storage.FakePersistantCustomerType> {
+  public static final net.suetholz.pos.storage.FakePersistantCustomerType Basic;
+  public static final net.suetholz.pos.storage.FakePersistantCustomerType Preferred;
+  public static final net.suetholz.pos.storage.FakePersistantCustomerType Corporate;
+  public static net.suetholz.pos.storage.FakePersistantCustomerType[] values();
+  public static net.suetholz.pos.storage.FakePersistantCustomerType valueOf(java.lang.String);
+  static {};
+}
+Compiled from "FakePersistantDiscount.java"
+public class net.suetholz.pos.storage.FakePersistantDiscount {
+  public net.suetholz.pos.storage.FakePersistantDiscount(java.lang.String, net.suetholz.pos.storage.FakePersistantDiscountType, java.lang.String, int, double);
+  public final net.suetholz.pos.storage.FakePersistantDiscountType getDiscType();
+  public final java.lang.String getId();
+  public final java.lang.String getDescription();
+  public final int getDiscNumber();
+  public final double getDiscDouble();
+  public final net.suetholz.pos.api.DiscountStrategy getDiscount();
+  public final void setDiscount(net.suetholz.pos.api.DiscountStrategy);
+}
+Compiled from "FakePersistantDiscountType.java"
+public final class net.suetholz.pos.storage.FakePersistantDiscountType extends java.lang.Enum<net.suetholz.pos.storage.FakePersistantDiscountType> {
+  public static final net.suetholz.pos.storage.FakePersistantDiscountType ByPercentage;
+  public static final net.suetholz.pos.storage.FakePersistantDiscountType ByFlatRate;
+  public static final net.suetholz.pos.storage.FakePersistantDiscountType ByQuantity;
+  public static final net.suetholz.pos.storage.FakePersistantDiscountType None;
+  public static net.suetholz.pos.storage.FakePersistantDiscountType[] values();
+  public static net.suetholz.pos.storage.FakePersistantDiscountType valueOf(java.lang.String);
+  static {};
+}
+Compiled from "FakePersistantProduct.java"
+public class net.suetholz.pos.storage.FakePersistantProduct {
+  public net.suetholz.pos.storage.FakePersistantProduct(java.lang.String, java.lang.String, java.lang.String, double, java.lang.String);
+  public final java.lang.String getId();
+  public final java.lang.String getDescription();
+  public final java.lang.String getDepartment();
+  public final double getUnitPrice();
+  public final java.lang.String getDiscId();
+  public final void setProduct(net.suetholz.pos.Product);
+  public final net.suetholz.pos.Product getProduct();
+}
+Compiled from "FakePerstantStorage.java"
+public class net.suetholz.pos.storage.FakePerstantStorage implements net.suetholz.pos.api.PersistantStorageStrategy {
+  public net.suetholz.pos.storage.FakePerstantStorage(net.suetholz.pos.storage.FakePersistantCustomer[], net.suetholz.pos.storage.FakePersistantProduct[], net.suetholz.pos.storage.FakePersistantDiscount[]);
+  public final net.suetholz.pos.api.DiscountStrategy lookupDiscount(java.lang.String);
+  public final void addCustomer(net.suetholz.pos.storage.FakePersistantCustomer);
+  public final net.suetholz.pos.api.CustomerStrategy lookupCustomer(java.lang.String);
+  public final void addProduct(net.suetholz.pos.storage.FakePersistantProduct);
+  public final net.suetholz.pos.Product lookupProduct(java.lang.String);
+}
+Compiled from "FakePerstantStorage.java"
+class net.suetholz.pos.storage.FakePerstantStorage$1 {
+  static final int[] $SwitchMap$net$suetholz$pos$storage$FakePersistantDiscountType;
+  static final int[] $SwitchMap$net$suetholz$pos$storage$FakePersistantCustomerType;
+  static {};
+}
+Compiled from "BasicStore.java"
+public class net.suetholz.pos.store.BasicStore implements net.suetholz.pos.api.StoreStrategy {
+  public net.suetholz.pos.store.BasicStore(java.lang.String, java.lang.String, java.lang.String, java.lang.String, double);
+  public final void setGreeting(java.lang.String);
+  public final void setThankYou(java.lang.String);
+  public final void setName(java.lang.String);
+  public final void setLocation(java.lang.String);
+  public final void setTaxRate(double);
+  public final java.lang.String getGreeting();
+  public final java.lang.String getThankYou();
+  public final java.lang.String getName();
+  public final java.lang.String getLocation();
+  public final double getTaxRate();
+  public final net.suetholz.pos.api.SaleStrategy allocateSale();
+  public final void newSale(net.suetholz.pos.api.SaleStrategy);
+  public final void saveSale(net.suetholz.pos.api.SaleStrategy);
+  public final void voidSale(net.suetholz.pos.api.SaleStrategy);
+}

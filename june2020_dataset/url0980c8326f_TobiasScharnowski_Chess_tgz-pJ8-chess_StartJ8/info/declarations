@@ -1,0 +1,335 @@
+Compiled from "CastlingAvailability.java"
+public interface chess.CastlingAvailability {
+  public abstract boolean isCastlingAvailable(boolean, chess.piece.ChessColor);
+  public abstract void setCastlingAvailability(boolean, chess.piece.ChessColor, boolean);
+  public abstract int getCastlingRookFile(boolean, chess.piece.ChessColor);
+}
+Compiled from "ChessCoord.java"
+public interface chess.ChessCoord {
+  public abstract int getRank();
+  public abstract int getFile();
+  public abstract boolean sameAs(chess.ChessCoord);
+}
+Compiled from "ChessRules.java"
+public class chess.ChessRules {
+  public static final int ENPASSANT_FILE_DISABLED;
+  public static final int MAX_FILE;
+  public static final int MIN_FILE;
+  public static final int MAX_RANK;
+  public static final int MIN_RANK;
+  public chess.ChessRules();
+  public static int baseRank(chess.piece.ChessColor);
+  public static boolean fileWithinBounds(int);
+  public static boolean rankWithinBounds(int);
+  public static boolean withinBounds(chess.ChessCoord);
+  public static chess.ChessCoord getCastlingTargetCoord(boolean, chess.piece.ChessColor);
+}
+Compiled from "PieceType.java"
+public final class chess.PieceType extends java.lang.Enum<chess.PieceType> {
+  public static final chess.PieceType PAWN;
+  public static final chess.PieceType ROOK;
+  public static final chess.PieceType KNIGHT;
+  public static final chess.PieceType BISHOP;
+  public static final chess.PieceType QUEEN;
+  public static final chess.PieceType KING;
+  public static chess.PieceType[] values();
+  public static chess.PieceType valueOf(java.lang.String);
+  public boolean isPromotable();
+  public static final int numPromotable();
+  public static chess.PieceType getTypeByShortCut(char);
+  public char getShortCut();
+  static {};
+}
+Compiled from "Position.java"
+public interface chess.Position {
+  public abstract chess.piece.Piece getPieceAt(chess.ChessCoord);
+  public abstract chess.piece.Piece getPieceAt(int, int);
+  public abstract void setPieceAt(chess.piece.Piece, chess.ChessCoord);
+  public abstract int getEnpassantFile();
+  public abstract void setEnpassantFile(int);
+  public abstract int getHalveMoveClock();
+  public abstract void advanceHalveMoveClock();
+  public abstract void revertHalveMoveClock();
+  public abstract boolean isCastlingAvailable(boolean, chess.piece.ChessColor);
+  public abstract void setCastlingAvailable(boolean, chess.piece.ChessColor, boolean);
+  public abstract int getMoveNumber();
+  public abstract void advanceMoveNumber();
+  public abstract void revertMoveNumber();
+  public abstract chess.piece.ChessColor getActiveColor();
+  public abstract void flipActiveColor();
+  public abstract void addPiece(chess.piece.Piece);
+  public abstract void removePiece(chess.piece.Piece);
+  public abstract int getCastlingRookFile(boolean, chess.piece.ChessColor);
+  public abstract chess.ChessCoord activeKingCoord();
+  public abstract boolean isControlled(chess.ChessCoord);
+  public abstract boolean processMove(chess.move.Move);
+  public abstract void undoLastMove();
+  public abstract java.util.List<chess.move.Move> possibleMoves();
+  public abstract java.util.List<chess.move.Move> possibleMovesToCoordForType(chess.PieceType, chess.ChessCoord);
+}
+Compiled from "Start.java"
+public class chess.Start {
+  public chess.Start();
+  public static void main(java.lang.String[]);
+}
+Compiled from "Coords.java"
+public class chess.impl.Coords {
+  public chess.impl.Coords();
+  public static chess.ChessCoord coord(int, int);
+  public static chess.ChessCoord coordByAlgebraic(java.lang.String);
+  static {};
+}
+Compiled from "Coords.java"
+class chess.impl.Coords$DefaultChessCoord implements chess.ChessCoord {
+  chess.impl.Coords$DefaultChessCoord(int, int);
+  public int getRank();
+  public int getFile();
+  public boolean sameAs(chess.ChessCoord);
+  public java.lang.String toString();
+}
+Compiled from "DefaultCastlingAvailability.java"
+public class chess.impl.DefaultCastlingAvailability implements chess.CastlingAvailability {
+  boolean[] availabilities;
+  public chess.impl.DefaultCastlingAvailability();
+  public boolean isCastlingAvailable(boolean, chess.piece.ChessColor);
+  public void setCastlingAvailability(boolean, chess.piece.ChessColor, boolean);
+  public int getCastlingRookFile(boolean, chess.piece.ChessColor);
+}
+Compiled from "DefaultPosition.java"
+public class chess.impl.DefaultPosition implements chess.Position {
+  public chess.impl.DefaultPosition(boolean);
+  public chess.impl.DefaultPosition(chess.piece.Piece[][], java.util.List<chess.move.Move>, chess.piece.ChessColor, int, int, int, chess.CastlingAvailability);
+  public chess.piece.Piece getPieceAt(chess.ChessCoord);
+  public chess.piece.Piece getPieceAt(int, int);
+  public void setPieceAt(chess.piece.Piece, chess.ChessCoord);
+  public int getEnpassantFile();
+  public void setEnpassantFile(int);
+  public int getHalveMoveClock();
+  public void advanceHalveMoveClock();
+  public void revertHalveMoveClock();
+  public boolean isCastlingAvailable(boolean, chess.piece.ChessColor);
+  public void setCastlingAvailable(boolean, chess.piece.ChessColor, boolean);
+  public int getMoveNumber();
+  public void advanceMoveNumber();
+  public void revertMoveNumber();
+  public chess.piece.ChessColor getActiveColor();
+  public void flipActiveColor();
+  public void addPiece(chess.piece.Piece);
+  public void removePiece(chess.piece.Piece);
+  public int getCastlingRookFile(boolean, chess.piece.ChessColor);
+  public boolean isControlled(chess.ChessCoord);
+  public boolean processMove(chess.move.Move);
+  public void undoLastMove();
+  public java.util.List<chess.move.Move> possibleMoves();
+  public chess.ChessCoord activeKingCoord();
+  public java.lang.String toString();
+  public java.util.List<chess.move.Move> possibleMovesToCoordForType(chess.PieceType, chess.ChessCoord);
+}
+Compiled from "Move.java"
+public interface chess.move.Move {
+  public abstract void doMove(chess.Position);
+  public abstract void undoMove(chess.Position);
+  public abstract chess.ChessCoord getSourceCoord();
+  public abstract chess.ChessCoord getTargetCoord();
+}
+Compiled from "MoveParser.java"
+public interface chess.move.MoveParser {
+  public abstract chess.move.Move parseMove(chess.Position, java.lang.String);
+}
+Compiled from "MoveTests.java"
+public class chess.move.MoveTests {
+  public chess.move.MoveTests();
+}
+Compiled from "AbstractTakingMove.java"
+public abstract class chess.move.impl.AbstractTakingMove extends chess.move.impl.SimpleMove {
+  public chess.move.impl.AbstractTakingMove(chess.ChessCoord, chess.ChessCoord);
+  protected abstract chess.ChessCoord getTakenPieceCoord();
+  public void doMove(chess.Position);
+  public void undoMove(chess.Position);
+  public chess.piece.Piece getTakenPiece();
+  public void setTakenPiece(chess.piece.Piece);
+}
+Compiled from "CastlingMove.java"
+public class chess.move.impl.CastlingMove extends chess.move.impl.SimpleMove {
+  public chess.move.impl.CastlingMove(chess.ChessCoord, chess.ChessCoord, chess.ChessCoord);
+  public void doMove(chess.Position);
+  public void undoMove(chess.Position);
+  public chess.ChessCoord getRookSource();
+}
+Compiled from "EnPassantMove.java"
+public class chess.move.impl.EnPassantMove extends chess.move.impl.AbstractTakingMove {
+  public chess.move.impl.EnPassantMove(chess.ChessCoord, chess.ChessCoord);
+  protected chess.ChessCoord getTakenPieceCoord();
+}
+Compiled from "PGNParser.java"
+public class chess.move.impl.PGNParser implements chess.move.MoveParser {
+  public chess.move.impl.PGNParser();
+  public chess.move.Move parseMove(chess.Position, java.lang.String);
+}
+Compiled from "PGNParserTest.java"
+public class chess.move.impl.PGNParserTest {
+  public chess.move.impl.PGNParserTest();
+  public void setUp() throws java.lang.Exception;
+  public void testSimpleMoveWithoutAmbiguity();
+  public void testSimpleMoveWithAmbiguity();
+}
+Compiled from "PawnPromotionMove.java"
+public class chess.move.impl.PawnPromotionMove extends chess.move.impl.SimpleTakingMove {
+  public chess.move.impl.PawnPromotionMove(chess.ChessCoord, chess.ChessCoord, chess.PieceType);
+  public void doMove(chess.Position);
+  public void undoMove(chess.Position);
+}
+Compiled from "SimpleMove.java"
+public class chess.move.impl.SimpleMove implements chess.move.Move {
+  protected chess.ChessCoord source;
+  protected chess.ChessCoord target;
+  public chess.move.impl.SimpleMove(chess.ChessCoord, chess.ChessCoord);
+  public void doMove(chess.Position);
+  public void undoMove(chess.Position);
+  public chess.ChessCoord getSourceCoord();
+  public chess.ChessCoord getTargetCoord();
+  protected void moveFromTo(chess.Position, chess.ChessCoord, chess.ChessCoord);
+  public java.lang.String toString();
+}
+Compiled from "SimpleMoveTest.java"
+public class chess.move.impl.SimpleMoveTest {
+  public chess.move.impl.SimpleMoveTest();
+  public static void setUpBeforeClass() throws java.lang.Exception;
+  public static void tearDownAfterClass() throws java.lang.Exception;
+  public void setUp() throws java.lang.Exception;
+  public void tearDown() throws java.lang.Exception;
+  public void testMove();
+  public static void testSimpleMove(chess.Position, chess.ChessCoord, chess.ChessCoord, chess.move.impl.SimpleMove);
+}
+Compiled from "SimpleTakingMove.java"
+public class chess.move.impl.SimpleTakingMove extends chess.move.impl.AbstractTakingMove {
+  public chess.move.impl.SimpleTakingMove(chess.ChessCoord, chess.ChessCoord);
+  protected chess.ChessCoord getTakenPieceCoord();
+}
+Compiled from "ChessColor.java"
+public final class chess.piece.ChessColor extends java.lang.Enum<chess.piece.ChessColor> {
+  public static final chess.piece.ChessColor WHITE;
+  public static final chess.piece.ChessColor BLACK;
+  public static chess.piece.ChessColor[] values();
+  public static chess.piece.ChessColor valueOf(java.lang.String);
+  public static chess.piece.ChessColor oppositeColor(chess.piece.ChessColor);
+  static {};
+}
+Compiled from "Piece.java"
+public interface chess.piece.Piece {
+  public abstract chess.piece.ChessColor getColor();
+  public abstract chess.PieceType getType();
+  public abstract java.util.List<chess.move.Move> getPossibleMoves();
+  public abstract java.util.List<chess.move.Move> generatePossibleMovesToCoord(chess.ChessCoord);
+  public abstract chess.ChessCoord getCoord();
+  public abstract void setCoord(chess.ChessCoord);
+  public abstract chess.Position getPos();
+  public abstract void incrMoveCnt();
+  public abstract void decrMoveCnt();
+  public abstract int getMoveCnt();
+  public abstract boolean isActive();
+  public abstract void setActive(boolean);
+  public abstract boolean controls(chess.ChessCoord);
+  public abstract boolean canMoveTo(chess.ChessCoord);
+  public abstract char shortCut();
+}
+Compiled from "PieceFactory.java"
+public interface chess.piece.PieceFactory {
+  public abstract chess.piece.Piece createPiece(chess.Position, chess.PieceType, chess.piece.ChessColor, chess.ChessCoord);
+  public abstract void createDefaultPieceSets(chess.Position);
+}
+Compiled from "AbstractDirectionalPiece.java"
+public abstract class chess.piece.impl.AbstractDirectionalPiece extends chess.piece.impl.AbstractPiece {
+  protected static final int STEP_UP;
+  protected static final int STEP_DOWN;
+  protected static final int STEP_RIGHT;
+  protected static final int STEP_LEFT;
+  protected static final int STEP_STAY;
+  public chess.piece.impl.AbstractDirectionalPiece(chess.Position, chess.PieceType, chess.piece.ChessColor, chess.ChessCoord);
+  protected void addPossibleMovesInDirection(java.util.List<chess.move.Move>, int, int, int, int);
+  protected boolean controls(chess.ChessCoord, int, int);
+}
+Compiled from "AbstractPiece.java"
+public abstract class chess.piece.impl.AbstractPiece implements chess.piece.Piece {
+  protected chess.Position pos;
+  protected chess.PieceType pieceType;
+  protected chess.piece.ChessColor color;
+  protected chess.ChessCoord coord;
+  public chess.piece.impl.AbstractPiece(chess.Position, chess.PieceType, chess.piece.ChessColor, chess.ChessCoord);
+  public boolean controls(chess.ChessCoord);
+  public final java.util.List<chess.move.Move> getPossibleMoves();
+  protected abstract java.util.List<chess.move.Move> _generateMoves();
+  public chess.PieceType getType();
+  public chess.piece.ChessColor getColor();
+  public chess.ChessCoord getCoord();
+  public chess.Position getPos();
+  public void setCoord(chess.ChessCoord);
+  public void incrMoveCnt();
+  public void decrMoveCnt();
+  public int getMoveCnt();
+  public boolean isActive();
+  public void setActive(boolean);
+  protected chess.move.Move defaultCorrectMoveTypeForValidCoord(chess.ChessCoord);
+  public char shortCut();
+  protected boolean isBlocked(chess.ChessCoord);
+  public java.util.List<chess.move.Move> generatePossibleMovesToCoord(chess.ChessCoord);
+  public boolean canMoveTo(chess.ChessCoord);
+}
+Compiled from "Bishop.java"
+public class chess.piece.impl.Bishop extends chess.piece.impl.AbstractDirectionalPiece {
+  public chess.piece.impl.Bishop(chess.Position, chess.piece.ChessColor, chess.ChessCoord);
+  protected java.util.List<chess.move.Move> _generateMoves();
+  public boolean controls(chess.ChessCoord);
+}
+Compiled from "DefaultPieceFactory.java"
+public class chess.piece.impl.DefaultPieceFactory implements chess.piece.PieceFactory {
+  public chess.piece.impl.DefaultPieceFactory();
+  public chess.piece.Piece createPiece(chess.Position, chess.PieceType, chess.piece.ChessColor, chess.ChessCoord);
+  public void createDefaultPieceSets(chess.Position);
+}
+Compiled from "DefaultPieceFactory.java"
+class chess.piece.impl.DefaultPieceFactory$1 {
+  static final int[] $SwitchMap$chess$PieceType;
+  static {};
+}
+Compiled from "King.java"
+public class chess.piece.impl.King extends chess.piece.impl.AbstractPiece {
+  public chess.piece.impl.King(chess.Position, chess.piece.ChessColor, chess.ChessCoord);
+  protected java.util.List<chess.move.Move> _generateMoves();
+  public boolean controls(chess.ChessCoord);
+}
+Compiled from "Knight.java"
+public class chess.piece.impl.Knight extends chess.piece.impl.AbstractPiece {
+  public chess.piece.impl.Knight(chess.Position, chess.piece.ChessColor, chess.ChessCoord);
+  protected java.util.List<chess.move.Move> _generateMoves();
+  public boolean controls(chess.ChessCoord);
+  static {};
+}
+Compiled from "Knight.java"
+class chess.piece.impl.Knight$KnightJump {
+  public static final chess.piece.impl.Knight$KnightJump[] JUMPS;
+  public int getFileJump();
+  public int[] getRankJumps();
+  static {};
+}
+Compiled from "Pawn.java"
+public class chess.piece.impl.Pawn extends chess.piece.impl.AbstractPiece {
+  public chess.piece.impl.Pawn(chess.Position, chess.piece.ChessColor, chess.ChessCoord);
+  protected java.util.List<chess.move.Move> _generateMoves();
+  public java.util.List<chess.move.Move> generatePossibleMovesToCoord(chess.ChessCoord);
+  public boolean controls(chess.ChessCoord);
+  protected chess.move.Move defaultCorrectMoveTypeForValidCoord(chess.ChessCoord);
+  public boolean canMoveTo(chess.ChessCoord);
+}
+Compiled from "Queen.java"
+public class chess.piece.impl.Queen extends chess.piece.impl.AbstractDirectionalPiece {
+  public chess.piece.impl.Queen(chess.Position, chess.piece.ChessColor, chess.ChessCoord);
+  protected java.util.List<chess.move.Move> _generateMoves();
+  public boolean controls(chess.ChessCoord);
+}
+Compiled from "Rook.java"
+public class chess.piece.impl.Rook extends chess.piece.impl.AbstractDirectionalPiece {
+  public chess.piece.impl.Rook(chess.Position, chess.piece.ChessColor, chess.ChessCoord, boolean);
+  protected java.util.List<chess.move.Move> _generateMoves();
+  public boolean controls(chess.ChessCoord);
+}

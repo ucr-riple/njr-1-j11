@@ -1,0 +1,1286 @@
+Compiled from "CRC.java"
+public class SevenZip.CRC {
+  public static int[] Table;
+  int _value;
+  public SevenZip.CRC();
+  public void Init();
+  public void Update(byte[], int, int);
+  public void Update(byte[]);
+  public void UpdateByte(int);
+  public int GetDigest();
+  static {};
+}
+Compiled from "BinTree.java"
+public class SevenZip.Compression.LZ.BinTree extends SevenZip.Compression.LZ.InWindow {
+  int _cyclicBufferPos;
+  int _cyclicBufferSize;
+  int _matchMaxLen;
+  int[] _son;
+  int[] _hash;
+  int _cutValue;
+  int _hashMask;
+  int _hashSizeSum;
+  boolean HASH_ARRAY;
+  static final int kHash2Size;
+  static final int kHash3Size;
+  static final int kBT2HashSize;
+  static final int kStartMaxLen;
+  static final int kHash3Offset;
+  static final int kEmptyHashValue;
+  static final int kMaxValForNormalize;
+  int kNumHashDirectBytes;
+  int kMinMatchCheck;
+  int kFixHashSize;
+  public SevenZip.Compression.LZ.BinTree();
+  public void SetType(int);
+  public void Init() throws java.io.IOException;
+  public void MovePos() throws java.io.IOException;
+  public boolean Create(int, int, int, int);
+  public int GetMatches(int[]) throws java.io.IOException;
+  public void Skip(int) throws java.io.IOException;
+  void NormalizeLinks(int[], int, int);
+  void Normalize();
+  public void SetCutValue(int);
+  static {};
+}
+Compiled from "InWindow.java"
+public class SevenZip.Compression.LZ.InWindow {
+  public byte[] _bufferBase;
+  java.io.InputStream _stream;
+  int _posLimit;
+  boolean _streamEndWasReached;
+  int _pointerToLastSafePosition;
+  public int _bufferOffset;
+  public int _blockSize;
+  public int _pos;
+  int _keepSizeBefore;
+  int _keepSizeAfter;
+  public int _streamPos;
+  public SevenZip.Compression.LZ.InWindow();
+  public void MoveBlock();
+  public void ReadBlock() throws java.io.IOException;
+  void Free();
+  public void Create(int, int, int);
+  public void SetStream(java.io.InputStream);
+  public void ReleaseStream();
+  public void Init() throws java.io.IOException;
+  public void MovePos() throws java.io.IOException;
+  public byte GetIndexByte(int);
+  public int GetMatchLen(int, int, int);
+  public int GetNumAvailableBytes();
+  public void ReduceOffsets(int);
+}
+Compiled from "OutWindow.java"
+public class SevenZip.Compression.LZ.OutWindow {
+  byte[] _buffer;
+  int _pos;
+  int _windowSize;
+  int _streamPos;
+  java.io.OutputStream _stream;
+  public SevenZip.Compression.LZ.OutWindow();
+  public void Create(int);
+  public void SetStream(java.io.OutputStream) throws java.io.IOException;
+  public void ReleaseStream() throws java.io.IOException;
+  public void Init(boolean);
+  public void Flush() throws java.io.IOException;
+  public void CopyBlock(int, int) throws java.io.IOException;
+  public void PutByte(byte) throws java.io.IOException;
+  public byte GetByte(int);
+}
+Compiled from "Base.java"
+public class SevenZip.Compression.LZMA.Base {
+  public static final int kNumRepDistances;
+  public static final int kNumStates;
+  public static final int kNumPosSlotBits;
+  public static final int kDicLogSizeMin;
+  public static final int kNumLenToPosStatesBits;
+  public static final int kNumLenToPosStates;
+  public static final int kMatchMinLen;
+  public static final int kNumAlignBits;
+  public static final int kAlignTableSize;
+  public static final int kAlignMask;
+  public static final int kStartPosModelIndex;
+  public static final int kEndPosModelIndex;
+  public static final int kNumPosModels;
+  public static final int kNumFullDistances;
+  public static final int kNumLitPosStatesBitsEncodingMax;
+  public static final int kNumLitContextBitsMax;
+  public static final int kNumPosStatesBitsMax;
+  public static final int kNumPosStatesMax;
+  public static final int kNumPosStatesBitsEncodingMax;
+  public static final int kNumPosStatesEncodingMax;
+  public static final int kNumLowLenBits;
+  public static final int kNumMidLenBits;
+  public static final int kNumHighLenBits;
+  public static final int kNumLowLenSymbols;
+  public static final int kNumMidLenSymbols;
+  public static final int kNumLenSymbols;
+  public static final int kMatchMaxLen;
+  public SevenZip.Compression.LZMA.Base();
+  public static final int StateInit();
+  public static final int StateUpdateChar(int);
+  public static final int StateUpdateMatch(int);
+  public static final int StateUpdateRep(int);
+  public static final int StateUpdateShortRep(int);
+  public static final boolean StateIsCharState(int);
+  public static final int GetLenToPosState(int);
+}
+Compiled from "Decoder.java"
+public class SevenZip.Compression.LZMA.Decoder {
+  SevenZip.Compression.LZ.OutWindow m_OutWindow;
+  SevenZip.Compression.RangeCoder.Decoder m_RangeDecoder;
+  short[] m_IsMatchDecoders;
+  short[] m_IsRepDecoders;
+  short[] m_IsRepG0Decoders;
+  short[] m_IsRepG1Decoders;
+  short[] m_IsRepG2Decoders;
+  short[] m_IsRep0LongDecoders;
+  SevenZip.Compression.RangeCoder.BitTreeDecoder[] m_PosSlotDecoder;
+  short[] m_PosDecoders;
+  SevenZip.Compression.RangeCoder.BitTreeDecoder m_PosAlignDecoder;
+  SevenZip.Compression.LZMA.Decoder$LenDecoder m_LenDecoder;
+  SevenZip.Compression.LZMA.Decoder$LenDecoder m_RepLenDecoder;
+  SevenZip.Compression.LZMA.Decoder$LiteralDecoder m_LiteralDecoder;
+  int m_DictionarySize;
+  int m_DictionarySizeCheck;
+  int m_PosStateMask;
+  public SevenZip.Compression.LZMA.Decoder();
+  boolean SetDictionarySize(int);
+  boolean SetLcLpPb(int, int, int);
+  void Init() throws java.io.IOException;
+  public boolean Code(java.io.InputStream, java.io.OutputStream, long) throws java.io.IOException;
+  public boolean SetDecoderProperties(byte[]);
+}
+Compiled from "Decoder.java"
+class SevenZip.Compression.LZMA.Decoder$LenDecoder {
+  short[] m_Choice;
+  SevenZip.Compression.RangeCoder.BitTreeDecoder[] m_LowCoder;
+  SevenZip.Compression.RangeCoder.BitTreeDecoder[] m_MidCoder;
+  SevenZip.Compression.RangeCoder.BitTreeDecoder m_HighCoder;
+  int m_NumPosStates;
+  final SevenZip.Compression.LZMA.Decoder this$0;
+  SevenZip.Compression.LZMA.Decoder$LenDecoder(SevenZip.Compression.LZMA.Decoder);
+  public void Create(int);
+  public void Init();
+  public int Decode(SevenZip.Compression.RangeCoder.Decoder, int) throws java.io.IOException;
+}
+Compiled from "Decoder.java"
+class SevenZip.Compression.LZMA.Decoder$LiteralDecoder {
+  SevenZip.Compression.LZMA.Decoder$LiteralDecoder$Decoder2[] m_Coders;
+  int m_NumPrevBits;
+  int m_NumPosBits;
+  int m_PosMask;
+  final SevenZip.Compression.LZMA.Decoder this$0;
+  SevenZip.Compression.LZMA.Decoder$LiteralDecoder(SevenZip.Compression.LZMA.Decoder);
+  public void Create(int, int);
+  public void Init();
+  SevenZip.Compression.LZMA.Decoder$LiteralDecoder$Decoder2 GetDecoder(int, byte);
+}
+Compiled from "Decoder.java"
+class SevenZip.Compression.LZMA.Decoder$LiteralDecoder$Decoder2 {
+  short[] m_Decoders;
+  final SevenZip.Compression.LZMA.Decoder$LiteralDecoder this$1;
+  SevenZip.Compression.LZMA.Decoder$LiteralDecoder$Decoder2(SevenZip.Compression.LZMA.Decoder$LiteralDecoder);
+  public void Init();
+  public byte DecodeNormal(SevenZip.Compression.RangeCoder.Decoder) throws java.io.IOException;
+  public byte DecodeWithMatchByte(SevenZip.Compression.RangeCoder.Decoder, byte) throws java.io.IOException;
+}
+Compiled from "Encoder.java"
+public class SevenZip.Compression.LZMA.Encoder {
+  public static final int EMatchFinderTypeBT2;
+  public static final int EMatchFinderTypeBT4;
+  static final int kIfinityPrice;
+  static byte[] g_FastPos;
+  int _state;
+  byte _previousByte;
+  int[] _repDistances;
+  static final int kDefaultDictionaryLogSize;
+  static final int kNumFastBytesDefault;
+  public static final int kNumLenSpecSymbols;
+  static final int kNumOpts;
+  SevenZip.Compression.LZMA.Encoder$Optimal[] _optimum;
+  SevenZip.Compression.LZ.BinTree _matchFinder;
+  SevenZip.Compression.RangeCoder.Encoder _rangeEncoder;
+  short[] _isMatch;
+  short[] _isRep;
+  short[] _isRepG0;
+  short[] _isRepG1;
+  short[] _isRepG2;
+  short[] _isRep0Long;
+  SevenZip.Compression.RangeCoder.BitTreeEncoder[] _posSlotEncoder;
+  short[] _posEncoders;
+  SevenZip.Compression.RangeCoder.BitTreeEncoder _posAlignEncoder;
+  SevenZip.Compression.LZMA.Encoder$LenPriceTableEncoder _lenEncoder;
+  SevenZip.Compression.LZMA.Encoder$LenPriceTableEncoder _repMatchLenEncoder;
+  SevenZip.Compression.LZMA.Encoder$LiteralEncoder _literalEncoder;
+  int[] _matchDistances;
+  int _numFastBytes;
+  int _longestMatchLength;
+  int _numDistancePairs;
+  int _additionalOffset;
+  int _optimumEndIndex;
+  int _optimumCurrentIndex;
+  boolean _longestMatchWasFound;
+  int[] _posSlotPrices;
+  int[] _distancesPrices;
+  int[] _alignPrices;
+  int _alignPriceCount;
+  int _distTableSize;
+  int _posStateBits;
+  int _posStateMask;
+  int _numLiteralPosStateBits;
+  int _numLiteralContextBits;
+  int _dictionarySize;
+  int _dictionarySizePrev;
+  int _numFastBytesPrev;
+  long nowPos64;
+  boolean _finished;
+  java.io.InputStream _inStream;
+  int _matchFinderType;
+  boolean _writeEndMark;
+  boolean _needReleaseMFStream;
+  int[] reps;
+  int[] repLens;
+  int backRes;
+  long[] processedInSize;
+  long[] processedOutSize;
+  boolean[] finished;
+  public static final int kPropSize;
+  byte[] properties;
+  int[] tempPrices;
+  int _matchPriceCount;
+  static int GetPosSlot(int);
+  static int GetPosSlot2(int);
+  void BaseInit();
+  void Create();
+  public SevenZip.Compression.LZMA.Encoder();
+  void SetWriteEndMarkerMode(boolean);
+  void Init();
+  int ReadMatchDistances() throws java.io.IOException;
+  void MovePos(int) throws java.io.IOException;
+  int GetRepLen1Price(int, int);
+  int GetPureRepPrice(int, int, int);
+  int GetRepPrice(int, int, int, int);
+  int GetPosLenPrice(int, int, int);
+  int Backward(int);
+  int GetOptimum(int) throws java.io.IOException;
+  boolean ChangePair(int, int);
+  void WriteEndMarker(int) throws java.io.IOException;
+  void Flush(int) throws java.io.IOException;
+  public void CodeOneBlock(long[], long[], boolean[]) throws java.io.IOException;
+  void ReleaseMFStream();
+  void SetOutStream(java.io.OutputStream);
+  void ReleaseOutStream();
+  void ReleaseStreams();
+  void SetStreams(java.io.InputStream, java.io.OutputStream, long, long);
+  public void Code(java.io.InputStream, java.io.OutputStream, long, long, SevenZip.ICodeProgress) throws java.io.IOException;
+  public void WriteCoderProperties(java.io.OutputStream) throws java.io.IOException;
+  void FillDistancesPrices();
+  void FillAlignPrices();
+  public boolean SetAlgorithm(int);
+  public boolean SetDictionarySize(int);
+  public boolean SetNumFastBytes(int);
+  public boolean SetMatchFinder(int);
+  public boolean SetLcLpPb(int, int, int);
+  public void SetEndMarkerMode(boolean);
+  static {};
+}
+Compiled from "Encoder.java"
+class SevenZip.Compression.LZMA.Encoder$LenEncoder {
+  short[] _choice;
+  SevenZip.Compression.RangeCoder.BitTreeEncoder[] _lowCoder;
+  SevenZip.Compression.RangeCoder.BitTreeEncoder[] _midCoder;
+  SevenZip.Compression.RangeCoder.BitTreeEncoder _highCoder;
+  final SevenZip.Compression.LZMA.Encoder this$0;
+  public SevenZip.Compression.LZMA.Encoder$LenEncoder(SevenZip.Compression.LZMA.Encoder);
+  public void Init(int);
+  public void Encode(SevenZip.Compression.RangeCoder.Encoder, int, int) throws java.io.IOException;
+  public void SetPrices(int, int, int[], int);
+}
+Compiled from "Encoder.java"
+class SevenZip.Compression.LZMA.Encoder$LenPriceTableEncoder extends SevenZip.Compression.LZMA.Encoder$LenEncoder {
+  int[] _prices;
+  int _tableSize;
+  int[] _counters;
+  final SevenZip.Compression.LZMA.Encoder this$0;
+  SevenZip.Compression.LZMA.Encoder$LenPriceTableEncoder(SevenZip.Compression.LZMA.Encoder);
+  public void SetTableSize(int);
+  public int GetPrice(int, int);
+  void UpdateTable(int);
+  public void UpdateTables(int);
+  public void Encode(SevenZip.Compression.RangeCoder.Encoder, int, int) throws java.io.IOException;
+}
+Compiled from "Encoder.java"
+class SevenZip.Compression.LZMA.Encoder$LiteralEncoder {
+  SevenZip.Compression.LZMA.Encoder$LiteralEncoder$Encoder2[] m_Coders;
+  int m_NumPrevBits;
+  int m_NumPosBits;
+  int m_PosMask;
+  final SevenZip.Compression.LZMA.Encoder this$0;
+  SevenZip.Compression.LZMA.Encoder$LiteralEncoder(SevenZip.Compression.LZMA.Encoder);
+  public void Create(int, int);
+  public void Init();
+  public SevenZip.Compression.LZMA.Encoder$LiteralEncoder$Encoder2 GetSubCoder(int, byte);
+}
+Compiled from "Encoder.java"
+class SevenZip.Compression.LZMA.Encoder$LiteralEncoder$Encoder2 {
+  short[] m_Encoders;
+  final SevenZip.Compression.LZMA.Encoder$LiteralEncoder this$1;
+  SevenZip.Compression.LZMA.Encoder$LiteralEncoder$Encoder2(SevenZip.Compression.LZMA.Encoder$LiteralEncoder);
+  public void Init();
+  public void Encode(SevenZip.Compression.RangeCoder.Encoder, byte) throws java.io.IOException;
+  public void EncodeMatched(SevenZip.Compression.RangeCoder.Encoder, byte, byte) throws java.io.IOException;
+  public int GetPrice(boolean, byte, byte);
+}
+Compiled from "Encoder.java"
+class SevenZip.Compression.LZMA.Encoder$Optimal {
+  public int State;
+  public boolean Prev1IsChar;
+  public boolean Prev2;
+  public int PosPrev2;
+  public int BackPrev2;
+  public int Price;
+  public int PosPrev;
+  public int BackPrev;
+  public int Backs0;
+  public int Backs1;
+  public int Backs2;
+  public int Backs3;
+  final SevenZip.Compression.LZMA.Encoder this$0;
+  SevenZip.Compression.LZMA.Encoder$Optimal(SevenZip.Compression.LZMA.Encoder);
+  public void MakeAsChar();
+  public void MakeAsShortRep();
+  public boolean IsShortRep();
+}
+Compiled from "BitTreeDecoder.java"
+public class SevenZip.Compression.RangeCoder.BitTreeDecoder {
+  short[] Models;
+  int NumBitLevels;
+  public SevenZip.Compression.RangeCoder.BitTreeDecoder(int);
+  public void Init();
+  public int Decode(SevenZip.Compression.RangeCoder.Decoder) throws java.io.IOException;
+  public int ReverseDecode(SevenZip.Compression.RangeCoder.Decoder) throws java.io.IOException;
+  public static int ReverseDecode(short[], int, SevenZip.Compression.RangeCoder.Decoder, int) throws java.io.IOException;
+}
+Compiled from "BitTreeEncoder.java"
+public class SevenZip.Compression.RangeCoder.BitTreeEncoder {
+  short[] Models;
+  int NumBitLevels;
+  public SevenZip.Compression.RangeCoder.BitTreeEncoder(int);
+  public void Init();
+  public void Encode(SevenZip.Compression.RangeCoder.Encoder, int) throws java.io.IOException;
+  public void ReverseEncode(SevenZip.Compression.RangeCoder.Encoder, int) throws java.io.IOException;
+  public int GetPrice(int);
+  public int ReverseGetPrice(int);
+  public static int ReverseGetPrice(short[], int, int, int);
+  public static void ReverseEncode(short[], int, SevenZip.Compression.RangeCoder.Encoder, int, int) throws java.io.IOException;
+}
+Compiled from "Decoder.java"
+public class SevenZip.Compression.RangeCoder.Decoder {
+  static final int kTopMask;
+  static final int kNumBitModelTotalBits;
+  static final int kBitModelTotal;
+  static final int kNumMoveBits;
+  int Range;
+  int Code;
+  java.io.InputStream Stream;
+  public SevenZip.Compression.RangeCoder.Decoder();
+  public final void SetStream(java.io.InputStream);
+  public final void ReleaseStream();
+  public final void Init() throws java.io.IOException;
+  public final int DecodeDirectBits(int) throws java.io.IOException;
+  public int DecodeBit(short[], int) throws java.io.IOException;
+  public static void InitBitModels(short[]);
+}
+Compiled from "Encoder.java"
+public class SevenZip.Compression.RangeCoder.Encoder {
+  static final int kTopMask;
+  static final int kNumBitModelTotalBits;
+  static final int kBitModelTotal;
+  static final int kNumMoveBits;
+  java.io.OutputStream Stream;
+  long Low;
+  int Range;
+  int _cacheSize;
+  int _cache;
+  long _position;
+  static final int kNumMoveReducingBits;
+  public static final int kNumBitPriceShiftBits;
+  public SevenZip.Compression.RangeCoder.Encoder();
+  public void SetStream(java.io.OutputStream);
+  public void ReleaseStream();
+  public void Init();
+  public void FlushData() throws java.io.IOException;
+  public void FlushStream() throws java.io.IOException;
+  public void ShiftLow() throws java.io.IOException;
+  public void EncodeDirectBits(int, int) throws java.io.IOException;
+  public long GetProcessedSizeAdd();
+  public static void InitBitModels(short[]);
+  public void Encode(short[], int, int) throws java.io.IOException;
+  public static int GetPrice(int, int);
+  public static int GetPrice0(int);
+  public static int GetPrice1(int);
+  static {};
+}
+Compiled from "ICodeProgress.java"
+public interface SevenZip.ICodeProgress {
+  public abstract void SetProgress(long, long);
+}
+Compiled from "LzmaAlone.java"
+public class SevenZip.LzmaAlone {
+  public SevenZip.LzmaAlone();
+  static void PrintHelp();
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+}
+Compiled from "LzmaAlone.java"
+public class SevenZip.LzmaAlone$CommandLine {
+  public static final int kEncode;
+  public static final int kDecode;
+  public static final int kBenchmak;
+  public int Command;
+  public int NumBenchmarkPasses;
+  public int DictionarySize;
+  public boolean DictionarySizeIsDefined;
+  public int Lc;
+  public int Lp;
+  public int Pb;
+  public int Fb;
+  public boolean FbIsDefined;
+  public boolean Eos;
+  public int Algorithm;
+  public int MatchFinder;
+  public java.lang.String InFile;
+  public java.lang.String OutFile;
+  public SevenZip.LzmaAlone$CommandLine();
+  boolean ParseSwitch(java.lang.String);
+  public boolean Parse(java.lang.String[]) throws java.lang.Exception;
+}
+Compiled from "LzmaBench.java"
+public class SevenZip.LzmaBench {
+  static final int kAdditionalSize;
+  static final int kCompressedAdditionalSize;
+  static final int kSubBits;
+  public SevenZip.LzmaBench();
+  static int GetLogSize(int);
+  static long MyMultDiv64(long, long);
+  static long GetCompressRating(int, long, long);
+  static long GetDecompressRating(long, long, long);
+  static long GetTotalRating(int, long, long, long, long, long);
+  static void PrintValue(long);
+  static void PrintRating(long);
+  static void PrintResults(int, long, long, boolean, long);
+  public static int LzmaBenchmark(int, int) throws java.lang.Exception;
+}
+Compiled from "LzmaBench.java"
+class SevenZip.LzmaBench$CBenchRandomGenerator {
+  SevenZip.LzmaBench$CBitRandomGenerator RG;
+  int Pos;
+  int Rep0;
+  public int BufferSize;
+  public byte[] Buffer;
+  public SevenZip.LzmaBench$CBenchRandomGenerator();
+  public void Set(int);
+  int GetRndBit();
+  int GetLogRandBits(int);
+  int GetOffset();
+  int GetLen1();
+  int GetLen2();
+  public void Generate();
+}
+Compiled from "LzmaBench.java"
+class SevenZip.LzmaBench$CBitRandomGenerator {
+  SevenZip.LzmaBench$CRandomGenerator RG;
+  int Value;
+  int NumBits;
+  SevenZip.LzmaBench$CBitRandomGenerator();
+  public void Init();
+  public int GetRnd(int);
+}
+Compiled from "LzmaBench.java"
+class SevenZip.LzmaBench$CProgressInfo implements SevenZip.ICodeProgress {
+  public long ApprovedStart;
+  public long InSize;
+  public long Time;
+  SevenZip.LzmaBench$CProgressInfo();
+  public void Init();
+  public void SetProgress(long, long);
+}
+Compiled from "LzmaBench.java"
+class SevenZip.LzmaBench$CRandomGenerator {
+  int A1;
+  int A2;
+  public SevenZip.LzmaBench$CRandomGenerator();
+  public void Init();
+  public int GetRnd();
+}
+Compiled from "LzmaBench.java"
+class SevenZip.LzmaBench$CrcOutStream extends java.io.OutputStream {
+  public SevenZip.CRC CRC;
+  SevenZip.LzmaBench$CrcOutStream();
+  public void Init();
+  public int GetDigest();
+  public void write(byte[]);
+  public void write(byte[], int, int);
+  public void write(int);
+}
+Compiled from "LzmaBench.java"
+class SevenZip.LzmaBench$MyInputStream extends java.io.InputStream {
+  byte[] _buffer;
+  int _size;
+  int _pos;
+  public SevenZip.LzmaBench$MyInputStream(byte[], int);
+  public void reset();
+  public int read();
+}
+Compiled from "LzmaBench.java"
+class SevenZip.LzmaBench$MyOutputStream extends java.io.OutputStream {
+  byte[] _buffer;
+  int _size;
+  int _pos;
+  public SevenZip.LzmaBench$MyOutputStream(byte[]);
+  public void reset();
+  public void write(int) throws java.io.IOException;
+  public int size();
+}
+Compiled from "MCLauncher.java"
+public class com.kokakiwi.mclauncher.MCLauncher {
+  public static final long MIN_HEAP;
+  public static final long RECOMMENDED_HEAP;
+  public com.kokakiwi.mclauncher.MCLauncher(java.lang.String[]);
+  public void start();
+  public void stop();
+  public com.kokakiwi.mclauncher.utils.Configuration getConfig();
+  public com.kokakiwi.mclauncher.core.Loginer getLoginer();
+  public com.kokakiwi.mclauncher.core.Updater getUpdater();
+  public com.kokakiwi.mclauncher.core.Launcher getLauncher();
+  public com.kokakiwi.mclauncher.api.LauncherAPI getApi();
+  public com.kokakiwi.mclauncher.core.TimeLine getTimeLine();
+  public com.kokakiwi.mclauncher.ui.LauncherFrame getFrame();
+  public com.kokakiwi.mclauncher.api.ui.Theme getTheme();
+  public static com.kokakiwi.mclauncher.MCLauncher getInstance();
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "MCLauncher.java"
+class com.kokakiwi.mclauncher.MCLauncher$1 implements java.lang.Runnable {
+  final com.kokakiwi.mclauncher.MCLauncher this$0;
+  com.kokakiwi.mclauncher.MCLauncher$1(com.kokakiwi.mclauncher.MCLauncher);
+  public void run();
+}
+Compiled from "LauncherAPI.java"
+public class com.kokakiwi.mclauncher.api.LauncherAPI {
+  public com.kokakiwi.mclauncher.api.LauncherAPI(com.kokakiwi.mclauncher.MCLauncher);
+  public com.kokakiwi.mclauncher.MCLauncher getMain();
+  public com.kokakiwi.mclauncher.core.TimeLine getTimeLine();
+  public com.kokakiwi.mclauncher.utils.Configuration getConfig();
+  public com.kokakiwi.mclauncher.core.Loginer getLoginer();
+  public com.kokakiwi.mclauncher.core.Updater getUpdater();
+  public com.kokakiwi.mclauncher.core.Launcher getLauncher();
+  public com.kokakiwi.mclauncher.ui.LauncherFrame getFrame();
+  public com.kokakiwi.mclauncher.api.ui.Theme getTheme();
+  public java.awt.Image getBackground();
+  public java.io.File getMinecraftDirectory();
+  public java.lang.String postUrl(java.lang.String, java.util.Map<java.lang.String, java.lang.String>);
+  public java.lang.String postUrl(java.lang.String, java.util.Map<java.lang.String, java.lang.String>, java.lang.String);
+  public java.lang.String getUrl(java.lang.String);
+  public java.lang.String getUrl(java.lang.String, java.lang.String);
+}
+Compiled from "LauncherAPI.java"
+class com.kokakiwi.mclauncher.api.LauncherAPI$1 {
+  static final int[] $SwitchMap$com$kokakiwi$mclauncher$utils$SystemUtils$OS;
+  static {};
+}
+Compiled from "Page.java"
+public interface com.kokakiwi.mclauncher.api.ui.Page {
+  public abstract com.kokakiwi.mclauncher.core.TimeLine$Step getStep();
+  public abstract void fill(javax.swing.JPanel, com.kokakiwi.mclauncher.api.LauncherAPI);
+}
+Compiled from "Theme.java"
+public interface com.kokakiwi.mclauncher.api.ui.Theme {
+  public abstract void onLoad(com.kokakiwi.mclauncher.api.LauncherAPI);
+  public abstract java.util.List<com.kokakiwi.mclauncher.api.ui.Page> getPages();
+  public abstract java.awt.Dimension getDimension();
+  public abstract java.awt.Image getBackground() throws java.lang.Exception;
+}
+Compiled from "JavaConfig.java"
+public class com.kokakiwi.mclauncher.core.JavaConfig {
+  public com.kokakiwi.mclauncher.core.JavaConfig();
+  public static com.kokakiwi.mclauncher.utils.Configuration config();
+}
+Compiled from "Launcher.java"
+public class com.kokakiwi.mclauncher.core.Launcher implements java.lang.Runnable {
+  public com.kokakiwi.mclauncher.core.Launcher(com.kokakiwi.mclauncher.MCLauncher);
+  public void launch();
+  public void run();
+  public com.kokakiwi.mclauncher.MCLauncher getMain();
+  public java.net.URLClassLoader getClassLoader();
+  public com.kokakiwi.mclauncher.core.launcher.ModsManager getMods();
+}
+Compiled from "Loginer.java"
+public class com.kokakiwi.mclauncher.core.Loginer {
+  public com.kokakiwi.mclauncher.core.Loginer(com.kokakiwi.mclauncher.MCLauncher);
+  public void init();
+  public java.lang.String doLogin(java.lang.String, java.lang.String, boolean);
+  public void storeLogin(java.lang.String, java.lang.String) throws java.lang.Exception;
+  public void readLogin() throws java.lang.Exception;
+  public com.kokakiwi.mclauncher.MCLauncher getMain();
+  public com.kokakiwi.mclauncher.core.Loginer$Login getLastLogin();
+  public java.lang.String getStoredUsername();
+  public java.lang.String getStoredPassword();
+}
+Compiled from "Loginer.java"
+public class com.kokakiwi.mclauncher.core.Loginer$Login {
+  public com.kokakiwi.mclauncher.core.Loginer$Login();
+  public long getTimestamp();
+  public void setTimestamp(long);
+  public java.lang.String getDownloadTicket();
+  public void setDownloadTicket(java.lang.String);
+  public java.lang.String getUsername();
+  public void setUsername(java.lang.String);
+  public java.lang.String getSessionId();
+  public void setSessionId(java.lang.String);
+}
+Compiled from "TimeLine.java"
+public class com.kokakiwi.mclauncher.core.TimeLine {
+  public com.kokakiwi.mclauncher.core.TimeLine(com.kokakiwi.mclauncher.MCLauncher);
+  public void init();
+  public void start();
+  public void next();
+  public com.kokakiwi.mclauncher.MCLauncher getMain();
+  public int getCurrentPageId();
+  public com.kokakiwi.mclauncher.api.ui.Page getCurrentPage();
+  public void setCurrentPage(int);
+  public java.util.List<com.kokakiwi.mclauncher.api.ui.Page> getPages();
+}
+Compiled from "TimeLine.java"
+public final class com.kokakiwi.mclauncher.core.TimeLine$Step extends java.lang.Enum<com.kokakiwi.mclauncher.core.TimeLine$Step> {
+  public static final com.kokakiwi.mclauncher.core.TimeLine$Step INIT;
+  public static final com.kokakiwi.mclauncher.core.TimeLine$Step LOGIN;
+  public static final com.kokakiwi.mclauncher.core.TimeLine$Step LOADING;
+  public static final com.kokakiwi.mclauncher.core.TimeLine$Step LAUNCHING;
+  public static final com.kokakiwi.mclauncher.core.TimeLine$Step DONE;
+  public static com.kokakiwi.mclauncher.core.TimeLine$Step[] values();
+  public static com.kokakiwi.mclauncher.core.TimeLine$Step valueOf(java.lang.String);
+  static {};
+}
+Compiled from "Updater.java"
+public class com.kokakiwi.mclauncher.core.Updater implements java.lang.Runnable {
+  public com.kokakiwi.mclauncher.core.Updater(com.kokakiwi.mclauncher.MCLauncher);
+  public com.kokakiwi.mclauncher.MCLauncher getMain();
+  public boolean isRunning();
+  public void setRunning(boolean);
+  public void run();
+  public boolean isAskUpdate();
+  public void setAskUpdate(boolean);
+  public boolean isDoUpdate();
+  public void setDoUpdate(boolean);
+  public int getPercentage();
+  public void setPercentage(int);
+  public java.lang.String getError();
+  public void setError(java.lang.String);
+  public com.kokakiwi.mclauncher.core.Updater$State getState();
+  public void setState(com.kokakiwi.mclauncher.core.Updater$State);
+  public com.kokakiwi.mclauncher.core.updater.UpdaterWorker$GameFile getCurrentFile();
+  public void setCurrentFile(com.kokakiwi.mclauncher.core.updater.UpdaterWorker$GameFile);
+  public long getDownloaded();
+  public void setDownloaded(long);
+  public void incrementDownloaded(long);
+  public long getTotalSize();
+  public void setTotalSize(long);
+  public void incrementTotalSize(long);
+  public java.util.List<com.kokakiwi.mclauncher.core.updater.UpdaterWorker$GameFile> getGameFiles();
+}
+Compiled from "Updater.java"
+public final class com.kokakiwi.mclauncher.core.Updater$State extends java.lang.Enum<com.kokakiwi.mclauncher.core.Updater$State> {
+  public static final com.kokakiwi.mclauncher.core.Updater$State INIT;
+  public static final com.kokakiwi.mclauncher.core.Updater$State DETERMINING_PACKAGES;
+  public static final com.kokakiwi.mclauncher.core.Updater$State CHECKING_CACHE;
+  public static final com.kokakiwi.mclauncher.core.Updater$State DOWNLOADING;
+  public static final com.kokakiwi.mclauncher.core.Updater$State EXTRACTING_PACKAGES;
+  public static final com.kokakiwi.mclauncher.core.Updater$State UPDATING_CLASSPATH;
+  public static final com.kokakiwi.mclauncher.core.Updater$State SWITCHING_APPLET;
+  public static final com.kokakiwi.mclauncher.core.Updater$State INITIALIZE_REAL_APPLET;
+  public static final com.kokakiwi.mclauncher.core.Updater$State START_REAL_APPLET;
+  public static final com.kokakiwi.mclauncher.core.Updater$State DONE;
+  public static com.kokakiwi.mclauncher.core.Updater$State[] values();
+  public static com.kokakiwi.mclauncher.core.Updater$State valueOf(java.lang.String);
+  public int getOpCode();
+  public java.lang.String getDescription();
+  static {};
+}
+Compiled from "LauncherApplet.java"
+public class com.kokakiwi.mclauncher.core.launcher.LauncherApplet extends java.applet.Applet implements java.applet.AppletStub {
+  public com.kokakiwi.mclauncher.core.launcher.LauncherApplet(com.kokakiwi.mclauncher.api.LauncherAPI) throws java.awt.HeadlessException;
+  public void appletResize(int, int);
+  public void replace(java.applet.Applet);
+  public boolean isActive();
+  public java.lang.String getParameter(java.lang.String);
+  public java.net.URL getDocumentBase();
+  public void stop();
+  public void destroy();
+  public java.util.Map<java.lang.String, java.lang.String> getParams();
+  public java.applet.Applet getApplet();
+  public int getContext();
+}
+Compiled from "ModsManager.java"
+public class com.kokakiwi.mclauncher.core.launcher.ModsManager {
+  public com.kokakiwi.mclauncher.core.launcher.ModsManager();
+  public void addMod(com.kokakiwi.mclauncher.core.launcher.ModsManager$Mod);
+  public java.util.List<com.kokakiwi.mclauncher.core.launcher.ModsManager$Mod> getMods();
+  public void fill(java.util.List<java.net.URL>);
+}
+Compiled from "ModsManager.java"
+public class com.kokakiwi.mclauncher.core.launcher.ModsManager$Mod {
+  public com.kokakiwi.mclauncher.core.launcher.ModsManager$Mod();
+  public com.kokakiwi.mclauncher.core.launcher.ModsManager$Mod(java.lang.String, java.net.URL);
+  public com.kokakiwi.mclauncher.core.launcher.ModsManager$Mod(java.lang.String, java.lang.String, java.net.URL);
+  public java.lang.String getName();
+  public void setName(java.lang.String);
+  public java.lang.String getDescription();
+  public void setDescription(java.lang.String);
+  public java.net.URL getUrl();
+  public void setUrl(java.net.URL);
+  public java.lang.String toString();
+}
+Compiled from "Wrapper.java"
+public class com.kokakiwi.mclauncher.core.launcher.Wrapper {
+  public com.kokakiwi.mclauncher.core.launcher.Wrapper();
+  public static java.applet.Applet wrap(com.kokakiwi.mclauncher.api.LauncherAPI) throws java.lang.Exception;
+  public static void doChanges(com.kokakiwi.mclauncher.api.LauncherAPI, java.lang.Class<?>);
+}
+Compiled from "FileExtractor.java"
+public class com.kokakiwi.mclauncher.core.updater.FileExtractor {
+  public com.kokakiwi.mclauncher.core.updater.FileExtractor();
+  public static boolean extract(com.kokakiwi.mclauncher.api.LauncherAPI, com.kokakiwi.mclauncher.core.updater.UpdaterWorker$GameFile, java.io.File, int, int, boolean) throws java.lang.Exception;
+  public static java.io.File extractLZMA(com.kokakiwi.mclauncher.api.LauncherAPI, com.kokakiwi.mclauncher.core.updater.UpdaterWorker$GameFile, java.io.File, java.io.File, int, int) throws java.lang.Exception;
+  public static void extractZIP(com.kokakiwi.mclauncher.api.LauncherAPI, com.kokakiwi.mclauncher.core.updater.UpdaterWorker$GameFile, java.io.File, java.io.File, int, int) throws java.lang.Exception;
+  public static void extractJAR(com.kokakiwi.mclauncher.api.LauncherAPI, com.kokakiwi.mclauncher.core.updater.UpdaterWorker$GameFile, java.io.File, java.io.File, int, int) throws java.lang.Exception;
+}
+Compiled from "UpdaterWorker.java"
+public class com.kokakiwi.mclauncher.core.updater.UpdaterWorker {
+  public com.kokakiwi.mclauncher.core.updater.UpdaterWorker();
+  public static void update(com.kokakiwi.mclauncher.api.LauncherAPI);
+  public static void determinePackages(com.kokakiwi.mclauncher.api.LauncherAPI);
+}
+Compiled from "UpdaterWorker.java"
+public class com.kokakiwi.mclauncher.core.updater.UpdaterWorker$GameFile {
+  public com.kokakiwi.mclauncher.core.updater.UpdaterWorker$GameFile(java.net.URL, java.io.File, com.kokakiwi.mclauncher.core.updater.UpdaterWorker$Type) throws java.lang.Exception;
+  public void init() throws java.lang.Exception;
+  public void download(com.kokakiwi.mclauncher.api.LauncherAPI) throws java.lang.Exception;
+  public void extract(com.kokakiwi.mclauncher.api.LauncherAPI, int, int);
+  public java.net.URL getUrl();
+  public java.io.File getDest();
+  public com.kokakiwi.mclauncher.core.updater.UpdaterWorker$Type getType();
+  public java.lang.String getFileName();
+  public float getSpeed();
+  public long getSize();
+  public java.net.HttpURLConnection getConnection();
+  public long getDownloaded();
+  public long getTotal();
+  public int getPercentage();
+  public void setPercentage(int);
+  public java.io.File getFile();
+  public java.lang.String toString();
+}
+Compiled from "UpdaterWorker.java"
+public final class com.kokakiwi.mclauncher.core.updater.UpdaterWorker$Type extends java.lang.Enum<com.kokakiwi.mclauncher.core.updater.UpdaterWorker$Type> {
+  public static final com.kokakiwi.mclauncher.core.updater.UpdaterWorker$Type LIBRARY;
+  public static final com.kokakiwi.mclauncher.core.updater.UpdaterWorker$Type NATIVE;
+  public static final com.kokakiwi.mclauncher.core.updater.UpdaterWorker$Type ADDITIONNAL;
+  public static com.kokakiwi.mclauncher.core.updater.UpdaterWorker$Type[] values();
+  public static com.kokakiwi.mclauncher.core.updater.UpdaterWorker$Type valueOf(java.lang.String);
+  static {};
+}
+Compiled from "VersionChecker.java"
+public class com.kokakiwi.mclauncher.core.updater.VersionChecker {
+  public com.kokakiwi.mclauncher.core.updater.VersionChecker();
+  public static void checkVersion(com.kokakiwi.mclauncher.api.LauncherAPI) throws java.lang.Exception;
+  public static java.lang.String readVersionFile(com.kokakiwi.mclauncher.api.LauncherAPI, java.io.File) throws java.lang.Exception;
+  public static void updateVersionFile(com.kokakiwi.mclauncher.api.LauncherAPI, java.io.File, java.util.Map<java.lang.String, java.lang.Object>) throws java.lang.Exception;
+  public static void updateVersionFile(java.io.File, java.lang.String) throws java.lang.Exception;
+  public static java.lang.String getLastVersion(com.kokakiwi.mclauncher.api.LauncherAPI, java.lang.String);
+}
+Compiled from "LauncherFrame.java"
+public class com.kokakiwi.mclauncher.ui.LauncherFrame extends java.awt.Frame {
+  public com.kokakiwi.mclauncher.ui.LauncherFrame(com.kokakiwi.mclauncher.MCLauncher) throws java.awt.HeadlessException;
+  public void init();
+  public void reset();
+  public com.kokakiwi.mclauncher.MCLauncher getMain();
+  public javax.swing.JPanel getMainPanel();
+  static com.kokakiwi.mclauncher.MCLauncher access$000(com.kokakiwi.mclauncher.ui.LauncherFrame);
+}
+Compiled from "LauncherFrame.java"
+class com.kokakiwi.mclauncher.ui.LauncherFrame$1 extends java.awt.event.WindowAdapter {
+  final com.kokakiwi.mclauncher.ui.LauncherFrame this$0;
+  com.kokakiwi.mclauncher.ui.LauncherFrame$1(com.kokakiwi.mclauncher.ui.LauncherFrame);
+  public void windowClosing(java.awt.event.WindowEvent);
+}
+Compiled from "LoadingApplet.java"
+public class com.kokakiwi.mclauncher.ui.simple.LoadingApplet extends java.applet.Applet implements java.awt.event.MouseListener {
+  public com.kokakiwi.mclauncher.ui.simple.LoadingApplet(com.kokakiwi.mclauncher.api.LauncherAPI) throws java.awt.HeadlessException;
+  public void init();
+  public void paint(java.awt.Graphics);
+  public void start();
+  public void update(java.awt.Graphics);
+  public void mouseClicked(java.awt.event.MouseEvent);
+  public void mousePressed(java.awt.event.MouseEvent);
+  public void mouseReleased(java.awt.event.MouseEvent);
+  public void mouseEntered(java.awt.event.MouseEvent);
+  public void mouseExited(java.awt.event.MouseEvent);
+  static com.kokakiwi.mclauncher.api.LauncherAPI access$000(com.kokakiwi.mclauncher.ui.simple.LoadingApplet);
+}
+Compiled from "LoadingApplet.java"
+class com.kokakiwi.mclauncher.ui.simple.LoadingApplet$1 implements java.lang.Runnable {
+  final com.kokakiwi.mclauncher.ui.simple.LoadingApplet this$0;
+  com.kokakiwi.mclauncher.ui.simple.LoadingApplet$1(com.kokakiwi.mclauncher.ui.simple.LoadingApplet);
+  public void run();
+}
+Compiled from "ModsDialog.java"
+public class com.kokakiwi.mclauncher.ui.simple.ModsDialog extends javax.swing.JDialog {
+  public com.kokakiwi.mclauncher.ui.simple.ModsDialog(com.kokakiwi.mclauncher.ui.simple.OptionsDialog);
+  static javax.swing.JPanel access$000(com.kokakiwi.mclauncher.ui.simple.ModsDialog);
+  static void access$100(com.kokakiwi.mclauncher.ui.simple.ModsDialog, javax.swing.JPanel);
+  static void access$200(com.kokakiwi.mclauncher.ui.simple.ModsDialog, javax.swing.JPanel);
+  static javax.swing.JList access$300(com.kokakiwi.mclauncher.ui.simple.ModsDialog);
+  static javax.swing.DefaultListModel access$400(com.kokakiwi.mclauncher.ui.simple.ModsDialog);
+}
+Compiled from "ModsDialog.java"
+class com.kokakiwi.mclauncher.ui.simple.ModsDialog$1 extends java.awt.event.WindowAdapter {
+  final com.kokakiwi.mclauncher.ui.simple.ModsDialog this$0;
+  com.kokakiwi.mclauncher.ui.simple.ModsDialog$1(com.kokakiwi.mclauncher.ui.simple.ModsDialog);
+  public void windowClosing(java.awt.event.WindowEvent);
+}
+Compiled from "ModsDialog.java"
+class com.kokakiwi.mclauncher.ui.simple.ModsDialog$2 implements java.awt.event.ActionListener {
+  final com.kokakiwi.mclauncher.ui.simple.ModsDialog this$0;
+  com.kokakiwi.mclauncher.ui.simple.ModsDialog$2(com.kokakiwi.mclauncher.ui.simple.ModsDialog);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "ModsDialog.java"
+class com.kokakiwi.mclauncher.ui.simple.ModsDialog$3 implements java.awt.event.ActionListener {
+  final com.kokakiwi.mclauncher.ui.simple.ModsDialog this$0;
+  com.kokakiwi.mclauncher.ui.simple.ModsDialog$3(com.kokakiwi.mclauncher.ui.simple.ModsDialog);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "ModsDialog.java"
+class com.kokakiwi.mclauncher.ui.simple.ModsDialog$4 implements java.awt.event.ActionListener {
+  final com.kokakiwi.mclauncher.core.launcher.ModsManager val$mods;
+  final com.kokakiwi.mclauncher.ui.simple.ModsDialog this$0;
+  com.kokakiwi.mclauncher.ui.simple.ModsDialog$4(com.kokakiwi.mclauncher.ui.simple.ModsDialog, com.kokakiwi.mclauncher.core.launcher.ModsManager);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "ModsDialog.java"
+class com.kokakiwi.mclauncher.ui.simple.ModsDialog$5 implements java.awt.event.ActionListener {
+  final com.kokakiwi.mclauncher.core.launcher.ModsManager$Mod val$mod;
+  final javax.swing.JTextField val$nameField;
+  final javax.swing.JTextField val$urlField;
+  final com.kokakiwi.mclauncher.ui.simple.ModsDialog this$0;
+  com.kokakiwi.mclauncher.ui.simple.ModsDialog$5(com.kokakiwi.mclauncher.ui.simple.ModsDialog, com.kokakiwi.mclauncher.core.launcher.ModsManager$Mod, javax.swing.JTextField, javax.swing.JTextField);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "OptionsDialog.java"
+public class com.kokakiwi.mclauncher.ui.simple.OptionsDialog extends javax.swing.JDialog {
+  public com.kokakiwi.mclauncher.ui.simple.OptionsDialog(com.kokakiwi.mclauncher.api.LauncherAPI);
+  public com.kokakiwi.mclauncher.api.LauncherAPI getApi();
+}
+Compiled from "OptionsDialog.java"
+class com.kokakiwi.mclauncher.ui.simple.OptionsDialog$1 extends java.awt.event.WindowAdapter {
+  final com.kokakiwi.mclauncher.ui.simple.OptionsDialog this$0;
+  com.kokakiwi.mclauncher.ui.simple.OptionsDialog$1(com.kokakiwi.mclauncher.ui.simple.OptionsDialog);
+  public void windowClosing(java.awt.event.WindowEvent);
+}
+Compiled from "OptionsDialog.java"
+class com.kokakiwi.mclauncher.ui.simple.OptionsDialog$2 implements java.awt.event.ActionListener {
+  final javax.swing.JCheckBox val$forceUpdate;
+  final com.kokakiwi.mclauncher.api.LauncherAPI val$api;
+  final com.kokakiwi.mclauncher.ui.simple.OptionsDialog this$0;
+  com.kokakiwi.mclauncher.ui.simple.OptionsDialog$2(com.kokakiwi.mclauncher.ui.simple.OptionsDialog, javax.swing.JCheckBox, com.kokakiwi.mclauncher.api.LauncherAPI);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "OptionsDialog.java"
+class com.kokakiwi.mclauncher.ui.simple.OptionsDialog$3 implements java.awt.event.ActionListener {
+  final javax.swing.JCheckBox val$offlineModeToggle;
+  final com.kokakiwi.mclauncher.api.LauncherAPI val$api;
+  final com.kokakiwi.mclauncher.ui.simple.OptionsDialog this$0;
+  com.kokakiwi.mclauncher.ui.simple.OptionsDialog$3(com.kokakiwi.mclauncher.ui.simple.OptionsDialog, javax.swing.JCheckBox, com.kokakiwi.mclauncher.api.LauncherAPI);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "OptionsDialog.java"
+class com.kokakiwi.mclauncher.ui.simple.OptionsDialog$4 extends com.kokakiwi.mclauncher.ui.simple.components.TransparentLabel {
+  final com.kokakiwi.mclauncher.ui.simple.OptionsDialog this$0;
+  com.kokakiwi.mclauncher.ui.simple.OptionsDialog$4(com.kokakiwi.mclauncher.ui.simple.OptionsDialog, java.lang.String);
+  public void paint(java.awt.Graphics);
+  public void update(java.awt.Graphics);
+}
+Compiled from "OptionsDialog.java"
+class com.kokakiwi.mclauncher.ui.simple.OptionsDialog$5 extends java.awt.event.MouseAdapter {
+  final com.kokakiwi.mclauncher.api.LauncherAPI val$api;
+  final com.kokakiwi.mclauncher.ui.simple.OptionsDialog this$0;
+  com.kokakiwi.mclauncher.ui.simple.OptionsDialog$5(com.kokakiwi.mclauncher.ui.simple.OptionsDialog, com.kokakiwi.mclauncher.api.LauncherAPI);
+  public void mousePressed(java.awt.event.MouseEvent);
+}
+Compiled from "OptionsDialog.java"
+class com.kokakiwi.mclauncher.ui.simple.OptionsDialog$6 implements java.awt.event.ActionListener {
+  final com.kokakiwi.mclauncher.ui.simple.OptionsDialog this$0;
+  com.kokakiwi.mclauncher.ui.simple.OptionsDialog$6(com.kokakiwi.mclauncher.ui.simple.OptionsDialog);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "SimpleLoadingPage.java"
+public class com.kokakiwi.mclauncher.ui.simple.SimpleLoadingPage implements com.kokakiwi.mclauncher.api.ui.Page {
+  public com.kokakiwi.mclauncher.ui.simple.SimpleLoadingPage();
+  public com.kokakiwi.mclauncher.core.TimeLine$Step getStep();
+  public void fill(javax.swing.JPanel, com.kokakiwi.mclauncher.api.LauncherAPI);
+}
+Compiled from "SimpleLoginPage.java"
+public class com.kokakiwi.mclauncher.ui.simple.SimpleLoginPage implements com.kokakiwi.mclauncher.api.ui.Page {
+  public com.kokakiwi.mclauncher.ui.simple.SimpleLoginPage();
+  public com.kokakiwi.mclauncher.core.TimeLine$Step getStep();
+  public void fill(javax.swing.JPanel, com.kokakiwi.mclauncher.api.LauncherAPI);
+  static com.kokakiwi.mclauncher.ui.simple.components.TransparentLabel access$000(com.kokakiwi.mclauncher.ui.simple.SimpleLoginPage);
+  static void access$100(com.kokakiwi.mclauncher.ui.simple.SimpleLoginPage, boolean);
+  static com.kokakiwi.mclauncher.api.LauncherAPI access$200(com.kokakiwi.mclauncher.ui.simple.SimpleLoginPage);
+  static javax.swing.JTextField access$300(com.kokakiwi.mclauncher.ui.simple.SimpleLoginPage);
+  static javax.swing.JPasswordField access$400(com.kokakiwi.mclauncher.ui.simple.SimpleLoginPage);
+  static javax.swing.JCheckBox access$500(com.kokakiwi.mclauncher.ui.simple.SimpleLoginPage);
+}
+Compiled from "SimpleLoginPage.java"
+class com.kokakiwi.mclauncher.ui.simple.SimpleLoginPage$1 extends java.awt.event.KeyAdapter {
+  final com.kokakiwi.mclauncher.ui.simple.SimpleLoginPage this$0;
+  com.kokakiwi.mclauncher.ui.simple.SimpleLoginPage$1(com.kokakiwi.mclauncher.ui.simple.SimpleLoginPage);
+  public void keyPressed(java.awt.event.KeyEvent);
+}
+Compiled from "SimpleLoginPage.java"
+class com.kokakiwi.mclauncher.ui.simple.SimpleLoginPage$2 extends java.awt.event.KeyAdapter {
+  final com.kokakiwi.mclauncher.ui.simple.SimpleLoginPage this$0;
+  com.kokakiwi.mclauncher.ui.simple.SimpleLoginPage$2(com.kokakiwi.mclauncher.ui.simple.SimpleLoginPage);
+  public void keyPressed(java.awt.event.KeyEvent);
+}
+Compiled from "SimpleLoginPage.java"
+class com.kokakiwi.mclauncher.ui.simple.SimpleLoginPage$3 implements java.awt.event.ActionListener {
+  final com.kokakiwi.mclauncher.ui.simple.SimpleLoginPage this$0;
+  com.kokakiwi.mclauncher.ui.simple.SimpleLoginPage$3(com.kokakiwi.mclauncher.ui.simple.SimpleLoginPage);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "SimpleLoginPage.java"
+class com.kokakiwi.mclauncher.ui.simple.SimpleLoginPage$4 implements java.awt.event.ActionListener {
+  final com.kokakiwi.mclauncher.ui.simple.SimpleLoginPage this$0;
+  com.kokakiwi.mclauncher.ui.simple.SimpleLoginPage$4(com.kokakiwi.mclauncher.ui.simple.SimpleLoginPage);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "SimpleLoginPage.java"
+class com.kokakiwi.mclauncher.ui.simple.SimpleLoginPage$5 implements java.awt.event.ActionListener {
+  final com.kokakiwi.mclauncher.ui.simple.SimpleLoginPage this$0;
+  com.kokakiwi.mclauncher.ui.simple.SimpleLoginPage$5(com.kokakiwi.mclauncher.ui.simple.SimpleLoginPage);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "SimpleLoginPage.java"
+class com.kokakiwi.mclauncher.ui.simple.SimpleLoginPage$6 implements java.awt.event.ActionListener {
+  final com.kokakiwi.mclauncher.ui.simple.SimpleLoginPage this$0;
+  com.kokakiwi.mclauncher.ui.simple.SimpleLoginPage$6(com.kokakiwi.mclauncher.ui.simple.SimpleLoginPage);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "SimpleLoginPage.java"
+class com.kokakiwi.mclauncher.ui.simple.SimpleLoginPage$6$1 implements java.lang.Runnable {
+  final com.kokakiwi.mclauncher.ui.simple.SimpleLoginPage$6 this$1;
+  com.kokakiwi.mclauncher.ui.simple.SimpleLoginPage$6$1(com.kokakiwi.mclauncher.ui.simple.SimpleLoginPage$6);
+  public void run();
+}
+Compiled from "SimpleTheme.java"
+public class com.kokakiwi.mclauncher.ui.simple.SimpleTheme implements com.kokakiwi.mclauncher.api.ui.Theme {
+  public com.kokakiwi.mclauncher.ui.simple.SimpleTheme();
+  public void onLoad(com.kokakiwi.mclauncher.api.LauncherAPI);
+  public java.util.List<com.kokakiwi.mclauncher.api.ui.Page> getPages();
+  public java.awt.Dimension getDimension();
+  public java.awt.Image getBackground();
+}
+Compiled from "LogoPanel.java"
+public class com.kokakiwi.mclauncher.ui.simple.components.LogoPanel extends javax.swing.JPanel {
+  public com.kokakiwi.mclauncher.ui.simple.components.LogoPanel();
+  public void update(java.awt.Graphics);
+  public void paintComponent(java.awt.Graphics);
+}
+Compiled from "NavigatorPanel.java"
+public class com.kokakiwi.mclauncher.ui.simple.components.NavigatorPanel extends com.kokakiwi.mclauncher.ui.simple.components.TexturedPanel {
+  public com.kokakiwi.mclauncher.ui.simple.components.NavigatorPanel(com.kokakiwi.mclauncher.api.LauncherAPI, java.lang.String) throws java.lang.Exception;
+  public com.kokakiwi.mclauncher.api.LauncherAPI getApi();
+  public java.lang.String getUrl();
+  public javax.swing.JTextPane getEditorPane();
+  public javax.swing.JScrollPane getScrollPane();
+  static javax.swing.JTextPane access$000(com.kokakiwi.mclauncher.ui.simple.components.NavigatorPanel);
+  static java.lang.String access$200(com.kokakiwi.mclauncher.ui.simple.components.NavigatorPanel);
+}
+Compiled from "NavigatorPanel.java"
+class com.kokakiwi.mclauncher.ui.simple.components.NavigatorPanel$1 implements javax.swing.event.HyperlinkListener {
+  final com.kokakiwi.mclauncher.ui.simple.components.NavigatorPanel this$0;
+  com.kokakiwi.mclauncher.ui.simple.components.NavigatorPanel$1(com.kokakiwi.mclauncher.ui.simple.components.NavigatorPanel);
+  public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent);
+}
+Compiled from "NavigatorPanel.java"
+class com.kokakiwi.mclauncher.ui.simple.components.NavigatorPanel$BrowserLoader implements java.lang.Runnable {
+  final com.kokakiwi.mclauncher.ui.simple.components.NavigatorPanel this$0;
+  public void run();
+  com.kokakiwi.mclauncher.ui.simple.components.NavigatorPanel$BrowserLoader(com.kokakiwi.mclauncher.ui.simple.components.NavigatorPanel, com.kokakiwi.mclauncher.ui.simple.components.NavigatorPanel$1);
+}
+Compiled from "TexturedPanel.java"
+public class com.kokakiwi.mclauncher.ui.simple.components.TexturedPanel extends javax.swing.JPanel {
+  public com.kokakiwi.mclauncher.ui.simple.components.TexturedPanel(java.lang.String) throws java.lang.Exception;
+  public com.kokakiwi.mclauncher.ui.simple.components.TexturedPanel(java.awt.Image);
+  public void update(java.awt.Graphics);
+  public void paintComponent(java.awt.Graphics);
+}
+Compiled from "TransparentButton.java"
+public class com.kokakiwi.mclauncher.ui.simple.components.TransparentButton extends javax.swing.JButton {
+  public com.kokakiwi.mclauncher.ui.simple.components.TransparentButton(java.lang.String);
+  public boolean isOpaque();
+}
+Compiled from "TransparentCheckbox.java"
+public class com.kokakiwi.mclauncher.ui.simple.components.TransparentCheckbox extends javax.swing.JCheckBox {
+  public com.kokakiwi.mclauncher.ui.simple.components.TransparentCheckbox(java.lang.String);
+  public boolean isOpaque();
+}
+Compiled from "TransparentLabel.java"
+public class com.kokakiwi.mclauncher.ui.simple.components.TransparentLabel extends javax.swing.JLabel {
+  public com.kokakiwi.mclauncher.ui.simple.components.TransparentLabel(java.lang.String, int);
+  public com.kokakiwi.mclauncher.ui.simple.components.TransparentLabel(java.lang.String);
+  public boolean isOpaque();
+}
+Compiled from "TransparentPanel.java"
+public class com.kokakiwi.mclauncher.ui.simple.components.TransparentPanel extends javax.swing.JPanel {
+  public com.kokakiwi.mclauncher.ui.simple.components.TransparentPanel();
+  public com.kokakiwi.mclauncher.ui.simple.components.TransparentPanel(java.awt.LayoutManager);
+  public boolean isOpaque();
+  public void setInsets(int, int, int, int);
+  public java.awt.Insets getInsets();
+}
+Compiled from "Configuration.java"
+public class com.kokakiwi.mclauncher.utils.Configuration {
+  public com.kokakiwi.mclauncher.utils.Configuration();
+  public boolean load(java.io.File);
+  public boolean load(java.io.File, boolean);
+  public boolean load(java.io.InputStream);
+  public boolean load(java.io.InputStream, boolean);
+  public boolean load(java.io.InputStream, java.lang.String);
+  public boolean load(java.io.InputStream, java.lang.String, boolean);
+  public void load(com.kokakiwi.mclauncher.utils.Configuration);
+  public void load(com.kokakiwi.mclauncher.utils.Configuration, boolean);
+  public void merge(java.util.Map<java.lang.String, java.lang.Object>, java.util.Map<java.lang.String, java.lang.Object>);
+  public void merge(java.util.Map<java.lang.String, java.lang.Object>, java.util.Map<java.lang.String, java.lang.Object>, boolean);
+  public void set(java.lang.String, java.lang.Object);
+  public java.lang.String getString(java.lang.String);
+  public java.lang.String getString(java.lang.String, java.lang.String);
+  public java.util.List<java.lang.Object> getList(java.lang.String);
+  public java.util.List<java.lang.String> getStringList(java.lang.String);
+  public java.util.List<java.util.Map<java.lang.String, java.lang.Object>> getMapList(java.lang.String);
+  public java.util.Map<java.lang.String, java.lang.String> getStringMap(java.lang.String);
+  public java.util.Map<java.lang.String, java.lang.Object> getMap(java.lang.String);
+  public java.util.Map<java.lang.String, java.lang.Object> getNode(java.lang.String);
+  public boolean getBoolean(java.lang.String);
+  public boolean getBoolean(java.lang.String, boolean);
+  public int getInteger(java.lang.String);
+  public java.lang.Object get(java.lang.String);
+  public java.util.Map<java.lang.String, java.lang.Object> getConfig();
+  public boolean has(java.lang.String);
+  public void clear();
+  public void save(java.io.File) throws java.lang.Exception;
+  public static com.kokakiwi.mclauncher.utils.Configuration getLauncherConfiguration();
+  public static void setConfigClass(java.lang.Class<?>);
+  static {};
+}
+Compiled from "ConfigurationSection.java"
+public class com.kokakiwi.mclauncher.utils.ConfigurationSection {
+  public com.kokakiwi.mclauncher.utils.ConfigurationSection();
+}
+Compiled from "MCLogger.java"
+public class com.kokakiwi.mclauncher.utils.MCLogger {
+  public static final com.kokakiwi.mclauncher.utils.MCLogger$DebugLevel DEBUG;
+  public com.kokakiwi.mclauncher.utils.MCLogger();
+  public static void register();
+  public static void register(java.lang.String);
+  public static void register(java.io.File);
+  public static void debug(java.lang.Object);
+  public static java.io.File getLauncherDir();
+  static java.util.logging.Logger access$000();
+  static {};
+}
+Compiled from "MCLogger.java"
+final class com.kokakiwi.mclauncher.utils.MCLogger$1 extends java.io.PrintStream {
+  com.kokakiwi.mclauncher.utils.MCLogger$1(java.io.OutputStream);
+  public void print(java.lang.String);
+}
+Compiled from "MCLogger.java"
+final class com.kokakiwi.mclauncher.utils.MCLogger$2 extends java.io.PrintStream {
+  com.kokakiwi.mclauncher.utils.MCLogger$2(java.io.OutputStream);
+  public void print(java.lang.String);
+}
+Compiled from "MCLogger.java"
+class com.kokakiwi.mclauncher.utils.MCLogger$3 {
+  static final int[] $SwitchMap$com$kokakiwi$mclauncher$utils$SystemUtils$OS;
+  static {};
+}
+Compiled from "MCLogger.java"
+public class com.kokakiwi.mclauncher.utils.MCLogger$DebugLevel extends java.util.logging.Level {
+  protected com.kokakiwi.mclauncher.utils.MCLogger$DebugLevel();
+}
+Compiled from "MCLogger.java"
+public class com.kokakiwi.mclauncher.utils.MCLogger$LogFormatter extends java.util.logging.Formatter {
+  public com.kokakiwi.mclauncher.utils.MCLogger$LogFormatter(boolean);
+  public java.lang.String format(java.util.logging.LogRecord);
+  public java.lang.String render(java.lang.CharSequence);
+  static {};
+}
+Compiled from "MCLogger.java"
+public class com.kokakiwi.mclauncher.utils.MCLogger$TerminalConsoleHandler extends java.util.logging.ConsoleHandler {
+  public com.kokakiwi.mclauncher.utils.MCLogger$TerminalConsoleHandler();
+}
+Compiled from "SystemUtils.java"
+public class com.kokakiwi.mclauncher.utils.SystemUtils {
+  public com.kokakiwi.mclauncher.utils.SystemUtils();
+  public static com.kokakiwi.mclauncher.utils.SystemUtils$OS getSystemOS();
+  public static com.kokakiwi.mclauncher.utils.SystemUtils$Arch getSystemArch();
+  public static java.lang.String getSystemVersion();
+  public static java.io.File getExecDirectory();
+  public static java.lang.String getExecDirectoryPath();
+}
+Compiled from "SystemUtils.java"
+public final class com.kokakiwi.mclauncher.utils.SystemUtils$Arch extends java.lang.Enum<com.kokakiwi.mclauncher.utils.SystemUtils$Arch> {
+  public static final com.kokakiwi.mclauncher.utils.SystemUtils$Arch x86;
+  public static final com.kokakiwi.mclauncher.utils.SystemUtils$Arch amd64;
+  public static final com.kokakiwi.mclauncher.utils.SystemUtils$Arch unknown;
+  public static com.kokakiwi.mclauncher.utils.SystemUtils$Arch[] values();
+  public static com.kokakiwi.mclauncher.utils.SystemUtils$Arch valueOf(java.lang.String);
+  public java.lang.String getName();
+  public static com.kokakiwi.mclauncher.utils.SystemUtils$Arch getArchFromString(java.lang.String);
+  static {};
+}
+Compiled from "SystemUtils.java"
+public final class com.kokakiwi.mclauncher.utils.SystemUtils$OS extends java.lang.Enum<com.kokakiwi.mclauncher.utils.SystemUtils$OS> {
+  public static final com.kokakiwi.mclauncher.utils.SystemUtils$OS windows;
+  public static final com.kokakiwi.mclauncher.utils.SystemUtils$OS linux;
+  public static final com.kokakiwi.mclauncher.utils.SystemUtils$OS macosx;
+  public static final com.kokakiwi.mclauncher.utils.SystemUtils$OS solaris;
+  public static final com.kokakiwi.mclauncher.utils.SystemUtils$OS unknown;
+  public static com.kokakiwi.mclauncher.utils.SystemUtils$OS[] values();
+  public static com.kokakiwi.mclauncher.utils.SystemUtils$OS valueOf(java.lang.String);
+  public java.lang.String getName();
+  public java.lang.String getLineSeparator();
+  public static com.kokakiwi.mclauncher.utils.SystemUtils$OS getOSFromString(java.lang.String);
+  static {};
+}
+Compiled from "Version.java"
+public class com.kokakiwi.mclauncher.utils.Version implements java.lang.Comparable<com.kokakiwi.mclauncher.utils.Version> {
+  public com.kokakiwi.mclauncher.utils.Version(long...);
+  public long[] getVersionNumbers();
+  public static com.kokakiwi.mclauncher.utils.Version parseString(java.lang.String);
+  public java.lang.String toString();
+  public int compareTo(com.kokakiwi.mclauncher.utils.Version);
+  public int compareTo(java.lang.Object);
+}
+Compiled from "Translater.java"
+public class com.kokakiwi.mclauncher.utils.lang.Translater {
+  public com.kokakiwi.mclauncher.utils.lang.Translater();
+  public static java.lang.String getString(java.lang.String, java.lang.String[]...);
+  public static java.lang.String getString(java.lang.String, java.util.Map<java.lang.String, java.lang.String>);
+  public static java.lang.String getString(java.lang.String);
+  public static java.lang.String getLang();
+  public static void setLang(java.lang.String);
+  public static void set(java.lang.String, java.lang.Object);
+  public static com.kokakiwi.mclauncher.utils.Configuration getMain();
+  public static com.kokakiwi.mclauncher.utils.Configuration getUser();
+  static {};
+}
+Compiled from "TranslaterFormatter.java"
+public class com.kokakiwi.mclauncher.utils.lang.TranslaterFormatter {
+  public com.kokakiwi.mclauncher.utils.lang.TranslaterFormatter();
+  public static java.lang.String format(java.lang.String, java.lang.String[]...);
+  public static java.lang.String format(java.lang.String, java.util.Map<java.lang.String, java.lang.String>);
+}
+Compiled from "Benchmark.java"
+public class net.contrapunctus.lzma.Benchmark {
+  static final boolean $assertionsDisabled;
+  public net.contrapunctus.lzma.Benchmark();
+  public static void doit() throws java.io.IOException;
+  public static void main(java.lang.String[]) throws java.io.IOException;
+  static {};
+}
+Compiled from "Command.java"
+public class net.contrapunctus.lzma.Command {
+  public net.contrapunctus.lzma.Command();
+  static void copy(java.io.InputStream, java.io.OutputStream) throws java.io.IOException;
+  public static void main(java.lang.String[]) throws java.io.IOException;
+}
+Compiled from "ConcurrentBufferInputStream.java"
+class net.contrapunctus.lzma.ConcurrentBufferInputStream extends java.io.InputStream {
+  protected java.util.concurrent.ArrayBlockingQueue<byte[]> q;
+  protected byte[] buf;
+  protected int next;
+  protected boolean eof;
+  static java.io.InputStream create(java.util.concurrent.ArrayBlockingQueue<byte[]>);
+  protected byte[] guarded_take() throws java.io.IOException;
+  protected boolean prepareAndCheckEOF() throws java.io.IOException;
+  public int read() throws java.io.IOException;
+  public int read(byte[], int, int) throws java.io.IOException;
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "ConcurrentBufferOutputStream.java"
+class net.contrapunctus.lzma.ConcurrentBufferOutputStream extends java.io.OutputStream {
+  protected java.util.concurrent.ArrayBlockingQueue<byte[]> q;
+  static final int BUFSIZE;
+  static final int QUEUESIZE;
+  static java.io.OutputStream create(java.util.concurrent.ArrayBlockingQueue<byte[]>);
+  static java.util.concurrent.ArrayBlockingQueue<byte[]> newQueue();
+  protected void guarded_put(byte[]) throws java.io.IOException;
+  public void write(int) throws java.io.IOException;
+  public void write(byte[], int, int) throws java.io.IOException;
+  public void close() throws java.io.IOException;
+  static {};
+}
+Compiled from "DecoderThread.java"
+class net.contrapunctus.lzma.DecoderThread extends java.lang.Thread {
+  protected java.util.concurrent.ArrayBlockingQueue<byte[]> q;
+  protected java.io.InputStream in;
+  protected java.io.OutputStream out;
+  protected SevenZip.Compression.LZMA.Decoder dec;
+  protected java.io.IOException exn;
+  static final int propSize;
+  static final byte[] props;
+  net.contrapunctus.lzma.DecoderThread(java.io.InputStream);
+  public void run();
+  public void maybeThrow() throws java.io.IOException;
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "EncoderThread.java"
+class net.contrapunctus.lzma.EncoderThread extends java.lang.Thread {
+  public static final java.lang.Integer DEFAULT_DICT_SZ_POW2;
+  protected java.util.concurrent.ArrayBlockingQueue<byte[]> q;
+  protected java.io.InputStream in;
+  protected java.io.OutputStream out;
+  protected SevenZip.Compression.LZMA.Encoder enc;
+  protected java.io.IOException exn;
+  net.contrapunctus.lzma.EncoderThread(java.io.OutputStream, java.lang.Integer, java.lang.Integer);
+  public void run();
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "LzmaInputStream.java"
+public class net.contrapunctus.lzma.LzmaInputStream extends java.io.FilterInputStream {
+  protected net.contrapunctus.lzma.DecoderThread dth;
+  public net.contrapunctus.lzma.LzmaInputStream(java.io.InputStream);
+  public int read() throws java.io.IOException;
+  public int read(byte[], int, int) throws java.io.IOException;
+  public void close() throws java.io.IOException;
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "LzmaOutputStream.java"
+public class net.contrapunctus.lzma.LzmaOutputStream extends java.io.FilterOutputStream {
+  protected net.contrapunctus.lzma.EncoderThread eth;
+  public static boolean LZMA_HEADER;
+  public net.contrapunctus.lzma.LzmaOutputStream(java.io.OutputStream);
+  public net.contrapunctus.lzma.LzmaOutputStream(java.io.OutputStream, java.lang.Integer, java.lang.Integer);
+  public void write(int) throws java.io.IOException;
+  public void close() throws java.io.IOException;
+  public java.lang.String toString();
+  static {};
+}

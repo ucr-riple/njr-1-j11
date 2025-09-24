@@ -1,0 +1,1916 @@
+Compiled from "DGDIRLFactory.java"
+public class behavior.irl.DGDIRLFactory extends behavior.irl.TabularIRLPlannerFactory {
+  burlap.behavior.statehashing.StateHashFactory hashingFactory;
+  public behavior.irl.DGDIRLFactory(burlap.oomdp.core.Domain, double, burlap.behavior.statehashing.StateHashFactory);
+  public burlap.behavior.singleagent.planning.ValueFunctionPlanner generatePlanner();
+}
+Compiled from "TabularIRL.java"
+public class behavior.irl.TabularIRL {
+  public static final java.lang.String TERMINATEATTNAME;
+  public static final java.lang.String TERMINATECLASSNAME;
+  protected java.util.List<burlap.oomdp.singleagent.Action> actions;
+  protected burlap.behavior.singleagent.planning.PlannerDerivedPolicy policy;
+  protected behavior.irl.TabularIRLPlannerFactory plannerFactory;
+  protected boolean useTerminateAction;
+  protected burlap.oomdp.core.ObjectClass terminateClassMarker;
+  protected burlap.oomdp.core.Attribute terminateAttribute;
+  protected burlap.oomdp.singleagent.Action terminateAction;
+  protected static double baseTemp;
+  public behavior.irl.TabularIRL(burlap.oomdp.core.Domain, behavior.irl.TabularIRLPlannerFactory);
+  public behavior.irl.TabularIRL(burlap.oomdp.core.Domain, behavior.irl.TabularIRLPlannerFactory, boolean);
+  public void setTemperature(double);
+  public double[] getBehaviorProbabilities(burlap.behavior.singleagent.EpisodeAnalysis, java.util.List<behavior.irl.TabularIRL$TaskCondition>);
+  public double[] getBehaviorLogProbabilities(burlap.behavior.singleagent.EpisodeAnalysis, java.util.List<behavior.irl.TabularIRL$TaskCondition>);
+  public double getBehaviorProbability(burlap.behavior.singleagent.EpisodeAnalysis, behavior.irl.TabularIRL$TaskCondition);
+  public double getBehaviorLogProbability(burlap.behavior.singleagent.EpisodeAnalysis, behavior.irl.TabularIRL$TaskCondition);
+  protected double getBehaviorProbabilityHelper(burlap.behavior.singleagent.EpisodeAnalysis, behavior.irl.TabularIRL$TaskCondition, boolean);
+  protected double getBehaviorLogProbabilityHelper(burlap.behavior.singleagent.EpisodeAnalysis, behavior.irl.TabularIRL$TaskCondition, boolean);
+  protected void setupPolicy(burlap.behavior.singleagent.EpisodeAnalysis, behavior.irl.TabularIRL$TaskCondition);
+  protected java.util.List<burlap.oomdp.core.State> getAllNeighbors(burlap.oomdp.core.State);
+  protected burlap.behavior.singleagent.EpisodeAnalysis getTerminateAugmentedTrajectory(burlap.behavior.singleagent.EpisodeAnalysis);
+  protected void addTerminateWithValue(burlap.oomdp.core.State, int);
+  protected void setUpTerminateStructures(burlap.oomdp.core.Domain);
+  static {};
+}
+Compiled from "TabularIRL.java"
+public class behavior.irl.TabularIRL$RFTerminalActionWrapper implements burlap.oomdp.singleagent.RewardFunction {
+  protected burlap.oomdp.singleagent.RewardFunction rf;
+  public behavior.irl.TabularIRL$RFTerminalActionWrapper(burlap.oomdp.singleagent.RewardFunction);
+  public double reward(burlap.oomdp.core.State, burlap.oomdp.singleagent.GroundedAction, burlap.oomdp.core.State);
+}
+Compiled from "TabularIRL.java"
+public class behavior.irl.TabularIRL$TFTerminalAction implements burlap.oomdp.core.TerminalFunction {
+  public behavior.irl.TabularIRL$TFTerminalAction();
+  public boolean isTerminal(burlap.oomdp.core.State);
+}
+Compiled from "TabularIRL.java"
+public class behavior.irl.TabularIRL$TaskCondition {
+  public burlap.oomdp.singleagent.RewardFunction rf;
+  public burlap.oomdp.core.TerminalFunction tf;
+  public behavior.irl.TabularIRL$TaskCondition(burlap.oomdp.singleagent.RewardFunction, burlap.oomdp.core.TerminalFunction);
+}
+Compiled from "TabularIRL.java"
+public class behavior.irl.TabularIRL$TerminateAction extends burlap.oomdp.singleagent.Action {
+  public behavior.irl.TabularIRL$TerminateAction(java.lang.String, burlap.oomdp.core.Domain, java.lang.String);
+  protected burlap.oomdp.core.State performActionHelper(burlap.oomdp.core.State, java.lang.String[]);
+  public java.util.List<burlap.oomdp.core.TransitionProbability> getTransitions(burlap.oomdp.core.State, java.lang.String[]);
+}
+Compiled from "TabularIRLPlannerFactory.java"
+public abstract class behavior.irl.TabularIRLPlannerFactory {
+  protected burlap.oomdp.core.Domain domain;
+  protected java.util.List<burlap.oomdp.singleagent.Action> actions;
+  protected burlap.oomdp.singleagent.RewardFunction rf;
+  protected burlap.oomdp.core.TerminalFunction tf;
+  protected double gamma;
+  public behavior.irl.TabularIRLPlannerFactory();
+  protected void irlpInit(burlap.oomdp.core.Domain, double);
+  public void setActions(java.util.List<burlap.oomdp.singleagent.Action>);
+  public void changeGoal(burlap.oomdp.singleagent.RewardFunction, burlap.oomdp.core.TerminalFunction);
+  public void chanageDomain(burlap.oomdp.core.Domain);
+  public void changeGamma(double);
+  public abstract burlap.behavior.singleagent.planning.ValueFunctionPlanner generatePlanner();
+}
+Compiled from "DeterministicGoalDirectedPartialVI.java"
+public class behavior.planning.DeterministicGoalDirectedPartialVI extends burlap.behavior.singleagent.planning.ValueFunctionPlanner implements burlap.behavior.singleagent.planning.QComputablePlanner {
+  protected java.util.Map<burlap.behavior.statehashing.StateHashTuple, java.lang.Integer> distanceFunction;
+  public behavior.planning.DeterministicGoalDirectedPartialVI(burlap.oomdp.core.Domain, burlap.oomdp.singleagent.RewardFunction, burlap.oomdp.core.TerminalFunction, double, burlap.behavior.statehashing.StateHashFactory);
+  public boolean planDefinedForState(burlap.oomdp.core.State);
+  public void planFromState(burlap.oomdp.core.State);
+  protected void setDistanceFunctionFromSolutions(behavior.planning.DeterministicGoalDirectedPartialVI$MultiBPtrSearchNode, int, java.util.Map<burlap.behavior.statehashing.StateHashTuple, java.lang.Integer>, java.util.Set<burlap.behavior.statehashing.StateHashTuple>);
+  protected behavior.planning.DeterministicGoalDirectedPartialVI$MultiBPtrSearchNode getNodeForState(burlap.behavior.statehashing.StateHashTuple, java.util.List<behavior.planning.DeterministicGoalDirectedPartialVI$MultiBPtrSearchNode>);
+  public java.util.List<burlap.behavior.singleagent.QValue> getQs(burlap.oomdp.core.State);
+  public burlap.behavior.singleagent.QValue getQ(burlap.oomdp.core.State, burlap.oomdp.core.AbstractGroundedAction);
+  protected double vFor(burlap.behavior.statehashing.StateHashTuple);
+}
+Compiled from "DeterministicGoalDirectedPartialVI.java"
+class behavior.planning.DeterministicGoalDirectedPartialVI$MultiBPtrSearchNode {
+  public burlap.behavior.statehashing.StateHashTuple sh;
+  public java.util.List<behavior.planning.DeterministicGoalDirectedPartialVI$MultiBPtrSearchNode> backPtrs;
+  public java.util.List<burlap.oomdp.singleagent.GroundedAction> generartingActions;
+  final behavior.planning.DeterministicGoalDirectedPartialVI this$0;
+  public behavior.planning.DeterministicGoalDirectedPartialVI$MultiBPtrSearchNode(behavior.planning.DeterministicGoalDirectedPartialVI, burlap.behavior.statehashing.StateHashTuple);
+  public behavior.planning.DeterministicGoalDirectedPartialVI$MultiBPtrSearchNode(behavior.planning.DeterministicGoalDirectedPartialVI, burlap.behavior.statehashing.StateHashTuple, behavior.planning.DeterministicGoalDirectedPartialVI$MultiBPtrSearchNode, burlap.oomdp.singleagent.GroundedAction);
+  public void addBPtr(behavior.planning.DeterministicGoalDirectedPartialVI$MultiBPtrSearchNode, burlap.oomdp.singleagent.GroundedAction);
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+}
+Compiled from "DynamicDVIPolicy.java"
+public class behavior.planning.DynamicDVIPolicy extends burlap.behavior.singleagent.Policy implements burlap.behavior.singleagent.planning.PlannerDerivedPolicy {
+  protected behavior.planning.DeterministicGoalDirectedPartialVI planner;
+  protected burlap.behavior.singleagent.Policy vfPolicy;
+  public behavior.planning.DynamicDVIPolicy(behavior.planning.DeterministicGoalDirectedPartialVI, double);
+  public void setPlanner(burlap.behavior.singleagent.planning.OOMDPPlanner);
+  public burlap.oomdp.core.AbstractGroundedAction getAction(burlap.oomdp.core.State);
+  public java.util.List<burlap.behavior.singleagent.Policy$ActionProb> getActionDistributionForState(burlap.oomdp.core.State);
+  public boolean isStochastic();
+  public boolean isDefinedFor(burlap.oomdp.core.State);
+}
+Compiled from "TrajectoryRecorder.java"
+public class commands.auxiliarytools.TrajectoryRecorder extends javax.swing.JFrame {
+  protected burlap.oomdp.visualizer.Visualizer painter;
+  protected java.awt.TextArea propViewer;
+  protected javax.swing.JList dataList;
+  protected javax.swing.JScrollPane dataScroller;
+  protected javax.swing.JList iterationList;
+  protected javax.swing.JScrollPane iterationScroller;
+  protected java.awt.Container controlContainer;
+  protected javax.swing.JDialog saveDialog;
+  protected java.awt.Container saveContainer;
+  protected javax.swing.JTextField commandSaveTF;
+  protected javax.swing.JTextField pathSaveTF;
+  protected javax.swing.JDialog saveImageDialog;
+  protected java.awt.Container saveImageContainer;
+  protected javax.swing.JTextField saveImageTF;
+  protected int cWidth;
+  protected int cHeight;
+  protected commands.data.TrainingElementParser parser;
+  protected java.util.List<java.lang.String> dataFiles;
+  protected javax.swing.DefaultListModel dataListModel;
+  protected commands.data.TrainingElement trainEl;
+  protected commands.data.Trajectory trajectory;
+  protected javax.swing.DefaultListModel trajectoryModel;
+  protected boolean selectedOnNewTrajectory;
+  protected burlap.oomdp.core.Domain domain;
+  protected burlap.oomdp.auxiliary.StateGenerator sg;
+  protected java.lang.String directory;
+  public commands.auxiliarytools.TrajectoryRecorder();
+  public void addKeyAction(java.lang.String, java.lang.String);
+  public void init(burlap.oomdp.visualizer.Visualizer, burlap.oomdp.core.Domain, burlap.oomdp.auxiliary.StateParser, burlap.oomdp.auxiliary.StateGenerator, java.lang.String);
+  public void init(burlap.oomdp.visualizer.Visualizer, burlap.oomdp.core.Domain, burlap.oomdp.auxiliary.StateParser, burlap.oomdp.auxiliary.StateGenerator, java.lang.String, int, int);
+  public void initGUI();
+  static void access$000(commands.auxiliarytools.TrajectoryRecorder, java.awt.event.KeyEvent);
+  static void access$100(commands.auxiliarytools.TrajectoryRecorder, javax.swing.event.ListSelectionEvent);
+  static void access$200(commands.auxiliarytools.TrajectoryRecorder, javax.swing.event.ListSelectionEvent);
+  static void access$300(commands.auxiliarytools.TrajectoryRecorder);
+  static void access$400(commands.auxiliarytools.TrajectoryRecorder);
+  static void access$500(commands.auxiliarytools.TrajectoryRecorder);
+  static void access$600(commands.auxiliarytools.TrajectoryRecorder);
+  static void access$700(commands.auxiliarytools.TrajectoryRecorder);
+}
+Compiled from "TrajectoryRecorder.java"
+class commands.auxiliarytools.TrajectoryRecorder$1 implements java.awt.event.KeyListener {
+  final commands.auxiliarytools.TrajectoryRecorder this$0;
+  commands.auxiliarytools.TrajectoryRecorder$1(commands.auxiliarytools.TrajectoryRecorder);
+  public void keyPressed(java.awt.event.KeyEvent);
+  public void keyReleased(java.awt.event.KeyEvent);
+  public void keyTyped(java.awt.event.KeyEvent);
+}
+Compiled from "TrajectoryRecorder.java"
+class commands.auxiliarytools.TrajectoryRecorder$10 implements java.awt.event.ActionListener {
+  final commands.auxiliarytools.TrajectoryRecorder this$0;
+  commands.auxiliarytools.TrajectoryRecorder$10(commands.auxiliarytools.TrajectoryRecorder);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "TrajectoryRecorder.java"
+class commands.auxiliarytools.TrajectoryRecorder$11 implements java.io.FilenameFilter {
+  final commands.auxiliarytools.TrajectoryRecorder this$0;
+  commands.auxiliarytools.TrajectoryRecorder$11(commands.auxiliarytools.TrajectoryRecorder);
+  public boolean accept(java.io.File, java.lang.String);
+}
+Compiled from "TrajectoryRecorder.java"
+class commands.auxiliarytools.TrajectoryRecorder$2 implements java.awt.event.KeyListener {
+  final commands.auxiliarytools.TrajectoryRecorder this$0;
+  commands.auxiliarytools.TrajectoryRecorder$2(commands.auxiliarytools.TrajectoryRecorder);
+  public void keyPressed(java.awt.event.KeyEvent);
+  public void keyReleased(java.awt.event.KeyEvent);
+  public void keyTyped(java.awt.event.KeyEvent);
+}
+Compiled from "TrajectoryRecorder.java"
+class commands.auxiliarytools.TrajectoryRecorder$3 implements java.awt.event.KeyListener {
+  final commands.auxiliarytools.TrajectoryRecorder this$0;
+  commands.auxiliarytools.TrajectoryRecorder$3(commands.auxiliarytools.TrajectoryRecorder);
+  public void keyPressed(java.awt.event.KeyEvent);
+  public void keyReleased(java.awt.event.KeyEvent);
+  public void keyTyped(java.awt.event.KeyEvent);
+}
+Compiled from "TrajectoryRecorder.java"
+class commands.auxiliarytools.TrajectoryRecorder$4 implements javax.swing.event.ListSelectionListener {
+  final commands.auxiliarytools.TrajectoryRecorder this$0;
+  commands.auxiliarytools.TrajectoryRecorder$4(commands.auxiliarytools.TrajectoryRecorder);
+  public void valueChanged(javax.swing.event.ListSelectionEvent);
+}
+Compiled from "TrajectoryRecorder.java"
+class commands.auxiliarytools.TrajectoryRecorder$5 implements javax.swing.event.ListSelectionListener {
+  final commands.auxiliarytools.TrajectoryRecorder this$0;
+  commands.auxiliarytools.TrajectoryRecorder$5(commands.auxiliarytools.TrajectoryRecorder);
+  public void valueChanged(javax.swing.event.ListSelectionEvent);
+}
+Compiled from "TrajectoryRecorder.java"
+class commands.auxiliarytools.TrajectoryRecorder$6 implements java.awt.event.ActionListener {
+  final commands.auxiliarytools.TrajectoryRecorder this$0;
+  commands.auxiliarytools.TrajectoryRecorder$6(commands.auxiliarytools.TrajectoryRecorder);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "TrajectoryRecorder.java"
+class commands.auxiliarytools.TrajectoryRecorder$7 implements java.awt.event.ActionListener {
+  final commands.auxiliarytools.TrajectoryRecorder this$0;
+  commands.auxiliarytools.TrajectoryRecorder$7(commands.auxiliarytools.TrajectoryRecorder);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "TrajectoryRecorder.java"
+class commands.auxiliarytools.TrajectoryRecorder$8 implements java.awt.event.ActionListener {
+  final commands.auxiliarytools.TrajectoryRecorder this$0;
+  commands.auxiliarytools.TrajectoryRecorder$8(commands.auxiliarytools.TrajectoryRecorder);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "TrajectoryRecorder.java"
+class commands.auxiliarytools.TrajectoryRecorder$9 implements java.awt.event.ActionListener {
+  final commands.auxiliarytools.TrajectoryRecorder this$0;
+  commands.auxiliarytools.TrajectoryRecorder$9(commands.auxiliarytools.TrajectoryRecorder);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "Soko2TRecorder.java"
+public class commands.auxiliarytools.sokoban.Soko2TRecorder {
+  public static final java.lang.String pathToRobotImagesDirectory;
+  public commands.auxiliarytools.sokoban.Soko2TRecorder();
+  public static void main(java.lang.String[]);
+}
+Compiled from "SokoSimpleStateGen.java"
+public class commands.auxiliarytools.sokoban.SokoSimpleStateGen implements burlap.oomdp.auxiliary.StateGenerator {
+  domain.singleagent.sokoban.SokobanDomain constructor;
+  java.util.List<burlap.oomdp.core.State> stateConfigs;
+  public int stateConfig;
+  public commands.auxiliarytools.sokoban.SokoSimpleStateGen();
+  public burlap.oomdp.core.State generateState();
+}
+Compiled from "SokoTRecorder.java"
+public class commands.auxiliarytools.sokoban.SokoTRecorder {
+  public commands.auxiliarytools.sokoban.SokoTRecorder();
+  public static void main(java.lang.String[]);
+}
+Compiled from "Soko2Turk1.java"
+public class commands.auxiliarytools.sokoban.soko2turkexamples.Soko2Turk1 implements burlap.oomdp.auxiliary.StateGenerator {
+  protected java.util.List<burlap.oomdp.core.State> initialStates;
+  protected int index;
+  public commands.auxiliarytools.sokoban.soko2turkexamples.Soko2Turk1(burlap.oomdp.core.Domain);
+  public burlap.oomdp.core.State generateState();
+}
+Compiled from "Turk1.java"
+public class commands.auxiliarytools.sokoban.turkexamples.Turk1 implements burlap.oomdp.auxiliary.StateGenerator {
+  public commands.auxiliarytools.sokoban.turkexamples.Turk1();
+  public burlap.oomdp.core.State generateState();
+}
+Compiled from "Turk2.java"
+public class commands.auxiliarytools.sokoban.turkexamples.Turk2 implements burlap.oomdp.auxiliary.StateGenerator {
+  public commands.auxiliarytools.sokoban.turkexamples.Turk2();
+  public burlap.oomdp.core.State generateState();
+}
+Compiled from "Turk3.java"
+public class commands.auxiliarytools.sokoban.turkexamples.Turk3 implements burlap.oomdp.auxiliary.StateGenerator {
+  public commands.auxiliarytools.sokoban.turkexamples.Turk3();
+  public burlap.oomdp.core.State generateState();
+}
+Compiled from "Turk4.java"
+public class commands.auxiliarytools.sokoban.turkexamples.Turk4 implements burlap.oomdp.auxiliary.StateGenerator {
+  public commands.auxiliarytools.sokoban.turkexamples.Turk4();
+  public burlap.oomdp.core.State generateState();
+}
+Compiled from "Turk5.java"
+public class commands.auxiliarytools.sokoban.turkexamples.Turk5 implements burlap.oomdp.auxiliary.StateGenerator {
+  public commands.auxiliarytools.sokoban.turkexamples.Turk5();
+  public burlap.oomdp.core.State generateState();
+}
+Compiled from "Turk6.java"
+public class commands.auxiliarytools.sokoban.turkexamples.Turk6 implements burlap.oomdp.auxiliary.StateGenerator {
+  public commands.auxiliarytools.sokoban.turkexamples.Turk6();
+  public burlap.oomdp.core.State generateState();
+}
+Compiled from "TurkRoomLayout.java"
+public class commands.auxiliarytools.sokoban.turkexamples.TurkRoomLayout {
+  public commands.auxiliarytools.sokoban.turkexamples.TurkRoomLayout();
+  public static burlap.oomdp.core.State getRoomLayout(int);
+}
+Compiled from "TestElement.java"
+public class commands.data.TestElement {
+  public java.lang.String testIdenitifier;
+  public java.lang.String command;
+  public burlap.oomdp.core.State initialState;
+  public commands.data.TestElement(java.lang.String, burlap.oomdp.core.State, java.lang.String);
+}
+Compiled from "TestElementParser.java"
+public class commands.data.TestElementParser {
+  protected burlap.oomdp.auxiliary.StateParser sp;
+  public commands.data.TestElementParser(burlap.oomdp.auxiliary.StateParser);
+  public commands.data.TestElement getTestElementFromString(java.lang.String, java.lang.String);
+  public java.lang.String getStringFromTestElement(commands.data.TestElement);
+  public commands.data.TestElement getTestElementFromFile(java.lang.String);
+  public java.util.List<commands.data.TestElement> getTestElementDataset(java.lang.String, java.lang.String);
+  public void writeTestElementToFile(commands.data.TestElement, java.lang.String);
+}
+Compiled from "TestElementParser.java"
+class commands.data.TestElementParser$1 implements java.io.FilenameFilter {
+  final java.lang.String val$ext;
+  final commands.data.TestElementParser this$0;
+  commands.data.TestElementParser$1(commands.data.TestElementParser, java.lang.String);
+  public boolean accept(java.io.File, java.lang.String);
+}
+Compiled from "TrainToTestConverter.java"
+public class commands.data.TrainToTestConverter {
+  public commands.data.TrainToTestConverter();
+  public static commands.data.TestElement convertToTest(commands.data.TrainingElement, java.lang.String);
+  public static java.util.List<commands.data.TestElement> convertTrainDatasetToTest(java.util.List<commands.data.TrainingElement>);
+  public static java.util.List<commands.data.TestElement> convertTrainDatasetToTest(java.util.List<commands.data.TrainingElement>, java.util.List<java.lang.String>);
+  public static void createTestDatasetFilesFromTrainingDatasetFiles(burlap.oomdp.core.Domain, burlap.oomdp.auxiliary.StateParser, java.lang.String, java.lang.String);
+}
+Compiled from "TrainingElement.java"
+public class commands.data.TrainingElement {
+  public java.lang.String command;
+  public commands.data.Trajectory trajectory;
+  public java.lang.String identifier;
+  public commands.data.TrainingElement(java.lang.String, commands.data.Trajectory);
+  public commands.data.TrainingElement(java.lang.String, commands.data.Trajectory, java.lang.String);
+}
+Compiled from "TrainingElementParser.java"
+public class commands.data.TrainingElementParser {
+  commands.data.TrajectoryParser tp;
+  public commands.data.TrainingElementParser(burlap.oomdp.core.Domain, burlap.oomdp.auxiliary.StateParser);
+  public commands.data.TrainingElement getTrainingElementFromString(java.lang.String);
+  public java.lang.String getStringOfTrainingElement(commands.data.TrainingElement);
+  public commands.data.TrainingElement getTrainingElementFromFile(java.lang.String);
+  public java.util.List<commands.data.TrainingElement> getTrainingElementDataset(java.lang.String, java.lang.String);
+  public void writeTrainingElementToFile(commands.data.TrainingElement, java.lang.String);
+}
+Compiled from "TrainingElementParser.java"
+class commands.data.TrainingElementParser$1 implements java.io.FilenameFilter {
+  final java.lang.String val$ext;
+  final commands.data.TrainingElementParser this$0;
+  commands.data.TrainingElementParser$1(commands.data.TrainingElementParser, java.lang.String);
+  public boolean accept(java.io.File, java.lang.String);
+}
+Compiled from "Trajectory.java"
+public class commands.data.Trajectory {
+  public java.util.List<burlap.oomdp.core.State> states;
+  public java.util.List<burlap.oomdp.singleagent.GroundedAction> actions;
+  public commands.data.Trajectory(burlap.oomdp.core.State);
+  public commands.data.Trajectory(java.util.List<burlap.oomdp.core.State>, java.util.List<burlap.oomdp.singleagent.GroundedAction>);
+  public commands.data.Trajectory(commands.data.Trajectory);
+  public burlap.behavior.singleagent.EpisodeAnalysis convertToZeroRewardEpisodeAnalysis();
+  public int numStates();
+  public burlap.oomdp.core.State getState(int);
+  public burlap.oomdp.singleagent.GroundedAction getAction(int);
+  public void addActionStateTransition(burlap.oomdp.singleagent.GroundedAction, burlap.oomdp.core.State);
+}
+Compiled from "TrajectoryParser.java"
+public class commands.data.TrajectoryParser {
+  burlap.oomdp.auxiliary.StateParser sp;
+  burlap.oomdp.core.Domain d;
+  public commands.data.TrajectoryParser(burlap.oomdp.core.Domain, burlap.oomdp.auxiliary.StateParser);
+  public commands.data.Trajectory getTrajectoryFromString(java.lang.String);
+  public java.lang.String getStringRepForTrajectory(commands.data.Trajectory);
+}
+Compiled from "GPConjunction.java"
+public class commands.model3.GPConjunction implements java.lang.Iterable<burlap.oomdp.core.GroundedProp> {
+  public java.util.List<burlap.oomdp.core.GroundedProp> gps;
+  public commands.model3.GPConjunction();
+  public void addGP(burlap.oomdp.core.GroundedProp);
+  public boolean statisifiedIn(burlap.oomdp.core.State);
+  public java.lang.String toString();
+  public java.util.Iterator<burlap.oomdp.core.GroundedProp> iterator();
+}
+Compiled from "Model3Controller.java"
+public class commands.model3.Model3Controller {
+  public static final java.lang.String TASKMODNAME;
+  public static final java.lang.String TRAJECMODNAME;
+  public static final java.lang.String LANGMODNAME;
+  protected generativemodel.GenerativeModel gm;
+  protected commands.model3.TaskModule taskMod;
+  protected commands.model3.TrajectoryModule trajectMod;
+  protected commands.model3.mt.SentenceReasoner sentenceReasoner;
+  protected burlap.oomdp.core.Domain domain;
+  protected burlap.behavior.statehashing.StateHashFactory hashingFactory;
+  protected generativemodel.RVariable naturalCommandVariable;
+  protected java.util.List<commands.data.TrainingElement> trajectoryDataset;
+  public commands.model3.Model3Controller(burlap.oomdp.core.Domain, java.util.List<commands.model3.GPConjunction>, burlap.behavior.statehashing.StateHashFactory, boolean);
+  public commands.model3.TrajectoryModule getTrajectoryModule();
+  public generativemodel.GenerativeModel getGM();
+  public java.util.List<commands.data.TrainingElement> getTrajectoryDataset();
+  public burlap.oomdp.core.Domain getDomain();
+  public burlap.behavior.statehashing.StateHashFactory getHashingFactory();
+  public void setToMTLanguageModel(java.util.Set<java.lang.String>, java.util.Set<java.lang.String>, int, int, commands.model3.mt.Tokenizer);
+  public void setToMTLanguageModel(java.util.List<commands.data.TrainingElement>, int, commands.model3.mt.Tokenizer);
+  public void setToMTLanugageModelUsingMTDataset(java.util.List<commands.model3.mt.em.WeightedMTInstance>, commands.model3.mt.Tokenizer, boolean);
+  public void setToBOWLanugageModel(java.util.List<commands.data.TrainingElement>, commands.model3.mt.Tokenizer, boolean);
+  public void setToNORLanugageModel(java.util.List<commands.data.TrainingElement>, commands.model3.mt.Tokenizer, boolean);
+  public java.util.List<generativemodel.GMQueryResult> getLiftedRFAndBindingDistribution(burlap.oomdp.core.State, java.lang.String);
+  public java.util.List<generativemodel.GMQueryResult> getSemanticSentenceDistributionUsingStrictMT(java.lang.String);
+  public java.util.List<generativemodel.GMQueryResult> getRFDistribution(burlap.oomdp.core.State, java.lang.String);
+  public java.util.List<generativemodel.GMQueryResult> getRFDistributionFromState(burlap.oomdp.core.State);
+  public java.util.List<generativemodel.GMQueryResult> getRFDistributionFromTrajectory(commands.data.Trajectory);
+  public java.util.Set<java.lang.String> getSemanticWords(boolean);
+  public java.util.Set<java.lang.String> getNaturalWords(java.util.List<commands.data.TrainingElement>, commands.model3.mt.Tokenizer);
+  public java.util.List<commands.model3.mt.em.WeightedMTInstance> getWeightedMTDatasetFromTrajectoryDataset(java.util.List<commands.data.TrainingElement>, commands.model3.mt.Tokenizer, double);
+  public em.Dataset getEMDatasetFromTrajectoriesDataset(java.util.List<commands.data.TrainingElement>);
+  protected java.util.Map<java.lang.String, java.lang.Double> getSemanticSentenceDistribution(commands.model3.TrajectoryModule$TrajectoryValue);
+  public static java.lang.String getSemanticString(commands.model3.TaskModule$LiftedVarValue, commands.model3.TaskModule$LiftedVarValue);
+  public static java.util.List<commands.data.TrainingElement> getCommandsDataset(burlap.oomdp.core.Domain, java.lang.String, burlap.oomdp.auxiliary.StateParser);
+  public static java.util.List<commands.model3.mt.em.WeightedMTInstance> getStrictMTDataset(commands.model3.mt.Tokenizer, java.lang.String, java.lang.String);
+  public static commands.model3.mt.em.WeightedMTInstance getStrictMTDataInstanceFromFile(commands.model3.mt.Tokenizer, java.lang.String);
+  public static int getSemanticWordsFromMTDataset(java.util.List<commands.model3.mt.em.WeightedMTInstance>, java.util.Set<java.lang.String>);
+  public static int getNaturalWordsFromMTDataset(java.util.List<commands.model3.mt.em.WeightedMTInstance>, java.util.Set<java.lang.String>);
+}
+Compiled from "Model3Controller.java"
+final class commands.model3.Model3Controller$1 implements java.io.FilenameFilter {
+  final java.lang.String val$ext;
+  commands.model3.Model3Controller$1(java.lang.String);
+  public boolean accept(java.io.File, java.lang.String);
+}
+Compiled from "StringValue.java"
+public class commands.model3.StringValue extends generativemodel.RVariableValue {
+  public java.lang.String s;
+  public commands.model3.StringValue(java.lang.String, generativemodel.RVariable);
+  public boolean valueEquals(generativemodel.RVariableValue);
+  public java.lang.String stringRep();
+}
+Compiled from "TaskModule.java"
+public class commands.model3.TaskModule extends generativemodel.GMModule {
+  public static final java.lang.String STATENAME;
+  public static final java.lang.String LIFTEDRFNAME;
+  public static final java.lang.String GROUNDEDRFNAME;
+  public static final java.lang.String BINDINGNAME;
+  protected generativemodel.RVariable stateVariable;
+  protected generativemodel.RVariable liftedRFVariable;
+  protected generativemodel.RVariable groundedRFVariable;
+  protected generativemodel.RVariable bindingConstraintVariable;
+  protected java.util.List<commands.model3.TaskModule$LiftedVarValue> liftedRFValues;
+  protected burlap.oomdp.core.Domain domain;
+  protected boolean permitInitiallySatisfiedRFs;
+  protected int maxBindingConstraintsComponentSize;
+  public commands.model3.TaskModule(java.lang.String, burlap.oomdp.core.Domain);
+  public void addLiftedVarValue(commands.model3.TaskModule$LiftedVarValue);
+  public generativemodel.GMQueryResult computeProb(generativemodel.GMQuery);
+  public generativemodel.ModelTrackedVarIterator getNonZeroProbIterator(generativemodel.RVariable, java.util.List<generativemodel.RVariableValue>);
+  public java.util.Iterator<generativemodel.RVariableValue> getRVariableValuesFor(generativemodel.RVariable);
+}
+Compiled from "TaskModule.java"
+public class commands.model3.TaskModule$ConjunctiveGroundedPropRF implements burlap.oomdp.singleagent.RewardFunction {
+  public java.util.List<burlap.oomdp.core.GroundedProp> gps;
+  public double goalR;
+  public double nonGoalR;
+  public commands.model3.TaskModule$ConjunctiveGroundedPropRF();
+  public commands.model3.TaskModule$ConjunctiveGroundedPropRF(java.util.List<burlap.oomdp.core.GroundedProp>);
+  public void addGP(burlap.oomdp.core.GroundedProp);
+  public double reward(burlap.oomdp.core.State, burlap.oomdp.singleagent.GroundedAction, burlap.oomdp.core.State);
+  public boolean satisfied(burlap.oomdp.core.State);
+  public boolean equals(java.lang.Object);
+}
+Compiled from "TaskModule.java"
+public class commands.model3.TaskModule$ConstraintIterator extends generativemodel.ModelTrackedVarIterator {
+  protected commands.model3.TaskModule$StateRVValue stateVal;
+  protected commands.model3.TaskModule$LiftedVarValue liftedRFVal;
+  protected commands.model3.TaskModule$RFConVariableValue groundedRFVal;
+  protected java.util.List<commands.model3.TaskModule$LiftedVarValue> bindingConstraints;
+  protected int next;
+  protected double uni;
+  final commands.model3.TaskModule this$0;
+  public commands.model3.TaskModule$ConstraintIterator(java.util.List<generativemodel.RVariableValue>);
+  public boolean hasNext();
+  public void remove();
+  public generativemodel.GMQueryResult varSpecificNext();
+  protected int varMembership(burlap.oomdp.core.GroundedProp, java.util.Set<java.lang.String>);
+  protected java.util.List<java.util.List<burlap.oomdp.core.GroundedProp>> combinations(java.util.List<burlap.oomdp.core.GroundedProp>);
+  protected java.util.List<java.util.List<java.lang.Integer>> combinationIndices(int);
+  protected java.lang.String sRep(java.lang.String, int);
+  protected java.util.Map<java.lang.String, java.lang.String> getGroundedToFree();
+  protected commands.model3.TaskModule$LiftedVarValue getLiftedVarValue(java.util.List<burlap.oomdp.core.GroundedProp>, java.util.Map<java.lang.String, java.lang.String>);
+  protected java.util.Set<java.lang.String> newVars(java.util.Set<java.lang.String>, java.util.List<burlap.oomdp.core.GroundedProp>);
+  protected boolean allVarsAppearSomewhere(java.util.Set<java.lang.String>, java.util.List<burlap.oomdp.core.GroundedProp>);
+}
+Compiled from "TaskModule.java"
+public class commands.model3.TaskModule$GroundedRFIterator extends generativemodel.ModelTrackedVarIterator {
+  protected commands.model3.TaskModule$StateRVValue stateVal;
+  protected commands.model3.TaskModule$LiftedVarValue liftedRFVal;
+  protected java.util.List<commands.model3.TaskModule$RFConVariableValue> rfVals;
+  protected int next;
+  protected double uniProb;
+  final commands.model3.TaskModule this$0;
+  public commands.model3.TaskModule$GroundedRFIterator(java.util.List<generativemodel.RVariableValue>);
+  public boolean hasNext();
+  public generativemodel.GMQueryResult varSpecificNext();
+  public void remove();
+}
+Compiled from "TaskModule.java"
+public class commands.model3.TaskModule$LiftedRFIterator extends generativemodel.ModelTrackedVarIterator {
+  java.util.Iterator<generativemodel.GMQueryResult> sourceIterator;
+  final commands.model3.TaskModule this$0;
+  public commands.model3.TaskModule$LiftedRFIterator(java.util.List<generativemodel.RVariableValue>);
+  public boolean hasNext();
+  public void remove();
+  public generativemodel.GMQueryResult varSpecificNext();
+}
+Compiled from "TaskModule.java"
+public class commands.model3.TaskModule$LiftedVarValue extends generativemodel.RVariableValue {
+  public java.util.Map<java.lang.String, java.lang.String> freeVariableToClassMapping;
+  public java.util.List<burlap.oomdp.core.GroundedProp> conditions;
+  public commands.model3.TaskModule$LiftedVarValue(generativemodel.RVariable);
+  public commands.model3.TaskModule$LiftedVarValue(generativemodel.RVariable, java.util.List<burlap.oomdp.core.GroundedProp>);
+  public void addProp(burlap.oomdp.core.GroundedProp);
+  public int numComps();
+  public boolean valueEquals(generativemodel.RVariableValue);
+  public java.lang.String stringRep();
+}
+Compiled from "TaskModule.java"
+public class commands.model3.TaskModule$RFConVariableValue extends generativemodel.RVariableValue {
+  public commands.model3.TaskModule$ConjunctiveGroundedPropRF rf;
+  public commands.model3.TaskModule$RFConVariableValue(generativemodel.RVariable);
+  public commands.model3.TaskModule$RFConVariableValue(generativemodel.RVariable, commands.model3.TaskModule$ConjunctiveGroundedPropRF);
+  public void addGoalGP(burlap.oomdp.core.GroundedProp);
+  public boolean valueEquals(generativemodel.RVariableValue);
+  public java.lang.String stringRep();
+}
+Compiled from "TaskModule.java"
+public class commands.model3.TaskModule$StateRVValue extends generativemodel.RVariableValue {
+  public burlap.oomdp.core.State s;
+  public burlap.behavior.statehashing.StateHashTuple sh;
+  public commands.model3.TaskModule$StateRVValue(burlap.oomdp.core.State, burlap.behavior.statehashing.StateHashFactory, generativemodel.RVariable);
+  public commands.model3.TaskModule$StateRVValue(burlap.behavior.statehashing.StateHashTuple, generativemodel.RVariable);
+  public boolean valueEquals(generativemodel.RVariableValue);
+  public java.lang.String stringRep();
+  public int hashCode();
+}
+Compiled from "TrajectoryModule.java"
+public class commands.model3.TrajectoryModule extends generativemodel.GMModule {
+  public static final java.lang.String TNAME;
+  protected generativemodel.RVariable stateRV;
+  protected generativemodel.RVariable rewardRV;
+  protected generativemodel.RVariable behaviorRV;
+  protected burlap.oomdp.core.Domain oomdpDomain;
+  protected behavior.irl.TabularIRL irl;
+  protected boolean useIRLCache;
+  protected java.util.Map<generativemodel.GMQuery, java.lang.Double> cachedResults;
+  protected java.util.Map<generativemodel.GMQuery, java.lang.Double> cachedLogResults;
+  public commands.model3.TrajectoryModule(java.lang.String, generativemodel.RVariable, generativemodel.RVariable, burlap.oomdp.core.Domain, behavior.irl.TabularIRLPlannerFactory, boolean, boolean);
+  public generativemodel.GMQueryResult computeProb(generativemodel.GMQuery);
+  public generativemodel.GMQueryResult getLogProb(generativemodel.GMQuery);
+  public generativemodel.GMQueryResult computeLogProb(generativemodel.GMQuery);
+  public generativemodel.ModelTrackedVarIterator getNonZeroProbIterator(generativemodel.RVariable, java.util.List<generativemodel.RVariableValue>);
+  public java.util.Iterator<generativemodel.RVariableValue> getRVariableValuesFor(generativemodel.RVariable);
+  public void writeCacheToDisk(java.lang.String, burlap.oomdp.core.Domain, burlap.oomdp.auxiliary.StateParser);
+  public void readCacheFromDisk(java.lang.String, burlap.oomdp.core.Domain, burlap.oomdp.auxiliary.StateParser, burlap.behavior.statehashing.StateHashFactory);
+}
+Compiled from "TrajectoryModule.java"
+class commands.model3.TrajectoryModule$1 implements java.io.FilenameFilter {
+  final java.lang.String val$ext;
+  final commands.model3.TrajectoryModule this$0;
+  commands.model3.TrajectoryModule$1(commands.model3.TrajectoryModule, java.lang.String);
+  public boolean accept(java.io.File, java.lang.String);
+}
+Compiled from "TrajectoryModule.java"
+public class commands.model3.TrajectoryModule$ConjunctiveGroundedPropTF implements burlap.oomdp.core.TerminalFunction {
+  public java.util.List<burlap.oomdp.core.GroundedProp> gps;
+  public commands.model3.TrajectoryModule$ConjunctiveGroundedPropTF(java.util.List<burlap.oomdp.core.GroundedProp>);
+  public commands.model3.TrajectoryModule$ConjunctiveGroundedPropTF(commands.model3.TaskModule$ConjunctiveGroundedPropRF);
+  public java.lang.String toString();
+  public boolean isTerminal(burlap.oomdp.core.State);
+}
+Compiled from "TrajectoryModule.java"
+public class commands.model3.TrajectoryModule$TrajectoryValue extends generativemodel.RVariableValue {
+  public commands.data.Trajectory t;
+  public commands.model3.TrajectoryModule$TrajectoryValue(commands.data.Trajectory, generativemodel.RVariable);
+  public boolean valueEquals(generativemodel.RVariableValue);
+  public java.lang.String stringRep();
+  public java.lang.String toString();
+}
+Compiled from "BagOfWordsEMModule.java"
+public class commands.model3.bagofwords.BagOfWordsEMModule extends em.EMModule {
+  protected java.util.List<java.util.Map<commands.model3.bagofwords.BagOfWordsModule$TopicVectorRVal, java.lang.Double>> jointTopicAndTrajectory;
+  protected burlap.behavior.statehashing.StateHashFactory hashingFactory;
+  protected double wordAdditiveConstant;
+  protected burlap.datastructures.HashedAggregator<java.lang.String> jointWordCounts;
+  protected burlap.datastructures.HashedAggregator<java.lang.String> singleTopicCounts;
+  protected boolean needsAggreatorReset;
+  public commands.model3.bagofwords.BagOfWordsEMModule(burlap.behavior.statehashing.StateHashFactory);
+  public void runEStep(int, java.util.List<generativemodel.RVariableValue>);
+  public void runMStep();
+  protected void resetAggregators();
+  protected java.util.Map<commands.model3.bagofwords.BagOfWordsModule$TopicVectorRVal, java.lang.Double> constructJointTopicAndTrajectoryEntry(int, commands.model3.TrajectoryModule$TrajectoryValue);
+  protected static java.lang.String tokenCombine(java.lang.String, java.lang.String);
+}
+Compiled from "BagOfWordsModule.java"
+public class commands.model3.bagofwords.BagOfWordsModule extends generativemodel.GMModule {
+  public static final java.lang.String TVECTOR;
+  public static final java.lang.String STOPICS;
+  public static final java.lang.String NNAME;
+  public static final java.lang.String NULLTOPIC;
+  protected generativemodel.RVariable liftedRFVariable;
+  protected generativemodel.RVariable bindingConstraintVariable;
+  protected generativemodel.RVariable commandTopicVector;
+  protected generativemodel.RVariable topic;
+  protected generativemodel.RVariable naturalCommandVariable;
+  protected java.util.Set<java.lang.String> semanticTopics;
+  protected java.util.Set<java.lang.String> naturalWords;
+  protected commands.model3.bagofwords.BagOfWordsModule$WordParam wp;
+  protected commands.model3.mt.Tokenizer tokenizer;
+  protected boolean includePFParamClasses;
+  protected boolean useFrequnecyOfTopicsInCommand;
+  public commands.model3.bagofwords.BagOfWordsModule(java.lang.String, generativemodel.RVariable, generativemodel.RVariable, java.util.Set<java.lang.String>, java.util.Set<java.lang.String>, commands.model3.mt.Tokenizer);
+  public java.util.Set<java.lang.String> getSemanticTopics();
+  public void setSemanticTopics(java.util.Set<java.lang.String>);
+  public java.util.Set<java.lang.String> getNaturalWords();
+  public void setNaturalWords(java.util.Set<java.lang.String>);
+  public commands.model3.bagofwords.BagOfWordsModule$WordParam getWp();
+  public void setWp(commands.model3.bagofwords.BagOfWordsModule$WordParam);
+  public commands.model3.mt.Tokenizer getTokenizer();
+  public void setTokenizer(commands.model3.mt.Tokenizer);
+  public boolean isIncludePFParamClasses();
+  public void setIncludePFParamClasses(boolean);
+  public boolean isUseFrequnecyOfTopicsInCommand();
+  public void setUseFrequnecyOfTopicsInCommand(boolean);
+  public generativemodel.GMQueryResult computeProb(generativemodel.GMQuery);
+  public generativemodel.ModelTrackedVarIterator getNonZeroProbIterator(generativemodel.RVariable, java.util.List<generativemodel.RVariableValue>);
+  public java.util.Iterator<generativemodel.RVariableValue> getRVariableValuesFor(generativemodel.RVariable);
+  protected static java.lang.String tokenCombine(java.lang.String, java.lang.String);
+  public double computeNaturalCommandProb(commands.model3.StringValue, commands.model3.bagofwords.BagOfWordsModule$TopicVectorRVal);
+  public double computeNaturalCommandProb(java.util.Map<java.lang.String, java.lang.Double>, commands.model3.bagofwords.BagOfWordsModule$TopicVectorRVal);
+  public double computeNaturalWordProb(java.lang.String, commands.model3.bagofwords.BagOfWordsModule$TopicVectorRVal);
+  public java.util.Map<java.lang.String, java.lang.Double> getWordCounts(commands.model3.StringValue);
+  public void printWordParams();
+}
+Compiled from "BagOfWordsModule.java"
+public class commands.model3.bagofwords.BagOfWordsModule$TopicVectorRVal extends generativemodel.RVariableValue {
+  protected java.util.Map<java.lang.String, java.lang.Integer> counts;
+  protected int totalCount;
+  protected java.lang.String srep;
+  final commands.model3.bagofwords.BagOfWordsModule this$0;
+  public commands.model3.bagofwords.BagOfWordsModule$TopicVectorRVal(commands.model3.bagofwords.BagOfWordsModule, generativemodel.RVariable, commands.model3.TaskModule$LiftedVarValue, commands.model3.TaskModule$LiftedVarValue);
+  public java.util.Set<java.lang.String> getNonZeroTopics();
+  public int getTotalCount();
+  public int getCount(java.lang.String);
+  public double getSelectionProb(java.lang.String);
+  public boolean valueEquals(generativemodel.RVariableValue);
+  public java.lang.String stringRep();
+}
+Compiled from "BagOfWordsModule.java"
+public class commands.model3.bagofwords.BagOfWordsModule$TopicVectorValIterator extends generativemodel.ModelTrackedVarIterator {
+  commands.model3.bagofwords.BagOfWordsModule$TopicVectorRVal res;
+  boolean hasNext;
+  commands.model3.TaskModule$LiftedVarValue liftedRF;
+  commands.model3.TaskModule$LiftedVarValue constraints;
+  final commands.model3.bagofwords.BagOfWordsModule this$0;
+  public commands.model3.bagofwords.BagOfWordsModule$TopicVectorValIterator(commands.model3.bagofwords.BagOfWordsModule, commands.model3.TaskModule$LiftedVarValue, commands.model3.TaskModule$LiftedVarValue);
+  public boolean hasNext();
+  public void remove();
+  public generativemodel.GMQueryResult varSpecificNext();
+}
+Compiled from "BagOfWordsModule.java"
+public class commands.model3.bagofwords.BagOfWordsModule$WordParam {
+  java.util.Map<java.lang.String, java.lang.Double> paramValues;
+  final commands.model3.bagofwords.BagOfWordsModule this$0;
+  public commands.model3.bagofwords.BagOfWordsModule$WordParam(commands.model3.bagofwords.BagOfWordsModule);
+  public double prob(java.lang.String, java.lang.String);
+  public void set(double, java.lang.String, java.lang.String);
+}
+Compiled from "MTModule.java"
+public class commands.model3.mt.MTModule extends generativemodel.GMModule {
+  public static final java.lang.String SNAME;
+  public static final java.lang.String NNAME;
+  protected generativemodel.RVariable liftedRFVariable;
+  protected generativemodel.RVariable bindingConstraintVariable;
+  protected generativemodel.RVariable semanticCommandVariable;
+  protected generativemodel.RVariable naturalCommandVariable;
+  protected java.util.Set<java.lang.String> semanticWords;
+  protected java.util.Set<java.lang.String> naturalWords;
+  protected int maxSemanticCommandLength;
+  protected int maxNaturalCommandLength;
+  protected commands.model3.mt.MTModule$DistortionParam dp;
+  protected commands.model3.mt.MTModule$WordParam wp;
+  protected commands.model3.mt.MTModule$LengthParam lp;
+  protected commands.model3.mt.Tokenizer naturalTokenizer;
+  protected commands.model3.mt.Tokenizer semanticTokenizer;
+  protected java.util.Random rand;
+  public commands.model3.mt.MTModule(java.lang.String, generativemodel.RVariable, generativemodel.RVariable, java.util.Set<java.lang.String>, java.util.Set<java.lang.String>, int, int, commands.model3.mt.Tokenizer);
+  public void resetParametersToUniforForNewDictionary(java.util.Set<java.lang.String>, int);
+  public int getMaxSemanticCommandLength();
+  public void setMaxSemanticCommandLength(int);
+  public int getMaxNaturalCommandLength();
+  public void setMaxNaturalCommandLength(int);
+  public java.util.Set<java.lang.String> getNaturalWords();
+  public void setNaturalWords(java.util.Set<java.lang.String>);
+  public java.util.Set<java.lang.String> getSemanticWords();
+  public void setSemanticWords(java.util.Set<java.lang.String>);
+  public commands.model3.mt.MTModule$DistortionParam getDp();
+  public void setDp(commands.model3.mt.MTModule$DistortionParam);
+  public commands.model3.mt.MTModule$WordParam getWp();
+  public void setWp(commands.model3.mt.MTModule$WordParam);
+  public commands.model3.mt.MTModule$LengthParam getLp();
+  public void setLp(commands.model3.mt.MTModule$LengthParam);
+  public void setLengthParameterProb(int, int, double);
+  public void resetLengthParameters();
+  public commands.model3.mt.TokenedString getTokenedSemanticString(commands.model3.TaskModule$LiftedVarValue, commands.model3.TaskModule$LiftedVarValue);
+  public generativemodel.GMQueryResult computeProb(generativemodel.GMQuery);
+  public double computeNaturalCommandProb(commands.model3.mt.TokenedString, commands.model3.mt.TokenedString);
+  protected double sampleMargAlign(commands.model3.mt.TokenedString, commands.model3.mt.TokenedString, int);
+  protected double m1MaximumAlignment(commands.model3.mt.TokenedString, commands.model3.mt.TokenedString);
+  protected java.util.List<java.lang.Integer> sampleAlignment(int, int);
+  public generativemodel.ModelTrackedVarIterator getNonZeroProbIterator(generativemodel.RVariable, java.util.List<generativemodel.RVariableValue>);
+  public java.util.Iterator<generativemodel.RVariableValue> getRVariableValuesFor(generativemodel.RVariable);
+  protected static java.lang.String tokenCombine(java.lang.String, java.lang.String);
+  public void printLPParams();
+  public void printDistortionParams();
+}
+Compiled from "MTModule.java"
+public class commands.model3.mt.MTModule$DistortionParam {
+  java.util.Map<commands.model3.mt.MTModule$IntTupleHash, java.lang.Double> paramValues;
+  final commands.model3.mt.MTModule this$0;
+  public commands.model3.mt.MTModule$DistortionParam(commands.model3.mt.MTModule);
+  public double prob(int, int, int, int);
+  public void set(double, int, int, int, int);
+}
+Compiled from "MTModule.java"
+public class commands.model3.mt.MTModule$IntTupleHash {
+  int[] tuple;
+  public commands.model3.mt.MTModule$IntTupleHash(int, int, int, int);
+  public commands.model3.mt.MTModule$IntTupleHash(int, int, int);
+  public commands.model3.mt.MTModule$IntTupleHash(int, int);
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+}
+Compiled from "MTModule.java"
+public class commands.model3.mt.MTModule$LengthParam {
+  java.util.Map<commands.model3.mt.MTModule$IntTupleHash, java.lang.Double> paramValues;
+  final commands.model3.mt.MTModule this$0;
+  public commands.model3.mt.MTModule$LengthParam(commands.model3.mt.MTModule);
+  public double prob(int, int);
+  public void set(double, int, int);
+}
+Compiled from "MTModule.java"
+public class commands.model3.mt.MTModule$WordParam {
+  java.util.Map<java.lang.String, java.lang.Double> paramValues;
+  final commands.model3.mt.MTModule this$0;
+  public commands.model3.mt.MTModule$WordParam(commands.model3.mt.MTModule);
+  public double prob(java.lang.String, java.lang.String);
+  public void set(double, java.lang.String, java.lang.String);
+}
+Compiled from "SentenceReasoner.java"
+public class commands.model3.mt.SentenceReasoner {
+  protected java.util.Map<commands.model3.mt.TokenedString, java.lang.Double> probGenSentences;
+  protected generativemodel.GenerativeModel gm;
+  public commands.model3.mt.SentenceReasoner(generativemodel.GenerativeModel, java.util.List<commands.model3.mt.em.WeightedMTInstance>);
+  public java.util.List<generativemodel.GMQueryResult> distribution(java.lang.String);
+}
+Compiled from "TokenedString.java"
+public class commands.model3.mt.TokenedString {
+  public static final java.lang.String NULLTOKEN;
+  public commands.model3.mt.TokenedString(java.util.List<java.lang.String>);
+  public commands.model3.mt.TokenedString(java.lang.String[]);
+  protected void init(java.lang.String[]);
+  public int size();
+  public java.lang.String t(int);
+  public java.lang.String toString();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+}
+Compiled from "Tokenizer.java"
+public class commands.model3.mt.Tokenizer {
+  java.util.List<java.lang.String> delimiters;
+  java.util.Set<java.lang.String> filter;
+  boolean isBlacklistFilter;
+  public commands.model3.mt.Tokenizer(boolean);
+  public commands.model3.mt.Tokenizer(boolean, boolean);
+  public void setToBlackListFilter();
+  public void setToWhiteListFilter();
+  public void addDelimiter(java.lang.String);
+  public void addTokenFilter(java.lang.String);
+  public commands.model3.mt.TokenedString tokenize(java.lang.String);
+  protected java.util.List<java.lang.String> tokenizeHelper(java.lang.String, int);
+}
+Compiled from "MTEMModule.java"
+public class commands.model3.mt.em.MTEMModule extends em.EMModule {
+  protected generativemodel.GenerativeModel gm;
+  protected java.util.List<commands.model3.mt.em.WeightedMTInstance> dataset;
+  protected commands.model3.mt.Tokenizer tokenizer;
+  protected commands.model3.mt.MTModule mtModule;
+  protected double wordAdditiveConstant;
+  protected int numWithWordParamAlone;
+  protected int numEMIterations;
+  protected boolean factorInAlignment;
+  protected burlap.datastructures.HashedAggregator<java.lang.String> jointWordCounts;
+  protected burlap.datastructures.HashedAggregator<java.lang.String> singleWordCounts;
+  protected burlap.datastructures.HashedAggregator<commands.model3.mt.MTModule$IntTupleHash> jointDistortionCounts;
+  protected burlap.datastructures.HashedAggregator<commands.model3.mt.MTModule$IntTupleHash> singleDistortionCounts;
+  public commands.model3.mt.em.MTEMModule(java.util.List<commands.model3.mt.em.WeightedMTInstance>, generativemodel.GenerativeModel);
+  public void runEMManually(int);
+  protected void primeMTModuleParameters(java.util.List<commands.model3.mt.em.WeightedMTInstance>);
+  public void runEStep(int, java.util.List<generativemodel.RVariableValue>);
+  public void runMStep();
+  protected double expectedVal(commands.model3.mt.TokenedString, commands.model3.mt.TokenedString, int, int, int, int);
+  protected static java.lang.String tokenCombine(java.lang.String, java.lang.String);
+  public static java.util.List<commands.model3.mt.em.WeightedMTInstance> getVanillaMTDataset(commands.model3.mt.Tokenizer, java.lang.String, java.lang.String);
+  public static commands.model3.mt.em.WeightedMTInstance getInstanceFromFile(commands.model3.mt.Tokenizer, java.lang.String);
+}
+Compiled from "MTEMModule.java"
+final class commands.model3.mt.em.MTEMModule$1 implements java.io.FilenameFilter {
+  final java.lang.String val$ext;
+  commands.model3.mt.em.MTEMModule$1(java.lang.String);
+  public boolean accept(java.io.File, java.lang.String);
+}
+Compiled from "WeightedMTInstance.java"
+public class commands.model3.mt.em.WeightedMTInstance implements java.lang.Iterable<commands.model3.mt.em.WeightedMTInstance$WeightedSemanticCommandPair> {
+  public java.util.List<commands.model3.mt.em.WeightedMTInstance$WeightedSemanticCommandPair> weightedSemanticCommands;
+  public commands.model3.mt.TokenedString naturalCommand;
+  public commands.model3.mt.em.WeightedMTInstance(commands.model3.mt.TokenedString);
+  public void addWeightedSemanticCommand(commands.model3.mt.TokenedString, double);
+  public commands.model3.mt.em.WeightedMTInstance$WeightedSemanticCommandPair getWeightedSemanticCommandPair(int);
+  public int numWeightedSemanticCommands();
+  public java.util.Iterator<commands.model3.mt.em.WeightedMTInstance$WeightedSemanticCommandPair> iterator();
+}
+Compiled from "WeightedMTInstance.java"
+public class commands.model3.mt.em.WeightedMTInstance$WeightedSemanticCommandPair {
+  public commands.model3.mt.TokenedString semanticCommand;
+  public double prob;
+  public commands.model3.mt.em.WeightedMTInstance$WeightedSemanticCommandPair(commands.model3.mt.TokenedString, double);
+}
+Compiled from "NoisyOr.java"
+public class commands.model3.noisyor.NoisyOr extends generativemodel.GMModule {
+  public static final java.lang.String TVECTOR;
+  public static final java.lang.String STOPICS;
+  public static final java.lang.String NNAME;
+  public static final java.lang.String NULLTOPIC;
+  protected generativemodel.RVariable liftedRFVariable;
+  protected generativemodel.RVariable bindingConstraintVariable;
+  protected generativemodel.RVariable commandTopicSet;
+  protected generativemodel.RVariable topic;
+  protected generativemodel.RVariable naturalCommandVariable;
+  protected java.util.Set<java.lang.String> semanticTopics;
+  protected java.util.Set<java.lang.String> naturalWords;
+  protected commands.model3.noisyor.NoisyOr$WordParam wp;
+  protected commands.model3.mt.Tokenizer tokenizer;
+  protected boolean includePFParamClasses;
+  public commands.model3.noisyor.NoisyOr(java.lang.String, generativemodel.RVariable, generativemodel.RVariable, java.util.Set<java.lang.String>, java.util.Set<java.lang.String>, commands.model3.mt.Tokenizer);
+  public java.util.Set<java.lang.String> getSemanticTopics();
+  public void setSemanticTopics(java.util.Set<java.lang.String>);
+  public java.util.Set<java.lang.String> getNaturalWords();
+  public void setNaturalWords(java.util.Set<java.lang.String>);
+  public commands.model3.noisyor.NoisyOr$WordParam getWp();
+  public void setWp(commands.model3.noisyor.NoisyOr$WordParam);
+  public commands.model3.mt.Tokenizer getTokenizer();
+  public void setTokenizer(commands.model3.mt.Tokenizer);
+  public boolean isIncludePFParamClasses();
+  public void setIncludePFParamClasses(boolean);
+  public generativemodel.GMQueryResult computeProb(generativemodel.GMQuery);
+  public generativemodel.ModelTrackedVarIterator getNonZeroProbIterator(generativemodel.RVariable, java.util.List<generativemodel.RVariableValue>);
+  public java.util.Iterator<generativemodel.RVariableValue> getRVariableValuesFor(generativemodel.RVariable);
+  public double computeNaturalCommandProb(commands.model3.StringValue, commands.model3.noisyor.NoisyOr$TopicSetRVal);
+  public double computeNaturalCommandProb(java.util.Set<java.lang.String>, commands.model3.noisyor.NoisyOr$TopicSetRVal);
+  public double probNotWordGivenTopicSet(java.lang.String, commands.model3.noisyor.NoisyOr$TopicSetRVal);
+  public java.util.Set<java.lang.String> getWordSet(commands.model3.StringValue);
+  public void printWordParams();
+  protected static java.lang.String tokenCombine(java.lang.String, java.lang.String);
+}
+Compiled from "NoisyOr.java"
+public class commands.model3.noisyor.NoisyOr$TopicSetRVal extends generativemodel.RVariableValue {
+  protected java.util.Set<java.lang.String> topics;
+  protected java.lang.String srep;
+  final commands.model3.noisyor.NoisyOr this$0;
+  public commands.model3.noisyor.NoisyOr$TopicSetRVal(commands.model3.noisyor.NoisyOr, generativemodel.RVariable, commands.model3.TaskModule$LiftedVarValue, commands.model3.TaskModule$LiftedVarValue);
+  public java.util.Set<java.lang.String> getNonZeroTopics();
+  public boolean valueEquals(generativemodel.RVariableValue);
+  public java.lang.String stringRep();
+}
+Compiled from "NoisyOr.java"
+public class commands.model3.noisyor.NoisyOr$TopicSetValIterator extends generativemodel.ModelTrackedVarIterator {
+  commands.model3.noisyor.NoisyOr$TopicSetRVal res;
+  boolean hasNext;
+  commands.model3.TaskModule$LiftedVarValue liftedRF;
+  commands.model3.TaskModule$LiftedVarValue constraints;
+  final commands.model3.noisyor.NoisyOr this$0;
+  public commands.model3.noisyor.NoisyOr$TopicSetValIterator(commands.model3.noisyor.NoisyOr, commands.model3.TaskModule$LiftedVarValue, commands.model3.TaskModule$LiftedVarValue);
+  public boolean hasNext();
+  public void remove();
+  public generativemodel.GMQueryResult varSpecificNext();
+}
+Compiled from "NoisyOr.java"
+public class commands.model3.noisyor.NoisyOr$WordParam {
+  java.util.Map<java.lang.String, java.lang.Double> paramValues;
+  final commands.model3.noisyor.NoisyOr this$0;
+  public commands.model3.noisyor.NoisyOr$WordParam(commands.model3.noisyor.NoisyOr);
+  public double prob(java.lang.String, java.lang.String);
+  public void set(double, java.lang.String, java.lang.String);
+}
+Compiled from "NoisyOrEMModule.java"
+public class commands.model3.noisyor.NoisyOrEMModule extends em.EMModule {
+  protected java.util.List<java.util.Map<commands.model3.noisyor.NoisyOr$TopicSetRVal, java.lang.Double>> jointTopicAndTrajectory;
+  protected burlap.behavior.statehashing.StateHashFactory hashingFactory;
+  protected burlap.datastructures.HashedAggregator<java.lang.String> jointWordCounts;
+  protected burlap.datastructures.HashedAggregator<java.lang.String> singleTopicCounts;
+  protected boolean needsAggreatorReset;
+  public commands.model3.noisyor.NoisyOrEMModule(burlap.behavior.statehashing.StateHashFactory);
+  public void runEStep(int, java.util.List<generativemodel.RVariableValue>);
+  public void runMStep();
+  protected void resetAggregators();
+  protected java.util.Map<commands.model3.noisyor.NoisyOr$TopicSetRVal, java.lang.Double> constructJointTopicAndTrajectoryEntry(int, commands.model3.TrajectoryModule$TrajectoryValue);
+  protected static java.lang.String tokenCombine(java.lang.String, java.lang.String);
+}
+Compiled from "MTWeaklySupervisedModel.java"
+public class commands.model3.weaklysupervisedinterface.MTWeaklySupervisedModel implements commands.model3.weaklysupervisedinterface.WeaklySupervisedLanguageModel {
+  public static final java.lang.String LANGMODNAME;
+  protected commands.model3.weaklysupervisedinterface.WeaklySupervisedController controller;
+  protected commands.model3.mt.Tokenizer tokenizer;
+  protected generativemodel.RVariable naturalCommandVariable;
+  protected int numEMIterations;
+  public commands.model3.weaklysupervisedinterface.MTWeaklySupervisedModel(commands.model3.weaklysupervisedinterface.WeaklySupervisedController, commands.model3.mt.Tokenizer, int);
+  public double probabilityOfCommand(logicalexpressions.LogicalExpression, logicalexpressions.LogicalExpression, java.lang.String);
+  public void learnFromDataset(java.util.List<commands.model3.weaklysupervisedinterface.WeaklySupervisedTrainingInstance>);
+  protected java.util.List<commands.model3.mt.em.WeightedMTInstance> generateMTDataset(java.util.List<commands.model3.weaklysupervisedinterface.WeaklySupervisedTrainingInstance>);
+  protected java.lang.String getMachineLanguageString(logicalexpressions.LogicalExpression, logicalexpressions.LogicalExpression);
+  protected static int getSemanticWordsFromMTDataset(java.util.List<commands.model3.mt.em.WeightedMTInstance>, java.util.Set<java.lang.String>);
+  protected static int getNaturalWordsFromMTDataset(java.util.List<commands.model3.mt.em.WeightedMTInstance>, java.util.Set<java.lang.String>);
+  protected java.util.List<burlap.oomdp.core.GroundedProp> extractGPs(logicalexpressions.LogicalExpression);
+}
+Compiled from "WeaklySupervisedController.java"
+public class commands.model3.weaklysupervisedinterface.WeaklySupervisedController {
+  public static final java.lang.String TASKMODNAME;
+  public static final java.lang.String TRAJECMODNAME;
+  protected generativemodel.GenerativeModel gm;
+  protected commands.model3.TaskModule taskMod;
+  protected commands.model3.TrajectoryModule trajectMod;
+  protected commands.model3.weaklysupervisedinterface.WeaklySupervisedLanguageModel languageModel;
+  protected java.util.List<commands.model3.weaklysupervisedinterface.WeaklySupervisedTrainingInstance> weaklySupervisedTrainingDataset;
+  protected burlap.oomdp.core.Domain domain;
+  protected burlap.behavior.statehashing.StateHashFactory hashingFactory;
+  protected boolean hasPerformedIRL;
+  public commands.model3.weaklysupervisedinterface.WeaklySupervisedController(burlap.oomdp.core.Domain, java.util.List<commands.model3.GPConjunction>, burlap.behavior.statehashing.StateHashFactory, boolean);
+  public void setLanguageModel(commands.model3.weaklysupervisedinterface.WeaklySupervisedLanguageModel);
+  public commands.model3.TrajectoryModule getTrajectoryModule();
+  public generativemodel.GenerativeModel getGM();
+  public burlap.oomdp.core.Domain getDomain();
+  public burlap.behavior.statehashing.StateHashFactory getHashingFactory();
+  public commands.model3.weaklysupervisedinterface.WeaklySupervisedLanguageModel getLanguageModel();
+  public java.util.List<generativemodel.GMQueryResult> getRFDistribution(burlap.oomdp.core.State, java.lang.String);
+  public void createWeaklySupervisedTrainingDatasetFromTrajectoryDataset(java.util.List<commands.data.TrainingElement>);
+  public void setWeaklySupervisedTrainingDataset(java.util.List<commands.model3.weaklysupervisedinterface.WeaklySupervisedTrainingInstance>);
+  public void trainLanguageModel();
+  public java.util.List<commands.model3.weaklysupervisedinterface.WeaklySupervisedTrainingInstance> getWeaklySupervisedTrainingInstancesForTrajectory(commands.data.Trajectory, java.lang.String);
+  public void cacheIRLProbabilitiesToDisk(java.lang.String, burlap.oomdp.auxiliary.StateParser);
+  public void loadIRLProbabiltiesFromDisk(java.lang.String, burlap.oomdp.auxiliary.StateParser);
+  protected logicalexpressions.LogicalExpression convertLiftedIntoLogicalExpression(commands.model3.TaskModule$LiftedVarValue);
+}
+Compiled from "WeaklySupervisedLanguageModel.java"
+public interface commands.model3.weaklysupervisedinterface.WeaklySupervisedLanguageModel {
+  public abstract double probabilityOfCommand(logicalexpressions.LogicalExpression, logicalexpressions.LogicalExpression, java.lang.String);
+  public abstract void learnFromDataset(java.util.List<commands.model3.weaklysupervisedinterface.WeaklySupervisedTrainingInstance>);
+}
+Compiled from "WeaklySupervisedTrainingInstance.java"
+public class commands.model3.weaklysupervisedinterface.WeaklySupervisedTrainingInstance {
+  public logicalexpressions.LogicalExpression liftedTask;
+  public logicalexpressions.LogicalExpression bindingConstraints;
+  public java.lang.String command;
+  public double weight;
+  public commands.model3.weaklysupervisedinterface.WeaklySupervisedTrainingInstance(logicalexpressions.LogicalExpression, logicalexpressions.LogicalExpression, java.lang.String, double);
+}
+Compiled from "SCFGMTWeaklySupervisedModel.java"
+public class commands.scfgmodel.SCFGMTWeaklySupervisedModel implements commands.model3.weaklysupervisedinterface.WeaklySupervisedLanguageModel {
+  public static final java.lang.String LANGMODNAME;
+  public static final java.lang.String NEW_LINE;
+  public static final java.lang.String MOSES_TRAIN_DIR;
+  public static final java.lang.String COMM_FILE_NAME;
+  public static final java.lang.String SEM_COMM_FILE_EXT;
+  public static final java.lang.String NAT_COMM_FILE_EXT;
+  public static final java.lang.String TEST_TRANLATION_FILE;
+  public static final java.lang.String MOSES_SCRIPT;
+  public static final java.lang.String MOSES_TRANS_SCRIPT;
+  public static final java.lang.String MOSES_SCRIPT_OUTPUT;
+  public static final java.lang.String MOSES_TRANS_OUPTUT_DIR;
+  public static final java.lang.String MOSES_TRANS_SCORE_FILE;
+  protected commands.model3.weaklysupervisedinterface.WeaklySupervisedController controller;
+  protected commands.model3.mt.Tokenizer tokenizer;
+  protected generativemodel.RVariable naturalCommandVariable;
+  protected int numEMIterations;
+  public commands.scfgmodel.SCFGMTWeaklySupervisedModel(commands.model3.weaklysupervisedinterface.WeaklySupervisedController, commands.model3.mt.Tokenizer, int);
+  public static void main(java.lang.String[]);
+  public double probabilityOfCommand(logicalexpressions.LogicalExpression, logicalexpressions.LogicalExpression, java.lang.String);
+  public void learnFromDataset(java.util.List<commands.model3.weaklysupervisedinterface.WeaklySupervisedTrainingInstance>);
+  protected java.util.List<commands.model3.mt.em.WeightedMTInstance> generateMTDataset(java.util.List<commands.model3.weaklysupervisedinterface.WeaklySupervisedTrainingInstance>);
+  protected java.lang.String getMachineLanguageString(logicalexpressions.LogicalExpression, logicalexpressions.LogicalExpression);
+}
+Compiled from "Model3ControllerExpertData.java"
+public class commands.tests.Model3ControllerExpertData {
+  public static java.lang.String DATASETTESTPATH;
+  public static java.lang.String CACHEPATH;
+  public commands.tests.Model3ControllerExpertData();
+  public static void main(java.lang.String[]);
+  public static commands.model3.Model3Controller constructController();
+  public static void uniformTest();
+  public static void execptedUniformRandom(java.lang.String);
+  public static void uniformBOWTest();
+  public static void uniformNORTest();
+  protected static void outputConstraintAndRFDistro(java.util.List<commands.data.TrainingElement>, commands.model3.Model3Controller);
+  public static void verifyTrajectories(java.lang.String);
+  public static void verifyRFLabels(java.lang.String);
+  public static void verifyIRL(java.lang.String, java.lang.String);
+  public static void writeIRLCache(java.lang.String, java.lang.String);
+  public static void checkCacheRead(java.lang.String, java.lang.String);
+  public static void verifyIRLSpecific(java.lang.String);
+  public static void checkForIdenticalCommands(java.lang.String);
+  public static void getUniqueCommands(java.lang.String);
+  public static void trajectoryTrainingTest(java.lang.String, java.lang.String);
+  public static void testMTWords(java.lang.String);
+  public static void getAccuracyOnTrajectoryDataset(commands.model3.Model3Controller, java.util.List<commands.data.TrainingElement>, java.util.Map<java.lang.String, java.lang.String>);
+  public static void trajectoryBOWTrainingTest(java.lang.String, java.lang.String);
+  public static void trajectoryNORTrainingTest();
+  public static void parallelLOOOutput(java.lang.String[]);
+  public static void parallelBOWLOOOutput(java.lang.String[]);
+  public static void parallelNORLOOOutput(java.lang.String[]);
+  public static void trajectoryToWeightedMTDataset();
+  public static void rfFromTrajectoryDistributionTest();
+  public static java.util.List<commands.data.TrainingElement> looTrajectoryDataset(java.util.List<commands.data.TrainingElement>, int);
+  public static void printWordParams(commands.model3.mt.MTModule);
+  public static java.util.Map<java.lang.String, java.lang.String> getOriginalDatasetRFLabels();
+  public static java.util.Map<java.lang.String, java.lang.String> getSimpleDatasetRFLabels();
+  public static java.util.Map<java.lang.String, java.lang.String> getJerryNormalRFLabels();
+  protected static void addLabelMappingForRange(java.util.Map<java.lang.String, java.lang.String>, java.lang.String, java.lang.String, int, int, java.lang.String);
+  public static void getAverageNumberOfWordsInTrajDataset();
+  public static void getLatexDatasetTable();
+  protected static java.lang.String latexTaskMap(java.lang.String);
+  public static java.util.List<burlap.oomdp.core.GroundedProp> parseGPsFromString(java.lang.String, burlap.oomdp.core.Domain);
+  public static burlap.oomdp.core.GroundedProp parseGPFromString(java.lang.String, burlap.oomdp.core.Domain);
+  public static java.lang.String gpsToString(java.util.List<burlap.oomdp.core.GroundedProp>);
+  public static boolean gpsSatisfied(java.util.List<burlap.oomdp.core.GroundedProp>, burlap.oomdp.core.State);
+  static {};
+}
+Compiled from "Model3ControllerTest.java"
+public class commands.tests.Model3ControllerTest {
+  public static java.lang.String DATASETTESTPATH;
+  public static java.lang.String MTDATASETPATH;
+  public commands.tests.Model3ControllerTest();
+  public static void main(java.lang.String[]);
+  public static commands.model3.Model3Controller constructController();
+  public static void uniformTest();
+  public static void uniformBOWTest();
+  public static void uniformNORTest();
+  protected static void outputConstraintAndRFDistro(java.util.List<commands.data.TrainingElement>, commands.model3.Model3Controller);
+  public static void trajectoryTrainingTest(java.lang.String);
+  public static void testMTWords(java.lang.String);
+  public static void getAccuracyOnTrajectoryDataset(commands.model3.Model3Controller, java.util.List<commands.data.TrainingElement>, java.util.Map<java.lang.String, java.lang.String>);
+  public static void trajectoryBOWTrainingTest();
+  public static void trajectoryNORTrainingTest();
+  public static void parallelLOOOutput(java.lang.String[]);
+  public static void parallelBOWLOOOutput(java.lang.String[]);
+  public static void parallelNORLOOOutput(java.lang.String[]);
+  public static void trajectoryToWeightedMTDataset();
+  public static void rfFromTrajectoryDistributionTest();
+  public static void strictMTTest();
+  public static void strictMTTrainingTest();
+  public static void strictMTLOOTest();
+  public static void parameterTest();
+  public static java.util.List<commands.model3.mt.em.WeightedMTInstance> looMTDataset(java.util.List<commands.model3.mt.em.WeightedMTInstance>, int);
+  public static java.util.List<commands.data.TrainingElement> looTrajectoryDataset(java.util.List<commands.data.TrainingElement>, int);
+  public static void printWordParams(commands.model3.mt.MTModule);
+  public static java.util.Map<java.lang.String, java.lang.String> getOriginalDatasetRFLabels();
+  public static java.util.Map<java.lang.String, java.lang.String> getSimpleDatasetRFLabels();
+  public static void setParamsForSimpleSoko(commands.model3.bagofwords.BagOfWordsModule);
+  protected static void setParams(commands.model3.bagofwords.BagOfWordsModule$WordParam, java.lang.String, java.util.Set<java.lang.String>, java.lang.String...);
+  protected static void addLabelMappingForRange(java.util.Map<java.lang.String, java.lang.String>, java.lang.String, java.lang.String, int, int, java.lang.String);
+  public static void getAverageNumberOfWordsInTrajDataset();
+  public static void getLatexDatasetTable();
+  protected static java.lang.String latexTaskMap(java.lang.String);
+  static {};
+}
+Compiled from "Model3LOOVerifier.java"
+public class commands.tests.Model3LOOVerifier {
+  public commands.tests.Model3LOOVerifier();
+  public static void main(java.lang.String[]);
+  public static java.util.Map<java.lang.String, java.lang.String> getPredictions(java.lang.String, java.lang.String);
+}
+Compiled from "Model3LOOVerifier.java"
+final class commands.tests.Model3LOOVerifier$1 implements java.io.FilenameFilter {
+  final java.lang.String val$ext;
+  commands.tests.Model3LOOVerifier$1(java.lang.String);
+  public boolean accept(java.io.File, java.lang.String);
+}
+Compiled from "Model3Tests.java"
+public class commands.tests.Model3Tests {
+  public commands.tests.Model3Tests();
+  public static void main(java.lang.String[]);
+}
+Compiled from "SokobanDomain.java"
+public class domain.singleagent.sokoban.SokobanDomain implements burlap.oomdp.auxiliary.DomainGenerator,burlap.oomdp.auxiliary.StateParser {
+  public static final java.lang.String XATTNAME;
+  public static final java.lang.String YATTNAME;
+  public static final java.lang.String TOPYATTNAME;
+  public static final java.lang.String BOTTOMXATTNAME;
+  public static final java.lang.String TOPXATTNAME;
+  public static final java.lang.String BOTTOMYATTNAME;
+  public static final java.lang.String COLORATTNAME;
+  public static final java.lang.String SHAPEATTNAME;
+  public static final java.lang.String AGENTCLASS;
+  public static final java.lang.String ROOMCLASS;
+  public static final java.lang.String BLOCKCLASS;
+  public static final java.lang.String DOORCLASS;
+  public static final java.lang.String ACTIONNORTH;
+  public static final java.lang.String ACTIONSOUTH;
+  public static final java.lang.String ACTIONEAST;
+  public static final java.lang.String ACTIONWEST;
+  public static final java.lang.String PFAGENTINROOM;
+  public static final java.lang.String PFBLOCKINROOM;
+  public static final java.lang.String PFISBLACK;
+  public static final java.lang.String PFISBLUE;
+  public static final java.lang.String PFISCYAN;
+  public static final java.lang.String PFISDARKGRAY;
+  public static final java.lang.String PFISGRAY;
+  public static final java.lang.String PFISGREEN;
+  public static final java.lang.String PFISLIGHTGRAY;
+  public static final java.lang.String PFISMAGENTA;
+  public static final java.lang.String PFISORANGE;
+  public static final java.lang.String PFISPINK;
+  public static final java.lang.String PFISRED;
+  public static final java.lang.String PFISWHITE;
+  public static final java.lang.String PFISYELLOW;
+  public static final java.lang.String PFISSTAR;
+  public static final java.lang.String PFISMOON;
+  public static final java.lang.String PFISCIRCLE;
+  public static final java.lang.String PFISSMILEY;
+  public static final java.lang.String PFISSQUARE;
+  public static final java.lang.String PFBLOCKNEXTTO;
+  public static final java.lang.String PFAGENTNEXTTO;
+  public static final java.lang.String PFROOMISBLACK;
+  public static final java.lang.String PFROOMISBLUE;
+  public static final java.lang.String PFROOMISCYAN;
+  public static final java.lang.String PFROOMISDARKGRAY;
+  public static final java.lang.String PFROOMISGRAY;
+  public static final java.lang.String PFROOMISGREEN;
+  public static final java.lang.String PFROOMISLIGHTGRAY;
+  public static final java.lang.String PFROOMISMAGENTA;
+  public static final java.lang.String PFROOMISORANGE;
+  public static final java.lang.String PFROOMISPINK;
+  public static final java.lang.String PFROOMISRED;
+  public static final java.lang.String PFROOMISWHITE;
+  public static final java.lang.String PFROOMISYELLOW;
+  public static final java.lang.String PFRCOLORCLASS;
+  public static final java.lang.String PFBCOLORCLASS;
+  public static final java.lang.String PFSHAPECLASS;
+  public static final java.lang.String PFPOSCLASS;
+  public static final java.lang.String PFBPOSCLASS;
+  public static int MINX;
+  public static int MAXX;
+  public static int MINY;
+  public static int MAXY;
+  public static int[][] MAP;
+  public static final java.util.ArrayList<java.lang.String> colors;
+  public static final java.util.ArrayList<java.lang.String> shapes;
+  public domain.singleagent.sokoban.SokobanDomain();
+  public static void main(java.lang.String[]);
+  public burlap.oomdp.core.Domain generateDomain();
+  public burlap.oomdp.core.State getCleanState();
+  public burlap.oomdp.core.State getCleanStateNBlocks(int);
+  public burlap.oomdp.core.State getCleanStateNBlocksNDoors(int, int);
+  public static void createMap(burlap.oomdp.core.State);
+  public static void move(burlap.oomdp.core.State, int, int);
+  public static boolean moveBlock(burlap.oomdp.core.State, burlap.oomdp.core.ObjectInstance, int, int);
+  public java.lang.String stateToString(burlap.oomdp.core.State);
+  public burlap.oomdp.core.State stringToState(java.lang.String);
+  public static void runTrajectory(domain.singleagent.sokoban.SokobanDomain, burlap.oomdp.core.Domain, burlap.oomdp.core.State, java.lang.String);
+  public static int getMaxX(burlap.oomdp.core.State);
+  public static int getMaxY(burlap.oomdp.core.State);
+  public static java.util.Map<domain.singleagent.sokoban.SokobanDomain$SokoSAS, java.lang.Double> getTransitionsFromSourceState(burlap.oomdp.core.State);
+  static {};
+}
+Compiled from "SokobanDomain.java"
+class domain.singleagent.sokoban.SokobanDomain$EastAction extends burlap.oomdp.singleagent.Action {
+  final domain.singleagent.sokoban.SokobanDomain this$0;
+  public domain.singleagent.sokoban.SokobanDomain$EastAction(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String);
+  public domain.singleagent.sokoban.SokobanDomain$EastAction(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String[]);
+  protected burlap.oomdp.core.State performActionHelper(burlap.oomdp.core.State, java.lang.String[]);
+  public java.util.List<burlap.oomdp.core.TransitionProbability> getTransitions(burlap.oomdp.core.State, java.lang.String[]);
+}
+Compiled from "SokobanDomain.java"
+class domain.singleagent.sokoban.SokobanDomain$InRoomPF extends burlap.oomdp.core.PropositionalFunction {
+  final domain.singleagent.sokoban.SokobanDomain this$0;
+  public domain.singleagent.sokoban.SokobanDomain$InRoomPF(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String);
+  public domain.singleagent.sokoban.SokobanDomain$InRoomPF(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String[]);
+  public boolean isTrue(burlap.oomdp.core.State, java.lang.String[]);
+}
+Compiled from "SokobanDomain.java"
+class domain.singleagent.sokoban.SokobanDomain$IsBlackPF extends burlap.oomdp.core.PropositionalFunction {
+  final domain.singleagent.sokoban.SokobanDomain this$0;
+  public domain.singleagent.sokoban.SokobanDomain$IsBlackPF(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String);
+  public domain.singleagent.sokoban.SokobanDomain$IsBlackPF(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String[]);
+  public boolean isTrue(burlap.oomdp.core.State, java.lang.String[]);
+}
+Compiled from "SokobanDomain.java"
+class domain.singleagent.sokoban.SokobanDomain$IsBluePF extends burlap.oomdp.core.PropositionalFunction {
+  final domain.singleagent.sokoban.SokobanDomain this$0;
+  public domain.singleagent.sokoban.SokobanDomain$IsBluePF(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String);
+  public domain.singleagent.sokoban.SokobanDomain$IsBluePF(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String[]);
+  public boolean isTrue(burlap.oomdp.core.State, java.lang.String[]);
+}
+Compiled from "SokobanDomain.java"
+class domain.singleagent.sokoban.SokobanDomain$IsCirclePF extends burlap.oomdp.core.PropositionalFunction {
+  final domain.singleagent.sokoban.SokobanDomain this$0;
+  public domain.singleagent.sokoban.SokobanDomain$IsCirclePF(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String);
+  public domain.singleagent.sokoban.SokobanDomain$IsCirclePF(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String[]);
+  public boolean isTrue(burlap.oomdp.core.State, java.lang.String[]);
+}
+Compiled from "SokobanDomain.java"
+class domain.singleagent.sokoban.SokobanDomain$IsCyanPF extends burlap.oomdp.core.PropositionalFunction {
+  final domain.singleagent.sokoban.SokobanDomain this$0;
+  public domain.singleagent.sokoban.SokobanDomain$IsCyanPF(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String);
+  public domain.singleagent.sokoban.SokobanDomain$IsCyanPF(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String[]);
+  public boolean isTrue(burlap.oomdp.core.State, java.lang.String[]);
+}
+Compiled from "SokobanDomain.java"
+class domain.singleagent.sokoban.SokobanDomain$IsDarkGrayPF extends burlap.oomdp.core.PropositionalFunction {
+  final domain.singleagent.sokoban.SokobanDomain this$0;
+  public domain.singleagent.sokoban.SokobanDomain$IsDarkGrayPF(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String);
+  public domain.singleagent.sokoban.SokobanDomain$IsDarkGrayPF(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String[]);
+  public boolean isTrue(burlap.oomdp.core.State, java.lang.String[]);
+}
+Compiled from "SokobanDomain.java"
+class domain.singleagent.sokoban.SokobanDomain$IsGrayPF extends burlap.oomdp.core.PropositionalFunction {
+  final domain.singleagent.sokoban.SokobanDomain this$0;
+  public domain.singleagent.sokoban.SokobanDomain$IsGrayPF(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String);
+  public domain.singleagent.sokoban.SokobanDomain$IsGrayPF(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String[]);
+  public boolean isTrue(burlap.oomdp.core.State, java.lang.String[]);
+}
+Compiled from "SokobanDomain.java"
+class domain.singleagent.sokoban.SokobanDomain$IsGreenPF extends burlap.oomdp.core.PropositionalFunction {
+  final domain.singleagent.sokoban.SokobanDomain this$0;
+  public domain.singleagent.sokoban.SokobanDomain$IsGreenPF(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String);
+  public domain.singleagent.sokoban.SokobanDomain$IsGreenPF(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String[]);
+  public boolean isTrue(burlap.oomdp.core.State, java.lang.String[]);
+}
+Compiled from "SokobanDomain.java"
+class domain.singleagent.sokoban.SokobanDomain$IsLightGrayPF extends burlap.oomdp.core.PropositionalFunction {
+  final domain.singleagent.sokoban.SokobanDomain this$0;
+  public domain.singleagent.sokoban.SokobanDomain$IsLightGrayPF(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String);
+  public domain.singleagent.sokoban.SokobanDomain$IsLightGrayPF(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String[]);
+  public boolean isTrue(burlap.oomdp.core.State, java.lang.String[]);
+}
+Compiled from "SokobanDomain.java"
+class domain.singleagent.sokoban.SokobanDomain$IsMagentaPF extends burlap.oomdp.core.PropositionalFunction {
+  final domain.singleagent.sokoban.SokobanDomain this$0;
+  public domain.singleagent.sokoban.SokobanDomain$IsMagentaPF(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String);
+  public domain.singleagent.sokoban.SokobanDomain$IsMagentaPF(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String[]);
+  public boolean isTrue(burlap.oomdp.core.State, java.lang.String[]);
+}
+Compiled from "SokobanDomain.java"
+class domain.singleagent.sokoban.SokobanDomain$IsMoonPF extends burlap.oomdp.core.PropositionalFunction {
+  final domain.singleagent.sokoban.SokobanDomain this$0;
+  public domain.singleagent.sokoban.SokobanDomain$IsMoonPF(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String);
+  public domain.singleagent.sokoban.SokobanDomain$IsMoonPF(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String[]);
+  public boolean isTrue(burlap.oomdp.core.State, java.lang.String[]);
+}
+Compiled from "SokobanDomain.java"
+class domain.singleagent.sokoban.SokobanDomain$IsOrangePF extends burlap.oomdp.core.PropositionalFunction {
+  final domain.singleagent.sokoban.SokobanDomain this$0;
+  public domain.singleagent.sokoban.SokobanDomain$IsOrangePF(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String);
+  public domain.singleagent.sokoban.SokobanDomain$IsOrangePF(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String[]);
+  public boolean isTrue(burlap.oomdp.core.State, java.lang.String[]);
+}
+Compiled from "SokobanDomain.java"
+class domain.singleagent.sokoban.SokobanDomain$IsPinkPF extends burlap.oomdp.core.PropositionalFunction {
+  final domain.singleagent.sokoban.SokobanDomain this$0;
+  public domain.singleagent.sokoban.SokobanDomain$IsPinkPF(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String);
+  public domain.singleagent.sokoban.SokobanDomain$IsPinkPF(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String[]);
+  public boolean isTrue(burlap.oomdp.core.State, java.lang.String[]);
+}
+Compiled from "SokobanDomain.java"
+class domain.singleagent.sokoban.SokobanDomain$IsRedPF extends burlap.oomdp.core.PropositionalFunction {
+  final domain.singleagent.sokoban.SokobanDomain this$0;
+  public domain.singleagent.sokoban.SokobanDomain$IsRedPF(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String);
+  public domain.singleagent.sokoban.SokobanDomain$IsRedPF(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String[]);
+  public boolean isTrue(burlap.oomdp.core.State, java.lang.String[]);
+}
+Compiled from "SokobanDomain.java"
+class domain.singleagent.sokoban.SokobanDomain$IsSmileyPF extends burlap.oomdp.core.PropositionalFunction {
+  final domain.singleagent.sokoban.SokobanDomain this$0;
+  public domain.singleagent.sokoban.SokobanDomain$IsSmileyPF(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String);
+  public domain.singleagent.sokoban.SokobanDomain$IsSmileyPF(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String[]);
+  public boolean isTrue(burlap.oomdp.core.State, java.lang.String[]);
+}
+Compiled from "SokobanDomain.java"
+class domain.singleagent.sokoban.SokobanDomain$IsSquarePF extends burlap.oomdp.core.PropositionalFunction {
+  final domain.singleagent.sokoban.SokobanDomain this$0;
+  public domain.singleagent.sokoban.SokobanDomain$IsSquarePF(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String);
+  public domain.singleagent.sokoban.SokobanDomain$IsSquarePF(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String[]);
+  public boolean isTrue(burlap.oomdp.core.State, java.lang.String[]);
+}
+Compiled from "SokobanDomain.java"
+class domain.singleagent.sokoban.SokobanDomain$IsStarPF extends burlap.oomdp.core.PropositionalFunction {
+  final domain.singleagent.sokoban.SokobanDomain this$0;
+  public domain.singleagent.sokoban.SokobanDomain$IsStarPF(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String);
+  public domain.singleagent.sokoban.SokobanDomain$IsStarPF(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String[]);
+  public boolean isTrue(burlap.oomdp.core.State, java.lang.String[]);
+}
+Compiled from "SokobanDomain.java"
+class domain.singleagent.sokoban.SokobanDomain$IsWhitePF extends burlap.oomdp.core.PropositionalFunction {
+  final domain.singleagent.sokoban.SokobanDomain this$0;
+  public domain.singleagent.sokoban.SokobanDomain$IsWhitePF(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String);
+  public domain.singleagent.sokoban.SokobanDomain$IsWhitePF(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String[]);
+  public boolean isTrue(burlap.oomdp.core.State, java.lang.String[]);
+}
+Compiled from "SokobanDomain.java"
+class domain.singleagent.sokoban.SokobanDomain$IsYellowPF extends burlap.oomdp.core.PropositionalFunction {
+  final domain.singleagent.sokoban.SokobanDomain this$0;
+  public domain.singleagent.sokoban.SokobanDomain$IsYellowPF(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String);
+  public domain.singleagent.sokoban.SokobanDomain$IsYellowPF(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String[]);
+  public boolean isTrue(burlap.oomdp.core.State, java.lang.String[]);
+}
+Compiled from "SokobanDomain.java"
+class domain.singleagent.sokoban.SokobanDomain$NextToPF extends burlap.oomdp.core.PropositionalFunction {
+  final domain.singleagent.sokoban.SokobanDomain this$0;
+  public domain.singleagent.sokoban.SokobanDomain$NextToPF(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String);
+  public domain.singleagent.sokoban.SokobanDomain$NextToPF(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String[]);
+  public boolean isTrue(burlap.oomdp.core.State, java.lang.String[]);
+}
+Compiled from "SokobanDomain.java"
+class domain.singleagent.sokoban.SokobanDomain$NorthAction extends burlap.oomdp.singleagent.Action {
+  final domain.singleagent.sokoban.SokobanDomain this$0;
+  public domain.singleagent.sokoban.SokobanDomain$NorthAction(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String);
+  public domain.singleagent.sokoban.SokobanDomain$NorthAction(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String[]);
+  protected burlap.oomdp.core.State performActionHelper(burlap.oomdp.core.State, java.lang.String[]);
+  public java.util.List<burlap.oomdp.core.TransitionProbability> getTransitions(burlap.oomdp.core.State, java.lang.String[]);
+}
+Compiled from "SokobanDomain.java"
+public class domain.singleagent.sokoban.SokobanDomain$SokoSAS {
+  public int sId;
+  public int aId;
+  public int sPrimeId;
+  public domain.singleagent.sokoban.SokobanDomain$SokoSAS(int, int, int);
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public static int getStateId(burlap.oomdp.core.State);
+  public static burlap.oomdp.core.State getStateFromId(int, burlap.oomdp.core.State);
+}
+Compiled from "SokobanDomain.java"
+class domain.singleagent.sokoban.SokobanDomain$SouthAction extends burlap.oomdp.singleagent.Action {
+  final domain.singleagent.sokoban.SokobanDomain this$0;
+  public domain.singleagent.sokoban.SokobanDomain$SouthAction(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String);
+  public domain.singleagent.sokoban.SokobanDomain$SouthAction(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String[]);
+  protected burlap.oomdp.core.State performActionHelper(burlap.oomdp.core.State, java.lang.String[]);
+  public java.util.List<burlap.oomdp.core.TransitionProbability> getTransitions(burlap.oomdp.core.State, java.lang.String[]);
+}
+Compiled from "SokobanDomain.java"
+class domain.singleagent.sokoban.SokobanDomain$WestAction extends burlap.oomdp.singleagent.Action {
+  final domain.singleagent.sokoban.SokobanDomain this$0;
+  public domain.singleagent.sokoban.SokobanDomain$WestAction(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String);
+  public domain.singleagent.sokoban.SokobanDomain$WestAction(domain.singleagent.sokoban.SokobanDomain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String[]);
+  protected burlap.oomdp.core.State performActionHelper(burlap.oomdp.core.State, java.lang.String[]);
+  public java.util.List<burlap.oomdp.core.TransitionProbability> getTransitions(burlap.oomdp.core.State, java.lang.String[]);
+}
+Compiled from "SokobanParser.java"
+public class domain.singleagent.sokoban.SokobanParser implements burlap.oomdp.auxiliary.StateParser {
+  domain.singleagent.sokoban.SokobanDomain constructor;
+  public domain.singleagent.sokoban.SokobanParser();
+  public java.lang.String stateToString(burlap.oomdp.core.State);
+  public burlap.oomdp.core.State stringToState(java.lang.String);
+}
+Compiled from "SokobanVisualizer.java"
+public class domain.singleagent.sokoban.SokobanVisualizer {
+  public domain.singleagent.sokoban.SokobanVisualizer();
+  public static burlap.oomdp.visualizer.Visualizer getVisualizer();
+}
+Compiled from "SokobanVisualizer.java"
+class domain.singleagent.sokoban.SokobanVisualizer$AgentPainter implements burlap.oomdp.visualizer.ObjectPainter {
+  domain.singleagent.sokoban.SokobanVisualizer$AgentPainter();
+  public void paintObject(java.awt.Graphics2D, burlap.oomdp.core.State, burlap.oomdp.core.ObjectInstance, float, float);
+}
+Compiled from "SokobanVisualizer.java"
+class domain.singleagent.sokoban.SokobanVisualizer$BlockPainter implements burlap.oomdp.visualizer.ObjectPainter {
+  domain.singleagent.sokoban.SokobanVisualizer$BlockPainter();
+  public void paintObject(java.awt.Graphics2D, burlap.oomdp.core.State, burlap.oomdp.core.ObjectInstance, float, float);
+}
+Compiled from "SokobanVisualizer.java"
+class domain.singleagent.sokoban.SokobanVisualizer$GoalPainter implements burlap.oomdp.visualizer.ObjectPainter {
+  domain.singleagent.sokoban.SokobanVisualizer$GoalPainter();
+  public void paintObject(java.awt.Graphics2D, burlap.oomdp.core.State, burlap.oomdp.core.ObjectInstance, float, float);
+}
+Compiled from "SokobanVisualizer.java"
+class domain.singleagent.sokoban.SokobanVisualizer$RoomPainter implements burlap.oomdp.visualizer.ObjectPainter {
+  domain.singleagent.sokoban.SokobanVisualizer$RoomPainter();
+  public void paintObject(java.awt.Graphics2D, burlap.oomdp.core.State, burlap.oomdp.core.ObjectInstance, float, float);
+}
+Compiled from "Sokoban2Domain.java"
+public class domain.singleagent.sokoban2.Sokoban2Domain implements burlap.oomdp.auxiliary.DomainGenerator {
+  public static final java.lang.String ATTX;
+  public static final java.lang.String ATTY;
+  public static final java.lang.String ATTDIR;
+  public static final java.lang.String ATTTOP;
+  public static final java.lang.String ATTLEFT;
+  public static final java.lang.String ATTBOTTOM;
+  public static final java.lang.String ATTRIGHT;
+  public static final java.lang.String ATTCOLOR;
+  public static final java.lang.String ATTSHAPE;
+  public static final java.lang.String CLASSAGENT;
+  public static final java.lang.String CLASSBLOCK;
+  public static final java.lang.String CLASSROOM;
+  public static final java.lang.String CLASSDOOR;
+  public static final java.lang.String ACTIONNORTH;
+  public static final java.lang.String ACTIONSOUTH;
+  public static final java.lang.String ACTIONEAST;
+  public static final java.lang.String ACTIONWEST;
+  public static final java.lang.String ACTIONPULL;
+  public static final java.lang.String PFAGENTINROOM;
+  public static final java.lang.String PFBLOCKINROOM;
+  public static final java.lang.String PFAGENTINDOOR;
+  public static final java.lang.String PFBLOCKINDOOR;
+  public static final java.lang.String PFWALLNORTH;
+  public static final java.lang.String PFWALLSOUTH;
+  public static final java.lang.String PFWALLEAST;
+  public static final java.lang.String PFWALLWEST;
+  public static final java.lang.String[] COLORS;
+  public static final java.lang.String[] SHAPES;
+  public static final java.lang.String[] DIRECTIONS;
+  protected static final java.lang.String PFRCOLORBASE;
+  protected static final java.lang.String PFBCOLORBASE;
+  protected static final java.lang.String PFBSHAPEBASE;
+  protected int maxX;
+  protected int maxY;
+  protected boolean includeDirectionAttribute;
+  protected boolean includePullAction;
+  protected boolean includeWallPFs;
+  public domain.singleagent.sokoban2.Sokoban2Domain();
+  public void includeWallPFs(boolean);
+  public void setMaxX(int);
+  public void setMaxY(int);
+  public void includeDirectionAttribute(boolean);
+  public void includePullAction(boolean);
+  public burlap.oomdp.core.Domain generateDomain();
+  protected void addRectAtts(burlap.oomdp.core.Domain, burlap.oomdp.core.ObjectClass);
+  public static java.lang.String PFRoomColorName(java.lang.String);
+  public static java.lang.String PFBlockColorName(java.lang.String);
+  public static java.lang.String PFBlockShapeName(java.lang.String);
+  public static burlap.oomdp.core.State getCleanState(burlap.oomdp.core.Domain, int, int, int);
+  public static burlap.oomdp.core.State getClassicState(burlap.oomdp.core.Domain);
+  public static void setAgent(burlap.oomdp.core.State, int, int);
+  public static void setAgent(burlap.oomdp.core.State, int, int, int);
+  public static void setBlockPos(burlap.oomdp.core.State, int, int, int);
+  public static void setBlock(burlap.oomdp.core.State, int, int, int, java.lang.String, java.lang.String);
+  public static void setBlock(burlap.oomdp.core.ObjectInstance, int, int, java.lang.String, java.lang.String);
+  public static void setRoom(burlap.oomdp.core.State, int, int, int, int, int, java.lang.String);
+  public static void setDoor(burlap.oomdp.core.State, int, int, int, int, int);
+  public static void setRoom(burlap.oomdp.core.ObjectInstance, int, int, int, int, java.lang.String);
+  public static void setRegion(burlap.oomdp.core.ObjectInstance, int, int, int, int);
+  protected static void createNInstances(burlap.oomdp.core.Domain, burlap.oomdp.core.State, java.lang.String, int);
+  public static int maxRoomXExtent(burlap.oomdp.core.State);
+  public static int maxRoomYExtent(burlap.oomdp.core.State);
+  protected static java.lang.String firstLetterCapped(java.lang.String);
+  public static burlap.oomdp.core.ObjectInstance roomContainingPoint(burlap.oomdp.core.State, int, int);
+  public static burlap.oomdp.core.ObjectInstance roomContainingPointIncludingBorder(burlap.oomdp.core.State, int, int);
+  public static burlap.oomdp.core.ObjectInstance doorContainingPoint(burlap.oomdp.core.State, int, int);
+  protected static burlap.oomdp.core.ObjectInstance regionContainingPoint(java.util.List<burlap.oomdp.core.ObjectInstance>, int, int, boolean);
+  public static boolean regionContainsPoint(burlap.oomdp.core.ObjectInstance, int, int, boolean);
+  public static burlap.oomdp.core.ObjectInstance blockAtPoint(burlap.oomdp.core.State, int, int);
+  public static boolean wallAt(burlap.oomdp.core.State, burlap.oomdp.core.ObjectInstance, int, int);
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "Sokoban2Domain.java"
+public class domain.singleagent.sokoban2.Sokoban2Domain$MovementAction extends burlap.oomdp.singleagent.Action {
+  protected int xdelta;
+  protected int ydelta;
+  final domain.singleagent.sokoban2.Sokoban2Domain this$0;
+  public domain.singleagent.sokoban2.Sokoban2Domain$MovementAction(domain.singleagent.sokoban2.Sokoban2Domain, java.lang.String, burlap.oomdp.core.Domain, int, int);
+  protected burlap.oomdp.core.State performActionHelper(burlap.oomdp.core.State, java.lang.String[]);
+  public java.util.List<burlap.oomdp.core.TransitionProbability> getTransitions(burlap.oomdp.core.State, java.lang.String[]);
+}
+Compiled from "Sokoban2Domain.java"
+public class domain.singleagent.sokoban2.Sokoban2Domain$PFInRegion extends burlap.oomdp.core.PropositionalFunction {
+  protected boolean countBoundary;
+  final domain.singleagent.sokoban2.Sokoban2Domain this$0;
+  public domain.singleagent.sokoban2.Sokoban2Domain$PFInRegion(domain.singleagent.sokoban2.Sokoban2Domain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String[], boolean);
+  public boolean isTrue(burlap.oomdp.core.State, java.lang.String[]);
+}
+Compiled from "Sokoban2Domain.java"
+public class domain.singleagent.sokoban2.Sokoban2Domain$PFIsColor extends burlap.oomdp.core.PropositionalFunction {
+  protected java.lang.String colorName;
+  final domain.singleagent.sokoban2.Sokoban2Domain this$0;
+  public domain.singleagent.sokoban2.Sokoban2Domain$PFIsColor(domain.singleagent.sokoban2.Sokoban2Domain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String[], java.lang.String);
+  public boolean isTrue(burlap.oomdp.core.State, java.lang.String[]);
+}
+Compiled from "Sokoban2Domain.java"
+public class domain.singleagent.sokoban2.Sokoban2Domain$PFIsShape extends burlap.oomdp.core.PropositionalFunction {
+  protected java.lang.String shapeName;
+  final domain.singleagent.sokoban2.Sokoban2Domain this$0;
+  public domain.singleagent.sokoban2.Sokoban2Domain$PFIsShape(domain.singleagent.sokoban2.Sokoban2Domain, java.lang.String, burlap.oomdp.core.Domain, java.lang.String[], java.lang.String);
+  public boolean isTrue(burlap.oomdp.core.State, java.lang.String[]);
+}
+Compiled from "Sokoban2Domain.java"
+public class domain.singleagent.sokoban2.Sokoban2Domain$PFWallTest extends burlap.oomdp.core.PropositionalFunction {
+  protected int dx;
+  protected int dy;
+  final domain.singleagent.sokoban2.Sokoban2Domain this$0;
+  public domain.singleagent.sokoban2.Sokoban2Domain$PFWallTest(domain.singleagent.sokoban2.Sokoban2Domain, java.lang.String, burlap.oomdp.core.Domain, int, int);
+  public boolean isTrue(burlap.oomdp.core.State, java.lang.String[]);
+}
+Compiled from "Sokoban2Domain.java"
+public class domain.singleagent.sokoban2.Sokoban2Domain$PullAction extends burlap.oomdp.singleagent.Action {
+  final domain.singleagent.sokoban2.Sokoban2Domain this$0;
+  public domain.singleagent.sokoban2.Sokoban2Domain$PullAction(domain.singleagent.sokoban2.Sokoban2Domain, burlap.oomdp.core.Domain);
+  public boolean applicableInState(burlap.oomdp.core.State, java.lang.String[]);
+  protected burlap.oomdp.core.State performActionHelper(burlap.oomdp.core.State, java.lang.String[]);
+  public java.util.List<burlap.oomdp.core.TransitionProbability> getTransitions(burlap.oomdp.core.State, java.lang.String[]);
+  protected burlap.oomdp.core.ObjectInstance blockToSwap(burlap.oomdp.core.State, int, int);
+}
+Compiled from "Sokoban2Parser.java"
+public class domain.singleagent.sokoban2.Sokoban2Parser implements burlap.oomdp.auxiliary.StateParser {
+  protected burlap.oomdp.core.Domain domain;
+  public domain.singleagent.sokoban2.Sokoban2Parser(burlap.oomdp.core.Domain);
+  public java.lang.String stateToString(burlap.oomdp.core.State);
+  public burlap.oomdp.core.State stringToState(java.lang.String);
+}
+Compiled from "Sokoban2Visualizer.java"
+public class domain.singleagent.sokoban2.Sokoban2Visualizer {
+  public domain.singleagent.sokoban2.Sokoban2Visualizer();
+  public static burlap.oomdp.visualizer.Visualizer getVisualizer(java.lang.String...);
+  public static burlap.oomdp.visualizer.StateRenderLayer getStateRenderLayer(java.lang.String...);
+  public static burlap.oomdp.visualizer.Visualizer getVisualizer(int, int, java.lang.String...);
+  public static burlap.oomdp.visualizer.StateRenderLayer getStateRenderLayer(int, int, java.lang.String...);
+  protected static java.awt.Color colorForName(java.lang.String);
+}
+Compiled from "Sokoban2Visualizer.java"
+public class domain.singleagent.sokoban2.Sokoban2Visualizer$AgentPainter implements burlap.oomdp.visualizer.ObjectPainter {
+  protected int maxX;
+  protected int maxY;
+  public domain.singleagent.sokoban2.Sokoban2Visualizer$AgentPainter();
+  public domain.singleagent.sokoban2.Sokoban2Visualizer$AgentPainter(int, int);
+  public void paintObject(java.awt.Graphics2D, burlap.oomdp.core.State, burlap.oomdp.core.ObjectInstance, float, float);
+}
+Compiled from "Sokoban2Visualizer.java"
+public class domain.singleagent.sokoban2.Sokoban2Visualizer$AgentPainterWithImages implements burlap.oomdp.visualizer.ObjectPainter,java.awt.image.ImageObserver {
+  protected int maxX;
+  protected int maxY;
+  java.util.Map<java.lang.String, java.awt.image.BufferedImage> dirToImage;
+  public domain.singleagent.sokoban2.Sokoban2Visualizer$AgentPainterWithImages(java.lang.String);
+  public domain.singleagent.sokoban2.Sokoban2Visualizer$AgentPainterWithImages(java.lang.String, int, int);
+  public void paintObject(java.awt.Graphics2D, burlap.oomdp.core.State, burlap.oomdp.core.ObjectInstance, float, float);
+  public boolean imageUpdate(java.awt.Image, int, int, int, int, int);
+}
+Compiled from "Sokoban2Visualizer.java"
+public class domain.singleagent.sokoban2.Sokoban2Visualizer$BlockPainter implements burlap.oomdp.visualizer.ObjectPainter,java.awt.image.ImageObserver {
+  protected int maxX;
+  protected int maxY;
+  protected java.util.Map<java.lang.String, java.awt.image.BufferedImage> shapeAndColToImages;
+  public domain.singleagent.sokoban2.Sokoban2Visualizer$BlockPainter();
+  public domain.singleagent.sokoban2.Sokoban2Visualizer$BlockPainter(int, int);
+  public domain.singleagent.sokoban2.Sokoban2Visualizer$BlockPainter(java.lang.String);
+  public domain.singleagent.sokoban2.Sokoban2Visualizer$BlockPainter(int, int, java.lang.String);
+  protected void initImages(java.lang.String);
+  public void paintObject(java.awt.Graphics2D, burlap.oomdp.core.State, burlap.oomdp.core.ObjectInstance, float, float);
+  protected java.lang.String shapeKey(java.lang.String, java.lang.String);
+  protected java.lang.String firstLetterCapped(java.lang.String);
+  public boolean imageUpdate(java.awt.Image, int, int, int, int, int);
+}
+Compiled from "Sokoban2Visualizer.java"
+public class domain.singleagent.sokoban2.Sokoban2Visualizer$DoorPainter implements burlap.oomdp.visualizer.ObjectPainter {
+  protected int maxX;
+  protected int maxY;
+  public domain.singleagent.sokoban2.Sokoban2Visualizer$DoorPainter();
+  public domain.singleagent.sokoban2.Sokoban2Visualizer$DoorPainter(int, int);
+  public void paintObject(java.awt.Graphics2D, burlap.oomdp.core.State, burlap.oomdp.core.ObjectInstance, float, float);
+}
+Compiled from "Sokoban2Visualizer.java"
+public class domain.singleagent.sokoban2.Sokoban2Visualizer$RoomPainter implements burlap.oomdp.visualizer.ObjectPainter {
+  protected int maxX;
+  protected int maxY;
+  public domain.singleagent.sokoban2.Sokoban2Visualizer$RoomPainter();
+  public domain.singleagent.sokoban2.Sokoban2Visualizer$RoomPainter(int, int);
+  public void paintObject(java.awt.Graphics2D, burlap.oomdp.core.State, burlap.oomdp.core.ObjectInstance, float, float);
+}
+Compiled from "SokobanOldToNewParser.java"
+public class domain.singleagent.sokoban2.SokobanOldToNewParser extends domain.singleagent.sokoban2.Sokoban2Parser {
+  public domain.singleagent.sokoban2.SokobanOldToNewParser(burlap.oomdp.core.Domain);
+  public burlap.oomdp.core.State stringToState(java.lang.String);
+}
+Compiled from "Dataset.java"
+public class em.Dataset {
+  protected java.util.List<java.util.List<generativemodel.RVariableValue>> allData;
+  public em.Dataset();
+  public void addDataInstance(java.util.List<generativemodel.RVariableValue>);
+  public java.util.List<generativemodel.RVariableValue> getDataInstance(int);
+  public int size();
+}
+Compiled from "EMAlgorithm.java"
+public class em.EMAlgorithm {
+  protected generativemodel.GenerativeModel generativeModel;
+  protected java.util.List<em.EMModule> emmodules;
+  protected java.util.List<em.EMAuxiliaryCode> aux;
+  protected em.Dataset dataset;
+  public int debugCode;
+  public em.EMAlgorithm(generativemodel.GenerativeModel);
+  public em.EMAlgorithm(generativemodel.GenerativeModel, em.Dataset);
+  public void setDataset(em.Dataset);
+  public void addEMModule(em.EMModule);
+  public void addAux(em.EMAuxiliaryCode);
+  public void runEM(int);
+  public void runEPass();
+  protected void runEStep(int, java.util.List<generativemodel.RVariableValue>);
+  protected void runMStep();
+}
+Compiled from "EMAuxiliaryCode.java"
+public interface em.EMAuxiliaryCode {
+  public abstract void preEStep();
+}
+Compiled from "EMModule.java"
+public abstract class em.EMModule {
+  protected generativemodel.GenerativeModel gm;
+  public em.EMModule();
+  public abstract void runEStep(int, java.util.List<generativemodel.RVariableValue>);
+  public abstract void runMStep();
+  public void setGenerativeModelSrc(generativemodel.GenerativeModel);
+}
+Compiled from "SokoMTExperiment.java"
+public class experiments.sokoban.SokoMTExperiment {
+  public static final java.lang.String IBM_MODEL;
+  public static final java.lang.String SCFG_MODEL;
+  public experiments.sokoban.SokoMTExperiment();
+  public static void main(java.lang.String[]);
+  public static void trainingTest(boolean, java.lang.String, java.lang.String);
+  public static void trainingTest(boolean, java.lang.String, java.lang.String, java.lang.String);
+  public static void LOOTest(boolean, java.lang.String, java.lang.String, java.lang.String);
+  public static void cacheIRLResultsFor(boolean, java.lang.String, java.lang.String, java.lang.String);
+  public static void createAndAddLanguageModel(commands.model3.weaklysupervisedinterface.WeaklySupervisedController, java.lang.String);
+  public static void createAndAddMTModel(commands.model3.weaklysupervisedinterface.WeaklySupervisedController, java.lang.String);
+  public static void evaluatePerformanceOnDataset(commands.model3.weaklysupervisedinterface.WeaklySupervisedController, java.util.List<commands.data.TrainingElement>, java.util.Map<java.lang.String, java.lang.String>);
+}
+Compiled from "SokobanControllerConstructor.java"
+public class experiments.sokoban.SokobanControllerConstructor {
+  public static final java.lang.String EXPERDATASETNODUPS;
+  public static final java.lang.String EXPERTDATASET;
+  public static final java.lang.String AMTFULLDATASET;
+  public static final java.lang.String AMTLIMITEDDATASET;
+  public domain.singleagent.sokoban2.Sokoban2Domain domainGenerator;
+  public burlap.oomdp.core.Domain domain;
+  public burlap.behavior.statehashing.StateHashFactory hashingFactory;
+  public java.util.List<commands.model3.GPConjunction> liftedTaskDescriptions;
+  public burlap.oomdp.auxiliary.StateParser sp;
+  public burlap.oomdp.auxiliary.StateParser cacheStateParser;
+  public experiments.sokoban.SokobanControllerConstructor(boolean, boolean);
+  public commands.model3.weaklysupervisedinterface.WeaklySupervisedController generateNewController();
+  public java.util.List<commands.data.TrainingElement> getTrainingDataset(java.lang.String);
+  public java.util.Map<java.lang.String, java.lang.String> getExpertDatasetRFLabels();
+  public java.util.Map<java.lang.String, java.lang.String> getTurkDatasetRFLabels();
+  protected static void addLabelMappingForRange(java.util.Map<java.lang.String, java.lang.String>, java.lang.String, java.lang.String, int, int, java.lang.String);
+}
+Compiled from "GMModule.java"
+public abstract class generativemodel.GMModule {
+  protected java.lang.String name;
+  protected generativemodel.GenerativeModel owner;
+  protected java.util.List<generativemodel.RVariable> rVariables;
+  protected java.util.Map<java.lang.String, generativemodel.RVariable> rVariableMap;
+  protected java.util.List<generativemodel.RVariable> externalDependencyList;
+  public abstract generativemodel.GMQueryResult computeProb(generativemodel.GMQuery);
+  public abstract generativemodel.ModelTrackedVarIterator getNonZeroProbIterator(generativemodel.RVariable, java.util.List<generativemodel.RVariableValue>);
+  public abstract java.util.Iterator<generativemodel.RVariableValue> getRVariableValuesFor(generativemodel.RVariable);
+  public generativemodel.GMModule(java.lang.String);
+  protected void initDataStructures();
+  public void setOwner(generativemodel.GenerativeModel);
+  void addVariable(generativemodel.RVariable);
+  public generativemodel.GMQueryResult getProb(generativemodel.GMQuery);
+  public generativemodel.GMQueryResult getLogProb(generativemodel.GMQuery);
+  public final generativemodel.RVariableValue extractValueForVariableFromConditions(generativemodel.RVariable, java.util.Collection<generativemodel.RVariableValue>);
+  public generativemodel.ModelTrackedVarIterator getNonInfiniteLogProbIterator(generativemodel.RVariable, java.util.List<generativemodel.RVariableValue>);
+  public boolean equals(java.lang.Object);
+}
+Compiled from "GMModule.java"
+class generativemodel.GMModule$1 extends generativemodel.ModelTrackedVarIterator {
+  final generativemodel.ModelTrackedVarIterator val$src;
+  final generativemodel.GMModule this$0;
+  generativemodel.GMModule$1(generativemodel.GMModule, generativemodel.ModelTrackedVarIterator);
+  public void remove();
+  public boolean hasNext();
+  public generativemodel.GMQueryResult varSpecificNext();
+}
+Compiled from "GMQuery.java"
+public class generativemodel.GMQuery {
+  protected java.util.Set<generativemodel.RVariableValue> queryValues;
+  protected java.util.Set<generativemodel.RVariableValue> condValues;
+  protected int hashValue;
+  protected boolean needsToRecomputeHash;
+  public generativemodel.GMQuery();
+  public generativemodel.GMQuery(generativemodel.GMQuery);
+  public void addQuery(generativemodel.RVariableValue);
+  public void addCondition(generativemodel.RVariableValue);
+  public void removeQuery(generativemodel.RVariableValue);
+  public void removeCondition(generativemodel.RVariableValue);
+  public void setConditions(java.util.Collection<generativemodel.RVariableValue>);
+  public int getNumQueryVars();
+  public int getNumConditionVars();
+  public java.util.Set<generativemodel.RVariableValue> getQueryValues();
+  public java.util.Set<generativemodel.RVariableValue> getConditionValues();
+  public generativemodel.RVariableValue getSingleQueryVar();
+  public generativemodel.RVariableValue getQueryForVariable(generativemodel.RVariable);
+  public generativemodel.RVariableValue getConditionForVariable(generativemodel.RVariable);
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  protected void computeHash();
+}
+Compiled from "GMQueryResult.java"
+public class generativemodel.GMQueryResult extends generativemodel.GMQuery {
+  public double probability;
+  public generativemodel.GMQueryResult();
+  public generativemodel.GMQueryResult(double);
+  public generativemodel.GMQueryResult(generativemodel.GMQuery);
+  public generativemodel.GMQueryResult(generativemodel.GMQuery, double);
+  public static generativemodel.GMQueryResult maxProb(java.util.List<generativemodel.GMQueryResult>);
+}
+Compiled from "GenerativeModel.java"
+public class generativemodel.GenerativeModel {
+  protected java.util.List<generativemodel.GMModule> modules;
+  protected java.util.Map<java.lang.String, generativemodel.GMModule> moduleMap;
+  protected java.util.List<generativemodel.RVariable> inputVariables;
+  protected java.util.Map<generativemodel.RVariable, generativemodel.GMModule> variableOwnerResolver;
+  protected java.util.Map<generativemodel.GMQuery, generativemodel.GMQueryResult> queryCache;
+  protected java.util.Map<generativemodel.GMQuery, generativemodel.GMQueryResult> logQueryCache;
+  public generativemodel.GenerativeModel();
+  public generativemodel.GenerativeModel(java.util.List<generativemodel.RVariable>);
+  public void addGMModule(generativemodel.GMModule);
+  public void emptyCache();
+  public generativemodel.RVariable getRVarWithName(java.lang.String);
+  public generativemodel.GMQueryResult getCachedResultForQuery(generativemodel.GMQuery);
+  public generativemodel.GMQueryResult getCachedLoggedResultForQuery(generativemodel.GMQuery);
+  public generativemodel.GMQueryResult getProb(generativemodel.GMQuery, boolean);
+  public generativemodel.GMQueryResult getLogProb(generativemodel.GMQuery, boolean);
+  public generativemodel.GMQueryResult getJointProbWithDiscreteMarginalization(generativemodel.GMQuery, java.lang.String[], boolean);
+  protected generativemodel.RVariable[] convertVarNamesArrayToVarArray(java.lang.String[]);
+  public generativemodel.GMQueryResult getJointProbWithDiscreteMarginalization(generativemodel.GMQuery, generativemodel.RVariable[], boolean);
+  public double getJointProbWithDiscreteMarginalizationHelper(generativemodel.GMQuery, generativemodel.RVariable[], int, boolean);
+  public generativemodel.GMQueryResult getJointLogProbWithDiscreteMarginalization(generativemodel.GMQuery, java.lang.String[], boolean);
+  public generativemodel.GMQueryResult getJointLogProbWithDiscreteMarginalization(generativemodel.GMQuery, generativemodel.RVariable[], boolean);
+  public double getJointLogProbWithDiscreteMarginalizationHelper(generativemodel.GMQuery, generativemodel.RVariable[], int, boolean);
+  protected generativemodel.GMQuery getSingleQueryWithOnlyParentConditionals(generativemodel.RVariableValue, java.util.Collection<generativemodel.RVariableValue>);
+  protected java.util.List<generativemodel.RVariableValue> onlyParentConditionals(generativemodel.RVariable, java.util.Collection<generativemodel.RVariableValue>);
+  public java.util.Iterator<generativemodel.GMQueryResult> getNonZeroIterator(generativemodel.RVariable, java.util.List<generativemodel.RVariableValue>, boolean);
+  public java.util.Iterator<generativemodel.GMQueryResult> getNonInfiniteLogProbIterator(generativemodel.RVariable, java.util.List<generativemodel.RVariableValue>, boolean);
+  public java.util.Iterator<generativemodel.RVariableValue> getRVariableValuesFor(generativemodel.RVariable);
+  public java.util.Set<generativemodel.RVariableValue> getNonInfiniteVariableValues(generativemodel.RVariable, java.util.List<generativemodel.RVariableValue>, java.lang.String[]);
+  public java.util.Set<generativemodel.RVariableValue> getNonInfiniteVariableValues(generativemodel.RVariable, java.util.List<generativemodel.RVariableValue>, generativemodel.RVariable[]);
+  public void getNonInfiniteVariableValuesHelper(generativemodel.RVariable, java.util.List<generativemodel.RVariableValue>, generativemodel.RVariable[], java.util.Set<generativemodel.RVariableValue>, int);
+  public void manualCache(generativemodel.GMQueryResult);
+  public void manualLogCache(generativemodel.GMQueryResult);
+  public generativemodel.GMModule getModuleWithName(java.lang.String);
+}
+Compiled from "LogSumExp.java"
+public class generativemodel.LogSumExp {
+  public generativemodel.LogSumExp();
+  public static void main(java.lang.String[]);
+  public static double logSumOfExponentials(double[]);
+  public static double logSumOfExponentials(java.util.List<java.lang.Double>);
+}
+Compiled from "ModelTrackedVarIterator.java"
+public abstract class generativemodel.ModelTrackedVarIterator implements java.util.Iterator<generativemodel.GMQueryResult> {
+  protected generativemodel.GenerativeModel modelOwner;
+  protected boolean cache;
+  public generativemodel.ModelTrackedVarIterator();
+  public abstract generativemodel.GMQueryResult varSpecificNext();
+  public final generativemodel.GMQueryResult next();
+  public void GMIniter(generativemodel.GenerativeModel, boolean);
+  public java.lang.Object next();
+}
+Compiled from "RVParameterIndex.java"
+public abstract class generativemodel.RVParameterIndex {
+  protected int hashCodeValue;
+  protected boolean needsToRecomputeHashCode;
+  public generativemodel.RVParameterIndex();
+  public abstract void computeHashCode();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+}
+Compiled from "RVariable.java"
+public class generativemodel.RVariable {
+  protected java.lang.String name;
+  protected generativemodel.GMModule moduleOwner;
+  protected java.util.List<generativemodel.RVariable> dependencies;
+  protected java.util.Map<generativemodel.RVParameterIndex, java.lang.Double> parameters;
+  protected boolean isInput;
+  public generativemodel.RVariable(java.lang.String, generativemodel.GMModule);
+  public generativemodel.RVariable(java.lang.String);
+  protected void RVarInit(java.lang.String, generativemodel.GMModule, java.util.List<generativemodel.RVariable>, java.util.Map<generativemodel.RVParameterIndex, java.lang.Double>, boolean);
+  public java.lang.String getName();
+  public generativemodel.GMModule getOwner();
+  public boolean isInput();
+  public void setDependencies(java.util.List<generativemodel.RVariable>);
+  public void addDependency(generativemodel.RVariable);
+  public java.util.List<generativemodel.RVariable> getDependencies();
+  public int geNumStoredParams();
+  public java.lang.Double getParameter(generativemodel.RVParameterIndex);
+  public double getParameter(generativemodel.RVParameterIndex, double);
+  public void setParam(generativemodel.RVParameterIndex, double);
+  public boolean isDependentOn(generativemodel.RVariable);
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+}
+Compiled from "RVariableValue.java"
+public abstract class generativemodel.RVariableValue {
+  protected generativemodel.RVariable owner;
+  public generativemodel.RVariableValue();
+  public abstract boolean valueEquals(generativemodel.RVariableValue);
+  public abstract java.lang.String stringRep();
+  public void setOwner(generativemodel.RVariable);
+  public generativemodel.RVariable getOwner();
+  public boolean isValueFor(generativemodel.RVariable);
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public java.lang.String toString();
+  public static generativemodel.RVariableValue extractValueForVariable(generativemodel.RVariable, java.util.List<generativemodel.RVariableValue>);
+}
+Compiled from "LPInfRejectQRIterator.java"
+public class generativemodel.common.LPInfRejectQRIterator extends generativemodel.ModelTrackedVarIterator {
+  java.util.Iterator<generativemodel.RVariableValue> varIter;
+  java.util.List<generativemodel.RVariableValue> conditions;
+  generativemodel.GMQueryResult nextResult;
+  public generativemodel.common.LPInfRejectQRIterator(java.util.Iterator<generativemodel.RVariableValue>, java.util.List<generativemodel.RVariableValue>, generativemodel.GenerativeModel);
+  public boolean hasNext();
+  public void remove();
+  public generativemodel.GMQueryResult varSpecificNext();
+  protected void setNext();
+}
+Compiled from "MNPEMModule.java"
+public abstract class generativemodel.common.MNPEMModule extends generativemodel.GMModule {
+  public generativemodel.common.MNPEMModule(java.lang.String);
+  protected double computeMNParamProb(generativemodel.RVariableValue, java.util.Set<generativemodel.RVariableValue>);
+  protected java.util.List<generativemodel.RVariableValue> getVarDependencySet(generativemodel.RVariableValue, java.util.Set<generativemodel.RVariableValue>);
+}
+Compiled from "MultiNomialRVPI.java"
+public class generativemodel.common.MultiNomialRVPI extends generativemodel.RVParameterIndex {
+  protected generativemodel.RVariableValue generatedVarValue;
+  protected java.util.List<generativemodel.RVariableValue> conditionalVarValues;
+  public generativemodel.common.MultiNomialRVPI();
+  public generativemodel.common.MultiNomialRVPI(generativemodel.RVariableValue);
+  public generativemodel.common.MultiNomialRVPI(generativemodel.RVariableValue, java.util.List<generativemodel.RVariableValue>);
+  public void setGenerated(generativemodel.RVariableValue);
+  public void setConditiona(java.util.List<generativemodel.RVariableValue>);
+  public void set(generativemodel.RVariableValue, java.util.List<generativemodel.RVariableValue>);
+  public void addConditional(generativemodel.RVariableValue);
+  public void computeHashCode();
+}
+Compiled from "P0RejectQRIterator.java"
+public class generativemodel.common.P0RejectQRIterator extends generativemodel.ModelTrackedVarIterator {
+  java.util.Iterator<generativemodel.RVariableValue> varIter;
+  java.util.List<generativemodel.RVariableValue> conditions;
+  generativemodel.GMQueryResult nextResult;
+  public generativemodel.common.P0RejectQRIterator(java.util.Iterator<generativemodel.RVariableValue>, java.util.List<generativemodel.RVariableValue>, generativemodel.GenerativeModel);
+  public boolean hasNext();
+  public void remove();
+  public generativemodel.GMQueryResult varSpecificNext();
+  protected void setNext();
+}
+Compiled from "Conjunction.java"
+public class logicalexpressions.Conjunction extends logicalexpressions.LogicalExpression {
+  public logicalexpressions.Conjunction(logicalexpressions.LogicalExpression...);
+  public logicalexpressions.Conjunction(java.util.List<logicalexpressions.LogicalExpression>);
+  public void addChild(logicalexpressions.LogicalExpression);
+  public logicalexpressions.LogicalExpression duplicate();
+  public boolean evaluateIn(burlap.oomdp.core.State);
+  protected void remapVariablesInThisExpression(java.util.Map<java.lang.String, java.lang.String>);
+  public java.lang.String toString();
+}
+Compiled from "Disjunction.java"
+public class logicalexpressions.Disjunction extends logicalexpressions.LogicalExpression {
+  public logicalexpressions.Disjunction(logicalexpressions.LogicalExpression...);
+  public logicalexpressions.Disjunction(java.util.List<logicalexpressions.LogicalExpression>);
+  public void addChild(logicalexpressions.LogicalExpression);
+  public logicalexpressions.LogicalExpression duplicate();
+  public boolean evaluateIn(burlap.oomdp.core.State);
+  protected void remapVariablesInThisExpression(java.util.Map<java.lang.String, java.lang.String>);
+  public java.lang.String toString();
+}
+Compiled from "LogicalExpression.java"
+public abstract class logicalexpressions.LogicalExpression {
+  protected java.util.Map<java.lang.String, java.lang.String> variablesAndTypes;
+  protected logicalexpressions.LogicalExpression parentExpression;
+  protected java.util.List<logicalexpressions.LogicalExpression> childExpressions;
+  protected java.lang.String name;
+  public logicalexpressions.LogicalExpression();
+  public abstract logicalexpressions.LogicalExpression duplicate();
+  public abstract boolean evaluateIn(burlap.oomdp.core.State);
+  protected abstract void remapVariablesInThisExpression(java.util.Map<java.lang.String, java.lang.String>);
+  public logicalexpressions.LogicalExpression duplicateWithVariableRemap(java.util.Map<java.lang.String, java.lang.String>);
+  public java.util.Map<java.lang.String, java.lang.String> getVariableAndTypes();
+  public logicalexpressions.LogicalExpression getParentExpression();
+  public void setParentExpression(logicalexpressions.LogicalExpression);
+  public void setName(java.lang.String);
+  public java.util.List<logicalexpressions.LogicalExpression> getChildExpressions();
+  protected void addVariable(java.lang.String, java.lang.String);
+  protected void remapVariables(java.util.Map<java.lang.String, java.lang.String>);
+  protected void remapVariablesInVariableAndTypeMap(java.util.Map<java.lang.String, java.lang.String>);
+  protected void remapVariablesDownStream(java.util.Map<java.lang.String, java.lang.String>);
+  protected void remapVariablesUpStream(java.util.Map<java.lang.String, java.lang.String>);
+}
+Compiled from "LogicalExpression.java"
+public class logicalexpressions.LogicalExpression$VariableAlreadyInUseException extends java.lang.RuntimeException {
+  public final java.lang.String variableName;
+  final logicalexpressions.LogicalExpression this$0;
+  public logicalexpressions.LogicalExpression$VariableAlreadyInUseException(logicalexpressions.LogicalExpression, java.lang.String);
+}
+Compiled from "Negation.java"
+public class logicalexpressions.Negation extends logicalexpressions.LogicalExpression {
+  public logicalexpressions.Negation();
+  public logicalexpressions.Negation(logicalexpressions.LogicalExpression);
+  public logicalexpressions.LogicalExpression duplicate();
+  public boolean evaluateIn(burlap.oomdp.core.State);
+  protected void remapVariablesInThisExpression(java.util.Map<java.lang.String, java.lang.String>);
+  public void setChild(logicalexpressions.LogicalExpression);
+  public java.lang.String toString();
+}
+Compiled from "PFAtom.java"
+public class logicalexpressions.PFAtom extends logicalexpressions.LogicalExpression {
+  protected burlap.oomdp.core.GroundedProp gp;
+  public logicalexpressions.PFAtom(burlap.oomdp.core.GroundedProp);
+  public logicalexpressions.PFAtom();
+  public burlap.oomdp.core.GroundedProp getGroundedProp();
+  public void setGroundedProp(burlap.oomdp.core.GroundedProp);
+  public logicalexpressions.LogicalExpression duplicate();
+  public boolean evaluateIn(burlap.oomdp.core.State);
+  protected void remapVariablesInThisExpression(java.util.Map<java.lang.String, java.lang.String>);
+  public java.lang.String toString();
+}

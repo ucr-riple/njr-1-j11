@@ -1,0 +1,1053 @@
+Compiled from "CmdMessage.java"
+public class farom.astroiddriver.CmdMessage {
+  public static final int MESSAGE_SIZE;
+  public static final int TICKS_OFF;
+  public static final int TICKS_FOCUS;
+  public static final int TICKS_EXPOSE;
+  public static final int TICKS_EXPOSE_FOCUS;
+  protected float speedRA;
+  protected float speedDE;
+  protected int ticks;
+  public farom.astroiddriver.CmdMessage(float, float, int);
+  public farom.astroiddriver.CmdMessage();
+  public byte[] getBytes();
+  public float getSpeedRA();
+  public void setSpeedRA(float);
+  public float getSpeedDE();
+  public void setSpeedDE(float);
+  public int getTicks();
+  public void setTicks(int);
+}
+Compiled from "INDIAstroidDriver.java"
+public abstract class farom.astroiddriver.INDIAstroidDriver extends laazotea.indi.driver.INDIDriver implements laazotea.indi.driver.INDIConnectionHandler {
+  protected farom.astroiddriver.StatusMessage lastStatusMessage;
+  protected farom.astroiddriver.CmdMessage command;
+  java.util.Timer intervalometer;
+  java.util.TimerTask currentTask;
+  public farom.astroiddriver.INDIAstroidDriver(java.io.InputStream, java.io.OutputStream);
+  public java.lang.String getName();
+  public void processNewBLOBValue(laazotea.indi.driver.INDIBLOBProperty, java.util.Date, laazotea.indi.driver.INDIBLOBElementAndValue[]);
+  public void processNewNumberValue(laazotea.indi.driver.INDINumberProperty, java.util.Date, laazotea.indi.driver.INDINumberElementAndValue[]);
+  public void processNewSwitchValue(laazotea.indi.driver.INDISwitchProperty, java.util.Date, laazotea.indi.driver.INDISwitchElementAndValue[]);
+  public void processNewTextValue(laazotea.indi.driver.INDITextProperty, java.util.Date, laazotea.indi.driver.INDITextElementAndValue[]);
+  public abstract void driverConnect(java.util.Date) throws laazotea.indi.INDIException;
+  protected void onConnected();
+  public abstract void driverDisconnect(java.util.Date) throws laazotea.indi.INDIException;
+  protected void onDisconnected();
+  public double getSiderealTime();
+  protected abstract void sendCommand();
+  protected void updateStatus();
+  static laazotea.indi.driver.INDINumberElement access$000(farom.astroiddriver.INDIAstroidDriver);
+  static boolean access$100(farom.astroiddriver.INDIAstroidDriver);
+  static laazotea.indi.driver.INDILightElement access$200(farom.astroiddriver.INDIAstroidDriver);
+  static laazotea.indi.driver.INDINumberProperty access$300(farom.astroiddriver.INDIAstroidDriver);
+  static void access$400(farom.astroiddriver.INDIAstroidDriver, laazotea.indi.driver.INDIProperty) throws laazotea.indi.INDIException;
+  static laazotea.indi.driver.INDILightProperty access$500(farom.astroiddriver.INDIAstroidDriver);
+  static void access$600(farom.astroiddriver.INDIAstroidDriver, laazotea.indi.driver.INDIProperty) throws laazotea.indi.INDIException;
+  static laazotea.indi.driver.INDINumberProperty access$700(farom.astroiddriver.INDIAstroidDriver);
+  static laazotea.indi.driver.INDISwitchElement access$800(farom.astroiddriver.INDIAstroidDriver);
+  static void access$900(farom.astroiddriver.INDIAstroidDriver, laazotea.indi.driver.INDIProperty) throws laazotea.indi.INDIException;
+  static laazotea.indi.driver.INDISwitchProperty access$1000(farom.astroiddriver.INDIAstroidDriver);
+  static void access$1100(farom.astroiddriver.INDIAstroidDriver, laazotea.indi.driver.INDIProperty) throws laazotea.indi.INDIException;
+  static laazotea.indi.driver.INDISwitchElement access$1200(farom.astroiddriver.INDIAstroidDriver);
+  static void access$1300(farom.astroiddriver.INDIAstroidDriver, laazotea.indi.driver.INDIProperty) throws laazotea.indi.INDIException;
+  static void access$1400(farom.astroiddriver.INDIAstroidDriver, laazotea.indi.driver.INDIProperty) throws laazotea.indi.INDIException;
+  static laazotea.indi.driver.INDINumberProperty access$1500(farom.astroiddriver.INDIAstroidDriver);
+  static laazotea.indi.driver.INDISwitchElement access$1600(farom.astroiddriver.INDIAstroidDriver);
+  static void access$1700(farom.astroiddriver.INDIAstroidDriver, laazotea.indi.driver.INDIProperty) throws laazotea.indi.INDIException;
+  static laazotea.indi.driver.INDISwitchProperty access$1800(farom.astroiddriver.INDIAstroidDriver);
+  static void access$1900(farom.astroiddriver.INDIAstroidDriver, laazotea.indi.driver.INDIProperty) throws laazotea.indi.INDIException;
+  static laazotea.indi.driver.INDISwitchElement access$2000(farom.astroiddriver.INDIAstroidDriver);
+  static void access$2100(farom.astroiddriver.INDIAstroidDriver, laazotea.indi.driver.INDIProperty) throws laazotea.indi.INDIException;
+  static void access$2200(farom.astroiddriver.INDIAstroidDriver, laazotea.indi.driver.INDIProperty) throws laazotea.indi.INDIException;
+  static void access$2300(farom.astroiddriver.INDIAstroidDriver, int);
+  static laazotea.indi.driver.INDINumberElement access$2400(farom.astroiddriver.INDIAstroidDriver);
+  static void access$2500(farom.astroiddriver.INDIAstroidDriver, laazotea.indi.driver.INDIProperty) throws laazotea.indi.INDIException;
+  static laazotea.indi.driver.INDINumberProperty access$2600(farom.astroiddriver.INDIAstroidDriver);
+  static void access$2700(farom.astroiddriver.INDIAstroidDriver, laazotea.indi.driver.INDIProperty) throws laazotea.indi.INDIException;
+  static laazotea.indi.driver.INDINumberElement access$3100(farom.astroiddriver.INDIAstroidDriver);
+  static laazotea.indi.driver.INDINumberElement access$3300(farom.astroiddriver.INDIAstroidDriver);
+  static laazotea.indi.driver.INDINumberElement access$3400(farom.astroiddriver.INDIAstroidDriver);
+  static laazotea.indi.driver.INDINumberProperty access$3500(farom.astroiddriver.INDIAstroidDriver);
+  static void access$3600(farom.astroiddriver.INDIAstroidDriver, laazotea.indi.driver.INDIProperty) throws laazotea.indi.INDIException;
+  static laazotea.indi.driver.INDINumberElement access$3700(farom.astroiddriver.INDIAstroidDriver);
+  static void access$3800(farom.astroiddriver.INDIAstroidDriver, laazotea.indi.driver.INDIProperty) throws laazotea.indi.INDIException;
+}
+Compiled from "INDIAstroidDriver.java"
+class farom.astroiddriver.INDIAstroidDriver$1 extends java.util.TimerTask {
+  final farom.astroiddriver.INDIAstroidDriver this$0;
+  farom.astroiddriver.INDIAstroidDriver$1(farom.astroiddriver.INDIAstroidDriver);
+  public void run();
+}
+Compiled from "INDIAstroidDriver.java"
+class farom.astroiddriver.INDIAstroidDriver$2 extends java.util.TimerTask {
+  final farom.astroiddriver.INDIAstroidDriver this$0;
+  farom.astroiddriver.INDIAstroidDriver$2(farom.astroiddriver.INDIAstroidDriver);
+  public void run();
+}
+Compiled from "INDIAstroidDriver.java"
+class farom.astroiddriver.INDIAstroidDriver$3 extends java.util.TimerTask {
+  final farom.astroiddriver.INDIAstroidDriver this$0;
+  farom.astroiddriver.INDIAstroidDriver$3(farom.astroiddriver.INDIAstroidDriver);
+  public void run();
+}
+Compiled from "INDIAstroidDriver.java"
+class farom.astroiddriver.INDIAstroidDriver$4 extends java.util.TimerTask {
+  final farom.astroiddriver.INDIAstroidDriver this$0;
+  farom.astroiddriver.INDIAstroidDriver$4(farom.astroiddriver.INDIAstroidDriver);
+  public void run();
+}
+Compiled from "INDIAstroidDriver.java"
+class farom.astroiddriver.INDIAstroidDriver$5 extends java.util.TimerTask {
+  final farom.astroiddriver.INDIAstroidDriver this$0;
+  farom.astroiddriver.INDIAstroidDriver$5(farom.astroiddriver.INDIAstroidDriver);
+  public void run();
+}
+Compiled from "INDIAstroidDriver.java"
+class farom.astroiddriver.INDIAstroidDriver$6 extends java.util.TimerTask {
+  final laazotea.indi.driver.INDIProperty val$prop;
+  final double val$speed;
+  final double val$duration;
+  final farom.astroiddriver.INDIAstroidDriver this$0;
+  farom.astroiddriver.INDIAstroidDriver$6(farom.astroiddriver.INDIAstroidDriver, laazotea.indi.driver.INDIProperty, double, double);
+  public void run();
+}
+Compiled from "INDIAstroidDriver.java"
+class farom.astroiddriver.INDIAstroidDriver$CompleteTask extends java.util.TimerTask {
+  final farom.astroiddriver.INDIAstroidDriver this$0;
+  public void run();
+  farom.astroiddriver.INDIAstroidDriver$CompleteTask(farom.astroiddriver.INDIAstroidDriver, farom.astroiddriver.INDIAstroidDriver$1);
+}
+Compiled from "INDIAstroidDriver.java"
+class farom.astroiddriver.INDIAstroidDriver$ExposeTask extends java.util.TimerTask {
+  final farom.astroiddriver.INDIAstroidDriver this$0;
+  public void run();
+  farom.astroiddriver.INDIAstroidDriver$ExposeTask(farom.astroiddriver.INDIAstroidDriver, farom.astroiddriver.INDIAstroidDriver$1);
+}
+Compiled from "INDIAstroidDriver.java"
+class farom.astroiddriver.INDIAstroidDriver$MirrorRaisingTask extends java.util.TimerTask {
+  final farom.astroiddriver.INDIAstroidDriver this$0;
+  public void run();
+  farom.astroiddriver.INDIAstroidDriver$MirrorRaisingTask(farom.astroiddriver.INDIAstroidDriver, farom.astroiddriver.INDIAstroidDriver$1);
+}
+Compiled from "INDIAstroidDriver.java"
+class farom.astroiddriver.INDIAstroidDriver$MirrorReleaseTask extends java.util.TimerTask {
+  final farom.astroiddriver.INDIAstroidDriver this$0;
+  public void run();
+  farom.astroiddriver.INDIAstroidDriver$MirrorReleaseTask(farom.astroiddriver.INDIAstroidDriver, farom.astroiddriver.INDIAstroidDriver$1);
+}
+Compiled from "StatusMessage.java"
+public class farom.astroiddriver.StatusMessage {
+  public static final int MESSAGE_SIZE;
+  protected long time;
+  protected int msCount;
+  protected int stepHA;
+  protected int stepDE;
+  protected float uStepHA;
+  protected float uStepDE;
+  protected float moveSpeedRA;
+  protected float moveSpeedDE;
+  protected int ticks;
+  public farom.astroiddriver.StatusMessage(byte[]);
+  public static boolean verify(byte[]);
+  farom.astroiddriver.StatusMessage();
+  public java.lang.String toString();
+  public int getTicks();
+  public long getTime();
+  public int getMsCount();
+  public int getStepHA();
+  public int getStepDE();
+  public float getuStepRA();
+  public float getuStepDE();
+  public float getMoveSpeedRA();
+  public float getMoveSpeedDE();
+  public double getHA();
+  public double getDE();
+}
+Compiled from "Base64.java"
+public class laazotea.indi.Base64 {
+  public static final int NO_OPTIONS;
+  public static final int ENCODE;
+  public static final int DECODE;
+  public static final int GZIP;
+  public static final int DONT_GUNZIP;
+  public static final int DO_BREAK_LINES;
+  public static final int URL_SAFE;
+  public static final int ORDERED;
+  static final boolean $assertionsDisabled;
+  public static void encode(java.nio.ByteBuffer, java.nio.ByteBuffer);
+  public static void encode(java.nio.ByteBuffer, java.nio.CharBuffer);
+  public static java.lang.String encodeObject(java.io.Serializable) throws java.io.IOException;
+  public static java.lang.String encodeObject(java.io.Serializable, int) throws java.io.IOException;
+  public static java.lang.String encodeBytes(byte[]);
+  public static java.lang.String encodeBytes(byte[], int) throws java.io.IOException;
+  public static java.lang.String encodeBytes(byte[], int, int);
+  public static java.lang.String encodeBytes(byte[], int, int, int) throws java.io.IOException;
+  public static byte[] encodeBytesToBytes(byte[]);
+  public static byte[] encodeBytesToBytes(byte[], int, int, int) throws java.io.IOException;
+  public static byte[] decode(byte[]) throws java.io.IOException;
+  public static byte[] decode(byte[], int, int, int) throws java.io.IOException;
+  public static byte[] decode(java.lang.String) throws java.io.IOException;
+  public static byte[] decode(java.lang.String, int) throws java.io.IOException;
+  public static java.lang.Object decodeToObject(java.lang.String) throws java.io.IOException, java.lang.ClassNotFoundException;
+  public static java.lang.Object decodeToObject(java.lang.String, int, java.lang.ClassLoader) throws java.io.IOException, java.lang.ClassNotFoundException;
+  public static void encodeToFile(byte[], java.lang.String) throws java.io.IOException;
+  public static void decodeToFile(java.lang.String, java.lang.String) throws java.io.IOException;
+  public static byte[] decodeFromFile(java.lang.String) throws java.io.IOException;
+  public static java.lang.String encodeFromFile(java.lang.String) throws java.io.IOException;
+  public static void encodeFileToFile(java.lang.String, java.lang.String) throws java.io.IOException;
+  public static void decodeFileToFile(java.lang.String, java.lang.String) throws java.io.IOException;
+  static byte[] access$000(int);
+  static byte[] access$100(byte[], int, int, byte[], int, int);
+  static int access$200(byte[], int, byte[], int, int);
+  static byte[] access$300(byte[], byte[], int, int);
+  static {};
+}
+Compiled from "Base64.java"
+final class laazotea.indi.Base64$1 extends java.io.ObjectInputStream {
+  final java.lang.ClassLoader val$loader;
+  laazotea.indi.Base64$1(java.io.InputStream, java.lang.ClassLoader);
+  public java.lang.Class<?> resolveClass(java.io.ObjectStreamClass) throws java.io.IOException, java.lang.ClassNotFoundException;
+}
+Compiled from "Base64.java"
+public class laazotea.indi.Base64$InputStream extends java.io.FilterInputStream {
+  public laazotea.indi.Base64$InputStream(java.io.InputStream);
+  public laazotea.indi.Base64$InputStream(java.io.InputStream, int);
+  public int read() throws java.io.IOException;
+  public int read(byte[], int, int) throws java.io.IOException;
+}
+Compiled from "Base64.java"
+public class laazotea.indi.Base64$OutputStream extends java.io.FilterOutputStream {
+  public laazotea.indi.Base64$OutputStream(java.io.OutputStream);
+  public laazotea.indi.Base64$OutputStream(java.io.OutputStream, int);
+  public void write(int) throws java.io.IOException;
+  public void write(byte[], int, int) throws java.io.IOException;
+  public void flushBase64() throws java.io.IOException;
+  public void close() throws java.io.IOException;
+  public void suspendEncoding() throws java.io.IOException;
+  public void resumeEncoding();
+}
+Compiled from "ClassInstantiator.java"
+public class laazotea.indi.ClassInstantiator {
+  public laazotea.indi.ClassInstantiator();
+  public static java.lang.Object instantiate(java.lang.String[], java.lang.Object[]) throws laazotea.indi.INDIException;
+}
+Compiled from "Constants.java"
+public class laazotea.indi.Constants {
+  public laazotea.indi.Constants();
+  public static laazotea.indi.Constants$LightStates parseLightState(java.lang.String) throws java.lang.IllegalArgumentException;
+  public static boolean isValidLightState(java.lang.String);
+  public static java.lang.String getLightStateAsString(laazotea.indi.Constants$LightStates);
+  public static laazotea.indi.Constants$SwitchStatus parseSwitchStatus(java.lang.String) throws java.lang.IllegalArgumentException;
+  public static boolean isValidSwitchStatus(java.lang.String);
+  public static java.lang.String getSwitchStatusAsString(laazotea.indi.Constants$SwitchStatus);
+  public static laazotea.indi.Constants$PropertyPermissions parsePropertyPermission(java.lang.String) throws java.lang.IllegalArgumentException;
+  public static boolean isValidPropertyPermission(java.lang.String);
+  public static java.lang.String getPropertyPermissionAsString(laazotea.indi.Constants$PropertyPermissions);
+  public static laazotea.indi.Constants$PropertyStates parsePropertyState(java.lang.String) throws java.lang.IllegalArgumentException;
+  public static boolean isValidPropertyState(java.lang.String);
+  public static java.lang.String getPropertyStateAsString(laazotea.indi.Constants$PropertyStates);
+  public static laazotea.indi.Constants$SwitchRules parseSwitchRule(java.lang.String) throws java.lang.IllegalArgumentException;
+  public static boolean isValidSwitchRule(java.lang.String);
+  public static java.lang.String getSwitchRuleAsString(laazotea.indi.Constants$SwitchRules);
+  public static laazotea.indi.Constants$BLOBEnables parseBLOBEnable(java.lang.String) throws java.lang.IllegalArgumentException;
+  public static boolean isValidBLOBEnable(java.lang.String);
+  public static java.lang.String getBLOBEnableAsString(laazotea.indi.Constants$BLOBEnables);
+}
+Compiled from "Constants.java"
+public final class laazotea.indi.Constants$BLOBEnables extends java.lang.Enum<laazotea.indi.Constants$BLOBEnables> {
+  public static final laazotea.indi.Constants$BLOBEnables NEVER;
+  public static final laazotea.indi.Constants$BLOBEnables ALSO;
+  public static final laazotea.indi.Constants$BLOBEnables ONLY;
+  public static laazotea.indi.Constants$BLOBEnables[] values();
+  public static laazotea.indi.Constants$BLOBEnables valueOf(java.lang.String);
+  static {};
+}
+Compiled from "Constants.java"
+public final class laazotea.indi.Constants$LightStates extends java.lang.Enum<laazotea.indi.Constants$LightStates> {
+  public static final laazotea.indi.Constants$LightStates IDLE;
+  public static final laazotea.indi.Constants$LightStates OK;
+  public static final laazotea.indi.Constants$LightStates BUSY;
+  public static final laazotea.indi.Constants$LightStates ALERT;
+  public static laazotea.indi.Constants$LightStates[] values();
+  public static laazotea.indi.Constants$LightStates valueOf(java.lang.String);
+  static {};
+}
+Compiled from "Constants.java"
+public final class laazotea.indi.Constants$PropertyPermissions extends java.lang.Enum<laazotea.indi.Constants$PropertyPermissions> {
+  public static final laazotea.indi.Constants$PropertyPermissions RO;
+  public static final laazotea.indi.Constants$PropertyPermissions RW;
+  public static final laazotea.indi.Constants$PropertyPermissions WO;
+  public static laazotea.indi.Constants$PropertyPermissions[] values();
+  public static laazotea.indi.Constants$PropertyPermissions valueOf(java.lang.String);
+  static {};
+}
+Compiled from "Constants.java"
+public final class laazotea.indi.Constants$PropertyStates extends java.lang.Enum<laazotea.indi.Constants$PropertyStates> {
+  public static final laazotea.indi.Constants$PropertyStates IDLE;
+  public static final laazotea.indi.Constants$PropertyStates OK;
+  public static final laazotea.indi.Constants$PropertyStates BUSY;
+  public static final laazotea.indi.Constants$PropertyStates ALERT;
+  public static laazotea.indi.Constants$PropertyStates[] values();
+  public static laazotea.indi.Constants$PropertyStates valueOf(java.lang.String);
+  static {};
+}
+Compiled from "Constants.java"
+public final class laazotea.indi.Constants$SwitchRules extends java.lang.Enum<laazotea.indi.Constants$SwitchRules> {
+  public static final laazotea.indi.Constants$SwitchRules ONE_OF_MANY;
+  public static final laazotea.indi.Constants$SwitchRules AT_MOST_ONE;
+  public static final laazotea.indi.Constants$SwitchRules ANY_OF_MANY;
+  public static laazotea.indi.Constants$SwitchRules[] values();
+  public static laazotea.indi.Constants$SwitchRules valueOf(java.lang.String);
+  static {};
+}
+Compiled from "Constants.java"
+public final class laazotea.indi.Constants$SwitchStatus extends java.lang.Enum<laazotea.indi.Constants$SwitchStatus> {
+  public static final laazotea.indi.Constants$SwitchStatus OFF;
+  public static final laazotea.indi.Constants$SwitchStatus ON;
+  public static laazotea.indi.Constants$SwitchStatus[] values();
+  public static laazotea.indi.Constants$SwitchStatus valueOf(java.lang.String);
+  static {};
+}
+Compiled from "INDIBLOBValue.java"
+public class laazotea.indi.INDIBLOBValue {
+  public laazotea.indi.INDIBLOBValue(byte[], java.lang.String);
+  public laazotea.indi.INDIBLOBValue(org.w3c.dom.Element) throws java.lang.IllegalArgumentException;
+  public byte[] getBLOBData();
+  public java.lang.String getBase64BLOBData();
+  public java.lang.String getFormat();
+  public int getSize();
+  public void saveBLOBData(java.io.File) throws java.io.IOException;
+}
+Compiled from "INDIDate.java"
+public class laazotea.indi.INDIDate {
+  public laazotea.indi.INDIDate();
+  public laazotea.indi.INDIDate(int, int, int);
+  public laazotea.indi.INDIDate(int, int, int, int, int, double);
+  public int getYears();
+  public final void setYears(int);
+  public int getMonths();
+  public final void setMonths(int);
+  public int getDays();
+  public final void setDays(int);
+  public int getHours();
+  public final void setHours(int);
+  public int getMinutes();
+  public final void setMinutes(int);
+  public double getSeconds();
+  public final void setSeconds(double);
+  public java.lang.String toString();
+}
+Compiled from "INDIDateFormat.java"
+public class laazotea.indi.INDIDateFormat {
+  public laazotea.indi.INDIDateFormat();
+  public static java.util.Date parseTimestamp(java.lang.String);
+  public static java.lang.String formatTimestamp(java.util.Date);
+  public static java.lang.String getCurrentTimestamp();
+  static {};
+}
+Compiled from "INDIException.java"
+public class laazotea.indi.INDIException extends java.lang.Exception {
+  public laazotea.indi.INDIException(java.lang.String);
+}
+Compiled from "INDIProtocolParser.java"
+public interface laazotea.indi.INDIProtocolParser {
+  public abstract void parseXML(org.w3c.dom.Document);
+  public abstract java.io.InputStream getInputStream();
+  public abstract void finishReader();
+}
+Compiled from "INDIProtocolReader.java"
+public class laazotea.indi.INDIProtocolReader extends java.lang.Thread {
+  public laazotea.indi.INDIProtocolReader(laazotea.indi.INDIProtocolParser);
+  public void run();
+  public void setStop(boolean);
+}
+Compiled from "INDIProtocolReader.java"
+class laazotea.indi.INDIProtocolReader$1 implements org.xml.sax.ErrorHandler {
+  final laazotea.indi.INDIProtocolReader this$0;
+  laazotea.indi.INDIProtocolReader$1(laazotea.indi.INDIProtocolReader);
+  public void warning(org.xml.sax.SAXParseException) throws org.xml.sax.SAXException;
+  public void fatalError(org.xml.sax.SAXParseException) throws org.xml.sax.SAXException;
+  public void error(org.xml.sax.SAXParseException) throws org.xml.sax.SAXException;
+}
+Compiled from "INDISexagesimalFormatter.java"
+public class laazotea.indi.INDISexagesimalFormatter {
+  public laazotea.indi.INDISexagesimalFormatter(java.lang.String) throws java.lang.IllegalArgumentException;
+  public java.lang.String getFormat();
+  public double parseSexagesimal2(java.lang.String) throws java.lang.IllegalArgumentException;
+  public double parseSexagesimal(java.lang.String) throws java.lang.IllegalArgumentException;
+  public java.lang.String format(java.lang.Double);
+}
+Compiled from "XMLToString.java"
+public class laazotea.indi.XMLToString {
+  public laazotea.indi.XMLToString();
+  public static java.lang.String transform(org.w3c.dom.Element);
+}
+Compiled from "INDIBLOBElement.java"
+public class laazotea.indi.driver.INDIBLOBElement extends laazotea.indi.driver.INDIElement {
+  public laazotea.indi.driver.INDIBLOBElement(laazotea.indi.driver.INDIBLOBProperty, java.lang.String, java.lang.String) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDIBLOBElement(laazotea.indi.driver.INDIBLOBProperty, java.lang.String) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDIBLOBProperty getProperty();
+  public laazotea.indi.INDIBLOBValue getValue();
+  public void setValue(java.lang.Object) throws java.lang.IllegalArgumentException;
+  public java.lang.String getXMLOneElement();
+  public java.lang.String getNameAndValueAsString();
+  protected java.lang.String getXMLDefElement();
+  public java.lang.Object parseOneValue(org.w3c.dom.Element);
+  public java.lang.Object getValue();
+  public laazotea.indi.driver.INDIProperty getProperty();
+}
+Compiled from "INDIBLOBElementAndValue.java"
+public class laazotea.indi.driver.INDIBLOBElementAndValue implements laazotea.indi.driver.INDIElementAndValue {
+  protected laazotea.indi.driver.INDIBLOBElementAndValue(laazotea.indi.driver.INDIBLOBElement, laazotea.indi.INDIBLOBValue);
+  public laazotea.indi.driver.INDIBLOBElement getElement();
+  public laazotea.indi.INDIBLOBValue getValue();
+  public java.lang.Object getValue();
+  public laazotea.indi.driver.INDIElement getElement();
+}
+Compiled from "INDIBLOBProperty.java"
+public class laazotea.indi.driver.INDIBLOBProperty extends laazotea.indi.driver.INDIProperty {
+  public laazotea.indi.driver.INDIBLOBProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, int) throws java.lang.IllegalArgumentException;
+  public static laazotea.indi.driver.INDIBLOBProperty createSaveableBLOBProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, int) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDIBLOBProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions) throws java.lang.IllegalArgumentException;
+  public static laazotea.indi.driver.INDIBLOBProperty createSaveableBLOBProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDIBLOBProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions) throws java.lang.IllegalArgumentException;
+  public static laazotea.indi.driver.INDIBLOBProperty createSaveableBLOBProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDIBLOBProperty(laazotea.indi.driver.INDIDriver, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions) throws java.lang.IllegalArgumentException;
+  public static laazotea.indi.driver.INDIBLOBProperty createSaveableBLOBProperty(laazotea.indi.driver.INDIDriver, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDIBLOBElement getElement(java.lang.String);
+  protected java.lang.String getXMLPropertyDefinitionInit();
+  protected java.lang.String getXMLPropertyDefinitionInit(java.lang.String);
+  protected java.lang.String getXMLPropertyDefinitionEnd();
+  protected java.lang.String getXMLPropertySetInit();
+  protected java.lang.String getXMLPropertySetInit(java.lang.String);
+  protected java.lang.String getXMLPropertySetEnd();
+  public laazotea.indi.driver.INDIElement getElement(java.lang.String);
+}
+Compiled from "INDIConnectionHandler.java"
+public interface laazotea.indi.driver.INDIConnectionHandler {
+  public abstract void driverConnect(java.util.Date) throws laazotea.indi.INDIException;
+  public abstract void driverDisconnect(java.util.Date) throws laazotea.indi.INDIException;
+}
+Compiled from "INDIDriver.java"
+public abstract class laazotea.indi.driver.INDIDriver implements laazotea.indi.INDIProtocolParser {
+  protected laazotea.indi.driver.INDIDriver(java.io.InputStream, java.io.OutputStream);
+  protected void registerSubdriver(laazotea.indi.driver.INDIDriver);
+  protected void unregisterSubdriver(laazotea.indi.driver.INDIDriver);
+  public abstract java.lang.String getName();
+  public void startListening();
+  public boolean isStarted();
+  public void finishReader();
+  protected java.io.PrintWriter getOut();
+  protected boolean isConnected();
+  public void parseXML(org.w3c.dom.Document);
+  public abstract void processNewTextValue(laazotea.indi.driver.INDITextProperty, java.util.Date, laazotea.indi.driver.INDITextElementAndValue[]);
+  public abstract void processNewSwitchValue(laazotea.indi.driver.INDISwitchProperty, java.util.Date, laazotea.indi.driver.INDISwitchElementAndValue[]);
+  public abstract void processNewNumberValue(laazotea.indi.driver.INDINumberProperty, java.util.Date, laazotea.indi.driver.INDINumberElementAndValue[]);
+  public abstract void processNewBLOBValue(laazotea.indi.driver.INDIBLOBProperty, java.util.Date, laazotea.indi.driver.INDIBLOBElementAndValue[]);
+  public void sendAllProperties();
+  protected void propertiesRequested();
+  protected void addProperty(laazotea.indi.driver.INDIProperty);
+  protected void addProperty(laazotea.indi.driver.INDIProperty, java.lang.String);
+  protected void updateProperty(laazotea.indi.driver.INDIProperty) throws laazotea.indi.INDIException;
+  protected void updateProperty(laazotea.indi.driver.INDIProperty, java.lang.String) throws laazotea.indi.INDIException;
+  protected void removeProperty(laazotea.indi.driver.INDIProperty);
+  protected void removeProperty(laazotea.indi.driver.INDIProperty, java.lang.String);
+  protected void removeDevice(java.lang.String);
+  protected laazotea.indi.driver.INDIProperty getProperty(java.lang.String);
+  protected laazotea.indi.driver.INDISwitchProperty getConnectionProperty();
+  public java.util.ArrayList<laazotea.indi.driver.INDIProperty> getPropertiesAsList();
+  public void printMessage(java.lang.String);
+  public java.io.InputStream getInputStream();
+  public java.io.OutputStream getOutputStream();
+  public void isBeingDestroyed();
+}
+Compiled from "INDIDriverRunner.java"
+public class laazotea.indi.driver.INDIDriverRunner {
+  public laazotea.indi.driver.INDIDriverRunner();
+  public static void main(java.lang.String[]);
+}
+Compiled from "INDIElement.java"
+public abstract class laazotea.indi.driver.INDIElement implements java.io.Serializable {
+  protected laazotea.indi.driver.INDIElement(laazotea.indi.driver.INDIProperty, java.lang.String, java.lang.String) throws java.lang.IllegalArgumentException;
+  protected laazotea.indi.driver.INDIElement(laazotea.indi.driver.INDIProperty, java.lang.String) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDIProperty getProperty();
+  public java.lang.String getLabel();
+  public java.lang.String getName();
+  public abstract java.lang.Object getValue();
+  public abstract java.lang.Object parseOneValue(org.w3c.dom.Element);
+  public abstract void setValue(java.lang.Object) throws java.lang.IllegalArgumentException;
+  protected abstract java.lang.String getXMLOneElement();
+  protected abstract java.lang.String getXMLDefElement();
+  public abstract java.lang.String getNameAndValueAsString();
+}
+Compiled from "INDIElementAndValue.java"
+public interface laazotea.indi.driver.INDIElementAndValue {
+  public abstract laazotea.indi.driver.INDIElement getElement();
+  public abstract java.lang.Object getValue();
+}
+Compiled from "INDIFilterWheelDriver.java"
+public abstract class laazotea.indi.driver.INDIFilterWheelDriver extends laazotea.indi.driver.INDIDriver {
+  public abstract int getNumberOfFilters();
+  public laazotea.indi.driver.INDIFilterWheelDriver(java.io.InputStream, java.io.OutputStream);
+  protected void initializeStandardProperties();
+  public void processNewTextValue(laazotea.indi.driver.INDITextProperty, java.util.Date, laazotea.indi.driver.INDITextElementAndValue[]);
+  public void processNewNumberValue(laazotea.indi.driver.INDINumberProperty, java.util.Date, laazotea.indi.driver.INDINumberElementAndValue[]);
+  protected abstract void changeFilter(int);
+  protected void filterHasBeenChanged(int);
+  protected void setBusy();
+  protected void showFilterSlotAndNameProperties();
+  protected void hideFilterSlotAndNameProperties();
+}
+Compiled from "INDIFocuserDriver.java"
+public abstract class laazotea.indi.driver.INDIFocuserDriver extends laazotea.indi.driver.INDIDriver {
+  public laazotea.indi.driver.INDIFocuserDriver(java.io.InputStream, java.io.OutputStream);
+  protected void initializeStandardProperties();
+  protected int getMaximumSpeed();
+  public void speedHasBeenChanged();
+  public abstract int getMaximumAbsPos();
+  public abstract int getMinimumAbsPos();
+  public abstract int getInitialAbsPos();
+  public abstract void absolutePositionHasBeenChanged();
+  public void stopHasBeenRequested();
+  protected void showSpeedProperty();
+  protected void showStopFocusingProperty();
+  protected void hideSpeedProperty();
+  protected void hideStopFocusingProperty();
+  protected int getCurrentSpeed();
+  protected int getDesiredAbsPosition();
+  protected void finalPositionReached();
+  protected void desiredSpeedSet();
+  protected void stopped();
+  protected void positionChanged(int);
+  protected void speedChanged(int);
+  public void processNewSwitchValue(laazotea.indi.driver.INDISwitchProperty, java.util.Date, laazotea.indi.driver.INDISwitchElementAndValue[]);
+  public void processNewNumberValue(laazotea.indi.driver.INDINumberProperty, java.util.Date, laazotea.indi.driver.INDINumberElementAndValue[]);
+}
+Compiled from "INDILightElement.java"
+public class laazotea.indi.driver.INDILightElement extends laazotea.indi.driver.INDIElement {
+  public laazotea.indi.driver.INDILightElement(laazotea.indi.driver.INDILightProperty, java.lang.String, java.lang.String, laazotea.indi.Constants$LightStates);
+  public laazotea.indi.driver.INDILightElement(laazotea.indi.driver.INDILightProperty, java.lang.String, laazotea.indi.Constants$LightStates);
+  public laazotea.indi.driver.INDILightProperty getProperty();
+  public laazotea.indi.Constants$LightStates getValue();
+  public void setValue(java.lang.Object) throws java.lang.IllegalArgumentException;
+  public java.lang.String getXMLOneElement();
+  public java.lang.String getNameAndValueAsString();
+  protected java.lang.String getXMLDefElement();
+  public java.lang.Object parseOneValue(org.w3c.dom.Element);
+  public java.lang.Object getValue();
+  public laazotea.indi.driver.INDIProperty getProperty();
+}
+Compiled from "INDILightProperty.java"
+public class laazotea.indi.driver.INDILightProperty extends laazotea.indi.driver.INDIProperty {
+  public laazotea.indi.driver.INDILightProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates) throws java.lang.IllegalArgumentException;
+  public static laazotea.indi.driver.INDILightProperty createSaveableLightProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDILightProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates) throws java.lang.IllegalArgumentException;
+  public static laazotea.indi.driver.INDILightProperty createSaveableLightProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDILightProperty(laazotea.indi.driver.INDIDriver, java.lang.String, laazotea.indi.Constants$PropertyStates) throws java.lang.IllegalArgumentException;
+  public static laazotea.indi.driver.INDILightProperty createSaveableLightProperty(laazotea.indi.driver.INDIDriver, java.lang.String, laazotea.indi.Constants$PropertyStates) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDILightElement getElement(java.lang.String);
+  protected java.lang.String getXMLPropertyDefinitionInit();
+  protected java.lang.String getXMLPropertyDefinitionInit(java.lang.String);
+  protected java.lang.String getXMLPropertyDefinitionEnd();
+  protected java.lang.String getXMLPropertySetInit();
+  protected java.lang.String getXMLPropertySetInit(java.lang.String);
+  protected java.lang.String getXMLPropertySetEnd();
+  public laazotea.indi.driver.INDIElement getElement(java.lang.String);
+}
+Compiled from "INDINotLoadableDriver.java"
+public interface laazotea.indi.driver.INDINotLoadableDriver {
+}
+Compiled from "INDINumberElement.java"
+public class laazotea.indi.driver.INDINumberElement extends laazotea.indi.driver.INDIElement {
+  public laazotea.indi.driver.INDINumberElement(laazotea.indi.driver.INDINumberProperty, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDINumberElement(laazotea.indi.driver.INDINumberProperty, java.lang.String, java.lang.String, double, double, double, double, java.lang.String) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDINumberElement(laazotea.indi.driver.INDINumberProperty, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDINumberElement(laazotea.indi.driver.INDINumberProperty, java.lang.String, double, double, double, double, java.lang.String) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDINumberProperty getProperty();
+  public double getMax();
+  public java.lang.String getMaxAsString();
+  public double getMin();
+  public java.lang.String getMinAsString();
+  public java.lang.String getNumberFormat();
+  public double getStep();
+  public java.lang.String getStepAsString();
+  public java.lang.String getValueAsString();
+  public java.lang.Double getValue();
+  public void setValue(java.lang.Object) throws java.lang.IllegalArgumentException;
+  public java.lang.String getXMLOneElement();
+  public java.lang.String getNameAndValueAsString();
+  protected java.lang.String getXMLDefElement();
+  public java.lang.Object parseOneValue(org.w3c.dom.Element);
+  public java.lang.Object getValue();
+  public laazotea.indi.driver.INDIProperty getProperty();
+}
+Compiled from "INDINumberElementAndValue.java"
+public class laazotea.indi.driver.INDINumberElementAndValue implements laazotea.indi.driver.INDIElementAndValue {
+  public laazotea.indi.driver.INDINumberElementAndValue(laazotea.indi.driver.INDINumberElement, java.lang.Double);
+  public laazotea.indi.driver.INDINumberElement getElement();
+  public java.lang.Double getValue();
+  public java.lang.Object getValue();
+  public laazotea.indi.driver.INDIElement getElement();
+}
+Compiled from "INDINumberProperty.java"
+public class laazotea.indi.driver.INDINumberProperty extends laazotea.indi.driver.INDIProperty {
+  public laazotea.indi.driver.INDINumberProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, int) throws java.lang.IllegalArgumentException;
+  public static laazotea.indi.driver.INDINumberProperty createSaveableNumberProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, int) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDINumberProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions) throws java.lang.IllegalArgumentException;
+  public static laazotea.indi.driver.INDINumberProperty createSaveableNumberProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDINumberProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions) throws java.lang.IllegalArgumentException;
+  public static laazotea.indi.driver.INDINumberProperty createSaveableNumberProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDINumberProperty(laazotea.indi.driver.INDIDriver, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions) throws java.lang.IllegalArgumentException;
+  public static laazotea.indi.driver.INDINumberProperty createSaveableNumberProperty(laazotea.indi.driver.INDIDriver, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDINumberElement getElement(java.lang.String);
+  protected java.lang.String getXMLPropertyDefinitionInit();
+  protected java.lang.String getXMLPropertyDefinitionInit(java.lang.String);
+  protected java.lang.String getXMLPropertyDefinitionEnd();
+  protected java.lang.String getXMLPropertySetInit();
+  protected java.lang.String getXMLPropertySetInit(java.lang.String);
+  protected java.lang.String getXMLPropertySetEnd();
+  public laazotea.indi.driver.INDIElement getElement(java.lang.String);
+}
+Compiled from "INDIOneElementBLOBProperty.java"
+public class laazotea.indi.driver.INDIOneElementBLOBProperty extends laazotea.indi.driver.INDIBLOBProperty {
+  public laazotea.indi.driver.INDIOneElementBLOBProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, int) throws java.lang.IllegalArgumentException;
+  public static laazotea.indi.driver.INDIOneElementBLOBProperty createSaveableOneElementBLOBProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, int) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDIOneElementBLOBProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions) throws java.lang.IllegalArgumentException;
+  public static laazotea.indi.driver.INDIOneElementBLOBProperty createSaveableOneElementBLOBProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDIOneElementBLOBProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions) throws java.lang.IllegalArgumentException;
+  public static laazotea.indi.driver.INDIOneElementBLOBProperty createSaveableOneElementBLOBProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDIOneElementBLOBProperty(laazotea.indi.driver.INDIDriver, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions) throws java.lang.IllegalArgumentException;
+  public static laazotea.indi.driver.INDIOneElementBLOBProperty createSaveableOneElementBLOBProperty(laazotea.indi.driver.INDIDriver, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.INDIBLOBValue getValue();
+  public void setValue(java.lang.Object) throws java.lang.IllegalArgumentException;
+}
+Compiled from "INDIOneElementLightProperty.java"
+public class laazotea.indi.driver.INDIOneElementLightProperty extends laazotea.indi.driver.INDILightProperty {
+  public laazotea.indi.driver.INDIOneElementLightProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$LightStates) throws java.lang.IllegalArgumentException;
+  public static laazotea.indi.driver.INDIOneElementLightProperty createSaveableOneElementLightProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$LightStates) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDIOneElementLightProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$LightStates) throws java.lang.IllegalArgumentException;
+  public static laazotea.indi.driver.INDIOneElementLightProperty createSaveableOneElementLightProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$LightStates) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDIOneElementLightProperty(laazotea.indi.driver.INDIDriver, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$LightStates) throws java.lang.IllegalArgumentException;
+  public static laazotea.indi.driver.INDIOneElementLightProperty createSaveableOneElementLightProperty(laazotea.indi.driver.INDIDriver, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$LightStates) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.Constants$LightStates getValue();
+  public void setValue(java.lang.Object) throws java.lang.IllegalArgumentException;
+}
+Compiled from "INDIOneElementNumberProperty.java"
+public class laazotea.indi.driver.INDIOneElementNumberProperty extends laazotea.indi.driver.INDINumberProperty {
+  public laazotea.indi.driver.INDIOneElementNumberProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, int, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDIOneElementNumberProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, int, double, double, double, java.lang.String, double) throws java.lang.IllegalArgumentException;
+  public static laazotea.indi.driver.INDIOneElementNumberProperty createSaveableOneElementNumberProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, int, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String) throws java.lang.IllegalArgumentException;
+  public static laazotea.indi.driver.INDIOneElementNumberProperty createSaveableOneElementNumberProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, int, double, double, double, java.lang.String, double) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDIOneElementNumberProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDIOneElementNumberProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, double, double, double, java.lang.String, double) throws java.lang.IllegalArgumentException;
+  public static laazotea.indi.driver.INDIOneElementNumberProperty createSaveableOneElementNumberProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String) throws java.lang.IllegalArgumentException;
+  public static laazotea.indi.driver.INDIOneElementNumberProperty createSaveableOneElementNumberProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, double, double, double, java.lang.String, double) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDIOneElementNumberProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDIOneElementNumberProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, double, double, double, java.lang.String, double) throws java.lang.IllegalArgumentException;
+  public static laazotea.indi.driver.INDIOneElementNumberProperty createSaveableOneElementNumberProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String) throws java.lang.IllegalArgumentException;
+  public static laazotea.indi.driver.INDIOneElementNumberProperty createSaveableOneElementNumberProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, double, double, double, java.lang.String, double) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDIOneElementNumberProperty(laazotea.indi.driver.INDIDriver, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDIOneElementNumberProperty(laazotea.indi.driver.INDIDriver, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, double, double, double, java.lang.String, double) throws java.lang.IllegalArgumentException;
+  public static laazotea.indi.driver.INDIOneElementNumberProperty createSaveableOneElementNumberProperty(laazotea.indi.driver.INDIDriver, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String) throws java.lang.IllegalArgumentException;
+  public static laazotea.indi.driver.INDIOneElementNumberProperty createSaveableOneElementNumberProperty(laazotea.indi.driver.INDIDriver, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, double, double, double, java.lang.String, double) throws java.lang.IllegalArgumentException;
+  public java.lang.Double getValue();
+  public void setValue(java.lang.Object) throws java.lang.IllegalArgumentException;
+}
+Compiled from "INDIOneElementTextProperty.java"
+public class laazotea.indi.driver.INDIOneElementTextProperty extends laazotea.indi.driver.INDITextProperty {
+  public laazotea.indi.driver.INDIOneElementTextProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, int, java.lang.String) throws java.lang.IllegalArgumentException;
+  public static laazotea.indi.driver.INDIOneElementTextProperty createSaveableOneElementTextProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, int, java.lang.String) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDIOneElementTextProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, java.lang.String) throws java.lang.IllegalArgumentException;
+  public static laazotea.indi.driver.INDIOneElementTextProperty createSaveableOneElementTextProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, java.lang.String) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDIOneElementTextProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, java.lang.String) throws java.lang.IllegalArgumentException;
+  public static laazotea.indi.driver.INDIOneElementTextProperty createSaveableOneElementTextProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, java.lang.String) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDIOneElementTextProperty(laazotea.indi.driver.INDIDriver, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, java.lang.String) throws java.lang.IllegalArgumentException;
+  public static laazotea.indi.driver.INDIOneElementTextProperty createSaveableOneElementTextProperty(laazotea.indi.driver.INDIDriver, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, java.lang.String) throws java.lang.IllegalArgumentException;
+  public java.lang.String getValue();
+  public void setValue(java.lang.Object) throws java.lang.IllegalArgumentException;
+}
+Compiled from "INDIPortProperty.java"
+public class laazotea.indi.driver.INDIPortProperty extends laazotea.indi.driver.INDITextProperty {
+  public laazotea.indi.driver.INDIPortProperty(laazotea.indi.driver.INDIDriver, java.lang.String);
+  public static laazotea.indi.driver.INDIPortProperty createSaveablePortProperty(laazotea.indi.driver.INDIDriver, java.lang.String);
+  public java.lang.String getPort();
+  public void setPort(java.lang.String);
+  public void processTextValue(laazotea.indi.driver.INDITextProperty, laazotea.indi.driver.INDITextElementAndValue[]);
+}
+Compiled from "INDIProperty.java"
+public abstract class laazotea.indi.driver.INDIProperty implements java.io.Serializable {
+  protected laazotea.indi.driver.INDIProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, int) throws java.lang.IllegalArgumentException;
+  protected void setSaveable(boolean);
+  protected laazotea.indi.driver.INDIDriver getDriver();
+  public void setState(laazotea.indi.Constants$PropertyStates);
+  public void setTimeout(int) throws java.lang.IllegalArgumentException;
+  public java.lang.String getGroup();
+  public int getTimeout();
+  public java.lang.String getLabel();
+  public java.lang.String getName();
+  public int getElementCount();
+  public laazotea.indi.Constants$PropertyPermissions getPermission();
+  public laazotea.indi.Constants$PropertyStates getState();
+  protected void addElement(laazotea.indi.driver.INDIElement) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDIElement getElement(java.lang.String);
+  public java.util.ArrayList<laazotea.indi.driver.INDIElement> getElementsAsList();
+  public java.lang.String[] getElementNames();
+  public java.lang.String getNameStateAndValuesAsString();
+  protected java.lang.String getXMLPropertyDefinition();
+  protected java.lang.String getXMLPropertyDefinition(java.lang.String);
+  protected java.lang.String getXMLPropertySet();
+  protected java.lang.String getXMLPropertySet(java.lang.String);
+  protected abstract java.lang.String getXMLPropertyDefinitionInit();
+  protected abstract java.lang.String getXMLPropertyDefinitionInit(java.lang.String);
+  protected abstract java.lang.String getXMLPropertyDefinitionEnd();
+  protected abstract java.lang.String getXMLPropertySetInit();
+  protected abstract java.lang.String getXMLPropertySetInit(java.lang.String);
+  protected abstract java.lang.String getXMLPropertySetEnd();
+  protected static laazotea.indi.driver.INDIProperty loadFromFile(laazotea.indi.driver.INDIDriver, java.lang.String) throws laazotea.indi.INDIException;
+  public void setValues(laazotea.indi.driver.INDIElementAndValue[]);
+}
+Compiled from "INDISwitchElement.java"
+public class laazotea.indi.driver.INDISwitchElement extends laazotea.indi.driver.INDIElement {
+  public laazotea.indi.driver.INDISwitchElement(laazotea.indi.driver.INDISwitchProperty, java.lang.String, java.lang.String, laazotea.indi.Constants$SwitchStatus) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDISwitchElement(laazotea.indi.driver.INDISwitchProperty, java.lang.String, laazotea.indi.Constants$SwitchStatus) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDISwitchProperty getProperty();
+  public laazotea.indi.Constants$SwitchStatus getValue();
+  public void setValue(java.lang.Object) throws java.lang.IllegalArgumentException;
+  public java.lang.String getXMLOneElement();
+  public java.lang.String getNameAndValueAsString();
+  protected java.lang.String getXMLDefElement();
+  public java.lang.Object parseOneValue(org.w3c.dom.Element);
+  public java.lang.Object getValue();
+  public laazotea.indi.driver.INDIProperty getProperty();
+}
+Compiled from "INDISwitchElementAndValue.java"
+public class laazotea.indi.driver.INDISwitchElementAndValue implements laazotea.indi.driver.INDIElementAndValue {
+  public laazotea.indi.driver.INDISwitchElementAndValue(laazotea.indi.driver.INDISwitchElement, laazotea.indi.Constants$SwitchStatus);
+  public laazotea.indi.driver.INDISwitchElement getElement();
+  public laazotea.indi.Constants$SwitchStatus getValue();
+  public java.lang.Object getValue();
+  public laazotea.indi.driver.INDIElement getElement();
+}
+Compiled from "INDISwitchOneOfManyProperty.java"
+public class laazotea.indi.driver.INDISwitchOneOfManyProperty extends laazotea.indi.driver.INDISwitchProperty {
+  public laazotea.indi.driver.INDISwitchOneOfManyProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, int, java.lang.String[], int);
+  public static laazotea.indi.driver.INDISwitchOneOfManyProperty createSaveableSwitchOneOfManyProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, int, java.lang.String[], int);
+  public laazotea.indi.driver.INDISwitchOneOfManyProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, int, java.lang.String[]);
+  public static laazotea.indi.driver.INDISwitchOneOfManyProperty createSaveableSwitchOneOfManyProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, int, java.lang.String[]);
+  public laazotea.indi.driver.INDISwitchOneOfManyProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, java.lang.String[], int);
+  public static laazotea.indi.driver.INDISwitchOneOfManyProperty createSaveableSwitchOneOfManyProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, java.lang.String[], int);
+  public laazotea.indi.driver.INDISwitchOneOfManyProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, java.lang.String[]);
+  public static laazotea.indi.driver.INDISwitchOneOfManyProperty createSaveableSwitchOneOfManyProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, java.lang.String[]);
+  public laazotea.indi.driver.INDISwitchOneOfManyProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, java.lang.String[], int);
+  public static laazotea.indi.driver.INDISwitchOneOfManyProperty createSaveableSwitchOneOfManyProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, java.lang.String[], int);
+  public laazotea.indi.driver.INDISwitchOneOfManyProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, java.lang.String[]);
+  public static laazotea.indi.driver.INDISwitchOneOfManyProperty createSaveableSwitchOneOfManyProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, java.lang.String[]);
+  public laazotea.indi.driver.INDISwitchOneOfManyProperty(laazotea.indi.driver.INDIDriver, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, java.lang.String[], int);
+  public static laazotea.indi.driver.INDISwitchOneOfManyProperty createSaveableSwitchOneOfManyProperty(laazotea.indi.driver.INDIDriver, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, java.lang.String[], int);
+  public laazotea.indi.driver.INDISwitchOneOfManyProperty(laazotea.indi.driver.INDIDriver, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, java.lang.String[]);
+  public static laazotea.indi.driver.INDISwitchOneOfManyProperty createSaveableSwitchOneOfManyProperty(laazotea.indi.driver.INDIDriver, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, java.lang.String[]);
+  public java.lang.String getSelectedValue();
+  public int getSelectedIndex();
+  public void setSelectedIndex(int);
+  public int getSelectedIndex(laazotea.indi.driver.INDISwitchElementAndValue[]);
+  public java.lang.String getSelectedValue(laazotea.indi.driver.INDISwitchElementAndValue[]);
+  public void setSelectedIndex(laazotea.indi.driver.INDISwitchElementAndValue[]);
+}
+Compiled from "INDISwitchOneOrNoneProperty.java"
+public class laazotea.indi.driver.INDISwitchOneOrNoneProperty extends laazotea.indi.driver.INDISwitchProperty {
+  public laazotea.indi.driver.INDISwitchOneOrNoneProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, int, java.lang.String, laazotea.indi.Constants$SwitchStatus);
+  public static laazotea.indi.driver.INDISwitchOneOrNoneProperty createSaveableSwitchOneOrNoneProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, int, java.lang.String, laazotea.indi.Constants$SwitchStatus) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDISwitchOneOrNoneProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, java.lang.String, laazotea.indi.Constants$SwitchStatus);
+  public static laazotea.indi.driver.INDISwitchOneOrNoneProperty createSaveableSwitchOneOrNoneProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, java.lang.String, laazotea.indi.Constants$SwitchStatus) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDISwitchOneOrNoneProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, java.lang.String, laazotea.indi.Constants$SwitchStatus);
+  public static laazotea.indi.driver.INDISwitchOneOrNoneProperty createSaveableSwitchOneOrNoneProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, java.lang.String, laazotea.indi.Constants$SwitchStatus) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDISwitchOneOrNoneProperty(laazotea.indi.driver.INDIDriver, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, java.lang.String, laazotea.indi.Constants$SwitchStatus);
+  public static laazotea.indi.driver.INDISwitchOneOrNoneProperty createSaveableSwitchOneOrNoneProperty(laazotea.indi.driver.INDIDriver, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, java.lang.String, laazotea.indi.Constants$SwitchStatus) throws java.lang.IllegalArgumentException;
+  public void setStatus(laazotea.indi.Constants$SwitchStatus);
+  public void setStatus(laazotea.indi.driver.INDISwitchElementAndValue[]);
+  public laazotea.indi.Constants$SwitchStatus getStatus();
+  public laazotea.indi.Constants$SwitchStatus getStatus(laazotea.indi.driver.INDISwitchElementAndValue[]);
+}
+Compiled from "INDISwitchProperty.java"
+public class laazotea.indi.driver.INDISwitchProperty extends laazotea.indi.driver.INDIProperty {
+  public laazotea.indi.driver.INDISwitchProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, int, laazotea.indi.Constants$SwitchRules) throws java.lang.IllegalArgumentException;
+  public static laazotea.indi.driver.INDISwitchProperty createSaveableSwitchProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, int, laazotea.indi.Constants$SwitchRules) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDISwitchProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, laazotea.indi.Constants$SwitchRules) throws java.lang.IllegalArgumentException;
+  public static laazotea.indi.driver.INDISwitchProperty createSaveableSwitchProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, laazotea.indi.Constants$SwitchRules) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDISwitchProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, laazotea.indi.Constants$SwitchRules) throws java.lang.IllegalArgumentException;
+  public static laazotea.indi.driver.INDISwitchProperty createSaveableSwitchProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, laazotea.indi.Constants$SwitchRules) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDISwitchProperty(laazotea.indi.driver.INDIDriver, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, laazotea.indi.Constants$SwitchRules) throws java.lang.IllegalArgumentException;
+  public static laazotea.indi.driver.INDISwitchProperty createSaveableSwitchProperty(laazotea.indi.driver.INDIDriver, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, laazotea.indi.Constants$SwitchRules) throws java.lang.IllegalArgumentException;
+  protected void resetAllSwitches();
+  public boolean setOnlyOneSwitchOn(laazotea.indi.driver.INDISwitchElement);
+  public laazotea.indi.Constants$SwitchRules getRule();
+  protected boolean checkCorrectValues();
+  public laazotea.indi.driver.INDISwitchElement getElement(java.lang.String);
+  protected java.lang.String getXMLPropertyDefinitionInit();
+  protected java.lang.String getXMLPropertyDefinitionInit(java.lang.String);
+  protected java.lang.String getXMLPropertyDefinitionEnd();
+  protected java.lang.String getXMLPropertySetInit();
+  protected java.lang.String getXMLPropertySetInit(java.lang.String);
+  protected java.lang.String getXMLPropertySetEnd();
+  public laazotea.indi.driver.INDIElement getElement(java.lang.String);
+}
+Compiled from "INDITextElement.java"
+public class laazotea.indi.driver.INDITextElement extends laazotea.indi.driver.INDIElement {
+  public laazotea.indi.driver.INDITextElement(laazotea.indi.driver.INDITextProperty, java.lang.String, java.lang.String, java.lang.String);
+  public laazotea.indi.driver.INDITextElement(laazotea.indi.driver.INDITextProperty, java.lang.String, java.lang.String) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDITextProperty getProperty();
+  public java.lang.String getValue();
+  public void setValue(java.lang.Object) throws java.lang.IllegalArgumentException;
+  public java.lang.String getXMLOneElement();
+  public java.lang.String getNameAndValueAsString();
+  protected java.lang.String getXMLDefElement();
+  public java.lang.String parseOneValue(org.w3c.dom.Element);
+  public java.lang.Object parseOneValue(org.w3c.dom.Element);
+  public java.lang.Object getValue();
+  public laazotea.indi.driver.INDIProperty getProperty();
+}
+Compiled from "INDITextElementAndValue.java"
+public class laazotea.indi.driver.INDITextElementAndValue implements laazotea.indi.driver.INDIElementAndValue {
+  public laazotea.indi.driver.INDITextElementAndValue(laazotea.indi.driver.INDITextElement, java.lang.String);
+  public laazotea.indi.driver.INDITextElement getElement();
+  public java.lang.String getValue();
+  public java.lang.Object getValue();
+  public laazotea.indi.driver.INDIElement getElement();
+}
+Compiled from "INDITextProperty.java"
+public class laazotea.indi.driver.INDITextProperty extends laazotea.indi.driver.INDIProperty {
+  public laazotea.indi.driver.INDITextProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, int) throws java.lang.IllegalArgumentException;
+  public static laazotea.indi.driver.INDITextProperty createSaveableTextProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions, int) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDITextProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions) throws java.lang.IllegalArgumentException;
+  public static laazotea.indi.driver.INDITextProperty createSaveableTextProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDITextProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions) throws java.lang.IllegalArgumentException;
+  public static laazotea.indi.driver.INDITextProperty createSaveableTextProperty(laazotea.indi.driver.INDIDriver, java.lang.String, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDITextProperty(laazotea.indi.driver.INDIDriver, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions) throws java.lang.IllegalArgumentException;
+  public static laazotea.indi.driver.INDITextProperty createSaveableTextProperty(laazotea.indi.driver.INDIDriver, java.lang.String, laazotea.indi.Constants$PropertyStates, laazotea.indi.Constants$PropertyPermissions) throws java.lang.IllegalArgumentException;
+  public laazotea.indi.driver.INDITextElement getElement(java.lang.String);
+  protected java.lang.String getXMLPropertyDefinitionInit();
+  protected java.lang.String getXMLPropertyDefinitionInit(java.lang.String);
+  protected java.lang.String getXMLPropertyDefinitionEnd();
+  protected java.lang.String getXMLPropertySetInit();
+  protected java.lang.String getXMLPropertySetInit(java.lang.String);
+  protected java.lang.String getXMLPropertySetEnd();
+  public laazotea.indi.driver.INDIElement getElement(java.lang.String);
+}
+Compiled from "INDIValueException.java"
+public class laazotea.indi.driver.INDIValueException extends laazotea.indi.INDIException {
+  public laazotea.indi.driver.INDIValueException(laazotea.indi.driver.INDIElement, java.lang.String);
+  public laazotea.indi.driver.INDIElement getINDIElement();
+}
+Compiled from "INDIDriverExample.java"
+public class laazotea.indi.driver.examples.INDIDriverExample extends laazotea.indi.driver.INDIDriver implements laazotea.indi.driver.INDIConnectionHandler {
+  public laazotea.indi.driver.examples.INDIDriverExample(java.io.InputStream, java.io.OutputStream);
+  public java.lang.String getName();
+  public void processNewNumberValue(laazotea.indi.driver.INDINumberProperty, java.util.Date, laazotea.indi.driver.INDINumberElementAndValue[]);
+  public void processNewBLOBValue(laazotea.indi.driver.INDIBLOBProperty, java.util.Date, laazotea.indi.driver.INDIBLOBElementAndValue[]);
+  public void processNewTextValue(laazotea.indi.driver.INDITextProperty, java.util.Date, laazotea.indi.driver.INDITextElementAndValue[]);
+  public void processNewSwitchValue(laazotea.indi.driver.INDISwitchProperty, java.util.Date, laazotea.indi.driver.INDISwitchElementAndValue[]);
+  public void driverConnect(java.util.Date);
+  public void driverDisconnect(java.util.Date);
+}
+Compiled from "INDIElTiempoDriver.java"
+public class laazotea.indi.driver.examples.INDIElTiempoDriver extends laazotea.indi.driver.INDIDriver implements java.lang.Runnable,laazotea.indi.driver.INDIConnectionHandler {
+  public laazotea.indi.driver.examples.INDIElTiempoDriver(java.io.InputStream, java.io.OutputStream);
+  public java.lang.String getName();
+  public void processNewTextValue(laazotea.indi.driver.INDITextProperty, java.util.Date, laazotea.indi.driver.INDITextElementAndValue[]);
+  public void processNewSwitchValue(laazotea.indi.driver.INDISwitchProperty, java.util.Date, laazotea.indi.driver.INDISwitchElementAndValue[]);
+  public void processNewNumberValue(laazotea.indi.driver.INDINumberProperty, java.util.Date, laazotea.indi.driver.INDINumberElementAndValue[]);
+  public void processNewBLOBValue(laazotea.indi.driver.INDIBLOBProperty, java.util.Date, laazotea.indi.driver.INDIBLOBElementAndValue[]);
+  public void run();
+  public void driverConnect(java.util.Date) throws laazotea.indi.INDIException;
+  public void driverDisconnect(java.util.Date) throws laazotea.indi.INDIException;
+}
+Compiled from "RandomNumberGeneratorDriver.java"
+public class laazotea.indi.driver.examples.RandomNumberGeneratorDriver extends laazotea.indi.driver.INDIDriver implements java.lang.Runnable {
+  public laazotea.indi.driver.examples.RandomNumberGeneratorDriver(java.io.InputStream, java.io.OutputStream);
+  public java.lang.String getName();
+  public void processNewTextValue(laazotea.indi.driver.INDITextProperty, java.util.Date, laazotea.indi.driver.INDITextElementAndValue[]);
+  public void processNewSwitchValue(laazotea.indi.driver.INDISwitchProperty, java.util.Date, laazotea.indi.driver.INDISwitchElementAndValue[]);
+  public void processNewNumberValue(laazotea.indi.driver.INDINumberProperty, java.util.Date, laazotea.indi.driver.INDINumberElementAndValue[]);
+  public void processNewBLOBValue(laazotea.indi.driver.INDIBLOBProperty, java.util.Date, laazotea.indi.driver.INDIBLOBElementAndValue[]);
+  public void run();
+}
+Compiled from "AbstractINDIServer.java"
+public abstract class laazotea.indi.server.AbstractINDIServer implements java.lang.Runnable {
+  protected laazotea.indi.server.AbstractINDIServer();
+  protected laazotea.indi.server.AbstractINDIServer(int);
+  protected void startListeningToClients();
+  protected int getListeningPort();
+  public void run();
+  protected boolean isServerRunning();
+  protected void stopServer();
+  public synchronized void loadJavaDriversFromJAR(java.lang.String) throws laazotea.indi.INDIException;
+  protected java.util.ArrayList<laazotea.indi.server.INDIDevice> getDevices();
+  public synchronized void loadJavaDriver(java.lang.Class) throws laazotea.indi.INDIException;
+  public synchronized void loadNativeDriver(java.lang.String) throws laazotea.indi.INDIException;
+  public synchronized void loadNetworkDriver(java.lang.String, int) throws laazotea.indi.INDIException;
+  public boolean isAlreadyLoaded(java.lang.String);
+  public synchronized void destroyJavaDriversFromJAR(java.lang.String);
+  public synchronized void destroyJavaDriver(java.lang.Class);
+  public synchronized void destroyNativeDriver(java.lang.String);
+  public synchronized void destroyNetworkDriver(java.lang.String, int);
+  protected void removeDevice(laazotea.indi.server.INDIDevice);
+  protected void removeClient(laazotea.indi.server.INDIClient);
+  protected laazotea.indi.server.INDIDevice getDevice(java.lang.String);
+  protected void sendXMLMessageToAllDevices(org.w3c.dom.Element);
+  protected void sendXMLMessageToAllClients(org.w3c.dom.Element);
+  protected java.util.ArrayList<laazotea.indi.server.INDIDeviceListener> getClientsListeningToProperty(java.lang.String, java.lang.String);
+  protected java.util.ArrayList<laazotea.indi.server.INDIDeviceListener> getClientsListeningToPropertyUpdates(java.lang.String, java.lang.String, boolean);
+  protected java.util.ArrayList<laazotea.indi.server.INDIDeviceListener> getClientsListeningToSingleProperties(java.lang.String);
+  protected java.util.ArrayList<laazotea.indi.server.INDIDeviceListener> getClientsListeningToDevice(java.lang.String);
+  protected abstract boolean acceptClient(java.net.Socket);
+  protected abstract void notifyDeviceListenersDefXXXVector(laazotea.indi.server.INDIDevice, org.w3c.dom.Element);
+  protected abstract void notifyDeviceListenersSetXXXVector(laazotea.indi.server.INDIDevice, org.w3c.dom.Element);
+  protected abstract void notifyDeviceListenersMessage(laazotea.indi.server.INDIDevice, org.w3c.dom.Element);
+  protected abstract void notifyDeviceListenersDelProperty(laazotea.indi.server.INDIDevice, org.w3c.dom.Element);
+  protected abstract void notifyClientListenersGetProperties(laazotea.indi.server.INDIDeviceListener, org.w3c.dom.Element);
+  protected abstract void notifyClientListenersNewXXXVector(laazotea.indi.server.INDIClient, org.w3c.dom.Element);
+  protected abstract void notifyClientListenersEnableBLOB(laazotea.indi.server.INDIClient, org.w3c.dom.Element);
+  protected abstract void connectionWithClientBroken(laazotea.indi.server.INDIClient);
+  protected abstract void connectionWithClientEstablished(laazotea.indi.server.INDIClient);
+  protected abstract void driverDisconnected(java.lang.String, java.lang.String[]);
+}
+Compiled from "DefaultINDIServer.java"
+public class laazotea.indi.server.DefaultINDIServer extends laazotea.indi.server.AbstractINDIServer {
+  public laazotea.indi.server.DefaultINDIServer();
+  public laazotea.indi.server.DefaultINDIServer(int);
+  protected void notifyDeviceListenersDefXXXVector(laazotea.indi.server.INDIDevice, org.w3c.dom.Element);
+  protected void notifyDeviceListenersSetXXXVector(laazotea.indi.server.INDIDevice, org.w3c.dom.Element);
+  protected void notifyDeviceListenersMessage(laazotea.indi.server.INDIDevice, org.w3c.dom.Element);
+  protected void notifyDeviceListenersDelProperty(laazotea.indi.server.INDIDevice, org.w3c.dom.Element);
+  protected void notifyClientListenersGetProperties(laazotea.indi.server.INDIDeviceListener, org.w3c.dom.Element);
+  protected void notifyClientListenersNewXXXVector(laazotea.indi.server.INDIClient, org.w3c.dom.Element);
+  protected void notifyClientListenersEnableBLOB(laazotea.indi.server.INDIClient, org.w3c.dom.Element);
+  protected boolean acceptClient(java.net.Socket);
+  protected void connectionWithClientBroken(laazotea.indi.server.INDIClient);
+  protected void connectionWithClientEstablished(laazotea.indi.server.INDIClient);
+  protected void driverDisconnected(java.lang.String, java.lang.String[]);
+}
+Compiled from "DevicePropertyBLOBEnableTuple.java"
+public class laazotea.indi.server.DevicePropertyBLOBEnableTuple {
+  protected laazotea.indi.server.DevicePropertyBLOBEnableTuple(java.lang.String, java.lang.String, laazotea.indi.Constants$BLOBEnables);
+  protected laazotea.indi.server.DevicePropertyBLOBEnableTuple(java.lang.String, java.lang.String);
+  protected laazotea.indi.server.DevicePropertyBLOBEnableTuple(java.lang.String, laazotea.indi.Constants$BLOBEnables);
+  protected laazotea.indi.server.DevicePropertyBLOBEnableTuple(java.lang.String);
+  protected java.lang.String getDevice();
+  protected java.lang.String getProperty();
+  protected laazotea.indi.Constants$BLOBEnables getBLOBEnable();
+  protected boolean isDevice(java.lang.String);
+  protected boolean isProperty(java.lang.String, java.lang.String);
+}
+Compiled from "INDIClient.java"
+public class laazotea.indi.server.INDIClient extends laazotea.indi.server.INDIDeviceListener implements laazotea.indi.INDIProtocolParser {
+  public laazotea.indi.server.INDIClient(java.net.Socket, laazotea.indi.server.AbstractINDIServer);
+  protected void disconnect();
+  public void finishReader();
+  public java.lang.String getInetAddress();
+  public void parseXML(org.w3c.dom.Document);
+  protected void sendXMLMessage(java.lang.String);
+  public java.io.InputStream getInputStream();
+}
+Compiled from "INDIDevice.java"
+public abstract class laazotea.indi.server.INDIDevice extends laazotea.indi.server.INDIDeviceListener implements laazotea.indi.INDIProtocolParser {
+  protected laazotea.indi.server.INDIDevice(laazotea.indi.server.AbstractINDIServer) throws laazotea.indi.INDIException;
+  protected void startReading();
+  public void parseXML(org.w3c.dom.Document);
+  protected abstract void dealWithPossibleNewDeviceName(java.lang.String);
+  protected abstract boolean hasName(java.lang.String);
+  protected abstract java.lang.String[] getNames();
+  public void destroy();
+  public abstract void isBeingDestroyed();
+  public abstract void closeConnections();
+  protected void sendXMLMessage(java.lang.String);
+  public void finishReader();
+  public abstract java.io.InputStream getInputStream();
+  public abstract java.io.OutputStream getOutputStream();
+  public abstract java.lang.String getDeviceIdentifier();
+  public abstract boolean isDevice(java.lang.String);
+}
+Compiled from "INDIDeviceListener.java"
+public abstract class laazotea.indi.server.INDIDeviceListener {
+  protected laazotea.indi.server.INDIDeviceListener();
+  protected void addBLOBEnableRule(java.lang.String, laazotea.indi.Constants$BLOBEnables);
+  protected void addBLOBEnableRule(java.lang.String, java.lang.String, laazotea.indi.Constants$BLOBEnables);
+  protected boolean areNonBLOBsAccepted(java.lang.String);
+  protected boolean isBLOBAccepted(java.lang.String, java.lang.String);
+  public boolean listensToAllDevices();
+  protected void addDeviceToListen(java.lang.String);
+  protected void addPropertyToListen(java.lang.String, java.lang.String);
+  protected void setListenToAllDevices(boolean);
+  protected boolean listensToDevice(java.lang.String);
+  protected boolean listensToProperty(java.lang.String, java.lang.String);
+  protected boolean listensToSingleProperty(java.lang.String);
+  public void sendXMLMessage(org.w3c.dom.Element);
+  protected abstract void sendXMLMessage(java.lang.String);
+}
+Compiled from "INDIJavaDevice.java"
+public class laazotea.indi.server.INDIJavaDevice extends laazotea.indi.server.INDIDevice {
+  protected laazotea.indi.server.INDIJavaDevice(laazotea.indi.server.AbstractINDIServer, java.lang.Class, java.lang.String) throws laazotea.indi.INDIException;
+  protected java.lang.String getIdentifier();
+  protected void dealWithPossibleNewDeviceName(java.lang.String);
+  protected boolean hasName(java.lang.String);
+  public void closeConnections();
+  public java.io.InputStream getInputStream();
+  public java.io.OutputStream getOutputStream();
+  public java.lang.String getDeviceIdentifier();
+  public boolean isDevice(java.lang.String);
+  protected java.lang.String[] getNames();
+  public java.lang.String toString();
+  public void isBeingDestroyed();
+}
+Compiled from "INDINativeDevice.java"
+public class laazotea.indi.server.INDINativeDevice extends laazotea.indi.server.INDIDevice {
+  protected laazotea.indi.server.INDINativeDevice(laazotea.indi.server.AbstractINDIServer, java.lang.String) throws laazotea.indi.INDIException;
+  public java.lang.String getDriverPath();
+  protected void dealWithPossibleNewDeviceName(java.lang.String);
+  protected boolean hasName(java.lang.String);
+  public void closeConnections();
+  public java.io.InputStream getInputStream();
+  public java.io.OutputStream getOutputStream();
+  public java.lang.String getDeviceIdentifier();
+  public boolean isDevice(java.lang.String);
+  protected java.lang.String[] getNames();
+  public java.lang.String toString();
+  public void isBeingDestroyed();
+}
+Compiled from "INDINetworkDevice.java"
+public class laazotea.indi.server.INDINetworkDevice extends laazotea.indi.server.INDIDevice {
+  protected laazotea.indi.server.INDINetworkDevice(laazotea.indi.server.AbstractINDIServer, java.lang.String, int) throws laazotea.indi.INDIException;
+  protected void dealWithPossibleNewDeviceName(java.lang.String);
+  protected boolean hasName(java.lang.String);
+  public void closeConnections();
+  public java.io.InputStream getInputStream();
+  public java.io.OutputStream getOutputStream();
+  public java.lang.String getDeviceIdentifier();
+  public boolean isDevice(java.lang.String);
+  protected java.lang.String[] getNames();
+  public java.lang.String toString();
+  public void isBeingDestroyed();
+}
+Compiled from "INDIBasicServer.java"
+public class laazotea.indi.server.examples.INDIBasicServer extends laazotea.indi.server.DefaultINDIServer {
+  public laazotea.indi.server.examples.INDIBasicServer();
+  public laazotea.indi.server.examples.INDIBasicServer(int);
+  public void loadJava(java.lang.String);
+  public void unloadJava(java.lang.String);
+  public void loadNative(java.lang.String);
+  public void unloadNative(java.lang.String);
+  public void connect(java.lang.String, int);
+  public void disconnect(java.lang.String, int);
+  public void listDevices();
+  public static void main(java.lang.String[]);
+  protected void connectionWithClientBroken(laazotea.indi.server.INDIClient);
+  protected void connectionWithClientEstablished(laazotea.indi.server.INDIClient);
+  protected void driverDisconnected(java.lang.String, java.lang.String[]);
+}
+Compiled from "MinimumINDIServer.java"
+public class laazotea.indi.server.examples.MinimumINDIServer extends laazotea.indi.server.DefaultINDIServer {
+  public laazotea.indi.server.examples.MinimumINDIServer();
+  protected boolean acceptClient(java.net.Socket);
+  public static void main(java.lang.String[]);
+}

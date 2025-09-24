@@ -1,0 +1,3289 @@
+Compiled from "EA.java"
+public interface ch.idsia.ai.EA {
+  public abstract ch.idsia.ai.Evolvable[] getBests();
+  public abstract float[] getBestFitnesses();
+  public abstract void nextGeneration() throws java.lang.Exception;
+  public abstract java.lang.String toString();
+}
+Compiled from "Evolvable.java"
+public interface ch.idsia.ai.Evolvable {
+  public abstract ch.idsia.ai.Evolvable getNewInstance();
+  public abstract ch.idsia.ai.Evolvable copy();
+  public abstract void reset();
+  public abstract void mutate();
+  public abstract java.lang.String toString();
+}
+Compiled from "FA.java"
+public interface ch.idsia.ai.FA<I, O> {
+  public abstract void reset();
+  public abstract O approximate(I);
+}
+Compiled from "MLP.java"
+public class ch.idsia.ai.MLP implements ch.idsia.ai.FA<double[], double[]>, ch.idsia.ai.Evolvable {
+  public double mutationMagnitude;
+  public static double mean;
+  public static double deviation;
+  public static final java.util.Random random;
+  public double learningRate;
+  public ch.idsia.ai.MLP(int, int, int);
+  public ch.idsia.ai.MLP(double[][], double[][], int, int);
+  protected void initializeLayer(double[][]);
+  public ch.idsia.ai.MLP getNewInstance();
+  public ch.idsia.ai.MLP copy();
+  public void mutate();
+  public void psoRecombine(ch.idsia.ai.MLP, ch.idsia.ai.MLP, ch.idsia.ai.MLP);
+  public void reset();
+  public double[] approximate(double[]);
+  public double[] propagate(double[]);
+  public double backPropagate(double[]);
+  public double getMutationMagnitude();
+  public void setMutationMagnitude(double);
+  public static void setInitParameters(double, double);
+  public void println();
+  public java.lang.String toString();
+  public void ssetLearningRate(double);
+  public double[] getOutputs();
+  public double[] getWeightsArray();
+  public void setWeightsArray(double[]);
+  public int getNumberOfInputs();
+  public void randomise();
+  protected void randomise(double[][]);
+  public double[] getArray();
+  public void setArray(double[]);
+  public java.lang.Object approximate(java.lang.Object);
+  public ch.idsia.ai.Evolvable copy();
+  public ch.idsia.ai.Evolvable getNewInstance();
+  static {};
+}
+Compiled from "SRN.java"
+public class ch.idsia.ai.SRN implements ch.idsia.ai.FA<double[], double[]>, ch.idsia.ai.Evolvable {
+  protected double[][] firstConnectionLayer;
+  protected double[][] recurrentConnectionLayer;
+  protected double[][] secondConnectionLayer;
+  protected double[] hiddenNeurons;
+  protected double[] hiddenNeuronsCopy;
+  protected double[] outputs;
+  protected double mutationMagnitude;
+  public ch.idsia.ai.SRN(int, int, int);
+  public ch.idsia.ai.SRN(double[][], double[][], double[][], int, int);
+  public double[] propagate(double[]);
+  public ch.idsia.ai.SRN getNewInstance();
+  public ch.idsia.ai.SRN copy();
+  public void mutate();
+  public void reset();
+  public double[] approximate(double[]);
+  protected double[][] copy(double[][]);
+  protected void mutate(double[]);
+  protected void mutate(double[][]);
+  protected void propagateOneStep(double[], double[], double[][]);
+  protected void clear(double[]);
+  protected void tanh(double[]);
+  public java.lang.String toString();
+  public void setMutationMagnitude(double);
+  public java.lang.Object approximate(java.lang.Object);
+  public ch.idsia.ai.Evolvable copy();
+  public ch.idsia.ai.Evolvable getNewInstance();
+}
+Compiled from "Agent.java"
+public interface ch.idsia.ai.agents.Agent {
+  public abstract boolean[] getAction();
+  public abstract void integrateObservation(ch.idsia.mario.environments.Environment);
+  public abstract void reset();
+  public abstract ch.idsia.ai.agents.Agent$AGENT_TYPE getType();
+  public abstract java.lang.String getName();
+  public abstract void setName(java.lang.String);
+}
+Compiled from "Agent.java"
+public final class ch.idsia.ai.agents.Agent$AGENT_TYPE extends java.lang.Enum<ch.idsia.ai.agents.Agent$AGENT_TYPE> {
+  public static final ch.idsia.ai.agents.Agent$AGENT_TYPE AI;
+  public static final ch.idsia.ai.agents.Agent$AGENT_TYPE HUMAN;
+  public static final ch.idsia.ai.agents.Agent$AGENT_TYPE TCP_SERVER;
+  public static ch.idsia.ai.agents.Agent$AGENT_TYPE[] values();
+  public static ch.idsia.ai.agents.Agent$AGENT_TYPE valueOf(java.lang.String);
+  static {};
+}
+Compiled from "AgentsPool.java"
+public final class ch.idsia.ai.agents.AgentsPool {
+  static java.util.HashMap<java.lang.String, ch.idsia.ai.agents.Agent> agentsHashMap;
+  public ch.idsia.ai.agents.AgentsPool();
+  public static void addAgent(ch.idsia.ai.agents.Agent);
+  public static void addAgent(java.lang.String) throws java.util.IllegalFormatException;
+  public static ch.idsia.ai.agents.Agent load(java.lang.String);
+  public static java.util.Collection<ch.idsia.ai.agents.Agent> getAgentsCollection();
+  public static java.util.Set<java.lang.String> getAgentsNames();
+  public static ch.idsia.ai.agents.Agent getAgentByName(java.lang.String);
+  public static ch.idsia.ai.agents.Agent getCurrentAgent();
+  public static void setCurrentAgent(ch.idsia.ai.agents.Agent);
+  public static void setCurrentAgent(java.lang.String);
+  static {};
+}
+Compiled from "AmiCoAgent.java"
+public class ch.idsia.ai.agents.AmiCoAgent implements ch.idsia.ai.agents.Agent {
+  static ch.idsia.amico.JavaCallsPython javaCallsPython;
+  public ch.idsia.ai.agents.AmiCoAgent(java.lang.String, java.lang.String);
+  public void integrateObservation(int[], int[], float[], float[], int[]);
+  public boolean[] getAction();
+  public void integrateObservation(ch.idsia.mario.environments.Environment);
+  public void reset();
+  public boolean[] getAction(ch.idsia.mario.environments.Environment);
+  public ch.idsia.ai.agents.Agent$AGENT_TYPE getType();
+  public java.lang.String getName();
+  public void setName(java.lang.String);
+  static {};
+}
+Compiled from "BasicLearningAgent.java"
+public class ch.idsia.ai.agents.BasicLearningAgent extends ch.idsia.ai.agents.learning.SimpleMLPAgent implements ch.idsia.ai.agents.LearningAgent {
+  public ch.idsia.ai.agents.BasicLearningAgent();
+  public void learn();
+  public void giveReward(float);
+  public void newEpisode();
+}
+Compiled from "LearningAgent.java"
+public interface ch.idsia.ai.agents.LearningAgent extends ch.idsia.ai.agents.Agent {
+  public abstract void learn();
+  public abstract void giveReward(float);
+  public abstract void newEpisode();
+}
+Compiled from "SimpleAgent.java"
+public class ch.idsia.ai.agents.SimpleAgent implements ch.idsia.ai.agents.Agent {
+  protected boolean[] Action;
+  protected java.lang.String Name;
+  public ch.idsia.ai.agents.SimpleAgent();
+  public void integrateObservation(int[], int[], float[], float[], int[]);
+  public boolean[] getAction();
+  public void integrateObservation(ch.idsia.mario.environments.Environment);
+  public void reset();
+  public boolean[] getAction(ch.idsia.mario.environments.Environment);
+  public ch.idsia.ai.agents.Agent$AGENT_TYPE getType();
+  public java.lang.String getName();
+  public void setName(java.lang.String);
+}
+Compiled from "BasicAIAgent.java"
+public class ch.idsia.ai.agents.controllers.BasicAIAgent implements ch.idsia.ai.agents.Agent {
+  protected boolean[] action;
+  protected java.lang.String name;
+  protected byte[][] levelScene;
+  protected byte[][] enemies;
+  protected byte[][] mergedObservation;
+  protected float[] marioFloatPos;
+  protected float[] enemiesFloatPos;
+  protected int[] marioState;
+  protected int marioStatus;
+  protected int marioMode;
+  protected boolean isMarioOnGround;
+  protected boolean isMarioAbleToJump;
+  protected boolean isMarioAbleToShoot;
+  protected boolean isMarioCarrying;
+  protected int getKillsTotal;
+  protected int getKillsByFire;
+  protected int getKillsByStomp;
+  protected int getKillsByShell;
+  int zLevelScene;
+  int zLevelEnemies;
+  public ch.idsia.ai.agents.controllers.BasicAIAgent(java.lang.String);
+  public void integrateObservation(int[], int[], float[], float[], int[]);
+  public boolean[] getAction();
+  public void integrateObservation(ch.idsia.mario.environments.Environment);
+  public void reset();
+  public boolean[] getAction(ch.idsia.mario.environments.Environment);
+  public ch.idsia.ai.agents.Agent$AGENT_TYPE getType();
+  public java.lang.String getName();
+  public void setName(java.lang.String);
+}
+Compiled from "ForwardAgent.java"
+public class ch.idsia.ai.agents.controllers.ForwardAgent extends ch.idsia.ai.agents.controllers.BasicAIAgent implements ch.idsia.ai.agents.Agent {
+  int trueJumpCounter;
+  int trueSpeedCounter;
+  public ch.idsia.ai.agents.controllers.ForwardAgent();
+  public void reset();
+  public boolean[] getAction();
+}
+Compiled from "ForwardJumpingAgent.java"
+public class ch.idsia.ai.agents.controllers.ForwardJumpingAgent extends ch.idsia.ai.agents.controllers.BasicAIAgent implements ch.idsia.ai.agents.Agent {
+  public ch.idsia.ai.agents.controllers.ForwardJumpingAgent();
+  public boolean[] getAction();
+  public void reset();
+}
+Compiled from "RandomAgent.java"
+public class ch.idsia.ai.agents.controllers.RandomAgent extends ch.idsia.ai.agents.controllers.BasicAIAgent implements ch.idsia.ai.agents.Agent {
+  public ch.idsia.ai.agents.controllers.RandomAgent();
+  public void reset();
+  public boolean[] getAction();
+}
+Compiled from "ScaredAgent.java"
+public class ch.idsia.ai.agents.controllers.ScaredAgent extends ch.idsia.ai.agents.controllers.BasicAIAgent implements ch.idsia.ai.agents.Agent {
+  int trueJumpCounter;
+  public ch.idsia.ai.agents.controllers.ScaredAgent();
+  public boolean[] getAction();
+  public void reset();
+}
+Compiled from "ScaredSpeedyAgent.java"
+public class ch.idsia.ai.agents.controllers.ScaredSpeedyAgent extends ch.idsia.ai.agents.controllers.BasicAIAgent implements ch.idsia.ai.agents.Agent {
+  int trueJumpCounter;
+  public ch.idsia.ai.agents.controllers.ScaredSpeedyAgent();
+  public boolean[] getAction();
+  public void reset();
+}
+Compiled from "TimingAgent.java"
+public class ch.idsia.ai.agents.controllers.TimingAgent extends ch.idsia.ai.agents.controllers.BasicAIAgent implements ch.idsia.ai.agents.Agent {
+  public ch.idsia.ai.agents.controllers.TimingAgent(ch.idsia.ai.agents.Agent);
+  public boolean[] getAction();
+  public void reset();
+  public ch.idsia.ai.agents.Agent$AGENT_TYPE getType();
+  public java.lang.String getName();
+  public void setName(java.lang.String);
+  public double averageTimeTaken();
+}
+Compiled from "CheaterKeyboardAgent.java"
+public class ch.idsia.ai.agents.human.CheaterKeyboardAgent extends java.awt.event.KeyAdapter implements ch.idsia.ai.agents.Agent {
+  public ch.idsia.ai.agents.human.CheaterKeyboardAgent();
+  public void integrateObservation(int[], int[], float[], float[], int[]);
+  public boolean[] getAction();
+  public void integrateObservation(ch.idsia.mario.environments.Environment);
+  public void reset();
+  public boolean[] getAction(ch.idsia.mario.environments.Environment);
+  public ch.idsia.ai.agents.Agent$AGENT_TYPE getType();
+  public java.lang.String getName();
+  public void setName(java.lang.String);
+  public void keyPressed(java.awt.event.KeyEvent);
+  public void keyReleased(java.awt.event.KeyEvent);
+}
+Compiled from "HumanKeyboardAgent.java"
+public class ch.idsia.ai.agents.human.HumanKeyboardAgent extends java.awt.event.KeyAdapter implements ch.idsia.ai.agents.Agent {
+  java.util.List<boolean[]> history;
+  protected byte[][] levelScene;
+  protected byte[][] enemies;
+  protected byte[][] mergedObservation;
+  protected float[] marioFloatPos;
+  protected float[] enemiesFloatPos;
+  protected int[] marioState;
+  protected int marioStatus;
+  protected int marioMode;
+  protected boolean isMarioOnGround;
+  protected boolean isMarioAbleToJump;
+  protected boolean isMarioAbleToShoot;
+  protected boolean isMarioCarrying;
+  protected int getKillsTotal;
+  protected int getKillsByFire;
+  protected int getKillsByStomp;
+  protected int getKillsByShell;
+  int zLevelScene;
+  int zLevelEnemies;
+  public ch.idsia.ai.agents.human.HumanKeyboardAgent();
+  public boolean[] getAction();
+  public void integrateObservation(ch.idsia.mario.environments.Environment);
+  public void reset();
+  public boolean[] getAction(ch.idsia.mario.environments.Environment);
+  public ch.idsia.ai.agents.Agent$AGENT_TYPE getType();
+  public java.lang.String getName();
+  public void setName(java.lang.String);
+  public void keyPressed(java.awt.event.KeyEvent);
+  public void keyReleased(java.awt.event.KeyEvent);
+  public java.util.List<boolean[]> getHistory();
+}
+Compiled from "LargeMLPAgent.java"
+public class ch.idsia.ai.agents.learning.LargeMLPAgent extends ch.idsia.ai.agents.controllers.BasicAIAgent implements ch.idsia.ai.agents.Agent,ch.idsia.ai.Evolvable {
+  final int numberOfOutputs;
+  final int numberOfInputs;
+  public ch.idsia.ai.agents.learning.LargeMLPAgent();
+  public ch.idsia.ai.Evolvable getNewInstance();
+  public ch.idsia.ai.Evolvable copy();
+  public void reset();
+  public void mutate();
+  public boolean[] getAction();
+  public ch.idsia.ai.agents.Agent$AGENT_TYPE getType();
+  public java.lang.String getName();
+  static {};
+}
+Compiled from "LargeSRNAgent.java"
+public class ch.idsia.ai.agents.learning.LargeSRNAgent extends ch.idsia.ai.agents.controllers.BasicAIAgent implements ch.idsia.ai.agents.Agent,ch.idsia.ai.Evolvable {
+  final int numberOfOutputs;
+  final int numberOfInputs;
+  public ch.idsia.ai.agents.learning.LargeSRNAgent();
+  public ch.idsia.ai.agents.learning.LargeSRNAgent(ch.idsia.ai.SRN);
+  public ch.idsia.ai.Evolvable getNewInstance();
+  public ch.idsia.ai.Evolvable copy();
+  public void reset();
+  public void mutate();
+  public boolean[] getAction();
+  public ch.idsia.ai.agents.Agent$AGENT_TYPE getType();
+  public java.lang.String getName();
+  public void setName(java.lang.String);
+}
+Compiled from "MediumMLPAgent.java"
+public class ch.idsia.ai.agents.learning.MediumMLPAgent extends ch.idsia.ai.agents.controllers.BasicAIAgent implements ch.idsia.ai.agents.Agent,ch.idsia.ai.Evolvable {
+  final int numberOfOutputs;
+  final int numberOfInputs;
+  public ch.idsia.ai.agents.learning.MediumMLPAgent();
+  public ch.idsia.ai.Evolvable getNewInstance();
+  public ch.idsia.ai.Evolvable copy();
+  public void reset();
+  public void mutate();
+  public boolean[] getAction();
+  public ch.idsia.ai.agents.Agent$AGENT_TYPE getType();
+  public java.lang.String getName();
+  public void setName(java.lang.String);
+}
+Compiled from "MediumSRNAgent.java"
+public class ch.idsia.ai.agents.learning.MediumSRNAgent extends ch.idsia.ai.agents.controllers.BasicAIAgent implements ch.idsia.ai.agents.Agent,ch.idsia.ai.Evolvable {
+  final int numberOfOutputs;
+  final int numberOfInputs;
+  public ch.idsia.ai.agents.learning.MediumSRNAgent();
+  public ch.idsia.ai.Evolvable getNewInstance();
+  public ch.idsia.ai.Evolvable copy();
+  public void reset();
+  public void mutate();
+  public boolean[] getAction();
+}
+Compiled from "SRNAgent.java"
+public class ch.idsia.ai.agents.learning.SRNAgent implements ch.idsia.ai.agents.Agent,ch.idsia.ai.Evolvable {
+  final int numberOfOutputs;
+  final int numberOfInputs;
+  protected byte[][] levelScene;
+  protected byte[][] enemies;
+  protected byte[][] mergedObservation;
+  protected float[] marioFloatPos;
+  protected float[] enemiesFloatPos;
+  protected int[] marioState;
+  protected int marioStatus;
+  protected int marioMode;
+  protected boolean isMarioOnGround;
+  protected boolean isMarioAbleToJump;
+  protected boolean isMarioAbleToShoot;
+  protected boolean isMarioCarrying;
+  protected int getKillsTotal;
+  protected int getKillsByFire;
+  protected int getKillsByStomp;
+  protected int getKillsByShell;
+  public ch.idsia.ai.agents.learning.SRNAgent();
+  public ch.idsia.ai.Evolvable getNewInstance();
+  public ch.idsia.ai.Evolvable copy();
+  public boolean[] getAction();
+  public void integrateObservation(ch.idsia.mario.environments.Environment);
+  public void reset();
+  public void mutate();
+  public boolean[] getAction(ch.idsia.mario.environments.Environment);
+  public ch.idsia.ai.agents.Agent$AGENT_TYPE getType();
+  public java.lang.String getName();
+  public void setName(java.lang.String);
+}
+Compiled from "SimpleMLPAgent.java"
+public class ch.idsia.ai.agents.learning.SimpleMLPAgent implements ch.idsia.ai.agents.Agent,ch.idsia.ai.Evolvable {
+  final int numberOfOutputs;
+  final int numberOfInputs;
+  protected byte[][] levelScene;
+  protected byte[][] enemies;
+  protected byte[][] mergedObservation;
+  protected float[] marioFloatPos;
+  protected float[] enemiesFloatPos;
+  protected int[] marioState;
+  protected int marioStatus;
+  protected int marioMode;
+  protected boolean isMarioOnGround;
+  protected boolean isMarioAbleToJump;
+  protected boolean isMarioAbleToShoot;
+  protected boolean isMarioCarrying;
+  protected int getKillsTotal;
+  protected int getKillsByFire;
+  protected int getKillsByStomp;
+  protected int getKillsByShell;
+  int zLevelScene;
+  int zLevelEnemies;
+  public ch.idsia.ai.agents.learning.SimpleMLPAgent();
+  public ch.idsia.ai.Evolvable getNewInstance();
+  public ch.idsia.ai.Evolvable copy();
+  public void integrateObservation(ch.idsia.mario.environments.Environment);
+  public void reset();
+  public void mutate();
+  public boolean[] getAction();
+  public ch.idsia.ai.agents.Agent$AGENT_TYPE getType();
+  public java.lang.String getName();
+  public void setName(java.lang.String);
+}
+Compiled from "SmallMLPAgent.java"
+public class ch.idsia.ai.agents.learning.SmallMLPAgent extends ch.idsia.ai.agents.controllers.BasicAIAgent implements ch.idsia.ai.agents.Agent,ch.idsia.ai.Evolvable {
+  final int numberOfOutputs;
+  final int numberOfInputs;
+  public ch.idsia.ai.agents.learning.SmallMLPAgent();
+  public ch.idsia.ai.Evolvable getNewInstance();
+  public ch.idsia.ai.Evolvable copy();
+  public void reset();
+  public void mutate();
+  public boolean[] getAction();
+  public ch.idsia.ai.agents.Agent$AGENT_TYPE getType();
+  public java.lang.String getName();
+  public void setName(java.lang.String);
+}
+Compiled from "SmallSRNAgent.java"
+public class ch.idsia.ai.agents.learning.SmallSRNAgent extends ch.idsia.ai.agents.controllers.BasicAIAgent implements ch.idsia.ai.agents.Agent,ch.idsia.ai.Evolvable {
+  final int numberOfOutputs;
+  final int numberOfInputs;
+  public ch.idsia.ai.agents.learning.SmallSRNAgent();
+  public ch.idsia.ai.Evolvable getNewInstance();
+  public ch.idsia.ai.Evolvable copy();
+  public void reset();
+  public void mutate();
+  public boolean[] getAction();
+  public ch.idsia.ai.agents.Agent$AGENT_TYPE getType();
+  public java.lang.String getName();
+  public void setName(java.lang.String);
+}
+Compiled from "ES.java"
+public class ch.idsia.ai.ea.ES implements ch.idsia.ai.EA {
+  public ch.idsia.ai.ea.ES(ch.idsia.maibe.tasks.Task, ch.idsia.ai.Evolvable, int);
+  public void nextGeneration();
+  public ch.idsia.ai.Evolvable[] getBests();
+  public float[] getBestFitnesses();
+}
+Compiled from "JavaCallsPython.java"
+public class ch.idsia.amico.JavaCallsPython {
+  public ch.idsia.amico.JavaCallsPython(java.lang.String, java.lang.String);
+  public native int setModuleName(java.lang.String);
+  public native int setAgentName(java.lang.String);
+  public native int[] getAction(int[], int[], float[], float[], int[]);
+  static {};
+}
+Compiled from "EpisodicExperiment.java"
+public class ch.idsia.maibe.experiments.EpisodicExperiment extends ch.idsia.maibe.experiments.Experiment {
+  public ch.idsia.maibe.experiments.EpisodicExperiment(ch.idsia.maibe.tasks.Task, ch.idsia.ai.agents.Agent);
+  public java.util.List<java.util.List<java.lang.Double>> doEpisodes(int);
+}
+Compiled from "Experiment.java"
+public class ch.idsia.maibe.experiments.Experiment {
+  public ch.idsia.maibe.tasks.Task task;
+  public ch.idsia.ai.agents.Agent agent;
+  public int stepNumber;
+  public ch.idsia.maibe.experiments.Experiment(ch.idsia.maibe.tasks.Task, ch.idsia.ai.agents.Agent);
+  public void doInteractions(int);
+  public double oneInteraction();
+  public java.util.List<java.util.List<java.lang.Double>> doEpisodes(int);
+}
+Compiled from "BasicTask.java"
+public class ch.idsia.maibe.tasks.BasicTask implements ch.idsia.maibe.tasks.Task {
+  protected ch.idsia.tools.CmdLineOptions options;
+  public ch.idsia.maibe.tasks.BasicTask(ch.idsia.tools.CmdLineOptions);
+  public boolean runOneEpisode();
+  public final void setAgent(ch.idsia.ai.agents.Agent);
+  public void reset(ch.idsia.tools.CmdLineOptions);
+  public ch.idsia.mario.environments.Environment getEnvironment();
+  public float[] evaluate(ch.idsia.ai.agents.Agent);
+  public void setOptions(ch.idsia.tools.CmdLineOptions);
+  public ch.idsia.tools.CmdLineOptions getOptions();
+  public void doEpisodes(int, boolean);
+  public boolean isFinished();
+  public void reset();
+  static {};
+}
+Compiled from "ChampGamePlayTask.java"
+public class ch.idsia.maibe.tasks.ChampGamePlayTask extends ch.idsia.maibe.tasks.BasicTask {
+  public ch.idsia.maibe.tasks.ChampGamePlayTask(ch.idsia.mario.environments.Environment, ch.idsia.ai.agents.Agent);
+}
+Compiled from "MarioCustomSystemOfValues.java"
+public class ch.idsia.maibe.tasks.MarioCustomSystemOfValues extends ch.idsia.maibe.tasks.SystemOfValues {
+  public ch.idsia.maibe.tasks.MarioCustomSystemOfValues();
+}
+Compiled from "MarioSystemOfValues.java"
+public class ch.idsia.maibe.tasks.MarioSystemOfValues extends ch.idsia.maibe.tasks.SystemOfValues {
+  public final int distance;
+  public final int win;
+  public final int mode;
+  public final int coins;
+  public final int hiddenItems;
+  public final int flowerFire;
+  public final int kills;
+  public final int killedByFire;
+  public final int killedByShell;
+  public final int killedByStomp;
+  public final int timeLeft;
+  public ch.idsia.maibe.tasks.MarioSystemOfValues();
+}
+Compiled from "MarioSystemOfValues.java"
+public interface ch.idsia.maibe.tasks.MarioSystemOfValues$timeLengthMapping {
+  public static final int TIGHT;
+  public static final int MEDIUM;
+  public static final int FLEXIBLE;
+}
+Compiled from "MultiDifficultyProgressTask.java"
+public class ch.idsia.maibe.tasks.MultiDifficultyProgressTask implements ch.idsia.maibe.tasks.Task {
+  public ch.idsia.maibe.tasks.MultiDifficultyProgressTask(ch.idsia.tools.CmdLineOptions);
+  public float[] evaluate(ch.idsia.ai.agents.Agent);
+  public void setStartingSeed(int);
+  public void setOptions(ch.idsia.tools.CmdLineOptions);
+  public ch.idsia.tools.CmdLineOptions getOptions();
+  public void doEpisodes(int, boolean);
+  public boolean isFinished();
+  public void reset();
+}
+Compiled from "MultiSeedProgressTask.java"
+public class ch.idsia.maibe.tasks.MultiSeedProgressTask extends ch.idsia.maibe.tasks.BasicTask implements ch.idsia.maibe.tasks.Task {
+  public ch.idsia.maibe.tasks.MultiSeedProgressTask(ch.idsia.tools.CmdLineOptions);
+  public float[] evaluate(ch.idsia.ai.agents.Agent);
+  public void setStartingSeed(int);
+  public void setNumberOfSeeds(int);
+  public void setOptions(ch.idsia.tools.CmdLineOptions);
+  public ch.idsia.tools.CmdLineOptions getOptions();
+  public void doEpisodes(int, boolean);
+  public boolean isFinished();
+  public void reset();
+}
+Compiled from "MushroomTask.java"
+public class ch.idsia.maibe.tasks.MushroomTask extends ch.idsia.maibe.tasks.BasicTask implements ch.idsia.maibe.tasks.Task {
+  public ch.idsia.maibe.tasks.MushroomTask(ch.idsia.tools.CmdLineOptions);
+  public float[] evaluate(ch.idsia.ai.agents.Agent);
+}
+Compiled from "ProgressTask.java"
+public final class ch.idsia.maibe.tasks.ProgressTask extends ch.idsia.maibe.tasks.BasicTask implements ch.idsia.maibe.tasks.Task {
+  public int uid;
+  public int totalEpisodes;
+  public ch.idsia.maibe.tasks.ProgressTask(ch.idsia.tools.CmdLineOptions);
+  public float[] evaluate(ch.idsia.ai.agents.Agent);
+  public void dumpFitnessEvaluation(float, java.lang.String);
+  public void doEpisodes(int, boolean);
+  public boolean isFinished();
+  public void reset();
+}
+Compiled from "SystemOfValues.java"
+public abstract class ch.idsia.maibe.tasks.SystemOfValues {
+  public float distance;
+  public int win;
+  public int mode;
+  public int coins;
+  public int hiddenItems;
+  public int flowerFire;
+  public int kills;
+  public int killedByFire;
+  public int killedByShell;
+  public int killedByStomp;
+  public int mushrooms;
+  public int timeLeft;
+  public ch.idsia.maibe.tasks.SystemOfValues();
+}
+Compiled from "Task.java"
+public interface ch.idsia.maibe.tasks.Task {
+  public abstract float[] evaluate(ch.idsia.ai.agents.Agent);
+  public abstract void setOptions(ch.idsia.tools.CmdLineOptions);
+  public abstract ch.idsia.tools.CmdLineOptions getOptions();
+  public abstract void doEpisodes(int, boolean);
+  public abstract boolean isFinished();
+  public abstract void reset();
+}
+Compiled from "AppletLauncher.java"
+public class ch.idsia.mario.engine.AppletLauncher extends javax.swing.JApplet {
+  public ch.idsia.mario.engine.AppletLauncher();
+  public void init();
+  public java.lang.String getAppletInfo();
+  public void start();
+  public void stop();
+}
+Compiled from "Art.java"
+public class ch.idsia.mario.engine.Art {
+  public static java.awt.Image[][] mario;
+  public static java.awt.Image[][] racoonmario;
+  public static java.awt.Image[][] smallMario;
+  public static java.awt.Image[][] fireMario;
+  public static java.awt.Image[][] enemies;
+  public static java.awt.Image[][] items;
+  public static java.awt.Image[][] level;
+  public static java.awt.Image[][] particles;
+  public static java.awt.Image[][] font;
+  public static java.awt.Image[][] bg;
+  static final boolean $assertionsDisabled;
+  public ch.idsia.mario.engine.Art();
+  public static void init(java.awt.GraphicsConfiguration);
+  static {};
+}
+Compiled from "BgRenderer.java"
+public class ch.idsia.mario.engine.BgRenderer {
+  public boolean renderBehaviors;
+  public ch.idsia.mario.engine.BgRenderer(ch.idsia.mario.engine.level.Level, java.awt.GraphicsConfiguration, int, int, int);
+  public void setCam(int, int);
+  public void render(java.awt.Graphics, int, float);
+  public void setLevel(ch.idsia.mario.engine.level.Level);
+  static {};
+}
+Compiled from "Generalizer.java"
+public interface ch.idsia.mario.engine.Generalizer {
+  public abstract byte ZLevelGeneralization(byte, int);
+}
+Compiled from "GeneralizerEnemies.java"
+public class ch.idsia.mario.engine.GeneralizerEnemies implements ch.idsia.mario.engine.Generalizer {
+  public ch.idsia.mario.engine.GeneralizerEnemies();
+  public byte ZLevelGeneralization(byte, int);
+}
+Compiled from "GeneralizerLevelScene.java"
+public class ch.idsia.mario.engine.GeneralizerLevelScene implements ch.idsia.mario.engine.Generalizer {
+  public ch.idsia.mario.engine.GeneralizerLevelScene();
+  public byte ZLevelGeneralization(byte, int);
+}
+Compiled from "GlobalOptions.java"
+public abstract class ch.idsia.mario.engine.GlobalOptions {
+  public static final int primaryVerionUID;
+  public static final int minorVerionUID;
+  public static final int minorSubVerionID;
+  public static boolean areLabels;
+  public static boolean isMarioAlwaysInCenter;
+  public static java.lang.Integer FPS;
+  public static int MaxFPS;
+  public static boolean isPauseWorld;
+  public static boolean isVisualization;
+  public static boolean isGameVeiwer;
+  public static boolean isTimer;
+  public static boolean isGameVeiwerContinuousUpdates;
+  public static boolean isPowerRestoration;
+  public static int observationGridWidth;
+  public static int observationGridHeight;
+  public static final int VISUAL_COMPONENT_WIDTH;
+  public static final int VISUAL_COMPONENT_HEIGHT;
+  public static boolean isMatrixView;
+  public static boolean isShowGrid;
+  public ch.idsia.mario.engine.GlobalOptions();
+  public static int getPrimaryVersionUID();
+  public static int getMinorVersionUID();
+  public static int getMinorSubVerionID();
+  public static java.lang.String getVersionUID();
+  public static void registerMarioVisualComponent(ch.idsia.mario.engine.MarioVisualComponent);
+  public static void registerGameViewer(ch.idsia.tools.GameViewer);
+  public static void AdjustMarioComponentFPS();
+  public static void gameViewerTick();
+  public static java.lang.String getDateTime(java.lang.Long);
+  public static java.lang.String getTimeStamp();
+  static {};
+}
+Compiled from "LevelRenderer.java"
+public class ch.idsia.mario.engine.LevelRenderer {
+  public boolean renderBehaviors;
+  int width;
+  int height;
+  public ch.idsia.mario.engine.LevelRenderer(ch.idsia.mario.engine.level.Level, java.awt.GraphicsConfiguration, int, int);
+  public void setCam(int, int);
+  public void render(java.awt.Graphics, int, float);
+  public void repaint(int, int, int, int);
+  public void setLevel(ch.idsia.mario.engine.level.Level);
+  public void renderExit0(java.awt.Graphics, int, float, boolean);
+  public void renderExit1(java.awt.Graphics, int, float);
+  static {};
+}
+Compiled from "LevelScene.java"
+public class ch.idsia.mario.engine.LevelScene extends ch.idsia.mario.engine.Scene implements ch.idsia.mario.engine.sprites.SpriteContext {
+  public final java.util.List<ch.idsia.mario.engine.sprites.Sprite> sprites;
+  public ch.idsia.mario.engine.level.Level level;
+  public ch.idsia.mario.engine.sprites.Mario mario;
+  public float xCam;
+  public float yCam;
+  public float xCamO;
+  public float yCamO;
+  public int tick;
+  public boolean paused;
+  public int startTime;
+  public int timeLeft;
+  public boolean visualization;
+  public static int killedCreaturesTotal;
+  public static int killedCreaturesByFireBall;
+  public static int killedCreaturesByStomp;
+  public static int killedCreaturesByShell;
+  public int fireballsOnScreen;
+  java.util.List<ch.idsia.mario.engine.sprites.Shell> shellsToCheck;
+  java.util.List<ch.idsia.mario.engine.sprites.Fireball> fireballsToCheck;
+  static final boolean $assertionsDisabled;
+  public void setTimeLimit(int);
+  public ch.idsia.mario.engine.LevelScene(long, int, int, int, int, int, int);
+  public void init();
+  public byte[][] getLevelSceneObservationZ(int);
+  public byte[][] getEnemiesObservationZ(int);
+  public float[] getEnemiesFloatPos();
+  public byte[][] getMergedObservationZZ(int, int);
+  public java.util.List<java.lang.String> LevelSceneAroundMarioASCII(boolean, boolean, boolean, int, int);
+  public void checkShellCollide(ch.idsia.mario.engine.sprites.Shell);
+  public void checkFireballCollide(ch.idsia.mario.engine.sprites.Fireball);
+  public void tick();
+  public void addSprite(ch.idsia.mario.engine.sprites.Sprite);
+  public void removeSprite(ch.idsia.mario.engine.sprites.Sprite);
+  public void bump(int, int, boolean);
+  public void bumpInto(int, int);
+  public int getTimeSpent();
+  public int getTimeLeft();
+  public int getKillsTotal();
+  public int getKillsByFire();
+  public int getKillsByStomp();
+  public int getKillsByShell();
+  public int[] getMarioState();
+  public void performAction(boolean[]);
+  public boolean isLevelFinished();
+  public void reset(ch.idsia.tools.CmdLineOptions);
+  public boolean isMarioAbleToShoot();
+  public int getMarioStatus();
+  public float[] getSerializedFullObservationZZ(int, int);
+  public int[] getSerializedLevelSceneObservationZ(int);
+  public int[] getSerializedEnemiesObservationZ(int);
+  public int[] getSerializedMergedObservationZZ(int, int);
+  public float[] getCreaturesFloatPos();
+  public boolean isMarioOnGround();
+  public boolean isMarioAbleToJump();
+  public void resetDefault();
+  public void reset(int[]);
+  public float[] getMarioFloatPos();
+  public int getMarioMode();
+  public boolean isMarioCarrying();
+  public int getLevelDifficulty();
+  public long getLevelSeed();
+  public int getLevelLength();
+  public int getLevelType();
+  public int getNumberOfHiddenCoinsGained();
+  static {};
+}
+Compiled from "MarioVisualComponent.java"
+public class ch.idsia.mario.engine.MarioVisualComponent extends javax.swing.JComponent {
+  public int width;
+  public int height;
+  public java.awt.image.VolatileImage thisVolatileImage;
+  public java.awt.Graphics thisVolatileImageGraphics;
+  public java.awt.Graphics thisGraphics;
+  public ch.idsia.mario.engine.LevelScene levelScene;
+  int delay;
+  public static ch.idsia.mario.engine.MarioVisualComponent getInstance(int, int, ch.idsia.mario.engine.LevelScene);
+  public void CreateMarioComponentFrame(ch.idsia.mario.engine.MarioVisualComponent);
+  public void setLocation(int, int);
+  public void reset();
+  public void tick();
+  public void render(java.awt.Graphics, float);
+  public static void drawStringDropShadow(java.awt.Graphics, java.lang.String, int, int, int);
+  public static void drawString(java.awt.Graphics, java.lang.String, int, int, int);
+  public void init();
+  public void postInitGraphics();
+  public void postInitGraphicsAndLevel();
+  public void adjustFPS();
+  public void setAgent(ch.idsia.ai.agents.Agent);
+  public void setGameViewer(ch.idsia.tools.GameViewer);
+  public java.util.List<java.lang.String> getTextObservation(boolean, boolean, boolean, int, int);
+  static {};
+}
+Compiled from "Recorder.java"
+public class ch.idsia.mario.engine.Recorder {
+  public ch.idsia.mario.engine.Recorder();
+  public void addLong(long);
+  public void addTick(byte);
+  public byte[] getBytes();
+}
+Compiled from "Replayer.java"
+public class ch.idsia.mario.engine.Replayer {
+  public ch.idsia.mario.engine.Replayer(byte[]);
+  public long nextLong();
+  public byte nextTick();
+}
+Compiled from "Scene.java"
+public abstract class ch.idsia.mario.engine.Scene {
+  public static boolean[] keys;
+  public static final java.lang.String[] keysStr;
+  public ch.idsia.mario.engine.Scene();
+  public abstract void init();
+  public abstract void tick();
+  static {};
+}
+Compiled from "BgLevelGenerator.java"
+public class ch.idsia.mario.engine.level.BgLevelGenerator {
+  public static ch.idsia.mario.engine.level.Level createLevel(int, int, boolean, int);
+  static {};
+}
+Compiled from "ImprovedNoise.java"
+public final class ch.idsia.mario.engine.level.ImprovedNoise {
+  int[] p;
+  public ch.idsia.mario.engine.level.ImprovedNoise(long);
+  public double noise(double, double, double);
+  double fade(double);
+  double lerp(double, double, double);
+  double grad(int, double, double, double);
+  public double perlinNoise(double, double);
+  public void shuffle(long);
+}
+Compiled from "Level.java"
+public class ch.idsia.mario.engine.level.Level {
+  public static final java.lang.String[] BIT_DESCRIPTIONS;
+  public static byte[] TILE_BEHAVIORS;
+  public static final int BIT_BLOCK_UPPER;
+  public static final int BIT_BLOCK_ALL;
+  public static final int BIT_BLOCK_LOWER;
+  public static final int BIT_SPECIAL;
+  public static final int BIT_BUMPABLE;
+  public static final int BIT_BREAKABLE;
+  public static final int BIT_PICKUPABLE;
+  public static final int BIT_ANIMATED;
+  public int width;
+  public int height;
+  public byte[][] map;
+  public byte[][] data;
+  public byte[][] observation;
+  public ch.idsia.mario.engine.level.SpriteTemplate[][] spriteTemplates;
+  public int xExit;
+  public int yExit;
+  public ch.idsia.mario.engine.level.Level(int, int);
+  public static void loadBehaviors(java.io.DataInputStream) throws java.io.IOException;
+  public static void saveBehaviors(java.io.DataOutputStream) throws java.io.IOException;
+  public static ch.idsia.mario.engine.level.Level load(java.io.DataInputStream) throws java.io.IOException;
+  public void save(java.io.DataOutputStream) throws java.io.IOException;
+  public void tick();
+  public byte getBlockCapped(int, int);
+  public byte getBlock(int, int);
+  public void setBlock(int, int, byte);
+  public void setBlockData(int, int, byte);
+  public boolean isBlocking(int, int, float, float);
+  public ch.idsia.mario.engine.level.SpriteTemplate getSpriteTemplate(int, int);
+  public void setSpriteTemplate(int, int, ch.idsia.mario.engine.level.SpriteTemplate);
+  public int getWidthCells();
+  public float getWidthPhys();
+  static {};
+}
+Compiled from "LevelGenerator.java"
+public class ch.idsia.mario.engine.level.LevelGenerator {
+  public static final int TYPE_OVERGROUND;
+  public static final int TYPE_UNDERGROUND;
+  public static final int TYPE_CASTLE;
+  public static final int DEFAULT_FLOOR;
+  public static final int LevelLengthMinThreshold;
+  ch.idsia.mario.engine.level.Level level;
+  static final java.util.Random random;
+  public static ch.idsia.mario.engine.level.Level createLevel(int[]);
+  static {};
+}
+Compiled from "SpriteTemplate.java"
+public class ch.idsia.mario.engine.level.SpriteTemplate {
+  public int lastVisibleTick;
+  public ch.idsia.mario.engine.sprites.Sprite sprite;
+  public boolean isDead;
+  public int getType();
+  public ch.idsia.mario.engine.level.SpriteTemplate(int, boolean);
+  public void spawn(ch.idsia.mario.engine.LevelScene, int, int, int);
+}
+Compiled from "LevelEditView.java"
+public class ch.idsia.mario.engine.mapedit.LevelEditView extends javax.swing.JComponent implements java.awt.event.MouseListener,java.awt.event.MouseMotionListener {
+  public ch.idsia.mario.engine.mapedit.LevelEditView(ch.idsia.mario.engine.mapedit.TilePicker);
+  public void setLevel(ch.idsia.mario.engine.level.Level);
+  public ch.idsia.mario.engine.level.Level getLevel();
+  public void addNotify();
+  public void paintComponent(java.awt.Graphics);
+  public void mouseClicked(java.awt.event.MouseEvent);
+  public void mouseEntered(java.awt.event.MouseEvent);
+  public void mouseExited(java.awt.event.MouseEvent);
+  public void mousePressed(java.awt.event.MouseEvent);
+  public void mouseReleased(java.awt.event.MouseEvent);
+  public void mouseDragged(java.awt.event.MouseEvent);
+  public void mouseMoved(java.awt.event.MouseEvent);
+}
+Compiled from "LevelEditor.java"
+public class ch.idsia.mario.engine.mapedit.LevelEditor extends javax.swing.JFrame implements java.awt.event.ActionListener {
+  public ch.idsia.mario.engine.mapedit.LevelEditor();
+  public javax.swing.JPanel buildBitmapPanel();
+  public javax.swing.JPanel buildButtonPanel();
+  public void actionPerformed(java.awt.event.ActionEvent);
+  public static void main(java.lang.String[]);
+  public void setPickedTile(byte);
+  static ch.idsia.mario.engine.mapedit.TilePicker access$000(ch.idsia.mario.engine.mapedit.LevelEditor);
+  static javax.swing.JCheckBox[] access$100(ch.idsia.mario.engine.mapedit.LevelEditor);
+}
+Compiled from "LevelEditor.java"
+class ch.idsia.mario.engine.mapedit.LevelEditor$1 implements java.awt.event.ActionListener {
+  final int val$id;
+  final ch.idsia.mario.engine.mapedit.LevelEditor this$0;
+  ch.idsia.mario.engine.mapedit.LevelEditor$1(ch.idsia.mario.engine.mapedit.LevelEditor, int);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "TilePicker.java"
+public class ch.idsia.mario.engine.mapedit.TilePicker extends javax.swing.JComponent implements java.awt.event.MouseListener,java.awt.event.MouseMotionListener {
+  public byte pickedTile;
+  public ch.idsia.mario.engine.mapedit.TilePicker();
+  public void addNotify();
+  public void paintComponent(java.awt.Graphics);
+  public void mouseClicked(java.awt.event.MouseEvent);
+  public void mouseEntered(java.awt.event.MouseEvent);
+  public void mouseExited(java.awt.event.MouseEvent);
+  public void mousePressed(java.awt.event.MouseEvent);
+  public void mouseReleased(java.awt.event.MouseEvent);
+  public void mouseDragged(java.awt.event.MouseEvent);
+  public void mouseMoved(java.awt.event.MouseEvent);
+  public void setPickedTile(byte);
+  public void addTilePickChangedListener(ch.idsia.mario.engine.mapedit.LevelEditor);
+}
+Compiled from "BulletBill.java"
+public class ch.idsia.mario.engine.sprites.BulletBill extends ch.idsia.mario.engine.sprites.Sprite {
+  int height;
+  public int facing;
+  public boolean avoidCliffs;
+  public int anim;
+  public boolean dead;
+  public ch.idsia.mario.engine.sprites.BulletBill(ch.idsia.mario.engine.LevelScene, float, float, int);
+  public void collideCheck();
+  public void move();
+  public boolean fireballCollideCheck(ch.idsia.mario.engine.sprites.Fireball);
+  public boolean shellCollideCheck(ch.idsia.mario.engine.sprites.Shell);
+}
+Compiled from "CoinAnim.java"
+public class ch.idsia.mario.engine.sprites.CoinAnim extends ch.idsia.mario.engine.sprites.Sprite {
+  public ch.idsia.mario.engine.sprites.CoinAnim(int, int);
+  public void move();
+}
+Compiled from "Enemy.java"
+public class ch.idsia.mario.engine.sprites.Enemy extends ch.idsia.mario.engine.sprites.Sprite {
+  public static final int ENEMY_RED_KOOPA;
+  public static final int ENEMY_GREEN_KOOPA;
+  public static final int ENEMY_GOOMBA;
+  public static final int ENEMY_SPIKY;
+  public static final int ENEMY_FLOWER;
+  int width;
+  int height;
+  public int facing;
+  public int deadTime;
+  public boolean flyDeath;
+  public boolean avoidCliffs;
+  public boolean winged;
+  public boolean noFireballDeath;
+  public ch.idsia.mario.engine.sprites.Enemy(ch.idsia.mario.engine.LevelScene, int, int, int, int, boolean, int, int);
+  public void collideCheck();
+  public void move();
+  public boolean shellCollideCheck(ch.idsia.mario.engine.sprites.Shell);
+  public boolean fireballCollideCheck(ch.idsia.mario.engine.sprites.Fireball);
+  public void bumpCheck(int, int);
+  public void render(java.awt.Graphics, float);
+}
+Compiled from "FireFlower.java"
+public class ch.idsia.mario.engine.sprites.FireFlower extends ch.idsia.mario.engine.sprites.Sprite {
+  int height;
+  public int facing;
+  public boolean avoidCliffs;
+  public ch.idsia.mario.engine.sprites.FireFlower(ch.idsia.mario.engine.LevelScene, int, int);
+  public void collideCheck();
+  public void move();
+}
+Compiled from "Fireball.java"
+public class ch.idsia.mario.engine.sprites.Fireball extends ch.idsia.mario.engine.sprites.Sprite {
+  int height;
+  public int facing;
+  public boolean avoidCliffs;
+  public int anim;
+  public boolean dead;
+  public ch.idsia.mario.engine.sprites.Fireball(ch.idsia.mario.engine.LevelScene, float, float, int);
+  public void move();
+  public void die();
+  static {};
+}
+Compiled from "FlowerEnemy.java"
+public class ch.idsia.mario.engine.sprites.FlowerEnemy extends ch.idsia.mario.engine.sprites.Enemy {
+  public ch.idsia.mario.engine.sprites.FlowerEnemy(ch.idsia.mario.engine.LevelScene, int, int, int, int);
+  public void move();
+}
+Compiled from "Mario.java"
+public class ch.idsia.mario.engine.sprites.Mario extends ch.idsia.mario.engine.sprites.Sprite {
+  public static boolean large;
+  public static boolean fire;
+  public static int coins;
+  public static int mushroomsDevoured;
+  public static int flowersDevoured;
+  public static boolean isMarioInvulnerable;
+  public static final java.lang.String[] MODES;
+  public static final int KEY_LEFT;
+  public static final int KEY_RIGHT;
+  public static final int KEY_DOWN;
+  public static final int KEY_JUMP;
+  public static final int KEY_SPEED;
+  public static final int KEY_UP;
+  public static final int KEY_PAUSE;
+  public static final int KEY_DUMP_CURRENT_WORLD;
+  public static final int KEY_LIFE_UP;
+  public static final int KEY_WIN;
+  public static final int STATUS_RUNNING;
+  public static final int STATUS_WIN;
+  public static final int STATUS_DEAD;
+  public boolean[] keys;
+  public boolean[] cheatKeys;
+  boolean wasOnGround;
+  boolean onGround;
+  int width;
+  int height;
+  public ch.idsia.mario.engine.LevelScene world;
+  public int facing;
+  public int xDeathPos;
+  public int yDeathPos;
+  public int deathTime;
+  public int winTime;
+  public ch.idsia.mario.engine.sprites.Sprite carried;
+  public static void resetStatic(int);
+  public int getMode();
+  public ch.idsia.mario.engine.sprites.Mario(ch.idsia.mario.engine.LevelScene);
+  void setLarge(boolean, boolean);
+  public void setRacoon(boolean);
+  public void move();
+  public void stomp(ch.idsia.mario.engine.sprites.Enemy);
+  public void stomp(ch.idsia.mario.engine.sprites.Shell);
+  public void getHurt();
+  public void win();
+  public void die();
+  public void getFlower();
+  public void getMushroom();
+  public void kick(ch.idsia.mario.engine.sprites.Shell);
+  public void stomp(ch.idsia.mario.engine.sprites.BulletBill);
+  public static void getCoin();
+  public int getStatus();
+  public boolean isOnGround();
+  public boolean mayJump();
+  public boolean isCanShoot();
+  static {};
+}
+Compiled from "Mushroom.java"
+public class ch.idsia.mario.engine.sprites.Mushroom extends ch.idsia.mario.engine.sprites.Sprite {
+  int height;
+  public int facing;
+  public boolean avoidCliffs;
+  public ch.idsia.mario.engine.sprites.Mushroom(ch.idsia.mario.engine.LevelScene, int, int);
+  public void collideCheck();
+  public void move();
+  public void bumpCheck(int, int);
+  static {};
+}
+Compiled from "Particle.java"
+public class ch.idsia.mario.engine.sprites.Particle extends ch.idsia.mario.engine.sprites.Sprite {
+  public int life;
+  public ch.idsia.mario.engine.sprites.Particle(int, int, float, float);
+  public ch.idsia.mario.engine.sprites.Particle(int, int, float, float, int, int);
+  public void move();
+}
+Compiled from "Shell.java"
+public class ch.idsia.mario.engine.sprites.Shell extends ch.idsia.mario.engine.sprites.Sprite {
+  int height;
+  public int facing;
+  public boolean avoidCliffs;
+  public int anim;
+  public boolean dead;
+  public boolean carried;
+  public ch.idsia.mario.engine.sprites.Shell(ch.idsia.mario.engine.LevelScene, float, float, int);
+  public boolean fireballCollideCheck(ch.idsia.mario.engine.sprites.Fireball);
+  public void collideCheck();
+  public void move();
+  public void bumpCheck(int, int);
+  public void die();
+  public boolean shellCollideCheck(ch.idsia.mario.engine.sprites.Shell);
+  public void release(ch.idsia.mario.engine.sprites.Mario);
+}
+Compiled from "Sparkle.java"
+public class ch.idsia.mario.engine.sprites.Sparkle extends ch.idsia.mario.engine.sprites.Sprite {
+  public int life;
+  public int xPicStart;
+  public ch.idsia.mario.engine.sprites.Sparkle(int, int, float, float);
+  public ch.idsia.mario.engine.sprites.Sparkle(int, int, float, float, int, int, int);
+  public void move();
+}
+Compiled from "Sprite.java"
+public class ch.idsia.mario.engine.sprites.Sprite {
+  public static final int KIND_NONE;
+  public static final int KIND_MARIO;
+  public static final int KIND_GOOMBA;
+  public static final int KIND_GOOMBA_WINGED;
+  public static final int KIND_RED_KOOPA;
+  public static final int KIND_RED_KOOPA_WINGED;
+  public static final int KIND_GREEN_KOOPA;
+  public static final int KIND_GREEN_KOOPA_WINGED;
+  public static final int KIND_BULLET_BILL;
+  public static final int KIND_SPIKY;
+  public static final int KIND_SPIKY_WINGED;
+  public static final int KIND_ENEMY_FLOWER;
+  public static final int KIND_SHELL;
+  public static final int KIND_MUSHROOM;
+  public static final int KIND_FIRE_FLOWER;
+  public static final int KIND_PARTICLE;
+  public static final int KIND_SPARCLE;
+  public static final int KIND_COIN_ANIM;
+  public static final int KIND_FIREBALL;
+  public static final int KIND_UNDEF;
+  public static ch.idsia.mario.engine.sprites.SpriteContext spriteContext;
+  public byte kind;
+  protected static float GROUND_INERTIA;
+  protected static float AIR_INERTIA;
+  public float xOld;
+  public float yOld;
+  public float x;
+  public float y;
+  public float xa;
+  public float ya;
+  public int mapX;
+  public int mapY;
+  public int xPic;
+  public int yPic;
+  public int wPic;
+  public int hPic;
+  public int xPicO;
+  public int yPicO;
+  public boolean xFlipPic;
+  public boolean yFlipPic;
+  public java.awt.Image[][] sheet;
+  public java.awt.Image[][] prevSheet;
+  public boolean visible;
+  public int layer;
+  public ch.idsia.mario.engine.level.SpriteTemplate spriteTemplate;
+  public ch.idsia.mario.engine.sprites.Sprite();
+  public void move();
+  public void render(java.awt.Graphics, float);
+  public final void tick();
+  public final void tickNoMove();
+  public void collideCheck();
+  public void bumpCheck(int, int);
+  public boolean shellCollideCheck(ch.idsia.mario.engine.sprites.Shell);
+  public void release(ch.idsia.mario.engine.sprites.Mario);
+  public boolean fireballCollideCheck(ch.idsia.mario.engine.sprites.Fireball);
+  static {};
+}
+Compiled from "SpriteContext.java"
+public interface ch.idsia.mario.engine.sprites.SpriteContext {
+  public abstract void addSprite(ch.idsia.mario.engine.sprites.Sprite);
+  public abstract void removeSprite(ch.idsia.mario.engine.sprites.Sprite);
+}
+Compiled from "Environment.java"
+public interface ch.idsia.mario.environments.Environment {
+  public static final int numberOfButtons;
+  public static final int HalfObsWidth;
+  public static final int HalfObsHeight;
+  public static final int MARIO_KEY_DOWN;
+  public static final int MARIO_KEY_JUMP;
+  public static final int MARIO_KEY_LEFT;
+  public static final int MARIO_KEY_RIGHT;
+  public static final int MARIO_KEY_SPEED;
+  public static final int MARIO_STATUS_WIN;
+  public static final int MARIO_STATUS_DEAD;
+  public static final int MARIO_STATUS_RUNNING;
+  public abstract void resetDefault();
+  public abstract void reset(int[]);
+  public abstract void tick();
+  public abstract float[] getMarioFloatPos();
+  public abstract int getMarioMode();
+  public abstract float[] getEnemiesFloatPos();
+  public abstract boolean isMarioOnGround();
+  public abstract boolean isMarioAbleToJump();
+  public abstract boolean isMarioCarrying();
+  public abstract boolean isMarioAbleToShoot();
+  public abstract byte[][] getMergedObservationZZ(int, int);
+  public abstract byte[][] getLevelSceneObservationZ(int);
+  public abstract byte[][] getEnemiesObservationZ(int);
+  public abstract int getKillsTotal();
+  public abstract int getKillsByFire();
+  public abstract int getKillsByStomp();
+  public abstract int getKillsByShell();
+  public abstract int getMarioStatus();
+  public abstract float[] getSerializedFullObservationZZ(int, int);
+  public abstract int[] getSerializedLevelSceneObservationZ(int);
+  public abstract int[] getSerializedEnemiesObservationZ(int);
+  public abstract int[] getSerializedMergedObservationZZ(int, int);
+  public abstract float[] getCreaturesFloatPos();
+  public abstract int[] getMarioState();
+  public abstract void performAction(boolean[]);
+  public abstract boolean isLevelFinished();
+  public abstract float[] getEvaluationInfoAsFloats();
+  public abstract java.lang.String getEvaluationInfoAsString();
+  public abstract ch.idsia.tools.EvaluationInfo getEvaluationInfo();
+  public abstract void reset(ch.idsia.tools.CmdLineOptions);
+  public abstract void setAgent(ch.idsia.ai.agents.Agent);
+}
+Compiled from "MarioEnvironment.java"
+public final class ch.idsia.mario.environments.MarioEnvironment implements ch.idsia.mario.environments.Environment {
+  final ch.idsia.mario.engine.LevelScene levelScene;
+  public ch.idsia.mario.environments.MarioEnvironment();
+  public void resetDefault();
+  public void reset(int[]);
+  public void tick();
+  public float[] getMarioFloatPos();
+  public int getMarioMode();
+  public float[] getEnemiesFloatPos();
+  public boolean isMarioOnGround();
+  public boolean isMarioAbleToJump();
+  public boolean isMarioCarrying();
+  public boolean isMarioAbleToShoot();
+  public byte[][] getMergedObservationZZ(int, int);
+  public byte[][] getLevelSceneObservationZ(int);
+  public byte[][] getEnemiesObservationZ(int);
+  public int getKillsTotal();
+  public int getKillsByFire();
+  public int getKillsByStomp();
+  public int getKillsByShell();
+  public int getMarioStatus();
+  public float[] getSerializedFullObservationZZ(int, int);
+  public int[] getSerializedLevelSceneObservationZ(int);
+  public int[] getSerializedEnemiesObservationZ(int);
+  public int[] getSerializedMergedObservationZZ(int, int);
+  public float[] getCreaturesFloatPos();
+  public int[] getMarioState();
+  public void performAction(boolean[]);
+  public boolean isLevelFinished();
+  public float[] getEvaluationInfoAsFloats();
+  public java.lang.String getEvaluationInfoAsString();
+  public ch.idsia.tools.EvaluationInfo getEvaluationInfo();
+  public void reset(ch.idsia.tools.CmdLineOptions);
+  public void setAgent(ch.idsia.ai.agents.Agent);
+}
+Compiled from "AmiCoSimulator.java"
+public class ch.idsia.mario.simulation.AmiCoSimulator {
+  public ch.idsia.mario.simulation.AmiCoSimulator();
+  public static void main(java.lang.String[]);
+  public void runEpisodes();
+}
+Compiled from "BasicSimulator.java"
+public class ch.idsia.mario.simulation.BasicSimulator implements ch.idsia.mario.simulation.Simulation {
+  ch.idsia.mario.simulation.SimulationOptions simulationOptions;
+  public ch.idsia.mario.simulation.BasicSimulator(ch.idsia.mario.simulation.SimulationOptions);
+  public void setSimulationOptions(ch.idsia.mario.simulation.SimulationOptions);
+  public ch.idsia.tools.EvaluationInfo simulateOneLevel();
+}
+Compiled from "GeneralSimulator.java"
+public class ch.idsia.mario.simulation.GeneralSimulator implements ch.idsia.mario.simulation.Simulation {
+  public ch.idsia.mario.simulation.GeneralSimulator();
+  public void setSimulationOptions(ch.idsia.mario.simulation.SimulationOptions);
+  public ch.idsia.tools.EvaluationInfo simulateOneLevel();
+}
+Compiled from "Simulation.java"
+public interface ch.idsia.mario.simulation.Simulation {
+  public abstract void setSimulationOptions(ch.idsia.mario.simulation.SimulationOptions);
+  public abstract ch.idsia.tools.EvaluationInfo simulateOneLevel();
+}
+Compiled from "SimulationOptions.java"
+public class ch.idsia.mario.simulation.SimulationOptions extends ch.idsia.utils.ParameterContainer {
+  protected ch.idsia.ai.agents.Agent agent;
+  public static int currentTrial;
+  protected ch.idsia.mario.simulation.SimulationOptions();
+  public ch.idsia.mario.simulation.SimulationOptions getSimulationOptionsCopy();
+  public ch.idsia.ai.agents.Agent getAgent();
+  public void setAgent(ch.idsia.ai.agents.Agent);
+  public void setAgent(java.lang.String);
+  public int getLevelType();
+  public void setLevelType(int);
+  public int getLevelDifficulty();
+  public void setLevelDifficulty(int);
+  public int getLevelLength();
+  public void setLevelLength(int);
+  public int getLevelHeight();
+  public void setLevelHeight(int);
+  public int getLevelRandSeed();
+  public void setLevelRandSeed(int);
+  public boolean isVisualization();
+  public void setVisualization(boolean);
+  public void setPauseWorld(boolean);
+  public java.lang.Boolean isPauseWorld();
+  public java.lang.Boolean isPowerRestoration();
+  public void setPowerRestoration(boolean);
+  public int getMarioMode();
+  public void setMarioMode(int);
+  public int getZLevelScene();
+  public void setZLevelScene(int);
+  public int getZLevelEnemies();
+  public void setZLevelEnemies(int);
+  public int getTimeLimit();
+  public void setTimeLimit(int);
+  public boolean isMarioInvulnerable();
+  public void setMarioInvulnerable(boolean);
+  public java.lang.Boolean getDeadEndsCount();
+  public void setDeadEndsCount(boolean);
+  public java.lang.Boolean getCannonsCount();
+  public void setCannonsCount(boolean);
+  public java.lang.Boolean getHillStraightCount();
+  public void setHillStraightCount(boolean);
+  public java.lang.Boolean getTubesCount();
+  public void setTubesCount(boolean);
+  public java.lang.Boolean getBlocksCount();
+  public void setBlocksCount(boolean);
+  public java.lang.Boolean getCoinsCount();
+  public void setCoinsCount(boolean);
+  public java.lang.Boolean getGapsCount();
+  public void setGapsCount(boolean);
+  public java.lang.Boolean getHiddenBlocksCount();
+  public void setHiddenBlocksCount(boolean);
+  public java.lang.Boolean isEnemiesEnabled();
+  public void setEnemiesEnabled(boolean);
+  public void resetCurrentTrial();
+  static {};
+}
+Compiled from "Main.java"
+public final class ch.idsia.scenarios.Main {
+  public ch.idsia.scenarios.Main();
+  public static void main(java.lang.String[]);
+}
+Compiled from "Play.java"
+public final class ch.idsia.scenarios.Play {
+  public ch.idsia.scenarios.Play();
+  public static void main(java.lang.String[]);
+}
+Compiled from "GamePlayEvaluation.java"
+public final class ch.idsia.scenarios.champ.GamePlayEvaluation {
+  static final int numberOfTrials;
+  static final boolean scoring;
+  public ch.idsia.scenarios.champ.GamePlayEvaluation();
+  public static void main(java.lang.String[]);
+  public static void scoreAllAgents(ch.idsia.tools.CmdLineOptions);
+  public static void score(ch.idsia.ai.agents.Agent, int, ch.idsia.tools.CmdLineOptions);
+  public static double testConfig(ch.idsia.ai.agents.controllers.TimingAgent, ch.idsia.tools.EvaluationOptions, int, int, boolean);
+  public static ch.idsia.utils.StatisticalSummary test(ch.idsia.ai.agents.Agent, ch.idsia.tools.EvaluationOptions, int);
+  static {};
+}
+Compiled from "LearningEvaluation.java"
+public final class ch.idsia.scenarios.champ.LearningEvaluation {
+  static final int numberOfTrials;
+  static final boolean scoring;
+  public ch.idsia.scenarios.champ.LearningEvaluation();
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "CompetitionScore.java"
+public class ch.idsia.scenarios.oldscenarios.CompetitionScore {
+  static final int numberOfTrials;
+  public ch.idsia.scenarios.oldscenarios.CompetitionScore();
+  public static void main(java.lang.String[]);
+  public static void score(ch.idsia.ai.agents.Agent, int);
+  public static double testConfig(ch.idsia.ai.agents.controllers.TimingAgent, ch.idsia.tools.EvaluationOptions, int, int, boolean);
+  public static ch.idsia.utils.StatisticalSummary test(ch.idsia.ai.agents.Agent, ch.idsia.tools.EvaluationOptions, int);
+  static {};
+}
+Compiled from "CustomRun.java"
+public class ch.idsia.scenarios.oldscenarios.CustomRun {
+  public ch.idsia.scenarios.oldscenarios.CustomRun();
+  public static void main(java.lang.String[]);
+}
+Compiled from "Evolve.java"
+public class ch.idsia.scenarios.oldscenarios.Evolve {
+  static final int generations;
+  static final int populationSize;
+  public ch.idsia.scenarios.oldscenarios.Evolve();
+  public static void main(java.lang.String[]);
+}
+Compiled from "EvolveIncrementally.java"
+public class ch.idsia.scenarios.oldscenarios.EvolveIncrementally {
+  static final int generations;
+  static final int populationSize;
+  public ch.idsia.scenarios.oldscenarios.EvolveIncrementally();
+  public static void main(java.lang.String[]);
+}
+Compiled from "EvolveMultiSeed.java"
+public class ch.idsia.scenarios.oldscenarios.EvolveMultiSeed {
+  static final int generations;
+  static final int populationSize;
+  public ch.idsia.scenarios.oldscenarios.EvolveMultiSeed();
+  public static void main(java.lang.String[]);
+}
+Compiled from "GeneralScenario.java"
+public class ch.idsia.scenarios.oldscenarios.GeneralScenario {
+  public ch.idsia.scenarios.oldscenarios.GeneralScenario();
+  public static void main(java.lang.String[]);
+}
+Compiled from "MainRun.java"
+public class ch.idsia.scenarios.oldscenarios.MainRun {
+  static final int numberOfTrials;
+  static final boolean scoring;
+  public ch.idsia.scenarios.oldscenarios.MainRun();
+  public static void main(java.lang.String[]);
+  public static void createAgentsPool();
+  public static void scoreAllAgents(ch.idsia.tools.CmdLineOptions);
+  public static void score(ch.idsia.ai.agents.Agent, int, ch.idsia.tools.CmdLineOptions);
+  public static double testConfig(ch.idsia.ai.agents.controllers.TimingAgent, ch.idsia.tools.EvaluationOptions, int, int, boolean);
+  public static ch.idsia.utils.StatisticalSummary test(ch.idsia.ai.agents.Agent, ch.idsia.tools.EvaluationOptions, int);
+  static {};
+}
+Compiled from "RandomSearch.java"
+public class ch.idsia.scenarios.oldscenarios.RandomSearch {
+  public ch.idsia.scenarios.oldscenarios.RandomSearch();
+}
+Compiled from "Stats.java"
+public class ch.idsia.scenarios.oldscenarios.Stats {
+  static final int numberOfTrials;
+  public ch.idsia.scenarios.oldscenarios.Stats();
+  public static void main(java.lang.String[]);
+  public static void doStats(ch.idsia.ai.agents.Agent, int);
+  public static double testConfig(ch.idsia.ai.agents.controllers.TimingAgent, ch.idsia.tools.EvaluationOptions, int, int, boolean);
+  public static ch.idsia.utils.StatisticalSummary test(ch.idsia.ai.agents.Agent, ch.idsia.tools.EvaluationOptions, int);
+}
+Compiled from "EvaluateJLink.java"
+public class ch.idsia.scenarios.test.EvaluateJLink {
+  public ch.idsia.scenarios.test.EvaluateJLink();
+  public static int[] getDimension();
+  public static int getInputSize();
+  public double evaluateLargeSRN(double[][], double[][], double[][], int, int);
+}
+Compiled from "EvolveSingle.java"
+public class ch.idsia.scenarios.test.EvolveSingle {
+  static final int generations;
+  static final int populationSize;
+  public ch.idsia.scenarios.test.EvolveSingle();
+  public static void main(java.lang.String[]);
+}
+Compiled from "EvolveWithChangingSeeds.java"
+public class ch.idsia.scenarios.test.EvolveWithChangingSeeds {
+  static final int generations;
+  static final int populationSize;
+  public ch.idsia.scenarios.test.EvolveWithChangingSeeds();
+  public static void main(java.lang.String[]);
+}
+Compiled from "PaperEvolve.java"
+public class ch.idsia.scenarios.test.PaperEvolve {
+  static final int generations;
+  static final int populationSize;
+  public ch.idsia.scenarios.test.PaperEvolve();
+  public static void main(java.lang.String[]);
+}
+Compiled from "PaperEvolveBatch.java"
+public class ch.idsia.scenarios.test.PaperEvolveBatch {
+  public ch.idsia.scenarios.test.PaperEvolveBatch();
+  public static void main(java.lang.String[]);
+}
+Compiled from "PlayJLink.java"
+public class ch.idsia.scenarios.test.PlayJLink {
+  public ch.idsia.scenarios.test.PlayJLink();
+  public static int[] getDimension();
+  public static int getInputSize();
+  public double evaluateLargeSRN(double[][], double[][], double[][], int, int);
+}
+Compiled from "StatsJLink.java"
+public class ch.idsia.scenarios.test.StatsJLink {
+  public ch.idsia.scenarios.test.StatsJLink();
+  public void evaluateLargeSRN(double[][], double[][], double[][], int);
+}
+Compiled from "StochasticityTest.java"
+public class ch.idsia.scenarios.test.StochasticityTest {
+  static final int repetitions;
+  public ch.idsia.scenarios.test.StochasticityTest();
+  public static void main(java.lang.String[]);
+}
+Compiled from "CmdLineOptions.java"
+public class ch.idsia.tools.CmdLineOptions extends ch.idsia.tools.EvaluationOptions {
+  public ch.idsia.tools.CmdLineOptions(java.lang.String[]);
+  public void setArgs(java.lang.String[]);
+  public java.lang.Boolean isToolsConfigurator();
+  public java.lang.Boolean isGameViewer();
+  public java.lang.Boolean isGameViewerContinuousUpdates();
+  public java.lang.Boolean isEcho();
+  public java.lang.String getPyAmiCoModuleName();
+  public java.lang.Integer getObservationGridWidth();
+  public java.lang.Boolean isGridVisualized();
+  public int[] toIntArray();
+}
+Compiled from "EvaluationInfo.java"
+public final class ch.idsia.tools.EvaluationInfo {
+  public static final int numberOfElements;
+  public int distancePassedCells;
+  public float distancePassedPhys;
+  public int flowersDevoured;
+  public int killsByFire;
+  public int killsByShell;
+  public int killsByStomp;
+  public int killsTotal;
+  public int marioMode;
+  public int marioStatus;
+  public int mushroomsDevoured;
+  public int numberOfCoinsGained;
+  public int numberOfHiddenItemsGained;
+  public int timeLeft;
+  public int timeSpent;
+  public java.lang.String Memo;
+  public ch.idsia.tools.EvaluationInfo();
+  public float computeBasicFitness();
+  public float computeMultiObjectiveFitness(ch.idsia.maibe.tasks.SystemOfValues);
+  public float computeMultiObjectiveFitness();
+  public float computeDistancePassed();
+  public int computeKillsTotal();
+  public float[] toFloatArray();
+  public java.lang.String toString();
+  public java.lang.String toStringSingleLine();
+  static {};
+}
+Compiled from "EvaluationOptions.java"
+public class ch.idsia.tools.EvaluationOptions extends ch.idsia.mario.simulation.SimulationOptions {
+  public ch.idsia.tools.EvaluationOptions();
+  public void setUpOptions(java.lang.String[]);
+  public java.lang.Boolean isExitProgramWhenFinished();
+  public void setExitProgramWhenFinished(boolean);
+  public java.lang.String getMatlabFileName();
+  public void setMatlabFileName(java.lang.String);
+  public java.awt.Point getViewLocation();
+  public java.lang.Boolean isViewAlwaysOnTop();
+  public void setFPS(int);
+  public java.lang.Integer getFPS();
+  public java.lang.String getAgentName();
+  public boolean isTimer();
+}
+Compiled from "Evaluator.java"
+public class ch.idsia.tools.Evaluator implements java.lang.Runnable {
+  java.lang.Thread thisThread;
+  public ch.idsia.tools.Evaluator();
+  public java.util.List<ch.idsia.tools.EvaluationInfo> evaluate();
+  public java.lang.String getMeanEvaluationSummary();
+  public void reset();
+  public void run();
+  public void start();
+}
+Compiled from "GameViewer.java"
+public class ch.idsia.tools.GameViewer extends javax.swing.JFrame {
+  java.awt.Dimension defaultSize;
+  java.awt.Point defaultLocation;
+  int delay;
+  int FPS;
+  ch.idsia.tools.GameViewer$GameViewerView gameViewerViewPanel;
+  public java.awt.TextField Console;
+  public java.awt.Label LabelConsole;
+  public java.awt.Checkbox ShowLevelMapObservation;
+  public java.awt.Checkbox ShowEnemiesObservation;
+  public java.awt.Checkbox ShowMergedObservation;
+  public java.awt.Button btnUpdate;
+  public java.awt.Checkbox ContinuousUpdates;
+  java.awt.CheckboxGroup ZLevelMap;
+  java.awt.Checkbox Z0_Map;
+  java.awt.Checkbox Z1_Map;
+  java.awt.Checkbox Z2_Map;
+  java.awt.CheckboxGroup ZLevelEnemies;
+  java.awt.Checkbox Z0_Enemies;
+  java.awt.Checkbox Z1_Enemies;
+  java.awt.Checkbox Z2_Enemies;
+  public void AdjustFPS();
+  public void setMarioVisualComponent(ch.idsia.mario.engine.MarioVisualComponent);
+  public void tick();
+  public ch.idsia.tools.GameViewer(java.awt.Dimension, java.awt.Point);
+  public void setToolsConfigurator(ch.idsia.tools.ToolsConfigurator);
+  public void setConsoleText(java.lang.String);
+  public boolean getContinuousUpdatesState();
+  static int access$100(ch.idsia.tools.GameViewer);
+  static int access$200(ch.idsia.tools.GameViewer);
+  static ch.idsia.mario.engine.MarioVisualComponent access$300(ch.idsia.tools.GameViewer);
+  static ch.idsia.tools.ToolsConfigurator access$400(ch.idsia.tools.GameViewer);
+  static int access$102(ch.idsia.tools.GameViewer, int);
+  static int access$202(ch.idsia.tools.GameViewer, int);
+}
+Compiled from "GameViewer.java"
+class ch.idsia.tools.GameViewer$1 {
+}
+Compiled from "GameViewer.java"
+public class ch.idsia.tools.GameViewer$GameViewerActions implements java.awt.event.ActionListener,java.awt.event.ItemListener {
+  final ch.idsia.tools.GameViewer this$0;
+  public ch.idsia.tools.GameViewer$GameViewerActions(ch.idsia.tools.GameViewer);
+  public void actionPerformed(java.awt.event.ActionEvent);
+  public void itemStateChanged(java.awt.event.ItemEvent);
+}
+Compiled from "GameViewer.java"
+class ch.idsia.tools.GameViewer$GameViewerView extends javax.swing.JPanel implements java.lang.Runnable {
+  java.lang.Thread animator;
+  final ch.idsia.tools.GameViewer this$0;
+  public void start();
+  public void stop();
+  public void paint(java.awt.Graphics);
+  public void run();
+  public ch.idsia.mario.engine.MarioVisualComponent getMarioVisualComponent();
+  ch.idsia.tools.GameViewer$GameViewerView(ch.idsia.tools.GameViewer, ch.idsia.tools.GameViewer$1);
+}
+Compiled from "StateEncoderDecoder.java"
+public class ch.idsia.tools.StateEncoderDecoder {
+  public ch.idsia.tools.StateEncoderDecoder();
+}
+Compiled from "ToolsConfigurator.java"
+public class ch.idsia.tools.ToolsConfigurator extends javax.swing.JFrame {
+  public static ch.idsia.mario.engine.MarioVisualComponent marioVisualComponent;
+  java.awt.Dimension defaultSize;
+  java.awt.Point defaultLocation;
+  public java.awt.Checkbox CheckboxShowGameViewer;
+  public java.awt.Label LabelConsole;
+  public java.awt.TextArea TextAreaConsole;
+  public java.awt.Checkbox CheckboxShowVizualization;
+  public java.awt.Checkbox CheckboxMaximizeFPS;
+  public java.awt.Choice ChoiceAgent;
+  public java.awt.Choice ChoiceLevelType;
+  public javax.swing.JSpinner JSpinnerLevelRandomizationSeed;
+  public java.awt.Checkbox CheckboxEnableTimer;
+  public javax.swing.JSpinner JSpinnerLevelDifficulty;
+  public java.awt.Checkbox CheckboxPauseWorld;
+  public java.awt.Checkbox CheckboxPauseMario;
+  public java.awt.Checkbox CheckboxPowerRestoration;
+  public javax.swing.JSpinner JSpinnerLevelLength;
+  public javax.swing.JSpinner JSpinnerMaxAttempts;
+  public java.awt.Checkbox CheckboxExitOnFinish;
+  public java.awt.TextField TextFieldMatLabFileName;
+  public java.awt.Choice ChoiceVerbose;
+  public javax.swing.JButton JButtonPlaySimulate;
+  public javax.swing.JButton JButtonResetEvaluationSummary;
+  static final boolean $assertionsDisabled;
+  public static void main(java.lang.String[]);
+  public static void CreateMarioComponentFrame();
+  static void CreateMarioComponentFrame(ch.idsia.tools.EvaluationOptions);
+  public ch.idsia.tools.ToolsConfigurator(java.awt.Point, java.awt.Dimension);
+  public void simulateOrPlay();
+  public void setGameViewer(ch.idsia.tools.GameViewer);
+  public ch.idsia.mario.engine.MarioVisualComponent getMarioVisualComponent();
+  public void setConsoleText(java.lang.String);
+  static javax.swing.plaf.basic.BasicArrowButton access$000(ch.idsia.tools.ToolsConfigurator);
+  static javax.swing.plaf.basic.BasicArrowButton access$100(ch.idsia.tools.ToolsConfigurator);
+  static ch.idsia.tools.Evaluator access$202(ch.idsia.tools.ToolsConfigurator, ch.idsia.tools.Evaluator);
+  static ch.idsia.tools.GameViewer access$300();
+  static javax.swing.JFrame access$400();
+  static int access$502(ch.idsia.tools.ToolsConfigurator, int);
+  static int access$500(ch.idsia.tools.ToolsConfigurator);
+  static {};
+}
+Compiled from "ToolsConfigurator.java"
+final class ch.idsia.tools.ToolsConfigurator$INTERFACE_TYPE extends java.lang.Enum<ch.idsia.tools.ToolsConfigurator$INTERFACE_TYPE> {
+  public static final ch.idsia.tools.ToolsConfigurator$INTERFACE_TYPE CONSOLE;
+  public static final ch.idsia.tools.ToolsConfigurator$INTERFACE_TYPE GUI;
+  public static ch.idsia.tools.ToolsConfigurator$INTERFACE_TYPE[] values();
+  public static ch.idsia.tools.ToolsConfigurator$INTERFACE_TYPE valueOf(java.lang.String);
+  static {};
+}
+Compiled from "ToolsConfigurator.java"
+public class ch.idsia.tools.ToolsConfigurator$ToolsConfiguratorActions implements java.awt.event.ActionListener,java.awt.event.ItemListener,javax.swing.event.ChangeListener {
+  final ch.idsia.tools.ToolsConfigurator this$0;
+  public ch.idsia.tools.ToolsConfigurator$ToolsConfiguratorActions(ch.idsia.tools.ToolsConfigurator);
+  public void actionPerformed(java.awt.event.ActionEvent);
+  public void itemStateChanged(java.awt.event.ItemEvent);
+  public void stateChanged(javax.swing.event.ChangeEvent);
+}
+Compiled from "MathX.java"
+public class ch.idsia.utils.MathX {
+  public ch.idsia.utils.MathX();
+  public static void show(char);
+}
+Compiled from "ParameterContainer.java"
+public class ch.idsia.utils.ParameterContainer {
+  protected java.util.HashMap<java.lang.String, java.lang.String> optionsHashMap;
+  protected static java.util.HashMap<java.lang.String, java.lang.String> defaultOptionsHashMap;
+  static final boolean $assertionsDisabled;
+  public ch.idsia.utils.ParameterContainer();
+  public void setParameterValue(java.lang.String, java.lang.String);
+  public java.lang.String getParameterValue(java.lang.String);
+  public int i(java.lang.String);
+  public java.lang.String s(java.lang.Object);
+  public java.lang.String s(ch.idsia.ai.agents.Agent);
+  public ch.idsia.ai.agents.Agent a(java.lang.String);
+  public boolean b(java.lang.String);
+  public static void InitDefaults();
+  public static java.lang.String getDefaultParameterValue(java.lang.String);
+  static {};
+}
+Compiled from "StatisticalSummary.java"
+public class ch.idsia.utils.StatisticalSummary implements java.io.Serializable {
+  public java.lang.String name;
+  int n;
+  boolean valid;
+  public ch.idsia.utils.StatisticalSummary$Watch watch;
+  public ch.idsia.utils.StatisticalSummary();
+  public ch.idsia.utils.StatisticalSummary(java.lang.String);
+  public final void reset();
+  public double max();
+  public double min();
+  public double mean();
+  public double gm();
+  public static double sigDiff(ch.idsia.utils.StatisticalSummary, ch.idsia.utils.StatisticalSummary);
+  public double sumSquareDiff();
+  public double sd();
+  public int n();
+  public double stdErr();
+  public void add(ch.idsia.utils.StatisticalSummary);
+  public void add(double);
+  public void add(java.lang.Number);
+  public void add(double[]);
+  public void add(java.util.Vector);
+  public java.lang.String toString();
+  public void save(java.lang.String);
+  public static ch.idsia.utils.StatisticalSummary load(java.lang.String);
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+}
+Compiled from "StatisticalSummary.java"
+public class ch.idsia.utils.StatisticalSummary$Watch {
+  double x;
+  public int count;
+  public ch.idsia.utils.StatisticalSummary$Watch(double);
+  public void note(double);
+  public java.lang.String toString();
+  public void reset();
+}
+Compiled from "StatisticalTests.java"
+public class ch.idsia.utils.StatisticalTests {
+  public ch.idsia.utils.StatisticalTests();
+  public static double sqr(double);
+  public static double sumSquareDiff(double[], double);
+  public static double correlation(double[], double[]);
+  public static double sumSquare(double[]);
+  public static double sumProdDiff(double[], double[], double, double);
+  public static double tNotPairedOneSided(double[], double[]);
+  public static double tNotPairedTwoSided(double[], double[]);
+  public static double tNotPaired(double[], double[], boolean);
+  public static double tNotPaired(double, double, double, double, int, int, boolean);
+  public static double tPairedOneSided(double[], double[]);
+  public static double tPairedTwoSided(double[], double[]);
+  public static double tPaired(double[], double[], boolean);
+  public static double tPairedOneSided(double[]);
+  public static double tPairedTwoSided(double[]);
+  public static double tPaired(double[], boolean);
+  public static double confDiff(double[], double);
+  public static double findt(double, double);
+  public static double tTest(double, double);
+  public static double tSingle(double, double);
+  protected static double gammln(double);
+  protected static double betai(double, double, double);
+  protected static double betacf(double, double, double);
+  public static void confTest();
+  public static void main(java.lang.String[]);
+}
+Compiled from "Stats.java"
+public class ch.idsia.utils.Stats {
+  public ch.idsia.utils.Stats();
+  public static double[] v2a(java.util.Vector);
+  public static double sqr(double);
+  public static double mean(double[]);
+  public static double mean(int[]);
+  public static double sdev(double[]);
+  public static double stderr(double[]);
+  public static double variance(double[]);
+  public static double covar(double[], double[]);
+  public static double correlation(double[], double[]);
+  public static double correlation2(double[], double[]);
+  public static double max(double[]);
+  public static double min(double[]);
+  public static void analyse(double[]);
+  public static void analyse(double[], java.io.PrintStream);
+  public static java.lang.String analysisString(double[]);
+  public static java.lang.String rmsString(double[]);
+  public static void main(java.lang.String[]) throws java.io.IOException;
+}
+Compiled from "SergeyKarakovskiy_JumpingAgent.java"
+public class competition.cig.sergeykarakovskiy.SergeyKarakovskiy_JumpingAgent extends ch.idsia.ai.agents.controllers.BasicAIAgent implements ch.idsia.ai.agents.Agent {
+  public competition.cig.sergeykarakovskiy.SergeyKarakovskiy_JumpingAgent();
+  public boolean[] getAction();
+  public void reset();
+  public ch.idsia.ai.agents.Agent$AGENT_TYPE getType();
+  public java.lang.String getName();
+  public void setName(java.lang.String);
+}
+Compiled from "SergeyKarakovskiy_JumpingAgent.java"
+public class competition.evostar.sergeykarakovskiy.SergeyKarakovskiy_JumpingAgent implements ch.idsia.ai.agents.Agent {
+  protected byte[][] levelScene;
+  protected byte[][] enemies;
+  protected byte[][] mergedObservation;
+  protected float[] marioFloatPos;
+  protected float[] enemiesFloatPos;
+  protected int[] marioState;
+  protected int marioStatus;
+  protected int marioMode;
+  protected boolean isMarioOnGround;
+  protected boolean isMarioAbleToJump;
+  protected boolean isMarioAbleToShoot;
+  protected boolean isMarioCarrying;
+  protected int getKillsTotal;
+  protected int getKillsByFire;
+  protected int getKillsByStomp;
+  protected int getKillsByShell;
+  int zLevelScene;
+  int zLevelEnemies;
+  public competition.evostar.sergeykarakovskiy.SergeyKarakovskiy_JumpingAgent();
+  public boolean[] getAction();
+  public void integrateObservation(ch.idsia.mario.environments.Environment);
+  public void reset();
+  public ch.idsia.ai.agents.Agent$AGENT_TYPE getType();
+  public java.lang.String getName();
+  public void setName(java.lang.String);
+  public boolean[] getAction(ch.idsia.mario.environments.Environment);
+  public void integrateObservation(int[], int[], float[], float[], int[]);
+}
+Compiled from "Edge.java"
+public class grammaticalbehaviors.GEBT_Mario.Edge {
+  public static final int META_NOTHING;
+  public static final int META_HOLE;
+  public static final int META_SOLID;
+  public grammaticalbehaviors.GEBT_Mario.Edge();
+  public grammaticalbehaviors.GEBT_Mario.Edge(long, int, int, int, int);
+  public long getID();
+  public int getMetadata();
+  public int getA();
+  public int getB();
+  public int getMode();
+  public int getDistance();
+  public java.lang.String toString();
+  public void setMetadata(int);
+  public int getCost(grammaticalbehaviors.GEBT_Mario.Node, grammaticalbehaviors.GEBT_Mario.GEBT_MarioAgent, boolean);
+}
+Compiled from "Enemy.java"
+public class grammaticalbehaviors.GEBT_Mario.Enemy {
+  public int m_x;
+  public int m_y;
+  public byte m_type;
+  public grammaticalbehaviors.GEBT_Mario.Enemy();
+  public grammaticalbehaviors.GEBT_Mario.Enemy(int, int, byte);
+  public java.lang.String toString(grammaticalbehaviors.GEBT_Mario.Enemy);
+}
+Compiled from "EvoMain.java"
+public class grammaticalbehaviors.GEBT_Mario.EvoMain {
+  public grammaticalbehaviors.GEBT_Mario.EvoMain();
+  public static void main(java.lang.String[]);
+}
+Compiled from "GEBT_MarioAgent.java"
+public class grammaticalbehaviors.GEBT_Mario.GEBT_MarioAgent implements ch.idsia.ai.agents.Agent {
+  java.util.Hashtable<java.lang.Integer, java.lang.Integer> m_record;
+  java.util.Vector<java.lang.Integer> m_gaps;
+  java.util.Vector<grammaticalbehaviors.GEBT_Mario.IntPair> m_forbiddenGaps;
+  grammaticalbehaviors.GEBT_Mario.Path m_currentPath;
+  int m_posIndexInPath;
+  public static final int MARIO_X;
+  public static final int MARIO_Y;
+  protected byte[][] levelScene;
+  protected byte[][] enemies;
+  protected byte[][] mergedObservation;
+  public float[] marioFloatPos;
+  protected float[] enemiesFloatPos;
+  protected int[] marioState;
+  protected int marioStatus;
+  protected int marioMode;
+  protected boolean isMarioOnGround;
+  protected boolean isMarioAbleToJump;
+  protected boolean isMarioAbleToShoot;
+  protected boolean isMarioCarrying;
+  protected int getKillsTotal;
+  protected int getKillsByFire;
+  protected int getKillsByStomp;
+  protected int getKillsByShell;
+  protected int m_MarioYInMapChunk;
+  protected int m_MarioYInMap;
+  protected int m_MarioXInMapChunk;
+  protected int m_MarioXInMap;
+  protected int m_OldMarioXInMap;
+  protected int m_marioInGraphNode;
+  protected boolean m_isFollowingPath;
+  protected boolean m_followingNewPath;
+  protected float m_speedCellsPerCycleX;
+  protected float m_lastRealXPos;
+  protected int m_maxGraphTo;
+  protected boolean m_onRightMostFlag;
+  protected int m_stuckCounter;
+  protected grammaticalbehaviors.bt.behaviortree.BehaviorTree m_behaviorTree;
+  int zLevelScene;
+  int zLevelEnemies;
+  public grammaticalbehaviors.GEBT_Mario.GEBT_MarioAgent();
+  public void resetAgent();
+  public void loadBehaviorTree(grammaticalbehaviors.bt.behaviortree.BTStream);
+  public void loadBehaviorTree(java.lang.String);
+  public grammaticalbehaviors.GEBT_Mario.Map getMap();
+  public java.util.Vector<grammaticalbehaviors.GEBT_Mario.IntPair> getForbiddenGaps();
+  public void deleteForbiddenGap(int);
+  public void addForbiddenGap(int, int);
+  public boolean isGapForbidden(int);
+  public boolean isNodeInCurrentPath(int);
+  public int getClosestNodeToMario();
+  public float getMarioSpeedX();
+  public grammaticalbehaviors.GEBT_Mario.MoveSimulator getMoveSimulator();
+  public boolean isFollowingNewPath();
+  public void followingNewPath(boolean);
+  public void setFollowingPath(boolean);
+  public boolean isFollowingPath();
+  public boolean inTrap();
+  public boolean isRightTrap();
+  public int heightTrapRight();
+  public int heightTrapLeft();
+  public int trapPos();
+  public int getObjective();
+  public void setObjective(int);
+  public java.util.Hashtable<java.lang.Integer, java.lang.Integer> getRecord();
+  public java.util.Vector<java.lang.Integer> getGaps();
+  public void setOnRightMostFlag(boolean);
+  public boolean onRightMostFlag();
+  public void registerActions();
+  public void setAction(int, boolean);
+  public boolean[] getAction();
+  public byte[][] getLevelScene();
+  public byte[][] getEnemyScene();
+  public boolean isOverOrEqualTo(int);
+  public int getDistanceYTo(int);
+  public int getDistanceXTo(int);
+  public boolean isMarioOnLeftOf(int);
+  public boolean isMarioOnRightOf(int);
+  public boolean isMarioOnPos(int);
+  public boolean CellOnRight();
+  public boolean CellOnLeft();
+  public int getMarioSafePos();
+  public void integrateObservation(ch.idsia.mario.environments.Environment);
+  public void scanScreen();
+  public void resetGraphLength();
+  public boolean increaseGraphLength();
+  public void scanLevel();
+  public void setPath(grammaticalbehaviors.GEBT_Mario.Path);
+  public void advancePathIndex();
+  public void setCurrentPathIndex(int);
+  public int getInertia();
+  public grammaticalbehaviors.GEBT_Mario.Path getCurrentPath();
+  public int getPosIndexInPath();
+  public int getMarioNodeInMap();
+  public boolean canIJump();
+  public boolean canIFire();
+  public boolean amIOnGround();
+  public boolean trap();
+  public void snapshot(int, int, int, int);
+  public boolean isBulletToHead();
+  public boolean isBulletToFeet();
+  public boolean isJumpableEnemy(byte);
+  public boolean isJumpableEnemy(int, int, int, int);
+  public boolean isNoJumpableEnemy(byte);
+  public boolean isNoJumpableEnemy(int, int, int, int);
+  public boolean isEnemy(byte);
+  public boolean isEnemy(int, int, int, int);
+  public boolean isItem(int, int, int, int);
+  public boolean isObstacle(byte);
+  public boolean isBreakable(byte);
+  public boolean isPushable(byte);
+  public boolean isItem(byte);
+  public boolean isClimbable(byte);
+  public boolean isObstacle(int, int, int, int);
+  public boolean isClimbable(int, int, int, int);
+  public boolean isPushable(int, int, int, int);
+  public boolean isBreakable(int, int, int, int);
+  public void reset();
+  public boolean isMarioSmall();
+  public boolean isMarioLarge();
+  public boolean isMarioFire();
+  public boolean isMarioStuck();
+  public java.lang.String getName();
+  public void setName(java.lang.String);
+  public boolean[] getAction(ch.idsia.mario.environments.Environment);
+  public void integrateObservation(int[], int[], float[], float[], int[]);
+  public void giveIntermediateReward(float);
+  public float getMarioGravity();
+  public ch.idsia.ai.agents.Agent$AGENT_TYPE getType();
+}
+Compiled from "Graph.java"
+public class grammaticalbehaviors.GEBT_Mario.Graph {
+  public static final int MODE_UNDEF;
+  public static final int MODE_WALK_BIG;
+  public static final int MODE_WALK_SMALL;
+  public static final int MODE_JUMP_BIG;
+  public static final int MODE_JUMP_SMALL;
+  public static final int MODE_FALL_BIG;
+  public static final int MODE_FALL_SMALL;
+  public static final int MODE_BREAKABLE;
+  public static final int MODE_FAITH_JUMP;
+  public grammaticalbehaviors.GEBT_Mario.Graph(grammaticalbehaviors.GEBT_Mario.Map);
+  public int addNode(int, int);
+  public int existsNode(int, int);
+  public int existsNode(int);
+  public void addBreakableEdge(int, int, int);
+  public void addEdge(int, int, int);
+  public long existsEdge(int, int);
+  public long existsEdgeDirectional(int, int);
+  public grammaticalbehaviors.GEBT_Mario.Edge getEdge(int, int);
+  public grammaticalbehaviors.GEBT_Mario.Edge getEdge(long);
+  public void removeNode(int, int);
+  public java.lang.Object[] getNodes();
+  public java.lang.Object[] getEdges();
+  public grammaticalbehaviors.GEBT_Mario.Node getNode(int);
+  public int getNumNodes();
+  public int getRightMostNode(java.util.Vector<java.lang.Integer>);
+  public int getLeftMostNodeClose(int, java.util.Vector<java.lang.Integer>);
+  public int getRightMostNodeClose(int, java.util.Vector<java.lang.Integer>);
+  public int getGroundMostNodeClose(int, java.util.Vector<java.lang.Integer>);
+  public int getTopMostNodeClose(int, java.util.Vector<java.lang.Integer>);
+  public int getClosestPotCannonNode(int, java.util.Vector<java.lang.Integer>);
+  public int getClosestBrickNode(int, java.util.Vector<java.lang.Integer>);
+  public int getClosestItemNode(int, java.util.Vector<java.lang.Integer>);
+  public int getClosestQuestionNode(int, java.util.Vector<java.lang.Integer>);
+  public int getClosestNodeTo(int, int);
+  public int getClosestNodeToFloatPos(float, float);
+  public void dumpProcessing(java.io.BufferedWriter) throws java.lang.Exception;
+  public grammaticalbehaviors.GEBT_Mario.Path getPath(int, int, grammaticalbehaviors.GEBT_Mario.GEBT_MarioAgent);
+  boolean _a_star(grammaticalbehaviors.GEBT_Mario.Path, grammaticalbehaviors.GEBT_Mario.GEBT_MarioAgent, boolean);
+}
+Compiled from "IntPair.java"
+public class grammaticalbehaviors.GEBT_Mario.IntPair {
+  public int a;
+  public int b;
+  public grammaticalbehaviors.GEBT_Mario.IntPair();
+  public grammaticalbehaviors.GEBT_Mario.IntPair(int, int);
+}
+Compiled from "Item.java"
+public class grammaticalbehaviors.GEBT_Mario.Item {
+  public int m_x;
+  public int m_y;
+  public byte m_type;
+  public grammaticalbehaviors.GEBT_Mario.Item();
+  public grammaticalbehaviors.GEBT_Mario.Item(int, int, byte);
+  public java.lang.String toString(grammaticalbehaviors.GEBT_Mario.Item);
+}
+Compiled from "Map.java"
+public class grammaticalbehaviors.GEBT_Mario.Map {
+  public static final int LEVEL_HEIGHT;
+  public static final int MAP_BLOCK_LENGTH;
+  public int MAX_JUMP_HEIGHT;
+  public int MAX_JUMP_HEIGHT_PUSH;
+  public static final int MAP_OBSTACLE;
+  public static final int MAP_SOFT_OBSTACLE;
+  public static final int MAP_SOFT_OBSTACLE2;
+  public static final int MAP_SIMPLE_BRICK;
+  public static final int MAP_QUESTION_BRICK;
+  public static final int MAP_COIN_ANIM;
+  public static final int MAP_BORDER_CANNOT_PASS_THROUGH;
+  public static final int MAP_CANNON_MUZZLE;
+  public static final int MAP_CANNON_TRUNK;
+  public static final int MAP_FLOWER_POT;
+  public static final int MAP_NOTHING;
+  public static final int MAP_ONE_SPACE_FREE_FLAG;
+  public static final int MAP_TWO_SPACES_FREE_FLAG;
+  java.util.Hashtable<java.lang.Integer, java.util.Vector<java.lang.Integer>> m_coinCollection;
+  java.util.Hashtable<java.lang.Integer, java.util.Vector<grammaticalbehaviors.GEBT_Mario.Enemy>> m_enemyCollection;
+  java.util.Hashtable<java.lang.Integer, java.util.Vector<grammaticalbehaviors.GEBT_Mario.Item>> m_itemCollection;
+  public static int MAX_DIST_JUMP;
+  public static boolean isObstacle(byte);
+  public static boolean isPotOrCannon(byte);
+  public grammaticalbehaviors.GEBT_Mario.Map();
+  public static boolean isNothing(byte);
+  public grammaticalbehaviors.GEBT_Mario.Graph getGraph();
+  public void setCurrentWrittingX(int);
+  public grammaticalbehaviors.GEBT_Mario.MapBlock getBlock(int);
+  public void writeLevel(int, byte);
+  public void flushEnemiesAndItems();
+  public void writeEnemy(int, byte);
+  public boolean checkForEnemyType(int, int, int, int, int);
+  public void updateLastCell();
+  public byte read(int, int);
+  public void dumpToFile(java.lang.String);
+  public void dumpToFileProcessing(java.lang.String);
+  public static int CanMarioStand(int);
+  public static boolean isSomethingSolid(int);
+  public void processGraph(int, int);
+  public void graphCheckJumps(int, int, int, int);
+  public int checkVolatileUp(int, int, java.util.Vector<grammaticalbehaviors.GEBT_Mario.Enemy>, java.util.Vector<grammaticalbehaviors.GEBT_Mario.Item>);
+  public int checkHoleOnSides(int, int);
+  public boolean checkObstacle(int, int, int, int);
+  public boolean checkSolid(int, int, int, int);
+  static {};
+}
+Compiled from "MapBlock.java"
+public class grammaticalbehaviors.GEBT_Mario.MapBlock {
+  public grammaticalbehaviors.GEBT_Mario.MapBlock();
+  public boolean checkFlags(int, int, byte);
+  public void write(int, int, byte);
+  public byte read(int, int);
+  public void dumpToFile(java.io.BufferedWriter, int, int) throws java.lang.Exception;
+  public void dumpToFileProcessing(java.io.BufferedWriter, int, int, int) throws java.lang.Exception;
+}
+Compiled from "MarioXMLReader.java"
+public class grammaticalbehaviors.GEBT_Mario.MarioXMLReader extends grammaticalbehaviors.bt.behaviortree.XML_BTReader {
+  public grammaticalbehaviors.GEBT_Mario.MarioXMLReader();
+  public grammaticalbehaviors.bt.behaviortree.BTLeafNode readNode(grammaticalbehaviors.bt.behaviortree.BTNode, java.util.Hashtable<java.lang.String, java.lang.String>);
+}
+Compiled from "MoveSimulator.java"
+public class grammaticalbehaviors.GEBT_Mario.MoveSimulator {
+  public grammaticalbehaviors.GEBT_Mario.MoveSimulator(grammaticalbehaviors.GEBT_Mario.GEBT_MarioAgent);
+  public void reset();
+  public void resetReg();
+  public void copyState();
+  public void registerAction(boolean[]);
+  public boolean simulateFall(int, int, boolean);
+  public void simulateSingleMove(boolean[]);
+  public void registerSingleMove(boolean[]);
+}
+Compiled from "Node.java"
+public class grammaticalbehaviors.GEBT_Mario.Node {
+  public static final int MAP_HOLE_ON_LEFT;
+  public static final int MAP_HOLE_ON_RIGHT;
+  public static final int MAP_HOLE_ON_BOTH;
+  public grammaticalbehaviors.GEBT_Mario.Node();
+  public grammaticalbehaviors.GEBT_Mario.Node(int, int, int);
+  public void addEdge(long);
+  public int getID();
+  public int getX();
+  public int getY();
+  public java.util.Vector<java.lang.Long> getEdgesFromNode();
+  public void setMetadata(int);
+  public int getMetadata();
+  public void setHoles(int);
+  public int getHoles();
+  public void setCoins(int);
+  public int getCoins();
+  public void setEnemies(java.util.Vector<grammaticalbehaviors.GEBT_Mario.Enemy>);
+  public java.util.Vector<grammaticalbehaviors.GEBT_Mario.Enemy> getEnemies();
+  public void setItems(java.util.Vector<grammaticalbehaviors.GEBT_Mario.Item>);
+  public java.util.Vector<grammaticalbehaviors.GEBT_Mario.Item> getItems();
+  public int internalCost(grammaticalbehaviors.GEBT_Mario.GEBT_MarioAgent);
+  public int manhattanDistanceTo(grammaticalbehaviors.GEBT_Mario.Node);
+  public int manhattanDistanceTo(int, int);
+  public boolean isFlowerOut(grammaticalbehaviors.GEBT_Mario.Graph);
+}
+Compiled from "Path.java"
+public class grammaticalbehaviors.GEBT_Mario.Path {
+  public static final int PATH_RIGHTMOST;
+  public static final int PATH_GROUNDMOST;
+  public static final int PATH_TOPMOST;
+  public static final int PATH_POTCANNON;
+  public static final int PATH_CLOSESTBRICK;
+  public static final int PATH_CLOSESTQUESTION;
+  public static final int PATH_CLOSESTITEM;
+  public int m_originID;
+  public int m_destinationID;
+  public int m_cost;
+  public java.util.Vector<java.lang.Integer> m_points;
+  public int m_metadata;
+  public grammaticalbehaviors.GEBT_Mario.Path();
+  public grammaticalbehaviors.GEBT_Mario.Path(int, int);
+  public grammaticalbehaviors.GEBT_Mario.Path(int, int, int);
+  public grammaticalbehaviors.GEBT_Mario.Path(grammaticalbehaviors.GEBT_Mario.Path);
+  public java.lang.String toString();
+}
+Compiled from "Graph.java"
+class grammaticalbehaviors.GEBT_Mario.PathCH {
+  public grammaticalbehaviors.GEBT_Mario.Path p;
+  public int destID;
+  public int heuristicCost;
+  grammaticalbehaviors.GEBT_Mario.PathCH();
+  public java.lang.String toString();
+}
+Compiled from "Graph.java"
+class grammaticalbehaviors.GEBT_Mario.PathCHComparator implements java.util.Comparator<grammaticalbehaviors.GEBT_Mario.PathCH> {
+  grammaticalbehaviors.GEBT_Mario.PathCHComparator();
+  public int compare(grammaticalbehaviors.GEBT_Mario.PathCH, grammaticalbehaviors.GEBT_Mario.PathCH);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "Down.java"
+public class grammaticalbehaviors.bt.Actions.Down extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Actions.Down(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "Fire.java"
+public class grammaticalbehaviors.bt.Actions.Fire extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Actions.Fire(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "FollowCurrentPath.java"
+public class grammaticalbehaviors.bt.Actions.FollowCurrentPath extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Actions.FollowCurrentPath(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void resetNode();
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "GetPathAtoB.java"
+public class grammaticalbehaviors.bt.Actions.GetPathAtoB extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Actions.GetPathAtoB(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "GetPathToClosestBrick.java"
+public class grammaticalbehaviors.bt.Actions.GetPathToClosestBrick extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Actions.GetPathToClosestBrick(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void resetNode();
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "GetPathToClosestItem.java"
+public class grammaticalbehaviors.bt.Actions.GetPathToClosestItem extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Actions.GetPathToClosestItem(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void resetNode();
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "GetPathToClosestPotCannon.java"
+public class grammaticalbehaviors.bt.Actions.GetPathToClosestPotCannon extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Actions.GetPathToClosestPotCannon(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void resetNode();
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "GetPathToClosestQuestion.java"
+public class grammaticalbehaviors.bt.Actions.GetPathToClosestQuestion extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Actions.GetPathToClosestQuestion(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void resetNode();
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "GetPathToGround.java"
+public class grammaticalbehaviors.bt.Actions.GetPathToGround extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Actions.GetPathToGround(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void resetNode();
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "GetPathToLeftMost.java"
+public class grammaticalbehaviors.bt.Actions.GetPathToLeftMost extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Actions.GetPathToLeftMost(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void resetNode();
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "GetPathToRightMost.java"
+public class grammaticalbehaviors.bt.Actions.GetPathToRightMost extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Actions.GetPathToRightMost(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void resetNode();
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "GetPathToTop.java"
+public class grammaticalbehaviors.bt.Actions.GetPathToTop extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Actions.GetPathToTop(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void resetNode();
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "JumpLeft.java"
+public class grammaticalbehaviors.bt.Actions.JumpLeft extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Actions.JumpLeft(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "JumpLeftRun.java"
+public class grammaticalbehaviors.bt.Actions.JumpLeftRun extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Actions.JumpLeftRun(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "JumpRight.java"
+public class grammaticalbehaviors.bt.Actions.JumpRight extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Actions.JumpRight(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "JumpRightRun.java"
+public class grammaticalbehaviors.bt.Actions.JumpRightRun extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Actions.JumpRightRun(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "NOP.java"
+public class grammaticalbehaviors.bt.Actions.NOP extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Actions.NOP(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "NoPathAction.java"
+public class grammaticalbehaviors.bt.Actions.NoPathAction extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Actions.NoPathAction(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "RunLeft.java"
+public class grammaticalbehaviors.bt.Actions.RunLeft extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Actions.RunLeft(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "RunRight.java"
+public class grammaticalbehaviors.bt.Actions.RunRight extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Actions.RunRight(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "Speed.java"
+public class grammaticalbehaviors.bt.Actions.Speed extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Actions.Speed(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "VerticalJump.java"
+public class grammaticalbehaviors.bt.Actions.VerticalJump extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Actions.VerticalJump(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "WalkLeft.java"
+public class grammaticalbehaviors.bt.Actions.WalkLeft extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Actions.WalkLeft(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "WalkRight.java"
+public class grammaticalbehaviors.bt.Actions.WalkRight extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Actions.WalkRight(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "CanIFire.java"
+public class grammaticalbehaviors.bt.Conditions.CanIFire extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Conditions.CanIFire(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "CanIJump.java"
+public class grammaticalbehaviors.bt.Conditions.CanIJump extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Conditions.CanIJump(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "EnemyAhead.java"
+public class grammaticalbehaviors.bt.Conditions.EnemyAhead extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Conditions.EnemyAhead(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "EnemyAheadDown.java"
+public class grammaticalbehaviors.bt.Conditions.EnemyAheadDown extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Conditions.EnemyAheadDown(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "EnemyAheadUp.java"
+public class grammaticalbehaviors.bt.Conditions.EnemyAheadUp extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Conditions.EnemyAheadUp(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "EnemyBack.java"
+public class grammaticalbehaviors.bt.Conditions.EnemyBack extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Conditions.EnemyBack(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "EnemyBackDown.java"
+public class grammaticalbehaviors.bt.Conditions.EnemyBackDown extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Conditions.EnemyBackDown(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "EnemyBackUp.java"
+public class grammaticalbehaviors.bt.Conditions.EnemyBackUp extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Conditions.EnemyBackUp(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "Failure.java"
+public class grammaticalbehaviors.bt.Conditions.Failure extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Conditions.Failure(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "HoleAhead.java"
+public class grammaticalbehaviors.bt.Conditions.HoleAhead extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Conditions.HoleAhead(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "HoleBack.java"
+public class grammaticalbehaviors.bt.Conditions.HoleBack extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Conditions.HoleBack(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "IsALeftTrap.java"
+public class grammaticalbehaviors.bt.Conditions.IsALeftTrap extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Conditions.IsALeftTrap(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "IsARightTrap.java"
+public class grammaticalbehaviors.bt.Conditions.IsARightTrap extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Conditions.IsARightTrap(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "IsBulletToFeet.java"
+public class grammaticalbehaviors.bt.Conditions.IsBulletToFeet extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Conditions.IsBulletToFeet(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "IsBulletToHead.java"
+public class grammaticalbehaviors.bt.Conditions.IsBulletToHead extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Conditions.IsBulletToHead(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "IsFollowingPath.java"
+public class grammaticalbehaviors.bt.Conditions.IsFollowingPath extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Conditions.IsFollowingPath(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "IsRightMostCloseToEnd.java"
+public class grammaticalbehaviors.bt.Conditions.IsRightMostCloseToEnd extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Conditions.IsRightMostCloseToEnd(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "IsStuck.java"
+public class grammaticalbehaviors.bt.Conditions.IsStuck extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Conditions.IsStuck(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "JumpableEnemyAhead.java"
+public class grammaticalbehaviors.bt.Conditions.JumpableEnemyAhead extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Conditions.JumpableEnemyAhead(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "JumpableEnemyBack.java"
+public class grammaticalbehaviors.bt.Conditions.JumpableEnemyBack extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Conditions.JumpableEnemyBack(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "NoJumpableEnemyAhead.java"
+public class grammaticalbehaviors.bt.Conditions.NoJumpableEnemyAhead extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Conditions.NoJumpableEnemyAhead(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "NoJumpableEnemyBack.java"
+public class grammaticalbehaviors.bt.Conditions.NoJumpableEnemyBack extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Conditions.NoJumpableEnemyBack(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "ObstacleAhead.java"
+public class grammaticalbehaviors.bt.Conditions.ObstacleAhead extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Conditions.ObstacleAhead(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "ObstacleBack.java"
+public class grammaticalbehaviors.bt.Conditions.ObstacleBack extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Conditions.ObstacleBack(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "OverCannonPot.java"
+public class grammaticalbehaviors.bt.Conditions.OverCannonPot extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Conditions.OverCannonPot(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "Success.java"
+public class grammaticalbehaviors.bt.Conditions.Success extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Conditions.Success(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "UnderBrick.java"
+public class grammaticalbehaviors.bt.Conditions.UnderBrick extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Conditions.UnderBrick(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "UnderQuestion.java"
+public class grammaticalbehaviors.bt.Conditions.UnderQuestion extends grammaticalbehaviors.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviors.bt.Conditions.UnderQuestion(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "BTConstants.java"
+public interface grammaticalbehaviors.bt.behaviortree.BTConstants {
+  public static final int NODE_STATUS_IDLE;
+  public static final int NODE_STATUS_EXECUTING;
+  public static final int NODE_STATUS_SUCCESS;
+  public static final int NODE_STATUS_FAILURE;
+}
+Compiled from "BTInterface.java"
+public interface grammaticalbehaviors.bt.behaviortree.BTInterface {
+  public abstract void execute();
+  public abstract boolean load(java.lang.String);
+  public abstract boolean load(grammaticalbehaviors.bt.behaviortree.BTStream);
+  public abstract grammaticalbehaviors.bt.behaviortree.XML_BTReader getReader();
+  public abstract long getCurTick();
+  public abstract void setRootNode(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public abstract grammaticalbehaviors.bt.behaviortree.BTNode getRootNode();
+  public abstract java.lang.Object getAgent();
+  public abstract void setCurrentNode(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public abstract grammaticalbehaviors.bt.behaviortree.BTNode getCurrentNode();
+  public abstract grammaticalbehaviors.bt.behaviortree.BTNode createNode(grammaticalbehaviors.bt.behaviortree.BTNode, java.util.Hashtable<java.lang.String, java.lang.String>) throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+  public abstract void reset();
+}
+Compiled from "BTLeafNode.java"
+public abstract class grammaticalbehaviors.bt.behaviortree.BTLeafNode extends grammaticalbehaviors.bt.behaviortree.BTNode {
+  public grammaticalbehaviors.bt.behaviortree.BTLeafNode(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void resetNode();
+  public void update(int) throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "BTLoopFilter.java"
+public class grammaticalbehaviors.bt.behaviortree.BTLoopFilter extends grammaticalbehaviors.bt.behaviortree.BTNode {
+  grammaticalbehaviors.bt.behaviortree.BTLoopFilter(grammaticalbehaviors.bt.behaviortree.BTNode, int);
+  public void resetNode();
+  public void update(int) throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "BTNode.java"
+public abstract class grammaticalbehaviors.bt.behaviortree.BTNode {
+  public int m_nodeId;
+  protected int m_nodeStatus;
+  protected java.util.Vector<grammaticalbehaviors.bt.behaviortree.BTNode> m_children;
+  protected grammaticalbehaviors.bt.behaviortree.BTNode m_parent;
+  protected int m_curNode;
+  protected int m_nodeCount;
+  protected grammaticalbehaviors.bt.behaviortree.BehaviorTree m_tree;
+  protected long m_lastTick;
+  public grammaticalbehaviors.bt.behaviortree.BTNode();
+  public grammaticalbehaviors.bt.behaviortree.BTNode(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void setParent(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public grammaticalbehaviors.bt.behaviortree.BTNode getParent();
+  public void add(grammaticalbehaviors.bt.behaviortree.BTNode, int);
+  public void add(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public grammaticalbehaviors.bt.behaviortree.BTNode get(int) throws java.lang.ArrayIndexOutOfBoundsException;
+  public void setBehaviorTree(grammaticalbehaviors.bt.behaviortree.BehaviorTree);
+  public grammaticalbehaviors.bt.behaviortree.BehaviorTree getBehaviorTree();
+  public abstract void update(int) throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+  public void notifyResult() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+  public void assignTreeRecur(grammaticalbehaviors.bt.behaviortree.BehaviorTree);
+  public abstract void resetNode();
+  public void reset();
+}
+Compiled from "BTNonFilter.java"
+public class grammaticalbehaviors.bt.behaviortree.BTNonFilter extends grammaticalbehaviors.bt.behaviortree.BTNode {
+  grammaticalbehaviors.bt.behaviortree.BTNonFilter(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void resetNode();
+  public void update(int) throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "BTParallelNode.java"
+public class grammaticalbehaviors.bt.behaviortree.BTParallelNode extends grammaticalbehaviors.bt.behaviortree.BTNode {
+  grammaticalbehaviors.bt.behaviortree.BTParallelNode(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void resetNode();
+  grammaticalbehaviors.bt.behaviortree.BTParallelNode(grammaticalbehaviors.bt.behaviortree.BTNode, int, int);
+  public void update(int) throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "BTRootNode.java"
+public class grammaticalbehaviors.bt.behaviortree.BTRootNode extends grammaticalbehaviors.bt.behaviortree.BTNode {
+  grammaticalbehaviors.bt.behaviortree.BTRootNode();
+  public void resetNode();
+  public void update(int) throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "BTSelectNode.java"
+public class grammaticalbehaviors.bt.behaviortree.BTSelectNode extends grammaticalbehaviors.bt.behaviortree.BTNode {
+  grammaticalbehaviors.bt.behaviortree.BTSelectNode(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void resetNode();
+  public void update(int) throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "BTSequenceNode.java"
+public class grammaticalbehaviors.bt.behaviortree.BTSequenceNode extends grammaticalbehaviors.bt.behaviortree.BTNode {
+  grammaticalbehaviors.bt.behaviortree.BTSequenceNode(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void resetNode();
+  public void update(int) throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "BTStream.java"
+public class grammaticalbehaviors.bt.behaviortree.BTStream {
+  public grammaticalbehaviors.bt.behaviortree.BTStream();
+  public void writeLine(java.lang.String);
+  public java.lang.String readLine();
+}
+Compiled from "BTUntilFails.java"
+public class grammaticalbehaviors.bt.behaviortree.BTUntilFails extends grammaticalbehaviors.bt.behaviortree.BTNode {
+  grammaticalbehaviors.bt.behaviortree.BTUntilFails(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void resetNode();
+  public void update(int) throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "BTUntilFailsLimitedFilter.java"
+public class grammaticalbehaviors.bt.behaviortree.BTUntilFailsLimitedFilter extends grammaticalbehaviors.bt.behaviortree.BTNode {
+  grammaticalbehaviors.bt.behaviortree.BTUntilFailsLimitedFilter(grammaticalbehaviors.bt.behaviortree.BTNode, int);
+  public void resetNode();
+  public void update(int) throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+  public void step() throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "BehaviorTree.java"
+public class grammaticalbehaviors.bt.behaviortree.BehaviorTree implements grammaticalbehaviors.bt.behaviortree.BTInterface {
+  grammaticalbehaviors.bt.behaviortree.XML_BTReader m_xmlReader;
+  public grammaticalbehaviors.bt.behaviortree.BehaviorTree(java.lang.Object, grammaticalbehaviors.bt.behaviortree.XML_BTReader);
+  public boolean load(java.lang.String);
+  public boolean load(grammaticalbehaviors.bt.behaviortree.BTStream);
+  public grammaticalbehaviors.bt.behaviortree.XML_BTReader getReader();
+  public long getCurTick();
+  public void setRootNode(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public grammaticalbehaviors.bt.behaviortree.BTNode getRootNode();
+  public java.lang.Object getAgent();
+  public void setCurrentNode(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public grammaticalbehaviors.bt.behaviortree.BTNode getCurrentNode();
+  public grammaticalbehaviors.bt.behaviortree.BTNode createNode(grammaticalbehaviors.bt.behaviortree.BTNode, java.util.Hashtable<java.lang.String, java.lang.String>) throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+  public void execute();
+  public void reset();
+}
+Compiled from "BehaviorTreeDouble.java"
+public class grammaticalbehaviors.bt.behaviortree.BehaviorTreeDouble implements grammaticalbehaviors.bt.behaviortree.BTInterface {
+  grammaticalbehaviors.bt.behaviortree.XML_BTReader m_xmlReader;
+  public grammaticalbehaviors.bt.behaviortree.BehaviorTreeDouble(java.lang.Object, grammaticalbehaviors.bt.behaviortree.XML_BTReader);
+  public boolean load(java.lang.String);
+  public boolean load(grammaticalbehaviors.bt.behaviortree.BTStream);
+  public boolean initTrees(grammaticalbehaviors.bt.behaviortree.BehaviorTree);
+  public long getCurTick();
+  public void setDeliberativeRootNode(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public void setReactiveRootNode(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public grammaticalbehaviors.bt.behaviortree.BTNode getDeliberativeRootNode();
+  public grammaticalbehaviors.bt.behaviortree.BTNode getReactiveRootNode();
+  public java.lang.Object getAgent();
+  public void setDeliberativeCurrentNode(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public grammaticalbehaviors.bt.behaviortree.BTNode getDeliberativeCurrentNode();
+  public void setReactiveCurrentNode(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public grammaticalbehaviors.bt.behaviortree.BTNode getReactiveCurrentNode();
+  public grammaticalbehaviors.bt.behaviortree.BTNode createNode(grammaticalbehaviors.bt.behaviortree.BTNode, java.util.Hashtable<java.lang.String, java.lang.String>) throws grammaticalbehaviors.bt.behaviortree.IncorrectNodeException;
+  public void execute();
+  public void reset();
+  public grammaticalbehaviors.bt.behaviortree.XML_BTReader getReader();
+  public void setRootNode(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public grammaticalbehaviors.bt.behaviortree.BTNode getRootNode();
+  public void setCurrentNode(grammaticalbehaviors.bt.behaviortree.BTNode);
+  public grammaticalbehaviors.bt.behaviortree.BTNode getCurrentNode();
+  public boolean isCurrentReactive();
+}
+Compiled from "IncorrectNodeException.java"
+public class grammaticalbehaviors.bt.behaviortree.IncorrectNodeException extends java.lang.Exception {
+  grammaticalbehaviors.bt.behaviortree.IncorrectNodeException();
+  grammaticalbehaviors.bt.behaviortree.IncorrectNodeException(java.lang.String);
+}
+Compiled from "Main.java"
+public class grammaticalbehaviors.bt.behaviortree.Main {
+  public grammaticalbehaviors.bt.behaviortree.Main();
+  public static void main(java.lang.String[]);
+}
+Compiled from "XML_BTReader.java"
+public abstract class grammaticalbehaviors.bt.behaviortree.XML_BTReader {
+  java.io.BufferedReader m_reader;
+  public grammaticalbehaviors.bt.behaviortree.XML_BTReader();
+  public grammaticalbehaviors.bt.behaviortree.BehaviorTree openDouble(grammaticalbehaviors.bt.behaviortree.BTInterface, java.lang.String);
+  public boolean open(grammaticalbehaviors.bt.behaviortree.BTInterface, java.lang.String);
+  public grammaticalbehaviors.bt.behaviortree.BehaviorTree readDouble(grammaticalbehaviors.bt.behaviortree.BTInterface, grammaticalbehaviors.bt.behaviortree.BTStream);
+  public boolean read(grammaticalbehaviors.bt.behaviortree.BTInterface, grammaticalbehaviors.bt.behaviortree.BTStream);
+  public abstract grammaticalbehaviors.bt.behaviortree.BTLeafNode readNode(grammaticalbehaviors.bt.behaviortree.BTNode, java.util.Hashtable<java.lang.String, java.lang.String>);
+}
+Compiled from "EvoMain.java"
+public class grammaticalbehaviorsNoAstar.GEBT_Mario.EvoMain {
+  public grammaticalbehaviorsNoAstar.GEBT_Mario.EvoMain();
+  public static void main(java.lang.String[]);
+}
+Compiled from "GEBT_MarioAgent.java"
+public class grammaticalbehaviorsNoAstar.GEBT_Mario.GEBT_MarioAgent implements ch.idsia.ai.agents.Agent {
+  java.util.Hashtable<java.lang.Integer, java.lang.Integer> m_record;
+  java.util.Vector<java.lang.Integer> m_gaps;
+  java.util.Vector<grammaticalbehaviorsNoAstar.GEBT_Mario.IntPair> m_forbiddenGaps;
+  public static final int MARIO_X;
+  public static final int MARIO_Y;
+  protected byte[][] levelScene;
+  protected byte[][] enemies;
+  protected byte[][] mergedObservation;
+  protected float[] marioFloatPos;
+  protected float[] enemiesFloatPos;
+  protected int[] marioState;
+  protected int marioStatus;
+  protected int marioMode;
+  protected boolean isMarioOnGround;
+  protected boolean isMarioAbleToJump;
+  protected boolean isMarioAbleToShoot;
+  protected boolean isMarioCarrying;
+  protected int getKillsTotal;
+  protected int getKillsByFire;
+  protected int getKillsByStomp;
+  protected int getKillsByShell;
+  protected int m_cellsRun;
+  protected int m_cellsRunOld;
+  protected int m_stuckCounter;
+  protected grammaticalbehaviorsNoAstar.bt.behaviortree.BehaviorTree m_behaviorTree;
+  int zLevelScene;
+  int zLevelEnemies;
+  public grammaticalbehaviorsNoAstar.GEBT_Mario.GEBT_MarioAgent();
+  public void resetAgent();
+  public void loadBehaviorTree(grammaticalbehaviorsNoAstar.bt.behaviortree.BTStream);
+  public void loadBehaviorTree(java.lang.String);
+  public java.util.Vector<grammaticalbehaviorsNoAstar.GEBT_Mario.IntPair> getForbiddenGaps();
+  public void deleteForbiddenGap(int);
+  public void addForbiddenGap(int, int);
+  public boolean isGapForbidden(int);
+  public boolean inTrap();
+  public boolean isRightTrap();
+  public int heightTrapRight();
+  public int heightTrapLeft();
+  public int trapPos();
+  public int getObjective();
+  public void setObjective(int);
+  public java.util.Hashtable<java.lang.Integer, java.lang.Integer> getRecord();
+  public java.util.Vector<java.lang.Integer> getGaps();
+  public void setAction(int, boolean);
+  public boolean[] getAction();
+  public byte[][] getLevelScene();
+  public byte[][] getEnemyScene();
+  public int getCellsRun();
+  public void integrateObservation(ch.idsia.mario.environments.Environment);
+  public boolean canIJump();
+  public boolean canIFire();
+  public boolean amIOnGround();
+  public boolean trap();
+  public void snapshot(int, int, int, int);
+  public boolean isJumpableEnemy(byte);
+  public boolean isJumpableEnemy(int, int, int, int);
+  public boolean isNoJumpableEnemy(byte);
+  public boolean isNoJumpableEnemy(int, int, int, int);
+  public boolean isEnemy(byte);
+  public boolean isEnemy(int, int, int, int);
+  public boolean isItem(int, int, int, int);
+  public boolean isObstacle(byte);
+  public boolean isBreakable(byte);
+  public boolean isPushable(byte);
+  public boolean isItem(byte);
+  public boolean isClimbable(byte);
+  public boolean isObstacle(int, int, int, int);
+  public boolean isClimbable(int, int, int, int);
+  public boolean isPushable(int, int, int, int);
+  public boolean isBreakable(int, int, int, int);
+  public void reset();
+  public boolean isMarioSmall();
+  public boolean isMarioLarge();
+  public boolean isMarioFire();
+  public boolean isMarioStuck();
+  public ch.idsia.ai.agents.Agent$AGENT_TYPE getType();
+  public java.lang.String getName();
+  public void setName(java.lang.String);
+  public boolean[] getAction(ch.idsia.mario.environments.Environment);
+  public void integrateObservation(int[], int[], float[], float[], int[]);
+}
+Compiled from "IntPair.java"
+public class grammaticalbehaviorsNoAstar.GEBT_Mario.IntPair {
+  public int a;
+  public int b;
+  public grammaticalbehaviorsNoAstar.GEBT_Mario.IntPair();
+  public grammaticalbehaviorsNoAstar.GEBT_Mario.IntPair(int, int);
+}
+Compiled from "MarioXMLReader.java"
+public class grammaticalbehaviorsNoAstar.GEBT_Mario.MarioXMLReader extends grammaticalbehaviorsNoAstar.bt.behaviortree.XML_BTReader {
+  public grammaticalbehaviorsNoAstar.GEBT_Mario.MarioXMLReader();
+  public grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode readNode(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode, java.util.Hashtable<java.lang.String, java.lang.String>);
+}
+Compiled from "CrouchRunLeft.java"
+public class grammaticalbehaviorsNoAstar.bt.Actions.CrouchRunLeft extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Actions.CrouchRunLeft(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "CrouchRunRight.java"
+public class grammaticalbehaviorsNoAstar.bt.Actions.CrouchRunRight extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Actions.CrouchRunRight(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "Down.java"
+public class grammaticalbehaviorsNoAstar.bt.Actions.Down extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Actions.Down(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "Fire.java"
+public class grammaticalbehaviorsNoAstar.bt.Actions.Fire extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Actions.Fire(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "GoGapOnLeft.java"
+public class grammaticalbehaviorsNoAstar.bt.Actions.GoGapOnLeft extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  int m_stepsInObjective;
+  int m_nopTime;
+  public grammaticalbehaviorsNoAstar.bt.Actions.GoGapOnLeft(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "GoGapOnRight.java"
+public class grammaticalbehaviorsNoAstar.bt.Actions.GoGapOnRight extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  int m_stepsInObjective;
+  int m_nopTime;
+  public grammaticalbehaviorsNoAstar.bt.Actions.GoGapOnRight(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "JumpLeft.java"
+public class grammaticalbehaviorsNoAstar.bt.Actions.JumpLeft extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Actions.JumpLeft(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "JumpLeftRun.java"
+public class grammaticalbehaviorsNoAstar.bt.Actions.JumpLeftRun extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Actions.JumpLeftRun(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "JumpRight.java"
+public class grammaticalbehaviorsNoAstar.bt.Actions.JumpRight extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Actions.JumpRight(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "JumpRightRun.java"
+public class grammaticalbehaviorsNoAstar.bt.Actions.JumpRightRun extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Actions.JumpRightRun(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "NOP.java"
+public class grammaticalbehaviorsNoAstar.bt.Actions.NOP extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Actions.NOP(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "RunLeft.java"
+public class grammaticalbehaviorsNoAstar.bt.Actions.RunLeft extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Actions.RunLeft(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "RunRight.java"
+public class grammaticalbehaviorsNoAstar.bt.Actions.RunRight extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Actions.RunRight(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "Speed.java"
+public class grammaticalbehaviorsNoAstar.bt.Actions.Speed extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Actions.Speed(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "VerticalJump.java"
+public class grammaticalbehaviorsNoAstar.bt.Actions.VerticalJump extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Actions.VerticalJump(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "WalkLeft.java"
+public class grammaticalbehaviorsNoAstar.bt.Actions.WalkLeft extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Actions.WalkLeft(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "WalkRight.java"
+public class grammaticalbehaviorsNoAstar.bt.Actions.WalkRight extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Actions.WalkRight(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "AvailableJumpAhead.java"
+public class grammaticalbehaviorsNoAstar.bt.Conditions.AvailableJumpAhead extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Conditions.AvailableJumpAhead(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "AvailableJumpBack.java"
+public class grammaticalbehaviorsNoAstar.bt.Conditions.AvailableJumpBack extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Conditions.AvailableJumpBack(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "CanIFire.java"
+public class grammaticalbehaviorsNoAstar.bt.Conditions.CanIFire extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Conditions.CanIFire(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "CanIJump.java"
+public class grammaticalbehaviorsNoAstar.bt.Conditions.CanIJump extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Conditions.CanIJump(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "EnemyAhead.java"
+public class grammaticalbehaviorsNoAstar.bt.Conditions.EnemyAhead extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Conditions.EnemyAhead(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "EnemyAheadDown.java"
+public class grammaticalbehaviorsNoAstar.bt.Conditions.EnemyAheadDown extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Conditions.EnemyAheadDown(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "EnemyAheadUp.java"
+public class grammaticalbehaviorsNoAstar.bt.Conditions.EnemyAheadUp extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Conditions.EnemyAheadUp(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "EnemyBack.java"
+public class grammaticalbehaviorsNoAstar.bt.Conditions.EnemyBack extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Conditions.EnemyBack(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "EnemyBackDown.java"
+public class grammaticalbehaviorsNoAstar.bt.Conditions.EnemyBackDown extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Conditions.EnemyBackDown(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "EnemyBackUp.java"
+public class grammaticalbehaviorsNoAstar.bt.Conditions.EnemyBackUp extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Conditions.EnemyBackUp(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "Failure.java"
+public class grammaticalbehaviorsNoAstar.bt.Conditions.Failure extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Conditions.Failure(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "HoleAhead.java"
+public class grammaticalbehaviorsNoAstar.bt.Conditions.HoleAhead extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Conditions.HoleAhead(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "HoleBack.java"
+public class grammaticalbehaviorsNoAstar.bt.Conditions.HoleBack extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Conditions.HoleBack(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "IsALeftTrap.java"
+public class grammaticalbehaviorsNoAstar.bt.Conditions.IsALeftTrap extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Conditions.IsALeftTrap(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "IsARightTrap.java"
+public class grammaticalbehaviorsNoAstar.bt.Conditions.IsARightTrap extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Conditions.IsARightTrap(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "IsBreakableUp.java"
+public class grammaticalbehaviorsNoAstar.bt.Conditions.IsBreakableUp extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Conditions.IsBreakableUp(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "IsBreakableUpAhead.java"
+public class grammaticalbehaviorsNoAstar.bt.Conditions.IsBreakableUpAhead extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Conditions.IsBreakableUpAhead(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "IsBreakableUpBack.java"
+public class grammaticalbehaviorsNoAstar.bt.Conditions.IsBreakableUpBack extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Conditions.IsBreakableUpBack(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "IsClimbableUp.java"
+public class grammaticalbehaviorsNoAstar.bt.Conditions.IsClimbableUp extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Conditions.IsClimbableUp(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "IsClimbableUpAhead.java"
+public class grammaticalbehaviorsNoAstar.bt.Conditions.IsClimbableUpAhead extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Conditions.IsClimbableUpAhead(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "IsClimbableUpBack.java"
+public class grammaticalbehaviorsNoAstar.bt.Conditions.IsClimbableUpBack extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Conditions.IsClimbableUpBack(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "IsGapOnLeft.java"
+public class grammaticalbehaviorsNoAstar.bt.Conditions.IsGapOnLeft extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Conditions.IsGapOnLeft(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "IsGapOnRight.java"
+public class grammaticalbehaviorsNoAstar.bt.Conditions.IsGapOnRight extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Conditions.IsGapOnRight(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "IsItemUp.java"
+public class grammaticalbehaviorsNoAstar.bt.Conditions.IsItemUp extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Conditions.IsItemUp(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "IsItemUpAhead.java"
+public class grammaticalbehaviorsNoAstar.bt.Conditions.IsItemUpAhead extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Conditions.IsItemUpAhead(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "IsItemUpBack.java"
+public class grammaticalbehaviorsNoAstar.bt.Conditions.IsItemUpBack extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Conditions.IsItemUpBack(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "IsJumpPlatformUpAhead.java"
+public class grammaticalbehaviorsNoAstar.bt.Conditions.IsJumpPlatformUpAhead extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Conditions.IsJumpPlatformUpAhead(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "IsJumpPlatformUpBack.java"
+public class grammaticalbehaviorsNoAstar.bt.Conditions.IsJumpPlatformUpBack extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Conditions.IsJumpPlatformUpBack(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "IsPushableUp.java"
+public class grammaticalbehaviorsNoAstar.bt.Conditions.IsPushableUp extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Conditions.IsPushableUp(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "IsPushableUpAhead.java"
+public class grammaticalbehaviorsNoAstar.bt.Conditions.IsPushableUpAhead extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Conditions.IsPushableUpAhead(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "IsPushableUpBack.java"
+public class grammaticalbehaviorsNoAstar.bt.Conditions.IsPushableUpBack extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Conditions.IsPushableUpBack(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "IsStuck.java"
+public class grammaticalbehaviorsNoAstar.bt.Conditions.IsStuck extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Conditions.IsStuck(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "IsTrapLeftEnded.java"
+public class grammaticalbehaviorsNoAstar.bt.Conditions.IsTrapLeftEnded extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Conditions.IsTrapLeftEnded(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "IsTrapRightEnded.java"
+public class grammaticalbehaviorsNoAstar.bt.Conditions.IsTrapRightEnded extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Conditions.IsTrapRightEnded(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "JumpableEnemyAhead.java"
+public class grammaticalbehaviorsNoAstar.bt.Conditions.JumpableEnemyAhead extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Conditions.JumpableEnemyAhead(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "JumpableEnemyBack.java"
+public class grammaticalbehaviorsNoAstar.bt.Conditions.JumpableEnemyBack extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Conditions.JumpableEnemyBack(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "NoJumpableEnemyAhead.java"
+public class grammaticalbehaviorsNoAstar.bt.Conditions.NoJumpableEnemyAhead extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Conditions.NoJumpableEnemyAhead(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "NoJumpableEnemyBack.java"
+public class grammaticalbehaviorsNoAstar.bt.Conditions.NoJumpableEnemyBack extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Conditions.NoJumpableEnemyBack(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "ObstacleAhead.java"
+public class grammaticalbehaviorsNoAstar.bt.Conditions.ObstacleAhead extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Conditions.ObstacleAhead(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "ObstacleBack.java"
+public class grammaticalbehaviorsNoAstar.bt.Conditions.ObstacleBack extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Conditions.ObstacleBack(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "ObstacleHead.java"
+public class grammaticalbehaviorsNoAstar.bt.Conditions.ObstacleHead extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Conditions.ObstacleHead(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "ObstacleHeadBack.java"
+public class grammaticalbehaviorsNoAstar.bt.Conditions.ObstacleHeadBack extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Conditions.ObstacleHeadBack(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "ObstacleUp.java"
+public class grammaticalbehaviorsNoAstar.bt.Conditions.ObstacleUp extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Conditions.ObstacleUp(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "Success.java"
+public class grammaticalbehaviorsNoAstar.bt.Conditions.Success extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode {
+  public grammaticalbehaviorsNoAstar.bt.Conditions.Success(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "BTConstants.java"
+public interface grammaticalbehaviorsNoAstar.bt.behaviortree.BTConstants {
+  public static final int NODE_STATUS_IDLE;
+  public static final int NODE_STATUS_EXECUTING;
+  public static final int NODE_STATUS_SUCCESS;
+  public static final int NODE_STATUS_FAILURE;
+}
+Compiled from "BTLeafNode.java"
+public abstract class grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode {
+  public grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void update(int) throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "BTLoopFilter.java"
+public class grammaticalbehaviorsNoAstar.bt.behaviortree.BTLoopFilter extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode {
+  grammaticalbehaviorsNoAstar.bt.behaviortree.BTLoopFilter(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode, int);
+  public void update(int) throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "BTNode.java"
+public abstract class grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode {
+  public int m_nodeId;
+  protected int m_nodeStatus;
+  protected java.util.Vector<grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode> m_children;
+  protected grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode m_parent;
+  protected int m_curNode;
+  protected int m_nodeCount;
+  protected grammaticalbehaviorsNoAstar.bt.behaviortree.BehaviorTree m_tree;
+  protected long m_lastTick;
+  public grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode();
+  public grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void setParent(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode getParent();
+  public void add(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode, int);
+  public void add(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode get(int) throws java.lang.ArrayIndexOutOfBoundsException;
+  public void setBehaviorTree(grammaticalbehaviorsNoAstar.bt.behaviortree.BehaviorTree);
+  public grammaticalbehaviorsNoAstar.bt.behaviortree.BehaviorTree getBehaviorTree();
+  public abstract void update(int) throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+  public void notifyResult() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "BTNonFilter.java"
+public class grammaticalbehaviorsNoAstar.bt.behaviortree.BTNonFilter extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode {
+  grammaticalbehaviorsNoAstar.bt.behaviortree.BTNonFilter(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void update(int) throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "BTParallelNode.java"
+public class grammaticalbehaviorsNoAstar.bt.behaviortree.BTParallelNode extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode {
+  grammaticalbehaviorsNoAstar.bt.behaviortree.BTParallelNode(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  grammaticalbehaviorsNoAstar.bt.behaviortree.BTParallelNode(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode, int, int);
+  public void update(int) throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "BTRootNode.java"
+public class grammaticalbehaviorsNoAstar.bt.behaviortree.BTRootNode extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode {
+  grammaticalbehaviorsNoAstar.bt.behaviortree.BTRootNode();
+  public void update(int) throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "BTSelectNode.java"
+public class grammaticalbehaviorsNoAstar.bt.behaviortree.BTSelectNode extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode {
+  grammaticalbehaviorsNoAstar.bt.behaviortree.BTSelectNode(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void update(int) throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "BTSequenceNode.java"
+public class grammaticalbehaviorsNoAstar.bt.behaviortree.BTSequenceNode extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode {
+  grammaticalbehaviorsNoAstar.bt.behaviortree.BTSequenceNode(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void update(int) throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "BTStream.java"
+public class grammaticalbehaviorsNoAstar.bt.behaviortree.BTStream {
+  public grammaticalbehaviorsNoAstar.bt.behaviortree.BTStream();
+  public void writeLine(java.lang.String);
+  public java.lang.String readLine();
+}
+Compiled from "BTUntilFails.java"
+public class grammaticalbehaviorsNoAstar.bt.behaviortree.BTUntilFails extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode {
+  grammaticalbehaviorsNoAstar.bt.behaviortree.BTUntilFails(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public void update(int) throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "BTUntilFailsLimitedFilter.java"
+public class grammaticalbehaviorsNoAstar.bt.behaviortree.BTUntilFailsLimitedFilter extends grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode {
+  grammaticalbehaviorsNoAstar.bt.behaviortree.BTUntilFailsLimitedFilter(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode, int);
+  public void update(int) throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+  public void step() throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+}
+Compiled from "BehaviorTree.java"
+public class grammaticalbehaviorsNoAstar.bt.behaviortree.BehaviorTree {
+  grammaticalbehaviorsNoAstar.bt.behaviortree.XML_BTReader m_xmlReader;
+  public grammaticalbehaviorsNoAstar.bt.behaviortree.BehaviorTree(java.lang.Object, grammaticalbehaviorsNoAstar.bt.behaviortree.XML_BTReader);
+  public boolean load(java.lang.String);
+  public boolean load(grammaticalbehaviorsNoAstar.bt.behaviortree.BTStream);
+  public long getCurTick();
+  public void setRootNode(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode getRootNode();
+  public java.lang.Object getAgent();
+  public void setCurrentNode(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode);
+  public grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode getCurrentNode();
+  public grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode createNode(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode, java.util.Hashtable<java.lang.String, java.lang.String>) throws grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException;
+  public void execute();
+  public void reset();
+}
+Compiled from "IncorrectNodeException.java"
+public class grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException extends java.lang.Exception {
+  grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException();
+  grammaticalbehaviorsNoAstar.bt.behaviortree.IncorrectNodeException(java.lang.String);
+}
+Compiled from "Main.java"
+public class grammaticalbehaviorsNoAstar.bt.behaviortree.Main {
+  public grammaticalbehaviorsNoAstar.bt.behaviortree.Main();
+  public static void main(java.lang.String[]);
+}
+Compiled from "XML_BTReader.java"
+public abstract class grammaticalbehaviorsNoAstar.bt.behaviortree.XML_BTReader {
+  java.io.BufferedReader m_reader;
+  public grammaticalbehaviorsNoAstar.bt.behaviortree.XML_BTReader();
+  public boolean open(grammaticalbehaviorsNoAstar.bt.behaviortree.BehaviorTree, java.lang.String);
+  public boolean read(grammaticalbehaviorsNoAstar.bt.behaviortree.BehaviorTree, grammaticalbehaviorsNoAstar.bt.behaviortree.BTStream);
+  public abstract grammaticalbehaviorsNoAstar.bt.behaviortree.BTLeafNode readNode(grammaticalbehaviorsNoAstar.bt.behaviortree.BTNode, java.util.Hashtable<java.lang.String, java.lang.String>);
+}
+Compiled from "AccessTest.java"
+public class wox.serial.AccessTest {
+  public wox.serial.AccessTest();
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+  static {};
+}
+Compiled from "AccessTest.java"
+public class wox.serial.AccessTest$Sub extends wox.serial.AccessTest$Super {
+  int y;
+  public wox.serial.AccessTest$Sub(double);
+  public java.lang.String toString();
+}
+Compiled from "AccessTest.java"
+public class wox.serial.AccessTest$Super {
+  int x;
+  public wox.serial.AccessTest$Super();
+}
+Compiled from "ArrayListTest.java"
+public class wox.serial.ArrayListTest {
+  public wox.serial.ArrayListTest();
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+}
+Compiled from "Easy.java"
+public class wox.serial.Easy {
+  public wox.serial.Easy();
+  public static void save(java.lang.Object, java.lang.String);
+  public static java.lang.Object load(java.lang.String);
+}
+Compiled from "EasyTest.java"
+public class wox.serial.EasyTest {
+  public wox.serial.EasyTest();
+  public static void main(java.lang.String[]);
+}
+Compiled from "EncodeBase64.java"
+public class wox.serial.EncodeBase64 {
+  public wox.serial.EncodeBase64();
+  public static byte[] encode(byte[]);
+  public static byte[] decode(byte[]);
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "ObjectReader.java"
+public interface wox.serial.ObjectReader extends wox.serial.Serial {
+  public abstract java.lang.Object read(org.jdom.Element);
+}
+Compiled from "ObjectWriter.java"
+public interface wox.serial.ObjectWriter extends wox.serial.Serial {
+  public abstract org.jdom.Element write(java.lang.Object);
+}
+Compiled from "ReadTest.java"
+public class wox.serial.ReadTest {
+  public wox.serial.ReadTest();
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+}
+Compiled from "Serial.java"
+public interface wox.serial.Serial {
+  public static final java.lang.String OBJECT;
+  public static final java.lang.String FIELD;
+  public static final java.lang.String NAME;
+  public static final java.lang.String TYPE;
+  public static final java.lang.String VALUE;
+  public static final java.lang.String ARRAY;
+  public static final java.lang.String LENGTH;
+  public static final java.lang.String ID;
+  public static final java.lang.String IDREF;
+  public static final java.lang.String DECLARED;
+  public static final java.lang.Class[] primitiveArrays;
+  public static final java.lang.Class[] primitiveWrappers;
+  public static final java.lang.Class[] primitives;
+  static {};
+}
+Compiled from "ShadowTest.java"
+public class wox.serial.ShadowTest {
+  public wox.serial.ShadowTest();
+  public static void main(java.lang.String[]) throws java.io.IOException;
+}
+Compiled from "ShadowTest.java"
+public class wox.serial.ShadowTest$X {
+  int x;
+  public wox.serial.ShadowTest$X();
+}
+Compiled from "ShadowTest.java"
+public class wox.serial.ShadowTest$Y extends wox.serial.ShadowTest$X {
+  int x;
+  java.lang.String s;
+  java.lang.Integer i;
+  public wox.serial.ShadowTest$Y();
+}
+Compiled from "SimpleReader.java"
+public class wox.serial.SimpleReader implements wox.serial.ObjectReader {
+  java.util.HashMap map;
+  public wox.serial.SimpleReader();
+  public java.lang.Object read(org.jdom.Element);
+  public boolean empty(org.jdom.Element);
+  public boolean reference(org.jdom.Element);
+  public boolean primitiveArray(org.jdom.Element);
+  public boolean array(org.jdom.Element);
+  public java.lang.Object readPrimitiveArray(org.jdom.Element, java.lang.Object);
+  public java.lang.Class getPrimitiveType(java.lang.String);
+  public java.lang.Class getWrapperType(java.lang.Class);
+  public java.lang.Class getWrapperType(java.lang.String);
+  public java.lang.Object readIntArray(int[], org.jdom.Element);
+  public java.lang.Object readByteArray(byte[], org.jdom.Element);
+  public java.lang.Object readObjectArray(org.jdom.Element, java.lang.Object);
+  public java.lang.Class getObjectArrayComponentType(java.lang.String) throws java.lang.Exception;
+  public java.lang.Object readStringObject(org.jdom.Element, java.lang.Object);
+  public java.lang.Object readObject(org.jdom.Element, java.lang.Object);
+  public void setFields(java.lang.Object, org.jdom.Element);
+  public java.lang.Object makeObject(java.lang.reflect.Constructor, java.lang.Object[], java.lang.Object) throws java.lang.Exception;
+  public java.lang.Object makeWrapper(java.lang.Class, java.lang.String) throws java.lang.Exception;
+  public java.lang.reflect.Field getField(java.lang.Class, java.lang.String) throws java.lang.Exception;
+  public void print(java.lang.reflect.Constructor[]);
+  public java.lang.Class getComponentType(java.lang.String);
+  public java.lang.Class getArrayType(java.lang.String);
+}
+Compiled from "SimpleWriter.java"
+public class wox.serial.SimpleWriter implements wox.serial.ObjectWriter {
+  java.util.HashMap map;
+  int count;
+  boolean writePrimitiveTypes;
+  boolean doStatic;
+  boolean doFinal;
+  public wox.serial.SimpleWriter();
+  public org.jdom.Element write(java.lang.Object);
+  public org.jdom.Element writeArray(java.lang.Object);
+  public org.jdom.Element writeObjectArray(java.lang.Object);
+  public org.jdom.Element writePrimitiveArray(java.lang.Object);
+  public java.lang.String byteArrayString(byte[], org.jdom.Element);
+  public java.lang.String arrayString(java.lang.Object, int);
+  public void writeFields(java.lang.Object, org.jdom.Element);
+  public static java.lang.String stringify(java.lang.Object);
+  public static java.lang.reflect.Field[] getFields(java.lang.Class);
+  public static java.lang.Object[] getValues(java.lang.Object, java.lang.reflect.Field[]);
+  public boolean isPrimitiveArray(java.lang.Class);
+}
+Compiled from "TestObject.java"
+public class wox.serial.TestObject {
+  int[] xa;
+  int[] xb;
+  byte[] ba;
+  wox.serial.TestObject to;
+  int[][] xxx;
+  int[] ia;
+  double[] dd;
+  java.lang.Object[] objects;
+  java.util.ArrayList alist;
+  java.lang.Object myNull;
+  wox.serial.TestObject$Inner inner;
+  public wox.serial.TestObject(int);
+  public synchronized int inc();
+}
+Compiled from "TestObject.java"
+public class wox.serial.TestObject$Inner {
+  int inx;
+  public wox.serial.TestObject$Inner(int);
+}
+Compiled from "Util.java"
+public class wox.serial.Util implements wox.serial.Serial {
+  public wox.serial.Util();
+  public static void main(java.lang.String[]);
+  public static java.lang.reflect.Constructor forceDefaultConstructor(java.lang.Class) throws java.lang.Exception;
+  public static boolean stringable(java.lang.Object);
+  public static boolean stringable(java.lang.Class);
+  public static boolean stringable(java.lang.String);
+  public static boolean primitive(java.lang.Class);
+  static {};
+}
+Compiled from "WriterTest.java"
+public class wox.serial.WriterTest {
+  public wox.serial.WriterTest();
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+}

@@ -1,0 +1,948 @@
+Compiled from "SimplePerformanceTest.java"
+public class br.com.bit.ideias.reflection.SimplePerformanceTest {
+  public br.com.bit.ideias.reflection.SimplePerformanceTest();
+  public static void main(java.lang.String[]);
+}
+Compiled from "Cache.java"
+public interface br.com.bit.ideias.reflection.cache.Cache {
+  public abstract void add(java.lang.Object, java.lang.Object);
+  public abstract java.lang.Object get(java.lang.Object);
+}
+Compiled from "CacheConfig.java"
+public class br.com.bit.ideias.reflection.cache.CacheConfig {
+  public br.com.bit.ideias.reflection.cache.CacheConfig(int);
+  public int getMaxEntries();
+  public void setMaxEntries(int);
+}
+Compiled from "CacheProvider.java"
+public class br.com.bit.ideias.reflection.cache.CacheProvider {
+  public br.com.bit.ideias.reflection.cache.CacheProvider();
+  public static synchronized br.com.bit.ideias.reflection.cache.Cache getCache();
+}
+Compiled from "CompositeKey.java"
+public class br.com.bit.ideias.reflection.cache.CompositeKey {
+  public br.com.bit.ideias.reflection.cache.CompositeKey(java.lang.Object...);
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+}
+Compiled from "LRUCache.java"
+public class br.com.bit.ideias.reflection.cache.LRUCache implements br.com.bit.ideias.reflection.cache.Cache {
+  public static br.com.bit.ideias.reflection.cache.Cache getInstance();
+  public br.com.bit.ideias.reflection.cache.LRUCache();
+  public br.com.bit.ideias.reflection.cache.LRUCache(br.com.bit.ideias.reflection.cache.CacheConfig);
+  public void add(java.lang.Object, java.lang.Object);
+  public java.lang.Object get(java.lang.Object);
+  static {};
+}
+Compiled from "LRUCache.java"
+class br.com.bit.ideias.reflection.cache.LRUCache$InnerCache extends java.util.LinkedHashMap<java.lang.Object, java.lang.ref.SoftReference<java.lang.Object>> {
+  final br.com.bit.ideias.reflection.cache.LRUCache this$0;
+  public br.com.bit.ideias.reflection.cache.LRUCache$InnerCache(br.com.bit.ideias.reflection.cache.LRUCache, int);
+  protected boolean removeEldestEntry(java.util.Map$Entry<java.lang.Object, java.lang.ref.SoftReference<java.lang.Object>>);
+}
+Compiled from "Introspector.java"
+public class br.com.bit.ideias.reflection.core.Introspector {
+  public static br.com.bit.ideias.reflection.core.Introspector inObject(java.lang.Object);
+  public static br.com.bit.ideias.reflection.core.Introspector forClass(java.lang.String);
+  public static br.com.bit.ideias.reflection.core.Introspector forClass(java.lang.Class<?>);
+  public br.com.bit.ideias.reflection.core.Introspector create();
+  public br.com.bit.ideias.reflection.core.Introspector create(java.lang.Object...);
+  public br.com.bit.ideias.reflection.core.Introspector member(java.lang.reflect.Member);
+  public br.com.bit.ideias.reflection.core.Introspector field(java.lang.String);
+  public br.com.bit.ideias.reflection.core.Introspector field(java.lang.reflect.Field);
+  public br.com.bit.ideias.reflection.core.Introspector method(java.lang.String);
+  public br.com.bit.ideias.reflection.core.Introspector method(java.lang.reflect.Method);
+  public <T extends java.lang.reflect.Member> T get(java.lang.Class<?>...);
+  public <T> T invoke();
+  public <T> T invoke(java.lang.Object...);
+  public br.com.bit.ideias.reflection.core.Introspector accessPrivateMembers();
+  public br.com.bit.ideias.reflection.core.Introspector accessPrivateMembers(boolean);
+  public br.com.bit.ideias.reflection.core.Introspector directAccess();
+  public br.com.bit.ideias.reflection.core.Introspector directAccess(boolean);
+  public br.com.bit.ideias.reflection.criteria.Criterion createCriterion();
+  public br.com.bit.ideias.reflection.rql.query.Query query(java.lang.String);
+  public static br.com.bit.ideias.reflection.criteria.Criterion createCriterion(java.lang.String);
+  public static br.com.bit.ideias.reflection.rql.query.Query query(java.lang.Class<?>, java.lang.String);
+  public static br.com.bit.ideias.reflection.rql.query.Query query(java.lang.String, java.lang.String);
+  public static br.com.bit.ideias.reflection.rql.query.Query createQuery(java.lang.String);
+  public static br.com.bit.ideias.reflection.criteria.Criterion createCriterion(java.lang.Class<?>);
+  public java.lang.Class<?> getTargetClass();
+  public <T> T getTargetInstance();
+  public java.lang.String getPropertyName(java.lang.reflect.Method);
+}
+Compiled from "IntrospectorTest.java"
+public class br.com.bit.ideias.reflection.core.IntrospectorTest {
+  public br.com.bit.ideias.reflection.core.IntrospectorTest();
+  public void prepare();
+  public void testOverloadedMethodShouldWorkWithRightParameters() throws java.lang.Exception;
+  public void testMoreThanOneParameterForAFieldShouldThrowException() throws java.lang.Exception;
+  public void testStaticMethodShouldNotRequireAnInstance() throws java.lang.Exception;
+  public void testClassForName() throws java.lang.Exception;
+  public void testClassForNameComParametroClassNulo() throws java.lang.Exception;
+  public void testClassForNameComParametroString() throws java.lang.Exception;
+  public void testClassForNameComParametroStringNulo() throws java.lang.Exception;
+  public void testInObject() throws java.lang.Exception;
+  public void testInObjectComParametroNulo() throws java.lang.Exception;
+  public void testCreateComClasseSemConstructorExplicito() throws java.lang.Exception;
+  public void testCreate() throws java.lang.Exception;
+  public void testCreateParaConstructorNaoExistente() throws java.lang.Exception;
+  public void testeInvokeFieldQueExisteNaClassePai() throws java.lang.Exception;
+  public void testInvokeMemberSemParametroParaField() throws java.lang.Exception;
+  public void testInvokeMemberComParametroParaField() throws java.lang.Exception;
+  public void testInvokeFieldUsandoApiReflection() throws java.lang.Exception;
+  public void testInvokeFieldUsandoApiReflectionDiretoComAcesso() throws java.lang.Exception;
+  public void testInvokeFieldSemParametro() throws java.lang.Exception;
+  public void testInvokeFieldComParametro() throws java.lang.Exception;
+  public void testInvokeFieldInexistenteSemParametro() throws java.lang.Exception;
+  public void testInvokeFieldInexistenteComParametro() throws java.lang.Exception;
+  public void testInvokeGetFieldPrivadoDiretoComAcesso() throws java.lang.Exception;
+  public void testInvokeSetFieldPrivadoDiretoComAcesso() throws java.lang.Exception;
+  public void testInvokeSetFieldPrivadoDiretoComAcessoComMaisDeUmParametro() throws java.lang.Exception;
+  public void testInvokeSetFieldPrivadoComMaisDeUmParametro() throws java.lang.Exception;
+  public void testInvokeFieldPrivadoDiretoSemAcesso() throws java.lang.Exception;
+  public void testInvokeFieldParaClasseNaoInstanciada() throws java.lang.Exception;
+  public void testInvokeFieldParaAtributoIntPrimitivo();
+  public void testGetField() throws java.lang.Exception;
+  public void testGetFieldComParametros() throws java.lang.Exception;
+  public void testeInvokeMethodQueExisteNaClassePai() throws java.lang.Exception;
+  public void testInvokeMemberSemParametroParaMethod() throws java.lang.Exception;
+  public void testInvokeMemberComParametroParaMethod() throws java.lang.Exception;
+  public void testInvokeMethodSemParametroUsandoApiReflection() throws java.lang.Exception;
+  public void testInvokeMethodComParametroUsandoApiReflection() throws java.lang.Exception;
+  public void testInvokeMethodSemParametros() throws java.lang.Exception;
+  public void testInvokeMethodComParametros() throws java.lang.Exception;
+  public void testInvokeMethodInexistenteSemParametros() throws java.lang.Exception;
+  public void testInvokeMethodInexistenteComParametros() throws java.lang.Exception;
+  public void testInvokeMethodParaClasseNaoInstanciada() throws java.lang.Exception;
+  public void testInvokeMethodPrivadoSemAcesso() throws java.lang.Exception;
+  public void testInvokeMethodPrivadoComAcesso() throws java.lang.Exception;
+  public void testGetMethod() throws java.lang.Exception;
+  public void testGetMethodComParametros() throws java.lang.Exception;
+  public void testSetarDirectAccesSemInstancia() throws java.lang.Exception;
+  public void testSetarAccessPrivateMembersSemInstancia() throws java.lang.Exception;
+  static {};
+}
+Compiled from "BaseExtractor.java"
+public abstract class br.com.bit.ideias.reflection.core.extrator.BaseExtractor {
+  public br.com.bit.ideias.reflection.core.extrator.BaseExtractor();
+  protected java.lang.Class<?>[] getParametersTypes(java.lang.Object...);
+  protected java.lang.Class<?>[] getParametersTypes(boolean, java.lang.Object...);
+}
+Compiled from "Extractor.java"
+public class br.com.bit.ideias.reflection.core.extrator.Extractor extends br.com.bit.ideias.reflection.core.extrator.BaseExtractor {
+  public static br.com.bit.ideias.reflection.core.extrator.Extractor inObject(java.lang.Object);
+  public static br.com.bit.ideias.reflection.core.extrator.Extractor forClass(java.lang.Class<?>);
+  public br.com.bit.ideias.reflection.core.extrator.ExtractorConstructor constructor();
+  public br.com.bit.ideias.reflection.core.extrator.ExtractorMethod setMethod(java.lang.String);
+  public br.com.bit.ideias.reflection.core.extrator.ExtractorMethod setMethod(java.lang.reflect.Method);
+  public br.com.bit.ideias.reflection.core.extrator.ExtractorMethod method();
+  public br.com.bit.ideias.reflection.core.extrator.ExtractorField setField(java.lang.String);
+  public br.com.bit.ideias.reflection.core.extrator.ExtractorField setField(java.lang.reflect.Field);
+  public br.com.bit.ideias.reflection.core.extrator.ExtractorField field();
+  public java.lang.Object getTargetInstance();
+  public java.lang.Class<?> getTargetClass();
+  public boolean isEmpty();
+}
+Compiled from "ExtractorConstructor.java"
+public class br.com.bit.ideias.reflection.core.extrator.ExtractorConstructor extends br.com.bit.ideias.reflection.core.extrator.BaseExtractor {
+  br.com.bit.ideias.reflection.core.extrator.ExtractorConstructor(br.com.bit.ideias.reflection.core.extrator.Extractor, java.lang.Object);
+  br.com.bit.ideias.reflection.core.extrator.ExtractorConstructor(br.com.bit.ideias.reflection.core.extrator.Extractor);
+  public java.lang.Object newInstance(java.lang.Object...);
+  public java.lang.Object getTargetInstance();
+}
+Compiled from "ExtractorField.java"
+public class br.com.bit.ideias.reflection.core.extrator.ExtractorField {
+  br.com.bit.ideias.reflection.core.extrator.ExtractorField(br.com.bit.ideias.reflection.core.extrator.Extractor, java.lang.String);
+  br.com.bit.ideias.reflection.core.extrator.ExtractorField(br.com.bit.ideias.reflection.core.extrator.Extractor, java.lang.reflect.Field);
+  public java.lang.Object invoke(boolean, java.lang.Object...);
+  public java.lang.reflect.Field get(java.lang.Class<?>...);
+  public void directAccess();
+  public void directAccess(boolean);
+}
+Compiled from "ExtractorMethod.java"
+public class br.com.bit.ideias.reflection.core.extrator.ExtractorMethod extends br.com.bit.ideias.reflection.core.extrator.BaseExtractor {
+  br.com.bit.ideias.reflection.core.extrator.ExtractorMethod(br.com.bit.ideias.reflection.core.extrator.Extractor, java.lang.String);
+  br.com.bit.ideias.reflection.core.extrator.ExtractorMethod(br.com.bit.ideias.reflection.core.extrator.Extractor, java.lang.reflect.Method);
+  public java.lang.Object invoke(boolean, java.lang.Object...);
+  public java.lang.reflect.Method get(java.lang.Class<?>...);
+  static {};
+}
+Compiled from "Criterion.java"
+public interface br.com.bit.ideias.reflection.criteria.Criterion {
+  public abstract br.com.bit.ideias.reflection.criteria.Criterion add(br.com.bit.ideias.reflection.criteria.expression.Expression);
+  public abstract <T extends java.lang.reflect.Member> java.util.List<T> list();
+  public abstract <T extends java.lang.reflect.Member> T uniqueResult();
+}
+Compiled from "CriterionImpl.java"
+public class br.com.bit.ideias.reflection.criteria.CriterionImpl implements br.com.bit.ideias.reflection.criteria.Criterion {
+  public br.com.bit.ideias.reflection.criteria.CriterionImpl(br.com.bit.ideias.reflection.core.Introspector);
+  public br.com.bit.ideias.reflection.criteria.Criterion add(br.com.bit.ideias.reflection.criteria.expression.Expression);
+  public br.com.bit.ideias.reflection.core.Introspector getIntrospector();
+  public <T extends java.lang.reflect.Member> T uniqueResult();
+  public <T extends java.lang.reflect.Member> java.util.List<T> list();
+}
+Compiled from "Restriction.java"
+public class br.com.bit.ideias.reflection.criteria.Restriction {
+  public static br.com.bit.ideias.reflection.criteria.expression.SimpleExpression eq(java.lang.String);
+  public static br.com.bit.ideias.reflection.criteria.expression.SimpleExpression ne(java.lang.String);
+  public static br.com.bit.ideias.reflection.criteria.expression.SimpleExpression like(java.lang.String);
+  public static br.com.bit.ideias.reflection.criteria.expression.SimpleExpression like(java.lang.String, br.com.bit.ideias.reflection.type.LikeType);
+  public static br.com.bit.ideias.reflection.criteria.expression.SimpleExpression regex(java.lang.String);
+  public static br.com.bit.ideias.reflection.criteria.expression.SimpleExpression in(java.lang.String...);
+  public static br.com.bit.ideias.reflection.criteria.expression.SimpleExpression withModifiers(br.com.bit.ideias.reflection.type.ModifierType...);
+  public static br.com.bit.ideias.reflection.criteria.expression.SimpleExpression targetType(br.com.bit.ideias.reflection.type.TargetType);
+  public static br.com.bit.ideias.reflection.criteria.expression.SimpleExpression annotatedWith(java.lang.Class<? extends java.lang.annotation.Annotation>);
+  public static br.com.bit.ideias.reflection.criteria.expression.SimpleExpression notAnnotatedWith(java.lang.Class<? extends java.lang.annotation.Annotation>);
+  public static br.com.bit.ideias.reflection.criteria.expression.SimpleExpression fieldClassEq(java.lang.Class<?>);
+  public static br.com.bit.ideias.reflection.criteria.expression.SimpleExpression methodReturnClassEq(java.lang.Class<?>);
+  public static br.com.bit.ideias.reflection.criteria.expression.SimpleExpression methodWithParams(java.lang.Class<?>...);
+  public static br.com.bit.ideias.reflection.criteria.expression.ComplexExpression disjunction();
+  public static br.com.bit.ideias.reflection.criteria.expression.ComplexExpression disjunction(br.com.bit.ideias.reflection.criteria.expression.Expression...);
+}
+Compiled from "Restriction.java"
+class br.com.bit.ideias.reflection.criteria.Restriction$1 {
+  static final int[] $SwitchMap$br$com$bit$ideias$reflection$type$LikeType;
+  static {};
+}
+Compiled from "RestrictionTest.java"
+public class br.com.bit.ideias.reflection.criteria.RestrictionTest {
+  public br.com.bit.ideias.reflection.criteria.RestrictionTest();
+  public void prepare();
+  public void testRestrictionEqComTargetTypeNaoEspecificado() throws java.lang.Exception;
+  public void testRestrictionTargetTypeConstructor() throws java.lang.Exception;
+  public void testRestrictionEqDirectCriterion() throws java.lang.Exception;
+  public void testRestrictionEq() throws java.lang.Exception;
+  public void shouldReturnEitherWhenUsingDisjunction() throws java.lang.Exception;
+  public void testRestrictionEqEncadeado() throws java.lang.Exception;
+  public void testRestrictionNe() throws java.lang.Exception;
+  public void testRestrictionNeEncadead() throws java.lang.Exception;
+  public void testRestrictionLike() throws java.lang.Exception;
+  public void testRestrictionLikeEncadeado() throws java.lang.Exception;
+  public void testRestrictionLikeComLikeTypeStart() throws java.lang.Exception;
+  public void testRestrictionLikeComLikeTypeEnd() throws java.lang.Exception;
+  public void testRestrictionLikeComLikeTypeAnywhere() throws java.lang.Exception;
+  public void testRestrictionRegex() throws java.lang.Exception;
+  public void testRestrictionIn() throws java.lang.Exception;
+  public void testRestrictionAnnotatedWith() throws java.lang.Exception;
+  public void testRestrictionAnnotatedWithComDoisAdd() throws java.lang.Exception;
+  public void testRestrictionShowOnlyPublicTrue() throws java.lang.Exception;
+  public void testRestrictionUniqueShouldThrowAnExceptionIfThereAreMoreThanOneResult() throws java.lang.Exception;
+  public void testRestrictionUniqueShouldThrowAnExceptionIfThereAreNoResults() throws java.lang.Exception;
+  public void testRestrictionUniqueShouldReturnOnlyOneMember() throws java.lang.Exception;
+  public void testRestrictionShowOnlyPublicFalse() throws java.lang.Exception;
+  public void testRestrictionShowOnlyPublicTrueComAtributosNaClassePai() throws java.lang.Exception;
+  public void testRestrictionEqComPropriedadeNaClassePai() throws java.lang.Exception;
+  public void testRestrictionAnnotatedWithNaClassePai() throws java.lang.Exception;
+  public void testTypeEq();
+  public void testMethodReturnClass();
+  public void testWithParams();
+  public void testWithParamsComMaisDeUmParametro();
+  public void testCriteriaProcuraPorFieldsConstantes();
+  public void testCriteriaProcuraPorFieldsEstaticos();
+  public void testCriteriaProcuraPorFieldsSynchronized();
+  public void testCriterionInCollections();
+}
+Compiled from "RestrictionsMethodTest.java"
+public class br.com.bit.ideias.reflection.criteria.RestrictionsMethodTest {
+  public br.com.bit.ideias.reflection.criteria.RestrictionsMethodTest();
+  public void prepare();
+  public void testRestrictionEq() throws java.lang.Exception;
+  public void testRestrictionEqEncadeado() throws java.lang.Exception;
+  public void testRestrictionNe() throws java.lang.Exception;
+  public void testRestrictionNeEncadead() throws java.lang.Exception;
+  public void testRestrictionLike() throws java.lang.Exception;
+  public void testRestrictionLikeEncadeado() throws java.lang.Exception;
+  public void testRestrictionLikeComLikeTypeStart() throws java.lang.Exception;
+  public void testRestrictionLikeComLikeTypeEnd() throws java.lang.Exception;
+  public void testRestrictionLikeComLikeTypeAnywhere() throws java.lang.Exception;
+  public void testRestrictionRegex() throws java.lang.Exception;
+  public void testRestrictionIn() throws java.lang.Exception;
+  public void testRestrictionAnnotatedWith() throws java.lang.Exception;
+  public void testRestrictionShowOnlyPublicTrue() throws java.lang.Exception;
+  public void testRestrictionShowOnlyPublicFalse() throws java.lang.Exception;
+  public void testRestrictionEqComPropriedadeNaClassePai() throws java.lang.Exception;
+  public void testRestrictionAnnotatedWithNaClassePai() throws java.lang.Exception;
+  public void testRestrictionUniqueShouldThrowAnExceptionIfThereAreMoreThanOneResult() throws java.lang.Exception;
+  public void testRestrictionUniqueShouldThrowAnExceptionIfThereAreNoResults() throws java.lang.Exception;
+  public void testRestrictionUniqueShouldReturnOnlyOneMember() throws java.lang.Exception;
+  public void testRestrictionDisjunction() throws java.lang.Exception;
+  public void testTypeEq();
+  public void testTypeReturn();
+  public void testTypeParams();
+  public void testTypeParamsComMaisDeUmParametro();
+  public void testCriterionInCollections();
+}
+Compiled from "BaseExpression.java"
+public abstract class br.com.bit.ideias.reflection.criteria.expression.BaseExpression implements br.com.bit.ideias.reflection.criteria.expression.Expression {
+  protected java.lang.String value;
+  protected br.com.bit.ideias.reflection.type.SearchType searchType;
+  public br.com.bit.ideias.reflection.criteria.expression.BaseExpression(java.lang.String, br.com.bit.ideias.reflection.type.SearchType);
+  public java.lang.String getValue();
+  public br.com.bit.ideias.reflection.type.SearchType getSearchType();
+  public boolean accept(java.lang.reflect.Member);
+}
+Compiled from "ComplexExpression.java"
+public interface br.com.bit.ideias.reflection.criteria.expression.ComplexExpression extends br.com.bit.ideias.reflection.criteria.expression.Expression {
+  public abstract br.com.bit.ideias.reflection.criteria.expression.ComplexExpression add(br.com.bit.ideias.reflection.criteria.expression.Expression);
+}
+Compiled from "ConjunctionExpression.java"
+public class br.com.bit.ideias.reflection.criteria.expression.ConjunctionExpression extends br.com.bit.ideias.reflection.criteria.expression.BaseExpression implements br.com.bit.ideias.reflection.criteria.expression.ComplexExpression {
+  protected final java.util.List<br.com.bit.ideias.reflection.criteria.expression.Expression> expressions;
+  public br.com.bit.ideias.reflection.criteria.expression.ConjunctionExpression();
+  public br.com.bit.ideias.reflection.criteria.expression.ComplexExpression add(br.com.bit.ideias.reflection.criteria.expression.Expression);
+  public boolean accept(java.lang.reflect.Member);
+}
+Compiled from "DisjunctionExpression.java"
+public class br.com.bit.ideias.reflection.criteria.expression.DisjunctionExpression extends br.com.bit.ideias.reflection.criteria.expression.ConjunctionExpression {
+  public br.com.bit.ideias.reflection.criteria.expression.DisjunctionExpression();
+  public boolean accept(java.lang.reflect.Member);
+}
+Compiled from "Expression.java"
+public interface br.com.bit.ideias.reflection.criteria.expression.Expression {
+  public static final java.lang.String NAME_SEPARATOR;
+  public abstract boolean accept(java.lang.reflect.Member);
+  public abstract java.lang.String getValue();
+  public abstract br.com.bit.ideias.reflection.type.SearchType getSearchType();
+}
+Compiled from "SimpleExpression.java"
+public class br.com.bit.ideias.reflection.criteria.expression.SimpleExpression extends br.com.bit.ideias.reflection.criteria.expression.BaseExpression {
+  public br.com.bit.ideias.reflection.criteria.expression.SimpleExpression(java.lang.String, br.com.bit.ideias.reflection.type.SearchType);
+}
+Compiled from "ApplyInterceptorException.java"
+public class br.com.bit.ideias.reflection.exceptions.ApplyInterceptorException extends br.com.bit.ideias.reflection.exceptions.BaseReflectionDslException {
+  public br.com.bit.ideias.reflection.exceptions.ApplyInterceptorException();
+  public br.com.bit.ideias.reflection.exceptions.ApplyInterceptorException(java.lang.String, java.lang.Throwable);
+  public br.com.bit.ideias.reflection.exceptions.ApplyInterceptorException(java.lang.String);
+  public br.com.bit.ideias.reflection.exceptions.ApplyInterceptorException(java.lang.Throwable);
+}
+Compiled from "BaseReflectionDslException.java"
+public abstract class br.com.bit.ideias.reflection.exceptions.BaseReflectionDslException extends java.lang.RuntimeException {
+  public br.com.bit.ideias.reflection.exceptions.BaseReflectionDslException();
+  public br.com.bit.ideias.reflection.exceptions.BaseReflectionDslException(java.lang.String, java.lang.Throwable);
+  public br.com.bit.ideias.reflection.exceptions.BaseReflectionDslException(java.lang.String);
+  public br.com.bit.ideias.reflection.exceptions.BaseReflectionDslException(java.lang.Throwable);
+}
+Compiled from "ClassNotExistsException.java"
+public class br.com.bit.ideias.reflection.exceptions.ClassNotExistsException extends br.com.bit.ideias.reflection.exceptions.BaseReflectionDslException {
+  public br.com.bit.ideias.reflection.exceptions.ClassNotExistsException();
+  public br.com.bit.ideias.reflection.exceptions.ClassNotExistsException(java.lang.String, java.lang.Throwable);
+  public br.com.bit.ideias.reflection.exceptions.ClassNotExistsException(java.lang.String);
+  public br.com.bit.ideias.reflection.exceptions.ClassNotExistsException(java.lang.Throwable);
+}
+Compiled from "ConstructorNotExistsException.java"
+public class br.com.bit.ideias.reflection.exceptions.ConstructorNotExistsException extends br.com.bit.ideias.reflection.exceptions.BaseReflectionDslException {
+  public br.com.bit.ideias.reflection.exceptions.ConstructorNotExistsException();
+  public br.com.bit.ideias.reflection.exceptions.ConstructorNotExistsException(java.lang.String, java.lang.Throwable);
+  public br.com.bit.ideias.reflection.exceptions.ConstructorNotExistsException(java.lang.String);
+  public br.com.bit.ideias.reflection.exceptions.ConstructorNotExistsException(java.lang.Throwable);
+}
+Compiled from "FieldAccessException.java"
+public class br.com.bit.ideias.reflection.exceptions.FieldAccessException extends br.com.bit.ideias.reflection.exceptions.BaseReflectionDslException {
+  public br.com.bit.ideias.reflection.exceptions.FieldAccessException();
+  public br.com.bit.ideias.reflection.exceptions.FieldAccessException(java.lang.String, java.lang.Throwable);
+  public br.com.bit.ideias.reflection.exceptions.FieldAccessException(java.lang.String);
+  public br.com.bit.ideias.reflection.exceptions.FieldAccessException(java.lang.Throwable);
+}
+Compiled from "FieldNotExistsException.java"
+public class br.com.bit.ideias.reflection.exceptions.FieldNotExistsException extends br.com.bit.ideias.reflection.exceptions.BaseReflectionDslException {
+  public br.com.bit.ideias.reflection.exceptions.FieldNotExistsException();
+  public br.com.bit.ideias.reflection.exceptions.FieldNotExistsException(java.lang.String, java.lang.Throwable);
+  public br.com.bit.ideias.reflection.exceptions.FieldNotExistsException(java.lang.String);
+  public br.com.bit.ideias.reflection.exceptions.FieldNotExistsException(java.lang.Throwable);
+}
+Compiled from "FieldPrivateException.java"
+public class br.com.bit.ideias.reflection.exceptions.FieldPrivateException extends br.com.bit.ideias.reflection.exceptions.BaseReflectionDslException {
+  public br.com.bit.ideias.reflection.exceptions.FieldPrivateException();
+  public br.com.bit.ideias.reflection.exceptions.FieldPrivateException(java.lang.String, java.lang.Throwable);
+  public br.com.bit.ideias.reflection.exceptions.FieldPrivateException(java.lang.String);
+  public br.com.bit.ideias.reflection.exceptions.FieldPrivateException(java.lang.Throwable);
+}
+Compiled from "InvalidParameterException.java"
+public class br.com.bit.ideias.reflection.exceptions.InvalidParameterException extends br.com.bit.ideias.reflection.exceptions.BaseReflectionDslException {
+  public br.com.bit.ideias.reflection.exceptions.InvalidParameterException();
+  public br.com.bit.ideias.reflection.exceptions.InvalidParameterException(java.lang.String, java.lang.Throwable);
+  public br.com.bit.ideias.reflection.exceptions.InvalidParameterException(java.lang.String);
+  public br.com.bit.ideias.reflection.exceptions.InvalidParameterException(java.lang.Throwable);
+}
+Compiled from "InvalidStateException.java"
+public class br.com.bit.ideias.reflection.exceptions.InvalidStateException extends br.com.bit.ideias.reflection.exceptions.BaseReflectionDslException {
+  public br.com.bit.ideias.reflection.exceptions.InvalidStateException();
+  public br.com.bit.ideias.reflection.exceptions.InvalidStateException(java.lang.String, java.lang.Throwable);
+  public br.com.bit.ideias.reflection.exceptions.InvalidStateException(java.lang.String);
+  public br.com.bit.ideias.reflection.exceptions.InvalidStateException(java.lang.Throwable);
+}
+Compiled from "MethodAccessException.java"
+public class br.com.bit.ideias.reflection.exceptions.MethodAccessException extends br.com.bit.ideias.reflection.exceptions.BaseReflectionDslException {
+  public br.com.bit.ideias.reflection.exceptions.MethodAccessException();
+  public br.com.bit.ideias.reflection.exceptions.MethodAccessException(java.lang.String, java.lang.Throwable);
+  public br.com.bit.ideias.reflection.exceptions.MethodAccessException(java.lang.String);
+  public br.com.bit.ideias.reflection.exceptions.MethodAccessException(java.lang.Throwable);
+}
+Compiled from "MethodNotExistsException.java"
+public class br.com.bit.ideias.reflection.exceptions.MethodNotExistsException extends br.com.bit.ideias.reflection.exceptions.BaseReflectionDslException {
+  public br.com.bit.ideias.reflection.exceptions.MethodNotExistsException();
+  public br.com.bit.ideias.reflection.exceptions.MethodNotExistsException(java.lang.String, java.lang.Throwable);
+  public br.com.bit.ideias.reflection.exceptions.MethodNotExistsException(java.lang.String);
+  public br.com.bit.ideias.reflection.exceptions.MethodNotExistsException(java.lang.Throwable);
+}
+Compiled from "MethodPrivateException.java"
+public class br.com.bit.ideias.reflection.exceptions.MethodPrivateException extends br.com.bit.ideias.reflection.exceptions.BaseReflectionDslException {
+  public br.com.bit.ideias.reflection.exceptions.MethodPrivateException();
+  public br.com.bit.ideias.reflection.exceptions.MethodPrivateException(java.lang.String, java.lang.Throwable);
+  public br.com.bit.ideias.reflection.exceptions.MethodPrivateException(java.lang.String);
+  public br.com.bit.ideias.reflection.exceptions.MethodPrivateException(java.lang.Throwable);
+}
+Compiled from "NoResultException.java"
+public class br.com.bit.ideias.reflection.exceptions.NoResultException extends br.com.bit.ideias.reflection.exceptions.BaseReflectionDslException {
+  public br.com.bit.ideias.reflection.exceptions.NoResultException();
+}
+Compiled from "ObjectCreateException.java"
+public class br.com.bit.ideias.reflection.exceptions.ObjectCreateException extends br.com.bit.ideias.reflection.exceptions.BaseReflectionDslException {
+  public br.com.bit.ideias.reflection.exceptions.ObjectCreateException();
+  public br.com.bit.ideias.reflection.exceptions.ObjectCreateException(java.lang.String, java.lang.Throwable);
+  public br.com.bit.ideias.reflection.exceptions.ObjectCreateException(java.lang.String);
+  public br.com.bit.ideias.reflection.exceptions.ObjectCreateException(java.lang.Throwable);
+}
+Compiled from "RQLException.java"
+public class br.com.bit.ideias.reflection.exceptions.RQLException extends br.com.bit.ideias.reflection.exceptions.BaseReflectionDslException {
+  public br.com.bit.ideias.reflection.exceptions.RQLException();
+  public br.com.bit.ideias.reflection.exceptions.RQLException(java.lang.String, java.lang.Throwable);
+  public br.com.bit.ideias.reflection.exceptions.RQLException(java.lang.String);
+  public br.com.bit.ideias.reflection.exceptions.RQLException(java.lang.Throwable);
+}
+Compiled from "StaticFieldNotExistsException.java"
+public class br.com.bit.ideias.reflection.exceptions.StaticFieldNotExistsException extends br.com.bit.ideias.reflection.exceptions.BaseReflectionDslException {
+  public br.com.bit.ideias.reflection.exceptions.StaticFieldNotExistsException();
+  public br.com.bit.ideias.reflection.exceptions.StaticFieldNotExistsException(java.lang.String, java.lang.Throwable);
+  public br.com.bit.ideias.reflection.exceptions.StaticFieldNotExistsException(java.lang.String);
+  public br.com.bit.ideias.reflection.exceptions.StaticFieldNotExistsException(java.lang.Throwable);
+}
+Compiled from "StaticMethodNotExistsException.java"
+public class br.com.bit.ideias.reflection.exceptions.StaticMethodNotExistsException extends br.com.bit.ideias.reflection.exceptions.BaseReflectionDslException {
+  public br.com.bit.ideias.reflection.exceptions.StaticMethodNotExistsException();
+  public br.com.bit.ideias.reflection.exceptions.StaticMethodNotExistsException(java.lang.String, java.lang.Throwable);
+  public br.com.bit.ideias.reflection.exceptions.StaticMethodNotExistsException(java.lang.String);
+  public br.com.bit.ideias.reflection.exceptions.StaticMethodNotExistsException(java.lang.Throwable);
+}
+Compiled from "SyntaxException.java"
+public class br.com.bit.ideias.reflection.exceptions.SyntaxException extends br.com.bit.ideias.reflection.exceptions.RQLException {
+  public br.com.bit.ideias.reflection.exceptions.SyntaxException();
+  public br.com.bit.ideias.reflection.exceptions.SyntaxException(java.lang.String, java.lang.Throwable);
+  public br.com.bit.ideias.reflection.exceptions.SyntaxException(java.lang.String);
+  public br.com.bit.ideias.reflection.exceptions.SyntaxException(java.lang.Throwable);
+}
+Compiled from "TooManyResultException.java"
+public class br.com.bit.ideias.reflection.exceptions.TooManyResultException extends br.com.bit.ideias.reflection.exceptions.BaseReflectionDslException {
+  public br.com.bit.ideias.reflection.exceptions.TooManyResultException();
+}
+Compiled from "PackageScannerException.java"
+public class br.com.bit.ideias.reflection.exceptions.pkgscanner.PackageScannerException extends br.com.bit.ideias.reflection.exceptions.BaseReflectionDslException {
+  public br.com.bit.ideias.reflection.exceptions.pkgscanner.PackageScannerException();
+  public br.com.bit.ideias.reflection.exceptions.pkgscanner.PackageScannerException(java.lang.String, java.lang.Throwable);
+  public br.com.bit.ideias.reflection.exceptions.pkgscanner.PackageScannerException(java.lang.String);
+  public br.com.bit.ideias.reflection.exceptions.pkgscanner.PackageScannerException(java.lang.Throwable);
+}
+Compiled from "RqlTest.java"
+public class br.com.bit.ideias.reflection.rql.RqlTest {
+  public br.com.bit.ideias.reflection.rql.RqlTest();
+  public void testForClassShouldWorkWithOrWithoutFromClause() throws java.lang.Exception;
+  public void testInvalidNumberOfParenthesisShouldThrowSyntaxException() throws java.lang.Exception;
+  public void testInvalidNumberOfConjunctionsShouldThrowSyntaxException() throws java.lang.Exception;
+  public void testUnknownClausesShouldThrowSyntaxException() throws java.lang.Exception;
+  public void testUnknownOperatorsShouldThrowSyntaxException() throws java.lang.Exception;
+  public void testInvalidOperatorForClauseShouldThrowSyntaxException() throws java.lang.Exception;
+  public void testInvalidRightHand() throws java.lang.Exception;
+  public void testUnterminatedStringShouldThrowSyntaxException() throws java.lang.Exception;
+  public void testRestrictionEqComTargetTypeNaoEspecificado() throws java.lang.Exception;
+  public void testRestrictionWithTargetConstructorShouldReturnTheConstructorsOfTheClass() throws java.lang.Exception;
+  public void testAnnotationShouldThrowExceptionIfNotAnnotation() throws java.lang.Exception;
+  public void testAnnotationShouldThrowExceptionIfNotClass() throws java.lang.Exception;
+  public void testRestrictionEqComTargetTypeNaoEspecificadoUsingForClass() throws java.lang.Exception;
+  public void testNullQueryShouldThrowSyntaxException() throws java.lang.Exception;
+  public void testEmptyQueryShouldThrowSyntaxException() throws java.lang.Exception;
+  public void testFromClassShouldReturnMembers() throws java.lang.Exception;
+  public void testFromClassShouldThrowExceptionIfNotParseableToClass() throws java.lang.Exception;
+  public void testQueryShouldThrowExceptionIfNotOrdered() throws java.lang.Exception;
+  public void testRestrictionEqDirectCriterion() throws java.lang.Exception;
+  public void testRestrictionEqWithParenthesisShouldReturnNoResults() throws java.lang.Exception;
+  public void testRestrictionEq() throws java.lang.Exception;
+  public void shouldReturnEitherWhenUsingDisjunction() throws java.lang.Exception;
+  public void testRestrictionEqEncadeado() throws java.lang.Exception;
+  public void testRestrictionNe() throws java.lang.Exception;
+  public void testRestrictionNeEncadead() throws java.lang.Exception;
+  public void testRestrictionLike() throws java.lang.Exception;
+  public void testRestrictionLikeEq() throws java.lang.Exception;
+  public void testRestrictionLikeEncadeado() throws java.lang.Exception;
+  public void testRestrictionLikeComLikeTypeStart() throws java.lang.Exception;
+  public void testRestrictionLikeComLikeTypeEnd() throws java.lang.Exception;
+  public void testRestrictionLikeComLikeTypeAnywhere() throws java.lang.Exception;
+  public void testRestrictionRegex() throws java.lang.Exception;
+  public void testRestrictionRegexWithUnterminatedRegexShouldThrowException() throws java.lang.Exception;
+  public void testRestrictionIn() throws java.lang.Exception;
+  public void testRestrictionAnnotatedWith() throws java.lang.Exception;
+  public void testRestrictionAnnotatedNe() throws java.lang.Exception;
+  public void testRestrictionAnnotatedWithComDoisAdd() throws java.lang.Exception;
+  public void testRestrictionShowOnlyPublicTrue() throws java.lang.Exception;
+  public void testRestrictionUniqueShouldThrowAnExceptionIfThereAreMoreThanOneResult() throws java.lang.Exception;
+  public void testRestrictionUniqueShouldThrowAnExceptionIfThereAreNoResults() throws java.lang.Exception;
+  public void testRestrictionUniqueShouldReturnOnlyOneMember() throws java.lang.Exception;
+  public void testRestrictionShowOnlyPublicFalse() throws java.lang.Exception;
+  public void testRestrictionShowOnlyPublicTrueComAtributosNaClassePai() throws java.lang.Exception;
+  public void testRestrictionEqComPropriedadeNaClassePai() throws java.lang.Exception;
+  public void testRestrictionAnnotatedWithNaClassePai() throws java.lang.Exception;
+  public void testTypeEq();
+  public void testMethodReturnClass();
+  public void testWithParams();
+  public void testWithParamsComMaisDeUmParametro();
+  public void testCriteriaProcuraPorFieldsConstantes();
+  public void testCriteriaProcuraPorFieldsEstaticos();
+  public void testCriteriaProcuraPorFieldsSynchronized();
+}
+Compiled from "ComplexPart.java"
+public class br.com.bit.ideias.reflection.rql.query.ComplexPart extends br.com.bit.ideias.reflection.rql.query.QueryPart {
+  public br.com.bit.ideias.reflection.rql.query.ComplexPart();
+  public br.com.bit.ideias.reflection.rql.query.ComplexPart addPart(br.com.bit.ideias.reflection.rql.query.QueryPart);
+  public br.com.bit.ideias.reflection.rql.query.ComplexPart addConnector(br.com.bit.ideias.reflection.rql.query.QueryConnector);
+  public br.com.bit.ideias.reflection.criteria.expression.Expression parse();
+}
+Compiled from "ExpressionPart.java"
+public class br.com.bit.ideias.reflection.rql.query.ExpressionPart extends br.com.bit.ideias.reflection.rql.query.QueryPart {
+  public br.com.bit.ideias.reflection.rql.query.ExpressionPart(java.lang.String);
+  public br.com.bit.ideias.reflection.criteria.expression.Expression parse();
+}
+Compiled from "Query.java"
+public interface br.com.bit.ideias.reflection.rql.query.Query {
+  public abstract <T extends java.lang.reflect.Member> java.util.List<T> list();
+  public abstract <T extends java.lang.reflect.Member> T uniqueResult();
+}
+Compiled from "QueryClause.java"
+public class br.com.bit.ideias.reflection.rql.query.QueryClause extends java.lang.Enum<br.com.bit.ideias.reflection.rql.query.QueryClause> {
+  public static final br.com.bit.ideias.reflection.rql.query.QueryClause NAME;
+  public static final br.com.bit.ideias.reflection.rql.query.QueryClause ANNOTATION;
+  public static final br.com.bit.ideias.reflection.rql.query.QueryClause MODIFIER;
+  public static final br.com.bit.ideias.reflection.rql.query.QueryClause FIELDCLASS;
+  public static final br.com.bit.ideias.reflection.rql.query.QueryClause METHODRETURNCLASS;
+  public static final br.com.bit.ideias.reflection.rql.query.QueryClause METHOD;
+  public static final br.com.bit.ideias.reflection.rql.query.QueryClause TARGET;
+  public static br.com.bit.ideias.reflection.rql.query.QueryClause[] values();
+  public static br.com.bit.ideias.reflection.rql.query.QueryClause valueOf(java.lang.String);
+  public boolean acceptsOperator(br.com.bit.ideias.reflection.rql.query.QueryOperator);
+  public java.util.Set<br.com.bit.ideias.reflection.rql.query.QueryOperator> doGetAccepted();
+  protected java.util.Set<br.com.bit.ideias.reflection.rql.query.QueryOperator> createSet(br.com.bit.ideias.reflection.rql.query.QueryOperator...);
+  br.com.bit.ideias.reflection.rql.query.QueryClause(java.lang.String, int, br.com.bit.ideias.reflection.rql.query.QueryClause$1);
+  static {};
+}
+Compiled from "QueryClause.java"
+final class br.com.bit.ideias.reflection.rql.query.QueryClause$1 extends br.com.bit.ideias.reflection.rql.query.QueryClause {
+  br.com.bit.ideias.reflection.rql.query.QueryClause$1(java.lang.String, int);
+  public java.util.Set<br.com.bit.ideias.reflection.rql.query.QueryOperator> doGetAccepted();
+}
+Compiled from "QueryClause.java"
+final class br.com.bit.ideias.reflection.rql.query.QueryClause$2 extends br.com.bit.ideias.reflection.rql.query.QueryClause {
+  br.com.bit.ideias.reflection.rql.query.QueryClause$2(java.lang.String, int);
+  public java.util.Set<br.com.bit.ideias.reflection.rql.query.QueryOperator> doGetAccepted();
+}
+Compiled from "QueryClause.java"
+final class br.com.bit.ideias.reflection.rql.query.QueryClause$3 extends br.com.bit.ideias.reflection.rql.query.QueryClause {
+  br.com.bit.ideias.reflection.rql.query.QueryClause$3(java.lang.String, int);
+}
+Compiled from "QueryClause.java"
+final class br.com.bit.ideias.reflection.rql.query.QueryClause$4 extends br.com.bit.ideias.reflection.rql.query.QueryClause {
+  br.com.bit.ideias.reflection.rql.query.QueryClause$4(java.lang.String, int);
+}
+Compiled from "QueryClause.java"
+final class br.com.bit.ideias.reflection.rql.query.QueryClause$5 extends br.com.bit.ideias.reflection.rql.query.QueryClause {
+  br.com.bit.ideias.reflection.rql.query.QueryClause$5(java.lang.String, int);
+}
+Compiled from "QueryClause.java"
+final class br.com.bit.ideias.reflection.rql.query.QueryClause$6 extends br.com.bit.ideias.reflection.rql.query.QueryClause {
+  br.com.bit.ideias.reflection.rql.query.QueryClause$6(java.lang.String, int);
+  public java.util.Set<br.com.bit.ideias.reflection.rql.query.QueryOperator> doGetAccepted();
+}
+Compiled from "QueryClause.java"
+final class br.com.bit.ideias.reflection.rql.query.QueryClause$7 extends br.com.bit.ideias.reflection.rql.query.QueryClause {
+  br.com.bit.ideias.reflection.rql.query.QueryClause$7(java.lang.String, int);
+}
+Compiled from "QueryConnector.java"
+public final class br.com.bit.ideias.reflection.rql.query.QueryConnector extends java.lang.Enum<br.com.bit.ideias.reflection.rql.query.QueryConnector> {
+  public static final br.com.bit.ideias.reflection.rql.query.QueryConnector AND;
+  public static final br.com.bit.ideias.reflection.rql.query.QueryConnector OR;
+  public static br.com.bit.ideias.reflection.rql.query.QueryConnector[] values();
+  public static br.com.bit.ideias.reflection.rql.query.QueryConnector valueOf(java.lang.String);
+  static {};
+}
+Compiled from "QueryImpl.java"
+public class br.com.bit.ideias.reflection.rql.query.QueryImpl implements br.com.bit.ideias.reflection.rql.query.Query {
+  public br.com.bit.ideias.reflection.rql.query.QueryImpl(br.com.bit.ideias.reflection.core.Introspector, java.lang.String);
+  public br.com.bit.ideias.reflection.rql.query.QueryImpl(java.lang.String);
+  public <T extends java.lang.reflect.Member> java.util.List<T> list();
+  public <T extends java.lang.reflect.Member> T uniqueResult();
+}
+Compiled from "QueryOperator.java"
+public abstract class br.com.bit.ideias.reflection.rql.query.QueryOperator extends java.lang.Enum<br.com.bit.ideias.reflection.rql.query.QueryOperator> {
+  public static final br.com.bit.ideias.reflection.rql.query.QueryOperator EQ;
+  public static final br.com.bit.ideias.reflection.rql.query.QueryOperator NE;
+  public static final br.com.bit.ideias.reflection.rql.query.QueryOperator LIKE;
+  public static final br.com.bit.ideias.reflection.rql.query.QueryOperator IN;
+  public static final br.com.bit.ideias.reflection.rql.query.QueryOperator WITH;
+  public static final java.util.regex.Pattern ARRAY_SEPARATOR_PATTERN;
+  public static br.com.bit.ideias.reflection.rql.query.QueryOperator[] values();
+  public static br.com.bit.ideias.reflection.rql.query.QueryOperator valueOf(java.lang.String);
+  public abstract br.com.bit.ideias.reflection.criteria.expression.Expression getExpression(br.com.bit.ideias.reflection.rql.query.QueryClause, java.lang.String);
+  protected java.lang.Class<?> getClassFromValue(java.lang.String);
+  protected java.lang.String removeEdges(java.lang.String);
+  protected java.lang.Class<? extends java.lang.annotation.Annotation> getAnnotationClassFromValue(java.lang.String);
+  br.com.bit.ideias.reflection.rql.query.QueryOperator(java.lang.String, int, br.com.bit.ideias.reflection.rql.query.QueryOperator$1);
+  static {};
+}
+Compiled from "QueryOperator.java"
+final class br.com.bit.ideias.reflection.rql.query.QueryOperator$1 extends br.com.bit.ideias.reflection.rql.query.QueryOperator {
+  br.com.bit.ideias.reflection.rql.query.QueryOperator$1(java.lang.String, int);
+  public br.com.bit.ideias.reflection.criteria.expression.Expression getExpression(br.com.bit.ideias.reflection.rql.query.QueryClause, java.lang.String);
+}
+Compiled from "QueryOperator.java"
+final class br.com.bit.ideias.reflection.rql.query.QueryOperator$2 extends br.com.bit.ideias.reflection.rql.query.QueryOperator {
+  br.com.bit.ideias.reflection.rql.query.QueryOperator$2(java.lang.String, int);
+  public br.com.bit.ideias.reflection.criteria.expression.Expression getExpression(br.com.bit.ideias.reflection.rql.query.QueryClause, java.lang.String);
+}
+Compiled from "QueryOperator.java"
+final class br.com.bit.ideias.reflection.rql.query.QueryOperator$3 extends br.com.bit.ideias.reflection.rql.query.QueryOperator {
+  br.com.bit.ideias.reflection.rql.query.QueryOperator$3(java.lang.String, int);
+  public br.com.bit.ideias.reflection.criteria.expression.Expression getExpression(br.com.bit.ideias.reflection.rql.query.QueryClause, java.lang.String);
+}
+Compiled from "QueryOperator.java"
+final class br.com.bit.ideias.reflection.rql.query.QueryOperator$4 extends br.com.bit.ideias.reflection.rql.query.QueryOperator {
+  br.com.bit.ideias.reflection.rql.query.QueryOperator$4(java.lang.String, int);
+  public br.com.bit.ideias.reflection.criteria.expression.Expression getExpression(br.com.bit.ideias.reflection.rql.query.QueryClause, java.lang.String);
+}
+Compiled from "QueryOperator.java"
+final class br.com.bit.ideias.reflection.rql.query.QueryOperator$5 extends br.com.bit.ideias.reflection.rql.query.QueryOperator {
+  br.com.bit.ideias.reflection.rql.query.QueryOperator$5(java.lang.String, int);
+  public br.com.bit.ideias.reflection.criteria.expression.Expression getExpression(br.com.bit.ideias.reflection.rql.query.QueryClause, java.lang.String);
+}
+Compiled from "QueryOperator.java"
+class br.com.bit.ideias.reflection.rql.query.QueryOperator$6 {
+  static final int[] $SwitchMap$br$com$bit$ideias$reflection$rql$query$QueryClause;
+  static {};
+}
+Compiled from "QueryPart.java"
+public abstract class br.com.bit.ideias.reflection.rql.query.QueryPart {
+  protected java.lang.String rql;
+  public br.com.bit.ideias.reflection.rql.query.QueryPart();
+  public abstract br.com.bit.ideias.reflection.criteria.expression.Expression parse();
+}
+Compiled from "Rql.java"
+public class br.com.bit.ideias.reflection.rql.query.Rql {
+  public br.com.bit.ideias.reflection.rql.query.Rql();
+  protected static br.com.bit.ideias.reflection.rql.query.Rql getInstance();
+  protected br.com.bit.ideias.reflection.criteria.Criterion parse(java.lang.String);
+  protected static br.com.bit.ideias.reflection.criteria.expression.Expression parseSimple(java.lang.String);
+  static {};
+}
+Compiled from "FileSystemResource.java"
+public class br.com.bit.ideias.reflection.scanner.FileSystemResource implements br.com.bit.ideias.reflection.scanner.Resource {
+  public br.com.bit.ideias.reflection.scanner.FileSystemResource(java.io.File);
+  public br.com.bit.ideias.reflection.scanner.Resource createRelative(java.lang.String);
+  public java.io.File getFile();
+  public java.net.URL getURL();
+  public java.lang.String toString();
+}
+Compiled from "PackageScanner.java"
+public class br.com.bit.ideias.reflection.scanner.PackageScanner {
+  public static final java.lang.String FILE_URL_PREFIX;
+  public static final java.lang.String URL_PROTOCOL_FILE;
+  public static final java.lang.String URL_PROTOCOL_JAR;
+  public static final java.lang.String URL_PROTOCOL_ZIP;
+  public static final java.lang.String URL_PROTOCOL_VFSZIP;
+  public static final java.lang.String URL_PROTOCOL_WSJAR;
+  public static final java.lang.String URL_PROTOCOL_CODE_SOURCE;
+  public static br.com.bit.ideias.reflection.scanner.PackageScanner forPackage(java.lang.String);
+  public br.com.bit.ideias.reflection.scanner.ScannerResult scan();
+  public br.com.bit.ideias.reflection.scanner.Resource[] getResources(java.lang.String) throws java.io.IOException;
+  protected java.lang.String resourceToClassName(br.com.bit.ideias.reflection.scanner.Resource);
+  protected java.lang.ClassLoader getClassLoader();
+  public static void main(java.lang.String[]);
+  protected java.lang.String convertClassNameToResourcePath(java.lang.String);
+  protected br.com.bit.ideias.reflection.scanner.Resource[] findPathMatchingResources(java.lang.String) throws java.io.IOException;
+  protected java.util.Set<br.com.bit.ideias.reflection.scanner.Resource> findPathMatchingFileResources(br.com.bit.ideias.reflection.scanner.Resource, java.lang.String) throws java.io.IOException;
+  protected java.util.Set<br.com.bit.ideias.reflection.scanner.Resource> findMatchingFileSystemResources(java.io.File, java.lang.String) throws java.io.IOException;
+  protected java.util.Set<java.io.File> retrieveMatchingFiles(java.io.File, java.lang.String) throws java.io.IOException;
+  protected java.lang.String fullPattern(java.io.File, java.lang.String);
+  protected void retrieveMatchingFiles(java.lang.String, java.io.File, java.util.Set<java.io.File>) throws java.io.IOException;
+  protected boolean match(java.lang.String, java.lang.String, boolean);
+  protected java.util.Set<br.com.bit.ideias.reflection.scanner.Resource> findPathMatchingJarResources(br.com.bit.ideias.reflection.scanner.Resource, java.lang.String) throws java.io.IOException;
+  protected java.lang.String determineRootDir(java.lang.String);
+  protected br.com.bit.ideias.reflection.scanner.Resource[] findAllClassPathResources(java.lang.String) throws java.io.IOException;
+  public boolean isPattern(java.lang.String);
+  protected br.com.bit.ideias.reflection.scanner.Resource convertClassLoaderURL(java.net.URL);
+  protected boolean isJarResource(br.com.bit.ideias.reflection.scanner.Resource) throws java.io.IOException;
+  protected java.util.jar.JarFile getJarFile(java.lang.String) throws java.io.IOException;
+  public static java.net.URI toURI(java.net.URL) throws java.net.URISyntaxException;
+  public static java.net.URI toURI(java.lang.String) throws java.net.URISyntaxException;
+}
+Compiled from "PackageScannerTest.java"
+public class br.com.bit.ideias.reflection.scanner.PackageScannerTest {
+  public br.com.bit.ideias.reflection.scanner.PackageScannerTest();
+  public void scannOnArtefactsPackageShouldReturnAllClasses() throws java.lang.Exception;
+}
+Compiled from "Resource.java"
+public interface br.com.bit.ideias.reflection.scanner.Resource {
+  public abstract java.io.File getFile();
+  public abstract java.net.URL getURL();
+  public abstract br.com.bit.ideias.reflection.scanner.Resource createRelative(java.lang.String);
+}
+Compiled from "ScannerResult.java"
+public class br.com.bit.ideias.reflection.scanner.ScannerResult {
+  public br.com.bit.ideias.reflection.scanner.ScannerResult(java.util.Set<java.lang.Class<?>>);
+  public java.util.Set<java.lang.Class<?>> getClasses();
+}
+Compiled from "UrlResource.java"
+public class br.com.bit.ideias.reflection.scanner.UrlResource implements br.com.bit.ideias.reflection.scanner.Resource {
+  public br.com.bit.ideias.reflection.scanner.UrlResource(java.net.URL);
+  public java.net.URL getURL();
+  public br.com.bit.ideias.reflection.scanner.Resource createRelative(java.lang.String);
+  public java.io.File getFile();
+}
+Compiled from "ClasseDominio.java"
+public class br.com.bit.ideias.reflection.test.artefacts.ClasseDominio {
+  public boolean comecaPriva;
+  static final java.lang.Object constante;
+  public br.com.bit.ideias.reflection.test.artefacts.ClasseDominio();
+  public br.com.bit.ideias.reflection.test.artefacts.ClasseDominio(java.lang.Integer);
+  public br.com.bit.ideias.reflection.test.artefacts.ClasseDominio(java.lang.Integer, java.lang.String);
+  public java.lang.Integer getAtributoPrivadoInteiro();
+  public void setAtributoPrivadoInteiro(java.lang.Integer);
+  public java.lang.String getAtributoPrivadoString();
+  public void setAtributoPrivadoString(java.lang.String);
+  public java.lang.Integer getDobroAtributoPrivadoInteiro();
+  public java.lang.Integer getDobro(java.lang.Integer);
+  public void metodoQueVaiLancarException();
+  public int getAtributoPrivadoInt();
+  public void setAtributoPrivadoInt(int);
+  public boolean isAlive();
+  public void setAlive(boolean);
+  public void metodoComTresParametros(java.lang.String, java.lang.Integer, java.lang.Boolean);
+  public void metodoComTresParametrosPrimitivos(java.lang.String, java.lang.Integer, boolean);
+  static {};
+}
+Compiled from "ClasseDominioFilha.java"
+public class br.com.bit.ideias.reflection.test.artefacts.ClasseDominioFilha extends br.com.bit.ideias.reflection.test.artefacts.ClasseDominio {
+  public br.com.bit.ideias.reflection.test.artefacts.ClasseDominioFilha();
+  public java.lang.String getAtributoClasseFilha();
+  public void setAtributoClasseFilha(java.lang.String);
+}
+Compiled from "ClasseDominioSemConstructor.java"
+public class br.com.bit.ideias.reflection.test.artefacts.ClasseDominioSemConstructor {
+  public br.com.bit.ideias.reflection.test.artefacts.ClasseDominioSemConstructor();
+  public boolean pluginResult(java.lang.String...);
+}
+Compiled from "MyAnnotation.java"
+public interface br.com.bit.ideias.reflection.test.artefacts.MyAnnotation extends java.lang.annotation.Annotation {
+}
+Compiled from "MyAnnotation2.java"
+public interface br.com.bit.ideias.reflection.test.artefacts.MyAnnotation2 extends java.lang.annotation.Annotation {
+}
+Compiled from "AnnotationParaPackageTest.java"
+public interface br.com.bit.ideias.reflection.test.artefacts.forPackageTest.AnnotationParaPackageTest extends java.lang.annotation.Annotation {
+}
+Compiled from "Class2ParaPackageTest.java"
+public class br.com.bit.ideias.reflection.test.artefacts.forPackageTest.Class2ParaPackageTest {
+  public br.com.bit.ideias.reflection.test.artefacts.forPackageTest.Class2ParaPackageTest();
+}
+Compiled from "ClasseParaPackageTest.java"
+public class br.com.bit.ideias.reflection.test.artefacts.forPackageTest.ClasseParaPackageTest {
+  public br.com.bit.ideias.reflection.test.artefacts.forPackageTest.ClasseParaPackageTest();
+}
+Compiled from "EnumParaPackageTest.java"
+public final class br.com.bit.ideias.reflection.test.artefacts.forPackageTest.EnumParaPackageTest extends java.lang.Enum<br.com.bit.ideias.reflection.test.artefacts.forPackageTest.EnumParaPackageTest> {
+  public static br.com.bit.ideias.reflection.test.artefacts.forPackageTest.EnumParaPackageTest[] values();
+  public static br.com.bit.ideias.reflection.test.artefacts.forPackageTest.EnumParaPackageTest valueOf(java.lang.String);
+  static {};
+}
+Compiled from "ClasseDoSubPacote.java"
+public class br.com.bit.ideias.reflection.test.artefacts.forPackageTest.subpackage.ClasseDoSubPacote {
+  public br.com.bit.ideias.reflection.test.artefacts.forPackageTest.subpackage.ClasseDoSubPacote();
+}
+Compiled from "LikeType.java"
+public final class br.com.bit.ideias.reflection.type.LikeType extends java.lang.Enum<br.com.bit.ideias.reflection.type.LikeType> {
+  public static final br.com.bit.ideias.reflection.type.LikeType START;
+  public static final br.com.bit.ideias.reflection.type.LikeType END;
+  public static final br.com.bit.ideias.reflection.type.LikeType ANYWHERE;
+  public static br.com.bit.ideias.reflection.type.LikeType[] values();
+  public static br.com.bit.ideias.reflection.type.LikeType valueOf(java.lang.String);
+  static {};
+}
+Compiled from "ModifierType.java"
+public final class br.com.bit.ideias.reflection.type.ModifierType extends java.lang.Enum<br.com.bit.ideias.reflection.type.ModifierType> {
+  public static final br.com.bit.ideias.reflection.type.ModifierType ABSTRACT;
+  public static final br.com.bit.ideias.reflection.type.ModifierType FINAL;
+  public static final br.com.bit.ideias.reflection.type.ModifierType INTERFACE;
+  public static final br.com.bit.ideias.reflection.type.ModifierType NATIVE;
+  public static final br.com.bit.ideias.reflection.type.ModifierType PRIVATE;
+  public static final br.com.bit.ideias.reflection.type.ModifierType PROTECTED;
+  public static final br.com.bit.ideias.reflection.type.ModifierType PUBLIC;
+  public static final br.com.bit.ideias.reflection.type.ModifierType STATIC;
+  public static final br.com.bit.ideias.reflection.type.ModifierType STRICT;
+  public static final br.com.bit.ideias.reflection.type.ModifierType SYNCHRONIZED;
+  public static final br.com.bit.ideias.reflection.type.ModifierType TRANSIENT;
+  public static final br.com.bit.ideias.reflection.type.ModifierType VOLATILE;
+  public static br.com.bit.ideias.reflection.type.ModifierType[] values();
+  public static br.com.bit.ideias.reflection.type.ModifierType valueOf(java.lang.String);
+  public boolean matches(java.lang.reflect.Member);
+  static {};
+}
+Compiled from "SearchType.java"
+public abstract class br.com.bit.ideias.reflection.type.SearchType extends java.lang.Enum<br.com.bit.ideias.reflection.type.SearchType> {
+  public static final br.com.bit.ideias.reflection.type.SearchType EQ;
+  public static final br.com.bit.ideias.reflection.type.SearchType NE;
+  public static final br.com.bit.ideias.reflection.type.SearchType LIKE_START;
+  public static final br.com.bit.ideias.reflection.type.SearchType LIKE_END;
+  public static final br.com.bit.ideias.reflection.type.SearchType REGEX;
+  public static final br.com.bit.ideias.reflection.type.SearchType IN;
+  public static final br.com.bit.ideias.reflection.type.SearchType ANNOTATION;
+  public static final br.com.bit.ideias.reflection.type.SearchType NOT_ANNOTATION;
+  public static final br.com.bit.ideias.reflection.type.SearchType WITH_MODIFIERS;
+  public static final br.com.bit.ideias.reflection.type.SearchType TARGET_TYPE;
+  public static final br.com.bit.ideias.reflection.type.SearchType FIELD_CLASS_EQ;
+  public static final br.com.bit.ideias.reflection.type.SearchType METHOD_RETURN_CLASS_EQ;
+  public static final br.com.bit.ideias.reflection.type.SearchType WITH_PARAMS;
+  public static br.com.bit.ideias.reflection.type.SearchType[] values();
+  public static br.com.bit.ideias.reflection.type.SearchType valueOf(java.lang.String);
+  public abstract boolean matches(java.lang.reflect.Member, br.com.bit.ideias.reflection.criteria.expression.Expression);
+  br.com.bit.ideias.reflection.type.SearchType(java.lang.String, int, br.com.bit.ideias.reflection.type.SearchType$1);
+  static java.lang.Class access$100(java.lang.String);
+  static {};
+}
+Compiled from "SearchType.java"
+final class br.com.bit.ideias.reflection.type.SearchType$1 extends br.com.bit.ideias.reflection.type.SearchType {
+  br.com.bit.ideias.reflection.type.SearchType$1(java.lang.String, int);
+  public boolean matches(java.lang.reflect.Member, br.com.bit.ideias.reflection.criteria.expression.Expression);
+}
+Compiled from "SearchType.java"
+final class br.com.bit.ideias.reflection.type.SearchType$10 extends br.com.bit.ideias.reflection.type.SearchType {
+  br.com.bit.ideias.reflection.type.SearchType$10(java.lang.String, int);
+  public boolean matches(java.lang.reflect.Member, br.com.bit.ideias.reflection.criteria.expression.Expression);
+}
+Compiled from "SearchType.java"
+final class br.com.bit.ideias.reflection.type.SearchType$11 extends br.com.bit.ideias.reflection.type.SearchType {
+  br.com.bit.ideias.reflection.type.SearchType$11(java.lang.String, int);
+  public boolean matches(java.lang.reflect.Member, br.com.bit.ideias.reflection.criteria.expression.Expression);
+}
+Compiled from "SearchType.java"
+final class br.com.bit.ideias.reflection.type.SearchType$12 extends br.com.bit.ideias.reflection.type.SearchType {
+  br.com.bit.ideias.reflection.type.SearchType$12(java.lang.String, int);
+  public boolean matches(java.lang.reflect.Member, br.com.bit.ideias.reflection.criteria.expression.Expression);
+}
+Compiled from "SearchType.java"
+final class br.com.bit.ideias.reflection.type.SearchType$13 extends br.com.bit.ideias.reflection.type.SearchType {
+  br.com.bit.ideias.reflection.type.SearchType$13(java.lang.String, int);
+  public boolean matches(java.lang.reflect.Member, br.com.bit.ideias.reflection.criteria.expression.Expression);
+}
+Compiled from "SearchType.java"
+final class br.com.bit.ideias.reflection.type.SearchType$2 extends br.com.bit.ideias.reflection.type.SearchType {
+  br.com.bit.ideias.reflection.type.SearchType$2(java.lang.String, int);
+  public boolean matches(java.lang.reflect.Member, br.com.bit.ideias.reflection.criteria.expression.Expression);
+}
+Compiled from "SearchType.java"
+final class br.com.bit.ideias.reflection.type.SearchType$3 extends br.com.bit.ideias.reflection.type.SearchType {
+  br.com.bit.ideias.reflection.type.SearchType$3(java.lang.String, int);
+  public boolean matches(java.lang.reflect.Member, br.com.bit.ideias.reflection.criteria.expression.Expression);
+}
+Compiled from "SearchType.java"
+final class br.com.bit.ideias.reflection.type.SearchType$4 extends br.com.bit.ideias.reflection.type.SearchType {
+  br.com.bit.ideias.reflection.type.SearchType$4(java.lang.String, int);
+  public boolean matches(java.lang.reflect.Member, br.com.bit.ideias.reflection.criteria.expression.Expression);
+}
+Compiled from "SearchType.java"
+final class br.com.bit.ideias.reflection.type.SearchType$5 extends br.com.bit.ideias.reflection.type.SearchType {
+  br.com.bit.ideias.reflection.type.SearchType$5(java.lang.String, int);
+  public boolean matches(java.lang.reflect.Member, br.com.bit.ideias.reflection.criteria.expression.Expression);
+}
+Compiled from "SearchType.java"
+final class br.com.bit.ideias.reflection.type.SearchType$6 extends br.com.bit.ideias.reflection.type.SearchType {
+  br.com.bit.ideias.reflection.type.SearchType$6(java.lang.String, int);
+  public boolean matches(java.lang.reflect.Member, br.com.bit.ideias.reflection.criteria.expression.Expression);
+}
+Compiled from "SearchType.java"
+final class br.com.bit.ideias.reflection.type.SearchType$7 extends br.com.bit.ideias.reflection.type.SearchType {
+  br.com.bit.ideias.reflection.type.SearchType$7(java.lang.String, int);
+  public boolean matches(java.lang.reflect.Member, br.com.bit.ideias.reflection.criteria.expression.Expression);
+}
+Compiled from "SearchType.java"
+final class br.com.bit.ideias.reflection.type.SearchType$8 extends br.com.bit.ideias.reflection.type.SearchType {
+  br.com.bit.ideias.reflection.type.SearchType$8(java.lang.String, int);
+  public boolean matches(java.lang.reflect.Member, br.com.bit.ideias.reflection.criteria.expression.Expression);
+}
+Compiled from "SearchType.java"
+final class br.com.bit.ideias.reflection.type.SearchType$9 extends br.com.bit.ideias.reflection.type.SearchType {
+  br.com.bit.ideias.reflection.type.SearchType$9(java.lang.String, int);
+  public boolean matches(java.lang.reflect.Member, br.com.bit.ideias.reflection.criteria.expression.Expression);
+}
+Compiled from "TargetType.java"
+public abstract class br.com.bit.ideias.reflection.type.TargetType extends java.lang.Enum<br.com.bit.ideias.reflection.type.TargetType> {
+  public static final br.com.bit.ideias.reflection.type.TargetType FIELD;
+  public static final br.com.bit.ideias.reflection.type.TargetType METHOD;
+  public static final br.com.bit.ideias.reflection.type.TargetType CONSTRUCTOR;
+  public static final br.com.bit.ideias.reflection.type.TargetType ANY;
+  protected br.com.bit.ideias.reflection.cache.Cache cache;
+  public static br.com.bit.ideias.reflection.type.TargetType[] values();
+  public static br.com.bit.ideias.reflection.type.TargetType valueOf(java.lang.String);
+  public java.util.List<java.lang.reflect.Member> obtainMembersInClass(java.lang.Class<?>);
+  public abstract boolean isValidMember(java.lang.reflect.Member);
+  protected abstract java.lang.reflect.Member[] getMembers(java.lang.Class<?>);
+  protected java.util.Map<java.lang.Class<?>, java.lang.reflect.Member[]> getSubCache(java.lang.Class<?>, br.com.bit.ideias.reflection.type.TargetType);
+  br.com.bit.ideias.reflection.type.TargetType(java.lang.String, int, br.com.bit.ideias.reflection.type.TargetType$1);
+  static {};
+}
+Compiled from "TargetType.java"
+final class br.com.bit.ideias.reflection.type.TargetType$1 extends br.com.bit.ideias.reflection.type.TargetType {
+  br.com.bit.ideias.reflection.type.TargetType$1(java.lang.String, int);
+  protected java.lang.reflect.Member[] getMembers(java.lang.Class<?>);
+  public boolean isValidMember(java.lang.reflect.Member);
+}
+Compiled from "TargetType.java"
+final class br.com.bit.ideias.reflection.type.TargetType$2 extends br.com.bit.ideias.reflection.type.TargetType {
+  br.com.bit.ideias.reflection.type.TargetType$2(java.lang.String, int);
+  protected java.lang.reflect.Member[] getMembers(java.lang.Class<?>);
+  public boolean isValidMember(java.lang.reflect.Member);
+}
+Compiled from "TargetType.java"
+final class br.com.bit.ideias.reflection.type.TargetType$3 extends br.com.bit.ideias.reflection.type.TargetType {
+  br.com.bit.ideias.reflection.type.TargetType$3(java.lang.String, int);
+  protected java.lang.reflect.Member[] getMembers(java.lang.Class<?>);
+  public boolean isValidMember(java.lang.reflect.Member);
+}
+Compiled from "TargetType.java"
+final class br.com.bit.ideias.reflection.type.TargetType$4 extends br.com.bit.ideias.reflection.type.TargetType {
+  br.com.bit.ideias.reflection.type.TargetType$4(java.lang.String, int);
+  protected java.lang.reflect.Member[] getMembers(java.lang.Class<?>);
+  public boolean isValidMember(java.lang.reflect.Member);
+}
+Compiled from "TreatmentExceptionType.java"
+public final class br.com.bit.ideias.reflection.type.TreatmentExceptionType extends java.lang.Enum<br.com.bit.ideias.reflection.type.TreatmentExceptionType> {
+  public static final br.com.bit.ideias.reflection.type.TreatmentExceptionType CONTINUE_EXCEPTION;
+  public static final br.com.bit.ideias.reflection.type.TreatmentExceptionType STOP_EXCEPTION;
+  public static br.com.bit.ideias.reflection.type.TreatmentExceptionType[] values();
+  public static br.com.bit.ideias.reflection.type.TreatmentExceptionType valueOf(java.lang.String);
+  static {};
+}
+Compiled from "CollectionUtil.java"
+public class br.com.bit.ideias.reflection.util.CollectionUtil {
+  public br.com.bit.ideias.reflection.util.CollectionUtil();
+  public static boolean isEmpty(java.util.Map<?, ?>);
+  public static boolean isEmpty(java.util.Collection<?>);
+  public static boolean isEmpty(java.lang.Object[]);
+}
+Compiled from "CollectionUtilTest.java"
+public class br.com.bit.ideias.reflection.util.CollectionUtilTest {
+  public br.com.bit.ideias.reflection.util.CollectionUtilTest();
+  public void isEmptyShoudReturnFalseIfNotNullAndHasItems();
+  public void isEmptyShoudReturnTrueIfNullOrEmpty();
+}
+Compiled from "ReflectionHelper.java"
+public class br.com.bit.ideias.reflection.util.ReflectionHelper {
+  public static br.com.bit.ideias.reflection.util.ReflectionHelper getInstance();
+  public boolean isSameParameters(java.lang.Class<?>[], java.lang.Class<?>[]);
+  public java.util.List<java.lang.reflect.Member> getMembers(java.lang.Class<?>, br.com.bit.ideias.reflection.type.TargetType);
+  static {};
+}

@@ -1,0 +1,590 @@
+Compiled from "Main.java"
+public class ori.Main {
+  public ori.Main();
+  public static void main(java.lang.String[]);
+}
+Compiled from "AbstractActor.java"
+public abstract class ori.mas.actors.AbstractActor implements ori.mas.core.Actor {
+  public ori.mas.actors.AbstractActor();
+  public ori.mas.actors.AbstractActor(ori.mas.core.Body);
+  public void setBody(ori.mas.core.Body);
+  protected ori.mas.core.Body body();
+  public abstract ori.mas.core.Influence act();
+  public abstract ori.mas.actors.AbstractActor clone();
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+  public ori.mas.core.Actor clone();
+}
+Compiled from "Actors.java"
+public class ori.mas.actors.Actors {
+  public static final ori.ogapi.util.Filter<ori.mas.core.Actor> FILTER_MOVEMENT;
+  public static final ori.ogapi.util.Filter<ori.mas.core.Actor> FILTER_EAT;
+  public static final java.util.Comparator<ori.mas.core.Actor> COMPARATOR_MOVEMENT;
+  public static final ori.ogapi.util.Selector<ori.mas.core.Actor> SELECTOR_MOVEMENT;
+  public static ori.mas.core.Actor selectActor(ori.ogapi.util.Filter<ori.mas.core.Actor>, java.lang.Iterable<ori.mas.core.Actor>);
+  public static ori.mas.actors.MovementActor selectMovementActor(java.lang.Iterable<ori.mas.core.Actor>);
+  public static ori.mas.actors.EatActor selectEatActor(java.lang.Iterable<ori.mas.core.Actor>);
+  public static ori.mas.actors.MovementActor selectMaxSpeedMovementActor(java.lang.Iterable<ori.mas.core.Actor>);
+  static {};
+}
+Compiled from "Actors.java"
+final class ori.mas.actors.Actors$1 implements ori.ogapi.util.Filter<ori.mas.core.Actor> {
+  ori.mas.actors.Actors$1();
+  public boolean filter(ori.mas.core.Actor);
+  public boolean filter(java.lang.Object);
+}
+Compiled from "Actors.java"
+final class ori.mas.actors.Actors$2 implements ori.ogapi.util.Filter<ori.mas.core.Actor> {
+  ori.mas.actors.Actors$2();
+  public boolean filter(ori.mas.core.Actor);
+  public boolean filter(java.lang.Object);
+}
+Compiled from "Actors.java"
+final class ori.mas.actors.Actors$3 implements java.util.Comparator<ori.mas.core.Actor> {
+  ori.mas.actors.Actors$3();
+  public int compare(ori.mas.core.Actor, ori.mas.core.Actor);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "BodyTargetActor.java"
+public abstract class ori.mas.actors.BodyTargetActor extends ori.mas.actors.AbstractActor {
+  public ori.mas.actors.BodyTargetActor();
+  public ori.mas.actors.BodyTargetActor(ori.mas.core.Body);
+  public ori.mas.actors.BodyTargetActor(ori.mas.core.Body, ori.mas.core.Body);
+  public void setTarget(ori.mas.core.Body);
+  public ori.mas.core.Body target();
+  public abstract ori.mas.core.Influence act();
+}
+Compiled from "ChangeBodyIntegerPropertyActor.java"
+public class ori.mas.actors.ChangeBodyIntegerPropertyActor extends ori.mas.actors.BodyTargetActor {
+  public ori.mas.actors.ChangeBodyIntegerPropertyActor(java.lang.String);
+  public ori.mas.actors.ChangeBodyIntegerPropertyActor(ori.mas.core.Body, java.lang.String);
+  public ori.mas.actors.ChangeBodyIntegerPropertyActor(ori.mas.core.Body, java.lang.String, int, int);
+  public java.lang.Integer value();
+  public void setValue(int);
+  public void setMinValue(int);
+  public int minValue();
+  public void setMaxValue(int);
+  public int maxValue();
+  public java.lang.String property();
+  public ori.mas.influences.ChangeBodyIntegerPropertyInfluence act();
+  public ori.mas.actors.ChangeBodyIntegerPropertyActor clone();
+  public ori.mas.core.Influence act();
+  public ori.mas.actors.AbstractActor clone();
+  public ori.mas.core.Actor clone();
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "ChangeBodyPropertyActor.java"
+public class ori.mas.actors.ChangeBodyPropertyActor extends ori.mas.actors.BodyTargetActor {
+  public ori.mas.actors.ChangeBodyPropertyActor();
+  public ori.mas.actors.ChangeBodyPropertyActor(ori.mas.core.Body);
+  public ori.mas.actors.ChangeBodyPropertyActor(ori.mas.core.Body, java.lang.String);
+  public ori.mas.actors.ChangeBodyPropertyActor(ori.mas.core.Body, java.lang.String, java.lang.Object);
+  public java.lang.String property();
+  public java.lang.Object value();
+  public void setValue(java.lang.Object);
+  public ori.mas.influences.ChangeBodyPropertyInfluence act();
+  public ori.mas.actors.ChangeBodyPropertyActor clone();
+  public ori.mas.core.Influence act();
+  public ori.mas.actors.AbstractActor clone();
+  public ori.mas.core.Actor clone();
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "EatActor.java"
+public class ori.mas.actors.EatActor extends ori.mas.actors.AbstractActor {
+  public ori.mas.actors.EatActor(ori.mas.core.Body, int);
+  public ori.mas.influences.MultipleInfluence act();
+  public void setTarget(ori.mas.core.Body);
+  public ori.mas.core.Body target();
+  public ori.mas.actors.EatActor clone();
+  public ori.mas.actors.AbstractActor clone();
+  public ori.mas.core.Influence act();
+  public ori.mas.core.Actor clone();
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "HitActor.java"
+public class ori.mas.actors.HitActor extends ori.mas.actors.ChangeBodyIntegerPropertyActor {
+  public ori.mas.actors.HitActor(ori.mas.core.Body);
+  public ori.mas.actors.HitActor(ori.mas.core.Body, int);
+  public ori.mas.actors.HitActor(ori.mas.core.Body, int, int);
+}
+Compiled from "MovementActor.java"
+public class ori.mas.actors.MovementActor extends ori.mas.actors.AbstractActor {
+  public ori.mas.actors.MovementActor();
+  public ori.mas.actors.MovementActor(ori.mas.core.Body);
+  public ori.mas.actors.MovementActor(ori.mas.core.Body, int);
+  public void setMaxSpeed(int);
+  public int maxSpeed();
+  public void setSpeed(int);
+  public void setAngle(int);
+  public void setHead(ori.mas.core.Body);
+  public ori.mas.influences.MovementInfluence act();
+  public ori.mas.actors.MovementActor clone();
+  public ori.mas.actors.AbstractActor clone();
+  public ori.mas.core.Influence act();
+  public ori.mas.core.Actor clone();
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "AbstractMind.java"
+public abstract class ori.mas.core.AbstractMind implements ori.mas.core.Mind {
+  public ori.mas.core.AbstractMind();
+  public ori.mas.core.AbstractMind(ori.mas.core.Agent);
+  public abstract void percept(ori.mas.core.Percept);
+  public void percept(java.lang.Iterable<ori.mas.core.Percept>);
+  public abstract ori.mas.core.Actor nextActor();
+  public ori.mas.core.Agent agent();
+  public void setAgent(ori.mas.core.Agent);
+  public abstract ori.mas.core.AbstractMind clone();
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+  public ori.mas.core.Mind clone();
+}
+Compiled from "Actor.java"
+public interface ori.mas.core.Actor {
+  public abstract void setBody(ori.mas.core.Body);
+  public abstract ori.mas.core.Influence act();
+  public abstract ori.mas.core.Actor clone();
+}
+Compiled from "AdaptedScene.java"
+public class ori.mas.core.AdaptedScene implements ori.mas.core.Scene {
+  public ori.mas.core.AdaptedScene(ori.ogapi.geometry.Surface<ori.mas.core.Body>);
+  public boolean add(ori.mas.core.Body);
+  public boolean remove(ori.mas.core.Body);
+  public boolean contains(ori.mas.core.Body);
+  public ori.mas.core.Scene getIn(ori.ogapi.geometry.Shape);
+  public ori.mas.core.Scene getPartlyIn(ori.ogapi.geometry.Shape);
+  public ori.mas.core.Scene getAt(ori.ogapi.geometry.Point);
+  public ori.ogapi.util.Iterator<ori.mas.core.Body> iterator();
+  public ori.ogapi.geometry.Surface getAt(ori.ogapi.geometry.Point);
+  public ori.ogapi.geometry.Surface getPartlyIn(ori.ogapi.geometry.Shape);
+  public ori.ogapi.geometry.Surface getIn(ori.ogapi.geometry.Shape);
+  public boolean contains(ori.ogapi.geometry.Shape);
+  public boolean remove(ori.ogapi.geometry.Shape);
+  public boolean add(ori.ogapi.geometry.Shape);
+  public java.util.Iterator iterator();
+}
+Compiled from "Agent.java"
+public class ori.mas.core.Agent implements ori.ogapi.report.Reportable {
+  public ori.mas.core.Agent();
+  public ori.mas.core.Agent(ori.mas.core.Body);
+  public ori.mas.core.Agent(ori.mas.core.Mind);
+  public ori.mas.core.Agent(ori.mas.core.Mind, ori.mas.core.Body);
+  public boolean hasMind();
+  public ori.mas.core.Mind mind();
+  public void setMind(ori.mas.core.Mind);
+  public boolean hasBody();
+  public ori.mas.core.Body body();
+  public void setBody(ori.mas.core.Body);
+  public ori.mas.core.Influence tick(ori.mas.core.World);
+  public void sense(ori.mas.core.World);
+  public void think();
+  public ori.mas.core.Influence act();
+  public void reportIn(ori.ogapi.report.Reporter);
+  public ori.mas.core.Agent clone();
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "Body.java"
+public class ori.mas.core.Body extends ori.ogapi.geometry.AdaptedShape implements ori.ogapi.report.Reportable {
+  public static final ori.ogapi.geometry.Shape DEFAULT_SHAPE;
+  public ori.mas.core.Body();
+  public ori.mas.core.Body(ori.ogapi.geometry.Shape);
+  public ori.mas.core.Body(ori.mas.core.Agent, ori.ogapi.geometry.Shape);
+  public ori.mas.core.Influence act();
+  public void prepareActor(ori.mas.core.Actor);
+  public java.util.List<ori.mas.core.Percept> sense(ori.mas.core.World);
+  public ori.mas.core.Agent agent();
+  public void setAgent(ori.mas.core.Agent);
+  public boolean hasActor();
+  public java.util.LinkedList<ori.mas.core.Actor> actors();
+  public boolean hasSensor();
+  public void addActor(ori.mas.core.Actor);
+  public void addSensor(ori.mas.core.Sensor);
+  public java.util.Map<java.lang.String, java.lang.Object> properties();
+  public void setProperties(java.util.Map<java.lang.String, java.lang.Object>);
+  public java.lang.Object get(java.lang.String);
+  public java.lang.Object set(java.lang.String, java.lang.Object);
+  public boolean has(java.lang.String);
+  public void reportIn(ori.ogapi.report.Reporter);
+  public ori.mas.core.Body clone();
+  public ori.ogapi.geometry.AdaptedShape clone();
+  public ori.ogapi.geometry.Shape clone();
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+  static {};
+}
+Compiled from "DefaultHeart.java"
+public class ori.mas.core.DefaultHeart implements ori.mas.core.Heart {
+  public ori.mas.core.DefaultHeart();
+  public ori.mas.core.DefaultHeart(ori.mas.core.World);
+  public void setWorld(ori.mas.core.World);
+  public java.util.List<ori.mas.core.Influence> pulse();
+  public void submitInfluence(ori.mas.core.Influence);
+  protected void submitPrioritaryInfluence(ori.mas.core.Influence);
+  protected java.util.LinkedList<ori.mas.core.Influence> influences();
+  protected ori.mas.core.Influence makeInfluence(ori.mas.core.Influence);
+  protected ori.mas.core.Influence makeInfluence(ori.mas.influences.PhysicalInfluence);
+  protected ori.mas.core.Influence makeInfluence(ori.mas.influences.MovementInfluence);
+  protected ori.mas.core.Influence makeInfluence(ori.mas.influences.CollideInfluence);
+  protected ori.mas.core.Influence makeInfluence(ori.mas.influences.ChangeBodyPropertyInfluence);
+  protected ori.mas.core.Influence makeInfluence(ori.mas.influences.DeathInfluence);
+  protected ori.mas.core.Influence makeInfluence(ori.mas.influences.BirthInfluence);
+  protected void callbackChangeBodyProperty(ori.mas.influences.ChangeBodyPropertyInfluence);
+  protected void callbackMove(ori.mas.influences.MovementInfluence);
+  protected void onPropertyMinReached(ori.mas.core.Body, java.lang.String);
+  protected void onPropertyMaxReached(ori.mas.core.Body, java.lang.String);
+  protected boolean mayCollide(ori.mas.core.Body, ori.mas.core.Body);
+  protected boolean isValid(ori.mas.core.Agent);
+}
+Compiled from "Heart.java"
+public interface ori.mas.core.Heart {
+  public abstract void setWorld(ori.mas.core.World);
+  public abstract void submitInfluence(ori.mas.core.Influence);
+  public abstract java.util.List<ori.mas.core.Influence> pulse();
+}
+Compiled from "Influence.java"
+public interface ori.mas.core.Influence {
+  public abstract ori.mas.core.Actor sourceActor();
+  public abstract void setSourceActor(ori.mas.core.Actor);
+}
+Compiled from "Mind.java"
+public interface ori.mas.core.Mind {
+  public abstract void percept(ori.mas.core.Percept);
+  public abstract void percept(java.lang.Iterable<ori.mas.core.Percept>);
+  public abstract ori.mas.core.Actor nextActor();
+  public abstract ori.mas.core.Agent agent();
+  public abstract void setAgent(ori.mas.core.Agent);
+  public abstract ori.mas.core.Mind clone();
+}
+Compiled from "Percept.java"
+public interface ori.mas.core.Percept {
+  public abstract ori.mas.core.Percept$TYPE type();
+  public abstract ori.mas.core.Sensor source();
+  public abstract void setSource(ori.mas.core.Sensor);
+}
+Compiled from "Percept.java"
+public final class ori.mas.core.Percept$TYPE extends java.lang.Enum<ori.mas.core.Percept$TYPE> {
+  public static final ori.mas.core.Percept$TYPE UNDEFINED;
+  public static final ori.mas.core.Percept$TYPE POSITIVE;
+  public static final ori.mas.core.Percept$TYPE NEGATIVE;
+  public static ori.mas.core.Percept$TYPE[] values();
+  public static ori.mas.core.Percept$TYPE valueOf(java.lang.String);
+  static {};
+}
+Compiled from "Properties.java"
+public class ori.mas.core.Properties {
+  public static final java.lang.String SUFFIX_MIN;
+  public static final java.lang.String SUFFIX_MAX;
+  public static final java.lang.String SOUL;
+  public static final java.lang.String HEALTH;
+  public static final java.lang.String HEALTH_MIN;
+  public static final java.lang.String HEALTH_MAX;
+  public static final java.lang.String FEED;
+  public static final java.lang.String FEED_MIN;
+  public static final java.lang.String FEED_MAX;
+  public static final java.lang.String FEED_TICK;
+  public static final java.lang.String TARGET;
+  public static final ori.mas.core.Body getTarget(ori.mas.core.Body);
+  public static final int getHealth(ori.mas.core.Body);
+  public static final int getHealthMax(ori.mas.core.Body);
+  public static final int getFeed(ori.mas.core.Body);
+  public static final int getFeedMax(ori.mas.core.Body);
+  public static final float healthRatio(ori.mas.core.Body);
+  public static final float feedRatio(ori.mas.core.Body);
+}
+Compiled from "Scene.java"
+public interface ori.mas.core.Scene extends ori.ogapi.geometry.Surface<ori.mas.core.Body> {
+  public abstract boolean add(ori.mas.core.Body);
+  public abstract boolean remove(ori.mas.core.Body);
+  public abstract boolean contains(ori.mas.core.Body);
+  public abstract ori.mas.core.Scene getIn(ori.ogapi.geometry.Shape);
+  public abstract ori.mas.core.Scene getPartlyIn(ori.ogapi.geometry.Shape);
+  public abstract ori.mas.core.Scene getAt(ori.ogapi.geometry.Point);
+  public abstract ori.ogapi.util.Iterator<ori.mas.core.Body> iterator();
+  public ori.ogapi.geometry.Surface getAt(ori.ogapi.geometry.Point);
+  public ori.ogapi.geometry.Surface getPartlyIn(ori.ogapi.geometry.Shape);
+  public ori.ogapi.geometry.Surface getIn(ori.ogapi.geometry.Shape);
+  public boolean contains(ori.ogapi.geometry.Shape);
+  public boolean remove(ori.ogapi.geometry.Shape);
+  public boolean add(ori.ogapi.geometry.Shape);
+  public java.util.Iterator iterator();
+}
+Compiled from "Scenes.java"
+public class ori.mas.core.Scenes {
+}
+Compiled from "Sensor.java"
+public interface ori.mas.core.Sensor {
+  public abstract ori.mas.core.Percept sense(ori.mas.core.World);
+  public abstract void setBody(ori.mas.core.Body);
+  public abstract ori.mas.core.Sensor clone();
+}
+Compiled from "World.java"
+public class ori.mas.core.World implements java.lang.Iterable<ori.mas.core.Agent>, ori.ogapi.report.Reportable {
+  public ori.mas.core.World(ori.mas.core.Heart, ori.mas.core.Scene);
+  public void setHeart(ori.mas.core.Heart);
+  public void setScene(ori.mas.core.Scene);
+  public void tick();
+  public ori.mas.core.Scene scene();
+  public ori.ogapi.util.Iterator<ori.mas.core.Agent> iterator();
+  public boolean remove(ori.mas.core.Agent);
+  public boolean add(ori.mas.core.Agent);
+  public void reportIn(ori.ogapi.report.Reporter);
+  public java.util.Iterator iterator();
+}
+Compiled from "World.java"
+public class ori.mas.core.World$AgentIterator extends ori.ogapi.util.AbstractIterator<ori.mas.core.Agent> {
+  final ori.mas.core.World this$0;
+  public ori.mas.core.World$AgentIterator(ori.ogapi.util.Iterator<ori.mas.core.Body>);
+  public boolean hasNext();
+  public ori.mas.core.Agent next() throws java.util.NoSuchElementException;
+  public void remove() throws java.lang.UnsupportedOperationException, java.util.NoSuchElementException;
+  public java.lang.Object next() throws java.util.NoSuchElementException;
+}
+Compiled from "State.java"
+public interface ori.mas.fsm.State extends java.lang.Iterable<ori.mas.fsm.Transition> {
+  public abstract ori.mas.core.Actor actor(ori.mas.core.Agent, ori.mas.core.Scene);
+  public abstract java.util.Iterator<ori.mas.fsm.Transition> iterator();
+}
+Compiled from "StateMachine.java"
+public class ori.mas.fsm.StateMachine {
+  public ori.mas.fsm.StateMachine();
+  public ori.mas.fsm.StateMachine(ori.mas.fsm.State);
+  public void setCurrent(ori.mas.fsm.State);
+  public ori.mas.fsm.State current();
+  public ori.mas.core.Actor nextActor(ori.mas.core.Agent, ori.mas.core.Scene);
+}
+Compiled from "StateMachineMind.java"
+public class ori.mas.fsm.StateMachineMind extends ori.mas.core.AbstractMind {
+  public ori.mas.fsm.StateMachineMind();
+  public ori.mas.fsm.StateMachineMind(ori.mas.fsm.State);
+  public ori.mas.fsm.StateMachineMind(ori.mas.core.Agent);
+  public ori.mas.fsm.StateMachineMind(ori.mas.core.Agent, ori.mas.fsm.State);
+  public void percept(ori.mas.core.Percept);
+  public ori.mas.core.Actor nextActor();
+  public ori.mas.fsm.StateMachineMind clone();
+  public ori.mas.fsm.State current();
+  public ori.mas.core.AbstractMind clone();
+  public ori.mas.core.Mind clone();
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "SuperState.java"
+public class ori.mas.fsm.SuperState extends ori.mas.fsm.StateMachine implements ori.mas.fsm.State {
+  public ori.mas.fsm.SuperState();
+  public ori.mas.fsm.SuperState(ori.mas.fsm.State);
+  public ori.mas.core.Actor actor(ori.mas.core.Agent, ori.mas.core.Scene);
+  public java.util.Iterator<ori.mas.fsm.Transition> iterator();
+  public void addTransition(ori.mas.fsm.Transition);
+  public void removeTransition(ori.mas.fsm.Transition);
+}
+Compiled from "Transition.java"
+public abstract class ori.mas.fsm.Transition {
+  public ori.mas.fsm.Transition(ori.mas.fsm.State);
+  public abstract boolean isValid(ori.mas.core.Agent, ori.mas.core.Scene);
+  public ori.mas.fsm.State state();
+}
+Compiled from "AbstractState.java"
+public abstract class ori.mas.fsm.states.AbstractState implements ori.mas.fsm.State {
+  public static final java.util.Random _random;
+  public ori.mas.fsm.states.AbstractState();
+  public ori.mas.fsm.states.AbstractState(java.util.List<ori.mas.fsm.Transition>);
+  public abstract ori.mas.core.Actor actor(ori.mas.core.Agent, ori.mas.core.Scene);
+  public java.util.Iterator<ori.mas.fsm.Transition> iterator();
+  public void addTransition(ori.mas.fsm.Transition);
+  public void removeTransition(ori.mas.fsm.Transition);
+  public static int random(int, int);
+  static {};
+}
+Compiled from "EatState.java"
+public class ori.mas.fsm.states.EatState extends ori.mas.fsm.states.AbstractState {
+  public ori.mas.fsm.states.EatState();
+  public ori.mas.fsm.states.EatState(java.util.List<ori.mas.fsm.Transition>);
+  public ori.mas.core.Actor actor(ori.mas.core.Agent, ori.mas.core.Scene);
+}
+Compiled from "FollowState.java"
+public class ori.mas.fsm.states.FollowState extends ori.mas.fsm.states.AbstractState {
+  public ori.mas.fsm.states.FollowState();
+  public ori.mas.fsm.states.FollowState(java.util.List<ori.mas.fsm.Transition>);
+  public ori.mas.core.Actor actor(ori.mas.core.Agent, ori.mas.core.Scene);
+}
+Compiled from "PatrolState.java"
+public class ori.mas.fsm.states.PatrolState extends ori.mas.fsm.states.AbstractState {
+  public ori.mas.fsm.states.PatrolState();
+  public ori.mas.fsm.states.PatrolState(java.util.List<ori.mas.fsm.Transition>);
+  public ori.mas.core.Actor actor(ori.mas.core.Agent, ori.mas.core.Scene);
+}
+Compiled from "PredateState.java"
+public class ori.mas.fsm.states.PredateState extends ori.mas.fsm.SuperState {
+  public ori.mas.fsm.states.PredateState();
+  public ori.mas.fsm.states.PredateState(ori.ogapi.util.Filter<ori.mas.core.Body>);
+  public void preprocess();
+  static ori.ogapi.util.Filter access$000(ori.mas.fsm.states.PredateState);
+}
+Compiled from "PredateState.java"
+class ori.mas.fsm.states.PredateState$1 implements ori.ogapi.util.Filter<ori.mas.core.Body> {
+  final ori.mas.fsm.states.PredateState this$0;
+  ori.mas.fsm.states.PredateState$1(ori.mas.fsm.states.PredateState);
+  public boolean filter(ori.mas.core.Body);
+  public boolean filter(java.lang.Object);
+}
+Compiled from "PredateState.java"
+class ori.mas.fsm.states.PredateState$2 extends ori.mas.fsm.Transition {
+  final ori.mas.fsm.states.PredateState this$0;
+  ori.mas.fsm.states.PredateState$2(ori.mas.fsm.states.PredateState, ori.mas.fsm.State);
+  public boolean isValid(ori.mas.core.Agent, ori.mas.core.Scene);
+}
+Compiled from "PredateState.java"
+class ori.mas.fsm.states.PredateState$3 extends ori.mas.fsm.Transition {
+  final ori.mas.fsm.states.PredateState this$0;
+  ori.mas.fsm.states.PredateState$3(ori.mas.fsm.states.PredateState, ori.mas.fsm.State);
+  public boolean isValid(ori.mas.core.Agent, ori.mas.core.Scene);
+}
+Compiled from "PredateState.java"
+class ori.mas.fsm.states.PredateState$4 extends ori.mas.fsm.Transition {
+  final ori.mas.fsm.states.PredateState this$0;
+  ori.mas.fsm.states.PredateState$4(ori.mas.fsm.states.PredateState, ori.mas.fsm.State);
+  public boolean isValid(ori.mas.core.Agent, ori.mas.core.Scene);
+}
+Compiled from "PredateState.java"
+class ori.mas.fsm.states.PredateState$5 extends ori.mas.fsm.Transition {
+  final ori.mas.fsm.states.PredateState this$0;
+  ori.mas.fsm.states.PredateState$5(ori.mas.fsm.states.PredateState, ori.mas.fsm.State);
+  public boolean isValid(ori.mas.core.Agent, ori.mas.core.Scene);
+}
+Compiled from "PredateState.java"
+class ori.mas.fsm.states.PredateState$6 extends ori.mas.fsm.Transition {
+  final ori.mas.fsm.states.PredateState this$0;
+  ori.mas.fsm.states.PredateState$6(ori.mas.fsm.states.PredateState, ori.mas.fsm.State);
+  public boolean isValid(ori.mas.core.Agent, ori.mas.core.Scene);
+}
+Compiled from "AbstractInfluence.java"
+public abstract class ori.mas.influences.AbstractInfluence implements ori.mas.core.Influence {
+  public ori.mas.influences.AbstractInfluence();
+  public ori.mas.influences.AbstractInfluence(ori.mas.core.Actor);
+  public ori.mas.core.Actor sourceActor();
+  public void setSourceActor(ori.mas.core.Actor);
+}
+Compiled from "BirthInfluence.java"
+public class ori.mas.influences.BirthInfluence extends ori.mas.influences.AbstractInfluence {
+  public ori.mas.influences.BirthInfluence(ori.mas.core.Agent);
+  public ori.mas.influences.BirthInfluence(ori.mas.core.Actor, ori.mas.core.Agent);
+  public ori.mas.core.Agent agent();
+}
+Compiled from "ChangeBodyIntegerPropertyInfluence.java"
+public class ori.mas.influences.ChangeBodyIntegerPropertyInfluence extends ori.mas.influences.ChangeBodyPropertyInfluence {
+  public static final java.util.Comparator<java.lang.Integer> INTEGER_COMPARATOR;
+  public ori.mas.influences.ChangeBodyIntegerPropertyInfluence(ori.mas.core.Actor, ori.mas.core.Body, java.lang.String, java.lang.Integer);
+  static {};
+}
+Compiled from "ChangeBodyIntegerPropertyInfluence.java"
+final class ori.mas.influences.ChangeBodyIntegerPropertyInfluence$1 implements java.util.Comparator<java.lang.Integer> {
+  ori.mas.influences.ChangeBodyIntegerPropertyInfluence$1();
+  public int compare(java.lang.Integer, java.lang.Integer);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "ChangeBodyPropertyInfluence.java"
+public class ori.mas.influences.ChangeBodyPropertyInfluence extends ori.mas.influences.PhysicalInfluence {
+  public ori.mas.influences.ChangeBodyPropertyInfluence(java.lang.String, java.lang.Object);
+  public ori.mas.influences.ChangeBodyPropertyInfluence(ori.mas.core.Actor, java.lang.String, java.lang.Object);
+  public ori.mas.influences.ChangeBodyPropertyInfluence(ori.mas.core.Actor, ori.mas.core.Body, java.lang.String, java.lang.Object);
+  public ori.mas.influences.ChangeBodyPropertyInfluence(ori.mas.core.Actor, ori.mas.core.Body, java.lang.String, java.lang.Object, ori.ogapi.util.OperatorPlus);
+  public ori.mas.influences.ChangeBodyPropertyInfluence(ori.mas.core.Actor, ori.mas.core.Body, java.lang.String, java.lang.Object, java.util.Comparator);
+  public ori.mas.influences.ChangeBodyPropertyInfluence(ori.mas.core.Actor, ori.mas.core.Body, java.lang.String, java.lang.Object, ori.ogapi.util.OperatorPlus, java.util.Comparator);
+  public java.lang.String property();
+  public java.lang.Object value();
+  public void setValue(java.lang.Object);
+  public ori.ogapi.util.OperatorPlus operator();
+  public java.util.Comparator comparator();
+}
+Compiled from "CollideInfluence.java"
+public class ori.mas.influences.CollideInfluence extends ori.mas.influences.PhysicalInfluence {
+  public ori.mas.influences.CollideInfluence(ori.mas.core.Body, ori.mas.core.Body, ori.ogapi.geometry.Point);
+  public ori.ogapi.geometry.Point collidingPoint();
+  public ori.mas.core.Body collidingBody();
+}
+Compiled from "DeathInfluence.java"
+public class ori.mas.influences.DeathInfluence extends ori.mas.influences.PhysicalInfluence {
+  public ori.mas.influences.DeathInfluence(ori.mas.core.Body);
+  public ori.mas.influences.DeathInfluence(ori.mas.core.Actor, ori.mas.core.Body);
+}
+Compiled from "MovementInfluence.java"
+public class ori.mas.influences.MovementInfluence extends ori.mas.influences.PhysicalInfluence {
+  public ori.mas.influences.MovementInfluence(ori.ogapi.geometry.Point);
+  public ori.mas.influences.MovementInfluence(ori.mas.core.Actor, ori.mas.core.Body);
+  public ori.mas.influences.MovementInfluence(ori.mas.core.Actor, ori.mas.core.Body, ori.ogapi.geometry.Point);
+  public void setVector(ori.ogapi.geometry.Point);
+  public ori.ogapi.geometry.Point vector();
+}
+Compiled from "MultipleInfluence.java"
+public class ori.mas.influences.MultipleInfluence extends ori.mas.influences.AbstractInfluence implements java.lang.Iterable<ori.mas.core.Influence> {
+  public ori.mas.influences.MultipleInfluence();
+  public ori.mas.influences.MultipleInfluence(ori.mas.core.Actor);
+  public void add(ori.mas.core.Influence);
+  public java.util.Iterator<ori.mas.core.Influence> iterator();
+}
+Compiled from "PhysicalInfluence.java"
+public abstract class ori.mas.influences.PhysicalInfluence extends ori.mas.influences.AbstractInfluence {
+  public ori.mas.influences.PhysicalInfluence();
+  public ori.mas.influences.PhysicalInfluence(ori.mas.core.Body);
+  public ori.mas.influences.PhysicalInfluence(ori.mas.core.Actor);
+  public ori.mas.influences.PhysicalInfluence(ori.mas.core.Actor, ori.mas.core.Body);
+  public ori.mas.core.Body target();
+  public void setTarget(ori.mas.core.Body);
+}
+Compiled from "AbstractPercept.java"
+public class ori.mas.percepts.AbstractPercept implements ori.mas.core.Percept {
+  ori.mas.core.Percept$TYPE _type;
+  ori.mas.core.Sensor _source;
+  public ori.mas.percepts.AbstractPercept();
+  public ori.mas.percepts.AbstractPercept(ori.mas.core.Percept$TYPE);
+  public ori.mas.percepts.AbstractPercept(ori.mas.core.Sensor);
+  public ori.mas.percepts.AbstractPercept(ori.mas.core.Percept$TYPE, ori.mas.core.Sensor);
+  public ori.mas.core.Percept$TYPE type();
+  public ori.mas.core.Sensor source();
+  public void setSource(ori.mas.core.Sensor);
+}
+Compiled from "MultiplePercept.java"
+public class ori.mas.percepts.MultiplePercept extends ori.mas.percepts.AbstractPercept implements java.lang.Iterable<ori.mas.core.Percept> {
+  public ori.mas.percepts.MultiplePercept();
+  public ori.mas.percepts.MultiplePercept(ori.mas.core.Sensor);
+  public void add(ori.mas.core.Percept);
+  public java.util.Iterator<ori.mas.core.Percept> iterator();
+}
+Compiled from "SurfacePercept.java"
+public class ori.mas.percepts.SurfacePercept extends ori.mas.percepts.AbstractPercept {
+  public ori.mas.percepts.SurfacePercept(ori.mas.core.Scene);
+  public ori.mas.percepts.SurfacePercept(ori.mas.core.Sensor, ori.mas.core.Scene);
+  public ori.mas.core.Scene sceneView();
+}
+Compiled from "AbstractSensor.java"
+public abstract class ori.mas.sensors.AbstractSensor implements ori.mas.core.Sensor {
+  public ori.mas.sensors.AbstractSensor();
+  public ori.mas.sensors.AbstractSensor(ori.mas.core.Body);
+  public void setBody(ori.mas.core.Body);
+  protected ori.mas.core.Body body();
+  public abstract ori.mas.core.Percept sense(ori.mas.core.World);
+  public abstract ori.mas.sensors.AbstractSensor clone();
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+  public ori.mas.core.Sensor clone();
+}
+Compiled from "ShapeSensor.java"
+public class ori.mas.sensors.ShapeSensor extends ori.mas.sensors.AbstractSensor {
+  public ori.mas.sensors.ShapeSensor();
+  public ori.mas.sensors.ShapeSensor(ori.mas.core.Body);
+  public ori.mas.sensors.ShapeSensor(ori.mas.core.Body, ori.ogapi.geometry.Shape);
+  public ori.mas.core.Percept sense(ori.mas.core.World);
+  public ori.mas.sensors.ShapeSensor clone();
+  public ori.mas.sensors.AbstractSensor clone();
+  public ori.mas.core.Sensor clone();
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "AgentScene.java"
+public class wjd.gui.AgentScene extends wjd.amb.model.Scene {
+  public wjd.gui.AgentScene();
+  public wjd.amb.control.EUpdateResult update(int);
+  public void render(wjd.amb.view.ICanvas);
+  public wjd.amb.control.EUpdateResult processStaticInput(wjd.amb.control.IInput);
+  public wjd.amb.control.EUpdateResult processKeyPress(wjd.amb.control.IInput$KeyPress);
+  public wjd.amb.control.EUpdateResult processMouseClick(wjd.amb.control.IInput$MouseClick);
+  static {};
+}
+Compiled from "Main.java"
+abstract class wjd.gui.Main {
+  wjd.gui.Main();
+  public static void main(java.lang.String[]);
+  static {};
+}

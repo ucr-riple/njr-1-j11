@@ -1,0 +1,816 @@
+Compiled from "BaconListener.java"
+public class minewebsocket.BaconListener implements minewebsocket.interfaces.JSONListener {
+  public minewebsocket.BaconListener(minewebsocket.handlers.MessageHandler);
+  public void messageReceived(java.lang.String);
+  public void connected(boolean);
+  public void connectionClosed();
+}
+Compiled from "EggListener.java"
+public class minewebsocket.EggListener implements minewebsocket.interfaces.JSONListener {
+  public minewebsocket.EggListener(minewebsocket.handlers.MessageHandler);
+  public void messageReceived(java.lang.String);
+  public void connected(boolean);
+  public void connectionClosed();
+}
+Compiled from "MineWebSocket.java"
+public class minewebsocket.MineWebSocket {
+  public minewebsocket.MineWebSocket();
+  public static void main(java.lang.String[]) throws java.net.URISyntaxException, java.lang.InterruptedException, java.io.IOException;
+  static {};
+}
+Compiled from "TorchAction.java"
+public class minewebsocket.TorchAction implements minewebsocket.interfaces.JSONListener {
+  java.lang.Thread t;
+  minewebsocket.handlers.MessageHandler mh;
+  public minewebsocket.TorchAction(java.lang.String, int) throws java.net.URISyntaxException, java.lang.InterruptedException;
+  public void startTest();
+  public void messageReceived(java.lang.String);
+  public void connected(boolean);
+  public void connectionClosed();
+}
+Compiled from "MessageHandler.java"
+public class minewebsocket.handlers.MessageHandler implements minewebsocket.interfaces.ConnectedCallback,java.lang.Runnable {
+  public minewebsocket.handlers.MessageHandler(java.lang.String, int) throws java.net.URISyntaxException, java.lang.InterruptedException;
+  public void registerListener(minewebsocket.interfaces.JSONListener);
+  public boolean removeListener(minewebsocket.interfaces.JSONListener);
+  public synchronized boolean getFromPins(int...);
+  public synchronized boolean sendToPin(int, int);
+  public synchronized boolean sendToPin(int, int, long, boolean, boolean, int...);
+  public boolean sendLogMessage(java.lang.String);
+  public boolean broadcastMessage(java.lang.String);
+  public boolean isConnected();
+  public void closeConnection();
+  public void run();
+  static java.util.LinkedList access$000(minewebsocket.handlers.MessageHandler);
+  static java.util.concurrent.BlockingQueue access$200(minewebsocket.handlers.MessageHandler);
+  static minewebsocket.handlers.MessageHandler$Connection access$300();
+  static {};
+}
+Compiled from "MessageHandler.java"
+class minewebsocket.handlers.MessageHandler$1 {
+}
+Compiled from "MessageHandler.java"
+public class minewebsocket.handlers.MessageHandler$Connection extends minewebsocket.org.java_websocket.client.WebSocketClient {
+  final minewebsocket.handlers.MessageHandler this$0;
+  public minewebsocket.handlers.MessageHandler$Connection(minewebsocket.handlers.MessageHandler, java.net.URI, minewebsocket.org.java_websocket.drafts.Draft);
+  public minewebsocket.handlers.MessageHandler$Connection(minewebsocket.handlers.MessageHandler, java.net.URI);
+  public void onOpen(minewebsocket.org.java_websocket.handshake.ServerHandshake);
+  public void onMessage(java.lang.String);
+  public void onClose(int, java.lang.String, boolean);
+  public void onError(java.lang.Exception);
+}
+Compiled from "MessageHandler.java"
+class minewebsocket.handlers.MessageHandler$QueueManager implements java.lang.Runnable {
+  final minewebsocket.handlers.MessageHandler this$0;
+  public void run();
+  minewebsocket.handlers.MessageHandler$QueueManager(minewebsocket.handlers.MessageHandler, minewebsocket.handlers.MessageHandler$1);
+}
+Compiled from "ConnectedCallback.java"
+public interface minewebsocket.interfaces.ConnectedCallback {
+  public abstract boolean isConnected();
+  public abstract void closeConnection();
+}
+Compiled from "JSONListener.java"
+public interface minewebsocket.interfaces.JSONListener {
+  public abstract void messageReceived(java.lang.String);
+  public abstract void connected(boolean);
+  public abstract void connectionClosed();
+}
+Compiled from "AbstractWrappedByteChannel.java"
+public class minewebsocket.org.java_websocket.AbstractWrappedByteChannel implements minewebsocket.org.java_websocket.WrappedByteChannel {
+  public minewebsocket.org.java_websocket.AbstractWrappedByteChannel(java.nio.channels.ByteChannel);
+  public minewebsocket.org.java_websocket.AbstractWrappedByteChannel(minewebsocket.org.java_websocket.WrappedByteChannel);
+  public int read(java.nio.ByteBuffer) throws java.io.IOException;
+  public boolean isOpen();
+  public void close() throws java.io.IOException;
+  public int write(java.nio.ByteBuffer) throws java.io.IOException;
+  public boolean isNeedWrite();
+  public void writeMore() throws java.io.IOException;
+  public boolean isNeedRead();
+  public int readMore(java.nio.ByteBuffer) throws javax.net.ssl.SSLException;
+  public boolean isBlocking();
+}
+Compiled from "SSLSocketChannel2.java"
+public class minewebsocket.org.java_websocket.SSLSocketChannel2 implements java.nio.channels.ByteChannel,minewebsocket.org.java_websocket.WrappedByteChannel {
+  protected static java.nio.ByteBuffer emptybuffer;
+  protected java.util.concurrent.ExecutorService exec;
+  protected java.util.List<java.util.concurrent.Future<?>> tasks;
+  protected java.nio.ByteBuffer inData;
+  protected java.nio.ByteBuffer outCrypt;
+  protected java.nio.ByteBuffer inCrypt;
+  protected java.nio.channels.SocketChannel socketChannel;
+  protected java.nio.channels.SelectionKey selectionKey;
+  protected javax.net.ssl.SSLEngine sslEngine;
+  protected javax.net.ssl.SSLEngineResult readEngineResult;
+  protected javax.net.ssl.SSLEngineResult writeEngineResult;
+  protected int bufferallocations;
+  static final boolean $assertionsDisabled;
+  public minewebsocket.org.java_websocket.SSLSocketChannel2(java.nio.channels.SocketChannel, javax.net.ssl.SSLEngine, java.util.concurrent.ExecutorService, java.nio.channels.SelectionKey) throws java.io.IOException;
+  protected void consumeDelegatedTasks();
+  protected void createBuffers(javax.net.ssl.SSLSession);
+  public int write(java.nio.ByteBuffer) throws java.io.IOException;
+  public int read(java.nio.ByteBuffer) throws java.io.IOException;
+  public boolean isConnected();
+  public void close() throws java.io.IOException;
+  public java.nio.channels.SelectableChannel configureBlocking(boolean) throws java.io.IOException;
+  public boolean connect(java.net.SocketAddress) throws java.io.IOException;
+  public boolean finishConnect() throws java.io.IOException;
+  public java.net.Socket socket();
+  public boolean isInboundDone();
+  public boolean isOpen();
+  public boolean isNeedWrite();
+  public void writeMore() throws java.io.IOException;
+  public boolean isNeedRead();
+  public int readMore(java.nio.ByteBuffer) throws javax.net.ssl.SSLException;
+  public boolean isBlocking();
+  static {};
+}
+Compiled from "SocketChannelIOHelper.java"
+public class minewebsocket.org.java_websocket.SocketChannelIOHelper {
+  public minewebsocket.org.java_websocket.SocketChannelIOHelper();
+  public static boolean read(java.nio.ByteBuffer, minewebsocket.org.java_websocket.WebSocketImpl, java.nio.channels.ByteChannel) throws java.io.IOException;
+  public static boolean readMore(java.nio.ByteBuffer, minewebsocket.org.java_websocket.WebSocketImpl, minewebsocket.org.java_websocket.WrappedByteChannel) throws java.io.IOException;
+  public static boolean batch(minewebsocket.org.java_websocket.WebSocketImpl, java.nio.channels.ByteChannel) throws java.io.IOException;
+}
+Compiled from "WebSocket.java"
+public interface minewebsocket.org.java_websocket.WebSocket {
+  public static final int DEFAULT_PORT;
+  public static final int DEFAULT_WSS_PORT;
+  public abstract void close(int, java.lang.String);
+  public abstract void close(int);
+  public abstract void close();
+  public abstract void closeConnection(int, java.lang.String);
+  public abstract void send(java.lang.String) throws java.nio.channels.NotYetConnectedException;
+  public abstract void send(java.nio.ByteBuffer) throws java.lang.IllegalArgumentException, java.nio.channels.NotYetConnectedException;
+  public abstract void send(byte[]) throws java.lang.IllegalArgumentException, java.nio.channels.NotYetConnectedException;
+  public abstract void sendFrame(minewebsocket.org.java_websocket.framing.Framedata);
+  public abstract void sendFragmentedFrame(minewebsocket.org.java_websocket.framing.Framedata$Opcode, java.nio.ByteBuffer, boolean);
+  public abstract boolean hasBufferedData();
+  public abstract java.net.InetSocketAddress getRemoteSocketAddress();
+  public abstract java.net.InetSocketAddress getLocalSocketAddress();
+  public abstract boolean isConnecting();
+  public abstract boolean isOpen();
+  public abstract boolean isClosing();
+  public abstract boolean isFlushAndClose();
+  public abstract boolean isClosed();
+  public abstract minewebsocket.org.java_websocket.drafts.Draft getDraft();
+  public abstract minewebsocket.org.java_websocket.WebSocket$READYSTATE getReadyState();
+  public abstract java.lang.String getResourceDescriptor();
+}
+Compiled from "WebSocket.java"
+public final class minewebsocket.org.java_websocket.WebSocket$READYSTATE extends java.lang.Enum<minewebsocket.org.java_websocket.WebSocket$READYSTATE> {
+  public static final minewebsocket.org.java_websocket.WebSocket$READYSTATE NOT_YET_CONNECTED;
+  public static final minewebsocket.org.java_websocket.WebSocket$READYSTATE CONNECTING;
+  public static final minewebsocket.org.java_websocket.WebSocket$READYSTATE OPEN;
+  public static final minewebsocket.org.java_websocket.WebSocket$READYSTATE CLOSING;
+  public static final minewebsocket.org.java_websocket.WebSocket$READYSTATE CLOSED;
+  public static minewebsocket.org.java_websocket.WebSocket$READYSTATE[] values();
+  public static minewebsocket.org.java_websocket.WebSocket$READYSTATE valueOf(java.lang.String);
+  static {};
+}
+Compiled from "WebSocket.java"
+public final class minewebsocket.org.java_websocket.WebSocket$Role extends java.lang.Enum<minewebsocket.org.java_websocket.WebSocket$Role> {
+  public static final minewebsocket.org.java_websocket.WebSocket$Role CLIENT;
+  public static final minewebsocket.org.java_websocket.WebSocket$Role SERVER;
+  public static minewebsocket.org.java_websocket.WebSocket$Role[] values();
+  public static minewebsocket.org.java_websocket.WebSocket$Role valueOf(java.lang.String);
+  static {};
+}
+Compiled from "WebSocketAdapter.java"
+public abstract class minewebsocket.org.java_websocket.WebSocketAdapter implements minewebsocket.org.java_websocket.WebSocketListener {
+  public minewebsocket.org.java_websocket.WebSocketAdapter();
+  public minewebsocket.org.java_websocket.handshake.ServerHandshakeBuilder onWebsocketHandshakeReceivedAsServer(minewebsocket.org.java_websocket.WebSocket, minewebsocket.org.java_websocket.drafts.Draft, minewebsocket.org.java_websocket.handshake.ClientHandshake) throws minewebsocket.org.java_websocket.exceptions.InvalidDataException;
+  public void onWebsocketHandshakeReceivedAsClient(minewebsocket.org.java_websocket.WebSocket, minewebsocket.org.java_websocket.handshake.ClientHandshake, minewebsocket.org.java_websocket.handshake.ServerHandshake) throws minewebsocket.org.java_websocket.exceptions.InvalidDataException;
+  public void onWebsocketHandshakeSentAsClient(minewebsocket.org.java_websocket.WebSocket, minewebsocket.org.java_websocket.handshake.ClientHandshake) throws minewebsocket.org.java_websocket.exceptions.InvalidDataException;
+  public void onWebsocketMessageFragment(minewebsocket.org.java_websocket.WebSocket, minewebsocket.org.java_websocket.framing.Framedata);
+  public void onWebsocketPing(minewebsocket.org.java_websocket.WebSocket, minewebsocket.org.java_websocket.framing.Framedata);
+  public void onWebsocketPong(minewebsocket.org.java_websocket.WebSocket, minewebsocket.org.java_websocket.framing.Framedata);
+  public java.lang.String getFlashPolicy(minewebsocket.org.java_websocket.WebSocket) throws minewebsocket.org.java_websocket.exceptions.InvalidDataException;
+}
+Compiled from "WebSocketFactory.java"
+public interface minewebsocket.org.java_websocket.WebSocketFactory {
+  public abstract minewebsocket.org.java_websocket.WebSocket createWebSocket(minewebsocket.org.java_websocket.WebSocketAdapter, minewebsocket.org.java_websocket.drafts.Draft, java.net.Socket);
+  public abstract minewebsocket.org.java_websocket.WebSocket createWebSocket(minewebsocket.org.java_websocket.WebSocketAdapter, java.util.List<minewebsocket.org.java_websocket.drafts.Draft>, java.net.Socket);
+}
+Compiled from "WebSocketImpl.java"
+public class minewebsocket.org.java_websocket.WebSocketImpl implements minewebsocket.org.java_websocket.WebSocket {
+  public static int RCVBUF;
+  public static boolean DEBUG;
+  public static final java.util.List<minewebsocket.org.java_websocket.drafts.Draft> defaultdraftlist;
+  public java.nio.channels.SelectionKey key;
+  public java.nio.channels.ByteChannel channel;
+  public final java.util.concurrent.BlockingQueue<java.nio.ByteBuffer> outQueue;
+  public final java.util.concurrent.BlockingQueue<java.nio.ByteBuffer> inQueue;
+  public volatile minewebsocket.org.java_websocket.server.WebSocketServer$WebSocketWorker workerThread;
+  static final boolean $assertionsDisabled;
+  public minewebsocket.org.java_websocket.WebSocketImpl(minewebsocket.org.java_websocket.WebSocketListener, java.util.List<minewebsocket.org.java_websocket.drafts.Draft>);
+  public minewebsocket.org.java_websocket.WebSocketImpl(minewebsocket.org.java_websocket.WebSocketListener, minewebsocket.org.java_websocket.drafts.Draft);
+  public minewebsocket.org.java_websocket.WebSocketImpl(minewebsocket.org.java_websocket.WebSocketListener, minewebsocket.org.java_websocket.drafts.Draft, java.net.Socket);
+  public minewebsocket.org.java_websocket.WebSocketImpl(minewebsocket.org.java_websocket.WebSocketListener, java.util.List<minewebsocket.org.java_websocket.drafts.Draft>, java.net.Socket);
+  public void decode(java.nio.ByteBuffer);
+  public void close(int, java.lang.String);
+  protected synchronized void closeConnection(int, java.lang.String, boolean);
+  protected void closeConnection(int, boolean);
+  public void closeConnection();
+  public void closeConnection(int, java.lang.String);
+  protected synchronized void flushAndClose(int, java.lang.String, boolean);
+  public void eot();
+  public void close(int);
+  public void close(minewebsocket.org.java_websocket.exceptions.InvalidDataException);
+  public void send(java.lang.String) throws minewebsocket.org.java_websocket.exceptions.WebsocketNotConnectedException;
+  public void send(java.nio.ByteBuffer) throws java.lang.IllegalArgumentException, minewebsocket.org.java_websocket.exceptions.WebsocketNotConnectedException;
+  public void send(byte[]) throws java.lang.IllegalArgumentException, minewebsocket.org.java_websocket.exceptions.WebsocketNotConnectedException;
+  public void sendFragmentedFrame(minewebsocket.org.java_websocket.framing.Framedata$Opcode, java.nio.ByteBuffer, boolean);
+  public void sendFrame(minewebsocket.org.java_websocket.framing.Framedata);
+  public boolean hasBufferedData();
+  public void startHandshake(minewebsocket.org.java_websocket.handshake.ClientHandshakeBuilder) throws minewebsocket.org.java_websocket.exceptions.InvalidHandshakeException;
+  public boolean isConnecting();
+  public boolean isOpen();
+  public boolean isClosing();
+  public boolean isFlushAndClose();
+  public boolean isClosed();
+  public minewebsocket.org.java_websocket.WebSocket$READYSTATE getReadyState();
+  public int hashCode();
+  public java.lang.String toString();
+  public java.net.InetSocketAddress getRemoteSocketAddress();
+  public java.net.InetSocketAddress getLocalSocketAddress();
+  public minewebsocket.org.java_websocket.drafts.Draft getDraft();
+  public void close();
+  public java.lang.String getResourceDescriptor();
+  static {};
+}
+Compiled from "WebSocketListener.java"
+public interface minewebsocket.org.java_websocket.WebSocketListener {
+  public abstract minewebsocket.org.java_websocket.handshake.ServerHandshakeBuilder onWebsocketHandshakeReceivedAsServer(minewebsocket.org.java_websocket.WebSocket, minewebsocket.org.java_websocket.drafts.Draft, minewebsocket.org.java_websocket.handshake.ClientHandshake) throws minewebsocket.org.java_websocket.exceptions.InvalidDataException;
+  public abstract void onWebsocketHandshakeReceivedAsClient(minewebsocket.org.java_websocket.WebSocket, minewebsocket.org.java_websocket.handshake.ClientHandshake, minewebsocket.org.java_websocket.handshake.ServerHandshake) throws minewebsocket.org.java_websocket.exceptions.InvalidDataException;
+  public abstract void onWebsocketHandshakeSentAsClient(minewebsocket.org.java_websocket.WebSocket, minewebsocket.org.java_websocket.handshake.ClientHandshake) throws minewebsocket.org.java_websocket.exceptions.InvalidDataException;
+  public abstract void onWebsocketMessage(minewebsocket.org.java_websocket.WebSocket, java.lang.String);
+  public abstract void onWebsocketMessage(minewebsocket.org.java_websocket.WebSocket, java.nio.ByteBuffer);
+  public abstract void onWebsocketMessageFragment(minewebsocket.org.java_websocket.WebSocket, minewebsocket.org.java_websocket.framing.Framedata);
+  public abstract void onWebsocketOpen(minewebsocket.org.java_websocket.WebSocket, minewebsocket.org.java_websocket.handshake.Handshakedata);
+  public abstract void onWebsocketClose(minewebsocket.org.java_websocket.WebSocket, int, java.lang.String, boolean);
+  public abstract void onWebsocketClosing(minewebsocket.org.java_websocket.WebSocket, int, java.lang.String, boolean);
+  public abstract void onWebsocketCloseInitiated(minewebsocket.org.java_websocket.WebSocket, int, java.lang.String);
+  public abstract void onWebsocketError(minewebsocket.org.java_websocket.WebSocket, java.lang.Exception);
+  public abstract void onWebsocketPing(minewebsocket.org.java_websocket.WebSocket, minewebsocket.org.java_websocket.framing.Framedata);
+  public abstract void onWebsocketPong(minewebsocket.org.java_websocket.WebSocket, minewebsocket.org.java_websocket.framing.Framedata);
+  public abstract java.lang.String getFlashPolicy(minewebsocket.org.java_websocket.WebSocket) throws minewebsocket.org.java_websocket.exceptions.InvalidDataException;
+  public abstract void onWriteDemand(minewebsocket.org.java_websocket.WebSocket);
+  public abstract java.net.InetSocketAddress getLocalSocketAddress(minewebsocket.org.java_websocket.WebSocket);
+  public abstract java.net.InetSocketAddress getRemoteSocketAddress(minewebsocket.org.java_websocket.WebSocket);
+}
+Compiled from "WrappedByteChannel.java"
+public interface minewebsocket.org.java_websocket.WrappedByteChannel extends java.nio.channels.ByteChannel {
+  public abstract boolean isNeedWrite();
+  public abstract void writeMore() throws java.io.IOException;
+  public abstract boolean isNeedRead();
+  public abstract int readMore(java.nio.ByteBuffer) throws javax.net.ssl.SSLException;
+  public abstract boolean isBlocking();
+}
+Compiled from "AbstractClientProxyChannel.java"
+public abstract class minewebsocket.org.java_websocket.client.AbstractClientProxyChannel extends minewebsocket.org.java_websocket.AbstractWrappedByteChannel {
+  protected final java.nio.ByteBuffer proxyHandshake;
+  public minewebsocket.org.java_websocket.client.AbstractClientProxyChannel(java.nio.channels.ByteChannel);
+  public int write(java.nio.ByteBuffer) throws java.io.IOException;
+  public abstract java.lang.String buildHandShake();
+}
+Compiled from "WebSocketClient.java"
+public abstract class minewebsocket.org.java_websocket.client.WebSocketClient extends minewebsocket.org.java_websocket.WebSocketAdapter implements java.lang.Runnable,minewebsocket.org.java_websocket.WebSocket {
+  protected java.net.URI uri;
+  static final boolean $assertionsDisabled;
+  public minewebsocket.org.java_websocket.client.WebSocketClient(java.net.URI);
+  public minewebsocket.org.java_websocket.client.WebSocketClient(java.net.URI, minewebsocket.org.java_websocket.drafts.Draft);
+  public minewebsocket.org.java_websocket.client.WebSocketClient(java.net.URI, minewebsocket.org.java_websocket.drafts.Draft, java.util.Map<java.lang.String, java.lang.String>, int);
+  public java.net.URI getURI();
+  public minewebsocket.org.java_websocket.drafts.Draft getDraft();
+  public void connect();
+  public boolean connectBlocking() throws java.lang.InterruptedException;
+  public void close();
+  public void closeBlocking() throws java.lang.InterruptedException;
+  public void send(java.lang.String) throws java.nio.channels.NotYetConnectedException;
+  public void send(byte[]) throws java.nio.channels.NotYetConnectedException;
+  public void run();
+  public minewebsocket.org.java_websocket.WebSocket$READYSTATE getReadyState();
+  public final void onWebsocketMessage(minewebsocket.org.java_websocket.WebSocket, java.lang.String);
+  public final void onWebsocketMessage(minewebsocket.org.java_websocket.WebSocket, java.nio.ByteBuffer);
+  public void onWebsocketMessageFragment(minewebsocket.org.java_websocket.WebSocket, minewebsocket.org.java_websocket.framing.Framedata);
+  public final void onWebsocketOpen(minewebsocket.org.java_websocket.WebSocket, minewebsocket.org.java_websocket.handshake.Handshakedata);
+  public final void onWebsocketClose(minewebsocket.org.java_websocket.WebSocket, int, java.lang.String, boolean);
+  public final void onWebsocketError(minewebsocket.org.java_websocket.WebSocket, java.lang.Exception);
+  public final void onWriteDemand(minewebsocket.org.java_websocket.WebSocket);
+  public void onWebsocketCloseInitiated(minewebsocket.org.java_websocket.WebSocket, int, java.lang.String);
+  public void onWebsocketClosing(minewebsocket.org.java_websocket.WebSocket, int, java.lang.String, boolean);
+  public void onCloseInitiated(int, java.lang.String);
+  public void onClosing(int, java.lang.String, boolean);
+  public minewebsocket.org.java_websocket.WebSocket getConnection();
+  public java.net.InetSocketAddress getLocalSocketAddress(minewebsocket.org.java_websocket.WebSocket);
+  public java.net.InetSocketAddress getRemoteSocketAddress(minewebsocket.org.java_websocket.WebSocket);
+  public abstract void onOpen(minewebsocket.org.java_websocket.handshake.ServerHandshake);
+  public abstract void onMessage(java.lang.String);
+  public abstract void onClose(int, java.lang.String, boolean);
+  public abstract void onError(java.lang.Exception);
+  public void onMessage(java.nio.ByteBuffer);
+  public void onFragment(minewebsocket.org.java_websocket.framing.Framedata);
+  public void setProxy(java.net.Proxy);
+  public void setSocket(java.net.Socket);
+  public void sendFragmentedFrame(minewebsocket.org.java_websocket.framing.Framedata$Opcode, java.nio.ByteBuffer, boolean);
+  public boolean isOpen();
+  public boolean isFlushAndClose();
+  public boolean isClosed();
+  public boolean isClosing();
+  public boolean isConnecting();
+  public boolean hasBufferedData();
+  public void close(int);
+  public void close(int, java.lang.String);
+  public void closeConnection(int, java.lang.String);
+  public void send(java.nio.ByteBuffer) throws java.lang.IllegalArgumentException, java.nio.channels.NotYetConnectedException;
+  public void sendFrame(minewebsocket.org.java_websocket.framing.Framedata);
+  public java.net.InetSocketAddress getLocalSocketAddress();
+  public java.net.InetSocketAddress getRemoteSocketAddress();
+  public java.lang.String getResourceDescriptor();
+  static minewebsocket.org.java_websocket.WebSocketImpl access$100(minewebsocket.org.java_websocket.client.WebSocketClient);
+  static java.io.OutputStream access$200(minewebsocket.org.java_websocket.client.WebSocketClient);
+  static {};
+}
+Compiled from "WebSocketClient.java"
+class minewebsocket.org.java_websocket.client.WebSocketClient$1 {
+}
+Compiled from "WebSocketClient.java"
+class minewebsocket.org.java_websocket.client.WebSocketClient$WebsocketWriteThread implements java.lang.Runnable {
+  final minewebsocket.org.java_websocket.client.WebSocketClient this$0;
+  public void run();
+  minewebsocket.org.java_websocket.client.WebSocketClient$WebsocketWriteThread(minewebsocket.org.java_websocket.client.WebSocketClient, minewebsocket.org.java_websocket.client.WebSocketClient$1);
+}
+Compiled from "Draft.java"
+public abstract class minewebsocket.org.java_websocket.drafts.Draft {
+  public static int MAX_FAME_SIZE;
+  public static int INITIAL_FAMESIZE;
+  public static final byte[] FLASH_POLICY_REQUEST;
+  protected minewebsocket.org.java_websocket.WebSocket$Role role;
+  protected minewebsocket.org.java_websocket.framing.Framedata$Opcode continuousFrameType;
+  public minewebsocket.org.java_websocket.drafts.Draft();
+  public static java.nio.ByteBuffer readLine(java.nio.ByteBuffer);
+  public static java.lang.String readStringLine(java.nio.ByteBuffer);
+  public static minewebsocket.org.java_websocket.handshake.HandshakeBuilder translateHandshakeHttp(java.nio.ByteBuffer, minewebsocket.org.java_websocket.WebSocket$Role) throws minewebsocket.org.java_websocket.exceptions.InvalidHandshakeException, minewebsocket.org.java_websocket.exceptions.IncompleteHandshakeException;
+  public abstract minewebsocket.org.java_websocket.drafts.Draft$HandshakeState acceptHandshakeAsClient(minewebsocket.org.java_websocket.handshake.ClientHandshake, minewebsocket.org.java_websocket.handshake.ServerHandshake) throws minewebsocket.org.java_websocket.exceptions.InvalidHandshakeException;
+  public abstract minewebsocket.org.java_websocket.drafts.Draft$HandshakeState acceptHandshakeAsServer(minewebsocket.org.java_websocket.handshake.ClientHandshake) throws minewebsocket.org.java_websocket.exceptions.InvalidHandshakeException;
+  protected boolean basicAccept(minewebsocket.org.java_websocket.handshake.Handshakedata);
+  public abstract java.nio.ByteBuffer createBinaryFrame(minewebsocket.org.java_websocket.framing.Framedata);
+  public abstract java.util.List<minewebsocket.org.java_websocket.framing.Framedata> createFrames(java.nio.ByteBuffer, boolean);
+  public abstract java.util.List<minewebsocket.org.java_websocket.framing.Framedata> createFrames(java.lang.String, boolean);
+  public java.util.List<minewebsocket.org.java_websocket.framing.Framedata> continuousFrame(minewebsocket.org.java_websocket.framing.Framedata$Opcode, java.nio.ByteBuffer, boolean);
+  public abstract void reset();
+  public java.util.List<java.nio.ByteBuffer> createHandshake(minewebsocket.org.java_websocket.handshake.Handshakedata, minewebsocket.org.java_websocket.WebSocket$Role);
+  public java.util.List<java.nio.ByteBuffer> createHandshake(minewebsocket.org.java_websocket.handshake.Handshakedata, minewebsocket.org.java_websocket.WebSocket$Role, boolean);
+  public abstract minewebsocket.org.java_websocket.handshake.ClientHandshakeBuilder postProcessHandshakeRequestAsClient(minewebsocket.org.java_websocket.handshake.ClientHandshakeBuilder) throws minewebsocket.org.java_websocket.exceptions.InvalidHandshakeException;
+  public abstract minewebsocket.org.java_websocket.handshake.HandshakeBuilder postProcessHandshakeResponseAsServer(minewebsocket.org.java_websocket.handshake.ClientHandshake, minewebsocket.org.java_websocket.handshake.ServerHandshakeBuilder) throws minewebsocket.org.java_websocket.exceptions.InvalidHandshakeException;
+  public abstract java.util.List<minewebsocket.org.java_websocket.framing.Framedata> translateFrame(java.nio.ByteBuffer) throws minewebsocket.org.java_websocket.exceptions.InvalidDataException;
+  public abstract minewebsocket.org.java_websocket.drafts.Draft$CloseHandshakeType getCloseHandshakeType();
+  public abstract minewebsocket.org.java_websocket.drafts.Draft copyInstance();
+  public minewebsocket.org.java_websocket.handshake.Handshakedata translateHandshake(java.nio.ByteBuffer) throws minewebsocket.org.java_websocket.exceptions.InvalidHandshakeException;
+  public int checkAlloc(int) throws minewebsocket.org.java_websocket.exceptions.LimitExedeedException, minewebsocket.org.java_websocket.exceptions.InvalidDataException;
+  public void setParseMode(minewebsocket.org.java_websocket.WebSocket$Role);
+  public minewebsocket.org.java_websocket.WebSocket$Role getRole();
+  static {};
+}
+Compiled from "Draft.java"
+public final class minewebsocket.org.java_websocket.drafts.Draft$CloseHandshakeType extends java.lang.Enum<minewebsocket.org.java_websocket.drafts.Draft$CloseHandshakeType> {
+  public static final minewebsocket.org.java_websocket.drafts.Draft$CloseHandshakeType NONE;
+  public static final minewebsocket.org.java_websocket.drafts.Draft$CloseHandshakeType ONEWAY;
+  public static final minewebsocket.org.java_websocket.drafts.Draft$CloseHandshakeType TWOWAY;
+  public static minewebsocket.org.java_websocket.drafts.Draft$CloseHandshakeType[] values();
+  public static minewebsocket.org.java_websocket.drafts.Draft$CloseHandshakeType valueOf(java.lang.String);
+  static {};
+}
+Compiled from "Draft.java"
+public final class minewebsocket.org.java_websocket.drafts.Draft$HandshakeState extends java.lang.Enum<minewebsocket.org.java_websocket.drafts.Draft$HandshakeState> {
+  public static final minewebsocket.org.java_websocket.drafts.Draft$HandshakeState MATCHED;
+  public static final minewebsocket.org.java_websocket.drafts.Draft$HandshakeState NOT_MATCHED;
+  public static minewebsocket.org.java_websocket.drafts.Draft$HandshakeState[] values();
+  public static minewebsocket.org.java_websocket.drafts.Draft$HandshakeState valueOf(java.lang.String);
+  static {};
+}
+Compiled from "Draft_10.java"
+public class minewebsocket.org.java_websocket.drafts.Draft_10 extends minewebsocket.org.java_websocket.drafts.Draft {
+  static final boolean $assertionsDisabled;
+  public minewebsocket.org.java_websocket.drafts.Draft_10();
+  public static int readVersion(minewebsocket.org.java_websocket.handshake.Handshakedata);
+  public minewebsocket.org.java_websocket.drafts.Draft$HandshakeState acceptHandshakeAsClient(minewebsocket.org.java_websocket.handshake.ClientHandshake, minewebsocket.org.java_websocket.handshake.ServerHandshake) throws minewebsocket.org.java_websocket.exceptions.InvalidHandshakeException;
+  public minewebsocket.org.java_websocket.drafts.Draft$HandshakeState acceptHandshakeAsServer(minewebsocket.org.java_websocket.handshake.ClientHandshake) throws minewebsocket.org.java_websocket.exceptions.InvalidHandshakeException;
+  public java.nio.ByteBuffer createBinaryFrame(minewebsocket.org.java_websocket.framing.Framedata);
+  public java.util.List<minewebsocket.org.java_websocket.framing.Framedata> createFrames(java.nio.ByteBuffer, boolean);
+  public java.util.List<minewebsocket.org.java_websocket.framing.Framedata> createFrames(java.lang.String, boolean);
+  public minewebsocket.org.java_websocket.handshake.ClientHandshakeBuilder postProcessHandshakeRequestAsClient(minewebsocket.org.java_websocket.handshake.ClientHandshakeBuilder);
+  public minewebsocket.org.java_websocket.handshake.HandshakeBuilder postProcessHandshakeResponseAsServer(minewebsocket.org.java_websocket.handshake.ClientHandshake, minewebsocket.org.java_websocket.handshake.ServerHandshakeBuilder) throws minewebsocket.org.java_websocket.exceptions.InvalidHandshakeException;
+  public java.util.List<minewebsocket.org.java_websocket.framing.Framedata> translateFrame(java.nio.ByteBuffer) throws minewebsocket.org.java_websocket.exceptions.LimitExedeedException, minewebsocket.org.java_websocket.exceptions.InvalidDataException;
+  public minewebsocket.org.java_websocket.framing.Framedata translateSingleFrame(java.nio.ByteBuffer) throws minewebsocket.org.java_websocket.drafts.Draft_10$IncompleteException, minewebsocket.org.java_websocket.exceptions.InvalidDataException;
+  public void reset();
+  public minewebsocket.org.java_websocket.drafts.Draft copyInstance();
+  public minewebsocket.org.java_websocket.drafts.Draft$CloseHandshakeType getCloseHandshakeType();
+  static {};
+}
+Compiled from "Draft_10.java"
+class minewebsocket.org.java_websocket.drafts.Draft_10$IncompleteException extends java.lang.Throwable {
+  final minewebsocket.org.java_websocket.drafts.Draft_10 this$0;
+  public minewebsocket.org.java_websocket.drafts.Draft_10$IncompleteException(minewebsocket.org.java_websocket.drafts.Draft_10, int);
+  public int getPreferedSize();
+}
+Compiled from "Draft_17.java"
+public class minewebsocket.org.java_websocket.drafts.Draft_17 extends minewebsocket.org.java_websocket.drafts.Draft_10 {
+  public minewebsocket.org.java_websocket.drafts.Draft_17();
+  public minewebsocket.org.java_websocket.drafts.Draft$HandshakeState acceptHandshakeAsServer(minewebsocket.org.java_websocket.handshake.ClientHandshake) throws minewebsocket.org.java_websocket.exceptions.InvalidHandshakeException;
+  public minewebsocket.org.java_websocket.handshake.ClientHandshakeBuilder postProcessHandshakeRequestAsClient(minewebsocket.org.java_websocket.handshake.ClientHandshakeBuilder);
+  public minewebsocket.org.java_websocket.drafts.Draft copyInstance();
+}
+Compiled from "Draft_75.java"
+public class minewebsocket.org.java_websocket.drafts.Draft_75 extends minewebsocket.org.java_websocket.drafts.Draft {
+  public static final byte CR;
+  public static final byte LF;
+  public static final byte START_OF_FRAME;
+  public static final byte END_OF_FRAME;
+  protected boolean readingState;
+  protected java.util.List<minewebsocket.org.java_websocket.framing.Framedata> readyframes;
+  protected java.nio.ByteBuffer currentFrame;
+  public minewebsocket.org.java_websocket.drafts.Draft_75();
+  public minewebsocket.org.java_websocket.drafts.Draft$HandshakeState acceptHandshakeAsClient(minewebsocket.org.java_websocket.handshake.ClientHandshake, minewebsocket.org.java_websocket.handshake.ServerHandshake);
+  public minewebsocket.org.java_websocket.drafts.Draft$HandshakeState acceptHandshakeAsServer(minewebsocket.org.java_websocket.handshake.ClientHandshake);
+  public java.nio.ByteBuffer createBinaryFrame(minewebsocket.org.java_websocket.framing.Framedata);
+  public java.util.List<minewebsocket.org.java_websocket.framing.Framedata> createFrames(java.nio.ByteBuffer, boolean);
+  public java.util.List<minewebsocket.org.java_websocket.framing.Framedata> createFrames(java.lang.String, boolean);
+  public minewebsocket.org.java_websocket.handshake.ClientHandshakeBuilder postProcessHandshakeRequestAsClient(minewebsocket.org.java_websocket.handshake.ClientHandshakeBuilder) throws minewebsocket.org.java_websocket.exceptions.InvalidHandshakeException;
+  public minewebsocket.org.java_websocket.handshake.HandshakeBuilder postProcessHandshakeResponseAsServer(minewebsocket.org.java_websocket.handshake.ClientHandshake, minewebsocket.org.java_websocket.handshake.ServerHandshakeBuilder) throws minewebsocket.org.java_websocket.exceptions.InvalidHandshakeException;
+  protected java.util.List<minewebsocket.org.java_websocket.framing.Framedata> translateRegularFrame(java.nio.ByteBuffer) throws minewebsocket.org.java_websocket.exceptions.InvalidDataException;
+  public java.util.List<minewebsocket.org.java_websocket.framing.Framedata> translateFrame(java.nio.ByteBuffer) throws minewebsocket.org.java_websocket.exceptions.InvalidDataException;
+  public void reset();
+  public minewebsocket.org.java_websocket.drafts.Draft$CloseHandshakeType getCloseHandshakeType();
+  public java.nio.ByteBuffer createBuffer();
+  public java.nio.ByteBuffer increaseBuffer(java.nio.ByteBuffer) throws minewebsocket.org.java_websocket.exceptions.LimitExedeedException, minewebsocket.org.java_websocket.exceptions.InvalidDataException;
+  public minewebsocket.org.java_websocket.drafts.Draft copyInstance();
+}
+Compiled from "Draft_76.java"
+public class minewebsocket.org.java_websocket.drafts.Draft_76 extends minewebsocket.org.java_websocket.drafts.Draft_75 {
+  public minewebsocket.org.java_websocket.drafts.Draft_76();
+  public static byte[] createChallenge(java.lang.String, java.lang.String, byte[]) throws minewebsocket.org.java_websocket.exceptions.InvalidHandshakeException;
+  public minewebsocket.org.java_websocket.drafts.Draft$HandshakeState acceptHandshakeAsClient(minewebsocket.org.java_websocket.handshake.ClientHandshake, minewebsocket.org.java_websocket.handshake.ServerHandshake);
+  public minewebsocket.org.java_websocket.drafts.Draft$HandshakeState acceptHandshakeAsServer(minewebsocket.org.java_websocket.handshake.ClientHandshake);
+  public minewebsocket.org.java_websocket.handshake.ClientHandshakeBuilder postProcessHandshakeRequestAsClient(minewebsocket.org.java_websocket.handshake.ClientHandshakeBuilder);
+  public minewebsocket.org.java_websocket.handshake.HandshakeBuilder postProcessHandshakeResponseAsServer(minewebsocket.org.java_websocket.handshake.ClientHandshake, minewebsocket.org.java_websocket.handshake.ServerHandshakeBuilder) throws minewebsocket.org.java_websocket.exceptions.InvalidHandshakeException;
+  public minewebsocket.org.java_websocket.handshake.Handshakedata translateHandshake(java.nio.ByteBuffer) throws minewebsocket.org.java_websocket.exceptions.InvalidHandshakeException;
+  public java.util.List<minewebsocket.org.java_websocket.framing.Framedata> translateFrame(java.nio.ByteBuffer) throws minewebsocket.org.java_websocket.exceptions.InvalidDataException;
+  public java.nio.ByteBuffer createBinaryFrame(minewebsocket.org.java_websocket.framing.Framedata);
+  public minewebsocket.org.java_websocket.drafts.Draft$CloseHandshakeType getCloseHandshakeType();
+  public minewebsocket.org.java_websocket.drafts.Draft copyInstance();
+  static {};
+}
+Compiled from "IncompleteHandshakeException.java"
+public class minewebsocket.org.java_websocket.exceptions.IncompleteHandshakeException extends java.lang.RuntimeException {
+  public minewebsocket.org.java_websocket.exceptions.IncompleteHandshakeException(int);
+  public minewebsocket.org.java_websocket.exceptions.IncompleteHandshakeException();
+  public int getPreferedSize();
+}
+Compiled from "InvalidDataException.java"
+public class minewebsocket.org.java_websocket.exceptions.InvalidDataException extends java.lang.Exception {
+  public minewebsocket.org.java_websocket.exceptions.InvalidDataException(int);
+  public minewebsocket.org.java_websocket.exceptions.InvalidDataException(int, java.lang.String);
+  public minewebsocket.org.java_websocket.exceptions.InvalidDataException(int, java.lang.Throwable);
+  public minewebsocket.org.java_websocket.exceptions.InvalidDataException(int, java.lang.String, java.lang.Throwable);
+  public int getCloseCode();
+}
+Compiled from "InvalidFrameException.java"
+public class minewebsocket.org.java_websocket.exceptions.InvalidFrameException extends minewebsocket.org.java_websocket.exceptions.InvalidDataException {
+  public minewebsocket.org.java_websocket.exceptions.InvalidFrameException();
+  public minewebsocket.org.java_websocket.exceptions.InvalidFrameException(java.lang.String);
+  public minewebsocket.org.java_websocket.exceptions.InvalidFrameException(java.lang.Throwable);
+  public minewebsocket.org.java_websocket.exceptions.InvalidFrameException(java.lang.String, java.lang.Throwable);
+}
+Compiled from "InvalidHandshakeException.java"
+public class minewebsocket.org.java_websocket.exceptions.InvalidHandshakeException extends minewebsocket.org.java_websocket.exceptions.InvalidDataException {
+  public minewebsocket.org.java_websocket.exceptions.InvalidHandshakeException();
+  public minewebsocket.org.java_websocket.exceptions.InvalidHandshakeException(java.lang.String, java.lang.Throwable);
+  public minewebsocket.org.java_websocket.exceptions.InvalidHandshakeException(java.lang.String);
+  public minewebsocket.org.java_websocket.exceptions.InvalidHandshakeException(java.lang.Throwable);
+}
+Compiled from "LimitExedeedException.java"
+public class minewebsocket.org.java_websocket.exceptions.LimitExedeedException extends minewebsocket.org.java_websocket.exceptions.InvalidDataException {
+  public minewebsocket.org.java_websocket.exceptions.LimitExedeedException();
+  public minewebsocket.org.java_websocket.exceptions.LimitExedeedException(java.lang.String);
+}
+Compiled from "NotSendableException.java"
+public class minewebsocket.org.java_websocket.exceptions.NotSendableException extends java.lang.RuntimeException {
+  public minewebsocket.org.java_websocket.exceptions.NotSendableException();
+  public minewebsocket.org.java_websocket.exceptions.NotSendableException(java.lang.String);
+  public minewebsocket.org.java_websocket.exceptions.NotSendableException(java.lang.Throwable);
+  public minewebsocket.org.java_websocket.exceptions.NotSendableException(java.lang.String, java.lang.Throwable);
+}
+Compiled from "WebsocketNotConnectedException.java"
+public class minewebsocket.org.java_websocket.exceptions.WebsocketNotConnectedException extends java.lang.RuntimeException {
+  public minewebsocket.org.java_websocket.exceptions.WebsocketNotConnectedException();
+}
+Compiled from "CloseFrame.java"
+public interface minewebsocket.org.java_websocket.framing.CloseFrame extends minewebsocket.org.java_websocket.framing.Framedata {
+  public static final int NORMAL;
+  public static final int GOING_AWAY;
+  public static final int PROTOCOL_ERROR;
+  public static final int REFUSE;
+  public static final int NOCODE;
+  public static final int ABNORMAL_CLOSE;
+  public static final int NO_UTF8;
+  public static final int POLICY_VALIDATION;
+  public static final int TOOBIG;
+  public static final int EXTENSION;
+  public static final int UNEXPECTED_CONDITION;
+  public static final int TLS_ERROR;
+  public static final int NEVER_CONNECTED;
+  public static final int BUGGYCLOSE;
+  public static final int FLASHPOLICY;
+  public abstract int getCloseCode() throws minewebsocket.org.java_websocket.exceptions.InvalidFrameException;
+  public abstract java.lang.String getMessage() throws minewebsocket.org.java_websocket.exceptions.InvalidDataException;
+}
+Compiled from "CloseFrameBuilder.java"
+public class minewebsocket.org.java_websocket.framing.CloseFrameBuilder extends minewebsocket.org.java_websocket.framing.FramedataImpl1 implements minewebsocket.org.java_websocket.framing.CloseFrame {
+  static final java.nio.ByteBuffer emptybytebuffer;
+  public minewebsocket.org.java_websocket.framing.CloseFrameBuilder();
+  public minewebsocket.org.java_websocket.framing.CloseFrameBuilder(int) throws minewebsocket.org.java_websocket.exceptions.InvalidDataException;
+  public minewebsocket.org.java_websocket.framing.CloseFrameBuilder(int, java.lang.String) throws minewebsocket.org.java_websocket.exceptions.InvalidDataException;
+  public int getCloseCode();
+  public java.lang.String getMessage();
+  public java.lang.String toString();
+  public void setPayload(java.nio.ByteBuffer) throws minewebsocket.org.java_websocket.exceptions.InvalidDataException;
+  public java.nio.ByteBuffer getPayloadData();
+  static {};
+}
+Compiled from "FrameBuilder.java"
+public interface minewebsocket.org.java_websocket.framing.FrameBuilder extends minewebsocket.org.java_websocket.framing.Framedata {
+  public abstract void setFin(boolean);
+  public abstract void setOptcode(minewebsocket.org.java_websocket.framing.Framedata$Opcode);
+  public abstract void setPayload(java.nio.ByteBuffer) throws minewebsocket.org.java_websocket.exceptions.InvalidDataException;
+  public abstract void setTransferemasked(boolean);
+}
+Compiled from "Framedata.java"
+public interface minewebsocket.org.java_websocket.framing.Framedata {
+  public abstract boolean isFin();
+  public abstract boolean getTransfereMasked();
+  public abstract minewebsocket.org.java_websocket.framing.Framedata$Opcode getOpcode();
+  public abstract java.nio.ByteBuffer getPayloadData();
+  public abstract void append(minewebsocket.org.java_websocket.framing.Framedata) throws minewebsocket.org.java_websocket.exceptions.InvalidFrameException;
+}
+Compiled from "Framedata.java"
+public final class minewebsocket.org.java_websocket.framing.Framedata$Opcode extends java.lang.Enum<minewebsocket.org.java_websocket.framing.Framedata$Opcode> {
+  public static final minewebsocket.org.java_websocket.framing.Framedata$Opcode CONTINUOUS;
+  public static final minewebsocket.org.java_websocket.framing.Framedata$Opcode TEXT;
+  public static final minewebsocket.org.java_websocket.framing.Framedata$Opcode BINARY;
+  public static final minewebsocket.org.java_websocket.framing.Framedata$Opcode PING;
+  public static final minewebsocket.org.java_websocket.framing.Framedata$Opcode PONG;
+  public static final minewebsocket.org.java_websocket.framing.Framedata$Opcode CLOSING;
+  public static minewebsocket.org.java_websocket.framing.Framedata$Opcode[] values();
+  public static minewebsocket.org.java_websocket.framing.Framedata$Opcode valueOf(java.lang.String);
+  static {};
+}
+Compiled from "FramedataImpl1.java"
+public class minewebsocket.org.java_websocket.framing.FramedataImpl1 implements minewebsocket.org.java_websocket.framing.FrameBuilder {
+  protected static byte[] emptyarray;
+  protected boolean fin;
+  protected minewebsocket.org.java_websocket.framing.Framedata$Opcode optcode;
+  protected boolean transferemasked;
+  public minewebsocket.org.java_websocket.framing.FramedataImpl1();
+  public minewebsocket.org.java_websocket.framing.FramedataImpl1(minewebsocket.org.java_websocket.framing.Framedata$Opcode);
+  public minewebsocket.org.java_websocket.framing.FramedataImpl1(minewebsocket.org.java_websocket.framing.Framedata);
+  public boolean isFin();
+  public minewebsocket.org.java_websocket.framing.Framedata$Opcode getOpcode();
+  public boolean getTransfereMasked();
+  public java.nio.ByteBuffer getPayloadData();
+  public void setFin(boolean);
+  public void setOptcode(minewebsocket.org.java_websocket.framing.Framedata$Opcode);
+  public void setPayload(java.nio.ByteBuffer) throws minewebsocket.org.java_websocket.exceptions.InvalidDataException;
+  public void setTransferemasked(boolean);
+  public void append(minewebsocket.org.java_websocket.framing.Framedata) throws minewebsocket.org.java_websocket.exceptions.InvalidFrameException;
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "ClientHandshake.java"
+public interface minewebsocket.org.java_websocket.handshake.ClientHandshake extends minewebsocket.org.java_websocket.handshake.Handshakedata {
+  public abstract java.lang.String getResourceDescriptor();
+}
+Compiled from "ClientHandshakeBuilder.java"
+public interface minewebsocket.org.java_websocket.handshake.ClientHandshakeBuilder extends minewebsocket.org.java_websocket.handshake.HandshakeBuilder,minewebsocket.org.java_websocket.handshake.ClientHandshake {
+  public abstract void setResourceDescriptor(java.lang.String);
+}
+Compiled from "HandshakeBuilder.java"
+public interface minewebsocket.org.java_websocket.handshake.HandshakeBuilder extends minewebsocket.org.java_websocket.handshake.Handshakedata {
+  public abstract void setContent(byte[]);
+  public abstract void put(java.lang.String, java.lang.String);
+}
+Compiled from "HandshakeImpl1Client.java"
+public class minewebsocket.org.java_websocket.handshake.HandshakeImpl1Client extends minewebsocket.org.java_websocket.handshake.HandshakedataImpl1 implements minewebsocket.org.java_websocket.handshake.ClientHandshakeBuilder {
+  public minewebsocket.org.java_websocket.handshake.HandshakeImpl1Client();
+  public void setResourceDescriptor(java.lang.String) throws java.lang.IllegalArgumentException;
+  public java.lang.String getResourceDescriptor();
+}
+Compiled from "HandshakeImpl1Server.java"
+public class minewebsocket.org.java_websocket.handshake.HandshakeImpl1Server extends minewebsocket.org.java_websocket.handshake.HandshakedataImpl1 implements minewebsocket.org.java_websocket.handshake.ServerHandshakeBuilder {
+  public minewebsocket.org.java_websocket.handshake.HandshakeImpl1Server();
+  public java.lang.String getHttpStatusMessage();
+  public short getHttpStatus();
+  public void setHttpStatusMessage(java.lang.String);
+  public void setHttpStatus(short);
+}
+Compiled from "Handshakedata.java"
+public interface minewebsocket.org.java_websocket.handshake.Handshakedata {
+  public abstract java.util.Iterator<java.lang.String> iterateHttpFields();
+  public abstract java.lang.String getFieldValue(java.lang.String);
+  public abstract boolean hasFieldValue(java.lang.String);
+  public abstract byte[] getContent();
+}
+Compiled from "HandshakedataImpl1.java"
+public class minewebsocket.org.java_websocket.handshake.HandshakedataImpl1 implements minewebsocket.org.java_websocket.handshake.HandshakeBuilder {
+  public minewebsocket.org.java_websocket.handshake.HandshakedataImpl1();
+  public java.util.Iterator<java.lang.String> iterateHttpFields();
+  public java.lang.String getFieldValue(java.lang.String);
+  public byte[] getContent();
+  public void setContent(byte[]);
+  public void put(java.lang.String, java.lang.String);
+  public boolean hasFieldValue(java.lang.String);
+}
+Compiled from "ServerHandshake.java"
+public interface minewebsocket.org.java_websocket.handshake.ServerHandshake extends minewebsocket.org.java_websocket.handshake.Handshakedata {
+  public abstract short getHttpStatus();
+  public abstract java.lang.String getHttpStatusMessage();
+}
+Compiled from "ServerHandshakeBuilder.java"
+public interface minewebsocket.org.java_websocket.handshake.ServerHandshakeBuilder extends minewebsocket.org.java_websocket.handshake.HandshakeBuilder,minewebsocket.org.java_websocket.handshake.ServerHandshake {
+  public abstract void setHttpStatus(short);
+  public abstract void setHttpStatusMessage(java.lang.String);
+}
+Compiled from "DefaultSSLWebSocketServerFactory.java"
+public class minewebsocket.org.java_websocket.server.DefaultSSLWebSocketServerFactory implements minewebsocket.org.java_websocket.server.WebSocketServer$WebSocketServerFactory {
+  protected javax.net.ssl.SSLContext sslcontext;
+  protected java.util.concurrent.ExecutorService exec;
+  public minewebsocket.org.java_websocket.server.DefaultSSLWebSocketServerFactory(javax.net.ssl.SSLContext);
+  public minewebsocket.org.java_websocket.server.DefaultSSLWebSocketServerFactory(javax.net.ssl.SSLContext, java.util.concurrent.ExecutorService);
+  public java.nio.channels.ByteChannel wrapChannel(java.nio.channels.SocketChannel, java.nio.channels.SelectionKey) throws java.io.IOException;
+  public minewebsocket.org.java_websocket.WebSocketImpl createWebSocket(minewebsocket.org.java_websocket.WebSocketAdapter, minewebsocket.org.java_websocket.drafts.Draft, java.net.Socket);
+  public minewebsocket.org.java_websocket.WebSocketImpl createWebSocket(minewebsocket.org.java_websocket.WebSocketAdapter, java.util.List<minewebsocket.org.java_websocket.drafts.Draft>, java.net.Socket);
+  public minewebsocket.org.java_websocket.WebSocket createWebSocket(minewebsocket.org.java_websocket.WebSocketAdapter, java.util.List, java.net.Socket);
+  public minewebsocket.org.java_websocket.WebSocket createWebSocket(minewebsocket.org.java_websocket.WebSocketAdapter, minewebsocket.org.java_websocket.drafts.Draft, java.net.Socket);
+}
+Compiled from "DefaultWebSocketServerFactory.java"
+public class minewebsocket.org.java_websocket.server.DefaultWebSocketServerFactory implements minewebsocket.org.java_websocket.server.WebSocketServer$WebSocketServerFactory {
+  public minewebsocket.org.java_websocket.server.DefaultWebSocketServerFactory();
+  public minewebsocket.org.java_websocket.WebSocketImpl createWebSocket(minewebsocket.org.java_websocket.WebSocketAdapter, minewebsocket.org.java_websocket.drafts.Draft, java.net.Socket);
+  public minewebsocket.org.java_websocket.WebSocketImpl createWebSocket(minewebsocket.org.java_websocket.WebSocketAdapter, java.util.List<minewebsocket.org.java_websocket.drafts.Draft>, java.net.Socket);
+  public java.nio.channels.SocketChannel wrapChannel(java.nio.channels.SocketChannel, java.nio.channels.SelectionKey);
+  public java.nio.channels.ByteChannel wrapChannel(java.nio.channels.SocketChannel, java.nio.channels.SelectionKey) throws java.io.IOException;
+  public minewebsocket.org.java_websocket.WebSocket createWebSocket(minewebsocket.org.java_websocket.WebSocketAdapter, java.util.List, java.net.Socket);
+  public minewebsocket.org.java_websocket.WebSocket createWebSocket(minewebsocket.org.java_websocket.WebSocketAdapter, minewebsocket.org.java_websocket.drafts.Draft, java.net.Socket);
+}
+Compiled from "WebSocketServer.java"
+public abstract class minewebsocket.org.java_websocket.server.WebSocketServer extends minewebsocket.org.java_websocket.WebSocketAdapter implements java.lang.Runnable {
+  public static int DECODERS;
+  static final boolean $assertionsDisabled;
+  public minewebsocket.org.java_websocket.server.WebSocketServer() throws java.net.UnknownHostException;
+  public minewebsocket.org.java_websocket.server.WebSocketServer(java.net.InetSocketAddress);
+  public minewebsocket.org.java_websocket.server.WebSocketServer(java.net.InetSocketAddress, int);
+  public minewebsocket.org.java_websocket.server.WebSocketServer(java.net.InetSocketAddress, java.util.List<minewebsocket.org.java_websocket.drafts.Draft>);
+  public minewebsocket.org.java_websocket.server.WebSocketServer(java.net.InetSocketAddress, int, java.util.List<minewebsocket.org.java_websocket.drafts.Draft>);
+  public minewebsocket.org.java_websocket.server.WebSocketServer(java.net.InetSocketAddress, int, java.util.List<minewebsocket.org.java_websocket.drafts.Draft>, java.util.Collection<minewebsocket.org.java_websocket.WebSocket>);
+  public void start();
+  public void stop(int) throws java.lang.InterruptedException;
+  public void stop() throws java.io.IOException, java.lang.InterruptedException;
+  public java.util.Collection<minewebsocket.org.java_websocket.WebSocket> connections();
+  public java.net.InetSocketAddress getAddress();
+  public int getPort();
+  public java.util.List<minewebsocket.org.java_websocket.drafts.Draft> getDraft();
+  public void run();
+  protected void allocateBuffers(minewebsocket.org.java_websocket.WebSocket) throws java.lang.InterruptedException;
+  protected void releaseBuffers(minewebsocket.org.java_websocket.WebSocket) throws java.lang.InterruptedException;
+  public java.nio.ByteBuffer createBuffer();
+  protected java.lang.String getFlashSecurityPolicy();
+  public final void onWebsocketMessage(minewebsocket.org.java_websocket.WebSocket, java.lang.String);
+  public void onWebsocketMessageFragment(minewebsocket.org.java_websocket.WebSocket, minewebsocket.org.java_websocket.framing.Framedata);
+  public final void onWebsocketMessage(minewebsocket.org.java_websocket.WebSocket, java.nio.ByteBuffer);
+  public final void onWebsocketOpen(minewebsocket.org.java_websocket.WebSocket, minewebsocket.org.java_websocket.handshake.Handshakedata);
+  public final void onWebsocketClose(minewebsocket.org.java_websocket.WebSocket, int, java.lang.String, boolean);
+  protected boolean removeConnection(minewebsocket.org.java_websocket.WebSocket);
+  public minewebsocket.org.java_websocket.handshake.ServerHandshakeBuilder onWebsocketHandshakeReceivedAsServer(minewebsocket.org.java_websocket.WebSocket, minewebsocket.org.java_websocket.drafts.Draft, minewebsocket.org.java_websocket.handshake.ClientHandshake) throws minewebsocket.org.java_websocket.exceptions.InvalidDataException;
+  protected boolean addConnection(minewebsocket.org.java_websocket.WebSocket);
+  public final void onWebsocketError(minewebsocket.org.java_websocket.WebSocket, java.lang.Exception);
+  public final void onWriteDemand(minewebsocket.org.java_websocket.WebSocket);
+  public void onWebsocketCloseInitiated(minewebsocket.org.java_websocket.WebSocket, int, java.lang.String);
+  public void onWebsocketClosing(minewebsocket.org.java_websocket.WebSocket, int, java.lang.String, boolean);
+  public void onCloseInitiated(minewebsocket.org.java_websocket.WebSocket, int, java.lang.String);
+  public void onClosing(minewebsocket.org.java_websocket.WebSocket, int, java.lang.String, boolean);
+  public final void setWebSocketFactory(minewebsocket.org.java_websocket.server.WebSocketServer$WebSocketServerFactory);
+  public final minewebsocket.org.java_websocket.WebSocketFactory getWebSocketFactory();
+  protected boolean onConnect(java.nio.channels.SelectionKey);
+  public java.net.InetSocketAddress getLocalSocketAddress(minewebsocket.org.java_websocket.WebSocket);
+  public java.net.InetSocketAddress getRemoteSocketAddress(minewebsocket.org.java_websocket.WebSocket);
+  public abstract void onOpen(minewebsocket.org.java_websocket.WebSocket, minewebsocket.org.java_websocket.handshake.ClientHandshake);
+  public abstract void onClose(minewebsocket.org.java_websocket.WebSocket, int, java.lang.String, boolean);
+  public abstract void onMessage(minewebsocket.org.java_websocket.WebSocket, java.lang.String);
+  public abstract void onError(minewebsocket.org.java_websocket.WebSocket, java.lang.Exception);
+  public void onMessage(minewebsocket.org.java_websocket.WebSocket, java.nio.ByteBuffer);
+  public void onFragment(minewebsocket.org.java_websocket.WebSocket, minewebsocket.org.java_websocket.framing.Framedata);
+  static void access$000(minewebsocket.org.java_websocket.server.WebSocketServer, java.nio.ByteBuffer) throws java.lang.InterruptedException;
+  static void access$100(minewebsocket.org.java_websocket.server.WebSocketServer, minewebsocket.org.java_websocket.WebSocket, java.lang.Exception);
+  static {};
+}
+Compiled from "WebSocketServer.java"
+public interface minewebsocket.org.java_websocket.server.WebSocketServer$WebSocketServerFactory extends minewebsocket.org.java_websocket.WebSocketFactory {
+  public abstract minewebsocket.org.java_websocket.WebSocketImpl createWebSocket(minewebsocket.org.java_websocket.WebSocketAdapter, minewebsocket.org.java_websocket.drafts.Draft, java.net.Socket);
+  public abstract minewebsocket.org.java_websocket.WebSocketImpl createWebSocket(minewebsocket.org.java_websocket.WebSocketAdapter, java.util.List<minewebsocket.org.java_websocket.drafts.Draft>, java.net.Socket);
+  public abstract java.nio.channels.ByteChannel wrapChannel(java.nio.channels.SocketChannel, java.nio.channels.SelectionKey) throws java.io.IOException;
+  public minewebsocket.org.java_websocket.WebSocket createWebSocket(minewebsocket.org.java_websocket.WebSocketAdapter, java.util.List, java.net.Socket);
+  public minewebsocket.org.java_websocket.WebSocket createWebSocket(minewebsocket.org.java_websocket.WebSocketAdapter, minewebsocket.org.java_websocket.drafts.Draft, java.net.Socket);
+}
+Compiled from "WebSocketServer.java"
+public class minewebsocket.org.java_websocket.server.WebSocketServer$WebSocketWorker extends java.lang.Thread {
+  static final boolean $assertionsDisabled;
+  final minewebsocket.org.java_websocket.server.WebSocketServer this$0;
+  public minewebsocket.org.java_websocket.server.WebSocketServer$WebSocketWorker(minewebsocket.org.java_websocket.server.WebSocketServer);
+  public void put(minewebsocket.org.java_websocket.WebSocketImpl) throws java.lang.InterruptedException;
+  public void run();
+  static {};
+}
+Compiled from "WebSocketServer.java"
+class minewebsocket.org.java_websocket.server.WebSocketServer$WebSocketWorker$1 implements java.lang.Thread$UncaughtExceptionHandler {
+  final minewebsocket.org.java_websocket.server.WebSocketServer val$this$0;
+  final minewebsocket.org.java_websocket.server.WebSocketServer$WebSocketWorker this$1;
+  minewebsocket.org.java_websocket.server.WebSocketServer$WebSocketWorker$1(minewebsocket.org.java_websocket.server.WebSocketServer$WebSocketWorker, minewebsocket.org.java_websocket.server.WebSocketServer);
+  public void uncaughtException(java.lang.Thread, java.lang.Throwable);
+}
+Compiled from "Base64.java"
+public class minewebsocket.org.java_websocket.util.Base64 {
+  public static final int NO_OPTIONS;
+  public static final int ENCODE;
+  public static final int DECODE;
+  public static final int GZIP;
+  public static final int DONT_GUNZIP;
+  public static final int DO_BREAK_LINES;
+  public static final int URL_SAFE;
+  public static final int ORDERED;
+  static final boolean $assertionsDisabled;
+  public static void encode(java.nio.ByteBuffer, java.nio.ByteBuffer);
+  public static void encode(java.nio.ByteBuffer, java.nio.CharBuffer);
+  public static java.lang.String encodeObject(java.io.Serializable) throws java.io.IOException;
+  public static java.lang.String encodeObject(java.io.Serializable, int) throws java.io.IOException;
+  public static java.lang.String encodeBytes(byte[]);
+  public static java.lang.String encodeBytes(byte[], int) throws java.io.IOException;
+  public static java.lang.String encodeBytes(byte[], int, int);
+  public static java.lang.String encodeBytes(byte[], int, int, int) throws java.io.IOException;
+  public static byte[] encodeBytesToBytes(byte[]);
+  public static byte[] encodeBytesToBytes(byte[], int, int, int) throws java.io.IOException;
+  public static byte[] decode(byte[]) throws java.io.IOException;
+  public static byte[] decode(byte[], int, int, int) throws java.io.IOException;
+  public static byte[] decode(java.lang.String) throws java.io.IOException;
+  public static byte[] decode(java.lang.String, int) throws java.io.IOException;
+  public static java.lang.Object decodeToObject(java.lang.String) throws java.io.IOException, java.lang.ClassNotFoundException;
+  public static java.lang.Object decodeToObject(java.lang.String, int, java.lang.ClassLoader) throws java.io.IOException, java.lang.ClassNotFoundException;
+  public static void encodeToFile(byte[], java.lang.String) throws java.io.IOException;
+  public static void decodeToFile(java.lang.String, java.lang.String) throws java.io.IOException;
+  public static byte[] decodeFromFile(java.lang.String) throws java.io.IOException;
+  public static java.lang.String encodeFromFile(java.lang.String) throws java.io.IOException;
+  public static void encodeFileToFile(java.lang.String, java.lang.String) throws java.io.IOException;
+  public static void decodeFileToFile(java.lang.String, java.lang.String) throws java.io.IOException;
+  static byte[] access$000(int);
+  static byte[] access$100(byte[], int, int, byte[], int, int);
+  static int access$200(byte[], int, byte[], int, int);
+  static byte[] access$300(byte[], byte[], int, int);
+  static {};
+}
+Compiled from "Base64.java"
+final class minewebsocket.org.java_websocket.util.Base64$1 extends java.io.ObjectInputStream {
+  final java.lang.ClassLoader val$loader;
+  minewebsocket.org.java_websocket.util.Base64$1(java.io.InputStream, java.lang.ClassLoader);
+  public java.lang.Class<?> resolveClass(java.io.ObjectStreamClass) throws java.io.IOException, java.lang.ClassNotFoundException;
+}
+Compiled from "Base64.java"
+public class minewebsocket.org.java_websocket.util.Base64$InputStream extends java.io.FilterInputStream {
+  public minewebsocket.org.java_websocket.util.Base64$InputStream(java.io.InputStream);
+  public minewebsocket.org.java_websocket.util.Base64$InputStream(java.io.InputStream, int);
+  public int read() throws java.io.IOException;
+  public int read(byte[], int, int) throws java.io.IOException;
+}
+Compiled from "Base64.java"
+public class minewebsocket.org.java_websocket.util.Base64$OutputStream extends java.io.FilterOutputStream {
+  public minewebsocket.org.java_websocket.util.Base64$OutputStream(java.io.OutputStream);
+  public minewebsocket.org.java_websocket.util.Base64$OutputStream(java.io.OutputStream, int);
+  public void write(int) throws java.io.IOException;
+  public void write(byte[], int, int) throws java.io.IOException;
+  public void flushBase64() throws java.io.IOException;
+  public void close() throws java.io.IOException;
+  public void suspendEncoding() throws java.io.IOException;
+  public void resumeEncoding();
+}
+Compiled from "Charsetfunctions.java"
+public class minewebsocket.org.java_websocket.util.Charsetfunctions {
+  public static java.nio.charset.CodingErrorAction codingErrorAction;
+  public minewebsocket.org.java_websocket.util.Charsetfunctions();
+  public static byte[] utf8Bytes(java.lang.String);
+  public static byte[] asciiBytes(java.lang.String);
+  public static java.lang.String stringAscii(byte[]);
+  public static java.lang.String stringAscii(byte[], int, int);
+  public static java.lang.String stringUtf8(byte[]) throws minewebsocket.org.java_websocket.exceptions.InvalidDataException;
+  public static java.lang.String stringUtf8(java.nio.ByteBuffer) throws minewebsocket.org.java_websocket.exceptions.InvalidDataException;
+  public static void main(java.lang.String[]) throws minewebsocket.org.java_websocket.exceptions.InvalidDataException;
+  static {};
+}

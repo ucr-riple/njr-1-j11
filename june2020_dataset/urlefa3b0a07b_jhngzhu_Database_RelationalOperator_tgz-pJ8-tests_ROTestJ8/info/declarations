@@ -1,0 +1,378 @@
+Compiled from "AttrOperator.java"
+public class global.AttrOperator {
+  public static final int EQ;
+  public static final int NEQ;
+  public static final int GT;
+  public static final int GTE;
+  public static final int LT;
+  public static final int LTE;
+  public static int toValue(java.lang.String);
+  public static java.lang.String toString(int);
+}
+Compiled from "AttrType.java"
+public class global.AttrType {
+  public static final int INTEGER;
+  public static final int FLOAT;
+  public static final int STRING;
+  public static final int COLNAME;
+  public static final int FIELDNO;
+  public static int getType(java.lang.Object);
+  public static java.lang.String toString(int);
+}
+Compiled from "Convert.java"
+public class global.Convert {
+  public global.Convert();
+  public static char getCharValue(int, byte[]);
+  public static void setCharValue(char, int, byte[]);
+  public static short getShortValue(int, byte[]);
+  public static void setShortValue(short, int, byte[]);
+  public static int getIntValue(int, byte[]);
+  public static void setIntValue(int, int, byte[]);
+  public static float getFloatValue(int, byte[]);
+  public static void setFloatValue(float, int, byte[]);
+  public static java.lang.String getStringValue(int, byte[], int);
+  public static void setStringValue(java.lang.String, int, byte[]);
+}
+Compiled from "GlobalConst.java"
+public interface global.GlobalConst {
+  public static final int PAGE_SIZE;
+  public static final int INVALID_PAGEID;
+  public static final int FIRST_PAGEID;
+  public static final int NAME_MAXLEN;
+  public static final boolean PIN_MEMCPY;
+  public static final boolean PIN_DISKIO;
+  public static final boolean UNPIN_DIRTY;
+  public static final boolean UNPIN_CLEAN;
+  public static final int EMPTY_SLOT;
+  public static final int MAX_COLSIZE;
+  public static final int MAX_TUPSIZE;
+}
+Compiled from "Minibase.java"
+public class global.Minibase {
+  public static java.lang.String DatabaseName;
+  public static diskmgr.DiskMgr DiskManager;
+  public static bufmgr.BufMgr BufferManager;
+  public global.Minibase(java.lang.String, int, int, java.lang.String, boolean);
+  public void init(java.lang.String, int, int, java.lang.String, boolean);
+  public static void haltSystem(java.lang.Exception);
+}
+Compiled from "Page.java"
+public class global.Page implements global.GlobalConst {
+  protected byte[] data;
+  public global.Page();
+  public global.Page(byte[]);
+  public byte[] getData();
+  public void setData(byte[]);
+  public void setPage(global.Page);
+  public void copyPage(global.Page);
+  public char getCharValue(int);
+  public void setCharValue(char, int);
+  public short getShortValue(int);
+  public void setShortValue(short, int);
+  public int getIntValue(int);
+  public void setIntValue(int, int);
+  public float getFloatValue(int);
+  public void setFloatValue(float, int);
+  public java.lang.String getStringValue(int, int);
+  public void setStringValue(java.lang.String, int);
+}
+Compiled from "PageId.java"
+public class global.PageId implements global.GlobalConst {
+  public int pid;
+  public global.PageId();
+  public global.PageId(int);
+  public void copyPageId(global.PageId);
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+}
+Compiled from "RID.java"
+public class global.RID {
+  public global.PageId pageno;
+  public int slotno;
+  public global.RID();
+  public global.RID(global.RID);
+  public global.RID(global.PageId, int);
+  public global.RID(byte[], short);
+  public void writeData(byte[], short);
+  public short getLength();
+  public void copyRID(global.RID);
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+}
+Compiled from "SearchKey.java"
+public class global.SearchKey implements java.lang.Comparable<global.SearchKey> {
+  protected static final byte INTEGER_KEY;
+  protected static final byte FLOAT_KEY;
+  protected static final byte STRING_KEY;
+  protected byte type;
+  protected short size;
+  protected java.lang.Object value;
+  public global.SearchKey(java.lang.Integer);
+  public global.SearchKey(java.lang.Float);
+  public global.SearchKey(java.lang.String);
+  public global.SearchKey(java.lang.Object);
+  public global.SearchKey(global.SearchKey);
+  public global.SearchKey(byte[], short);
+  public void writeData(byte[], short);
+  public short getLength();
+  public int getHash(int);
+  public boolean isHash(int);
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public int compareTo(global.SearchKey);
+  public int compareTo(java.lang.Object);
+}
+Compiled from "SortKey.java"
+public class global.SortKey {
+  public java.lang.Object field;
+  public boolean isDesc;
+  public global.SortKey(java.lang.Object, boolean);
+}
+Compiled from "FileScan.java"
+public class relop.FileScan extends relop.Iterator {
+  heap.HeapScan heapScan;
+  heap.HeapFile heapFile;
+  boolean openning;
+  global.RID lastRid;
+  public relop.FileScan(relop.Schema, heap.HeapFile);
+  public void explain(int);
+  public void restart();
+  public boolean isOpen();
+  public void close();
+  public boolean hasNext();
+  public relop.Tuple getNext();
+  public global.RID getLastRID();
+}
+Compiled from "HashJoin.java"
+public class relop.HashJoin extends relop.Iterator {
+  public static final int NUM_BUCKETS;
+  public static int hfid;
+  public relop.Iterator left;
+  public relop.Iterator right;
+  public boolean openning;
+  public boolean isHasNext;
+  public relop.Tuple nextTuple;
+  public relop.Tuple leftTuple;
+  public relop.Tuple rightTuple;
+  public boolean isFirstCall;
+  public relop.Predicate pred;
+  public heap.HeapFile[] lefthf;
+  public heap.HeapFile[] righthf;
+  public relop.FileScan[] leftscan;
+  public relop.FileScan[] rightscan;
+  public relop.FileScan curright;
+  public relop.HashTableDup hashTableDup;
+  public int rcol;
+  public int lcol;
+  public int ind;
+  public int leftind;
+  public int rightind;
+  public relop.Tuple[] ltuples;
+  public relop.HashJoin(relop.Iterator, relop.Iterator, java.lang.Integer, java.lang.Integer);
+  public void explain(int);
+  public void restart();
+  public boolean isOpen();
+  public void close();
+  public boolean hasNext();
+  public relop.Tuple getNext();
+  static {};
+}
+Compiled from "HashTableDup.java"
+class relop.HashTableDup extends java.util.Hashtable {
+  relop.HashTableDup();
+  public void add(global.SearchKey, relop.Tuple);
+  public relop.Tuple[] getAll(global.SearchKey);
+}
+Compiled from "IndexScan.java"
+public class relop.IndexScan extends relop.Iterator {
+  public relop.IndexScan(relop.Schema, index.HashIndex, heap.HeapFile);
+  public void explain(int);
+  public void restart();
+  public boolean isOpen();
+  public void close();
+  public boolean hasNext();
+  public relop.Tuple getNext();
+  public global.SearchKey getLastKey();
+  public int getNextHash();
+}
+Compiled from "Iterator.java"
+public abstract class relop.Iterator {
+  protected relop.Schema schema;
+  public relop.Iterator();
+  public abstract void explain(int);
+  protected void indent(int);
+  public abstract void restart();
+  public abstract boolean isOpen();
+  public abstract void close();
+  public abstract boolean hasNext();
+  public abstract relop.Tuple getNext();
+  public int execute();
+  protected void finalize() throws java.lang.Throwable;
+}
+Compiled from "KeyScan.java"
+public class relop.KeyScan extends relop.Iterator {
+  public heap.HeapFile heapFile;
+  public index.HashScan hashScan;
+  public index.HashIndex hashIndex;
+  public global.SearchKey key;
+  boolean openning;
+  global.RID lastRid;
+  public relop.KeyScan(relop.Schema, index.HashIndex, global.SearchKey, heap.HeapFile);
+  public void explain(int);
+  public void restart();
+  public boolean isOpen();
+  public void close();
+  public boolean hasNext();
+  public relop.Tuple getNext();
+}
+Compiled from "Predicate.java"
+public class relop.Predicate {
+  protected int oper;
+  protected int ltype;
+  protected java.lang.Object left;
+  protected int rtype;
+  protected java.lang.Object right;
+  public relop.Predicate(int, int, java.lang.Object, int, java.lang.Object);
+  public boolean validate(relop.Schema);
+  public boolean evaluate(relop.Tuple);
+  public java.lang.String toString();
+  protected java.lang.String opString(int, java.lang.Object);
+}
+Compiled from "Projection.java"
+public class relop.Projection extends relop.Iterator {
+  public relop.Iterator iter;
+  public int[] fields;
+  public boolean openning;
+  public relop.Schema oldSchema;
+  public relop.Projection(relop.Iterator, java.lang.Integer...);
+  public void explain(int);
+  public void restart();
+  public boolean isOpen();
+  public void close();
+  public boolean hasNext();
+  public relop.Tuple getNext();
+}
+Compiled from "Schema.java"
+public class relop.Schema {
+  public static final int MIN_WIDTH;
+  protected int[] types;
+  protected int[] lengths;
+  protected int[] offsets;
+  protected java.lang.String[] names;
+  public relop.Schema(int);
+  public void initField(int, int, int, java.lang.String);
+  public void initField(int, relop.Schema, int);
+  public static relop.Schema join(relop.Schema, relop.Schema);
+  public int getCount();
+  public int getLength();
+  public int fieldType(int);
+  public int fieldLength(int);
+  public int fieldOffset(int);
+  public java.lang.String fieldName(int);
+  public int fieldNumber(java.lang.String);
+  public void print();
+}
+Compiled from "Selection.java"
+public class relop.Selection extends relop.Iterator {
+  public relop.Iterator iter;
+  public relop.Predicate[] preds;
+  public boolean openning;
+  public boolean isHasNext;
+  public relop.Tuple nextTuple;
+  public relop.Selection(relop.Iterator, relop.Predicate...);
+  public void explain(int);
+  public void restart();
+  public boolean isOpen();
+  public void close();
+  public boolean hasNext();
+  public relop.Tuple getNext();
+}
+Compiled from "SimpleSortMergeJoin.java"
+public class relop.SimpleSortMergeJoin extends relop.Iterator {
+  public relop.Iterator left;
+  public relop.Iterator right;
+  public relop.Predicate[] preds;
+  public boolean openning;
+  public boolean isHasNext;
+  public relop.Tuple nextTuple;
+  public relop.Tuple[] leftTuple;
+  public relop.Tuple[] rightTuple;
+  public int leftind;
+  public int rightind;
+  public int leftbase;
+  public int rightbase;
+  public int leftfldno;
+  public int rightfldno;
+  public relop.SimpleSortMergeJoin(relop.Iterator, relop.Iterator, relop.Predicate...);
+  public void explain(int);
+  public void restart();
+  public boolean isOpen();
+  public void close();
+  public boolean hasNext();
+  public relop.Tuple getNext();
+}
+Compiled from "Tuple.java"
+public class relop.Tuple {
+  protected byte[] data;
+  protected relop.Schema schema;
+  public relop.Tuple(relop.Schema);
+  public relop.Tuple(relop.Schema, java.lang.Object...);
+  public relop.Tuple(relop.Schema, byte[]);
+  public static relop.Tuple join(relop.Tuple, relop.Tuple, relop.Schema);
+  public byte[] getData();
+  public global.RID insertIntoFile(heap.HeapFile);
+  public java.lang.Object getField(int);
+  public java.lang.Object getField(java.lang.String);
+  public void setField(int, java.lang.Object);
+  public void setField(java.lang.String, java.lang.Object);
+  public java.lang.Object[] getAllFields();
+  public void setAllFields(java.lang.Object...);
+  public int getIntFld(int);
+  public void setIntFld(int, int);
+  public float getFloatFld(int);
+  public void setFloatFld(int, float);
+  public java.lang.String getStringFld(int);
+  public void setStringFld(int, java.lang.String);
+  public void print();
+  protected void padOutput(int, int);
+}
+Compiled from "ROTest.java"
+class tests.ROTest extends tests.TestDriver {
+  tests.ROTest();
+  public static void main(java.lang.String[]);
+  protected boolean test1();
+  protected boolean test2();
+  protected boolean test3();
+}
+Compiled from "TestDriver.java"
+class tests.TestDriver implements global.GlobalConst {
+  protected static final boolean PASS;
+  protected static final boolean FAIL;
+  protected java.lang.String DB_PATH;
+  protected int DB_SIZE;
+  protected int BUF_SIZE;
+  protected java.lang.String BUF_POLICY;
+  protected java.util.Random random;
+  protected java.util.ArrayList<tests.TestDriver$CountData> counts;
+  tests.TestDriver();
+  protected void delete_minibase();
+  protected void create_minibase();
+  protected void load_minibase();
+  protected void initRandom();
+  protected void initCounts();
+  protected void saveCounts(java.lang.String);
+  protected void printCounters();
+  protected void printSummary(int);
+}
+Compiled from "TestDriver.java"
+public class tests.TestDriver$CountData {
+  public java.lang.String desc;
+  public int reads;
+  public int writes;
+  public int allocs;
+  public int pinned;
+  final tests.TestDriver this$0;
+  protected tests.TestDriver$CountData(tests.TestDriver);
+}

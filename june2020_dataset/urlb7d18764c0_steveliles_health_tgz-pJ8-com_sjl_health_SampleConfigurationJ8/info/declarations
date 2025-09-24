@@ -1,0 +1,744 @@
+Compiled from "Condition.java"
+public interface com.sjl.health.Condition {
+  public abstract boolean test(com.sjl.health.Statistics, com.sjl.health.Statistics);
+}
+Compiled from "Configuration.java"
+public interface com.sjl.health.Configuration extends com.sjl.health.internal.InitialStateFactory {
+  public abstract void init(com.sjl.health.IssueTrackerFactory, com.sjl.health.internal.Clock);
+  public abstract com.sjl.health.internal.State newStateInstance(java.lang.String, com.sjl.health.Issue);
+}
+Compiled from "Exceptions.java"
+public class com.sjl.health.Exceptions {
+  public com.sjl.health.Exceptions();
+  public static com.sjl.health.Condition ratioExceeds(double);
+  public static com.sjl.health.Condition ratioFallsBelow(double);
+}
+Compiled from "Frequency.java"
+public interface com.sjl.health.Frequency {
+  public abstract double getHertz();
+}
+Compiled from "HealthInfo.java"
+public interface com.sjl.health.HealthInfo {
+  public abstract com.sjl.health.HealthInfo$StateInfo getCurrentState();
+  public abstract com.sjl.health.HealthInfo$History getHistory();
+  public abstract void addListener(com.sjl.health.HealthListener);
+  public abstract void removeListener(com.sjl.health.HealthListener);
+}
+Compiled from "HealthInfo.java"
+public interface com.sjl.health.HealthInfo$History extends com.sjl.health.InternallyIterable<com.sjl.health.HealthInfo$StateInfo> {
+}
+Compiled from "HealthInfo.java"
+public interface com.sjl.health.HealthInfo$StateInfo {
+  public abstract java.lang.String getName();
+  public abstract com.sjl.health.Instant getWhenChanged();
+  public abstract com.sjl.health.Issue getWhyChanged();
+  public abstract com.sjl.health.Statistics getSuccessStats();
+  public abstract com.sjl.health.Statistics getFailureStats();
+  public abstract com.sjl.health.Statistics getTotalStats();
+  public abstract com.sjl.health.Issues getDistinctIssues();
+}
+Compiled from "HealthListener.java"
+public interface com.sjl.health.HealthListener {
+  public abstract void onChange(com.sjl.health.HealthInfo$StateInfo, com.sjl.health.HealthInfo$StateInfo);
+}
+Compiled from "HealthService.java"
+public interface com.sjl.health.HealthService {
+  public abstract <T> T monitor(T, com.sjl.health.Configuration);
+  public abstract com.sjl.health.HealthInfo get(java.lang.Object);
+  public abstract void reset(java.lang.Object);
+}
+Compiled from "Instant.java"
+public interface com.sjl.health.Instant {
+  public abstract long getClockTime();
+  public abstract boolean before(com.sjl.health.Instant);
+  public abstract boolean after(com.sjl.health.Instant);
+}
+Compiled from "InstrumentedResult.java"
+public interface com.sjl.health.InstrumentedResult extends java.lang.annotation.Annotation {
+}
+Compiled from "InternallyIterable.java"
+public interface com.sjl.health.InternallyIterable<T> {
+  public abstract void each(com.sjl.health.InternallyIterable$Callback<T>);
+}
+Compiled from "InternallyIterable.java"
+public interface com.sjl.health.InternallyIterable$Callback<T> {
+  public abstract void with(T);
+}
+Compiled from "Issue.java"
+public interface com.sjl.health.Issue {
+  public abstract com.sjl.health.Instant getWhenFirstOccurred();
+  public abstract com.sjl.health.Instant getMostRecentOccurrence();
+  public abstract com.sjl.health.Statistics getStatistics();
+  public abstract java.lang.Throwable getCause();
+}
+Compiled from "IssueTrackerFactory.java"
+public interface com.sjl.health.IssueTrackerFactory {
+  public abstract com.sjl.health.internal.IssueTracker newTracker();
+}
+Compiled from "Issues.java"
+public interface com.sjl.health.Issues extends com.sjl.health.InternallyIterable<com.sjl.health.Issue> {
+}
+Compiled from "NotInstrumented.java"
+public interface com.sjl.health.NotInstrumented extends java.lang.annotation.Annotation {
+}
+Compiled from "RealTimeClock.java"
+public class com.sjl.health.RealTimeClock implements com.sjl.health.internal.Clock {
+  public com.sjl.health.RealTimeClock();
+  public com.sjl.health.Instant now();
+}
+Compiled from "SampleConfiguration.java"
+public class com.sjl.health.SampleConfiguration {
+  public com.sjl.health.SampleConfiguration();
+  public void basicExample();
+  public static void main(java.lang.String[]);
+}
+Compiled from "SampleConfiguration.java"
+class com.sjl.health.SampleConfiguration$1 implements com.sjl.health.internal.HistoryManager {
+  final com.sjl.health.SampleConfiguration this$0;
+  com.sjl.health.SampleConfiguration$1(com.sjl.health.SampleConfiguration);
+  public com.sjl.health.HealthInfo$History get();
+  public void add(com.sjl.health.HealthInfo$StateInfo);
+}
+Compiled from "SampleConfiguration.java"
+class com.sjl.health.SampleConfiguration$2 implements com.sjl.health.internal.HealthFactory {
+  final com.sjl.health.internal.HistoryManager val$_historyManager;
+  final com.sjl.health.SampleConfiguration this$0;
+  com.sjl.health.SampleConfiguration$2(com.sjl.health.SampleConfiguration, com.sjl.health.internal.HistoryManager);
+  public com.sjl.health.internal.Health newHealth(com.sjl.health.internal.InitialStateFactory);
+}
+Compiled from "SampleConfiguration.java"
+public interface com.sjl.health.SampleConfiguration$MyComponent {
+  public abstract java.lang.String method1();
+  public abstract java.lang.String method2();
+}
+Compiled from "SampleConfiguration.java"
+class com.sjl.health.SampleConfiguration$MyComponentImpl implements com.sjl.health.SampleConfiguration$MyComponent {
+  final com.sjl.health.SampleConfiguration this$0;
+  com.sjl.health.SampleConfiguration$MyComponentImpl(com.sjl.health.SampleConfiguration);
+  public java.lang.String method1();
+  public java.lang.String method2();
+}
+Compiled from "SimpleConfiguration.java"
+public class com.sjl.health.SimpleConfiguration implements com.sjl.health.Configuration {
+  public com.sjl.health.SimpleConfiguration(com.sjl.health.Transitions$TransitionBuilder...);
+  public void init(com.sjl.health.IssueTrackerFactory, com.sjl.health.internal.Clock);
+  public java.lang.String toString();
+  public com.sjl.health.internal.State newInitialState(com.sjl.health.Issue);
+  public com.sjl.health.internal.State newStateInstance(java.lang.String, com.sjl.health.Issue);
+}
+Compiled from "SimpleConfiguration.java"
+class com.sjl.health.SimpleConfiguration$1 implements com.sjl.health.SimpleConfiguration$StateFactory {
+  final com.sjl.health.SimpleConfiguration$TransitionPair val$_top;
+  final com.sjl.health.SimpleConfiguration this$0;
+  com.sjl.health.SimpleConfiguration$1(com.sjl.health.SimpleConfiguration, com.sjl.health.SimpleConfiguration$TransitionPair);
+  public com.sjl.health.internal.State newState(com.sjl.health.Issue, com.sjl.health.internal.IssueTracker, com.sjl.health.internal.Clock);
+}
+Compiled from "SimpleConfiguration.java"
+class com.sjl.health.SimpleConfiguration$2 implements com.sjl.health.SimpleConfiguration$StateFactory {
+  final com.sjl.health.SimpleConfiguration$TransitionPair val$_tp;
+  final com.sjl.health.SimpleConfiguration this$0;
+  com.sjl.health.SimpleConfiguration$2(com.sjl.health.SimpleConfiguration, com.sjl.health.SimpleConfiguration$TransitionPair);
+  public com.sjl.health.internal.State newState(com.sjl.health.Issue, com.sjl.health.internal.IssueTracker, com.sjl.health.internal.Clock);
+  public java.lang.String toString();
+}
+Compiled from "SimpleConfiguration.java"
+interface com.sjl.health.SimpleConfiguration$StateFactory {
+  public abstract com.sjl.health.internal.State newState(com.sjl.health.Issue, com.sjl.health.internal.IssueTracker, com.sjl.health.internal.Clock);
+}
+Compiled from "SimpleConfiguration.java"
+class com.sjl.health.SimpleConfiguration$TransitionPair {
+  final com.sjl.health.SimpleConfiguration this$0;
+  public com.sjl.health.SimpleConfiguration$TransitionPair(com.sjl.health.SimpleConfiguration, java.lang.String);
+  public java.lang.String getName();
+  public void setPromotion(com.sjl.health.internal.Transition);
+  public com.sjl.health.internal.Transition getPromotion();
+  public void setDemotion(com.sjl.health.internal.Transition);
+  public com.sjl.health.internal.Transition getDemotion();
+  public boolean isDemotionOnly();
+}
+Compiled from "SimpleConfiguration.java"
+class com.sjl.health.SimpleConfiguration$TransitionPairs implements java.lang.Iterable<com.sjl.health.SimpleConfiguration$TransitionPair> {
+  final com.sjl.health.SimpleConfiguration this$0;
+  public void addPromoter(java.lang.String, com.sjl.health.internal.Transition);
+  public void addDemoter(java.lang.String, com.sjl.health.internal.Transition);
+  public void validate();
+  public com.sjl.health.SimpleConfiguration$TransitionPair getInitialStateTransitionPair();
+  public com.sjl.health.SimpleConfiguration$TransitionPair get(java.lang.String);
+  public java.util.Iterator<com.sjl.health.SimpleConfiguration$TransitionPair> iterator();
+  com.sjl.health.SimpleConfiguration$TransitionPairs(com.sjl.health.SimpleConfiguration, com.sjl.health.SimpleConfiguration$1);
+}
+Compiled from "Statistics.java"
+public interface com.sjl.health.Statistics {
+  public abstract long getOccurrenceCount();
+  public abstract com.sjl.health.Frequency getFrequency();
+  public abstract com.sjl.health.TimePeriod getPeriod();
+}
+Compiled from "TimePeriod.java"
+public interface com.sjl.health.TimePeriod {
+  public abstract com.sjl.health.Instant getStart();
+  public abstract com.sjl.health.Instant getEnd();
+  public abstract long getMilliseconds();
+}
+Compiled from "Transitions.java"
+public class com.sjl.health.Transitions {
+  public com.sjl.health.Transitions();
+  public static com.sjl.health.Transitions$TransitionBuilder demote(java.lang.String);
+  public static com.sjl.health.Transitions$TransitionBuilder promote(java.lang.String);
+}
+Compiled from "Transitions.java"
+class com.sjl.health.Transitions$TransitionBuilder {
+  public com.sjl.health.Transitions$TransitionBuilder(java.lang.String, boolean);
+  public boolean isDemotion();
+  public com.sjl.health.Transitions$TransitionBuilder to(java.lang.String);
+  public com.sjl.health.Transitions$TransitionBuilder when(com.sjl.health.Condition);
+  public java.lang.String getFrom();
+  public java.lang.String getTo();
+  public com.sjl.health.Condition getWhen();
+  public com.sjl.health.internal.Transition build(com.sjl.health.Configuration);
+  static com.sjl.health.Condition access$000(com.sjl.health.Transitions$TransitionBuilder);
+  static java.lang.String access$100(com.sjl.health.Transitions$TransitionBuilder);
+  static java.lang.String access$200(com.sjl.health.Transitions$TransitionBuilder);
+}
+Compiled from "Transitions.java"
+class com.sjl.health.Transitions$TransitionBuilder$1 implements com.sjl.health.internal.Transition {
+  final com.sjl.health.Configuration val$aStates;
+  final com.sjl.health.Transitions$TransitionBuilder this$0;
+  com.sjl.health.Transitions$TransitionBuilder$1(com.sjl.health.Transitions$TransitionBuilder, com.sjl.health.Configuration);
+  public com.sjl.health.internal.State attempt(com.sjl.health.Statistics, com.sjl.health.Statistics, java.lang.Throwable);
+  public java.lang.String toString();
+}
+Compiled from "RatioAbove.java"
+public class com.sjl.health.conditions.RatioAbove implements com.sjl.health.Condition {
+  public com.sjl.health.conditions.RatioAbove(double);
+  public boolean test(com.sjl.health.Statistics, com.sjl.health.Statistics);
+  public java.lang.String toString();
+}
+Compiled from "RatioAboveTest.java"
+public class com.sjl.health.conditions.RatioAboveTest {
+  public com.sjl.health.conditions.RatioAboveTest();
+  public void setup();
+  public void teardown();
+  public void returnsFalseIfNothingHappenedYet();
+  public void returnsTrueIfFailuresButNoSuccesses();
+  public void returnsTrueWhenRatioEqualsTarget();
+  public void returnsTrueWhenRatioAboveTarget();
+  public void returnsFalseWhenRatioBelowTarget();
+  static com.sjl.health.Statistics access$000(com.sjl.health.conditions.RatioAboveTest);
+  static com.sjl.health.Statistics access$100(com.sjl.health.conditions.RatioAboveTest);
+}
+Compiled from "RatioAboveTest.java"
+class com.sjl.health.conditions.RatioAboveTest$1 extends org.jmock.Expectations {
+  final com.sjl.health.conditions.RatioAboveTest this$0;
+  com.sjl.health.conditions.RatioAboveTest$1(com.sjl.health.conditions.RatioAboveTest);
+}
+Compiled from "RatioAboveTest.java"
+class com.sjl.health.conditions.RatioAboveTest$2 extends org.jmock.Expectations {
+  final com.sjl.health.conditions.RatioAboveTest this$0;
+  com.sjl.health.conditions.RatioAboveTest$2(com.sjl.health.conditions.RatioAboveTest);
+}
+Compiled from "RatioAboveTest.java"
+class com.sjl.health.conditions.RatioAboveTest$3 extends org.jmock.Expectations {
+  final com.sjl.health.conditions.RatioAboveTest this$0;
+  com.sjl.health.conditions.RatioAboveTest$3(com.sjl.health.conditions.RatioAboveTest);
+}
+Compiled from "RatioAboveTest.java"
+class com.sjl.health.conditions.RatioAboveTest$4 extends org.jmock.Expectations {
+  final com.sjl.health.conditions.RatioAboveTest this$0;
+  com.sjl.health.conditions.RatioAboveTest$4(com.sjl.health.conditions.RatioAboveTest);
+}
+Compiled from "RatioAboveTest.java"
+class com.sjl.health.conditions.RatioAboveTest$5 extends org.jmock.Expectations {
+  final com.sjl.health.conditions.RatioAboveTest this$0;
+  com.sjl.health.conditions.RatioAboveTest$5(com.sjl.health.conditions.RatioAboveTest);
+}
+Compiled from "RatioBelow.java"
+public class com.sjl.health.conditions.RatioBelow implements com.sjl.health.Condition {
+  public com.sjl.health.conditions.RatioBelow(double);
+  public boolean test(com.sjl.health.Statistics, com.sjl.health.Statistics);
+  public java.lang.String toString();
+}
+Compiled from "RatioBelowTest.java"
+public class com.sjl.health.conditions.RatioBelowTest {
+  public com.sjl.health.conditions.RatioBelowTest();
+  public void setup();
+  public void teardown();
+  public void returnsTrueIfNothingHappenedYet();
+  public void returnsFalseIfFailuresButNoSuccesses();
+  public void returnsTrueWhenRatioEqualsTarget();
+  public void returnsFalseWhenRatioAboveTarget();
+  public void returnsTrueWhenRatioBelowTarget();
+  static com.sjl.health.Statistics access$000(com.sjl.health.conditions.RatioBelowTest);
+  static com.sjl.health.Statistics access$100(com.sjl.health.conditions.RatioBelowTest);
+}
+Compiled from "RatioBelowTest.java"
+class com.sjl.health.conditions.RatioBelowTest$1 extends org.jmock.Expectations {
+  final com.sjl.health.conditions.RatioBelowTest this$0;
+  com.sjl.health.conditions.RatioBelowTest$1(com.sjl.health.conditions.RatioBelowTest);
+}
+Compiled from "RatioBelowTest.java"
+class com.sjl.health.conditions.RatioBelowTest$2 extends org.jmock.Expectations {
+  final com.sjl.health.conditions.RatioBelowTest this$0;
+  com.sjl.health.conditions.RatioBelowTest$2(com.sjl.health.conditions.RatioBelowTest);
+}
+Compiled from "RatioBelowTest.java"
+class com.sjl.health.conditions.RatioBelowTest$3 extends org.jmock.Expectations {
+  final com.sjl.health.conditions.RatioBelowTest this$0;
+  com.sjl.health.conditions.RatioBelowTest$3(com.sjl.health.conditions.RatioBelowTest);
+}
+Compiled from "RatioBelowTest.java"
+class com.sjl.health.conditions.RatioBelowTest$4 extends org.jmock.Expectations {
+  final com.sjl.health.conditions.RatioBelowTest this$0;
+  com.sjl.health.conditions.RatioBelowTest$4(com.sjl.health.conditions.RatioBelowTest);
+}
+Compiled from "RatioBelowTest.java"
+class com.sjl.health.conditions.RatioBelowTest$5 extends org.jmock.Expectations {
+  final com.sjl.health.conditions.RatioBelowTest this$0;
+  com.sjl.health.conditions.RatioBelowTest$5(com.sjl.health.conditions.RatioBelowTest);
+}
+Compiled from "AbstractStateTest.java"
+public class com.sjl.health.internal.AbstractStateTest {
+  public com.sjl.health.internal.AbstractStateTest();
+  public void setup();
+  public void teardown();
+  public void usesOriginatingIssueOccurrenceInstantForWhenChangedValue();
+  public void collectsIssuesViaSuppliedTracker();
+  public void mayPerformStatePromotionOnSuccess();
+  public void mayPerformStateDemotionOnFailure();
+  static com.sjl.health.Issue access$000(com.sjl.health.internal.AbstractStateTest);
+  static com.sjl.health.Instant access$100(com.sjl.health.internal.AbstractStateTest);
+  static com.sjl.health.internal.Clock access$200(com.sjl.health.internal.AbstractStateTest);
+  static com.sjl.health.internal.Transition access$300(com.sjl.health.internal.AbstractStateTest);
+  static com.sjl.health.internal.IssueTracker access$400(com.sjl.health.internal.AbstractStateTest);
+  static com.sjl.health.internal.Transition access$500(com.sjl.health.internal.AbstractStateTest);
+  static com.sjl.health.internal.State access$600(com.sjl.health.internal.AbstractStateTest);
+}
+Compiled from "AbstractStateTest.java"
+class com.sjl.health.internal.AbstractStateTest$1 extends org.jmock.Expectations {
+  final com.sjl.health.internal.AbstractStateTest this$0;
+  com.sjl.health.internal.AbstractStateTest$1(com.sjl.health.internal.AbstractStateTest);
+}
+Compiled from "AbstractStateTest.java"
+class com.sjl.health.internal.AbstractStateTest$2 extends com.sjl.health.internal.MutableState {
+  final com.sjl.health.internal.AbstractStateTest this$0;
+  com.sjl.health.internal.AbstractStateTest$2(com.sjl.health.internal.AbstractStateTest, java.lang.String, com.sjl.health.Issue, com.sjl.health.internal.IssueTracker, com.sjl.health.internal.Transition, com.sjl.health.internal.Transition, com.sjl.health.internal.Clock);
+}
+Compiled from "AbstractStateTest.java"
+class com.sjl.health.internal.AbstractStateTest$3 extends org.jmock.Expectations {
+  final java.lang.Exception val$_exception;
+  final com.sjl.health.internal.AbstractStateTest this$0;
+  com.sjl.health.internal.AbstractStateTest$3(com.sjl.health.internal.AbstractStateTest, java.lang.Exception);
+}
+Compiled from "AbstractStateTest.java"
+class com.sjl.health.internal.AbstractStateTest$4 extends com.sjl.health.internal.MutableState {
+  final com.sjl.health.internal.AbstractStateTest this$0;
+  com.sjl.health.internal.AbstractStateTest$4(com.sjl.health.internal.AbstractStateTest, java.lang.String, com.sjl.health.Issue, com.sjl.health.internal.IssueTracker, com.sjl.health.internal.Transition, com.sjl.health.internal.Transition, com.sjl.health.internal.Clock);
+}
+Compiled from "AbstractStateTest.java"
+class com.sjl.health.internal.AbstractStateTest$5 extends org.jmock.Expectations {
+  final com.sjl.health.internal.AbstractStateTest this$0;
+  com.sjl.health.internal.AbstractStateTest$5(com.sjl.health.internal.AbstractStateTest);
+}
+Compiled from "AbstractStateTest.java"
+class com.sjl.health.internal.AbstractStateTest$6 extends com.sjl.health.internal.MutableState {
+  final com.sjl.health.internal.AbstractStateTest this$0;
+  com.sjl.health.internal.AbstractStateTest$6(com.sjl.health.internal.AbstractStateTest, java.lang.String, com.sjl.health.Issue, com.sjl.health.internal.IssueTracker, com.sjl.health.internal.Transition, com.sjl.health.internal.Transition, com.sjl.health.internal.Clock);
+}
+Compiled from "AbstractStateTest.java"
+class com.sjl.health.internal.AbstractStateTest$7 extends org.jmock.Expectations {
+  final com.sjl.health.internal.AbstractStateTest this$0;
+  com.sjl.health.internal.AbstractStateTest$7(com.sjl.health.internal.AbstractStateTest);
+}
+Compiled from "AbstractStateTest.java"
+class com.sjl.health.internal.AbstractStateTest$8 extends com.sjl.health.internal.MutableState {
+  final com.sjl.health.internal.AbstractStateTest this$0;
+  com.sjl.health.internal.AbstractStateTest$8(com.sjl.health.internal.AbstractStateTest, java.lang.String, com.sjl.health.Issue, com.sjl.health.internal.IssueTracker, com.sjl.health.internal.Transition, com.sjl.health.internal.Transition, com.sjl.health.internal.Clock);
+}
+Compiled from "Clock.java"
+public interface com.sjl.health.internal.Clock {
+  public abstract com.sjl.health.Instant now();
+}
+Compiled from "DynamicProxyingHealthService.java"
+public class com.sjl.health.internal.DynamicProxyingHealthService implements com.sjl.health.HealthService {
+  public com.sjl.health.internal.DynamicProxyingHealthService(com.sjl.health.internal.HealthFactory, com.sjl.health.IssueTrackerFactory, com.sjl.health.internal.Clock);
+  public <T> T monitor(T, com.sjl.health.Configuration);
+  public com.sjl.health.HealthInfo get(java.lang.Object);
+  public void reset(java.lang.Object);
+}
+Compiled from "DynamicProxyingHealthService.java"
+class com.sjl.health.internal.DynamicProxyingHealthService$1 implements java.lang.reflect.InvocationHandler {
+  final java.util.Map val$_handlers;
+  final com.sjl.health.internal.Health val$_health;
+  final java.lang.Object val$aComponent;
+  final com.sjl.health.internal.DynamicProxyingHealthService this$0;
+  com.sjl.health.internal.DynamicProxyingHealthService$1(com.sjl.health.internal.DynamicProxyingHealthService, java.util.Map, com.sjl.health.internal.Health, java.lang.Object);
+  public java.lang.Object invoke(java.lang.Object, java.lang.reflect.Method, java.lang.Object[]) throws java.lang.Throwable;
+}
+Compiled from "DynamicProxyingHealthService.java"
+class com.sjl.health.internal.DynamicProxyingHealthService$2 implements com.sjl.health.internal.DynamicProxyingHealthService$Handler {
+  final java.lang.reflect.Method val$aMethod;
+  final com.sjl.health.internal.DynamicProxyingHealthService this$0;
+  com.sjl.health.internal.DynamicProxyingHealthService$2(com.sjl.health.internal.DynamicProxyingHealthService, java.lang.reflect.Method);
+  public java.lang.Object handle(com.sjl.health.internal.OperationMonitor, java.lang.Object, java.lang.Object[]) throws java.lang.Throwable;
+}
+Compiled from "DynamicProxyingHealthService.java"
+class com.sjl.health.internal.DynamicProxyingHealthService$3 implements com.sjl.health.internal.DynamicProxyingHealthService$Handler {
+  final com.sjl.health.internal.DynamicProxyingHealthService this$0;
+  com.sjl.health.internal.DynamicProxyingHealthService$3(com.sjl.health.internal.DynamicProxyingHealthService);
+  public java.lang.Object handle(com.sjl.health.internal.OperationMonitor, java.lang.Object, java.lang.Object[]) throws java.lang.Throwable;
+}
+Compiled from "DynamicProxyingHealthService.java"
+class com.sjl.health.internal.DynamicProxyingHealthService$4 implements com.sjl.health.internal.DynamicProxyingHealthService$Handler {
+  final java.lang.reflect.Method val$aMethod;
+  final com.sjl.health.internal.DynamicProxyingHealthService this$0;
+  com.sjl.health.internal.DynamicProxyingHealthService$4(com.sjl.health.internal.DynamicProxyingHealthService, java.lang.reflect.Method);
+  public java.lang.Object handle(com.sjl.health.internal.OperationMonitor, java.lang.Object, java.lang.Object[]) throws java.lang.Throwable;
+}
+Compiled from "DynamicProxyingHealthService.java"
+interface com.sjl.health.internal.DynamicProxyingHealthService$Handler {
+  public abstract java.lang.Object handle(com.sjl.health.internal.OperationMonitor, java.lang.Object, java.lang.Object[]) throws java.lang.Throwable;
+}
+Compiled from "DynamicProxyingHealthServiceTest.java"
+public class com.sjl.health.internal.DynamicProxyingHealthServiceTest {
+  public com.sjl.health.internal.DynamicProxyingHealthServiceTest();
+  public void setup();
+  public void teardown();
+  public void providesAccessToHealthInfoOfInstrumentedComponents();
+  public void providesAccessToHealthInfoOfInstrumentedComponentsViaRefToUninstrumented();
+  public void returnsNullForUnmonitoredObjects();
+  public void invokingMethodOnInstrumentedClassInvokesUnderlyingObject();
+  public void tracksSuccessfulMethodInvocations();
+  public void tracksUnsuccessfulMethodInvocations();
+  static java.lang.RuntimeException access$000(com.sjl.health.internal.DynamicProxyingHealthServiceTest);
+  static com.sjl.health.Configuration access$200(com.sjl.health.internal.DynamicProxyingHealthServiceTest);
+  static com.sjl.health.internal.HealthFactory access$300(com.sjl.health.internal.DynamicProxyingHealthServiceTest);
+  static com.sjl.health.internal.Health access$400(com.sjl.health.internal.DynamicProxyingHealthServiceTest);
+}
+Compiled from "DynamicProxyingHealthServiceTest.java"
+class com.sjl.health.internal.DynamicProxyingHealthServiceTest$1 extends org.jmock.Expectations {
+  final com.sjl.health.internal.DynamicProxyingHealthServiceTest this$0;
+  com.sjl.health.internal.DynamicProxyingHealthServiceTest$1(com.sjl.health.internal.DynamicProxyingHealthServiceTest);
+}
+Compiled from "DynamicProxyingHealthServiceTest.java"
+class com.sjl.health.internal.DynamicProxyingHealthServiceTest$2 extends org.jmock.Expectations {
+  final com.sjl.health.internal.DynamicProxyingHealthServiceTest this$0;
+  com.sjl.health.internal.DynamicProxyingHealthServiceTest$2(com.sjl.health.internal.DynamicProxyingHealthServiceTest);
+}
+Compiled from "DynamicProxyingHealthServiceTest.java"
+class com.sjl.health.internal.DynamicProxyingHealthServiceTest$3 extends org.jmock.Expectations {
+  final com.sjl.health.internal.DynamicProxyingHealthServiceTest this$0;
+  com.sjl.health.internal.DynamicProxyingHealthServiceTest$3(com.sjl.health.internal.DynamicProxyingHealthServiceTest);
+}
+Compiled from "DynamicProxyingHealthServiceTest.java"
+class com.sjl.health.internal.DynamicProxyingHealthServiceTest$4 extends org.jmock.Expectations {
+  final com.sjl.health.internal.DynamicProxyingHealthServiceTest this$0;
+  com.sjl.health.internal.DynamicProxyingHealthServiceTest$4(com.sjl.health.internal.DynamicProxyingHealthServiceTest);
+}
+Compiled from "DynamicProxyingHealthServiceTest.java"
+class com.sjl.health.internal.DynamicProxyingHealthServiceTest$SomeClass implements com.sjl.health.internal.DynamicProxyingHealthServiceTest$SomeInterface {
+  final com.sjl.health.internal.DynamicProxyingHealthServiceTest this$0;
+  public void method1();
+  public void method2();
+  public boolean wasInvoked();
+  com.sjl.health.internal.DynamicProxyingHealthServiceTest$SomeClass(com.sjl.health.internal.DynamicProxyingHealthServiceTest, com.sjl.health.internal.DynamicProxyingHealthServiceTest$1);
+}
+Compiled from "DynamicProxyingHealthServiceTest.java"
+interface com.sjl.health.internal.DynamicProxyingHealthServiceTest$SomeInterface {
+  public abstract void method1();
+  public abstract void method2();
+}
+Compiled from "FastMutableIssue.java"
+public class com.sjl.health.internal.FastMutableIssue implements com.sjl.health.internal.MutableIssue {
+  public com.sjl.health.internal.FastMutableIssue(java.lang.Throwable, com.sjl.health.internal.Clock);
+  public com.sjl.health.Instant getWhenFirstOccurred();
+  public com.sjl.health.Instant getMostRecentOccurrence();
+  public com.sjl.health.Statistics getStatistics();
+  public java.lang.Throwable getCause();
+  public void newOccurrence();
+}
+Compiled from "Health.java"
+public interface com.sjl.health.internal.Health extends com.sjl.health.HealthInfo,com.sjl.health.internal.OperationMonitor {
+  public abstract void reset();
+}
+Compiled from "HealthFactory.java"
+public interface com.sjl.health.internal.HealthFactory {
+  public abstract com.sjl.health.internal.Health newHealth(com.sjl.health.internal.InitialStateFactory);
+}
+Compiled from "HealthListeners.java"
+public class com.sjl.health.internal.HealthListeners implements com.sjl.health.HealthListener {
+  public com.sjl.health.internal.HealthListeners();
+  public void addListener(com.sjl.health.HealthListener);
+  public void removeListener(com.sjl.health.HealthListener);
+  public void onChange(com.sjl.health.HealthInfo$StateInfo, com.sjl.health.HealthInfo$StateInfo);
+}
+Compiled from "HistoryManager.java"
+public interface com.sjl.health.internal.HistoryManager {
+  public abstract com.sjl.health.HealthInfo$History get();
+  public abstract void add(com.sjl.health.HealthInfo$StateInfo);
+}
+Compiled from "InMemoryHealthTest.java"
+public class com.sjl.health.internal.InMemoryHealthTest {
+  public com.sjl.health.internal.InMemoryHealthTest();
+  public void setup();
+  public void teardown();
+  public void invokesStateOnSuccess();
+  public void invokesStateOnFailure();
+  public void notifiesListenersOfSuccessStateChange();
+  public void notifiesListenersOfFailureStateChange();
+  public void listenersReceiveImmutableCopiesOfStates();
+  static com.sjl.health.internal.InitialStateFactory access$000(com.sjl.health.internal.InMemoryHealthTest);
+  static com.sjl.health.internal.State access$100(com.sjl.health.internal.InMemoryHealthTest);
+  static java.lang.Exception access$200(com.sjl.health.internal.InMemoryHealthTest);
+  static com.sjl.health.internal.HistoryManager access$300(com.sjl.health.internal.InMemoryHealthTest);
+  static com.sjl.health.internal.State access$400(com.sjl.health.internal.InMemoryHealthTest);
+  static void access$500(com.sjl.health.internal.InMemoryHealthTest, com.sjl.health.internal.State, java.lang.String);
+  static com.sjl.health.HealthListener access$600(com.sjl.health.internal.InMemoryHealthTest);
+  static org.hamcrest.Matcher access$700(com.sjl.health.internal.InMemoryHealthTest, java.lang.String);
+}
+Compiled from "InMemoryHealthTest.java"
+class com.sjl.health.internal.InMemoryHealthTest$1 extends org.jmock.Expectations {
+  final com.sjl.health.internal.InMemoryHealthTest this$0;
+  com.sjl.health.internal.InMemoryHealthTest$1(com.sjl.health.internal.InMemoryHealthTest);
+}
+Compiled from "InMemoryHealthTest.java"
+class com.sjl.health.internal.InMemoryHealthTest$2 extends org.jmock.Expectations {
+  final com.sjl.health.internal.InMemoryHealthTest this$0;
+  com.sjl.health.internal.InMemoryHealthTest$2(com.sjl.health.internal.InMemoryHealthTest);
+}
+Compiled from "InMemoryHealthTest.java"
+class com.sjl.health.internal.InMemoryHealthTest$3 extends org.jmock.Expectations {
+  final com.sjl.health.internal.InMemoryHealthTest this$0;
+  com.sjl.health.internal.InMemoryHealthTest$3(com.sjl.health.internal.InMemoryHealthTest);
+}
+Compiled from "InMemoryHealthTest.java"
+class com.sjl.health.internal.InMemoryHealthTest$4 extends org.jmock.Expectations {
+  final com.sjl.health.internal.InMemoryHealthTest this$0;
+  com.sjl.health.internal.InMemoryHealthTest$4(com.sjl.health.internal.InMemoryHealthTest);
+}
+Compiled from "InMemoryHealthTest.java"
+class com.sjl.health.internal.InMemoryHealthTest$5 extends org.jmock.Expectations {
+  final com.sjl.health.internal.InMemoryHealthTest this$0;
+  com.sjl.health.internal.InMemoryHealthTest$5(com.sjl.health.internal.InMemoryHealthTest);
+}
+Compiled from "InMemoryHealthTest.java"
+class com.sjl.health.internal.InMemoryHealthTest$6 extends org.jmock.Expectations {
+  final com.sjl.health.internal.InMemoryHealthTest this$0;
+  com.sjl.health.internal.InMemoryHealthTest$6(com.sjl.health.internal.InMemoryHealthTest);
+}
+Compiled from "InMemoryHealthTest.java"
+class com.sjl.health.internal.InMemoryHealthTest$7 extends org.hamcrest.BaseMatcher<com.sjl.health.HealthInfo$StateInfo> {
+  final java.lang.String val$aName;
+  final com.sjl.health.internal.InMemoryHealthTest this$0;
+  com.sjl.health.internal.InMemoryHealthTest$7(com.sjl.health.internal.InMemoryHealthTest, java.lang.String);
+  public boolean matches(java.lang.Object);
+  public void describeTo(org.hamcrest.Description);
+}
+Compiled from "InMemoryHealthTest.java"
+class com.sjl.health.internal.InMemoryHealthTest$8 extends org.jmock.Expectations {
+  final com.sjl.health.internal.State val$aState;
+  final java.lang.String val$aStateName;
+  final com.sjl.health.internal.InMemoryHealthTest this$0;
+  com.sjl.health.internal.InMemoryHealthTest$8(com.sjl.health.internal.InMemoryHealthTest, com.sjl.health.internal.State, java.lang.String);
+}
+Compiled from "InMemoryIssueTrackerFactory.java"
+public class com.sjl.health.internal.InMemoryIssueTrackerFactory implements com.sjl.health.IssueTrackerFactory {
+  public com.sjl.health.internal.InMemoryIssueTrackerFactory(com.sjl.health.internal.Clock);
+  public com.sjl.health.internal.IssueTracker newTracker();
+  static com.sjl.health.internal.Clock access$000(com.sjl.health.internal.InMemoryIssueTrackerFactory);
+}
+Compiled from "InMemoryIssueTrackerFactory.java"
+class com.sjl.health.internal.InMemoryIssueTrackerFactory$InMemoryIssueTracker implements com.sjl.health.internal.IssueTracker {
+  final com.sjl.health.internal.InMemoryIssueTrackerFactory this$0;
+  public com.sjl.health.internal.InMemoryIssueTrackerFactory$InMemoryIssueTracker(com.sjl.health.internal.InMemoryIssueTrackerFactory);
+  public com.sjl.health.Issues getDistinctIssues();
+  public void log(java.lang.Throwable);
+}
+Compiled from "InMemoryIssueTrackerFactory.java"
+class com.sjl.health.internal.InMemoryIssueTrackerFactory$InMemoryIssueTracker$1 implements com.sjl.health.Issues {
+  final java.util.Collection val$_result;
+  final com.sjl.health.internal.InMemoryIssueTrackerFactory$InMemoryIssueTracker this$1;
+  com.sjl.health.internal.InMemoryIssueTrackerFactory$InMemoryIssueTracker$1(com.sjl.health.internal.InMemoryIssueTrackerFactory$InMemoryIssueTracker, java.util.Collection);
+  public void each(com.sjl.health.InternallyIterable$Callback<com.sjl.health.Issue>);
+}
+Compiled from "InitialStateFactory.java"
+public interface com.sjl.health.internal.InitialStateFactory {
+  public abstract com.sjl.health.internal.State newInitialState(com.sjl.health.Issue);
+}
+Compiled from "IssueTracker.java"
+public interface com.sjl.health.internal.IssueTracker {
+  public abstract com.sjl.health.Issues getDistinctIssues();
+  public abstract void log(java.lang.Throwable);
+}
+Compiled from "MutableIssue.java"
+public interface com.sjl.health.internal.MutableIssue extends com.sjl.health.Issue {
+  public abstract void newOccurrence();
+}
+Compiled from "MutableState.java"
+public class com.sjl.health.internal.MutableState implements com.sjl.health.internal.State {
+  public com.sjl.health.internal.MutableState(java.lang.String, com.sjl.health.Issue, com.sjl.health.internal.IssueTracker, com.sjl.health.internal.Transition, com.sjl.health.internal.Transition, com.sjl.health.internal.Clock);
+  public java.lang.String getName();
+  public com.sjl.health.Instant getWhenChanged();
+  public com.sjl.health.Issue getWhyChanged();
+  public com.sjl.health.Issues getDistinctIssues();
+  public com.sjl.health.Statistics getSuccessStats();
+  public com.sjl.health.Statistics getFailureStats();
+  public com.sjl.health.Statistics getTotalStats();
+  public com.sjl.health.internal.State success();
+  public com.sjl.health.internal.State failure(java.lang.Throwable);
+  public java.lang.String toString();
+}
+Compiled from "MutableStatistics.java"
+public interface com.sjl.health.internal.MutableStatistics extends com.sjl.health.Statistics {
+  public abstract long increment();
+  public abstract com.sjl.health.Statistics snapshot();
+}
+Compiled from "OperationMonitor.java"
+public interface com.sjl.health.internal.OperationMonitor {
+  public abstract void success();
+  public abstract void failure(java.lang.Throwable);
+}
+Compiled from "SimpleThreadSafeHealth.java"
+public class com.sjl.health.internal.SimpleThreadSafeHealth implements com.sjl.health.internal.Health {
+  public com.sjl.health.internal.SimpleThreadSafeHealth(com.sjl.health.internal.InitialStateFactory, com.sjl.health.internal.HistoryManager);
+  public void reset();
+  public com.sjl.health.HealthInfo$StateInfo getCurrentState();
+  public com.sjl.health.HealthInfo$History getHistory();
+  public void addListener(com.sjl.health.HealthListener);
+  public void removeListener(com.sjl.health.HealthListener);
+  public void success();
+  public void failure(java.lang.Throwable);
+  public java.lang.String toString();
+  static com.sjl.health.internal.State access$100(com.sjl.health.internal.SimpleThreadSafeHealth);
+  static java.lang.Object access$200(com.sjl.health.internal.SimpleThreadSafeHealth);
+  static com.sjl.health.internal.State access$102(com.sjl.health.internal.SimpleThreadSafeHealth, com.sjl.health.internal.State);
+  static com.sjl.health.internal.HistoryManager access$300(com.sjl.health.internal.SimpleThreadSafeHealth);
+  static com.sjl.health.internal.HealthListeners access$400(com.sjl.health.internal.SimpleThreadSafeHealth);
+}
+Compiled from "SimpleThreadSafeHealth.java"
+class com.sjl.health.internal.SimpleThreadSafeHealth$1 extends com.sjl.health.internal.SimpleThreadSafeHealth$StateInvoker {
+  final com.sjl.health.internal.SimpleThreadSafeHealth this$0;
+  com.sjl.health.internal.SimpleThreadSafeHealth$1(com.sjl.health.internal.SimpleThreadSafeHealth);
+  protected com.sjl.health.internal.State invokeImpl(java.lang.Throwable);
+}
+Compiled from "SimpleThreadSafeHealth.java"
+class com.sjl.health.internal.SimpleThreadSafeHealth$2 extends com.sjl.health.internal.SimpleThreadSafeHealth$StateInvoker {
+  final com.sjl.health.internal.SimpleThreadSafeHealth this$0;
+  com.sjl.health.internal.SimpleThreadSafeHealth$2(com.sjl.health.internal.SimpleThreadSafeHealth);
+  protected com.sjl.health.internal.State invokeImpl(java.lang.Throwable);
+}
+Compiled from "SimpleThreadSafeHealth.java"
+abstract class com.sjl.health.internal.SimpleThreadSafeHealth$StateInvoker {
+  final com.sjl.health.internal.SimpleThreadSafeHealth this$0;
+  protected abstract com.sjl.health.internal.State invokeImpl(java.lang.Throwable);
+  public void invoke(java.lang.Throwable);
+  com.sjl.health.internal.SimpleThreadSafeHealth$StateInvoker(com.sjl.health.internal.SimpleThreadSafeHealth, com.sjl.health.internal.SimpleThreadSafeHealth$1);
+}
+Compiled from "State.java"
+public interface com.sjl.health.internal.State extends com.sjl.health.HealthInfo$StateInfo {
+  public abstract com.sjl.health.internal.State success();
+  public abstract com.sjl.health.internal.State failure(java.lang.Throwable);
+}
+Compiled from "ThreadSafeMutableStatistics.java"
+public class com.sjl.health.internal.ThreadSafeMutableStatistics implements com.sjl.health.internal.MutableStatistics {
+  public com.sjl.health.internal.ThreadSafeMutableStatistics(com.sjl.health.internal.Clock);
+  public long getOccurrenceCount();
+  public com.sjl.health.Frequency getFrequency();
+  public com.sjl.health.TimePeriod getPeriod();
+  public long increment();
+  public com.sjl.health.Statistics snapshot();
+  static java.lang.Object access$000(com.sjl.health.internal.ThreadSafeMutableStatistics);
+  static long access$100(com.sjl.health.internal.ThreadSafeMutableStatistics);
+  static com.sjl.health.Instant access$200(com.sjl.health.internal.ThreadSafeMutableStatistics);
+  static com.sjl.health.internal.Clock access$300(com.sjl.health.internal.ThreadSafeMutableStatistics);
+}
+Compiled from "ThreadSafeMutableStatistics.java"
+class com.sjl.health.internal.ThreadSafeMutableStatistics$1 implements com.sjl.health.Frequency {
+  final com.sjl.health.internal.ThreadSafeMutableStatistics this$0;
+  com.sjl.health.internal.ThreadSafeMutableStatistics$1(com.sjl.health.internal.ThreadSafeMutableStatistics);
+  public double getHertz();
+}
+Compiled from "ThreadSafeMutableStatistics.java"
+class com.sjl.health.internal.ThreadSafeMutableStatistics$2 implements com.sjl.health.TimePeriod {
+  final com.sjl.health.internal.ThreadSafeMutableStatistics this$0;
+  com.sjl.health.internal.ThreadSafeMutableStatistics$2(com.sjl.health.internal.ThreadSafeMutableStatistics);
+  public com.sjl.health.Instant getStart();
+  public com.sjl.health.Instant getEnd();
+  public long getMilliseconds();
+}
+Compiled from "Transition.java"
+public interface com.sjl.health.internal.Transition {
+  public abstract com.sjl.health.internal.State attempt(com.sjl.health.Statistics, com.sjl.health.Statistics, java.lang.Throwable);
+}
+Compiled from "ImmutableFrequency.java"
+public final class com.sjl.health.internal.immutable.ImmutableFrequency implements com.sjl.health.Frequency {
+  public static com.sjl.health.internal.immutable.ImmutableFrequency create(long, long);
+  public double getHertz();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "ImmutableInstant.java"
+public final class com.sjl.health.internal.immutable.ImmutableInstant implements com.sjl.health.Instant {
+  public static com.sjl.health.internal.immutable.ImmutableInstant create(long);
+  public static com.sjl.health.internal.immutable.ImmutableInstant create(com.sjl.health.Instant);
+  public static com.sjl.health.internal.immutable.ImmutableInstant earliest(com.sjl.health.Instant...);
+  public static com.sjl.health.internal.immutable.ImmutableInstant latest(com.sjl.health.Instant...);
+  public long getClockTime();
+  public boolean before(com.sjl.health.Instant);
+  public boolean after(com.sjl.health.Instant);
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+}
+Compiled from "ImmutableIssue.java"
+public final class com.sjl.health.internal.immutable.ImmutableIssue implements com.sjl.health.Issue {
+  public static com.sjl.health.internal.immutable.ImmutableIssue create(com.sjl.health.Issue);
+  public com.sjl.health.Instant getWhenFirstOccurred();
+  public com.sjl.health.Instant getMostRecentOccurrence();
+  public com.sjl.health.Statistics getStatistics();
+  public java.lang.Throwable getCause();
+}
+Compiled from "ImmutableIssues.java"
+public final class com.sjl.health.internal.immutable.ImmutableIssues implements com.sjl.health.Issues {
+  public static com.sjl.health.internal.immutable.ImmutableIssues create(com.sjl.health.Issues);
+  public void each(com.sjl.health.InternallyIterable$Callback<com.sjl.health.Issue>);
+}
+Compiled from "ImmutableIssues.java"
+final class com.sjl.health.internal.immutable.ImmutableIssues$1 implements com.sjl.health.InternallyIterable$Callback<com.sjl.health.Issue> {
+  final java.util.List val$_issues;
+  com.sjl.health.internal.immutable.ImmutableIssues$1(java.util.List);
+  public void with(com.sjl.health.Issue);
+  public void with(java.lang.Object);
+}
+Compiled from "ImmutableStateInfo.java"
+public final class com.sjl.health.internal.immutable.ImmutableStateInfo implements com.sjl.health.HealthInfo$StateInfo {
+  public static com.sjl.health.internal.immutable.ImmutableStateInfo create(com.sjl.health.HealthInfo$StateInfo);
+  public java.lang.String getName();
+  public com.sjl.health.Instant getWhenChanged();
+  public com.sjl.health.Issue getWhyChanged();
+  public com.sjl.health.Statistics getSuccessStats();
+  public com.sjl.health.Statistics getFailureStats();
+  public com.sjl.health.Statistics getTotalStats();
+  public com.sjl.health.Issues getDistinctIssues();
+}
+Compiled from "ImmutableStatistics.java"
+public final class com.sjl.health.internal.immutable.ImmutableStatistics implements com.sjl.health.Statistics {
+  public static com.sjl.health.internal.immutable.ImmutableStatistics create(com.sjl.health.TimePeriod, long);
+  public static com.sjl.health.internal.immutable.ImmutableStatistics create(com.sjl.health.Statistics);
+  public static com.sjl.health.internal.immutable.ImmutableStatistics combine(com.sjl.health.Statistics, com.sjl.health.Statistics);
+  public long getOccurrenceCount();
+  public com.sjl.health.Frequency getFrequency();
+  public com.sjl.health.TimePeriod getPeriod();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+}
+Compiled from "ImmutableTimePeriod.java"
+public final class com.sjl.health.internal.immutable.ImmutableTimePeriod implements com.sjl.health.TimePeriod {
+  public static final com.sjl.health.internal.immutable.ImmutableTimePeriod create(com.sjl.health.Instant, com.sjl.health.Instant);
+  public static final com.sjl.health.internal.immutable.ImmutableTimePeriod create(com.sjl.health.TimePeriod);
+  public com.sjl.health.Instant getStart();
+  public com.sjl.health.Instant getEnd();
+  public long getMilliseconds();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+}

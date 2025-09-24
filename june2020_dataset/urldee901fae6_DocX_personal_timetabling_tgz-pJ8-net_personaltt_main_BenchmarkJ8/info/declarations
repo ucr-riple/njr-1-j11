@@ -1,0 +1,882 @@
+Compiled from "ProblemDefinitionBuilder.java"
+public class net.personaltt.client.ProblemDefinitionBuilder {
+  net.personaltt.model.ProblemDefinition definition;
+  public net.personaltt.client.ProblemDefinitionBuilder();
+  public void addOccurrence(int, org.joda.time.LocalDateTime, int, int, int, net.personaltt.timedomain.IIntervalsTimeDomain);
+  public void setPreferredPriority(int, int);
+  public net.personaltt.model.ProblemDefinition getDefinition();
+  public boolean cropToFutureOf(org.joda.time.LocalDateTime);
+}
+Compiled from "ScheduleParser.java"
+public class net.personaltt.client.ScheduleParser {
+  net.personaltt.model.Schedule schedule;
+  net.personaltt.utils.Converter<java.lang.Integer, org.joda.time.LocalDateTime> converter;
+  public net.personaltt.client.ScheduleParser(net.personaltt.model.Schedule);
+  public net.personaltt.client.ScheduleParser$Allocation getAllocationOf(int);
+  public java.util.List<net.personaltt.client.ScheduleParser$Allocation> getAllocations();
+}
+Compiled from "ScheduleParser.java"
+public class net.personaltt.client.ScheduleParser$Allocation {
+  public org.joda.time.LocalDateTime start;
+  public int duration;
+  public int id;
+  final net.personaltt.client.ScheduleParser this$0;
+  public net.personaltt.client.ScheduleParser$Allocation(net.personaltt.client.ScheduleParser, org.joda.time.LocalDateTime, int, int);
+}
+Compiled from "SolverClient.java"
+public class net.personaltt.client.SolverClient {
+  net.personaltt.client.SolverClient$SolverThread thread;
+  public net.personaltt.client.SolverClient();
+  public void solve(net.personaltt.model.ProblemDefinition, long) throws java.lang.Exception;
+  public net.personaltt.model.Schedule getCurrentBest() throws java.lang.Exception;
+  public boolean isRunning() throws java.lang.Exception;
+  public boolean endedWithError() throws java.lang.Exception;
+  public void stop() throws java.lang.Exception;
+  public void join() throws java.lang.Exception;
+  protected void finalize() throws java.lang.Throwable;
+}
+Compiled from "SolverClient.java"
+class net.personaltt.client.SolverClient$SolverThread extends java.lang.Thread {
+  net.personaltt.solver.core.Solver solver;
+  net.personaltt.model.ProblemDefinition problem;
+  java.lang.Exception ex;
+  final net.personaltt.client.SolverClient this$0;
+  public net.personaltt.client.SolverClient$SolverThread(net.personaltt.client.SolverClient, net.personaltt.model.ProblemDefinition);
+  public void run();
+  public void sendStop();
+  public net.personaltt.solver.core.SolverSolution getBestSolution();
+}
+Compiled from "Benchmark.java"
+public class net.personaltt.main.Benchmark {
+  static int SOLVER_TIMEOUT;
+  static net.sf.cpsolver.ifs.util.DataProperties solverProperties;
+  public net.personaltt.main.Benchmark();
+  public static void main(java.lang.String[]);
+  public static void testAll();
+  public static void test1(int);
+  public static void test2(int);
+  public static void test3(int);
+  public static void test4(int);
+  public static void testS(int);
+  public static void testP(int);
+  public static void benchmarkPriority();
+  public static void benchmarkTerminationCondition();
+  public static void benchmarkProp(net.personaltt.model.ProblemDefinition, java.lang.String, double, double, double);
+  public static net.personaltt.model.ProblemDefinition SeqentialProblem(int);
+  public static net.personaltt.model.ProblemDefinition SeqentialProblemInitialyFilled(int);
+  static {};
+}
+Compiled from "Benchmark.java"
+class net.personaltt.main.Benchmark$RandomProblemGenerator {
+  net.personaltt.model.ProblemDefinition problem;
+  java.util.Random r;
+  int maxTime;
+  int number;
+  float fixedChance;
+  public net.personaltt.main.Benchmark$RandomProblemGenerator(int, int, float);
+  public net.personaltt.model.ProblemDefinition generateRandomProblem();
+}
+Compiled from "Benchmark.java"
+class net.personaltt.main.Benchmark$SolvableProblemGenerator {
+  net.personaltt.model.ProblemDefinition problem;
+  java.util.Random r;
+  int maxTime;
+  int number;
+  long bestSolutionDurations;
+  java.util.List<net.personaltt.model.Occurrence> optimalSolution;
+  public net.personaltt.main.Benchmark$SolvableProblemGenerator(int, int);
+  public net.personaltt.model.ProblemDefinition getProblem();
+  public void generateRandomProblem();
+}
+Compiled from "Benchmark.java"
+class net.personaltt.main.Benchmark$SolverThread extends java.lang.Thread {
+  public boolean paused;
+  net.personaltt.solver.core.Solver solver;
+  net.personaltt.model.ProblemDefinition problem;
+  net.personaltt.solver.core.SolverState state;
+  public net.personaltt.main.Benchmark$SolverThread(net.personaltt.solver.core.Solver, net.personaltt.model.ProblemDefinition);
+  public void run();
+}
+Compiled from "Occurrence.java"
+public class net.personaltt.model.Occurrence {
+  net.personaltt.utils.BaseIntervalsSet<java.lang.Integer> domain;
+  int minDuration;
+  int maxDuration;
+  int id;
+  net.personaltt.model.OccurrenceAllocation allocation;
+  int preferredStart;
+  int preferredDuration;
+  int preferrencePriority;
+  long domainLowerBound;
+  long domainUpperBound;
+  int PRIORTY_OFFSET;
+  int DURATIONPREF_OFFSET;
+  public net.personaltt.model.Occurrence(net.personaltt.utils.BaseIntervalsSet<java.lang.Integer>, int, int, int);
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public net.personaltt.utils.BaseIntervalsSet<java.lang.Integer> getDomain();
+  public int getMaxDuration();
+  public int getMinDuration();
+  public java.lang.String toString();
+  public int getId();
+  public java.lang.Object clone();
+  public net.personaltt.model.OccurrenceAllocation getAllocation();
+  public void setAllocation(net.personaltt.model.OccurrenceAllocation);
+  public void setInitialAllocation(net.personaltt.model.OccurrenceAllocation);
+  public int getPreferrencePriority();
+  public int getPreferredStart();
+  public long getPreferrenceCost();
+  public long getPreferrenceCost(net.personaltt.model.OccurrenceAllocation);
+  public long getPreferrenceCost(net.personaltt.utils.BaseInterval<java.lang.Integer>);
+  public long getPreferrenceCost(int, int);
+  public long getDurationCost();
+  public long getDurationCost(int);
+  public long getPreferredStartCost();
+  public long getPreferredStartCost(long);
+  public void setDomain(net.personaltt.utils.BaseIntervalsSet<java.lang.Integer>);
+  public void setPreferrencePriority(int);
+  public net.personaltt.model.OccurrenceAllocation getBestPreferredAllocation();
+}
+Compiled from "OccurrenceAllocation.java"
+public class net.personaltt.model.OccurrenceAllocation {
+  int start;
+  int duration;
+  public net.personaltt.model.OccurrenceAllocation();
+  public net.personaltt.model.OccurrenceAllocation(int, int);
+  public net.personaltt.model.OccurrenceAllocation(net.personaltt.utils.BaseInterval<java.lang.Integer>);
+  public net.personaltt.utils.BaseInterval<java.lang.Integer> toInterval();
+  public void setStart(int);
+  public void setDuration(int);
+  public int getEnd();
+  public int getDuration();
+  public int getStart();
+  public void set(net.personaltt.model.OccurrenceAllocation);
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public java.lang.String toString();
+}
+Compiled from "ProblemDefinition.java"
+public class net.personaltt.model.ProblemDefinition {
+  public java.util.List<net.personaltt.model.Occurrence> problemOccurrences;
+  public net.personaltt.model.Schedule initialSchedule;
+  public net.personaltt.model.ProblemDefinition();
+  public void addOccurrence(net.personaltt.model.Occurrence, net.personaltt.utils.BaseInterval<java.lang.Integer>);
+  public void removeOccurrence(net.personaltt.model.Occurrence);
+}
+Compiled from "Schedule.java"
+public class net.personaltt.model.Schedule {
+  java.util.HashMap<net.personaltt.model.Occurrence, net.personaltt.model.OccurrenceAllocation> allocationMapping;
+  public net.personaltt.model.Schedule(java.util.List<net.personaltt.model.Occurrence>);
+  public net.personaltt.model.Schedule();
+  public java.util.Set<java.util.Map$Entry<net.personaltt.model.Occurrence, net.personaltt.model.OccurrenceAllocation>> getOccurrencesAllocations();
+  public net.personaltt.model.OccurrenceAllocation getAllocationOf(net.personaltt.model.Occurrence);
+  public net.personaltt.utils.BaseInterval<java.lang.Integer> getAllocationIntervalOf(net.personaltt.model.Occurrence);
+  public net.personaltt.model.OccurrenceAllocation getAllocationOf(int);
+  public net.personaltt.model.Schedule deepClone();
+  public net.personaltt.model.Schedule allocationsClone();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public boolean hasConflict();
+  public int numberOccurrences();
+  public net.personaltt.model.OccurrenceAllocation removeAllocation(net.personaltt.model.Occurrence);
+  public void setAllocation(net.personaltt.model.Occurrence, net.personaltt.model.OccurrenceAllocation);
+}
+Compiled from "AllocationSelection.java"
+public interface net.personaltt.solver.core.AllocationSelection {
+  public abstract net.personaltt.model.OccurrenceAllocation select(net.personaltt.solver.core.SolverState, net.personaltt.model.Occurrence);
+}
+Compiled from "OccurrenceSelection.java"
+public interface net.personaltt.solver.core.OccurrenceSelection {
+  public abstract net.personaltt.model.Occurrence select(net.personaltt.solver.core.SolverState);
+}
+Compiled from "Solver.java"
+public class net.personaltt.solver.core.Solver {
+  public long timeoutLimit;
+  public float stuckedThresholdCoef;
+  java.util.Random random;
+  boolean pause;
+  net.personaltt.solver.core.SolverState currentSolution;
+  public net.sf.cpsolver.ifs.util.DataProperties properties;
+  public net.personaltt.solver.core.Solver(java.lang.String, java.lang.String);
+  public net.personaltt.solver.core.Solver(java.util.Random, java.lang.String, java.lang.String);
+  public net.personaltt.solver.core.Solver();
+  public net.personaltt.solver.core.SolverState solve(net.personaltt.model.ProblemDefinition);
+  public void pause();
+  public void step();
+  public void printState();
+  public net.personaltt.solver.core.SolverSolution currentBestSolution();
+}
+Compiled from "SolverSolution.java"
+public interface net.personaltt.solver.core.SolverSolution {
+  public abstract long preferenceCost();
+  public abstract long constraintsCost();
+  public abstract net.personaltt.model.Schedule getSchedule();
+}
+Compiled from "SolverState.java"
+public interface net.personaltt.solver.core.SolverState extends net.personaltt.solver.core.SolverSolution,java.lang.Comparable {
+  public abstract void init(net.personaltt.model.Schedule);
+  public abstract boolean iterate();
+  public abstract net.personaltt.utils.intervalmultimap.IntervalMultimap<net.personaltt.model.Occurrence> allocationsMultimap();
+  public abstract net.personaltt.model.OccurrenceAllocation unassigneAllocation(net.personaltt.model.Occurrence);
+  public abstract java.util.List<net.personaltt.model.Occurrence> assigneAllocation(net.personaltt.model.Occurrence, net.personaltt.model.OccurrenceAllocation);
+  public abstract boolean setAllocation(net.personaltt.model.Occurrence, net.personaltt.model.OccurrenceAllocation);
+  public abstract boolean isBetterThanBest();
+  public abstract void saveBestSolution();
+  public abstract int getLastBestIteration();
+  public abstract int getItearation();
+  public abstract net.personaltt.solver.core.SolverSolution getBestSolution();
+  public abstract java.util.List<net.personaltt.model.Occurrence> getUnassignedOccurrences();
+}
+Compiled from "AlignedOccurrenceAllocationsIterator.java"
+public class net.personaltt.solver.heuristics.AlignedOccurrenceAllocationsIterator implements java.util.Iterator<net.personaltt.utils.BaseInterval<java.lang.Integer>> {
+  net.personaltt.model.Occurrence occurrence;
+  net.personaltt.utils.intervalmultimap.IntervalMultimap<net.personaltt.model.Occurrence> schedule;
+  java.util.ListIterator<net.personaltt.utils.BaseInterval<java.lang.Integer>> occurrenceDomainIntervals;
+  net.personaltt.solver.heuristics.StopsAlignedAllocationsEnumerator allocationsEnum;
+  public net.personaltt.solver.heuristics.AlignedOccurrenceAllocationsIterator(net.personaltt.model.Occurrence, net.personaltt.utils.intervalmultimap.IntervalMultimap<net.personaltt.model.Occurrence>);
+  public boolean hasNext();
+  public net.personaltt.utils.BaseInterval<java.lang.Integer> next();
+  public void remove();
+  public void skipDurationIncreasing();
+  public java.lang.Object next();
+}
+Compiled from "AlignedOccurrenceAllocationsIteratorTest.java"
+public class net.personaltt.solver.heuristics.AlignedOccurrenceAllocationsIteratorTest {
+  public net.personaltt.solver.heuristics.AlignedOccurrenceAllocationsIteratorTest();
+  public void testAllallocations();
+}
+Compiled from "BestAllocationSelection.java"
+public class net.personaltt.solver.heuristics.BestAllocationSelection implements net.personaltt.solver.core.AllocationSelection {
+  java.util.Random random;
+  double conflictCostWeight;
+  double valueCostWeight;
+  public net.personaltt.solver.heuristics.BestAllocationSelection(net.sf.cpsolver.ifs.util.DataProperties);
+  public net.personaltt.model.OccurrenceAllocation select(net.personaltt.solver.core.SolverState, net.personaltt.model.Occurrence);
+}
+Compiled from "ConflictSumAllocationCost.java"
+public class net.personaltt.solver.heuristics.ConflictSumAllocationCost implements net.personaltt.solver.heuristics.CostForOccurrence {
+  net.personaltt.model.Occurrence allocatingOccurrence;
+  net.personaltt.solver.core.SolverState solution;
+  public net.personaltt.solver.heuristics.ConflictSumAllocationCost(net.personaltt.model.Occurrence, net.personaltt.solver.core.SolverState);
+  public long computeCostOfAllocation(net.personaltt.utils.BaseInterval<java.lang.Integer>);
+  public void setOccurrence(net.personaltt.model.Occurrence);
+}
+Compiled from "Cost.java"
+public interface net.personaltt.solver.heuristics.Cost {
+  public abstract long computeCostOfAllocation(net.personaltt.utils.BaseInterval<java.lang.Integer>);
+}
+Compiled from "CostForOccurrence.java"
+public interface net.personaltt.solver.heuristics.CostForOccurrence extends net.personaltt.solver.heuristics.Cost {
+  public abstract void setOccurrence(net.personaltt.model.Occurrence);
+}
+Compiled from "MainAllocationSelection.java"
+public class net.personaltt.solver.heuristics.MainAllocationSelection implements net.personaltt.solver.core.AllocationSelection {
+  net.personaltt.solver.heuristics.BestAllocationSelection conflictingSelection;
+  net.personaltt.solver.heuristics.RouletteAllocationSelection optimizingSelection;
+  java.util.Random random;
+  int stayMinConflictSelectionAfterToZeroConflict;
+  double probBestIgnoringSelWhenNoConflict;
+  double conflictCostWeight;
+  int lastConflictLoweringIteration;
+  long lastConflictCost;
+  long smallestConflict;
+  public net.personaltt.solver.heuristics.MainAllocationSelection(net.sf.cpsolver.ifs.util.DataProperties);
+  public net.personaltt.model.OccurrenceAllocation select(net.personaltt.solver.core.SolverState, net.personaltt.model.Occurrence);
+  public net.personaltt.model.OccurrenceAllocation selectBestIgnoringConflict(net.personaltt.solver.core.SolverState, net.personaltt.model.Occurrence);
+}
+Compiled from "MainSolverState.java"
+public class net.personaltt.solver.heuristics.MainSolverState implements net.personaltt.solver.core.SolverState {
+  net.personaltt.utils.intervalmultimap.IntervalMultimap<net.personaltt.model.Occurrence> allocationMultimap;
+  net.personaltt.model.Schedule solutionSchedule;
+  net.personaltt.solver.core.SolverSolution bestSolution;
+  int bestIteration;
+  long preferencesCost;
+  long conflictingCost;
+  java.util.List<net.personaltt.model.Occurrence> unassignedOccurrences;
+  boolean incompleteSearch;
+  int currentIteration;
+  public net.personaltt.solver.heuristics.MainSolverState();
+  public void init(net.personaltt.model.Schedule);
+  public long preferenceCost();
+  public long constraintsCost();
+  public net.personaltt.utils.intervalmultimap.IntervalMultimap<net.personaltt.model.Occurrence> allocationsMultimap();
+  public net.personaltt.model.OccurrenceAllocation unassigneAllocation(net.personaltt.model.Occurrence);
+  public java.util.List<net.personaltt.model.Occurrence> assigneAllocation(net.personaltt.model.Occurrence, net.personaltt.model.OccurrenceAllocation);
+  public boolean setAllocation(net.personaltt.model.Occurrence, net.personaltt.model.OccurrenceAllocation);
+  public net.personaltt.model.Schedule getSchedule();
+  public net.personaltt.solver.core.SolverSolution cloneSolution();
+  public int compareTo(java.lang.Object);
+  public boolean iterate();
+  public boolean isBetterThanBest();
+  public void saveBestSolution();
+  public int getLastBestIteration();
+  public int getItearation();
+  public net.personaltt.solver.core.SolverSolution getBestSolution();
+  public java.util.List<net.personaltt.model.Occurrence> getUnassignedOccurrences();
+}
+Compiled from "MainSolverState.java"
+class net.personaltt.solver.heuristics.MainSolverState$1 implements net.personaltt.solver.core.SolverSolution {
+  final long val$optimalCost;
+  final long val$constraintCost;
+  final net.personaltt.model.Schedule val$clonedSchedule;
+  final net.personaltt.solver.heuristics.MainSolverState this$0;
+  net.personaltt.solver.heuristics.MainSolverState$1(net.personaltt.solver.heuristics.MainSolverState, long, long, net.personaltt.model.Schedule);
+  public long preferenceCost();
+  public long constraintsCost();
+  public net.personaltt.model.Schedule getSchedule();
+}
+Compiled from "MinDurationConflictAllocationCost.java"
+public class net.personaltt.solver.heuristics.MinDurationConflictAllocationCost extends net.personaltt.solver.heuristics.OccurrenceConflictAllocationCost {
+  public net.personaltt.solver.heuristics.MinDurationConflictAllocationCost(net.personaltt.model.Occurrence, net.personaltt.solver.core.SolverState);
+  public int occurrenceOverMinDurationCost(net.personaltt.model.Occurrence, net.personaltt.utils.BaseInterval<java.lang.Integer>);
+}
+Compiled from "OccurrenceConflictAllocationCost.java"
+public abstract class net.personaltt.solver.heuristics.OccurrenceConflictAllocationCost implements net.personaltt.solver.heuristics.CostForOccurrence {
+  net.personaltt.model.Occurrence allocatingOccurrence;
+  net.personaltt.solver.core.SolverState solution;
+  public net.personaltt.solver.heuristics.OccurrenceConflictAllocationCost();
+  public net.personaltt.solver.heuristics.OccurrenceConflictAllocationCost(net.personaltt.model.Occurrence, net.personaltt.solver.core.SolverState);
+  public void setOccurrence(net.personaltt.model.Occurrence);
+  public long computeCostOfAllocation(net.personaltt.utils.BaseInterval<java.lang.Integer>);
+  protected abstract int occurrenceOverMinDurationCost(net.personaltt.model.Occurrence, net.personaltt.utils.BaseInterval<java.lang.Integer>);
+  protected int sumOccurrencesCost(java.util.List<net.personaltt.model.Occurrence>, net.personaltt.utils.BaseInterval<java.lang.Integer>);
+}
+Compiled from "RouletteAllocationSelection.java"
+public class net.personaltt.solver.heuristics.RouletteAllocationSelection implements net.personaltt.solver.core.AllocationSelection {
+  java.util.Random random;
+  public net.personaltt.solver.heuristics.RouletteAllocationSelection(net.sf.cpsolver.ifs.util.DataProperties);
+  public net.personaltt.model.OccurrenceAllocation select(net.personaltt.solver.core.SolverState, net.personaltt.model.Occurrence);
+}
+Compiled from "RouletteAllocationSelection.java"
+class net.personaltt.solver.heuristics.RouletteAllocationSelection$AllocationAndCost {
+  net.personaltt.utils.BaseInterval<java.lang.Integer> allocation;
+  double cost;
+  final net.personaltt.solver.heuristics.RouletteAllocationSelection this$0;
+  public net.personaltt.solver.heuristics.RouletteAllocationSelection$AllocationAndCost(net.personaltt.utils.BaseInterval<java.lang.Integer>, double);
+}
+Compiled from "RouletteOccurrenceSelection.java"
+public class net.personaltt.solver.heuristics.RouletteOccurrenceSelection implements net.personaltt.solver.core.OccurrenceSelection {
+  java.util.Random random;
+  double optimizationWhenConflictProb;
+  public net.personaltt.solver.heuristics.RouletteOccurrenceSelection(net.sf.cpsolver.ifs.util.DataProperties);
+  public net.personaltt.model.Occurrence select(net.personaltt.solver.core.SolverState);
+}
+Compiled from "StopsAlignedAllocationsEnumerator.java"
+public class net.personaltt.solver.heuristics.StopsAlignedAllocationsEnumerator {
+  java.util.List<? extends net.personaltt.utils.BaseInterval<java.lang.Integer>> elementaryIntervals;
+  int minDuration;
+  int maxDuration;
+  int intervalsUpperBound;
+  net.personaltt.utils.intervalmultimap.IntervalAllocationsAlignedToStopsIterator<java.lang.Integer, java.lang.Integer> stopsIterator;
+  int duration;
+  net.personaltt.utils.intervalmultimap.IntervalAllocationsAlignedToStopsIterator<java.lang.Integer, java.lang.Integer>.IntervalStop alignment;
+  int currentIntervalOfEnd;
+  boolean nextIsSkipped;
+  public net.personaltt.solver.heuristics.StopsAlignedAllocationsEnumerator(int, int, java.util.List<? extends net.personaltt.utils.BaseInterval<java.lang.Integer>>);
+  public boolean hasNext();
+  public net.personaltt.solver.heuristics.StopsAlignedAllocationsEnumerator$AlignedAllocation next();
+  public void skipToNextStop();
+}
+Compiled from "StopsAlignedAllocationsEnumerator.java"
+public class net.personaltt.solver.heuristics.StopsAlignedAllocationsEnumerator$AlignedAllocation {
+  public int intervalIndexOfStartPoint;
+  public int startPoint;
+  public int endPoint;
+  final net.personaltt.solver.heuristics.StopsAlignedAllocationsEnumerator this$0;
+  public net.personaltt.solver.heuristics.StopsAlignedAllocationsEnumerator$AlignedAllocation(net.personaltt.solver.heuristics.StopsAlignedAllocationsEnumerator);
+}
+Compiled from "ActionStackDomain.java"
+public class net.personaltt.timedomain.ActionStackDomain implements net.personaltt.timedomain.IIntervalsTimeDomain {
+  static final int ADD;
+  static final int REMOVE;
+  static final int MASK;
+  public net.personaltt.timedomain.ActionStackDomain();
+  public net.personaltt.timedomain.IntervalsSet getIntervalsIn(net.personaltt.timedomain.Interval);
+  public void push(int, net.personaltt.timedomain.IIntervalsTimeDomain);
+  public boolean isBounded();
+  public net.personaltt.timedomain.Interval getBoundingInterval();
+  public boolean intersects(net.personaltt.timedomain.IIntervalsTimeDomain);
+}
+Compiled from "ActionStackDomain.java"
+abstract class net.personaltt.timedomain.ActionStackDomain$ActionBase {
+  net.personaltt.timedomain.IIntervalsTimeDomain domain;
+  final net.personaltt.timedomain.ActionStackDomain this$0;
+  public net.personaltt.timedomain.ActionStackDomain$ActionBase(net.personaltt.timedomain.ActionStackDomain, net.personaltt.timedomain.IIntervalsTimeDomain);
+  abstract void applyOn(net.personaltt.timedomain.IntervalsSet, net.personaltt.timedomain.Interval);
+  abstract boolean boundedAppliedOn(boolean);
+  abstract net.personaltt.timedomain.Interval applyOnBoundary(net.personaltt.timedomain.Interval);
+}
+Compiled from "ActionStackDomain.java"
+class net.personaltt.timedomain.ActionStackDomain$AddAction extends net.personaltt.timedomain.ActionStackDomain$ActionBase {
+  final net.personaltt.timedomain.ActionStackDomain this$0;
+  public net.personaltt.timedomain.ActionStackDomain$AddAction(net.personaltt.timedomain.ActionStackDomain, net.personaltt.timedomain.IIntervalsTimeDomain);
+  void applyOn(net.personaltt.timedomain.IntervalsSet, net.personaltt.timedomain.Interval);
+  boolean boundedAppliedOn(boolean);
+  net.personaltt.timedomain.Interval applyOnBoundary(net.personaltt.timedomain.Interval);
+}
+Compiled from "ActionStackDomain.java"
+class net.personaltt.timedomain.ActionStackDomain$MaskAction extends net.personaltt.timedomain.ActionStackDomain$ActionBase {
+  final net.personaltt.timedomain.ActionStackDomain this$0;
+  public net.personaltt.timedomain.ActionStackDomain$MaskAction(net.personaltt.timedomain.ActionStackDomain, net.personaltt.timedomain.IIntervalsTimeDomain);
+  void applyOn(net.personaltt.timedomain.IntervalsSet, net.personaltt.timedomain.Interval);
+  boolean boundedAppliedOn(boolean);
+  net.personaltt.timedomain.Interval applyOnBoundary(net.personaltt.timedomain.Interval);
+}
+Compiled from "ActionStackDomain.java"
+class net.personaltt.timedomain.ActionStackDomain$RemoveAction extends net.personaltt.timedomain.ActionStackDomain$ActionBase {
+  final net.personaltt.timedomain.ActionStackDomain this$0;
+  public net.personaltt.timedomain.ActionStackDomain$RemoveAction(net.personaltt.timedomain.ActionStackDomain, net.personaltt.timedomain.IIntervalsTimeDomain);
+  void applyOn(net.personaltt.timedomain.IntervalsSet, net.personaltt.timedomain.Interval);
+  boolean boundedAppliedOn(boolean);
+  net.personaltt.timedomain.Interval applyOnBoundary(net.personaltt.timedomain.Interval);
+}
+Compiled from "ActionStackDomainTest.java"
+public class net.personaltt.timedomain.ActionStackDomainTest {
+  public net.personaltt.timedomain.ActionStackDomainTest();
+  public static void setUpClass();
+  public static void tearDownClass();
+  public void setUp();
+  public void tearDown();
+  public void testGetIntervalsIn1();
+  public void testGetIntervalsIn3();
+  public void testGetIntervalsIn2();
+  public void testGetIntervalsInRepeatingAddThenMask();
+  public void testGetIntervalsRepeatingAddThenRemove();
+  public void testGetIntervalsRepeatingAddThenRemoveBounded();
+  public void testGetIntervalsRepeatingAddThenRemoveBounded2();
+}
+Compiled from "ConverterFromInteger.java"
+public class net.personaltt.timedomain.ConverterFromInteger implements net.personaltt.utils.Converter<java.lang.Integer, org.joda.time.LocalDateTime> {
+  public net.personaltt.timedomain.ConverterFromInteger();
+  public org.joda.time.LocalDateTime convert(java.lang.Integer);
+  public java.lang.Object convert(java.lang.Object);
+}
+Compiled from "ConverterToInteger.java"
+public class net.personaltt.timedomain.ConverterToInteger implements net.personaltt.utils.Converter<org.joda.time.LocalDateTime, java.lang.Integer> {
+  public net.personaltt.timedomain.ConverterToInteger();
+  public java.lang.Integer convert(org.joda.time.LocalDateTime);
+  public java.lang.Object convert(java.lang.Object);
+}
+Compiled from "IIntervalsTimeDomain.java"
+public interface net.personaltt.timedomain.IIntervalsTimeDomain {
+  public abstract net.personaltt.timedomain.IntervalsSet getIntervalsIn(net.personaltt.timedomain.Interval);
+  public abstract boolean isBounded();
+  public abstract net.personaltt.timedomain.Interval getBoundingInterval();
+  public abstract boolean intersects(net.personaltt.timedomain.IIntervalsTimeDomain);
+}
+Compiled from "IntegerMetric.java"
+public class net.personaltt.timedomain.IntegerMetric implements net.personaltt.utils.Metric<java.lang.Integer, java.lang.Integer> {
+  public net.personaltt.timedomain.IntegerMetric();
+  public java.lang.Integer add(java.lang.Integer, java.lang.Integer);
+  public java.lang.Integer removes(java.lang.Integer, java.lang.Integer);
+  public java.lang.Integer difference(java.lang.Integer, java.lang.Integer);
+  public java.lang.Object difference(java.lang.Object, java.lang.Object);
+  public java.lang.Object removes(java.lang.Object, java.lang.Object);
+  public java.lang.Object add(java.lang.Object, java.lang.Object);
+}
+Compiled from "Interval.java"
+public class net.personaltt.timedomain.Interval extends net.personaltt.utils.BaseInterval<org.joda.time.LocalDateTime> implements net.personaltt.timedomain.IIntervalsTimeDomain {
+  public net.personaltt.timedomain.Interval(org.joda.time.LocalDateTime, org.joda.time.LocalDateTime);
+  public java.lang.String toString();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public net.personaltt.timedomain.IntervalsSet toIntervalsSet();
+  public net.personaltt.timedomain.IntervalsSet getIntervalsIn(net.personaltt.timedomain.Interval);
+  public boolean intersects(net.personaltt.timedomain.Interval);
+  public boolean overlaps(net.personaltt.timedomain.Interval);
+  public boolean isBounded();
+  public net.personaltt.timedomain.Interval getBoundingInterval();
+  public boolean intersects(net.personaltt.timedomain.IIntervalsTimeDomain);
+}
+Compiled from "IntervalTest.java"
+public class net.personaltt.timedomain.IntervalTest {
+  net.personaltt.timedomain.Interval instance;
+  net.personaltt.timedomain.Interval beforeBefore;
+  net.personaltt.timedomain.Interval beforeIn;
+  net.personaltt.timedomain.Interval beforeAfter;
+  net.personaltt.timedomain.Interval inIn;
+  net.personaltt.timedomain.Interval inAfter;
+  net.personaltt.timedomain.Interval afterAfter;
+  public net.personaltt.timedomain.IntervalTest();
+  public static void setUpClass();
+  public static void tearDownClass();
+  public void setUp();
+  public void tearDown();
+  public void testToIntervalsSet();
+  public void testIntersectsBeforeBefore();
+  public void testIntersectsBeforeIn();
+  public void testIntersectsBeforeAfter();
+  public void testIntersectsInIn();
+  public void testIntersectsInAfter();
+  public void testIntersectsAfterAfter();
+  public void testOverlapsBeforeBefore();
+  public void testOverlapsBeforeIn();
+  public void testOverlapsBeforeAfter();
+  public void testOverlapsInIn();
+  public void testOverlapsInAfter();
+  public void testOverlapsAfterAfter();
+}
+Compiled from "IntervalsSet.java"
+public class net.personaltt.timedomain.IntervalsSet extends net.personaltt.utils.BaseIntervalsSet<org.joda.time.LocalDateTime> {
+  public net.personaltt.timedomain.IntervalsSet(net.personaltt.timedomain.Interval);
+  public net.personaltt.timedomain.IntervalsSet();
+  public void unionWith(net.personaltt.timedomain.Interval);
+  public void minus(net.personaltt.timedomain.Interval);
+  public java.util.List<net.personaltt.timedomain.Interval> getIntervals();
+  public net.personaltt.utils.BaseIntervalsSet<java.lang.Integer> toNumericIntervalsSet();
+}
+Compiled from "IntervalsSet.java"
+class net.personaltt.timedomain.IntervalsSet$IntervalListBuilder implements net.personaltt.utils.BaseIntervalsSet$IntervalsBuilder<org.joda.time.LocalDateTime> {
+  java.util.List<net.personaltt.timedomain.Interval> intervals;
+  final net.personaltt.timedomain.IntervalsSet this$0;
+  public net.personaltt.timedomain.IntervalsSet$IntervalListBuilder(net.personaltt.timedomain.IntervalsSet);
+  public void add(org.joda.time.LocalDateTime, org.joda.time.LocalDateTime);
+  public void add(java.lang.Object, java.lang.Object);
+}
+Compiled from "IntervalsSetTest.java"
+public class net.personaltt.timedomain.IntervalsSetTest {
+  net.personaltt.timedomain.IntervalsSet set1;
+  net.personaltt.timedomain.IntervalsSet set2;
+  public net.personaltt.timedomain.IntervalsSetTest();
+  public static void setUpClass();
+  public static void tearDownClass();
+  public void setUp();
+  public void tearDown();
+  public void testUnionWith_IntervalsSet1();
+  public void testUnionWith_IntervalsSet2();
+  public void testUnionWith_LocalDateTime_LocalDateTime1();
+  public void testUnionWith_LocalDateTime_LocalDateTime_Distinct();
+  public void testUnionWith_LocalDateTime_LocalDateTime_Seamless();
+  public void testIntersectWith();
+  public void testMinus();
+  public void testMinus2();
+  public void testMinus3();
+  public void testMinus4();
+  public void testMinus5();
+  public void testMinus6();
+}
+Compiled from "IntervalsTimeDomainUtils.java"
+public class net.personaltt.timedomain.IntervalsTimeDomainUtils {
+  public net.personaltt.timedomain.IntervalsTimeDomainUtils();
+  public static net.personaltt.utils.IntMatrix computeIntersectionMatrix(java.util.List<net.personaltt.timedomain.IIntervalsTimeDomain>);
+  public static boolean genericIntersects(net.personaltt.timedomain.IIntervalsTimeDomain, net.personaltt.timedomain.IIntervalsTimeDomain);
+  public static java.util.List<java.lang.Integer> computeIntersectsTransitiveClosure(java.util.List<net.personaltt.timedomain.IIntervalsTimeDomain>, java.util.List<java.lang.Integer>);
+}
+Compiled from "RepeatingIntervalDomain.java"
+public class net.personaltt.timedomain.RepeatingIntervalDomain implements net.personaltt.timedomain.IIntervalsTimeDomain {
+  org.joda.time.LocalDateTime referenceIntervalStart;
+  org.joda.time.base.BaseSingleFieldPeriod intervalDuration;
+  org.joda.time.base.BaseSingleFieldPeriod repeatingPeriod;
+  public net.personaltt.timedomain.RepeatingIntervalDomain(org.joda.time.LocalDateTime, org.joda.time.base.BaseSingleFieldPeriod, org.joda.time.base.BaseSingleFieldPeriod);
+  public net.personaltt.timedomain.IntervalsSet getIntervalsIn(net.personaltt.timedomain.Interval);
+  public static java.util.List<net.personaltt.timedomain.Interval> periodsIntervals(org.joda.time.LocalDateTime, org.joda.time.base.BaseSingleFieldPeriod, int);
+  public boolean isBounded();
+  public net.personaltt.timedomain.Interval getBoundingInterval();
+  public boolean intersects(net.personaltt.timedomain.IIntervalsTimeDomain);
+}
+Compiled from "RepeatingIntervalDomainTest.java"
+public class net.personaltt.timedomain.RepeatingIntervalDomainTest {
+  public net.personaltt.timedomain.RepeatingIntervalDomainTest();
+  public static void setUpClass();
+  public static void tearDownClass();
+  public void setUp();
+  public void tearDown();
+  public void testGetIntervalsInDayForDays();
+  public void testGetIntervalsInRange1();
+  public void testGetIntervalsInRange2();
+  public void testGetIntervalsInRangeRepeating31DayInMonth();
+}
+Compiled from "BaseInterval.java"
+public class net.personaltt.utils.BaseInterval<T extends java.lang.Comparable> {
+  protected T start;
+  protected T end;
+  public net.personaltt.utils.BaseInterval(T, T);
+  public T getStart();
+  public T getEnd();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public java.lang.String toString();
+}
+Compiled from "BaseIntervalsSet.java"
+public class net.personaltt.utils.BaseIntervalsSet<T extends java.lang.Comparable> {
+  protected java.util.TreeMap<T, java.lang.Boolean> setMap;
+  public net.personaltt.utils.BaseIntervalsSet();
+  public static <K extends java.lang.Comparable> net.personaltt.utils.BaseIntervalsSet<K> oneInterval(K, K);
+  public void unionWith(T, T);
+  public net.personaltt.utils.BaseInterval<T> getIntervalContaining(T);
+  public net.personaltt.utils.BaseInterval<T> getFirstInterval();
+  public T getUpperBound();
+  public T getLowerBound();
+  public void unionWith(net.personaltt.utils.BaseIntervalsSet<T>);
+  public net.personaltt.utils.BaseIntervalsSet<T> getUnionWith(java.util.Iterator<java.util.Map$Entry<T, java.lang.Boolean>>);
+  public void intersectWith(net.personaltt.utils.BaseIntervalsSet<T>);
+  public net.personaltt.utils.BaseIntervalsSet<T> getIntersectionWith(java.util.Iterator<java.util.Map$Entry<T, java.lang.Boolean>>);
+  public net.personaltt.utils.BaseIntervalsSet<T> getIntersectionWith(net.personaltt.utils.BaseIntervalsSet<T>);
+  public void minus(net.personaltt.utils.BaseIntervalsSet<T>);
+  public net.personaltt.utils.BaseIntervalsSet<T> getSubtraction(java.util.Iterator<java.util.Map$Entry<T, java.lang.Boolean>>);
+  public java.util.List<net.personaltt.utils.BaseInterval<T>> getBaseIntervals();
+  protected void buildIntervals(net.personaltt.utils.BaseIntervalsSet$IntervalsBuilder<T>);
+  public <D extends java.lang.Comparable> net.personaltt.utils.BaseIntervalsSet<D> convertTo(net.personaltt.utils.Converter<T, D>);
+  public boolean empty();
+}
+Compiled from "BaseIntervalsSet.java"
+class net.personaltt.utils.BaseIntervalsSet$1 {
+}
+Compiled from "BaseIntervalsSet.java"
+class net.personaltt.utils.BaseIntervalsSet$BaseIntervalBuilder implements net.personaltt.utils.BaseIntervalsSet$IntervalsBuilder<T> {
+  java.util.List<net.personaltt.utils.BaseInterval<T>> intervals;
+  final net.personaltt.utils.BaseIntervalsSet this$0;
+  public net.personaltt.utils.BaseIntervalsSet$BaseIntervalBuilder(net.personaltt.utils.BaseIntervalsSet);
+  public void add(T, T);
+  public void add(java.lang.Object, java.lang.Object);
+}
+Compiled from "BaseIntervalsSet.java"
+class net.personaltt.utils.BaseIntervalsSet$IntersectMerge implements net.personaltt.utils.IntervalsSetMerger$MergeFunction<java.lang.Boolean, java.lang.Boolean, java.lang.Boolean> {
+  final net.personaltt.utils.BaseIntervalsSet this$0;
+  public java.lang.Boolean mergeEdge(java.lang.Boolean, java.lang.Boolean, java.lang.Boolean);
+  public java.lang.Object mergeEdge(java.lang.Object, java.lang.Object, java.lang.Object);
+  net.personaltt.utils.BaseIntervalsSet$IntersectMerge(net.personaltt.utils.BaseIntervalsSet, net.personaltt.utils.BaseIntervalsSet$1);
+}
+Compiled from "BaseIntervalsSet.java"
+public interface net.personaltt.utils.BaseIntervalsSet$IntervalsBuilder<T> {
+  public abstract void add(T, T);
+}
+Compiled from "BaseIntervalsSet.java"
+class net.personaltt.utils.BaseIntervalsSet$MinusMerge implements net.personaltt.utils.IntervalsSetMerger$MergeFunction<java.lang.Boolean, java.lang.Boolean, java.lang.Boolean> {
+  final net.personaltt.utils.BaseIntervalsSet this$0;
+  public java.lang.Boolean mergeEdge(java.lang.Boolean, java.lang.Boolean, java.lang.Boolean);
+  public java.lang.Object mergeEdge(java.lang.Object, java.lang.Object, java.lang.Object);
+  net.personaltt.utils.BaseIntervalsSet$MinusMerge(net.personaltt.utils.BaseIntervalsSet, net.personaltt.utils.BaseIntervalsSet$1);
+}
+Compiled from "BaseIntervalsSet.java"
+class net.personaltt.utils.BaseIntervalsSet$UnionMerge implements net.personaltt.utils.IntervalsSetMerger$MergeFunction<java.lang.Boolean, java.lang.Boolean, java.lang.Boolean> {
+  final net.personaltt.utils.BaseIntervalsSet this$0;
+  public java.lang.Boolean mergeEdge(java.lang.Boolean, java.lang.Boolean, java.lang.Boolean);
+  public java.lang.Object mergeEdge(java.lang.Object, java.lang.Object, java.lang.Object);
+  net.personaltt.utils.BaseIntervalsSet$UnionMerge(net.personaltt.utils.BaseIntervalsSet, net.personaltt.utils.BaseIntervalsSet$1);
+}
+Compiled from "Converter.java"
+public interface net.personaltt.utils.Converter<S, D> {
+  public abstract D convert(S);
+}
+Compiled from "IntMatrix.java"
+public class net.personaltt.utils.IntMatrix {
+  int[] values;
+  int order;
+  public net.personaltt.utils.IntMatrix(int);
+  public void set(int, int, int);
+  public int get(int, int);
+}
+Compiled from "IntervalsSetMerger.java"
+public class net.personaltt.utils.IntervalsSetMerger<T extends java.lang.Comparable, V1, V2> {
+  java.util.Iterator<java.util.Map$Entry<T, V1>> this_iterator;
+  java.util.Iterator<java.util.Map$Entry<T, V2>> second_iterator;
+  public net.personaltt.utils.IntervalsSetMerger(java.util.Iterator<java.util.Map$Entry<T, V1>>, java.util.Iterator<java.util.Map$Entry<T, V2>>);
+  public <R> java.util.TreeMap<T, R> merge(net.personaltt.utils.IntervalsSetMerger$MergeFunction<R, V1, V2>);
+}
+Compiled from "IntervalsSetMerger.java"
+public interface net.personaltt.utils.IntervalsSetMerger$MergeFunction<VR, V1, V2> {
+  public abstract VR mergeEdge(VR, V1, V2);
+}
+Compiled from "Iterables.java"
+public final class net.personaltt.utils.Iterables {
+  public net.personaltt.utils.Iterables();
+  public static <T> java.util.ArrayList<T> toArrayList(java.lang.Iterable<T>);
+}
+Compiled from "Metric.java"
+public interface net.personaltt.utils.Metric<O, M> {
+  public abstract O add(O, M);
+  public abstract O removes(O, M);
+  public abstract M difference(O, O);
+}
+Compiled from "RandomUtils.java"
+public class net.personaltt.utils.RandomUtils {
+  public net.personaltt.utils.RandomUtils();
+  public static long nextLong(java.util.Random, long);
+}
+Compiled from "ValuedInterval.java"
+public class net.personaltt.utils.ValuedInterval<K extends java.lang.Comparable, V> extends net.personaltt.utils.BaseInterval<K> {
+  V values;
+  public V getValues();
+  public net.personaltt.utils.ValuedInterval(net.personaltt.utils.BaseInterval<K>, V);
+}
+Compiled from "ElementaryIntervalsIterator.java"
+public class net.personaltt.utils.intervalmultimap.ElementaryIntervalsIterator<K extends java.lang.Comparable, V> implements java.util.Iterator<net.personaltt.utils.ValuedInterval<K, V>> {
+  net.personaltt.utils.intervalmultimap.IntervalsStopsIterator<K, V> stopsIterator;
+  java.util.Map$Entry<K, V> previous;
+  java.util.Map$Entry<K, V> current;
+  public net.personaltt.utils.intervalmultimap.ElementaryIntervalsIterator(net.personaltt.utils.intervalmultimap.IntervalsStopsIterator<K, V>);
+  public boolean hasNext();
+  public net.personaltt.utils.ValuedInterval<K, V> next();
+  public void remove();
+  public java.lang.Object next();
+}
+Compiled from "IntervalAllocationsAlignedToStopsIterator.java"
+public class net.personaltt.utils.intervalmultimap.IntervalAllocationsAlignedToStopsIterator<K extends java.lang.Comparable, M> implements java.util.Iterator<net.personaltt.utils.intervalmultimap.IntervalAllocationsAlignedToStopsIterator<K, M>.IntervalStop> {
+  M allocationDuration;
+  java.util.List<? extends net.personaltt.utils.BaseInterval<K>> values;
+  K startPoint;
+  int startValuesIndex;
+  K endPoint;
+  int endValuesIndex;
+  net.personaltt.utils.Metric<K, M> metric;
+  public net.personaltt.utils.intervalmultimap.IntervalAllocationsAlignedToStopsIterator(M, java.util.List<? extends net.personaltt.utils.BaseInterval<K>>, net.personaltt.utils.Metric<K, M>);
+  public boolean hasNext();
+  public net.personaltt.utils.intervalmultimap.IntervalAllocationsAlignedToStopsIterator<K, M>.IntervalStop next();
+  public void remove();
+  public java.lang.Object next();
+}
+Compiled from "IntervalAllocationsAlignedToStopsIterator.java"
+public class net.personaltt.utils.intervalmultimap.IntervalAllocationsAlignedToStopsIterator$IntervalStop {
+  public K startPoint;
+  public int startValuesIndex;
+  final net.personaltt.utils.intervalmultimap.IntervalAllocationsAlignedToStopsIterator this$0;
+  public net.personaltt.utils.intervalmultimap.IntervalAllocationsAlignedToStopsIterator$IntervalStop(net.personaltt.utils.intervalmultimap.IntervalAllocationsAlignedToStopsIterator);
+}
+Compiled from "IntervalMultimap.java"
+public class net.personaltt.utils.intervalmultimap.IntervalMultimap<V> {
+  java.util.TreeMap<java.lang.Integer, net.personaltt.utils.intervalmultimap.IntervalMultimap$MultimapEdge<V>> edges;
+  java.util.HashMap<V, java.lang.Integer> startPoints;
+  public net.personaltt.utils.intervalmultimap.IntervalMultimap();
+  public long put(V, net.personaltt.utils.BaseInterval<java.lang.Integer>);
+  public long put(V, net.personaltt.utils.BaseInterval<java.lang.Integer>, java.util.List<V>);
+  public long remove(V);
+  public net.personaltt.utils.ValuedInterval<java.lang.Integer, java.util.List<V>> valuesIntervalOfPoint(java.lang.Integer);
+  public java.lang.Iterable<net.personaltt.utils.ValuedInterval<java.lang.Integer, java.util.List<V>>> valuesInInterval(net.personaltt.utils.BaseInterval<java.lang.Integer>);
+  public java.lang.Iterable<net.personaltt.utils.ValuedInterval<java.lang.Integer, net.personaltt.utils.intervalmultimap.IntervalMultimap$MultimapEdge<V>>> valuesChangesInInterval(net.personaltt.utils.BaseInterval<java.lang.Integer>);
+  public java.lang.Iterable<net.personaltt.utils.ValuedInterval<java.lang.Integer, java.util.List<V>>> valuesIntervals();
+  public java.lang.Iterable<java.util.Map$Entry<java.lang.Integer, net.personaltt.utils.intervalmultimap.IntervalMultimap$MultimapEdge<V>>> stopsInMap();
+  public java.util.Iterator<java.util.Map$Entry<java.lang.Integer, net.personaltt.utils.intervalmultimap.IntervalMultimap$MultimapEdge<V>>> edgesIteratorInInterval(net.personaltt.utils.BaseInterval<java.lang.Integer>);
+  public java.lang.Iterable<V> values();
+  public java.lang.Iterable<net.personaltt.utils.ValuedInterval<java.lang.Integer, java.util.List<V>>> intervalsIn(V);
+  public int size();
+  public java.lang.Iterable<V> keys();
+}
+Compiled from "IntervalMultimap.java"
+class net.personaltt.utils.intervalmultimap.IntervalMultimap$1 implements java.lang.Iterable<net.personaltt.utils.ValuedInterval<java.lang.Integer, java.util.List<V>>> {
+  final net.personaltt.utils.BaseInterval val$interval;
+  final net.personaltt.utils.intervalmultimap.IntervalMultimap this$0;
+  net.personaltt.utils.intervalmultimap.IntervalMultimap$1(net.personaltt.utils.intervalmultimap.IntervalMultimap, net.personaltt.utils.BaseInterval);
+  public java.util.Iterator<net.personaltt.utils.ValuedInterval<java.lang.Integer, java.util.List<V>>> iterator();
+}
+Compiled from "IntervalMultimap.java"
+class net.personaltt.utils.intervalmultimap.IntervalMultimap$2 implements java.lang.Iterable<net.personaltt.utils.ValuedInterval<java.lang.Integer, net.personaltt.utils.intervalmultimap.IntervalMultimap$MultimapEdge<V>>> {
+  final net.personaltt.utils.BaseInterval val$interval;
+  final net.personaltt.utils.intervalmultimap.IntervalMultimap this$0;
+  net.personaltt.utils.intervalmultimap.IntervalMultimap$2(net.personaltt.utils.intervalmultimap.IntervalMultimap, net.personaltt.utils.BaseInterval);
+  public java.util.Iterator<net.personaltt.utils.ValuedInterval<java.lang.Integer, net.personaltt.utils.intervalmultimap.IntervalMultimap$MultimapEdge<V>>> iterator();
+}
+Compiled from "IntervalMultimap.java"
+class net.personaltt.utils.intervalmultimap.IntervalMultimap$3 implements java.lang.Iterable<net.personaltt.utils.ValuedInterval<java.lang.Integer, java.util.List<V>>> {
+  final java.lang.Object val$value;
+  final net.personaltt.utils.intervalmultimap.IntervalMultimap this$0;
+  net.personaltt.utils.intervalmultimap.IntervalMultimap$3(net.personaltt.utils.intervalmultimap.IntervalMultimap, java.lang.Object);
+  public java.util.Iterator<net.personaltt.utils.ValuedInterval<java.lang.Integer, java.util.List<V>>> iterator();
+}
+Compiled from "IntervalMultimap.java"
+public class net.personaltt.utils.intervalmultimap.IntervalMultimap$MultimapEdge<V> {
+  java.util.List<V> values;
+  java.util.List<V> addedValues;
+  java.util.List<V> removedValues;
+  public net.personaltt.utils.intervalmultimap.IntervalMultimap$MultimapEdge();
+  net.personaltt.utils.intervalmultimap.IntervalMultimap$MultimapEdge<V> copy();
+  public int size();
+  public V get(int);
+  public java.util.List<V> getValues();
+  public java.lang.Object[] toArray();
+  public java.util.List<V> getAdded();
+  static boolean access$000(net.personaltt.utils.intervalmultimap.IntervalMultimap$MultimapEdge);
+}
+Compiled from "IntervalMultimap.java"
+class net.personaltt.utils.intervalmultimap.IntervalMultimap$MultimapSubsetEdgeIterator implements net.personaltt.utils.intervalmultimap.IntervalsStopsIterator<java.lang.Integer, net.personaltt.utils.intervalmultimap.IntervalMultimap$MultimapEdge<V>> {
+  net.personaltt.utils.BaseInterval<java.lang.Integer> boundary;
+  java.util.Iterator<java.util.Map$Entry<java.lang.Integer, net.personaltt.utils.intervalmultimap.IntervalMultimap$MultimapEdge<V>>> subsetIterator;
+  java.util.Map$Entry<java.lang.Integer, net.personaltt.utils.intervalmultimap.IntervalMultimap$MultimapEdge<V>> current;
+  final net.personaltt.utils.intervalmultimap.IntervalMultimap this$0;
+  public net.personaltt.utils.intervalmultimap.IntervalMultimap$MultimapSubsetEdgeIterator(net.personaltt.utils.BaseInterval<java.lang.Integer>);
+  public boolean hasNext();
+  public java.util.Map$Entry<java.lang.Integer, net.personaltt.utils.intervalmultimap.IntervalMultimap$MultimapEdge<V>> next();
+  public void remove();
+  public java.lang.Integer upperBound();
+  public java.lang.Object upperBound();
+  public java.lang.Object next();
+}
+Compiled from "IntervalMultimap.java"
+class net.personaltt.utils.intervalmultimap.IntervalMultimap$MultimapSubsetStopsIterator implements net.personaltt.utils.intervalmultimap.IntervalsStopsIterator<java.lang.Integer, java.util.List<V>> {
+  net.personaltt.utils.intervalmultimap.IntervalMultimap<V>.MultimapSubsetEdgeIterator edgesIterator;
+  final net.personaltt.utils.intervalmultimap.IntervalMultimap this$0;
+  public net.personaltt.utils.intervalmultimap.IntervalMultimap$MultimapSubsetStopsIterator(net.personaltt.utils.BaseInterval<java.lang.Integer>);
+  public java.lang.Integer upperBound();
+  public boolean hasNext();
+  public java.util.Map$Entry<java.lang.Integer, java.util.List<V>> next();
+  public void remove();
+  public java.lang.Object upperBound();
+  public java.lang.Object next();
+}
+Compiled from "IntervalMultimap.java"
+class net.personaltt.utils.intervalmultimap.IntervalMultimap$StopsInValueInterval implements net.personaltt.utils.intervalmultimap.IntervalsStopsIterator<java.lang.Integer, java.util.List<V>> {
+  V value;
+  java.util.Iterator<java.util.Map$Entry<java.lang.Integer, net.personaltt.utils.intervalmultimap.IntervalMultimap$MultimapEdge<V>>> subsetIterator;
+  java.util.Map$Entry<java.lang.Integer, net.personaltt.utils.intervalmultimap.IntervalMultimap$MultimapEdge<V>> current;
+  final net.personaltt.utils.intervalmultimap.IntervalMultimap this$0;
+  public net.personaltt.utils.intervalmultimap.IntervalMultimap$StopsInValueInterval(V);
+  public boolean hasNext();
+  public java.util.Map$Entry<java.lang.Integer, java.util.List<V>> next();
+  public void remove();
+  public java.lang.Integer upperBound();
+  public java.lang.Object upperBound();
+  public java.lang.Object next();
+}
+Compiled from "IntervalMultimapTest.java"
+public class net.personaltt.utils.intervalmultimap.IntervalMultimapTest {
+  public net.personaltt.utils.intervalmultimap.IntervalMultimapTest();
+  public static void setUpClass() throws java.lang.Exception;
+  public static void tearDownClass() throws java.lang.Exception;
+  public void setUp() throws java.lang.Exception;
+  public void tearDown() throws java.lang.Exception;
+  public void testPut();
+  public void testPut3();
+  public void testPutNewConflicts();
+  public void testPutNewConflicts2();
+  public void testRemove();
+  public void testRemoveFirst();
+  public void testRemoveLast();
+  public void testRemoveLast2();
+  public void testRemoveLast3();
+  public void testRemoveLast4();
+  public void testRemoveReturn();
+  public void testRemoveReturn2();
+  public void testValuesInInterval();
+  public void testValuesInInterval2();
+  public void testValuesInInterval3();
+  public void testValuesIntervals1();
+}
+Compiled from "IntervalsStopsIterator.java"
+public interface net.personaltt.utils.intervalmultimap.IntervalsStopsIterator<K, V> extends java.util.Iterator<java.util.Map$Entry<K, V>> {
+  public abstract K upperBound();
+}
+Compiled from "DataProperties.java"
+public class net.sf.cpsolver.ifs.util.DataProperties extends java.util.Properties {
+  public net.sf.cpsolver.ifs.util.DataProperties();
+  public net.sf.cpsolver.ifs.util.DataProperties(java.util.Properties);
+  public net.sf.cpsolver.ifs.util.DataProperties(java.util.Map<java.lang.String, java.lang.String>);
+  public java.lang.String getProperty(java.lang.String, java.lang.String);
+  public java.lang.Object setProperty(java.lang.String, java.lang.String);
+  public int getPropertyInt(java.lang.String, int);
+  public long getPropertyLong(java.lang.String, long);
+  public java.lang.Integer getPropertyInteger(java.lang.String, java.lang.Integer);
+  public java.lang.Long getPropertyLong(java.lang.String, java.lang.Long);
+  public boolean containsPropery(java.lang.String);
+  public boolean getPropertyBoolean(java.lang.String, boolean);
+  public double getPropertyDouble(java.lang.String, double);
+  public float getPropertyFloat(java.lang.String, float);
+  public java.lang.Boolean getPropertyBoolean(java.lang.String, java.lang.Boolean);
+  public java.lang.Double getPropertyDouble(java.lang.String, java.lang.Double);
+  public java.lang.Float getPropertyFloat(java.lang.String, java.lang.Float);
+  public void setProperty(java.lang.String, java.lang.Object[]);
+  public java.lang.Long[] getPropertyLongArry(java.lang.String, java.lang.Long[]);
+  public java.lang.Integer[] getPropertyIntegerArry(java.lang.String, java.lang.Integer[]);
+  public java.util.Map<java.lang.String, java.lang.String> toMap();
+  public void expand();
+  public void load(java.io.InputStream) throws java.io.IOException;
+}

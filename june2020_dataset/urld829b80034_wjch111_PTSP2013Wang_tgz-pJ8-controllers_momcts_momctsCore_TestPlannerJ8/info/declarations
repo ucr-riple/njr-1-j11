@@ -1,0 +1,1691 @@
+Compiled from "MacroRSController.java"
+public class controllers.MacroRandomSearch.MacroRSController extends framework.core.Controller {
+  public static framework.graph.Graph m_graph;
+  public static controllers.MacroRandomSearch.TSPBranchBound m_tspGraph;
+  public int[] m_bestRoute;
+  boolean m_resetRS;
+  public controllers.MacroRandomSearch.MacroRSController(framework.core.Game, long);
+  public int getAction(framework.core.Game, long);
+  public void prepareGameCopy(framework.core.Game);
+  public void paint(java.awt.Graphics2D);
+}
+Compiled from "RandomSearch.java"
+public class controllers.MacroRandomSearch.RandomSearch {
+  public int[] m_bestRandomPath;
+  public double m_bestFitnessFound;
+  public int[] m_currentRandomPath;
+  public java.util.Random m_rnd;
+  public static int[] m_nextPickups;
+  public static framework.core.Game m_currentGameState;
+  public static framework.core.Game m_futureGameState;
+  public static java.util.HashMap<java.lang.Integer, framework.graph.Node> m_nodeLookup;
+  public static int NUM_ACTIONS_INDIVIDUAL;
+  public static int MACRO_ACTION_LENGTH;
+  public static final double SCORE_PER_WAYPOINT;
+  public static final double SCORE_PER_FUELTANK;
+  public static final double DAMAGE_REDUCTION_FACTOR;
+  public controllers.MacroRandomSearch.RandomSearch();
+  public void init();
+  public int run(framework.core.Game, long);
+  public double createRandomPath(long);
+  public static void updateNextWaypoints(int);
+  public static double scoreGame();
+  public static double scoreDist(double);
+  public static boolean match(java.util.ArrayList<java.lang.Integer>, int[]);
+  static {};
+}
+Compiled from "TSPBranchBound.java"
+public class controllers.MacroRandomSearch.TSPBranchBound {
+  public static int MAX_NODES;
+  public controllers.MacroRandomSearch.TSPBranchBound$TSPPath m_tspBestPath;
+  public framework.graph.Graph m_graph;
+  public framework.core.Game m_game;
+  public java.util.TreeMap<java.lang.Integer, framework.utils.Vector2d> m_nodes;
+  public framework.graph.Path[][] m_paths;
+  public double[][] m_dists;
+  public double[] m_distOrigin;
+  public controllers.MacroRandomSearch.TSPBranchBound(framework.core.Game, framework.graph.Graph);
+  public void solve();
+  public int[] getBestPath();
+}
+Compiled from "TSPBranchBound.java"
+class controllers.MacroRandomSearch.TSPBranchBound$TSPPath {
+  public int m_nNodes;
+  public double m_totalCost;
+  public int[] m_path;
+  final controllers.MacroRandomSearch.TSPBranchBound this$0;
+  public controllers.MacroRandomSearch.TSPBranchBound$TSPPath(controllers.MacroRandomSearch.TSPBranchBound, int, int[], double);
+  public controllers.MacroRandomSearch.TSPBranchBound$TSPPath(controllers.MacroRandomSearch.TSPBranchBound, controllers.MacroRandomSearch.TSPBranchBound$TSPPath, int, double);
+  public boolean includes(int);
+}
+Compiled from "Bias.java"
+public class controllers.WoxController.Bias {
+  public controllers.WoxController.Bias();
+  public double getThrust();
+  public double getStraight();
+  public double getRight();
+}
+Compiled from "WoxController.java"
+public class controllers.WoxController.WoxController extends framework.core.Controller {
+  java.util.Random m_rnd;
+  controllers.WoxController.Bias m_bias;
+  public controllers.WoxController.WoxController(framework.core.Game, long);
+  public int getAction(framework.core.Game, long);
+}
+Compiled from "GreedyController.java"
+public class controllers.greedy.GreedyController extends framework.core.Controller {
+  public controllers.greedy.GreedyController(framework.core.Game, long);
+  public int getAction(framework.core.Game, long);
+  public void paint(java.awt.Graphics2D);
+  public framework.graph.Path getPathToClosest();
+  public framework.graph.Graph getGraph();
+}
+Compiled from "KeyController.java"
+public class controllers.keycontroller.KeyController extends framework.core.Controller {
+  public controllers.keycontroller.KeyController();
+  public int getAction(framework.core.Game, long);
+  public controllers.keycontroller.KeyInput getInput();
+}
+Compiled from "KeyInput.java"
+public class controllers.keycontroller.KeyInput extends java.awt.event.KeyAdapter {
+  public controllers.keycontroller.KeyInput();
+  public int getAction();
+  public void keyPressed(java.awt.event.KeyEvent);
+  public void keyReleased(java.awt.event.KeyEvent);
+}
+Compiled from "LineOfSight.java"
+public class controllers.lineofsight.LineOfSight extends framework.core.Controller {
+  public controllers.lineofsight.LineOfSight(framework.core.Game, long);
+  public int getAction(framework.core.Game, long);
+}
+Compiled from "ExpController.java"
+public class controllers.momcts.ExpController extends framework.core.Controller {
+  int i;
+  public controllers.momcts.ExpController(framework.core.Game, long);
+  public int getAction(framework.core.Game, long);
+}
+Compiled from "LongNavigator.java"
+public class controllers.momcts.LongNavigator {
+  public static int MAX_NODES;
+  public controllers.momcts.LongNavigator$TSPPath m_tspBestPath;
+  public framework.graph.Graph m_graph;
+  public framework.core.Game m_game;
+  public java.util.TreeMap<java.lang.Integer, framework.utils.Vector2d> m_nodes;
+  public framework.graph.Path[][] m_paths;
+  public double[][] m_dists;
+  public double[] m_distOrigin;
+  public controllers.momcts.LongNavigator(framework.core.Game, framework.graph.Graph);
+  public void solve();
+  public int[] getBestPath();
+}
+Compiled from "LongNavigator.java"
+class controllers.momcts.LongNavigator$TSPPath {
+  public int m_nNodes;
+  public double m_totalCost;
+  public int[] m_path;
+  final controllers.momcts.LongNavigator this$0;
+  public controllers.momcts.LongNavigator$TSPPath(controllers.momcts.LongNavigator, int, int[], double);
+  public controllers.momcts.LongNavigator$TSPPath(controllers.momcts.LongNavigator, controllers.momcts.LongNavigator$TSPPath, int, double);
+  public boolean includes(int);
+}
+Compiled from "MOMCTSController.java"
+public class controllers.momcts.MOMCTSController extends framework.core.Controller {
+  public static framework.graph.Graph m_graph;
+  public int[] m_bestRoute;
+  public static controllers.momcts.LongNavigator m_tspGraph;
+  boolean m_resetRS;
+  public controllers.momcts.utils.Debug dbg;
+  public controllers.momcts.MOMCTSController(framework.core.Game, long);
+  public int getAction(framework.core.Game, long);
+  public void prepareGameCopy(framework.core.Game);
+}
+Compiled from "MOMCTSPlanner.java"
+public class controllers.momcts.MOMCTSPlanner {
+  public controllers.momcts.MOMCTSPlanner();
+}
+Compiled from "MOOTools.java"
+public class controllers.momcts.MOOTools {
+  public controllers.momcts.MOOTools();
+  public static java.util.Vector<java.lang.Integer> dim(java.util.Vector<java.util.Vector<java.lang.Double>>);
+  public static int sameDimension(java.util.Vector<java.util.Vector<java.lang.Double>>);
+  public static boolean dominates(java.util.Vector<java.lang.Double>, java.util.Vector<java.lang.Double>, boolean);
+  public static boolean dominates(java.util.Vector<java.lang.Double>, java.util.Vector<java.lang.Double>);
+  public static boolean domEquals(java.util.Vector<java.lang.Double>, java.util.Vector<java.lang.Double>);
+  public static boolean dominatesSet(java.util.Vector<java.lang.Double>, java.util.Vector<java.util.Vector<java.lang.Double>>, boolean, boolean);
+  public static boolean dominatesSet(java.util.Vector<java.lang.Double>, java.util.Vector<java.util.Vector<java.lang.Double>>, boolean);
+  public static boolean dominatesSet(java.util.Vector<java.lang.Double>, java.util.Vector<java.util.Vector<java.lang.Double>>);
+  public static boolean isDominatedByAllSet(java.util.Vector<java.lang.Double>, java.util.Vector<java.util.Vector<java.lang.Double>>, boolean, boolean);
+  public static boolean isDominatedByAllSet(java.util.Vector<java.lang.Double>, java.util.Vector<java.util.Vector<java.lang.Double>>, boolean);
+  public static boolean isDominatedByAllSet(java.util.Vector<java.lang.Double>, java.util.Vector<java.util.Vector<java.lang.Double>>);
+  public static java.util.Vector<java.util.Vector<java.lang.Double>> eliminateRepetitions(java.util.Vector<java.util.Vector<java.lang.Double>>);
+  public static java.util.Vector<java.lang.Integer> dominatedInds(java.util.Vector<java.util.Vector<java.lang.Double>>, java.util.Vector<java.lang.Double>, boolean, boolean);
+  public static java.util.Vector<java.util.Vector<java.lang.Double>> dominatedPnts(java.util.Vector<java.util.Vector<java.lang.Double>>, java.util.Vector<java.lang.Double>, boolean, boolean);
+  public static java.util.Vector<java.lang.Integer> dominatingInds(java.util.Vector<java.util.Vector<java.lang.Double>>, java.util.Vector<java.lang.Double>, boolean, boolean);
+  public static java.util.Vector<java.util.Vector<java.lang.Double>> dominatingPnts(java.util.Vector<java.util.Vector<java.lang.Double>>, java.util.Vector<java.lang.Double>, boolean, boolean);
+  public static java.util.Vector<java.util.Vector<java.lang.Double>> dominatingPnts(java.util.Vector<java.util.Vector<java.lang.Double>>, java.util.Vector<java.lang.Double>, boolean);
+  public static java.util.Vector<java.util.Vector<java.lang.Integer>> fastNonDominatedSort(java.util.Vector<java.util.Vector<java.lang.Double>>, boolean);
+  public static java.util.Vector<java.lang.Integer> nonDominatedInds(java.util.Vector<java.util.Vector<java.lang.Double>>, boolean);
+  public static java.util.Vector<java.util.Vector<java.lang.Double>> nonDominatedPnts(java.util.Vector<java.util.Vector<java.lang.Double>>, boolean);
+  public static double hypervolumeIndicator(java.util.Vector<java.util.Vector<java.lang.Double>>, boolean, java.util.Vector<java.lang.Double>);
+  public static double hypervolumeIndicator(java.util.Vector<java.util.Vector<java.lang.Double>>, boolean);
+  public static double hypervolumeIndicator(java.util.Vector<java.util.Vector<java.lang.Double>>);
+  public static double HVIContrib(java.util.Vector<java.lang.Double>, java.util.Vector<java.util.Vector<java.lang.Double>>, boolean, java.util.Vector<java.lang.Double>);
+  public static double HVIContrib(java.util.Vector<java.lang.Double>, java.util.Vector<java.util.Vector<java.lang.Double>>, boolean);
+  public static double HVIContrib(java.util.Vector<java.lang.Double>, java.util.Vector<java.util.Vector<java.lang.Double>>);
+  public static void showPoints(java.util.Vector<java.util.Vector<java.lang.Double>>);
+  public void testHVI();
+  public static void main(java.lang.String[]);
+}
+Compiled from "MOOTools.java"
+public class controllers.momcts.MOOTools$firstDimComparator implements java.util.Comparator {
+  public controllers.momcts.MOOTools$firstDimComparator(boolean);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "MOUCT.java"
+public class controllers.momcts.MOUCT {
+  public static java.util.Vector<java.lang.String> defRwdTypes;
+  public controllers.momcts.MOUCT();
+  public boolean isLeaf();
+  public double avgR(java.lang.String);
+  public void addSon(int);
+  public void showSelf(int, java.util.Vector<java.lang.String>, java.lang.String, int);
+  public void showSelf(int, java.util.Vector<java.lang.String>, java.lang.String);
+  public void showSelf(int, java.util.Vector<java.lang.String>);
+  public void showSelf(int);
+  public void showSelf();
+  public static void main(java.lang.String[]);
+}
+Compiled from "ShortNavigator.java"
+public class controllers.momcts.ShortNavigator extends controllers.momcts.core.MOMCTS {
+  public java.util.Vector<java.lang.Integer> m_bestRandomPath;
+  public java.util.Vector<java.lang.Double> m_bestPntFound;
+  public static int[] m_nextPickups;
+  public static framework.core.Game m_currentGameState;
+  public static framework.core.Game m_futureGameState;
+  public static java.util.HashMap<java.lang.Integer, framework.graph.Node> m_nodeLookup;
+  public static int MACRO_ACTIONS_DEPTH;
+  public static int prolongedStrgyLength;
+  public static int[] MACRO_ACTION_LENGTHs;
+  public static int seqTimeGranularity;
+  public static int wayPointReward;
+  public static int succRotationPenalty;
+  public static int[] fuelTankRewards;
+  public static double collisionAvoidance;
+  public static double lavaAvoidance;
+  public static int defNeighbourhoodSize;
+  public controllers.momcts.utils.Debug dbg;
+  public controllers.momcts.ShortNavigator();
+  public static java.lang.Integer oppositeAction(int);
+  public void turnOffGameCounts();
+  public void turnOnGameCounts();
+  public void resetRotationCounts(int, int);
+  public void resetRotationCounts(int);
+  public void resetRotationCounts();
+  public boolean isSuccRotate(int, int);
+  public void advanceGame(framework.core.Game, int);
+  public void advanceGame(framework.core.Game, java.util.Vector<java.lang.Integer>);
+  public int isInCorner(framework.core.Game, int);
+  public int isInCorner(framework.core.Game);
+  public double distToWaypoint(framework.core.Game);
+  public double distToNextWaypoint(framework.core.Game);
+  public boolean isCloseToWaypoint(framework.core.Game);
+  public boolean isOnLava(framework.core.Game);
+  public boolean isHighSpeed(framework.core.Game, double);
+  public boolean isHighSpeed(framework.core.Game);
+  public java.util.Vector<java.lang.Integer> gameRelatedCandidateActions(java.util.Vector<java.lang.Integer>);
+  public java.util.Vector<java.lang.Integer> candidateActions(controllers.momcts.core.MOUCT);
+  public java.util.Vector<java.lang.Integer> generateRandomPath(controllers.momcts.core.MOUCT);
+  public java.util.Vector<java.lang.Double> evaluateSeq(java.util.Vector<java.lang.Integer>);
+  public static void updateNextWaypoints(int);
+  public void init(int);
+  public int run(framework.core.Game, long);
+  static {};
+}
+Compiled from "ShortNavigator.java"
+class controllers.momcts.ShortNavigator$1 {
+  static final int[] $SwitchMap$controllers$momcts$ShortNavigator$Modes;
+  static {};
+}
+Compiled from "ShortNavigator.java"
+class controllers.momcts.ShortNavigator$ModeParams {
+  public controllers.momcts.ShortNavigator$Modes gameMode;
+  final controllers.momcts.ShortNavigator this$0;
+  public java.util.Vector<java.lang.Double> getPrefs(framework.core.Game);
+  public java.util.Vector<java.lang.Double> getPrefs();
+  public java.util.Vector<java.lang.Integer> getCandidateActSet();
+  controllers.momcts.ShortNavigator$ModeParams(controllers.momcts.ShortNavigator, controllers.momcts.ShortNavigator$1);
+}
+Compiled from "ShortNavigator.java"
+final class controllers.momcts.ShortNavigator$Modes extends java.lang.Enum<controllers.momcts.ShortNavigator$Modes> {
+  public static final controllers.momcts.ShortNavigator$Modes NORMAL;
+  public static final controllers.momcts.ShortNavigator$Modes CONER;
+  public static final controllers.momcts.ShortNavigator$Modes WAYPOINT;
+  public static final controllers.momcts.ShortNavigator$Modes LAVA;
+  public static final controllers.momcts.ShortNavigator$Modes HIGHSPEED;
+  public static controllers.momcts.ShortNavigator$Modes[] values();
+  public static controllers.momcts.ShortNavigator$Modes valueOf(java.lang.String);
+  static {};
+}
+Compiled from "MOMCTS.java"
+public abstract class controllers.momcts.core.MOMCTS {
+  protected static java.lang.String RdomType;
+  protected controllers.momcts.core.MOUCT root;
+  protected controllers.momcts.utils.Archive archive;
+  protected java.util.Vector<java.lang.String> objectives;
+  protected java.lang.String metaRewardType;
+  protected boolean maximize;
+  protected int smt;
+  protected boolean domAppeared;
+  protected java.util.Vector<java.lang.Double> objRwds;
+  protected java.util.Vector<java.lang.Integer> strtgy;
+  protected double pwConst;
+  protected java.util.HashMap<java.lang.String, java.lang.Double> EvEConsts;
+  protected int raveLocal;
+  protected double defDiscount;
+  protected int solNbLimitPerPoint;
+  public static int seqTimeGranularity;
+  protected controllers.momcts.utils.Debug dbg;
+  public java.lang.String getRdomType();
+  public controllers.momcts.core.MOMCTS(java.lang.String, boolean, double, int, double);
+  public void setObjectives(java.util.Vector<java.lang.String>);
+  public java.lang.String getMetaRewardType();
+  public void setMetaRewardType(java.lang.String);
+  public double getPwConst();
+  public void setPwConst(double);
+  public void setEvEConst(java.lang.String, double);
+  public double getEvEConst(java.lang.String);
+  public int getRaveLocal();
+  public void setRaveLocal(int);
+  public double getDefDiscount();
+  public void setDefDiscount(double);
+  public int getSolNbLimitPerPoint();
+  public void setSolNbLimitPerPoint(int);
+  public void setRoot(controllers.momcts.core.MOUCT);
+  public controllers.momcts.core.MOUCT getRoot();
+  public java.util.Vector<java.lang.String> getObjectives();
+  public boolean isMaximize();
+  public void setMaximize(boolean);
+  public int getSmt();
+  public controllers.momcts.utils.Archive getArchive();
+  protected double totalNb(java.util.Vector<controllers.momcts.core.MOUCT>, java.lang.String);
+  public boolean isDomAppeared();
+  public java.util.Vector<java.lang.Double> getObjRwds();
+  public java.util.Vector<java.lang.Integer> getStrtgy();
+  protected java.util.Vector<java.lang.Double> rewards(java.util.Vector<controllers.momcts.core.MOUCT>, java.lang.String);
+  protected java.util.Vector<java.lang.Double> UCBRanks(java.util.Vector<controllers.momcts.core.MOUCT>, java.lang.String, double, boolean);
+  protected java.util.Vector<java.lang.Double> UCBRanks(java.util.Vector<controllers.momcts.core.MOUCT>, java.lang.String, double);
+  protected java.util.Vector<java.lang.Double> UCBRanks(java.util.Vector<controllers.momcts.core.MOUCT>, java.lang.String);
+  public controllers.momcts.core.MOUCT bestUCB(java.util.Vector<controllers.momcts.core.MOUCT>, java.lang.String, boolean);
+  public controllers.momcts.core.MOUCT bestUCB(controllers.momcts.core.MOUCT, java.lang.String, boolean);
+  public controllers.momcts.core.MOUCT bestUCB(controllers.momcts.core.MOUCT, java.lang.String);
+  protected java.util.Vector<java.util.Vector<java.lang.Double>> MOUCBRanks(java.util.Vector<controllers.momcts.core.MOUCT>, java.util.Vector<java.lang.String>);
+  protected java.util.Vector<java.lang.Double> RAVERanks(java.util.Vector<java.lang.Integer>, java.lang.String, controllers.momcts.core.MOUCT);
+  protected java.util.Vector<java.lang.Double> RAVERanks(java.util.Vector<java.lang.Integer>, java.lang.String);
+  public abstract java.util.Vector<java.lang.Integer> candidateActions(controllers.momcts.core.MOUCT);
+  public abstract java.util.Vector<java.lang.Double> evaluateSeq(java.util.Vector<java.lang.Integer>);
+  public abstract java.util.Vector<java.lang.Integer> generateRandomPath(controllers.momcts.core.MOUCT);
+  protected void updateRAVEs(java.util.Vector<controllers.momcts.core.MOUCT>, java.util.Vector<java.lang.Integer>, java.util.Vector<java.lang.String>, java.util.Vector<java.lang.Double>, double);
+  protected void updateRAVEs(java.util.Vector<controllers.momcts.core.MOUCT>, java.util.Vector<java.lang.Integer>, java.util.Vector<java.lang.String>, java.util.Vector<java.lang.Double>);
+  protected void updateRwds(java.util.Vector<controllers.momcts.core.MOUCT>, java.util.Vector<java.lang.String>, java.util.Vector<java.lang.Double>, int, double);
+  protected void updateRwds(java.util.Vector<controllers.momcts.core.MOUCT>, java.util.Vector<java.lang.String>, java.util.Vector<java.lang.Double>, int);
+  protected void updateArchive(java.util.Vector<java.lang.Double>, java.util.Vector<java.lang.Integer>);
+  protected void updateArchive(java.util.Vector<java.lang.Double>);
+  public java.util.Vector<java.util.Vector<java.lang.Integer>> getOptimalSolutions();
+  protected double updateDomReward(java.util.Vector<controllers.momcts.core.MOUCT>, java.util.Vector<java.lang.Double>, int, java.lang.String);
+  public java.util.Vector<controllers.momcts.core.MOUCT> playOneSequence(long, boolean, java.lang.String, boolean, boolean);
+  public java.util.Vector<controllers.momcts.core.MOUCT> playOneSequence(long, boolean, java.lang.String);
+  public java.util.Vector<controllers.momcts.core.MOUCT> playOneSequence(long, boolean);
+  public java.util.Vector<controllers.momcts.core.MOUCT> playOneSequence(long);
+  public java.util.Vector<controllers.momcts.core.MOUCT> playOneSequence();
+  static {};
+}
+Compiled from "MOUCT.java"
+public class controllers.momcts.core.MOUCT {
+  public static java.util.Vector<java.lang.String> defRwdTypes;
+  public controllers.momcts.core.MOUCT(int);
+  public int getState();
+  public void setState(int);
+  public java.util.Vector<java.lang.Integer> getContext();
+  public void setContext(java.util.Vector<java.lang.Integer>);
+  public java.util.Vector<java.lang.Integer> getHistoryActs();
+  public int getDepth();
+  public int getAction();
+  public java.util.Vector<controllers.momcts.core.MOUCT> getSons();
+  public java.util.HashMap<java.lang.String, java.lang.Double> getRwds();
+  public java.util.HashMap<java.lang.String, java.lang.Double> getNbs();
+  public double getRwd(java.lang.String, int);
+  public double getRwd(java.lang.String);
+  public double avgR(java.lang.String, int);
+  public double avgR(java.lang.String);
+  public double getNb(java.lang.String);
+  protected void setRwd(java.lang.String, double);
+  protected void setNb(java.lang.String, double);
+  public static java.util.Vector<java.lang.String> getDefRwdTypes();
+  public static void setDefRwdTypes(java.util.Vector<java.lang.String>);
+  public static void addDefRwdtypes(java.lang.String);
+  public double incrementRwd(java.lang.String, double, double);
+  public void incrementRwd(java.lang.String, double);
+  public double incrementRwd(java.lang.String, double, int, double);
+  public void incrementRAVE(int, java.lang.String, double, double);
+  public void incrementRAVE(int, java.lang.String, double);
+  public double getRAVE(int, java.lang.String);
+  public double getRAVEnb(int, java.lang.String);
+  public controllers.momcts.core.MOUCT addSon(int, int, boolean);
+  public controllers.momcts.core.MOUCT addSon(int, int);
+  public controllers.momcts.core.MOUCT addSon(int);
+  public java.util.Vector<java.lang.Integer> sonActions();
+  public controllers.momcts.core.MOUCT getSon(int);
+  public controllers.momcts.core.MOUCT findSon(int);
+  public boolean hasSon(int);
+  public boolean isLeaf();
+  public boolean isRoot();
+  public int size();
+  public void showSelf(int, java.util.Vector<java.lang.String>, boolean, java.lang.String, int);
+  public void showSelf(int, java.util.Vector<java.lang.String>, boolean, java.lang.String);
+  public void showSelf(int, java.util.Vector<java.lang.String>, boolean);
+  public void showSelf(int, java.util.Vector<java.lang.String>);
+  public void showSelf(int, java.lang.String, boolean);
+  public void showSelf(int, java.lang.String);
+  public void showSelf(int);
+  public void showSelf();
+  public static java.util.Vector<java.lang.Double> update(java.util.Vector<controllers.momcts.core.MOUCT>, java.lang.String, double, int, double);
+  public static java.util.Vector<java.lang.Double> update(java.util.Vector<controllers.momcts.core.MOUCT>, java.lang.String, double, int);
+  public static java.util.Vector<java.lang.Double> update(java.util.Vector<controllers.momcts.core.MOUCT>, java.lang.String, double);
+  public static java.util.Vector<java.util.Vector<java.lang.Double>> updateRwds(java.util.Vector<controllers.momcts.core.MOUCT>, java.util.Vector<java.lang.String>, java.util.Vector<java.lang.Double>, int, double);
+  public static java.util.Vector<java.util.Vector<java.lang.Double>> updateRwds(java.util.Vector<controllers.momcts.core.MOUCT>, java.util.Vector<java.lang.String>, java.util.Vector<java.lang.Double>, int);
+  public static java.util.Vector<java.util.Vector<java.lang.Double>> updateRwds(java.util.Vector<controllers.momcts.core.MOUCT>, java.util.Vector<java.lang.String>, java.util.Vector<java.lang.Double>);
+  public void updateRAVE(java.util.Vector<java.lang.Integer>, java.lang.String, double, double);
+  public void updateRAVE(java.util.Vector<java.lang.Integer>, java.lang.String, double);
+  public void updateRAVEs(java.util.Vector<java.lang.Integer>, java.util.Vector<java.lang.String>, java.util.Vector<java.lang.Double>, double);
+  public void updateRAVEs(java.util.Vector<java.lang.Integer>, java.util.Vector<java.lang.String>, java.util.Vector<java.lang.Double>);
+  public static void updateRAVEs(java.util.Vector<controllers.momcts.core.MOUCT>, java.util.Vector<java.lang.Integer>, java.util.Vector<java.lang.String>, java.util.Vector<java.lang.Double>, double);
+  public static void updateRAVEs(java.util.Vector<controllers.momcts.core.MOUCT>, java.util.Vector<java.lang.Integer>, java.util.Vector<java.lang.String>, java.util.Vector<java.lang.Double>);
+  public static java.util.Vector<java.lang.Integer> extractActs(java.util.Vector<controllers.momcts.core.MOUCT>);
+  public void resetAsRoot();
+  public void resetSonContexts(java.util.Vector<java.lang.Integer>);
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "TestPlanner.java"
+public class controllers.momcts.core.TestPlanner extends controllers.momcts.core.MOMCTS {
+  public controllers.momcts.core.TestPlanner();
+  public java.util.Vector<java.lang.Integer> candidateActions(controllers.momcts.core.MOUCT);
+  public java.util.Vector<java.lang.Double> evaluateSeq(java.util.Vector<java.lang.Integer>);
+  public java.util.Vector<java.lang.Integer> generateRandomPath(controllers.momcts.core.MOUCT);
+  public static void main(java.lang.String[]);
+}
+Compiled from "MOMCTS.java"
+public abstract class controllers.momcts.momctsCore.MOMCTS {
+  protected static java.lang.String RdomType;
+  protected controllers.momcts.momctsCore.MOUCT root;
+  protected controllers.momcts.utils.Archive archive;
+  protected java.util.Vector<java.lang.String> objectives;
+  protected java.lang.String metaRewardType;
+  protected boolean maximize;
+  protected int smt;
+  protected double pwConst;
+  protected java.util.HashMap<java.lang.String, java.lang.Double> EvEConsts;
+  protected int raveLocal;
+  protected double defDiscount;
+  protected int solNbLimitPerPoint;
+  public static int seqTimeGranularity;
+  protected controllers.momcts.utils.Debug dbg;
+  public java.lang.String getRdomType();
+  public controllers.momcts.momctsCore.MOMCTS(java.lang.String, boolean, double, int, double);
+  public void setObjectives(java.util.Vector<java.lang.String>);
+  public java.lang.String getMetaRewardType();
+  public void setMetaRewardType(java.lang.String);
+  public double getPwConst();
+  public void setPwConst(double);
+  public void setEvEConst(java.lang.String, double);
+  public double getEvEConst(java.lang.String);
+  public int getRaveLocal();
+  public void setRaveLocal(int);
+  public double getDefDiscount();
+  public void setDefDiscount(double);
+  public int getSolNbLimitPerPoint();
+  public void setSolNbLimitPerPoint(int);
+  public void setRoot(controllers.momcts.momctsCore.MOUCT);
+  public controllers.momcts.momctsCore.MOUCT getRoot();
+  public java.util.Vector<java.lang.String> getObjectives();
+  public boolean isMaximize();
+  public void setMaximize(boolean);
+  public int getSmt();
+  public controllers.momcts.utils.Archive getArchive();
+  protected double totalNb(java.util.Vector<controllers.momcts.momctsCore.MOUCT>, java.lang.String);
+  protected java.util.Vector<java.lang.Double> rewards(java.util.Vector<controllers.momcts.momctsCore.MOUCT>, java.lang.String);
+  protected java.util.Vector<java.lang.Double> UCBRanks(java.util.Vector<controllers.momcts.momctsCore.MOUCT>, java.lang.String, double, boolean);
+  protected java.util.Vector<java.lang.Double> UCBRanks(java.util.Vector<controllers.momcts.momctsCore.MOUCT>, java.lang.String, double);
+  protected java.util.Vector<java.lang.Double> UCBRanks(java.util.Vector<controllers.momcts.momctsCore.MOUCT>, java.lang.String);
+  public controllers.momcts.momctsCore.MOUCT bestUCB(java.util.Vector<controllers.momcts.momctsCore.MOUCT>, java.lang.String, boolean);
+  public controllers.momcts.momctsCore.MOUCT bestUCB(controllers.momcts.momctsCore.MOUCT, java.lang.String, boolean);
+  public controllers.momcts.momctsCore.MOUCT bestUCB(controllers.momcts.momctsCore.MOUCT, java.lang.String);
+  protected java.util.Vector<java.util.Vector<java.lang.Double>> MOUCBRanks(java.util.Vector<controllers.momcts.momctsCore.MOUCT>, java.util.Vector<java.lang.String>);
+  protected java.util.Vector<java.lang.Double> RAVERanks(java.util.Vector<java.lang.Integer>, java.lang.String, controllers.momcts.momctsCore.MOUCT);
+  protected java.util.Vector<java.lang.Double> RAVERanks(java.util.Vector<java.lang.Integer>, java.lang.String);
+  public abstract java.util.Vector<java.lang.Integer> candidateActions(controllers.momcts.momctsCore.MOUCT);
+  public abstract java.util.Vector<java.lang.Double> evaluateSeq(java.util.Vector<java.lang.Integer>);
+  public abstract java.util.Vector<java.lang.Integer> generateRandomPath(controllers.momcts.momctsCore.MOUCT);
+  protected void updateRAVEs(java.util.Vector<controllers.momcts.momctsCore.MOUCT>, java.util.Vector<java.lang.Integer>, java.util.Vector<java.lang.String>, java.util.Vector<java.lang.Double>, double);
+  protected void updateRAVEs(java.util.Vector<controllers.momcts.momctsCore.MOUCT>, java.util.Vector<java.lang.Integer>, java.util.Vector<java.lang.String>, java.util.Vector<java.lang.Double>);
+  protected void updateRwds(java.util.Vector<controllers.momcts.momctsCore.MOUCT>, java.util.Vector<java.lang.String>, java.util.Vector<java.lang.Double>, int, double);
+  protected void updateRwds(java.util.Vector<controllers.momcts.momctsCore.MOUCT>, java.util.Vector<java.lang.String>, java.util.Vector<java.lang.Double>, int);
+  protected void updateArchive(java.util.Vector<java.lang.Double>, java.util.Vector<java.lang.Integer>);
+  protected void updateArchive(java.util.Vector<java.lang.Double>);
+  public java.util.Vector<java.util.Vector<java.lang.Integer>> getOptimalSolutions();
+  protected double updateDomReward(java.util.Vector<controllers.momcts.momctsCore.MOUCT>, java.util.Vector<java.lang.Double>, int, java.lang.String);
+  public java.util.Vector<controllers.momcts.momctsCore.MOUCT> playOneSequence(long, boolean, java.lang.String, boolean, boolean);
+  public java.util.Vector<controllers.momcts.momctsCore.MOUCT> playOneSequence(long, boolean, java.lang.String);
+  public java.util.Vector<controllers.momcts.momctsCore.MOUCT> playOneSequence(long, boolean);
+  public java.util.Vector<controllers.momcts.momctsCore.MOUCT> playOneSequence(long);
+  public java.util.Vector<controllers.momcts.momctsCore.MOUCT> playOneSequence();
+  static {};
+}
+Compiled from "MOUCT.java"
+public class controllers.momcts.momctsCore.MOUCT {
+  public static java.util.Vector<java.lang.String> defRwdTypes;
+  public controllers.momcts.momctsCore.MOUCT(int);
+  public int getState();
+  public void setState(int);
+  public java.util.Vector<java.lang.Integer> getContext();
+  public void setContext(java.util.Vector<java.lang.Integer>);
+  public int getDepth();
+  public int getAction();
+  public java.util.Vector<controllers.momcts.momctsCore.MOUCT> getSons();
+  public java.util.HashMap<java.lang.String, java.lang.Double> getRwds();
+  public java.util.HashMap<java.lang.String, java.lang.Double> getNbs();
+  public double getRwd(java.lang.String, int);
+  public double getRwd(java.lang.String);
+  public double avgR(java.lang.String, int);
+  public double avgR(java.lang.String);
+  public double getNb(java.lang.String);
+  protected void setRwd(java.lang.String, double);
+  protected void setNb(java.lang.String, double);
+  public static java.util.Vector<java.lang.String> getDefRwdTypes();
+  public static void setDefRwdTypes(java.util.Vector<java.lang.String>);
+  public static void addDefRwdtypes(java.lang.String);
+  public double incrementRwd(java.lang.String, double, double);
+  public void incrementRwd(java.lang.String, double);
+  public double incrementRwd(java.lang.String, double, int, double);
+  public void incrementRAVE(int, java.lang.String, double, double);
+  public void incrementRAVE(int, java.lang.String, double);
+  public double getRAVE(int, java.lang.String);
+  public double getRAVEnb(int, java.lang.String);
+  public controllers.momcts.momctsCore.MOUCT addSon(int, int, boolean);
+  public controllers.momcts.momctsCore.MOUCT addSon(int, int);
+  public controllers.momcts.momctsCore.MOUCT addSon(int);
+  public java.util.Vector<java.lang.Integer> sonActions();
+  public controllers.momcts.momctsCore.MOUCT getSon(int);
+  public controllers.momcts.momctsCore.MOUCT findSon(int);
+  public boolean hasSon(int);
+  public boolean isLeaf();
+  public boolean isRoot();
+  public int size();
+  public void showSelf(int, java.util.Vector<java.lang.String>, boolean, java.lang.String, int);
+  public void showSelf(int, java.util.Vector<java.lang.String>, boolean, java.lang.String);
+  public void showSelf(int, java.util.Vector<java.lang.String>, boolean);
+  public void showSelf(int, java.util.Vector<java.lang.String>);
+  public void showSelf(int, java.lang.String, boolean);
+  public void showSelf(int, java.lang.String);
+  public void showSelf(int);
+  public void showSelf();
+  public static java.util.Vector<java.lang.Double> update(java.util.Vector<controllers.momcts.momctsCore.MOUCT>, java.lang.String, double, int, double);
+  public static java.util.Vector<java.lang.Double> update(java.util.Vector<controllers.momcts.momctsCore.MOUCT>, java.lang.String, double, int);
+  public static java.util.Vector<java.lang.Double> update(java.util.Vector<controllers.momcts.momctsCore.MOUCT>, java.lang.String, double);
+  public static java.util.Vector<java.util.Vector<java.lang.Double>> updateRwds(java.util.Vector<controllers.momcts.momctsCore.MOUCT>, java.util.Vector<java.lang.String>, java.util.Vector<java.lang.Double>, int, double);
+  public static java.util.Vector<java.util.Vector<java.lang.Double>> updateRwds(java.util.Vector<controllers.momcts.momctsCore.MOUCT>, java.util.Vector<java.lang.String>, java.util.Vector<java.lang.Double>, int);
+  public static java.util.Vector<java.util.Vector<java.lang.Double>> updateRwds(java.util.Vector<controllers.momcts.momctsCore.MOUCT>, java.util.Vector<java.lang.String>, java.util.Vector<java.lang.Double>);
+  public void updateRAVE(java.util.Vector<java.lang.Integer>, java.lang.String, double, double);
+  public void updateRAVE(java.util.Vector<java.lang.Integer>, java.lang.String, double);
+  public void updateRAVEs(java.util.Vector<java.lang.Integer>, java.util.Vector<java.lang.String>, java.util.Vector<java.lang.Double>, double);
+  public void updateRAVEs(java.util.Vector<java.lang.Integer>, java.util.Vector<java.lang.String>, java.util.Vector<java.lang.Double>);
+  public static void updateRAVEs(java.util.Vector<controllers.momcts.momctsCore.MOUCT>, java.util.Vector<java.lang.Integer>, java.util.Vector<java.lang.String>, java.util.Vector<java.lang.Double>, double);
+  public static void updateRAVEs(java.util.Vector<controllers.momcts.momctsCore.MOUCT>, java.util.Vector<java.lang.Integer>, java.util.Vector<java.lang.String>, java.util.Vector<java.lang.Double>);
+  public static java.util.Vector<java.lang.Integer> extractActs(java.util.Vector<controllers.momcts.momctsCore.MOUCT>);
+  public void resetAsRoot();
+  public void resetSonContexts(java.util.Vector<java.lang.Integer>);
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "TestPlanner.java"
+public class controllers.momcts.momctsCore.TestPlanner extends controllers.momcts.momctsCore.MOMCTS {
+  public controllers.momcts.momctsCore.TestPlanner();
+  public java.util.Vector<java.lang.Integer> candidateActions(controllers.momcts.momctsCore.MOUCT);
+  public java.util.Vector<java.lang.Double> evaluateSeq(java.util.Vector<java.lang.Integer>);
+  public java.util.Vector<java.lang.Integer> generateRandomPath(controllers.momcts.momctsCore.MOUCT);
+  public static void main(java.lang.String[]);
+}
+Compiled from "Archive.java"
+public class controllers.momcts.utils.Archive {
+  public controllers.momcts.utils.Archive();
+  public controllers.momcts.utils.Archive(int);
+  public int getSolNbLimit();
+  public void setSolNbLimit(int);
+  public java.util.Vector<java.util.Vector<java.lang.Double>> getPoints();
+  public void setSols(java.util.Vector<java.lang.Double>, java.util.Vector<java.util.Vector<java.lang.Integer>>);
+  public void addSol(java.util.Vector<java.lang.Double>, java.util.Vector<java.lang.Integer>);
+  public java.util.Vector<java.util.Vector<java.lang.Integer>> getSols(java.util.Vector<java.lang.Double>);
+  public java.util.Vector<java.lang.Integer> getOneSol(java.util.Vector<java.lang.Double>);
+  public boolean addNewPoint(java.util.Vector<java.lang.Double>);
+  public boolean addNewPoint(java.util.Vector<java.lang.Double>, java.util.Vector<java.lang.Integer>);
+  public boolean contains(java.util.Vector<java.lang.Double>);
+  public java.util.Vector<java.util.Vector<java.lang.Double>> rearrange(boolean);
+  public java.util.Vector<java.util.Vector<java.lang.Integer>> getAllSolutions();
+  public java.util.Vector<java.lang.Double> getPointScores(java.util.Vector<java.lang.Double>);
+  public java.util.Vector<java.lang.Double> getBestPoint(java.util.Vector<java.lang.Double>, boolean);
+  public void showPointScores(java.util.Vector<java.lang.Double>);
+  public double getBestScore(java.util.Vector<java.lang.Double>, boolean);
+  public java.util.Vector<java.util.Vector<java.lang.Integer>> getBestSolutions(java.util.Vector<java.lang.Double>, boolean);
+  public java.util.Vector<java.lang.Integer> getBestSol(java.util.Vector<java.lang.Double>, boolean);
+  public void showPntSol();
+  public void showPntSols();
+  public void showPoints();
+  public static void testPnt2Sol();
+  public static void main(java.lang.String[]);
+}
+Compiled from "Debug.java"
+public class controllers.momcts.utils.Debug {
+  public int counter;
+  public long currentTime;
+  public long initMemory;
+  public controllers.momcts.utils.Debug();
+  public void turnOnDebug();
+  public void turnOffDebug();
+  public int stopWatch();
+  public long resetMemoryCount();
+  public int getMemoryChange();
+  public int getMemoryChange(int);
+  public int getMemoryChangeMB();
+  public static void debug();
+  public static void debug(java.lang.String, java.lang.String);
+  public static void debug(java.lang.String);
+  public static void debug(java.lang.Object, java.lang.String);
+  public static void debug(java.lang.Object);
+  public static void showSeq(java.util.Vector<java.lang.Integer>);
+  public void showCounter();
+  static {};
+}
+Compiled from "Logger.java"
+public class controllers.momcts.utils.Logger {
+  public controllers.momcts.utils.Logger(java.lang.String, boolean);
+  public controllers.momcts.utils.Logger(java.lang.String);
+  public <T> void write(java.lang.String);
+  public static void main(java.lang.String[]);
+}
+Compiled from "MOOTools.java"
+public class controllers.momcts.utils.MOOTools {
+  public controllers.momcts.utils.MOOTools();
+  public static java.util.Vector<java.lang.Integer> dim(java.util.Vector<java.util.Vector<java.lang.Double>>);
+  public static int sameDimension(java.util.Vector<java.util.Vector<java.lang.Double>>);
+  public static boolean dominates(java.util.Vector<java.lang.Double>, java.util.Vector<java.lang.Double>, boolean);
+  public static boolean dominates(java.util.Vector<java.lang.Double>, java.util.Vector<java.lang.Double>);
+  public static boolean domEquals(java.util.Vector<java.lang.Double>, java.util.Vector<java.lang.Double>);
+  public static boolean dominatesSet(java.util.Vector<java.lang.Double>, java.util.Vector<java.util.Vector<java.lang.Double>>, boolean, boolean);
+  public static boolean dominatesSet(java.util.Vector<java.lang.Double>, java.util.Vector<java.util.Vector<java.lang.Double>>, boolean);
+  public static boolean dominatesSet(java.util.Vector<java.lang.Double>, java.util.Vector<java.util.Vector<java.lang.Double>>);
+  public static boolean isDominatedByAllSet(java.util.Vector<java.lang.Double>, java.util.Vector<java.util.Vector<java.lang.Double>>, boolean, boolean);
+  public static boolean isDominatedByAllSet(java.util.Vector<java.lang.Double>, java.util.Vector<java.util.Vector<java.lang.Double>>, boolean);
+  public static boolean isDominatedByAllSet(java.util.Vector<java.lang.Double>, java.util.Vector<java.util.Vector<java.lang.Double>>);
+  public static java.util.Vector<java.util.Vector<java.lang.Double>> eliminateRepetitions(java.util.Vector<java.util.Vector<java.lang.Double>>);
+  public static java.util.Vector<java.lang.Integer> dominatedInds(java.util.Vector<java.util.Vector<java.lang.Double>>, java.util.Vector<java.lang.Double>, boolean, boolean);
+  public static java.util.Vector<java.util.Vector<java.lang.Double>> dominatedPnts(java.util.Vector<java.util.Vector<java.lang.Double>>, java.util.Vector<java.lang.Double>, boolean, boolean);
+  public static java.util.Vector<java.lang.Integer> dominatingInds(java.util.Vector<java.util.Vector<java.lang.Double>>, java.util.Vector<java.lang.Double>, boolean, boolean);
+  public static java.util.Vector<java.util.Vector<java.lang.Double>> dominatingPnts(java.util.Vector<java.util.Vector<java.lang.Double>>, java.util.Vector<java.lang.Double>, boolean, boolean);
+  public static java.util.Vector<java.util.Vector<java.lang.Double>> dominatingPnts(java.util.Vector<java.util.Vector<java.lang.Double>>, java.util.Vector<java.lang.Double>, boolean);
+  public static java.util.Vector<java.util.Vector<java.lang.Integer>> fastNonDominatedSort(java.util.Vector<java.util.Vector<java.lang.Double>>, boolean);
+  public static java.util.Vector<java.lang.Integer> nonDominatedInds(java.util.Vector<java.util.Vector<java.lang.Double>>, boolean);
+  public static java.util.Vector<java.util.Vector<java.lang.Double>> nonDominatedPnts(java.util.Vector<java.util.Vector<java.lang.Double>>, boolean);
+  public static double hypervolumeIndicator(java.util.Vector<java.util.Vector<java.lang.Double>>, boolean, java.util.Vector<java.lang.Double>);
+  public static double hypervolumeIndicator(java.util.Vector<java.util.Vector<java.lang.Double>>, boolean);
+  public static double hypervolumeIndicator(java.util.Vector<java.util.Vector<java.lang.Double>>);
+  public static double HVIContrib(java.util.Vector<java.lang.Double>, java.util.Vector<java.util.Vector<java.lang.Double>>, boolean, java.util.Vector<java.lang.Double>);
+  public static double HVIContrib(java.util.Vector<java.lang.Double>, java.util.Vector<java.util.Vector<java.lang.Double>>, boolean);
+  public static double HVIContrib(java.util.Vector<java.lang.Double>, java.util.Vector<java.util.Vector<java.lang.Double>>);
+  public static void showPoints(java.util.Vector<java.util.Vector<java.lang.Double>>);
+  public void testHVI();
+  public static void main(java.lang.String[]);
+}
+Compiled from "MOOTools.java"
+public class controllers.momcts.utils.MOOTools$firstDimComparator implements java.util.Comparator {
+  public controllers.momcts.utils.MOOTools$firstDimComparator(boolean);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "MathOperation.java"
+public class controllers.momcts.utils.MathOperation {
+  static java.util.Random rnd;
+  public controllers.momcts.utils.MathOperation();
+  public static int rndInt(int, int);
+  public static int rndInt(int);
+  public static double rand(double, double);
+  public static double rand(double);
+  public static double rand1();
+  public static boolean bernouilli(double);
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "Presentation.java"
+public class controllers.momcts.utils.Presentation {
+  public static java.lang.String defElemSep;
+  public static java.lang.String defLineSep;
+  public controllers.momcts.utils.Presentation();
+  public static void showSeq(java.util.Vector);
+  public static void showSeq(java.util.Vector, java.lang.String);
+  public static void showSeqln(java.util.Vector);
+  public static void showSeqln(java.util.Vector, java.lang.String);
+  public static void showSeq(int[]);
+  public static void showSeq(double[]);
+  public static void showSeq(java.lang.String[]);
+  public static void multiOut(java.lang.String);
+  public static void multiOut(java.lang.String, int);
+  public static void spr(java.lang.String);
+  public static void spr();
+  public static <T> void showMatrix(java.util.Vector<java.util.Vector<T>>, java.lang.String, java.lang.String);
+  public static <T> void showMatrix(java.util.Vector<java.util.Vector<T>>, java.lang.String);
+  public static <T> void showMatrix(java.util.Vector<java.util.Vector<T>>);
+  public static <K, V> void showMap(java.util.Map<K, V>);
+  public static double ndigits(double, int);
+  public static double ndigits(double);
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "SetOperation.java"
+public class controllers.momcts.utils.SetOperation {
+  public controllers.momcts.utils.SetOperation();
+  public static <K, V> java.util.Vector<K> getKeys(java.util.Map<K, V>);
+  public static <K> java.util.Vector<K> complementSet(java.util.Vector<K>, java.util.Vector<K>);
+  public static <T> java.util.Vector<T> getElements(java.util.Vector<T>, java.util.Vector<java.lang.Integer>);
+  public static <T> java.util.Vector<T> eliminateElements(java.util.Vector<T>, java.util.Vector<java.lang.Integer>);
+  public static <T> java.util.Vector<T> eliminateFirstNElements(java.util.Vector<T>, int);
+  public static <T> java.util.Vector<T> eliminateLastNElements(java.util.Vector<T>, int);
+  public static <K, V> java.util.Vector<K> sortItems(java.util.Map<K, V>, boolean);
+  public static <K, V> java.util.Vector<K> sortItems(java.util.Map<K, V>);
+  public static <K, V> java.util.Vector<K> sortItems(java.util.Vector<K>, java.util.Vector<V>, boolean);
+  public static <K, V> java.util.Vector<K> sortItems(java.util.Vector<K>, java.util.Vector<V>);
+  public static <K, V extends java.lang.Comparable<V>> K getBestItem(java.util.Vector<K>, java.util.Vector<V>, boolean);
+  public static <K, V extends java.lang.Comparable<V>> K getBestItem(java.util.Map<K, V>, boolean);
+  public static <K, V extends java.lang.Comparable<V>> K maxItem(java.util.Vector<K>, java.util.Vector<V>);
+  public static <K, V extends java.lang.Comparable<V>> K maxItem(java.util.Map<K, V>);
+  public static <K, V extends java.lang.Comparable<V>> K minItem(java.util.Vector<K>, java.util.Vector<V>);
+  public static <K, V extends java.lang.Comparable<V>> K minItem(java.util.Map<K, V>);
+  public static <T extends java.lang.Comparable<T>> T getBestItem(java.util.Vector<T>, boolean);
+  public static <T extends java.lang.Comparable<T>> T maxItem(java.util.Vector<T>);
+  public static <T extends java.lang.Comparable<T>> T minItem(java.util.Vector<T>);
+  public static <T extends java.lang.Comparable<T>> int getBestItemInd(java.util.Vector<T>, boolean);
+  public static <K, Double> double getDoubleValue(java.util.Map<K, Double>, K);
+  public static <K, Double> int getIntValue(java.util.Map<K, java.lang.Integer>, K);
+  public static <T extends java.lang.Comparable<T>> boolean isBetter(T, T, boolean, boolean);
+  public static <T extends java.lang.Comparable<T>> boolean isBetter(T, T, boolean);
+  public static java.util.Vector<java.lang.Double> adds(java.util.Vector<java.lang.Double>, java.util.Vector<java.lang.Double>);
+  public static java.util.Vector<java.lang.Double> muls(java.util.Vector<java.lang.Double>, java.util.Vector<java.lang.Double>);
+  public static java.util.Vector<java.lang.Double> muls(java.util.Vector<java.lang.Double>, double);
+  public static java.util.Vector<java.lang.Double> divs(java.util.Vector<java.lang.Double>, double);
+  public static <T> java.util.HashMap<T, java.lang.Double> muls(java.util.Map<T, java.lang.Double>, double);
+  public static <T> java.util.HashMap<T, java.lang.Double> divs(java.util.Map<T, java.lang.Double>, double);
+  public static <T> T pop(java.util.Vector<T>, int);
+  public static <T> T popFront(java.util.Vector<T>);
+  public static <T> T popEnd(java.util.Vector<T>);
+  public static <T> java.util.Vector<T> subSeq(java.util.Vector<T>, int, int);
+  public static <T> java.util.Vector<T> subSeq(java.util.Vector<T>, int);
+  public static <T> java.util.Vector<T> firstNElements(java.util.Vector<T>, int);
+  public static <T> boolean exists(java.util.Vector<T>, int);
+  public static <T> T randomElement(java.util.Vector<T>);
+  public static <T> java.util.Vector<T> joinSeq(java.util.Vector<T>, java.util.Vector<T>);
+  public static <T> java.util.Vector<T> joinSeq(java.util.Vector<T>, java.util.Vector<T>, int);
+  public static <T> java.util.Vector<T> joinSeq(T, java.util.Vector<T>);
+  public static <T> java.util.Vector<T> joinSeq(T, java.util.Vector<T>, int);
+  public static <T> java.util.Vector<T> joinSeq(java.util.Vector<T>, T);
+  public static <T> java.util.Vector<T> joinSeq(java.util.Vector<T>, T, int);
+  public static <T> java.util.HashMap<T, java.lang.Integer> frequence(java.util.Vector<T>);
+  public static <T> java.util.HashMap<T, java.lang.Double> frequencePortion(java.util.Vector<T>);
+  public static <T> java.util.Vector<T> ones(int, T);
+  public static java.util.Vector<java.lang.Integer> arithmeticProgression(int, int, int);
+  public static java.util.Vector<java.lang.Integer> arithmeticProgression(int, int);
+  public static java.util.Vector<java.lang.Integer> arithmeticProgression(int);
+  public static java.util.Vector<java.lang.Double> arithmeticProgression(int, double, double);
+  public static <T> java.util.Vector<T> singleton(T);
+  public static double weightedSum(java.util.Vector<java.lang.Double>, java.util.Vector<java.lang.Double>);
+  public static double sumSeq(java.util.Vector<java.lang.Double>);
+  public static double avgSeq(java.util.Vector<java.lang.Double>);
+  public static <T> java.util.Vector<java.util.Vector<T>> matrixOnes(int, int, T);
+  public static <T> java.util.Vector<java.util.Vector<T>> matrixOnes(int, T);
+  public static <T> boolean exists(java.util.Vector<java.util.Vector<T>>, int, int);
+  public static <T> void assignMatrix(java.util.Vector<java.util.Vector<T>>, int, int, T);
+  public static <T> java.util.Vector<T> extractCol(java.util.Vector<java.util.Vector<T>>, int);
+  public static <T> java.util.Vector<java.util.Vector<T>> transposeMatrix(java.util.Vector<java.util.Vector<T>>);
+  public static <T> java.util.Vector<java.util.Vector<T>> duplicateMatrix(java.util.Vector<java.util.Vector<T>>);
+  public void testEquals();
+  public void testSort();
+  public void testMapEquivalence();
+  public void testFrequence();
+  public void testVectorOperations();
+  public void testComparison();
+  public static void main(java.lang.String[]);
+}
+Compiled from "SetOperation.java"
+public class controllers.momcts.utils.SetOperation$A {
+  public int av;
+  final controllers.momcts.utils.SetOperation this$0;
+  public controllers.momcts.utils.SetOperation$A(controllers.momcts.utils.SetOperation, int);
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+}
+Compiled from "SetOperation.java"
+public class controllers.momcts.utils.SetOperation$MapComparator implements java.util.Comparator {
+  final controllers.momcts.utils.SetOperation this$0;
+  public controllers.momcts.utils.SetOperation$MapComparator(controllers.momcts.utils.SetOperation, java.util.Map, boolean);
+  public controllers.momcts.utils.SetOperation$MapComparator(controllers.momcts.utils.SetOperation, java.util.Map);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "TextOperation.java"
+public class controllers.momcts.utils.TextOperation {
+  public controllers.momcts.utils.TextOperation();
+  public static java.lang.String get(java.lang.String);
+  public static java.lang.String read(java.io.InputStream);
+  public static java.lang.String[][] getArray(java.lang.String);
+  public static java.lang.String[][] readArray(java.io.InputStream);
+  public static boolean put(java.lang.String, java.lang.String);
+  public static boolean put(java.lang.String, java.io.File);
+  public static boolean put(java.lang.String[], java.lang.String);
+}
+Compiled from "Transformation.java"
+public class controllers.momcts.utils.Transformation {
+  public controllers.momcts.utils.Transformation();
+  public static java.util.Vector<java.lang.String> ints2strs(java.util.Vector<java.lang.Integer>);
+  public static java.util.Vector<java.lang.Integer> intAry2Vec(int[]);
+  public static java.util.Vector<java.lang.Double> doubleAry2Vec(double[]);
+  public static java.util.Vector<java.lang.String> strAry2Vec(java.lang.String[]);
+  public static java.util.Vector<java.lang.Double> ints2doubles(int[]);
+  public static <K, V> java.util.HashMap<K, V> vec2map(java.util.Vector<K>, java.util.Vector<V>);
+  public static void main(java.lang.String[]);
+}
+Compiled from "RandomController.java"
+public class controllers.random.RandomController extends framework.core.Controller {
+  java.util.Random m_rnd;
+  public controllers.random.RandomController(framework.core.Game, long);
+  public int getAction(framework.core.Game, long);
+}
+Compiled from "Archive.java"
+public class controllers.utils.Archive {
+  public controllers.utils.Archive();
+  public controllers.utils.Archive(int);
+  public int getSolNbLimit();
+  public void setSolNbLimit(int);
+  public java.util.Vector<java.util.Vector<java.lang.Double>> getPoints();
+  public void setSols(java.util.Vector<java.lang.Double>, java.util.Vector<java.util.Vector<java.lang.Integer>>);
+  public void addSol(java.util.Vector<java.lang.Double>, java.util.Vector<java.lang.Integer>);
+  public java.util.Vector<java.util.Vector<java.lang.Integer>> getSols(java.util.Vector<java.lang.Double>);
+  public java.util.Vector<java.lang.Integer> getOneSol(java.util.Vector<java.lang.Double>);
+  public boolean addNewPoint(java.util.Vector<java.lang.Double>);
+  public boolean addNewPoint(java.util.Vector<java.lang.Double>, java.util.Vector<java.lang.Integer>);
+  public boolean contains(java.util.Vector<java.lang.Double>);
+  public java.util.Vector<java.util.Vector<java.lang.Double>> rearrange(boolean);
+  public java.util.Vector<java.util.Vector<java.lang.Integer>> getAllSolutions();
+  public java.util.Vector<java.lang.Double> getPointScores(java.util.Vector<java.lang.Double>);
+  public java.util.Vector<java.lang.Double> getBestPoint(java.util.Vector<java.lang.Double>, boolean);
+  public double getBestScore(java.util.Vector<java.lang.Double>, boolean);
+  public java.util.Vector<java.util.Vector<java.lang.Integer>> getBestSolutions(java.util.Vector<java.lang.Double>, boolean);
+  public java.util.Vector<java.lang.Integer> getBestSol(java.util.Vector<java.lang.Double>, boolean);
+  public void showPntSol();
+  public void showPntSols();
+  public void showPoints();
+  public static void testPnt2Sol();
+  public static void main(java.lang.String[]);
+}
+Compiled from "Debug.java"
+public class controllers.utils.Debug {
+  public int counter;
+  public controllers.utils.Debug();
+  public static void debug();
+  public static void debug(java.lang.String, java.lang.String);
+  public static void debug(java.lang.String);
+  public static void debug(java.lang.Object, java.lang.String);
+  public static void debug(java.lang.Object);
+  public static void showSeq(java.util.Vector<java.lang.Integer>);
+  public void showCounter();
+}
+Compiled from "DebugTools.java"
+public class controllers.utils.DebugTools {
+  public controllers.utils.DebugTools();
+  public static void debug();
+  public static void debug(java.lang.String);
+  public static void debug(java.lang.Object);
+  public static void showSeq(java.util.Vector<java.lang.Integer>);
+}
+Compiled from "Logger.java"
+public class controllers.utils.Logger {
+  public controllers.utils.Logger(java.lang.String, boolean);
+  public controllers.utils.Logger(java.lang.String);
+  public <T> void write(java.lang.String);
+  public static void main(java.lang.String[]);
+}
+Compiled from "MOOTools.java"
+public class controllers.utils.MOOTools {
+  public controllers.utils.MOOTools();
+  public static java.util.Vector<java.lang.Integer> dim(java.util.Vector<java.util.Vector<java.lang.Double>>);
+  public static int sameDimension(java.util.Vector<java.util.Vector<java.lang.Double>>);
+  public static boolean dominates(java.util.Vector<java.lang.Double>, java.util.Vector<java.lang.Double>, boolean);
+  public static boolean dominates(java.util.Vector<java.lang.Double>, java.util.Vector<java.lang.Double>);
+  public static boolean domEquals(java.util.Vector<java.lang.Double>, java.util.Vector<java.lang.Double>);
+  public static boolean dominatesSet(java.util.Vector<java.lang.Double>, java.util.Vector<java.util.Vector<java.lang.Double>>, boolean, boolean);
+  public static boolean dominatesSet(java.util.Vector<java.lang.Double>, java.util.Vector<java.util.Vector<java.lang.Double>>, boolean);
+  public static boolean dominatesSet(java.util.Vector<java.lang.Double>, java.util.Vector<java.util.Vector<java.lang.Double>>);
+  public static boolean isDominatedByAllSet(java.util.Vector<java.lang.Double>, java.util.Vector<java.util.Vector<java.lang.Double>>, boolean, boolean);
+  public static boolean isDominatedByAllSet(java.util.Vector<java.lang.Double>, java.util.Vector<java.util.Vector<java.lang.Double>>, boolean);
+  public static boolean isDominatedByAllSet(java.util.Vector<java.lang.Double>, java.util.Vector<java.util.Vector<java.lang.Double>>);
+  public static java.util.Vector<java.util.Vector<java.lang.Double>> eliminateRepetitions(java.util.Vector<java.util.Vector<java.lang.Double>>);
+  public static java.util.Vector<java.lang.Integer> dominatedInds(java.util.Vector<java.util.Vector<java.lang.Double>>, java.util.Vector<java.lang.Double>, boolean, boolean);
+  public static java.util.Vector<java.util.Vector<java.lang.Double>> dominatedPnts(java.util.Vector<java.util.Vector<java.lang.Double>>, java.util.Vector<java.lang.Double>, boolean, boolean);
+  public static java.util.Vector<java.lang.Integer> dominatingInds(java.util.Vector<java.util.Vector<java.lang.Double>>, java.util.Vector<java.lang.Double>, boolean, boolean);
+  public static java.util.Vector<java.util.Vector<java.lang.Double>> dominatingPnts(java.util.Vector<java.util.Vector<java.lang.Double>>, java.util.Vector<java.lang.Double>, boolean, boolean);
+  public static java.util.Vector<java.util.Vector<java.lang.Double>> dominatingPnts(java.util.Vector<java.util.Vector<java.lang.Double>>, java.util.Vector<java.lang.Double>, boolean);
+  public static java.util.Vector<java.util.Vector<java.lang.Integer>> fastNonDominatedSort(java.util.Vector<java.util.Vector<java.lang.Double>>, boolean);
+  public static java.util.Vector<java.lang.Integer> nonDominatedInds(java.util.Vector<java.util.Vector<java.lang.Double>>, boolean);
+  public static java.util.Vector<java.util.Vector<java.lang.Double>> nonDominatedPnts(java.util.Vector<java.util.Vector<java.lang.Double>>, boolean);
+  public static double hypervolumeIndicator(java.util.Vector<java.util.Vector<java.lang.Double>>, boolean, java.util.Vector<java.lang.Double>);
+  public static double hypervolumeIndicator(java.util.Vector<java.util.Vector<java.lang.Double>>, boolean);
+  public static double hypervolumeIndicator(java.util.Vector<java.util.Vector<java.lang.Double>>);
+  public static double HVIContrib(java.util.Vector<java.lang.Double>, java.util.Vector<java.util.Vector<java.lang.Double>>, boolean, java.util.Vector<java.lang.Double>);
+  public static double HVIContrib(java.util.Vector<java.lang.Double>, java.util.Vector<java.util.Vector<java.lang.Double>>, boolean);
+  public static double HVIContrib(java.util.Vector<java.lang.Double>, java.util.Vector<java.util.Vector<java.lang.Double>>);
+  public static void showPoints(java.util.Vector<java.util.Vector<java.lang.Double>>);
+  public void testHVI();
+  public static void main(java.lang.String[]);
+}
+Compiled from "MOOTools.java"
+public class controllers.utils.MOOTools$firstDimComparator implements java.util.Comparator {
+  public controllers.utils.MOOTools$firstDimComparator(boolean);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "MathOperation.java"
+public class controllers.utils.MathOperation {
+  static java.util.Random rnd;
+  public controllers.utils.MathOperation();
+  public static int rndInt(int, int);
+  public static int rndInt(int);
+  public static double rand(double, double);
+  public static double rand(double);
+  public static double rand1();
+  static {};
+}
+Compiled from "Presentation.java"
+public class controllers.utils.Presentation {
+  public static java.lang.String defElemSep;
+  public static java.lang.String defLineSep;
+  public controllers.utils.Presentation();
+  public static void showSeq(java.util.Vector);
+  public static void showSeq(java.util.Vector, java.lang.String);
+  public static void showSeqln(java.util.Vector);
+  public static void showSeqln(java.util.Vector, java.lang.String);
+  public static void showSeq(int[]);
+  public static void showSeq(double[]);
+  public static void showSeq(java.lang.String[]);
+  public static void multiOut(java.lang.String);
+  public static void multiOut(java.lang.String, int);
+  public static void spr(java.lang.String);
+  public static void spr();
+  public static <T> void showMatrix(java.util.Vector<java.util.Vector<T>>, java.lang.String, java.lang.String);
+  public static <T> void showMatrix(java.util.Vector<java.util.Vector<T>>, java.lang.String);
+  public static <T> void showMatrix(java.util.Vector<java.util.Vector<T>>);
+  public static <K, V> void showMap(java.util.Map<K, V>);
+  public static double ndigits(double, int);
+  public static double ndigits(double);
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "SetOperation.java"
+public class controllers.utils.SetOperation {
+  public controllers.utils.SetOperation();
+  public static <K, V> java.util.Vector<K> getKeys(java.util.Map<K, V>);
+  public static <K> java.util.Vector<K> complementSet(java.util.Vector<K>, java.util.Vector<K>);
+  public static <T> java.util.Vector<T> getElements(java.util.Vector<T>, java.util.Vector<java.lang.Integer>);
+  public static <T> java.util.Vector<T> eliminateElements(java.util.Vector<T>, java.util.Vector<java.lang.Integer>);
+  public static <T> java.util.Vector<T> eliminateFirstNElements(java.util.Vector<T>, int);
+  public static <T> java.util.Vector<T> eliminateLastNElements(java.util.Vector<T>, int);
+  public static <K, V> java.util.Vector<K> sortItems(java.util.Map<K, V>, boolean);
+  public static <K, V> java.util.Vector<K> sortItems(java.util.Map<K, V>);
+  public static <K, V> java.util.Vector<K> sortItems(java.util.Vector<K>, java.util.Vector<V>, boolean);
+  public static <K, V> java.util.Vector<K> sortItems(java.util.Vector<K>, java.util.Vector<V>);
+  public static <K, V> K getBestItem(java.util.Vector<K>, java.util.Vector<V>, boolean);
+  public static <K, V> K getBestItem(java.util.Map<K, V>, boolean);
+  public static <K, V> K maxItem(java.util.Vector<K>, java.util.Vector<V>);
+  public static <K, V> K maxItem(java.util.Map<K, V>);
+  public static <K, V> K minItem(java.util.Vector<K>, java.util.Vector<V>);
+  public static <K, V> K minItem(java.util.Map<K, V>);
+  public static <T extends java.lang.Comparable<T>> T getBestItem(java.util.Vector<T>, boolean);
+  public static <T extends java.lang.Comparable<T>> T maxItem(java.util.Vector<T>);
+  public static <T extends java.lang.Comparable<T>> T minItem(java.util.Vector<T>);
+  public static <K, Double> double getDoubleValue(java.util.Map<K, Double>, K);
+  public static <K, Double> int getIntValue(java.util.Map<K, java.lang.Integer>, K);
+  public static <T extends java.lang.Comparable<T>> boolean isBetter(T, T, boolean, boolean);
+  public static <T extends java.lang.Comparable<T>> boolean isBetter(T, T, boolean);
+  public static java.util.Vector<java.lang.Double> adds(java.util.Vector<java.lang.Double>, java.util.Vector<java.lang.Double>);
+  public static java.util.Vector<java.lang.Double> muls(java.util.Vector<java.lang.Double>, java.util.Vector<java.lang.Double>);
+  public static java.util.Vector<java.lang.Double> muls(java.util.Vector<java.lang.Double>, double);
+  public static java.util.Vector<java.lang.Double> divs(java.util.Vector<java.lang.Double>, double);
+  public static <T> java.util.HashMap<T, java.lang.Double> muls(java.util.Map<T, java.lang.Double>, double);
+  public static <T> java.util.HashMap<T, java.lang.Double> divs(java.util.Map<T, java.lang.Double>, double);
+  public static <T> T pop(java.util.Vector<T>, int);
+  public static <T> T popFront(java.util.Vector<T>);
+  public static <T> T popEnd(java.util.Vector<T>);
+  public static <T> java.util.Vector<T> subSeq(java.util.Vector<T>, int, int);
+  public static <T> java.util.Vector<T> subSeq(java.util.Vector<T>, int);
+  public static <T> java.util.Vector<T> firstNElements(java.util.Vector<T>, int);
+  public static <T> boolean exists(java.util.Vector<T>, int);
+  public static <T> T randomElement(java.util.Vector<T>);
+  public static <T> java.util.Vector<T> joinSeq(java.util.Vector<T>, java.util.Vector<T>);
+  public static <T> java.util.Vector<T> joinSeq(java.util.Vector<T>, java.util.Vector<T>, int);
+  public static <T> java.util.Vector<T> joinSeq(T, java.util.Vector<T>);
+  public static <T> java.util.Vector<T> joinSeq(T, java.util.Vector<T>, int);
+  public static <T> java.util.Vector<T> joinSeq(java.util.Vector<T>, T);
+  public static <T> java.util.Vector<T> joinSeq(java.util.Vector<T>, T, int);
+  public static <T> java.util.HashMap<T, java.lang.Integer> frequence(java.util.Vector<T>);
+  public static <T> java.util.HashMap<T, java.lang.Double> frequencePortion(java.util.Vector<T>);
+  public static <T> java.util.Vector<T> ones(int, T);
+  public static java.util.Vector<java.lang.Integer> arithmeticProgression(int, int, int);
+  public static java.util.Vector<java.lang.Integer> arithmeticProgression(int, int);
+  public static java.util.Vector<java.lang.Integer> arithmeticProgression(int);
+  public static java.util.Vector<java.lang.Double> arithmeticProgression(int, double, double);
+  public static <T> java.util.Vector<T> singleton(T);
+  public static double weightedSum(java.util.Vector<java.lang.Double>, java.util.Vector<java.lang.Double>);
+  public static <T> java.util.Vector<java.util.Vector<T>> matrixOnes(int, int, T);
+  public static <T> java.util.Vector<java.util.Vector<T>> matrixOnes(int, T);
+  public static <T> boolean exists(java.util.Vector<java.util.Vector<T>>, int, int);
+  public static <T> void assignMatrix(java.util.Vector<java.util.Vector<T>>, int, int, T);
+  public static <T> java.util.Vector<T> extractCol(java.util.Vector<java.util.Vector<T>>, int);
+  public static <T> java.util.Vector<java.util.Vector<T>> transposeMatrix(java.util.Vector<java.util.Vector<T>>);
+  public static <T> java.util.Vector<java.util.Vector<T>> duplicateMatrix(java.util.Vector<java.util.Vector<T>>);
+  public void testEquals();
+  public void testSort();
+  public void testMapEquivalence();
+  public void testFrequence();
+  public void testVectorOperations();
+  public void testComparison();
+  public static void main(java.lang.String[]);
+}
+Compiled from "SetOperation.java"
+public class controllers.utils.SetOperation$A {
+  public int av;
+  final controllers.utils.SetOperation this$0;
+  public controllers.utils.SetOperation$A(controllers.utils.SetOperation, int);
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+}
+Compiled from "SetOperation.java"
+public class controllers.utils.SetOperation$MapComparator implements java.util.Comparator {
+  final controllers.utils.SetOperation this$0;
+  public controllers.utils.SetOperation$MapComparator(controllers.utils.SetOperation, java.util.Map, boolean);
+  public controllers.utils.SetOperation$MapComparator(controllers.utils.SetOperation, java.util.Map);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "TextOperation.java"
+public class controllers.utils.TextOperation {
+  public controllers.utils.TextOperation();
+  public static java.lang.String get(java.lang.String);
+  public static java.lang.String read(java.io.InputStream);
+  public static java.lang.String[][] getArray(java.lang.String);
+  public static java.lang.String[][] readArray(java.io.InputStream);
+  public static boolean put(java.lang.String, java.lang.String);
+  public static boolean put(java.lang.String, java.io.File);
+  public static boolean put(java.lang.String[], java.lang.String);
+}
+Compiled from "Transformation.java"
+public class controllers.utils.Transformation {
+  public controllers.utils.Transformation();
+  public static java.util.Vector<java.lang.String> ints2strs(java.util.Vector<java.lang.Integer>);
+  public static java.util.Vector<java.lang.Integer> intAry2Vec(int[]);
+  public static java.util.Vector<java.lang.Double> doubleAry2Vec(double[]);
+  public static java.util.Vector<java.lang.String> strAry2Vec(java.lang.String[]);
+  public static java.util.Vector<java.lang.Double> ints2doubles(int[]);
+  public static <K, V> java.util.HashMap<K, V> vec2map(java.util.Vector<K>, java.util.Vector<V>);
+  public static void main(java.lang.String[]);
+}
+Compiled from "ExecFromData.java"
+public class framework.ExecFromData extends framework.core.Exec {
+  public framework.ExecFromData();
+  public static void runGameTimedSpeedOptimisedData(boolean, boolean, char[][], framework.utils.Vector2d, java.util.LinkedList<framework.utils.Vector2d>, java.util.LinkedList<framework.utils.Vector2d>);
+  public static framework.core.Game runGame(framework.core.Controller, boolean, boolean, char[][], framework.utils.Vector2d, java.util.LinkedList<framework.utils.Vector2d>, java.util.LinkedList<framework.utils.Vector2d>);
+  public static framework.core.Game runGameFromFile(framework.core.Controller, boolean, boolean);
+  public static framework.core.Game runGameFromGame(framework.core.Controller, framework.core.Game, boolean, boolean);
+  public static void main(java.lang.String[]);
+}
+Compiled from "ExecReplay.java"
+public class framework.ExecReplay extends framework.core.Exec {
+  protected static java.lang.String m_mapName;
+  public framework.ExecReplay();
+  public static void replayGame(boolean, int);
+  public static void main(java.lang.String[]);
+}
+Compiled from "ExecSync.java"
+public class framework.ExecSync extends framework.core.Exec {
+  public framework.ExecSync();
+  public static void playGame(int);
+  public static void runGame(boolean, int);
+  public static void runGames(int);
+  public static void main(java.lang.String[]);
+}
+Compiled from "Controller.java"
+public abstract class framework.core.Controller implements java.lang.Runnable {
+  public static final int ACTION_NO_FRONT;
+  public static final int ACTION_NO_LEFT;
+  public static final int ACTION_NO_RIGHT;
+  public static final int ACTION_THR_FRONT;
+  public static final int ACTION_THR_LEFT;
+  public static final int ACTION_THR_RIGHT;
+  public static final double HALF_PI;
+  public static final double QUARTER_PI;
+  public static final int NUM_ACTIONS;
+  public framework.core.Controller();
+  public synchronized void reset();
+  public final synchronized void terminate();
+  public final synchronized void update(framework.core.Game, long);
+  public final void run();
+  public final int getMove();
+  public final boolean hasComputed();
+  public static boolean getThrust(int);
+  public static int getTurning(int);
+  public static int getActionFromInput(boolean, int);
+  public void paint(java.awt.Graphics2D);
+  public abstract int getAction(framework.core.Game, long);
+  static int access$000(framework.core.Controller);
+  static framework.core.Game access$100(framework.core.Controller);
+  static long access$200(framework.core.Controller);
+  static boolean access$302(framework.core.Controller, boolean);
+  static int access$402(framework.core.Controller, int);
+}
+Compiled from "Controller.java"
+class framework.core.Controller$1 extends java.lang.Thread {
+  final framework.core.Controller this$0;
+  framework.core.Controller$1(framework.core.Controller);
+  public void run();
+}
+Compiled from "Exec.java"
+public class framework.core.Exec {
+  public static java.lang.String[] m_mapNames;
+  public static java.lang.String m_actionFilename;
+  public static java.lang.String m_controllerName;
+  public static boolean m_writeOutput;
+  public static boolean m_visibility;
+  public static framework.core.Game m_game;
+  public static framework.core.Controller m_controller;
+  public static framework.core.PTSPView m_view;
+  public static boolean m_verbose;
+  public static int m_warmUpTime;
+  public framework.core.Exec();
+  protected static boolean instanceController();
+  protected static boolean createController();
+  protected static boolean initializeController(java.lang.reflect.Constructor, java.lang.String);
+  protected static boolean prepareGame();
+  protected static void waitStep(int);
+  protected static boolean runFromData(char[][], framework.utils.Vector2d, java.util.LinkedList<framework.utils.Vector2d>, java.util.LinkedList<framework.utils.Vector2d>);
+  protected static void writeMap(framework.core.Map, java.lang.String);
+  protected static int[] readForces(java.lang.String) throws java.lang.Exception;
+  static {};
+}
+Compiled from "FuelTank.java"
+public class framework.core.FuelTank extends framework.core.GameObject {
+  protected boolean collected;
+  public static int RADIUS;
+  public static java.awt.Color fuelTankColor;
+  public framework.core.FuelTank(framework.core.Game, framework.utils.Vector2d);
+  public void update();
+  public void reset();
+  public void draw(java.awt.Graphics2D);
+  public boolean checkCollected(framework.utils.Vector2d, int);
+  public void setCollected(boolean);
+  public boolean isCollected();
+  public framework.core.FuelTank getCopy(framework.core.Game);
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  static {};
+}
+Compiled from "Game.java"
+public class framework.core.Game {
+  public static framework.core.Map[] m_maps;
+  public framework.core.Game();
+  public framework.core.Game(java.lang.String);
+  public framework.core.Game(char[][], framework.utils.Vector2d, java.util.LinkedList<framework.utils.Vector2d>, java.util.LinkedList<framework.utils.Vector2d>);
+  public framework.core.Game(java.lang.String[]);
+  public void tick(int);
+  public void waypointCollected();
+  public void fuelTankCollected();
+  public void addCollected(int);
+  public void saveRoute();
+  public void saveRoute(java.lang.String);
+  public void addGameObject(framework.core.GameObject);
+  public void printResults();
+  public int getWaypointsVisited();
+  public int getFuelTanksCollected();
+  public void go();
+  public boolean advanceMap();
+  public void addWaypoint(framework.core.Waypoint);
+  public void addFuelTank(framework.core.FuelTank);
+  public void abort();
+  public java.util.LinkedList<framework.core.GameObject> getGameObjects();
+  public framework.core.Map getMap();
+  public java.awt.Dimension getMapSize();
+  public framework.core.Ship getShip();
+  public java.util.LinkedList<framework.core.Waypoint> getWaypoints();
+  public int getWaypointsLeft();
+  public int getNumWaypoints();
+  public java.util.ArrayList<java.lang.Integer> getVisitOrder();
+  public java.util.LinkedList<framework.core.FuelTank> getFuelTanks();
+  public int getFuelTanksLeft();
+  public int getNumFuelTanks();
+  public int getStepsLeft();
+  public int getTotalTime();
+  public boolean hasStarted();
+  public boolean isEnded();
+  public void setSize(java.awt.Dimension);
+  public void setShip(framework.core.Ship);
+  public void setStepsLeft(int);
+  public void setTotalTime(int);
+  public void setWaypointsLeft(int);
+  public void setFuelTanksLeft(int);
+  public void setStarted(boolean);
+  public framework.core.Game getCopy();
+}
+Compiled from "GameObject.java"
+public abstract class framework.core.GameObject {
+  public framework.utils.Vector2d s;
+  public framework.utils.Vector2d ps;
+  public framework.utils.Vector2d v;
+  public framework.utils.Vector2d d;
+  framework.core.Game m_game;
+  public int radius;
+  protected framework.core.GameObject();
+  protected framework.core.GameObject(framework.core.Game, framework.utils.Vector2d, framework.utils.Vector2d, framework.utils.Vector2d);
+  public abstract void update();
+  public abstract void draw(java.awt.Graphics2D);
+  public abstract void reset();
+}
+Compiled from "Map.java"
+public class framework.core.Map extends javax.swing.JComponent {
+  public static final char EDGE;
+  public static final char START;
+  public static final char WAYPOINT;
+  public static final char FUEL_TANK;
+  public static final char NIL;
+  public static final char DAMAGE;
+  public static final char ELASTIC;
+  public static final char LAVA;
+  public framework.core.Map(framework.core.Game, java.lang.String);
+  public framework.core.Map(framework.core.Game, char[][], framework.utils.Vector2d, java.util.LinkedList<framework.utils.Vector2d>, java.util.LinkedList<framework.utils.Vector2d>);
+  public boolean isOutsideBounds(int, int);
+  public boolean isObstacle(int, int);
+  public boolean isLava(int, int);
+  public int getCollisionType(int, int);
+  public boolean isCollisionUpDown(int, int);
+  public double distanceToCollision(framework.utils.Vector2d, framework.utils.Vector2d, int);
+  public boolean LineOfSight(framework.utils.Vector2d, framework.utils.Vector2d);
+  public boolean checkObsFree(int, int, int, int);
+  public double checkObsFreeDistance(int, int, int, int, int);
+  public java.util.LinkedList<framework.utils.Vector2d> getWaypointPositions();
+  public java.util.LinkedList<framework.utils.Vector2d> getFuelTankPositions();
+  public char[][] getMapChar();
+  public framework.utils.Vector2d getStartingPoint();
+  public int getMapHeight();
+  public int getMapWidth();
+  public java.lang.String getFilename();
+  public void setMapChar(char[][]);
+  public void setHeight(int);
+  public void setWidth(int);
+  public void setStartingPoint(framework.utils.Vector2d);
+  public void setGame(framework.core.Game);
+  public void setFilename(java.lang.String);
+  public framework.core.Map getCopy(framework.core.Game);
+}
+Compiled from "PTSPConstants.java"
+public abstract class framework.core.PTSPConstants {
+  public static final int DELAY;
+  public static final double T;
+  public static final double COLLISION_SPEED_RED;
+  public static final double COLLISION_DAMAGE_SPEED_RED;
+  public static final double COLLISION_ELASTIC_SPEED_RED;
+  public static final int ACTION_TIME_MS;
+  public static final int TIME_ACTION_DISQ;
+  public static final int INTERVAL_WAIT;
+  public static final int INITIAL_FUEL;
+  public static final int FUEL_TANK_BOOST;
+  public static final int FUEL_WAYPOINT_REWARD;
+  public static final int INVULNERABLE;
+  public static final int MAX_DAMAGE;
+  public static final int NO_COLLISION_TYPE;
+  public static final int NORMAL_COLLISION_TYPE;
+  public static final int DAMAGE_COLLISION_TYPE;
+  public static final int ELASTIC_COLLISION_TYPE;
+  public static final int DAMAGE_NORMAL_COLLISION;
+  public static final int DAMAGE_DAMAGE_COLLISION;
+  public static final int DAMAGE_LAVA;
+  public framework.core.PTSPConstants();
+  public static int getStepsPerWaypoints(int);
+  public static int getStepsInit(int);
+}
+Compiled from "PTSPView.java"
+public class framework.core.PTSPView extends javax.swing.JComponent {
+  public framework.core.PTSPView(framework.core.Game, java.awt.Dimension, framework.core.Map, framework.core.Ship, framework.core.Controller);
+  public void paintComponent(java.awt.Graphics);
+  public java.awt.Dimension getPreferredSize();
+  static {};
+}
+Compiled from "Ship.java"
+public class framework.core.Ship extends framework.core.GameObject {
+  public final int[] xp;
+  public final int[] yp;
+  public final int[] xpThrust;
+  public final int[] ypThrust;
+  public static final double steerStep;
+  public static final double loss;
+  public static final int SHIP_RADIUS;
+  public framework.core.Ship(framework.core.Game, framework.utils.Vector2d);
+  public void createCollSphere();
+  public void update();
+  public void update(int);
+  public boolean checkCollisionInPosition(framework.utils.Vector2d);
+  public int getCollisionTypeInPosition(framework.utils.Vector2d);
+  public void addFuel(int);
+  public void draw(java.awt.Graphics2D);
+  public void reset();
+  public java.util.ArrayList getActionList();
+  public boolean getCollLastStep();
+  public boolean hasStarted();
+  public framework.utils.Vector2d getPotentialPosition();
+  public framework.utils.Vector2d getPotentialSpeed();
+  public boolean isThrusting();
+  public int turning();
+  public int getRemainingFuel();
+  public int getDamage();
+  public int getLastCollisionType();
+  public int getInvulnerableTime();
+  public boolean isOnLava();
+  public void setStarted(boolean);
+  public void setCollisionLastStep(boolean);
+  public void setNextMove(int);
+  public void setRemainingFuel(int);
+  public void setDamage(int);
+  public void setLastCollisionType(int);
+  public void addAction(int);
+  public void setInvulnerableTime(int);
+  public void setLava(boolean);
+  public framework.core.Ship getCopy(framework.core.Game);
+  public void copyCollSph(framework.utils.Vector2d[]);
+}
+Compiled from "Waypoint.java"
+public class framework.core.Waypoint extends framework.core.GameObject {
+  protected boolean collected;
+  public static int RADIUS;
+  public framework.core.Waypoint(framework.core.Game, framework.utils.Vector2d);
+  public void update();
+  public void reset();
+  public void draw(java.awt.Graphics2D);
+  public boolean checkCollected(framework.utils.Vector2d, int);
+  public void setCollected(boolean);
+  public boolean isCollected();
+  public framework.core.Waypoint getCopy(framework.core.Game);
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  static {};
+}
+Compiled from "Edge.java"
+public class framework.graph.Edge {
+  public framework.graph.Edge(long, int, int, double);
+  public void draw(framework.graph.Graph, java.awt.Graphics2D);
+  public long id();
+  public int aId();
+  public int bId();
+  public double cost();
+}
+Compiled from "Graph.java"
+public class framework.graph.Graph {
+  public final int GRANULARITY;
+  public final double COST_STRAIGHT;
+  public final double COST_DIAG;
+  framework.graph.PathFinder m_pathFinder;
+  public framework.graph.Graph(framework.core.Game);
+  public framework.graph.Edge getEdge(long);
+  public framework.graph.Node getClosestNodeTo(double, double, boolean);
+  public framework.graph.Node getClosestNodeTo(double, double);
+  public framework.graph.Path getPath(int, int);
+  public void draw(java.awt.Graphics2D);
+  public java.lang.Object[] getNodesArray();
+  public java.util.HashMap<java.lang.Integer, framework.graph.Node> getNodes();
+  public java.util.HashMap<java.lang.Long, framework.graph.Edge> getEdges();
+  public framework.graph.Node getNode(int);
+  public int getNumNodes();
+}
+Compiled from "Node.java"
+public class framework.graph.Node implements java.lang.Comparable {
+  public final int RADIUS;
+  public final java.awt.Color nodeCol;
+  public final java.awt.Color edgeCol;
+  public double m_g;
+  public double m_h;
+  public double m_f;
+  public framework.graph.Node(int, int, int);
+  public void draw(framework.graph.Graph, java.awt.Graphics2D);
+  public int manhattanDistanceTo(framework.graph.Node);
+  public int manhattanDistanceTo(int, int);
+  public double euclideanDistanceTo(framework.graph.Node);
+  public double euclideanDistanceTo(double, double);
+  public int compareTo(java.lang.Object);
+  public int x();
+  public int y();
+  public int id();
+  public java.util.Vector<java.lang.Long> getEdgesFromNode();
+  public void addEdge(long);
+  public void x(int);
+  public void y(int);
+}
+Compiled from "PathFinder.java"
+class framework.graph.NodeComparatorG implements java.util.Comparator<framework.graph.Node> {
+  framework.graph.NodeComparatorG();
+  public int compare(framework.graph.Node, framework.graph.Node);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "PathFinder.java"
+class framework.graph.NodeComparatorH implements java.util.Comparator<framework.graph.Node> {
+  framework.graph.NodeComparatorH();
+  public int compare(framework.graph.Node, framework.graph.Node);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "Path.java"
+public class framework.graph.Path {
+  public int m_originID;
+  public int m_destinationID;
+  public double m_cost;
+  public java.util.Vector<java.lang.Integer> m_points;
+  public framework.graph.Path(int, int);
+  public framework.graph.Path(int, int, double);
+  public framework.graph.Path(framework.graph.Path);
+}
+Compiled from "PathFinder.java"
+class framework.graph.PathCH {
+  public framework.graph.Path p;
+  public int destID;
+  public double heuristicCost;
+  framework.graph.PathCH();
+  public java.lang.String toString();
+}
+Compiled from "PathFinder.java"
+class framework.graph.PathCHComparator implements java.util.Comparator<framework.graph.PathCH> {
+  framework.graph.PathCHComparator();
+  public int compare(framework.graph.PathCH, framework.graph.PathCH);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "PathFinder.java"
+public class framework.graph.PathFinder {
+  public framework.graph.PathFinder(framework.graph.Graph);
+  public framework.graph.Path getPath(int, int);
+}
+Compiled from "File2String.java"
+public class framework.utils.File2String {
+  public framework.utils.File2String();
+  public static java.lang.String get(java.lang.String);
+  public static java.lang.String read(java.io.InputStream);
+  public static java.lang.String[][] getArray(java.lang.String);
+  public static java.lang.String[][] readArray(java.io.InputStream);
+  public static boolean put(java.lang.String, java.lang.String);
+  public static boolean put(java.lang.String, java.io.File);
+  public static boolean put(java.lang.String[], java.lang.String);
+}
+Compiled from "JEasyFrame.java"
+public class framework.utils.JEasyFrame extends javax.swing.JFrame {
+  public java.awt.Component comp;
+  public framework.utils.JEasyFrame(java.awt.Component, java.lang.String);
+}
+Compiled from "MapArchitect.java"
+public class framework.utils.MapArchitect extends javax.swing.JComponent implements java.awt.event.MouseListener,java.awt.event.MouseMotionListener {
+  public static char EMPTY;
+  public static boolean READ_WAYPOINTS;
+  public framework.utils.MapArchitect(java.lang.String, framework.core.Map, framework.core.Game);
+  public framework.utils.MapArchitect(java.lang.String, int, int);
+  public void paint(java.awt.Graphics);
+  public java.awt.Dimension getPreferredSize();
+  public void registerEvent(int, int, int);
+  public void registerDragEvent(int, int);
+  public void mouseClicked(java.awt.event.MouseEvent);
+  public void mouseDragged(java.awt.event.MouseEvent);
+  public void mouseEntered(java.awt.event.MouseEvent);
+  public void mouseExited(java.awt.event.MouseEvent);
+  public void mousePressed(java.awt.event.MouseEvent);
+  public void mouseReleased(java.awt.event.MouseEvent);
+  public void mouseMoved(java.awt.event.MouseEvent);
+  public static void save();
+  public void loadMap(boolean) throws java.lang.Exception;
+  public framework.utils.MapArchitect showArchitect();
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "MapArchitect.java"
+class framework.utils.MapArchitect$ArchitectFrame extends javax.swing.JFrame {
+  public framework.utils.MapArchitect comp;
+  final framework.utils.MapArchitect this$0;
+  public char getChoice();
+  public framework.utils.MapArchitect$ArchitectFrame(framework.utils.MapArchitect, framework.utils.MapArchitect);
+  public int getBrushValue();
+  public void updateNumWaypoints(int);
+}
+Compiled from "MapArchitect.java"
+class framework.utils.MapArchitect$ArchitectFrame$1 implements java.awt.event.ActionListener {
+  final framework.utils.MapArchitect val$this$0;
+  final framework.utils.MapArchitect$ArchitectFrame this$1;
+  framework.utils.MapArchitect$ArchitectFrame$1(framework.utils.MapArchitect$ArchitectFrame, framework.utils.MapArchitect);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "MapConverter.java"
+public class framework.utils.MapConverter {
+  public static final char EDGE;
+  public static final char START;
+  public static final char COLL;
+  public static final char NIL;
+  public framework.utils.Vector2d m_startPoint;
+  public java.util.LinkedList<framework.core.Waypoint> m_collectables;
+  public int SCALE_FACTOR;
+  public framework.utils.MapConverter(java.lang.String, java.lang.String, int);
+  public boolean isLogic(char);
+  public static void main(java.lang.String[]);
+}
+Compiled from "Vector2d.java"
+public class framework.utils.Vector2d {
+  public double x;
+  public double y;
+  public framework.utils.Vector2d();
+  public boolean equals(java.lang.Object);
+  public framework.utils.Vector2d(double, double);
+  public framework.utils.Vector2d(framework.utils.Vector2d);
+  public framework.utils.Vector2d copy();
+  public void set(framework.utils.Vector2d);
+  public void set(double, double);
+  public void zero();
+  public java.lang.String toString();
+  public framework.utils.Vector2d add(framework.utils.Vector2d);
+  public framework.utils.Vector2d add(double, double);
+  public framework.utils.Vector2d add(framework.utils.Vector2d, double);
+  public framework.utils.Vector2d wrap(double, double);
+  public framework.utils.Vector2d subtract(framework.utils.Vector2d);
+  public framework.utils.Vector2d subtract(double, double);
+  public framework.utils.Vector2d mul(double);
+  public void rotate(double);
+  public double scalarProduct(framework.utils.Vector2d);
+  public static double sqr(double);
+  public double sqDist(framework.utils.Vector2d);
+  public double mag();
+  public double dist(framework.utils.Vector2d);
+  public double dist(double, double);
+  public double theta();
+  public void normalise();
+  public double dot(framework.utils.Vector2d);
+}
+Compiled from "AccessTest.java"
+public class wox.serial.AccessTest {
+  public wox.serial.AccessTest();
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+  static {};
+}
+Compiled from "AccessTest.java"
+public class wox.serial.AccessTest$Sub extends wox.serial.AccessTest$Super {
+  int y;
+  public wox.serial.AccessTest$Sub(double);
+  public java.lang.String toString();
+}
+Compiled from "AccessTest.java"
+public class wox.serial.AccessTest$Super {
+  int x;
+  public wox.serial.AccessTest$Super();
+}
+Compiled from "ArrayListTest.java"
+public class wox.serial.ArrayListTest {
+  public wox.serial.ArrayListTest();
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+}
+Compiled from "Easy.java"
+public class wox.serial.Easy {
+  public wox.serial.Easy();
+  public static void save(java.lang.Object, java.lang.String);
+  public static java.lang.Object load(java.lang.String);
+}
+Compiled from "EasyTest.java"
+public class wox.serial.EasyTest {
+  public wox.serial.EasyTest();
+  public static void main(java.lang.String[]);
+}
+Compiled from "EncodeBase64.java"
+public class wox.serial.EncodeBase64 {
+  public wox.serial.EncodeBase64();
+  public static byte[] encode(byte[]);
+  public static byte[] decode(byte[]);
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "ObjectReader.java"
+public interface wox.serial.ObjectReader extends wox.serial.Serial {
+  public abstract java.lang.Object read(org.jdom.Element);
+}
+Compiled from "ObjectWriter.java"
+public interface wox.serial.ObjectWriter extends wox.serial.Serial {
+  public abstract org.jdom.Element write(java.lang.Object);
+}
+Compiled from "ReadTest.java"
+public class wox.serial.ReadTest {
+  public wox.serial.ReadTest();
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+}
+Compiled from "Serial.java"
+public interface wox.serial.Serial {
+  public static final java.lang.String OBJECT;
+  public static final java.lang.String FIELD;
+  public static final java.lang.String NAME;
+  public static final java.lang.String TYPE;
+  public static final java.lang.String VALUE;
+  public static final java.lang.String ARRAY;
+  public static final java.lang.String LENGTH;
+  public static final java.lang.String ID;
+  public static final java.lang.String IDREF;
+  public static final java.lang.String DECLARED;
+  public static final java.lang.Class[] primitiveArrays;
+  public static final java.lang.Class[] primitiveWrappers;
+  public static final java.lang.Class[] primitives;
+  static {};
+}
+Compiled from "ShadowTest.java"
+public class wox.serial.ShadowTest {
+  public wox.serial.ShadowTest();
+  public static void main(java.lang.String[]) throws java.io.IOException;
+}
+Compiled from "ShadowTest.java"
+public class wox.serial.ShadowTest$X {
+  int x;
+  public wox.serial.ShadowTest$X();
+}
+Compiled from "ShadowTest.java"
+public class wox.serial.ShadowTest$Y extends wox.serial.ShadowTest$X {
+  int x;
+  java.lang.String s;
+  java.lang.Integer i;
+  public wox.serial.ShadowTest$Y();
+}
+Compiled from "SimpleReader.java"
+public class wox.serial.SimpleReader implements wox.serial.ObjectReader {
+  java.util.HashMap map;
+  public wox.serial.SimpleReader();
+  public java.lang.Object read(org.jdom.Element);
+  public boolean empty(org.jdom.Element);
+  public boolean reference(org.jdom.Element);
+  public boolean primitiveArray(org.jdom.Element);
+  public boolean array(org.jdom.Element);
+  public java.lang.Object readPrimitiveArray(org.jdom.Element, java.lang.Object);
+  public java.lang.Class getPrimitiveType(java.lang.String);
+  public java.lang.Class getWrapperType(java.lang.Class);
+  public java.lang.Class getWrapperType(java.lang.String);
+  public java.lang.Object readIntArray(int[], org.jdom.Element);
+  public java.lang.Object readByteArray(byte[], org.jdom.Element);
+  public java.lang.Object readObjectArray(org.jdom.Element, java.lang.Object);
+  public java.lang.Class getObjectArrayComponentType(java.lang.String) throws java.lang.Exception;
+  public java.lang.Object readStringObject(org.jdom.Element, java.lang.Object);
+  public java.lang.Object readObject(org.jdom.Element, java.lang.Object);
+  public void setFields(java.lang.Object, org.jdom.Element);
+  public java.lang.Object makeObject(java.lang.reflect.Constructor, java.lang.Object[], java.lang.Object) throws java.lang.Exception;
+  public java.lang.Object makeWrapper(java.lang.Class, java.lang.String) throws java.lang.Exception;
+  public java.lang.reflect.Field getField(java.lang.Class, java.lang.String) throws java.lang.Exception;
+  public void print(java.lang.reflect.Constructor[]);
+  public java.lang.Class getComponentType(java.lang.String);
+  public java.lang.Class getArrayType(java.lang.String);
+}
+Compiled from "SimpleWriter.java"
+public class wox.serial.SimpleWriter implements wox.serial.ObjectWriter {
+  java.util.HashMap map;
+  int count;
+  boolean writePrimitiveTypes;
+  boolean doStatic;
+  boolean doFinal;
+  public wox.serial.SimpleWriter();
+  public org.jdom.Element write(java.lang.Object);
+  public org.jdom.Element writeArray(java.lang.Object);
+  public org.jdom.Element writeObjectArray(java.lang.Object);
+  public org.jdom.Element writePrimitiveArray(java.lang.Object);
+  public java.lang.String byteArrayString(byte[], org.jdom.Element);
+  public java.lang.String arrayString(java.lang.Object, int);
+  public void writeFields(java.lang.Object, org.jdom.Element);
+  public static java.lang.String stringify(java.lang.Object);
+  public static java.lang.reflect.Field[] getFields(java.lang.Class);
+  public static java.lang.Object[] getValues(java.lang.Object, java.lang.reflect.Field[]);
+  public boolean isPrimitiveArray(java.lang.Class);
+}
+Compiled from "TestObject.java"
+public class wox.serial.TestObject {
+  int[] xa;
+  int[] xb;
+  byte[] ba;
+  wox.serial.TestObject to;
+  int[][] xxx;
+  int[] ia;
+  double[] dd;
+  java.lang.Object[] objects;
+  java.util.ArrayList alist;
+  java.lang.Object myNull;
+  wox.serial.TestObject$Inner inner;
+  public wox.serial.TestObject(int);
+  public synchronized int inc();
+}
+Compiled from "TestObject.java"
+public class wox.serial.TestObject$Inner {
+  int inx;
+  public wox.serial.TestObject$Inner(int);
+}
+Compiled from "Util.java"
+public class wox.serial.Util implements wox.serial.Serial {
+  public wox.serial.Util();
+  public static void main(java.lang.String[]);
+  public static java.lang.reflect.Constructor forceDefaultConstructor(java.lang.Class) throws java.lang.Exception;
+  public static boolean stringable(java.lang.Object);
+  public static boolean stringable(java.lang.Class);
+  public static boolean stringable(java.lang.String);
+  public static boolean primitive(java.lang.Class);
+  static {};
+}
+Compiled from "WriterTest.java"
+public class wox.serial.WriterTest {
+  public wox.serial.WriterTest();
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+}

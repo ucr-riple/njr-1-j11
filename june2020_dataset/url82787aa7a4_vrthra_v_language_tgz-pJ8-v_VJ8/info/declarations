@@ -1,0 +1,776 @@
+Compiled from "BuffCharStream.java"
+public class v.BuffCharStream implements v.CharStream {
+  java.io.BufferedReader _reader;
+  v.Lexer _lexer;
+  char _current;
+  char _next;
+  public v.BuffCharStream(java.lang.String);
+  public void lexer(v.Lexer);
+  public java.io.BufferedReader reader();
+  public char read();
+  public char peek();
+  public char current();
+}
+Compiled from "CharStream.java"
+public interface v.CharStream {
+  public abstract char read();
+  public abstract char current();
+  public abstract char peek();
+  public abstract void lexer(v.Lexer);
+}
+Compiled from "Cmd.java"
+public abstract class v.Cmd implements v.Quote {
+  java.util.HashMap<java.lang.String, java.lang.Object> _store;
+  public v.Cmd();
+  public java.util.HashMap<java.lang.String, java.lang.Object> store();
+  public v.TokenStream tokens();
+}
+Compiled from "CmdQuote.java"
+public class v.CmdQuote implements v.Quote {
+  v.TokenStream _tokens;
+  char _c;
+  java.util.HashMap<java.lang.String, java.lang.Object> _store;
+  public v.CmdQuote(v.TokenStream, char);
+  public v.CmdQuote(v.TokenStream);
+  public void eval(v.VFrame);
+  public void dofunction(v.VFrame);
+  public v.TokenStream tokens();
+  public java.lang.String toString();
+  public java.util.HashMap<java.lang.String, java.lang.Object> store();
+}
+Compiled from "ConsoleCharStream.java"
+public class v.ConsoleCharStream implements v.CharStream {
+  java.io.BufferedReader _reader;
+  static v.ConsoleCharStream _i;
+  v.Lexer _lexer;
+  char _current;
+  java.lang.StringBuffer _buf;
+  int _index;
+  static v.ConsoleCharStream getInstance();
+  public java.lang.String gets();
+  public void lexer(v.Lexer);
+  public java.io.BufferedReader reader();
+  java.lang.String read_nobuf();
+  public char read();
+  public char peek();
+  public char current();
+  public int index();
+  static {};
+}
+Compiled from "FileCharStream.java"
+public class v.FileCharStream extends v.BuffCharStream {
+  public v.FileCharStream(java.lang.String) throws java.io.FileNotFoundException;
+}
+Compiled from "LexIterator.java"
+public class v.LexIterator extends v.QuoteIterator {
+  v.Lexer _lex;
+  v.Term _current;
+  public v.LexIterator(v.QuoteStream, v.CharStream);
+  public boolean hasNext();
+  v.Term lex_next();
+  public v.Term next();
+  public void remove();
+  public java.lang.Object next();
+}
+Compiled from "LexStream.java"
+public class v.LexStream extends v.QuoteStream {
+  v.CharStream _stream;
+  public v.LexStream(v.CharStream);
+  public java.util.Iterator<v.Term> iterator();
+}
+Compiled from "Lexer.java"
+public class v.Lexer {
+  java.lang.StringBuffer _word;
+  public java.util.Stack<java.lang.Character> _cstack;
+  public java.util.LinkedList<v.Term> _queue;
+  public v.CharStream _stream;
+  static final java.util.regex.Pattern P_INT;
+  static final java.util.regex.Pattern P_FLOAT;
+  boolean _has;
+  public v.Lexer(v.CharStream);
+  void add(v.Term);
+  public void reset();
+  public char charconv(char);
+  public void lex();
+  static char closeCompound(char);
+  public boolean closed();
+  void copen();
+  void cclose();
+  void lcomment();
+  void string();
+  void space();
+  void character();
+  void word();
+  public void dump();
+  public boolean hasNext();
+  public v.Term next();
+  static {};
+}
+Compiled from "VStack.java"
+class v.Node<E> {
+  E data;
+  v.Node<E> link;
+  public v.Node(E);
+}
+Compiled from "Prologue.java"
+public class v.Prologue {
+  static v.Cmd _def;
+  static v.Cmd _set;
+  static v.Cmd _me;
+  static v.Cmd _parent;
+  static v.Cmd _defenv;
+  static v.Cmd _defmodule;
+  static v.Cmd _java;
+  static v.Cmd _view;
+  static v.Cmd _trans;
+  static v.Cmd _words;
+  static v.Cmd _catch;
+  static v.Cmd _throw;
+  static v.Cmd _stack;
+  static v.Cmd _unstack;
+  static v.Cmd _abort;
+  static v.Cmd _true;
+  static v.Cmd _false;
+  static v.Cmd _if;
+  static v.Cmd _when;
+  static v.Cmd _choice;
+  static v.Cmd _ifte;
+  static v.Cmd _while;
+  static v.Cmd _print;
+  static v.Cmd _println;
+  static v.Cmd _gets;
+  static v.Cmd _peek;
+  static v.Cmd _show;
+  static v.Cmd _vdebug;
+  static v.Cmd _dframe;
+  static v.Cmd _debug;
+  static v.Cmd _map;
+  static v.Cmd _map_i;
+  static v.Cmd _split;
+  static v.Cmd _split_i;
+  static v.Cmd _fold;
+  static v.Cmd _fold_i;
+  static v.Cmd _drop;
+  static v.Cmd _take;
+  static v.Cmd _dequote;
+  static v.Cmd _dequoteenv;
+  static v.Cmd _add;
+  static v.Cmd _sub;
+  static v.Cmd _mul;
+  static v.Cmd _div;
+  static v.Cmd _mod;
+  static v.Cmd _gt;
+  static v.Cmd _lt;
+  static v.Cmd _lteq;
+  static v.Cmd _gteq;
+  static v.Cmd _eq;
+  static v.Cmd _neq;
+  static v.Cmd _and;
+  static v.Cmd _or;
+  static v.Cmd _not;
+  static v.Cmd _isbool;
+  static v.Cmd _isinteger;
+  static v.Cmd _isdouble;
+  static v.Cmd _issym;
+  static v.Cmd _islist;
+  static v.Cmd _isstr;
+  static v.Cmd _isnum;
+  static v.Cmd _ischar;
+  static v.Cmd _tostring;
+  static v.Cmd _toint;
+  static v.Cmd _todecimal;
+  static v.Cmd _use;
+  static v.Cmd _useenv;
+  static v.Cmd _eval;
+  static v.Cmd _evalenv;
+  static v.Cmd _help;
+  static v.Cmd _env;
+  static v.Cmd _time;
+  public v.Prologue();
+  static java.util.Map$Entry<java.lang.String, v.CmdQuote> splitdef(v.Quote);
+  static v.QuoteStream evalres(v.TokenStream, java.util.HashMap<java.lang.String, v.Term>);
+  static void evaltmpl(v.TokenStream, v.TokenStream, java.util.HashMap<java.lang.String, v.Term>);
+  static java.util.Collection<java.lang.String> sort(java.util.Set<java.lang.String>);
+  public static void init(v.VFrame);
+  static boolean access$000(v.Term, v.Term);
+  static boolean access$100(v.Term, v.Term);
+  static boolean access$200(v.Term, v.Term);
+  static boolean access$300(v.Term, v.Term);
+  static boolean access$400(v.Term, v.Term);
+  static java.lang.String access$500(java.lang.String);
+  static {};
+}
+Compiled from "Prologue.java"
+final class v.Prologue$1 extends v.Cmd {
+  v.Prologue$1();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$10 extends v.Cmd {
+  v.Prologue$10();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$11 extends v.Cmd {
+  v.Prologue$11();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$12 extends v.Cmd {
+  v.Prologue$12();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$13 extends v.Cmd {
+  v.Prologue$13();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$14 extends v.Cmd {
+  v.Prologue$14();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$15 extends v.Cmd {
+  v.Prologue$15();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$16 extends v.Cmd {
+  v.Prologue$16();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$17 extends v.Cmd {
+  v.Prologue$17();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$18 extends v.Cmd {
+  v.Prologue$18();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$19 extends v.Cmd {
+  v.Prologue$19();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$2 extends v.Cmd {
+  v.Prologue$2();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$20 extends v.Cmd {
+  v.Prologue$20();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$21 extends v.Cmd {
+  v.Prologue$21();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$22 extends v.Cmd {
+  v.Prologue$22();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$23 extends v.Cmd {
+  v.Prologue$23();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$24 extends v.Cmd {
+  v.Prologue$24();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$25 extends v.Cmd {
+  v.Prologue$25();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$26 extends v.Cmd {
+  v.Prologue$26();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$27 extends v.Cmd {
+  v.Prologue$27();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$28 extends v.Cmd {
+  v.Prologue$28();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$29 extends v.Cmd {
+  v.Prologue$29();
+  public void eval(v.VFrame);
+  public void dumpframe(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$3 extends v.Cmd {
+  v.Prologue$3();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$30 extends v.Cmd {
+  v.Prologue$30();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$31 extends v.Cmd {
+  v.Prologue$31();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$32 extends v.Cmd {
+  v.Prologue$32();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$33 extends v.Cmd {
+  v.Prologue$33();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$34 extends v.Cmd {
+  v.Prologue$34();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$35 extends v.Cmd {
+  v.Prologue$35();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$36 extends v.Cmd {
+  v.Prologue$36();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$37 extends v.Cmd {
+  v.Prologue$37();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$38 extends v.Cmd {
+  v.Prologue$38();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$39 extends v.Cmd {
+  v.Prologue$39();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$4 extends v.Cmd {
+  v.Prologue$4();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$40 extends v.Cmd {
+  v.Prologue$40();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$41 extends v.Cmd {
+  v.Prologue$41();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$42 extends v.Cmd {
+  v.Prologue$42();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$43 extends v.Cmd {
+  v.Prologue$43();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$44 extends v.Cmd {
+  v.Prologue$44();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$45 extends v.Cmd {
+  v.Prologue$45();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$46 extends v.Cmd {
+  v.Prologue$46();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$47 extends v.Cmd {
+  v.Prologue$47();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$48 extends v.Cmd {
+  v.Prologue$48();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$49 extends v.Cmd {
+  v.Prologue$49();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$5 extends v.Cmd {
+  v.Prologue$5();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$50 extends v.Cmd {
+  v.Prologue$50();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$51 extends v.Cmd {
+  v.Prologue$51();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$52 extends v.Cmd {
+  v.Prologue$52();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$53 extends v.Cmd {
+  v.Prologue$53();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$54 extends v.Cmd {
+  v.Prologue$54();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$55 extends v.Cmd {
+  v.Prologue$55();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$56 extends v.Cmd {
+  v.Prologue$56();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$57 extends v.Cmd {
+  v.Prologue$57();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$58 extends v.Cmd {
+  v.Prologue$58();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$59 extends v.Cmd {
+  v.Prologue$59();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$6 extends v.Cmd {
+  v.Prologue$6();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$60 extends v.Cmd {
+  v.Prologue$60();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$61 extends v.Cmd {
+  v.Prologue$61();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$62 extends v.Cmd {
+  v.Prologue$62();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$63 extends v.Cmd {
+  v.Prologue$63();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$64 extends v.Cmd {
+  v.Prologue$64();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$65 extends v.Cmd {
+  v.Prologue$65();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$66 extends v.Cmd {
+  v.Prologue$66();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$67 extends v.Cmd {
+  v.Prologue$67();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$68 extends v.Cmd {
+  v.Prologue$68();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$69 extends v.Cmd {
+  v.Prologue$69();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$7 extends v.Cmd {
+  v.Prologue$7();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$70 extends v.Cmd {
+  v.Prologue$70();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$71 extends v.Cmd {
+  v.Prologue$71();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$72 extends v.Cmd {
+  v.Prologue$72();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+class v.Prologue$73 {
+  static final int[] $SwitchMap$v$Type;
+  static {};
+}
+Compiled from "Prologue.java"
+final class v.Prologue$8 extends v.Cmd {
+  v.Prologue$8();
+  public void eval(v.VFrame);
+}
+Compiled from "Prologue.java"
+final class v.Prologue$9 extends v.Cmd {
+  v.Prologue$9();
+  public void eval(v.VFrame);
+}
+Compiled from "Quote.java"
+public interface v.Quote {
+  public abstract void eval(v.VFrame);
+  public abstract v.TokenStream tokens();
+}
+Compiled from "QuoteIterator.java"
+public class v.QuoteIterator implements v.TokenIterator {
+  v.QuoteStream _qs;
+  int _index;
+  public v.QuoteIterator(v.QuoteStream);
+  public boolean hasNext();
+  public v.Term next();
+  public void remove();
+  public java.lang.Object next();
+}
+Compiled from "QuoteStream.java"
+public class v.QuoteStream implements v.TokenStream {
+  java.util.List<v.Term> _terms;
+  public v.QuoteStream();
+  public void add(v.Term);
+  public v.Term get(int);
+  public int size();
+  public java.util.Iterator<v.Term> iterator();
+}
+Compiled from "Prologue.java"
+class v.Shield {
+  v.Node<v.Term> stack;
+  v.Quote quote;
+  v.Shield(v.VStack, v.Quote);
+}
+Compiled from "Sym.java"
+public class v.Sym {
+  public v.Sym();
+  public static java.lang.String lookup(java.lang.String);
+  static {};
+}
+Compiled from "Term.java"
+public class v.Term<T> extends v.Token {
+  public v.Type type;
+  public T val;
+  public v.Term(v.Type, T);
+  public java.lang.String value();
+  public v.Type type();
+  public int size();
+}
+Compiled from "Token.java"
+public abstract class v.Token {
+  public v.Token();
+  public abstract java.lang.String value();
+  public abstract v.Type type();
+  public boolean bvalue();
+  public char cvalue();
+  public int ivalue();
+  public double dvalue();
+  public java.lang.Number numvalue();
+  public java.lang.String svalue();
+  public v.Quote qvalue();
+  public java.lang.Object ovalue();
+  public v.VFrame fvalue();
+}
+Compiled from "TokenIterator.java"
+public interface v.TokenIterator extends java.util.Iterator<v.Term> {
+}
+Compiled from "TokenStream.java"
+public interface v.TokenStream extends java.lang.Iterable<v.Term> {
+}
+Compiled from "Type.java"
+public final class v.Type extends java.lang.Enum<v.Type> {
+  public static final v.Type TSymbol;
+  public static final v.Type TQuote;
+  public static final v.Type TFrame;
+  public static final v.Type TString;
+  public static final v.Type TInt;
+  public static final v.Type TDouble;
+  public static final v.Type TChar;
+  public static final v.Type TBool;
+  public static final v.Type TObject;
+  public static final v.Type TOpen;
+  public static final v.Type TClose;
+  public static v.Type[] values();
+  public static v.Type valueOf(java.lang.String);
+  static {};
+}
+Compiled from "Util.java"
+public class v.Util {
+  public v.Util();
+  public static void evaluate(java.lang.String, v.VFrame);
+  static v.Quote compile(v.Quote);
+  static v.Quote getdef(java.lang.String);
+  static java.lang.String getresource(java.lang.String);
+}
+Compiled from "V.java"
+public class v.V {
+  public static java.lang.String version;
+  public static boolean singleassign;
+  static boolean _showtime;
+  static boolean _debug;
+  public v.V();
+  static void banner();
+  public static void showtime(boolean);
+  public static void main(java.lang.String[]);
+  public static void outln(java.lang.String);
+  public static void out(java.lang.String);
+  public void outln(v.Term);
+  public static java.lang.String gets();
+  public static void debug(java.lang.Exception);
+  public static void debug(java.lang.String);
+  static void debug(boolean);
+  static {};
+}
+Compiled from "V.java"
+final class v.V$1 extends v.CmdQuote {
+  final boolean val$interactive;
+  final v.VFrame val$frame;
+  v.V$1(v.TokenStream, boolean, v.VFrame);
+  public void dofunction(v.VFrame);
+}
+Compiled from "VException.java"
+public class v.VException extends v.Vx {
+  v.Token _token;
+  v.Quote _quote;
+  java.lang.String _err;
+  java.lang.StringBuffer _info;
+  public v.VException(java.lang.String, v.Token, java.lang.String);
+  public void addLine(java.lang.String);
+  public v.Token token();
+  public java.lang.String message();
+  public java.lang.String stack();
+}
+Compiled from "VFrame.java"
+public class v.VFrame {
+  v.VStack _stack;
+  java.util.HashMap<java.lang.String, v.Quote> _dict;
+  v.VFrame _parent;
+  static int _idcount;
+  int _id;
+  public java.util.HashMap<java.lang.String, v.Quote> dict();
+  public java.lang.String id();
+  public v.VFrame();
+  public v.Quote lookup(java.lang.String);
+  public void def(java.lang.String, v.Quote);
+  public void set(java.lang.String, v.Quote);
+  public v.VFrame parent();
+  public v.VFrame child();
+  public v.VStack stack();
+  public void dump();
+  public void reinit();
+  static {};
+}
+Compiled from "VStack.java"
+public class v.VStack {
+  v.Node<v.Term> now;
+  v.Node<v.Term> first;
+  public v.VStack();
+  public v.Node<v.Term> now();
+  public v.Node<v.Term> now(v.Node<v.Term>);
+  public v.Term push(v.Term);
+  public v.Term pop();
+  public boolean empty();
+  public void clear();
+  public v.Term peek();
+  public v.Quote quote();
+  public void dequote(v.Quote);
+  public void dump();
+}
+Compiled from "VStack.java"
+class v.VStack$1 {
+  static final int[] $SwitchMap$v$Type;
+  static {};
+}
+Compiled from "VSynException.java"
+public class v.VSynException extends v.Vx {
+  java.lang.StringBuffer _info;
+  java.lang.String _err;
+  public v.VSynException(java.lang.String, java.lang.String);
+  java.lang.String message();
+  java.lang.String stack();
+  public void addLine(java.lang.String);
+}
+Compiled from "Vx.java"
+public abstract class v.Vx extends java.lang.RuntimeException {
+  public v.Vx();
+  abstract java.lang.String message();
+  abstract java.lang.String stack();
+  abstract void addLine(java.lang.String);
+}
+Compiled from "Helper.java"
+public class v.java.Helper {
+  public v.java.Helper();
+  public static java.lang.Class[] getParamType(v.Quote);
+  public static java.lang.Class getArrayElementType(v.Term);
+  public static java.lang.Class getArrayType(v.Term);
+  public static java.lang.Object getArrayObj(v.Term);
+  public static java.lang.Class getJavaType(v.Term);
+  public static java.lang.Object getJavaObj(v.Term);
+  public static java.lang.Object[] getParams(v.Quote);
+  public static v.Term getResult(java.lang.Object);
+  public static java.lang.Class getClass(java.lang.String);
+  public static java.lang.reflect.Method getMethod(java.lang.String, v.Term, v.Quote);
+  public static java.lang.reflect.Constructor getConstructor(java.lang.String, v.Quote);
+  public static java.lang.reflect.Field getField(java.lang.String, java.lang.String);
+  public static v.Term invoke(v.Term, v.Term, v.Quote);
+}
+Compiled from "Helper.java"
+class v.java.Helper$1 {
+  static final int[] $SwitchMap$v$Type;
+  static {};
+}

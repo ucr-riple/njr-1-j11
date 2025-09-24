@@ -1,0 +1,278 @@
+Compiled from "User.java"
+public class groupsignature.client.User {
+  public groupsignature.client.User(java.lang.String, groupsignature.server.IssuingManager, groupsignature.server.OpeningManager, groupsignature.server.RevocationManager);
+  public groupsignature.keys.Mpk getMpk();
+  public groupsignature.server.IssuingManager getIssuingmanager();
+  public java.lang.String getPseudo();
+  public void join();
+  public void updateKey();
+  public groupsignature.signature.Signature sign(java.lang.String);
+}
+Compiled from "Verifier.java"
+public class groupsignature.client.Verifier {
+  public groupsignature.client.Verifier(groupsignature.server.IssuingManager, groupsignature.server.OpeningManager, groupsignature.server.RevocationManager);
+  public java.lang.Boolean verify(java.lang.String, groupsignature.signature.Signature);
+}
+Compiled from "ECParameters.java"
+public interface groupsignature.elliptic.ECParameters {
+  public abstract java.math.BigInteger a();
+  public abstract java.math.BigInteger b();
+  public abstract java.math.BigInteger p();
+  public abstract java.math.BigInteger generatorX();
+  public abstract java.math.BigInteger generatorY();
+  public abstract java.math.BigInteger order();
+  public abstract java.lang.String toString();
+}
+Compiled from "ECPoint.java"
+public class groupsignature.elliptic.ECPoint {
+  public static final java.math.BigInteger TWO;
+  public static final java.math.BigInteger THREE;
+  public void fastCache();
+  public groupsignature.elliptic.ECPoint(groupsignature.elliptic.EllipticCurve, java.math.BigInteger, java.math.BigInteger) throws groupsignature.elliptic.NotOnMotherException;
+  public groupsignature.elliptic.ECPoint(byte[], groupsignature.elliptic.EllipticCurve);
+  public groupsignature.elliptic.ECPoint(groupsignature.elliptic.EllipticCurve);
+  public byte[] compress();
+  public groupsignature.elliptic.ECPoint add(groupsignature.elliptic.ECPoint) throws groupsignature.elliptic.NoCommonMotherException;
+  public groupsignature.elliptic.ECPoint multiply(java.math.BigInteger);
+  public java.math.BigInteger getx();
+  public java.math.BigInteger gety();
+  public groupsignature.elliptic.EllipticCurve getMother();
+  public java.lang.String toString();
+  public boolean hasCommonMother(groupsignature.elliptic.ECPoint);
+  public boolean isZero();
+  static {};
+}
+Compiled from "EllipticCurve.java"
+public class groupsignature.elliptic.EllipticCurve {
+  public static final java.math.BigInteger COEFA;
+  public static final java.math.BigInteger COEFB;
+  public static final int PRIMESECURITY;
+  public groupsignature.elliptic.EllipticCurve(java.math.BigInteger, java.math.BigInteger, java.math.BigInteger) throws groupsignature.elliptic.InsecureCurveException;
+  public groupsignature.elliptic.EllipticCurve(groupsignature.elliptic.ECParameters) throws groupsignature.elliptic.InsecureCurveException;
+  public void writeCurve(java.io.DataOutputStream) throws java.io.IOException;
+  protected groupsignature.elliptic.EllipticCurve(java.io.DataInputStream) throws java.io.IOException;
+  public boolean isSingular();
+  public java.math.BigInteger calculateOrder();
+  public groupsignature.elliptic.ECPoint calculateGenerator();
+  public boolean onCurve(groupsignature.elliptic.ECPoint);
+  public java.math.BigInteger getOrder();
+  public groupsignature.elliptic.ECPoint getZero();
+  public java.math.BigInteger geta();
+  public java.math.BigInteger getb();
+  public java.math.BigInteger getp();
+  public int getPCS();
+  public groupsignature.elliptic.ECPoint getGenerator();
+  public java.lang.String toString();
+  public java.math.BigInteger getPPODBF();
+  static {};
+}
+Compiled from "InsecureCurveException.java"
+public class groupsignature.elliptic.InsecureCurveException extends java.lang.Exception {
+  public static final int NONPRIMEMODULUS;
+  public static final int SINGULAR;
+  public static final int SUPERSINGULAR;
+  public static final int ANOMALOUS;
+  public static final int TRACEONE;
+  public groupsignature.elliptic.InsecureCurveException(groupsignature.elliptic.EllipticCurve);
+  public groupsignature.elliptic.InsecureCurveException(int, groupsignature.elliptic.EllipticCurve);
+  public int getError();
+  public java.lang.String getErrorString();
+  public groupsignature.elliptic.EllipticCurve getSender();
+}
+Compiled from "NoCommonMotherException.java"
+public class groupsignature.elliptic.NoCommonMotherException extends java.lang.Exception {
+  public groupsignature.elliptic.NoCommonMotherException();
+  public java.lang.String getErrorString();
+}
+Compiled from "NotOnMotherException.java"
+public class groupsignature.elliptic.NotOnMotherException extends java.lang.Exception {
+  public groupsignature.elliptic.NotOnMotherException(groupsignature.elliptic.ECPoint);
+  public java.lang.String getErrorString();
+  public groupsignature.elliptic.ECPoint getSource();
+}
+Compiled from "secp112r1.java"
+public class groupsignature.elliptic.secp112r1 implements groupsignature.elliptic.ECParameters {
+  public groupsignature.elliptic.secp112r1();
+  public java.math.BigInteger a();
+  public java.math.BigInteger b();
+  public java.math.BigInteger p();
+  public java.math.BigInteger generatorX();
+  public java.math.BigInteger generatorY();
+  public java.math.BigInteger order();
+  public java.lang.String toString();
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "secp160r1.java"
+public class groupsignature.elliptic.secp160r1 implements groupsignature.elliptic.ECParameters {
+  public groupsignature.elliptic.secp160r1();
+  public java.math.BigInteger a();
+  public java.math.BigInteger b();
+  public java.math.BigInteger p();
+  public java.math.BigInteger generatorX();
+  public java.math.BigInteger generatorY();
+  public java.math.BigInteger order();
+  public java.lang.String toString();
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "secp256r1.java"
+public class groupsignature.elliptic.secp256r1 implements groupsignature.elliptic.ECParameters {
+  public groupsignature.elliptic.secp256r1();
+  public java.math.BigInteger a();
+  public java.math.BigInteger b();
+  public java.math.BigInteger p();
+  public java.math.BigInteger generatorX();
+  public java.math.BigInteger generatorY();
+  public java.math.BigInteger order();
+  public java.lang.String toString();
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "Ipk.java"
+public class groupsignature.keys.Ipk {
+  public groupsignature.keys.Ipk(java.math.BigInteger, java.math.BigInteger, java.math.BigInteger, java.math.BigInteger);
+  public java.math.BigInteger getn();
+  public java.math.BigInteger geta0();
+  public java.math.BigInteger geta1();
+  public java.math.BigInteger geta2();
+}
+Compiled from "Isk.java"
+public class groupsignature.keys.Isk {
+  public groupsignature.keys.Isk(java.math.BigInteger, java.math.BigInteger);
+  public java.math.BigInteger getp1();
+  public java.math.BigInteger getp2();
+}
+Compiled from "Mpk.java"
+public class groupsignature.keys.Mpk {
+  public groupsignature.keys.Mpk(java.math.BigInteger, java.math.BigInteger, java.math.BigInteger, groupsignature.elliptic.ECPoint);
+  public java.math.BigInteger getA();
+  public java.math.BigInteger getEPrime();
+  public void setB(java.math.BigInteger);
+  public java.math.BigInteger getB();
+  public groupsignature.elliptic.ECPoint geth();
+}
+Compiled from "Msk.java"
+public class groupsignature.keys.Msk {
+  public groupsignature.keys.Msk(java.math.BigInteger);
+  public java.math.BigInteger getx();
+}
+Compiled from "Opk.java"
+public class groupsignature.keys.Opk {
+  public groupsignature.keys.Opk(java.math.BigInteger, groupsignature.elliptic.ECPoint, groupsignature.elliptic.ECPoint, groupsignature.elliptic.ECPoint);
+  public java.math.BigInteger getOrder();
+  public groupsignature.elliptic.ECPoint getGenerator();
+  public groupsignature.elliptic.ECPoint getH1();
+  public groupsignature.elliptic.ECPoint getH2();
+}
+Compiled from "Osk.java"
+public class groupsignature.keys.Osk {
+  public groupsignature.keys.Osk(java.math.BigInteger, java.math.BigInteger);
+  public java.math.BigInteger gety1();
+  public java.math.BigInteger gety2();
+}
+Compiled from "Rpk.java"
+public class groupsignature.keys.Rpk {
+  public groupsignature.keys.Rpk(java.math.BigInteger, java.math.BigInteger, java.math.BigInteger);
+  public java.math.BigInteger getl();
+  public java.math.BigInteger getb();
+  public java.math.BigInteger getw();
+  public void updateB(java.math.BigInteger);
+}
+Compiled from "Rsk.java"
+public class groupsignature.keys.Rsk {
+  public groupsignature.keys.Rsk(java.math.BigInteger, java.math.BigInteger);
+  public java.math.BigInteger getl1();
+  public java.math.BigInteger getl2();
+}
+Compiled from "IssuingManager.java"
+public class groupsignature.server.IssuingManager {
+  public groupsignature.server.IssuingManager(groupsignature.server.RevocationManager);
+  public java.util.HashMap<java.lang.String, groupsignature.keys.Mpk> getMembersList();
+  public groupsignature.keys.Ipk getIpk();
+  public java.math.BigInteger getJoinXSecond();
+  public groupsignature.keys.Mpk getCertificate(java.lang.String, java.math.BigInteger, groupsignature.elliptic.ECPoint);
+  public void printMemberList();
+}
+Compiled from "OpeningManager.java"
+public class groupsignature.server.OpeningManager {
+  public groupsignature.server.OpeningManager(groupsignature.server.IssuingManager, groupsignature.server.RevocationManager);
+  public groupsignature.keys.Opk getOpk();
+  public java.lang.String open(java.lang.String, groupsignature.signature.Signature);
+  public java.lang.Boolean verify(java.lang.String, groupsignature.signature.Signature);
+}
+Compiled from "RevocationManager.java"
+public class groupsignature.server.RevocationManager {
+  public groupsignature.server.RevocationManager();
+  public groupsignature.keys.Rpk getRpk();
+  public java.math.BigInteger computeB(java.math.BigInteger);
+  public void revokeUser(groupsignature.keys.Mpk);
+  public groupsignature.signature.RevocationCertificate getCertificate(java.lang.Integer);
+  public java.lang.Integer getCurrentIndex();
+  public java.math.BigInteger getNewCertificat(groupsignature.keys.Mpk, groupsignature.signature.RevocationCertificate);
+}
+Compiled from "RevocationCertificate.java"
+public class groupsignature.signature.RevocationCertificate {
+  public groupsignature.signature.RevocationCertificate(groupsignature.keys.Mpk, groupsignature.keys.Rpk);
+  public groupsignature.keys.Rpk getRpk();
+  public groupsignature.keys.Mpk getMpk();
+}
+Compiled from "Signature.java"
+public class groupsignature.signature.Signature {
+  public groupsignature.signature.Signature(groupsignature.elliptic.ECPoint, groupsignature.elliptic.ECPoint, groupsignature.elliptic.ECPoint, java.math.BigInteger, java.math.BigInteger, java.math.BigInteger, java.math.BigInteger, java.math.BigInteger, java.math.BigInteger, java.math.BigInteger, java.math.BigInteger, java.lang.Integer);
+  public groupsignature.elliptic.ECPoint getE0();
+  public groupsignature.elliptic.ECPoint getE1();
+  public groupsignature.elliptic.ECPoint getE2();
+  public java.math.BigInteger getACOM();
+  public java.math.BigInteger getBCOM();
+  public java.math.BigInteger getC();
+  public java.math.BigInteger getTx();
+  public java.math.BigInteger getTs();
+  public java.math.BigInteger getTePrime();
+  public java.math.BigInteger getTt();
+  public java.math.BigInteger getTE();
+  public java.lang.Integer getindex();
+}
+Compiled from "Constants.java"
+public class groupsignature.utils.Constants {
+  public static final int certainty;
+  public static final int Kn;
+  public static final int Kl;
+  public static final int Ke;
+  public static final int KePrime;
+  public static final int K;
+  public static final int Ks;
+  public static final int Kc;
+  public static final int lam;
+  public static final java.math.BigInteger ONE;
+  public static final java.math.BigInteger TWO;
+  public static final java.math.BigInteger expLam;
+  public static final java.math.BigInteger expKe;
+  public groupsignature.utils.Constants();
+  static {};
+}
+Compiled from "Utils.java"
+public class groupsignature.utils.Utils {
+  public groupsignature.utils.Utils();
+  public java.math.BigInteger getSafePrime(int);
+  public java.math.BigInteger getRandomQuadraticResidue(java.math.BigInteger);
+  public java.math.BigInteger getRandomBinaryString(int);
+}
+Compiled from "SignedMessage.java"
+public class vehiclesc.SignedMessage {
+  public groupsignature.signature.Signature sign;
+  public java.lang.String message;
+  public vehiclesc.SignedMessage(groupsignature.signature.Signature, java.lang.String);
+}
+Compiled from "Vehicle.java"
+public class vehiclesc.Vehicle extends groupsignature.client.User {
+  public vehiclesc.Vehicle(java.lang.String, groupsignature.server.IssuingManager, groupsignature.server.OpeningManager, groupsignature.server.RevocationManager);
+  public vehiclesc.SignedMessage broadcastMessage(java.lang.String);
+  public boolean verifiyMessage(vehiclesc.SignedMessage);
+}
+Compiled from "VehicleSC.java"
+public class vehiclesc.VehicleSC {
+  public vehiclesc.VehicleSC();
+  public static void main(java.lang.String[]);
+  public void verifyMessage(vehiclesc.SignedMessage, java.util.ArrayList<vehiclesc.Vehicle>);
+}

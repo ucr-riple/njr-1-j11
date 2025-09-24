@@ -1,0 +1,167 @@
+Compiled from "Client.java"
+public class rummikub.Client {
+  public rummikub.Client();
+  public int connect(java.lang.String, int) throws java.net.UnknownHostException, java.io.IOException;
+  public void disconnect();
+  public java.lang.String getMessage() throws java.io.IOException;
+  public void sendMessage(java.lang.String) throws java.io.IOException;
+  public void decodeMessage(java.lang.String);
+}
+Compiled from "GameInfo.java"
+public class rummikub.GameInfo {
+  public static final int PLAYER1;
+  public static final int PLAYER2;
+  public static final int PLAYER3;
+  public static final int PLAYER4;
+  public static final int GAMEOVER;
+  public static final int DISCONNECT;
+  public static final int HAND_SIZE;
+  public static final int SUBSET_SIZE;
+  public rummikub.GameInfo(int);
+  public rummikub.GameInfo(java.lang.String) throws java.lang.Exception;
+  public void addTile(int);
+  public void setHand(int, int);
+  public void addMelds(java.util.ArrayList<rummikub.Meld>);
+  public void setMelds(java.util.ArrayList<rummikub.Meld>);
+  public boolean isGameOver();
+  public int getWinner();
+  public java.util.ArrayList<rummikub.Meld> getBoard();
+  public java.util.ArrayList<rummikub.Meld> getBruteForceMove(rummikub.Hand, int) throws java.lang.Exception;
+  public java.util.ArrayList<rummikub.Meld> getAdjacentPlay(rummikub.Hand, int) throws java.lang.Exception;
+  public java.lang.String toString();
+  public java.lang.String displayGame();
+  public static java.lang.String indexToPlayerName(int);
+  public static int playerToIndex(java.lang.String);
+  public int getNextPlayer(int);
+}
+Compiled from "Hand.java"
+public class rummikub.Hand extends rummikub.Set {
+  public rummikub.Hand();
+  public rummikub.Hand(rummikub.Hand) throws java.lang.Exception;
+  public rummikub.Hand(java.util.ArrayList<rummikub.Tile>) throws java.lang.Exception;
+  public rummikub.Hand(java.lang.String) throws java.lang.Exception;
+  public void sortByNumber() throws java.lang.Exception;
+  public java.util.ArrayList<rummikub.Hand> separateByNumber() throws java.lang.Exception;
+  public void sortByColour() throws java.lang.Exception;
+  public java.util.ArrayList<rummikub.Meld> getGroups() throws java.lang.Exception;
+  public java.util.ArrayList<rummikub.Meld> getRuns() throws java.lang.Exception;
+  public java.util.ArrayList<rummikub.Meld> getInitialMeld() throws java.lang.Exception;
+  public java.util.ArrayList<rummikub.Meld> findLargestSubset(java.util.ArrayList<rummikub.Tile>, java.util.ArrayList<rummikub.Tile>, java.util.ArrayList<rummikub.Meld>) throws java.lang.Exception;
+  public java.util.ArrayList<rummikub.Meld> getMeldsFromHand() throws java.lang.Exception;
+  public java.util.ArrayList<rummikub.Tile> getAdjacentInHand(rummikub.Tile);
+  public boolean equals(java.lang.Object);
+}
+Compiled from "HintClient.java"
+public class rummikub.HintClient extends java.lang.Thread {
+  public rummikub.HintClient(boolean);
+  public static void main(java.lang.String[]);
+  public void run();
+}
+Compiled from "Meld.java"
+public class rummikub.Meld extends rummikub.Set implements java.lang.Comparable<rummikub.Meld> {
+  public final boolean isRun;
+  public rummikub.Meld(java.util.ArrayList<rummikub.Tile>) throws java.lang.Exception;
+  public rummikub.Meld(java.util.ArrayList<rummikub.Tile>, boolean) throws java.lang.Exception;
+  public rummikub.Meld(rummikub.Meld) throws java.lang.Exception;
+  public rummikub.Meld(java.lang.String) throws java.lang.Exception;
+  boolean validateMeld(java.util.ArrayList<rummikub.Tile>);
+  boolean validateRun(java.util.ArrayList<rummikub.Tile>);
+  boolean validateGroup(java.util.ArrayList<rummikub.Tile>);
+  public void addTile(rummikub.Tile) throws java.lang.Exception;
+  public int getNumAdjacent(rummikub.Tile);
+  public int compareTo(rummikub.Meld);
+  public boolean equals(java.lang.Object);
+  public int compareTo(java.lang.Object);
+}
+Compiled from "Move.java"
+public class rummikub.Move {
+  public rummikub.Hand handBefore;
+  public rummikub.Hand handAfter;
+  public rummikub.Hand usedTiles;
+  public java.util.ArrayList<rummikub.Meld> boardBefore;
+  public java.util.ArrayList<rummikub.Meld> boardAfter;
+  public java.util.HashMap<rummikub.Tile, java.util.ArrayList<rummikub.Position>> positionsBefore;
+  public java.util.HashMap<rummikub.Tile, java.util.ArrayList<rummikub.Position>> positionsAfter;
+  public java.util.HashMap<rummikub.Position, rummikub.Position> movement;
+  public rummikub.Move(rummikub.Hand, rummikub.Hand, java.util.ArrayList<rummikub.Meld>, java.util.ArrayList<rummikub.Meld>) throws java.lang.Exception;
+}
+Compiled from "Pool.java"
+public class rummikub.Pool extends rummikub.Set {
+  public static final boolean INCLUDE_JOKERS;
+  public rummikub.Pool() throws java.lang.Exception;
+  public int numTilesRemaining();
+  public rummikub.Hand getHand() throws java.lang.Exception;
+  public rummikub.Tile drawTile();
+}
+Compiled from "Position.java"
+public class rummikub.Position {
+  public rummikub.Position();
+  public rummikub.Position(int, int);
+  public rummikub.Position(rummikub.Position);
+  public void setMeldNum(int);
+  public int getMeldNum();
+  public void setPositionNum(int);
+  public int getPositionNum();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public java.lang.String toString();
+}
+Compiled from "RAIclient.java"
+public class rummikub.RAIclient extends java.lang.Thread {
+  public rummikub.RAIclient(java.lang.String, int);
+  public static void main(java.lang.String[]);
+  public void run();
+}
+Compiled from "Rummikub.java"
+public class rummikub.Rummikub {
+  public rummikub.Rummikub();
+  public static void main(java.lang.String[]);
+}
+Compiled from "Server.java"
+public class rummikub.Server extends java.lang.Thread {
+  public static final java.lang.String SERVER_IP;
+  public static final int PORT_NUM;
+  public static void printUsage();
+  public rummikub.Server(int);
+  public static void main(java.lang.String[]);
+  public void run();
+}
+Compiled from "Set.java"
+public abstract class rummikub.Set {
+  public rummikub.Set();
+  public rummikub.Set(java.util.ArrayList<rummikub.Tile>) throws java.lang.Exception;
+  public rummikub.Set(rummikub.Set);
+  public rummikub.Set(java.lang.String) throws java.lang.Exception;
+  public java.util.ArrayList<rummikub.Tile> getTiles();
+  public void setTiles(java.util.ArrayList<rummikub.Tile>);
+  public void addTile(rummikub.Tile) throws java.lang.Exception;
+  public void removeTiles(rummikub.Set) throws java.lang.Exception;
+  public void removeTile(rummikub.Tile) throws java.lang.Exception;
+  public int getNumTiles();
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+  public int getScore();
+}
+Compiled from "Tile.java"
+public class rummikub.Tile implements java.lang.Comparable<rummikub.Tile> {
+  public static final char RED;
+  public static final char ORANGE;
+  public static final char BLUE;
+  public static final char BLACK;
+  public static final char[] COLOURS;
+  public static final int JOKER;
+  public final char colour;
+  public final int number;
+  public rummikub.Tile(char, int) throws java.lang.Exception;
+  public rummikub.Tile(rummikub.Tile) throws java.lang.Exception;
+  public rummikub.Tile(java.lang.String) throws java.lang.Exception;
+  public boolean validateTile(rummikub.Tile);
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public java.lang.String toString();
+  public int compareTo(rummikub.Tile);
+  public boolean isAdjacent(rummikub.Tile);
+  public static java.lang.String getColours();
+  public int compareTo(java.lang.Object);
+  static {};
+}

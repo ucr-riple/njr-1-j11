@@ -1,0 +1,1261 @@
+Compiled from "Net.java"
+public interface de.jannlab.Net extends java.io.Serializable {
+  public abstract void reset();
+  public abstract void initializeWeights();
+  public abstract void initializeWeights(java.util.Random);
+  public abstract void input(double[], int);
+  public abstract void input(double[], int, int[]);
+  public abstract void output(double[], int);
+  public abstract void output(double[], int, int[]);
+  public abstract void target(double[], int);
+  public abstract void target(double[], int, int[]);
+  public abstract double error();
+  public abstract de.jannlab.data.WritePort inputPort();
+  public abstract de.jannlab.data.ReadPort outputPort();
+  public abstract de.jannlab.data.WritePort targetPort();
+  public abstract de.jannlab.Net copy();
+  public abstract de.jannlab.Net sharedCopy();
+  public abstract void compute();
+  public abstract void computeGradient();
+  public abstract void incrFrameIdx();
+  public abstract void setFrameIdx(int);
+  public abstract int getFrameWidth();
+  public abstract int getFrameIdx();
+  public abstract void decrFrameIdx();
+  public abstract double[] getOutputBuffer(int);
+  public abstract double[] getGradOutputBuffer(int);
+  public abstract double[] getGradInputBuffer(int);
+  public abstract boolean isRecurrent();
+  public abstract boolean isOnline();
+  public abstract boolean isBidirectional();
+  public abstract boolean isOffline();
+  public abstract int getInputCells();
+  public abstract int getOutputCells();
+  public abstract int getValueCells();
+  public abstract int getComputingCells();
+  public abstract double[] getWeights();
+  public abstract int getWeightsNum();
+  public abstract void writeWeights(double[], int);
+  public abstract void readWeights(double[], int);
+  public abstract int[] getLinks();
+  public abstract int[] getLinksRev();
+  public abstract int getLinksNum();
+  public abstract void rebuffer(int);
+  public abstract boolean numericalCheck();
+  public abstract de.jannlab.core.NetStructure getStructure();
+}
+Compiled from "BidirectionalNetBase.java"
+public final class de.jannlab.core.BidirectionalNetBase extends de.jannlab.core.RecurrentNetBase {
+  public de.jannlab.core.BidirectionalNetBase(de.jannlab.core.NetStructure, de.jannlab.core.NetData);
+  public final void compute();
+  public final void computeGradient();
+}
+Compiled from "CellArray.java"
+public final class de.jannlab.core.CellArray implements java.io.Serializable {
+  public static final int ILC_NONE;
+  public static final int ILC_IN;
+  public static final int ILC_OUT;
+  public static final int ILC_BOTH;
+  public int cellslbd;
+  public int cellsubd;
+  public int cellsnum;
+  public int indeg;
+  public int outdeg;
+  public int predslbd;
+  public int predsubd;
+  public int predsnum;
+  public int predswnum;
+  public int succslbd;
+  public int succsubd;
+  public int succsnum;
+  public int succswnum;
+  public int layer;
+  public int compidx;
+  public int ilctag;
+  public de.jannlab.core.CellType celltype;
+  public de.jannlab.core.CellArray();
+  public java.lang.String toString();
+}
+Compiled from "CellFunction.java"
+public final class de.jannlab.core.CellFunction {
+  public static final int NONE;
+  public static final int CONST_ONE;
+  public static final int ID;
+  public static final int SIGMOID;
+  public static final int SIGMOIDDX;
+  public static final int SIGMOID1;
+  public static final int SIGMOID1DX;
+  public static final int SIGMOID2;
+  public static final int SIGMOID2DX;
+  public static final int TANH;
+  public static final int TANHDX;
+  public static final int INVERT;
+  public de.jannlab.core.CellFunction();
+  public static double exp(double);
+  public static double sigmoid(double);
+  public static double sigmoidDx(double);
+  public static double sigmoid2(double);
+  public static double sigmoid2Dx(double);
+  public static double sigmoid1(double);
+  public static double sigmoid1Dx(double);
+  public static double tanh(double);
+  public static double tanhDx(double);
+  public static void id(double[], int, double[], int, int);
+  public static void invert(double[], int, double[], int, int);
+  public static void constOne(double[], int, double[], int, int);
+  public static void sigmoid(double[], int, double[], int, int);
+  public static void sigmoidDx(double[], int, double[], int, int);
+  public static void sigmoid2(double[], int, double[], int, int);
+  public static void sigmoid2Dx(double[], int, double[], int, int);
+  public static void sigmoid1(double[], int, double[], int, int);
+  public static void sigmoid1Dx(double[], int, double[], int, int);
+  public static void tanh(double[], int, double[], int, int);
+  public static void tanhDx(double[], int, double[], int, int);
+  public static void perform(double[], int, double[], int, int, int);
+}
+Compiled from "CellIntegration.java"
+public final class de.jannlab.core.CellIntegration {
+  public static final int NONE;
+  public static final int SUM;
+  public static final int MULT;
+  public static final int LASTID;
+  public de.jannlab.core.CellIntegration();
+  public static void sum(double[], double[], int, int, double[], int[], int, int);
+  public static void lastID(double[], double[], int, int, double[], int[], int, int);
+  public static void mult(double[], double[], int, int, double[], int[], int, int);
+  public static void perform(double[], double[], int, int, double[], int[], int, int, int);
+}
+Compiled from "CellType.java"
+public final class de.jannlab.core.CellType implements java.io.Serializable {
+  public static final de.jannlab.core.CellType VALUE;
+  public static final de.jannlab.core.CellType SIGMOID;
+  public static final de.jannlab.core.CellType SIGMOID2;
+  public static final de.jannlab.core.CellType SIGMOID1;
+  public static final de.jannlab.core.CellType TANH;
+  public static final de.jannlab.core.CellType LINEAR;
+  public static final de.jannlab.core.CellType MULTIPLICATIVE;
+  public static final de.jannlab.core.CellType DMULTIPLICATIVE;
+  public final int integration;
+  public final int activation;
+  public final int revintegration;
+  public final int revactivation;
+  public final boolean perceptron;
+  public final boolean linear;
+  public final java.lang.String name;
+  public de.jannlab.core.CellType(int, int, int, int, java.lang.String, boolean, boolean);
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "FeedForwardNetBase.java"
+public final class de.jannlab.core.FeedForwardNetBase extends de.jannlab.core.NetBase {
+  public de.jannlab.core.FeedForwardNetBase(de.jannlab.core.NetStructure, de.jannlab.core.NetData);
+  public final void compute();
+  public final void computeGradient();
+}
+Compiled from "Layer.java"
+public final class de.jannlab.core.Layer implements java.io.Serializable {
+  public static final int NO_LAYER;
+  public int cellslbd;
+  public int cellsubd;
+  public int cellsnum;
+  public int arrayslbd;
+  public int arraysubd;
+  public int arraysnum;
+  public int[] complbds;
+  public int[] compubds;
+  public int compwidth;
+  public int indeg;
+  public int outdeg;
+  public int tag;
+  public de.jannlab.core.Layer();
+  public java.lang.String toString();
+}
+Compiled from "LayerTag.java"
+public final class de.jannlab.core.LayerTag {
+  public static final int REGULAR;
+  public static final int REVERSED;
+  public de.jannlab.core.LayerTag();
+  public static final java.lang.String asString(int);
+}
+Compiled from "Link.java"
+public final class de.jannlab.core.Link {
+  public static final int IDX_SRC;
+  public static final int IDX_DST;
+  public static final int IDX_WEIGHT;
+  public static final int LINK_SIZE;
+  public static final int ORDER_ASC;
+  public static final int ORDER_DESC;
+  public static final int NOWEIGHT;
+  public de.jannlab.core.Link();
+  public static int[] link(int, int);
+  public static int[] link(int, int, int);
+  public static int[] alloc(int);
+  public static int src(int[], int);
+  public static int dst(int[], int);
+  public static int weight(int[], int);
+  public static void swap(int[], int, int);
+  public static int cmpDstMaj(int[], int, int);
+  public static int cmpSrcMaj(int[], int, int);
+  public static boolean equal(int[], int, int);
+  public static void sortDstMaj(int[], int[], int, int, int);
+  public static void sortSrcMaj(int[], int[], int, int, int);
+  public static void copy(int[], int, int[], int);
+  public static void sortSrcMaj(int[], int);
+  public static void sortDstMaj(int[], int);
+  public static int[] eliminateRedundantLinks(int[]);
+  public static java.lang.String asString(int[], int, int);
+  public static java.lang.String asString(int[], int, int, int);
+}
+Compiled from "NetBase.java"
+public abstract class de.jannlab.core.NetBase implements de.jannlab.Net,java.io.Serializable,java.lang.Cloneable {
+  public static final double RANDOM_WEIGHT_LBD;
+  public static final double RANDOM_WEIGHT_UBD;
+  protected de.jannlab.core.NetStructure structure;
+  protected de.jannlab.core.NetData data;
+  protected int frameidx;
+  protected void computeLayerActivations(int);
+  protected void computeLayerGradients(int);
+  public void rebuffer(int);
+  public void incrFrameIdx();
+  public void setFrameIdx(int);
+  public void decrFrameIdx();
+  public de.jannlab.Net sharedCopy();
+  public de.jannlab.Net copy();
+  de.jannlab.core.NetBase(de.jannlab.core.NetStructure, de.jannlab.core.NetData);
+  public int getFrameIdx();
+  public int getFrameWidth();
+  public de.jannlab.data.WritePort inputPort();
+  public de.jannlab.data.WritePort targetPort();
+  public de.jannlab.data.ReadPort outputPort();
+  public void reset();
+  public double[] getOutputBuffer(int);
+  public double[] getGradOutputBuffer(int);
+  public double[] getGradInputBuffer(int);
+  public final de.jannlab.core.NetStructure getStructure();
+  public final boolean isBidirectional();
+  public final boolean isRecurrent();
+  public final boolean isOnline();
+  public final boolean isOffline();
+  public final int getInputCells();
+  public final int getOutputCells();
+  public final int getValueCells();
+  public final int getComputingCells();
+  public double error();
+  public void initializeWeights();
+  public void initializeWeights(java.util.Random);
+  public double[] getWeights();
+  public void writeWeights(double[], int);
+  public void readWeights(double[], int);
+  public int[] getLinks();
+  public int[] getLinksRev();
+  public int getWeightsNum();
+  public int getLinksNum();
+  public void input(double[], int);
+  public void input(double[], int, int[]);
+  public void output(double[], int);
+  public void output(double[], int, int[]);
+  public void target(double[], int);
+  public void target(double[], int, int[]);
+  public boolean numericalCheck();
+  public java.lang.String toString();
+}
+Compiled from "NetBase.java"
+class de.jannlab.core.NetBase$1 implements de.jannlab.data.WritePort {
+  final de.jannlab.core.NetBase this$0;
+  de.jannlab.core.NetBase$1(de.jannlab.core.NetBase);
+  public void write(double[], int);
+  public void write(double[], int, int[]);
+}
+Compiled from "NetBase.java"
+class de.jannlab.core.NetBase$2 implements de.jannlab.data.ReadPort {
+  final de.jannlab.core.NetBase this$0;
+  de.jannlab.core.NetBase$2(de.jannlab.core.NetBase);
+  public void read(double[], int);
+  public void read(double[], int, int[]);
+}
+Compiled from "NetBase.java"
+class de.jannlab.core.NetBase$3 implements de.jannlab.data.WritePort {
+  final de.jannlab.core.NetBase this$0;
+  de.jannlab.core.NetBase$3(de.jannlab.core.NetBase);
+  public void write(double[], int);
+  public void write(double[], int, int[]);
+}
+Compiled from "NetData.java"
+public final class de.jannlab.core.NetData implements java.io.Serializable {
+  public double[][] input;
+  public double[][] output;
+  public double[][] gradinput;
+  public double[][] gradoutput;
+  public int framewidth;
+  public double[] weights;
+  public int weightsnum;
+  public int[] asgns;
+  public double[] asgnsv;
+  public de.jannlab.core.NetData();
+  public de.jannlab.core.NetData sharedCopy();
+  public de.jannlab.core.NetData copy();
+}
+Compiled from "NetStructure.java"
+public final class de.jannlab.core.NetStructure implements java.io.Serializable {
+  public int cellsnum;
+  public int valcellsnum;
+  public int comcellsnum;
+  public int incellslbd;
+  public int incellsubd;
+  public int incellsnum;
+  public int outcellsnum;
+  public int outcellslbd;
+  public int outcellsubd;
+  public de.jannlab.core.Layer[] layers;
+  public int layersnum;
+  public boolean recurrent;
+  public boolean offline;
+  public boolean bidirectional;
+  public int inputlayer;
+  public int outputlayer;
+  public de.jannlab.core.CellArray[] arrays;
+  public int arraysnum;
+  public int[] links;
+  public int[] linksrev;
+  public int linksnum;
+  public int weightsnum;
+  public de.jannlab.core.NetStructure();
+  public java.lang.String toString();
+}
+Compiled from "OfflineRecurrentNetBase.java"
+public final class de.jannlab.core.OfflineRecurrentNetBase extends de.jannlab.core.RecurrentNetBase {
+  public de.jannlab.core.OfflineRecurrentNetBase(de.jannlab.core.NetStructure, de.jannlab.core.NetData);
+  public final void compute();
+  public final void computeGradient();
+}
+Compiled from "OnlineRecurrentNetBase.java"
+public final class de.jannlab.core.OnlineRecurrentNetBase extends de.jannlab.core.RecurrentNetBase {
+  public de.jannlab.core.OnlineRecurrentNetBase(de.jannlab.core.NetStructure, de.jannlab.core.NetData);
+  public final void compute();
+  public final void computeGradient();
+}
+Compiled from "RecurrentNetBase.java"
+public abstract class de.jannlab.core.RecurrentNetBase extends de.jannlab.core.NetBase {
+  de.jannlab.core.RecurrentNetBase(de.jannlab.core.NetStructure, de.jannlab.core.NetData);
+  protected void copyOutput(int, int);
+  protected void copyOutput(int, int, int);
+  protected void copyGradOutput(int, int);
+  protected void copyGradOutput(int, int, int);
+}
+Compiled from "DataPort.java"
+public interface de.jannlab.data.DataPort extends de.jannlab.data.ReadPort,de.jannlab.data.WritePort,java.io.Serializable {
+}
+Compiled from "ReadPort.java"
+public interface de.jannlab.data.ReadPort extends java.io.Serializable {
+  public abstract void read(double[], int);
+  public abstract void read(double[], int, int[]);
+}
+Compiled from "Sample.java"
+public final class de.jannlab.data.Sample implements java.io.Serializable {
+  public final void mapInput(de.jannlab.data.WritePort);
+  public final void mapInput(de.jannlab.data.WritePort, int[]);
+  public final void mapTarget(de.jannlab.data.WritePort);
+  public final void mapTarget(de.jannlab.data.WritePort, int[]);
+  public final void map(de.jannlab.data.WritePort, de.jannlab.data.WritePort);
+  public final void mapInput(de.jannlab.data.WritePort, int);
+  public final void mapTarget(de.jannlab.data.WritePort, int);
+  public final void mapInput(de.jannlab.data.WritePort, int, int[]);
+  public de.jannlab.data.Sample(int, int, int, int);
+  public de.jannlab.data.Sample(java.lang.String, int, int, int, int);
+  public de.jannlab.data.Sample(double[], double[]);
+  public de.jannlab.data.Sample(java.lang.String, double[], double[]);
+  public de.jannlab.data.Sample(double[], double[], int, int);
+  public de.jannlab.data.Sample(java.lang.String, double[], double[], int, int);
+  public de.jannlab.data.Sample(double[], double[], int, int, int, int);
+  public de.jannlab.data.Sample(java.lang.String, double[], double[], int, int, int, int);
+  public final java.lang.String getTag();
+  public final int getInputSize();
+  public final int getTargetSize();
+  public final int getInputLength();
+  public final int getTargetLength();
+  public final double[] getInput();
+  public final double[] getTarget();
+  public final void mapTarget(de.jannlab.data.WritePort, int, int[]);
+  public final void map(de.jannlab.data.WritePort, de.jannlab.data.WritePort, int);
+  public java.lang.String toString();
+}
+Compiled from "SampleSet.java"
+public final class de.jannlab.data.SampleSet extends java.util.ArrayList<de.jannlab.data.Sample> {
+  public de.jannlab.data.SampleSet();
+  public int maxSequenceLength();
+  public java.lang.String toString();
+  public de.jannlab.data.SampleSet split(int, java.util.Random);
+  public void shuffle(java.util.Random);
+  public static de.jannlab.data.SampleSet join(de.jannlab.data.SampleSet...);
+}
+Compiled from "SampleTools.java"
+public class de.jannlab.data.SampleTools {
+  public static final java.lang.String DEFAULT_VALUEDELIMITER;
+  public static final java.lang.String DEFAULT_VECTORDELIMITER;
+  public de.jannlab.data.SampleTools();
+  public static double[] mean(de.jannlab.data.SampleSet);
+  public static double[] stdDeviation(de.jannlab.data.SampleSet, double[]);
+  public static void normalize(de.jannlab.data.SampleSet, int...);
+  public static void normalize(de.jannlab.data.SampleSet, double[], double[], int...);
+  public static de.jannlab.data.SampleSet readCSV(java.lang.String) throws java.io.IOException;
+  public static void readCSV(java.lang.String, de.jannlab.data.SampleSet) throws java.io.IOException;
+  public static void writeCSV(de.jannlab.data.SampleSet, java.lang.String) throws java.io.IOException;
+}
+Compiled from "WritePort.java"
+public interface de.jannlab.data.WritePort extends java.io.Serializable {
+  public abstract void write(double[], int);
+  public abstract void write(double[], int, int[]);
+}
+Compiled from "GeometricExample.java"
+public class de.jannlab.examples.feedforward.GeometricExample {
+  public static final de.jannlab.examples.math.Vector2f c1;
+  public static final double r1;
+  public static final de.jannlab.examples.math.Vector2f c2;
+  public static final double r2;
+  public static final de.jannlab.examples.math.Vector2f c3;
+  public static final double r3;
+  public static final java.awt.Color CLASS_1;
+  public static final java.awt.Color CLASS_2;
+  public de.jannlab.examples.feedforward.GeometricExample();
+  public static de.jannlab.data.SampleSet generateData(int, float, java.util.Random);
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "GeometricExample.java"
+final class de.jannlab.examples.feedforward.GeometricExample$1 implements de.jannlab.training.NetTrainerListener {
+  final de.jannlab.Net val$mlp;
+  final de.jannlab.data.SampleSet val$trainset;
+  de.jannlab.examples.feedforward.GeometricExample$1(de.jannlab.Net, de.jannlab.data.SampleSet);
+  public void started(de.jannlab.training.NetTrainer);
+  public void finished(de.jannlab.training.NetTrainer);
+  public void epoch(de.jannlab.training.NetTrainer);
+}
+Compiled from "GeometricExample.java"
+class de.jannlab.examples.feedforward.GeometricExample$1$1 extends javax.swing.JPanel {
+  final java.awt.image.BufferedImage val$img;
+  final de.jannlab.examples.feedforward.GeometricExample$1 this$0;
+  de.jannlab.examples.feedforward.GeometricExample$1$1(de.jannlab.examples.feedforward.GeometricExample$1, java.awt.image.BufferedImage);
+  protected void paintComponent(java.awt.Graphics);
+}
+Compiled from "StaticParityExample.java"
+public class de.jannlab.examples.feedforward.StaticParityExample {
+  public static final double ON;
+  public static final double OFF;
+  public static final int CLASS_EVEN;
+  public static final int CLASS_ODD;
+  public de.jannlab.examples.feedforward.StaticParityExample();
+  public static double bitAsDouble(boolean);
+  public static de.jannlab.data.SampleSet generateData(int, java.util.Random);
+  public static void main(java.lang.String[]);
+}
+Compiled from "XORExample.java"
+public class de.jannlab.examples.feedforward.XORExample {
+  public de.jannlab.examples.feedforward.XORExample();
+  public static double[] array(double...);
+  public static void main(java.lang.String[]) throws java.io.IOException, java.lang.ClassNotFoundException;
+}
+Compiled from "BRNNGeneratorExample.java"
+public class de.jannlab.examples.generator.BRNNGeneratorExample {
+  public de.jannlab.examples.generator.BRNNGeneratorExample();
+  public static void main(java.lang.String[]);
+}
+Compiled from "LSTMGeneratorExample.java"
+public class de.jannlab.examples.generator.LSTMGeneratorExample {
+  public de.jannlab.examples.generator.LSTMGeneratorExample();
+  public static void main(java.lang.String[]);
+  public static int hiddenLayer(de.jannlab.generator.NetCoreGenerator, int, de.jannlab.core.CellType, de.jannlab.core.CellType, de.jannlab.core.CellType, boolean);
+}
+Compiled from "MLPGeneratorExample.java"
+public class de.jannlab.examples.generator.MLPGeneratorExample {
+  public de.jannlab.examples.generator.MLPGeneratorExample();
+  public static void main(java.lang.String[]);
+}
+Compiled from "RNNGeneratorExample.java"
+public class de.jannlab.examples.generator.RNNGeneratorExample {
+  public de.jannlab.examples.generator.RNNGeneratorExample();
+  public static void main(java.lang.String[]);
+}
+Compiled from "SimpleNetGeneration.java"
+public class de.jannlab.examples.generator.SimpleNetGeneration {
+  public static final de.jannlab.misc.TimeCounter TC;
+  public de.jannlab.examples.generator.SimpleNetGeneration();
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "Vector2f.java"
+public class de.jannlab.examples.math.Vector2f {
+  public float x;
+  public float y;
+  public de.jannlab.examples.math.Vector2f();
+  public de.jannlab.examples.math.Vector2f(de.jannlab.examples.math.Vector3f);
+  public static void normalize(de.jannlab.examples.math.Vector2f, de.jannlab.examples.math.Vector2f);
+  public static de.jannlab.examples.math.Vector2f normalize(de.jannlab.examples.math.Vector2f);
+  public de.jannlab.examples.math.Vector2f(float, float);
+  public de.jannlab.examples.math.Vector2f(de.jannlab.examples.math.Vector2f);
+  public void copy(de.jannlab.examples.math.Vector2f);
+  public de.jannlab.examples.math.Vector2f copy();
+  public void copy(float[]);
+  public void copy(float[], int);
+  public java.lang.String toString();
+  public float length();
+  public float length2();
+  public static void add(de.jannlab.examples.math.Vector2f, de.jannlab.examples.math.Vector2f, de.jannlab.examples.math.Vector2f);
+  public static de.jannlab.examples.math.Vector2f add(de.jannlab.examples.math.Vector2f, de.jannlab.examples.math.Vector2f);
+  public static void sub(de.jannlab.examples.math.Vector2f, de.jannlab.examples.math.Vector2f, de.jannlab.examples.math.Vector2f);
+  public static de.jannlab.examples.math.Vector2f sub(de.jannlab.examples.math.Vector2f, de.jannlab.examples.math.Vector2f);
+  public static void mul(de.jannlab.examples.math.Vector2f, float, de.jannlab.examples.math.Vector2f);
+  public static float scalar(de.jannlab.examples.math.Vector2f, de.jannlab.examples.math.Vector2f);
+  public static float cos(de.jannlab.examples.math.Vector2f, de.jannlab.examples.math.Vector2f);
+  public static float phi(de.jannlab.examples.math.Vector2f, de.jannlab.examples.math.Vector2f);
+  public static float signedPhi(de.jannlab.examples.math.Vector2f, de.jannlab.examples.math.Vector2f);
+  public static de.jannlab.examples.math.Vector2f mul(de.jannlab.examples.math.Vector2f, float);
+  public static de.jannlab.examples.math.Vector2f rotate(de.jannlab.examples.math.Vector2f, float);
+  public static void rotate(de.jannlab.examples.math.Vector2f, float, de.jannlab.examples.math.Vector2f);
+}
+Compiled from "Vector2fTools.java"
+public class de.jannlab.examples.math.Vector2fTools {
+  public de.jannlab.examples.math.Vector2fTools();
+  public static de.jannlab.examples.math.Vector2f mean(java.util.Collection<de.jannlab.examples.math.Vector2f>);
+  public static float pcaAngle(java.util.Collection<de.jannlab.examples.math.Vector2f>);
+}
+Compiled from "Vector3f.java"
+public class de.jannlab.examples.math.Vector3f {
+  public float x;
+  public float y;
+  public float z;
+  public boolean equals(java.lang.Object);
+  public void copy(de.jannlab.examples.math.Vector3f);
+  public de.jannlab.examples.math.Vector3f(float, float, float);
+  public de.jannlab.examples.math.Vector3f(de.jannlab.examples.math.Vector3f);
+  public de.jannlab.examples.math.Vector3f();
+  public float length();
+  public float length2();
+  public java.lang.String toString();
+  public static void add(de.jannlab.examples.math.Vector3f, de.jannlab.examples.math.Vector3f, de.jannlab.examples.math.Vector3f);
+  public static de.jannlab.examples.math.Vector3f add(de.jannlab.examples.math.Vector3f, de.jannlab.examples.math.Vector3f);
+  public static void sub(de.jannlab.examples.math.Vector3f, de.jannlab.examples.math.Vector3f, de.jannlab.examples.math.Vector3f);
+  public static de.jannlab.examples.math.Vector3f sub(de.jannlab.examples.math.Vector3f, de.jannlab.examples.math.Vector3f);
+  public static void mul(de.jannlab.examples.math.Vector3f, float, de.jannlab.examples.math.Vector3f);
+  public static de.jannlab.examples.math.Vector3f mul(de.jannlab.examples.math.Vector3f, float);
+  public static void div(de.jannlab.examples.math.Vector3f, float, de.jannlab.examples.math.Vector3f);
+  public static de.jannlab.examples.math.Vector3f div(de.jannlab.examples.math.Vector3f, float);
+  public static void normalize(de.jannlab.examples.math.Vector3f, de.jannlab.examples.math.Vector3f);
+  public static de.jannlab.examples.math.Vector3f normalize(de.jannlab.examples.math.Vector3f);
+  public static void invert(de.jannlab.examples.math.Vector3f, de.jannlab.examples.math.Vector3f);
+  public static de.jannlab.examples.math.Vector3f invert(de.jannlab.examples.math.Vector3f);
+  public static float scalar(de.jannlab.examples.math.Vector3f, de.jannlab.examples.math.Vector3f);
+  public static void cross(de.jannlab.examples.math.Vector3f, de.jannlab.examples.math.Vector3f, de.jannlab.examples.math.Vector3f);
+  public static de.jannlab.examples.math.Vector3f cross(de.jannlab.examples.math.Vector3f, de.jannlab.examples.math.Vector3f);
+  public static float phi(de.jannlab.examples.math.Vector3f, de.jannlab.examples.math.Vector3f);
+  public static void rotateX(de.jannlab.examples.math.Vector3f, float, de.jannlab.examples.math.Vector3f);
+  public static de.jannlab.examples.math.Vector3f rotateX(de.jannlab.examples.math.Vector3f, float);
+  public static void rotateY(de.jannlab.examples.math.Vector3f, float, de.jannlab.examples.math.Vector3f);
+  public static de.jannlab.examples.math.Vector3f rotateY(de.jannlab.examples.math.Vector3f, float);
+  public static void rotateZ(de.jannlab.examples.math.Vector3f, float, de.jannlab.examples.math.Vector3f);
+  public static de.jannlab.examples.math.Vector3f rotateZ(de.jannlab.examples.math.Vector3f, float);
+  public static void normal(de.jannlab.examples.math.Vector3f, de.jannlab.examples.math.Vector3f, de.jannlab.examples.math.Vector3f, de.jannlab.examples.math.Vector3f);
+  public static de.jannlab.examples.math.Vector3f normal(de.jannlab.examples.math.Vector3f, de.jannlab.examples.math.Vector3f, de.jannlab.examples.math.Vector3f);
+}
+Compiled from "AddingExample.java"
+public class de.jannlab.examples.recurrent.AddingExample {
+  public de.jannlab.examples.recurrent.AddingExample();
+  public static de.jannlab.data.Sample generateSample(int);
+  public static de.jannlab.data.SampleSet generate(int, int);
+  public static de.jannlab.Net LSTM(int, int, int);
+  public static void main(java.lang.String[]) throws java.io.IOException;
+  static {};
+}
+Compiled from "DifferentialEvolutionExample.java"
+public class de.jannlab.examples.recurrent.DifferentialEvolutionExample {
+  public static final java.util.Random rnd;
+  public static double X_LBD;
+  public static double X_UBD;
+  public static double X_RANGE;
+  public static int TICKS;
+  public static double X_INCR;
+  public de.jannlab.examples.recurrent.DifferentialEvolutionExample();
+  public static double f(double);
+  public static double error(de.jannlab.Net);
+  public static de.jannlab.Net RNN(int);
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "DifferentialEvolutionExample.java"
+final class de.jannlab.examples.recurrent.DifferentialEvolutionExample$1 implements de.jannlab.optimization.Objective {
+  final de.jannlab.Net val$net;
+  de.jannlab.examples.recurrent.DifferentialEvolutionExample$1(de.jannlab.Net);
+  public double compute(double[], int);
+  public int arity();
+}
+Compiled from "DifferentialEvolutionExample.java"
+final class de.jannlab.examples.recurrent.DifferentialEvolutionExample$2 extends de.jannlab.examples.tools.OnlineDiagram {
+  final long[] val$ticks;
+  de.jannlab.examples.recurrent.DifferentialEvolutionExample$2(int, double, double, int, long[]);
+  protected void paintComponent(java.awt.Graphics);
+}
+Compiled from "DifferentialEvolutionExample.java"
+final class de.jannlab.examples.recurrent.DifferentialEvolutionExample$3 implements java.awt.event.ActionListener {
+  final de.jannlab.Net val$net;
+  final double[] val$input;
+  final long[] val$ticks;
+  final double[] val$output;
+  final de.jannlab.examples.tools.OnlineDiagram val$diagram;
+  de.jannlab.examples.recurrent.DifferentialEvolutionExample$3(de.jannlab.Net, double[], long[], double[], de.jannlab.examples.tools.OnlineDiagram);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "DifferentialEvolutionExample.java"
+final class de.jannlab.examples.recurrent.DifferentialEvolutionExample$4 extends java.awt.event.MouseAdapter {
+  final double[] val$input;
+  final long[] val$ticks;
+  de.jannlab.examples.recurrent.DifferentialEvolutionExample$4(double[], long[]);
+  public void mousePressed(java.awt.event.MouseEvent);
+  public void mouseReleased(java.awt.event.MouseEvent);
+}
+Compiled from "SequentialParityExample.java"
+public class de.jannlab.examples.recurrent.SequentialParityExample {
+  public static final double THRESHOLD;
+  public static final double[] EVEN;
+  public static final double[] ODD;
+  public de.jannlab.examples.recurrent.SequentialParityExample();
+  public static double[] generateSequence(int, java.util.Random);
+  public static boolean parity(double[]);
+  public static de.jannlab.data.Sample generateSample(int, java.util.Random);
+  public static double runExperiment(de.jannlab.data.SampleSet, de.jannlab.data.SampleSet, de.jannlab.Net, java.util.Random, int, double, double);
+  public static de.jannlab.Net RNN(int, int, int);
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "SequentialXorExample.java"
+public class de.jannlab.examples.recurrent.SequentialXorExample {
+  public de.jannlab.examples.recurrent.SequentialXorExample();
+  public static void incrBit(boolean[], int);
+  public static boolean xor(boolean[]);
+  public static de.jannlab.data.SampleSet generateSamples(int);
+  public static de.jannlab.Net RNN(int);
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "OnlineDiagram.java"
+public class de.jannlab.examples.tools.OnlineDiagram extends javax.swing.JPanel {
+  public void reset();
+  public void record(double...);
+  public void assignColor(int, java.awt.Color);
+  public de.jannlab.examples.tools.OnlineDiagram(int, double, double, int);
+  protected void paintComponent(java.awt.Graphics);
+  public int getLines();
+  public double getRange();
+  public double getLbd();
+  public double getUbd();
+}
+Compiled from "JANNLabException.java"
+public class de.jannlab.exception.JANNLabException extends java.lang.RuntimeException {
+  public de.jannlab.exception.JANNLabException(java.lang.String);
+  public de.jannlab.exception.JANNLabException(java.lang.String, java.lang.Throwable);
+  public de.jannlab.exception.JANNLabException();
+}
+Compiled from "LSTMGenerator.java"
+public class de.jannlab.generator.LSTMGenerator implements de.jannlab.generator.NetGenerator {
+  public de.jannlab.generator.NetCoreGenerator getCoreGenerator();
+  public void clear();
+  public de.jannlab.generator.LSTMGenerator();
+  public int inputLayer(int);
+  public int hiddenLayer(int, de.jannlab.core.CellType, de.jannlab.core.CellType, de.jannlab.core.CellType, boolean);
+  public int outputLayer(int);
+  public int outputLayer(int, de.jannlab.core.CellType);
+  public int outputLayer(int, de.jannlab.core.CellType, boolean, double);
+  public de.jannlab.Net generate();
+  public static int inputLayer(de.jannlab.generator.NetCoreGenerator, int);
+  public static int hiddenLayer(de.jannlab.generator.NetCoreGenerator, int, de.jannlab.core.CellType, de.jannlab.core.CellType, de.jannlab.core.CellType, boolean);
+  public static int hiddenLayer(de.jannlab.generator.NetCoreGenerator, int, de.jannlab.core.CellType, de.jannlab.core.CellType, de.jannlab.core.CellType, boolean, boolean, double, boolean, double, boolean, double);
+  public static int outputLayer(de.jannlab.generator.NetCoreGenerator, int, de.jannlab.core.CellType);
+  public static int outputLayer(de.jannlab.generator.NetCoreGenerator, int, de.jannlab.core.CellType, boolean, double);
+}
+Compiled from "MLPGenerator.java"
+public class de.jannlab.generator.MLPGenerator implements de.jannlab.generator.NetGenerator {
+  public de.jannlab.generator.NetCoreGenerator getCoreGenerator();
+  public void clear();
+  public de.jannlab.generator.MLPGenerator();
+  public int inputLayer(int);
+  public int hiddenLayer(int);
+  public int hiddenLayer(int, de.jannlab.core.CellType);
+  public int hiddenLayer(int, de.jannlab.core.CellType, boolean, double);
+  public int outputLayer(int);
+  public int outputLayer(int, de.jannlab.core.CellType);
+  public int outputLayer(int, de.jannlab.core.CellType, boolean, double);
+  public de.jannlab.Net generate();
+  public static int bias(de.jannlab.generator.NetCoreGenerator, double);
+  public static int inputLayer(de.jannlab.generator.NetCoreGenerator, int);
+  public static int hiddenLayer(de.jannlab.generator.NetCoreGenerator, int, de.jannlab.core.CellType);
+  public static int hiddenLayer(de.jannlab.generator.NetCoreGenerator, int, de.jannlab.core.CellType, boolean, double);
+  public static int outputLayer(de.jannlab.generator.NetCoreGenerator, int, de.jannlab.core.CellType);
+  public static int outputLayer(de.jannlab.generator.NetCoreGenerator, int, de.jannlab.core.CellType, boolean, double);
+}
+Compiled from "NetCoreGenerator.java"
+public class de.jannlab.generator.NetCoreGenerator implements de.jannlab.generator.NetGenerator {
+  public de.jannlab.generator.NetCoreGenerator();
+  public void clear();
+  public de.jannlab.Net generate();
+  public void computeOnline();
+  public void computeOffline();
+  public void assign(int, double);
+  public int valueCell();
+  public int valueCells(int);
+  public int cell(de.jannlab.core.CellType);
+  public int cells(int, de.jannlab.core.CellType);
+  public int sigmoidCells(int);
+  public int tanhCells(int);
+  public int linearCells(int);
+  public int multiplicativeCells(int);
+  public int dmultiplicativeCells(int);
+  public void link(int, int);
+  public void weightedLink(int, int);
+  public void link(int, int, int, int);
+  public void weightedLink(int, int, int, int);
+  public void link(int, int, int);
+  public void weightedLink(int, int, int);
+  public void linkLayer(int, int);
+  public void weightedLinkLayer(int, int);
+  public void inputConnectors();
+  public void nonConnectors();
+  public void outputConnectors();
+  public void inputOutputConnectors();
+  public void shiftComputationIndex();
+  public int beginLayer();
+  public int endLayer();
+  public int getInputLayer();
+  public int getOutputLayer();
+  public void defineLayerAsRegular(int);
+  public void defineLayerAsReversed(int);
+  public void defineInputLayer(int);
+  public void defineOutputLayer(int);
+  public int getLayerCells(int);
+}
+Compiled from "NetGenerator.java"
+public interface de.jannlab.generator.NetGenerator {
+  public abstract de.jannlab.Net generate();
+  public abstract void clear();
+}
+Compiled from "RNNGenerator.java"
+public class de.jannlab.generator.RNNGenerator implements de.jannlab.generator.NetGenerator {
+  public de.jannlab.generator.NetCoreGenerator getCoreGenerator();
+  public void clear();
+  public de.jannlab.generator.RNNGenerator();
+  public int inputLayer(int);
+  public int hiddenLayer(int);
+  public int hiddenLayer(int, de.jannlab.core.CellType);
+  public int hiddenLayer(int, de.jannlab.core.CellType, boolean, double);
+  public int outputLayer(int);
+  public int outputLayer(int, de.jannlab.core.CellType);
+  public int outputLayer(int, de.jannlab.core.CellType, boolean, double);
+  public de.jannlab.Net generate();
+  public static int bias(de.jannlab.generator.NetCoreGenerator, double);
+  public static int inputLayer(de.jannlab.generator.NetCoreGenerator, int);
+  public static int hiddenLayer(de.jannlab.generator.NetCoreGenerator, int, de.jannlab.core.CellType);
+  public static int hiddenLayer(de.jannlab.generator.NetCoreGenerator, int, de.jannlab.core.CellType, boolean, double);
+  public static int outputLayer(de.jannlab.generator.NetCoreGenerator, int, de.jannlab.core.CellType);
+  public static int outputLayer(de.jannlab.generator.NetCoreGenerator, int, de.jannlab.core.CellType, boolean, double);
+}
+Compiled from "GeneratingFailed.java"
+public class de.jannlab.generator.exception.GeneratingFailed extends de.jannlab.generator.exception.NetGeneratorException {
+  public de.jannlab.generator.exception.GeneratingFailed();
+}
+Compiled from "LinkArrayCorrupt.java"
+public class de.jannlab.generator.exception.LinkArrayCorrupt extends de.jannlab.generator.exception.NetGeneratorException {
+  public de.jannlab.generator.exception.LinkArrayCorrupt();
+}
+Compiled from "NetGeneratorException.java"
+public class de.jannlab.generator.exception.NetGeneratorException extends de.jannlab.exception.JANNLabException {
+  public de.jannlab.generator.exception.NetGeneratorException(java.lang.String);
+  public de.jannlab.generator.exception.NetGeneratorException();
+}
+Compiled from "NoInputLayerDefined.java"
+public class de.jannlab.generator.exception.NoInputLayerDefined extends de.jannlab.generator.exception.NetGeneratorException {
+  public de.jannlab.generator.exception.NoInputLayerDefined();
+}
+Compiled from "NoModificationAllowed.java"
+public class de.jannlab.generator.exception.NoModificationAllowed extends de.jannlab.generator.exception.NetGeneratorException {
+  public de.jannlab.generator.exception.NoModificationAllowed();
+}
+Compiled from "OnlyPerceptronsAllowed.java"
+public class de.jannlab.generator.exception.OnlyPerceptronsAllowed extends de.jannlab.generator.exception.NetGeneratorException {
+  public de.jannlab.generator.exception.OnlyPerceptronsAllowed();
+}
+Compiled from "Serializer.java"
+public class de.jannlab.io.Serializer {
+  public de.jannlab.io.Serializer();
+  public static <T> void write(T, java.lang.String) throws java.io.IOException;
+  public static <T> T read(java.lang.String) throws java.io.IOException, java.lang.ClassNotFoundException;
+}
+Compiled from "Histogram.java"
+public class de.jannlab.math.Histogram {
+  public final double getLbd();
+  public final double getUbd();
+  public final int getQuanta();
+  public void note(double);
+  public void normalize();
+  public void abs();
+  public void normalizeSum();
+  public void normalizeSum(double);
+  public void normalize(double);
+  public void note(double, double);
+  public void clear();
+  public java.lang.String toString();
+  public de.jannlab.math.Histogram(double, double, int);
+  public boolean hasPositiveValues();
+  public boolean hasNegativeValues();
+  public java.lang.String printBars(int);
+  public double[] getAccu();
+}
+Compiled from "MathTools.java"
+public class de.jannlab.math.MathTools {
+  public static final double NULL_THRESHOLD_DOUBLE;
+  public static final float NULL_THRESHOLD_FLOAT;
+  public de.jannlab.math.MathTools();
+  public static boolean approxNull(double);
+  public static boolean approxNull(float);
+  public static boolean approxNull(double, double);
+  public static boolean approxNull(float, float);
+  public static double fastExp(double);
+  public static double fastTanh(double);
+  public static int argmax(double...);
+  public static int argmin(double...);
+  public static double clamp(double, double, double);
+}
+Compiled from "MatrixTools.java"
+public class de.jannlab.math.MatrixTools {
+  public static final int VALUE_PADDING;
+  public de.jannlab.math.MatrixTools();
+  public static double[] allocate(int, int);
+  public static double[] allocate(int);
+  public static void setRow(double[], int, int, int, double...);
+  public static void setRow(double[], int, int, int, double[], int);
+  public static int idx(int, int, int);
+  public static void transpose(double[], int, int, double[]);
+  public static java.lang.String asString(double[], int, int, int);
+}
+Compiled from "BinaryFunctionDouble.java"
+public interface de.jannlab.misc.BinaryFunctionDouble {
+  public abstract double perform(double, double);
+}
+Compiled from "DoubleTools.java"
+public final class de.jannlab.misc.DoubleTools {
+  public de.jannlab.misc.DoubleTools();
+  public static void copy(double[], int, double[], int, int);
+  public static void copy(double[], int, int[], double[], int);
+  public static void copy(double[], int, double[], int, int[]);
+  public static void copy(double[], int, int, double[], int, int, int);
+  public static void fill(double[], int, int, int, java.util.Random, double, double);
+  public static void fill(double[], int, int, java.util.Random, double, double);
+  public static void fill(double[], int, int, double);
+  public static void fill(double[], int, int, int, double);
+  public static void threshold(double[], int, double[], int, int, double);
+  public static void threshold(double[], int, int, double[], int, int, int, double);
+  public static void map(double[], int, double[], int, int, de.jannlab.misc.UnaryFunctionDouble);
+  public static void map(double[], int, int, double[], int, int, int, de.jannlab.misc.UnaryFunctionDouble);
+  public static void map(double[], int, double[], int, double[], int, int, de.jannlab.misc.BinaryFunctionDouble);
+  public static void map(double[], int, int, double[], int, int, double[], int, int, int, de.jannlab.misc.BinaryFunctionDouble);
+  public static double absSum(double[], int, int);
+  public static double absSum(double[], int, int, int);
+  public static double meanSquareSum(double[], int, int);
+  public static double squareSum(double[], int, int);
+  public static double squareSum(double[], int, int, int);
+  public static double sum(double[], int, int);
+  public static double sum(double[], int, int, int);
+  public static double mul(double[], int, int);
+  public static double mul(double[], int, int, int);
+  public static void dot(double[], int, double[], int, int, double[], int);
+  public static void dot(double[], int, int, double[], int, int, int, double[], int);
+  public static void add(double[], int, double[], int, double[], int, int);
+  public static void add(double[], int, int, double[], int, int, double[], int, int, int);
+  public static void sub(double[], int, double[], int, double[], int, int);
+  public static void sub(double[], int, int, double[], int, int, double[], int, int, int);
+  public static void mul(double[], int, double[], int, double[], int, int);
+  public static void mul(double[], int, int, double[], int, int, double[], int, int, int);
+  public static void div(double[], int, double[], int, double[], int, int);
+  public static void div(double[], int, int, double[], int, int, double[], int, int, int);
+  public static void divSafe(double[], int, double[], int, double[], int, int);
+  public static void divSafe(double[], int, int, double[], int, int, double[], int, int, int);
+  public static java.lang.String asString(double[], int);
+  public static java.lang.String asString(double, int);
+  public static java.lang.String asString(double[], java.lang.String, int);
+  public static java.lang.String asString(double[], int, int, int);
+  public static java.lang.String asString(double[], java.lang.String, int, int, int);
+  public static java.lang.String asString(double[], int, int, int, int);
+  public static java.lang.String asString(double[], java.lang.String, int, int, int, int);
+  public static double[] tail(double[], int);
+  public static double[] merge(double[]...);
+}
+Compiled from "DoubleTools.java"
+final class de.jannlab.misc.DoubleTools$1 extends java.text.DecimalFormatSymbols {
+  de.jannlab.misc.DoubleTools$1();
+  public char getGroupingSeparator();
+  public char getDecimalSeparator();
+}
+Compiled from "DoubleTools.java"
+final class de.jannlab.misc.DoubleTools$2 extends java.text.DecimalFormatSymbols {
+  de.jannlab.misc.DoubleTools$2();
+  public char getGroupingSeparator();
+  public char getDecimalSeparator();
+}
+Compiled from "IntTools.java"
+public final class de.jannlab.misc.IntTools {
+  public de.jannlab.misc.IntTools();
+  public static void shuffle(int[], java.util.Random);
+  public static java.lang.String asString(int[]);
+  public static java.lang.String asString(int[], int, int);
+}
+Compiled from "ObjectCopy.java"
+public class de.jannlab.misc.ObjectCopy {
+  public de.jannlab.misc.ObjectCopy();
+  public static <T extends java.io.Serializable> T copy(T);
+}
+Compiled from "TimeCounter.java"
+public class de.jannlab.misc.TimeCounter {
+  protected long value;
+  public void reset();
+  public de.jannlab.misc.TimeCounter();
+  public long valueNano();
+  public long value();
+  public long valueMicro();
+  public long valueMilli();
+  public double valueNanoDouble();
+  public double valueDouble();
+  public double valueMicroDouble();
+  public double valueMilliDouble();
+  public long reval();
+  public double revalDouble();
+}
+Compiled from "UnaryFunctionDouble.java"
+public interface de.jannlab.misc.UnaryFunctionDouble {
+  public abstract double perform(double);
+}
+Compiled from "BasicIterationListener.java"
+public class de.jannlab.optimization.BasicIterationListener<I extends de.jannlab.optimization.IterativeMethod<I>> implements de.jannlab.optimization.IterationListener<I> {
+  public de.jannlab.optimization.BasicIterationListener();
+  public void started(I);
+  public void beforeIteration(int, I);
+  public void afterIteration(int, I);
+  public void finished(int, double, I);
+}
+Compiled from "DifferentiableObjective.java"
+public interface de.jannlab.optimization.DifferentiableObjective extends de.jannlab.optimization.Objective {
+  public abstract double computeGradient(double[], int, double[], int);
+}
+Compiled from "IterationListener.java"
+public interface de.jannlab.optimization.IterationListener<I extends de.jannlab.optimization.IterativeMethod<I>> {
+  public abstract void started(I);
+  public abstract void beforeIteration(int, I);
+  public abstract void afterIteration(int, I);
+  public abstract void finished(int, double, I);
+}
+Compiled from "IterativeMethod.java"
+public interface de.jannlab.optimization.IterativeMethod<I extends de.jannlab.optimization.IterativeMethod<I>> {
+  public abstract void addListener(de.jannlab.optimization.IterationListener<I>);
+  public abstract void removeListener(de.jannlab.optimization.IterationListener<I>);
+  public abstract void clearListener(de.jannlab.optimization.IterationListener<I>);
+  public abstract int getIteration();
+  public abstract void initialize();
+  public abstract void reset();
+  public abstract double getError();
+  public abstract double performIteration();
+  public abstract double iterate(int, double);
+  public abstract void requestAbort();
+}
+Compiled from "IterativeMethodBase.java"
+public abstract class de.jannlab.optimization.IterativeMethodBase<I extends de.jannlab.optimization.IterativeMethod<I>> implements de.jannlab.optimization.IterativeMethod<I> {
+  protected de.jannlab.optimization.IterativeMethodBase();
+  public void addListener(de.jannlab.optimization.IterationListener<I>);
+  public void removeListener(de.jannlab.optimization.IterationListener<I>);
+  public void clearListener(de.jannlab.optimization.IterationListener<I>);
+  public synchronized void requestAbort();
+  protected void abort();
+  protected boolean getAbort();
+  protected abstract I iterativeMethodMe();
+  protected abstract void iterativeMethodInitialize();
+  public void initialize();
+  public int getIteration();
+  protected abstract void iterativeMethodReset();
+  protected abstract double iterativeMethodPerformIteration();
+  protected void updateError(double);
+  public void reset();
+  protected void preIterationCheck() throws de.jannlab.optimization.exception.IterativeMethodException;
+  protected void preIterationsCheck() throws de.jannlab.optimization.exception.IterativeMethodException;
+  public double performIteration();
+  public double getError();
+  public synchronized double iterate(int, double);
+}
+Compiled from "Objective.java"
+public interface de.jannlab.optimization.Objective {
+  public abstract int arity();
+  public abstract double compute(double[], int);
+}
+Compiled from "Optimizer.java"
+public interface de.jannlab.optimization.Optimizer<T extends de.jannlab.optimization.Optimizer<T>> extends de.jannlab.optimization.IterativeMethod<T> {
+  public abstract de.jannlab.optimization.Objective getObjective();
+  public abstract void updateObjective(de.jannlab.optimization.Objective);
+  public abstract boolean requiresGradient();
+  public abstract double getBestError();
+  public abstract void copyBestSolution(double[], int);
+}
+Compiled from "OptimizerBase.java"
+public abstract class de.jannlab.optimization.OptimizerBase<I extends de.jannlab.optimization.Optimizer<I>> extends de.jannlab.optimization.IterativeMethodBase<I> implements de.jannlab.optimization.Optimizer<I> {
+  public static final java.lang.String KEY_PARAMS;
+  public void setParameters(int);
+  public int getParameters();
+  public java.lang.String toString();
+  public de.jannlab.optimization.OptimizerBase();
+  public void reset();
+  public de.jannlab.optimization.Objective getObjective();
+  public void updateObjective(de.jannlab.optimization.Objective);
+  protected void preIterationCheck() throws de.jannlab.optimization.exception.IterativeMethodException;
+  protected void preIterationsCheck() throws de.jannlab.optimization.exception.IterativeMethodException;
+}
+Compiled from "DifferentialEvolution.java"
+public class de.jannlab.optimization.diffevo.DifferentialEvolution extends de.jannlab.optimization.OptimizerBase<de.jannlab.optimization.diffevo.DifferentialEvolution> {
+  public static final java.lang.String KEY_POPSIZE;
+  public static final java.lang.String KEY_CR;
+  public static final java.lang.String KEY_F;
+  public static final java.lang.String KEY_F2;
+  public static final java.lang.String KEY_MUTATION;
+  public static final java.lang.String KEY_INITLBD;
+  public static final java.lang.String KEY_INITUBD;
+  public static final int DEFAULT_POPSIZE;
+  public static final double DEFAULT_CR;
+  public static final double DEFAULT_F;
+  public static final double DEFAULT_F2;
+  public static final de.jannlab.optimization.diffevo.Mutation DEFAULT_MUTATION;
+  public static final double DEFAULT_INITLBD;
+  public static final double DEFAULT_INITUBD;
+  public java.lang.String toString();
+  public de.jannlab.optimization.diffevo.DifferentialEvolution();
+  public double getInitUbd();
+  public boolean requiresGradient();
+  public double getBestError();
+  public void setInitUbd(double);
+  public double getInitLbd();
+  public void setInitLbd(double);
+  public de.jannlab.optimization.diffevo.Mutation getMutation();
+  public void setMutation(de.jannlab.optimization.diffevo.Mutation);
+  public int getPopSize();
+  public void setPopSize(int);
+  public double getCR();
+  public void setCR(double);
+  public double getF();
+  public void setF(double);
+  public double getF2();
+  public void setF2(double);
+  public void setRnd(java.util.Random);
+  public int getPopulationSize();
+  public java.util.Random getRnd();
+  protected de.jannlab.optimization.diffevo.DifferentialEvolution iterativeMethodMe();
+  protected void iterativeMethodInitialize();
+  protected void iterativeMethodReset();
+  protected double iterativeMethodPerformIteration();
+  public void copyBestSolution(double[], int);
+  protected de.jannlab.optimization.IterativeMethod iterativeMethodMe();
+  static {};
+}
+Compiled from "DifferentialEvolution.java"
+class de.jannlab.optimization.diffevo.DifferentialEvolution$1 {
+  static final int[] $SwitchMap$de$jannlab$optimization$diffevo$Mutation;
+  static {};
+}
+Compiled from "Mutation.java"
+public final class de.jannlab.optimization.diffevo.Mutation extends java.lang.Enum<de.jannlab.optimization.diffevo.Mutation> {
+  public static final de.jannlab.optimization.diffevo.Mutation RAND_ONE;
+  public static final de.jannlab.optimization.diffevo.Mutation BEST_ONE;
+  public static final de.jannlab.optimization.diffevo.Mutation RAND_TWO;
+  public static final de.jannlab.optimization.diffevo.Mutation BEST_TWO;
+  public static final de.jannlab.optimization.diffevo.Mutation RAND2BEST_ONE;
+  public static de.jannlab.optimization.diffevo.Mutation[] values();
+  public static de.jannlab.optimization.diffevo.Mutation valueOf(java.lang.String);
+  static {};
+}
+Compiled from "IterativeMethodException.java"
+public class de.jannlab.optimization.exception.IterativeMethodException extends de.jannlab.exception.JANNLabException {
+  public de.jannlab.optimization.exception.IterativeMethodException(java.lang.String);
+  public de.jannlab.optimization.exception.IterativeMethodException(java.lang.String, java.lang.Throwable);
+  public de.jannlab.optimization.exception.IterativeMethodException();
+}
+Compiled from "NoObjective.java"
+public class de.jannlab.optimization.exception.NoObjective extends de.jannlab.optimization.exception.OptimizerException {
+  public de.jannlab.optimization.exception.NoObjective();
+}
+Compiled from "NotAllowedWhileRunning.java"
+public class de.jannlab.optimization.exception.NotAllowedWhileRunning extends de.jannlab.optimization.exception.IterativeMethodException {
+  public de.jannlab.optimization.exception.NotAllowedWhileRunning();
+}
+Compiled from "NotInitialized.java"
+public class de.jannlab.optimization.exception.NotInitialized extends de.jannlab.optimization.exception.IterativeMethodException {
+  public de.jannlab.optimization.exception.NotInitialized();
+}
+Compiled from "OptimizerException.java"
+public class de.jannlab.optimization.exception.OptimizerException extends de.jannlab.optimization.exception.IterativeMethodException {
+  public de.jannlab.optimization.exception.OptimizerException(java.lang.String);
+  public de.jannlab.optimization.exception.OptimizerException(java.lang.String, java.lang.Throwable);
+  public de.jannlab.optimization.exception.OptimizerException();
+}
+Compiled from "RequiresDifferentiableObjective.java"
+public class de.jannlab.optimization.exception.RequiresDifferentiableObjective extends de.jannlab.optimization.exception.IterativeMethodException {
+  public de.jannlab.optimization.exception.RequiresDifferentiableObjective();
+}
+Compiled from "ClassificationValidator.java"
+public class de.jannlab.tools.ClassificationValidator {
+  public static final double DEFAULT_THRESHOLD;
+  public void reset();
+  public de.jannlab.tools.ClassificationValidator(de.jannlab.Net);
+  public de.jannlab.tools.ClassificationValidator(de.jannlab.Net, double);
+  public double getThreshold();
+  public double ratio();
+  public double[] apply(de.jannlab.data.Sample, int[]);
+  public double[] apply(de.jannlab.data.Sample);
+  public java.lang.String applyAsString(de.jannlab.data.Sample, boolean);
+}
+Compiled from "DataTools.java"
+public final class de.jannlab.tools.DataTools {
+  public static final java.lang.String FEATURE_SEPERATOR;
+  public static final java.lang.String FILE_SEPARATOR;
+  public static final java.lang.String EXTENSION_CSV;
+  public static final java.lang.String EXTENSION_GZ;
+  public de.jannlab.tools.DataTools();
+  public static int[] features(java.lang.String);
+  public static void loadToSampleSet(de.jannlab.data.SampleSet, java.lang.String) throws java.io.IOException, java.lang.ClassNotFoundException;
+  public static de.jannlab.data.SampleSet loadSampleSets(java.lang.String) throws java.io.IOException, java.lang.ClassNotFoundException;
+  public static de.jannlab.data.SampleSet loadSampleSets(java.lang.String...) throws java.io.IOException, java.lang.ClassNotFoundException;
+}
+Compiled from "Debug.java"
+public final class de.jannlab.tools.Debug {
+  public static final boolean DEBUG;
+  public de.jannlab.tools.Debug();
+  public static java.lang.String combine(java.lang.String[], java.lang.String);
+  public static java.lang.String indent(java.lang.String);
+}
+Compiled from "DefaultNetTrainerListener.java"
+public final class de.jannlab.tools.DefaultNetTrainerListener implements de.jannlab.training.NetTrainerListener {
+  public de.jannlab.tools.DefaultNetTrainerListener();
+  public void started(de.jannlab.training.NetTrainer);
+  public void epoch(de.jannlab.training.NetTrainer);
+  public void finished(de.jannlab.training.NetTrainer);
+}
+Compiled from "EvaluationTools.java"
+public final class de.jannlab.tools.EvaluationTools {
+  public static final double REGRESSION_THRESHOLD;
+  public de.jannlab.tools.EvaluationTools();
+  public static final double performClassification(de.jannlab.Net, de.jannlab.data.SampleSet);
+  public static final double performRegression(de.jannlab.Net, de.jannlab.data.SampleSet);
+  public static final double performClassification(de.jannlab.Net, de.jannlab.data.SampleSet, int);
+}
+Compiled from "NetTools.java"
+public final class de.jannlab.tools.NetTools {
+  public de.jannlab.tools.NetTools();
+  public static double computeError(de.jannlab.Net, de.jannlab.data.SampleSet);
+  public static double performForward(de.jannlab.Net, de.jannlab.data.Sample);
+  public static double performForward(de.jannlab.Net, de.jannlab.data.Sample, int[]);
+  public static void performBackward(de.jannlab.Net);
+}
+Compiled from "RegressionValidator.java"
+public class de.jannlab.tools.RegressionValidator {
+  public void reset();
+  public de.jannlab.tools.RegressionValidator(de.jannlab.Net, double);
+  public double ratio();
+  public double apply(de.jannlab.data.Sample, int[]);
+  public double apply(de.jannlab.data.Sample);
+}
+Compiled from "GradientDescent.java"
+public final class de.jannlab.training.GradientDescent extends de.jannlab.training.NetTrainer {
+  public static final double DEFAULT_ALPHA;
+  public static final double DEFAULT_MU;
+  public static final int DEFAULT_VLDINTERVAL;
+  public static final boolean DEFAULT_EARLYSTOP;
+  public static final int DEFAULT_EARLYSTOPCOUNT;
+  public static final int DEFAULT_EPOCHS;
+  public static final double DEFAULT_TARGETERROR;
+  public static final boolean DEFAULT_ONLINE;
+  public static final boolean DEFAULT_PERMUTE;
+  public de.jannlab.training.GradientDescent();
+  public void reset();
+  public java.lang.String toString();
+  public boolean getOnline();
+  public void setOnline(boolean);
+  public boolean getPermute();
+  public void setPermute(boolean);
+  public int getValidationInterval();
+  public void setValidationInterval(int);
+  public boolean getEarlyStopping();
+  public void setEarlyStopping(boolean);
+  public void setEarlyStoppingCount(int);
+  public final double getLearningRate();
+  public final void setLearningRate(double);
+  public final double getMomentum();
+  public final void setMomentum(double);
+  protected void init();
+  public synchronized void train();
+}
+Compiled from "NetTrainer.java"
+public abstract class de.jannlab.training.NetTrainer {
+  protected de.jannlab.data.SampleSet trainset;
+  protected de.jannlab.data.SampleSet validationset;
+  protected de.jannlab.Net net;
+  protected java.util.Random rnd;
+  protected double targeterror;
+  protected int epochs;
+  protected int epoch;
+  protected double trainerror;
+  protected int[] features;
+  protected double validationerror;
+  public final double getTrainingError();
+  public final double getValidationError();
+  public int getEpoch();
+  public final void addListener(de.jannlab.training.NetTrainerListener);
+  public final void removeListener(de.jannlab.training.NetTrainerListener);
+  protected void notifyEpoch();
+  protected void notifyFinished();
+  protected void notifyStarted();
+  public final void clearListener();
+  public abstract void reset();
+  protected void init();
+  protected void check();
+  public java.lang.String toString();
+  public de.jannlab.training.NetTrainer();
+  public final int getEpochs();
+  public final int[] getFeatures();
+  public final void setFeatures(int[]);
+  public final void setEpochs(int);
+  public final double getTargetError();
+  public final void setTargetError(double);
+  public final void setValidationSet(de.jannlab.data.SampleSet);
+  public de.jannlab.data.SampleSet getTrainingSet();
+  public de.jannlab.data.SampleSet getValidationSet();
+  public final void setNet(de.jannlab.Net);
+  public de.jannlab.Net getNet();
+  public java.util.Random getRnd();
+  public void setRnd(java.util.Random);
+  public final void setTrainingSet(de.jannlab.data.SampleSet);
+  public abstract void train();
+}
+Compiled from "NetTrainerListener.java"
+public interface de.jannlab.training.NetTrainerListener {
+  public abstract void started(de.jannlab.training.NetTrainer);
+  public abstract void epoch(de.jannlab.training.NetTrainer);
+  public abstract void finished(de.jannlab.training.NetTrainer);
+}
+Compiled from "RandomSearch.java"
+public final class de.jannlab.training.RandomSearch extends de.jannlab.training.NetTrainer {
+  public static final double DEFAULT_LBD;
+  public static final double DEFAULT_UBD;
+  public de.jannlab.training.RandomSearch();
+  public void reset();
+  public java.lang.String toString();
+  public final double getSearchLbd();
+  public final void setSearchLbd(double);
+  public final void setSearchUbd(double);
+  public final double getSearchUbd();
+  protected void init();
+  public synchronized void train();
+}
+Compiled from "NetTrainerException.java"
+public class de.jannlab.training.exception.NetTrainerException extends de.jannlab.exception.JANNLabException {
+  public de.jannlab.training.exception.NetTrainerException(java.lang.String);
+  public de.jannlab.training.exception.NetTrainerException(java.lang.String, java.lang.Throwable);
+  public de.jannlab.training.exception.NetTrainerException();
+}

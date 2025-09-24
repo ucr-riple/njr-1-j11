@@ -1,0 +1,239 @@
+Compiled from "DriveNow.java"
+public class drivenow.DriveNow implements drivenow.interfaces.IDrivenow {
+  public drivenow.DriveNow();
+  public java.lang.String getGruppenNummer();
+  public drivenow.interfaces.IFahrlehrerinBoundary getFahrlehrerinBoundary();
+  public drivenow.interfaces.ISekretaerBoundary getSekretaerBoundary();
+  public void initialisieren();
+  public void setDatum(java.util.Date);
+  public java.util.Date getDatum();
+  public void shutDown();
+}
+Compiled from "Systemereignis.java"
+public class drivenow.Systemereignis {
+  public drivenow.Systemereignis(drivenow.Systemereignis$Nachricht);
+  public drivenow.Systemereignis$Nachricht getNachricht();
+  public java.lang.String getID();
+  public java.lang.String getText();
+  public void setID(java.lang.String);
+  public void setText(java.lang.String);
+  public java.lang.String toString();
+}
+Compiled from "Systemereignis.java"
+public final class drivenow.Systemereignis$Nachricht extends java.lang.Enum<drivenow.Systemereignis$Nachricht> {
+  public static final drivenow.Systemereignis$Nachricht Fahrschulauto_erfolgreich_hinzugefuegt;
+  public static final drivenow.Systemereignis$Nachricht Auto_mit_kennzeichen_bereits_vorhanden;
+  public static final drivenow.Systemereignis$Nachricht Fahrlehrerin_erfolgreich_hinzugefuegt;
+  public static final drivenow.Systemereignis$Nachricht Fahrlehrerin_nicht_hinzugefuegt_Auto_unbekannt;
+  public static final drivenow.Systemereignis$Nachricht Fahrlehrerin_nicht_hinzugefuegt_Auto_vergeben;
+  public static final drivenow.Systemereignis$Nachricht Fahrschueler_erfolgreich_hinzugefuegt;
+  public static final drivenow.Systemereignis$Nachricht Fahrschueler_nicht_hinzugefuegt_keine_Fahrlehrerin_vorhanden;
+  public static final drivenow.Systemereignis$Nachricht Theoriestunde_erfolgreich_hinzugefuegt;
+  public static final drivenow.Systemereignis$Nachricht Theoriestunde_nicht_hinzugefuegt_Raum_belegt;
+  public static final drivenow.Systemereignis$Nachricht Theoriestunde_nicht_hinzugefuegt_keine_Lehrerin_verfuegbar;
+  public static final drivenow.Systemereignis$Nachricht Fahrstunde_erfolgreich_eingetragen;
+  public static final drivenow.Systemereignis$Nachricht Fahrstunde_nicht_eingetragen_Lehrerin_nicht_verfuegbar;
+  public static final drivenow.Systemereignis$Nachricht Theoriestunde_erfolgreich_vermerkt;
+  public static final drivenow.Systemereignis$Nachricht Theoriestunde_nicht_vermerkt_bereits_vermerkt;
+  public static final drivenow.Systemereignis$Nachricht Theoriestunde_nicht_vermerkt_bereits_genug_Grundlagen;
+  public static final drivenow.Systemereignis$Nachricht Theoriestunde_nicht_vermerkt_bereits_Sonderthema;
+  public static final drivenow.Systemereignis$Nachricht Fahrstunde_erfolgreich_geloescht;
+  public static final drivenow.Systemereignis$Nachricht Fahrstunde_nicht_geloescht_Stunde_existiert_nicht;
+  public static final drivenow.Systemereignis$Nachricht Theoriepruefungszulassung_erfolgreich_geprueft;
+  public static final drivenow.Systemereignis$Nachricht Theoriepruefungszulassung_nicht_erfuellt_Grundlagen_fehlen;
+  public static final drivenow.Systemereignis$Nachricht Theoriepruefungszulassung_nicht_erfuellt_Sonderstunden_fehlen;
+  public static final drivenow.Systemereignis$Nachricht Theoriepruefungsbestehen_erfolgreich_eingetragen;
+  public static final drivenow.Systemereignis$Nachricht Praxispruefung_erfolgreich_eingtragen;
+  public static final drivenow.Systemereignis$Nachricht Praxispruefung_nicht_eingetragen_Sonderstunden_fehlen;
+  public static final drivenow.Systemereignis$Nachricht Praxispruefung_nicht_eingetragen_Theoriepruefung_fehlt;
+  public static final drivenow.Systemereignis$Nachricht Praxispruefung_nicht_eingetragen_Fahrlehrerin_nicht_verfuegbar;
+  public static final drivenow.Systemereignis$Nachricht Fahrlehrerin_Login_erfolgreich;
+  public static final drivenow.Systemereignis$Nachricht Fahrlehrerin_Login_nicht_erfolgreich;
+  public static drivenow.Systemereignis$Nachricht[] values();
+  public static drivenow.Systemereignis$Nachricht valueOf(java.lang.String);
+  static {};
+}
+Compiled from "FahrlehrerinBoundary.java"
+public class drivenow.boundaries.FahrlehrerinBoundary implements drivenow.interfaces.IFahrlehrerinBoundary {
+  public drivenow.boundaries.FahrlehrerinBoundary();
+  public drivenow.Systemereignis einloggenUndUnterrichtsstundenZurueckgeben(java.lang.String, java.lang.String);
+  public java.lang.String unterrichtsstundenZurueckgeben();
+}
+Compiled from "SekretaerBoundary.java"
+public class drivenow.boundaries.SekretaerBoundary implements drivenow.interfaces.ISekretaerBoundary {
+  public drivenow.boundaries.SekretaerBoundary();
+  public drivenow.Systemereignis fahrlehrerinEintragen(java.lang.String, java.lang.String);
+  public drivenow.Systemereignis fahrschuelerEintragen(java.lang.String, java.lang.String);
+  public drivenow.Systemereignis fahrschulautoEintragen(java.lang.String);
+  public drivenow.Systemereignis theoriestundeEintragen(int, java.util.Date);
+  public drivenow.Systemereignis fahrstundeEintragen(java.lang.String, drivenow.interfaces.ISekretaerBoundary$Stundenart, java.util.Date, int);
+  public drivenow.Systemereignis theoriestundeVermerken(java.lang.String, java.util.Date);
+  public drivenow.Systemereignis fahrstundeLoeschen(java.lang.String, java.util.Date);
+  public java.lang.String datenbestandZurueckgeben();
+  public drivenow.Systemereignis theoriepruefungszulassungUeberpruefen(java.lang.String);
+  public drivenow.Systemereignis theoriepruefungsbestehenEintragen(java.lang.String);
+  public drivenow.Systemereignis praxispruefungEintragen(java.lang.String, java.util.Date);
+}
+Compiled from "Pruefungsverwaltung.java"
+public class drivenow.controls.Pruefungsverwaltung {
+  public drivenow.controls.Pruefungsverwaltung();
+  public static drivenow.controls.Pruefungsverwaltung getInstance();
+  public void cleanInstance();
+  public drivenow.Systemereignis theoriepruefungszulassungUeberpruefen(java.lang.String);
+  public drivenow.Systemereignis theoriepruefungsbestehenEintragen(java.lang.String);
+  public drivenow.Systemereignis praxispruefungEintragen(java.lang.String, java.util.Date);
+}
+Compiled from "Ressourcenverwaltung.java"
+public class drivenow.controls.Ressourcenverwaltung {
+  public drivenow.controls.Ressourcenverwaltung();
+  public static drivenow.controls.Ressourcenverwaltung getInstance();
+  public void cleanInstance();
+  public java.util.ArrayList<drivenow.entities.Auto> get_auto();
+  public java.util.ArrayList<drivenow.entities.Fahrlehrerindaten> get_fahrlehrerin();
+  public java.util.ArrayList<drivenow.entities.Fahrschueler> get_fahrschueler();
+  public drivenow.entities.Fahrschueler find_fahrschueler(java.lang.String);
+  public drivenow.Systemereignis auto_hinzufuegen(java.lang.String);
+  public drivenow.Systemereignis fahrschueler_hinzufuegen(java.lang.String, java.lang.String);
+  public drivenow.Systemereignis fahrlehrerin_einloggene_und_unterrichtsstunden_zurueckgeben(java.lang.String, java.lang.String);
+  public drivenow.Systemereignis fahrlehrerin_hinzufuegen(java.lang.String, java.lang.String);
+  public drivenow.Systemereignis datenbestandZurueckgeben();
+}
+Compiled from "Unterrichtsverwaltung.java"
+public class drivenow.controls.Unterrichtsverwaltung {
+  public drivenow.controls.Unterrichtsverwaltung();
+  public static drivenow.controls.Unterrichtsverwaltung getInstance();
+  public void cleanInstance();
+  public drivenow.Systemereignis unterrichtsstunden_zurueckgeben();
+  public drivenow.Systemereignis theoriestundeEintragen(int, java.util.Date);
+  public drivenow.Systemereignis fahrstundeEintragen(java.lang.String, drivenow.interfaces.ISekretaerBoundary$Stundenart, java.util.Date, int);
+  public drivenow.Systemereignis fahrstundeLoeschen(java.lang.String, java.util.Date);
+  public drivenow.Systemereignis theoriestunde_vermerken(java.lang.String, java.util.Date);
+}
+Compiled from "Auto.java"
+public class drivenow.entities.Auto {
+  public drivenow.entities.Auto(java.lang.String);
+  public java.lang.String get_kennzeichen();
+  public drivenow.entities.Fahrlehrerindaten get_fahrlehrerin();
+  public void set_fahrlehrerin(drivenow.entities.Fahrlehrerindaten);
+  public java.lang.String toString();
+}
+Compiled from "Fahrlehrerindaten.java"
+public class drivenow.entities.Fahrlehrerindaten {
+  public drivenow.entities.Fahrlehrerindaten();
+  public void create(java.lang.String, drivenow.entities.Auto);
+  public java.lang.String get_lehrerinID();
+  public java.lang.String get_name();
+  public drivenow.entities.Auto get_zugewiesenes_auto();
+  public java.util.ArrayList<drivenow.entities.Theoriestunde> get_theoriestunde();
+  public java.util.ArrayList<drivenow.entities.Fahrstunde> get_fahrstunde();
+  public void add_Theoriestunde(drivenow.entities.Theoriestunde);
+  public void add_fahrstunde(drivenow.entities.Fahrstunde);
+  public boolean verfuegbar(java.util.Date, java.util.Date);
+  public java.lang.String print_self();
+  public java.lang.String print_theoriestunde();
+  public java.lang.String print_fahrstunde();
+}
+Compiled from "Fahrschueler.java"
+public class drivenow.entities.Fahrschueler {
+  public drivenow.entities.Fahrschueler(java.lang.String, java.lang.String);
+  public void set_fahrlehrerin(drivenow.entities.Fahrlehrerindaten);
+  public void set_theoriepruefungsstatus(java.lang.String);
+  public java.lang.String get_theoriepruefungsstatus();
+  public java.lang.String get_ID();
+  public java.lang.String get_name();
+  public java.lang.String get_anschrift();
+  public drivenow.entities.Fahrlehrerindaten get_fahrlehrerindaten();
+  public void add_theoriestunde(drivenow.entities.Theoriestunde);
+  public void add_bestanden_theoriestunde(drivenow.entities.Theoriestunde);
+  public boolean find_theoriestunde(drivenow.entities.Theoriestunde);
+  public void add_fahrstunde(drivenow.entities.Fahrstunde);
+  public void add_bestanden_fahrstunde(drivenow.entities.Fahrstunde);
+  public boolean find_fahrstunde(drivenow.entities.Fahrstunde);
+  public java.util.ArrayList<drivenow.entities.Fahrstunde> get_fahrstunde();
+  public boolean sonderthema_besucht(int);
+  public int get_anzahl_grundlagenstunden();
+  public int get_anzahl_sonderstunden();
+  public int[] get_anzahl_fahrstunden();
+  public boolean verfuegbar(java.util.Date, java.util.Date);
+  public java.lang.String print_self();
+  public java.lang.String print_bestanden_theoriestunde();
+  public java.lang.String print_geplante_fahrstunde();
+}
+Compiled from "Fahrschueler.java"
+class drivenow.entities.Fahrschueler$1 {
+  static final int[] $SwitchMap$drivenow$interfaces$ISekretaerBoundary$Stundenart;
+  static {};
+}
+Compiled from "Fahrstunde.java"
+public class drivenow.entities.Fahrstunde implements drivenow.entities.Unterricht {
+  public drivenow.entities.Fahrstunde(drivenow.entities.Fahrlehrerindaten, java.util.Date, drivenow.interfaces.ISekretaerBoundary$Stundenart, int);
+  public java.util.Date get_Datum();
+  public java.util.Date get_end();
+  public drivenow.entities.Fahrlehrerindaten get_fahrlehrerindaten();
+  public drivenow.interfaces.ISekretaerBoundary$Stundenart get_Art();
+  public int get_anzahl();
+  public java.lang.String toString();
+}
+Compiled from "Theoriestunde.java"
+public class drivenow.entities.Theoriestunde implements drivenow.entities.Unterricht {
+  public drivenow.entities.Theoriestunde(int, java.util.Date);
+  public void set_fahrlehrerin(drivenow.entities.Fahrlehrerindaten);
+  public java.util.Date get_Datum();
+  public java.util.Date get_end();
+  public drivenow.entities.Fahrlehrerindaten get_fahrlehrerindaten();
+  public int get_thema();
+  public java.lang.String toString();
+}
+Compiled from "Unterricht.java"
+public interface drivenow.entities.Unterricht {
+  public abstract java.util.Date get_Datum();
+  public abstract drivenow.entities.Fahrlehrerindaten get_fahrlehrerindaten();
+}
+Compiled from "IDrivenow.java"
+public interface drivenow.interfaces.IDrivenow {
+  public abstract java.lang.String getGruppenNummer();
+  public abstract drivenow.interfaces.IFahrlehrerinBoundary getFahrlehrerinBoundary();
+  public abstract drivenow.interfaces.ISekretaerBoundary getSekretaerBoundary();
+  public abstract void initialisieren();
+  public abstract void shutDown();
+}
+Compiled from "IFahrlehrerinBoundary.java"
+public interface drivenow.interfaces.IFahrlehrerinBoundary {
+  public abstract drivenow.Systemereignis einloggenUndUnterrichtsstundenZurueckgeben(java.lang.String, java.lang.String);
+  public abstract java.lang.String unterrichtsstundenZurueckgeben();
+}
+Compiled from "ISekretaerBoundary.java"
+public interface drivenow.interfaces.ISekretaerBoundary {
+  public abstract drivenow.Systemereignis fahrlehrerinEintragen(java.lang.String, java.lang.String);
+  public abstract drivenow.Systemereignis fahrschuelerEintragen(java.lang.String, java.lang.String);
+  public abstract drivenow.Systemereignis fahrschulautoEintragen(java.lang.String);
+  public abstract drivenow.Systemereignis theoriestundeEintragen(int, java.util.Date);
+  public abstract drivenow.Systemereignis fahrstundeEintragen(java.lang.String, drivenow.interfaces.ISekretaerBoundary$Stundenart, java.util.Date, int);
+  public abstract drivenow.Systemereignis theoriestundeVermerken(java.lang.String, java.util.Date);
+  public abstract drivenow.Systemereignis fahrstundeLoeschen(java.lang.String, java.util.Date);
+  public abstract java.lang.String datenbestandZurueckgeben();
+  public abstract drivenow.Systemereignis theoriepruefungszulassungUeberpruefen(java.lang.String);
+  public abstract drivenow.Systemereignis theoriepruefungsbestehenEintragen(java.lang.String);
+  public abstract drivenow.Systemereignis praxispruefungEintragen(java.lang.String, java.util.Date);
+}
+Compiled from "ISekretaerBoundary.java"
+public final class drivenow.interfaces.ISekretaerBoundary$Stundenart extends java.lang.Enum<drivenow.interfaces.ISekretaerBoundary$Stundenart> {
+  public static final drivenow.interfaces.ISekretaerBoundary$Stundenart Uebungsfahrt;
+  public static final drivenow.interfaces.ISekretaerBoundary$Stundenart Ueberlandfahrt;
+  public static final drivenow.interfaces.ISekretaerBoundary$Stundenart Autobahnfahrt;
+  public static final drivenow.interfaces.ISekretaerBoundary$Stundenart Beleuchtungsfahrt;
+  public static final drivenow.interfaces.ISekretaerBoundary$Stundenart Pruefung;
+  public static drivenow.interfaces.ISekretaerBoundary$Stundenart[] values();
+  public static drivenow.interfaces.ISekretaerBoundary$Stundenart valueOf(java.lang.String);
+  static {};
+}
+Compiled from "BeispielTest.java"
+public class drivenow.tests.BeispielTest {
+  public drivenow.tests.BeispielTest();
+  public static void main(java.lang.String[]);
+}
+Compiled from "Test.java"
+public class drivenow.tests.Test {
+  public drivenow.tests.Test();
+  public static void main(java.lang.String[]);
+}

@@ -1,0 +1,720 @@
+Compiled from "ForEachTest.java"
+public class fr.umlv.stream.ForEachTest {
+  public fr.umlv.stream.ForEachTest();
+  public static void main(java.lang.String[]);
+}
+Compiled from "Test.java"
+public class fr.umlv.stream.Test {
+  public fr.umlv.stream.Test();
+  public static void main(java.lang.String[]);
+}
+Compiled from "EscapableStream.java"
+public class java.lang.invoke.EscapableStream<T> implements java.util.stream.Stream<T> {
+  static final java.lang.Object BLANK;
+  public static <T> java.util.stream.Stream<T> stream(java.lang.Iterable<? extends T>);
+  public java.util.stream.Stream<T> filter(java.util.function.Predicate<? super T>);
+  public <R> java.util.stream.Stream<R> map(java.util.function.Function<? super T, ? extends R>);
+  public java.util.stream.Stream<T> peek(java.util.function.Consumer<? super T>);
+  public <R> java.util.stream.Stream<R> flatMap(java.util.function.Function<? super T, ? extends java.util.stream.Stream<? extends R>>);
+  public void forEach(java.util.function.Consumer<? super T>);
+  public java.util.Iterator<T> iterator();
+  public java.util.Spliterator<T> spliterator();
+  public boolean isParallel();
+  public java.util.stream.Stream<T> sequential();
+  public java.util.stream.Stream<T> parallel();
+  public java.util.stream.Stream<T> unordered();
+  public java.util.stream.Stream<T> onClose(java.lang.Runnable);
+  public void close();
+  public java.util.stream.IntStream mapToInt(java.util.function.ToIntFunction<? super T>);
+  public java.util.stream.LongStream mapToLong(java.util.function.ToLongFunction<? super T>);
+  public java.util.stream.DoubleStream mapToDouble(java.util.function.ToDoubleFunction<? super T>);
+  public java.util.stream.IntStream flatMapToInt(java.util.function.Function<? super T, ? extends java.util.stream.IntStream>);
+  public java.util.stream.LongStream flatMapToLong(java.util.function.Function<? super T, ? extends java.util.stream.LongStream>);
+  public java.util.stream.DoubleStream flatMapToDouble(java.util.function.Function<? super T, ? extends java.util.stream.DoubleStream>);
+  public java.util.stream.Stream<T> distinct();
+  public java.util.stream.Stream<T> sorted();
+  public java.util.stream.Stream<T> sorted(java.util.Comparator<? super T>);
+  public java.util.stream.Stream<T> limit(long);
+  public java.util.stream.Stream<T> skip(long);
+  public void forEachOrdered(java.util.function.Consumer<? super T>);
+  public java.lang.Object[] toArray();
+  public <A> A[] toArray(java.util.function.IntFunction<A[]>);
+  public T reduce(T, java.util.function.BinaryOperator<T>);
+  public java.util.Optional<T> reduce(java.util.function.BinaryOperator<T>);
+  public <U> U reduce(U, java.util.function.BiFunction<U, ? super T, U>, java.util.function.BinaryOperator<U>);
+  public <R> R collect(java.util.function.Supplier<R>, java.util.function.BiConsumer<R, ? super T>, java.util.function.BiConsumer<R, R>);
+  public <R, A> R collect(java.util.stream.Collector<? super T, A, R>);
+  public java.util.Optional<T> min(java.util.Comparator<? super T>);
+  public java.util.Optional<T> max(java.util.Comparator<? super T>);
+  public long count();
+  public boolean anyMatch(java.util.function.Predicate<? super T>);
+  public boolean allMatch(java.util.function.Predicate<? super T>);
+  public boolean noneMatch(java.util.function.Predicate<? super T>);
+  public java.util.Optional<T> findFirst();
+  public java.util.Optional<T> findAny();
+  public java.util.stream.BaseStream onClose(java.lang.Runnable);
+  public java.util.stream.BaseStream unordered();
+  public java.util.stream.BaseStream parallel();
+  public java.util.stream.BaseStream sequential();
+  static {};
+}
+Compiled from "EscapableStream.java"
+class java.lang.invoke.EscapableStream$StreamIterator<T> implements java.util.Iterator<T> {
+  java.lang.invoke.EscapableStream$StreamIterator(java.util.Iterator<?>, int, int, int, int, int, int, int, int, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object);
+  public boolean hasNext();
+  public T next();
+}
+Compiled from "BinaryOperator.java"
+public interface perf.BinaryOperator<T> {
+  public abstract T operate(T, T);
+}
+Compiled from "Block.java"
+public interface perf.Block<T> {
+  public abstract void accept(T);
+}
+Compiled from "IntBinaryOperator.java"
+public interface perf.IntBinaryOperator {
+  public abstract int operate(int, int);
+}
+Compiled from "Mapper.java"
+public interface perf.Mapper<T, R> {
+  public abstract R map(T);
+}
+Compiled from "Predicate.java"
+public interface perf.Predicate<T> {
+  public abstract boolean test(T);
+}
+Compiled from "Stream.java"
+public interface perf.Stream<T> {
+  public abstract perf.Stream<T> filter(perf.Predicate<? super T>);
+  public abstract <R> perf.Stream<R> map(perf.Mapper<? super T, ? extends R>);
+  public abstract void forEach(perf.Block<? super T>);
+  public abstract <A extends java.util.Collection<? super T>> A into(A);
+  public abstract T reduce(T, perf.BinaryOperator<T>);
+  public abstract int reduce(int, perf.IntBinaryOperator);
+  public abstract T findFirst(T);
+}
+Compiled from "StreamFactory.java"
+interface perf.StreamFactory {
+  public abstract <T> perf.Stream<T> asStream(java.lang.Iterable<? extends T>);
+}
+Compiled from "StreamFactory.java"
+class perf.StreamFactory$1 {
+}
+Compiled from "StreamFactory.java"
+public abstract class perf.StreamFactory$Impl extends java.lang.Enum<perf.StreamFactory$Impl> implements perf.StreamFactory {
+  public static final perf.StreamFactory$Impl ITERABLE;
+  public static final perf.StreamFactory$Impl SINK;
+  public static final perf.StreamFactory$Impl REDUCER;
+  public static final perf.StreamFactory$Impl ADHOC;
+  public static final perf.StreamFactory$Impl MH;
+  public static final perf.StreamFactory$Impl MH2;
+  public static perf.StreamFactory$Impl[] values();
+  public static perf.StreamFactory$Impl valueOf(java.lang.String);
+  perf.StreamFactory$Impl(java.lang.String, int, perf.StreamFactory$1);
+  static {};
+}
+Compiled from "StreamFactory.java"
+final class perf.StreamFactory$Impl$1 extends perf.StreamFactory$Impl {
+  perf.StreamFactory$Impl$1(java.lang.String, int);
+  public <T> perf.Stream<T> asStream(java.lang.Iterable<? extends T>);
+}
+Compiled from "StreamFactory.java"
+final class perf.StreamFactory$Impl$2 extends perf.StreamFactory$Impl {
+  perf.StreamFactory$Impl$2(java.lang.String, int);
+  public <T> perf.Stream<T> asStream(java.lang.Iterable<? extends T>);
+}
+Compiled from "StreamFactory.java"
+final class perf.StreamFactory$Impl$3 extends perf.StreamFactory$Impl {
+  perf.StreamFactory$Impl$3(java.lang.String, int);
+  public <T> perf.Stream<T> asStream(java.lang.Iterable<? extends T>);
+}
+Compiled from "StreamFactory.java"
+final class perf.StreamFactory$Impl$4 extends perf.StreamFactory$Impl {
+  perf.StreamFactory$Impl$4(java.lang.String, int);
+  public <T> perf.Stream<T> asStream(java.lang.Iterable<? extends T>);
+}
+Compiled from "StreamFactory.java"
+final class perf.StreamFactory$Impl$5 extends perf.StreamFactory$Impl {
+  perf.StreamFactory$Impl$5(java.lang.String, int);
+  public <T> perf.Stream<T> asStream(java.lang.Iterable<? extends T>);
+}
+Compiled from "StreamFactory.java"
+final class perf.StreamFactory$Impl$6 extends perf.StreamFactory$Impl {
+  perf.StreamFactory$Impl$6(java.lang.String, int);
+  public <T> perf.Stream<T> asStream(java.lang.Iterable<? extends T>);
+}
+Compiled from "StreamWithAdhocImpl.java"
+public class perf.StreamWithAdhocImpl<T> implements perf.Stream<T> {
+  static final java.lang.Object NONE;
+  final perf.StreamWithAdhocImpl$Node node;
+  final java.lang.Iterable<?> iterable;
+  perf.StreamWithAdhocImpl$Reducer createPipeline(perf.StreamWithAdhocImpl$Reducer);
+  public perf.Stream<T> filter(perf.Predicate<? super T>);
+  public <R> perf.Stream<R> map(perf.Mapper<? super T, ? extends R>);
+  public void forEach(perf.Block<? super T>);
+  public <A extends java.util.Collection<? super T>> A into(A);
+  public T reduce(T, perf.BinaryOperator<T>);
+  public int reduce(int, perf.IntBinaryOperator);
+  public T findFirst(T);
+  public static <T> perf.Stream<T> asStream(java.lang.Iterable<? extends T>);
+  static {};
+}
+Compiled from "StreamWithAdhocImpl.java"
+class perf.StreamWithAdhocImpl$1 extends perf.StreamWithAdhocImpl$Node {
+  final perf.Predicate val$predicate;
+  final perf.StreamWithAdhocImpl this$0;
+  perf.StreamWithAdhocImpl$1(perf.StreamWithAdhocImpl, perf.StreamWithAdhocImpl$Node, perf.Predicate);
+  public perf.StreamWithAdhocImpl$Reducer createReducer(perf.StreamWithAdhocImpl$Reducer);
+}
+Compiled from "StreamWithAdhocImpl.java"
+class perf.StreamWithAdhocImpl$1$1 extends perf.StreamWithAdhocImpl$Reducer {
+  final perf.StreamWithAdhocImpl$Reducer val$reducer;
+  final perf.StreamWithAdhocImpl$1 this$1;
+  perf.StreamWithAdhocImpl$1$1(perf.StreamWithAdhocImpl$1, perf.StreamWithAdhocImpl$Reducer);
+  public void protoSink(java.lang.Object);
+  public java.lang.Object protoFind(java.lang.Object);
+  public java.lang.Object protoReduce(java.lang.Object, java.lang.Object);
+  public int protoReduce(java.lang.Object, int);
+}
+Compiled from "StreamWithAdhocImpl.java"
+class perf.StreamWithAdhocImpl$2 extends perf.StreamWithAdhocImpl$Node {
+  final perf.Mapper val$mapper;
+  final perf.StreamWithAdhocImpl this$0;
+  perf.StreamWithAdhocImpl$2(perf.StreamWithAdhocImpl, perf.StreamWithAdhocImpl$Node, perf.Mapper);
+  public perf.StreamWithAdhocImpl$Reducer createReducer(perf.StreamWithAdhocImpl$Reducer);
+}
+Compiled from "StreamWithAdhocImpl.java"
+class perf.StreamWithAdhocImpl$2$1 extends perf.StreamWithAdhocImpl$Reducer {
+  final perf.StreamWithAdhocImpl$Reducer val$reducer;
+  final perf.StreamWithAdhocImpl$2 this$1;
+  perf.StreamWithAdhocImpl$2$1(perf.StreamWithAdhocImpl$2, perf.StreamWithAdhocImpl$Reducer);
+  public void protoSink(java.lang.Object);
+  public java.lang.Object protoFind(java.lang.Object);
+  public java.lang.Object protoReduce(java.lang.Object, java.lang.Object);
+  public int protoReduce(java.lang.Object, int);
+}
+Compiled from "StreamWithAdhocImpl.java"
+class perf.StreamWithAdhocImpl$3 extends perf.StreamWithAdhocImpl$Reducer {
+  final perf.Block val$block;
+  final perf.StreamWithAdhocImpl this$0;
+  perf.StreamWithAdhocImpl$3(perf.StreamWithAdhocImpl, perf.Block);
+  public void protoSink(java.lang.Object);
+}
+Compiled from "StreamWithAdhocImpl.java"
+class perf.StreamWithAdhocImpl$4 extends perf.StreamWithAdhocImpl$Reducer {
+  final java.util.Collection val$target;
+  final perf.StreamWithAdhocImpl this$0;
+  perf.StreamWithAdhocImpl$4(perf.StreamWithAdhocImpl, java.util.Collection);
+  public void protoSink(java.lang.Object);
+}
+Compiled from "StreamWithAdhocImpl.java"
+class perf.StreamWithAdhocImpl$5 extends perf.StreamWithAdhocImpl$Reducer {
+  final perf.BinaryOperator val$op;
+  final perf.StreamWithAdhocImpl this$0;
+  perf.StreamWithAdhocImpl$5(perf.StreamWithAdhocImpl, perf.BinaryOperator);
+  public java.lang.Object protoReduce(java.lang.Object, java.lang.Object);
+}
+Compiled from "StreamWithAdhocImpl.java"
+class perf.StreamWithAdhocImpl$6 extends perf.StreamWithAdhocImpl$Reducer {
+  final perf.IntBinaryOperator val$op;
+  final perf.StreamWithAdhocImpl this$0;
+  perf.StreamWithAdhocImpl$6(perf.StreamWithAdhocImpl, perf.IntBinaryOperator);
+  public int protoReduce(java.lang.Object, int);
+}
+Compiled from "StreamWithAdhocImpl.java"
+class perf.StreamWithAdhocImpl$7 extends perf.StreamWithAdhocImpl$Reducer {
+  final perf.StreamWithAdhocImpl this$0;
+  perf.StreamWithAdhocImpl$7(perf.StreamWithAdhocImpl);
+  public java.lang.Object protoFind(java.lang.Object);
+}
+Compiled from "StreamWithAdhocImpl.java"
+abstract class perf.StreamWithAdhocImpl$Node {
+  final perf.StreamWithAdhocImpl$Node previous;
+  public perf.StreamWithAdhocImpl$Node(perf.StreamWithAdhocImpl$Node);
+  public abstract perf.StreamWithAdhocImpl$Reducer createReducer(perf.StreamWithAdhocImpl$Reducer);
+}
+Compiled from "StreamWithAdhocImpl.java"
+abstract class perf.StreamWithAdhocImpl$Reducer {
+  perf.StreamWithAdhocImpl$Reducer();
+  public void protoSink(java.lang.Object);
+  public java.lang.Object protoFind(java.lang.Object);
+  public java.lang.Object protoReduce(java.lang.Object, java.lang.Object);
+  public int protoReduce(java.lang.Object, int);
+}
+Compiled from "StreamWithIterable.java"
+public class perf.StreamWithIterable<T> implements perf.Stream<T> {
+  final java.lang.Iterable<? extends T> iterable;
+  static final java.lang.Object EMPTY;
+  public perf.Stream<T> filter(perf.Predicate<? super T>);
+  public <R> perf.Stream<R> map(perf.Mapper<? super T, ? extends R>);
+  public void forEach(perf.Block<? super T>);
+  public <A extends java.util.Collection<? super T>> A into(A);
+  public T reduce(T, perf.BinaryOperator<T>);
+  public int reduce(int, perf.IntBinaryOperator);
+  public T findFirst(T);
+  public static <T> perf.Stream<T> asStream(java.lang.Iterable<? extends T>);
+  static {};
+}
+Compiled from "StreamWithIterable.java"
+class perf.StreamWithIterable$1 implements java.lang.Iterable<T> {
+  final perf.Predicate val$predicate;
+  final perf.StreamWithIterable this$0;
+  perf.StreamWithIterable$1(perf.StreamWithIterable, perf.Predicate);
+  public java.util.Iterator<T> iterator();
+}
+Compiled from "StreamWithIterable.java"
+class perf.StreamWithIterable$1$1 implements java.util.Iterator<T> {
+  final java.util.Iterator val$it;
+  final perf.StreamWithIterable$1 this$1;
+  perf.StreamWithIterable$1$1(perf.StreamWithIterable$1, java.util.Iterator);
+  public boolean hasNext();
+  public T next();
+  public void remove();
+}
+Compiled from "StreamWithIterable.java"
+class perf.StreamWithIterable$2 implements java.lang.Iterable<R> {
+  final perf.Mapper val$mapper;
+  final perf.StreamWithIterable this$0;
+  perf.StreamWithIterable$2(perf.StreamWithIterable, perf.Mapper);
+  public java.util.Iterator<R> iterator();
+}
+Compiled from "StreamWithIterable.java"
+class perf.StreamWithIterable$2$1 implements java.util.Iterator<R> {
+  final java.util.Iterator val$it;
+  final perf.StreamWithIterable$2 this$1;
+  perf.StreamWithIterable$2$1(perf.StreamWithIterable$2, java.util.Iterator);
+  public boolean hasNext();
+  public R next();
+  public void remove();
+}
+Compiled from "StreamWithMH.java"
+public class perf.StreamWithMH<T> implements perf.Stream<T> {
+  final perf.StreamWithMH$Node node;
+  final java.lang.Iterable<?> iterable;
+  static final java.lang.invoke.MethodHandle EMPTY;
+  java.lang.invoke.MethodHandle createPipeline(java.lang.invoke.MethodHandle);
+  static java.lang.invoke.MethodHandle predicateAsMethodHandle(perf.Predicate<?>, java.lang.invoke.MethodType);
+  public perf.Stream<T> filter(perf.Predicate<? super T>);
+  static java.lang.invoke.MethodHandle mapperAsMethodHandle(perf.Mapper<?, ?>, java.lang.invoke.MethodType);
+  public <R> perf.Stream<R> map(perf.Mapper<? super T, ? extends R>);
+  public T reduce(T, perf.BinaryOperator<T>);
+  public int reduce(int, perf.IntBinaryOperator);
+  public T findFirst(T);
+  public void forEach(perf.Block<? super T>);
+  public <A extends java.util.Collection<? super T>> A into(A);
+  public static <T> perf.Stream<T> asStream(java.lang.Iterable<? extends T>);
+  static {};
+}
+Compiled from "StreamWithMH.java"
+class perf.StreamWithMH$1 extends perf.StreamWithMH$Node {
+  final perf.Predicate val$predicate;
+  final perf.StreamWithMH this$0;
+  perf.StreamWithMH$1(perf.StreamWithMH, perf.StreamWithMH$Node, perf.Predicate);
+  public java.lang.invoke.MethodHandle chain(java.lang.invoke.MethodHandle);
+}
+Compiled from "StreamWithMH.java"
+class perf.StreamWithMH$2 extends perf.StreamWithMH$Node {
+  final perf.Mapper val$mapper;
+  final perf.StreamWithMH this$0;
+  perf.StreamWithMH$2(perf.StreamWithMH, perf.StreamWithMH$Node, perf.Mapper);
+  public java.lang.invoke.MethodHandle chain(java.lang.invoke.MethodHandle);
+}
+Compiled from "StreamWithMH.java"
+class perf.StreamWithMH$ControlFlowException extends java.lang.Throwable {
+  java.lang.Object value;
+  static final java.lang.invoke.MethodHandle INIT_VALUE;
+  perf.StreamWithMH$ControlFlowException();
+  public static perf.StreamWithMH$ControlFlowException initValue(java.lang.Object);
+  java.lang.Object value();
+  static {};
+}
+Compiled from "StreamWithMH.java"
+final class perf.StreamWithMH$ControlFlowException$1 extends java.lang.ThreadLocal<perf.StreamWithMH$ControlFlowException> {
+  perf.StreamWithMH$ControlFlowException$1();
+  protected perf.StreamWithMH$ControlFlowException initialValue();
+  protected java.lang.Object initialValue();
+}
+Compiled from "StreamWithMH.java"
+abstract class perf.StreamWithMH$Node {
+  final perf.StreamWithMH$Node previous;
+  public perf.StreamWithMH$Node(perf.StreamWithMH$Node);
+  public abstract java.lang.invoke.MethodHandle chain(java.lang.invoke.MethodHandle);
+}
+Compiled from "StreamWithMH2.java"
+public class perf.StreamWithMH2<T> implements perf.Stream<T> {
+  final perf.StreamWithMH2$Node node;
+  final java.lang.Iterable<?> iterable;
+  static final java.lang.invoke.MethodHandle EMPTY;
+  java.lang.invoke.MethodHandle createPipeline(java.lang.invoke.MethodHandle);
+  static java.lang.invoke.MethodHandle predicateAsMethodHandle(perf.Predicate<?>, java.lang.invoke.MethodType);
+  public perf.Stream<T> filter(perf.Predicate<? super T>);
+  static java.lang.invoke.MethodHandle mapperAsMethodHandle(perf.Mapper<?, ?>, java.lang.invoke.MethodType);
+  public <R> perf.Stream<R> map(perf.Mapper<? super T, ? extends R>);
+  public T reduce(T, perf.BinaryOperator<T>);
+  public int reduce(int, perf.IntBinaryOperator);
+  public T findFirst(T);
+  public void forEach(perf.Block<? super T>);
+  public <A extends java.util.Collection<? super T>> A into(A);
+  public static <T> perf.Stream<T> asStream(java.lang.Iterable<? extends T>);
+  static {};
+}
+Compiled from "StreamWithMH2.java"
+class perf.StreamWithMH2$1 extends perf.StreamWithMH2$Node {
+  final perf.Predicate val$predicate;
+  final perf.StreamWithMH2 this$0;
+  perf.StreamWithMH2$1(perf.StreamWithMH2, perf.StreamWithMH2$Node, perf.Predicate);
+  public java.lang.invoke.MethodHandle chain(java.lang.invoke.MethodHandle);
+}
+Compiled from "StreamWithMH2.java"
+class perf.StreamWithMH2$2 extends perf.StreamWithMH2$Node {
+  final perf.Mapper val$mapper;
+  final perf.StreamWithMH2 this$0;
+  perf.StreamWithMH2$2(perf.StreamWithMH2, perf.StreamWithMH2$Node, perf.Mapper);
+  public java.lang.invoke.MethodHandle chain(java.lang.invoke.MethodHandle);
+}
+Compiled from "StreamWithMH2.java"
+class perf.StreamWithMH2$ControlFlowException extends java.lang.Throwable {
+  java.lang.Object value;
+  static final java.lang.invoke.MethodHandle INIT_VALUE;
+  perf.StreamWithMH2$ControlFlowException();
+  public static perf.StreamWithMH2$ControlFlowException initValue(java.lang.Object);
+  java.lang.Object value();
+  static {};
+}
+Compiled from "StreamWithMH2.java"
+final class perf.StreamWithMH2$ControlFlowException$1 extends java.lang.ThreadLocal<perf.StreamWithMH2$ControlFlowException> {
+  perf.StreamWithMH2$ControlFlowException$1();
+  protected perf.StreamWithMH2$ControlFlowException initialValue();
+  protected java.lang.Object initialValue();
+}
+Compiled from "StreamWithMH2.java"
+abstract class perf.StreamWithMH2$Node {
+  final perf.StreamWithMH2$Node previous;
+  public perf.StreamWithMH2$Node(perf.StreamWithMH2$Node);
+  public abstract java.lang.invoke.MethodHandle chain(java.lang.invoke.MethodHandle);
+}
+Compiled from "StreamWithReducer.java"
+public class perf.StreamWithReducer<T> implements perf.Stream<T> {
+  final perf.StreamWithReducer$Node node;
+  final java.lang.Iterable<?> iterable;
+  perf.StreamWithReducer$Reducer createPipeline(perf.StreamWithReducer$Reducer);
+  public perf.Stream<T> filter(perf.Predicate<? super T>);
+  public <R> perf.Stream<R> map(perf.Mapper<? super T, ? extends R>);
+  public void forEach(perf.Block<? super T>);
+  public <A extends java.util.Collection<? super T>> A into(A);
+  public T reduce(T, perf.BinaryOperator<T>);
+  public int reduce(int, perf.IntBinaryOperator);
+  public T findFirst(T);
+  public static <T> perf.Stream<T> asStream(java.lang.Iterable<? extends T>);
+}
+Compiled from "StreamWithReducer.java"
+class perf.StreamWithReducer$1 extends perf.StreamWithReducer$Node {
+  final perf.Predicate val$predicate;
+  final perf.StreamWithReducer this$0;
+  perf.StreamWithReducer$1(perf.StreamWithReducer, perf.StreamWithReducer$Node, perf.Predicate);
+  public perf.StreamWithReducer$Reducer createReducer(perf.StreamWithReducer$Reducer);
+}
+Compiled from "StreamWithReducer.java"
+class perf.StreamWithReducer$1$1 extends perf.StreamWithReducer$Reducer {
+  final perf.StreamWithReducer$Reducer val$reducer;
+  final perf.StreamWithReducer$1 this$1;
+  perf.StreamWithReducer$1$1(perf.StreamWithReducer$1, perf.StreamWithReducer$Reducer);
+  public java.lang.Object accept(java.lang.Object, java.lang.Object);
+  public int accept(java.lang.Object, int);
+}
+Compiled from "StreamWithReducer.java"
+class perf.StreamWithReducer$2 extends perf.StreamWithReducer$Node {
+  final perf.Mapper val$mapper;
+  final perf.StreamWithReducer this$0;
+  perf.StreamWithReducer$2(perf.StreamWithReducer, perf.StreamWithReducer$Node, perf.Mapper);
+  public perf.StreamWithReducer$Reducer createReducer(perf.StreamWithReducer$Reducer);
+}
+Compiled from "StreamWithReducer.java"
+class perf.StreamWithReducer$2$1 extends perf.StreamWithReducer$Reducer {
+  final perf.StreamWithReducer$Reducer val$reducer;
+  final perf.StreamWithReducer$2 this$1;
+  perf.StreamWithReducer$2$1(perf.StreamWithReducer$2, perf.StreamWithReducer$Reducer);
+  public java.lang.Object accept(java.lang.Object, java.lang.Object);
+  public int accept(java.lang.Object, int);
+}
+Compiled from "StreamWithReducer.java"
+class perf.StreamWithReducer$3 extends perf.StreamWithReducer$Reducer {
+  final perf.Block val$block;
+  final perf.StreamWithReducer this$0;
+  perf.StreamWithReducer$3(perf.StreamWithReducer, perf.Block);
+  public java.lang.Object accept(java.lang.Object, java.lang.Object);
+}
+Compiled from "StreamWithReducer.java"
+class perf.StreamWithReducer$4 extends perf.StreamWithReducer$Reducer {
+  final java.util.Collection val$target;
+  final perf.StreamWithReducer this$0;
+  perf.StreamWithReducer$4(perf.StreamWithReducer, java.util.Collection);
+  public java.lang.Object accept(java.lang.Object, java.lang.Object);
+}
+Compiled from "StreamWithReducer.java"
+class perf.StreamWithReducer$5 extends perf.StreamWithReducer$Reducer {
+  final perf.BinaryOperator val$op;
+  final perf.StreamWithReducer this$0;
+  perf.StreamWithReducer$5(perf.StreamWithReducer, perf.BinaryOperator);
+  public java.lang.Object accept(java.lang.Object, java.lang.Object);
+}
+Compiled from "StreamWithReducer.java"
+class perf.StreamWithReducer$6 extends perf.StreamWithReducer$Reducer {
+  final perf.IntBinaryOperator val$op;
+  final perf.StreamWithReducer this$0;
+  perf.StreamWithReducer$6(perf.StreamWithReducer, perf.IntBinaryOperator);
+  public int accept(java.lang.Object, int);
+}
+Compiled from "StreamWithReducer.java"
+class perf.StreamWithReducer$7 extends perf.StreamWithReducer$Reducer {
+  final perf.StreamWithReducer this$0;
+  perf.StreamWithReducer$7(perf.StreamWithReducer);
+  public java.lang.Object accept(java.lang.Object, java.lang.Object);
+}
+Compiled from "StreamWithReducer.java"
+class perf.StreamWithReducer$ControlFlowException extends java.lang.Error {
+  perf.StreamWithReducer$ControlFlowException();
+  final java.lang.Object value();
+  static perf.StreamWithReducer$ControlFlowException initValue(java.lang.Object);
+  static {};
+}
+Compiled from "StreamWithReducer.java"
+final class perf.StreamWithReducer$ControlFlowException$1 extends java.lang.ThreadLocal<perf.StreamWithReducer$ControlFlowException> {
+  perf.StreamWithReducer$ControlFlowException$1();
+  protected perf.StreamWithReducer$ControlFlowException initialValue();
+  protected java.lang.Object initialValue();
+}
+Compiled from "StreamWithReducer.java"
+abstract class perf.StreamWithReducer$Node {
+  final perf.StreamWithReducer$Node previous;
+  public perf.StreamWithReducer$Node(perf.StreamWithReducer$Node);
+  public abstract perf.StreamWithReducer$Reducer createReducer(perf.StreamWithReducer$Reducer);
+}
+Compiled from "StreamWithReducer.java"
+abstract class perf.StreamWithReducer$Reducer {
+  perf.StreamWithReducer$Reducer();
+  public java.lang.Object accept(java.lang.Object, java.lang.Object);
+  public int accept(java.lang.Object, int);
+}
+Compiled from "StreamWithSink.java"
+public class perf.StreamWithSink<T> implements perf.Stream<T> {
+  final perf.StreamWithSink$Node node;
+  final java.lang.Iterable<?> iterable;
+  perf.StreamWithSink$Sink createPipeline(perf.StreamWithSink$Sink);
+  public perf.Stream<T> filter(perf.Predicate<? super T>);
+  public <R> perf.Stream<R> map(perf.Mapper<? super T, ? extends R>);
+  public void forEach(perf.Block<? super T>);
+  public <A extends java.util.Collection<? super T>> A into(A);
+  public T reduce(T, perf.BinaryOperator<T>);
+  public int reduce(int, perf.IntBinaryOperator);
+  public T findFirst(T);
+  public static <T> perf.Stream<T> asStream(java.lang.Iterable<? extends T>);
+}
+Compiled from "StreamWithSink.java"
+class perf.StreamWithSink$1 extends perf.StreamWithSink$Node {
+  final perf.Predicate val$predicate;
+  final perf.StreamWithSink this$0;
+  perf.StreamWithSink$1(perf.StreamWithSink, perf.StreamWithSink$Node, perf.Predicate);
+  public perf.StreamWithSink$Sink createSink(perf.StreamWithSink$Sink);
+}
+Compiled from "StreamWithSink.java"
+class perf.StreamWithSink$1$1 implements perf.StreamWithSink$Sink {
+  final perf.StreamWithSink$Sink val$sink;
+  final perf.StreamWithSink$1 this$1;
+  perf.StreamWithSink$1$1(perf.StreamWithSink$1, perf.StreamWithSink$Sink);
+  public void accept(java.lang.Object);
+}
+Compiled from "StreamWithSink.java"
+class perf.StreamWithSink$1Reducer implements perf.StreamWithSink$Sink {
+  T value;
+  final java.lang.Object val$base;
+  final perf.BinaryOperator val$op;
+  final perf.StreamWithSink this$0;
+  perf.StreamWithSink$1Reducer();
+  public void accept(java.lang.Object);
+}
+Compiled from "StreamWithSink.java"
+class perf.StreamWithSink$2 extends perf.StreamWithSink$Node {
+  final perf.Mapper val$mapper;
+  final perf.StreamWithSink this$0;
+  perf.StreamWithSink$2(perf.StreamWithSink, perf.StreamWithSink$Node, perf.Mapper);
+  public perf.StreamWithSink$Sink createSink(perf.StreamWithSink$Sink);
+}
+Compiled from "StreamWithSink.java"
+class perf.StreamWithSink$2$1 implements perf.StreamWithSink$Sink {
+  final perf.StreamWithSink$Sink val$sink;
+  final perf.StreamWithSink$2 this$1;
+  perf.StreamWithSink$2$1(perf.StreamWithSink$2, perf.StreamWithSink$Sink);
+  public void accept(java.lang.Object);
+}
+Compiled from "StreamWithSink.java"
+class perf.StreamWithSink$2Reducer implements perf.StreamWithSink$Sink {
+  int value;
+  final int val$base;
+  final perf.IntBinaryOperator val$op;
+  final perf.StreamWithSink this$0;
+  perf.StreamWithSink$2Reducer();
+  public void accept(java.lang.Object);
+}
+Compiled from "StreamWithSink.java"
+class perf.StreamWithSink$3 implements perf.StreamWithSink$Sink {
+  final perf.Block val$block;
+  final perf.StreamWithSink this$0;
+  perf.StreamWithSink$3(perf.StreamWithSink, perf.Block);
+  public void accept(java.lang.Object);
+}
+Compiled from "StreamWithSink.java"
+class perf.StreamWithSink$4 implements perf.StreamWithSink$Sink {
+  final java.util.Collection val$target;
+  final perf.StreamWithSink this$0;
+  perf.StreamWithSink$4(perf.StreamWithSink, java.util.Collection);
+  public void accept(java.lang.Object);
+}
+Compiled from "StreamWithSink.java"
+class perf.StreamWithSink$5 implements perf.StreamWithSink$Sink {
+  final perf.StreamWithSink this$0;
+  perf.StreamWithSink$5(perf.StreamWithSink);
+  public void accept(java.lang.Object);
+}
+Compiled from "StreamWithSink.java"
+class perf.StreamWithSink$ControlFlowException extends java.lang.Error {
+  perf.StreamWithSink$ControlFlowException();
+  final java.lang.Object value();
+  static perf.StreamWithSink$ControlFlowException initValue(java.lang.Object);
+  static {};
+}
+Compiled from "StreamWithSink.java"
+final class perf.StreamWithSink$ControlFlowException$1 extends java.lang.ThreadLocal<perf.StreamWithSink$ControlFlowException> {
+  perf.StreamWithSink$ControlFlowException$1();
+  protected perf.StreamWithSink$ControlFlowException initialValue();
+  protected java.lang.Object initialValue();
+}
+Compiled from "StreamWithSink.java"
+abstract class perf.StreamWithSink$Node {
+  final perf.StreamWithSink$Node previous;
+  public perf.StreamWithSink$Node(perf.StreamWithSink$Node);
+  public abstract perf.StreamWithSink$Sink createSink(perf.StreamWithSink$Sink);
+}
+Compiled from "StreamWithSink.java"
+interface perf.StreamWithSink$Sink {
+  public abstract void accept(java.lang.Object);
+}
+Compiled from "Test.java"
+public class perf.Test {
+  public perf.Test();
+  public static void main(java.lang.String[]);
+}
+Compiled from "Test.java"
+final class perf.Test$1 implements perf.IntBinaryOperator {
+  perf.Test$1();
+  public int operate(int, int);
+}
+Compiled from "Test.java"
+final class perf.Test$10 implements perf.IntBinaryOperator {
+  perf.Test$10();
+  public int operate(int, int);
+}
+Compiled from "Test.java"
+final class perf.Test$11 implements perf.Predicate<java.lang.Integer> {
+  perf.Test$11();
+  public boolean test(java.lang.Integer);
+  public boolean test(java.lang.Object);
+}
+Compiled from "Test.java"
+final class perf.Test$12 implements perf.Predicate<java.lang.Integer> {
+  perf.Test$12();
+  public boolean test(java.lang.Integer);
+  public boolean test(java.lang.Object);
+}
+Compiled from "Test.java"
+final class perf.Test$2 implements perf.Predicate<java.lang.Integer> {
+  perf.Test$2();
+  public boolean test(java.lang.Integer);
+  public boolean test(java.lang.Object);
+}
+Compiled from "Test.java"
+final class perf.Test$3 implements perf.Block<java.lang.Integer> {
+  final int[] val$result2;
+  perf.Test$3(int[]);
+  public void accept(java.lang.Integer);
+  public void accept(java.lang.Object);
+}
+Compiled from "Test.java"
+final class perf.Test$4 implements perf.Mapper<java.lang.String, java.lang.Integer> {
+  perf.Test$4();
+  public java.lang.Integer map(java.lang.String);
+  public java.lang.Object map(java.lang.Object);
+}
+Compiled from "Test.java"
+final class perf.Test$5 implements perf.Mapper<java.lang.Double, java.lang.Boolean> {
+  perf.Test$5();
+  public java.lang.Boolean map(java.lang.Double);
+  public java.lang.Object map(java.lang.Object);
+}
+Compiled from "Test.java"
+final class perf.Test$6 extends java.util.AbstractList<java.lang.Integer> {
+  perf.Test$6();
+  public java.lang.Integer get(int);
+  public int size();
+  public java.lang.Object get(int);
+}
+Compiled from "Test.java"
+final class perf.Test$7 implements perf.Predicate<java.lang.Integer> {
+  perf.Test$7();
+  public boolean test(java.lang.Integer);
+  public boolean test(java.lang.Object);
+}
+Compiled from "Test.java"
+final class perf.Test$8 implements perf.Block<java.lang.Integer> {
+  final int[] val$result;
+  perf.Test$8(int[]);
+  public void accept(java.lang.Integer);
+  public void accept(java.lang.Object);
+}
+Compiled from "Test.java"
+final class perf.Test$9 implements perf.Predicate<java.lang.Integer> {
+  perf.Test$9();
+  public boolean test(java.lang.Integer);
+  public boolean test(java.lang.Object);
+}
+Compiled from "Test.java"
+public class serialization.Test {
+  public serialization.Test();
+  public static void main(java.lang.String[]) throws java.lang.Throwable;
+  static {};
+}
+Compiled from "Test.java"
+class serialization.Test$LambdaSerializationInfo {
+  serialization.Test$LambdaSerializationInfo();
+}
+Compiled from "Test.java"
+class serialization.Test$Proxy implements java.lang.Runnable {
+  public serialization.Test$Proxy(int[], int);
+  public void run();
+}
+Compiled from "Test.java"
+class serialization.Test$ProxySer implements java.lang.Runnable {
+  public serialization.Test$ProxySer(serialization.Test$LambdaSerializationInfo, int[], int);
+  public void run();
+}
+Compiled from "Test2.java"
+public class serialization.Test2 {
+  public serialization.Test2();
+  public static void main(java.lang.String[]) throws java.lang.Throwable;
+  static {};
+}
+Compiled from "Test2.java"
+class serialization.Test2$LambdaSerializationInfo {
+  serialization.Test2$LambdaSerializationInfo();
+}
+Compiled from "Test2.java"
+class serialization.Test2$Proxy implements java.lang.Runnable {
+  public serialization.Test2$Proxy(int[], int);
+  public void run();
+}
+Compiled from "Test2.java"
+class serialization.Test2$ProxySer implements java.lang.Runnable {
+  public serialization.Test2$ProxySer(serialization.Test2$LambdaSerializationInfo, int[], int);
+  public void run();
+}

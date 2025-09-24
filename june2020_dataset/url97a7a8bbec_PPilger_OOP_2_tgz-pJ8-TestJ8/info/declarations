@@ -1,0 +1,299 @@
+Compiled from "Band.java"
+public class Band implements java.io.Serializable {
+  public Band(java.lang.String, java.lang.String, int);
+  public java.lang.String getName();
+  public Songs getRepertoire();
+  public Songs getRepertoire(Selector<Song>);
+  public Songs getRepertoire(java.util.List<Selector<Song>>);
+  public Termine getTermine();
+  public Termine getTermine(Selector<Termin>);
+  public Termine getTermine(java.util.List<Selector<Termin>>);
+  public Mitglieder getMitglieder();
+  public Mitglieder getMitglieder(Selector<Mitglied>);
+  public Mitglieder getMitglieder(java.util.List<Selector<Mitglied>>);
+  public Orte getOrte();
+  public Orte getOrte(Selector<Ort>);
+  public Orte getOrte(java.util.List<Selector<Ort>>);
+  public GuV getGuV();
+  public GuV getGuV(Selector<Posten>);
+  public GuV getGuV(java.util.List<Selector<Posten>>);
+  public boolean sendeTerminvorschlag(Termin);
+  public java.lang.String toString();
+}
+Compiled from "GuV.java"
+public class GuV extends Selection<Posten> {
+  public GuV(Band);
+  public GuV select(java.util.List<Selector<Posten>>);
+  public double getEinnahmen();
+  public double getAusgaben();
+  public double getGewinn();
+}
+Compiled from "Mitglied.java"
+public class Mitglied implements java.io.Serializable {
+  public Mitglied(java.lang.String, java.lang.String, java.lang.String, Zeitraum, boolean);
+  public Zeitraum getZeitraum();
+  public void sende(java.lang.String);
+  public void sende(Terminvorschlag);
+  public void revidiere(Terminvorschlag);
+  public java.util.Queue<java.lang.String> getNachrichten();
+  public java.util.Queue<Terminvorschlag> getTerminvorschlaege();
+  public void setErsatzmitglied(boolean);
+  public java.lang.String toString();
+  public java.lang.String toDetailString();
+  static boolean access$000(Mitglied);
+  static java.lang.String access$100(Mitglied);
+  static java.lang.String access$200(Mitglied);
+}
+Compiled from "Mitglied.java"
+public class Mitglied$InstrumentSelektor implements Selector<Mitglied> {
+  public Mitglied$InstrumentSelektor(java.lang.String);
+  public boolean select(Mitglied);
+  public boolean select(java.lang.Object);
+}
+Compiled from "Mitglied.java"
+public class Mitglied$NameSelektor implements Selector<Mitglied> {
+  public Mitglied$NameSelektor(java.lang.String...);
+  public boolean select(Mitglied);
+  public boolean select(java.lang.Object);
+}
+Compiled from "Mitglied.java"
+public class Mitglied$TypSelector implements Selector<Mitglied> {
+  public Mitglied$TypSelector(boolean);
+  public boolean select(Mitglied);
+  public boolean select(java.lang.Object);
+}
+Compiled from "Mitglied.java"
+public class Mitglied$ZeitraumSelektor implements Selector<Mitglied> {
+  public Mitglied$ZeitraumSelektor(java.util.Date);
+  public boolean select(Mitglied);
+  public boolean select(java.lang.Object);
+}
+Compiled from "Mitglieder.java"
+public class Mitglieder extends Selection<Mitglied> {
+  public Mitglieder();
+  public Mitglieder select(java.util.List<Selector<Mitglied>>);
+}
+Compiled from "Ort.java"
+public class Ort implements java.io.Serializable {
+  public java.lang.String toString();
+  public java.lang.String toDetailString();
+  public Ort(java.lang.String, java.util.List<java.lang.String>);
+  static java.lang.String access$000(Ort);
+  static java.util.List access$100(Ort);
+}
+Compiled from "Ort.java"
+public class Ort$BezeichnungSelektor implements Selector<Ort> {
+  public Ort$BezeichnungSelektor(java.lang.String);
+  public Ort$BezeichnungSelektor(java.lang.String, boolean);
+  public boolean select(Ort);
+  public boolean select(java.lang.Object);
+}
+Compiled from "Ort.java"
+public class Ort$InfrastrukturSelektor implements Selector<Ort> {
+  public Ort$InfrastrukturSelektor(java.lang.String);
+  public boolean select(Ort);
+  public boolean select(java.lang.Object);
+}
+Compiled from "Orte.java"
+public class Orte extends Selection<Ort> {
+  public Orte();
+  public Orte select(java.util.List<Selector<Ort>>);
+}
+Compiled from "Posten.java"
+public class Posten implements java.io.Serializable {
+  public Posten(double, double, java.lang.String, java.util.Date);
+  public double getEinnahmen();
+  public double getAusgaben();
+  public java.lang.String toString();
+  public java.lang.String toDetailString();
+  static java.util.Date access$000(Posten);
+}
+Compiled from "Posten.java"
+public class Posten$ZeitraumSelektor implements Selector<Posten> {
+  public Posten$ZeitraumSelektor(Zeitraum);
+  public boolean select(Posten);
+  public boolean select(java.lang.Object);
+}
+Compiled from "Programm.java"
+public class Programm {
+  public Programm();
+  public Programm(boolean);
+  public void addBand(Band);
+  public Band getBand(java.lang.String);
+  public void quit();
+}
+Compiled from "Selection.java"
+public class Selection<T> implements java.lang.Iterable<T>, java.io.Serializable {
+  public Selection();
+  public Selection(Selection<T>, java.util.List<Selector<T>>);
+  public T getFirst();
+  public java.util.List<T> asList();
+  public boolean add(T);
+  public int remove();
+  public void restore();
+  public int count();
+  public boolean selected(T);
+  public java.lang.String toString();
+  public java.util.Iterator<T> iterator();
+  public java.util.Iterator<T> removedIterator();
+}
+Compiled from "Selection.java"
+class Selection$SelectionIterator implements java.util.Iterator<T> {
+  final Selection this$0;
+  public Selection$SelectionIterator(java.util.List<T>);
+  public Selection$SelectionIterator(java.util.List<T>, java.util.Collection<T>);
+  public boolean hasNext();
+  public T next();
+  public void remove();
+}
+Compiled from "Selector.java"
+public interface Selector<T> {
+  public abstract boolean select(T);
+}
+Compiled from "Song.java"
+public class Song implements java.io.Serializable {
+  public Song(java.lang.String, Zeitraum, java.util.List<Variante>);
+  public java.util.List<Variante> getVarianten();
+  public java.lang.String toString();
+  public java.lang.String toDetailString();
+  static Zeitraum access$000(Song);
+  static java.lang.String access$100(Song);
+}
+Compiled from "Song.java"
+public class Song$NameSelektor implements Selector<Song> {
+  public Song$NameSelektor(java.lang.String);
+  public boolean select(Song);
+  public boolean select(java.lang.Object);
+}
+Compiled from "Song.java"
+public class Song$TerminSelector implements Selector<Song> {
+  public Song$TerminSelector(Termin);
+  public boolean select(Song);
+  public boolean select(java.lang.Object);
+}
+Compiled from "Song.java"
+public class Song$ZeitpunktSelektor implements Selector<Song> {
+  public Song$ZeitpunktSelektor(java.util.Date);
+  public boolean select(Song);
+  public boolean select(java.lang.Object);
+}
+Compiled from "SongVariante.java"
+public class SongVariante {
+  public SongVariante(Song, Variante);
+  public Song getSong();
+  public Variante getVariante();
+  public java.lang.String toString();
+}
+Compiled from "Songs.java"
+public class Songs extends Selection<Song> {
+  public Songs();
+  public Songs select(java.util.List<Selector<Song>>);
+  public java.util.List<SongVariante> getSongVarianten();
+  public java.util.List<SongVariante> getSongVarianten(java.util.List<Selector<Variante>>);
+}
+Compiled from "Termin.java"
+public class Termin implements java.io.Serializable {
+  public Termin(Termin$Typ, Ort, java.util.Date, java.util.Date, double, double, java.util.List<Mitglied>);
+  public Zeitraum getZeitraum();
+  public Posten getPosten();
+  public double getAusgaben();
+  public double getEinnahmen();
+  public java.util.List<Mitglied> getTeilnehmer();
+  public boolean undo();
+  public void setOrt(Ort);
+  public void setZeitraum(java.util.Date, java.util.Date);
+  public void setAusgaben(double);
+  public void setEinnahmen(double);
+  public java.lang.String toString();
+  public java.lang.String toDetailString();
+  static java.util.List access$000(Termin);
+  static Zeitraum access$100(Termin);
+  static Termin$Typ access$200(Termin);
+}
+Compiled from "Termin.java"
+public class Termin$TeilnehmerSelektor implements Selector<Termin> {
+  public Termin$TeilnehmerSelektor(Mitglied);
+  public boolean select(Termin);
+  public boolean select(java.lang.Object);
+}
+Compiled from "Termin.java"
+public final class Termin$Typ extends java.lang.Enum<Termin$Typ> {
+  public static final Termin$Typ Probe;
+  public static final Termin$Typ Auftritt;
+  public static Termin$Typ[] values();
+  public static Termin$Typ valueOf(java.lang.String);
+  static {};
+}
+Compiled from "Termin.java"
+public class Termin$TypSelektor implements Selector<Termin> {
+  public Termin$TypSelektor(Termin$Typ);
+  public boolean select(Termin);
+  public boolean select(java.lang.Object);
+}
+Compiled from "Termin.java"
+public class Termin$ZeitraumSelektor implements Selector<Termin> {
+  public Termin$ZeitraumSelektor(Zeitraum);
+  public boolean select(Termin);
+  public boolean select(java.lang.Object);
+}
+Compiled from "Termine.java"
+public class Termine extends Selection<Termin> {
+  public Termine();
+  public Termine select(java.util.List<Selector<Termin>>);
+  public boolean add(Termin);
+  public void add(Terminvorschlag);
+  public int remove();
+  public double getGewinn();
+  public double getKosten();
+  public boolean add(java.lang.Object);
+}
+Compiled from "Terminvorschlag.java"
+public class Terminvorschlag implements java.io.Serializable {
+  public Terminvorschlag(Termin, Termine);
+  public Termin getTermin();
+  public void accept(Mitglied);
+  public void decline(Mitglied, java.lang.String);
+  public boolean accepted();
+  public java.lang.String toString();
+  public java.lang.String toDetailString();
+}
+Compiled from "Test.java"
+public class Test {
+  public Test();
+  public static void main(java.lang.String[]);
+  public static void testeBands();
+  public static void erstelleMitglieder(Band);
+  public static void testeMitglieder(Band);
+  public static void erstelleOrte(Band);
+  public static void testeOrte(Band);
+  public static void erstelleTermine(Band);
+  public static void erstellePosten(Band);
+  public static void testeGuV(Band);
+  public static void erstelleRepertoire(Band);
+  public static void testeSicherung(Band);
+  static {};
+}
+Compiled from "Variante.java"
+public class Variante implements java.io.Serializable {
+  public Variante(java.lang.String, int);
+  public java.lang.String toString();
+  static java.lang.String access$000(Variante);
+}
+Compiled from "Variante.java"
+public class Variante$BezeichnungSelektor implements Selector<Variante> {
+  public Variante$BezeichnungSelektor(java.lang.String);
+  public boolean select(Variante);
+  public boolean select(java.lang.Object);
+}
+Compiled from "Zeitraum.java"
+public class Zeitraum implements java.io.Serializable {
+  java.util.List<java.util.Date> zeitpunkte;
+  public Zeitraum(java.util.Date...);
+  public Zeitraum(Zeitraum);
+  public java.util.Date getFirst();
+  public java.util.Date getLast();
+  public boolean inZeitraum(java.util.Date);
+  public boolean enthaelt(Zeitraum);
+  public java.lang.String toString();
+  public java.lang.String toString(java.text.DateFormat);
+}

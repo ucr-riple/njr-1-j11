@@ -1,0 +1,226 @@
+Compiled from "Benchmark.java"
+public class fr.noxx90.jflam.Benchmark {
+  protected int width;
+  protected int height;
+  protected int quality;
+  protected int sampling;
+  protected fr.noxx90.jflam.model.Flame flame;
+  public fr.noxx90.jflam.Benchmark();
+  public void method1();
+  public void method2();
+  public void method3();
+  protected boolean checkResult(java.awt.image.BufferedImage);
+  public static void main(java.lang.String[]);
+}
+Compiled from "FlameLogger.java"
+public class fr.noxx90.jflam.FlameLogger extends com.esotericsoftware.minlog.Log$Logger {
+  public fr.noxx90.jflam.FlameLogger();
+  public void log(int, java.lang.String, java.lang.String, java.lang.Throwable);
+}
+Compiled from "Functions.java"
+public class fr.noxx90.jflam.Functions {
+  public static final fr.noxx90.jflam.model.Function LINEAR;
+  public static final fr.noxx90.jflam.model.Function SINUSOIDAL;
+  public static final fr.noxx90.jflam.model.Function SPHERICAL;
+  public static final fr.noxx90.jflam.model.Function SWIRL;
+  public fr.noxx90.jflam.Functions();
+  static {};
+}
+Compiled from "JFlamMain.java"
+public class fr.noxx90.jflam.JFlamMain {
+  public fr.noxx90.jflam.JFlamMain();
+  public static void main(java.lang.String[]) throws java.lang.InterruptedException;
+}
+Compiled from "JFlamMain.java"
+final class fr.noxx90.jflam.JFlamMain$1 extends javax.swing.JPanel {
+  final java.awt.image.BufferedImage val$image;
+  fr.noxx90.jflam.JFlamMain$1(java.awt.image.BufferedImage);
+  public void paint(java.awt.Graphics);
+}
+Compiled from "Linear.java"
+public class fr.noxx90.jflam.functions.Linear extends fr.noxx90.jflam.model.Function {
+  public fr.noxx90.jflam.functions.Linear();
+  protected java.awt.geom.Point2D$Float doCompute(float, float);
+}
+Compiled from "Sinusoidal.java"
+public class fr.noxx90.jflam.functions.Sinusoidal extends fr.noxx90.jflam.model.Function {
+  public fr.noxx90.jflam.functions.Sinusoidal();
+  protected java.awt.geom.Point2D$Float doCompute(float, float);
+}
+Compiled from "Spherical.java"
+public class fr.noxx90.jflam.functions.Spherical extends fr.noxx90.jflam.model.Function {
+  public fr.noxx90.jflam.functions.Spherical();
+  protected java.awt.geom.Point2D$Float doCompute(float, float);
+}
+Compiled from "Swirl.java"
+public class fr.noxx90.jflam.functions.Swirl extends fr.noxx90.jflam.model.Function {
+  public fr.noxx90.jflam.functions.Swirl();
+  protected java.awt.geom.Point2D$Float doCompute(float, float);
+}
+Compiled from "JFlamGui.java"
+public class fr.noxx90.jflam.gui.JFlamGui implements org.apache.pivot.wtk.Application {
+  public fr.noxx90.jflam.gui.JFlamGui();
+  public void resume() throws java.lang.Exception;
+  public boolean shutdown(boolean) throws java.lang.Exception;
+  public void startup(org.apache.pivot.wtk.Display, org.apache.pivot.collections.Map<java.lang.String, java.lang.String>) throws java.lang.Exception;
+  public void suspend() throws java.lang.Exception;
+  public static void main(java.lang.String[]);
+}
+Compiled from "Flame.java"
+public class fr.noxx90.jflam.model.Flame {
+  protected java.util.Map<java.lang.String, fr.noxx90.jflam.model.Form> forms;
+  public fr.noxx90.jflam.model.Flame();
+  public void add(java.lang.String, fr.noxx90.jflam.model.Form);
+  public void remove(java.lang.String);
+  public void clear();
+  public java.util.Map<java.lang.String, fr.noxx90.jflam.model.Form> getForms();
+  public java.awt.image.BufferedImage render(fr.noxx90.jflam.renderer.FlameRenderer, int, int, int, int);
+}
+Compiled from "Form.java"
+public class fr.noxx90.jflam.model.Form {
+  protected java.lang.String name;
+  protected float a;
+  protected float b;
+  protected float c;
+  protected float d;
+  protected float e;
+  protected float f;
+  protected float weight;
+  protected java.util.Map<fr.noxx90.jflam.model.Function, java.lang.Float> functions;
+  protected java.awt.Color color;
+  public fr.noxx90.jflam.model.Form(float, float, float, float, float, float, float, java.awt.Color);
+  public fr.noxx90.jflam.model.Form(fr.noxx90.jflam.model.Triangle, float, java.awt.Color);
+  public void compute(java.awt.geom.Point2D$Float);
+  public float getA();
+  public void setA(float);
+  public float getB();
+  public void setB(float);
+  public float getC();
+  public void setC(float);
+  public float getD();
+  public void setD(float);
+  public float getE();
+  public void setE(float);
+  public float getF();
+  public void setF(float);
+  public float getWeight();
+  public java.util.Map<fr.noxx90.jflam.model.Function, java.lang.Float> getFunctions();
+  public void add(fr.noxx90.jflam.model.Function);
+  public void add(fr.noxx90.jflam.model.Function, float);
+  public void remove(fr.noxx90.jflam.model.Function);
+  public java.lang.String toString();
+  public java.lang.String getName();
+  public void setName(java.lang.String);
+  public java.awt.Color getColor();
+  public void setByTriangle(fr.noxx90.jflam.model.Triangle);
+}
+Compiled from "Function.java"
+public abstract class fr.noxx90.jflam.model.Function {
+  public fr.noxx90.jflam.model.Function();
+  public java.awt.geom.Point2D$Float compute(fr.noxx90.jflam.model.Form, float, float);
+  protected abstract java.awt.geom.Point2D$Float doCompute(float, float);
+  public float computeR(float, float);
+  public float computeR2(float, float);
+  public float computeTheta(float, float);
+  public float computePsi(float, float);
+}
+Compiled from "Histogram.java"
+public interface fr.noxx90.jflam.model.Histogram {
+  public abstract int getFrequency(int, int);
+  public abstract int getFrequencyMax();
+  public abstract java.awt.Color getColor(int, int);
+  public abstract void putColor(int, int, java.awt.Color);
+  public abstract int getWidth();
+  public abstract int getHeight();
+}
+Compiled from "Triangle.java"
+public class fr.noxx90.jflam.model.Triangle {
+  protected java.awt.geom.Point2D$Float o;
+  protected java.awt.geom.Point2D$Float x;
+  protected java.awt.geom.Point2D$Float y;
+  public fr.noxx90.jflam.model.Triangle(float, float, float, float, float, float);
+  public java.awt.geom.Point2D$Float getO();
+  public java.awt.geom.Point2D$Float getX();
+  public java.awt.geom.Point2D$Float getY();
+}
+Compiled from "InMemoryHistogram.java"
+public class fr.noxx90.jflam.model.impl.InMemoryHistogram implements fr.noxx90.jflam.model.Histogram {
+  protected int width;
+  protected int height;
+  protected int frequencyMax;
+  protected int[][] frequencies;
+  protected java.awt.Color[][] colors;
+  public fr.noxx90.jflam.model.impl.InMemoryHistogram(int, int);
+  public int getFrequency(int, int);
+  public java.awt.Color getColor(int, int);
+  public synchronized void putColor(int, int, java.awt.Color);
+  public int getWidth();
+  public int getHeight();
+  public int getFrequencyMax();
+}
+Compiled from "FlameRenderer.java"
+public class fr.noxx90.jflam.renderer.FlameRenderer {
+  protected fr.noxx90.jflam.renderer.HistogramRenderer histogramRenderer;
+  protected fr.noxx90.jflam.renderer.ImageRenderer imageRenderer;
+  public fr.noxx90.jflam.renderer.FlameRenderer(fr.noxx90.jflam.renderer.HistogramRenderer, fr.noxx90.jflam.renderer.ImageRenderer);
+  public fr.noxx90.jflam.renderer.HistogramRenderer getHistogramRenderer();
+  public fr.noxx90.jflam.renderer.ImageRenderer getImageRenderer();
+  public java.awt.image.BufferedImage render(fr.noxx90.jflam.model.Flame, int, int, int, int);
+}
+Compiled from "HistogramRenderer.java"
+public abstract class fr.noxx90.jflam.renderer.HistogramRenderer {
+  public fr.noxx90.jflam.renderer.HistogramRenderer();
+  public abstract fr.noxx90.jflam.model.Histogram render(fr.noxx90.jflam.model.Flame, int, int, int, int);
+}
+Compiled from "ImageRenderer.java"
+public abstract class fr.noxx90.jflam.renderer.ImageRenderer {
+  public fr.noxx90.jflam.renderer.ImageRenderer();
+  public abstract java.awt.image.BufferedImage render(fr.noxx90.jflam.model.Histogram);
+}
+Compiled from "DefaultHistogramRenderer.java"
+public class fr.noxx90.jflam.renderer.impl.DefaultHistogramRenderer extends fr.noxx90.jflam.renderer.HistogramRenderer {
+  protected com.google.common.collect.RangeMap<java.lang.Float, fr.noxx90.jflam.model.Form> rangeMap;
+  protected float weightSum;
+  protected float ratio;
+  protected float marginTop;
+  protected float marginLeft;
+  public fr.noxx90.jflam.renderer.impl.DefaultHistogramRenderer();
+  public fr.noxx90.jflam.model.Histogram render(fr.noxx90.jflam.model.Flame, int, int, int, int);
+  protected static float rand();
+  protected java.awt.Color randomColor();
+  protected java.lang.String printColor(java.awt.Color);
+  protected void initializeRangeMap(fr.noxx90.jflam.model.Flame);
+  protected void initializeProjection(fr.noxx90.jflam.model.Histogram);
+  protected fr.noxx90.jflam.model.Form chooseFormByWeight();
+  protected java.awt.Color blendColor(java.awt.Color, java.awt.Color);
+}
+Compiled from "DefaultImageRenderer.java"
+public class fr.noxx90.jflam.renderer.impl.DefaultImageRenderer extends fr.noxx90.jflam.renderer.ImageRenderer {
+  public fr.noxx90.jflam.renderer.impl.DefaultImageRenderer();
+  public java.awt.image.BufferedImage render(fr.noxx90.jflam.model.Histogram);
+  protected java.awt.Color getFinalColor(java.awt.Color, float);
+}
+Compiled from "RendererTask.java"
+public class fr.noxx90.jflam.renderer.impl.RendererTask implements java.lang.Runnable {
+  protected com.google.common.collect.RangeMap<java.lang.Float, fr.noxx90.jflam.model.Form> rangeMap;
+  protected float weightSum;
+  protected float ratio;
+  protected float marginTop;
+  protected float marginLeft;
+  protected fr.noxx90.jflam.model.Histogram histogram;
+  protected int points;
+  protected int width;
+  protected int height;
+  public fr.noxx90.jflam.renderer.impl.RendererTask(com.google.common.collect.RangeMap<java.lang.Float, fr.noxx90.jflam.model.Form>, float, float, float, float, fr.noxx90.jflam.model.Histogram, int, int, int);
+  public void run();
+  protected fr.noxx90.jflam.model.Form chooseFormByWeight();
+  protected java.awt.Color blendColor(java.awt.Color, java.awt.Color);
+  protected static float rand();
+  protected java.lang.String printColor(java.awt.Color);
+}
+Compiled from "ThreadPooledHistogramRenderer.java"
+public class fr.noxx90.jflam.renderer.impl.ThreadPooledHistogramRenderer extends fr.noxx90.jflam.renderer.impl.DefaultHistogramRenderer {
+  protected java.util.concurrent.ThreadPoolExecutor executor;
+  public fr.noxx90.jflam.renderer.impl.ThreadPooledHistogramRenderer(int);
+  public fr.noxx90.jflam.model.Histogram render(fr.noxx90.jflam.model.Flame, int, int, int, int);
+}

@@ -1,0 +1,747 @@
+Compiled from "EEEA1.java"
+public class ee.ea.pkg1.EEEA1 {
+  public ee.ea.pkg1.EEEA1();
+  public static double fitnessTestO(ee.ea.pkg1.PokemonTeam);
+  public static double fitnessTestD(ee.ea.pkg1.PokemonTeam, ee.ea.pkg1.Population);
+  public static double fitnessTestAll(double, double);
+  public static void main(java.lang.String[]);
+}
+Compiled from "Field.java"
+public class ee.ea.pkg1.Field {
+  ee.ea.pkg1.Pokemon p1;
+  ee.ea.pkg1.Pokemon p2;
+  public ee.ea.pkg1.Field(ee.ea.pkg1.Pokemon, ee.ea.pkg1.Pokemon);
+  public void SetRain();
+  public void setSun();
+  public void setSandstorm();
+  public void setHail();
+  public void setSpikes();
+  public void setToxicSpikes();
+  public void setStealthRocks();
+}
+Compiled from "Move.java"
+public interface ee.ea.pkg1.Move {
+  public abstract int recoilDamage(int);
+  public abstract int statBoost();
+  public abstract int statDrop();
+  public abstract int recoverHealth();
+  public abstract double typeModifier();
+  public abstract ee.ea.pkg1.types.Type getType();
+  public abstract java.lang.String showType();
+}
+Compiled from "PassiveMoveFoe.java"
+public interface ee.ea.pkg1.PassiveMoveFoe {
+  public abstract java.lang.String inflictStatus();
+  public abstract java.lang.String inflictSecondaryStatus();
+  public abstract double boostStat();
+  public abstract double reduceStat();
+  public abstract double drainHealth();
+}
+Compiled from "PassiveMoveSelf.java"
+public interface ee.ea.pkg1.PassiveMoveSelf {
+  public abstract int recoverHealth();
+  public abstract double boostStat();
+  public abstract double dropStat();
+  public abstract java.lang.String inflictStatus();
+  public abstract java.lang.String inflictSecondaryStatus();
+}
+Compiled from "Pokemon.java"
+public abstract class ee.ea.pkg1.Pokemon {
+  protected ee.ea.pkg1.types.Type primary;
+  protected ee.ea.pkg1.types.Type secondary;
+  protected int baseHealth;
+  protected int baseDefense;
+  protected int baseAttack;
+  protected int baseSpecialAttack;
+  protected int baseSpecialDefense;
+  protected int baseSpeed;
+  protected double natureAtk;
+  protected double natureDef;
+  protected double natureSpa;
+  protected double natureSdf;
+  protected double natureSpeed;
+  protected int IVHP;
+  protected int IVATK;
+  protected int IVDEF;
+  protected int IVSPA;
+  protected int IVSPD;
+  protected int IVSPEED;
+  protected int EVHP;
+  protected int EVATK;
+  protected int EVDEF;
+  protected int EVSPA;
+  protected int EVSDF;
+  protected int EVSPEED;
+  protected double statBoostATK;
+  protected double statBoostDEF;
+  protected double statBoostSPA;
+  protected double statBoostSDF;
+  protected double statBoostSPEED;
+  protected int level;
+  protected int finalAtk;
+  protected int finalDef;
+  protected int finalSpa;
+  protected int finalSdf;
+  protected int finalHp;
+  protected int finalSpeed;
+  protected java.lang.String name;
+  protected java.lang.String status;
+  protected java.lang.String type1;
+  protected java.lang.String type2;
+  protected java.util.ArrayList<java.lang.String> potentials;
+  protected java.util.ArrayList<java.lang.String> circumvent;
+  protected java.util.HashMap<java.lang.String, ee.ea.pkg1.Move> moveLibrary;
+  protected java.util.HashMap<java.lang.String, ee.ea.pkg1.Move> battleReady;
+  public ee.ea.pkg1.Pokemon();
+  public int showHP();
+  public int showAtk();
+  public int showDef();
+  public int showSpa();
+  public int showSdf();
+  public int showSpeed();
+  public int showLevel();
+  public void takeDamage(int);
+  public java.lang.String showName();
+  public java.lang.String showStatus();
+  public ee.ea.pkg1.types.Type getType1();
+  public ee.ea.pkg1.types.Type getType2();
+  public java.lang.String showType1();
+  public java.lang.String showType2();
+  public ee.ea.pkg1.Move getMove(java.lang.String);
+  public ee.ea.pkg1.Move getMove(int);
+  public java.util.ArrayList<java.lang.String> getPotentials();
+  public java.util.ArrayList<java.lang.String> getCircumvent();
+}
+Compiled from "PokemonMoveset.java"
+public class ee.ea.pkg1.PokemonMoveset extends javax.swing.JApplet {
+  public ee.ea.pkg1.PokemonMoveset();
+  public static java.util.HashMap<java.lang.String, ee.ea.pkg1.Move> moveLibrary();
+  public void init();
+  static void access$000(ee.ea.pkg1.PokemonMoveset);
+  static void access$100(ee.ea.pkg1.PokemonMoveset, java.awt.event.ActionEvent);
+}
+Compiled from "PokemonMoveset.java"
+class ee.ea.pkg1.PokemonMoveset$1 implements java.lang.Runnable {
+  final ee.ea.pkg1.PokemonMoveset this$0;
+  ee.ea.pkg1.PokemonMoveset$1(ee.ea.pkg1.PokemonMoveset);
+  public void run();
+}
+Compiled from "PokemonMoveset.java"
+class ee.ea.pkg1.PokemonMoveset$2 implements java.awt.event.ActionListener {
+  final ee.ea.pkg1.PokemonMoveset this$0;
+  ee.ea.pkg1.PokemonMoveset$2(ee.ea.pkg1.PokemonMoveset);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "PokemonTeam.java"
+public class ee.ea.pkg1.PokemonTeam {
+  public ee.ea.pkg1.PokemonTeam();
+  public ee.ea.pkg1.Pokemon getMember(int);
+  public int getMoveResistances();
+  public int getMoveNeutrals();
+  public int getMoveSuperEffectives();
+  public int getMoveImmunities();
+  public double getFitness();
+  public int getRankFitness();
+  public java.util.ArrayList<ee.ea.pkg1.Pokemon> getTeam();
+  public void modifyMoveResistances(int);
+  public void modifyMoveNeutrals(int);
+  public void modifyMoveSuperEffectives(int);
+  public void modifyMoveImmunities(int);
+  public void modifyFitness(double);
+  public void modifyPairings();
+  public void modifyPairings(ee.ea.pkg1.PokemonTeam);
+  public void reset();
+  public void modifyFitnessRank(int);
+  public void removeAll();
+  public void removeAll2();
+  public static java.util.HashMap<java.lang.String, ee.ea.pkg1.Pokemon> pokeLibrary();
+}
+Compiled from "Population.java"
+public class ee.ea.pkg1.Population {
+  public ee.ea.pkg1.Population(int);
+  public java.util.ArrayList<ee.ea.pkg1.PokemonTeam> getPopulation();
+  public void makeEven();
+  public void setNew(ee.ea.pkg1.Population);
+  public void sort();
+  public void cutWeak();
+  public void cutWeak2();
+  public void mutate();
+  public void reproduce0(ee.ea.pkg1.PokemonTeam, ee.ea.pkg1.PokemonTeam, int);
+  public void reproduce(ee.ea.pkg1.PokemonTeam, ee.ea.pkg1.PokemonTeam, int);
+  public java.util.ArrayList<ee.ea.pkg1.PokemonTeam> getCMember();
+  public void assignFitnessRank();
+  public void clearPop();
+  public void clearPop2();
+  public void addInChildren();
+  public void createNextGen();
+}
+Compiled from "SpecialAttackingMove.java"
+public interface ee.ea.pkg1.SpecialAttackingMove extends ee.ea.pkg1.Move {
+  public abstract int recoilDamage(int);
+  public abstract int statBoost();
+  public abstract int statDrop();
+  public abstract int recoverHealth();
+  public abstract double typeModifier();
+}
+Compiled from "SpecifiedPhysical.java"
+public abstract class ee.ea.pkg1.SpecifiedPhysical implements ee.ea.pkg1.physicalAttackingMove {
+  protected ee.ea.pkg1.types.Type primary;
+  protected int basepower;
+  protected java.lang.String type;
+  protected int accuracy;
+  protected java.lang.String name;
+  public ee.ea.pkg1.SpecifiedPhysical();
+  public boolean hits();
+  public boolean criticalHit();
+  public int inflictPhysicalDamage(int, int, int, double, double, int, int);
+  public java.lang.String showType();
+  public ee.ea.pkg1.types.Type getType();
+  public java.lang.String showNmae();
+}
+Compiled from "SpecifiedSpecial.java"
+public abstract class ee.ea.pkg1.SpecifiedSpecial implements ee.ea.pkg1.SpecialAttackingMove {
+  protected ee.ea.pkg1.types.Type primary;
+  protected int basepower;
+  protected int accuracy;
+  protected java.lang.String type;
+  protected java.lang.String name;
+  public ee.ea.pkg1.SpecifiedSpecial();
+  public boolean hits();
+  public boolean criticalHit();
+  public int inflictSpecialDamage(int, int, int, double, double, int, int);
+  public java.lang.String showType();
+  public ee.ea.pkg1.types.Type getType();
+  public java.lang.String showName();
+}
+Compiled from "Status.java"
+public interface ee.ea.pkg1.Status {
+  public abstract int sampleMethod(int);
+}
+Compiled from "AirSlash.java"
+public class ee.ea.pkg1.moves.AirSlash extends ee.ea.pkg1.SpecifiedSpecial {
+  public ee.ea.pkg1.moves.AirSlash();
+  public int recoilDamage(int);
+  public int statBoost();
+  public int statDrop();
+  public int recoverHealth();
+  public double typeModifier();
+}
+Compiled from "AuraSphere.java"
+public class ee.ea.pkg1.moves.AuraSphere extends ee.ea.pkg1.SpecifiedSpecial {
+  public ee.ea.pkg1.moves.AuraSphere();
+  public int recoilDamage(int);
+  public int statBoost();
+  public int statDrop();
+  public int recoverHealth();
+  public double typeModifier();
+}
+Compiled from "Blizzard.java"
+public class ee.ea.pkg1.moves.Blizzard extends ee.ea.pkg1.SpecifiedSpecial {
+  public ee.ea.pkg1.moves.Blizzard();
+  public int recoilDamage(int);
+  public int statBoost();
+  public int statDrop();
+  public int recoverHealth();
+  public double typeModifier();
+}
+Compiled from "BlueFlare.java"
+public class ee.ea.pkg1.moves.BlueFlare extends ee.ea.pkg1.SpecifiedSpecial {
+  public ee.ea.pkg1.moves.BlueFlare();
+  public int recoilDamage(int);
+  public int statBoost();
+  public int statDrop();
+  public int recoverHealth();
+  public double typeModifier();
+}
+Compiled from "BoltStrike.java"
+public class ee.ea.pkg1.moves.BoltStrike extends ee.ea.pkg1.SpecifiedPhysical {
+  public ee.ea.pkg1.moves.BoltStrike();
+  public int recoilDamage(int);
+  public int statBoost();
+  public int statDrop();
+  public int recoverHealth();
+  public double typeModifier();
+}
+Compiled from "DarkPulse.java"
+public class ee.ea.pkg1.moves.DarkPulse extends ee.ea.pkg1.SpecifiedSpecial {
+  public ee.ea.pkg1.moves.DarkPulse();
+  public int recoilDamage(int);
+  public int statBoost();
+  public int statDrop();
+  public int recoverHealth();
+  public double typeModifier();
+}
+Compiled from "DracoMeteor.java"
+public class ee.ea.pkg1.moves.DracoMeteor extends ee.ea.pkg1.SpecifiedSpecial {
+  public ee.ea.pkg1.moves.DracoMeteor();
+  public int recoilDamage(int);
+  public int statBoost();
+  public int statDrop();
+  public int recoverHealth();
+  public double typeModifier();
+}
+Compiled from "DragonClaw.java"
+public class ee.ea.pkg1.moves.DragonClaw extends ee.ea.pkg1.SpecifiedPhysical {
+  public ee.ea.pkg1.moves.DragonClaw();
+  public int recoilDamage(int);
+  public int statBoost();
+  public int statDrop();
+  public int recoverHealth();
+  public double typeModifier();
+}
+Compiled from "DragonPulse.java"
+public class ee.ea.pkg1.moves.DragonPulse extends ee.ea.pkg1.SpecifiedSpecial {
+  public ee.ea.pkg1.moves.DragonPulse();
+  public int recoilDamage(int);
+  public int statBoost();
+  public int statDrop();
+  public int recoverHealth();
+  public double typeModifier();
+}
+Compiled from "EarthPower.java"
+public class ee.ea.pkg1.moves.EarthPower extends ee.ea.pkg1.SpecifiedSpecial {
+  public ee.ea.pkg1.moves.EarthPower();
+  public int recoilDamage(int);
+  public int statBoost();
+  public int statDrop();
+  public int recoverHealth();
+  public double typeModifier();
+}
+Compiled from "Earthquake.java"
+public class ee.ea.pkg1.moves.Earthquake extends ee.ea.pkg1.SpecifiedPhysical {
+  public ee.ea.pkg1.moves.Earthquake();
+  public int recoilDamage(int);
+  public int statBoost();
+  public int statDrop();
+  public int recoverHealth();
+  public double typeModifier();
+}
+Compiled from "ExtremeSpeed.java"
+public class ee.ea.pkg1.moves.ExtremeSpeed extends ee.ea.pkg1.SpecifiedPhysical {
+  public ee.ea.pkg1.moves.ExtremeSpeed();
+  public int recoilDamage(int);
+  public int statBoost();
+  public int statDrop();
+  public int recoverHealth();
+  public double typeModifier();
+}
+Compiled from "FireBlast.java"
+public class ee.ea.pkg1.moves.FireBlast extends ee.ea.pkg1.SpecifiedSpecial {
+  public ee.ea.pkg1.moves.FireBlast();
+  public int recoilDamage(int);
+  public int statBoost();
+  public int statDrop();
+  public int recoverHealth();
+  public double typeModifier();
+}
+Compiled from "FirePunch.java"
+public class ee.ea.pkg1.moves.FirePunch extends ee.ea.pkg1.SpecifiedPhysical {
+  public ee.ea.pkg1.moves.FirePunch();
+  public int recoilDamage(int);
+  public int statBoost();
+  public int statDrop();
+  public int recoverHealth();
+  public double typeModifier();
+}
+Compiled from "FocusBlast.java"
+public class ee.ea.pkg1.moves.FocusBlast extends ee.ea.pkg1.SpecifiedSpecial {
+  public ee.ea.pkg1.moves.FocusBlast();
+  public int recoilDamage(int);
+  public int statBoost();
+  public int statDrop();
+  public int recoverHealth();
+  public double typeModifier();
+}
+Compiled from "FusionFlare.java"
+public class ee.ea.pkg1.moves.FusionFlare extends ee.ea.pkg1.SpecifiedSpecial {
+  public ee.ea.pkg1.moves.FusionFlare();
+  public int recoilDamage(int);
+  public int statBoost();
+  public int statDrop();
+  public int recoverHealth();
+  public double typeModifier();
+}
+Compiled from "HiddenPowerFire.java"
+public class ee.ea.pkg1.moves.HiddenPowerFire extends ee.ea.pkg1.SpecifiedSpecial {
+  public ee.ea.pkg1.moves.HiddenPowerFire();
+  public int recoilDamage(int);
+  public int statBoost();
+  public int statDrop();
+  public int recoverHealth();
+  public double typeModifier();
+}
+Compiled from "HiddenPowerIce.java"
+public class ee.ea.pkg1.moves.HiddenPowerIce extends ee.ea.pkg1.SpecifiedSpecial {
+  public ee.ea.pkg1.moves.HiddenPowerIce();
+  public int recoilDamage(int);
+  public int statBoost();
+  public int statDrop();
+  public int recoverHealth();
+  public double typeModifier();
+}
+Compiled from "Hurricane.java"
+public class ee.ea.pkg1.moves.Hurricane extends ee.ea.pkg1.SpecifiedSpecial {
+  public ee.ea.pkg1.moves.Hurricane();
+  public int recoilDamage(int);
+  public int statBoost();
+  public int statDrop();
+  public int recoverHealth();
+  public double typeModifier();
+}
+Compiled from "HydroPump.java"
+public class ee.ea.pkg1.moves.HydroPump extends ee.ea.pkg1.SpecifiedSpecial {
+  public ee.ea.pkg1.moves.HydroPump();
+  public int recoilDamage(int);
+  public int statBoost();
+  public int statDrop();
+  public int recoverHealth();
+  public double typeModifier();
+}
+Compiled from "IceBeam.java"
+public class ee.ea.pkg1.moves.IceBeam extends ee.ea.pkg1.SpecifiedSpecial {
+  public ee.ea.pkg1.moves.IceBeam();
+  public int recoilDamage(int);
+  public int statBoost();
+  public int statDrop();
+  public int recoverHealth();
+  public double typeModifier();
+}
+Compiled from "Inferno.java"
+public class ee.ea.pkg1.moves.Inferno extends ee.ea.pkg1.SpecifiedSpecial {
+  public ee.ea.pkg1.moves.Inferno();
+  public int recoilDamage(int);
+  public int statBoost();
+  public int statDrop();
+  public int recoverHealth();
+  public double typeModifier();
+}
+Compiled from "LeafStorm.java"
+public class ee.ea.pkg1.moves.LeafStorm extends ee.ea.pkg1.SpecifiedSpecial {
+  public ee.ea.pkg1.moves.LeafStorm();
+  public int recoilDamage(int);
+  public int statBoost();
+  public int statDrop();
+  public int recoverHealth();
+  public double typeModifier();
+}
+Compiled from "Outrage.java"
+public class ee.ea.pkg1.moves.Outrage extends ee.ea.pkg1.SpecifiedPhysical {
+  public ee.ea.pkg1.moves.Outrage();
+  public int recoilDamage(int);
+  public int statBoost();
+  public int statDrop();
+  public int recoverHealth();
+  public double typeModifier();
+}
+Compiled from "OverHeat.java"
+public class ee.ea.pkg1.moves.OverHeat extends ee.ea.pkg1.SpecifiedSpecial {
+  public ee.ea.pkg1.moves.OverHeat();
+  public int recoilDamage(int);
+  public int statBoost();
+  public int statDrop();
+  public int recoverHealth();
+  public double typeModifier();
+}
+Compiled from "PsychoBoost.java"
+public class ee.ea.pkg1.moves.PsychoBoost extends ee.ea.pkg1.SpecifiedSpecial {
+  public ee.ea.pkg1.moves.PsychoBoost();
+  public int recoilDamage(int);
+  public int statBoost();
+  public int statDrop();
+  public int recoverHealth();
+  public double typeModifier();
+}
+Compiled from "Psystrike.java"
+public class ee.ea.pkg1.moves.Psystrike extends ee.ea.pkg1.SpecifiedSpecial {
+  public ee.ea.pkg1.moves.Psystrike();
+  public int recoilDamage(int);
+  public int statBoost();
+  public int statDrop();
+  public int recoverHealth();
+  public double typeModifier();
+}
+Compiled from "Scald.java"
+public class ee.ea.pkg1.moves.Scald extends ee.ea.pkg1.SpecifiedSpecial {
+  public ee.ea.pkg1.moves.Scald();
+  public int recoilDamage(int);
+  public int statBoost();
+  public int statDrop();
+  public int recoverHealth();
+  public double typeModifier();
+}
+Compiled from "SeedFlare.java"
+public class ee.ea.pkg1.moves.SeedFlare extends ee.ea.pkg1.SpecifiedSpecial {
+  public ee.ea.pkg1.moves.SeedFlare();
+  public int recoilDamage(int);
+  public int statBoost();
+  public int statDrop();
+  public int recoverHealth();
+  public double typeModifier();
+}
+Compiled from "ShadowBall.java"
+public class ee.ea.pkg1.moves.ShadowBall extends ee.ea.pkg1.SpecifiedSpecial {
+  public ee.ea.pkg1.moves.ShadowBall();
+  public int recoilDamage(int);
+  public int statBoost();
+  public int statDrop();
+  public int recoverHealth();
+  public double typeModifier();
+}
+Compiled from "ShadowSneak.java"
+public class ee.ea.pkg1.moves.ShadowSneak extends ee.ea.pkg1.SpecifiedPhysical {
+  public ee.ea.pkg1.moves.ShadowSneak();
+  public int recoilDamage(int);
+  public int statBoost();
+  public int statDrop();
+  public int recoverHealth();
+  public double typeModifier();
+}
+Compiled from "SolarBeam.java"
+public class ee.ea.pkg1.moves.SolarBeam extends ee.ea.pkg1.SpecifiedSpecial {
+  public ee.ea.pkg1.moves.SolarBeam();
+  public int recoilDamage(int);
+  public int statBoost();
+  public int statDrop();
+  public int recoverHealth();
+  public double typeModifier();
+}
+Compiled from "StoneEdge.java"
+public class ee.ea.pkg1.moves.StoneEdge extends ee.ea.pkg1.SpecifiedPhysical {
+  public ee.ea.pkg1.moves.StoneEdge();
+  public int recoilDamage(int);
+  public int statBoost();
+  public int statDrop();
+  public int recoverHealth();
+  public double typeModifier();
+}
+Compiled from "SuperPower.java"
+public class ee.ea.pkg1.moves.SuperPower extends ee.ea.pkg1.SpecifiedPhysical {
+  public ee.ea.pkg1.moves.SuperPower();
+  public int recoilDamage(int);
+  public int statBoost();
+  public int statDrop();
+  public int recoverHealth();
+  public double typeModifier();
+}
+Compiled from "Surf.java"
+public class ee.ea.pkg1.moves.Surf extends ee.ea.pkg1.SpecifiedSpecial {
+  public ee.ea.pkg1.moves.Surf();
+  public int recoilDamage(int);
+  public int statBoost();
+  public int statDrop();
+  public int recoverHealth();
+  public double typeModifier();
+}
+Compiled from "Thunder.java"
+public class ee.ea.pkg1.moves.Thunder extends ee.ea.pkg1.SpecifiedSpecial {
+  public ee.ea.pkg1.moves.Thunder();
+  public int recoilDamage(int);
+  public int statBoost();
+  public int statDrop();
+  public int recoverHealth();
+  public double typeModifier();
+}
+Compiled from "ThunderBolt.java"
+public class ee.ea.pkg1.moves.ThunderBolt extends ee.ea.pkg1.SpecifiedSpecial {
+  public ee.ea.pkg1.moves.ThunderBolt();
+  public int recoilDamage(int);
+  public int statBoost();
+  public int statDrop();
+  public int recoverHealth();
+  public double typeModifier();
+}
+Compiled from "UTurn.java"
+public class ee.ea.pkg1.moves.UTurn extends ee.ea.pkg1.SpecifiedPhysical {
+  public ee.ea.pkg1.moves.UTurn();
+  public int recoilDamage(int);
+  public int statBoost();
+  public int statDrop();
+  public int recoverHealth();
+  public double typeModifier();
+}
+Compiled from "VCreate.java"
+public class ee.ea.pkg1.moves.VCreate extends ee.ea.pkg1.SpecifiedPhysical {
+  public ee.ea.pkg1.moves.VCreate();
+  public int recoilDamage(int);
+  public int statBoost();
+  public int statDrop();
+  public int recoverHealth();
+  public double typeModifier();
+}
+Compiled from "ZenHeadbutt.java"
+public class ee.ea.pkg1.moves.ZenHeadbutt extends ee.ea.pkg1.SpecifiedPhysical {
+  public ee.ea.pkg1.moves.ZenHeadbutt();
+  public int recoilDamage(int);
+  public int statBoost();
+  public int statDrop();
+  public int recoverHealth();
+  public double typeModifier();
+}
+Compiled from "PhysicalAttackingMove.java"
+interface ee.ea.pkg1.physicalAttackingMove extends ee.ea.pkg1.Move {
+  public abstract int recoilDamage(int);
+  public abstract int statBoost();
+  public abstract int statDrop();
+  public abstract int recoverHealth();
+  public abstract double typeModifier();
+}
+Compiled from "Darkrai.java"
+public class ee.ea.pkg1.pokemon.Darkrai extends ee.ea.pkg1.Pokemon {
+  public ee.ea.pkg1.pokemon.Darkrai();
+  public ee.ea.pkg1.pokemon.Darkrai(int, int, int, int, int, int, int, int, int, int, int, int, double, double, double, double, double);
+}
+Compiled from "DeoxysA.java"
+public class ee.ea.pkg1.pokemon.DeoxysA extends ee.ea.pkg1.Pokemon {
+  public ee.ea.pkg1.pokemon.DeoxysA();
+  public ee.ea.pkg1.pokemon.DeoxysA(int, int, int, int, int, int, int, int, int, int, int, int, double, double, double, double, double);
+}
+Compiled from "GiratinaO.java"
+public class ee.ea.pkg1.pokemon.GiratinaO extends ee.ea.pkg1.Pokemon {
+  public ee.ea.pkg1.pokemon.GiratinaO();
+  public ee.ea.pkg1.pokemon.GiratinaO(int, int, int, int, int, int, int, int, int, int, int, int, double, double, double, double, double);
+}
+Compiled from "Groundon.java"
+public class ee.ea.pkg1.pokemon.Groundon extends ee.ea.pkg1.Pokemon {
+  public ee.ea.pkg1.pokemon.Groundon();
+  public ee.ea.pkg1.pokemon.Groundon(int, int, int, int, int, int, int, int, int, int, int, int, double, double, double, double, double);
+}
+Compiled from "Kyogre.java"
+public class ee.ea.pkg1.pokemon.Kyogre extends ee.ea.pkg1.Pokemon {
+  public ee.ea.pkg1.pokemon.Kyogre();
+  public ee.ea.pkg1.pokemon.Kyogre(int, int, int, int, int, int, int, int, int, int, int, int, double, double, double, double, double);
+}
+Compiled from "KyuremW.java"
+public class ee.ea.pkg1.pokemon.KyuremW extends ee.ea.pkg1.Pokemon {
+  public ee.ea.pkg1.pokemon.KyuremW();
+  public ee.ea.pkg1.pokemon.KyuremW(int, int, int, int, int, int, int, int, int, int, int, int, double, double, double, double, double);
+}
+Compiled from "Mewtwo.java"
+public class ee.ea.pkg1.pokemon.Mewtwo extends ee.ea.pkg1.Pokemon {
+  public ee.ea.pkg1.pokemon.Mewtwo();
+  public ee.ea.pkg1.pokemon.Mewtwo(int, int, int, int, int, int, int, int, int, int, int, int, double, double, double, double, double);
+}
+Compiled from "Rayquaza.java"
+public class ee.ea.pkg1.pokemon.Rayquaza extends ee.ea.pkg1.Pokemon {
+  public ee.ea.pkg1.pokemon.Rayquaza();
+  public ee.ea.pkg1.pokemon.Rayquaza(int, int, int, int, int, int, int, int, int, int, int, int, double, double, double, double, double);
+}
+Compiled from "ShayminS.java"
+public class ee.ea.pkg1.pokemon.ShayminS extends ee.ea.pkg1.Pokemon {
+  public ee.ea.pkg1.pokemon.ShayminS();
+  public ee.ea.pkg1.pokemon.ShayminS(int, int, int, int, int, int, int, int, int, int, int, int, double, double, double, double, double);
+}
+Compiled from "Victini.java"
+public class ee.ea.pkg1.pokemon.Victini extends ee.ea.pkg1.Pokemon {
+  public ee.ea.pkg1.pokemon.Victini();
+  public ee.ea.pkg1.pokemon.Victini(int, int, int, int, int, int, int, int, int, int, int, int, double, double, double, double, double);
+}
+Compiled from "Bug.java"
+public class ee.ea.pkg1.types.Bug extends ee.ea.pkg1.types.Type {
+  public ee.ea.pkg1.types.Bug();
+  public ee.ea.pkg1.types.Bug(int);
+}
+Compiled from "Dark.java"
+public class ee.ea.pkg1.types.Dark extends ee.ea.pkg1.types.Type {
+  public ee.ea.pkg1.types.Dark();
+  public ee.ea.pkg1.types.Dark(int);
+}
+Compiled from "Dragon.java"
+public class ee.ea.pkg1.types.Dragon extends ee.ea.pkg1.types.Type {
+  public ee.ea.pkg1.types.Dragon();
+  public ee.ea.pkg1.types.Dragon(int);
+}
+Compiled from "Electric.java"
+public class ee.ea.pkg1.types.Electric extends ee.ea.pkg1.types.Type {
+  public ee.ea.pkg1.types.Electric();
+  public ee.ea.pkg1.types.Electric(int);
+}
+Compiled from "Fighting.java"
+public class ee.ea.pkg1.types.Fighting extends ee.ea.pkg1.types.Type {
+  public ee.ea.pkg1.types.Fighting();
+  public ee.ea.pkg1.types.Fighting(int);
+}
+Compiled from "Fire.java"
+public class ee.ea.pkg1.types.Fire extends ee.ea.pkg1.types.Type {
+  public ee.ea.pkg1.types.Fire();
+  public ee.ea.pkg1.types.Fire(int);
+}
+Compiled from "Flying.java"
+public class ee.ea.pkg1.types.Flying extends ee.ea.pkg1.types.Type {
+  public ee.ea.pkg1.types.Flying();
+  public ee.ea.pkg1.types.Flying(int);
+}
+Compiled from "Ghost.java"
+public class ee.ea.pkg1.types.Ghost extends ee.ea.pkg1.types.Type {
+  public ee.ea.pkg1.types.Ghost();
+  public ee.ea.pkg1.types.Ghost(int);
+}
+Compiled from "Grass.java"
+public class ee.ea.pkg1.types.Grass extends ee.ea.pkg1.types.Type {
+  public ee.ea.pkg1.types.Grass();
+  public ee.ea.pkg1.types.Grass(int);
+}
+Compiled from "Ground.java"
+public class ee.ea.pkg1.types.Ground extends ee.ea.pkg1.types.Type {
+  public ee.ea.pkg1.types.Ground();
+  public ee.ea.pkg1.types.Ground(int);
+}
+Compiled from "Ice.java"
+public class ee.ea.pkg1.types.Ice extends ee.ea.pkg1.types.Type {
+  public ee.ea.pkg1.types.Ice();
+  public ee.ea.pkg1.types.Ice(int);
+}
+Compiled from "None.java"
+public class ee.ea.pkg1.types.None extends ee.ea.pkg1.types.Type {
+  public ee.ea.pkg1.types.None();
+}
+Compiled from "Normal.java"
+public class ee.ea.pkg1.types.Normal extends ee.ea.pkg1.types.Type {
+  public ee.ea.pkg1.types.Normal();
+  public ee.ea.pkg1.types.Normal(int);
+}
+Compiled from "Poison.java"
+public class ee.ea.pkg1.types.Poison extends ee.ea.pkg1.types.Type {
+  public ee.ea.pkg1.types.Poison();
+  public ee.ea.pkg1.types.Poison(int);
+}
+Compiled from "Psychic.java"
+public class ee.ea.pkg1.types.Psychic extends ee.ea.pkg1.types.Type {
+  public ee.ea.pkg1.types.Psychic();
+  public ee.ea.pkg1.types.Psychic(int);
+}
+Compiled from "Rock.java"
+public class ee.ea.pkg1.types.Rock extends ee.ea.pkg1.types.Type {
+  public ee.ea.pkg1.types.Rock();
+  public ee.ea.pkg1.types.Rock(int);
+}
+Compiled from "Steel.java"
+public class ee.ea.pkg1.types.Steel extends ee.ea.pkg1.types.Type {
+  public ee.ea.pkg1.types.Steel();
+  public ee.ea.pkg1.types.Steel(int);
+}
+Compiled from "Type.java"
+public abstract class ee.ea.pkg1.types.Type {
+  protected int nothing;
+  protected double typeModifier;
+  protected java.lang.String name;
+  protected ee.ea.pkg1.types.Type[] resistantTypes;
+  protected ee.ea.pkg1.types.Type[] effectiveTypes;
+  protected ee.ea.pkg1.types.Type[] immuneTypes;
+  public ee.ea.pkg1.types.Type();
+  public void superEffective(ee.ea.pkg1.types.Type);
+  public void superEffective(ee.ea.pkg1.types.Type, ee.ea.pkg1.types.Type);
+  public void immune(ee.ea.pkg1.types.Type, ee.ea.pkg1.types.Type);
+  public void resisted(ee.ea.pkg1.types.Type, ee.ea.pkg1.types.Type);
+  public int superEffectiveCounter(ee.ea.pkg1.types.Type);
+  public int superEffectiveCounter(ee.ea.pkg1.types.Type, ee.ea.pkg1.types.Type);
+  public int immuneCounter(ee.ea.pkg1.types.Type, ee.ea.pkg1.types.Type);
+  public int resistedCounter(ee.ea.pkg1.types.Type, ee.ea.pkg1.types.Type);
+  public java.lang.String showType();
+  public boolean equalsTo(java.lang.String);
+  public double getTypeModifier();
+}
+Compiled from "Water.java"
+public class ee.ea.pkg1.types.Water extends ee.ea.pkg1.types.Type {
+  public ee.ea.pkg1.types.Water();
+  public ee.ea.pkg1.types.Water(int);
+}

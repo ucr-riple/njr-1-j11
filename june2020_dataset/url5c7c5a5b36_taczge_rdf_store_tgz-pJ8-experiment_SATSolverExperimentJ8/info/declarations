@@ -1,0 +1,510 @@
+Compiled from "Resource.java"
+public class core.Resource implements query.Token {
+  public static core.Resource of(java.lang.String);
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+  public query.Token apply(query.Substitution);
+  static {};
+}
+Compiled from "Triple.java"
+public class core.Triple {
+  public core.Triple(core.Resource, core.Resource, core.Resource);
+  public core.Triple(java.lang.String, java.lang.String, java.lang.String);
+  public core.Resource getSubject();
+  public core.Resource getPredicate();
+  public core.Resource getObject();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+  public boolean equalsSubject(core.Resource);
+  public boolean equalsPredicate(core.Resource);
+  public boolean equalsObject(core.Resource);
+}
+Compiled from "Triples.java"
+public class core.Triples implements query.QueryTarget,rule.RuleTarget {
+  public core.Triples();
+  public core.Triples(java.util.Collection<core.Triple>);
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+  public void add(core.Triple);
+  public void add(core.Resource, core.Resource, core.Resource);
+  public boolean contains(core.Resource, core.Resource, core.Resource);
+  public java.util.Collection<core.Triple> listXPO(core.Resource, core.Resource);
+  public java.util.Collection<core.Triple> listSXO(core.Resource, core.Resource);
+  public java.util.Collection<core.Triple> listSPX(core.Resource, core.Resource);
+  public java.util.Collection<core.Triple> listSXY(core.Resource);
+  public java.util.Collection<core.Triple> listXPY(core.Resource);
+  public java.util.Collection<core.Triple> listXYO(core.Resource);
+  public java.util.Collection<core.Triple> listSXX(core.Resource);
+  public java.util.Collection<core.Triple> listXPX(core.Resource);
+  public java.util.Collection<core.Triple> listXXO(core.Resource);
+  public java.util.Collection<core.Triple> listXYZ();
+  public java.util.Collection<core.Triple> listXXY();
+  public java.util.Collection<core.Triple> listXYY();
+  public java.util.Collection<core.Triple> listXYX();
+  public java.util.Collection<core.Triple> listXXX();
+  public boolean contains(core.Triple);
+  public void addAll(java.util.Collection<core.Triple>);
+}
+Compiled from "TriplesTest.java"
+public class core.TriplesTest {
+  public core.TriplesTest();
+  public void setUp() throws java.lang.Exception;
+  public void contains_returnTrue() throws java.lang.Exception;
+  public void contains_returnFalse() throws java.lang.Exception;
+  public void contains_returnFalseWhenAnonymousResourceIsGive();
+  public void listXPO_() throws java.lang.Exception;
+  public void listSXO_() throws java.lang.Exception;
+  public void listSPX_() throws java.lang.Exception;
+  public void listSXY() throws java.lang.Exception;
+  public void listXPY() throws java.lang.Exception;
+  public void listXYO() throws java.lang.Exception;
+  public void listSXX() throws java.lang.Exception;
+  public void listXPX() throws java.lang.Exception;
+  public void listXXO() throws java.lang.Exception;
+  static {};
+}
+Compiled from "Main.java"
+public class entry.Main {
+  public entry.Main();
+  public static void main(java.lang.String[]);
+}
+Compiled from "QueryExperiment.java"
+public class experiment.QueryExperiment {
+  public experiment.QueryExperiment();
+  public static query.QueryTarget load();
+  public static void main(java.lang.String[]);
+}
+Compiled from "RuleExperiment.java"
+public class experiment.RuleExperiment {
+  public experiment.RuleExperiment();
+  public static rule.RuleTarget load();
+  public static void main(java.lang.String[]);
+}
+Compiled from "SATSolverExperiment.java"
+public class experiment.SATSolverExperiment {
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "RDFFileReader.java"
+public class io.RDFFileReader implements io.Reader {
+  public io.RDFFileReader();
+  public core.Triples read(java.lang.String);
+}
+Compiled from "Reader.java"
+public interface io.Reader {
+  public abstract core.Triples read(java.lang.String);
+}
+Compiled from "And.java"
+public class logic.And implements logic.Proposition {
+  public logic.And(logic.Proposition, logic.Proposition);
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+  public java.util.Set<core.Triple> toTriples();
+  public java.util.Set<core.Triple> toTriples(logic.ResourceIssuer, core.Resource);
+  public logic.Proposition simplify();
+  public logic.Proposition normalize();
+}
+Compiled from "AndTest.java"
+public class logic.AndTest {
+  public logic.AndTest();
+  public void simplify_();
+  public void simplify_nest();
+  static {};
+}
+Compiled from "Atom.java"
+public class logic.Atom implements logic.Proposition {
+  public logic.Atom(java.lang.String);
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+  public java.util.Set<core.Triple> toTriples();
+  public java.util.Set<core.Triple> toTriples(logic.ResourceIssuer, core.Resource);
+  public logic.Proposition simplify();
+  public logic.Proposition normalize();
+}
+Compiled from "Not.java"
+public class logic.Not implements logic.Proposition {
+  public logic.Not(logic.Proposition);
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+  public java.util.Set<core.Triple> toTriples();
+  public java.util.Set<core.Triple> toTriples(logic.ResourceIssuer, core.Resource);
+  public logic.Proposition simplify();
+  public logic.Proposition normalize();
+}
+Compiled from "NotTest.java"
+public class logic.NotTest {
+  public logic.NotTest();
+  public void simplify_();
+  public void simplify_nest();
+  static {};
+}
+Compiled from "Or.java"
+public class logic.Or implements logic.Proposition {
+  public logic.Or(logic.Proposition, logic.Proposition);
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+  public java.util.Set<core.Triple> toTriples();
+  public java.util.Set<core.Triple> toTriples(logic.ResourceIssuer, core.Resource);
+  public logic.Proposition simplify();
+  public logic.Proposition normalize();
+}
+Compiled from "OrTest.java"
+public class logic.OrTest {
+  public logic.OrTest();
+  public void simplify_();
+  public void simplify_nest();
+  static {};
+}
+Compiled from "PLParser.java"
+public class logic.PLParser {
+  public static final logic.Proposition parse(java.lang.String);
+}
+Compiled from "PLParser.java"
+class logic.PLParser$ParseResult {
+  final logic.Proposition p;
+  final java.lang.String rest;
+  logic.PLParser$ParseResult(logic.Proposition, java.lang.String);
+}
+Compiled from "PLParserTest.java"
+public class logic.PLParserTest {
+  public logic.PLParserTest();
+  public void parse_atom() throws java.lang.Exception;
+  public void parse_not() throws java.lang.Exception;
+  public void parse_and();
+  public void parse_or();
+  public void parse_1() throws java.lang.Exception;
+  public void parse_2() throws java.lang.Exception;
+  public void err_1();
+  public void err_2() throws java.lang.Exception;
+  static {};
+}
+Compiled from "Proposition.java"
+public interface logic.Proposition {
+  public abstract java.util.Set<core.Triple> toTriples(logic.ResourceIssuer, core.Resource);
+  public abstract java.util.Set<core.Triple> toTriples();
+  public abstract logic.Proposition simplify();
+  public abstract logic.Proposition normalize();
+}
+Compiled from "ResourceIssuer.java"
+public interface logic.ResourceIssuer {
+  public abstract core.Resource createFresh();
+}
+Compiled from "ResourceIssuerImpl.java"
+public class logic.ResourceIssuerImpl implements logic.ResourceIssuer {
+  public logic.ResourceIssuerImpl(java.lang.String, int);
+  public logic.ResourceIssuerImpl(java.lang.String);
+  public logic.ResourceIssuerImpl();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public core.Resource createFresh();
+}
+Compiled from "PrimitiveQuery.java"
+public interface query.PrimitiveQuery {
+  public abstract query.Resolution solve(query.QueryTarget);
+  public abstract query.PrimitiveQuery apply(query.Substitution);
+  public abstract core.Triple toTriple();
+}
+Compiled from "Query.java"
+public class query.Query implements rule.Head,rule.Body {
+  public query.Query(java.util.List<query.PrimitiveQuery>);
+  public query.Query(query.PrimitiveQuery...);
+  public query.Resolution solve(query.QueryTarget);
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+  public java.util.Set<core.Triple> apply(query.Resolution);
+}
+Compiled from "QueryParser.java"
+public class query.QueryParser {
+  public query.QueryParser();
+  public static query.Query parse(java.lang.String);
+}
+Compiled from "QueryParserTest.java"
+public class query.QueryParserTest {
+  public query.QueryParserTest();
+  public void setUp() throws java.lang.Exception;
+  public void test();
+  public void parse_blank() throws java.lang.Exception;
+}
+Compiled from "QueryTarget.java"
+public interface query.QueryTarget {
+  public abstract boolean contains(core.Resource, core.Resource, core.Resource);
+  public abstract java.util.Collection<core.Triple> listXPO(core.Resource, core.Resource);
+  public abstract java.util.Collection<core.Triple> listSXO(core.Resource, core.Resource);
+  public abstract java.util.Collection<core.Triple> listSPX(core.Resource, core.Resource);
+  public abstract java.util.Collection<core.Triple> listSXY(core.Resource);
+  public abstract java.util.Collection<core.Triple> listXPY(core.Resource);
+  public abstract java.util.Collection<core.Triple> listXYO(core.Resource);
+  public abstract java.util.Collection<core.Triple> listSXX(core.Resource);
+  public abstract java.util.Collection<core.Triple> listXPX(core.Resource);
+  public abstract java.util.Collection<core.Triple> listXXO(core.Resource);
+  public abstract java.util.Collection<core.Triple> listXYZ();
+  public abstract java.util.Collection<core.Triple> listXXY();
+  public abstract java.util.Collection<core.Triple> listXYY();
+  public abstract java.util.Collection<core.Triple> listXYX();
+  public abstract java.util.Collection<core.Triple> listXXX();
+}
+Compiled from "QueryTest.java"
+public class query.QueryTest {
+  public query.QueryTest();
+  public void setUp() throws java.lang.Exception;
+  public void apply_() throws java.lang.Exception;
+  static {};
+}
+Compiled from "Resolution.java"
+public class query.Resolution implements java.lang.Iterable<query.Substitution> {
+  public static final query.Resolution SUCCESS;
+  public static final query.Resolution FAILURE;
+  public static query.Resolution of(java.util.Set<query.Substitution>);
+  public static query.Resolution createEmpty();
+  public static query.Resolution of(query.Substitution...);
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+  public boolean isEmpty();
+  public int size();
+  public void add(query.Substitution);
+  public void addAll(query.Resolution);
+  public query.Resolution concat(query.Substitution);
+  public query.Resolution concat(query.Resolution);
+  public java.util.Iterator<query.Substitution> iterator();
+  query.Resolution(query.Resolution$1);
+  static {};
+}
+Compiled from "Resolution.java"
+final class query.Resolution$1 extends query.Resolution {
+  query.Resolution$1();
+  public java.lang.String toString();
+}
+Compiled from "Resolution.java"
+final class query.Resolution$2 extends query.Resolution {
+  query.Resolution$2();
+  public java.lang.String toString();
+  public query.Resolution concat(query.Substitution);
+}
+Compiled from "Substitution.java"
+public class query.Substitution {
+  public query.Substitution(java.util.Map<query.Variable, core.Resource>);
+  public query.Substitution();
+  public query.Substitution(query.Variable, core.Resource);
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+  public void put(query.Variable, core.Resource);
+  public boolean contains(query.Variable);
+  public core.Resource getAssignedValue(query.Variable);
+  public int size();
+  public query.Substitution concat(query.Substitution);
+}
+Compiled from "Token.java"
+public interface query.Token {
+  public abstract query.Token apply(query.Substitution);
+}
+Compiled from "Variable.java"
+public class query.Variable implements query.Token {
+  public static query.Variable of(java.lang.String);
+  public query.Variable(java.lang.String);
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+  public query.Token apply(query.Substitution);
+}
+Compiled from "AbstractPrimitiveQuery.java"
+public abstract class query.primitive.AbstractPrimitiveQuery<T1 extends query.Token, T2 extends query.Token, T3 extends query.Token> implements query.PrimitiveQuery {
+  protected final T1 s;
+  protected final T2 p;
+  protected final T3 o;
+  public query.primitive.AbstractPrimitiveQuery(T1, T2, T3);
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+  public abstract query.Resolution solve(query.QueryTarget);
+  public query.PrimitiveQuery apply(query.Substitution);
+  public core.Triple toTriple();
+}
+Compiled from "PrimitiveQueryFactory.java"
+public class query.primitive.PrimitiveQueryFactory {
+  public static query.PrimitiveQuery create(query.Token, query.Token, query.Token);
+  public static query.PrimitiveQuery create(core.Resource, core.Resource, core.Resource);
+  public static query.PrimitiveQuery create(query.Variable, core.Resource, core.Resource);
+  public static query.PrimitiveQuery create(core.Resource, query.Variable, core.Resource);
+  public static query.PrimitiveQuery create(core.Resource, core.Resource, query.Variable);
+  public static query.PrimitiveQuery create(query.Variable, query.Variable, core.Resource);
+  public static query.PrimitiveQuery create(core.Resource, query.Variable, query.Variable);
+  public static query.PrimitiveQuery create(query.Variable, core.Resource, query.Variable);
+  public static query.PrimitiveQuery create(query.Variable, query.Variable, query.Variable);
+}
+Compiled from "PrimitiveQueryParser.java"
+public class query.primitive.PrimitiveQueryParser {
+  public static query.PrimitiveQuery parse(java.lang.String);
+}
+Compiled from "PrimitiveQueryParserTest.java"
+public class query.primitive.PrimitiveQueryParserTest {
+  public query.primitive.PrimitiveQueryParserTest();
+  public void test();
+  public void test_trim();
+}
+Compiled from "SPO.java"
+public class query.primitive.SPO extends query.primitive.AbstractPrimitiveQuery<core.Resource, core.Resource, core.Resource> {
+  public query.primitive.SPO(core.Resource, core.Resource, core.Resource);
+  public query.Resolution solve(query.QueryTarget);
+  public core.Triple toTriple();
+}
+Compiled from "SPX.java"
+public class query.primitive.SPX extends query.primitive.AbstractPrimitiveQuery<core.Resource, core.Resource, query.Variable> {
+  public query.primitive.SPX(core.Resource, core.Resource, query.Variable);
+  public query.Resolution solve(query.QueryTarget);
+}
+Compiled from "SXO.java"
+public class query.primitive.SXO extends query.primitive.AbstractPrimitiveQuery<core.Resource, query.Variable, core.Resource> {
+  public query.primitive.SXO(core.Resource, query.Variable, core.Resource);
+  public query.Resolution solve(query.QueryTarget);
+}
+Compiled from "SXX.java"
+public class query.primitive.SXX extends query.primitive.AbstractPrimitiveQuery<core.Resource, query.Variable, query.Variable> {
+  public query.primitive.SXX(core.Resource, query.Variable, query.Variable);
+  public query.Resolution solve(query.QueryTarget);
+}
+Compiled from "SXY.java"
+public class query.primitive.SXY extends query.primitive.AbstractPrimitiveQuery<core.Resource, query.Variable, query.Variable> {
+  public query.primitive.SXY(core.Resource, query.Variable, query.Variable);
+  public query.Resolution solve(query.QueryTarget);
+}
+Compiled from "XPO.java"
+public class query.primitive.XPO extends query.primitive.AbstractPrimitiveQuery<query.Variable, core.Resource, core.Resource> {
+  public query.primitive.XPO(query.Variable, core.Resource, core.Resource);
+  public query.Resolution solve(query.QueryTarget);
+}
+Compiled from "XPX.java"
+public class query.primitive.XPX extends query.primitive.AbstractPrimitiveQuery<query.Variable, core.Resource, query.Variable> {
+  public query.primitive.XPX(query.Variable, core.Resource, query.Variable);
+  public query.Resolution solve(query.QueryTarget);
+}
+Compiled from "XPY.java"
+public class query.primitive.XPY extends query.primitive.AbstractPrimitiveQuery<query.Variable, core.Resource, query.Variable> {
+  public query.primitive.XPY(query.Variable, core.Resource, query.Variable);
+  public query.Resolution solve(query.QueryTarget);
+}
+Compiled from "XXO.java"
+public class query.primitive.XXO extends query.primitive.AbstractPrimitiveQuery<query.Variable, query.Variable, core.Resource> {
+  public query.primitive.XXO(query.Variable, query.Variable, core.Resource);
+  public query.Resolution solve(query.QueryTarget);
+}
+Compiled from "XXX.java"
+public class query.primitive.XXX extends query.primitive.AbstractPrimitiveQuery<query.Variable, query.Variable, query.Variable> {
+  public query.primitive.XXX(query.Variable, query.Variable, query.Variable);
+  public query.Resolution solve(query.QueryTarget);
+}
+Compiled from "XXY.java"
+public class query.primitive.XXY extends query.primitive.AbstractPrimitiveQuery<query.Variable, query.Variable, query.Variable> {
+  public query.primitive.XXY(query.Variable, query.Variable, query.Variable);
+  public query.Resolution solve(query.QueryTarget);
+}
+Compiled from "XYO.java"
+public class query.primitive.XYO extends query.primitive.AbstractPrimitiveQuery<query.Variable, query.Variable, core.Resource> {
+  public query.primitive.XYO(query.Variable, query.Variable, core.Resource);
+  public query.Resolution solve(query.QueryTarget);
+}
+Compiled from "XYX.java"
+public class query.primitive.XYX extends query.primitive.AbstractPrimitiveQuery<query.Variable, query.Variable, query.Variable> {
+  public query.primitive.XYX(query.Variable, query.Variable, query.Variable);
+  public query.Resolution solve(query.QueryTarget);
+}
+Compiled from "XYY.java"
+public class query.primitive.XYY extends query.primitive.AbstractPrimitiveQuery<query.Variable, query.Variable, query.Variable> {
+  public query.primitive.XYY(query.Variable, query.Variable, query.Variable);
+  public query.Resolution solve(query.QueryTarget);
+}
+Compiled from "XYZ.java"
+public class query.primitive.XYZ extends query.primitive.AbstractPrimitiveQuery<query.Variable, query.Variable, query.Variable> {
+  public query.primitive.XYZ(query.Variable, query.Variable, query.Variable);
+  public query.Resolution solve(query.QueryTarget);
+}
+Compiled from "Body.java"
+public interface rule.Body {
+  public abstract java.util.Set<core.Triple> apply(query.Resolution);
+}
+Compiled from "Head.java"
+public interface rule.Head {
+  public abstract query.Resolution solve(query.QueryTarget);
+}
+Compiled from "Rule.java"
+public class rule.Rule {
+  public rule.Rule(rule.Head, rule.Body);
+  public java.util.Set<core.Triple> apply(rule.RuleTarget);
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+}
+Compiled from "RuleParser.java"
+public class rule.RuleParser {
+  public static rule.Rule parse(java.lang.String);
+}
+Compiled from "RuleParserTest.java"
+public class rule.RuleParserTest {
+  public rule.RuleParserTest();
+  public void setUp() throws java.lang.Exception;
+  public void test();
+}
+Compiled from "RuleTarget.java"
+public interface rule.RuleTarget extends query.QueryTarget {
+  public abstract boolean contains(core.Triple);
+  public abstract void addAll(java.util.Collection<core.Triple>);
+}
+Compiled from "Rules.java"
+public class rule.Rules {
+  public rule.Rules(java.util.Set<rule.Rule>);
+  public rule.Rules(rule.Rule...);
+  public rule.RuleTarget apply(rule.RuleTarget);
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+}
+Compiled from "DecidablePLSATSolver.java"
+public class solver.DecidablePLSATSolver implements solver.PLSATSolver {
+  public solver.DecidablePLSATSolver();
+  public solver.PLSATSolver$Satisfiability check(java.lang.String);
+  static {};
+}
+Compiled from "DecidablePLSATSolverTest.java"
+public class solver.DecidablePLSATSolverTest {
+  public solver.DecidablePLSATSolverTest();
+  public void setUp();
+  public void check_0();
+  public void check_1();
+  public void check_2();
+  public void check_3();
+  public void check_4();
+}
+Compiled from "PLSATSolver.java"
+public interface solver.PLSATSolver {
+  public static final core.Resource ATOM;
+  public static final core.Resource NOT;
+  public static final core.Resource AND;
+  public static final core.Resource OR;
+  public static final core.Resource _0;
+  public static final core.Resource _1;
+  public abstract solver.PLSATSolver$Satisfiability check(java.lang.String);
+  static {};
+}
+Compiled from "PLSATSolver.java"
+public final class solver.PLSATSolver$Satisfiability extends java.lang.Enum<solver.PLSATSolver$Satisfiability> {
+  public static final solver.PLSATSolver$Satisfiability YES;
+  public static final solver.PLSATSolver$Satisfiability NO;
+  public static solver.PLSATSolver$Satisfiability[] values();
+  public static solver.PLSATSolver$Satisfiability valueOf(java.lang.String);
+  static {};
+}
+Compiled from "PLSATSolverImpl.java"
+public class solver.PLSATSolverImpl implements solver.PLSATSolver {
+  public solver.PLSATSolverImpl();
+  public solver.PLSATSolver$Satisfiability check(java.lang.String);
+  static {};
+}

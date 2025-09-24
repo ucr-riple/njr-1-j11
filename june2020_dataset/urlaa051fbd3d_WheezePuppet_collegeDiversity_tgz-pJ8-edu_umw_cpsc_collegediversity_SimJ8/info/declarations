@@ -1,0 +1,177 @@
+Compiled from "Dorm.java"
+public class edu.umw.cpsc.collegediversity.Dorm extends edu.umw.cpsc.collegediversity.Group {
+  public edu.umw.cpsc.collegediversity.Dorm(java.lang.String, boolean, boolean, int);
+  public boolean isFull();
+  public java.lang.String toString();
+  public int getNumRooms();
+  public edu.umw.cpsc.collegediversity.Room getRoomByIndex(int);
+  public boolean isFemaleOnly();
+  public void emptyAllRooms();
+}
+Compiled from "FreshmanFactory.java"
+public final class edu.umw.cpsc.collegediversity.FreshmanFactory implements sim.engine.Steppable {
+  public static synchronized edu.umw.cpsc.collegediversity.FreshmanFactory instance();
+  public void step(sim.engine.SimState);
+}
+Compiled from "FreshmanHousingSelection.java"
+public class edu.umw.cpsc.collegediversity.FreshmanHousingSelection {
+  public static synchronized edu.umw.cpsc.collegediversity.FreshmanHousingSelection instance();
+  public void assign(sim.util.Bag);
+  public void assignByRace(sim.util.Bag);
+}
+Compiled from "Group.java"
+public class edu.umw.cpsc.collegediversity.Group {
+  protected java.util.Hashtable<edu.umw.cpsc.collegediversity.Student, edu.umw.cpsc.collegediversity.Membership> members;
+  public edu.umw.cpsc.collegediversity.Group();
+  public int getId();
+  public edu.umw.cpsc.collegediversity.Membership getMembership(edu.umw.cpsc.collegediversity.Student);
+  public java.util.Enumeration<edu.umw.cpsc.collegediversity.Student> getMembers();
+  void setId(int);
+  public void step();
+  public void addMember(edu.umw.cpsc.collegediversity.Student) throws edu.umw.cpsc.collegediversity.GroupFullException;
+  public void removeMember(edu.umw.cpsc.collegediversity.Student);
+  public void empty();
+  static {};
+}
+Compiled from "GroupFullException.java"
+public class edu.umw.cpsc.collegediversity.GroupFullException extends java.lang.Exception {
+  public edu.umw.cpsc.collegediversity.GroupFullException();
+}
+Compiled from "Membership.java"
+public class edu.umw.cpsc.collegediversity.Membership {
+  public edu.umw.cpsc.collegediversity.Membership(edu.umw.cpsc.collegediversity.Student, edu.umw.cpsc.collegediversity.Group);
+  public double getStrength();
+}
+Compiled from "OrientationGroup.java"
+public class edu.umw.cpsc.collegediversity.OrientationGroup extends edu.umw.cpsc.collegediversity.Group {
+  public edu.umw.cpsc.collegediversity.OrientationGroup(int);
+  public void addMember(edu.umw.cpsc.collegediversity.Student) throws edu.umw.cpsc.collegediversity.GroupFullException;
+}
+Compiled from "Room.java"
+public class edu.umw.cpsc.collegediversity.Room {
+  public edu.umw.cpsc.collegediversity.Room(edu.umw.cpsc.collegediversity.Dorm, int, boolean);
+  public sim.util.Bag getOccupants();
+  public edu.umw.cpsc.collegediversity.Dorm getDorm();
+  public boolean isFull();
+  public boolean isEmpty();
+  public void empty();
+  public void addResidents(edu.umw.cpsc.collegediversity.Student, edu.umw.cpsc.collegediversity.Student);
+  public void addResident(edu.umw.cpsc.collegediversity.Student);
+  public java.lang.String toString();
+  void addOccupant(edu.umw.cpsc.collegediversity.Student);
+  void removeOccupant(edu.umw.cpsc.collegediversity.Student);
+  public int getNumOccupants();
+}
+Compiled from "Sim.java"
+public class edu.umw.cpsc.collegediversity.Sim extends sim.engine.SimState implements sim.engine.Steppable {
+  public static final int NUM_SIM_YEARS;
+  public static final int FRESHMAN_CLASS_SIZE;
+  public static final int OGROUP_SIZE;
+  public static final int CLASS_SIZE;
+  public static final int DORM_ROOM_SIZE;
+  public static final double PROB_MINORITY;
+  public static final int NUM_PERSONALITY_ATTRIBUTES;
+  public static final double PROB_ATTRIBUTE;
+  public static boolean HOUSING_BY_RACE;
+  public static final double PROB_DUAL_MINORITY;
+  public static final java.lang.String OUTPUT_DIRECTORY;
+  public static final double GLOBAL_WEIGHT_RACE;
+  public static final double GLOBAL_WEIGHT_GPA;
+  public static final double GLOBAL_WEIGHT_GRADE;
+  public static final double LOW_PROB_RANDOM_CONNECTION;
+  public static final double HIGH_PROB_RANDOM_CONNECTION;
+  public static final int NUM_ANNUAL_RANDOM_ENCOUNTERS;
+  public static synchronized edu.umw.cpsc.collegediversity.Sim instance();
+  public void addStudents(sim.util.Bag);
+  void removeMe(edu.umw.cpsc.collegediversity.Student);
+  public static void main(java.lang.String[]);
+  public void start();
+  public void step(sim.engine.SimState);
+  public int getYear();
+  public edu.umw.cpsc.collegediversity.Student getRandomStudent();
+  public int getNumStudents();
+  sim.util.Bag getStudents();
+  public void clearOGroups();
+  public void assignOGroup(edu.umw.cpsc.collegediversity.Student);
+  static {};
+}
+Compiled from "Sim.java"
+final class edu.umw.cpsc.collegediversity.Sim$1 implements sim.engine.MakesSimState {
+  edu.umw.cpsc.collegediversity.Sim$1();
+  public sim.engine.SimState newInstance(long, java.lang.String[]);
+  public java.lang.Class simulationClass();
+}
+Compiled from "StatsPrinter.java"
+public class edu.umw.cpsc.collegediversity.StatsPrinter implements sim.engine.Steppable {
+  public static synchronized edu.umw.cpsc.collegediversity.StatsPrinter instance();
+  public void step(sim.engine.SimState);
+}
+Compiled from "Student.java"
+public class edu.umw.cpsc.collegediversity.Student implements sim.engine.Steppable {
+  edu.umw.cpsc.collegediversity.Student(edu.umw.cpsc.collegediversity.Student$Gender, int, double, edu.umw.cpsc.collegediversity.Student$Race);
+  public int getId();
+  public edu.umw.cpsc.collegediversity.Student$Gender getGender();
+  public int getGrade();
+  public double getGpa();
+  public edu.umw.cpsc.collegediversity.Student$Race getRace();
+  public void setRoom(edu.umw.cpsc.collegediversity.Room);
+  void addAttribute(int);
+  public void step(sim.engine.SimState);
+  public double similarityTo(edu.umw.cpsc.collegediversity.Student);
+  public double similarityTo(edu.umw.cpsc.collegediversity.Group);
+  boolean hasRoom();
+  void leaveRoom();
+  public void joinGroup(edu.umw.cpsc.collegediversity.Group);
+  public void leaveGroup(edu.umw.cpsc.collegediversity.Group);
+  void removeConnection(edu.umw.cpsc.collegediversity.Student);
+  public java.lang.String toString();
+  public edu.umw.cpsc.collegediversity.Room getDormRoom();
+  static {};
+}
+Compiled from "Student.java"
+class edu.umw.cpsc.collegediversity.Student$1 {
+}
+Compiled from "Student.java"
+public class edu.umw.cpsc.collegediversity.Student$Gender extends java.lang.Enum<edu.umw.cpsc.collegediversity.Student$Gender> {
+  public static final edu.umw.cpsc.collegediversity.Student$Gender MALE;
+  public static final edu.umw.cpsc.collegediversity.Student$Gender FEMALE;
+  public static edu.umw.cpsc.collegediversity.Student$Gender[] values();
+  public static edu.umw.cpsc.collegediversity.Student$Gender valueOf(java.lang.String);
+  edu.umw.cpsc.collegediversity.Student$Gender(java.lang.String, int, edu.umw.cpsc.collegediversity.Student$1);
+  static {};
+}
+Compiled from "Student.java"
+final class edu.umw.cpsc.collegediversity.Student$Gender$1 extends edu.umw.cpsc.collegediversity.Student$Gender {
+  edu.umw.cpsc.collegediversity.Student$Gender$1(java.lang.String, int);
+  public java.lang.String toString();
+}
+Compiled from "Student.java"
+final class edu.umw.cpsc.collegediversity.Student$Gender$2 extends edu.umw.cpsc.collegediversity.Student$Gender {
+  edu.umw.cpsc.collegediversity.Student$Gender$2(java.lang.String, int);
+  public java.lang.String toString();
+}
+Compiled from "Student.java"
+public class edu.umw.cpsc.collegediversity.Student$Race extends java.lang.Enum<edu.umw.cpsc.collegediversity.Student$Race> {
+  public static final edu.umw.cpsc.collegediversity.Student$Race WHITE;
+  public static final edu.umw.cpsc.collegediversity.Student$Race MINORITY;
+  public static edu.umw.cpsc.collegediversity.Student$Race[] values();
+  public static edu.umw.cpsc.collegediversity.Student$Race valueOf(java.lang.String);
+  edu.umw.cpsc.collegediversity.Student$Race(java.lang.String, int, edu.umw.cpsc.collegediversity.Student$1);
+  static {};
+}
+Compiled from "Student.java"
+final class edu.umw.cpsc.collegediversity.Student$Race$1 extends edu.umw.cpsc.collegediversity.Student$Race {
+  edu.umw.cpsc.collegediversity.Student$Race$1(java.lang.String, int);
+  public java.lang.String toString();
+}
+Compiled from "Student.java"
+final class edu.umw.cpsc.collegediversity.Student$Race$2 extends edu.umw.cpsc.collegediversity.Student$Race {
+  edu.umw.cpsc.collegediversity.Student$Race$2(java.lang.String, int);
+  public java.lang.String toString();
+}
+Compiled from "UpperclassHousingSelection.java"
+public class edu.umw.cpsc.collegediversity.UpperclassHousingSelection {
+  public static edu.umw.cpsc.collegediversity.UpperclassHousingSelection instance();
+  public void assign(sim.util.Bag);
+  public void assignByRace(sim.util.Bag);
+}

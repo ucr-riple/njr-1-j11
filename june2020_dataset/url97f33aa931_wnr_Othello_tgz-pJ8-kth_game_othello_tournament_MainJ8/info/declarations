@@ -1,0 +1,463 @@
+Compiled from "Othello.java"
+public interface kth.game.othello.Othello {
+  public abstract void addGameFinishedObserver(java.util.Observer);
+  public abstract void addMoveObserver(java.util.Observer);
+  public abstract kth.game.othello.board.Board getBoard();
+  public abstract java.lang.String getId();
+  public abstract java.util.List<kth.game.othello.board.Node> getNodesToSwap(java.lang.String, java.lang.String);
+  public abstract kth.game.othello.player.Player getPlayerInTurn();
+  public abstract java.util.List<kth.game.othello.player.Player> getPlayers();
+  public abstract kth.game.othello.score.Score getScore();
+  public abstract boolean hasValidMove(java.lang.String);
+  public abstract boolean isActive();
+  public abstract boolean isMoveValid(java.lang.String, java.lang.String);
+  public abstract java.util.List<kth.game.othello.board.Node> move();
+  public abstract java.util.List<kth.game.othello.board.Node> move(java.lang.String, java.lang.String) throws java.lang.IllegalArgumentException;
+  public abstract void start();
+  public abstract void start(java.lang.String);
+  public abstract void undo();
+}
+Compiled from "OthelloFactory.java"
+public interface kth.game.othello.OthelloFactory {
+  public abstract kth.game.othello.Othello createComputerGame();
+  public abstract kth.game.othello.Othello createHumanGame();
+  public abstract kth.game.othello.Othello createHumanVersusComputerGame();
+  public abstract kth.game.othello.Othello createGame(java.util.Set<kth.game.othello.board.factory.NodeData>, java.util.List<kth.game.othello.player.Player>);
+}
+Compiled from "OthelloFactoryImpl.java"
+public class kth.game.othello.OthelloFactoryImpl implements kth.game.othello.OthelloFactory {
+  public kth.game.othello.OthelloFactoryImpl();
+  public kth.game.othello.Othello createComputerGame();
+  public kth.game.othello.Othello createHumanGame();
+  public kth.game.othello.Othello createHumanVersusComputerGame();
+  public kth.game.othello.Othello createGame(java.util.Set<kth.game.othello.board.factory.NodeData>, java.util.List<kth.game.othello.player.Player>);
+}
+Compiled from "OthelloImpl.java"
+public class kth.game.othello.OthelloImpl extends java.util.Observable implements kth.game.othello.Othello {
+  public kth.game.othello.OthelloImpl(kth.game.othello.board.BoardHandler, kth.game.othello.player.PlayerHandler, kth.game.othello.score.Score);
+  public void addGameFinishedObserver(java.util.Observer);
+  public void addMoveObserver(java.util.Observer);
+  public java.lang.String getId();
+  public kth.game.othello.board.Board getBoard();
+  public kth.game.othello.player.Player getPlayerInTurn();
+  public java.util.List<kth.game.othello.player.Player> getPlayers();
+  public kth.game.othello.score.Score getScore();
+  public java.util.List<kth.game.othello.board.Node> getNodesToSwap(java.lang.String, java.lang.String);
+  public boolean hasValidMove(java.lang.String);
+  public boolean isActive();
+  public boolean isMoveValid(java.lang.String, java.lang.String);
+  public java.util.List<kth.game.othello.board.Node> move();
+  public java.util.List<kth.game.othello.board.Node> move(java.lang.String, java.lang.String) throws java.lang.IllegalArgumentException;
+  public void start();
+  public void start(java.lang.String);
+  public void undo();
+  public synchronized void addObserver(java.util.Observer);
+  public synchronized void deleteObserver(java.util.Observer);
+  public void notifyObservers();
+  public void notifyObservers(java.lang.Object);
+  public synchronized void deleteObservers();
+  protected synchronized void setChanged();
+  protected synchronized void clearChanged();
+  public synchronized boolean hasChanged();
+  public synchronized int countObservers();
+}
+Compiled from "OthelloImplTest.java"
+public class kth.game.othello.OthelloImplTest {
+  public kth.game.othello.OthelloImplTest();
+  public void moveTest() throws java.lang.NoSuchFieldException, java.lang.IllegalAccessException;
+  public void moveWithNoPlayerInTurnExceptionTest();
+  public void moveWrongPlayerExceptionTest();
+  public void gameFinishedObserversTest();
+  public void moveObserversTest();
+}
+Compiled from "OthelloLab1IT.java"
+public class kth.game.othello.OthelloLab1IT {
+  public kth.game.othello.OthelloLab1IT();
+  public void someMovesBetweenAComputerAndHumanTest();
+  public void twoComputerOnAClassicalBoardTest();
+}
+Compiled from "OthelloLab2IT.java"
+public class kth.game.othello.OthelloLab2IT {
+  public kth.game.othello.OthelloLab2IT();
+  public void studyTheInitialScoreTest();
+  public void studyTheScoreAfterAMoveTest();
+  public void twoHumanOnAClassicalBoardTest();
+  public void threeComputersOnADiamondBoardTest();
+  public void twoComputerOnAClassicalBoardTest();
+}
+Compiled from "UndoTest.java"
+public class kth.game.othello.UndoTest {
+  public kth.game.othello.UndoTest();
+  public void undoTest();
+}
+Compiled from "Board.java"
+public interface kth.game.othello.board.Board {
+  public abstract int getMaxX();
+  public abstract int getMaxY();
+  public abstract kth.game.othello.board.Node getNode(int, int);
+  public abstract java.util.List<kth.game.othello.board.Node> getNodes();
+  public abstract boolean hasNode(int, int);
+}
+Compiled from "BoardFactory.java"
+public class kth.game.othello.board.BoardFactory {
+  public kth.game.othello.board.BoardFactory();
+  public kth.game.othello.board.BoardImpl createBoard(java.util.Set<kth.game.othello.board.factory.NodeData>);
+}
+Compiled from "BoardHandler.java"
+public class kth.game.othello.board.BoardHandler implements kth.game.othello.rules.Rules {
+  public kth.game.othello.board.BoardHandler(kth.game.othello.board.BoardImpl, kth.game.othello.board.BoardHistoryHandler);
+  public kth.game.othello.board.Board getBoard();
+  public java.util.List<kth.game.othello.board.Node> move(java.lang.String, java.lang.String);
+  public void undo();
+  public java.util.List<kth.game.othello.board.Node> getNodesToSwap(java.lang.String, java.lang.String);
+  public int getNumNodesToSwap(java.lang.String, java.lang.String);
+  public boolean isMoveValid(java.lang.String, java.lang.String);
+  public boolean hasValidMove(java.lang.String);
+  public boolean hasAnyAValidMove(java.util.List<java.lang.String>);
+  public java.util.List<kth.game.othello.board.Node> getValidMoves(java.lang.String);
+}
+Compiled from "BoardHandlerFactory.java"
+public class kth.game.othello.board.BoardHandlerFactory {
+  public kth.game.othello.board.BoardHandlerFactory();
+  public kth.game.othello.board.BoardHandler createOthelloBoardHandler(kth.game.othello.board.BoardImpl);
+}
+Compiled from "BoardHandlerTest.java"
+public class kth.game.othello.board.BoardHandlerTest {
+  public kth.game.othello.board.BoardHandlerTest();
+  public void getValidMovesTest();
+  public void getNumSwapsTest();
+  public void moveTest();
+  public void invalidMoveTest();
+  public void hasAValidMoveTest();
+  public void undoTest();
+}
+Compiled from "BoardHistoryHandler.java"
+public class kth.game.othello.board.BoardHistoryHandler {
+  public kth.game.othello.board.BoardHistoryHandler(kth.game.othello.board.BoardImpl);
+  public void save(java.util.List<kth.game.othello.board.Node>);
+  public void undo();
+}
+Compiled from "BoardHistoryHandlerTest.java"
+public class kth.game.othello.board.BoardHistoryHandlerTest {
+  public kth.game.othello.board.BoardHistoryHandlerTest();
+  public void pushAndPopTest();
+}
+Compiled from "BoardImpl.java"
+public class kth.game.othello.board.BoardImpl implements kth.game.othello.board.Board {
+  public kth.game.othello.board.BoardImpl(java.util.Collection<kth.game.othello.board.NodeImpl>);
+  public int getMaxX();
+  public int getMaxY();
+  public int getNumNodes();
+  public kth.game.othello.board.Node getNode(int, int);
+  public kth.game.othello.board.Node getNode(java.lang.String);
+  public boolean hasNode(java.lang.String);
+  public boolean hasNode(int, int);
+  public void occupyNode(java.lang.String, java.lang.String);
+  public kth.game.othello.board.BoardImpl copyWithoutObservers();
+  public java.util.List<kth.game.othello.board.Node> getNodes();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+}
+Compiled from "BoardImplTest.java"
+public class kth.game.othello.board.BoardImplTest {
+  public kth.game.othello.board.BoardImplTest();
+  public void getNodesTest();
+  public void occupyTest();
+  public void hasNodeTest();
+  public void getNodeTest();
+  public void outOfRangeTest();
+  public void copyWithoutObservers();
+  public void getMaxXTest();
+  public void getMaxYTest();
+}
+Compiled from "Node.java"
+public interface kth.game.othello.board.Node {
+  public abstract void addObserver(java.util.Observer);
+  public abstract java.lang.String getId();
+  public abstract java.lang.String getOccupantPlayerId();
+  public abstract int getXCoordinate();
+  public abstract int getYCoordinate();
+  public abstract boolean isMarked();
+}
+Compiled from "NodeIdUtil.java"
+public class kth.game.othello.board.NodeIdUtil {
+  public kth.game.othello.board.NodeIdUtil();
+  public static java.lang.String createNodeId(int, int);
+}
+Compiled from "NodeImpl.java"
+public class kth.game.othello.board.NodeImpl extends java.util.Observable implements kth.game.othello.board.Node, java.lang.Comparable<kth.game.othello.board.NodeImpl> {
+  public kth.game.othello.board.NodeImpl(java.lang.String, int, int);
+  public kth.game.othello.board.NodeImpl(kth.game.othello.board.Node);
+  public kth.game.othello.board.NodeImpl(int, int);
+  public void setOccupantPlayerId(java.lang.String);
+  public kth.game.othello.board.NodeImpl copyWithoutObservers();
+  public java.lang.String getId();
+  public java.lang.String getOccupantPlayerId();
+  public int getXCoordinate();
+  public int getYCoordinate();
+  public boolean isMarked();
+  public boolean equals(java.lang.Object);
+  public int compareTo(kth.game.othello.board.NodeImpl);
+  public int hashCode();
+  public int compareTo(java.lang.Object);
+}
+Compiled from "NodeImplTest.java"
+public class kth.game.othello.board.NodeImplTest {
+  public kth.game.othello.board.NodeImplTest();
+  public void constructorTest();
+  public void occupyTest();
+  public void compareToTest();
+  public void nodeIDTest();
+  public void observableTest();
+  public void copyWithoutObserversTest();
+}
+Compiled from "Castle.java"
+public class kth.game.othello.board.factory.Castle {
+  public kth.game.othello.board.factory.Castle();
+  public kth.game.othello.board.factory.Castle(kth.game.othello.board.factory.Square);
+  public java.util.Set<kth.game.othello.board.factory.NodeData> getNodes(java.util.List<kth.game.othello.player.Player>);
+}
+Compiled from "Diamond.java"
+public class kth.game.othello.board.factory.Diamond {
+  public kth.game.othello.board.factory.Diamond();
+  public java.util.Set<kth.game.othello.board.factory.NodeData> getNodes(int, java.util.List<kth.game.othello.player.Player>);
+}
+Compiled from "DoubleSquare.java"
+public class kth.game.othello.board.factory.DoubleSquare {
+  public kth.game.othello.board.factory.DoubleSquare();
+  public kth.game.othello.board.factory.DoubleSquare(kth.game.othello.board.factory.Square);
+  public java.util.Set<kth.game.othello.board.factory.NodeData> getNodes(int, java.util.List<kth.game.othello.player.Player>);
+}
+Compiled from "NodeData.java"
+public class kth.game.othello.board.factory.NodeData {
+  public kth.game.othello.board.factory.NodeData(int, int);
+  public kth.game.othello.board.factory.NodeData(int, int, java.lang.String);
+  public java.lang.String getOccupantPlayerId();
+  public int getXCoordinate();
+  public int getYCoordinate();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+}
+Compiled from "Square.java"
+public class kth.game.othello.board.factory.Square {
+  public kth.game.othello.board.factory.Square();
+  public java.util.Set<kth.game.othello.board.factory.NodeData> getNodes(int, java.util.List<kth.game.othello.player.Player>);
+  java.util.Set<kth.game.othello.board.factory.NodeData> getNodes(int, java.util.List<kth.game.othello.player.Player>, int, int);
+}
+Compiled from "ComputerPlayer.java"
+public class kth.game.othello.player.ComputerPlayer extends kth.game.othello.player.PlayerImpl {
+  public kth.game.othello.player.ComputerPlayer(java.lang.String, java.lang.String, kth.game.othello.player.movestrategy.MoveStrategy);
+}
+Compiled from "HumanPlayer.java"
+public class kth.game.othello.player.HumanPlayer extends kth.game.othello.player.PlayerImpl {
+  public kth.game.othello.player.HumanPlayer(java.lang.String, java.lang.String);
+}
+Compiled from "Player.java"
+public interface kth.game.othello.player.Player {
+  public abstract java.lang.String getId();
+  public abstract kth.game.othello.player.movestrategy.MoveStrategy getMoveStrategy();
+  public abstract java.lang.String getName();
+  public abstract kth.game.othello.player.Player$Type getType();
+  public abstract void setMoveStrategy(kth.game.othello.player.movestrategy.MoveStrategy);
+}
+Compiled from "Player.java"
+public final class kth.game.othello.player.Player$Type extends java.lang.Enum<kth.game.othello.player.Player$Type> {
+  public static final kth.game.othello.player.Player$Type COMPUTER;
+  public static final kth.game.othello.player.Player$Type HUMAN;
+  public static kth.game.othello.player.Player$Type[] values();
+  public static kth.game.othello.player.Player$Type valueOf(java.lang.String);
+  static {};
+}
+Compiled from "PlayerHandler.java"
+public class kth.game.othello.player.PlayerHandler {
+  public kth.game.othello.player.PlayerHandler(java.util.List<kth.game.othello.player.Player>, kth.game.othello.player.turndecider.TurnDecider);
+  public kth.game.othello.player.Player setStartingPlayer(java.lang.String);
+  public java.util.List<kth.game.othello.player.Player> getPlayers();
+  public java.util.List<java.lang.String> getPlayerIds();
+  public kth.game.othello.player.Player getPlayer(java.lang.String);
+  public java.util.List<kth.game.othello.player.Player> updatePlayerInTurn(kth.game.othello.rules.Rules);
+  public kth.game.othello.player.Player getPlayerInTurn();
+  public int getNumPlayers();
+  public kth.game.othello.player.Player getRandomPlayer();
+  public java.util.List<java.lang.String> getPlayerIds(java.util.List<kth.game.othello.player.Player>);
+  public java.util.List<kth.game.othello.player.Player> getPlayers(java.util.List<java.lang.String>);
+}
+Compiled from "PlayerHandlerTest.java"
+public class kth.game.othello.player.PlayerHandlerTest {
+  public kth.game.othello.player.PlayerHandlerTest();
+  public void initiateStartingPlayerTest() throws java.lang.NoSuchFieldException, java.lang.IllegalAccessException;
+  public void getPlayerTest();
+  public void getPlayersTest();
+  static {};
+}
+Compiled from "PlayerImpl.java"
+public abstract class kth.game.othello.player.PlayerImpl implements kth.game.othello.player.Player {
+  public kth.game.othello.player.PlayerImpl(java.lang.String, java.lang.String, kth.game.othello.player.Player$Type, kth.game.othello.player.movestrategy.MoveStrategy);
+  public kth.game.othello.player.PlayerImpl(java.lang.String, java.lang.String, kth.game.othello.player.Player$Type);
+  public java.lang.String getId();
+  public java.lang.String getName();
+  public kth.game.othello.player.Player$Type getType();
+  public kth.game.othello.player.movestrategy.MoveStrategy getMoveStrategy();
+  public void setMoveStrategy(kth.game.othello.player.movestrategy.MoveStrategy);
+}
+Compiled from "PlayerImplTest.java"
+public class kth.game.othello.player.PlayerImplTest {
+  public kth.game.othello.player.PlayerImplTest();
+  public void ConstructorTest();
+  public void getIdTest();
+  public void getNameTest();
+  public void getType();
+  public void moveStrategyTest();
+  public void getMoveStrategyHumanTest();
+  public void setMoveStrategyHumanTest();
+}
+Compiled from "PlayerImplTest.java"
+class kth.game.othello.player.PlayerImplTest$PlayerImplTester extends kth.game.othello.player.PlayerImpl {
+  final kth.game.othello.player.PlayerImplTest this$0;
+  public kth.game.othello.player.PlayerImplTest$PlayerImplTester(kth.game.othello.player.PlayerImplTest, java.lang.String, java.lang.String, kth.game.othello.player.Player$Type);
+}
+Compiled from "RotationTest.java"
+public class kth.game.othello.player.RotationTest {
+  public kth.game.othello.player.RotationTest();
+  public void initiateTest();
+  public void updateNextPlayerInTurnTest();
+  public void updatePlayerInTurnUninitializedExceptionTest();
+  static {};
+}
+Compiled from "GreedyStrategy.java"
+public class kth.game.othello.player.movestrategy.GreedyStrategy implements kth.game.othello.player.movestrategy.MoveStrategy {
+  public kth.game.othello.player.movestrategy.GreedyStrategy();
+  public java.lang.String getName();
+  public kth.game.othello.board.Node move(java.lang.String, kth.game.othello.rules.Rules, kth.game.othello.board.Board);
+}
+Compiled from "GreedyStrategyTest.java"
+public class kth.game.othello.player.movestrategy.GreedyStrategyTest {
+  public kth.game.othello.player.movestrategy.GreedyStrategyTest();
+  public void moveMultipleEquallyGoodTest();
+  public void moveOneBestTest();
+  public void moveNotPossibleTest();
+}
+Compiled from "LowestStrategy.java"
+public class kth.game.othello.player.movestrategy.LowestStrategy implements kth.game.othello.player.movestrategy.MoveStrategy {
+  public kth.game.othello.player.movestrategy.LowestStrategy();
+  public java.lang.String getName();
+  public kth.game.othello.board.Node move(java.lang.String, kth.game.othello.rules.Rules, kth.game.othello.board.Board);
+}
+Compiled from "LowestStrategyTest.java"
+public class kth.game.othello.player.movestrategy.LowestStrategyTest {
+  public kth.game.othello.player.movestrategy.LowestStrategyTest();
+  public void moveMultipleEquallyGoodTest();
+  public void moveOneBestTest();
+  public void moveNotPossibleTest();
+}
+Compiled from "MoveStrategy.java"
+public interface kth.game.othello.player.movestrategy.MoveStrategy {
+  public abstract java.lang.String getName();
+  public abstract kth.game.othello.board.Node move(java.lang.String, kth.game.othello.rules.Rules, kth.game.othello.board.Board);
+}
+Compiled from "RandomStrategy.java"
+public class kth.game.othello.player.movestrategy.RandomStrategy implements kth.game.othello.player.movestrategy.MoveStrategy {
+  public kth.game.othello.player.movestrategy.RandomStrategy();
+  public java.lang.String getName();
+  public kth.game.othello.board.Node move(java.lang.String, kth.game.othello.rules.Rules, kth.game.othello.board.Board);
+}
+Compiled from "RandomStrategyTest.java"
+public class kth.game.othello.player.movestrategy.RandomStrategyTest {
+  public kth.game.othello.player.movestrategy.RandomStrategyTest();
+  public void moveMultipleEquallyGoodTest();
+  public void moveNotPossibleTest();
+}
+Compiled from "TopLeftStrategy.java"
+public class kth.game.othello.player.movestrategy.TopLeftStrategy implements kth.game.othello.player.movestrategy.MoveStrategy {
+  public kth.game.othello.player.movestrategy.TopLeftStrategy();
+  public java.lang.String getName();
+  public kth.game.othello.board.Node move(java.lang.String, kth.game.othello.rules.Rules, kth.game.othello.board.Board);
+}
+Compiled from "Rotation.java"
+public class kth.game.othello.player.turndecider.Rotation implements kth.game.othello.player.turndecider.TurnDecider {
+  public kth.game.othello.player.turndecider.Rotation(java.util.List<java.lang.String>);
+  public java.util.List<java.lang.String> updatePlayerInTurn(kth.game.othello.rules.Rules);
+  public void setFirstPlayerInTurn(java.lang.String);
+  public java.lang.String getPlayerInTurn();
+}
+Compiled from "TurnDecider.java"
+public interface kth.game.othello.player.turndecider.TurnDecider {
+  public abstract java.util.List<java.lang.String> updatePlayerInTurn(kth.game.othello.rules.Rules);
+  public abstract void setFirstPlayerInTurn(java.lang.String);
+  public abstract java.lang.String getPlayerInTurn();
+}
+Compiled from "Rules.java"
+public interface kth.game.othello.rules.Rules {
+  public abstract java.util.List<kth.game.othello.board.Node> getNodesToSwap(java.lang.String, java.lang.String);
+  public abstract int getNumNodesToSwap(java.lang.String, java.lang.String);
+  public abstract boolean isMoveValid(java.lang.String, java.lang.String);
+  public abstract boolean hasValidMove(java.lang.String);
+  public abstract boolean hasAnyAValidMove(java.util.List<java.lang.String>);
+  public abstract java.util.List<kth.game.othello.board.Node> getValidMoves(java.lang.String);
+}
+Compiled from "Score.java"
+public interface kth.game.othello.score.Score {
+  public abstract void addObserver(java.util.Observer);
+  public abstract java.util.List<kth.game.othello.score.ScoreItem> getPlayersScore();
+  public abstract int getPoints(java.lang.String);
+}
+Compiled from "ScoreImpl.java"
+public class kth.game.othello.score.ScoreImpl extends java.util.Observable implements kth.game.othello.score.Score,java.util.Observer {
+  public kth.game.othello.score.ScoreImpl(java.util.List<kth.game.othello.score.ScoreItem>);
+  public java.util.List<kth.game.othello.score.ScoreItem> getPlayersScore();
+  public int getPoints(java.lang.String);
+  public void update(java.util.Observable, java.lang.Object);
+}
+Compiled from "ScoreImplTest.java"
+public class kth.game.othello.score.ScoreImplTest {
+  public kth.game.othello.score.ScoreImplTest();
+  public void getPlayersScoreTest();
+  public void getPointsTest();
+  public void updateTest();
+}
+Compiled from "ScoreItem.java"
+public class kth.game.othello.score.ScoreItem {
+  public kth.game.othello.score.ScoreItem(java.lang.String, int);
+  public java.lang.String getPlayerId();
+  public int getScore();
+}
+Compiled from "Main.java"
+public class kth.game.othello.tournament.Main {
+  public kth.game.othello.tournament.Main();
+  public static void main(java.lang.String[]);
+}
+Compiled from "PlayerResult.java"
+public class kth.game.othello.tournament.PlayerResult implements java.lang.Comparable<kth.game.othello.tournament.PlayerResult> {
+  public kth.game.othello.tournament.PlayerResult(java.lang.String, int, int, int);
+  public java.lang.String getName();
+  public int getWins();
+  public int getLosses();
+  public int getDraws();
+  public kth.game.othello.tournament.PlayerResult incrementWins();
+  public kth.game.othello.tournament.PlayerResult incrementLosses();
+  public kth.game.othello.tournament.PlayerResult incrementDraws();
+  public boolean isScoreEqual(kth.game.othello.tournament.PlayerResult);
+  public int compareTo(kth.game.othello.tournament.PlayerResult);
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public int compareTo(java.lang.Object);
+}
+Compiled from "PlayerResultTest.java"
+public class kth.game.othello.tournament.PlayerResultTest {
+  public kth.game.othello.tournament.PlayerResultTest();
+  public void testCompareTo();
+  public void testIsScoreEqual();
+}
+Compiled from "Tournament.java"
+public class kth.game.othello.tournament.Tournament {
+  public static final int BOARD_SIZE;
+  public static final int TIME_BETWEEN_SWAPS;
+  public static final int TIME_BETWEEN_MOVES;
+  public kth.game.othello.tournament.Tournament(java.util.List<kth.game.othello.player.movestrategy.MoveStrategy>);
+  public java.util.List<kth.game.othello.tournament.PlayerResult> play(boolean);
+}
+Compiled from "TournamentPrinter.java"
+public class kth.game.othello.tournament.TournamentPrinter {
+  public kth.game.othello.tournament.TournamentPrinter(java.io.PrintWriter);
+  public void printResults(java.util.List<kth.game.othello.tournament.PlayerResult>);
+}

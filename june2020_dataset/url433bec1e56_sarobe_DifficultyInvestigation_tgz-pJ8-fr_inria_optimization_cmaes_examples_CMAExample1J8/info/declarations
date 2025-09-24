@@ -1,0 +1,1540 @@
+Compiled from "Params.java"
+public class common.Params {
+  public static int screenWidth;
+  public static int screenHeight;
+  public static int worldWidth;
+  public static int worldHeight;
+  public static int delay;
+  public static double dt;
+  public static java.util.Random rand;
+  public static final java.lang.String dataDirectory;
+  public static final java.lang.String[] strategies;
+  public static double bracketedRange;
+  public static int numEvals;
+  public static int numEvalsMin;
+  public static int numEvalsMax;
+  public static int popSize;
+  public static int popSizeMin;
+  public static int popSizeMax;
+  public static double valueRange;
+  public static double valueRangeDefault;
+  public static double valueRangeMin;
+  public static double valueRangeMax;
+  public static double shipRadius;
+  public static double shipMass;
+  public static double shipMoment;
+  public static int maxActions;
+  public static double thrustLimit;
+  public static double thrustLimitDefault;
+  public static double thrustLimitMin;
+  public static double thrustLimitMax;
+  public static double uprightAngularTolerance;
+  public static double uprightAngularToleranceMin;
+  public static double uprightAngularToleranceMax;
+  public static double lunarGravity;
+  public static double lunarGravityDefault;
+  public static double lunarGravityMin;
+  public static double lunarGravityMax;
+  public static double friction;
+  public static double frictionDefault;
+  public static double frictionMin;
+  public static double frictionMax;
+  public static int randomSeed;
+  public static int randomSeedDefault;
+  public static int randomSeedMin;
+  public static int randomSeedMax;
+  public static int numLandingPads;
+  public static int numLandingPadsDefault;
+  public static int numLandingPadsMin;
+  public static int numLandingPadsMax;
+  public static int landingPadSize;
+  public static int landingPadSizeDefault;
+  public static int landingPadSizeMin;
+  public static int landingPadSizeMax;
+  public static double survivableVelocity;
+  public static double survivableVelocityDefault;
+  public static double survivableVelocityMin;
+  public static double survivableVelocityMax;
+  public static double startingFuel;
+  public static double startingFuelDefault;
+  public static double startingFuelMin;
+  public static double startingFuelMax;
+  public static int steps;
+  public static int stepsMin;
+  public static int stepsMax;
+  public static boolean flatLandscape;
+  public static common.math.Vector2d startingPoint;
+  public static common.math.Vector2d landingFacing;
+  public static int numPoints;
+  public static double proximityWeight;
+  public static double velocityWeight;
+  public static double fuelWeight;
+  public static double angleWeight;
+  public static double weightMin;
+  public static double weightMax;
+  public common.Params();
+  public static void resetParams();
+  static {};
+}
+Compiled from "StatSummary.java"
+public class common.StatSummary {
+  public java.lang.String name;
+  int n;
+  boolean valid;
+  public common.StatSummary();
+  public common.StatSummary(java.lang.String);
+  public final void reset();
+  public double max();
+  public double min();
+  public double mean();
+  public double sumSquareDiff();
+  public double sd();
+  public int n();
+  public double stdErr();
+  public void add(common.StatSummary);
+  public void add(double);
+  public void add(java.lang.Number);
+  public void add(double...);
+  public java.lang.String toString();
+}
+Compiled from "StatsUtil.java"
+public class common.math.StatsUtil {
+  public common.math.StatsUtil();
+  public static double getMean(java.util.Collection<java.lang.Double>);
+  public static double getBest(java.util.Collection<java.lang.Double>);
+  public static double getStdDev(java.util.Collection<java.lang.Double>);
+}
+Compiled from "Vector2d.java"
+public class common.math.Vector2d {
+  public double x;
+  public double y;
+  public common.math.Vector2d();
+  public common.math.Vector2d(double, double);
+  public common.math.Vector2d(common.math.Vector2d);
+  public common.math.Vector2d add(common.math.Vector2d);
+  public common.math.Vector2d add(double, double);
+  public common.math.Vector2d add(common.math.Vector2d, double);
+  public common.math.Vector2d copy();
+  public double dist(common.math.Vector2d);
+  public double mag();
+  public common.math.Vector2d mul(double);
+  public common.math.Vector2d rotate(double);
+  public double theta();
+  public double scalarProduct(common.math.Vector2d);
+  public common.math.Vector2d set(common.math.Vector2d);
+  public common.math.Vector2d set(double, double);
+  public boolean equals(common.math.Vector2d);
+  public double sqDist(common.math.Vector2d);
+  public static double sqr(double);
+  public common.math.Vector2d subtract(common.math.Vector2d);
+  public java.lang.String toString();
+  public common.math.Vector2d wrap(double, double);
+  public common.math.Vector2d wrapHorizontal(double);
+  public common.math.Vector2d limit(double, double);
+  public void zero();
+  public double angBetween(common.math.Vector2d);
+  public double determinant(common.math.Vector2d);
+  public common.math.Vector2d normalise();
+}
+Compiled from "JEasyFrame.java"
+public class common.utilities.JEasyFrame extends javax.swing.JFrame {
+  public java.awt.Component comp;
+  public common.utilities.JEasyFrame(java.awt.Component, java.lang.String);
+}
+Compiled from "Pair.java"
+public class common.utilities.Pair<A, B> {
+  public A first;
+  public B second;
+  public common.utilities.Pair(A, B);
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+}
+Compiled from "IController.java"
+public interface controller.IController {
+  public abstract void think();
+}
+Compiled from "ShipController.java"
+public class controller.ShipController implements controller.IController {
+  public entity.spaceship.Spaceship ship;
+  protected double[] actionSequence;
+  protected int timestepsTilNextAction;
+  protected int currActionIndex;
+  public controller.ShipController(entity.spaceship.Spaceship, double[]);
+  public void think();
+  public entity.spaceship.Spaceship getShip();
+  public double getCurrentThrust();
+}
+Compiled from "MersenneTwister.java"
+public class ec.util.MersenneTwister extends java.util.Random implements java.io.Serializable,java.lang.Cloneable {
+  public strictfp java.lang.Object clone();
+  public strictfp boolean stateEquals(java.lang.Object);
+  public strictfp void readState(java.io.DataInputStream) throws java.io.IOException;
+  public strictfp void writeState(java.io.DataOutputStream) throws java.io.IOException;
+  public strictfp ec.util.MersenneTwister();
+  public strictfp ec.util.MersenneTwister(long);
+  public strictfp ec.util.MersenneTwister(int[]);
+  public synchronized strictfp void setSeed(long);
+  public synchronized strictfp void setSeed(int[]);
+  protected synchronized strictfp int next(int);
+  public strictfp boolean nextBoolean();
+  public strictfp boolean nextBoolean(float);
+  public strictfp boolean nextBoolean(double);
+  public strictfp int nextInt(int);
+  public strictfp long nextLong(long);
+  public strictfp double nextDouble();
+  public strictfp double nextDouble(boolean, boolean);
+  public strictfp float nextFloat();
+  public strictfp float nextFloat(boolean, boolean);
+  public strictfp void nextBytes(byte[]);
+  public strictfp char nextChar();
+  public strictfp short nextShort();
+  public strictfp byte nextByte();
+  public synchronized strictfp double nextGaussian();
+  public static strictfp void main(java.lang.String[]);
+}
+Compiled from "MersenneTwisterFast.java"
+public class ec.util.MersenneTwisterFast implements java.io.Serializable,java.lang.Cloneable {
+  public strictfp java.lang.Object clone();
+  public strictfp boolean stateEquals(java.lang.Object);
+  public strictfp void readState(java.io.DataInputStream) throws java.io.IOException;
+  public strictfp void writeState(java.io.DataOutputStream) throws java.io.IOException;
+  public strictfp ec.util.MersenneTwisterFast();
+  public strictfp ec.util.MersenneTwisterFast(long);
+  public strictfp ec.util.MersenneTwisterFast(int[]);
+  public synchronized strictfp void setSeed(long);
+  public synchronized strictfp void setSeed(int[]);
+  public strictfp int nextInt();
+  public strictfp short nextShort();
+  public strictfp char nextChar();
+  public strictfp boolean nextBoolean();
+  public strictfp boolean nextBoolean(float);
+  public strictfp boolean nextBoolean(double);
+  public strictfp byte nextByte();
+  public strictfp void nextBytes(byte[]);
+  public strictfp long nextLong();
+  public strictfp long nextLong(long);
+  public strictfp double nextDouble();
+  public strictfp double nextDouble(boolean, boolean);
+  public strictfp double nextGaussian();
+  public strictfp float nextFloat();
+  public strictfp float nextFloat(boolean, boolean);
+  public strictfp int nextInt(int);
+  public static strictfp void main(java.lang.String[]);
+}
+Compiled from "Entity.java"
+public abstract class entity.Entity {
+  public double mass;
+  public double moment;
+  public common.math.Vector2d pos;
+  public common.math.Vector2d vel;
+  public double rot;
+  public double rotvel;
+  public double radius;
+  protected boolean alive;
+  protected java.awt.Font labelFont;
+  public java.lang.String label;
+  public entity.Entity();
+  public entity.Entity(common.math.Vector2d, double);
+  public entity.Entity(common.math.Vector2d, common.math.Vector2d, double, double);
+  public boolean isAlive();
+  public void reset();
+  public void kill();
+  public abstract void draw(java.awt.Graphics2D);
+  public void update();
+  public void label(java.lang.String);
+  public java.lang.String toString();
+}
+Compiled from "Spaceship.java"
+public class entity.spaceship.Spaceship extends entity.Entity {
+  public int[] xpShip;
+  public int[] ypShip;
+  public double thrustForce;
+  public entity.spaceship.Spaceship();
+  public void thrust(double);
+  public void spin(double);
+  public void draw(java.awt.Graphics2D);
+  public entity.spaceship.Spaceship copyShip();
+  public void kill();
+  public java.lang.String toString();
+}
+Compiled from "CMAEvolutionStrategy.java"
+public class fr.inria.optimization.cmaes.CMAEvolutionStrategy implements java.io.Serializable {
+  public final java.lang.String versionNumber;
+  public fr.inria.optimization.cmaes.CMAOptions options;
+  public fr.inria.optimization.cmaes.CMAParameters parameters;
+  public fr.inria.optimization.cmaes.CMAEvolutionStrategy$StopCondition stopConditions;
+  int N;
+  long seed;
+  java.util.Random rand;
+  final fr.inria.optimization.cmaes.CMAEvolutionStrategy$MyMath math;
+  double axisratio;
+  long counteval;
+  long countiter;
+  long bestever_eval;
+  double[] bestever_x;
+  double bestever_fit;
+  double sigma;
+  double[] typicalX;
+  double[] initialX;
+  double[] LBound;
+  double[] UBound;
+  double[] xmean;
+  double xmean_fit;
+  double[] pc;
+  double[] ps;
+  double[][] C;
+  double maxsqrtdiagC;
+  double minsqrtdiagC;
+  double[][] B;
+  double[] diagD;
+  boolean flgdiag;
+  double[] startsigma;
+  double maxstartsigma;
+  double minstartsigma;
+  boolean iniphase;
+  double state;
+  long citerlastwritten;
+  long countwritten;
+  int lockDimension;
+  int mode;
+  final int SINGLE_MODE;
+  final int PARALLEL_MODE;
+  long countCupdatesSinceEigenupdate;
+  protected fr.inria.optimization.cmaes.CMAEvolutionStrategy$FitnessCollector fit;
+  double recentFunctionValue;
+  double recentMaxFunctionValue;
+  double recentMinFunctionValue;
+  int idxRecentOffspring;
+  double[][] arx;
+  public double[][] population;
+  double[] xold;
+  double[] BDz;
+  double[] artmp;
+  java.lang.String propertiesFileName;
+  java.util.Properties properties;
+  fr.inria.optimization.cmaes.CMAEvolutionStrategy$Timing timings;
+  static final boolean $assertionsDisabled;
+  void testAndCorrectNumerics();
+  public fr.inria.optimization.cmaes.CMAEvolutionStrategy();
+  public fr.inria.optimization.cmaes.CMAEvolutionStrategy(java.util.Properties);
+  public fr.inria.optimization.cmaes.CMAEvolutionStrategy(java.lang.String);
+  public fr.inria.optimization.cmaes.CMAEvolutionStrategy(int);
+  public double[] init(int, double[], double[]);
+  public double[] init(int);
+  public double[] init();
+  public fr.inria.optimization.cmaes.CMAParameters getParameterDefaults();
+  public fr.inria.optimization.cmaes.CMAParameters getParameterDefaults(int);
+  public java.util.Properties readProperties();
+  public java.util.Properties readProperties(java.lang.String);
+  public void setFromProperties(java.util.Properties);
+  void eigendecomposition(int);
+  int checkEigenSystem(int, double[][], double[], double[][]);
+  double[][] genoPhenoTransformation(double[][], double[][]);
+  double[][] phenoGenoTransformation(double[][], double[][]);
+  double[] genoPhenoTransformation(double[], double[]);
+  double[] phenoGenoTransformation(double[], double[]);
+  public double[][] samplePopulation();
+  public double[] resampleSingle(int);
+  public double mahalanobisNorm(double[], double[]);
+  public void updateDistribution(double[][], double[]);
+  public void updateDistribution(double[][], double[], int);
+  public void updateDistribution(double[]);
+  double[] assignNew(double[], double[]);
+  void updateBestEver(double[], double, long);
+  public double getAxisRatio();
+  public fr.inria.optimization.cmaes.CMASolution getBestSolution();
+  public fr.inria.optimization.cmaes.CMASolution setFitnessOfMeanX(double);
+  public double[] getBestX();
+  public double getBestFunctionValue();
+  public long getBestEvaluationNumber();
+  public fr.inria.optimization.cmaes.ISolutionPoint getBestRecentSolution();
+  public double[] getBestRecentX();
+  public double getBestRecentFunctionValue();
+  public double getWorstRecentFunctionValue();
+  public double[] getMeanX();
+  public int getDimension();
+  public long getCountEval();
+  public long getCountIter();
+  public double[] getInitialX();
+  public java.util.Random getRand();
+  public java.util.Properties getProperties();
+  public long getSeed();
+  public long setCountEval(long);
+  public void setDimension(int);
+  public void setTypicalX(double);
+  public void setTypicalX(double[]);
+  public void setInitialStandardDeviation(double);
+  public void setInitialStandardDeviations(double[]);
+  public void setInitialX(double);
+  public void setInitialX(double, double);
+  public void setInitialX(double[], double[]);
+  public void setInitialX(double[]);
+  public void setRand(java.util.Random);
+  public void setSeed(long);
+  public java.lang.String getPrintLine();
+  public java.lang.String getPrintAnnotation();
+  public java.lang.String helloWorld();
+  public void println(java.lang.String);
+  public void println();
+  public void printlnAnnotation();
+  public void printlnHelloWorld();
+  public java.lang.String getDataRowFitness();
+  public java.lang.String getDataRowXRecentBest();
+  public java.lang.String getDataRowXMean();
+  public java.lang.String getDataRowAxlen();
+  public java.lang.String getDataRowStddev();
+  public java.lang.String getDataC();
+  public void writeToFile(java.lang.String, java.lang.String, int);
+  public void writeToDefaultFiles();
+  public void writeToDefaultFiles(int);
+  public void writeToDefaultFiles(java.lang.String);
+  public void writeToDefaultFilesHeaders(int);
+  public void writeToDefaultFilesHeaders(java.lang.String, int);
+  static {};
+}
+Compiled from "CMAEvolutionStrategy.java"
+public class fr.inria.optimization.cmaes.CMAEvolutionStrategy$CMAException extends java.lang.RuntimeException {
+  final fr.inria.optimization.cmaes.CMAEvolutionStrategy this$0;
+  fr.inria.optimization.cmaes.CMAEvolutionStrategy$CMAException(fr.inria.optimization.cmaes.CMAEvolutionStrategy, java.lang.String);
+}
+Compiled from "CMAEvolutionStrategy.java"
+class fr.inria.optimization.cmaes.CMAEvolutionStrategy$FitnessCollector {
+  double[] history;
+  fr.inria.optimization.cmaes.IntDouble[] fitness;
+  fr.inria.optimization.cmaes.IntDouble[] raw;
+  double[] deltaFitHist;
+  int idxDeltaFitHist;
+  final fr.inria.optimization.cmaes.CMAEvolutionStrategy this$0;
+  fr.inria.optimization.cmaes.CMAEvolutionStrategy$FitnessCollector(fr.inria.optimization.cmaes.CMAEvolutionStrategy);
+}
+Compiled from "CMAEvolutionStrategy.java"
+class fr.inria.optimization.cmaes.CMAEvolutionStrategy$MyMath {
+  int itest;
+  final fr.inria.optimization.cmaes.CMAEvolutionStrategy this$0;
+  fr.inria.optimization.cmaes.CMAEvolutionStrategy$MyMath(fr.inria.optimization.cmaes.CMAEvolutionStrategy);
+  double square(double);
+  double prod(double[]);
+  public double median(double[]);
+  public double max(double[]);
+  public double hypot(double, double);
+  public int minidx(double[]);
+  public int minidx(double[], int);
+  protected int minidx(fr.inria.optimization.cmaes.IntDouble[], int);
+  public int maxidx(double[]);
+  public double min(double[]);
+  public java.lang.Double max(java.lang.Double[], java.util.Comparator<java.lang.Double>);
+  public fr.inria.optimization.cmaes.IntDouble max(fr.inria.optimization.cmaes.IntDouble[]);
+  public fr.inria.optimization.cmaes.IntDouble min(fr.inria.optimization.cmaes.IntDouble[]);
+  public java.lang.Double min(java.lang.Double[], java.util.Comparator<java.lang.Double>);
+  public double[] diag(double[][]);
+  public double[] abs(double[]);
+}
+Compiled from "CMAEvolutionStrategy.java"
+public class fr.inria.optimization.cmaes.CMAEvolutionStrategy$StopCondition {
+  int index;
+  java.lang.String[] messages;
+  double lastcounteval;
+  final fr.inria.optimization.cmaes.CMAEvolutionStrategy this$0;
+  public fr.inria.optimization.cmaes.CMAEvolutionStrategy$StopCondition(fr.inria.optimization.cmaes.CMAEvolutionStrategy);
+  public boolean isTrue();
+  public boolean isFalse();
+  public int getNumber();
+  public java.lang.String[] getMessages();
+  public void clear();
+  int test();
+}
+Compiled from "CMAEvolutionStrategy.java"
+class fr.inria.optimization.cmaes.CMAEvolutionStrategy$Timing {
+  long birth;
+  long start;
+  long starteigen;
+  long eigendecomposition;
+  long writedefaultfiles;
+  final fr.inria.optimization.cmaes.CMAEvolutionStrategy this$0;
+  fr.inria.optimization.cmaes.CMAEvolutionStrategy$Timing(fr.inria.optimization.cmaes.CMAEvolutionStrategy);
+}
+Compiled from "CMAOptions.java"
+public class fr.inria.optimization.cmaes.CMAOptions implements java.io.Serializable {
+  public long diagonalCovarianceMatrix;
+  public double[] lowerStandardDeviations;
+  public double[] upperStandardDeviations;
+  public double stopFitness;
+  public double stopTolFun;
+  public double stopTolFunHist;
+  public double stopTolX;
+  public double stopTolXFactor;
+  public double stopTolUpXFactor;
+  public long stopMaxFunEvals;
+  public long stopMaxIter;
+  public boolean stopnow;
+  public int verbosity;
+  public java.lang.String outputFileNamesPrefix;
+  public int writeDisplayToFile;
+  public double maxTimeFractionForEigendecomposition;
+  public double maxTimeFractionForWriteToDefaultFiles;
+  public int checkEigenSystem;
+  public fr.inria.optimization.cmaes.CMAOptions();
+  void setOptions(java.util.Properties);
+  public java.lang.Double getFirstToken(java.lang.String, java.lang.Double);
+  public java.lang.String getFirstToken(java.lang.String);
+  public java.lang.Integer getFirstToken(java.lang.String, java.lang.Integer);
+  java.lang.String[] getAllToken(java.lang.String);
+  double[] parseDouble(java.lang.String[]);
+}
+Compiled from "CMAParameters.java"
+public class fr.inria.optimization.cmaes.CMAParameters implements java.io.Serializable {
+  int supplemented;
+  int locked;
+  int lambda;
+  int mu;
+  double mucov;
+  double mueff;
+  double[] weights;
+  double damps;
+  double cs;
+  double cc;
+  double ccov;
+  double ccovsep;
+  double chiN;
+  int flgLambdaChanged;
+  fr.inria.optimization.cmaes.CMAParameters$RecombinationType recombinationType;
+  static final boolean $assertionsDisabled;
+  public fr.inria.optimization.cmaes.CMAParameters();
+  public java.lang.String check();
+  public fr.inria.optimization.cmaes.CMAParameters getDefaults(int);
+  public fr.inria.optimization.cmaes.CMAParameters getDefaults(int, int);
+  public void supplementRemainders(int, fr.inria.optimization.cmaes.CMAOptions);
+  public int getMu();
+  public void setMu(int);
+  public int getLambda();
+  void setLambda(int);
+  public int getPopulationSize();
+  public void setPopulationSize(int);
+  public double[] getWeights();
+  public void setRecombinationWeights(fr.inria.optimization.cmaes.CMAParameters$RecombinationType);
+  public void setRecombination(int, fr.inria.optimization.cmaes.CMAParameters$RecombinationType);
+  protected void setWeights(double[]);
+  public double getMueff();
+  public double getMucov();
+  public void setMucov(double);
+  public double getCcov(boolean);
+  public double getCcov();
+  public void setCcov(double);
+  public double getDamps();
+  public void setDamps(double);
+  public double getCc();
+  public void setCc(double);
+  public double getCs();
+  public void setCs(double);
+  static {};
+}
+Compiled from "CMAParameters.java"
+public final class fr.inria.optimization.cmaes.CMAParameters$RecombinationType extends java.lang.Enum<fr.inria.optimization.cmaes.CMAParameters$RecombinationType> {
+  public static final fr.inria.optimization.cmaes.CMAParameters$RecombinationType superlinear;
+  public static final fr.inria.optimization.cmaes.CMAParameters$RecombinationType linear;
+  public static final fr.inria.optimization.cmaes.CMAParameters$RecombinationType equal;
+  public static fr.inria.optimization.cmaes.CMAParameters$RecombinationType[] values();
+  public static fr.inria.optimization.cmaes.CMAParameters$RecombinationType valueOf(java.lang.String);
+  static {};
+}
+Compiled from "CMASolution.java"
+public class fr.inria.optimization.cmaes.CMASolution implements fr.inria.optimization.cmaes.ISolutionPoint,java.io.Serializable {
+  public fr.inria.optimization.cmaes.CMASolution();
+  public fr.inria.optimization.cmaes.CMASolution(double[], double, long);
+  public fr.inria.optimization.cmaes.CMASolution deepCopy();
+  public fr.inria.optimization.cmaes.CMASolution(double[]);
+  public double getFitness();
+  public long getEvaluationNumber();
+  public double[] getX();
+  public void setFitness(double);
+  public void setEvaluationNumber(long);
+  public void setX(double[]);
+}
+Compiled from "ISolutionPoint.java"
+public interface fr.inria.optimization.cmaes.ISolutionPoint {
+  public abstract double getFitness();
+  public abstract long getEvaluationNumber();
+  public abstract double[] getX();
+  public abstract void setFitness(double);
+  public abstract void setEvaluationNumber(long);
+  public abstract void setX(double[]);
+}
+Compiled from "CMAEvolutionStrategy.java"
+class fr.inria.optimization.cmaes.IntDouble implements java.util.Comparator<fr.inria.optimization.cmaes.IntDouble> {
+  int i;
+  double val;
+  public fr.inria.optimization.cmaes.IntDouble(double, int);
+  public fr.inria.optimization.cmaes.IntDouble(double);
+  public fr.inria.optimization.cmaes.IntDouble();
+  public int compare(fr.inria.optimization.cmaes.IntDouble, fr.inria.optimization.cmaes.IntDouble);
+  public boolean equals(fr.inria.optimization.cmaes.IntDouble, fr.inria.optimization.cmaes.IntDouble);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "PrintfFormat.java"
+public class fr.inria.optimization.cmaes.PrintfFormat {
+  public fr.inria.optimization.cmaes.PrintfFormat(java.lang.String) throws java.lang.IllegalArgumentException;
+  public fr.inria.optimization.cmaes.PrintfFormat(java.util.Locale, java.lang.String) throws java.lang.IllegalArgumentException;
+  public java.lang.String sprintf(java.lang.Object[]);
+  public java.lang.String sprintf();
+  public java.lang.String sprintf(int) throws java.lang.IllegalArgumentException;
+  public java.lang.String sprintf(long) throws java.lang.IllegalArgumentException;
+  public java.lang.String sprintf(double) throws java.lang.IllegalArgumentException;
+  public java.lang.String sprintf(java.lang.String) throws java.lang.IllegalArgumentException;
+  public java.lang.String sprintf(java.lang.Object) throws java.lang.IllegalArgumentException;
+  static java.text.DecimalFormatSymbols access$000(fr.inria.optimization.cmaes.PrintfFormat);
+}
+Compiled from "PrintfFormat.java"
+class fr.inria.optimization.cmaes.PrintfFormat$ConversionSpecification {
+  final fr.inria.optimization.cmaes.PrintfFormat this$0;
+  fr.inria.optimization.cmaes.PrintfFormat$ConversionSpecification(fr.inria.optimization.cmaes.PrintfFormat);
+  fr.inria.optimization.cmaes.PrintfFormat$ConversionSpecification(fr.inria.optimization.cmaes.PrintfFormat, java.lang.String) throws java.lang.IllegalArgumentException;
+  void setLiteral(java.lang.String);
+  java.lang.String getLiteral();
+  char getConversionCharacter();
+  boolean isVariableFieldWidth();
+  void setFieldWidthWithArg(int);
+  boolean isVariablePrecision();
+  void setPrecisionWithArg(int);
+  java.lang.String internalsprintf(int) throws java.lang.IllegalArgumentException;
+  java.lang.String internalsprintf(long) throws java.lang.IllegalArgumentException;
+  java.lang.String internalsprintf(double) throws java.lang.IllegalArgumentException;
+  java.lang.String internalsprintf(java.lang.String) throws java.lang.IllegalArgumentException;
+  java.lang.String internalsprintf(java.lang.Object);
+  boolean isPositionalSpecification();
+  int getArgumentPosition();
+  boolean isPositionalFieldWidth();
+  int getArgumentPositionForFieldWidth();
+  boolean isPositionalPrecision();
+  int getArgumentPositionForPrecision();
+}
+Compiled from "CMAExample1.java"
+public class fr.inria.optimization.cmaes.examples.CMAExample1 {
+  public fr.inria.optimization.cmaes.examples.CMAExample1();
+  public static void main(java.lang.String[]);
+}
+Compiled from "CMAExample2.java"
+public class fr.inria.optimization.cmaes.examples.CMAExample2 {
+  public fr.inria.optimization.cmaes.examples.CMAExample2();
+  public static void main(java.lang.String[]);
+}
+Compiled from "CMAExample1.java"
+class fr.inria.optimization.cmaes.examples.Rosenbrock implements fr.inria.optimization.cmaes.fitness.IObjectiveFunction {
+  fr.inria.optimization.cmaes.examples.Rosenbrock();
+  public double valueOf(double[]);
+  public boolean isFeasible(double[]);
+}
+Compiled from "AbstractObjectiveFunction.java"
+public abstract class fr.inria.optimization.cmaes.fitness.AbstractObjectiveFunction implements fr.inria.optimization.cmaes.fitness.IObjectiveFunction,fr.inria.optimization.cmaes.fitness.IObjectiveFunctionParallel {
+  public fr.inria.optimization.cmaes.fitness.AbstractObjectiveFunction();
+  public abstract double valueOf(double[]);
+  public double[] valuesOf(double[][]);
+  public boolean isFeasible(double[]);
+}
+Compiled from "FunctionCollector.java"
+class fr.inria.optimization.cmaes.fitness.Ackley extends fr.inria.optimization.cmaes.fitness.AbstractObjectiveFunction {
+  double axisratio;
+  fr.inria.optimization.cmaes.fitness.Ackley(double);
+  public fr.inria.optimization.cmaes.fitness.Ackley();
+  public double valueOf(double[]);
+}
+Compiled from "FunctionCollector.java"
+class fr.inria.optimization.cmaes.fitness.Basis {
+  double[][] B;
+  java.util.Random rand;
+  fr.inria.optimization.cmaes.fitness.Basis();
+  double[] Rotate(double[]);
+  double[][] Rotate(double[][]);
+  void GenBasis(int);
+}
+Compiled from "FunctionCollector.java"
+class fr.inria.optimization.cmaes.fitness.CigTab extends fr.inria.optimization.cmaes.fitness.AbstractObjectiveFunction {
+  public double factor;
+  fr.inria.optimization.cmaes.fitness.CigTab();
+  fr.inria.optimization.cmaes.fitness.CigTab(double);
+  public double valueOf(double[]);
+}
+Compiled from "FunctionCollector.java"
+class fr.inria.optimization.cmaes.fitness.Cigar extends fr.inria.optimization.cmaes.fitness.AbstractObjectiveFunction {
+  public double factor;
+  fr.inria.optimization.cmaes.fitness.Cigar();
+  fr.inria.optimization.cmaes.fitness.Cigar(double);
+  public double valueOf(double[]);
+}
+Compiled from "FunctionCollector.java"
+class fr.inria.optimization.cmaes.fitness.DiffPow extends fr.inria.optimization.cmaes.fitness.AbstractObjectiveFunction {
+  fr.inria.optimization.cmaes.fitness.DiffPow();
+  public double valueOf(double[]);
+}
+Compiled from "FunctionCollector.java"
+class fr.inria.optimization.cmaes.fitness.Elli extends fr.inria.optimization.cmaes.fitness.AbstractObjectiveFunction {
+  public double factor;
+  fr.inria.optimization.cmaes.fitness.Elli();
+  fr.inria.optimization.cmaes.fitness.Elli(double);
+  public double valueOf(double[]);
+}
+Compiled from "FunctionCollector.java"
+class fr.inria.optimization.cmaes.fitness.ElliRotated extends fr.inria.optimization.cmaes.fitness.AbstractObjectiveFunction {
+  public fr.inria.optimization.cmaes.fitness.Basis B;
+  public double factor;
+  fr.inria.optimization.cmaes.fitness.ElliRotated();
+  fr.inria.optimization.cmaes.fitness.ElliRotated(double);
+  public double valueOf(double[]);
+}
+Compiled from "FunctionCollector.java"
+public class fr.inria.optimization.cmaes.fitness.FunctionCollector extends fr.inria.optimization.cmaes.fitness.AbstractObjectiveFunction {
+  final int maxFuncNumber;
+  fr.inria.optimization.cmaes.fitness.IObjectiveFunction[] funs;
+  int actFun;
+  int rotate;
+  double scaling;
+  fr.inria.optimization.cmaes.fitness.Basis B;
+  public fr.inria.optimization.cmaes.fitness.FunctionCollector(double, int, double);
+  public double valueOf(double[]);
+  public boolean isFeasible(double[]);
+}
+Compiled from "IObjectiveFunction.java"
+public interface fr.inria.optimization.cmaes.fitness.IObjectiveFunction {
+  public abstract double valueOf(double[]);
+  public abstract boolean isFeasible(double[]);
+}
+Compiled from "IObjectiveFunctionParallel.java"
+public interface fr.inria.optimization.cmaes.fitness.IObjectiveFunctionParallel {
+  public abstract double[] valuesOf(double[][]);
+}
+Compiled from "FunctionCollector.java"
+class fr.inria.optimization.cmaes.fitness.RandFun extends fr.inria.optimization.cmaes.fitness.AbstractObjectiveFunction {
+  java.util.Random rand;
+  fr.inria.optimization.cmaes.fitness.RandFun();
+  public double valueOf(double[]);
+}
+Compiled from "FunctionCollector.java"
+class fr.inria.optimization.cmaes.fitness.Rastrigin extends fr.inria.optimization.cmaes.fitness.AbstractObjectiveFunction {
+  public double axisratio;
+  public double amplitude;
+  fr.inria.optimization.cmaes.fitness.Rastrigin();
+  fr.inria.optimization.cmaes.fitness.Rastrigin(double, double);
+  public double valueOf(double[]);
+}
+Compiled from "FunctionCollector.java"
+class fr.inria.optimization.cmaes.fitness.Rosen extends fr.inria.optimization.cmaes.fitness.AbstractObjectiveFunction {
+  fr.inria.optimization.cmaes.fitness.Rosen();
+  public double valueOf(double[]);
+}
+Compiled from "FunctionCollector.java"
+class fr.inria.optimization.cmaes.fitness.Sphere extends fr.inria.optimization.cmaes.fitness.AbstractObjectiveFunction {
+  fr.inria.optimization.cmaes.fitness.Sphere();
+  public double valueOf(double[]);
+  public boolean isFeasible(double[]);
+}
+Compiled from "FunctionCollector.java"
+class fr.inria.optimization.cmaes.fitness.Tablet extends fr.inria.optimization.cmaes.fitness.AbstractObjectiveFunction {
+  public double factor;
+  fr.inria.optimization.cmaes.fitness.Tablet();
+  fr.inria.optimization.cmaes.fitness.Tablet(double);
+  public double valueOf(double[]);
+}
+Compiled from "FunctionCollector.java"
+class fr.inria.optimization.cmaes.fitness.TwoAxes extends fr.inria.optimization.cmaes.fitness.AbstractObjectiveFunction {
+  public double factor;
+  fr.inria.optimization.cmaes.fitness.TwoAxes();
+  fr.inria.optimization.cmaes.fitness.TwoAxes(double);
+  public double valueOf(double[]);
+}
+Compiled from "FunctionCollector.java"
+class fr.inria.optimization.cmaes.fitness.ssDiffPow extends fr.inria.optimization.cmaes.fitness.AbstractObjectiveFunction {
+  fr.inria.optimization.cmaes.fitness.ssDiffPow();
+  public double valueOf(double[]);
+}
+Compiled from "GnuPlot.java"
+public class gnuplot.GnuPlot {
+  static java.lang.String exeFile;
+  java.lang.Process p;
+  java.io.PrintStream ps;
+  java.io.BufferedReader dis;
+  public gnuplot.GnuPlot() throws java.lang.Exception;
+  public void splot(java.lang.String) throws java.lang.Exception;
+  public void plot(java.lang.String, java.lang.String) throws java.lang.Exception;
+  public void replot(java.lang.String, java.lang.String) throws java.lang.Exception;
+  public void setAxes(java.lang.String, java.lang.String);
+  static {};
+}
+Compiled from "Grapher.java"
+public class gnuplot.Grapher {
+  public gnuplot.Grapher();
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+  public static void drawGraph(int);
+  public static void writeGenData(int, int, double, double, double[]) throws java.io.IOException;
+  public static void transformData(int, double) throws java.lang.Exception;
+}
+Compiled from "IProblem.java"
+public interface lunar.IProblem<T> {
+  public abstract int nDim();
+  public abstract double fitness(double[]);
+  public abstract T getInstance(double[]);
+  public abstract void demonstrationInit(java.util.List<entity.spaceship.Spaceship>, java.util.List<controller.ShipController>, double[][]);
+  public abstract void demonstrate(java.util.List<entity.spaceship.Spaceship>, java.util.List<controller.ShipController>, double[][]);
+  public abstract void visualiseExtraInformation(java.awt.Graphics);
+}
+Compiled from "LunarProblem.java"
+public class lunar.LunarProblem implements lunar.IProblem<double[]> {
+  public lunar.LunarTerrain lt;
+  public java.util.Map<entity.spaceship.Spaceship, java.lang.Double> shipFuels;
+  public lunar.LunarProblem();
+  public int nDim();
+  public double fitness(double[]);
+  public static double scoreTerminalState(entity.spaceship.Spaceship, lunar.LunarTerrain, double);
+  public double[] getInstance(double[]);
+  public void demonstrationInit(java.util.List<entity.spaceship.Spaceship>, java.util.List<controller.ShipController>, double[][]);
+  public void demonstrate(java.util.List<entity.spaceship.Spaceship>, java.util.List<controller.ShipController>, double[][]);
+  public void visualiseExtraInformation(java.awt.Graphics);
+  public java.lang.Object getInstance(double[]);
+}
+Compiled from "LunarTerrain.java"
+public class lunar.LunarTerrain {
+  public double[] moonSurface;
+  public int[] landingPads;
+  public double gravity;
+  public double friction;
+  public double survivableVelocity;
+  public lunar.LunarTerrain(int, int, int, boolean, double, double, double);
+  public lunar.LunarTerrain(int, int, int, boolean);
+  public double getHeightAtX(double);
+  public common.math.Vector2d getNearestSafeLandingPoint(common.math.Vector2d);
+  public boolean onLandingPad(entity.spaceship.Spaceship);
+  public boolean isShipColliding(entity.spaceship.Spaceship);
+  public void draw(java.awt.Graphics2D);
+  public void draw(java.awt.Graphics2D, float);
+}
+Compiled from "ProblemProblem.java"
+public class lunar.ProblemProblem implements lunar.IProblem<double[]> {
+  public int runIndex;
+  public main.ParamEnums param;
+  public java.util.List<lunar.LunarTerrain> lts;
+  public double comparisonValue;
+  public double valueRange;
+  public double thrustLimit;
+  public double lunarGravity;
+  public double friction;
+  public int randomSeed;
+  public int numLandingPads;
+  public int landingPadSize;
+  public double survivableVelocity;
+  public double startingFuel;
+  public double proximityWeight;
+  public double velocityWeight;
+  public double fuelWeight;
+  public double angleWeight;
+  public lunar.ProblemProblem(int, main.ParamEnums);
+  public int nDim();
+  public double fitness(double[]);
+  public static double evaluateWithCurrentParams(double);
+  public static double[] getRandomIndividual(int);
+  public double[] getInstance(double[]);
+  public void demonstrationInit(java.util.List<entity.spaceship.Spaceship>, java.util.List<controller.ShipController>, double[][]);
+  public void demonstrate(java.util.List<entity.spaceship.Spaceship>, java.util.List<controller.ShipController>, double[][]);
+  public void visualiseExtraInformation(java.awt.Graphics);
+  public java.lang.Object getInstance(double[]);
+}
+Compiled from "AutoRunner.java"
+public class main.AutoRunner {
+  public main.AutoRunner();
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+}
+Compiled from "ButtonEnums.java"
+public final class main.ButtonEnums extends java.lang.Enum<main.ButtonEnums> {
+  public static final main.ButtonEnums DEMO;
+  public static final main.ButtonEnums RUN;
+  public static main.ButtonEnums[] values();
+  public static main.ButtonEnums valueOf(java.lang.String);
+  static {};
+}
+Compiled from "ControlPanel.java"
+class main.ButtonListener implements java.awt.event.ActionListener {
+  main.MainView main;
+  main.ButtonEnums type;
+  public main.ButtonListener(main.MainView, main.ButtonEnums);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "ControlPanel.java"
+class main.ButtonListener$1 {
+  static final int[] $SwitchMap$main$ButtonEnums;
+  static {};
+}
+Compiled from "ControlPanel.java"
+public class main.ControlPanel extends javax.swing.JPanel {
+  public static main.MainView main;
+  main.SliderPanel numEvalsSlider;
+  main.SliderPanel popSizeSlider;
+  main.SliderPanel valueRangeSlider;
+  main.SliderPanel uprightAngularToleranceSlider;
+  main.SliderPanel lunarGravitySlider;
+  main.SliderPanel frictionSlider;
+  main.SliderPanel randomSeedSlider;
+  main.SliderPanel numLandingPadsSlider;
+  main.SliderPanel landingPadSizeSlider;
+  main.SliderPanel survivableVelocitySlider;
+  main.SliderPanel startingFuelSlider;
+  main.SliderPanel stepsSlider;
+  main.SliderPanel thrustSlider;
+  main.SliderPanel proximitySlider;
+  main.SliderPanel velocitySlider;
+  main.SliderPanel fuelSlider;
+  main.SliderPanel angleSlider;
+  javax.swing.JButton toggleRun;
+  javax.swing.JButton toggleDemo;
+  public main.ControlPanel(main.MainView);
+  public void allowChanges();
+  public void blockChanges();
+  public void updateValues();
+  public java.awt.Dimension getPreferredSize();
+}
+Compiled from "ConvertToReadable.java"
+public class main.ConvertToReadable {
+  public main.ConvertToReadable();
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+}
+Compiled from "Demonstrator.java"
+public class main.Demonstrator implements java.lang.Runnable {
+  lunar.IProblem problem;
+  strategy.IStrategy handler;
+  main.SpaceshipVisualiser sv;
+  boolean runDemo;
+  public main.Demonstrator(lunar.IProblem, strategy.IStrategy, main.SpaceshipVisualiser);
+  public void run();
+  public void stopDemo();
+}
+Compiled from "MainView.java"
+public class main.MainView extends javax.swing.JPanel {
+  public main.ControlPanel cp;
+  public main.StatsVisualiser stv;
+  public main.SpaceshipVisualiser spv;
+  main.Runner r;
+  main.Demonstrator d;
+  lunar.IProblem problem;
+  strategy.IStrategy handler;
+  int runIndex;
+  public boolean running;
+  public boolean demoing;
+  public static main.MainView mainView;
+  public double[] bestSolution;
+  public static void main(java.lang.String[]);
+  public main.MainView();
+  public void startRun();
+  public void stopRun();
+  public void startDemo();
+  public void stopDemo();
+  public java.awt.Dimension getPreferredSize();
+}
+Compiled from "ParamEnums.java"
+public final class main.ParamEnums extends java.lang.Enum<main.ParamEnums> {
+  public static final main.ParamEnums ALL_PARAMS;
+  public static final main.ParamEnums NUM_EVALS;
+  public static final main.ParamEnums POP_SIZE;
+  public static final main.ParamEnums VALUE_RANGE;
+  public static final main.ParamEnums ANGLE_TOL;
+  public static final main.ParamEnums GRAVITY;
+  public static final main.ParamEnums FRICTION;
+  public static final main.ParamEnums RANDOM_SEED;
+  public static final main.ParamEnums NUM_PADS;
+  public static final main.ParamEnums PAD_SIZE;
+  public static final main.ParamEnums SURVIVE_VEL;
+  public static final main.ParamEnums FUEL;
+  public static final main.ParamEnums STEPS;
+  public static final main.ParamEnums THRUST;
+  public static final main.ParamEnums W_PROXIMITY;
+  public static final main.ParamEnums W_VELOCITY;
+  public static final main.ParamEnums W_FUEL;
+  public static final main.ParamEnums W_ANGLE;
+  public static main.ParamEnums[] values();
+  public static main.ParamEnums valueOf(java.lang.String);
+  static {};
+}
+Compiled from "Runner.java"
+public class main.Runner implements java.lang.Runnable {
+  lunar.IProblem problem;
+  strategy.IStrategy handler;
+  main.StatsVisualiser statsVisualiser;
+  int runIndex;
+  boolean running;
+  public main.Runner(int, lunar.IProblem, strategy.IStrategy);
+  public main.Runner(int, lunar.IProblem, strategy.IStrategy, main.StatsVisualiser);
+  public void run();
+  public void end();
+  public boolean hasEnded();
+}
+Compiled from "ControlPanel.java"
+class main.SliderPanel extends javax.swing.JPanel implements javax.swing.event.ChangeListener {
+  java.lang.String name;
+  main.ParamEnums type;
+  javax.swing.JSlider slider;
+  javax.swing.JLabel label;
+  public main.SliderPanel(java.lang.String, main.ParamEnums, int, int, int);
+  public java.awt.Dimension getPreferredSize();
+  public void stateChanged(javax.swing.event.ChangeEvent);
+}
+Compiled from "ControlPanel.java"
+class main.SliderPanel$1 {
+  static final int[] $SwitchMap$main$ParamEnums;
+  static {};
+}
+Compiled from "SpaceshipVisualiser.java"
+public class main.SpaceshipVisualiser extends javax.swing.JComponent {
+  public main.SpaceshipVisualiser();
+  public void startDemo(java.util.List<entity.spaceship.Spaceship>, lunar.IProblem);
+  public void stopDemo();
+  public void paintComponent(java.awt.Graphics);
+  public void tick();
+  public java.awt.Dimension getPreferredSize();
+}
+Compiled from "StatsVisualiser.java"
+public class main.StatsVisualiser extends javax.swing.JComponent {
+  final int MARGIN;
+  final int SCALE_WIDTH;
+  final int V_LINES;
+  int runIndex;
+  java.util.List<java.lang.Double> results;
+  double bestResult;
+  public main.StatsVisualiser();
+  public void addResult(double);
+  public void clearResults();
+  public void setRunIndex(int);
+  public void paintComponent(java.awt.Graphics);
+  public java.awt.Dimension getPreferredSize();
+}
+Compiled from "GameConfig.java"
+public class ssamot.config.GameConfig {
+  public static ssamot.config.GameConfig getInstance();
+  public int getRunTimeThreads();
+  public double getUcb1C();
+  public double getUcb1MinimumIterations();
+  public java.lang.String getRunTimeDirectory();
+  static {};
+}
+Compiled from "EXP3T.java"
+public class ssamot.mcts.EXP3T extends ssamot.mcts.MCTS<ssamot.mcts.selectors.exp3.EXP3Node> {
+  public ssamot.mcts.EXP3T(ssamot.mcts.selectors.exp3.EXP3Node);
+}
+Compiled from "MCTS.java"
+public class ssamot.mcts.MCTS<N extends ssamot.mcts.MCTSNode> {
+  public static boolean DEBUG;
+  public ssamot.mcts.selectors.Selector<N> getChanceNodeSelector();
+  public ssamot.mcts.selectors.Selector<N> getDeterministicNodeSelector();
+  public ssamot.mcts.selectors.Selector<N> getActionSelector();
+  public ssamot.mcts.backpropagators.Backpropagator<N> getBackpropagator();
+  public void setChanceNodeSelector(ssamot.mcts.selectors.Selector<N>);
+  public void setDeterministicNodeSelector(ssamot.mcts.selectors.Selector<N>);
+  public void setActionSelector(ssamot.mcts.selectors.Selector<N>);
+  public ssamot.mcts.selectors.Selector<N> getAdversarialNodeSelector();
+  public void setAdversarialNodeSelector(ssamot.mcts.selectors.Selector<N>);
+  public void setBackpropagator(ssamot.mcts.backpropagators.Backpropagator<N>);
+  public boolean shouldEnableDefaultPolicy();
+  public void enableDefaultPolicy(boolean);
+  public N getRootNode();
+  public void setRootNode(N);
+  public ssamot.mcts.MCTS(N);
+  public ssamot.mcts.MCTS();
+  public void runForMs(long);
+  public void runForSim(int);
+  public N getHighestScoringChild(N);
+  public N getHighestScoringChild();
+  static {};
+}
+Compiled from "MCTSNode.java"
+public abstract class ssamot.mcts.MCTSNode<T> {
+  protected java.util.List<T> children;
+  protected java.util.List<java.lang.Double> scores;
+  protected boolean autoGenerateChildren;
+  public ssamot.mcts.MCTSNode();
+  public double getProbability();
+  public void setProbability(double);
+  public java.util.List<T> getChildren();
+  public abstract int getAction();
+  public abstract int getRewardId();
+  public abstract boolean isLeaf();
+  public abstract void generateChildren();
+  public abstract boolean canBeEvaluated();
+  public abstract double evaluate(int);
+  public abstract double evaluateDefaultPolicy(int);
+  public abstract int getGameTotalGamePlayers();
+  public java.util.List<java.lang.Double> evaluate();
+  public java.util.List<java.lang.Double> evaluateDefaultPolicy();
+  public void setType(ssamot.mcts.MCTSNode$NodeType);
+  public ssamot.mcts.MCTSNode$NodeType getType();
+  public void prune();
+  public void reset();
+  public boolean isFirstTime();
+  public void setFirstTime(boolean);
+  public void init();
+}
+Compiled from "MCTSNode.java"
+public final class ssamot.mcts.MCTSNode$NodeType extends java.lang.Enum<ssamot.mcts.MCTSNode$NodeType> {
+  public static final ssamot.mcts.MCTSNode$NodeType STOCHASTIC;
+  public static final ssamot.mcts.MCTSNode$NodeType DETERMINISTIC;
+  public static final ssamot.mcts.MCTSNode$NodeType ADVERSARIAL;
+  public static ssamot.mcts.MCTSNode$NodeType[] values();
+  public static ssamot.mcts.MCTSNode$NodeType valueOf(java.lang.String);
+  static {};
+}
+Compiled from "StatisticsNode.java"
+public abstract class ssamot.mcts.StatisticsNode extends ssamot.mcts.MCTSNode<ssamot.mcts.StatisticsNode> {
+  protected ssamot.utilities.SummaryStatistics actionStatistics;
+  public ssamot.mcts.StatisticsNode();
+  public ssamot.utilities.SummaryStatistics getStatistics();
+}
+Compiled from "TreeExplorer.java"
+public class ssamot.mcts.TreeExplorer {
+  public ssamot.mcts.TreeExplorer();
+  public double expectimax(ssamot.mcts.StatisticsNode, int, int);
+  public static java.lang.String toDot(java.lang.String, java.lang.String, double, int);
+  public static java.lang.String toDot(java.lang.String, java.lang.String, java.lang.String, int);
+}
+Compiled from "UCT.java"
+public class ssamot.mcts.UCT extends ssamot.mcts.MCTS<ssamot.mcts.StatisticsNode> {
+  public ssamot.mcts.UCT(ssamot.mcts.StatisticsNode);
+  public ssamot.mcts.UCT();
+}
+Compiled from "Backpropagator.java"
+public interface ssamot.mcts.backpropagators.Backpropagator<T extends ssamot.mcts.MCTSNode> {
+  public abstract void backpropagate(java.util.List<T>, java.util.List<java.lang.Double>);
+}
+Compiled from "EXP3Backpropagator.java"
+public class ssamot.mcts.backpropagators.EXP3Backpropagator<T extends ssamot.mcts.selectors.exp3.EXP3Node> implements ssamot.mcts.backpropagators.Backpropagator<T> {
+  public ssamot.mcts.backpropagators.EXP3Backpropagator();
+  public void backpropagate(java.util.List<T>, java.util.List<java.lang.Double>);
+}
+Compiled from "UCBBackpropagator.java"
+public class ssamot.mcts.backpropagators.UCBBackpropagator<T extends ssamot.mcts.StatisticsNode> implements ssamot.mcts.backpropagators.Backpropagator<T> {
+  public ssamot.mcts.backpropagators.UCBBackpropagator();
+  public void backpropagate(java.util.List<T>, java.util.List<java.lang.Double>);
+}
+Compiled from "ChanceProportional.java"
+public class ssamot.mcts.selectors.ChanceProportional<T extends ssamot.mcts.MCTSNode> implements ssamot.mcts.selectors.Selector<T> {
+  java.util.Random generator;
+  public ssamot.mcts.selectors.ChanceProportional();
+  public T selectChild(T);
+}
+Compiled from "Egreedy.java"
+public class ssamot.mcts.selectors.Egreedy implements ssamot.mcts.selectors.Selector<ssamot.mcts.StatisticsNode> {
+  public static final double E;
+  java.util.Random generator;
+  public ssamot.mcts.selectors.Egreedy();
+  public ssamot.mcts.StatisticsNode selectChild(ssamot.mcts.StatisticsNode);
+  public ssamot.mcts.MCTSNode selectChild(ssamot.mcts.MCTSNode);
+}
+Compiled from "Selector.java"
+public interface ssamot.mcts.selectors.Selector<T extends ssamot.mcts.MCTSNode> {
+  public abstract T selectChild(T);
+}
+Compiled from "EXP3.java"
+public class ssamot.mcts.selectors.exp3.EXP3 implements ssamot.mcts.selectors.Selector<ssamot.mcts.selectors.exp3.EXP3Node> {
+  protected static ec.util.MersenneTwister twister;
+  public ssamot.mcts.selectors.exp3.EXP3();
+  public ssamot.mcts.selectors.exp3.EXP3Node selectChild(ssamot.mcts.selectors.exp3.EXP3Node);
+  public ssamot.mcts.MCTSNode selectChild(ssamot.mcts.MCTSNode);
+  static {};
+}
+Compiled from "EXP3Node.java"
+public abstract class ssamot.mcts.selectors.exp3.EXP3Node extends ssamot.mcts.MCTSNode<ssamot.mcts.selectors.exp3.EXP3Node> {
+  public ssamot.mcts.selectors.exp3.EXP3Node();
+  public double getGamma();
+  public double getReward();
+  public void setGamma(double);
+  public void setReward(double);
+}
+Compiled from "UCB.java"
+public abstract class ssamot.mcts.selectors.ucb.UCB<T extends ssamot.mcts.StatisticsNode> implements ssamot.mcts.selectors.Selector<T> {
+  protected ec.util.MersenneTwister twister;
+  static final boolean $assertionsDisabled;
+  public ssamot.mcts.selectors.ucb.UCB();
+  public T selectChild(T);
+  public abstract double getNodeScore(T, T);
+  public ssamot.mcts.MCTSNode selectChild(ssamot.mcts.MCTSNode);
+  static {};
+}
+Compiled from "UCB1.java"
+public class ssamot.mcts.selectors.ucb.UCB1 extends ssamot.mcts.selectors.ucb.UCB {
+  static final boolean $assertionsDisabled;
+  public ssamot.mcts.selectors.ucb.UCB1();
+  public double getNodeScore(ssamot.mcts.StatisticsNode, ssamot.mcts.StatisticsNode);
+  static {};
+}
+Compiled from "UCBActionSelector.java"
+public class ssamot.mcts.selectors.ucb.UCBActionSelector<T extends ssamot.mcts.StatisticsNode> implements ssamot.mcts.selectors.Selector<T> {
+  public ssamot.mcts.selectors.ucb.UCBActionSelector();
+  public ssamot.mcts.StatisticsNode selectChild(ssamot.mcts.StatisticsNode);
+  public ssamot.mcts.MCTSNode selectChild(ssamot.mcts.MCTSNode);
+}
+Compiled from "UCBTUNED.java"
+public class ssamot.mcts.selectors.ucb.UCBTUNED extends ssamot.mcts.selectors.ucb.UCB {
+  public ssamot.mcts.selectors.ucb.UCBTUNED();
+  public double getNodeScore(ssamot.mcts.StatisticsNode, ssamot.mcts.StatisticsNode);
+}
+Compiled from "ContinuousProblem.java"
+public abstract class ssamot.mcts.ucb.optimisation.ContinuousProblem {
+  public ssamot.mcts.ucb.optimisation.ContinuousProblem();
+  public abstract double getFtarget();
+  public abstract double evaluate(double[]);
+}
+Compiled from "HOOB.java"
+public class ssamot.mcts.ucb.optimisation.HOOB extends ssamot.mcts.selectors.ucb.UCB<ssamot.mcts.ucb.optimisation.MCTSContinuousNode> {
+  static final boolean $assertionsDisabled;
+  public ssamot.mcts.ucb.optimisation.HOOB(int, int);
+  public int calculateMaximumDepth();
+  public double getU(ssamot.mcts.ucb.optimisation.MCTSContinuousNode);
+  public double getU(ssamot.mcts.ucb.optimisation.MCTSContinuousNode, ssamot.mcts.ucb.optimisation.MCTSContinuousNode);
+  public double getNodeScore(ssamot.mcts.ucb.optimisation.MCTSContinuousNode, ssamot.mcts.ucb.optimisation.MCTSContinuousNode);
+  public int getMaxDepth();
+  public int getDimensions();
+  public int getIterations();
+  public double getNodeScore(ssamot.mcts.StatisticsNode, ssamot.mcts.StatisticsNode);
+  static {};
+}
+Compiled from "HOONodeExplorer.java"
+public class ssamot.mcts.ucb.optimisation.HOONodeExplorer {
+  ssamot.mcts.StatisticsNode node;
+  public ssamot.mcts.ucb.optimisation.HOONodeExplorer(ssamot.mcts.StatisticsNode);
+  public void generatePath(ssamot.mcts.StatisticsNode, int, double[]);
+  public double[] generatePath(int);
+}
+Compiled from "HOOOptimiser.java"
+public class ssamot.mcts.ucb.optimisation.HOOOptimiser extends ssamot.mcts.MCTS<ssamot.mcts.ucb.optimisation.MCTSContinuousNode> {
+  public ssamot.mcts.ucb.optimisation.HOOOptimiser(ssamot.mcts.ucb.optimisation.ContinuousProblem, int, int, double, double, double);
+  public ssamot.mcts.ucb.optimisation.HOOOptimiser(ssamot.mcts.ucb.optimisation.ContinuousProblem, int, int, double[], double[], double);
+  public double getBestValue();
+  public ssamot.mcts.ucb.optimisation.MCTSContinuousNode getBestNode();
+  public double[] getBestSample();
+}
+Compiled from "HOOTruncatedBackpropagator.java"
+public class ssamot.mcts.ucb.optimisation.HOOTruncatedBackpropagator implements ssamot.mcts.backpropagators.Backpropagator<ssamot.mcts.ucb.optimisation.MCTSContinuousNode> {
+  ssamot.mcts.ucb.optimisation.ContinuousProblem function;
+  double bestValue;
+  double[] bestSample;
+  ssamot.mcts.ucb.optimisation.HOOB hoob;
+  double[][] samples;
+  double[] rewards;
+  public ssamot.mcts.ucb.optimisation.HOOTruncatedBackpropagator(int, ssamot.mcts.ucb.optimisation.ContinuousProblem, int, ssamot.mcts.ucb.optimisation.HOOB);
+  public void backpropagate(java.util.List<ssamot.mcts.ucb.optimisation.MCTSContinuousNode>, java.util.List<java.lang.Double>);
+  public double getBestValue();
+  public double[] getBestSample();
+  public double[][] getSamples();
+  public void setSamples(double[][]);
+  public double[] getRewards();
+  public void setRewards(double[]);
+}
+Compiled from "LockingContinuousProblem.java"
+public class ssamot.mcts.ucb.optimisation.LockingContinuousProblem extends ssamot.mcts.ucb.optimisation.ContinuousProblem {
+  public ssamot.mcts.ucb.optimisation.LockingContinuousProblem();
+  public double getFtarget();
+  public double[] getX();
+  public void setScore(double);
+  public int getN();
+  public void unlock();
+  public double evaluate(double[]);
+}
+Compiled from "MCTSContinuousNode.java"
+public class ssamot.mcts.ucb.optimisation.MCTSContinuousNode extends ssamot.mcts.StatisticsNode {
+  public static ec.util.MersenneTwister twister;
+  protected double action;
+  boolean hasBeenSplit;
+  public java.lang.String contId;
+  protected double[] min;
+  protected double[] max;
+  protected int splitPoints;
+  double oldValue;
+  int timeshit;
+  public boolean isHasBeenSplit();
+  public ssamot.mcts.ucb.optimisation.MCTSContinuousNode(double[], double[], int, int, int, int, double);
+  public void addSample(double[], double);
+  public double[] getMin();
+  public double[] getMax();
+  public int getSplitPoints();
+  public double getContinuousAction();
+  public int getAction();
+  public double[] sampleAction();
+  public void split();
+  public int getDepth();
+  public int getRewardId();
+  public boolean isLeaf();
+  public void generateChildren();
+  public boolean canBeEvaluated();
+  public double evaluate(int);
+  public double evaluateDefaultPolicy(int);
+  public int getGameTotalGamePlayers();
+  public java.lang.String toString();
+  public void setB(double);
+  public double getB();
+  static {};
+}
+Compiled from "MDPRootActionReplayer.java"
+public class ssamot.mcts.ucb.optimisation.MDPRootActionReplayer {
+  public ssamot.mcts.ucb.optimisation.MDPRootActionReplayer();
+  public double[] replay(double[][], double[], int, int, double, double, double);
+}
+Compiled from "UCBLeafNode.java"
+public class ssamot.mcts.ucb.optimisation.UCBLeafNode extends ssamot.mcts.StatisticsNode {
+  public ssamot.mcts.ucb.optimisation.UCBLeafNode();
+  public int getAction();
+  public int getRewardId();
+  public boolean isLeaf();
+  public void generateChildren();
+  public boolean canBeEvaluated();
+  public double evaluate(int);
+  public double evaluateDefaultPolicy(int);
+  public int getGameTotalGamePlayers();
+}
+Compiled from "URLockingContinuousProblem.java"
+public class ssamot.mcts.ucb.optimisation.URLockingContinuousProblem extends ssamot.mcts.ucb.optimisation.LockingContinuousProblem {
+  double max;
+  double min;
+  public ssamot.mcts.ucb.optimisation.URLockingContinuousProblem();
+  public void setScore(double);
+}
+Compiled from "OneDimensionLinearCoco.java"
+public class ssamot.test.OneDimensionLinearCoco extends ssamot.mcts.ucb.optimisation.ContinuousProblem {
+  public ssamot.test.OneDimensionLinearCoco();
+  public double getFtarget();
+  public double evaluate(double[]);
+}
+Compiled from "UCBTestNode.java"
+public class ssamot.test.UCBTestNode extends ssamot.mcts.StatisticsNode {
+  int action;
+  int depth;
+  public int getAction();
+  public int getRewardId();
+  public boolean isLeaf();
+  public void generateChildren();
+  public ssamot.test.UCBTestNode(int, int, int);
+  public boolean canBeEvaluated();
+  public double evaluate(int);
+  public int getGameTotalGamePlayers();
+  public double evaluateDefaultPolicy(int);
+}
+Compiled from "XSquaredCoco.java"
+public class ssamot.test.XSquaredCoco extends ssamot.mcts.ucb.optimisation.ContinuousProblem {
+  double max;
+  double min;
+  public ssamot.test.XSquaredCoco();
+  public double getFtarget();
+  public double evaluate(double[]);
+}
+Compiled from "ArraysCopy.java"
+public class ssamot.utilities.ArraysCopy {
+  public ssamot.utilities.ArraysCopy();
+  public static void multiArrayCopy(int[][], int[][]);
+  public static void multiArrayCopy(float[][], float[][]);
+  public static int[] fastShallowArrayCopy(int[]);
+  public static javax.smartcardio.Card[] fastShallowArrayCopy(javax.smartcardio.Card[]);
+  public static double[] fastShallowArrayCopy(double[]);
+  public static void fastShallowArrayCopy(double[], double[]);
+  public static boolean[] fastShallowArrayCopy(boolean[]);
+  public static short[] fastShallowArrayCopy(short[]);
+  public static void multiArrayCopy(short[][], short[][]);
+  public static void multiArrayCopy(javax.smartcardio.Card[][], javax.smartcardio.Card[][]);
+  public static double[] flattenTwoDArray(float[][], double[], int);
+  public static <T> T[] concat(T[], T[]);
+  public static double[] concat(double[], double[]);
+}
+Compiled from "BoundedExecutor.java"
+public class ssamot.utilities.BoundedExecutor {
+  public ssamot.utilities.BoundedExecutor(java.util.concurrent.Executor, int);
+  public void submitTask(java.lang.Runnable) throws java.lang.InterruptedException, java.util.concurrent.RejectedExecutionException;
+  static java.util.concurrent.Semaphore access$000(ssamot.utilities.BoundedExecutor);
+}
+Compiled from "BoundedExecutor.java"
+class ssamot.utilities.BoundedExecutor$1 implements java.lang.Runnable {
+  final java.lang.Runnable val$command;
+  final ssamot.utilities.BoundedExecutor this$0;
+  ssamot.utilities.BoundedExecutor$1(ssamot.utilities.BoundedExecutor, java.lang.Runnable);
+  public void run();
+}
+Compiled from "Common.java"
+public class ssamot.utilities.Common {
+  public static ec.util.MersenneTwister twister;
+  public ssamot.utilities.Common();
+  public static boolean arrayRepresentsProbability(double[]);
+  public static boolean testIfpotIsEqual(short[], boolean[]);
+  public static boolean rewardsAreZeroSum(java.util.List<java.lang.Double>, java.lang.Object);
+  public static boolean arrayRepresentsProbability(float[]);
+  public static int pickRandomProportionally(double[]);
+  public static double sigmoidt(double);
+  public static double tanht(double);
+  public static double sigmoid(double);
+  public static double step(double);
+  public static void shuffle(int[]);
+  public static double normalise(double, double, double);
+  public static double normaliseZeroToOne(double, double, double);
+  public static void normaliseActions(double[]);
+  public static short convertDoubleToShort(double);
+  public static double convertShortToDouble(short);
+  public static double sumArray(short[]);
+  static {};
+}
+Compiled from "Configuration.java"
+public class ssamot.utilities.Configuration {
+  public java.lang.String getRuntime_directory();
+  public java.lang.String getCma_configuration_file();
+  public java.lang.Boolean istCocoBbopNoisy();
+  public static ssamot.utilities.Configuration getConfiguration();
+  public static java.lang.String getPropertyAsString(java.lang.String);
+  static {};
+}
+Compiled from "ConsoleProgressBar.java"
+public class ssamot.utilities.ConsoleProgressBar {
+  int currentChar;
+  char completed;
+  int totalPercent;
+  ssamot.utilities.ElapsedCpuTimer timer;
+  ssamot.utilities.ElapsedCpuTimer totalTimer;
+  public ssamot.utilities.ConsoleProgressBar();
+  public void addOnePercent();
+  public void print(double);
+  public void printTime(long);
+  public void endProgress();
+  public static void main(java.lang.String[]);
+}
+Compiled from "ElapsedCpuTimer.java"
+public class ssamot.utilities.ElapsedCpuTimer {
+  java.lang.management.ThreadMXBean bean;
+  long oldTime;
+  long maxTime;
+  public ssamot.utilities.ElapsedCpuTimer$TimerType type;
+  public ssamot.utilities.ElapsedCpuTimer(ssamot.utilities.ElapsedCpuTimer$TimerType);
+  public ssamot.utilities.ElapsedCpuTimer();
+  public long elapsed();
+  public long elapsedMillis();
+  public double elapsedMinutes();
+  public double elapsedHours();
+  public void reset();
+  public java.lang.String toString();
+  public void setMaxTimeMillis(long);
+  public boolean exceededMaxTime();
+}
+Compiled from "ElapsedCpuTimer.java"
+class ssamot.utilities.ElapsedCpuTimer$1 {
+  static final int[] $SwitchMap$ssamot$utilities$ElapsedCpuTimer$TimerType;
+  static {};
+}
+Compiled from "ElapsedCpuTimer.java"
+public final class ssamot.utilities.ElapsedCpuTimer$TimerType extends java.lang.Enum<ssamot.utilities.ElapsedCpuTimer$TimerType> {
+  public static final ssamot.utilities.ElapsedCpuTimer$TimerType WALL_TIME;
+  public static final ssamot.utilities.ElapsedCpuTimer$TimerType CPU_TIME;
+  public static final ssamot.utilities.ElapsedCpuTimer$TimerType USER_TIME;
+  public static ssamot.utilities.ElapsedCpuTimer$TimerType[] values();
+  public static ssamot.utilities.ElapsedCpuTimer$TimerType valueOf(java.lang.String);
+  static {};
+}
+Compiled from "ObjectSizeFetcher.java"
+public class ssamot.utilities.ObjectSizeFetcher {
+  public ssamot.utilities.ObjectSizeFetcher();
+  public static void premain(java.lang.String, java.lang.instrument.Instrumentation);
+  public static long getObjectSize(java.lang.Object);
+}
+Compiled from "SerialClone.java"
+public class ssamot.utilities.SerialClone {
+  public ssamot.utilities.SerialClone();
+  public static <T> T clone(T);
+}
+Compiled from "SerialClone.java"
+class ssamot.utilities.SerialClone$CloneInput extends java.io.ObjectInputStream {
+  ssamot.utilities.SerialClone$CloneInput(java.io.InputStream, ssamot.utilities.SerialClone$CloneOutput) throws java.io.IOException;
+  protected java.lang.Class<?> resolveClass(java.io.ObjectStreamClass) throws java.io.IOException, java.lang.ClassNotFoundException;
+  protected java.lang.Class<?> resolveProxyClass(java.lang.String[]) throws java.io.IOException, java.lang.ClassNotFoundException;
+}
+Compiled from "SerialClone.java"
+class ssamot.utilities.SerialClone$CloneOutput extends java.io.ObjectOutputStream {
+  java.util.Queue<java.lang.Class<?>> classQueue;
+  ssamot.utilities.SerialClone$CloneOutput(java.io.OutputStream) throws java.io.IOException;
+  protected void annotateClass(java.lang.Class<?>);
+  protected void annotateProxyClass(java.lang.Class<?>);
+}
+Compiled from "SerialisableCollable.java"
+public abstract class ssamot.utilities.SerialisableCollable<V> implements java.io.Serializable, java.util.concurrent.Callable<V> {
+  public ssamot.utilities.SerialisableCollable();
+}
+Compiled from "StreamClonable.java"
+public class ssamot.utilities.StreamClonable {
+  public ssamot.utilities.StreamClonable();
+  public java.lang.Object clone();
+}
+Compiled from "SummaryStatistics.java"
+public class ssamot.utilities.SummaryStatistics implements java.io.Serializable {
+  public java.lang.String name;
+  double n;
+  boolean valid;
+  java.util.ArrayList<java.lang.Double> values;
+  public ssamot.utilities.SummaryStatistics();
+  public ssamot.utilities.SummaryStatistics(java.lang.String, boolean);
+  public final void reset();
+  public double getMax();
+  public double getMin();
+  public double getMean();
+  public double sumSquareDiff();
+  public double getStandardDeviation();
+  public double getVariance();
+  public double getEVStdDev();
+  public double getSum();
+  public double getN();
+  public void setN(int);
+  public double stdErr();
+  public void add(ssamot.utilities.SummaryStatistics);
+  public ssamot.utilities.SummaryStatistics copy();
+  public void addValue(double);
+  public void addValue(double, double);
+  public void removeValue(double, double);
+  public java.lang.String toString();
+  public double getMedian();
+}
+Compiled from "CMAHandler.java"
+public class strategy.CMAHandler implements strategy.IStrategy {
+  public lunar.IProblem problem;
+  public fr.inria.optimization.cmaes.CMAEvolutionStrategy cma;
+  public strategy.CMAHandler(lunar.IProblem, int, double, double, int);
+  public void init();
+  public void run();
+  public void finish();
+  public double[][] getPopulation();
+  public boolean hasCompleted();
+  public long getIterations();
+  public int getFuncEvals();
+  public double[] getBestRecentSolution();
+  public double getBestRecentFitness();
+  public double getRecentMeanFitness();
+  public double getRecentStdDevFitness();
+}
+Compiled from "ContinuousProblemWrapper.java"
+public class strategy.ContinuousProblemWrapper extends ssamot.mcts.ucb.optimisation.ContinuousProblem {
+  lunar.IProblem problem;
+  boolean negateFitness;
+  public strategy.ContinuousProblemWrapper(lunar.IProblem, boolean);
+  public double getFtarget();
+  public double evaluate(double[]);
+}
+Compiled from "IStrategy.java"
+public interface strategy.IStrategy {
+  public abstract void init();
+  public abstract void run();
+  public abstract void finish();
+  public abstract double[][] getPopulation();
+  public abstract boolean hasCompleted();
+  public abstract long getIterations();
+  public abstract int getFuncEvals();
+  public abstract double[] getBestRecentSolution();
+  public abstract double getBestRecentFitness();
+}
+Compiled from "TruncatedHOOHandler.java"
+public class strategy.TruncatedHOOHandler implements strategy.IStrategy {
+  public lunar.IProblem problem;
+  public strategy.TruncatedHOOHandler(lunar.IProblem, int);
+  public strategy.TruncatedHOOHandler(lunar.IProblem, int, double[], double);
+  public void init();
+  public void init(double[], double);
+  public void run();
+  public void finish();
+  public double[][] getPopulation();
+  public boolean hasCompleted();
+  public long getIterations();
+  public int getFuncEvals();
+  public double[] getBestRecentSolution();
+  public double getBestRecentFitness();
+}

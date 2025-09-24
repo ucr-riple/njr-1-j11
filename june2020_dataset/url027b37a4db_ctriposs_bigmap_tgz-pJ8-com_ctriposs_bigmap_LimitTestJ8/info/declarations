@@ -1,0 +1,537 @@
+Compiled from "BigConcurrentHashMapImpl.java"
+public class com.ctriposs.bigmap.BigConcurrentHashMapImpl implements com.ctriposs.bigmap.IBigConcurrentHashMap {
+  static final int DEFAULT_INITIAL_CAPACITY;
+  static final float DEFAULT_LOAD_FACTOR;
+  static final int DEFAULT_CONCURRENCY_LEVEL;
+  static final int DEFAULT_PURGE_INTERVAL;
+  static final boolean DEFAULT_RELOAD_ON_STARTUP;
+  static final int MAXIMUM_CAPACITY;
+  static final int MAX_SEGMENTS;
+  final int segmentMask;
+  final int segmentShift;
+  final com.ctriposs.bigmap.BigConcurrentHashMapImpl$Segment<byte[]>[] segments;
+  final com.ctriposs.bigmap.IMapEntryFactory mapEntryFactory;
+  final java.lang.String mapDir;
+  final java.lang.String mapName;
+  java.util.Timer purgeTimer;
+  final com.ctriposs.bigmap.BigConfig config;
+  final java.util.concurrent.atomic.AtomicLong purgeCount;
+  final com.ctriposs.bigmap.BigConcurrentHashMapImpl$Segment<byte[]> segmentFor(int);
+  public com.ctriposs.bigmap.BigConcurrentHashMapImpl(java.lang.String, java.lang.String, com.ctriposs.bigmap.BigConfig) throws java.io.IOException;
+  void reload() throws java.io.IOException;
+  public com.ctriposs.bigmap.BigConcurrentHashMapImpl(java.lang.String, java.lang.String) throws java.io.IOException;
+  void purge() throws java.io.IOException;
+  public boolean isEmpty();
+  public int size();
+  public byte[] get(byte[]);
+  public boolean containsKey(byte[]);
+  public byte[] put(byte[], byte[], long);
+  void restoreInUseMapEntry(com.ctriposs.bigmap.MapEntry);
+  public byte[] put(byte[], byte[]);
+  public byte[] putIfAbsent(byte[], byte[], long);
+  public byte[] putIfAbsent(byte[], byte[]);
+  public byte[] remove(byte[]);
+  public boolean remove(byte[], byte[]);
+  public boolean replace(byte[], byte[], byte[]);
+  public boolean replace(byte[], byte[], byte[], long);
+  public byte[] replace(byte[], byte[]);
+  public byte[] replace(byte[], byte[], long);
+  public void clear();
+  public void close() throws java.io.IOException;
+  public void removeAll() throws java.io.IOException;
+  public com.ctriposs.bigmap.IMMFStats getMemoryMappedFileStats();
+  static org.slf4j.Logger access$000();
+  static {};
+}
+Compiled from "BigConcurrentHashMapImpl.java"
+final class com.ctriposs.bigmap.BigConcurrentHashMapImpl$HashEntry {
+  volatile long index;
+  final int hash;
+  com.ctriposs.bigmap.BigConcurrentHashMapImpl$HashEntry next;
+  com.ctriposs.bigmap.BigConcurrentHashMapImpl$HashEntry(long, int, com.ctriposs.bigmap.BigConcurrentHashMapImpl$HashEntry);
+  static com.ctriposs.bigmap.BigConcurrentHashMapImpl$HashEntry[] newArray(int);
+}
+Compiled from "BigConcurrentHashMapImpl.java"
+class com.ctriposs.bigmap.BigConcurrentHashMapImpl$PurgeTimerTask extends java.util.TimerTask {
+  java.util.concurrent.atomic.AtomicBoolean running;
+  final com.ctriposs.bigmap.BigConcurrentHashMapImpl this$0;
+  com.ctriposs.bigmap.BigConcurrentHashMapImpl$PurgeTimerTask(com.ctriposs.bigmap.BigConcurrentHashMapImpl);
+  public void run();
+}
+Compiled from "BigConcurrentHashMapImpl.java"
+final class com.ctriposs.bigmap.BigConcurrentHashMapImpl$Segment<V> extends java.util.concurrent.locks.ReentrantLock implements java.io.Serializable {
+  volatile transient int count;
+  transient int threshold;
+  volatile transient com.ctriposs.bigmap.BigConcurrentHashMapImpl$HashEntry[] table;
+  final float loadFactor;
+  final com.ctriposs.bigmap.IMapEntryFactory mapEntryFactory;
+  com.ctriposs.bigmap.BigConcurrentHashMapImpl$Segment(int, float, com.ctriposs.bigmap.IMapEntryFactory);
+  static <V> com.ctriposs.bigmap.BigConcurrentHashMapImpl$Segment<V>[] newArray(int);
+  void setTable(com.ctriposs.bigmap.BigConcurrentHashMapImpl$HashEntry[]);
+  com.ctriposs.bigmap.BigConcurrentHashMapImpl$HashEntry getFirst(int);
+  byte[] get(byte[], int) throws java.io.IOException;
+  void removeEntry(com.ctriposs.bigmap.BigConcurrentHashMapImpl$HashEntry[], int, com.ctriposs.bigmap.BigConcurrentHashMapImpl$HashEntry);
+  boolean containsKey(byte[], int) throws java.io.IOException;
+  boolean replace(byte[], int, byte[], byte[], long) throws java.io.IOException;
+  byte[] replace(byte[], int, byte[], long) throws java.io.IOException;
+  void restoreInUseMapEntry(com.ctriposs.bigmap.MapEntry, int) throws java.io.IOException;
+  byte[] put(byte[], int, byte[], boolean, long) throws java.io.IOException;
+  void rehash();
+  void purge() throws java.io.IOException;
+  byte[] remove(byte[], int, byte[]) throws java.io.IOException;
+  boolean isExpired(com.ctriposs.bigmap.MapEntry);
+  void clear();
+}
+Compiled from "BigConcurrentHashMapTest.java"
+public class com.ctriposs.bigmap.BigConcurrentHashMapTest {
+  public com.ctriposs.bigmap.BigConcurrentHashMapTest();
+  public void testClear() throws java.io.IOException;
+  public void testContainsKey() throws java.io.IOException;
+  public void testGet() throws java.io.IOException;
+  public void testIsEmpty() throws java.io.IOException;
+  public void testPutIfAbsent() throws java.io.IOException;
+  public void testPutIfAbsent2() throws java.io.IOException;
+  public void testReplace() throws java.io.IOException;
+  public void testReplace2() throws java.io.IOException;
+  public void testReplaceValue() throws java.io.IOException;
+  public void testReplaceValue2() throws java.io.IOException;
+  public void testRemove() throws java.io.IOException;
+  public void testRemove2() throws java.io.IOException;
+  public void testSize() throws java.io.IOException;
+  public void clear() throws java.io.IOException;
+  public void testConstructor1() throws java.io.IOException;
+  public void testConstructor2() throws java.io.IOException;
+  public void testConstructor3() throws java.io.IOException;
+  public void testContainsValue_NullPointerException() throws java.io.IOException;
+  public void testLoop() throws java.io.IOException;
+  public void shouldThrow();
+  public void testConcurrency() throws java.io.IOException, java.lang.InterruptedException;
+  static {};
+}
+Compiled from "BigConcurrentHashMapTest.java"
+public class com.ctriposs.bigmap.BigConcurrentHashMapTest$CachePutterRunnable implements java.lang.Runnable {
+  public com.ctriposs.bigmap.BigConcurrentHashMapTest$CachePutterRunnable(com.ctriposs.bigmap.BigConcurrentHashMapImpl, int, int);
+  public void run();
+}
+Compiled from "BigConfig.java"
+public class com.ctriposs.bigmap.BigConfig {
+  public com.ctriposs.bigmap.BigConfig();
+  public boolean isReloadOnStartup();
+  public com.ctriposs.bigmap.BigConfig setReloadOnStartup(boolean);
+  public int getInitialCapacity();
+  public com.ctriposs.bigmap.BigConfig setInitialCapacity(int);
+  public int getConcurrencyLevel();
+  public com.ctriposs.bigmap.BigConfig setConcurrencyLevel(int);
+  public float getLoadFactor();
+  public com.ctriposs.bigmap.BigConfig setLoadFactor(float);
+  public long getPurgeIntervalInMs();
+  public com.ctriposs.bigmap.BigConfig setPurgeIntervalInMs(long);
+}
+Compiled from "IBigConcurrentHashMap.java"
+public interface com.ctriposs.bigmap.IBigConcurrentHashMap extends java.io.Closeable {
+  public abstract void clear();
+  public abstract byte[] get(byte[]);
+  public abstract boolean isEmpty();
+  public abstract byte[] put(byte[], byte[], long);
+  public abstract byte[] putIfAbsent(byte[], byte[], long);
+  public abstract byte[] remove(byte[]);
+  public abstract int size();
+  public abstract void removeAll() throws java.io.IOException;
+  public abstract com.ctriposs.bigmap.IMMFStats getMemoryMappedFileStats();
+}
+Compiled from "IMMFStats.java"
+public interface com.ctriposs.bigmap.IMMFStats {
+  public abstract long getBackFileUsed() throws java.io.IOException;
+  public abstract long getFreeEntryCount();
+  public abstract long[] getFreeEntryCountArray();
+  public abstract long[] getTotalFreeSlotSizeArray();
+  public abstract long getTotalEntryCount();
+  public abstract long getTotalFreeSlotSize();
+  public abstract long getTotalSlotSize();
+  public abstract long getTotalUsedSlotSize();
+  public abstract long getTotalRealUsedSlotSize();
+  public abstract long getTotalWastedSlotSize();
+  public abstract long getTotalAcquireCounter();
+  public abstract long getTotalReleaseCounter();
+  public abstract long getTotalExatchMatchReuseCounter();
+  public abstract long getTotalApproximateMatchReuseCounter();
+  public abstract long getTotalAcquireNewCounter();
+}
+Compiled from "IMapEntryFactory.java"
+public interface com.ctriposs.bigmap.IMapEntryFactory extends java.io.Closeable,com.ctriposs.bigmap.IMMFStats {
+  public abstract com.ctriposs.bigmap.MapEntry acquire(int) throws java.io.IOException;
+  public abstract void release(com.ctriposs.bigmap.MapEntry) throws java.io.IOException;
+  public abstract com.ctriposs.bigmap.MapEntry findMapEntryByIndex(long) throws java.io.IOException;
+  public abstract void removeAll() throws java.io.IOException;
+  public abstract long getFreeEntryCountByIndex(int);
+  public abstract long getTotalFreeSlotSizeByIndex(int);
+  public abstract java.util.NavigableSet<java.lang.Integer> getFreeEntryIndexSet();
+  public abstract void flush();
+}
+Compiled from "LimitTest.java"
+public class com.ctriposs.bigmap.LimitTest {
+  public com.ctriposs.bigmap.LimitTest();
+  public static void main(java.lang.String[]) throws java.io.IOException;
+  public static void limitTest() throws java.io.IOException, java.lang.InterruptedException;
+  public static void clear() throws java.io.IOException;
+  static {};
+}
+Compiled from "MapEntry.java"
+public class com.ctriposs.bigmap.MapEntry {
+  static final int INDEX_ITEM_DATA_PAGE_INDEX_OFFSET;
+  static final int INDEX_ITEM_DATA_SLOT_OFFSET_OFFSET;
+  static final int INDEX_ITEM_DATA_SLOT_LENGTH_OFFSET;
+  static final int INDEX_ITEM_MAP_ENTRY_KEY_LENGTH_OFFSET;
+  static final int INDEX_ITEM_MAP_ENTRY_VALUE_LENGTH_OFFSET;
+  static final int INDEX_ITEM_MAP_ENTRY_CREATED_TIME_OFFSET;
+  static final int INDEX_ITEM_MAP_ENTRY_LAST_ACCESS_TIME_OFFSET;
+  static final int INDEX_ITEM_MAP_ENTRY_TIME_TO_LIVE_OFFSET;
+  static final int INDEX_ITEM_MAP_ENTRY_STATUS;
+  public com.ctriposs.bigmap.MapEntry(long, int, int, com.ctriposs.bigmap.page.IMappedPage, com.ctriposs.bigmap.page.IMappedPageFactory);
+  public com.ctriposs.bigmap.MapEntry(long, int, com.ctriposs.bigmap.page.IMappedPage, com.ctriposs.bigmap.page.IMappedPageFactory);
+  public long getIndex();
+  public int getRealEntryLength();
+  public int getSlotSize();
+  public int getKeyLength();
+  public void putKeyLength(int);
+  public int getValueLength();
+  public void putValueLength(int);
+  public long getCreatedTime();
+  public void putCreatedTime(long);
+  public long getLastAccessedTime();
+  public void putLastAccessedTime(long);
+  public long getTimeToLive();
+  public void putTimeToLive(long);
+  public boolean isReleased();
+  public void markReleased();
+  public boolean isInUse();
+  public void MarkInUse();
+  public boolean isAllocated();
+  public void MarkAllocated();
+  public byte[] getEntryKey() throws java.io.IOException;
+  public void putEntryKey(byte[]) throws java.io.IOException;
+  public byte[] getEntryValue() throws java.io.IOException;
+  public void putEntryValue(byte[]) throws java.io.IOException;
+  public boolean equals(java.lang.Object);
+}
+Compiled from "MapEntryFactoryImpl.java"
+public class com.ctriposs.bigmap.MapEntryFactoryImpl implements com.ctriposs.bigmap.IMapEntryFactory {
+  static final java.lang.String INDEX_PAGE_FOLDER;
+  static final java.lang.String DATA_PAGE_FOLDER;
+  static final java.lang.String META_DATA_PAGE_FOLDER;
+  static final int INDEX_ITEMS_PER_PAGE_BITS;
+  static final int INDEX_ITEMS_PER_PAGE;
+  static final int INDEX_ITEM_LENGTH_BITS;
+  static final int INDEX_ITEM_LENGTH;
+  static final int INDEX_PAGE_SIZE;
+  public static final int DATA_PAGE_SIZE;
+  static final int MAX_DATA_SLOT_LENGTH_BITS;
+  public static final int MAX_DATA_SLOT_LENGTH;
+  public static final int FREE_ENTRY_ARRAY_ITEM_BITS;
+  public static final int FREE_ENTRY_ARRAY_SIZE;
+  static final int META_DATA_ITEM_LENGTH_BITS;
+  static final int META_DATA_PAGE_SIZE;
+  java.lang.String mapFileDirectory;
+  java.lang.String mapDir;
+  java.lang.String mapName;
+  com.ctriposs.bigmap.page.IMappedPageFactory indexPageFactory;
+  com.ctriposs.bigmap.page.IMappedPageFactory dataPageFactory;
+  com.ctriposs.bigmap.page.IMappedPageFactory metaPageFactory;
+  static final long META_DATA_PAGE_INDEX;
+  long headDataPageIndex;
+  int headDataItemOffset;
+  final java.util.concurrent.locks.Lock appendLock;
+  final java.util.concurrent.locks.ReadWriteLock arrayReadWritelock;
+  final java.util.concurrent.locks.Lock arrayReadLock;
+  final java.util.concurrent.locks.Lock arrayWriteLock;
+  java.util.concurrent.atomic.AtomicLong arrayHeadIndex;
+  java.util.concurrent.atomic.AtomicLong arrayTailIndex;
+  java.util.concurrent.atomic.AtomicLong freeEntryCount;
+  java.util.concurrent.atomic.AtomicLong totalEntryCount;
+  java.util.concurrent.atomic.AtomicLong totalFreeSlotSize;
+  java.util.concurrent.atomic.AtomicLong totalSlotSize;
+  java.util.concurrent.atomic.AtomicLong totalRealUsedSlotSize;
+  java.util.concurrent.atomic.AtomicLong totalAcquireCounter;
+  java.util.concurrent.atomic.AtomicLong totalReleaseCounter;
+  java.util.concurrent.atomic.AtomicLong totalExactMatchReuseCounter;
+  java.util.concurrent.atomic.AtomicLong totalApproximateMatchReuseCounter;
+  java.util.NavigableSet<java.lang.Integer> freeEntryIndexSet;
+  com.ctriposs.bigmap.MapEntryFactoryImpl$FreeEntry[] freeEntries;
+  public java.util.NavigableSet<java.lang.Integer> getFreeEntryIndexSet();
+  public long getTotalWastedSlotSize();
+  public long getTotalRealUsedSlotSize();
+  public long getTotalUsedSlotSize();
+  public long getTotalSlotSize();
+  public long getTotalFreeSlotSize();
+  public int mapLengthToFreeEntryArrayIndex(int);
+  public long getFreeEntryCount();
+  public long getTotalEntryCount();
+  public long getFreeEntryCountByIndex(int);
+  public long getTotalFreeSlotSizeByIndex(int);
+  public long[] getFreeEntryCountArray();
+  public long[] getTotalFreeSlotSizeArray();
+  public com.ctriposs.bigmap.MapEntryFactoryImpl(java.lang.String, java.lang.String) throws java.io.IOException;
+  void commonInit() throws java.io.IOException;
+  void initFreeEntry();
+  void initCounters();
+  void initArrayIndex() throws java.io.IOException;
+  void initDataPageIndex() throws java.io.IOException;
+  boolean isEmpty();
+  boolean isFull();
+  public com.ctriposs.bigmap.MapEntry acquire(int) throws java.io.IOException;
+  public com.ctriposs.bigmap.MapEntry findMapEntryByIndex(long) throws java.io.IOException;
+  void restore(com.ctriposs.bigmap.MapEntry) throws java.io.IOException;
+  public void release(com.ctriposs.bigmap.MapEntry) throws java.io.IOException;
+  public void removeAll() throws java.io.IOException;
+  public long getBackFileUsed() throws java.io.IOException;
+  public void close() throws java.io.IOException;
+  public long getTotalAcquireCounter();
+  public long getTotalReleaseCounter();
+  public long getTotalExatchMatchReuseCounter();
+  public long getTotalApproximateMatchReuseCounter();
+  public long getTotalAcquireNewCounter();
+  public void flush();
+  static {};
+}
+Compiled from "MapEntryFactoryImpl.java"
+class com.ctriposs.bigmap.MapEntryFactoryImpl$1 {
+}
+Compiled from "MapEntryFactoryImpl.java"
+class com.ctriposs.bigmap.MapEntryFactoryImpl$FreeEntry {
+  com.ctriposs.bigmap.MapEntryFactoryImpl$FreeNode first;
+  volatile int count;
+  long totalSlotSize;
+  com.ctriposs.bigmap.MapEntryFactoryImpl$FreeEntry(com.ctriposs.bigmap.MapEntryFactoryImpl$1);
+}
+Compiled from "MapEntryFactoryImpl.java"
+class com.ctriposs.bigmap.MapEntryFactoryImpl$FreeNode {
+  long index;
+  int size;
+  com.ctriposs.bigmap.MapEntryFactoryImpl$FreeNode next;
+  com.ctriposs.bigmap.MapEntryFactoryImpl$FreeNode(com.ctriposs.bigmap.MapEntryFactoryImpl$1);
+}
+Compiled from "MapEntryFactoryTest.java"
+public class com.ctriposs.bigmap.MapEntryFactoryTest {
+  public com.ctriposs.bigmap.MapEntryFactoryTest();
+  public void TestAcquireAndRelease() throws java.io.IOException;
+  public void TestAcquireInvalidSize() throws java.io.IOException;
+  public void TestAcquireAndReleaseRandomSize() throws java.io.IOException;
+  public void TestAcquireAndReleaseBigSize() throws java.io.IOException;
+  public void TestAcquiredAndReleaseDifferentSize() throws java.io.IOException;
+  public void TestAcquireAndReleaseSameSize() throws java.io.IOException;
+  public void TestMultiThreading() throws java.io.IOException;
+  public void clear() throws java.io.IOException;
+}
+Compiled from "MapEntryFactoryTest.java"
+class com.ctriposs.bigmap.MapEntryFactoryTest$Worker extends java.lang.Thread {
+  public com.ctriposs.bigmap.MapEntryFactoryTest$Worker(com.ctriposs.bigmap.IMapEntryFactory, int, int, int, java.util.concurrent.CountDownLatch);
+  public void run();
+}
+Compiled from "PerfTest.java"
+public class com.ctriposs.bigmap.PerfTest {
+  static final int N_THREADS;
+  static final int COUNT;
+  static final long stride;
+  public com.ctriposs.bigmap.PerfTest();
+  public void testPut() throws java.io.IOException, java.lang.ClassNotFoundException;
+  public void testPutPerf() throws java.util.concurrent.ExecutionException, java.lang.InterruptedException, java.io.IOException;
+  java.lang.String users(java.lang.StringBuilder, int);
+  public void clear() throws java.io.IOException;
+  static com.ctriposs.bigmap.BigConcurrentHashMapImpl access$000(com.ctriposs.bigmap.PerfTest);
+  static {};
+}
+Compiled from "PerfTest.java"
+class com.ctriposs.bigmap.PerfTest$1 implements java.lang.Runnable {
+  final int val$finalT;
+  final com.ctriposs.bigmap.PerfTest this$0;
+  com.ctriposs.bigmap.PerfTest$1(com.ctriposs.bigmap.PerfTest, int);
+  public void run();
+}
+Compiled from "PerfTest.java"
+final class com.ctriposs.bigmap.PerfTest$BuySell extends java.lang.Enum<com.ctriposs.bigmap.PerfTest$BuySell> {
+  public static final com.ctriposs.bigmap.PerfTest$BuySell Buy;
+  public static final com.ctriposs.bigmap.PerfTest$BuySell Sell;
+  public static com.ctriposs.bigmap.PerfTest$BuySell[] values();
+  public static com.ctriposs.bigmap.PerfTest$BuySell valueOf(java.lang.String);
+  static {};
+}
+Compiled from "PerfTest.java"
+public class com.ctriposs.bigmap.PerfTest$SampleValue implements java.io.Serializable {
+  java.lang.String aa;
+  java.lang.String bb;
+  com.ctriposs.bigmap.PerfTest$BuySell cc;
+  com.ctriposs.bigmap.PerfTest$BuySell dd;
+  int ee;
+  int ff;
+  double gg;
+  double hh;
+  long ii;
+  long jj;
+  public com.ctriposs.bigmap.PerfTest$SampleValue();
+  public byte[] toBytes() throws java.io.IOException;
+  public static com.ctriposs.bigmap.PerfTest$SampleValue fromBytes(byte[]) throws java.lang.ClassNotFoundException, java.io.IOException;
+}
+Compiled from "PurgeTest.java"
+public class com.ctriposs.bigmap.PurgeTest {
+  public com.ctriposs.bigmap.PurgeTest();
+  public void scheduledPurgeTest() throws java.io.IOException, java.lang.InterruptedException;
+  public void purgeTriggerByGetTest() throws java.io.IOException, java.lang.InterruptedException;
+  public void purgeTriggerByRemoveTest() throws java.io.IOException, java.lang.InterruptedException;
+  public void clear() throws java.io.IOException;
+  static {};
+}
+Compiled from "ReloadTest.java"
+public class com.ctriposs.bigmap.ReloadTest {
+  public com.ctriposs.bigmap.ReloadTest();
+  public void TestReload() throws java.io.IOException;
+  public void clear() throws java.io.IOException;
+  static {};
+}
+Compiled from "TestUtil.java"
+public class com.ctriposs.bigmap.TestUtil {
+  static final java.lang.String AB;
+  static java.util.Random rnd;
+  public static final java.lang.String TEST_BASE_DIR;
+  public com.ctriposs.bigmap.TestUtil();
+  public static java.lang.String randomString(int);
+  public static void sleepQuietly(long);
+  public static java.lang.String kbString(long);
+  public static java.lang.String printMemoryFootprint();
+  static {};
+}
+Compiled from "IMappedPage.java"
+public interface com.ctriposs.bigmap.page.IMappedPage {
+  public abstract java.nio.ByteBuffer getLocal(int);
+  public abstract java.nio.ByteBuffer getLocal();
+  public abstract byte[] getLocal(int, int);
+  public abstract boolean isClosed();
+  public abstract void setDirty(boolean);
+  public abstract java.lang.String getPageFile();
+  public abstract long getPageIndex();
+  public abstract void flush();
+}
+Compiled from "IMappedPageFactory.java"
+public interface com.ctriposs.bigmap.page.IMappedPageFactory {
+  public abstract com.ctriposs.bigmap.page.IMappedPage acquirePage(long) throws java.io.IOException;
+  public abstract int getPageSize();
+  public abstract java.lang.String getPageDir();
+  public abstract void deletePage(long) throws java.io.IOException;
+  public abstract void deletePages(java.util.Set<java.lang.Long>) throws java.io.IOException;
+  public abstract void deleteAllPages() throws java.io.IOException;
+  public abstract void releaseCachedPages() throws java.io.IOException;
+  public abstract java.util.Set<java.lang.Long> getPageIndexSetBefore(long);
+  public abstract void deletePagesBefore(long) throws java.io.IOException;
+  public abstract long getPageFileLastModifiedTime(long);
+  public abstract long getFirstPageIndexBefore(long);
+  public abstract java.util.Set<java.lang.Long> getExistingBackFileIndexSet();
+  public abstract int getCacheSize();
+  public abstract void flush();
+  public abstract java.util.Set<java.lang.String> getBackPageFileSet();
+  public abstract long getBackPageFileSize();
+}
+Compiled from "MappedPageFactoryImpl.java"
+public class com.ctriposs.bigmap.page.MappedPageFactoryImpl implements com.ctriposs.bigmap.page.IMappedPageFactory {
+  public static final java.lang.String PAGE_FILE_NAME;
+  public static final java.lang.String PAGE_FILE_SUFFIX;
+  public com.ctriposs.bigmap.page.MappedPageFactoryImpl(int, java.lang.String);
+  public com.ctriposs.bigmap.page.IMappedPage acquirePage(long) throws java.io.IOException;
+  public int getPageSize();
+  public java.lang.String getPageDir();
+  public void releaseCachedPages() throws java.io.IOException;
+  public void deleteAllPages() throws java.io.IOException;
+  public void deletePages(java.util.Set<java.lang.Long>) throws java.io.IOException;
+  public void deletePage(long) throws java.io.IOException;
+  public java.util.Set<java.lang.Long> getPageIndexSetBefore(long);
+  public void deletePagesBefore(long) throws java.io.IOException;
+  public java.util.Set<java.lang.Long> getExistingBackFileIndexSet();
+  public int getCacheSize();
+  public long getPageFileLastModifiedTime(long);
+  public long getFirstPageIndexBefore(long);
+  public void flush();
+  public java.util.Set<java.lang.String> getBackPageFileSet();
+  public long getBackPageFileSize();
+  static {};
+}
+Compiled from "MappedPageFactoryTest.java"
+public class com.ctriposs.bigmap.page.MappedPageFactoryTest {
+  public com.ctriposs.bigmap.page.MappedPageFactoryTest();
+  public void testGetBackPageFileSet() throws java.io.IOException;
+  public void testGetBackPageFileSize() throws java.io.IOException;
+  public void testSingleThread() throws java.io.IOException;
+  public void clear() throws java.io.IOException;
+  public void testMultiThreads() throws java.io.IOException;
+}
+Compiled from "MappedPageFactoryTest.java"
+class com.ctriposs.bigmap.page.MappedPageFactoryTest$Worker extends java.lang.Thread {
+  public com.ctriposs.bigmap.page.MappedPageFactoryTest$Worker(int, java.util.Map<java.lang.Integer, com.ctriposs.bigmap.page.IMappedPage[]>, com.ctriposs.bigmap.page.IMappedPageFactory, int, java.util.concurrent.CountDownLatch);
+  public void run();
+}
+Compiled from "MappedPageImpl.java"
+public class com.ctriposs.bigmap.page.MappedPageImpl implements com.ctriposs.bigmap.page.IMappedPage,java.io.Closeable {
+  public com.ctriposs.bigmap.page.MappedPageImpl(java.nio.MappedByteBuffer, java.lang.String, long);
+  public void close() throws java.io.IOException;
+  public void setDirty(boolean);
+  public void flush();
+  public byte[] getLocal(int, int);
+  public java.nio.ByteBuffer getLocal(int);
+  public java.nio.ByteBuffer getLocal();
+  public boolean isClosed();
+  public java.lang.String toString();
+  public java.lang.String getPageFile();
+  public long getPageIndex();
+  static {};
+}
+Compiled from "MappedPageImpl.java"
+class com.ctriposs.bigmap.page.MappedPageImpl$Cleaner {
+  public static final boolean CLEAN_SUPPORTED;
+  public static void clean(java.nio.ByteBuffer);
+  static {};
+}
+Compiled from "MappedPageImpl.java"
+class com.ctriposs.bigmap.page.MappedPageImpl$ThreadLocalByteBuffer extends java.lang.ThreadLocal<java.nio.ByteBuffer> {
+  public com.ctriposs.bigmap.page.MappedPageImpl$ThreadLocalByteBuffer(java.nio.ByteBuffer);
+  public java.nio.ByteBuffer getSourceBuffer();
+  protected synchronized java.nio.ByteBuffer initialValue();
+  protected java.lang.Object initialValue();
+}
+Compiled from "MappedPageTest.java"
+public class com.ctriposs.bigmap.page.MappedPageTest {
+  public com.ctriposs.bigmap.page.MappedPageTest();
+  public void testSingleThread() throws java.io.IOException;
+  public void testMultiThreads();
+  public void clear() throws java.io.IOException;
+}
+Compiled from "MappedPageTest.java"
+class com.ctriposs.bigmap.page.MappedPageTest$Worker extends java.lang.Thread {
+  public com.ctriposs.bigmap.page.MappedPageTest$Worker(int, com.ctriposs.bigmap.page.IMappedPageFactory, int, java.util.Set<com.ctriposs.bigmap.page.IMappedPage>, java.util.List<java.nio.ByteBuffer>);
+  public void run();
+}
+Compiled from "Calculator.java"
+public class com.ctriposs.bigmap.utils.Calculator {
+  public com.ctriposs.bigmap.utils.Calculator();
+  public static long mod(long, int);
+  public static long mul(long, int);
+  public static long div(long, int);
+}
+Compiled from "CalculatorTest.java"
+public class com.ctriposs.bigmap.utils.CalculatorTest {
+  public com.ctriposs.bigmap.utils.CalculatorTest();
+  public void testCalculator();
+}
+Compiled from "FileUtil.java"
+public class com.ctriposs.bigmap.utils.FileUtil {
+  public com.ctriposs.bigmap.utils.FileUtil();
+  public static boolean isFilenameValid(java.lang.String);
+  public static void deleteDirectory(java.io.File);
+  public static void deleteFile(java.io.File);
+  public static boolean copyDirectory(java.io.File, java.io.File);
+  public static boolean copyDirectory(java.lang.String, java.lang.String);
+  public static boolean copyDirectory(java.io.File, java.io.File, byte[]);
+  public static boolean copyFile(java.io.File, java.io.File, byte[]);
+}
+Compiled from "FolderNameValidator.java"
+public class com.ctriposs.bigmap.utils.FolderNameValidator {
+  public com.ctriposs.bigmap.utils.FolderNameValidator();
+  public static void validate(java.lang.String);
+  static {};
+}

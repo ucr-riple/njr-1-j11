@@ -1,0 +1,591 @@
+Compiled from "Action.java"
+public interface net.madz.stochastic.demo.annotations.Action extends java.lang.annotation.Annotation {
+  public abstract java.lang.String value();
+}
+Compiled from "SayHello.java"
+public interface net.madz.stochastic.demo.annotations.SayHello extends java.lang.annotation.Annotation {
+  public abstract java.lang.String value();
+}
+Compiled from "FirstDim.java"
+public final class net.madz.stochastic.demo.dimensions.FirstDim extends java.lang.Enum<net.madz.stochastic.demo.dimensions.FirstDim> {
+  public static final net.madz.stochastic.demo.dimensions.FirstDim A;
+  public static final net.madz.stochastic.demo.dimensions.FirstDim B;
+  public static final net.madz.stochastic.demo.dimensions.FirstDim C;
+  public static net.madz.stochastic.demo.dimensions.FirstDim[] values();
+  public static net.madz.stochastic.demo.dimensions.FirstDim valueOf(java.lang.String);
+  static {};
+}
+Compiled from "SecondDim.java"
+public final class net.madz.stochastic.demo.dimensions.SecondDim extends java.lang.Enum<net.madz.stochastic.demo.dimensions.SecondDim> {
+  public static final net.madz.stochastic.demo.dimensions.SecondDim X;
+  public static final net.madz.stochastic.demo.dimensions.SecondDim Y;
+  public static final net.madz.stochastic.demo.dimensions.SecondDim Z;
+  public static net.madz.stochastic.demo.dimensions.SecondDim[] values();
+  public static net.madz.stochastic.demo.dimensions.SecondDim valueOf(java.lang.String);
+  static {};
+}
+Compiled from "ActionProcessor.java"
+public class net.madz.stochastic.demo.processor.ActionProcessor extends net.madz.test.stochastic.core.AbsScriptEngine<net.madz.stochastic.demo.annotations.Action> {
+  public net.madz.stochastic.demo.processor.ActionProcessor();
+  public void doProcess(net.madz.test.stochastic.core.TestContext, net.madz.stochastic.demo.annotations.Action);
+  public void doProcess(net.madz.test.stochastic.core.TestContext, java.lang.Object);
+}
+Compiled from "SayHelloProcessor.java"
+public class net.madz.stochastic.demo.processor.SayHelloProcessor extends net.madz.test.stochastic.core.AbsScriptEngine<net.madz.stochastic.demo.annotations.SayHello> {
+  public net.madz.stochastic.demo.processor.SayHelloProcessor();
+  public void doProcess(net.madz.test.stochastic.core.TestContext, net.madz.stochastic.demo.annotations.SayHello);
+  public void doProcess(net.madz.test.stochastic.core.TestContext, java.lang.Object);
+}
+Compiled from "AbsScriptEngine.java"
+public abstract class net.madz.test.stochastic.core.AbsScriptEngine<META> implements net.madz.test.stochastic.core.ScriptEngine<META> {
+  public net.madz.test.stochastic.core.AbsScriptEngine();
+  public abstract void doProcess(net.madz.test.stochastic.core.TestContext, META);
+  public void doProcess(net.madz.test.stochastic.core.TestContext, META[]);
+  public void executeScript(net.madz.test.stochastic.core.TestContext, java.lang.annotation.Annotation);
+  public void processAnnotation(net.madz.test.stochastic.core.TestContext, java.lang.annotation.Annotation[]);
+  protected static void debug(java.lang.annotation.Annotation[]);
+  public static void debug(java.lang.String);
+  public static java.lang.Integer getIndent();
+  public static void decreaseIndent();
+  public static void increaseIndent();
+  public java.lang.Object evaluate(java.lang.String);
+  static {};
+}
+Compiled from "DeduceResultEnum.java"
+public final class net.madz.test.stochastic.core.DeduceResultEnum extends java.lang.Enum<net.madz.test.stochastic.core.DeduceResultEnum> {
+  public static final net.madz.test.stochastic.core.DeduceResultEnum Pass;
+  public static final net.madz.test.stochastic.core.DeduceResultEnum DirectFail;
+  public static final net.madz.test.stochastic.core.DeduceResultEnum Skip;
+  public static net.madz.test.stochastic.core.DeduceResultEnum[] values();
+  public static net.madz.test.stochastic.core.DeduceResultEnum valueOf(java.lang.String);
+  static {};
+}
+Compiled from "DefaultGlobalDimension.java"
+public class net.madz.test.stochastic.core.DefaultGlobalDimension extends net.madz.test.stochastic.core.impl.dimensions.DefaultDimension implements net.madz.test.stochastic.core.IGlobalDimension {
+  public net.madz.test.stochastic.core.DefaultGlobalDimension();
+  public java.lang.String getDottedName();
+}
+Compiled from "DimensionValuePair.java"
+public class net.madz.test.stochastic.core.DimensionValuePair {
+  public net.madz.test.stochastic.core.DimensionValuePair(net.madz.test.stochastic.core.IDimension, java.lang.String);
+  public net.madz.test.stochastic.core.IDimension getDimension();
+  public java.lang.String getChoice();
+}
+Compiled from "DimensionWeight.java"
+public class net.madz.test.stochastic.core.DimensionWeight implements java.lang.Comparable<net.madz.test.stochastic.core.DimensionWeight> {
+  public net.madz.test.stochastic.core.DimensionWeight(java.lang.String, int);
+  public void increment();
+  public int compareTo(net.madz.test.stochastic.core.DimensionWeight);
+  public java.lang.String getDottedName();
+  public int compareTo(java.lang.Object);
+}
+Compiled from "DynamicCaseContext.java"
+public class net.madz.test.stochastic.core.DynamicCaseContext {
+  public net.madz.test.stochastic.core.DynamicCaseContext(java.util.List<net.madz.test.stochastic.core.DimensionValuePair>);
+  public java.util.List<net.madz.test.stochastic.core.IExpectation> getExpectations();
+  public java.util.List<net.madz.test.stochastic.core.impl.dimensions.AbstractDimension> getDimensions();
+  public java.util.List<net.madz.test.stochastic.core.DimensionValuePair> getTargetStateList();
+  public void addExpectation(net.madz.test.stochastic.core.IExpectation);
+  public void debug();
+  public void pass();
+  public void fail(java.lang.Throwable);
+  public long getStart();
+  public long getEnd();
+  public boolean isSuccess();
+  public java.lang.Throwable getFailCause();
+  public void report();
+  public void skip();
+  public net.madz.test.stochastic.core.report.Cell[] getReportHeader();
+  public net.madz.test.stochastic.core.report.Cell[] getReportRow(int);
+  public static java.lang.Object getVariable(java.lang.String);
+  public static java.util.HashMap<java.lang.String, java.lang.Object> getLocalVariableMap();
+  public static void registerLocalVariable(java.lang.String, java.lang.Object);
+  public static void initLocalVariables();
+  public static void removeLocalVariable(java.lang.String);
+  public static void clearLocalVariables();
+  public java.lang.String getCaseName();
+  public void setCaseName(java.lang.String);
+  public net.madz.test.stochastic.core.DimensionValuePair findDimensionValuePair(java.lang.String);
+  public net.madz.test.stochastic.core.DimensionValuePair findDimensionValuePair(java.lang.String, boolean);
+  static {};
+}
+Compiled from "DynamicCaseContext.java"
+final class net.madz.test.stochastic.core.DynamicCaseContext$1 implements java.util.Comparator<net.madz.test.stochastic.core.DimensionValuePair> {
+  net.madz.test.stochastic.core.DynamicCaseContext$1();
+  public int compare(net.madz.test.stochastic.core.DimensionValuePair, net.madz.test.stochastic.core.DimensionValuePair);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "DynamicCaseContext.java"
+class net.madz.test.stochastic.core.DynamicCaseContext$2 implements java.util.Comparator<net.madz.test.stochastic.core.DimensionValuePair> {
+  final net.madz.test.stochastic.core.DynamicCaseContext this$0;
+  net.madz.test.stochastic.core.DynamicCaseContext$2(net.madz.test.stochastic.core.DynamicCaseContext);
+  public int compare(net.madz.test.stochastic.core.DimensionValuePair, net.madz.test.stochastic.core.DimensionValuePair);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "GlobalTestContext.java"
+public class net.madz.test.stochastic.core.GlobalTestContext {
+  public static final java.lang.String ASSERT_FUNCTIONS_PREFIX;
+  public static final java.lang.String SDFC_CUSTOM_OBJECT_PREFIX;
+  public static final java.lang.String SFDC_CUSTOM_SETTING_PREFIX;
+  public static final java.lang.String GLOABLE_FUNCTION_PREFIX;
+  public static final java.lang.String CUSTOM_FUNCTION_PREFIX;
+  public static final net.madz.test.stochastic.core.GlobalTestContext INSTANCE;
+  public java.lang.Object getVariable(java.lang.String);
+  public static net.madz.test.stochastic.core.GlobalTestContext getInstance();
+  public java.lang.Integer getIndent();
+  public void decreaseIndent();
+  public void increaseIndent();
+  public void clearLocalVariables();
+  public net.madz.test.stochastic.utilities.IFunction lookupFunction(java.lang.String);
+  public void registerLocalVariable(java.lang.String, java.lang.Object);
+  public java.lang.Object evaluateVariableNavigation(java.lang.String);
+  void print(java.lang.reflect.Method);
+  public void removeLocalVariable(java.lang.String);
+  public void registerLocalFunctions(net.madz.test.stochastic.core.IFunctionRegistry);
+  public void clearLocalFunctions();
+  static {};
+}
+Compiled from "ICombinationHandler.java"
+public interface net.madz.test.stochastic.core.ICombinationHandler {
+  public abstract void onCombinationFound(net.madz.test.stochastic.core.DynamicCaseContext);
+}
+Compiled from "IConstraint.java"
+public interface net.madz.test.stochastic.core.IConstraint {
+  public static final java.lang.String EXCLUSION_PLACEHOLDER;
+  public static final java.lang.String INCLUSION_PLACEHOLDER;
+  public abstract net.madz.test.stochastic.core.IConstraint$ConstraintType getConstraintType();
+  public abstract boolean skip(int, java.lang.String[]);
+}
+Compiled from "IConstraint.java"
+public final class net.madz.test.stochastic.core.IConstraint$ConstraintType extends java.lang.Enum<net.madz.test.stochastic.core.IConstraint$ConstraintType> {
+  public static final net.madz.test.stochastic.core.IConstraint$ConstraintType Inclusion;
+  public static final net.madz.test.stochastic.core.IConstraint$ConstraintType Exclusion;
+  public static final net.madz.test.stochastic.core.IConstraint$ConstraintType Combination;
+  public static net.madz.test.stochastic.core.IConstraint$ConstraintType[] values();
+  public static net.madz.test.stochastic.core.IConstraint$ConstraintType valueOf(java.lang.String);
+  static {};
+}
+Compiled from "IDeducer.java"
+public interface net.madz.test.stochastic.core.IDeducer {
+  public abstract net.madz.test.stochastic.core.DeduceResultEnum doDeduce(net.madz.test.stochastic.core.DynamicCaseContext);
+}
+Compiled from "IDimension.java"
+public interface net.madz.test.stochastic.core.IDimension {
+  public abstract void setAlias(java.lang.String);
+  public abstract void setEnumType(java.lang.Class<? extends java.lang.Enum>);
+  public abstract java.lang.Class<? extends java.lang.Enum> getEnumType();
+  public abstract java.lang.String getAlias();
+  public abstract void choose(net.madz.test.stochastic.core.TestContext, java.lang.String);
+  public abstract java.lang.String[] values();
+  public abstract void setPriority(int);
+  public abstract int getPriority();
+  public abstract java.lang.String getDottedName();
+}
+Compiled from "IDomain.java"
+public interface net.madz.test.stochastic.core.IDomain<T> {
+}
+Compiled from "IDynamicCase.java"
+public interface net.madz.test.stochastic.core.IDynamicCase {
+  public abstract int maxCombinations();
+  public abstract net.madz.test.stochastic.utilities.annotations.Dimension[] dimensions();
+  public abstract net.madz.test.stochastic.utilities.annotations.Filter[] filters();
+  public abstract java.lang.Class<? extends net.madz.test.stochastic.core.IExploreStrategy> detector();
+  public abstract net.madz.test.stochastic.utilities.annotations.Constraint[] constraints();
+  public abstract java.util.List<net.madz.test.stochastic.core.IDimension> getDimensions(net.madz.test.stochastic.core.TestContext);
+}
+Compiled from "IExpectation.java"
+public interface net.madz.test.stochastic.core.IExpectation {
+  public abstract boolean isNegative();
+  public abstract java.lang.String getFormalizedString();
+  public abstract void verify(net.madz.test.stochastic.core.DynamicCaseContext);
+}
+Compiled from "IExploreStrategy.java"
+public interface net.madz.test.stochastic.core.IExploreStrategy {
+  public abstract void setCombinationHandler(net.madz.test.stochastic.core.ICombinationHandler);
+  public abstract void doExplore(java.util.List<net.madz.test.stochastic.core.IDimension>, net.madz.test.stochastic.core.IFilter[], net.madz.test.stochastic.core.IConstraint, java.util.Map<java.lang.String, java.lang.Integer>);
+}
+Compiled from "IFilter.java"
+public interface net.madz.test.stochastic.core.IFilter {
+  public abstract java.lang.String dimension();
+  public abstract java.lang.String[] includes();
+  public abstract java.lang.String[] excludes();
+}
+Compiled from "IFunctionRegistry.java"
+public interface net.madz.test.stochastic.core.IFunctionRegistry {
+  public abstract void onLoadFuctions(java.util.Map<java.lang.String, net.madz.test.stochastic.utilities.IFunction>);
+}
+Compiled from "IGlobalDimension.java"
+public interface net.madz.test.stochastic.core.IGlobalDimension extends net.madz.test.stochastic.core.IDimension {
+}
+Compiled from "IObjectDimension.java"
+public interface net.madz.test.stochastic.core.IObjectDimension extends net.madz.test.stochastic.core.IDimension {
+  public abstract void setOne(java.lang.String);
+  public abstract java.lang.String getOneExpression();
+  public abstract java.lang.Object getOne();
+}
+Compiled from "IPairDimension.java"
+public interface net.madz.test.stochastic.core.IPairDimension extends net.madz.test.stochastic.core.IDimension {
+  public abstract void setOne(java.lang.String);
+  public abstract java.lang.String getOneExpression();
+  public abstract java.lang.String getOtherExpression();
+  public abstract void setOther(java.lang.String);
+  public abstract java.lang.Object getOne();
+  public abstract java.lang.Object getOther();
+}
+Compiled from "ScriptEngine.java"
+public interface net.madz.test.stochastic.core.ScriptEngine<META> {
+  public abstract void doProcess(net.madz.test.stochastic.core.TestContext, META);
+  public abstract void doProcess(net.madz.test.stochastic.core.TestContext, META[]);
+  public abstract void executeScript(net.madz.test.stochastic.core.TestContext, java.lang.annotation.Annotation);
+  public abstract void processAnnotation(net.madz.test.stochastic.core.TestContext, java.lang.annotation.Annotation[]);
+}
+Compiled from "TestContext.java"
+public interface net.madz.test.stochastic.core.TestContext {
+  public abstract java.lang.Class<?> getTestClass();
+  public abstract java.lang.reflect.Method getTestMethod();
+  public abstract java.lang.Object getTarget();
+  public abstract org.junit.runners.model.Statement getBase();
+}
+Compiled from "DefaultTestContext.java"
+public final class net.madz.test.stochastic.core.impl.DefaultTestContext implements net.madz.test.stochastic.core.TestContext {
+  public java.lang.Object getTarget();
+  public net.madz.test.stochastic.core.impl.DefaultTestContext(org.junit.runners.model.Statement, java.lang.Class<?>, java.lang.reflect.Method, java.lang.Object);
+  public java.lang.reflect.Method getTestMethod();
+  public java.lang.Class<?> getTestClass();
+  public org.junit.runners.model.Statement getBase();
+}
+Compiled from "DynamicDemo.java"
+public class net.madz.test.stochastic.core.impl.DynamicDemo {
+  public net.madz.test.stochastic.core.impl.DynamicDemo();
+  public static void main(java.lang.String[]);
+  public void test();
+}
+Compiled from "DynamicDemo.java"
+class net.madz.test.stochastic.core.impl.DynamicDemo$1 {
+}
+Compiled from "DynamicDemo.java"
+final class net.madz.test.stochastic.core.impl.DynamicDemo$Processor extends net.madz.test.stochastic.core.impl.processors.DynamicCaseProcessor {
+  protected net.madz.test.stochastic.core.DeduceResultEnum generateExpectation(net.madz.test.stochastic.core.TestContext, net.madz.test.stochastic.core.DynamicCaseContext, net.madz.test.stochastic.core.IDynamicCase);
+  protected void performTestAction(net.madz.test.stochastic.core.TestContext, net.madz.test.stochastic.core.DynamicCaseContext);
+  net.madz.test.stochastic.core.impl.DynamicDemo$Processor(net.madz.test.stochastic.core.impl.DynamicDemo$1);
+}
+Compiled from "DynamicDemo.java"
+class net.madz.test.stochastic.core.impl.DynamicDemo$Processor$1 implements net.madz.test.stochastic.core.IExpectation {
+  final net.madz.test.stochastic.core.impl.DynamicDemo$Processor this$0;
+  net.madz.test.stochastic.core.impl.DynamicDemo$Processor$1(net.madz.test.stochastic.core.impl.DynamicDemo$Processor);
+  public void verify(net.madz.test.stochastic.core.DynamicCaseContext);
+  public boolean isNegative();
+  public java.lang.String getFormalizedString();
+  public java.lang.String toString();
+}
+Compiled from "GlobalDimensionBasedDynamicCase.java"
+final class net.madz.test.stochastic.core.impl.GlobalDimensionBasedDynamicCase implements net.madz.test.stochastic.core.IDynamicCase {
+  net.madz.test.stochastic.core.impl.GlobalDimensionBasedDynamicCase(net.madz.test.stochastic.utilities.annotations.DynamicCase);
+  public int maxCombinations();
+  public net.madz.test.stochastic.utilities.annotations.Dimension[] dimensions();
+  public net.madz.test.stochastic.utilities.annotations.Filter[] filters();
+  public java.lang.Class<? extends net.madz.test.stochastic.core.IExploreStrategy> detector();
+  public net.madz.test.stochastic.utilities.annotations.Constraint[] constraints();
+  public java.util.List<net.madz.test.stochastic.core.IDimension> getDimensions(net.madz.test.stochastic.core.TestContext);
+}
+Compiled from "ConstraintCombination.java"
+public class net.madz.test.stochastic.core.impl.constraints.ConstraintCombination implements net.madz.test.stochastic.core.IConstraint {
+  public net.madz.test.stochastic.core.impl.constraints.ConstraintCombination(net.madz.test.stochastic.core.IConstraint[], net.madz.test.stochastic.core.IConstraint[]);
+  public net.madz.test.stochastic.core.IConstraint$ConstraintType getConstraintType();
+  public boolean skip(int, java.lang.String[]);
+}
+Compiled from "ExclusionConstraint.java"
+public class net.madz.test.stochastic.core.impl.constraints.ExclusionConstraint implements net.madz.test.stochastic.core.IConstraint {
+  public net.madz.test.stochastic.core.impl.constraints.ExclusionConstraint(java.lang.String[]);
+  public net.madz.test.stochastic.core.IConstraint$ConstraintType getConstraintType();
+  public boolean skip(int, java.lang.String[]);
+}
+Compiled from "InclusionConstraint.java"
+public class net.madz.test.stochastic.core.impl.constraints.InclusionConstraint implements net.madz.test.stochastic.core.IConstraint {
+  public net.madz.test.stochastic.core.impl.constraints.InclusionConstraint(java.lang.String[]);
+  public net.madz.test.stochastic.core.IConstraint$ConstraintType getConstraintType();
+  public boolean skip(int, java.lang.String[]);
+}
+Compiled from "AbstractDimension.java"
+public abstract class net.madz.test.stochastic.core.impl.dimensions.AbstractDimension extends net.madz.test.stochastic.core.AbsScriptEngine implements net.madz.test.stochastic.core.IDimension {
+  public net.madz.test.stochastic.core.impl.dimensions.AbstractDimension();
+  public abstract java.lang.String getAlias();
+  public java.lang.String[] listRequirement(java.lang.String);
+  protected void processAnnotations(net.madz.test.stochastic.core.TestContext, java.lang.String);
+  public abstract java.lang.Class<? extends java.lang.Enum> getEnumType();
+  public void choose(net.madz.test.stochastic.core.TestContext, java.lang.String);
+  public void handleException(java.lang.Exception);
+  public void doProcess(net.madz.test.stochastic.core.TestContext, java.lang.Object);
+  public java.lang.String[] values();
+  public java.lang.String getDottedName();
+}
+Compiled from "DefaultDimension.java"
+public abstract class net.madz.test.stochastic.core.impl.dimensions.DefaultDimension extends net.madz.test.stochastic.core.impl.dimensions.AbstractDimension implements net.madz.test.stochastic.core.IDimension {
+  protected java.lang.Class<? extends java.lang.Enum> enumClass;
+  protected java.lang.String alias;
+  protected int priority;
+  public int getPriority();
+  public void setPriority(int);
+  public net.madz.test.stochastic.core.impl.dimensions.DefaultDimension();
+  public java.lang.String getAlias();
+  public java.lang.Class<? extends java.lang.Enum> getEnumType();
+  public void setEnumType(java.lang.Class<? extends java.lang.Enum>);
+  public void setAlias(java.lang.String);
+}
+Compiled from "DefaultObjectDimension.java"
+public class net.madz.test.stochastic.core.impl.dimensions.DefaultObjectDimension extends net.madz.test.stochastic.core.impl.dimensions.DefaultDimension implements net.madz.test.stochastic.core.IObjectDimension {
+  protected java.lang.String oneExpression;
+  public net.madz.test.stochastic.core.impl.dimensions.DefaultObjectDimension();
+  public void setOne(java.lang.String);
+  public java.lang.String getOneExpression();
+  public java.lang.Object getOne();
+  public void choose(net.madz.test.stochastic.core.TestContext, java.lang.String);
+  public java.lang.String getDottedName();
+}
+Compiled from "DefaultPairDimension.java"
+public class net.madz.test.stochastic.core.impl.dimensions.DefaultPairDimension extends net.madz.test.stochastic.core.impl.dimensions.DefaultDimension implements net.madz.test.stochastic.core.IPairDimension {
+  protected java.lang.String oneExpression;
+  protected java.lang.String otherExpression;
+  public net.madz.test.stochastic.core.impl.dimensions.DefaultPairDimension();
+  public void setOne(java.lang.String);
+  public java.lang.String getOneExpression();
+  public java.lang.Object getOne();
+  public java.lang.String getOtherExpression();
+  public void setOther(java.lang.String);
+  public java.lang.String getAlias();
+  public java.lang.Object getOther();
+  public void choose(net.madz.test.stochastic.core.TestContext, java.lang.String);
+  public java.lang.String getDottedName();
+}
+Compiled from "ExhaustiveExploreStrategy.java"
+public class net.madz.test.stochastic.core.impl.explorers.ExhaustiveExploreStrategy implements net.madz.test.stochastic.core.IExploreStrategy {
+  public net.madz.test.stochastic.core.impl.explorers.ExhaustiveExploreStrategy();
+  public void setCombinationHandler(net.madz.test.stochastic.core.ICombinationHandler);
+  public void doExplore(java.util.List<net.madz.test.stochastic.core.IDimension>, net.madz.test.stochastic.core.IFilter[], net.madz.test.stochastic.core.IConstraint, java.util.Map<java.lang.String, java.lang.Integer>);
+}
+Compiled from "ExhaustiveExploreStrategy.java"
+class net.madz.test.stochastic.core.impl.explorers.ExhaustiveExploreStrategy$1 implements java.util.Comparator<net.madz.test.stochastic.core.IDimension> {
+  final java.util.Map val$dimensionIndex;
+  final net.madz.test.stochastic.core.impl.explorers.ExhaustiveExploreStrategy this$0;
+  net.madz.test.stochastic.core.impl.explorers.ExhaustiveExploreStrategy$1(net.madz.test.stochastic.core.impl.explorers.ExhaustiveExploreStrategy, java.util.Map);
+  public int compare(net.madz.test.stochastic.core.IDimension, net.madz.test.stochastic.core.IDimension);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "ExhaustiveExploreStrategy.java"
+public class net.madz.test.stochastic.core.impl.explorers.ExhaustiveExploreStrategy$DimensionIterator {
+  public final int size;
+  final net.madz.test.stochastic.core.impl.explorers.ExhaustiveExploreStrategy this$0;
+  public net.madz.test.stochastic.core.impl.explorers.ExhaustiveExploreStrategy$DimensionIterator(net.madz.test.stochastic.core.impl.explorers.ExhaustiveExploreStrategy, net.madz.test.stochastic.core.IDimension);
+  public net.madz.test.stochastic.core.impl.explorers.ExhaustiveExploreStrategy$DimensionIterator(net.madz.test.stochastic.core.impl.explorers.ExhaustiveExploreStrategy, net.madz.test.stochastic.core.IDimension, net.madz.test.stochastic.core.IFilter);
+  public boolean hasNext();
+  public void next();
+  public java.lang.String getValue();
+  public net.madz.test.stochastic.core.IDimension getDimension();
+  public void reset();
+}
+Compiled from "DynamicCaseProcessor.java"
+public abstract class net.madz.test.stochastic.core.impl.processors.DynamicCaseProcessor extends net.madz.test.stochastic.core.AbsScriptEngine<net.madz.test.stochastic.core.IDynamicCase> {
+  public net.madz.test.stochastic.core.impl.processors.DynamicCaseProcessor();
+  protected void beforeDynamicCase(net.madz.test.stochastic.core.TestContext, net.madz.test.stochastic.core.DynamicCaseContext);
+  protected void afterDynamicCase(net.madz.test.stochastic.core.TestContext, net.madz.test.stochastic.core.DynamicCaseContext);
+  protected abstract net.madz.test.stochastic.core.DeduceResultEnum generateExpectation(net.madz.test.stochastic.core.TestContext, net.madz.test.stochastic.core.DynamicCaseContext, net.madz.test.stochastic.core.IDynamicCase);
+  protected abstract void performTestAction(net.madz.test.stochastic.core.TestContext, net.madz.test.stochastic.core.DynamicCaseContext);
+  public void doProcess(net.madz.test.stochastic.core.TestContext, net.madz.test.stochastic.core.IDynamicCase);
+  public void cleanupResourcePerThread(net.madz.test.stochastic.core.TestContext);
+  public <T extends java.lang.annotation.Annotation> void doCleanup(net.madz.test.stochastic.core.TestContext, java.lang.Class<T>);
+  public void cleanupResourcePerCase(net.madz.test.stochastic.core.TestContext);
+  public net.madz.test.stochastic.core.impl.constraints.ConstraintCombination parseConstraints(net.madz.test.stochastic.core.IDynamicCase, java.util.Map<java.lang.String, java.lang.Integer>);
+  public void resetCounters();
+  void produceTargetState(net.madz.test.stochastic.core.TestContext, net.madz.test.stochastic.core.DynamicCaseContext);
+  void verifyExpectations(net.madz.test.stochastic.core.TestContext, net.madz.test.stochastic.core.DynamicCaseContext);
+  void setTotalNumber(int);
+  int getTotalNumber();
+  void setHeaderCreated(boolean);
+  boolean isHeaderCreated();
+  public void incrementCounter();
+  public synchronized int incrementRowNumber();
+  public void doProcess(net.madz.test.stochastic.core.TestContext, java.lang.Object);
+}
+Compiled from "DynamicCaseProcessor.java"
+class net.madz.test.stochastic.core.impl.processors.DynamicCaseProcessor$1 implements net.madz.test.stochastic.core.IFilter {
+  final net.madz.test.stochastic.utilities.annotations.Filter val$filter;
+  final net.madz.test.stochastic.core.impl.processors.DynamicCaseProcessor this$0;
+  net.madz.test.stochastic.core.impl.processors.DynamicCaseProcessor$1(net.madz.test.stochastic.core.impl.processors.DynamicCaseProcessor, net.madz.test.stochastic.utilities.annotations.Filter);
+  public java.lang.String[] includes();
+  public java.lang.String[] excludes();
+  public java.lang.String dimension();
+}
+Compiled from "DynamicCaseProcessor.java"
+final class net.madz.test.stochastic.core.impl.processors.DynamicCaseProcessor$CombinationCounter implements net.madz.test.stochastic.core.ICombinationHandler {
+  final net.madz.test.stochastic.core.impl.processors.DynamicCaseProcessor this$0;
+  public void onCombinationFound(net.madz.test.stochastic.core.DynamicCaseContext);
+  net.madz.test.stochastic.core.impl.processors.DynamicCaseProcessor$CombinationCounter(net.madz.test.stochastic.core.impl.processors.DynamicCaseProcessor, net.madz.test.stochastic.core.impl.processors.DynamicCaseProcessor$1);
+}
+Compiled from "DynamicTestExecutor.java"
+final class net.madz.test.stochastic.core.impl.processors.DynamicTestExecutor implements net.madz.test.stochastic.core.ICombinationHandler {
+  net.madz.test.stochastic.core.impl.processors.DynamicTestExecutor(net.madz.test.stochastic.core.impl.processors.DynamicCaseProcessor, net.madz.test.stochastic.core.report.ExcelFormatTestReporter, net.madz.test.stochastic.core.TestContext, net.madz.test.stochastic.core.IDynamicCase);
+  public void onCombinationFound(net.madz.test.stochastic.core.DynamicCaseContext);
+  public void runTest(net.madz.test.stochastic.core.DynamicCaseContext);
+  public void logResult(net.madz.test.stochastic.core.DynamicCaseContext);
+  public void shutdown();
+  static net.madz.test.stochastic.core.TestContext access$000(net.madz.test.stochastic.core.impl.processors.DynamicTestExecutor);
+  static net.madz.test.stochastic.core.impl.processors.DynamicCaseProcessor access$100(net.madz.test.stochastic.core.impl.processors.DynamicTestExecutor);
+}
+Compiled from "DynamicTestExecutor.java"
+class net.madz.test.stochastic.core.impl.processors.DynamicTestExecutor$1 implements java.util.concurrent.ThreadFactory {
+  final net.madz.test.stochastic.core.impl.processors.DynamicTestExecutor this$0;
+  net.madz.test.stochastic.core.impl.processors.DynamicTestExecutor$1(net.madz.test.stochastic.core.impl.processors.DynamicTestExecutor);
+  public java.lang.Thread newThread(java.lang.Runnable);
+}
+Compiled from "DynamicTestExecutor.java"
+class net.madz.test.stochastic.core.impl.processors.DynamicTestExecutor$2 implements java.lang.Runnable {
+  final java.util.concurrent.CountDownLatch val$beginLatch;
+  final java.util.concurrent.CountDownLatch val$finishLatch;
+  final net.madz.test.stochastic.core.impl.processors.DynamicTestExecutor this$0;
+  net.madz.test.stochastic.core.impl.processors.DynamicTestExecutor$2(net.madz.test.stochastic.core.impl.processors.DynamicTestExecutor, java.util.concurrent.CountDownLatch, java.util.concurrent.CountDownLatch);
+  public void run();
+}
+Compiled from "DynamicTestRunnable.java"
+public class net.madz.test.stochastic.core.impl.processors.DynamicTestRunnable implements java.lang.Runnable {
+  public net.madz.test.stochastic.core.impl.processors.DynamicTestRunnable(net.madz.test.stochastic.core.TestContext, net.madz.test.stochastic.core.impl.processors.DynamicCaseProcessor, net.madz.test.stochastic.core.impl.processors.DynamicTestExecutor, net.madz.test.stochastic.core.DynamicCaseContext);
+  public void run();
+  static {};
+}
+Compiled from "DynamicTestThread.java"
+public final class net.madz.test.stochastic.core.impl.processors.DynamicTestThread extends java.lang.Thread {
+  public net.madz.test.stochastic.core.impl.processors.DynamicTestThread(int, java.lang.Runnable);
+  public int getNumber();
+}
+Compiled from "Cell.java"
+public class net.madz.test.stochastic.core.report.Cell {
+  protected final java.lang.String label;
+  protected final java.util.List<java.lang.String> validateList;
+  protected final int column;
+  protected final int row;
+  public net.madz.test.stochastic.core.report.Cell(java.lang.String, int, int);
+  public net.madz.test.stochastic.core.report.Cell(java.lang.String, java.util.List<java.lang.String>, int, int);
+  public void setWrapped(boolean);
+  public org.apache.poi.hssf.usermodel.HSSFCell writeTo(org.apache.poi.hssf.usermodel.HSSFSheet) throws java.lang.Exception;
+  protected int getColumn();
+  protected int getRow();
+}
+Compiled from "ExcelFormatTestReporter.java"
+public class net.madz.test.stochastic.core.report.ExcelFormatTestReporter {
+  public net.madz.test.stochastic.core.report.ExcelFormatTestReporter(java.lang.String);
+  public synchronized void createWorksheet(java.lang.String);
+  public synchronized void createWorksheet(java.lang.String, net.madz.test.stochastic.core.report.Cell[]) throws java.lang.Exception;
+  public synchronized void createHeader(net.madz.test.stochastic.core.report.Cell[]) throws java.lang.Exception;
+  public synchronized void createRow(net.madz.test.stochastic.core.report.Cell[]) throws java.lang.Exception;
+  public synchronized void writeCellsInRow(net.madz.test.stochastic.core.report.Cell[]) throws java.lang.Exception;
+  public synchronized void close() throws java.lang.Exception;
+  public static void main(java.lang.String[]);
+}
+Compiled from "MergeableCell.java"
+public class net.madz.test.stochastic.core.report.MergeableCell extends net.madz.test.stochastic.core.report.Cell {
+  public net.madz.test.stochastic.core.report.MergeableCell(java.lang.String, int, int, int, int);
+  public net.madz.test.stochastic.core.report.MergeableCell(java.lang.String, java.util.List<java.lang.String>, int, int, int, int);
+  public org.apache.poi.hssf.usermodel.HSSFCell writeTo(org.apache.poi.hssf.usermodel.HSSFSheet) throws java.lang.Exception;
+}
+Compiled from "ClassUtils.java"
+public class net.madz.test.stochastic.utilities.ClassUtils {
+  public net.madz.test.stochastic.utilities.ClassUtils();
+  public static <T> void setProperty(T, java.lang.String, java.lang.String);
+  public static void setProperty(java.lang.Object, java.lang.String, java.lang.Object);
+  public static java.lang.Object getProperty(java.lang.Object, java.lang.String);
+}
+Compiled from "IFunction.java"
+public interface net.madz.test.stochastic.utilities.IFunction {
+  public abstract java.lang.Object execute(java.lang.Object...);
+}
+Compiled from "ITestFunctions.java"
+public interface net.madz.test.stochastic.utilities.ITestFunctions {
+}
+Compiled from "ScriptLexicalAnalyzer.java"
+public class net.madz.test.stochastic.utilities.ScriptLexicalAnalyzer {
+  public net.madz.test.stochastic.utilities.ScriptLexicalAnalyzer();
+  public static java.lang.String stripVariablePlaceholder(java.lang.String);
+  public static java.lang.Object evaluateVariableExpression(java.lang.String);
+  public static java.lang.String preprocessNavigationExpression(java.lang.String);
+  public static java.lang.Object evaluateVariableNavigation(java.lang.Object, java.lang.String);
+}
+Compiled from "ActionMeta.java"
+public interface net.madz.test.stochastic.utilities.annotations.ActionMeta extends java.lang.annotation.Annotation {
+  public abstract java.lang.Class<?> zuoraType();
+  public abstract java.lang.String sfdcType();
+  public abstract java.lang.String customSettingType();
+  public abstract java.lang.String customName();
+}
+Compiled from "Concurrency.java"
+public interface net.madz.test.stochastic.utilities.annotations.Concurrency extends java.lang.annotation.Annotation {
+  public abstract int threads();
+}
+Compiled from "Constraint.java"
+public interface net.madz.test.stochastic.utilities.annotations.Constraint extends java.lang.annotation.Annotation {
+  public abstract net.madz.test.stochastic.utilities.annotations.Constraint$ConstraintTypeEnum type();
+  public abstract net.madz.test.stochastic.utilities.annotations.ConstraintDimension[] combination();
+}
+Compiled from "Constraint.java"
+public final class net.madz.test.stochastic.utilities.annotations.Constraint$ConstraintTypeEnum extends java.lang.Enum<net.madz.test.stochastic.utilities.annotations.Constraint$ConstraintTypeEnum> {
+  public static final net.madz.test.stochastic.utilities.annotations.Constraint$ConstraintTypeEnum Inclusion;
+  public static final net.madz.test.stochastic.utilities.annotations.Constraint$ConstraintTypeEnum Exclusion;
+  public static net.madz.test.stochastic.utilities.annotations.Constraint$ConstraintTypeEnum[] values();
+  public static net.madz.test.stochastic.utilities.annotations.Constraint$ConstraintTypeEnum valueOf(java.lang.String);
+  static {};
+}
+Compiled from "ConstraintDimension.java"
+public interface net.madz.test.stochastic.utilities.annotations.ConstraintDimension extends java.lang.annotation.Annotation {
+  public abstract java.lang.String name();
+  public abstract java.lang.String value();
+}
+Compiled from "Dimension.java"
+public interface net.madz.test.stochastic.utilities.annotations.Dimension extends java.lang.annotation.Annotation {
+  public abstract java.lang.String alias();
+  public abstract java.lang.Class<? extends java.lang.Enum<?>> enumClass();
+  public abstract java.lang.Class<? extends net.madz.test.stochastic.core.IDomain> domainClass();
+  public abstract java.lang.Class<? extends net.madz.test.stochastic.core.IDimension> dimensionClass();
+  public abstract int priority();
+}
+Compiled from "DynamicCase.java"
+public interface net.madz.test.stochastic.utilities.annotations.DynamicCase extends java.lang.annotation.Annotation {
+  public abstract int maxCombinations();
+  public abstract net.madz.test.stochastic.utilities.annotations.Dimension[] dimensions();
+  public abstract net.madz.test.stochastic.utilities.annotations.Filter[] filters();
+  public abstract java.lang.Class<? extends net.madz.test.stochastic.core.IExploreStrategy> detector();
+  public abstract net.madz.test.stochastic.utilities.annotations.Constraint[] constraints();
+}
+Compiled from "Filter.java"
+public interface net.madz.test.stochastic.utilities.annotations.Filter extends java.lang.annotation.Annotation {
+  public abstract java.lang.String dimension();
+  public abstract java.lang.String[] includes();
+  public abstract java.lang.String[] excludes();
+}
+Compiled from "FunctionRegistry.java"
+public interface net.madz.test.stochastic.utilities.annotations.FunctionRegistry extends java.lang.annotation.Annotation {
+  public abstract java.lang.Class<? extends net.madz.test.stochastic.core.IFunctionRegistry> value();
+}
+Compiled from "PerCaseCleanup.java"
+public interface net.madz.test.stochastic.utilities.annotations.PerCaseCleanup extends java.lang.annotation.Annotation {
+}
+Compiled from "PerCaseSetup.java"
+public interface net.madz.test.stochastic.utilities.annotations.PerCaseSetup extends java.lang.annotation.Annotation {
+}
+Compiled from "PerTestMethodCleanup.java"
+public interface net.madz.test.stochastic.utilities.annotations.PerTestMethodCleanup extends java.lang.annotation.Annotation {
+}
+Compiled from "PerThreadCleanup.java"
+public interface net.madz.test.stochastic.utilities.annotations.PerThreadCleanup extends java.lang.annotation.Annotation {
+}
+Compiled from "PerThreadSetup.java"
+public interface net.madz.test.stochastic.utilities.annotations.PerThreadSetup extends java.lang.annotation.Annotation {
+}
+Compiled from "Processor.java"
+public interface net.madz.test.stochastic.utilities.annotations.Processor extends java.lang.annotation.Annotation {
+  public abstract java.lang.Class<? extends net.madz.test.stochastic.core.AbsScriptEngine<?>> value();
+  public abstract java.lang.String[] processSequence();
+}
+Compiled from "FunctionRegistryProcessor.java"
+public class net.madz.test.stochastic.utilities.processors.FunctionRegistryProcessor extends net.madz.test.stochastic.core.AbsScriptEngine<net.madz.test.stochastic.utilities.annotations.FunctionRegistry> {
+  public net.madz.test.stochastic.utilities.processors.FunctionRegistryProcessor();
+  public void doProcess(net.madz.test.stochastic.core.TestContext, net.madz.test.stochastic.utilities.annotations.FunctionRegistry);
+  public void doProcess(net.madz.test.stochastic.core.TestContext, java.lang.Object);
+}

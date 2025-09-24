@@ -1,0 +1,1393 @@
+Compiled from "AppTest.java"
+public class ping.pong.net.AppTest {
+  public ping.pong.net.AppTest();
+  public static void setUpClass() throws java.lang.Exception;
+  public static void tearDownClass() throws java.lang.Exception;
+  public void clientSetupTest();
+}
+Compiled from "AppTest.java"
+class ping.pong.net.AppTest$1 implements ping.pong.net.client.Client {
+  boolean connected;
+  boolean running;
+  final ping.pong.net.AppTest this$0;
+  ping.pong.net.AppTest$1(ping.pong.net.AppTest);
+  public void start();
+  public void close();
+  public boolean isConnected();
+  public int getId();
+  public void addMessageListener(ping.pong.net.connection.messaging.MessageListener);
+  public void removeMessageListener(ping.pong.net.connection.messaging.MessageListener);
+  public void addConnectionListener(ping.pong.net.client.ClientConnectionListener);
+  public void removeConnectionListener(ping.pong.net.client.ClientConnectionListener);
+  public void sendMessage(java.lang.Object);
+}
+Compiled from "Client.java"
+public interface ping.pong.net.client.Client<Message> extends ping.pong.net.connection.messaging.MessageSender<ping.pong.net.connection.messaging.Envelope<Message>> {
+  public abstract void start();
+  public abstract void close();
+  public abstract boolean isConnected();
+  public abstract int getId();
+  public abstract void addMessageListener(ping.pong.net.connection.messaging.MessageListener<? super ping.pong.net.client.Client, Message>);
+  public abstract void removeMessageListener(ping.pong.net.connection.messaging.MessageListener<? super ping.pong.net.client.Client, Message>);
+  public abstract void addConnectionListener(ping.pong.net.client.ClientConnectionListener);
+  public abstract void removeConnectionListener(ping.pong.net.client.ClientConnectionListener);
+}
+Compiled from "ClientConnectionListener.java"
+public interface ping.pong.net.client.ClientConnectionListener {
+  public abstract void clientConnected(ping.pong.net.client.Client);
+  public abstract void clientDisconnected(ping.pong.net.client.Client, ping.pong.net.connection.DisconnectInfo);
+}
+Compiled from "ClientIoConnection.java"
+class ping.pong.net.client.io.ClientIoConnection<MessageType> extends ping.pong.net.connection.io.AbstractIoConnection<MessageType> {
+  protected java.net.DatagramSocket udpSocket;
+  protected ping.pong.net.connection.io.IoUdpReadRunnable<MessageType> ioUdpReadRunnable;
+  protected ping.pong.net.connection.io.IoUdpWriteRunnable<MessageType> ioUdpWriteRunnable;
+  public ping.pong.net.client.io.ClientIoConnection(ping.pong.net.connection.config.ConnectionConfiguration, ping.pong.net.connection.io.DataReader, ping.pong.net.connection.io.DataWriter, java.net.Socket, java.net.DatagramSocket);
+  protected void processMessage(MessageType);
+  protected void sendUdpMessage(MessageType);
+  protected boolean isAnyRunning();
+  protected boolean isUdpReadRunning();
+  protected boolean isUdpWriteRunning();
+  protected final boolean initUdp();
+  protected void startUdp();
+  protected void closeUdp();
+  static org.slf4j.Logger access$000();
+  static void access$100(ping.pong.net.client.io.ClientIoConnection);
+  static org.slf4j.Logger access$200();
+  static void access$300(ping.pong.net.client.io.ClientIoConnection);
+}
+Compiled from "ClientIoConnection.java"
+class ping.pong.net.client.io.ClientIoConnection$1 implements ping.pong.net.connection.RunnableEventListener {
+  final ping.pong.net.client.io.ClientIoConnection this$0;
+  ping.pong.net.client.io.ClientIoConnection$1(ping.pong.net.client.io.ClientIoConnection);
+  public void onRunnableClosed(ping.pong.net.connection.DisconnectState);
+}
+Compiled from "ClientIoConnection.java"
+class ping.pong.net.client.io.ClientIoConnection$2 implements ping.pong.net.connection.RunnableEventListener {
+  final ping.pong.net.client.io.ClientIoConnection this$0;
+  ping.pong.net.client.io.ClientIoConnection$2(ping.pong.net.client.io.ClientIoConnection);
+  public void onRunnableClosed(ping.pong.net.connection.DisconnectState);
+}
+Compiled from "ClientIoConnectionFactory.java"
+final class ping.pong.net.client.io.ClientIoConnectionFactory {
+  public static <Message> ping.pong.net.connection.Connection<Message> createNonPPNConnection(ping.pong.net.connection.config.ConnectionConfiguration, ping.pong.net.connection.io.DataReader, ping.pong.net.connection.io.DataWriter, java.net.Socket, java.net.DatagramSocket);
+  public static <Message> ping.pong.net.connection.Connection<Message> createPPNConnection(ping.pong.net.connection.config.ConnectionConfiguration, java.net.Socket, java.net.DatagramSocket);
+}
+Compiled from "ClientIoConnectionTest.java"
+public class ping.pong.net.client.io.ClientIoConnectionTest {
+  public ping.pong.net.client.io.ClientIoConnectionTest();
+  public static void setUpClass() throws java.lang.Exception;
+  public static void tearDownClass() throws java.lang.Exception;
+  public void testProcessMessage();
+}
+Compiled from "ClientIoConnectionTest.java"
+class ping.pong.net.client.io.ClientIoConnectionTest$1 implements ping.pong.net.connection.config.ConnectionConfiguration {
+  final ping.pong.net.client.io.ClientIoConnectionTest this$0;
+  ping.pong.net.client.io.ClientIoConnectionTest$1(ping.pong.net.client.io.ClientIoConnectionTest);
+  public int getPort();
+  public void setPort(int);
+  public int getUdpPort();
+  public void setUdpPort(int);
+  public java.lang.String getIpAddress();
+  public void setIpAddress(java.lang.String);
+  public boolean isSsl();
+  public void setSsl(boolean);
+  public java.lang.String getKeystorePath();
+  public void setKeystorePath(java.lang.String);
+  public java.lang.String getKeystorePassword();
+  public void setKeystorePassword(java.lang.String);
+}
+Compiled from "ClientIoNonPPNConnection.java"
+final class ping.pong.net.client.io.ClientIoNonPPNConnection<MessageType> extends ping.pong.net.client.io.ClientIoConnection<MessageType> {
+  public ping.pong.net.client.io.ClientIoNonPPNConnection(ping.pong.net.connection.config.ConnectionConfiguration, ping.pong.net.connection.io.DataReader, ping.pong.net.connection.io.DataWriter, java.net.Socket, java.net.DatagramSocket);
+  protected void processMessage(MessageType);
+  protected void startConnection();
+}
+Compiled from "IoClient.java"
+public class ping.pong.net.client.io.IoClient<Message> implements ping.pong.net.client.Client<Message> {
+  protected ping.pong.net.connection.Connection<Message> connection;
+  protected ping.pong.net.connection.config.ConnectionConfiguration config;
+  protected java.util.List<ping.pong.net.connection.messaging.MessageListener> messageListeners;
+  protected java.util.List<ping.pong.net.client.ClientConnectionListener> connectionListeners;
+  protected ping.pong.net.connection.io.DataReader customDataReader;
+  protected ping.pong.net.connection.io.DataWriter customDataWriter;
+  public ping.pong.net.client.io.IoClient();
+  public ping.pong.net.client.io.IoClient(ping.pong.net.connection.config.ConnectionConfiguration);
+  protected final ping.pong.net.connection.Connection<Message> getConnection();
+  public void start();
+  public void close();
+  public boolean isConnected();
+  public int getId();
+  public void addMessageListener(ping.pong.net.connection.messaging.MessageListener<? super ping.pong.net.client.Client, Message>);
+  public void removeMessageListener(ping.pong.net.connection.messaging.MessageListener<? super ping.pong.net.client.Client, Message>);
+  public void addConnectionListener(ping.pong.net.client.ClientConnectionListener);
+  public void removeConnectionListener(ping.pong.net.client.ClientConnectionListener);
+  public void sendMessage(ping.pong.net.connection.messaging.Envelope<Message>);
+  public void setCustomDataReader(ping.pong.net.connection.io.DataReader);
+  public void setCustomDataWriter(ping.pong.net.connection.io.DataWriter);
+  public void sendMessage(java.lang.Object);
+  static org.slf4j.Logger access$000();
+  static {};
+}
+Compiled from "IoClient.java"
+class ping.pong.net.client.io.IoClient$1 implements javax.net.ssl.HandshakeCompletedListener {
+  final ping.pong.net.client.io.IoClient this$0;
+  ping.pong.net.client.io.IoClient$1(ping.pong.net.client.io.IoClient);
+  public void handshakeCompleted(javax.net.ssl.HandshakeCompletedEvent);
+}
+Compiled from "IoClient.java"
+final class ping.pong.net.client.io.IoClient$ConnectionEventImpl implements ping.pong.net.connection.ConnectionEvent<Message> {
+  final ping.pong.net.client.io.IoClient this$0;
+  public ping.pong.net.client.io.IoClient$ConnectionEventImpl(ping.pong.net.client.io.IoClient);
+  public void onSocketClosed();
+  public void onSocketCreated();
+  public synchronized void onSocketReceivedMessage(Message);
+}
+Compiled from "IoClient.java"
+final class ping.pong.net.client.io.IoClient$ConnectionEventImpl$DisconnectInfoImpl implements ping.pong.net.connection.DisconnectInfo {
+  final ping.pong.net.client.io.IoClient$ConnectionEventImpl this$1;
+  public ping.pong.net.client.io.IoClient$ConnectionEventImpl$DisconnectInfoImpl(ping.pong.net.client.io.IoClient$ConnectionEventImpl);
+  public java.lang.String getReason();
+  public ping.pong.net.connection.DisconnectState getDisconnectState();
+}
+Compiled from "IoClientTest.java"
+public class ping.pong.net.client.io.IoClientTest {
+  public ping.pong.net.client.io.IoClientTest();
+  public static void setUpClass() throws java.lang.Exception;
+  public static void tearDownClass() throws java.lang.Exception;
+  public void testStartNoServer();
+  public void testStartWithServer() throws java.lang.InterruptedException;
+  public void testStartWithServerNONPPN() throws java.lang.InterruptedException;
+  public void testClose() throws java.lang.InterruptedException;
+  public void testIsConnected();
+  public void testGetId() throws java.lang.InterruptedException;
+  public void testAddMessageListener();
+  public void testRemoveMessageListener();
+  public void testAddConnectionListener();
+  public void testRemoveConnectionListener();
+  public void testSendMessage() throws java.lang.InterruptedException;
+}
+Compiled from "IoClientTest.java"
+class ping.pong.net.client.io.IoClientTest$1 implements ping.pong.net.client.ClientConnectionListener {
+  final ping.pong.net.client.io.IoClientTest this$0;
+  ping.pong.net.client.io.IoClientTest$1(ping.pong.net.client.io.IoClientTest);
+  public void clientConnected(ping.pong.net.client.Client);
+  public void clientDisconnected(ping.pong.net.client.Client, ping.pong.net.connection.DisconnectInfo);
+}
+Compiled from "IoClientTest.java"
+class ping.pong.net.client.io.IoClientTest$2 implements ping.pong.net.client.ClientConnectionListener {
+  final ping.pong.net.client.io.IoClientTest this$0;
+  ping.pong.net.client.io.IoClientTest$2(ping.pong.net.client.io.IoClientTest);
+  public void clientConnected(ping.pong.net.client.Client);
+  public void clientDisconnected(ping.pong.net.client.Client, ping.pong.net.connection.DisconnectInfo);
+}
+Compiled from "IoClientTest.java"
+class ping.pong.net.client.io.IoClientTest$3 implements ping.pong.net.client.ClientConnectionListener {
+  final ping.pong.net.client.io.IoClientTest this$0;
+  ping.pong.net.client.io.IoClientTest$3(ping.pong.net.client.io.IoClientTest);
+  public void clientConnected(ping.pong.net.client.Client);
+  public void clientDisconnected(ping.pong.net.client.Client, ping.pong.net.connection.DisconnectInfo);
+}
+Compiled from "IoClientTest.java"
+class ping.pong.net.client.io.IoClientTest$4 implements ping.pong.net.client.ClientConnectionListener {
+  final ping.pong.net.client.io.IoClientTest this$0;
+  ping.pong.net.client.io.IoClientTest$4(ping.pong.net.client.io.IoClientTest);
+  public void clientConnected(ping.pong.net.client.Client);
+  public void clientDisconnected(ping.pong.net.client.Client, ping.pong.net.connection.DisconnectInfo);
+}
+Compiled from "IoClientTest.java"
+class ping.pong.net.client.io.IoClientTest$5 implements ping.pong.net.connection.messaging.MessageListener {
+  final ping.pong.net.client.io.IoClientTest this$0;
+  ping.pong.net.client.io.IoClientTest$5(ping.pong.net.client.io.IoClientTest);
+  public void messageReceived(java.lang.Object, java.lang.Object);
+}
+Compiled from "IoClientTest.java"
+class ping.pong.net.client.io.IoClientTest$6 implements ping.pong.net.client.ClientConnectionListener {
+  final ping.pong.net.client.io.IoClientTest this$0;
+  ping.pong.net.client.io.IoClientTest$6(ping.pong.net.client.io.IoClientTest);
+  public void clientConnected(ping.pong.net.client.Client);
+  public void clientDisconnected(ping.pong.net.client.Client, ping.pong.net.connection.DisconnectInfo);
+}
+Compiled from "IoClientTest.java"
+class ping.pong.net.client.io.IoClientTest$ClientConnectionListenerImpl implements ping.pong.net.client.ClientConnectionListener {
+  public ping.pong.net.client.io.IoClientTest$ClientConnectionListenerImpl();
+  public void clientConnected(ping.pong.net.client.Client);
+  public void clientDisconnected(ping.pong.net.client.Client, ping.pong.net.connection.DisconnectInfo);
+}
+Compiled from "IoClientTest.java"
+class ping.pong.net.client.io.IoClientTest$MessageListenerImpl implements ping.pong.net.connection.messaging.MessageListener {
+  public ping.pong.net.client.io.IoClientTest$MessageListenerImpl();
+  public void messageReceived(java.lang.Object, java.lang.Object);
+}
+Compiled from "TestClientNonPPNServer.java"
+public class ping.pong.net.client.io.TestClientNonPPNServer {
+  public ping.pong.net.client.io.TestClientNonPPNServer();
+  public static void main(java.lang.String[]) throws java.lang.InterruptedException;
+  public static void launchPPNServer();
+  public static void launchNonPPNServer();
+  public static void launchClient();
+}
+Compiled from "TestClientNonPPNServer.java"
+final class ping.pong.net.client.io.TestClientNonPPNServer$1 implements java.lang.Runnable {
+  ping.pong.net.client.io.TestClientNonPPNServer$1();
+  public void run();
+}
+Compiled from "TestClientNonPPNServer.java"
+final class ping.pong.net.client.io.TestClientNonPPNServer$2 implements ping.pong.net.server.ServerConnectionListener {
+  ping.pong.net.client.io.TestClientNonPPNServer$2();
+  public void connectionAdded(ping.pong.net.server.Server, ping.pong.net.connection.Connection);
+  public void connectionRemoved(ping.pong.net.server.Server, ping.pong.net.connection.Connection);
+}
+Compiled from "TestClientNonPPNServer.java"
+final class ping.pong.net.client.io.TestClientNonPPNServer$3 implements ping.pong.net.connection.messaging.MessageListener<ping.pong.net.connection.Connection, byte[]> {
+  ping.pong.net.client.io.TestClientNonPPNServer$3();
+  public void messageReceived(ping.pong.net.connection.Connection, byte[]);
+  public void messageReceived(java.lang.Object, java.lang.Object);
+}
+Compiled from "TestClientNonPPNServer.java"
+final class ping.pong.net.client.io.TestClientNonPPNServer$4 implements ping.pong.net.client.ClientConnectionListener {
+  ping.pong.net.client.io.TestClientNonPPNServer$4();
+  public void clientConnected(ping.pong.net.client.Client);
+  public void clientDisconnected(ping.pong.net.client.Client, ping.pong.net.connection.DisconnectInfo);
+}
+Compiled from "TestClientNonPPNServer.java"
+final class ping.pong.net.client.io.TestClientNonPPNServer$5 implements ping.pong.net.connection.messaging.MessageListener<ping.pong.net.client.Client, byte[]> {
+  ping.pong.net.client.io.TestClientNonPPNServer$5();
+  public void messageReceived(ping.pong.net.client.Client, byte[]);
+  public void messageReceived(java.lang.Object, java.lang.Object);
+}
+Compiled from "Connection.java"
+public interface ping.pong.net.connection.Connection<Message> extends ping.pong.net.connection.messaging.MessageSender<ping.pong.net.connection.messaging.Envelope<Message>>, java.lang.Runnable {
+  public abstract void close();
+  public abstract boolean isConnected();
+  public abstract int getConnectionId();
+  public abstract void setConnectionId(int);
+  public abstract java.net.SocketAddress getSocketAddress();
+  public abstract void addConnectionEventListener(ping.pong.net.connection.ConnectionEvent);
+  public abstract void removeConnectionEventListener(ping.pong.net.connection.ConnectionEvent);
+  public abstract boolean isUsingCustomSerialization();
+  public abstract boolean isUdpEnabled();
+}
+Compiled from "ConnectionEvent.java"
+public interface ping.pong.net.connection.ConnectionEvent<MessageType> {
+  public abstract void onSocketClosed();
+  public abstract void onSocketCreated();
+  public abstract void onSocketReceivedMessage(MessageType);
+}
+Compiled from "ConnectionExceptionHandler.java"
+public final class ping.pong.net.connection.ConnectionExceptionHandler {
+  public static ping.pong.net.connection.DisconnectState handleException(java.lang.Exception, org.slf4j.Logger);
+}
+Compiled from "ConnectionExceptionHandlerTest.java"
+public class ping.pong.net.connection.ConnectionExceptionHandlerTest {
+  public ping.pong.net.connection.ConnectionExceptionHandlerTest();
+  public void testHandleException_SocketException_BindException();
+  public void testHandleException_SocketException_JVM_Bind();
+  public void testHandleException_SocketException_ConnectException();
+  public void testHandleException_SocketException_NoRouteToHostException();
+  public void testHandleException_SocketException_PortUnreachableException();
+  public void testHandleException_SocketException_Connection_reset();
+  public void testHandleException_SocketException_socket_closed();
+  public void testHandleException_SocketException_Unknkown();
+  public void testHandleException_SSLException();
+  public void testHandleException_EOFException();
+  public void testHandleException_Other();
+}
+Compiled from "ConnectionExceptionHandlerTest.java"
+public class ping.pong.net.connection.ConnectionExceptionHandlerTest$MyLogger implements org.slf4j.Logger {
+  public ping.pong.net.connection.ConnectionExceptionHandlerTest$MyLogger();
+  public int getErrorStringThrowableCounter();
+  public java.lang.String getErrorStringThrowableString();
+  public int getDebugStringCounter();
+  public java.lang.String getDebugStringString();
+  public int getTraceStringCounter();
+  public java.lang.String getTraceStringString();
+  public java.lang.String getName();
+  public boolean isTraceEnabled();
+  public void trace(java.lang.String);
+  public void trace(java.lang.String, java.lang.Object);
+  public void trace(java.lang.String, java.lang.Object, java.lang.Object);
+  public void trace(java.lang.String, java.lang.Object[]);
+  public void trace(java.lang.String, java.lang.Throwable);
+  public boolean isTraceEnabled(org.slf4j.Marker);
+  public void trace(org.slf4j.Marker, java.lang.String);
+  public void trace(org.slf4j.Marker, java.lang.String, java.lang.Object);
+  public void trace(org.slf4j.Marker, java.lang.String, java.lang.Object, java.lang.Object);
+  public void trace(org.slf4j.Marker, java.lang.String, java.lang.Object[]);
+  public void trace(org.slf4j.Marker, java.lang.String, java.lang.Throwable);
+  public boolean isDebugEnabled();
+  public void debug(java.lang.String);
+  public void debug(java.lang.String, java.lang.Object);
+  public void debug(java.lang.String, java.lang.Object, java.lang.Object);
+  public void debug(java.lang.String, java.lang.Object[]);
+  public void debug(java.lang.String, java.lang.Throwable);
+  public boolean isDebugEnabled(org.slf4j.Marker);
+  public void debug(org.slf4j.Marker, java.lang.String);
+  public void debug(org.slf4j.Marker, java.lang.String, java.lang.Object);
+  public void debug(org.slf4j.Marker, java.lang.String, java.lang.Object, java.lang.Object);
+  public void debug(org.slf4j.Marker, java.lang.String, java.lang.Object[]);
+  public void debug(org.slf4j.Marker, java.lang.String, java.lang.Throwable);
+  public boolean isInfoEnabled();
+  public void info(java.lang.String);
+  public void info(java.lang.String, java.lang.Object);
+  public void info(java.lang.String, java.lang.Object, java.lang.Object);
+  public void info(java.lang.String, java.lang.Object[]);
+  public void info(java.lang.String, java.lang.Throwable);
+  public boolean isInfoEnabled(org.slf4j.Marker);
+  public void info(org.slf4j.Marker, java.lang.String);
+  public void info(org.slf4j.Marker, java.lang.String, java.lang.Object);
+  public void info(org.slf4j.Marker, java.lang.String, java.lang.Object, java.lang.Object);
+  public void info(org.slf4j.Marker, java.lang.String, java.lang.Object[]);
+  public void info(org.slf4j.Marker, java.lang.String, java.lang.Throwable);
+  public boolean isWarnEnabled();
+  public void warn(java.lang.String);
+  public void warn(java.lang.String, java.lang.Object);
+  public void warn(java.lang.String, java.lang.Object[]);
+  public void warn(java.lang.String, java.lang.Object, java.lang.Object);
+  public void warn(java.lang.String, java.lang.Throwable);
+  public boolean isWarnEnabled(org.slf4j.Marker);
+  public void warn(org.slf4j.Marker, java.lang.String);
+  public void warn(org.slf4j.Marker, java.lang.String, java.lang.Object);
+  public void warn(org.slf4j.Marker, java.lang.String, java.lang.Object, java.lang.Object);
+  public void warn(org.slf4j.Marker, java.lang.String, java.lang.Object[]);
+  public void warn(org.slf4j.Marker, java.lang.String, java.lang.Throwable);
+  public boolean isErrorEnabled();
+  public void error(java.lang.String);
+  public void error(java.lang.String, java.lang.Object);
+  public void error(java.lang.String, java.lang.Object, java.lang.Object);
+  public void error(java.lang.String, java.lang.Object[]);
+  public void error(java.lang.String, java.lang.Throwable);
+  public boolean isErrorEnabled(org.slf4j.Marker);
+  public void error(org.slf4j.Marker, java.lang.String);
+  public void error(org.slf4j.Marker, java.lang.String, java.lang.Object);
+  public void error(org.slf4j.Marker, java.lang.String, java.lang.Object, java.lang.Object);
+  public void error(org.slf4j.Marker, java.lang.String, java.lang.Object[]);
+  public void error(org.slf4j.Marker, java.lang.String, java.lang.Throwable);
+}
+Compiled from "ConnectionUtils.java"
+public final class ping.pong.net.connection.ConnectionUtils {
+  public static byte[] compressfinal(byte[]);
+  public static byte[] decompress(byte[]);
+  public static byte[] getbytes(java.lang.Object) throws java.io.IOException;
+  public static <M> M getObject(byte[]) throws java.io.IOException, java.lang.ClassNotFoundException;
+  static {};
+}
+Compiled from "ConnectionUtilsTest.java"
+public class ping.pong.net.connection.ConnectionUtilsTest {
+  public ping.pong.net.connection.ConnectionUtilsTest();
+  public void testCompressfinal();
+  public void testDecompress();
+  public void testGetbytes() throws java.lang.Exception;
+  public void testGetObject() throws java.lang.Exception;
+  protected static java.lang.String byteArrayToString(byte[]);
+}
+Compiled from "DisconnectInfo.java"
+public interface ping.pong.net.connection.DisconnectInfo {
+  public abstract java.lang.String getReason();
+  public abstract ping.pong.net.connection.DisconnectState getDisconnectState();
+}
+Compiled from "DisconnectState.java"
+public final class ping.pong.net.connection.DisconnectState extends java.lang.Enum<ping.pong.net.connection.DisconnectState> {
+  public static final ping.pong.net.connection.DisconnectState NORMAL;
+  public static final ping.pong.net.connection.DisconnectState ERROR;
+  public static ping.pong.net.connection.DisconnectState[] values();
+  public static ping.pong.net.connection.DisconnectState valueOf(java.lang.String);
+  static {};
+}
+Compiled from "RunnableEventListener.java"
+public interface ping.pong.net.connection.RunnableEventListener {
+  public abstract void onRunnableClosed(ping.pong.net.connection.DisconnectState);
+}
+Compiled from "ConnectionConfigFactory.java"
+public final class ping.pong.net.connection.config.ConnectionConfigFactory {
+  public static ping.pong.net.connection.config.ConnectionConfiguration createPPNConfig(java.lang.String, int, int, boolean);
+  public static ping.pong.net.connection.config.ConnectionConfiguration createPPNServerConfig(int, int, boolean);
+  public static ping.pong.net.connection.config.ConnectionConfiguration createPPNServerConfig(int, boolean);
+  public static ping.pong.net.connection.config.ConnectionConfiguration createPPNServerConfig(int);
+  public static ping.pong.net.connection.config.ConnectionConfiguration createPPNClientConfig(java.lang.String, int, int, boolean);
+  public static ping.pong.net.connection.config.ConnectionConfiguration createPPNClientConfig(java.lang.String, int, boolean);
+  public static ping.pong.net.connection.config.ConnectionConfiguration createPPNClientConfig(java.lang.String, int);
+  public static ping.pong.net.connection.config.ConnectionConfiguration createConnectionConfiguration();
+}
+Compiled from "ConnectionConfigFactoryTest.java"
+public class ping.pong.net.connection.config.ConnectionConfigFactoryTest {
+  public ping.pong.net.connection.config.ConnectionConfigFactoryTest();
+  public void testCreatePPNConfig();
+  public void testCreatePPNServerConfig_3args();
+  public void testCreatePPNServerConfig_int_boolean();
+  public void testCreatePPNServerConfig_int();
+  public void testCreatePPNClientConfig_4args();
+  public void testCreatePPNClientConfig_3args();
+  public void testCreatePPNClientConfig_String_int();
+  public void testCreateConnectionConfiguration();
+}
+Compiled from "ConnectionConfiguration.java"
+public interface ping.pong.net.connection.config.ConnectionConfiguration {
+  public static final java.lang.String DEFAULT_KEY_STORE;
+  public static final java.lang.String DEFAULT_KEY_STORE_PASSWORD;
+  public static final java.lang.String DEFAULT_CERT;
+  public static final int UDP_DISABLED;
+  public static final java.lang.String LOCAL_HOST;
+  public static final int DEFAULT_TCP_PORT;
+  public static final int DEFAULT_UDP_PORT;
+  public abstract int getPort();
+  public abstract void setPort(int);
+  public abstract int getUdpPort();
+  public abstract void setUdpPort(int);
+  public abstract java.lang.String getIpAddress();
+  public abstract void setIpAddress(java.lang.String);
+  public abstract boolean isSsl();
+  public abstract void setSsl(boolean);
+  public abstract java.lang.String getKeystorePath();
+  public abstract void setKeystorePath(java.lang.String);
+  public abstract java.lang.String getKeystorePassword();
+  public abstract void setKeystorePassword(java.lang.String);
+}
+Compiled from "DefaultConnectionConfiguration.java"
+public class ping.pong.net.connection.config.DefaultConnectionConfiguration implements ping.pong.net.connection.config.ConnectionConfiguration {
+  public static final org.slf4j.Logger LOGGER;
+  public static java.lang.String findKeyStorePath(java.lang.String);
+  ping.pong.net.connection.config.DefaultConnectionConfiguration();
+  ping.pong.net.connection.config.DefaultConnectionConfiguration(int, int, java.lang.String, boolean);
+  ping.pong.net.connection.config.DefaultConnectionConfiguration(int, int, java.lang.String, boolean, java.lang.String, java.lang.String);
+  public java.lang.String getKeystorePassword();
+  public void setKeystorePassword(java.lang.String);
+  public void setKeystorePath(java.lang.String);
+  public java.lang.String getKeystorePath();
+  public java.lang.String getIpAddress();
+  public void setIpAddress(java.lang.String);
+  public int getPort();
+  public void setPort(int);
+  public int getUdpPort();
+  public void setUdpPort(int);
+  public boolean isSsl();
+  public void setSsl(boolean);
+  static {};
+}
+Compiled from "DefaultConnectionConfigurationTest.java"
+public class ping.pong.net.connection.config.DefaultConnectionConfigurationTest {
+  public ping.pong.net.connection.config.DefaultConnectionConfigurationTest();
+  public void testFindKeyStorePath();
+  public void testGetKeystorePassword();
+  public void testGetKeystorePath();
+  public void testGetIpAddress();
+  public void testPort();
+  public void testGetUdpPort();
+  public void testIsSsl();
+}
+Compiled from "AbstractIoConnection.java"
+public abstract class ping.pong.net.connection.io.AbstractIoConnection<MessageType> implements ping.pong.net.connection.Connection<MessageType>, ping.pong.net.connection.messaging.MessageProcessor<MessageType> {
+  protected static final org.slf4j.Logger LOGGER;
+  protected ping.pong.net.connection.config.ConnectionConfiguration config;
+  protected boolean connected;
+  protected int connectionId;
+  protected java.util.List<ping.pong.net.connection.ConnectionEvent> connectionEventListeners;
+  protected ping.pong.net.connection.io.IoTcpReadRunnable<MessageType> ioTcpReadRunnable;
+  protected ping.pong.net.connection.io.IoTcpWriteRunnable<MessageType> ioTcpWriteRunnable;
+  protected java.util.concurrent.BlockingQueue<MessageType> receiveQueue;
+  protected java.util.concurrent.ExecutorService executorService;
+  protected java.net.Socket tcpSocket;
+  protected boolean usingCustomSerialization;
+  protected boolean closed;
+  protected boolean canStart;
+  protected boolean udpEnabled;
+  protected java.net.SocketAddress socketAddress;
+  public ping.pong.net.connection.io.AbstractIoConnection(ping.pong.net.connection.config.ConnectionConfiguration, ping.pong.net.connection.io.DataReader, ping.pong.net.connection.io.DataWriter, java.net.Socket);
+  protected abstract void processMessage(MessageType);
+  protected abstract void startUdp();
+  protected abstract void closeUdp();
+  protected abstract void sendUdpMessage(MessageType);
+  protected final boolean initTcp();
+  public boolean isUsingCustomSerialization();
+  protected void disconnect();
+  public synchronized java.net.SocketAddress getSocketAddress();
+  protected synchronized void fireOnSocketCreated();
+  protected synchronized void fireOnSocketMessageReceived(MessageType);
+  protected synchronized void fireOnSocketClosed();
+  protected void startConnection();
+  public void run();
+  protected java.lang.String getConnectionName();
+  protected boolean isAnyRunning();
+  protected boolean isTcpWriteRunning();
+  protected boolean isTcpReadRunning();
+  public synchronized void close();
+  public synchronized boolean isConnected();
+  public synchronized int getConnectionId();
+  public synchronized void setConnectionId(int);
+  public void sendMessage(ping.pong.net.connection.messaging.Envelope<MessageType>);
+  protected void sendTcpMessage(MessageType);
+  public boolean isUdpEnabled();
+  public void enqueueReceivedMessage(MessageType);
+  public void enqueueMessageToWrite(ping.pong.net.connection.messaging.Envelope<MessageType>);
+  public void addConnectionEventListener(ping.pong.net.connection.ConnectionEvent);
+  public void removeConnectionEventListener(ping.pong.net.connection.ConnectionEvent);
+  public void sendMessage(java.lang.Object);
+  static {};
+}
+Compiled from "AbstractIoConnection.java"
+class ping.pong.net.connection.io.AbstractIoConnection$1 implements ping.pong.net.connection.RunnableEventListener {
+  final ping.pong.net.connection.io.AbstractIoConnection this$0;
+  ping.pong.net.connection.io.AbstractIoConnection$1(ping.pong.net.connection.io.AbstractIoConnection);
+  public void onRunnableClosed(ping.pong.net.connection.DisconnectState);
+}
+Compiled from "AbstractIoConnection.java"
+class ping.pong.net.connection.io.AbstractIoConnection$2 implements ping.pong.net.connection.RunnableEventListener {
+  final ping.pong.net.connection.io.AbstractIoConnection this$0;
+  ping.pong.net.connection.io.AbstractIoConnection$2(ping.pong.net.connection.io.AbstractIoConnection);
+  public void onRunnableClosed(ping.pong.net.connection.DisconnectState);
+}
+Compiled from "AbstractIoConnectionTest.java"
+public class ping.pong.net.connection.io.AbstractIoConnectionTest {
+  public ping.pong.net.connection.io.AbstractIoConnectionTest();
+  public static void setUpClass() throws java.lang.Exception;
+  public static void tearDownClass() throws java.lang.Exception;
+  public void testInitTcpWithAllNullParameters();
+  public void testInitTcpWithAllNullDataReaderWriter() throws java.io.IOException;
+  public void testIsUsingCustomSerialization();
+  public void testFireOnSocketCreated();
+  public void testFireOnSocketClosed();
+  public void testFireOnSocketMessageReceived();
+  public void testRunCantStart();
+  public void testRunCanStart() throws java.io.IOException, java.lang.InterruptedException;
+  public void testGetConnectionName();
+  public void testIsAnyRunning();
+  public void testClose() throws java.io.IOException;
+  public void testIsConnected();
+  public void testGetandSetConnectionId();
+  public void testSendUdpMessage();
+  public void testSendTcpMessage();
+  public void testEnqueueReceivedMessage();
+  public void testEnqueueMessageToWrite();
+  public void testAddConnectionEventListener();
+  public void testRemoveConnectionEventListener();
+}
+Compiled from "AbstractIoConnectionTest.java"
+class ping.pong.net.connection.io.AbstractIoConnectionTest$1 implements ping.pong.net.connection.ConnectionEvent<java.lang.Object> {
+  final ping.pong.net.connection.io.AbstractIoConnectionTest this$0;
+  ping.pong.net.connection.io.AbstractIoConnectionTest$1(ping.pong.net.connection.io.AbstractIoConnectionTest);
+  public void onSocketClosed();
+  public void onSocketCreated();
+  public void onSocketReceivedMessage(java.lang.Object);
+}
+Compiled from "AbstractIoConnectionTest.java"
+class ping.pong.net.connection.io.AbstractIoConnectionTest$10 extends ping.pong.net.connection.io.IoTcpWriteRunnable {
+  final ping.pong.net.connection.io.AbstractIoConnectionTest this$0;
+  ping.pong.net.connection.io.AbstractIoConnectionTest$10(ping.pong.net.connection.io.AbstractIoConnectionTest, ping.pong.net.connection.RunnableEventListener, ping.pong.net.connection.io.DataWriter, java.net.Socket);
+  public boolean isRunning();
+}
+Compiled from "AbstractIoConnectionTest.java"
+class ping.pong.net.connection.io.AbstractIoConnectionTest$11 extends ping.pong.net.connection.io.IoTcpReadRunnable {
+  final ping.pong.net.connection.io.AbstractIoConnectionTest this$0;
+  ping.pong.net.connection.io.AbstractIoConnectionTest$11(ping.pong.net.connection.io.AbstractIoConnectionTest, ping.pong.net.connection.messaging.MessageProcessor, ping.pong.net.connection.RunnableEventListener, ping.pong.net.connection.io.DataReader, java.net.Socket);
+  public boolean isRunning();
+}
+Compiled from "AbstractIoConnectionTest.java"
+class ping.pong.net.connection.io.AbstractIoConnectionTest$12 extends ping.pong.net.connection.io.IoTcpWriteRunnable {
+  final ping.pong.net.connection.io.AbstractIoConnectionTest this$0;
+  ping.pong.net.connection.io.AbstractIoConnectionTest$12(ping.pong.net.connection.io.AbstractIoConnectionTest, ping.pong.net.connection.RunnableEventListener, ping.pong.net.connection.io.DataWriter, java.net.Socket);
+  public boolean isRunning();
+}
+Compiled from "AbstractIoConnectionTest.java"
+class ping.pong.net.connection.io.AbstractIoConnectionTest$13 extends ping.pong.net.connection.io.IoTcpReadRunnable {
+  final ping.pong.net.connection.io.AbstractIoConnectionTest this$0;
+  ping.pong.net.connection.io.AbstractIoConnectionTest$13(ping.pong.net.connection.io.AbstractIoConnectionTest, ping.pong.net.connection.messaging.MessageProcessor, ping.pong.net.connection.RunnableEventListener, ping.pong.net.connection.io.DataReader, java.net.Socket);
+  public boolean isRunning();
+}
+Compiled from "AbstractIoConnectionTest.java"
+class ping.pong.net.connection.io.AbstractIoConnectionTest$14 extends ping.pong.net.connection.io.IoTcpWriteRunnable {
+  final ping.pong.net.connection.io.AbstractIoConnectionTest this$0;
+  ping.pong.net.connection.io.AbstractIoConnectionTest$14(ping.pong.net.connection.io.AbstractIoConnectionTest, ping.pong.net.connection.RunnableEventListener, ping.pong.net.connection.io.DataWriter, java.net.Socket);
+  public boolean isRunning();
+}
+Compiled from "AbstractIoConnectionTest.java"
+class ping.pong.net.connection.io.AbstractIoConnectionTest$2 implements ping.pong.net.connection.ConnectionEvent<java.lang.Object> {
+  final ping.pong.net.connection.io.AbstractIoConnectionTest this$0;
+  ping.pong.net.connection.io.AbstractIoConnectionTest$2(ping.pong.net.connection.io.AbstractIoConnectionTest);
+  public void onSocketClosed();
+  public void onSocketCreated();
+  public void onSocketReceivedMessage(java.lang.Object);
+}
+Compiled from "AbstractIoConnectionTest.java"
+class ping.pong.net.connection.io.AbstractIoConnectionTest$3 implements ping.pong.net.connection.ConnectionEvent<java.lang.String> {
+  final ping.pong.net.connection.io.AbstractIoConnectionTest this$0;
+  ping.pong.net.connection.io.AbstractIoConnectionTest$3(ping.pong.net.connection.io.AbstractIoConnectionTest);
+  public void onSocketClosed();
+  public void onSocketCreated();
+  public void onSocketReceivedMessage(java.lang.String);
+  public void onSocketReceivedMessage(java.lang.Object);
+}
+Compiled from "AbstractIoConnectionTest.java"
+class ping.pong.net.connection.io.AbstractIoConnectionTest$4 implements java.lang.Runnable {
+  final ping.pong.net.connection.io.AbstractIoConnectionTest this$0;
+  ping.pong.net.connection.io.AbstractIoConnectionTest$4(ping.pong.net.connection.io.AbstractIoConnectionTest);
+  public void run();
+}
+Compiled from "AbstractIoConnectionTest.java"
+class ping.pong.net.connection.io.AbstractIoConnectionTest$5 extends ping.pong.net.connection.io.IoTcpReadRunnable {
+  final ping.pong.net.connection.io.AbstractIoConnectionTest this$0;
+  ping.pong.net.connection.io.AbstractIoConnectionTest$5(ping.pong.net.connection.io.AbstractIoConnectionTest, ping.pong.net.connection.messaging.MessageProcessor, ping.pong.net.connection.RunnableEventListener, ping.pong.net.connection.io.DataReader, java.net.Socket);
+  public boolean isRunning();
+}
+Compiled from "AbstractIoConnectionTest.java"
+class ping.pong.net.connection.io.AbstractIoConnectionTest$6 extends ping.pong.net.connection.io.IoTcpWriteRunnable {
+  final ping.pong.net.connection.io.AbstractIoConnectionTest this$0;
+  ping.pong.net.connection.io.AbstractIoConnectionTest$6(ping.pong.net.connection.io.AbstractIoConnectionTest, ping.pong.net.connection.RunnableEventListener, ping.pong.net.connection.io.DataWriter, java.net.Socket);
+  public boolean isRunning();
+}
+Compiled from "AbstractIoConnectionTest.java"
+class ping.pong.net.connection.io.AbstractIoConnectionTest$7 extends ping.pong.net.connection.io.IoTcpReadRunnable {
+  final ping.pong.net.connection.io.AbstractIoConnectionTest this$0;
+  ping.pong.net.connection.io.AbstractIoConnectionTest$7(ping.pong.net.connection.io.AbstractIoConnectionTest, ping.pong.net.connection.messaging.MessageProcessor, ping.pong.net.connection.RunnableEventListener, ping.pong.net.connection.io.DataReader, java.net.Socket);
+  public boolean isRunning();
+}
+Compiled from "AbstractIoConnectionTest.java"
+class ping.pong.net.connection.io.AbstractIoConnectionTest$8 extends ping.pong.net.connection.io.IoTcpWriteRunnable {
+  final ping.pong.net.connection.io.AbstractIoConnectionTest this$0;
+  ping.pong.net.connection.io.AbstractIoConnectionTest$8(ping.pong.net.connection.io.AbstractIoConnectionTest, ping.pong.net.connection.RunnableEventListener, ping.pong.net.connection.io.DataWriter, java.net.Socket);
+  public boolean isRunning();
+}
+Compiled from "AbstractIoConnectionTest.java"
+class ping.pong.net.connection.io.AbstractIoConnectionTest$9 extends ping.pong.net.connection.io.IoTcpReadRunnable {
+  final ping.pong.net.connection.io.AbstractIoConnectionTest this$0;
+  ping.pong.net.connection.io.AbstractIoConnectionTest$9(ping.pong.net.connection.io.AbstractIoConnectionTest, ping.pong.net.connection.messaging.MessageProcessor, ping.pong.net.connection.RunnableEventListener, ping.pong.net.connection.io.DataReader, java.net.Socket);
+  public boolean isRunning();
+}
+Compiled from "AbstractIoConnectionTest.java"
+public class ping.pong.net.connection.io.AbstractIoConnectionTest$AbstractIoConnectionImpl<M> extends ping.pong.net.connection.io.AbstractIoConnection<M> {
+  final ping.pong.net.connection.io.AbstractIoConnectionTest this$0;
+  public ping.pong.net.connection.io.AbstractIoConnectionTest$AbstractIoConnectionImpl(ping.pong.net.connection.io.AbstractIoConnectionTest);
+  public ping.pong.net.connection.io.AbstractIoConnectionTest$AbstractIoConnectionImpl(ping.pong.net.connection.io.AbstractIoConnectionTest, ping.pong.net.connection.config.ConnectionConfiguration, ping.pong.net.connection.io.DataReader, ping.pong.net.connection.io.DataWriter, java.net.Socket);
+  protected void processMessage(M);
+  protected void startUdp();
+  protected void closeUdp();
+  protected void sendUdpMessage(M);
+}
+Compiled from "AbstractIoConnectionTest.java"
+class ping.pong.net.connection.io.AbstractIoConnectionTest$ConnectionEventImpl implements ping.pong.net.connection.ConnectionEvent<java.lang.Object> {
+  public ping.pong.net.connection.io.AbstractIoConnectionTest$ConnectionEventImpl();
+  public void onSocketClosed();
+  public void onSocketCreated();
+  public void onSocketReceivedMessage(java.lang.Object);
+}
+Compiled from "AbstractIoUdpRunnable.java"
+public abstract class ping.pong.net.connection.io.AbstractIoUdpRunnable implements java.lang.Runnable {
+  protected boolean running;
+  protected java.net.DatagramSocket udpSocket;
+  protected ping.pong.net.connection.RunnableEventListener runnableEventListener;
+  protected ping.pong.net.connection.DisconnectState disconnectState;
+  public ping.pong.net.connection.io.AbstractIoUdpRunnable(ping.pong.net.connection.RunnableEventListener, java.net.DatagramSocket);
+  public synchronized boolean isRunning();
+  public synchronized void close();
+  public synchronized void setDisconnectState(ping.pong.net.connection.DisconnectState);
+  public abstract void run();
+  static {};
+}
+Compiled from "DataReader.java"
+public interface ping.pong.net.connection.io.DataReader<Type> {
+  public abstract Type readData();
+  public abstract java.io.InputStream init(java.net.Socket);
+}
+Compiled from "DataWriter.java"
+public interface ping.pong.net.connection.io.DataWriter<Type> {
+  public abstract java.io.OutputStream init(java.net.Socket);
+  public abstract void writeData(Type);
+}
+Compiled from "IoTcpReadRunnable.java"
+class ping.pong.net.connection.io.IoTcpReadRunnable<MessageType> implements java.lang.Runnable {
+  protected ping.pong.net.connection.messaging.MessageProcessor<MessageType> messageProcessor;
+  protected java.net.Socket tcpSocket;
+  protected java.io.InputStream inputStream;
+  protected boolean running;
+  protected ping.pong.net.connection.RunnableEventListener runnableEventListener;
+  protected ping.pong.net.connection.DisconnectState disconnectState;
+  public ping.pong.net.connection.io.IoTcpReadRunnable(ping.pong.net.connection.messaging.MessageProcessor<MessageType>, ping.pong.net.connection.RunnableEventListener, ping.pong.net.connection.io.DataReader, java.net.Socket);
+  protected void init();
+  public boolean isRunning();
+  public void close();
+  public void run();
+  static {};
+}
+Compiled from "IoTcpWriteRunnable.java"
+class ping.pong.net.connection.io.IoTcpWriteRunnable<MessageType> implements java.lang.Runnable {
+  public static final org.slf4j.Logger LOGGER;
+  protected java.net.Socket tcpSocket;
+  protected java.io.OutputStream outputStream;
+  protected boolean running;
+  protected java.util.concurrent.BlockingQueue<MessageType> writeQueue;
+  protected ping.pong.net.connection.RunnableEventListener runnableEventListener;
+  protected ping.pong.net.connection.DisconnectState disconnectState;
+  public ping.pong.net.connection.io.IoTcpWriteRunnable(ping.pong.net.connection.RunnableEventListener, ping.pong.net.connection.io.DataWriter, java.net.Socket);
+  protected void init();
+  public boolean isRunning();
+  public void close();
+  public boolean enqueueMessage(MessageType);
+  public void run();
+  static {};
+}
+Compiled from "IoUdpReadRunnable.java"
+public class ping.pong.net.connection.io.IoUdpReadRunnable<MessageType> extends ping.pong.net.connection.io.AbstractIoUdpRunnable {
+  protected ping.pong.net.connection.messaging.MessageProcessor<MessageType> messageProcessor;
+  public ping.pong.net.connection.io.IoUdpReadRunnable(ping.pong.net.connection.messaging.MessageProcessor<MessageType>, ping.pong.net.connection.RunnableEventListener, java.net.DatagramSocket);
+  public void run();
+  static {};
+}
+Compiled from "IoUdpReadRunnableTest.java"
+public class ping.pong.net.connection.io.IoUdpReadRunnableTest {
+  public ping.pong.net.connection.io.IoUdpReadRunnableTest();
+  public static void setUpClass() throws java.lang.Exception;
+  public static void tearDownClass() throws java.lang.Exception;
+  public void testReceive() throws java.net.SocketException, java.net.UnknownHostException, java.io.IOException, java.lang.InterruptedException;
+  public void testCloseWhileNotRunning() throws java.net.SocketException, java.lang.InterruptedException;
+  public void testCloseWhileRunning() throws java.net.SocketException, java.lang.InterruptedException;
+  public void closeWithNullUdpSocket();
+  static org.slf4j.Logger access$000();
+  static {};
+}
+Compiled from "IoUdpReadRunnableTest.java"
+class ping.pong.net.connection.io.IoUdpReadRunnableTest$1 implements ping.pong.net.connection.RunnableEventListener {
+  final ping.pong.net.connection.io.IoUdpReadRunnableTest this$0;
+  ping.pong.net.connection.io.IoUdpReadRunnableTest$1(ping.pong.net.connection.io.IoUdpReadRunnableTest);
+  public void onRunnableClosed(ping.pong.net.connection.DisconnectState);
+}
+Compiled from "IoUdpReadRunnableTest.java"
+class ping.pong.net.connection.io.IoUdpReadRunnableTest$2 implements ping.pong.net.connection.RunnableEventListener {
+  final ping.pong.net.connection.io.IoUdpReadRunnableTest this$0;
+  ping.pong.net.connection.io.IoUdpReadRunnableTest$2(ping.pong.net.connection.io.IoUdpReadRunnableTest);
+  public void onRunnableClosed(ping.pong.net.connection.DisconnectState);
+}
+Compiled from "IoUdpReadRunnableTest.java"
+class ping.pong.net.connection.io.IoUdpReadRunnableTest$3 implements ping.pong.net.connection.RunnableEventListener {
+  final ping.pong.net.connection.io.IoUdpReadRunnableTest this$0;
+  ping.pong.net.connection.io.IoUdpReadRunnableTest$3(ping.pong.net.connection.io.IoUdpReadRunnableTest);
+  public void onRunnableClosed(ping.pong.net.connection.DisconnectState);
+}
+Compiled from "IoUdpReadRunnableTest.java"
+class ping.pong.net.connection.io.IoUdpReadRunnableTest$4 implements java.lang.Runnable {
+  final ping.pong.net.connection.io.IoUdpReadRunnable val$ioUdpReadRunnable;
+  final ping.pong.net.connection.io.IoUdpReadRunnableTest this$0;
+  ping.pong.net.connection.io.IoUdpReadRunnableTest$4(ping.pong.net.connection.io.IoUdpReadRunnableTest, ping.pong.net.connection.io.IoUdpReadRunnable);
+  public void run();
+}
+Compiled from "IoUdpReadRunnableTest.java"
+class ping.pong.net.connection.io.IoUdpReadRunnableTest$MessageProcessorImpl implements ping.pong.net.connection.messaging.MessageProcessor<byte[]> {
+  public java.lang.String myMessage;
+  final ping.pong.net.connection.io.IoUdpReadRunnableTest this$0;
+  public ping.pong.net.connection.io.IoUdpReadRunnableTest$MessageProcessorImpl(ping.pong.net.connection.io.IoUdpReadRunnableTest);
+  public void enqueueReceivedMessage(byte[]);
+  public void enqueueMessageToWrite(ping.pong.net.connection.messaging.Envelope);
+  public void enqueueReceivedMessage(java.lang.Object);
+}
+Compiled from "IoUdpWriteRunnable.java"
+public class ping.pong.net.connection.io.IoUdpWriteRunnable<MessageType> extends ping.pong.net.connection.io.AbstractIoUdpRunnable {
+  protected java.util.concurrent.BlockingQueue<MessageType> writeQueue;
+  protected java.net.InetSocketAddress address;
+  public ping.pong.net.connection.io.IoUdpWriteRunnable(java.net.InetSocketAddress, ping.pong.net.connection.RunnableEventListener, java.net.DatagramSocket);
+  public boolean enqueueMessage(MessageType);
+  public void run();
+  static {};
+}
+Compiled from "IoUdpWriteRunnableTest.java"
+public class ping.pong.net.connection.io.IoUdpWriteRunnableTest {
+  public ping.pong.net.connection.io.IoUdpWriteRunnableTest();
+  public static void setUpClass() throws java.lang.Exception;
+  public static void tearDownClass() throws java.lang.Exception;
+  public void testSendByte() throws java.net.SocketException, java.lang.InterruptedException;
+  public void testSendObject() throws java.net.SocketException, java.lang.InterruptedException;
+  public void testClose();
+  public void testIsRunning();
+  public void testEnqueueMessage();
+  public void testRun();
+  static org.slf4j.Logger access$000();
+  static {};
+}
+Compiled from "IoUdpWriteRunnableTest.java"
+class ping.pong.net.connection.io.IoUdpWriteRunnableTest$1 implements ping.pong.net.connection.RunnableEventListener {
+  final ping.pong.net.connection.io.IoUdpWriteRunnableTest this$0;
+  ping.pong.net.connection.io.IoUdpWriteRunnableTest$1(ping.pong.net.connection.io.IoUdpWriteRunnableTest);
+  public void onRunnableClosed(ping.pong.net.connection.DisconnectState);
+}
+Compiled from "IoUdpWriteRunnableTest.java"
+class ping.pong.net.connection.io.IoUdpWriteRunnableTest$2 implements ping.pong.net.connection.RunnableEventListener {
+  final ping.pong.net.connection.io.IoUdpWriteRunnableTest this$0;
+  ping.pong.net.connection.io.IoUdpWriteRunnableTest$2(ping.pong.net.connection.io.IoUdpWriteRunnableTest);
+  public void onRunnableClosed(ping.pong.net.connection.DisconnectState);
+}
+Compiled from "IoUdpWriteRunnableTest.java"
+class ping.pong.net.connection.io.IoUdpWriteRunnableTest$3 implements ping.pong.net.connection.RunnableEventListener {
+  final ping.pong.net.connection.io.IoUdpWriteRunnableTest this$0;
+  ping.pong.net.connection.io.IoUdpWriteRunnableTest$3(ping.pong.net.connection.io.IoUdpWriteRunnableTest);
+  public void onRunnableClosed(ping.pong.net.connection.DisconnectState);
+}
+Compiled from "IoUdpWriteRunnableTest.java"
+class ping.pong.net.connection.io.IoUdpWriteRunnableTest$4 implements ping.pong.net.connection.RunnableEventListener {
+  final ping.pong.net.connection.io.IoUdpWriteRunnableTest this$0;
+  ping.pong.net.connection.io.IoUdpWriteRunnableTest$4(ping.pong.net.connection.io.IoUdpWriteRunnableTest);
+  public void onRunnableClosed(ping.pong.net.connection.DisconnectState);
+}
+Compiled from "IoUdpWriteRunnableTest.java"
+class ping.pong.net.connection.io.IoUdpWriteRunnableTest$ByteMessageProcessorImpl implements ping.pong.net.connection.messaging.MessageProcessor<byte[]> {
+  public java.lang.String myMessage;
+  final ping.pong.net.connection.io.IoUdpWriteRunnableTest this$0;
+  public ping.pong.net.connection.io.IoUdpWriteRunnableTest$ByteMessageProcessorImpl(ping.pong.net.connection.io.IoUdpWriteRunnableTest);
+  public void enqueueReceivedMessage(byte[]);
+  public void enqueueMessageToWrite(ping.pong.net.connection.messaging.Envelope);
+  public void enqueueReceivedMessage(java.lang.Object);
+}
+Compiled from "IoUdpWriteRunnableTest.java"
+class ping.pong.net.connection.io.IoUdpWriteRunnableTest$StringMessageProcessor implements ping.pong.net.connection.messaging.MessageProcessor<java.lang.String> {
+  public java.lang.String myMessage;
+  final ping.pong.net.connection.io.IoUdpWriteRunnableTest this$0;
+  public ping.pong.net.connection.io.IoUdpWriteRunnableTest$StringMessageProcessor(ping.pong.net.connection.io.IoUdpWriteRunnableTest);
+  public void enqueueReceivedMessage(java.lang.String);
+  public void enqueueMessageToWrite(ping.pong.net.connection.messaging.Envelope<java.lang.String>);
+  public void enqueueReceivedMessage(java.lang.Object);
+}
+Compiled from "ReadFullyDataReader.java"
+public class ping.pong.net.connection.io.ReadFullyDataReader implements ping.pong.net.connection.io.DataReader<byte[]> {
+  public ping.pong.net.connection.io.ReadFullyDataReader();
+  public java.io.InputStream init(java.net.Socket);
+  public synchronized byte[] readData();
+  public java.lang.Object readData();
+  static {};
+}
+Compiled from "ReadFullyDataReaderTest.java"
+public class ping.pong.net.connection.io.ReadFullyDataReaderTest {
+  public ping.pong.net.connection.io.ReadFullyDataReaderTest();
+  public static void setUpClass() throws java.lang.Exception;
+  public static void tearDownClass() throws java.lang.Exception;
+  public void testReadFullyDataReader() throws java.io.IOException, java.lang.InterruptedException;
+  static org.slf4j.Logger access$000();
+  static {};
+}
+Compiled from "ReadFullyDataReaderTest.java"
+class ping.pong.net.connection.io.ReadFullyDataReaderTest$1 implements java.lang.Runnable {
+  final ping.pong.net.connection.io.ReadFullyDataReaderTest this$0;
+  ping.pong.net.connection.io.ReadFullyDataReaderTest$1(ping.pong.net.connection.io.ReadFullyDataReaderTest);
+  public void run();
+}
+Compiled from "ReadFullyDataReaderTest.java"
+class ping.pong.net.connection.io.ReadFullyDataReaderTest$2 implements java.lang.Runnable {
+  boolean running;
+  final java.lang.String[] val$results;
+  final ping.pong.net.connection.io.ReadFullyDataReaderTest this$0;
+  ping.pong.net.connection.io.ReadFullyDataReaderTest$2(ping.pong.net.connection.io.ReadFullyDataReaderTest, java.lang.String[]);
+  public void run();
+}
+Compiled from "ReadObjectDataReader.java"
+public class ping.pong.net.connection.io.ReadObjectDataReader implements ping.pong.net.connection.io.DataReader<java.lang.Object> {
+  public ping.pong.net.connection.io.ReadObjectDataReader();
+  public java.io.InputStream init(java.net.Socket);
+  public synchronized java.lang.Object readData();
+  static {};
+}
+Compiled from "WriteByteArrayDataWriter.java"
+public class ping.pong.net.connection.io.WriteByteArrayDataWriter implements ping.pong.net.connection.io.DataWriter<byte[]> {
+  public ping.pong.net.connection.io.WriteByteArrayDataWriter();
+  public java.io.OutputStream init(java.net.Socket);
+  public void writeData(byte[]);
+  public void writeData(java.lang.Object);
+  static {};
+}
+Compiled from "WriteByteArrayDataWriterTest.java"
+public class ping.pong.net.connection.io.WriteByteArrayDataWriterTest {
+  public ping.pong.net.connection.io.WriteByteArrayDataWriterTest();
+  public static void setUpClass() throws java.lang.Exception;
+  public static void tearDownClass() throws java.lang.Exception;
+  public void testWriteByteArrayDataWriter() throws java.lang.InterruptedException;
+  static org.slf4j.Logger access$000();
+  static {};
+}
+Compiled from "WriteByteArrayDataWriterTest.java"
+class ping.pong.net.connection.io.WriteByteArrayDataWriterTest$1 implements java.lang.Runnable {
+  final ping.pong.net.connection.io.WriteByteArrayDataWriterTest this$0;
+  ping.pong.net.connection.io.WriteByteArrayDataWriterTest$1(ping.pong.net.connection.io.WriteByteArrayDataWriterTest);
+  public void run();
+}
+Compiled from "WriteByteArrayDataWriterTest.java"
+class ping.pong.net.connection.io.WriteByteArrayDataWriterTest$2 implements java.lang.Runnable {
+  boolean running;
+  final java.lang.String[] val$results;
+  final ping.pong.net.connection.io.WriteByteArrayDataWriterTest this$0;
+  ping.pong.net.connection.io.WriteByteArrayDataWriterTest$2(ping.pong.net.connection.io.WriteByteArrayDataWriterTest, java.lang.String[]);
+  public void run();
+}
+Compiled from "WriteObjectDataWriter.java"
+public class ping.pong.net.connection.io.WriteObjectDataWriter implements ping.pong.net.connection.io.DataWriter<java.lang.Object> {
+  public ping.pong.net.connection.io.WriteObjectDataWriter();
+  public java.io.OutputStream init(java.net.Socket);
+  public void writeData(java.lang.Object);
+  static {};
+}
+Compiled from "AbstractMessage.java"
+public interface ping.pong.net.connection.messaging.AbstractMessage extends java.io.Serializable {
+}
+Compiled from "ConnectionIdMessage.java"
+public final class ping.pong.net.connection.messaging.ConnectionIdMessage implements ping.pong.net.connection.messaging.AbstractMessage {
+  public ping.pong.net.connection.messaging.ConnectionIdMessage();
+}
+Compiled from "ConnectionIdMessage.java"
+public class ping.pong.net.connection.messaging.ConnectionIdMessage$RequestMessage implements ping.pong.net.connection.messaging.AbstractMessage {
+  public ping.pong.net.connection.messaging.ConnectionIdMessage$RequestMessage();
+}
+Compiled from "ConnectionIdMessage.java"
+public class ping.pong.net.connection.messaging.ConnectionIdMessage$ResponseMessage implements ping.pong.net.connection.messaging.AbstractMessage {
+  public ping.pong.net.connection.messaging.ConnectionIdMessage$ResponseMessage();
+  public ping.pong.net.connection.messaging.ConnectionIdMessage$ResponseMessage(int);
+  public int getId();
+}
+Compiled from "DefaultEnvelope.java"
+public class ping.pong.net.connection.messaging.DefaultEnvelope<Message> implements ping.pong.net.connection.messaging.Envelope<Message> {
+  public ping.pong.net.connection.messaging.DefaultEnvelope();
+  public void setReliable(boolean);
+  public void setMessage(Message);
+  public boolean isReliable();
+  public Message getMessage();
+  public java.lang.String toString();
+}
+Compiled from "DefaultEnvelopeTest.java"
+public class ping.pong.net.connection.messaging.DefaultEnvelopeTest {
+  public ping.pong.net.connection.messaging.DefaultEnvelopeTest();
+  public void testSetReliable();
+  public void testSetMessage();
+  public void testSetMessage_String();
+  public void testSetMessage_Integer();
+  public void testToString();
+  public void testToString_String();
+}
+Compiled from "DisconnectMessage.java"
+public final class ping.pong.net.connection.messaging.DisconnectMessage implements ping.pong.net.connection.messaging.AbstractMessage {
+  public ping.pong.net.connection.messaging.DisconnectMessage();
+}
+Compiled from "Envelope.java"
+public interface ping.pong.net.connection.messaging.Envelope<Message> {
+  public abstract boolean isReliable();
+  public abstract Message getMessage();
+}
+Compiled from "EnvelopeFactory.java"
+public final class ping.pong.net.connection.messaging.EnvelopeFactory {
+  public static <MessageType> ping.pong.net.connection.messaging.Envelope createTcpEnvelope(MessageType);
+  public static <MessageType> ping.pong.net.connection.messaging.Envelope createUdpEnvelope(MessageType);
+}
+Compiled from "EnvelopeFactoryTest.java"
+public class ping.pong.net.connection.messaging.EnvelopeFactoryTest {
+  public ping.pong.net.connection.messaging.EnvelopeFactoryTest();
+  public void testCreateTcpEnvelope();
+  public void testCreateUdpEnvelope();
+}
+Compiled from "MessageListener.java"
+public interface ping.pong.net.connection.messaging.MessageListener<S, Message> {
+  public abstract void messageReceived(S, Message);
+}
+Compiled from "MessageProcessor.java"
+public interface ping.pong.net.connection.messaging.MessageProcessor<Message> {
+  public abstract void enqueueReceivedMessage(Message);
+  public abstract void enqueueMessageToWrite(ping.pong.net.connection.messaging.Envelope<Message>);
+}
+Compiled from "MessageSender.java"
+public interface ping.pong.net.connection.messaging.MessageSender<Message> {
+  public abstract void sendMessage(Message);
+}
+Compiled from "SSLTestClient.java"
+public class ping.pong.net.connection.ssl.SSLTestClient {
+  public ping.pong.net.connection.ssl.SSLTestClient();
+  public static void main(java.lang.String[]);
+  public static void usePPNClient();
+  public static void clientWithoutKeyStore();
+  public static void clientWithKeyStores();
+}
+Compiled from "SSLTestClient.java"
+final class ping.pong.net.connection.ssl.SSLTestClient$1 implements javax.net.ssl.HandshakeCompletedListener {
+  ping.pong.net.connection.ssl.SSLTestClient$1();
+  public void handshakeCompleted(javax.net.ssl.HandshakeCompletedEvent);
+}
+Compiled from "SSLTestClient.java"
+final class ping.pong.net.connection.ssl.SSLTestClient$2 implements javax.net.ssl.HandshakeCompletedListener {
+  ping.pong.net.connection.ssl.SSLTestClient$2();
+  public void handshakeCompleted(javax.net.ssl.HandshakeCompletedEvent);
+}
+Compiled from "SSLTestServer.java"
+public class ping.pong.net.connection.ssl.SSLTestServer {
+  public ping.pong.net.connection.ssl.SSLTestServer();
+  public static void main(java.lang.String[]) throws java.io.FileNotFoundException, java.security.NoSuchAlgorithmException, java.security.KeyManagementException, java.lang.Exception;
+  public static void usePPNServer();
+  public static void createCustomServer() throws java.io.FileNotFoundException, java.security.NoSuchAlgorithmException, java.security.KeyManagementException, java.lang.Exception;
+}
+Compiled from "SSLTestServer.java"
+final class ping.pong.net.connection.ssl.SSLTestServer$1 implements javax.net.ssl.HandshakeCompletedListener {
+  ping.pong.net.connection.ssl.SSLTestServer$1();
+  public void handshakeCompleted(javax.net.ssl.HandshakeCompletedEvent);
+}
+Compiled from "SSLUtils.java"
+public final class ping.pong.net.connection.ssl.SSLUtils {
+  public static javax.net.ssl.SSLContext createSSLContext(ping.pong.net.connection.config.ConnectionConfiguration);
+  public static javax.net.ssl.SSLContext createSSLContext(java.lang.String, ping.pong.net.connection.config.ConnectionConfiguration);
+  public static javax.net.ssl.KeyManager[] getKeyManagers(java.lang.String, java.io.InputStream, java.lang.String) throws java.security.KeyStoreException, java.io.IOException, java.security.NoSuchAlgorithmException, java.security.cert.CertificateException, java.security.UnrecoverableKeyException;
+  public static javax.net.ssl.KeyManager[] getKeyManagers(java.lang.String, java.lang.String, java.lang.String) throws java.security.KeyStoreException, java.io.IOException, java.security.NoSuchAlgorithmException, java.security.cert.CertificateException, java.security.UnrecoverableKeyException;
+  public static javax.net.ssl.TrustManager[] getTrustManagers(java.lang.String, java.io.InputStream, java.lang.String) throws java.security.KeyStoreException, java.io.IOException, java.security.NoSuchAlgorithmException, java.security.cert.CertificateException, java.security.UnrecoverableKeyException;
+  public static javax.net.ssl.TrustManager[] getTrustManagers(java.lang.String, java.lang.String, java.lang.String) throws java.security.KeyStoreException, java.io.IOException, java.security.NoSuchAlgorithmException, java.security.cert.CertificateException, java.security.UnrecoverableKeyException;
+  static {};
+}
+Compiled from "ClientExample.java"
+public class ping.pong.net.server.ClientExample {
+  public ping.pong.net.server.ClientExample();
+  public static void ssl1() throws java.io.IOException, java.lang.InterruptedException, java.security.NoSuchAlgorithmException, java.security.KeyManagementException, java.security.KeyStoreException, java.security.UnrecoverableKeyException, java.security.cert.CertificateException, java.net.URISyntaxException;
+  public static void ssl2() throws java.io.IOException, java.lang.InterruptedException, java.security.NoSuchAlgorithmException, java.security.KeyManagementException, java.security.KeyStoreException, java.security.UnrecoverableKeyException, java.security.cert.CertificateException, java.net.URISyntaxException;
+  public static void SSLFollowedByRegularConnection() throws java.io.IOException, java.lang.InterruptedException, java.security.NoSuchAlgorithmException, java.security.KeyManagementException, java.security.KeyStoreException, java.security.UnrecoverableKeyException, java.security.cert.CertificateException, java.net.URISyntaxException;
+  public static void clientApiConnect() throws java.lang.InterruptedException;
+  public static void regularConnectionByteArray() throws java.io.IOException, java.lang.InterruptedException, java.security.NoSuchAlgorithmException, java.security.KeyManagementException, java.security.KeyStoreException, java.security.UnrecoverableKeyException, java.security.cert.CertificateException, java.net.URISyntaxException;
+  public static void regularConnectionByteArrayStaysOpen() throws java.io.IOException, java.lang.InterruptedException, java.security.NoSuchAlgorithmException, java.security.KeyManagementException, java.security.KeyStoreException, java.security.UnrecoverableKeyException, java.security.cert.CertificateException, java.net.URISyntaxException;
+  public static void regularConnectionsHelloworld() throws java.io.IOException, java.lang.InterruptedException, java.security.NoSuchAlgorithmException, java.security.KeyManagementException, java.security.KeyStoreException, java.security.UnrecoverableKeyException, java.security.cert.CertificateException, java.net.URISyntaxException;
+  public static void main(java.lang.String[]) throws java.io.IOException, java.lang.InterruptedException, java.security.NoSuchAlgorithmException, java.security.KeyManagementException, java.security.KeyStoreException, java.security.UnrecoverableKeyException, java.security.cert.CertificateException, java.net.URISyntaxException;
+}
+Compiled from "ClientExample.java"
+final class ping.pong.net.server.ClientExample$1 implements ping.pong.net.connection.messaging.MessageListener<ping.pong.net.client.Client, java.lang.String> {
+  ping.pong.net.server.ClientExample$1();
+  public void messageReceived(ping.pong.net.client.Client, java.lang.String);
+  public void messageReceived(java.lang.Object, java.lang.Object);
+}
+Compiled from "ClientExample.java"
+class ping.pong.net.server.ClientExample$DefaultTrustManager implements javax.net.ssl.X509TrustManager {
+  public void checkClientTrusted(java.security.cert.X509Certificate[], java.lang.String) throws java.security.cert.CertificateException;
+  public void checkServerTrusted(java.security.cert.X509Certificate[], java.lang.String) throws java.security.cert.CertificateException;
+  public java.security.cert.X509Certificate[] getAcceptedIssuers();
+}
+Compiled from "DefaultServer.java"
+class ping.pong.net.server.DefaultServer implements ping.pong.net.server.Server {
+  public ping.pong.net.server.DefaultServer();
+  public void start();
+  public void shutdown();
+  public ping.pong.net.connection.Connection getConnection(int);
+  public java.util.Collection<ping.pong.net.connection.Connection> getConnections();
+  public boolean hasConnections();
+  public boolean isListening();
+  public void addMessageListener(ping.pong.net.connection.messaging.MessageListener);
+  public void removeMessageListener(ping.pong.net.connection.messaging.MessageListener);
+  public void addConnectionListener(ping.pong.net.server.ServerConnectionListener);
+  public void removeConnectionListener(ping.pong.net.server.ServerConnectionListener);
+  public int getNextAvailableId();
+  public void broadcast(ping.pong.net.connection.messaging.Envelope);
+}
+Compiled from "MyClient.java"
+public class ping.pong.net.server.MyClient {
+  public ping.pong.net.server.MyClient();
+  public static void main(java.lang.String[]) throws java.lang.InterruptedException;
+  public static void runMulitClients();
+  public static void runOneClient() throws java.lang.InterruptedException;
+}
+Compiled from "MyClient.java"
+final class ping.pong.net.server.MyClient$1 implements ping.pong.net.connection.messaging.MessageListener<ping.pong.net.client.Client, java.lang.String> {
+  ping.pong.net.server.MyClient$1();
+  public void messageReceived(ping.pong.net.client.Client, java.lang.String);
+  public void messageReceived(java.lang.Object, java.lang.Object);
+}
+Compiled from "MyClient.java"
+final class ping.pong.net.server.MyClient$2 implements ping.pong.net.client.ClientConnectionListener {
+  ping.pong.net.server.MyClient$2();
+  public void clientConnected(ping.pong.net.client.Client);
+  public void clientDisconnected(ping.pong.net.client.Client, ping.pong.net.connection.DisconnectInfo);
+}
+Compiled from "MyClient.java"
+final class ping.pong.net.server.MyClient$3 implements ping.pong.net.connection.messaging.MessageListener<ping.pong.net.client.Client, java.lang.String> {
+  ping.pong.net.server.MyClient$3();
+  public void messageReceived(ping.pong.net.client.Client, java.lang.String);
+  public void messageReceived(java.lang.Object, java.lang.Object);
+}
+Compiled from "MyClient.java"
+final class ping.pong.net.server.MyClient$4 implements ping.pong.net.client.ClientConnectionListener {
+  ping.pong.net.server.MyClient$4();
+  public void clientConnected(ping.pong.net.client.Client);
+  public void clientDisconnected(ping.pong.net.client.Client, ping.pong.net.connection.DisconnectInfo);
+}
+Compiled from "Server.java"
+public interface ping.pong.net.server.Server<Message> {
+  public abstract void broadcast(ping.pong.net.connection.messaging.Envelope<Message>);
+  public abstract void start();
+  public abstract void shutdown();
+  public abstract ping.pong.net.connection.Connection getConnection(int);
+  public abstract java.util.Collection<ping.pong.net.connection.Connection> getConnections();
+  public abstract boolean hasConnections();
+  public abstract boolean isListening();
+  public abstract int getNextAvailableId();
+  public abstract void addMessageListener(ping.pong.net.connection.messaging.MessageListener<? super ping.pong.net.connection.Connection, Message>);
+  public abstract void removeMessageListener(ping.pong.net.connection.messaging.MessageListener<? super ping.pong.net.connection.Connection, Message>);
+  public abstract void addConnectionListener(ping.pong.net.server.ServerConnectionListener);
+  public abstract void removeConnectionListener(ping.pong.net.server.ServerConnectionListener);
+}
+Compiled from "ServerConnectionListener.java"
+public interface ping.pong.net.server.ServerConnectionListener {
+  public abstract void connectionAdded(ping.pong.net.server.Server, ping.pong.net.connection.Connection);
+  public abstract void connectionRemoved(ping.pong.net.server.Server, ping.pong.net.connection.Connection);
+}
+Compiled from "ServerExample.java"
+public class ping.pong.net.server.ServerExample {
+  public ping.pong.net.server.ServerExample();
+  public static void main(java.lang.String[]) throws java.net.UnknownHostException, java.io.IOException, java.lang.InterruptedException;
+}
+Compiled from "ServerExample.java"
+final class ping.pong.net.server.ServerExample$1 implements ping.pong.net.server.ServerConnectionListener {
+  ping.pong.net.server.ServerExample$1();
+  public void connectionAdded(ping.pong.net.server.Server, ping.pong.net.connection.Connection);
+  public void connectionRemoved(ping.pong.net.server.Server, ping.pong.net.connection.Connection);
+}
+Compiled from "ServerExample.java"
+class ping.pong.net.server.ServerExample$1$1 implements ping.pong.net.connection.messaging.Envelope<java.lang.String> {
+  final ping.pong.net.server.ServerExample$1 this$0;
+  ping.pong.net.server.ServerExample$1$1(ping.pong.net.server.ServerExample$1);
+  public boolean isReliable();
+  public java.lang.String getMessage();
+  public java.lang.Object getMessage();
+}
+Compiled from "ServerMultiClient.java"
+public class ping.pong.net.server.ServerMultiClient {
+  public ping.pong.net.server.ServerMultiClient();
+  public static void main(java.lang.String[]);
+}
+Compiled from "ServerMultiClient.java"
+final class ping.pong.net.server.ServerMultiClient$1 implements ping.pong.net.server.ServerConnectionListener {
+  ping.pong.net.server.ServerMultiClient$1();
+  public void connectionAdded(ping.pong.net.server.Server, ping.pong.net.connection.Connection);
+  public void connectionRemoved(ping.pong.net.server.Server, ping.pong.net.connection.Connection);
+}
+Compiled from "ServerMultiClient.java"
+final class ping.pong.net.server.ServerMultiClient$2 implements ping.pong.net.connection.messaging.MessageListener<ping.pong.net.connection.Connection, java.lang.String> {
+  ping.pong.net.server.ServerMultiClient$2();
+  public void messageReceived(ping.pong.net.connection.Connection, java.lang.String);
+  public void messageReceived(java.lang.Object, java.lang.Object);
+}
+Compiled from "ServerMultiClient.java"
+final class ping.pong.net.server.ServerMultiClient$3 extends java.util.TimerTask {
+  final ping.pong.net.server.io.IoServer val$server;
+  ping.pong.net.server.ServerMultiClient$3(ping.pong.net.server.io.IoServer);
+  public void run();
+}
+Compiled from "ServerMultiClient.java"
+class ping.pong.net.server.ServerMultiClient$3$1 implements ping.pong.net.connection.messaging.Envelope<java.lang.String> {
+  final ping.pong.net.server.ServerMultiClient$3 this$0;
+  ping.pong.net.server.ServerMultiClient$3$1(ping.pong.net.server.ServerMultiClient$3);
+  public boolean isReliable();
+  public java.lang.String getMessage();
+  public java.lang.Object getMessage();
+}
+Compiled from "IoServer.java"
+public class ping.pong.net.server.io.IoServer<MessageType> implements ping.pong.net.server.Server<MessageType> {
+  public static final org.slf4j.Logger LOGGER;
+  protected java.util.Map<java.lang.Integer, ping.pong.net.connection.Connection> connectionsMap;
+  protected ping.pong.net.server.io.ServerConnectionManager<MessageType> serverConnectionManager;
+  protected ping.pong.net.connection.config.ConnectionConfiguration config;
+  protected java.util.List<ping.pong.net.connection.messaging.MessageListener> messageListeners;
+  protected java.util.List<ping.pong.net.server.ServerConnectionListener> connectionListeners;
+  protected ping.pong.net.connection.io.DataReader customDataReader;
+  protected ping.pong.net.connection.io.DataWriter customDataWriter;
+  public ping.pong.net.server.io.IoServer();
+  public ping.pong.net.server.io.IoServer(ping.pong.net.connection.config.ConnectionConfiguration);
+  public void broadcast(ping.pong.net.connection.messaging.Envelope<MessageType>);
+  public void start();
+  public void shutdown();
+  public ping.pong.net.connection.Connection getConnection(int);
+  public java.util.Collection<ping.pong.net.connection.Connection> getConnections();
+  public boolean hasConnections();
+  public boolean isListening();
+  public void addMessageListener(ping.pong.net.connection.messaging.MessageListener<? super ping.pong.net.connection.Connection, MessageType>);
+  public void removeMessageListener(ping.pong.net.connection.messaging.MessageListener<? super ping.pong.net.connection.Connection, MessageType>);
+  public void addConnectionListener(ping.pong.net.server.ServerConnectionListener);
+  public void removeConnectionListener(ping.pong.net.server.ServerConnectionListener);
+  synchronized void addConnection(ping.pong.net.connection.Connection<MessageType>);
+  synchronized void removeConnection(ping.pong.net.connection.Connection<MessageType>);
+  synchronized void removeConnection(int);
+  public synchronized int getNextAvailableId();
+  public void setCustomDataReader(ping.pong.net.connection.io.DataReader);
+  public void setCustomDataWriter(ping.pong.net.connection.io.DataWriter);
+  static {};
+}
+Compiled from "IoServerTest.java"
+public class ping.pong.net.server.io.IoServerTest {
+  ping.pong.net.connection.messaging.Envelope<java.lang.String> tcpMessage;
+  ping.pong.net.connection.Connection connection1;
+  public ping.pong.net.server.io.IoServerTest();
+  public static void setUpClass() throws java.lang.Exception;
+  public static void tearDownClass() throws java.lang.Exception;
+  public void testBroadcast();
+  public void testStart();
+  public void testConnectionManager();
+  public void testShutdown();
+  public void testGetConnection();
+  public void testGetConnections();
+  public void testHasConnections();
+  public void testIsListening();
+  public void testIsListening2();
+  public void testAddMessageListener();
+  public void testRemoveMessageListener();
+  public void testAddConnectionListener();
+  public void testRemoveConnectionListener();
+  public void testGetNextAvailableId();
+  public void testRemoveConnection();
+  static {};
+}
+Compiled from "IoServerTest.java"
+class ping.pong.net.server.io.IoServerTest$1 implements ping.pong.net.connection.messaging.Envelope<java.lang.String> {
+  final ping.pong.net.server.io.IoServerTest this$0;
+  ping.pong.net.server.io.IoServerTest$1(ping.pong.net.server.io.IoServerTest);
+  public boolean isReliable();
+  public java.lang.String getMessage();
+  public java.lang.Object getMessage();
+}
+Compiled from "IoServerTest.java"
+class ping.pong.net.server.io.IoServerTest$2 implements ping.pong.net.connection.Connection<java.lang.String> {
+  final ping.pong.net.server.io.IoServerTest this$0;
+  ping.pong.net.server.io.IoServerTest$2(ping.pong.net.server.io.IoServerTest);
+  public void close();
+  public boolean isConnected();
+  public int getConnectionId();
+  public void setConnectionId(int);
+  public void sendMessage(ping.pong.net.connection.messaging.Envelope<java.lang.String>);
+  public void run();
+  public void addConnectionEventListener(ping.pong.net.connection.ConnectionEvent);
+  public void removeConnectionEventListener(ping.pong.net.connection.ConnectionEvent);
+  public boolean isUsingCustomSerialization();
+  public boolean isUdpEnabled();
+  public java.net.SocketAddress getSocketAddress();
+  public void sendMessage(java.lang.Object);
+}
+Compiled from "IoServerTest.java"
+class ping.pong.net.server.io.IoServerTest$3 implements ping.pong.net.connection.messaging.MessageListener<ping.pong.net.connection.Connection, ping.pong.net.connection.messaging.Envelope> {
+  final ping.pong.net.server.io.IoServerTest this$0;
+  ping.pong.net.server.io.IoServerTest$3(ping.pong.net.server.io.IoServerTest);
+  public void messageReceived(ping.pong.net.connection.Connection, ping.pong.net.connection.messaging.Envelope);
+  public void messageReceived(java.lang.Object, java.lang.Object);
+}
+Compiled from "IoServerTest.java"
+class ping.pong.net.server.io.IoServerTest$4 implements ping.pong.net.connection.messaging.MessageListener<ping.pong.net.connection.Connection, ping.pong.net.connection.messaging.Envelope> {
+  final ping.pong.net.server.io.IoServerTest this$0;
+  ping.pong.net.server.io.IoServerTest$4(ping.pong.net.server.io.IoServerTest);
+  public void messageReceived(ping.pong.net.connection.Connection, ping.pong.net.connection.messaging.Envelope);
+  public void messageReceived(java.lang.Object, java.lang.Object);
+}
+Compiled from "IoServerTest.java"
+class ping.pong.net.server.io.IoServerTest$5 implements ping.pong.net.server.ServerConnectionListener {
+  final ping.pong.net.server.io.IoServerTest this$0;
+  ping.pong.net.server.io.IoServerTest$5(ping.pong.net.server.io.IoServerTest);
+  public void connectionAdded(ping.pong.net.server.Server, ping.pong.net.connection.Connection);
+  public void connectionRemoved(ping.pong.net.server.Server, ping.pong.net.connection.Connection);
+}
+Compiled from "IoServerTest.java"
+class ping.pong.net.server.io.IoServerTest$6 implements ping.pong.net.server.ServerConnectionListener {
+  final ping.pong.net.server.io.IoServerTest this$0;
+  ping.pong.net.server.io.IoServerTest$6(ping.pong.net.server.io.IoServerTest);
+  public void connectionAdded(ping.pong.net.server.Server, ping.pong.net.connection.Connection);
+  public void connectionRemoved(ping.pong.net.server.Server, ping.pong.net.connection.Connection);
+}
+Compiled from "IoServerTest.java"
+class ping.pong.net.server.io.IoServerTest$7 implements ping.pong.net.server.ServerConnectionListener {
+  final ping.pong.net.server.io.IoServerTest this$0;
+  ping.pong.net.server.io.IoServerTest$7(ping.pong.net.server.io.IoServerTest);
+  public void connectionAdded(ping.pong.net.server.Server, ping.pong.net.connection.Connection);
+  public void connectionRemoved(ping.pong.net.server.Server, ping.pong.net.connection.Connection);
+}
+Compiled from "ServerConnectionManager.java"
+class ping.pong.net.server.io.ServerConnectionManager<MessageType> implements java.lang.Runnable {
+  protected boolean listening;
+  protected ping.pong.net.connection.config.ConnectionConfiguration configuration;
+  protected java.net.ServerSocket tcpServerSocket;
+  protected java.net.DatagramSocket udpServerSocket;
+  protected ping.pong.net.server.io.IoServer<MessageType> server;
+  protected ping.pong.net.connection.io.DataReader customDataReader;
+  protected ping.pong.net.connection.io.DataWriter customDataWriter;
+  protected java.util.Map<java.net.SocketAddress, ping.pong.net.connection.Connection> udpConnections;
+  protected ping.pong.net.connection.io.AbstractIoUdpRunnable ioUdpReadRunnable;
+  public ping.pong.net.server.io.ServerConnectionManager(ping.pong.net.connection.config.ConnectionConfiguration, ping.pong.net.server.io.IoServer<MessageType>);
+  public void shutdown();
+  public boolean isListening();
+  public void run();
+  public void setCustomDataReader(ping.pong.net.connection.io.DataReader);
+  public void setCustomDataWriter(ping.pong.net.connection.io.DataWriter);
+  static org.slf4j.Logger access$000();
+  static {};
+}
+Compiled from "ServerConnectionManager.java"
+class ping.pong.net.server.io.ServerConnectionManager$1 implements ping.pong.net.server.io.ServerConnectionManager$UdpReceived<MessageType> {
+  final ping.pong.net.server.io.ServerConnectionManager this$0;
+  ping.pong.net.server.io.ServerConnectionManager$1(ping.pong.net.server.io.ServerConnectionManager);
+  public void UdpPacketReceived(java.net.SocketAddress, MessageType);
+}
+Compiled from "ServerConnectionManager.java"
+class ping.pong.net.server.io.ServerConnectionManager$2 implements javax.net.ssl.HandshakeCompletedListener {
+  final ping.pong.net.server.io.ServerConnectionManager this$0;
+  ping.pong.net.server.io.ServerConnectionManager$2(ping.pong.net.server.io.ServerConnectionManager);
+  public void handshakeCompleted(javax.net.ssl.HandshakeCompletedEvent);
+}
+Compiled from "ServerConnectionManager.java"
+class ping.pong.net.server.io.ServerConnectionManager$AbstractIoUdpRunnableImpl<MessageType> extends ping.pong.net.connection.io.AbstractIoUdpRunnable {
+  final ping.pong.net.server.io.ServerConnectionManager this$0;
+  public ping.pong.net.server.io.ServerConnectionManager$AbstractIoUdpRunnableImpl(ping.pong.net.connection.RunnableEventListener, java.net.DatagramSocket, ping.pong.net.server.io.ServerConnectionManager$UdpReceived<MessageType>);
+  public void run();
+}
+Compiled from "ServerConnectionManager.java"
+final class ping.pong.net.server.io.ServerConnectionManager$ConnectionEventImpl implements ping.pong.net.connection.ConnectionEvent<MessageType> {
+  final ping.pong.net.server.io.ServerConnectionManager this$0;
+  public ping.pong.net.server.io.ServerConnectionManager$ConnectionEventImpl(ping.pong.net.server.io.ServerConnectionManager, ping.pong.net.connection.Connection);
+  public void onSocketClosed();
+  public void onSocketCreated();
+  public void onSocketReceivedMessage(MessageType);
+}
+Compiled from "ServerConnectionManager.java"
+interface ping.pong.net.server.io.ServerConnectionManager$UdpReceived<MessageType> {
+  public abstract void UdpPacketReceived(java.net.SocketAddress, MessageType);
+}
+Compiled from "ServerConnectionManagerTest.java"
+public class ping.pong.net.server.io.ServerConnectionManagerTest {
+  public ping.pong.net.server.io.ServerConnectionManagerTest();
+  public static void setUpClass() throws java.lang.Exception;
+  public static void tearDownClass() throws java.lang.Exception;
+  public void testShutdown();
+  public void testShutdownWithNotNulLSockets() throws java.io.IOException;
+  public void testIsListening();
+  public void testRunSSL();
+  public void testRunCreateUDPSocketError() throws java.io.IOException;
+  public void testRunAcceptedSocket() throws java.io.IOException, java.lang.InterruptedException;
+  public void testRunAcceptedSocketSSL() throws java.io.IOException, java.lang.InterruptedException, java.net.URISyntaxException, java.security.NoSuchAlgorithmException, java.security.KeyStoreException, java.security.cert.CertificateException, java.security.KeyManagementException;
+}
+Compiled from "ServerIoConnection.java"
+final class ping.pong.net.server.io.ServerIoConnection<MessageType> extends ping.pong.net.connection.io.AbstractIoConnection<MessageType> {
+  protected ping.pong.net.connection.io.IoUdpWriteRunnable<MessageType> ioUdpWriteRunnable;
+  protected java.net.DatagramSocket udpSocket;
+  public ping.pong.net.server.io.ServerIoConnection(ping.pong.net.connection.config.ConnectionConfiguration, ping.pong.net.connection.io.DataReader, ping.pong.net.connection.io.DataWriter, java.net.Socket, java.net.DatagramSocket);
+  protected void processMessage(MessageType);
+  protected final boolean initUdp();
+  protected synchronized void fireOnSocketCreated();
+  protected void startUdp();
+  protected void closeUdp();
+  protected boolean isAnyRunning();
+  protected boolean isUdpWriteRunning();
+  protected void sendUdpMessage(MessageType);
+  static org.slf4j.Logger access$000();
+  static void access$100(ping.pong.net.server.io.ServerIoConnection);
+}
+Compiled from "ServerIoConnection.java"
+class ping.pong.net.server.io.ServerIoConnection$1 implements ping.pong.net.connection.RunnableEventListener {
+  final ping.pong.net.server.io.ServerIoConnection this$0;
+  ping.pong.net.server.io.ServerIoConnection$1(ping.pong.net.server.io.ServerIoConnection);
+  public void onRunnableClosed(ping.pong.net.connection.DisconnectState);
+}
+Compiled from "ServerIoConnectionTest.java"
+public class ping.pong.net.server.io.ServerIoConnectionTest {
+  public ping.pong.net.server.io.ServerIoConnectionTest();
+  public static void setUpClass() throws java.lang.Exception;
+  public static void tearDownClass() throws java.lang.Exception;
+  public void testProcessMessage();
+  public void testFireOnSocketCreated();
+}
+Compiled from "ServerIoConnectionTest.java"
+class ping.pong.net.server.io.ServerIoConnectionTest$1 implements ping.pong.net.connection.ConnectionEvent {
+  final ping.pong.net.server.io.ServerIoConnectionTest this$0;
+  ping.pong.net.server.io.ServerIoConnectionTest$1(ping.pong.net.server.io.ServerIoConnectionTest);
+  public void onSocketClosed();
+  public void onSocketCreated();
+  public void onSocketReceivedMessage(java.lang.Object);
+}
+Compiled from "PPNUtils.java"
+public final class ping.pong.net.utils.PPNUtils {
+  public static java.lang.String getAbsolutePath(java.lang.String);
+  public static java.io.InputStream getInputStream(java.lang.String) throws java.io.FileNotFoundException;
+  public static java.io.InputStream getInputStreamFromPath(java.lang.String) throws java.io.FileNotFoundException;
+  static {};
+}

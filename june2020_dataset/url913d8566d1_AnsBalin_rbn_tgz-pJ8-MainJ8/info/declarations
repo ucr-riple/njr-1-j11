@@ -1,0 +1,219 @@
+Compiled from "DataOutput.java"
+public class DataOutput {
+  public DataOutput(java.lang.String);
+  public DataOutput(java.lang.String, boolean);
+  public java.lang.String getPath();
+  public void writeToFile(int[]) throws java.io.IOException;
+  public void writeToFile(double[]) throws java.io.IOException;
+  public void writeToFile(java.lang.String) throws java.io.IOException;
+  public void writeToFile(java.lang.Object) throws java.io.IOException;
+  public Network readFile() throws java.io.IOException, java.lang.ClassNotFoundException;
+  public void clearFile() throws java.io.IOException;
+}
+Compiled from "Global.java"
+public class Global {
+  public static boolean[][] lookUp;
+  public static boolean[][] lookUp3;
+  public static java.lang.String[] chars;
+  public Global();
+  public static void printBoolVal(java.lang.String, char, java.lang.String);
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "Graph.java"
+public class Graph {
+  public static final int _REACTION_;
+  public static final int _MOLECULE_;
+  public static final int _NULL_;
+  public static final int WHITE;
+  public static final int BLACK;
+  public Graph();
+  public int checkReactionID(int);
+  public int checkMoleculeID(int);
+  public int getNumCycles();
+  public java.util.ArrayList<Graph$GraphNode> getGraphNodes();
+  public java.util.ArrayList<int[]> getCycles();
+  public void add(Reaction, Main);
+  public void bufferSave(Graph$GraphNode);
+  public void dfs();
+  public void dfsVisit(Graph$GraphNode, int);
+  public boolean filter(Reaction, int, int);
+  public void printCycle(int, Main);
+  public boolean contains(int[], int, Main);
+  public static void main(java.lang.String[]);
+}
+Compiled from "Graph.java"
+public class Graph$GraphNode {
+  final Graph this$0;
+  public Graph$GraphNode(Graph);
+  public Graph$GraphNode(Graph, Molecule, int);
+  public Graph$GraphNode(Graph, Reaction, int);
+  public int getColour();
+  public int getID();
+  public int getNodeIndex();
+  public int getType();
+  public void print();
+  public java.util.ArrayList<Graph$GraphNode> getChildren();
+  public void colour(int);
+  public void addChild(Graph$GraphNode);
+  public void addParent(Graph$GraphNode);
+  public void connect(Graph$GraphNode);
+}
+Compiled from "Main.java"
+public class Main {
+  public static double temperature;
+  public Main(int, int, int, int);
+  public Main(int, int, int, int, int, double);
+  public int getCycleLength(int);
+  public double getActivity(int);
+  public int getPopulation();
+  public int getNumSpecies();
+  public int getNumReactions();
+  public java.util.ArrayList<Reaction> getReactions();
+  public java.util.ArrayList<Network> getLibrary();
+  public java.util.ArrayList<Molecule> getBucket();
+  public void populationDistribution();
+  public void populateLibrary(int, int, int);
+  public void populateWorld(int, int);
+  public void stats();
+  public int[] molecularSizeDistrb();
+  public int[] cycleLengthDistrb();
+  public void reactionAnalysis();
+  public java.util.ArrayList<Molecule> selectRandMols(int);
+  public java.util.ArrayList<Network> moleculeArrToNetworkArr(java.util.ArrayList<Molecule>);
+  public int libraryUpdate(Network, Molecule, Molecule);
+  public int reactionsUpdate(Reaction);
+  public Network retrieve(int);
+  public Network retrieve(Molecule);
+  public Network bond(Molecule, Molecule, int, int);
+  public java.lang.String reactionToString(Reaction);
+  public void formBond(Molecule, Molecule, Molecule, Molecule, int, int);
+  public void checkCatalysis(java.util.ArrayList<Molecule>, java.util.ArrayList<Molecule>);
+  public void collide(Molecule, Molecule, boolean);
+  public void breakUp(Molecule);
+  public static void progress(java.lang.String, int, int);
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "Molecule.java"
+public class Molecule implements java.io.Serializable {
+  boolean flag;
+  int NetworkID;
+  int[] MoleculeID;
+  int[] bondingSites;
+  java.util.ArrayList<Molecule> children;
+  int state;
+  int size;
+  java.lang.String StringID;
+  public Molecule();
+  public Molecule(int, Molecule, Molecule);
+  public Molecule(Molecule);
+  public void initMoleculeID(int);
+  public void calculateMoleculeID(int, int, int[]);
+  public boolean getFlag();
+  public java.util.ArrayList<Molecule> getChildren();
+  public Molecule getChildren(int);
+  public int getID();
+  public int[] getMolID();
+  public int[] getBondingSites();
+  public int getState();
+  public int getSize();
+  public java.lang.String getStringID();
+  public void setID(int);
+  public void setMoleculeID(int, int);
+  public void setChildren(java.util.ArrayList<Molecule>);
+  public void setSize(int);
+  public void flag();
+  public void unFlag();
+  public java.util.ArrayList<Molecule> sortIntoArray(java.util.ArrayList<Molecule>);
+  public void setState(int);
+  public void flagChildren();
+  public void flagAncestors(int[], int, int);
+  public void findUnflaggedChildren(java.util.ArrayList<Molecule>);
+  public void unFlagAll();
+  public int[] selectRandom();
+  public Molecule getFromMoleculeID(int[], int, int);
+  public java.util.ArrayList<Molecule> split(int[]);
+  public java.lang.String toString();
+  public java.lang.String toStringf();
+  public static void main(java.lang.String[]);
+}
+Compiled from "Network.java"
+public class Network implements java.io.Serializable {
+  public Network();
+  public Network(int);
+  public Network(int, int, int);
+  public Network(java.util.ArrayList<Node>, int[]);
+  public java.util.ArrayList<Node> copyNodes();
+  public void setState(int);
+  public void setPop(int);
+  public void incrPop();
+  public void decrPop();
+  public void setMol(Molecule);
+  public Molecule getMol();
+  public int getNetworkID();
+  public int getNumNodes();
+  public java.util.ArrayList<Node> getNodes();
+  public int getCycleLength();
+  public int getState();
+  public double getActivity();
+  public int getNumBondingSites();
+  public int[] getBondingSites();
+  public int getPop();
+  public void printMatrixString();
+  public java.lang.String toString();
+  public void calculateState();
+  public void calculateCycleLength();
+  public void calculateActivity();
+  public void update();
+  public int update(int);
+  public Network bond(Network, int, int);
+  public void trajectory(int);
+  public boolean equals(Network);
+  public static void main(java.lang.String[]);
+}
+Compiled from "Node.java"
+public class Node implements java.io.Serializable {
+  public Node(int, boolean);
+  public Node(Node);
+  public int[] getInputs();
+  public boolean getState();
+  public boolean getBondingSite();
+  public boolean getFilled();
+  public boolean getNextState();
+  public int getFunction();
+  public void setInputs(int[]);
+  public void setBondingInput(int);
+  public void setState(boolean);
+  public void setBondingSite(boolean);
+  public void setFilled(boolean);
+  public void setNextState(boolean);
+  public void setFunction(int);
+  public static void main(java.lang.String[]);
+}
+Compiled from "Reaction.java"
+public class Reaction {
+  public Reaction(Reaction);
+  public Reaction();
+  public Reaction(int[], int[]);
+  public Reaction(int[], int[], Main);
+  public Reaction(java.util.ArrayList<Molecule>, java.util.ArrayList<Molecule>);
+  public Reaction(java.util.ArrayList<Molecule>, java.util.ArrayList<Molecule>, Main);
+  public int getCount();
+  public int[] getReactants();
+  public int[] getProducts();
+  public java.util.ArrayList<Molecule> getMolReactants();
+  public java.util.ArrayList<Molecule> getMolProducts();
+  public java.lang.String getID();
+  public int getIntID();
+  public void setIntID(int);
+  public void incrCount();
+  public boolean equals(Reaction);
+  public void printReaction();
+  public static void main(java.lang.String[]);
+}
+Compiled from "Test.java"
+class Test {
+  Test();
+  public static void main(java.lang.String[]);
+}

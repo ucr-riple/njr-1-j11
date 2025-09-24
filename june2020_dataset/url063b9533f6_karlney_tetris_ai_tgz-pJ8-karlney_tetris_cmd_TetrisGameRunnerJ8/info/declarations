@@ -1,0 +1,431 @@
+Compiled from "AIPlayer.java"
+public class karlney.tetris.ai.AIPlayer extends karlney.tetris.core.Player {
+  public karlney.tetris.ai.AIPlayer(karlney.tetris.core.Board, karlney.tetris.core.PieceGenerator, karlney.tetris.ai.PiecePlacer, karlney.tetris.ai.BoardEvaluator, karlney.tetris.ai.PathFinder, int, int);
+  public void start(int);
+  public void stop();
+  public karlney.tetris.ai.PiecePlacer getPlacer();
+  public void setPlacer(karlney.tetris.ai.PiecePlacer);
+  public karlney.tetris.ai.BoardEvaluator getEvaluator();
+  public void setEvaluator(karlney.tetris.ai.BoardEvaluator);
+  public karlney.tetris.ai.PathFinder getPathFinder();
+  public void setPathFinder(karlney.tetris.ai.PathFinder);
+  public synchronized void processInput(karlney.tetris.core.PlayerInput);
+  public void clearDestination();
+  public void setDestination(karlney.tetris.core.Piece);
+  public karlney.tetris.core.Piece getDestination();
+  public boolean hasDestination();
+  static karlney.tetris.ai.PiecePlacer access$000(karlney.tetris.ai.AIPlayer);
+  static karlney.tetris.ai.PathFinder access$100(karlney.tetris.ai.AIPlayer);
+  static int access$200(karlney.tetris.ai.AIPlayer);
+  static org.slf4j.Logger access$300();
+  static {};
+}
+Compiled from "AIPlayer.java"
+public class karlney.tetris.ai.AIPlayer$AIThread implements java.lang.Runnable {
+  final karlney.tetris.ai.AIPlayer this$0;
+  public karlney.tetris.ai.AIPlayer$AIThread(karlney.tetris.ai.AIPlayer);
+  public void run();
+  public void start();
+  public void stop();
+}
+Compiled from "AIPlayerBuilder.java"
+public class karlney.tetris.ai.AIPlayerBuilder {
+  public static karlney.tetris.ai.AIPlayer getInstantMoveOnePieceAIPlayer(karlney.tetris.core.Board, karlney.tetris.core.PieceGenerator, karlney.tetris.ai.BoardEvaluator, int, int);
+}
+Compiled from "BoardEvaluator.java"
+public interface karlney.tetris.ai.BoardEvaluator {
+  public abstract double score(karlney.tetris.core.Board, karlney.tetris.core.Piece, int);
+}
+Compiled from "BoardMeasuresUtil.java"
+public class karlney.tetris.ai.BoardMeasuresUtil {
+  public karlney.tetris.ai.BoardMeasuresUtil();
+  public static double getLandingHeight(karlney.tetris.core.Board, karlney.tetris.core.Piece);
+  public static int getRowTransitions(karlney.tetris.core.Board);
+  public static int getColumnTransitions(karlney.tetris.core.Board);
+  public static int getNrHoles(karlney.tetris.core.Board);
+  public static int getWellSums(karlney.tetris.core.Board);
+}
+Compiled from "ColumnTransitionsBoardMeasureTest.java"
+public class karlney.tetris.ai.ColumnTransitionsBoardMeasureTest {
+  public karlney.tetris.ai.ColumnTransitionsBoardMeasureTest();
+  public void testEmptyBoard_Expect4();
+  public void testBoardWithoutHoles_Expect8();
+  public void testBoardWithHoles_Expect5();
+  public void testComplexBoard_Expect24();
+}
+Compiled from "ElAshiEvaluatorTest.java"
+public class karlney.tetris.ai.ElAshiEvaluatorTest {
+  public karlney.tetris.ai.ElAshiEvaluatorTest();
+  public void testComplexBoard_ExpectIplacedAtWall();
+}
+Compiled from "ElAshiTetrisBoardEvaluator.java"
+public class karlney.tetris.ai.ElAshiTetrisBoardEvaluator implements karlney.tetris.ai.BoardEvaluator {
+  double[] w;
+  public karlney.tetris.ai.ElAshiTetrisBoardEvaluator();
+  public double score(karlney.tetris.core.Board, karlney.tetris.core.Piece, int);
+}
+Compiled from "InstantMovePathFinder.java"
+public class karlney.tetris.ai.InstantMovePathFinder implements karlney.tetris.ai.PathFinder {
+  public karlney.tetris.ai.InstantMovePathFinder();
+  public java.util.List<karlney.tetris.core.PlayerInput> findPath(karlney.tetris.core.Board, karlney.tetris.core.Piece, karlney.tetris.core.Piece);
+}
+Compiled from "LandingHeightBoardMeasureTest.java"
+public class karlney.tetris.ai.LandingHeightBoardMeasureTest {
+  public karlney.tetris.ai.LandingHeightBoardMeasureTest();
+  public void testWithPieceIhorizEmptyBoard_Expect0() throws karlney.tetris.core.UnableToPlacePieceException;
+  public void testWithPieceJemptyBoard_Expect1() throws karlney.tetris.core.UnableToPlacePieceException;
+  public void testWithPieceIvert1_Expect15() throws karlney.tetris.core.UnableToPlacePieceException;
+  public void testWithPieceIvert2_Expect25() throws karlney.tetris.core.UnableToPlacePieceException;
+  public void testWithPieceTemptyBoard_Expect05() throws karlney.tetris.core.UnableToPlacePieceException;
+  public void testWithPieceTfitsVertical_Expect2() throws karlney.tetris.core.UnableToPlacePieceException;
+  public void testWithPieceTfitsHoriz_Expect05() throws karlney.tetris.core.UnableToPlacePieceException;
+  public void testWithPieceLlandOnPile_Expect25() throws karlney.tetris.core.UnableToPlacePieceException;
+  public void testWithPieceLlandOnPile2_Expect25() throws karlney.tetris.core.UnableToPlacePieceException;
+}
+Compiled from "NrHolesBoardMeasureTest.java"
+public class karlney.tetris.ai.NrHolesBoardMeasureTest {
+  public karlney.tetris.ai.NrHolesBoardMeasureTest();
+  public void testEmptyBoard_Expect0();
+  public void testBoardWithoutHoles_Expect0();
+  public void testBoardWithHoles_Expect3();
+  public void testBoardWithManyHoles_Expect9();
+  public void testComplexBoard_Expect9();
+}
+Compiled from "OnePieceNoPathCheckPiecePlacer.java"
+public class karlney.tetris.ai.OnePieceNoPathCheckPiecePlacer implements karlney.tetris.ai.PiecePlacer {
+  public karlney.tetris.ai.OnePieceNoPathCheckPiecePlacer();
+  public karlney.tetris.core.Piece bestPlacement(karlney.tetris.ai.BoardEvaluator, karlney.tetris.core.Board, karlney.tetris.core.Piece, karlney.tetris.core.Piece);
+  static {};
+}
+Compiled from "PathFinder.java"
+public interface karlney.tetris.ai.PathFinder {
+  public abstract java.util.List<karlney.tetris.core.PlayerInput> findPath(karlney.tetris.core.Board, karlney.tetris.core.Piece, karlney.tetris.core.Piece);
+}
+Compiled from "PiecePlacer.java"
+public interface karlney.tetris.ai.PiecePlacer {
+  public abstract karlney.tetris.core.Piece bestPlacement(karlney.tetris.ai.BoardEvaluator, karlney.tetris.core.Board, karlney.tetris.core.Piece, karlney.tetris.core.Piece);
+}
+Compiled from "RowTransitionsBoardMeasureTest.java"
+public class karlney.tetris.ai.RowTransitionsBoardMeasureTest {
+  public karlney.tetris.ai.RowTransitionsBoardMeasureTest();
+  public void testEmptyBoard_Expect8();
+  public void testBoardWithoutHoles_Expect14();
+  public void testBoardWithHoles_Expect12();
+  public void testComplexBoard_Expect40();
+}
+Compiled from "WellSumsBoardMeasureTest.java"
+public class karlney.tetris.ai.WellSumsBoardMeasureTest {
+  public karlney.tetris.ai.WellSumsBoardMeasureTest();
+  public void testEmptyBoard_Expect0();
+  public void testBoardWithoutWells_Expect1();
+  public void testBoardWithOneWell_Expect3();
+  public void testBoardWithOneWellAgainstTheWall_Expect1();
+  public void testBoardWithSeveralWells_Expect6();
+  public void testComplexBoard_Expect17();
+}
+Compiled from "TetrisGameRunner.java"
+public class karlney.tetris.cmd.TetrisGameRunner {
+  public karlney.tetris.cmd.TetrisGameRunner();
+  public static void main(java.lang.String[]) throws java.lang.InterruptedException;
+}
+Compiled from "AbstractPiece.java"
+public abstract class karlney.tetris.core.AbstractPiece implements karlney.tetris.core.Piece {
+  protected final karlney.tetris.core.Board board;
+  protected karlney.tetris.core.Square[][] shape;
+  protected boolean inputsAccepted;
+  protected int slides;
+  protected int x;
+  protected int y;
+  protected int rotation;
+  public karlney.tetris.core.AbstractPiece(int, int, int, karlney.tetris.core.Board, karlney.tetris.core.Square[][]);
+  public karlney.tetris.core.AbstractPiece(karlney.tetris.core.AbstractPiece, int, int, int, karlney.tetris.core.Board);
+  protected abstract void rotateNoCheck();
+  public abstract boolean rotateIfPossible();
+  public abstract karlney.tetris.core.Piece getTranslatedCopy(int, int, int, karlney.tetris.core.Board);
+  public abstract int getPossibleOrientations();
+  public karlney.tetris.core.PieceType getType();
+  public synchronized void stepDownAFAP();
+  public synchronized boolean moveDown();
+  public synchronized void moveSideWays(karlney.tetris.core.PlayerInput);
+  public synchronized void drop();
+  public synchronized boolean isDropped();
+  public java.lang.String toString();
+  public int getSize();
+  public synchronized int getX();
+  public synchronized int getY();
+  public synchronized karlney.tetris.core.Square getSquare(int, int);
+  public synchronized karlney.tetris.core.Square[][] getShape();
+  public synchronized boolean isFilled(int, int);
+  public synchronized int getOrientation();
+  static {};
+}
+Compiled from "AbstractPieceGenerator.java"
+public abstract class karlney.tetris.core.AbstractPieceGenerator implements karlney.tetris.core.PieceGenerator {
+  protected static final int NUMBER_OF_BLOCKS;
+  public karlney.tetris.core.AbstractPieceGenerator();
+  protected karlney.tetris.core.Piece getPiece(karlney.tetris.core.PieceType, karlney.tetris.core.Board);
+  static {};
+}
+Compiled from "AbstractPieceGenerator.java"
+class karlney.tetris.core.AbstractPieceGenerator$1 {
+  static final int[] $SwitchMap$karlney$tetris$core$PieceType;
+  static {};
+}
+Compiled from "Board.java"
+public class karlney.tetris.core.Board {
+  public static final int DEFAULT_ROWS;
+  public static final int DEFAULT_COLS;
+  public karlney.tetris.core.Board();
+  public karlney.tetris.core.Board(int, int);
+  public karlney.tetris.core.Board(karlney.tetris.core.Board);
+  public void addSquare(int, int, karlney.tetris.core.Square);
+  public void placePieceOnBoard(karlney.tetris.core.Piece) throws karlney.tetris.core.UnableToPlacePieceException;
+  public int removeFullRows();
+  public boolean allowedPlacement(karlney.tetris.core.Piece);
+  public boolean allowedPlacement(int, int, karlney.tetris.core.Square[][]);
+  public int getRows();
+  public int getCols();
+  public karlney.tetris.core.Square getSquare(int, int);
+  public boolean isFilled(int, int);
+}
+Compiled from "Piece.java"
+public interface karlney.tetris.core.Piece {
+  public abstract boolean rotateIfPossible();
+  public abstract boolean moveDown();
+  public abstract void moveSideWays(karlney.tetris.core.PlayerInput);
+  public abstract void drop();
+  public abstract boolean isDropped();
+  public abstract void stepDownAFAP();
+  public abstract int getSize();
+  public abstract boolean isFilled(int, int);
+  public abstract int getX();
+  public abstract int getY();
+  public abstract int getPossibleOrientations();
+  public abstract int getOrientation();
+  public abstract karlney.tetris.core.PieceType getType();
+  public abstract karlney.tetris.core.Square[][] getShape();
+  public abstract karlney.tetris.core.Square getSquare(int, int);
+  public abstract karlney.tetris.core.Piece getTranslatedCopy(int, int, int, karlney.tetris.core.Board);
+}
+Compiled from "PieceGenerator.java"
+public interface karlney.tetris.core.PieceGenerator {
+  public abstract karlney.tetris.core.Piece getNextPiece(karlney.tetris.core.Board);
+}
+Compiled from "PieceI.java"
+public class karlney.tetris.core.PieceI extends karlney.tetris.core.PieceISZ {
+  static final boolean[][] I_NORMAL;
+  static final boolean[][] I_TILT;
+  public karlney.tetris.core.PieceI(int, int, karlney.tetris.core.Board, karlney.tetris.core.Square[][]);
+  public karlney.tetris.core.PieceI(karlney.tetris.core.PieceI, int, int, int, karlney.tetris.core.Board);
+  protected karlney.tetris.core.Square[][] getRotatedShape();
+  public karlney.tetris.core.Piece getTranslatedCopy(int, int, int, karlney.tetris.core.Board);
+  static {};
+}
+Compiled from "PieceISZ.java"
+public abstract class karlney.tetris.core.PieceISZ extends karlney.tetris.core.AbstractPiece {
+  public karlney.tetris.core.PieceISZ(int, int, karlney.tetris.core.Board, karlney.tetris.core.Square[][]);
+  public karlney.tetris.core.PieceISZ(karlney.tetris.core.PieceISZ, int, int, int, karlney.tetris.core.Board);
+  public synchronized boolean rotateIfPossible();
+  public synchronized void rotateNoCheck();
+  public int getPossibleOrientations();
+  protected karlney.tetris.core.Square[][] buildSquares(boolean[][], karlney.tetris.core.PieceType);
+  protected abstract karlney.tetris.core.Square[][] getRotatedShape();
+  protected synchronized boolean isTilted();
+}
+Compiled from "PieceJLT.java"
+public class karlney.tetris.core.PieceJLT extends karlney.tetris.core.AbstractPiece {
+  public karlney.tetris.core.PieceJLT(int, int, karlney.tetris.core.Board, karlney.tetris.core.Square[][]);
+  public karlney.tetris.core.PieceJLT(karlney.tetris.core.PieceJLT, int, int, int, karlney.tetris.core.Board);
+  public karlney.tetris.core.Piece getTranslatedCopy(int, int, int, karlney.tetris.core.Board);
+  public int getPossibleOrientations();
+  public synchronized boolean rotateIfPossible();
+  public synchronized void rotateNoCheck();
+  static {};
+}
+Compiled from "PieceO.java"
+public class karlney.tetris.core.PieceO extends karlney.tetris.core.AbstractPiece {
+  public karlney.tetris.core.PieceO(int, int, karlney.tetris.core.Board, karlney.tetris.core.Square[][]);
+  public karlney.tetris.core.PieceO(karlney.tetris.core.PieceO, int, int, karlney.tetris.core.Board);
+  public void rotateNoCheck();
+  public karlney.tetris.core.Piece getTranslatedCopy(int, int, int, karlney.tetris.core.Board);
+  public int getPossibleOrientations();
+  public boolean rotateIfPossible();
+}
+Compiled from "PieceS.java"
+public class karlney.tetris.core.PieceS extends karlney.tetris.core.PieceISZ {
+  static final boolean[][] S_NORMAL;
+  static final boolean[][] S_TILT;
+  public karlney.tetris.core.PieceS(int, int, karlney.tetris.core.Board, karlney.tetris.core.Square[][]);
+  public karlney.tetris.core.PieceS(karlney.tetris.core.PieceS, int, int, int, karlney.tetris.core.Board);
+  protected karlney.tetris.core.Square[][] getRotatedShape();
+  public karlney.tetris.core.Piece getTranslatedCopy(int, int, int, karlney.tetris.core.Board);
+  static {};
+}
+Compiled from "PieceType.java"
+public final class karlney.tetris.core.PieceType extends java.lang.Enum<karlney.tetris.core.PieceType> {
+  public static final karlney.tetris.core.PieceType O;
+  public static final karlney.tetris.core.PieceType I;
+  public static final karlney.tetris.core.PieceType S;
+  public static final karlney.tetris.core.PieceType Z;
+  public static final karlney.tetris.core.PieceType L;
+  public static final karlney.tetris.core.PieceType J;
+  public static final karlney.tetris.core.PieceType T;
+  public static final karlney.tetris.core.PieceType BOARD;
+  public static karlney.tetris.core.PieceType[] values();
+  public static karlney.tetris.core.PieceType valueOf(java.lang.String);
+  public int getValue();
+  public static karlney.tetris.core.PieceType valueOf(int);
+  static {};
+}
+Compiled from "PieceZ.java"
+public class karlney.tetris.core.PieceZ extends karlney.tetris.core.PieceISZ {
+  static final boolean[][] Z_NORMAL;
+  static final boolean[][] Z_TILT;
+  public karlney.tetris.core.PieceZ(int, int, karlney.tetris.core.Board, karlney.tetris.core.Square[][]);
+  public karlney.tetris.core.PieceZ(karlney.tetris.core.PieceZ, int, int, int, karlney.tetris.core.Board);
+  protected karlney.tetris.core.Square[][] getRotatedShape();
+  public karlney.tetris.core.Piece getTranslatedCopy(int, int, int, karlney.tetris.core.Board);
+  static {};
+}
+Compiled from "Player.java"
+public class karlney.tetris.core.Player implements java.lang.Runnable {
+  protected karlney.tetris.core.Piece currentPiece;
+  protected karlney.tetris.core.Piece nextPiece;
+  public karlney.tetris.core.Player(karlney.tetris.core.Board, karlney.tetris.core.PieceGenerator, int);
+  public void start(int);
+  public void stop();
+  public synchronized void moveDownOrLand();
+  public synchronized void setDelay(int);
+  public synchronized void setLevel(int);
+  public synchronized void updatePlaceScore(int);
+  protected synchronized void commitCurrentPieceToBoard() throws karlney.tetris.core.UnableToPlacePieceException;
+  public void processInput(karlney.tetris.core.PlayerInput);
+  public boolean isRunning();
+  public void run();
+  public karlney.tetris.core.Piece getNextPiece();
+  public karlney.tetris.core.Piece getCurrentPiece();
+  public karlney.tetris.core.Board getBoard();
+  public long getScore();
+  public int getLines();
+  public int getNumberOfPieces();
+  static {};
+}
+Compiled from "Player.java"
+class karlney.tetris.core.Player$1 {
+  static final int[] $SwitchMap$karlney$tetris$core$PlayerInput;
+  static {};
+}
+Compiled from "PlayerInput.java"
+public final class karlney.tetris.core.PlayerInput extends java.lang.Enum<karlney.tetris.core.PlayerInput> {
+  public static final karlney.tetris.core.PlayerInput DOWN;
+  public static final karlney.tetris.core.PlayerInput LEFT;
+  public static final karlney.tetris.core.PlayerInput RIGHT;
+  public static final karlney.tetris.core.PlayerInput DROP;
+  public static final karlney.tetris.core.PlayerInput ROTATE;
+  public static final karlney.tetris.core.PlayerInput INSTANT_MOVE;
+  public static karlney.tetris.core.PlayerInput[] values();
+  public static karlney.tetris.core.PlayerInput valueOf(java.lang.String);
+  static {};
+}
+Compiled from "RandomPieceGenerator.java"
+public class karlney.tetris.core.RandomPieceGenerator extends karlney.tetris.core.AbstractPieceGenerator {
+  public karlney.tetris.core.RandomPieceGenerator();
+  public karlney.tetris.core.RandomPieceGenerator(int);
+  public karlney.tetris.core.Piece getNextPiece(karlney.tetris.core.Board);
+}
+Compiled from "Square.java"
+public class karlney.tetris.core.Square {
+  public karlney.tetris.core.Square(karlney.tetris.core.PieceType);
+  public karlney.tetris.core.Square(karlney.tetris.core.PieceType, boolean);
+  public boolean isFilled();
+  public karlney.tetris.core.PieceType getType();
+  public java.lang.String toString();
+}
+Compiled from "TetrisGame.java"
+public class karlney.tetris.core.TetrisGame {
+  public karlney.tetris.core.TetrisGame(int, java.util.List<karlney.tetris.core.Player>);
+  public void start();
+  public void stop();
+  public void increaseLevel();
+  public void decreaseLevel();
+  public void togglePause();
+  public boolean isPaused();
+  public java.util.List<karlney.tetris.core.Player> getPlayers();
+  public boolean hasEnded();
+  public int getLevel();
+  static {};
+}
+Compiled from "UnableToPlacePieceException.java"
+public class karlney.tetris.core.UnableToPlacePieceException extends java.lang.Exception {
+  public karlney.tetris.core.UnableToPlacePieceException(java.lang.String, java.lang.Exception);
+}
+Compiled from "Highscore.java"
+class karlney.tetris.swing.HighScorePost implements java.io.Serializable {
+  public int score;
+  public java.lang.String name;
+  public karlney.tetris.swing.HighScorePost();
+  public karlney.tetris.swing.HighScorePost(int, java.lang.String);
+  public java.lang.String toString();
+}
+Compiled from "Highscore.java"
+public class karlney.tetris.swing.Highscore {
+  static karlney.tetris.swing.HighScorePost[] scorename;
+  static java.lang.String name;
+  static java.lang.String outputfile;
+  static int place;
+  public karlney.tetris.swing.Highscore();
+  public static void readFile();
+  public static void updateScore(int);
+  public static void getPlace(int);
+  public static void getName();
+  public static void updateFile(int);
+  public static void showHighscore();
+  static {};
+}
+Compiled from "TetrisGameSwing.java"
+public class karlney.tetris.swing.TetrisGameSwing extends javax.swing.JPanel implements java.lang.Runnable,java.awt.event.KeyListener,java.awt.event.ActionListener {
+  public karlney.tetris.core.TetrisGame game;
+  public karlney.tetris.core.PieceGenerator generator;
+  public static final java.awt.Color c1;
+  public static final java.awt.Color c2;
+  public static final java.awt.Color c3;
+  public static final java.awt.Color c4;
+  public static final java.awt.Color c6;
+  public static final java.awt.Color c5;
+  public static final java.awt.Color c7;
+  public static final java.awt.Color c8;
+  public static final java.awt.Color c9;
+  public karlney.tetris.swing.TetrisGameSwing();
+  public void buildMenu(javax.swing.JFrame);
+  public void quitGame();
+  public void keyTyped(java.awt.event.KeyEvent);
+  public void keyReleased(java.awt.event.KeyEvent);
+  public void keyPressed(java.awt.event.KeyEvent);
+  public void processKeyInput(java.awt.event.KeyEvent);
+  public void actionPerformed(java.awt.event.ActionEvent);
+  public void paintComponent(java.awt.Graphics);
+  public void drawColoredSquare(karlney.tetris.core.Square, java.awt.Graphics, int, int, java.awt.Color);
+  public void drawSquare(karlney.tetris.core.Square, java.awt.Graphics, int, int);
+  public java.awt.Color[] getColors(int);
+  public void run();
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "BoardBuilder.java"
+public class karlney.tetris.test.BoardBuilder {
+  public karlney.tetris.test.BoardBuilder();
+  public static karlney.tetris.core.Board createEmptyBoard(int, int);
+  public static karlney.tetris.core.Board createBoard(int, int, int[][]);
+  public static karlney.tetris.core.Board createBoard(int, int[][]);
+}
+Compiled from "PieceBuilder.java"
+public class karlney.tetris.test.PieceBuilder {
+  public karlney.tetris.test.PieceBuilder();
+  public static karlney.tetris.core.Piece createPiece(karlney.tetris.core.PieceType, karlney.tetris.core.Board);
+  static {};
+}
+Compiled from "StaticPieceGenerator.java"
+public class karlney.tetris.test.StaticPieceGenerator extends karlney.tetris.core.AbstractPieceGenerator {
+  public karlney.tetris.test.StaticPieceGenerator(int[]);
+  public karlney.tetris.core.Piece getNextPiece(karlney.tetris.core.Board);
+}

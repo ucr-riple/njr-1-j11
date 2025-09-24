@@ -1,0 +1,222 @@
+Compiled from "Configuracion.java"
+public class agapi.Configuracion {
+  public static final int ULTIMA_GENERACION;
+  public static final int GENERACIONES_SIN_POBLACIONES;
+  public static final int GENERACIONES_CON_POBLACIONES;
+  public agapi.Configuracion();
+  public agapi.Proceso getProceso();
+  public void iniciarProceso();
+  public void setNumeroEjecuciones(int);
+  public void setNumeroGeneraciones(int);
+  public void setSelector(agapi.Selector);
+  public void setSelectorPostCruce(agapi.SelectorPostCruce);
+  public void setProbabilidadCruce(double);
+  public void setProbabilidadMutacion(double);
+  public void setElitismo(boolean);
+  public void setTamanoPoblacion(int);
+  public void setTipoIndividuo(agapi.Individuo);
+  public void setTamanoCromosoma(int);
+  public java.lang.String aTexto(int);
+}
+Compiled from "Ejecucion.java"
+public class agapi.Ejecucion {
+  public agapi.Ejecucion();
+  public static int getNumeroGeneraciones();
+  public static void setNumeroGeneraciones(int);
+  public agapi.Generacion[] getGeneraciones();
+  public double getTiempoEjecucion();
+  public void ejecutar();
+  public java.lang.String toString();
+  public java.lang.String toStringConPoblaciones();
+}
+Compiled from "Generacion.java"
+public class agapi.Generacion {
+  public agapi.Generacion();
+  public agapi.Generacion(agapi.Poblacion);
+  public agapi.Poblacion getPoblacion();
+  public void setPoblacion(agapi.Poblacion);
+  public static agapi.Selector getSelector();
+  public static void setSelector(agapi.Selector);
+  public static agapi.SelectorPostCruce getSelectorPostCruce();
+  public static void setSelectorPostCruce(agapi.SelectorPostCruce);
+  public static double getProbabilidadCruce();
+  public static void setProbabilidadCruce(double);
+  public static double getProbabilidadMutacion();
+  public static void setProbabilidadMutacion(double);
+  public static boolean isElitismo();
+  public static void setElitismo(boolean);
+  public agapi.Generacion generar();
+  public java.lang.String toString();
+  protected java.lang.String toStringConPoblaciones();
+}
+Compiled from "Generador.java"
+public class agapi.Generador {
+  public agapi.Generador();
+  public agapi.Generacion generar(agapi.Generacion);
+  static {};
+}
+Compiled from "Individuo.java"
+public abstract class agapi.Individuo implements java.lang.Comparable<agapi.Individuo> {
+  public agapi.Individuo();
+  public static agapi.Individuo getTipoIndividuo();
+  public static void setTipoIndividuo(agapi.Individuo);
+  public static agapi.Individuo fabricaIndividuo();
+  public static int getTamanoCromosoma();
+  public static void setTamanoCromosoma(int);
+  public double getFA();
+  public void setFA(double);
+  public int compareTo(agapi.Individuo);
+  public abstract double calcFA();
+  public abstract void aleatorio();
+  public abstract agapi.Individuo[] cruce(agapi.Individuo);
+  public abstract void mutacion();
+  public int compareTo(java.lang.Object);
+}
+Compiled from "Poblacion.java"
+public class agapi.Poblacion {
+  public static final int ALEATORIA;
+  public agapi.Poblacion();
+  public agapi.Poblacion(int);
+  public static int getTamanoPoblacion();
+  public static void setTamanoPoblacion(int);
+  public agapi.Individuo[] getIndividuos();
+  protected void setIndividuos(agapi.Individuo[]);
+  public agapi.Individuo getMejorIndividuo();
+  protected void setMejorIndividuo(agapi.Individuo);
+  public agapi.Individuo getPeorIndividuo();
+  protected void setPeorIndividuo(agapi.Individuo);
+  public double getMedia();
+  protected void setMedia(double);
+  public double getDesviacion();
+  protected void setDesviacion(double);
+  public void aleatoria();
+  public void calcMejorPeorMediaDesviacion();
+  public java.lang.String toString();
+}
+Compiled from "Proceso.java"
+public class agapi.Proceso {
+  public agapi.Proceso();
+  public static int getNumeroEjecuciones();
+  public static void setNumeroEjecuciones(int);
+  public agapi.Ejecucion[] getEjecuciones();
+  public long getTiempoProceso();
+  public void procesar();
+  public java.lang.String toString();
+  protected java.lang.String aTexto(int);
+}
+Compiled from "Selector.java"
+public interface agapi.Selector {
+  public abstract agapi.Individuo[] seleccion(agapi.Poblacion, int);
+  public abstract void prepararSeleccion(agapi.Poblacion);
+}
+Compiled from "SelectorPostCruce.java"
+public interface agapi.SelectorPostCruce {
+  public abstract agapi.Individuo[] seleccionPostCruce(agapi.Individuo[], agapi.Individuo[]);
+}
+Compiled from "CrucePMX.java"
+public class agapi.impl.CrucePMX {
+  public agapi.impl.CrucePMX();
+  public agapi.impl.IndividuoCombinatorio[] cruce(agapi.impl.IndividuoCombinatorio, agapi.impl.IndividuoCombinatorio);
+  static {};
+}
+Compiled from "Funcion.java"
+public interface agapi.impl.Funcion {
+  public abstract double[] calcValEsp(agapi.Poblacion);
+}
+Compiled from "FuncionClasico.java"
+public class agapi.impl.FuncionClasico implements agapi.impl.Funcion {
+  public agapi.impl.FuncionClasico();
+  public double[] calcValEsp(agapi.Poblacion);
+}
+Compiled from "FuncionRanking.java"
+public class agapi.impl.FuncionRanking implements agapi.impl.Funcion {
+  public agapi.impl.FuncionRanking(double);
+  public double[] calcValEsp(agapi.Poblacion);
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "FuncionTanese.java"
+public class agapi.impl.FuncionTanese implements agapi.impl.Funcion {
+  public agapi.impl.FuncionTanese();
+  public double[] calcValEsp(agapi.Poblacion);
+  public java.lang.String toString();
+}
+Compiled from "IndividuoBinario.java"
+public abstract class agapi.impl.IndividuoBinario extends agapi.Individuo {
+  public agapi.impl.IndividuoBinario();
+  public boolean[] getCromosoma();
+  public void setCromosoma(boolean[]);
+  public void aleatorio();
+  public agapi.Individuo[] cruce(agapi.Individuo);
+  public void mutacion();
+  static {};
+}
+Compiled from "IndividuoCombinatorio.java"
+public abstract class agapi.impl.IndividuoCombinatorio extends agapi.Individuo {
+  public agapi.impl.IndividuoCombinatorio();
+  public int[] getCromosoma();
+  public void setCromosoma(int[]);
+  public void aleatorio();
+  public agapi.Individuo[] cruce(agapi.Individuo);
+  public void mutacion();
+  static {};
+}
+Compiled from "SelectorEstocastico.java"
+public abstract class agapi.impl.SelectorEstocastico implements agapi.Selector {
+  public agapi.impl.SelectorEstocastico();
+  public agapi.impl.SelectorEstocastico(agapi.impl.Funcion);
+  public agapi.impl.Funcion getFuncValEsp();
+  public agapi.Individuo[] seleccion(agapi.Poblacion, int);
+  public void prepararSeleccion(agapi.Poblacion);
+  public abstract agapi.Individuo[] generaPool(agapi.Poblacion, double[]);
+}
+Compiled from "SelectorPostCruceSoloHijos.java"
+public class agapi.impl.SelectorPostCruceSoloHijos implements agapi.SelectorPostCruce {
+  public agapi.impl.SelectorPostCruceSoloHijos();
+  public agapi.Individuo[] seleccionPostCruce(agapi.Individuo[], agapi.Individuo[]);
+  public java.lang.String toString();
+}
+Compiled from "SelectorPostCruceTaigeto.java"
+public class agapi.impl.SelectorPostCruceTaigeto implements agapi.SelectorPostCruce {
+  public agapi.impl.SelectorPostCruceTaigeto();
+  public agapi.Individuo[] seleccionPostCruce(agapi.Individuo[], agapi.Individuo[]);
+  public java.lang.String toString();
+}
+Compiled from "SelectorRuleta.java"
+public class agapi.impl.SelectorRuleta extends agapi.impl.SelectorEstocastico {
+  public agapi.impl.SelectorRuleta();
+  public agapi.impl.SelectorRuleta(agapi.impl.Funcion);
+  public agapi.Individuo[] generaPool(agapi.Poblacion, double[]);
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "SelectorSUS.java"
+public class agapi.impl.SelectorSUS extends agapi.impl.SelectorEstocastico {
+  public agapi.impl.SelectorSUS();
+  public agapi.impl.SelectorSUS(agapi.impl.Funcion);
+  public agapi.Individuo[] generaPool(agapi.Poblacion, double[]);
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "SelectorTodos.java"
+public class agapi.impl.SelectorTodos implements agapi.Selector {
+  public agapi.impl.SelectorTodos();
+  public agapi.Individuo[] seleccion(agapi.Poblacion, int);
+  public void prepararSeleccion(agapi.Poblacion);
+  public java.lang.String toString();
+}
+Compiled from "SelectorTorneo.java"
+public class agapi.impl.SelectorTorneo implements agapi.Selector {
+  public agapi.impl.SelectorTorneo(double);
+  public agapi.Individuo[] seleccion(agapi.Poblacion, int);
+  public void prepararSeleccion(agapi.Poblacion);
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "IndividuoCombinatorioEjemplo.java"
+public class agapi.impl.ejemplos.IndividuoCombinatorioEjemplo extends agapi.impl.IndividuoCombinatorio {
+  public agapi.impl.ejemplos.IndividuoCombinatorioEjemplo();
+  public double calcFA();
+  public java.lang.String toString();
+  public static void main(java.lang.String[]);
+}

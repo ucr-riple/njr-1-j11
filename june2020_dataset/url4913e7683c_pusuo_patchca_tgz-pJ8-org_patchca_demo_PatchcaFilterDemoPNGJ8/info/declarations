@@ -1,0 +1,448 @@
+Compiled from "BackgroundFactory.java"
+public interface org.patchca.background.BackgroundFactory {
+  public abstract void fillBackground(java.awt.image.BufferedImage);
+}
+Compiled from "GradientBackgroundFactory.java"
+public class org.patchca.background.GradientBackgroundFactory implements org.patchca.background.BackgroundFactory {
+  public org.patchca.background.GradientBackgroundFactory();
+  public org.patchca.background.GradientBackgroundFactory(java.awt.Color, java.awt.Color, org.patchca.background.GradientBackgroundFactory$Direction);
+  public void fillBackground(java.awt.image.BufferedImage);
+}
+Compiled from "GradientBackgroundFactory.java"
+class org.patchca.background.GradientBackgroundFactory$1 {
+  static final int[] $SwitchMap$org$patchca$background$GradientBackgroundFactory$Direction;
+  static {};
+}
+Compiled from "GradientBackgroundFactory.java"
+public final class org.patchca.background.GradientBackgroundFactory$Direction extends java.lang.Enum<org.patchca.background.GradientBackgroundFactory$Direction> {
+  public static final org.patchca.background.GradientBackgroundFactory$Direction Horizontal;
+  public static final org.patchca.background.GradientBackgroundFactory$Direction Vertical;
+  public static final org.patchca.background.GradientBackgroundFactory$Direction TopLeftBottomRight;
+  public static final org.patchca.background.GradientBackgroundFactory$Direction BottomLeftTopRight;
+  public static org.patchca.background.GradientBackgroundFactory$Direction[] values();
+  public static org.patchca.background.GradientBackgroundFactory$Direction valueOf(java.lang.String);
+  static {};
+}
+Compiled from "SingleColorBackgroundFactory.java"
+public class org.patchca.background.SingleColorBackgroundFactory implements org.patchca.background.BackgroundFactory {
+  public org.patchca.background.SingleColorBackgroundFactory();
+  public org.patchca.background.SingleColorBackgroundFactory(java.awt.Color);
+  public void setColorFactory(org.patchca.color.ColorFactory);
+  public void fillBackground(java.awt.image.BufferedImage);
+}
+Compiled from "ColorFactory.java"
+public interface org.patchca.color.ColorFactory {
+  public abstract java.awt.Color getColor(int);
+}
+Compiled from "GradientColorFactory.java"
+public class org.patchca.color.GradientColorFactory implements org.patchca.color.ColorFactory {
+  public org.patchca.color.GradientColorFactory();
+  public java.awt.Color getColor(int);
+  public void setStart(java.awt.Color);
+  public void setStep(java.awt.Color);
+}
+Compiled from "RandomColorFactory.java"
+public class org.patchca.color.RandomColorFactory implements org.patchca.color.ColorFactory {
+  public org.patchca.color.RandomColorFactory();
+  public void setMin(java.awt.Color);
+  public void setMax(java.awt.Color);
+  public java.awt.Color getColor(int);
+}
+Compiled from "SingleColorFactory.java"
+public class org.patchca.color.SingleColorFactory implements org.patchca.color.ColorFactory {
+  public org.patchca.color.SingleColorFactory();
+  public org.patchca.color.SingleColorFactory(java.awt.Color);
+  public java.awt.Color getColor(int);
+  public void setColor(java.awt.Color);
+}
+Compiled from "PatchcaFilterDemo.java"
+public class org.patchca.demo.PatchcaFilterDemo extends java.awt.Frame implements java.awt.event.ActionListener {
+  public org.patchca.demo.PatchcaFilterDemo();
+  public void update(java.awt.Graphics);
+  public void paint(java.awt.Graphics);
+  public void createImage();
+  public void actionPerformed(java.awt.event.ActionEvent);
+  public static void main(java.lang.String[]);
+}
+Compiled from "PatchcaFilterDemo.java"
+class org.patchca.demo.PatchcaFilterDemo$1 extends java.awt.event.WindowAdapter {
+  final org.patchca.demo.PatchcaFilterDemo this$0;
+  org.patchca.demo.PatchcaFilterDemo$1(org.patchca.demo.PatchcaFilterDemo);
+  public void windowClosing(java.awt.event.WindowEvent);
+}
+Compiled from "PatchcaFilterDemoPNG.java"
+public class org.patchca.demo.PatchcaFilterDemoPNG {
+  public org.patchca.demo.PatchcaFilterDemoPNG();
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+}
+Compiled from "Sample.java"
+public class org.patchca.demo.Sample {
+  public org.patchca.demo.Sample();
+  public static void main(java.lang.String[]) throws java.io.IOException;
+}
+Compiled from "AbstractFilterFactory.java"
+public abstract class org.patchca.filter.AbstractFilterFactory implements org.patchca.filter.FilterFactory {
+  public org.patchca.filter.AbstractFilterFactory();
+  protected abstract java.util.List<java.awt.image.BufferedImageOp> getFilters();
+  public java.awt.image.BufferedImage applyFilters(java.awt.image.BufferedImage);
+}
+Compiled from "ConfigurableFilterFactory.java"
+public class org.patchca.filter.ConfigurableFilterFactory extends org.patchca.filter.AbstractFilterFactory {
+  public org.patchca.filter.ConfigurableFilterFactory();
+  public java.util.List<java.awt.image.BufferedImageOp> getFilters();
+  public void setFilters(java.util.List<java.awt.image.BufferedImageOp>);
+}
+Compiled from "FilterFactory.java"
+public interface org.patchca.filter.FilterFactory {
+  public abstract java.awt.image.BufferedImage applyFilters(java.awt.image.BufferedImage);
+}
+Compiled from "AbstractConvolveImageOp.java"
+public abstract class org.patchca.filter.library.AbstractConvolveImageOp extends org.patchca.filter.library.AbstractImageOp {
+  protected org.patchca.filter.library.AbstractConvolveImageOp(float[][]);
+  protected void filter(int[], int[], int, int);
+}
+Compiled from "AbstractImageOp.java"
+public abstract class org.patchca.filter.library.AbstractImageOp implements java.awt.image.BufferedImageOp {
+  public static final int EDGE_ZERO;
+  public static final int EDGE_MIRROR;
+  public static final int EDGE_CLAMP;
+  protected int edgeMode;
+  protected java.awt.RenderingHints hints;
+  public org.patchca.filter.library.AbstractImageOp();
+  public int getEdgeMode();
+  public void setEdgeMode(int);
+  protected int getPixel(int[], int, int, int, int, int);
+  protected int bilinear(int, int, int, int, double, double);
+  protected int getPixelBilinear(int[], double, double, int, int, int);
+  protected int limit(int, int, int);
+  protected int limitByte(int);
+  protected void filter(int[], int[], int, int);
+  public java.awt.image.BufferedImage filter(java.awt.image.BufferedImage, java.awt.image.BufferedImage);
+  public java.awt.image.BufferedImage createCompatibleDestImage(java.awt.image.BufferedImage, java.awt.image.ColorModel);
+  public java.awt.geom.Rectangle2D getBounds2D(java.awt.image.BufferedImage);
+  public java.awt.geom.Point2D getPoint2D(java.awt.geom.Point2D, java.awt.geom.Point2D);
+  public java.awt.RenderingHints getRenderingHints();
+}
+Compiled from "AbstractTransformImageOp.java"
+public abstract class org.patchca.filter.library.AbstractTransformImageOp extends org.patchca.filter.library.AbstractImageOp {
+  protected abstract void transform(int, int, double[]);
+  protected void init();
+  public org.patchca.filter.library.AbstractTransformImageOp();
+  protected void filter(int[], int[], int, int);
+}
+Compiled from "BlurImageOp.java"
+public class org.patchca.filter.library.BlurImageOp extends org.patchca.filter.library.AbstractConvolveImageOp {
+  public org.patchca.filter.library.BlurImageOp();
+  static {};
+}
+Compiled from "CurvesImageOp.java"
+public class org.patchca.filter.library.CurvesImageOp extends org.patchca.filter.library.AbstractImageOp {
+  public org.patchca.filter.library.CurvesImageOp();
+  public float getStrokeMin();
+  public void setStrokeMin(float);
+  public float getStrokeMax();
+  public void setStrokeMax(float);
+  public org.patchca.color.ColorFactory getColorFactory();
+  public void setColorFactory(org.patchca.color.ColorFactory);
+  public java.awt.image.BufferedImage filter(java.awt.image.BufferedImage, java.awt.image.BufferedImage);
+}
+Compiled from "DiffuseImageOp.java"
+public class org.patchca.filter.library.DiffuseImageOp extends org.patchca.filter.library.AbstractTransformImageOp {
+  double[] tx;
+  double[] ty;
+  double amount;
+  public org.patchca.filter.library.DiffuseImageOp();
+  public double getAmount();
+  public void setAmount(double);
+  protected synchronized void init();
+  protected void transform(int, int, double[]);
+}
+Compiled from "DoubleRippleImageOp.java"
+public class org.patchca.filter.library.DoubleRippleImageOp extends org.patchca.filter.library.RippleImageOp {
+  public org.patchca.filter.library.DoubleRippleImageOp();
+  protected void transform(int, int, double[]);
+}
+Compiled from "MarbleImageOp.java"
+public class org.patchca.filter.library.MarbleImageOp extends org.patchca.filter.library.AbstractTransformImageOp {
+  double scale;
+  double amount;
+  double turbulence;
+  double[] tx;
+  double[] ty;
+  double randomX;
+  double randomY;
+  public org.patchca.filter.library.MarbleImageOp();
+  public double getScale();
+  public void setScale(double);
+  public double getAmount();
+  public void setAmount(double);
+  public double getTurbulence();
+  public void setTurbulence(double);
+  protected synchronized void init();
+  protected void transform(int, int, double[]);
+  protected void filter2(int[], int[], int, int);
+}
+Compiled from "PerlinNoise.java"
+public class org.patchca.filter.library.PerlinNoise {
+  static int[] p;
+  public org.patchca.filter.library.PerlinNoise();
+  public static double noise2D(double, double);
+  static double fade(double);
+  static double grad(int, double, double);
+  public static double lerp(double, double, double);
+  static {};
+}
+Compiled from "RippleImageOp.java"
+public class org.patchca.filter.library.RippleImageOp extends org.patchca.filter.library.AbstractTransformImageOp {
+  protected double xWavelength;
+  protected double yWavelength;
+  protected double xAmplitude;
+  protected double yAmplitude;
+  protected double xRandom;
+  protected double yRandom;
+  public org.patchca.filter.library.RippleImageOp();
+  public double getxWavelength();
+  public void setxWavelength(double);
+  public double getyWavelength();
+  public void setyWavelength(double);
+  public double getxAmplitude();
+  public void setxAmplitude(double);
+  public double getyAmplitude();
+  public void setyAmplitude(double);
+  protected void transform(int, int, double[]);
+}
+Compiled from "SoftenImageOp.java"
+public class org.patchca.filter.library.SoftenImageOp extends org.patchca.filter.library.AbstractConvolveImageOp {
+  public org.patchca.filter.library.SoftenImageOp();
+  static {};
+}
+Compiled from "WobbleImageOp.java"
+public class org.patchca.filter.library.WobbleImageOp extends org.patchca.filter.library.AbstractTransformImageOp {
+  public org.patchca.filter.library.WobbleImageOp();
+  public double getxWavelength();
+  public void setxWavelength(double);
+  public double getyWavelength();
+  public void setyWavelength(double);
+  public double getxAmplitude();
+  public void setxAmplitude(double);
+  public double getyAmplitude();
+  public void setyAmplitude(double);
+  public double getxScale();
+  public void setxScale(double);
+  public double getyScale();
+  public void setyScale(double);
+  protected void transform(int, int, double[]);
+}
+Compiled from "CurvesRippleFilterFactory.java"
+public class org.patchca.filter.predefined.CurvesRippleFilterFactory extends org.patchca.filter.predefined.RippleFilterFactory {
+  protected org.patchca.filter.library.CurvesImageOp curves;
+  public org.patchca.filter.predefined.CurvesRippleFilterFactory();
+  public org.patchca.filter.predefined.CurvesRippleFilterFactory(org.patchca.color.ColorFactory);
+  protected java.util.List<java.awt.image.BufferedImageOp> getPreRippleFilters();
+  public void setStrokeMin(float);
+  public void setStrokeMax(float);
+  public void setColorFactory(org.patchca.color.ColorFactory);
+}
+Compiled from "DiffuseRippleFilterFactory.java"
+public class org.patchca.filter.predefined.DiffuseRippleFilterFactory extends org.patchca.filter.predefined.RippleFilterFactory {
+  protected org.patchca.filter.library.DiffuseImageOp diffuse;
+  public org.patchca.filter.predefined.DiffuseRippleFilterFactory();
+  protected java.util.List<java.awt.image.BufferedImageOp> getPreRippleFilters();
+}
+Compiled from "DoubleRippleFilterFactory.java"
+public class org.patchca.filter.predefined.DoubleRippleFilterFactory extends org.patchca.filter.AbstractFilterFactory {
+  protected java.util.List<java.awt.image.BufferedImageOp> filters;
+  protected org.patchca.filter.library.DoubleRippleImageOp ripple;
+  public org.patchca.filter.predefined.DoubleRippleFilterFactory();
+  public java.util.List<java.awt.image.BufferedImageOp> getFilters();
+}
+Compiled from "MarbleRippleFilterFactory.java"
+public class org.patchca.filter.predefined.MarbleRippleFilterFactory extends org.patchca.filter.predefined.RippleFilterFactory {
+  protected org.patchca.filter.library.MarbleImageOp marble;
+  public org.patchca.filter.predefined.MarbleRippleFilterFactory();
+  protected java.util.List<java.awt.image.BufferedImageOp> getPreRippleFilters();
+}
+Compiled from "RippleFilterFactory.java"
+public class org.patchca.filter.predefined.RippleFilterFactory extends org.patchca.filter.AbstractFilterFactory {
+  protected java.util.List<java.awt.image.BufferedImageOp> filters;
+  protected org.patchca.filter.library.RippleImageOp ripple;
+  public org.patchca.filter.predefined.RippleFilterFactory();
+  protected java.util.List<java.awt.image.BufferedImageOp> getPreRippleFilters();
+  protected java.util.List<java.awt.image.BufferedImageOp> getPostRippleFilters();
+  public java.util.List<java.awt.image.BufferedImageOp> getFilters();
+}
+Compiled from "WobbleRippleFilterFactory.java"
+public class org.patchca.filter.predefined.WobbleRippleFilterFactory extends org.patchca.filter.predefined.RippleFilterFactory {
+  protected org.patchca.filter.library.WobbleImageOp wobble;
+  public org.patchca.filter.predefined.WobbleRippleFilterFactory();
+  protected java.util.List<java.awt.image.BufferedImageOp> getPreRippleFilters();
+}
+Compiled from "FontFactory.java"
+public interface org.patchca.font.FontFactory {
+  public abstract java.awt.Font getFont(int);
+}
+Compiled from "RandomFontFactory.java"
+public class org.patchca.font.RandomFontFactory implements org.patchca.font.FontFactory {
+  protected java.util.List<java.lang.String> families;
+  protected int minSize;
+  protected int maxSize;
+  protected boolean randomStyle;
+  public org.patchca.font.RandomFontFactory();
+  public org.patchca.font.RandomFontFactory(java.util.List<java.lang.String>);
+  public org.patchca.font.RandomFontFactory(java.lang.String[]);
+  public org.patchca.font.RandomFontFactory(int, java.util.List<java.lang.String>);
+  public org.patchca.font.RandomFontFactory(int, java.lang.String[]);
+  public void setFamilies(java.util.List<java.lang.String>);
+  public void setMinSize(int);
+  public void setMaxSize(int);
+  public void setRandomStyle(boolean);
+  public java.awt.Font getFont(int);
+}
+Compiled from "AbstractCaptchaService.java"
+public abstract class org.patchca.service.AbstractCaptchaService implements org.patchca.service.CaptchaService {
+  protected org.patchca.font.FontFactory fontFactory;
+  protected org.patchca.word.WordFactory wordFactory;
+  protected org.patchca.color.ColorFactory colorFactory;
+  protected org.patchca.background.BackgroundFactory backgroundFactory;
+  protected org.patchca.text.renderer.TextRenderer textRenderer;
+  protected org.patchca.filter.FilterFactory filterFactory;
+  protected int width;
+  protected int height;
+  public org.patchca.service.AbstractCaptchaService();
+  public void setFontFactory(org.patchca.font.FontFactory);
+  public void setWordFactory(org.patchca.word.WordFactory);
+  public void setColorFactory(org.patchca.color.ColorFactory);
+  public void setBackgroundFactory(org.patchca.background.BackgroundFactory);
+  public void setTextRenderer(org.patchca.text.renderer.TextRenderer);
+  public void setFilterFactory(org.patchca.filter.FilterFactory);
+  public org.patchca.font.FontFactory getFontFactory();
+  public org.patchca.word.WordFactory getWordFactory();
+  public org.patchca.color.ColorFactory getColorFactory();
+  public org.patchca.background.BackgroundFactory getBackgroundFactory();
+  public org.patchca.text.renderer.TextRenderer getTextRenderer();
+  public org.patchca.filter.FilterFactory getFilterFactory();
+  public int getWidth();
+  public int getHeight();
+  public void setWidth(int);
+  public void setHeight(int);
+  public org.patchca.service.Captcha getCaptcha();
+}
+Compiled from "Captcha.java"
+public class org.patchca.service.Captcha {
+  public org.patchca.service.Captcha(java.lang.String, java.awt.image.BufferedImage);
+  public java.lang.String getChallenge();
+  public void setChallenge(java.lang.String);
+  public java.awt.image.BufferedImage getImage();
+  public void setImage(java.awt.image.BufferedImage);
+}
+Compiled from "CaptchaService.java"
+public interface org.patchca.service.CaptchaService {
+  public abstract org.patchca.service.Captcha getCaptcha();
+}
+Compiled from "ConfigurableCaptchaService.java"
+public class org.patchca.service.ConfigurableCaptchaService extends org.patchca.service.AbstractCaptchaService {
+  public org.patchca.service.ConfigurableCaptchaService();
+}
+Compiled from "SimpleCaptchaService.java"
+public class org.patchca.service.SimpleCaptchaService extends org.patchca.service.AbstractCaptchaService {
+  public org.patchca.service.SimpleCaptchaService(int, int, java.awt.Color, java.awt.Color, int, org.patchca.filter.FilterFactory);
+  public org.patchca.service.SimpleCaptchaService(int, int, java.awt.Color, java.awt.Color, int, java.lang.String[], org.patchca.filter.FilterFactory);
+  public org.patchca.service.Captcha getCaptcha();
+}
+Compiled from "AbstractTextRenderer.java"
+public abstract class org.patchca.text.renderer.AbstractTextRenderer implements org.patchca.text.renderer.TextRenderer {
+  protected int leftMargin;
+  protected int rightMargin;
+  protected int topMargin;
+  protected int bottomMargin;
+  protected abstract void arrangeCharacters(int, int, org.patchca.text.renderer.TextString);
+  public org.patchca.text.renderer.AbstractTextRenderer();
+  public void setLeftMargin(int);
+  public void setRightMargin(int);
+  public void setTopMargin(int);
+  public void setBottomMargin(int);
+  public void draw(java.lang.String, java.awt.image.BufferedImage, org.patchca.font.FontFactory, org.patchca.color.ColorFactory);
+  protected org.patchca.text.renderer.TextString convertToCharacters(java.lang.String, java.awt.Graphics2D, org.patchca.font.FontFactory, org.patchca.color.ColorFactory);
+}
+Compiled from "BestFitTextRenderer.java"
+public class org.patchca.text.renderer.BestFitTextRenderer extends org.patchca.text.renderer.AbstractTextRenderer {
+  public org.patchca.text.renderer.BestFitTextRenderer();
+  protected void arrangeCharacters(int, int, org.patchca.text.renderer.TextString);
+}
+Compiled from "RandomYBestFitTextRenderer.java"
+public class org.patchca.text.renderer.RandomYBestFitTextRenderer extends org.patchca.text.renderer.AbstractTextRenderer {
+  public org.patchca.text.renderer.RandomYBestFitTextRenderer();
+  protected void arrangeCharacters(int, int, org.patchca.text.renderer.TextString);
+}
+Compiled from "SimpleTextRenderer.java"
+public class org.patchca.text.renderer.SimpleTextRenderer extends org.patchca.text.renderer.AbstractTextRenderer {
+  public org.patchca.text.renderer.SimpleTextRenderer();
+  protected void arrangeCharacters(int, int, org.patchca.text.renderer.TextString);
+}
+Compiled from "TextCharacter.java"
+public class org.patchca.text.renderer.TextCharacter {
+  public org.patchca.text.renderer.TextCharacter();
+  public double getX();
+  public void setX(double);
+  public double getY();
+  public void setY(double);
+  public double getWidth();
+  public void setWidth(double);
+  public double getHeight();
+  public void setHeight(double);
+  public char getCharacter();
+  public void setCharacter(char);
+  public java.awt.Font getFont();
+  public void setFont(java.awt.Font);
+  public java.awt.Color getColor();
+  public void setColor(java.awt.Color);
+  public double getAscent();
+  public void setAscent(double);
+  public double getDescent();
+  public void setDescent(double);
+  public java.text.AttributedCharacterIterator iterator();
+}
+Compiled from "TextRenderer.java"
+public interface org.patchca.text.renderer.TextRenderer {
+  public abstract void setLeftMargin(int);
+  public abstract void setRightMargin(int);
+  public abstract void setTopMargin(int);
+  public abstract void setBottomMargin(int);
+  public abstract void draw(java.lang.String, java.awt.image.BufferedImage, org.patchca.font.FontFactory, org.patchca.color.ColorFactory);
+}
+Compiled from "TextString.java"
+public class org.patchca.text.renderer.TextString {
+  public org.patchca.text.renderer.TextString();
+  public void clear();
+  public void addCharacter(org.patchca.text.renderer.TextCharacter);
+  public java.util.ArrayList<org.patchca.text.renderer.TextCharacter> getCharacters();
+  public double getWidth();
+  public double getHeight();
+}
+Compiled from "EncoderHelper.java"
+public class org.patchca.utils.encoder.EncoderHelper {
+  public org.patchca.utils.encoder.EncoderHelper();
+  public static java.lang.String getChallangeAndWriteImage(org.patchca.service.CaptchaService, java.lang.String, java.io.OutputStream) throws java.io.IOException;
+}
+Compiled from "AdaptiveRandomWordFactory.java"
+public class org.patchca.word.AdaptiveRandomWordFactory extends org.patchca.word.RandomWordFactory {
+  protected java.lang.String wideCharacters;
+  public void setWideCharacters(java.lang.String);
+  public org.patchca.word.AdaptiveRandomWordFactory();
+  public java.lang.String getNextWord();
+}
+Compiled from "RandomWordFactory.java"
+public class org.patchca.word.RandomWordFactory implements org.patchca.word.WordFactory {
+  protected java.lang.String characters;
+  protected int minLength;
+  protected int maxLength;
+  public void setCharacters(java.lang.String);
+  public void setMinLength(int);
+  public void setMaxLength(int);
+  public org.patchca.word.RandomWordFactory();
+  public java.lang.String getNextWord();
+}
+Compiled from "WordFactory.java"
+public interface org.patchca.word.WordFactory {
+  public abstract java.lang.String getNextWord();
+}

@@ -1,0 +1,493 @@
+Compiled from "ByteBuffer.java"
+public class com.swemel.common.ByteBuffer {
+  public com.swemel.common.ByteBuffer();
+  public byte[] data();
+  public int getCapacity();
+  public void setCapacity(int);
+}
+Compiled from "OutBuffer.java"
+public class com.swemel.common.OutBuffer {
+  public com.swemel.common.OutBuffer();
+  public void setStream(java.io.OutputStream);
+  public void create(int);
+  public void init();
+  public long getProcessedSize();
+  public void writeByte(java.lang.Byte) throws java.io.IOException;
+  public void writeBytes(byte[], int) throws java.io.IOException;
+  public void flush() throws java.io.IOException;
+}
+Compiled from "RandomAccessOutputStream.java"
+public class com.swemel.common.RandomAccessOutputStream extends java.io.OutputStream {
+  public static final int STREAM_SEEK_SET;
+  public static final int STREAM_SEEK_CUR;
+  public com.swemel.common.RandomAccessOutputStream(java.io.File, java.lang.String) throws java.io.IOException;
+  public void write(byte[]) throws java.io.IOException;
+  public void write(byte[], int, int) throws java.io.IOException;
+  public void write(int) throws java.io.IOException;
+  public long seek(long, int) throws java.io.IOException;
+  public long getSize();
+  public void setSize(long);
+  public void close() throws java.io.IOException;
+}
+Compiled from "CRC.java"
+public class com.swemel.sevenzip.CRC {
+  public com.swemel.sevenzip.CRC();
+  public void init();
+  public void updateUInt32(int);
+  public void updateUInt64(long);
+  public void update(byte[], int, int);
+  public void Update(byte[]);
+  public void updateByte(byte);
+  public void updateByte(int);
+  public void update(byte[], int);
+  public int getDigest();
+  public static int calculateDigest(byte[], int);
+  public static int calculateDigest(byte[], int, int);
+  public static boolean verifyDigest(int, byte[], int);
+  static {};
+}
+Compiled from "CoderInfo.java"
+public class com.swemel.sevenzip.CoderInfo {
+  public com.swemel.sevenzip.CoderInfo();
+  public com.swemel.common.ByteBuffer getProps();
+  public void setProps(com.swemel.common.ByteBuffer);
+  public boolean isSimpleCoder();
+  public long getMethodID();
+  public void setMethodID(long);
+  public int getNumInStreams();
+  public void setNumInStreams(int);
+  public int getNumOutStreams();
+  public void setNumOutStreams(int);
+}
+Compiled from "Folder.java"
+public class com.swemel.sevenzip.Folder {
+  public com.swemel.sevenzip.Folder();
+  public void addUnpackSize(long);
+  public java.util.List<java.lang.Long> getUnpackSizes();
+  public java.util.List<com.swemel.sevenzip.CoderInfo> getCoders();
+}
+Compiled from "LZMACoderInfo.java"
+public class com.swemel.sevenzip.LZMACoderInfo extends com.swemel.sevenzip.CoderInfo {
+  public com.swemel.sevenzip.LZMACoderInfo();
+  public com.swemel.common.ByteBuffer getProps();
+  public void setDictionarySize(long);
+  public boolean isSimpleCoder();
+  public long getMethodID();
+  public int getNumInStreams();
+  public int getNumOutStreams();
+}
+Compiled from "SevenZip.java"
+public class com.swemel.sevenzip.SevenZip {
+  public com.swemel.sevenzip.SevenZip(java.lang.String, java.io.File...) throws java.io.IOException;
+  public void createArchive() throws java.io.IOException;
+}
+Compiled from "Test.java"
+class com.swemel.sevenzip.Test {
+  com.swemel.sevenzip.Test();
+  public static void main(java.lang.String[]);
+}
+Compiled from "UpdateItem.java"
+public class com.swemel.sevenzip.UpdateItem {
+  public com.swemel.sevenzip.UpdateItem();
+  public long getmTime();
+  public void setmTime(long);
+  public long getSize();
+  public void setSize(long);
+  public java.lang.String getName();
+  public void setName(java.lang.String);
+  public int getAttrib();
+  public void setAttrib(int);
+  public boolean isNewData();
+  public void setNewData(boolean);
+  public void setIsAnti(boolean);
+  public boolean isDir();
+  public void setIsDir(boolean);
+  public boolean isAttribDefined();
+  public void setAttribDefined(boolean);
+  public boolean ismTimeDefined();
+  public void setmTimeDefined(boolean);
+  public boolean hasStream();
+  public java.lang.String getFullName();
+  public void setFullName(java.lang.String);
+}
+Compiled from "ArchiveDatabase.java"
+public final class com.swemel.sevenzip.archive.ArchiveDatabase {
+  public com.swemel.sevenzip.archive.ArchiveDatabase();
+  public java.util.List<java.lang.Long> getMTimes();
+  public java.util.List<java.lang.Boolean> getMTimesDefined();
+  public void addMTime(long);
+  public void addMTimeDefined(boolean);
+  boolean isEmpty();
+  public void addFolder(com.swemel.sevenzip.Folder);
+  public java.util.List<java.lang.Long> getPackSizes();
+  public void addPackSize(long);
+  public java.util.List<com.swemel.sevenzip.Folder> getFolders();
+  public java.util.List<java.lang.Integer> getNumUnPackStreamsVector();
+  public java.util.List<com.swemel.sevenzip.archive.FileItem> getFiles();
+  public void addFile(com.swemel.sevenzip.archive.FileItem);
+}
+Compiled from "FileItem.java"
+public class com.swemel.sevenzip.archive.FileItem {
+  public boolean isCrcDefined();
+  public void setCrcDefined(boolean);
+  public long getSize();
+  public void setSize(long);
+  public int getAttributes();
+  public void setAttributes(int);
+  public int getFileCRC();
+  public void setFileCRC(int);
+  public boolean isDirectory();
+  public void setDirectory(boolean);
+  public boolean isAttributesDefined();
+  public void setAttributesDefined(boolean);
+  public boolean hasStream();
+  public void setHasStream(boolean);
+  public java.lang.String getName();
+  public void setName(java.lang.String);
+  public com.swemel.sevenzip.archive.FileItem();
+}
+Compiled from "Header.java"
+public class com.swemel.sevenzip.archive.Header {
+  public static byte[] kSignature;
+  public com.swemel.sevenzip.archive.Header();
+  static {};
+}
+Compiled from "Header.java"
+public class com.swemel.sevenzip.archive.Header$NID {
+  public static final int kEnd;
+  public static final int kHeader;
+  public static final int kArchiveProperties;
+  public static final int kAdditionalStreamsInfo;
+  public static final int kMainStreamsInfo;
+  public static final int kFilesInfo;
+  public static final int kPackInfo;
+  public static final int kUnPackInfo;
+  public static final int kSubStreamsInfo;
+  public static final int kSize;
+  public static final int kCRC;
+  public static final int kFolder;
+  public static final int kCodersUnPackSize;
+  public static final int kNumUnPackStream;
+  public static final int kEmptyStream;
+  public static final int kEmptyFile;
+  public static final int kAnti;
+  public static final int kName;
+  public static final int kCreationTime;
+  public static final int kLastAccessTime;
+  public static final int kLastWriteTime;
+  public static final int kWinAttributes;
+  public static final int kComment;
+  public static final int kEncodedHeader;
+  public static final int kStartPos;
+  final com.swemel.sevenzip.archive.Header this$0;
+  public com.swemel.sevenzip.archive.Header$NID(com.swemel.sevenzip.archive.Header);
+}
+Compiled from "OutArchive.java"
+public class com.swemel.sevenzip.archive.OutArchive {
+  public com.swemel.sevenzip.archive.OutArchive();
+  public void writeDatabase(com.swemel.sevenzip.archive.ArchiveDatabase) throws java.io.IOException;
+  public void create(com.swemel.common.RandomAccessOutputStream) throws java.io.IOException;
+  public void skipPrefixArchiveHeader();
+}
+Compiled from "SevenZipFolderInStream.java"
+public class com.swemel.sevenzip.archive.SevenZipFolderInStream extends java.io.InputStream {
+  public com.swemel.sevenzip.archive.SevenZipFolderInStream();
+  public void init(java.util.List<com.swemel.sevenzip.UpdateItem>, int, int);
+  public int read(byte[]) throws java.io.IOException;
+  public int getCrc(int);
+  public int read(byte[], int, int) throws java.io.IOException;
+  public long getFullSize();
+  public int read() throws java.io.IOException;
+}
+Compiled from "StartHeader.java"
+public class com.swemel.sevenzip.archive.StartHeader {
+  public com.swemel.sevenzip.archive.StartHeader();
+  public long getNextHeaderOffset();
+  public void setNextHeaderOffset(long);
+  public long getNextHeaderSize();
+  public void setNextHeaderSize(long);
+  public int getNextHeaderCRC();
+  public void setNextHeaderCRC(int);
+}
+Compiled from "InStreamWithCRC.java"
+public class com.swemel.sevenzip.common.InStreamWithCRC extends java.io.InputStream {
+  public com.swemel.sevenzip.common.InStreamWithCRC(java.lang.String) throws java.io.FileNotFoundException;
+  public long seek(int, int) throws java.io.IOException;
+  public int read() throws java.io.IOException;
+  public int read(byte[]) throws java.io.IOException;
+  public int read(byte[], int, int) throws java.io.IOException;
+  public void init();
+  public long getSize();
+  public void releaseStream() throws java.io.IOException;
+  public int getCrc();
+}
+Compiled from "BinTree.java"
+public class com.swemel.sevenzip.compression.lz.BinTree extends com.swemel.sevenzip.compression.lz.InWindow {
+  public com.swemel.sevenzip.compression.lz.BinTree();
+  public void setType(int);
+  public void init() throws java.io.IOException;
+  void movePos() throws java.io.IOException;
+  public void create(int, int, int, int);
+  public int getMatches(int[]) throws java.io.IOException;
+  public void skip(int) throws java.io.IOException;
+  void normalizeLinks(int[], int, int);
+  void normalize();
+  static {};
+}
+Compiled from "InWindow.java"
+public class com.swemel.sevenzip.compression.lz.InWindow {
+  byte[] _bufferBase;
+  int _bufferOffset;
+  int _pos;
+  int _streamPos;
+  public com.swemel.sevenzip.compression.lz.InWindow();
+  void moveBlock();
+  void readBlock() throws java.io.IOException;
+  void free();
+  void create(int, int, int);
+  public void setStream(java.io.InputStream);
+  public void releaseStream();
+  void init() throws java.io.IOException;
+  void movePos() throws java.io.IOException;
+  public byte getIndexByte(int);
+  public int getMatchLen(int, int, int);
+  public int getNumAvailableBytes();
+  void reduceOffsets(int);
+}
+Compiled from "OutWindow.java"
+public class com.swemel.sevenzip.compression.lz.OutWindow {
+  public com.swemel.sevenzip.compression.lz.OutWindow();
+  public void create(int);
+  public void setStream(java.io.OutputStream) throws java.io.IOException;
+  public void releaseStream() throws java.io.IOException;
+  public void init(boolean);
+  public void flush() throws java.io.IOException;
+  public void copyBlock(int, int) throws java.io.IOException;
+  public void putByte(byte) throws java.io.IOException;
+  public byte getByte(int);
+}
+Compiled from "Base.java"
+class com.swemel.sevenzip.compression.lzma.Base {
+  public static final int kNumRepDistances;
+  public static final int kNumStates;
+  public static final int kNumPosSlotBits;
+  public static final int kNumLenToPosStatesBits;
+  public static final int kNumLenToPosStates;
+  public static final int kMatchMinLen;
+  public static final int kNumAlignBits;
+  public static final int kAlignTableSize;
+  public static final int kAlignMask;
+  public static final int kStartPosModelIndex;
+  public static final int kEndPosModelIndex;
+  public static final int kNumFullDistances;
+  public static final int kNumLitPosStatesBitsEncodingMax;
+  public static final int kNumLitContextBitsMax;
+  public static final int kNumPosStatesBitsMax;
+  public static final int kNumPosStatesMax;
+  public static final int kNumPosStatesBitsEncodingMax;
+  public static final int kNumPosStatesEncodingMax;
+  public static final int kNumLowLenBits;
+  public static final int kNumMidLenBits;
+  public static final int kNumHighLenBits;
+  public static final int kNumLowLenSymbols;
+  public static final int kNumMidLenSymbols;
+  public static final int kNumLenSymbols;
+  public static final int kMatchMaxLen;
+  com.swemel.sevenzip.compression.lzma.Base();
+  public static int stateUpdateChar(int);
+  public static int stateUpdateMatch(int);
+  public static int stateUpdateRep(int);
+  public static int stateUpdateShortRep(int);
+  public static boolean stateIsCharState(int);
+  public static int getLenToPosState(int);
+}
+Compiled from "Decoder.java"
+class com.swemel.sevenzip.compression.lzma.Decoder {
+  public com.swemel.sevenzip.compression.lzma.Decoder();
+  boolean setDictionarySize(int);
+  boolean setLcLpPb(int, int, int);
+  void init() throws java.io.IOException;
+  public boolean code(java.io.InputStream, java.io.OutputStream, long) throws java.io.IOException;
+  public boolean setDecoderProperties(byte[]);
+}
+Compiled from "Decoder.java"
+class com.swemel.sevenzip.compression.lzma.Decoder$LenDecoder {
+  final short[] m_Choice;
+  final com.swemel.sevenzip.compression.rangecoder.BitTreeDecoder[] m_LowCoder;
+  final com.swemel.sevenzip.compression.rangecoder.BitTreeDecoder[] m_MidCoder;
+  final com.swemel.sevenzip.compression.rangecoder.BitTreeDecoder m_HighCoder;
+  int m_NumPosStates;
+  final com.swemel.sevenzip.compression.lzma.Decoder this$0;
+  com.swemel.sevenzip.compression.lzma.Decoder$LenDecoder(com.swemel.sevenzip.compression.lzma.Decoder);
+  public void create(int);
+  public void init();
+  public int decode(com.swemel.sevenzip.compression.rangecoder.Decoder, int) throws java.io.IOException;
+}
+Compiled from "Decoder.java"
+class com.swemel.sevenzip.compression.lzma.Decoder$LiteralDecoder {
+  com.swemel.sevenzip.compression.lzma.Decoder$LiteralDecoder$Decoder2[] m_Coders;
+  int m_NumPrevBits;
+  int m_NumPosBits;
+  int m_PosMask;
+  final com.swemel.sevenzip.compression.lzma.Decoder this$0;
+  com.swemel.sevenzip.compression.lzma.Decoder$LiteralDecoder(com.swemel.sevenzip.compression.lzma.Decoder);
+  public void create(int, int);
+  public void init();
+  com.swemel.sevenzip.compression.lzma.Decoder$LiteralDecoder$Decoder2 getDecoder(int, byte);
+}
+Compiled from "Decoder.java"
+class com.swemel.sevenzip.compression.lzma.Decoder$LiteralDecoder$Decoder2 {
+  final short[] m_Decoders;
+  final com.swemel.sevenzip.compression.lzma.Decoder$LiteralDecoder this$1;
+  com.swemel.sevenzip.compression.lzma.Decoder$LiteralDecoder$Decoder2(com.swemel.sevenzip.compression.lzma.Decoder$LiteralDecoder);
+  public void init();
+  public byte decodeNormal(com.swemel.sevenzip.compression.rangecoder.Decoder) throws java.io.IOException;
+  public byte decodeWithMatchByte(com.swemel.sevenzip.compression.rangecoder.Decoder, byte) throws java.io.IOException;
+}
+Compiled from "Encoder.java"
+public class com.swemel.sevenzip.compression.lzma.Encoder {
+  void create();
+  public com.swemel.sevenzip.compression.lzma.Encoder();
+  void init();
+  int readMatchDistances() throws java.io.IOException;
+  void movePos(int) throws java.io.IOException;
+  int getRepLen1Price(int, int);
+  int getPureRepPrice(int, int, int);
+  int getRepPrice(int, int, int, int);
+  int getPosLenPrice(int, int, int);
+  int backward(int);
+  int getOptimum(int) throws java.io.IOException;
+  void writeEndMarker(int) throws java.io.IOException;
+  void flush(int) throws java.io.IOException;
+  void codeOneBlock(long[], long[], boolean[]) throws java.io.IOException;
+  void releaseMFStream();
+  void setOutStream(java.io.OutputStream);
+  void releaseOutStream();
+  void releaseStreams();
+  void setStreams(java.io.InputStream, java.io.OutputStream);
+  public void code(java.io.InputStream, java.io.OutputStream) throws java.io.IOException;
+  public void writeCoderProperties(java.io.OutputStream) throws java.io.IOException;
+  void fillDistancesPrices();
+  void fillAlignPrices();
+  public void setDictionarySize(int);
+  public void setNumFastBytes(int);
+  public void setMatchFinder(int);
+  public void setLcLpPb(int, int, int);
+  public void setEndMarkerMode(boolean);
+  static {};
+}
+Compiled from "Encoder.java"
+class com.swemel.sevenzip.compression.lzma.Encoder$LenEncoder {
+  final short[] _choice;
+  final com.swemel.sevenzip.compression.rangecoder.BitTreeEncoder[] _lowCoder;
+  final com.swemel.sevenzip.compression.rangecoder.BitTreeEncoder[] _midCoder;
+  final com.swemel.sevenzip.compression.rangecoder.BitTreeEncoder _highCoder;
+  final com.swemel.sevenzip.compression.lzma.Encoder this$0;
+  public com.swemel.sevenzip.compression.lzma.Encoder$LenEncoder(com.swemel.sevenzip.compression.lzma.Encoder);
+  public void init(int);
+  public void encode(com.swemel.sevenzip.compression.rangecoder.Encoder, int, int) throws java.io.IOException;
+  public void setPrices(int, int, int[], int);
+}
+Compiled from "Encoder.java"
+class com.swemel.sevenzip.compression.lzma.Encoder$LenPriceTableEncoder extends com.swemel.sevenzip.compression.lzma.Encoder$LenEncoder {
+  final int[] _prices;
+  int _tableSize;
+  final int[] _counters;
+  final com.swemel.sevenzip.compression.lzma.Encoder this$0;
+  com.swemel.sevenzip.compression.lzma.Encoder$LenPriceTableEncoder(com.swemel.sevenzip.compression.lzma.Encoder);
+  public void setTableSize(int);
+  public int getPrice(int, int);
+  void updateTable(int);
+  public void updateTables(int);
+  public void encode(com.swemel.sevenzip.compression.rangecoder.Encoder, int, int) throws java.io.IOException;
+}
+Compiled from "Encoder.java"
+class com.swemel.sevenzip.compression.lzma.Encoder$LiteralEncoder {
+  com.swemel.sevenzip.compression.lzma.Encoder$LiteralEncoder$Encoder2[] m_Coders;
+  int m_NumPrevBits;
+  int m_NumPosBits;
+  int m_PosMask;
+  final com.swemel.sevenzip.compression.lzma.Encoder this$0;
+  com.swemel.sevenzip.compression.lzma.Encoder$LiteralEncoder(com.swemel.sevenzip.compression.lzma.Encoder);
+  public void create(int, int);
+  public void init();
+  public com.swemel.sevenzip.compression.lzma.Encoder$LiteralEncoder$Encoder2 getSubCoder(int, byte);
+}
+Compiled from "Encoder.java"
+class com.swemel.sevenzip.compression.lzma.Encoder$LiteralEncoder$Encoder2 {
+  final short[] m_Encoders;
+  final com.swemel.sevenzip.compression.lzma.Encoder$LiteralEncoder this$1;
+  com.swemel.sevenzip.compression.lzma.Encoder$LiteralEncoder$Encoder2(com.swemel.sevenzip.compression.lzma.Encoder$LiteralEncoder);
+  public void init();
+  public void encode(com.swemel.sevenzip.compression.rangecoder.Encoder, byte) throws java.io.IOException;
+  public void encodeMatched(com.swemel.sevenzip.compression.rangecoder.Encoder, byte, byte) throws java.io.IOException;
+  public int getPrice(boolean, byte, byte);
+}
+Compiled from "Encoder.java"
+class com.swemel.sevenzip.compression.lzma.Encoder$Optimal {
+  public int State;
+  public boolean Prev1IsChar;
+  public boolean Prev2;
+  public int PosPrev2;
+  public int BackPrev2;
+  public int Price;
+  public int PosPrev;
+  public int BackPrev;
+  public int Backs0;
+  public int Backs1;
+  public int Backs2;
+  public int Backs3;
+  final com.swemel.sevenzip.compression.lzma.Encoder this$0;
+  com.swemel.sevenzip.compression.lzma.Encoder$Optimal(com.swemel.sevenzip.compression.lzma.Encoder);
+  public void makeAsChar();
+  public void makeAsShortRep();
+  public boolean isShortRep();
+}
+Compiled from "BitTreeDecoder.java"
+public class com.swemel.sevenzip.compression.rangecoder.BitTreeDecoder {
+  public com.swemel.sevenzip.compression.rangecoder.BitTreeDecoder(int);
+  public void init();
+  public int decode(com.swemel.sevenzip.compression.rangecoder.Decoder) throws java.io.IOException;
+  public int reverseDecode(com.swemel.sevenzip.compression.rangecoder.Decoder) throws java.io.IOException;
+  public static int reverseDecode(short[], int, com.swemel.sevenzip.compression.rangecoder.Decoder, int) throws java.io.IOException;
+}
+Compiled from "BitTreeEncoder.java"
+public class com.swemel.sevenzip.compression.rangecoder.BitTreeEncoder {
+  public com.swemel.sevenzip.compression.rangecoder.BitTreeEncoder(int);
+  public void init();
+  public void encode(com.swemel.sevenzip.compression.rangecoder.Encoder, int) throws java.io.IOException;
+  public void reverseEncode(com.swemel.sevenzip.compression.rangecoder.Encoder, int) throws java.io.IOException;
+  public int getPrice(int);
+  public int reverseGetPrice(int);
+  public static int reverseGetPrice(short[], int, int, int);
+  public static void reverseEncode(short[], int, com.swemel.sevenzip.compression.rangecoder.Encoder, int, int) throws java.io.IOException;
+}
+Compiled from "Decoder.java"
+public class com.swemel.sevenzip.compression.rangecoder.Decoder {
+  public com.swemel.sevenzip.compression.rangecoder.Decoder();
+  public final void setStream(java.io.InputStream);
+  public final void releaseStream();
+  public final void init() throws java.io.IOException;
+  public final int decodeDirectBits(int) throws java.io.IOException;
+  public int decodeBit(short[], int) throws java.io.IOException;
+  public static void initBitModels(short[]);
+}
+Compiled from "Encoder.java"
+public class com.swemel.sevenzip.compression.rangecoder.Encoder {
+  public static final int kNumBitPriceShiftBits;
+  public com.swemel.sevenzip.compression.rangecoder.Encoder();
+  public void setStream(java.io.OutputStream);
+  public void releaseStream();
+  public void init();
+  public void flushData() throws java.io.IOException;
+  public void flushStream() throws java.io.IOException;
+  void shiftLow() throws java.io.IOException;
+  public void encodeDirectBits(int, int) throws java.io.IOException;
+  public long getProcessedSizeAdd();
+  public static void initBitModels(short[]);
+  public void encode(short[], int, int) throws java.io.IOException;
+  public static int getPrice(int, int);
+  public static int getPrice0(int);
+  public static int getPrice1(int);
+  static {};
+}

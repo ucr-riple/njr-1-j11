@@ -1,0 +1,352 @@
+Compiled from "Color.java"
+public class fws.utility.Color {
+  public fws.utility.Color(float, float, float);
+  public float getRed();
+  public final void setRed(float);
+  public float getGreen();
+  public final void setGreen(float);
+  public float getBlue();
+  public final void setBlue(float);
+  public void apply();
+}
+Compiled from "SimplexNoise.java"
+public class fws.utility.SimplexNoise {
+  public fws.utility.SimplexNoise();
+  public static float getNoise(float, float);
+  public static float getOctavedNoise(float, float, int, float, float);
+  static {};
+}
+Compiled from "SimplexNoise.java"
+class fws.utility.SimplexNoise$Grad {
+  float x;
+  float y;
+  float z;
+  float w;
+  fws.utility.SimplexNoise$Grad(float, float, float);
+  fws.utility.SimplexNoise$Grad(float, float, float, float);
+}
+Compiled from "Cell.java"
+public class fws.utility.map.Cell {
+  public fws.utility.map.Cell(int);
+  public int getId();
+}
+Compiled from "ColorRenderer.java"
+public class fws.utility.map.ColorRenderer<T extends fws.utility.map.Cell> {
+  public fws.utility.map.ColorRenderer(fws.utility.map.Map<T>, float, float, fws.utility.map.ColorSelector<T>);
+  public fws.utility.map.ColorRenderer(fws.utility.map.Map<T>, float, fws.utility.map.ColorSelector<T>);
+  public float getCellSize();
+  public void setSelector(fws.utility.map.ColorSelector<T>);
+  public T getCell(int, int);
+  public void render();
+}
+Compiled from "ColorSelector.java"
+public interface fws.utility.map.ColorSelector<T extends fws.utility.map.Cell> {
+  public abstract void selectColor(T);
+}
+Compiled from "HexMap.java"
+public class fws.utility.map.HexMap<T extends fws.utility.map.Cell> extends fws.utility.map.Map<T> {
+  public static final float CELL_WIDTH;
+  public static final float CELL_WIDTH_1_2;
+  public static final float CELL_HEIGHT;
+  public static final float CELL_HEIGHT_1_4;
+  public static final float CELL_HEIGHT_3_4;
+  public fws.utility.map.HexMap(int, int, T[]);
+  float getRowStart(int);
+  public T getCell(float, float);
+  public int getNumberOfNeighbors();
+  public T getNeighbor(int, int);
+  public int getNumberOfDiagonalNeighbors();
+  public T getDiagonalNeighbor(int, int);
+  void prepareRendering(float);
+  void renderCell(int);
+  static {};
+}
+Compiled from "Map.java"
+public abstract class fws.utility.map.Map<T extends fws.utility.map.Cell> {
+  protected final int width_;
+  protected final int height_;
+  public fws.utility.map.Map(int, int, T[]);
+  public int getWidth();
+  public int getHeight();
+  public int getColumn(int);
+  public int getRow(int);
+  public int getIndex(int, int);
+  public int getNumberOfCells();
+  public T getCell(int);
+  public T getCell(int, int);
+  public abstract T getCell(float, float);
+  public abstract int getNumberOfNeighbors();
+  public T getNeighbor(T, int);
+  public abstract T getNeighbor(int, int);
+  public abstract int getNumberOfDiagonalNeighbors();
+  public T getDiagonalNeighbor(T, int);
+  public abstract T getDiagonalNeighbor(int, int);
+  abstract void prepareRendering(float);
+  abstract void renderCell(int);
+}
+Compiled from "MapType.java"
+public final class fws.utility.map.MapType extends java.lang.Enum<fws.utility.map.MapType> {
+  public static final fws.utility.map.MapType SQUARE_MAP;
+  public static final fws.utility.map.MapType HEX_MAP;
+  public static fws.utility.map.MapType[] values();
+  public static fws.utility.map.MapType valueOf(java.lang.String);
+  static {};
+}
+Compiled from "RandomColorSelector.java"
+public class fws.utility.map.RandomColorSelector<T extends fws.utility.map.Cell> implements fws.utility.map.ColorSelector<T> {
+  public fws.utility.map.RandomColorSelector();
+  public void selectColor(T);
+}
+Compiled from "SquareMap.java"
+public class fws.utility.map.SquareMap<T extends fws.utility.map.Cell> extends fws.utility.map.Map<T> {
+  public fws.utility.map.SquareMap(int, int, T[]);
+  public T getCell(float, float);
+  public int getNumberOfNeighbors();
+  public T getNeighbor(int, int);
+  public int getNumberOfDiagonalNeighbors();
+  public T getDiagonalNeighbor(int, int);
+  void prepareRendering(float);
+  public void renderCell(int);
+  static {};
+}
+Compiled from "State.java"
+public abstract class fws.utility.state.State {
+  protected fws.utility.state.StateMgr manager_;
+  public fws.utility.state.State();
+  public abstract java.lang.String getName();
+  protected void add(fws.utility.state.StateMgr);
+  public void onEnter();
+  public void onExit();
+  public void processKeyboard();
+  public void processMouse();
+  public void render();
+  public void update();
+}
+Compiled from "StateMgr.java"
+public class fws.utility.state.StateMgr {
+  public fws.utility.state.StateMgr();
+  public void add(fws.utility.state.State);
+  public fws.utility.state.State get(java.lang.String);
+  public fws.utility.state.State getActive();
+  public boolean setActive(java.lang.String);
+  public void processKeyboard();
+  public void processMouse();
+  public void render();
+  public void update();
+}
+Compiled from "ColorElevation.java"
+public class fws.world.ColorElevation<T extends fws.utility.map.Cell & fws.world.WorldData> implements fws.utility.map.ColorSelector<T> {
+  public fws.world.ColorElevation();
+  public void selectColor(T);
+}
+Compiled from "ColorLandAndWater.java"
+public class fws.world.ColorLandAndWater<T extends fws.utility.map.Cell & fws.world.WorldData> implements fws.utility.map.ColorSelector<T> {
+  public fws.world.ColorLandAndWater(fws.world.WorldGenerationMap);
+  public void selectColor(T);
+}
+Compiled from "ColorPlateTectonics.java"
+public class fws.world.ColorPlateTectonics<T extends fws.world.PlateTectonicsCell> implements fws.utility.map.ColorSelector<T> {
+  public fws.world.ColorPlateTectonics();
+  public void selectColor(T);
+  public void selectColor(fws.utility.map.Cell);
+}
+Compiled from "ColorRainfall.java"
+public class fws.world.ColorRainfall<T extends fws.utility.map.Cell & fws.world.WorldData> implements fws.utility.map.ColorSelector<T> {
+  public static final float MAX_HUE;
+  public fws.world.ColorRainfall();
+  public void selectColor(T);
+}
+Compiled from "ColorTemperature.java"
+public class fws.world.ColorTemperature<T extends fws.utility.map.Cell & fws.world.WorldData> implements fws.utility.map.ColorSelector<T> {
+  public static final float MAX_HUE;
+  public fws.world.ColorTemperature();
+  public void selectColor(T);
+}
+Compiled from "PlateTectonicsCell.java"
+public class fws.world.PlateTectonicsCell extends fws.utility.map.Cell {
+  public fws.world.PlateType type_;
+  public fws.world.PlateTectonicsCell(int, fws.world.PlateType);
+}
+Compiled from "PlateTectonicsMap.java"
+public class fws.world.PlateTectonicsMap {
+  public fws.world.PlateTectonicsMap(int, int, int, fws.world.PlateType);
+  public void clear();
+  public fws.utility.map.Map<fws.world.PlateTectonicsCell> getMap();
+  public fws.world.PlateType getDefaultType();
+  public int getCellSize();
+  public fws.world.PlateType getType(int);
+  public fws.world.PlateType getType(int, int);
+  public float getElevation(int, int);
+  public fws.world.WorldGenerationMap createWorldGenerationMap(fws.utility.map.MapType);
+}
+Compiled from "PlateType.java"
+public class fws.world.PlateType {
+  public fws.world.PlateType(java.lang.String, float, fws.utility.Color);
+  public java.lang.String getName();
+  public float getElevation();
+  public final void setElevation(float);
+  public fws.utility.Color getColor();
+}
+Compiled from "WorldData.java"
+public interface fws.world.WorldData {
+  public abstract float getElevation();
+  public abstract float getTemperature();
+  public abstract float getRainfall();
+}
+Compiled from "WorldGenerationCell.java"
+public class fws.world.WorldGenerationCell extends fws.utility.map.Cell implements fws.world.WorldData {
+  public fws.world.WorldGenerationCell(int);
+  public float getElevation();
+  public void setElevation(float);
+  public float getTemperature();
+  public void setTemperature(float);
+  public float getRainfall();
+  public void setRainfall(float);
+}
+Compiled from "WorldGenerationMap.java"
+public class fws.world.WorldGenerationMap {
+  public fws.world.WorldGenerationMap(fws.utility.map.MapType, int, int);
+  public fws.utility.map.Map<fws.world.WorldGenerationCell> getMap();
+  public void generate();
+  public void setElevationAlgo(fws.world.generation.GenerationAlgorithm);
+  public fws.world.generation.GenerationAlgorithm getElevationAlgo();
+  public void generateElevation();
+  public void setRainfallAlgo(fws.world.generation.GenerationAlgorithm);
+  public fws.world.generation.GenerationAlgorithm getRainfallAlgo();
+  public void generateRainfall();
+  public void setTemperatureAlgo(fws.world.generation.GenerationAlgorithm);
+  public fws.world.generation.GenerationAlgorithm getTemperatureAlgo();
+  public void generateTemperature();
+  public float getSeaLevel();
+  public void setSeaLevel(float);
+}
+Compiled from "GrowingAlgorithm.java"
+public class fws.world.continent.GrowingAlgorithm {
+  public fws.world.continent.GrowingAlgorithm(fws.world.PlateTectonicsMap, fws.world.PlateType);
+  public void clear();
+  public void update();
+  public void growContinent(int);
+}
+Compiled from "AddAlgorithms.java"
+public class fws.world.generation.AddAlgorithms<T extends fws.utility.map.Cell> implements fws.world.generation.GenerationAlgorithm<T> {
+  public fws.world.generation.AddAlgorithms();
+  public void addAlgorithm(fws.world.generation.GenerationAlgorithm<T>);
+  public void nextSeed();
+  public void update();
+  public float generate(float, float, T);
+}
+Compiled from "GenerationAlgorithm.java"
+public interface fws.world.generation.GenerationAlgorithm<T extends fws.utility.map.Cell> {
+  public abstract void nextSeed();
+  public abstract void update();
+  public abstract float generate(float, float, T);
+}
+Compiled from "LinearGradientAlgorithm.java"
+public class fws.world.generation.LinearGradientAlgorithm<T extends fws.utility.map.Cell> implements fws.world.generation.GenerationAlgorithm<T> {
+  public fws.world.generation.LinearGradientAlgorithm(float, float, float, float);
+  public void nextSeed();
+  public void update();
+  public float generate(float, float, T);
+}
+Compiled from "ModifiedByElevationAlgorithm.java"
+public class fws.world.generation.ModifiedByElevationAlgorithm<T extends fws.utility.map.Cell & fws.world.WorldData> implements fws.world.generation.GenerationAlgorithm<T> {
+  public fws.world.generation.ModifiedByElevationAlgorithm(fws.world.WorldGenerationMap, float, float);
+  public void nextSeed();
+  public void update();
+  public float generate(float, float, T);
+}
+Compiled from "MultiplyAlgorithms.java"
+public class fws.world.generation.MultiplyAlgorithms<T extends fws.utility.map.Cell> implements fws.world.generation.GenerationAlgorithm<T> {
+  public fws.world.generation.MultiplyAlgorithms();
+  public void addAlgorithm(fws.world.generation.GenerationAlgorithm<T>);
+  public void nextSeed();
+  public void update();
+  public float generate(float, float, T);
+}
+Compiled from "NoiseAlgorithm.java"
+public class fws.world.generation.NoiseAlgorithm<T extends fws.utility.map.Cell> implements fws.world.generation.GenerationAlgorithm<T> {
+  public fws.world.generation.NoiseAlgorithm(int, float, float);
+  public fws.world.generation.NoiseAlgorithm(int, float, float, float, float);
+  public fws.world.generation.NoiseAlgorithm(int, float, float, int);
+  public void nextSeed();
+  public void update();
+  public float generate(float, float, T);
+}
+Compiled from "PlateTectonicsAlgorithm.java"
+public class fws.world.generation.PlateTectonicsAlgorithm<T extends fws.utility.map.Cell & fws.world.WorldData> implements fws.world.generation.GenerationAlgorithm<T> {
+  public fws.world.generation.PlateTectonicsAlgorithm(fws.world.PlateTectonicsMap);
+  public void nextSeed();
+  public void update();
+  public float generate(float, float, T);
+  public float interpolateBilinear(float, float, float, float, float, float);
+  public float interpolateWithDistance(float, float, float, float, float, float);
+}
+Compiled from "RadialGradientAlgorithm.java"
+public class fws.world.generation.RadialGradientAlgorithm<T extends fws.utility.map.Cell> implements fws.world.generation.GenerationAlgorithm<T> {
+  public fws.world.generation.RadialGradientAlgorithm(float, float, float, float, float);
+  public void nextSeed();
+  public void update();
+  public float generate(float, float, T);
+}
+Compiled from "RainShadowAlgorithm.java"
+public class fws.world.generation.RainShadowAlgorithm<T extends fws.utility.map.Cell & fws.world.WorldData> implements fws.world.generation.GenerationAlgorithm<T> {
+  public fws.world.generation.RainShadowAlgorithm(fws.world.WorldGenerationMap, float, int, int);
+  public void nextSeed();
+  public void update();
+  public void updateCell(int, int, float);
+  public float generate(float, float, T);
+}
+Compiled from "SineAlgorithm.java"
+public class fws.world.generation.SineAlgorithm<T extends fws.utility.map.Cell> implements fws.world.generation.GenerationAlgorithm<T> {
+  public fws.world.generation.SineAlgorithm(float, float, float, float, float);
+  public void nextSeed();
+  public void update();
+  public float generate(float, float, T);
+}
+Compiled from "ElevationState.java"
+public class fws.worldeditor.ElevationState extends fws.utility.state.State {
+  public fws.worldeditor.ElevationState(fws.worldeditor.WorldEditor);
+  public java.lang.String getName();
+  public void processKeyboard();
+  public void processMouse();
+  public void processClick(fws.world.PlateType);
+  public void render();
+}
+Compiled from "RainfallState.java"
+public class fws.worldeditor.RainfallState extends fws.utility.state.State {
+  fws.world.WorldGenerationMap map_;
+  public fws.worldeditor.RainfallState(fws.worldeditor.WorldEditor);
+  public java.lang.String getName();
+  public void processKeyboard();
+  public void render();
+}
+Compiled from "TemperatureState.java"
+public class fws.worldeditor.TemperatureState extends fws.utility.state.State {
+  fws.world.WorldGenerationMap map_;
+  public fws.worldeditor.TemperatureState(fws.worldeditor.WorldEditor);
+  public java.lang.String getName();
+  public void processKeyboard();
+  public void render();
+}
+Compiled from "WorldEditor.java"
+public class fws.worldeditor.WorldEditor {
+  public static final int DISPLAY_HEIGHT;
+  public static final int DISPLAY_WIDTH;
+  public static void main(java.lang.String[]);
+  public fws.worldeditor.WorldEditor();
+  public fws.world.PlateTectonicsMap getPlateTectonicsMap();
+  public float getTectonicsRenderSize();
+  public fws.world.PlateType getLandType();
+  public fws.world.PlateType getWaterType();
+  public fws.world.WorldGenerationMap getWorldGenerationMap();
+  public float getWorldRenderSize();
+  public void create() throws org.lwjgl.LWJGLException;
+  public void destroy();
+  public void initGL();
+  public void processKeyboard();
+  public void processMouse();
+  public void render();
+  public void resizeGL();
+  public void run();
+  public void update();
+}

@@ -1,0 +1,755 @@
+Compiled from "HPPPlus.java"
+public class com.iconmaster.hppplus.HPPPlus {
+  public static java.lang.String[] reservedWords;
+  public static java.lang.String[] blockBeginners;
+  public com.iconmaster.hppplus.HPPPlus();
+  public static void main(java.lang.String[]) throws com.iconmaster.hppplus.exception.HPPPlusException;
+  public static boolean isReservedWord(java.lang.String);
+  public static boolean isBlockBeginner(java.lang.String);
+  static {};
+}
+Compiled from "Parseable.java"
+public interface com.iconmaster.hppplus.Parseable {
+  public abstract java.lang.Object getParsedContent();
+  public abstract com.iconmaster.hppplus.SourceRange getRange();
+}
+Compiled from "SourceRange.java"
+public class com.iconmaster.hppplus.SourceRange {
+  public com.iconmaster.hppplus.SourceRange(int, int);
+  public int getBegin();
+  public int getEnd();
+  public java.lang.String toString();
+  public static com.iconmaster.hppplus.SourceRange between(com.iconmaster.hppplus.SourceRange, com.iconmaster.hppplus.SourceRange);
+}
+Compiled from "HPPPlusException.java"
+public class com.iconmaster.hppplus.exception.HPPPlusException extends java.lang.Exception {
+  protected final com.iconmaster.hppplus.SourceRange range;
+  public com.iconmaster.hppplus.exception.HPPPlusException(com.iconmaster.hppplus.SourceRange);
+  public com.iconmaster.hppplus.exception.HPPPlusException(com.iconmaster.hppplus.SourceRange, java.lang.String);
+  public com.iconmaster.hppplus.SourceRange getRange();
+  public java.lang.String getMessage();
+}
+Compiled from "DuplicateVariableException.java"
+public class com.iconmaster.hppplus.exception.link.DuplicateVariableException extends com.iconmaster.hppplus.exception.HPPPlusException {
+  public com.iconmaster.hppplus.exception.link.DuplicateVariableException(com.iconmaster.hppplus.SourceRange, java.lang.Object);
+}
+Compiled from "InvalidLocallyException.java"
+public class com.iconmaster.hppplus.exception.link.InvalidLocallyException extends com.iconmaster.hppplus.exception.HPPPlusException {
+  public com.iconmaster.hppplus.exception.link.InvalidLocallyException(com.iconmaster.hppplus.SourceRange, java.lang.String);
+}
+Compiled from "UndefinedVariableException.java"
+public class com.iconmaster.hppplus.exception.link.UndefinedVariableException extends com.iconmaster.hppplus.exception.HPPPlusException {
+  public com.iconmaster.hppplus.exception.link.UndefinedVariableException(com.iconmaster.hppplus.SourceRange, java.lang.Object);
+}
+Compiled from "VariableExpectedException.java"
+public class com.iconmaster.hppplus.exception.link.VariableExpectedException extends com.iconmaster.hppplus.exception.HPPPlusException {
+  public com.iconmaster.hppplus.exception.link.VariableExpectedException(com.iconmaster.hppplus.SourceRange, java.lang.Object);
+}
+Compiled from "DoExpectedException.java"
+public class com.iconmaster.hppplus.exception.parse.DoExpectedException extends com.iconmaster.hppplus.exception.HPPPlusException {
+  public com.iconmaster.hppplus.exception.parse.DoExpectedException(com.iconmaster.hppplus.SourceRange, java.lang.String);
+}
+Compiled from "EndExpectedException.java"
+public class com.iconmaster.hppplus.exception.parse.EndExpectedException extends com.iconmaster.hppplus.exception.HPPPlusException {
+  public com.iconmaster.hppplus.exception.parse.EndExpectedException(com.iconmaster.hppplus.SourceRange, java.lang.String);
+}
+Compiled from "IllegalArgumentCountException.java"
+public class com.iconmaster.hppplus.exception.parse.IllegalArgumentCountException extends com.iconmaster.hppplus.exception.HPPPlusException {
+  public com.iconmaster.hppplus.exception.parse.IllegalArgumentCountException(com.iconmaster.hppplus.SourceRange, java.lang.Object, int, int);
+}
+Compiled from "SyntaxException.java"
+public class com.iconmaster.hppplus.exception.parse.SyntaxException extends com.iconmaster.hppplus.exception.HPPPlusException {
+  public com.iconmaster.hppplus.exception.parse.SyntaxException(com.iconmaster.hppplus.SourceRange, com.iconmaster.hppplus.Parseable);
+}
+Compiled from "ThenExpectedException.java"
+public class com.iconmaster.hppplus.exception.parse.ThenExpectedException extends com.iconmaster.hppplus.exception.HPPPlusException {
+  public com.iconmaster.hppplus.exception.parse.ThenExpectedException(com.iconmaster.hppplus.SourceRange, java.lang.String);
+}
+Compiled from "UnexpectedEOFException.java"
+public class com.iconmaster.hppplus.exception.tokenize.UnexpectedEOFException extends com.iconmaster.hppplus.exception.HPPPlusException {
+  public com.iconmaster.hppplus.exception.tokenize.UnexpectedEOFException(com.iconmaster.hppplus.SourceRange);
+}
+Compiled from "UnknownSymbolException.java"
+public class com.iconmaster.hppplus.exception.tokenize.UnknownSymbolException extends com.iconmaster.hppplus.exception.HPPPlusException {
+  public com.iconmaster.hppplus.exception.tokenize.UnknownSymbolException(com.iconmaster.hppplus.SourceRange, char);
+}
+Compiled from "Block.java"
+public class com.iconmaster.hppplus.link.Block extends com.iconmaster.hppplus.link.Statement {
+  public com.iconmaster.hppplus.link.Block();
+}
+Compiled from "Directable.java"
+public interface com.iconmaster.hppplus.link.Directable {
+}
+Compiled from "Directive.java"
+public class com.iconmaster.hppplus.link.Directive {
+  public com.iconmaster.hppplus.link.Directive();
+}
+Compiled from "FunctionPrototype.java"
+public class com.iconmaster.hppplus.link.FunctionPrototype implements com.iconmaster.hppplus.link.Directable {
+  public com.iconmaster.hppplus.link.FunctionPrototype(java.lang.String, java.util.ArrayList<com.iconmaster.hppplus.link.VariablePrototype>, java.util.ArrayList<com.iconmaster.hppplus.parse.Element>) throws com.iconmaster.hppplus.exception.HPPPlusException;
+  public java.lang.String getName();
+  public java.lang.String toString();
+}
+Compiled from "LinkHandler.java"
+public interface com.iconmaster.hppplus.link.LinkHandler<T extends com.iconmaster.hppplus.parse.Element> {
+  public abstract void handleLocal(com.iconmaster.hppplus.link.Linker, com.iconmaster.hppplus.link.LinkSpace, T) throws com.iconmaster.hppplus.exception.HPPPlusException;
+  public abstract void handleGlobal(com.iconmaster.hppplus.link.Linker, com.iconmaster.hppplus.link.LinkSpaceGlobal, T) throws com.iconmaster.hppplus.exception.HPPPlusException;
+}
+Compiled from "LinkSpace.java"
+public class com.iconmaster.hppplus.link.LinkSpace {
+  protected java.util.HashMap<java.lang.String, com.iconmaster.hppplus.link.VariablePrototype> vars;
+  protected java.util.ArrayList<com.iconmaster.hppplus.link.Statement> statements;
+  public com.iconmaster.hppplus.link.LinkSpace();
+  public java.lang.String toString();
+  public void addVar(com.iconmaster.hppplus.link.VariablePrototype);
+  public void addVarEnsureUnique(com.iconmaster.hppplus.link.VariablePrototype, com.iconmaster.hppplus.SourceRange) throws com.iconmaster.hppplus.exception.HPPPlusException;
+  public void addVarEnsureDefined(com.iconmaster.hppplus.link.VariablePrototype, com.iconmaster.hppplus.SourceRange) throws com.iconmaster.hppplus.exception.HPPPlusException;
+  public void addStatement(com.iconmaster.hppplus.link.Statement);
+}
+Compiled from "LinkSpaceGlobal.java"
+public class com.iconmaster.hppplus.link.LinkSpaceGlobal extends com.iconmaster.hppplus.link.LinkSpace implements com.iconmaster.hppplus.link.Directable {
+  public com.iconmaster.hppplus.link.LinkSpaceGlobal();
+  public void addFunction(com.iconmaster.hppplus.link.FunctionPrototype);
+  public java.lang.String toString();
+}
+Compiled from "Linker.java"
+public class com.iconmaster.hppplus.link.Linker {
+  public static void registerHandler(java.lang.Class, com.iconmaster.hppplus.link.LinkHandler);
+  public static void registerDefaultHandlers();
+  public com.iconmaster.hppplus.link.Linker(java.util.ArrayList<com.iconmaster.hppplus.parse.Element>);
+  public com.iconmaster.hppplus.link.LinkSpaceGlobal link() throws com.iconmaster.hppplus.exception.HPPPlusException;
+  public com.iconmaster.hppplus.link.LinkSpace linkBlock(java.util.ArrayList<com.iconmaster.hppplus.link.VariablePrototype>) throws com.iconmaster.hppplus.exception.HPPPlusException;
+  public com.iconmaster.hppplus.link.LinkSpace linkBlock() throws com.iconmaster.hppplus.exception.HPPPlusException;
+  public static java.lang.String extractVarName(com.iconmaster.hppplus.parse.Element);
+  static {};
+}
+Compiled from "Statement.java"
+public class com.iconmaster.hppplus.link.Statement implements com.iconmaster.hppplus.link.Directable {
+  public com.iconmaster.hppplus.link.Statement();
+}
+Compiled from "VariablePrototype.java"
+public class com.iconmaster.hppplus.link.VariablePrototype implements com.iconmaster.hppplus.link.Directable {
+  public com.iconmaster.hppplus.link.VariablePrototype(java.lang.String);
+  public java.lang.String toString();
+  java.lang.String getName();
+}
+Compiled from "StatementEquation.java"
+public class com.iconmaster.hppplus.link.element.StatementEquation extends com.iconmaster.hppplus.link.Statement {
+  public com.iconmaster.hppplus.link.element.StatementEquation();
+}
+Compiled from "AssignmentLinker.java"
+public class com.iconmaster.hppplus.link.handler.AssignmentLinker implements com.iconmaster.hppplus.link.LinkHandler<com.iconmaster.hppplus.parse.element.operator.ElementAssignment> {
+  public com.iconmaster.hppplus.link.handler.AssignmentLinker();
+  public void handleLocal(com.iconmaster.hppplus.link.Linker, com.iconmaster.hppplus.link.LinkSpace, com.iconmaster.hppplus.parse.element.operator.ElementAssignment) throws com.iconmaster.hppplus.exception.HPPPlusException;
+  public void handleGlobal(com.iconmaster.hppplus.link.Linker, com.iconmaster.hppplus.link.LinkSpaceGlobal, com.iconmaster.hppplus.parse.element.operator.ElementAssignment) throws com.iconmaster.hppplus.exception.HPPPlusException;
+  public void handleGlobal(com.iconmaster.hppplus.link.Linker, com.iconmaster.hppplus.link.LinkSpaceGlobal, com.iconmaster.hppplus.parse.Element) throws com.iconmaster.hppplus.exception.HPPPlusException;
+  public void handleLocal(com.iconmaster.hppplus.link.Linker, com.iconmaster.hppplus.link.LinkSpace, com.iconmaster.hppplus.parse.Element) throws com.iconmaster.hppplus.exception.HPPPlusException;
+}
+Compiled from "FunctionLinker.java"
+public class com.iconmaster.hppplus.link.handler.FunctionLinker implements com.iconmaster.hppplus.link.LinkHandler<com.iconmaster.hppplus.parse.element.block.ElementFunction> {
+  public com.iconmaster.hppplus.link.handler.FunctionLinker();
+  public void handleLocal(com.iconmaster.hppplus.link.Linker, com.iconmaster.hppplus.link.LinkSpace, com.iconmaster.hppplus.parse.element.block.ElementFunction) throws com.iconmaster.hppplus.exception.HPPPlusException;
+  public void handleGlobal(com.iconmaster.hppplus.link.Linker, com.iconmaster.hppplus.link.LinkSpaceGlobal, com.iconmaster.hppplus.parse.element.block.ElementFunction) throws com.iconmaster.hppplus.exception.HPPPlusException;
+  public void handleGlobal(com.iconmaster.hppplus.link.Linker, com.iconmaster.hppplus.link.LinkSpaceGlobal, com.iconmaster.hppplus.parse.Element) throws com.iconmaster.hppplus.exception.HPPPlusException;
+  public void handleLocal(com.iconmaster.hppplus.link.Linker, com.iconmaster.hppplus.link.LinkSpace, com.iconmaster.hppplus.parse.Element) throws com.iconmaster.hppplus.exception.HPPPlusException;
+}
+Compiled from "Element.java"
+public interface com.iconmaster.hppplus.parse.Element extends com.iconmaster.hppplus.Parseable {
+  public abstract boolean isMatch(java.util.ArrayList<com.iconmaster.hppplus.Parseable>, int);
+  public abstract com.iconmaster.hppplus.parse.Element match(java.util.ArrayList<com.iconmaster.hppplus.Parseable>, int) throws com.iconmaster.hppplus.exception.HPPPlusException;
+  public abstract int getDeletionLength();
+}
+Compiled from "Parser.java"
+public class com.iconmaster.hppplus.parse.Parser {
+  public static java.lang.String[] opl1;
+  public static java.lang.String[] opl2;
+  public static java.lang.String[] opl3;
+  public com.iconmaster.hppplus.parse.Parser(java.util.ArrayList<com.iconmaster.hppplus.tokenize.Token>);
+  public static void registerHandler(com.iconmaster.hppplus.parse.Element);
+  public static void registerDefaultHandlers();
+  public java.util.ArrayList<com.iconmaster.hppplus.parse.Element> parse() throws com.iconmaster.hppplus.exception.HPPPlusException;
+  static {};
+}
+Compiled from "ElementDirective.java"
+public class com.iconmaster.hppplus.parse.element.ElementDirective implements com.iconmaster.hppplus.parse.Element {
+  public com.iconmaster.hppplus.parse.element.ElementDirective();
+  public com.iconmaster.hppplus.parse.element.ElementDirective(java.lang.String, com.iconmaster.hppplus.SourceRange);
+  public java.lang.Object getParsedContent();
+  public com.iconmaster.hppplus.SourceRange getRange();
+  public boolean isMatch(java.util.ArrayList<com.iconmaster.hppplus.Parseable>, int);
+  public com.iconmaster.hppplus.parse.Element match(java.util.ArrayList<com.iconmaster.hppplus.Parseable>, int) throws com.iconmaster.hppplus.exception.HPPPlusException;
+  public int getDeletionLength();
+  public java.lang.String toString();
+}
+Compiled from "ElementGlobalDirective.java"
+public class com.iconmaster.hppplus.parse.element.ElementGlobalDirective implements com.iconmaster.hppplus.parse.Element {
+  public com.iconmaster.hppplus.parse.element.ElementGlobalDirective();
+  public com.iconmaster.hppplus.parse.element.ElementGlobalDirective(java.lang.String, com.iconmaster.hppplus.SourceRange);
+  public java.lang.Object getParsedContent();
+  public com.iconmaster.hppplus.SourceRange getRange();
+  public boolean isMatch(java.util.ArrayList<com.iconmaster.hppplus.Parseable>, int);
+  public com.iconmaster.hppplus.parse.Element match(java.util.ArrayList<com.iconmaster.hppplus.Parseable>, int) throws com.iconmaster.hppplus.exception.HPPPlusException;
+  public int getDeletionLength();
+  public java.lang.String toString();
+}
+Compiled from "ElementIndex.java"
+public class com.iconmaster.hppplus.parse.element.ElementIndex implements com.iconmaster.hppplus.parse.Element {
+  public com.iconmaster.hppplus.parse.element.ElementIndex();
+  public com.iconmaster.hppplus.parse.element.ElementIndex(com.iconmaster.hppplus.Parseable, java.util.ArrayList<com.iconmaster.hppplus.parse.Element>, com.iconmaster.hppplus.SourceRange);
+  public java.lang.Object getParsedContent();
+  public com.iconmaster.hppplus.SourceRange getRange();
+  public boolean isMatch(java.util.ArrayList<com.iconmaster.hppplus.Parseable>, int);
+  public com.iconmaster.hppplus.parse.Element match(java.util.ArrayList<com.iconmaster.hppplus.Parseable>, int) throws com.iconmaster.hppplus.exception.HPPPlusException;
+  public int getDeletionLength();
+  public java.lang.String toString();
+}
+Compiled from "ElementIndex.java"
+class com.iconmaster.hppplus.parse.element.ElementIndex$1 {
+}
+Compiled from "ElementIndex.java"
+public class com.iconmaster.hppplus.parse.element.ElementIndex$IndexData {
+  public com.iconmaster.hppplus.Parseable lvalue;
+  public java.util.ArrayList<com.iconmaster.hppplus.parse.Element> args;
+  final com.iconmaster.hppplus.parse.element.ElementIndex this$0;
+  com.iconmaster.hppplus.parse.element.ElementIndex$IndexData(com.iconmaster.hppplus.parse.element.ElementIndex, com.iconmaster.hppplus.Parseable, java.util.ArrayList, com.iconmaster.hppplus.parse.element.ElementIndex$1);
+}
+Compiled from "ElementNumber.java"
+public class com.iconmaster.hppplus.parse.element.ElementNumber implements com.iconmaster.hppplus.parse.Element {
+  public com.iconmaster.hppplus.parse.element.ElementNumber();
+  public com.iconmaster.hppplus.parse.element.ElementNumber(java.lang.String, com.iconmaster.hppplus.SourceRange);
+  public java.lang.Object getParsedContent();
+  public com.iconmaster.hppplus.SourceRange getRange();
+  public boolean isMatch(java.util.ArrayList<com.iconmaster.hppplus.Parseable>, int);
+  public com.iconmaster.hppplus.parse.Element match(java.util.ArrayList<com.iconmaster.hppplus.Parseable>, int) throws com.iconmaster.hppplus.exception.HPPPlusException;
+  public int getDeletionLength();
+  public java.lang.String toString();
+}
+Compiled from "ElementParen.java"
+public class com.iconmaster.hppplus.parse.element.ElementParen implements com.iconmaster.hppplus.parse.Element {
+  public com.iconmaster.hppplus.parse.element.ElementParen();
+  public com.iconmaster.hppplus.parse.element.ElementParen(java.util.ArrayList<com.iconmaster.hppplus.parse.Element>, com.iconmaster.hppplus.SourceRange);
+  public java.lang.Object getParsedContent();
+  public com.iconmaster.hppplus.SourceRange getRange();
+  public boolean isMatch(java.util.ArrayList<com.iconmaster.hppplus.Parseable>, int);
+  public com.iconmaster.hppplus.parse.Element match(java.util.ArrayList<com.iconmaster.hppplus.Parseable>, int) throws com.iconmaster.hppplus.exception.HPPPlusException;
+  public int getDeletionLength();
+  public java.lang.String toString();
+}
+Compiled from "ElementRef.java"
+public class com.iconmaster.hppplus.parse.element.ElementRef implements com.iconmaster.hppplus.parse.Element {
+  public com.iconmaster.hppplus.parse.element.ElementRef();
+  public com.iconmaster.hppplus.parse.element.ElementRef(com.iconmaster.hppplus.parse.Element, java.lang.String, com.iconmaster.hppplus.SourceRange);
+  public java.lang.Object getParsedContent();
+  public com.iconmaster.hppplus.SourceRange getRange();
+  public boolean isMatch(java.util.ArrayList<com.iconmaster.hppplus.Parseable>, int);
+  public com.iconmaster.hppplus.parse.Element match(java.util.ArrayList<com.iconmaster.hppplus.Parseable>, int) throws com.iconmaster.hppplus.exception.HPPPlusException;
+  public int getDeletionLength();
+  public java.lang.String toString();
+}
+Compiled from "ElementRef.java"
+class com.iconmaster.hppplus.parse.element.ElementRef$1 {
+}
+Compiled from "ElementRef.java"
+public class com.iconmaster.hppplus.parse.element.ElementRef$CallData {
+  public com.iconmaster.hppplus.parse.Element name;
+  public java.lang.String field;
+  final com.iconmaster.hppplus.parse.element.ElementRef this$0;
+  com.iconmaster.hppplus.parse.element.ElementRef$CallData(com.iconmaster.hppplus.parse.element.ElementRef, com.iconmaster.hppplus.parse.Element, java.lang.String, com.iconmaster.hppplus.parse.element.ElementRef$1);
+}
+Compiled from "ElementRefCall.java"
+public class com.iconmaster.hppplus.parse.element.ElementRefCall implements com.iconmaster.hppplus.parse.Element {
+  public com.iconmaster.hppplus.parse.element.ElementRefCall();
+  public com.iconmaster.hppplus.parse.element.ElementRefCall(com.iconmaster.hppplus.parse.Element, java.lang.String, java.util.ArrayList<com.iconmaster.hppplus.parse.Element>, com.iconmaster.hppplus.SourceRange);
+  public java.lang.Object getParsedContent();
+  public com.iconmaster.hppplus.SourceRange getRange();
+  public boolean isMatch(java.util.ArrayList<com.iconmaster.hppplus.Parseable>, int);
+  public com.iconmaster.hppplus.parse.Element match(java.util.ArrayList<com.iconmaster.hppplus.Parseable>, int) throws com.iconmaster.hppplus.exception.HPPPlusException;
+  public int getDeletionLength();
+  public java.lang.String toString();
+}
+Compiled from "ElementRefCall.java"
+class com.iconmaster.hppplus.parse.element.ElementRefCall$1 {
+}
+Compiled from "ElementRefCall.java"
+public class com.iconmaster.hppplus.parse.element.ElementRefCall$RefCallData {
+  public com.iconmaster.hppplus.parse.Element member;
+  public java.lang.String func;
+  public java.util.ArrayList<com.iconmaster.hppplus.parse.Element> args;
+  final com.iconmaster.hppplus.parse.element.ElementRefCall this$0;
+  com.iconmaster.hppplus.parse.element.ElementRefCall$RefCallData(com.iconmaster.hppplus.parse.element.ElementRefCall, com.iconmaster.hppplus.parse.Element, java.lang.String, java.util.ArrayList, com.iconmaster.hppplus.parse.element.ElementRefCall$1);
+}
+Compiled from "ElementSeperator.java"
+public class com.iconmaster.hppplus.parse.element.ElementSeperator implements com.iconmaster.hppplus.parse.Element {
+  public com.iconmaster.hppplus.parse.element.ElementSeperator();
+  public java.lang.Object getParsedContent();
+  public com.iconmaster.hppplus.SourceRange getRange();
+  public boolean isMatch(java.util.ArrayList<com.iconmaster.hppplus.Parseable>, int);
+  public com.iconmaster.hppplus.parse.Element match(java.util.ArrayList<com.iconmaster.hppplus.Parseable>, int) throws com.iconmaster.hppplus.exception.HPPPlusException;
+  public int getDeletionLength();
+  public java.lang.String toString();
+}
+Compiled from "ElementString.java"
+public class com.iconmaster.hppplus.parse.element.ElementString implements com.iconmaster.hppplus.parse.Element {
+  public com.iconmaster.hppplus.parse.element.ElementString();
+  public com.iconmaster.hppplus.parse.element.ElementString(java.lang.String, com.iconmaster.hppplus.SourceRange);
+  public java.lang.Object getParsedContent();
+  public com.iconmaster.hppplus.SourceRange getRange();
+  public boolean isMatch(java.util.ArrayList<com.iconmaster.hppplus.Parseable>, int);
+  public com.iconmaster.hppplus.parse.Element match(java.util.ArrayList<com.iconmaster.hppplus.Parseable>, int) throws com.iconmaster.hppplus.exception.HPPPlusException;
+  public int getDeletionLength();
+  public java.lang.String toString();
+}
+Compiled from "ElementVariable.java"
+public class com.iconmaster.hppplus.parse.element.ElementVariable implements com.iconmaster.hppplus.parse.Element {
+  public com.iconmaster.hppplus.parse.element.ElementVariable();
+  public com.iconmaster.hppplus.parse.element.ElementVariable(java.lang.String, com.iconmaster.hppplus.SourceRange);
+  public java.lang.Object getParsedContent();
+  public com.iconmaster.hppplus.SourceRange getRange();
+  public boolean isMatch(java.util.ArrayList<com.iconmaster.hppplus.Parseable>, int);
+  public com.iconmaster.hppplus.parse.Element match(java.util.ArrayList<com.iconmaster.hppplus.Parseable>, int) throws com.iconmaster.hppplus.exception.HPPPlusException;
+  public int getDeletionLength();
+  public java.lang.String toString();
+}
+Compiled from "ElementWhitespace.java"
+public class com.iconmaster.hppplus.parse.element.ElementWhitespace implements com.iconmaster.hppplus.parse.Element {
+  public com.iconmaster.hppplus.parse.element.ElementWhitespace();
+  public java.lang.Object getParsedContent();
+  public com.iconmaster.hppplus.SourceRange getRange();
+  public boolean isMatch(java.util.ArrayList<com.iconmaster.hppplus.Parseable>, int);
+  public com.iconmaster.hppplus.parse.Element match(java.util.ArrayList<com.iconmaster.hppplus.Parseable>, int) throws com.iconmaster.hppplus.exception.HPPPlusException;
+  public int getDeletionLength();
+  public java.lang.String toString();
+}
+Compiled from "ElementBreak.java"
+public class com.iconmaster.hppplus.parse.element.block.ElementBreak implements com.iconmaster.hppplus.parse.Element {
+  public com.iconmaster.hppplus.parse.element.block.ElementBreak();
+  public com.iconmaster.hppplus.parse.element.block.ElementBreak(com.iconmaster.hppplus.parse.Element, com.iconmaster.hppplus.SourceRange);
+  public boolean isMatch(java.util.ArrayList, int);
+  public com.iconmaster.hppplus.parse.Element match(java.util.ArrayList, int) throws com.iconmaster.hppplus.exception.HPPPlusException;
+  public int getDeletionLength();
+  public com.iconmaster.hppplus.SourceRange getRange();
+  public java.lang.String toString();
+  public java.lang.Object getParsedContent();
+}
+Compiled from "ElementContinue.java"
+public class com.iconmaster.hppplus.parse.element.block.ElementContinue implements com.iconmaster.hppplus.parse.Element {
+  public com.iconmaster.hppplus.parse.element.block.ElementContinue();
+  public com.iconmaster.hppplus.parse.element.block.ElementContinue(com.iconmaster.hppplus.parse.Element, com.iconmaster.hppplus.SourceRange);
+  public boolean isMatch(java.util.ArrayList, int);
+  public com.iconmaster.hppplus.parse.Element match(java.util.ArrayList, int) throws com.iconmaster.hppplus.exception.HPPPlusException;
+  public int getDeletionLength();
+  public com.iconmaster.hppplus.SourceRange getRange();
+  public java.lang.String toString();
+  public java.lang.Object getParsedContent();
+}
+Compiled from "ElementFor.java"
+public class com.iconmaster.hppplus.parse.element.block.ElementFor implements com.iconmaster.hppplus.parse.Element {
+  public com.iconmaster.hppplus.parse.element.block.ElementFor();
+  public com.iconmaster.hppplus.parse.element.block.ElementFor(com.iconmaster.hppplus.parse.Element, com.iconmaster.hppplus.parse.Element, com.iconmaster.hppplus.parse.Element, java.util.ArrayList<com.iconmaster.hppplus.parse.Element>, int, com.iconmaster.hppplus.SourceRange);
+  public boolean isMatch(java.util.ArrayList, int);
+  public com.iconmaster.hppplus.parse.Element match(java.util.ArrayList, int) throws com.iconmaster.hppplus.exception.HPPPlusException;
+  public int getDeletionLength();
+  public com.iconmaster.hppplus.SourceRange getRange();
+  public java.lang.String toString();
+  public java.lang.Object getParsedContent();
+}
+Compiled from "ElementFor.java"
+public class com.iconmaster.hppplus.parse.element.block.ElementFor$ForData {
+  public com.iconmaster.hppplus.parse.Element var;
+  public java.util.ArrayList<com.iconmaster.hppplus.parse.Element> block;
+  public com.iconmaster.hppplus.parse.Element goal;
+  public com.iconmaster.hppplus.parse.Element step;
+  final com.iconmaster.hppplus.parse.element.block.ElementFor this$0;
+  public com.iconmaster.hppplus.parse.element.block.ElementFor$ForData(com.iconmaster.hppplus.parse.Element, com.iconmaster.hppplus.parse.Element, com.iconmaster.hppplus.parse.Element, java.util.ArrayList<com.iconmaster.hppplus.parse.Element>);
+}
+Compiled from "ElementForEach.java"
+public class com.iconmaster.hppplus.parse.element.block.ElementForEach implements com.iconmaster.hppplus.parse.Element {
+  public com.iconmaster.hppplus.parse.element.block.ElementForEach(com.iconmaster.hppplus.parse.Element, com.iconmaster.hppplus.parse.Element, com.iconmaster.hppplus.parse.Element, java.util.ArrayList<com.iconmaster.hppplus.parse.Element>, int, com.iconmaster.hppplus.SourceRange);
+  public boolean isMatch(java.util.ArrayList, int);
+  public com.iconmaster.hppplus.parse.Element match(java.util.ArrayList, int) throws com.iconmaster.hppplus.exception.HPPPlusException;
+  public int getDeletionLength();
+  public com.iconmaster.hppplus.SourceRange getRange();
+  public java.lang.String toString();
+  public java.lang.Object getParsedContent();
+}
+Compiled from "ElementForEach.java"
+public class com.iconmaster.hppplus.parse.element.block.ElementForEach$ForEachData {
+  public com.iconmaster.hppplus.parse.Element var1;
+  public java.util.ArrayList<com.iconmaster.hppplus.parse.Element> block;
+  public com.iconmaster.hppplus.parse.Element var2;
+  public com.iconmaster.hppplus.parse.Element list;
+  final com.iconmaster.hppplus.parse.element.block.ElementForEach this$0;
+  public com.iconmaster.hppplus.parse.element.block.ElementForEach$ForEachData(com.iconmaster.hppplus.parse.Element, com.iconmaster.hppplus.parse.Element, com.iconmaster.hppplus.parse.Element, java.util.ArrayList<com.iconmaster.hppplus.parse.Element>);
+}
+Compiled from "ElementFunction.java"
+public class com.iconmaster.hppplus.parse.element.block.ElementFunction implements com.iconmaster.hppplus.parse.Element {
+  public com.iconmaster.hppplus.parse.element.block.ElementFunction();
+  public com.iconmaster.hppplus.parse.element.block.ElementFunction(java.lang.String, java.util.ArrayList<com.iconmaster.hppplus.parse.Element>, java.util.ArrayList<com.iconmaster.hppplus.parse.Element>, int, com.iconmaster.hppplus.SourceRange);
+  public java.lang.Object getParsedContent();
+  public com.iconmaster.hppplus.SourceRange getRange();
+  public boolean isMatch(java.util.ArrayList<com.iconmaster.hppplus.Parseable>, int);
+  public com.iconmaster.hppplus.parse.Element match(java.util.ArrayList<com.iconmaster.hppplus.Parseable>, int) throws com.iconmaster.hppplus.exception.HPPPlusException;
+  public int getDeletionLength();
+  public java.lang.String toString();
+}
+Compiled from "ElementFunction.java"
+class com.iconmaster.hppplus.parse.element.block.ElementFunction$1 {
+}
+Compiled from "ElementFunction.java"
+public class com.iconmaster.hppplus.parse.element.block.ElementFunction$FunctionData {
+  public java.lang.String name;
+  public java.util.ArrayList<com.iconmaster.hppplus.parse.Element> block;
+  public java.util.ArrayList<com.iconmaster.hppplus.parse.Element> args;
+  final com.iconmaster.hppplus.parse.element.block.ElementFunction this$0;
+  com.iconmaster.hppplus.parse.element.block.ElementFunction$FunctionData(com.iconmaster.hppplus.parse.element.block.ElementFunction, java.lang.String, java.util.ArrayList, java.util.ArrayList, com.iconmaster.hppplus.parse.element.block.ElementFunction$1);
+}
+Compiled from "ElementIf.java"
+public class com.iconmaster.hppplus.parse.element.block.ElementIf implements com.iconmaster.hppplus.parse.Element {
+  public com.iconmaster.hppplus.parse.element.block.ElementIf();
+  public com.iconmaster.hppplus.parse.element.block.ElementIf(com.iconmaster.hppplus.parse.Element, java.util.ArrayList<com.iconmaster.hppplus.parse.Element>, java.util.ArrayList<com.iconmaster.hppplus.parse.Element>, int, com.iconmaster.hppplus.SourceRange);
+  public boolean isMatch(java.util.ArrayList<com.iconmaster.hppplus.Parseable>, int);
+  public com.iconmaster.hppplus.parse.Element match(java.util.ArrayList<com.iconmaster.hppplus.Parseable>, int) throws com.iconmaster.hppplus.exception.HPPPlusException;
+  public int getDeletionLength();
+  public com.iconmaster.hppplus.SourceRange getRange();
+  public java.lang.String toString();
+  public java.lang.Object getParsedContent();
+}
+Compiled from "ElementIf.java"
+public class com.iconmaster.hppplus.parse.element.block.ElementIf$IfData {
+  final com.iconmaster.hppplus.parse.element.block.ElementIf this$0;
+  public com.iconmaster.hppplus.parse.element.block.ElementIf$IfData(com.iconmaster.hppplus.parse.Element, java.util.ArrayList<com.iconmaster.hppplus.parse.Element>, java.util.ArrayList<com.iconmaster.hppplus.parse.Element>);
+}
+Compiled from "ElementLocal.java"
+public class com.iconmaster.hppplus.parse.element.block.ElementLocal implements com.iconmaster.hppplus.parse.Element {
+  public com.iconmaster.hppplus.parse.element.block.ElementLocal();
+  public com.iconmaster.hppplus.parse.element.block.ElementLocal(java.util.ArrayList<com.iconmaster.hppplus.parse.Element>, int, com.iconmaster.hppplus.SourceRange);
+  public boolean isMatch(java.util.ArrayList, int);
+  public com.iconmaster.hppplus.parse.Element match(java.util.ArrayList, int) throws com.iconmaster.hppplus.exception.HPPPlusException;
+  public int getDeletionLength();
+  public com.iconmaster.hppplus.SourceRange getRange();
+  public java.lang.String toString();
+  public java.lang.Object getParsedContent();
+}
+Compiled from "ElementReturn.java"
+public class com.iconmaster.hppplus.parse.element.block.ElementReturn implements com.iconmaster.hppplus.parse.Element {
+  public com.iconmaster.hppplus.parse.element.block.ElementReturn();
+  public com.iconmaster.hppplus.parse.element.block.ElementReturn(com.iconmaster.hppplus.parse.Element, com.iconmaster.hppplus.SourceRange);
+  public boolean isMatch(java.util.ArrayList, int);
+  public com.iconmaster.hppplus.parse.Element match(java.util.ArrayList, int) throws com.iconmaster.hppplus.exception.HPPPlusException;
+  public int getDeletionLength();
+  public com.iconmaster.hppplus.SourceRange getRange();
+  public java.lang.String toString();
+  public java.lang.Object getParsedContent();
+}
+Compiled from "ElementWhile.java"
+public class com.iconmaster.hppplus.parse.element.block.ElementWhile implements com.iconmaster.hppplus.parse.Element {
+  public com.iconmaster.hppplus.parse.element.block.ElementWhile();
+  public com.iconmaster.hppplus.parse.element.block.ElementWhile(com.iconmaster.hppplus.parse.Element, java.util.ArrayList<com.iconmaster.hppplus.parse.Element>, int, com.iconmaster.hppplus.SourceRange);
+  public boolean isMatch(java.util.ArrayList, int);
+  public com.iconmaster.hppplus.parse.Element match(java.util.ArrayList, int) throws com.iconmaster.hppplus.exception.HPPPlusException;
+  public int getDeletionLength();
+  public com.iconmaster.hppplus.SourceRange getRange();
+  public java.lang.String toString();
+  public java.lang.Object getParsedContent();
+}
+Compiled from "ElementWhile.java"
+public class com.iconmaster.hppplus.parse.element.block.ElementWhile$WhileData {
+  final com.iconmaster.hppplus.parse.element.block.ElementWhile this$0;
+  public com.iconmaster.hppplus.parse.element.block.ElementWhile$WhileData(com.iconmaster.hppplus.parse.Element, java.util.ArrayList<com.iconmaster.hppplus.parse.Element>);
+}
+Compiled from "ElementAssignment.java"
+public class com.iconmaster.hppplus.parse.element.operator.ElementAssignment implements com.iconmaster.hppplus.parse.Element {
+  public com.iconmaster.hppplus.parse.element.operator.ElementAssignment();
+  public com.iconmaster.hppplus.parse.element.operator.ElementAssignment(com.iconmaster.hppplus.parse.Element, com.iconmaster.hppplus.parse.Element, com.iconmaster.hppplus.SourceRange);
+  public java.lang.Object getParsedContent();
+  public com.iconmaster.hppplus.SourceRange getRange();
+  public boolean isMatch(java.util.ArrayList<com.iconmaster.hppplus.Parseable>, int);
+  public com.iconmaster.hppplus.parse.Element match(java.util.ArrayList<com.iconmaster.hppplus.Parseable>, int) throws com.iconmaster.hppplus.exception.HPPPlusException;
+  public int getDeletionLength();
+  public java.lang.String toString();
+}
+Compiled from "ElementAssignment.java"
+class com.iconmaster.hppplus.parse.element.operator.ElementAssignment$1 {
+}
+Compiled from "ElementAssignment.java"
+public class com.iconmaster.hppplus.parse.element.operator.ElementAssignment$AssignmentData {
+  public com.iconmaster.hppplus.parse.Element lvalue;
+  public com.iconmaster.hppplus.parse.Element rvalue;
+  final com.iconmaster.hppplus.parse.element.operator.ElementAssignment this$0;
+  com.iconmaster.hppplus.parse.element.operator.ElementAssignment$AssignmentData(com.iconmaster.hppplus.parse.element.operator.ElementAssignment, com.iconmaster.hppplus.parse.Element, com.iconmaster.hppplus.parse.Element, com.iconmaster.hppplus.parse.element.operator.ElementAssignment$1);
+}
+Compiled from "ElementCall.java"
+public class com.iconmaster.hppplus.parse.element.operator.ElementCall implements com.iconmaster.hppplus.parse.Element {
+  public com.iconmaster.hppplus.parse.element.operator.ElementCall();
+  public com.iconmaster.hppplus.parse.element.operator.ElementCall(java.lang.String, java.util.ArrayList<com.iconmaster.hppplus.parse.Element>, com.iconmaster.hppplus.SourceRange);
+  public java.lang.Object getParsedContent();
+  public com.iconmaster.hppplus.SourceRange getRange();
+  public boolean isMatch(java.util.ArrayList<com.iconmaster.hppplus.Parseable>, int);
+  public com.iconmaster.hppplus.parse.Element match(java.util.ArrayList<com.iconmaster.hppplus.Parseable>, int) throws com.iconmaster.hppplus.exception.HPPPlusException;
+  public int getDeletionLength();
+  public java.lang.String toString();
+}
+Compiled from "ElementCall.java"
+class com.iconmaster.hppplus.parse.element.operator.ElementCall$1 {
+}
+Compiled from "ElementCall.java"
+public class com.iconmaster.hppplus.parse.element.operator.ElementCall$CallData {
+  public java.lang.String name;
+  public java.util.ArrayList<com.iconmaster.hppplus.parse.Element> args;
+  final com.iconmaster.hppplus.parse.element.operator.ElementCall this$0;
+  com.iconmaster.hppplus.parse.element.operator.ElementCall$CallData(com.iconmaster.hppplus.parse.element.operator.ElementCall, java.lang.String, java.util.ArrayList, com.iconmaster.hppplus.parse.element.operator.ElementCall$1);
+}
+Compiled from "ElementCast.java"
+public class com.iconmaster.hppplus.parse.element.operator.ElementCast implements com.iconmaster.hppplus.parse.Element {
+  public com.iconmaster.hppplus.parse.element.operator.ElementCast();
+  public com.iconmaster.hppplus.parse.element.operator.ElementCast(com.iconmaster.hppplus.parse.Element, com.iconmaster.hppplus.parse.Element, com.iconmaster.hppplus.SourceRange);
+  public java.lang.Object getParsedContent();
+  public com.iconmaster.hppplus.SourceRange getRange();
+  public boolean isMatch(java.util.ArrayList<com.iconmaster.hppplus.Parseable>, int);
+  public com.iconmaster.hppplus.parse.Element match(java.util.ArrayList<com.iconmaster.hppplus.Parseable>, int) throws com.iconmaster.hppplus.exception.HPPPlusException;
+  public int getDeletionLength();
+  public java.lang.String toString();
+}
+Compiled from "ElementCast.java"
+class com.iconmaster.hppplus.parse.element.operator.ElementCast$1 {
+}
+Compiled from "ElementCast.java"
+public class com.iconmaster.hppplus.parse.element.operator.ElementCast$CastData {
+  public com.iconmaster.hppplus.parse.Element lvalue;
+  public com.iconmaster.hppplus.parse.Element rvalue;
+  final com.iconmaster.hppplus.parse.element.operator.ElementCast this$0;
+  com.iconmaster.hppplus.parse.element.operator.ElementCast$CastData(com.iconmaster.hppplus.parse.element.operator.ElementCast, com.iconmaster.hppplus.parse.Element, com.iconmaster.hppplus.parse.Element, com.iconmaster.hppplus.parse.element.operator.ElementCast$1);
+}
+Compiled from "ElementClassTest.java"
+public class com.iconmaster.hppplus.parse.element.operator.ElementClassTest implements com.iconmaster.hppplus.parse.Element {
+  public com.iconmaster.hppplus.parse.element.operator.ElementClassTest();
+  public com.iconmaster.hppplus.parse.element.operator.ElementClassTest(com.iconmaster.hppplus.Parseable, com.iconmaster.hppplus.Parseable, com.iconmaster.hppplus.SourceRange);
+  public java.lang.Object getParsedContent();
+  public com.iconmaster.hppplus.SourceRange getRange();
+  public boolean isMatch(java.util.ArrayList<com.iconmaster.hppplus.Parseable>, int);
+  public com.iconmaster.hppplus.parse.Element match(java.util.ArrayList<com.iconmaster.hppplus.Parseable>, int) throws com.iconmaster.hppplus.exception.HPPPlusException;
+  public int getDeletionLength();
+  public java.lang.String toString();
+}
+Compiled from "ElementClassTest.java"
+class com.iconmaster.hppplus.parse.element.operator.ElementClassTest$1 {
+}
+Compiled from "ElementClassTest.java"
+public class com.iconmaster.hppplus.parse.element.operator.ElementClassTest$ClassTestData {
+  public com.iconmaster.hppplus.Parseable lvalue;
+  public com.iconmaster.hppplus.Parseable rvalue;
+  final com.iconmaster.hppplus.parse.element.operator.ElementClassTest this$0;
+  com.iconmaster.hppplus.parse.element.operator.ElementClassTest$ClassTestData(com.iconmaster.hppplus.parse.element.operator.ElementClassTest, com.iconmaster.hppplus.Parseable, com.iconmaster.hppplus.Parseable, com.iconmaster.hppplus.parse.element.operator.ElementClassTest$1);
+}
+Compiled from "ElementOperator.java"
+public class com.iconmaster.hppplus.parse.element.operator.ElementOperator implements com.iconmaster.hppplus.parse.Element {
+  public com.iconmaster.hppplus.parse.element.operator.ElementOperator(java.lang.String);
+  public com.iconmaster.hppplus.parse.element.operator.ElementOperator(com.iconmaster.hppplus.Parseable, java.lang.String, com.iconmaster.hppplus.Parseable, com.iconmaster.hppplus.SourceRange);
+  public java.lang.Object getParsedContent();
+  public com.iconmaster.hppplus.SourceRange getRange();
+  public boolean isMatch(java.util.ArrayList<com.iconmaster.hppplus.Parseable>, int);
+  public com.iconmaster.hppplus.parse.Element match(java.util.ArrayList<com.iconmaster.hppplus.Parseable>, int) throws com.iconmaster.hppplus.exception.HPPPlusException;
+  public int getDeletionLength();
+  public java.lang.String toString();
+}
+Compiled from "ElementOperator.java"
+class com.iconmaster.hppplus.parse.element.operator.ElementOperator$1 {
+}
+Compiled from "ElementOperator.java"
+public class com.iconmaster.hppplus.parse.element.operator.ElementOperator$OperatorData {
+  public java.lang.String op;
+  public com.iconmaster.hppplus.Parseable lvalue;
+  public com.iconmaster.hppplus.Parseable rvalue;
+  final com.iconmaster.hppplus.parse.element.operator.ElementOperator this$0;
+  com.iconmaster.hppplus.parse.element.operator.ElementOperator$OperatorData(com.iconmaster.hppplus.parse.element.operator.ElementOperator, com.iconmaster.hppplus.Parseable, com.iconmaster.hppplus.Parseable, java.lang.String, com.iconmaster.hppplus.parse.element.operator.ElementOperator$1);
+}
+Compiled from "ElementUnaryOperator.java"
+public class com.iconmaster.hppplus.parse.element.operator.ElementUnaryOperator implements com.iconmaster.hppplus.parse.Element {
+  public com.iconmaster.hppplus.parse.element.operator.ElementUnaryOperator(java.lang.String);
+  public com.iconmaster.hppplus.parse.element.operator.ElementUnaryOperator(java.lang.String, com.iconmaster.hppplus.Parseable, com.iconmaster.hppplus.SourceRange);
+  public java.lang.Object getParsedContent();
+  public com.iconmaster.hppplus.SourceRange getRange();
+  public boolean isMatch(java.util.ArrayList<com.iconmaster.hppplus.Parseable>, int);
+  public com.iconmaster.hppplus.parse.Element match(java.util.ArrayList<com.iconmaster.hppplus.Parseable>, int) throws com.iconmaster.hppplus.exception.HPPPlusException;
+  public int getDeletionLength();
+  public java.lang.String toString();
+}
+Compiled from "ElementUnaryOperator.java"
+class com.iconmaster.hppplus.parse.element.operator.ElementUnaryOperator$1 {
+}
+Compiled from "ElementUnaryOperator.java"
+public class com.iconmaster.hppplus.parse.element.operator.ElementUnaryOperator$UnaryOperatorData {
+  public java.lang.String op;
+  public com.iconmaster.hppplus.Parseable rvalue;
+  final com.iconmaster.hppplus.parse.element.operator.ElementUnaryOperator this$0;
+  com.iconmaster.hppplus.parse.element.operator.ElementUnaryOperator$UnaryOperatorData(com.iconmaster.hppplus.parse.element.operator.ElementUnaryOperator, com.iconmaster.hppplus.Parseable, java.lang.String, com.iconmaster.hppplus.parse.element.operator.ElementUnaryOperator$1);
+}
+Compiled from "Token.java"
+public interface com.iconmaster.hppplus.tokenize.Token extends com.iconmaster.hppplus.Parseable {
+  public abstract boolean isMatch(com.iconmaster.hppplus.tokenize.Tokenizer, char);
+  public abstract com.iconmaster.hppplus.tokenize.Token match(com.iconmaster.hppplus.tokenize.Tokenizer) throws com.iconmaster.hppplus.exception.HPPPlusException;
+}
+Compiled from "Tokenizer.java"
+public class com.iconmaster.hppplus.tokenize.Tokenizer {
+  public com.iconmaster.hppplus.tokenize.Tokenizer(java.lang.CharSequence);
+  public static void registerHandler(com.iconmaster.hppplus.tokenize.Token);
+  public static void registerDefaultHandlers();
+  public java.util.ArrayList<com.iconmaster.hppplus.tokenize.Token> tokenize() throws com.iconmaster.hppplus.exception.HPPPlusException;
+  public com.iconmaster.hppplus.tokenize.Token nextToken() throws com.iconmaster.hppplus.exception.HPPPlusException;
+  public void advanceIndex();
+  public void advanceIndex(int);
+  public char getChar();
+  public boolean isEOF();
+  public int getIndex();
+  static {};
+}
+Compiled from "RecursiveMatchToken.java"
+public class com.iconmaster.hppplus.tokenize.element.RecursiveMatchToken implements com.iconmaster.hppplus.tokenize.Token {
+  protected java.util.ArrayList<com.iconmaster.hppplus.tokenize.Token> tokens;
+  protected com.iconmaster.hppplus.SourceRange range;
+  public com.iconmaster.hppplus.tokenize.element.RecursiveMatchToken();
+  public boolean isMatch(com.iconmaster.hppplus.tokenize.Tokenizer, char);
+  public com.iconmaster.hppplus.tokenize.Token match(com.iconmaster.hppplus.tokenize.Tokenizer) throws com.iconmaster.hppplus.exception.HPPPlusException;
+  public java.lang.Object getParsedContent();
+  public com.iconmaster.hppplus.SourceRange getRange();
+  public boolean matchFirstChar(com.iconmaster.hppplus.tokenize.Tokenizer, char);
+  public boolean matchLastChar(com.iconmaster.hppplus.tokenize.Tokenizer, char);
+  public com.iconmaster.hppplus.tokenize.Token getToken(java.util.ArrayList<com.iconmaster.hppplus.tokenize.Token>, com.iconmaster.hppplus.SourceRange);
+  public java.lang.String toString();
+  public java.lang.String getPrefix();
+}
+Compiled from "SimpleMatchToken.java"
+public class com.iconmaster.hppplus.tokenize.element.SimpleMatchToken implements com.iconmaster.hppplus.tokenize.Token {
+  protected java.lang.String content;
+  protected com.iconmaster.hppplus.SourceRange range;
+  public com.iconmaster.hppplus.tokenize.element.SimpleMatchToken();
+  public boolean isMatch(com.iconmaster.hppplus.tokenize.Tokenizer, char);
+  public com.iconmaster.hppplus.tokenize.Token match(com.iconmaster.hppplus.tokenize.Tokenizer);
+  public java.lang.Object getParsedContent();
+  public com.iconmaster.hppplus.SourceRange getRange();
+  public boolean matchFirstChar(com.iconmaster.hppplus.tokenize.Tokenizer, char);
+  public boolean matchChar(com.iconmaster.hppplus.tokenize.Tokenizer, char);
+  public com.iconmaster.hppplus.tokenize.Token getToken(java.lang.String, com.iconmaster.hppplus.SourceRange);
+  public java.lang.String toString();
+  public java.lang.String getPrefix();
+}
+Compiled from "TokenChunk.java"
+public class com.iconmaster.hppplus.tokenize.element.TokenChunk extends com.iconmaster.hppplus.tokenize.element.RecursiveMatchToken {
+  public com.iconmaster.hppplus.tokenize.element.TokenChunk();
+  public com.iconmaster.hppplus.tokenize.element.TokenChunk(java.util.ArrayList<com.iconmaster.hppplus.tokenize.Token>, com.iconmaster.hppplus.SourceRange);
+  public boolean matchFirstChar(com.iconmaster.hppplus.tokenize.Tokenizer, char);
+  public boolean matchLastChar(com.iconmaster.hppplus.tokenize.Tokenizer, char);
+  public com.iconmaster.hppplus.tokenize.Token getToken(java.util.ArrayList<com.iconmaster.hppplus.tokenize.Token>, com.iconmaster.hppplus.SourceRange);
+  public java.lang.String getPrefix();
+}
+Compiled from "TokenComment.java"
+public class com.iconmaster.hppplus.tokenize.element.TokenComment extends com.iconmaster.hppplus.tokenize.element.TotalMatchToken {
+  public com.iconmaster.hppplus.tokenize.element.TokenComment();
+  public com.iconmaster.hppplus.tokenize.element.TokenComment(java.lang.String, com.iconmaster.hppplus.SourceRange);
+  public boolean matchFirstChar(com.iconmaster.hppplus.tokenize.Tokenizer, char);
+  public boolean matchLastChar(com.iconmaster.hppplus.tokenize.Tokenizer, char);
+  public com.iconmaster.hppplus.tokenize.Token getToken(java.lang.String, com.iconmaster.hppplus.SourceRange);
+  public java.lang.String getPrefix();
+}
+Compiled from "TokenDirective.java"
+public class com.iconmaster.hppplus.tokenize.element.TokenDirective extends com.iconmaster.hppplus.tokenize.element.TotalMatchToken {
+  public com.iconmaster.hppplus.tokenize.element.TokenDirective();
+  public com.iconmaster.hppplus.tokenize.element.TokenDirective(java.lang.String, com.iconmaster.hppplus.SourceRange);
+  public boolean matchFirstChar(com.iconmaster.hppplus.tokenize.Tokenizer, char);
+  public boolean matchLastChar(com.iconmaster.hppplus.tokenize.Tokenizer, char);
+  public com.iconmaster.hppplus.tokenize.Token getToken(java.lang.String, com.iconmaster.hppplus.SourceRange);
+  public java.lang.String getPrefix();
+}
+Compiled from "TokenIndex.java"
+public class com.iconmaster.hppplus.tokenize.element.TokenIndex extends com.iconmaster.hppplus.tokenize.element.RecursiveMatchToken {
+  public com.iconmaster.hppplus.tokenize.element.TokenIndex();
+  public com.iconmaster.hppplus.tokenize.element.TokenIndex(java.util.ArrayList<com.iconmaster.hppplus.tokenize.Token>, com.iconmaster.hppplus.SourceRange);
+  public boolean matchFirstChar(com.iconmaster.hppplus.tokenize.Tokenizer, char);
+  public boolean matchLastChar(com.iconmaster.hppplus.tokenize.Tokenizer, char);
+  public com.iconmaster.hppplus.tokenize.Token getToken(java.util.ArrayList<com.iconmaster.hppplus.tokenize.Token>, com.iconmaster.hppplus.SourceRange);
+  public java.lang.String getPrefix();
+}
+Compiled from "TokenList.java"
+public class com.iconmaster.hppplus.tokenize.element.TokenList extends com.iconmaster.hppplus.tokenize.element.RecursiveMatchToken {
+  public com.iconmaster.hppplus.tokenize.element.TokenList();
+  public com.iconmaster.hppplus.tokenize.element.TokenList(java.util.ArrayList<com.iconmaster.hppplus.tokenize.Token>, com.iconmaster.hppplus.SourceRange);
+  public boolean matchFirstChar(com.iconmaster.hppplus.tokenize.Tokenizer, char);
+  public boolean matchLastChar(com.iconmaster.hppplus.tokenize.Tokenizer, char);
+  public com.iconmaster.hppplus.tokenize.Token getToken(java.util.ArrayList<com.iconmaster.hppplus.tokenize.Token>, com.iconmaster.hppplus.SourceRange);
+  public java.lang.String getPrefix();
+}
+Compiled from "TokenNumber.java"
+public class com.iconmaster.hppplus.tokenize.element.TokenNumber extends com.iconmaster.hppplus.tokenize.element.SimpleMatchToken {
+  public com.iconmaster.hppplus.tokenize.element.TokenNumber();
+  public com.iconmaster.hppplus.tokenize.element.TokenNumber(java.lang.String, com.iconmaster.hppplus.SourceRange);
+  public boolean matchChar(com.iconmaster.hppplus.tokenize.Tokenizer, char);
+  public com.iconmaster.hppplus.tokenize.Token getToken(java.lang.String, com.iconmaster.hppplus.SourceRange);
+  public java.lang.String getPrefix();
+}
+Compiled from "TokenOperator.java"
+public class com.iconmaster.hppplus.tokenize.element.TokenOperator extends com.iconmaster.hppplus.tokenize.element.SimpleMatchToken {
+  public com.iconmaster.hppplus.tokenize.element.TokenOperator();
+  public com.iconmaster.hppplus.tokenize.element.TokenOperator(java.lang.String, com.iconmaster.hppplus.SourceRange);
+  public boolean matchChar(com.iconmaster.hppplus.tokenize.Tokenizer, char);
+  public com.iconmaster.hppplus.tokenize.Token getToken(java.lang.String, com.iconmaster.hppplus.SourceRange);
+  public java.lang.String getPrefix();
+  static {};
+}
+Compiled from "TokenReference.java"
+public class com.iconmaster.hppplus.tokenize.element.TokenReference extends com.iconmaster.hppplus.tokenize.element.SimpleMatchToken {
+  public com.iconmaster.hppplus.tokenize.element.TokenReference();
+  public com.iconmaster.hppplus.tokenize.element.TokenReference(java.lang.String, com.iconmaster.hppplus.SourceRange);
+  public boolean matchFirstChar(com.iconmaster.hppplus.tokenize.Tokenizer, char);
+  public boolean matchChar(com.iconmaster.hppplus.tokenize.Tokenizer, char);
+  public com.iconmaster.hppplus.tokenize.Token getToken(java.lang.String, com.iconmaster.hppplus.SourceRange);
+  public java.lang.String getPrefix();
+}
+Compiled from "TokenSeperator.java"
+public class com.iconmaster.hppplus.tokenize.element.TokenSeperator extends com.iconmaster.hppplus.tokenize.element.SimpleMatchToken {
+  public com.iconmaster.hppplus.tokenize.element.TokenSeperator();
+  public com.iconmaster.hppplus.tokenize.element.TokenSeperator(com.iconmaster.hppplus.SourceRange);
+  public boolean matchChar(com.iconmaster.hppplus.tokenize.Tokenizer, char);
+  public com.iconmaster.hppplus.tokenize.Token getToken(java.lang.String, com.iconmaster.hppplus.SourceRange);
+  public java.lang.String getPrefix();
+}
+Compiled from "TokenString.java"
+public class com.iconmaster.hppplus.tokenize.element.TokenString extends com.iconmaster.hppplus.tokenize.element.TotalMatchToken {
+  public com.iconmaster.hppplus.tokenize.element.TokenString();
+  public com.iconmaster.hppplus.tokenize.element.TokenString(java.lang.String, com.iconmaster.hppplus.SourceRange);
+  public boolean matchFirstChar(com.iconmaster.hppplus.tokenize.Tokenizer, char);
+  public boolean matchLastChar(com.iconmaster.hppplus.tokenize.Tokenizer, char);
+  public com.iconmaster.hppplus.tokenize.Token getToken(java.lang.String, com.iconmaster.hppplus.SourceRange);
+  public java.lang.String getPrefix();
+}
+Compiled from "TokenWhitespace.java"
+public class com.iconmaster.hppplus.tokenize.element.TokenWhitespace extends com.iconmaster.hppplus.tokenize.element.SimpleMatchToken {
+  public com.iconmaster.hppplus.tokenize.element.TokenWhitespace();
+  public com.iconmaster.hppplus.tokenize.element.TokenWhitespace(com.iconmaster.hppplus.SourceRange);
+  public boolean matchChar(com.iconmaster.hppplus.tokenize.Tokenizer, char);
+  public com.iconmaster.hppplus.tokenize.Token getToken(java.lang.String, com.iconmaster.hppplus.SourceRange);
+  public java.lang.String getPrefix();
+}
+Compiled from "TokenWord.java"
+public class com.iconmaster.hppplus.tokenize.element.TokenWord extends com.iconmaster.hppplus.tokenize.element.SimpleMatchToken {
+  public com.iconmaster.hppplus.tokenize.element.TokenWord();
+  public com.iconmaster.hppplus.tokenize.element.TokenWord(java.lang.String, com.iconmaster.hppplus.SourceRange);
+  public boolean matchFirstChar(com.iconmaster.hppplus.tokenize.Tokenizer, char);
+  public boolean matchChar(com.iconmaster.hppplus.tokenize.Tokenizer, char);
+  public com.iconmaster.hppplus.tokenize.Token getToken(java.lang.String, com.iconmaster.hppplus.SourceRange);
+  public java.lang.String getPrefix();
+}
+Compiled from "TotalMatchToken.java"
+public class com.iconmaster.hppplus.tokenize.element.TotalMatchToken implements com.iconmaster.hppplus.tokenize.Token {
+  protected java.lang.String content;
+  protected com.iconmaster.hppplus.SourceRange range;
+  public com.iconmaster.hppplus.tokenize.element.TotalMatchToken();
+  public boolean isMatch(com.iconmaster.hppplus.tokenize.Tokenizer, char);
+  public com.iconmaster.hppplus.tokenize.Token match(com.iconmaster.hppplus.tokenize.Tokenizer);
+  public java.lang.Object getParsedContent();
+  public com.iconmaster.hppplus.SourceRange getRange();
+  public boolean matchFirstChar(com.iconmaster.hppplus.tokenize.Tokenizer, char);
+  public boolean matchLastChar(com.iconmaster.hppplus.tokenize.Tokenizer, char);
+  public com.iconmaster.hppplus.tokenize.Token getToken(java.lang.String, com.iconmaster.hppplus.SourceRange);
+  public java.lang.String toString();
+  public java.lang.String getPrefix();
+}

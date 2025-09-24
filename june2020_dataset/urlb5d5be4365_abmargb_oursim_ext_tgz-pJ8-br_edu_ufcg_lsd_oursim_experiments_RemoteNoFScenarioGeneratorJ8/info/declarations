@@ -1,0 +1,1672 @@
+Compiled from "Main.java"
+public class br.edu.ufcg.lsd.oursim.Main {
+  public br.edu.ufcg.lsd.oursim.Main();
+  public static void main(java.lang.String[]) throws java.io.FileNotFoundException;
+}
+Compiled from "OurSim.java"
+public class br.edu.ufcg.lsd.oursim.OurSim {
+  public br.edu.ufcg.lsd.oursim.OurSim(br.edu.ufcg.lsd.oursim.queue.EventProxy, br.edu.ufcg.lsd.oursim.entities.grid.Grid, java.util.Properties, br.edu.ufcg.lsd.oursim.network.Network, br.edu.ufcg.lsd.oursim.trace.TraceCollector);
+  public br.edu.ufcg.lsd.oursim.factories.EventFactory getEventFactory();
+  public void addEventListener(br.edu.ufcg.lsd.oursim.events.EventListener);
+  public java.util.Random getRandom();
+  public br.edu.ufcg.lsd.oursim.entities.grid.Grid getGrid();
+  public void addEvent(br.edu.ufcg.lsd.oursim.events.Event);
+  public void addNetworkEvent(br.edu.ufcg.lsd.oursim.events.Event);
+  public br.edu.ufcg.lsd.oursim.events.Event createEvent(java.lang.String, long, java.lang.Object...);
+  public void run();
+  public java.lang.Long getLongProperty(java.lang.String);
+  public java.lang.Integer getIntProperty(java.lang.String);
+  public java.lang.Boolean getBooleanProperty(java.lang.String);
+  public java.lang.String getStringProperty(java.lang.String);
+  public br.edu.ufcg.lsd.oursim.trace.TraceCollector getTraceCollector();
+  public void halt();
+  public void removeEventListener(br.edu.ufcg.lsd.oursim.events.EventListener);
+  public br.edu.ufcg.lsd.oursim.queue.EventQueue getQueue();
+  public boolean isLivenessCheckSchedule();
+  public void setLivenessCheckSchedule(boolean);
+}
+Compiled from "AcceptanceTest.java"
+public class br.edu.ufcg.lsd.oursim.acceptance.AcceptanceTest {
+  public br.edu.ufcg.lsd.oursim.acceptance.AcceptanceTest();
+  public java.util.List<br.edu.ufcg.lsd.oursim.events.Event> addEvent(br.edu.ufcg.lsd.oursim.events.EventSpec);
+  public java.util.List<br.edu.ufcg.lsd.oursim.events.Event> addEventAndReturn(br.edu.ufcg.lsd.oursim.events.EventSpec);
+  public java.util.List<br.edu.ufcg.lsd.oursim.events.Event> addEvent(br.edu.ufcg.lsd.oursim.events.EventSpec, java.lang.String);
+  protected br.edu.ufcg.lsd.oursim.entities.grid.Broker createBroker(java.lang.String);
+  protected br.edu.ufcg.lsd.oursim.entities.grid.Worker createWorker(java.lang.String);
+  protected br.edu.ufcg.lsd.oursim.entities.grid.DiscoveryService createDiscoveryService(java.lang.String);
+  protected br.edu.ufcg.lsd.oursim.entities.grid.Peer createPeer(java.lang.String);
+  protected void setProperty(java.lang.String, java.lang.String);
+}
+Compiled from "EventRecorder.java"
+public class br.edu.ufcg.lsd.oursim.acceptance.EventRecorder implements br.edu.ufcg.lsd.oursim.events.EventListener {
+  public br.edu.ufcg.lsd.oursim.acceptance.EventRecorder();
+  public void eventProcessed(br.edu.ufcg.lsd.oursim.events.Event);
+  public void startRecording();
+  public java.util.List<br.edu.ufcg.lsd.oursim.events.Event> stopRecording();
+}
+Compiled from "EventRecorderUtils.java"
+public class br.edu.ufcg.lsd.oursim.acceptance.EventRecorderUtils {
+  public br.edu.ufcg.lsd.oursim.acceptance.EventRecorderUtils();
+  public static boolean hasEvent(java.util.List<br.edu.ufcg.lsd.oursim.events.Event>, java.lang.String);
+  public static boolean hasEventSequence(java.util.List<br.edu.ufcg.lsd.oursim.events.Event>, java.lang.String...);
+  public static <T extends br.edu.ufcg.lsd.oursim.events.Event> T getEvent(java.util.List<br.edu.ufcg.lsd.oursim.events.Event>, java.lang.String);
+}
+Compiled from "HaltByEventCondition.java"
+public class br.edu.ufcg.lsd.oursim.acceptance.HaltByEventCondition extends br.edu.ufcg.lsd.oursim.events.global.HaltCondition {
+  public br.edu.ufcg.lsd.oursim.acceptance.HaltByEventCondition(br.edu.ufcg.lsd.oursim.OurSim, java.lang.String);
+  public boolean halt(br.edu.ufcg.lsd.oursim.events.Event, br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "TestTraceCollector.java"
+public class br.edu.ufcg.lsd.oursim.acceptance.TestTraceCollector implements br.edu.ufcg.lsd.oursim.trace.TraceCollector {
+  public br.edu.ufcg.lsd.oursim.acceptance.TestTraceCollector();
+  public void replicaEnded(long, br.edu.ufcg.lsd.oursim.entities.job.Replica, java.lang.String);
+  public void jobEnded(long, br.edu.ufcg.lsd.oursim.entities.job.Job, java.lang.String);
+  public void taskEnded(long, br.edu.ufcg.lsd.oursim.entities.job.Task, java.lang.String);
+}
+Compiled from "AddJobTest.java"
+public class br.edu.ufcg.lsd.oursim.acceptance.broker.AddJobTest extends br.edu.ufcg.lsd.oursim.acceptance.AcceptanceTest {
+  public br.edu.ufcg.lsd.oursim.acceptance.broker.AddJobTest();
+  public void testAddJobNotStartedBroker();
+  public void testAddJobStartedBroker();
+  public void testAddMoreThanOneJob();
+  public void testAddJobWithPeerDown();
+  public void testAddJobWithPeerUp();
+  public void testAddJobThenStartPeer();
+}
+Compiled from "CancelJobTest.java"
+public class br.edu.ufcg.lsd.oursim.acceptance.broker.CancelJobTest extends br.edu.ufcg.lsd.oursim.acceptance.AcceptanceTest {
+  public br.edu.ufcg.lsd.oursim.acceptance.broker.CancelJobTest();
+  public void testCancelJobNoBroker();
+  public void testCancelJobBrokerDown();
+  public void testCancelJobNoJob();
+  public void testCancelJobOneJob();
+  public void testCancelJobMoreThanOneJob();
+  public void testCancelAllJobsMoreThanOneJob();
+  public void testCancelJobWithPeer();
+  public void testCancelJobAfterHereIsWorker();
+  public void testCancelJobAfterWorkerAvailable();
+  public void testCancelJobAfterWorkerScheduling();
+  public void testCancelJobAfterJobFinished();
+}
+Compiled from "HereIsExecutionResultTest.java"
+public class br.edu.ufcg.lsd.oursim.acceptance.broker.HereIsExecutionResultTest extends br.edu.ufcg.lsd.oursim.acceptance.AcceptanceTest {
+  public br.edu.ufcg.lsd.oursim.acceptance.broker.HereIsExecutionResultTest();
+  public void testHereIsExecutionResultAfterJobCancelled();
+  public void testHereIsExecutionResultWithTwoTasks();
+  public void testHereIsExecutionResultWithReplication();
+}
+Compiled from "HereIsWorkerTest.java"
+public class br.edu.ufcg.lsd.oursim.acceptance.broker.HereIsWorkerTest extends br.edu.ufcg.lsd.oursim.acceptance.AcceptanceTest {
+  public br.edu.ufcg.lsd.oursim.acceptance.broker.HereIsWorkerTest();
+  public void testHereIsWorkerWithNoPeer();
+  public void testHereIsWorkerWithPeerDown();
+  public void testHereIsWorkerWithNoJobs();
+  public void testHereIsWorkerWithJobs();
+  public void testHereIsWorkerWithFinishedJob();
+}
+Compiled from "PeerFailedTest.java"
+public class br.edu.ufcg.lsd.oursim.acceptance.broker.PeerFailedTest extends br.edu.ufcg.lsd.oursim.acceptance.AcceptanceTest {
+  public br.edu.ufcg.lsd.oursim.acceptance.broker.PeerFailedTest();
+  public void testPeerFailedWithNoJobs();
+  public void testPeerFailedWithSatisfiedJob();
+  public void testPeerFailedWithUnstartedJob();
+  public void testPeerFailedThenPeerRecovery();
+}
+Compiled from "SetGridTest.java"
+public class br.edu.ufcg.lsd.oursim.acceptance.broker.SetGridTest extends br.edu.ufcg.lsd.oursim.acceptance.AcceptanceTest {
+  public br.edu.ufcg.lsd.oursim.acceptance.broker.SetGridTest();
+  public void testBrokerStartAndSetGrid();
+  public void testSetGridWithSatisfiedJob();
+  public void testSetGridToSamePeer();
+}
+Compiled from "StartBrokerTest.java"
+public class br.edu.ufcg.lsd.oursim.acceptance.broker.StartBrokerTest extends br.edu.ufcg.lsd.oursim.acceptance.AcceptanceTest {
+  public br.edu.ufcg.lsd.oursim.acceptance.broker.StartBrokerTest();
+  public void testBrokerStartNoPeer();
+  public void testBrokerStartAndAddJobNoPeer();
+  public void testBrokerStartWithPeerDown();
+  public void testBrokerStartAndAddJobPeerDown();
+  public void testBrokerStartWithPeerUp();
+  public void testBrokerStartAnAlreadyStartedOne();
+}
+Compiled from "StopBrokerTest.java"
+public class br.edu.ufcg.lsd.oursim.acceptance.broker.StopBrokerTest extends br.edu.ufcg.lsd.oursim.acceptance.AcceptanceTest {
+  public br.edu.ufcg.lsd.oursim.acceptance.broker.StopBrokerTest();
+  public void testBrokerStopNoPeer();
+  public void testBrokerStopTwice();
+}
+Compiled from "WorkerAvailableTest.java"
+public class br.edu.ufcg.lsd.oursim.acceptance.broker.WorkerAvailableTest extends br.edu.ufcg.lsd.oursim.acceptance.AcceptanceTest {
+  public br.edu.ufcg.lsd.oursim.acceptance.broker.WorkerAvailableTest();
+  public void testWorkerIsAvailableWithCancelledJob();
+}
+Compiled from "WorkerFailedTest.java"
+public class br.edu.ufcg.lsd.oursim.acceptance.broker.WorkerFailedTest extends br.edu.ufcg.lsd.oursim.acceptance.AcceptanceTest {
+  public br.edu.ufcg.lsd.oursim.acceptance.broker.WorkerFailedTest();
+  public void testWorkerFailedAfterHereIsWorker();
+  public void testWorkerFailedAfterRecovering();
+  public void testWorkerFailedAfterBeingScheduled();
+  public void testWorkerFailedMaxFails();
+  public void testWorkerFailedAlreadyFailed();
+  public void testWorkerFailedAlreadyFailedTask();
+  public void testWorkerFailedTwice();
+  public void testWorkerFailedAfterJobFinished();
+  public void testWorkerFailedNeedMoreWorkers();
+  public void testWorkerFailedSatisfiedJob();
+}
+Compiled from "IsItAliveSentTest.java"
+public class br.edu.ufcg.lsd.oursim.acceptance.fd.IsItAliveSentTest extends br.edu.ufcg.lsd.oursim.acceptance.AcceptanceTest {
+  public br.edu.ufcg.lsd.oursim.acceptance.fd.IsItAliveSentTest();
+  public void testIsItAliveSentNoDetector();
+  public void testIsItAliveSentWithDetector();
+}
+Compiled from "LivenessCheckTest.java"
+public class br.edu.ufcg.lsd.oursim.acceptance.fd.LivenessCheckTest extends br.edu.ufcg.lsd.oursim.acceptance.AcceptanceTest {
+  public br.edu.ufcg.lsd.oursim.acceptance.fd.LivenessCheckTest();
+  public void testLivenessCheckNotFailed();
+  public void testLivenessCheckFailed();
+}
+Compiled from "BrokerAvailableTest.java"
+public class br.edu.ufcg.lsd.oursim.acceptance.peer.BrokerAvailableTest extends br.edu.ufcg.lsd.oursim.acceptance.AcceptanceTest {
+  public br.edu.ufcg.lsd.oursim.acceptance.peer.BrokerAvailableTest();
+  public void testBrokerAvailable();
+}
+Compiled from "BrokerFailedTest.java"
+public class br.edu.ufcg.lsd.oursim.acceptance.peer.BrokerFailedTest extends br.edu.ufcg.lsd.oursim.acceptance.AcceptanceTest {
+  public br.edu.ufcg.lsd.oursim.acceptance.peer.BrokerFailedTest();
+  public void testBrokerFailedNoRequests();
+  public void testBrokerFailedWithRequestsButNoWorkers();
+  public void testBrokerFailedWithWorkers();
+}
+Compiled from "DiscoveryServiceFailedTest.java"
+public class br.edu.ufcg.lsd.oursim.acceptance.peer.DiscoveryServiceFailedTest extends br.edu.ufcg.lsd.oursim.acceptance.AcceptanceTest {
+  public br.edu.ufcg.lsd.oursim.acceptance.peer.DiscoveryServiceFailedTest();
+  public void testDiscoveryServiceFailed();
+}
+Compiled from "DiscoveryServiceRecoveryTest.java"
+public class br.edu.ufcg.lsd.oursim.acceptance.peer.DiscoveryServiceRecoveryTest extends br.edu.ufcg.lsd.oursim.acceptance.AcceptanceTest {
+  public br.edu.ufcg.lsd.oursim.acceptance.peer.DiscoveryServiceRecoveryTest();
+  public void testDiscoveryServiceRecovery();
+  public void testDiscoveryServiceRecoveryWithPeers();
+}
+Compiled from "DisposeRemoteWorkerTest.java"
+public class br.edu.ufcg.lsd.oursim.acceptance.peer.DisposeRemoteWorkerTest extends br.edu.ufcg.lsd.oursim.acceptance.AcceptanceTest {
+  public br.edu.ufcg.lsd.oursim.acceptance.peer.DisposeRemoteWorkerTest();
+  public void testDisposeRemoteWorker();
+  public void testDisposeRemoteWorkerNullAllocation();
+}
+Compiled from "DisposeWorkerTest.java"
+public class br.edu.ufcg.lsd.oursim.acceptance.peer.DisposeWorkerTest extends br.edu.ufcg.lsd.oursim.acceptance.AcceptanceTest {
+  public br.edu.ufcg.lsd.oursim.acceptance.peer.DisposeWorkerTest();
+  public void testDisposeWorkerRequestNotPaused();
+  public void testDisposeWorkerRequestPaused();
+}
+Compiled from "FinishRequestTest.java"
+public class br.edu.ufcg.lsd.oursim.acceptance.peer.FinishRequestTest extends br.edu.ufcg.lsd.oursim.acceptance.AcceptanceTest {
+  public br.edu.ufcg.lsd.oursim.acceptance.peer.FinishRequestTest();
+  public void testFinishRequest();
+}
+Compiled from "HereIsRemoteWorkerTest.java"
+public class br.edu.ufcg.lsd.oursim.acceptance.peer.HereIsRemoteWorkerTest extends br.edu.ufcg.lsd.oursim.acceptance.AcceptanceTest {
+  public br.edu.ufcg.lsd.oursim.acceptance.peer.HereIsRemoteWorkerTest();
+  public void testHereIsRemoteWorker();
+  public void testHereIsRemoteWorkerLocalRedistribution();
+  public void testRemoteWorkerAvailableNoProvider();
+}
+Compiled from "LocalWorkerFailedTest.java"
+public class br.edu.ufcg.lsd.oursim.acceptance.peer.LocalWorkerFailedTest extends br.edu.ufcg.lsd.oursim.acceptance.AcceptanceTest {
+  public br.edu.ufcg.lsd.oursim.acceptance.peer.LocalWorkerFailedTest();
+  public void testLocalWorkerFailure();
+  public void testLocalWorkerFailureNotRecovered();
+  public void testLocalWorkerFailureDonatedWorker();
+}
+Compiled from "RemoteRequestWorkersTest.java"
+public class br.edu.ufcg.lsd.oursim.acceptance.peer.RemoteRequestWorkersTest extends br.edu.ufcg.lsd.oursim.acceptance.AcceptanceTest {
+  public br.edu.ufcg.lsd.oursim.acceptance.peer.RemoteRequestWorkersTest();
+  public void testRemoteRequestAllocation();
+  public void testRemoteAllocationNoWorkers();
+  public void testRemoteRequestNoNof();
+}
+Compiled from "RemoteWorkerFailedTest.java"
+public class br.edu.ufcg.lsd.oursim.acceptance.peer.RemoteWorkerFailedTest extends br.edu.ufcg.lsd.oursim.acceptance.AcceptanceTest {
+  public br.edu.ufcg.lsd.oursim.acceptance.peer.RemoteWorkerFailedTest();
+  public void testRemoteWorkerFailedBeforeDelivered();
+  public void testRemoteWorkerFailedAfterDelivered();
+}
+Compiled from "ReportReplicaAccountingTest.java"
+public class br.edu.ufcg.lsd.oursim.acceptance.peer.ReportReplicaAccountingTest extends br.edu.ufcg.lsd.oursim.acceptance.AcceptanceTest {
+  public br.edu.ufcg.lsd.oursim.acceptance.peer.ReportReplicaAccountingTest();
+  public void testEmptyNof();
+  public void testNoF();
+  public void testNoFOnlyRemote();
+}
+Compiled from "ReportWorkAccountingTest.java"
+public class br.edu.ufcg.lsd.oursim.acceptance.peer.ReportWorkAccountingTest extends br.edu.ufcg.lsd.oursim.acceptance.AcceptanceTest {
+  public br.edu.ufcg.lsd.oursim.acceptance.peer.ReportWorkAccountingTest();
+  public void testNonNegativeNof();
+  public void testNoF();
+}
+Compiled from "RequestWorkersTest.java"
+public class br.edu.ufcg.lsd.oursim.acceptance.peer.RequestWorkersTest extends br.edu.ufcg.lsd.oursim.acceptance.AcceptanceTest {
+  public br.edu.ufcg.lsd.oursim.acceptance.peer.RequestWorkersTest();
+  public void testRequestLocalAllocation();
+  public void testRequestRepetition();
+  public void testRequestForwardToCommunity();
+  public void testRequestLocalReallocation();
+  public void testLocalAndRemoteReallocation();
+  public void testLocalAndRemoteRedistributionConsideringNof();
+}
+Compiled from "StartPeerTest.java"
+public class br.edu.ufcg.lsd.oursim.acceptance.peer.StartPeerTest extends br.edu.ufcg.lsd.oursim.acceptance.AcceptanceTest {
+  public br.edu.ufcg.lsd.oursim.acceptance.peer.StartPeerTest();
+  public void testStartPeer();
+  public void testStartPeerWithWorkersDown();
+  public void testStartPeerWithWorkersUp();
+  public void testStartPeerWithDiscoveryServiceDown();
+  public void testStartPeerWithDiscoveryServiceUp();
+}
+Compiled from "StopPeerTest.java"
+public class br.edu.ufcg.lsd.oursim.acceptance.peer.StopPeerTest extends br.edu.ufcg.lsd.oursim.acceptance.AcceptanceTest {
+  public br.edu.ufcg.lsd.oursim.acceptance.peer.StopPeerTest();
+  public void testStopPeer();
+}
+Compiled from "WorkerStatusChangeTest.java"
+public class br.edu.ufcg.lsd.oursim.acceptance.peer.WorkerStatusChangeTest extends br.edu.ufcg.lsd.oursim.acceptance.AcceptanceTest {
+  public br.edu.ufcg.lsd.oursim.acceptance.peer.WorkerStatusChangeTest();
+  public void workerChangeFromUnavailableToIdle();
+  public void workerChangeFromIdleToUnavailable();
+  public void workerChangeFromIdleToInUse();
+  public void workerChangeFromIdleToDonated();
+}
+Compiled from "SendReportWorkAccountingTest.java"
+public class br.edu.ufcg.lsd.oursim.acceptance.worker.SendReportWorkAccountingTest extends br.edu.ufcg.lsd.oursim.acceptance.AcceptanceTest {
+  public br.edu.ufcg.lsd.oursim.acceptance.worker.SendReportWorkAccountingTest();
+  public void testReportWorkAccounting();
+  public void testReportWithNoAccounting();
+  public void testReportWithOpenedAccountingNoInitTime();
+  public void testReportWithOpenedAccountingWithInitTime();
+}
+Compiled from "WorkForBrokerTest.java"
+public class br.edu.ufcg.lsd.oursim.acceptance.worker.WorkForBrokerTest extends br.edu.ufcg.lsd.oursim.acceptance.AcceptanceTest {
+  public br.edu.ufcg.lsd.oursim.acceptance.worker.WorkForBrokerTest();
+  public void testWorkForBrokerWithRemotePeer();
+  public void testWorkForBrokerTwiceWithRemotePeer();
+}
+Compiled from "ActiveEntity.java"
+public class br.edu.ufcg.lsd.oursim.entities.ActiveEntity extends br.edu.ufcg.lsd.oursim.entities.Entity {
+  public br.edu.ufcg.lsd.oursim.entities.ActiveEntity();
+  public java.lang.String getId();
+  public void addOnRecoveryEvent(java.lang.Class<? extends br.edu.ufcg.lsd.oursim.entities.ActiveEntity>, java.lang.String);
+  public void addOnFailureEvent(java.lang.Class<? extends br.edu.ufcg.lsd.oursim.entities.ActiveEntity>, java.lang.String);
+  public java.lang.String getOnRecoveryEvent(java.lang.Class<? extends br.edu.ufcg.lsd.oursim.entities.ActiveEntity>);
+  public java.lang.String getOnFailureEvent(java.lang.Class<? extends br.edu.ufcg.lsd.oursim.entities.ActiveEntity>);
+  public void setId(java.lang.String);
+  public void setUp(boolean);
+  public boolean isUp();
+  public void addMonitor(br.edu.ufcg.lsd.oursim.entities.Monitor, java.lang.Long);
+  public br.edu.ufcg.lsd.oursim.entities.Monitor getMonitor(java.lang.String);
+  public java.util.Set<br.edu.ufcg.lsd.oursim.entities.Monitor> getMonitors();
+  public void isItAliveSent(java.lang.String, java.lang.Long);
+  public java.lang.Long getTimeToNextPing(java.lang.String, java.lang.Long);
+  public void updateStatusReceived(java.lang.String, java.lang.Long);
+  public boolean isFailed(java.lang.String, java.lang.Long);
+  public void release(java.lang.String);
+  public void setFailureDetector(br.edu.ufcg.lsd.oursim.fd.FailureDetector);
+  public void setPingInterval(long);
+  public void setTimeout(long);
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+}
+Compiled from "Entity.java"
+public class br.edu.ufcg.lsd.oursim.entities.Entity {
+  public br.edu.ufcg.lsd.oursim.entities.Entity();
+  public <T> T getData(java.lang.String);
+  public void setData(java.lang.String, java.lang.Object);
+}
+Compiled from "ExecutableEntity.java"
+public class br.edu.ufcg.lsd.oursim.entities.ExecutableEntity extends br.edu.ufcg.lsd.oursim.entities.Entity {
+  public br.edu.ufcg.lsd.oursim.entities.ExecutableEntity();
+  public br.edu.ufcg.lsd.oursim.entities.job.ExecutionState getState();
+  public void setState(br.edu.ufcg.lsd.oursim.entities.job.ExecutionState);
+  public int getId();
+  public void setId(int);
+  public long getCreationTime();
+  public void setCreationTime(long);
+  public long getEndTime();
+  public void setEndTime(long);
+}
+Compiled from "Monitor.java"
+public class br.edu.ufcg.lsd.oursim.entities.Monitor {
+  public br.edu.ufcg.lsd.oursim.entities.Monitor(br.edu.ufcg.lsd.oursim.entities.ActiveEntity);
+  public void setUp(boolean);
+  public boolean isUp();
+  public void setObject(br.edu.ufcg.lsd.oursim.entities.ActiveEntity);
+  public br.edu.ufcg.lsd.oursim.entities.ActiveEntity getObject();
+  public void setCreatingConnection(boolean);
+  public boolean isCreatingConnection();
+}
+Compiled from "ReplicaAccounting.java"
+public class br.edu.ufcg.lsd.oursim.entities.accounting.ReplicaAccounting {
+  public br.edu.ufcg.lsd.oursim.entities.accounting.ReplicaAccounting(long, java.lang.String, java.lang.String, long, br.edu.ufcg.lsd.oursim.entities.job.ExecutionState);
+  public long getRequestId();
+  public java.lang.String getWorkerId();
+  public java.lang.String getBrokerId();
+  public long getCpuTime();
+  public br.edu.ufcg.lsd.oursim.entities.job.ExecutionState getState();
+  public void setProvider(java.lang.String);
+  public java.lang.String getProvider();
+}
+Compiled from "WorkAccounting.java"
+public class br.edu.ufcg.lsd.oursim.entities.accounting.WorkAccounting {
+  public br.edu.ufcg.lsd.oursim.entities.accounting.WorkAccounting(java.lang.String, java.lang.String);
+  public java.lang.String getWorkerId();
+  public java.lang.String getRemotePeerId();
+  public void setInitCPUtime(java.lang.Long);
+  public java.lang.Long getInitCPUtime();
+  public void setCPUTime(long);
+  public long getCPUTime();
+}
+Compiled from "Allocation.java"
+public class br.edu.ufcg.lsd.oursim.entities.allocation.Allocation {
+  public br.edu.ufcg.lsd.oursim.entities.allocation.Allocation(java.lang.String, java.lang.String);
+  public boolean equals(java.lang.Object);
+  public boolean isWorkerLocal();
+  public void setLastAssign(long);
+  public long getLastAssign();
+  public java.lang.String getWorker();
+  public void setWorkerLocal(boolean);
+  public void setRequest(br.edu.ufcg.lsd.oursim.entities.request.PeerRequest);
+  public br.edu.ufcg.lsd.oursim.entities.request.PeerRequest getRequest();
+  public void setConsumerLocal(boolean);
+  public boolean isConsumerLocal();
+  public void setConsumer(java.lang.String);
+  public java.lang.String getConsumer();
+  public java.lang.String getProvider();
+}
+Compiled from "AllocationInfo.java"
+public class br.edu.ufcg.lsd.oursim.entities.allocation.AllocationInfo implements java.lang.Comparable<br.edu.ufcg.lsd.oursim.entities.allocation.AllocationInfo> {
+  public br.edu.ufcg.lsd.oursim.entities.allocation.AllocationInfo(int, java.lang.String, java.util.List<br.edu.ufcg.lsd.oursim.entities.allocation.Allocation>);
+  public void removeAllocation(br.edu.ufcg.lsd.oursim.entities.allocation.Allocation);
+  public void addAllocation(br.edu.ufcg.lsd.oursim.entities.allocation.Allocation);
+  public java.util.List<br.edu.ufcg.lsd.oursim.entities.allocation.Allocation> getAllocations();
+  public int getBalance();
+  public boolean isOverBalanced();
+  public boolean isInBalanced();
+  public double getDeservedWorkers();
+  public int compareTo(br.edu.ufcg.lsd.oursim.entities.allocation.AllocationInfo);
+  public java.lang.String getConsumer();
+  public int compareTo(java.lang.Object);
+}
+Compiled from "Broker.java"
+public class br.edu.ufcg.lsd.oursim.entities.grid.Broker extends br.edu.ufcg.lsd.oursim.entities.ActiveEntity {
+  public br.edu.ufcg.lsd.oursim.entities.grid.Broker();
+  public void setPeerId(java.lang.String);
+  public java.lang.String getPeerId();
+  public void addJob(br.edu.ufcg.lsd.oursim.entities.job.Job);
+  public java.util.List<br.edu.ufcg.lsd.oursim.entities.job.Job> getJobs();
+  public br.edu.ufcg.lsd.oursim.entities.job.Job getJob(int);
+  public boolean isScheduled();
+  public void setScheduled(boolean);
+  public br.edu.ufcg.lsd.oursim.entities.request.BrokerRequest getRequest(long);
+  public void addRequest(br.edu.ufcg.lsd.oursim.entities.request.BrokerRequest);
+  public br.edu.ufcg.lsd.oursim.entities.request.BrokerRequest removeRequest(long);
+  public java.util.List<br.edu.ufcg.lsd.oursim.entities.request.BrokerRequest> getRequests();
+}
+Compiled from "DiscoveryService.java"
+public class br.edu.ufcg.lsd.oursim.entities.grid.DiscoveryService extends br.edu.ufcg.lsd.oursim.entities.ActiveEntity {
+  public br.edu.ufcg.lsd.oursim.entities.grid.DiscoveryService();
+  public boolean addPeer(java.lang.String);
+  public java.util.Set<java.lang.String> getPeers();
+}
+Compiled from "Grid.java"
+public class br.edu.ufcg.lsd.oursim.entities.grid.Grid extends br.edu.ufcg.lsd.oursim.entities.Entity {
+  public br.edu.ufcg.lsd.oursim.entities.grid.Grid();
+  public void addObject(br.edu.ufcg.lsd.oursim.entities.ActiveEntity);
+  public <T extends br.edu.ufcg.lsd.oursim.entities.ActiveEntity> T getObject(java.lang.String);
+  public java.util.Collection<br.edu.ufcg.lsd.oursim.entities.ActiveEntity> getAllObjects();
+}
+Compiled from "Peer.java"
+public class br.edu.ufcg.lsd.oursim.entities.grid.Peer extends br.edu.ufcg.lsd.oursim.entities.ActiveEntity {
+  public br.edu.ufcg.lsd.oursim.entities.grid.Peer();
+  public br.edu.ufcg.lsd.oursim.entities.request.PeerRequest getRequest(long);
+  public void addNotRecoveredRemoteWorker(java.lang.String, java.lang.String);
+  public java.lang.String removeNotRecoveredRemoteWorker(java.lang.String);
+  public void addRequest(br.edu.ufcg.lsd.oursim.entities.request.PeerRequest);
+  public br.edu.ufcg.lsd.oursim.entities.request.PeerRequest removeRequest(long);
+  public void addWorker(java.lang.String);
+  public java.util.Set<java.lang.String> getWorkersIds();
+  public void addBroker(java.lang.String);
+  public void removeBroker(java.lang.String);
+  public java.util.Set<java.lang.String> getBrokersIds();
+  public void setDiscoveryServiceId(java.lang.String);
+  public java.lang.String getDiscoveryServiceId();
+  public void setWorkerState(java.lang.String, br.edu.ufcg.lsd.oursim.events.peer.WorkerState);
+  public br.edu.ufcg.lsd.oursim.events.peer.WorkerState getWorkerState(java.lang.String);
+  public void addAllocation(br.edu.ufcg.lsd.oursim.entities.allocation.Allocation);
+  public br.edu.ufcg.lsd.oursim.entities.allocation.Allocation removeAllocation(java.lang.String);
+  public java.util.List<br.edu.ufcg.lsd.oursim.entities.allocation.Allocation> getAllocations();
+  public java.util.Map<java.lang.String, java.lang.Double> getBalances();
+  public java.util.List<br.edu.ufcg.lsd.oursim.entities.request.PeerRequest> getRequests();
+  public br.edu.ufcg.lsd.oursim.entities.allocation.Allocation getAllocation(java.lang.String);
+  public void setWorkerProviders(java.util.Set<java.lang.String>);
+  public java.util.Set<java.lang.String> getWorkerProviders();
+  public void addReplicaAccounting(br.edu.ufcg.lsd.oursim.entities.accounting.ReplicaAccounting);
+  public java.util.List<br.edu.ufcg.lsd.oursim.entities.accounting.ReplicaAccounting> getReplicaAccountings(long);
+  public void setBalance(java.lang.String, double);
+  public void removeReplicaAccountings(long);
+}
+Compiled from "Worker.java"
+public class br.edu.ufcg.lsd.oursim.entities.grid.Worker extends br.edu.ufcg.lsd.oursim.entities.ActiveEntity {
+  public br.edu.ufcg.lsd.oursim.entities.grid.Worker();
+  public void setConsumer(java.lang.String);
+  public java.lang.String getConsumer();
+  public void setRemotePeer(java.lang.String);
+  public java.lang.String getRemotePeer();
+  public void setCurrentWorkAccounting(br.edu.ufcg.lsd.oursim.entities.accounting.WorkAccounting);
+  public br.edu.ufcg.lsd.oursim.entities.accounting.WorkAccounting getCurrentWorkAccounting();
+  public void addWorkAccounting(br.edu.ufcg.lsd.oursim.entities.accounting.WorkAccounting);
+  public void setPeer(java.lang.String);
+  public java.lang.String getPeer();
+  public java.util.List<br.edu.ufcg.lsd.oursim.entities.accounting.WorkAccounting> getWorkAccountings();
+  public void clearWorkAccountings();
+  public void setCpu(double);
+  public double getCpu();
+}
+Compiled from "ExecutionState.java"
+public final class br.edu.ufcg.lsd.oursim.entities.job.ExecutionState extends java.lang.Enum<br.edu.ufcg.lsd.oursim.entities.job.ExecutionState> {
+  public static final br.edu.ufcg.lsd.oursim.entities.job.ExecutionState UNSTARTED;
+  public static final br.edu.ufcg.lsd.oursim.entities.job.ExecutionState RUNNING;
+  public static final br.edu.ufcg.lsd.oursim.entities.job.ExecutionState FAILED;
+  public static final br.edu.ufcg.lsd.oursim.entities.job.ExecutionState FINISHED;
+  public static final br.edu.ufcg.lsd.oursim.entities.job.ExecutionState CANCELLED;
+  public static final br.edu.ufcg.lsd.oursim.entities.job.ExecutionState ABORTED;
+  public static br.edu.ufcg.lsd.oursim.entities.job.ExecutionState[] values();
+  public static br.edu.ufcg.lsd.oursim.entities.job.ExecutionState valueOf(java.lang.String);
+  static {};
+}
+Compiled from "Job.java"
+public class br.edu.ufcg.lsd.oursim.entities.job.Job extends br.edu.ufcg.lsd.oursim.entities.ExecutableEntity {
+  public br.edu.ufcg.lsd.oursim.entities.job.Job();
+  public void addTask(br.edu.ufcg.lsd.oursim.entities.job.Task);
+  public java.util.Set<br.edu.ufcg.lsd.oursim.entities.job.Task> getFinishedTasks();
+  public java.util.Set<br.edu.ufcg.lsd.oursim.entities.job.Task> getUnallocatedTasks();
+  public void updateTaskState(br.edu.ufcg.lsd.oursim.entities.job.Task);
+  public void updateReplicaState(br.edu.ufcg.lsd.oursim.entities.job.Replica);
+  public java.util.List<br.edu.ufcg.lsd.oursim.entities.job.Task> getTasks();
+  public void setRequest(br.edu.ufcg.lsd.oursim.entities.request.BrokerRequest);
+  public br.edu.ufcg.lsd.oursim.entities.request.BrokerRequest getRequest();
+  public void workerIsAvailable(java.lang.String);
+  public void workerIsNotRecovered(java.lang.String);
+  public void workerIsInUse(java.lang.String);
+  public void removeWorker(java.lang.String);
+  public boolean hasWorker(java.lang.String);
+  public java.util.Set<java.lang.String> getAvailableWorkers();
+  public java.util.Set<java.lang.String> getInUseWorkers();
+  public java.util.Set<java.lang.String> getNotRecoveredWorkers();
+}
+Compiled from "Job.java"
+class br.edu.ufcg.lsd.oursim.entities.job.Job$1 {
+  static final int[] $SwitchMap$br$edu$ufcg$lsd$oursim$entities$job$ExecutionState;
+  static {};
+}
+Compiled from "Replica.java"
+public class br.edu.ufcg.lsd.oursim.entities.job.Replica extends br.edu.ufcg.lsd.oursim.entities.ExecutableEntity {
+  public br.edu.ufcg.lsd.oursim.entities.job.Replica();
+  public void setWorker(java.lang.String);
+  public void setState(br.edu.ufcg.lsd.oursim.entities.job.ExecutionState);
+  public java.lang.String getWorker();
+  public void setTask(br.edu.ufcg.lsd.oursim.entities.job.Task);
+  public br.edu.ufcg.lsd.oursim.entities.job.Task getTask();
+}
+Compiled from "Task.java"
+public class br.edu.ufcg.lsd.oursim.entities.job.Task extends br.edu.ufcg.lsd.oursim.entities.ExecutableEntity {
+  public br.edu.ufcg.lsd.oursim.entities.job.Task();
+  public void setDuration(long);
+  public void setState(br.edu.ufcg.lsd.oursim.entities.job.ExecutionState);
+  public long getDuration();
+  public void setJob(br.edu.ufcg.lsd.oursim.entities.job.Job);
+  public br.edu.ufcg.lsd.oursim.entities.job.Job getJob();
+  public java.util.List<br.edu.ufcg.lsd.oursim.entities.job.Replica> getReplicas();
+  public void addReplica(br.edu.ufcg.lsd.oursim.entities.job.Replica);
+}
+Compiled from "BrokerRequest.java"
+public class br.edu.ufcg.lsd.oursim.entities.request.BrokerRequest {
+  public br.edu.ufcg.lsd.oursim.entities.request.BrokerRequest(br.edu.ufcg.lsd.oursim.entities.request.RequestSpec);
+  public void setJob(br.edu.ufcg.lsd.oursim.entities.job.Job);
+  public br.edu.ufcg.lsd.oursim.entities.request.RequestSpec getSpec();
+  public br.edu.ufcg.lsd.oursim.entities.job.Job getJob();
+  public void setPaused(boolean);
+  public boolean isPaused();
+}
+Compiled from "PeerRequest.java"
+public class br.edu.ufcg.lsd.oursim.entities.request.PeerRequest {
+  public br.edu.ufcg.lsd.oursim.entities.request.PeerRequest(br.edu.ufcg.lsd.oursim.entities.request.RequestSpec, java.lang.String);
+  public java.lang.String getConsumer();
+  public br.edu.ufcg.lsd.oursim.entities.request.RequestSpec getSpec();
+  public void setPaused(boolean);
+  public boolean isPaused();
+  public int getNeededWorkers();
+  public void addAllocatedWorker(java.lang.String);
+  public java.util.Set<java.lang.String> getAllocatedWorkers();
+  public void removeAllocatedWorker(java.lang.String);
+  public void setCancelled(boolean);
+  public boolean isCancelled();
+}
+Compiled from "RequestSpec.java"
+public class br.edu.ufcg.lsd.oursim.entities.request.RequestSpec {
+  public br.edu.ufcg.lsd.oursim.entities.request.RequestSpec();
+  public long getId();
+  public void setId(long);
+  public int getRequiredWorkers();
+  public void setRequiredWorkers(int);
+  public java.lang.String getBrokerId();
+  public void setBrokerId(java.lang.String);
+}
+Compiled from "EntityTest.java"
+public class br.edu.ufcg.lsd.oursim.entity.EntityTest {
+  public br.edu.ufcg.lsd.oursim.entity.EntityTest();
+  public void testSettersAndGetters();
+}
+Compiled from "AbstractEvent.java"
+public abstract class br.edu.ufcg.lsd.oursim.events.AbstractEvent implements br.edu.ufcg.lsd.oursim.events.Event {
+  public br.edu.ufcg.lsd.oursim.events.AbstractEvent(java.lang.Integer);
+  public void setTime(java.lang.Long);
+  public java.lang.Long getTime();
+  public java.lang.Integer getPriority();
+  public int compareTo(br.edu.ufcg.lsd.oursim.events.Event);
+  public java.lang.String getType();
+  public void setType(java.lang.String);
+  public int compareTo(java.lang.Object);
+}
+Compiled from "Event.java"
+public interface br.edu.ufcg.lsd.oursim.events.Event extends java.lang.Comparable<br.edu.ufcg.lsd.oursim.events.Event> {
+  public static final int DEF_PRIORITY;
+  public static final int LOWER_PRIORITY;
+  public static final int HIGHER_PRIORITY;
+  public abstract void process(br.edu.ufcg.lsd.oursim.OurSim);
+  public abstract java.lang.Long getTime();
+  public abstract void setTime(java.lang.Long);
+  public abstract java.lang.String getType();
+  public abstract void setType(java.lang.String);
+  public abstract java.lang.Integer getPriority();
+}
+Compiled from "EventListener.java"
+public interface br.edu.ufcg.lsd.oursim.events.EventListener {
+  public abstract void eventProcessed(br.edu.ufcg.lsd.oursim.events.Event);
+}
+Compiled from "EventSpec.java"
+public class br.edu.ufcg.lsd.oursim.events.EventSpec {
+  public br.edu.ufcg.lsd.oursim.events.EventSpec(java.lang.String, long, java.lang.Object...);
+  public java.lang.String getType();
+  public long getTime();
+  public java.lang.Object[] getParams();
+}
+Compiled from "PrimaryEvent.java"
+public abstract class br.edu.ufcg.lsd.oursim.events.PrimaryEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.PrimaryEvent(java.lang.Integer, java.lang.String);
+  public java.lang.String getData();
+}
+Compiled from "AddJobEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.broker.AddJobEvent extends br.edu.ufcg.lsd.oursim.events.PrimaryEvent {
+  public br.edu.ufcg.lsd.oursim.events.broker.AddJobEvent(java.lang.String);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "BrokerDownEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.broker.BrokerDownEvent extends br.edu.ufcg.lsd.oursim.events.fd.ActiveEntityDownEvent {
+  public br.edu.ufcg.lsd.oursim.events.broker.BrokerDownEvent(java.lang.String);
+  protected void entityDown(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "BrokerEvents.java"
+public class br.edu.ufcg.lsd.oursim.events.broker.BrokerEvents {
+  public static final java.lang.String ADD_JOB;
+  public static final java.lang.String CANCEL_JOB;
+  public static final java.lang.String SET_GRID;
+  public static final java.lang.String BROKER_DOWN;
+  public static final java.lang.String BROKER_UP;
+  public static final java.lang.String BROKER_LOGGED;
+  public static final java.lang.String HERE_IS_EXECUTION_RESULT;
+  public static final java.lang.String HERE_IS_WORKER;
+  public static final java.lang.String PEER_AVAILABLE;
+  public static final java.lang.String PEER_FAILED;
+  public static final java.lang.String SCHEDULE;
+  public static final java.lang.String WORKER_FAILED;
+  public static final java.lang.String WORKER_AVAILABLE;
+  public static final java.lang.String WORKER_PREEMPTED;
+  public br.edu.ufcg.lsd.oursim.events.broker.BrokerEvents();
+  public static java.util.Map<java.lang.String, java.lang.Class<? extends br.edu.ufcg.lsd.oursim.events.Event>> createEvents();
+}
+Compiled from "BrokerLoggedEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.broker.BrokerLoggedEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.broker.BrokerLoggedEvent(java.lang.String);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "BrokerUpEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.broker.BrokerUpEvent extends br.edu.ufcg.lsd.oursim.events.fd.ActiveEntityUpEvent {
+  public br.edu.ufcg.lsd.oursim.events.broker.BrokerUpEvent(java.lang.String);
+  protected void entityUp(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "CancelJobEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.broker.CancelJobEvent extends br.edu.ufcg.lsd.oursim.events.PrimaryEvent {
+  public br.edu.ufcg.lsd.oursim.events.broker.CancelJobEvent(java.lang.String);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "HereIsExecutionResultEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.broker.HereIsExecutionResultEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.broker.HereIsExecutionResultEvent(br.edu.ufcg.lsd.oursim.entities.job.Replica, java.lang.String);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "HereIsWorkerEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.broker.HereIsWorkerEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.broker.HereIsWorkerEvent(java.lang.String, br.edu.ufcg.lsd.oursim.entities.request.RequestSpec);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "PeerAvailableEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.broker.PeerAvailableEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.broker.PeerAvailableEvent(java.lang.String, java.lang.String);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "PeerFailedEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.broker.PeerFailedEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.broker.PeerFailedEvent(java.lang.String, java.lang.String);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "ScheduleEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.broker.ScheduleEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.broker.ScheduleEvent(java.lang.String);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "SchedulerHelper.java"
+public class br.edu.ufcg.lsd.oursim.events.broker.SchedulerHelper {
+  public br.edu.ufcg.lsd.oursim.events.broker.SchedulerHelper();
+  public static boolean isJobSatisfied(br.edu.ufcg.lsd.oursim.entities.job.Job, br.edu.ufcg.lsd.oursim.OurSim);
+  public static boolean isJobEnded(br.edu.ufcg.lsd.oursim.entities.job.Job);
+  public static boolean canSchedule(br.edu.ufcg.lsd.oursim.entities.job.Task, br.edu.ufcg.lsd.oursim.OurSim);
+  public static void disposeWorker(br.edu.ufcg.lsd.oursim.entities.job.Job, long, br.edu.ufcg.lsd.oursim.entities.grid.Broker, java.lang.String, br.edu.ufcg.lsd.oursim.OurSim, long);
+  public static void finishJob(br.edu.ufcg.lsd.oursim.entities.job.Job, br.edu.ufcg.lsd.oursim.entities.grid.Broker, br.edu.ufcg.lsd.oursim.OurSim, long);
+  public static void updateScheduler(br.edu.ufcg.lsd.oursim.OurSim, br.edu.ufcg.lsd.oursim.entities.grid.Broker, long);
+}
+Compiled from "SetGridEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.broker.SetGridEvent extends br.edu.ufcg.lsd.oursim.events.PrimaryEvent {
+  public br.edu.ufcg.lsd.oursim.events.broker.SetGridEvent(java.lang.String);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "WorkerAvailableEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.broker.WorkerAvailableEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.broker.WorkerAvailableEvent(java.lang.String, java.lang.String);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "WorkerFailedEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.broker.WorkerFailedEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.broker.WorkerFailedEvent(java.lang.String, java.lang.String);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "WorkerPreemptedEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.broker.WorkerPreemptedEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.broker.WorkerPreemptedEvent(java.lang.String, java.lang.String);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "DiscoveryServiceDownEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.ds.DiscoveryServiceDownEvent extends br.edu.ufcg.lsd.oursim.events.fd.ActiveEntityDownEvent {
+  public br.edu.ufcg.lsd.oursim.events.ds.DiscoveryServiceDownEvent(java.lang.String);
+  protected void entityDown(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "DiscoveryServiceEvents.java"
+public class br.edu.ufcg.lsd.oursim.events.ds.DiscoveryServiceEvents {
+  public static final java.lang.String DS_DOWN;
+  public static final java.lang.String DS_UP;
+  public static final java.lang.String GET_WORKER_PROVIDERS;
+  public br.edu.ufcg.lsd.oursim.events.ds.DiscoveryServiceEvents();
+  public static java.util.Map<java.lang.String, java.lang.Class<? extends br.edu.ufcg.lsd.oursim.events.Event>> createEvents();
+}
+Compiled from "DiscoveryServiceUpEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.ds.DiscoveryServiceUpEvent extends br.edu.ufcg.lsd.oursim.events.fd.ActiveEntityUpEvent {
+  public br.edu.ufcg.lsd.oursim.events.ds.DiscoveryServiceUpEvent(java.lang.String);
+  protected void entityUp(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "GetWorkerProvidersEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.ds.GetWorkerProvidersEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.ds.GetWorkerProvidersEvent(java.lang.String, java.lang.String);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "ActiveEntityDownEvent.java"
+public abstract class br.edu.ufcg.lsd.oursim.events.fd.ActiveEntityDownEvent extends br.edu.ufcg.lsd.oursim.events.PrimaryEvent {
+  public br.edu.ufcg.lsd.oursim.events.fd.ActiveEntityDownEvent(java.lang.Integer, java.lang.String);
+  public final void process(br.edu.ufcg.lsd.oursim.OurSim);
+  protected abstract void entityDown(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "ActiveEntityUpEvent.java"
+public abstract class br.edu.ufcg.lsd.oursim.events.fd.ActiveEntityUpEvent extends br.edu.ufcg.lsd.oursim.events.PrimaryEvent {
+  public br.edu.ufcg.lsd.oursim.events.fd.ActiveEntityUpEvent(java.lang.Integer, java.lang.String);
+  public final void process(br.edu.ufcg.lsd.oursim.OurSim);
+  protected abstract void entityUp(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "FailureDetectionEvents.java"
+public class br.edu.ufcg.lsd.oursim.events.fd.FailureDetectionEvents {
+  public static final java.lang.String ACTIVE_ENTITY_DOWN;
+  public static final java.lang.String ACTIVE_ENTITY_UP;
+  public static final java.lang.String IS_IT_ALIVE_RECEIVED;
+  public static final java.lang.String IS_IT_ALIVE_SENT;
+  public static final java.lang.String LIVENESS_CHECK;
+  public static final java.lang.String UPDATE_STATUS_AVAILABLE;
+  public static final java.lang.String RELEASE;
+  public br.edu.ufcg.lsd.oursim.events.fd.FailureDetectionEvents();
+  public static java.util.Map<java.lang.String, java.lang.Class<? extends br.edu.ufcg.lsd.oursim.events.Event>> createEvents();
+}
+Compiled from "IsItAliveReceivedEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.fd.IsItAliveReceivedEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.fd.IsItAliveReceivedEvent(java.lang.String, java.lang.String, java.lang.Boolean);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "IsItAliveSentEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.fd.IsItAliveSentEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.fd.IsItAliveSentEvent(java.lang.String, java.lang.String);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "LivenessCheckEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.fd.LivenessCheckEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.fd.LivenessCheckEvent();
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "MonitorUtil.java"
+public class br.edu.ufcg.lsd.oursim.events.fd.MonitorUtil {
+  public br.edu.ufcg.lsd.oursim.events.fd.MonitorUtil();
+  public static void registerMonitored(br.edu.ufcg.lsd.oursim.OurSim, java.lang.Long, java.lang.String, java.lang.String);
+  public static br.edu.ufcg.lsd.oursim.entities.Monitor registerMonitored(br.edu.ufcg.lsd.oursim.OurSim, java.lang.Long, java.lang.String, java.lang.String, boolean);
+  public static void checkLiveness(br.edu.ufcg.lsd.oursim.OurSim, java.lang.Long);
+  public static void checkLiveness(br.edu.ufcg.lsd.oursim.OurSim, java.lang.Long, br.edu.ufcg.lsd.oursim.entities.ActiveEntity, br.edu.ufcg.lsd.oursim.entities.ActiveEntity);
+  public static void scheduleLivenessCheck(br.edu.ufcg.lsd.oursim.OurSim, java.lang.Long);
+  public static void sendIsItAlive(br.edu.ufcg.lsd.oursim.OurSim, java.lang.Long, java.lang.String, java.lang.String);
+  public static void objectIsUp(br.edu.ufcg.lsd.oursim.OurSim, java.lang.String, java.lang.Long);
+  public static void objectIsDown(br.edu.ufcg.lsd.oursim.OurSim, java.lang.String, java.lang.Long);
+  public static void releaseMonitored(br.edu.ufcg.lsd.oursim.OurSim, java.lang.String, java.lang.String, java.lang.Long);
+}
+Compiled from "ReleaseMonitoredEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.fd.ReleaseMonitoredEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.fd.ReleaseMonitoredEvent(java.lang.String, java.lang.String);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "UpdateStatusAvailableEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.fd.UpdateStatusAvailableEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.fd.UpdateStatusAvailableEvent(java.lang.String, java.lang.String);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "HaltCondition.java"
+public abstract class br.edu.ufcg.lsd.oursim.events.global.HaltCondition implements br.edu.ufcg.lsd.oursim.events.EventListener {
+  protected final br.edu.ufcg.lsd.oursim.OurSim ourSim;
+  public br.edu.ufcg.lsd.oursim.events.global.HaltCondition(br.edu.ufcg.lsd.oursim.OurSim);
+  public void eventProcessed(br.edu.ufcg.lsd.oursim.events.Event);
+  public abstract boolean halt(br.edu.ufcg.lsd.oursim.events.Event, br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "HaltEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.global.HaltEvent extends br.edu.ufcg.lsd.oursim.events.PrimaryEvent {
+  public static final java.lang.String TYPE;
+  public br.edu.ufcg.lsd.oursim.events.global.HaltEvent();
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "BrokerAvailableEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.peer.BrokerAvailableEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.peer.BrokerAvailableEvent(java.lang.String, java.lang.String);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "BrokerFailedEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.peer.BrokerFailedEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.peer.BrokerFailedEvent(java.lang.String, java.lang.String);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "BrokerLoginEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.peer.BrokerLoginEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.peer.BrokerLoginEvent(java.lang.String);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "DiscoveryServiceFailedEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.peer.DiscoveryServiceFailedEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.peer.DiscoveryServiceFailedEvent(java.lang.String, java.lang.String);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "DisposeRemoteWorkerEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.peer.DisposeRemoteWorkerEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.peer.DisposeRemoteWorkerEvent(java.lang.String, java.lang.String, java.lang.String);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "DisposeWorkerEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.peer.DisposeWorkerEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.peer.DisposeWorkerEvent(java.lang.String, java.lang.Long, java.lang.String);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "FinishRequestEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.peer.FinishRequestEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.peer.FinishRequestEvent(java.lang.String, br.edu.ufcg.lsd.oursim.entities.request.RequestSpec);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "HereAreWorkerProvidersEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.peer.HereAreWorkerProvidersEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.peer.HereAreWorkerProvidersEvent(java.lang.String, java.util.HashSet<java.lang.String>);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "HereIsRemoteWorkerEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.peer.HereIsRemoteWorkerEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.peer.HereIsRemoteWorkerEvent(java.lang.String, java.lang.String, java.lang.String);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "LocalWorkerAvailableEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.peer.LocalWorkerAvailableEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.peer.LocalWorkerAvailableEvent(java.lang.String, java.lang.String);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "LocalWorkerFailedEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.peer.LocalWorkerFailedEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.peer.LocalWorkerFailedEvent(java.lang.String, java.lang.String);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "PauseRequestEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.peer.PauseRequestEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.peer.PauseRequestEvent(br.edu.ufcg.lsd.oursim.entities.request.RequestSpec, java.lang.String);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "PeerDownEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.peer.PeerDownEvent extends br.edu.ufcg.lsd.oursim.events.fd.ActiveEntityDownEvent {
+  public br.edu.ufcg.lsd.oursim.events.peer.PeerDownEvent(java.lang.String);
+  protected void entityDown(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "PeerEvents.java"
+public class br.edu.ufcg.lsd.oursim.events.peer.PeerEvents {
+  public static final java.lang.String PEER_DOWN;
+  public static final java.lang.String PEER_UP;
+  public static final java.lang.String BROKER_LOGIN;
+  public static final java.lang.String DISCOVERY_SERVICE_FAILED;
+  public static final java.lang.String DISPOSE_WORKER;
+  public static final java.lang.String FINISH_REQUEST;
+  public static final java.lang.String PAUSE_REQUEST;
+  public static final java.lang.String REQUEST_WORKERS;
+  public static final java.lang.String RESUME_REQUEST;
+  public static final java.lang.String WORKER_IDLE;
+  public static final java.lang.String LOCAL_WORKER_FAILED;
+  public static final java.lang.String LOCAL_WORKER_AVAILABLE;
+  public static final java.lang.String WORKER_FAILED;
+  public static final java.lang.String WORKER_AVAILABLE;
+  public static final java.lang.String WORKER_IN_USE;
+  public static final java.lang.String HERE_ARE_WORKER_PROVIDERS;
+  public static final java.lang.String REPEAT_GET_WORKER_PROVIDERS;
+  public static final java.lang.String REMOTE_REQUEST_WORKERS;
+  public static final java.lang.String WORKER_DONATED;
+  public static final java.lang.String REMOTE_HERE_IS_WORKER;
+  public static final java.lang.String REMOTE_WORKER_AVAILABLE;
+  public static final java.lang.String REMOTE_WORKER_FAILED;
+  public static final java.lang.String DISPOSE_REMOTE_WORKER;
+  public static final java.lang.String REPORT_REPLICA_ACCOUNTING;
+  public static final java.lang.String REPORT_WORK_ACCOUNTING;
+  public static final java.lang.String BROKER_AVAILABLE;
+  public static final java.lang.String BROKER_FAILED;
+  public br.edu.ufcg.lsd.oursim.events.peer.PeerEvents();
+  public static java.util.Map<java.lang.String, java.lang.Class<? extends br.edu.ufcg.lsd.oursim.events.Event>> createEvents();
+}
+Compiled from "PeerUpEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.peer.PeerUpEvent extends br.edu.ufcg.lsd.oursim.events.fd.ActiveEntityUpEvent {
+  public br.edu.ufcg.lsd.oursim.events.peer.PeerUpEvent(java.lang.String);
+  protected void entityUp(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "RemoteRequestWorkersEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.peer.RemoteRequestWorkersEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.peer.RemoteRequestWorkersEvent(java.lang.String, java.lang.String, br.edu.ufcg.lsd.oursim.entities.request.RequestSpec);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "RemoteWorkerAvailableEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.peer.RemoteWorkerAvailableEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.peer.RemoteWorkerAvailableEvent(java.lang.String, java.lang.String);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "RemoteWorkerFailedEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.peer.RemoteWorkerFailedEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.peer.RemoteWorkerFailedEvent(java.lang.String, java.lang.String);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "RepeatGetWorkerProvidersEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.peer.RepeatGetWorkerProvidersEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.peer.RepeatGetWorkerProvidersEvent(java.lang.String, java.lang.String);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "ReportReplicaAccountingEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.peer.ReportReplicaAccountingEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.peer.ReportReplicaAccountingEvent(br.edu.ufcg.lsd.oursim.entities.accounting.ReplicaAccounting, java.lang.String);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "ReportWorkAccountingEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.peer.ReportWorkAccountingEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.peer.ReportWorkAccountingEvent(java.lang.String, java.util.LinkedList<br.edu.ufcg.lsd.oursim.entities.accounting.WorkAccounting>);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "RequestWorkersEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.peer.RequestWorkersEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.peer.RequestWorkersEvent(java.lang.String, br.edu.ufcg.lsd.oursim.entities.request.RequestSpec, java.lang.Boolean);
+  public br.edu.ufcg.lsd.oursim.entities.request.RequestSpec getRequestSpec();
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "ResumeRequestEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.peer.ResumeRequestEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.peer.ResumeRequestEvent(br.edu.ufcg.lsd.oursim.entities.request.RequestSpec, java.lang.String);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "WorkerAvailableEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.peer.WorkerAvailableEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.peer.WorkerAvailableEvent(java.lang.String, java.lang.String);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "WorkerDonatedEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.peer.WorkerDonatedEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.peer.WorkerDonatedEvent(java.lang.String, java.lang.String, java.lang.String);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "WorkerFailedEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.peer.WorkerFailedEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.peer.WorkerFailedEvent(java.lang.String, java.lang.String);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "WorkerIdleEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.peer.WorkerIdleEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.peer.WorkerIdleEvent(java.lang.String, java.lang.String);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "WorkerInUseEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.peer.WorkerInUseEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.peer.WorkerInUseEvent(br.edu.ufcg.lsd.oursim.entities.request.RequestSpec, java.lang.String, java.lang.String);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "WorkerState.java"
+public final class br.edu.ufcg.lsd.oursim.events.peer.WorkerState extends java.lang.Enum<br.edu.ufcg.lsd.oursim.events.peer.WorkerState> {
+  public static final br.edu.ufcg.lsd.oursim.events.peer.WorkerState IDLE;
+  public static final br.edu.ufcg.lsd.oursim.events.peer.WorkerState UNAVAILABLE;
+  public static final br.edu.ufcg.lsd.oursim.events.peer.WorkerState IN_USE;
+  public static br.edu.ufcg.lsd.oursim.events.peer.WorkerState[] values();
+  public static br.edu.ufcg.lsd.oursim.events.peer.WorkerState valueOf(java.lang.String);
+  static {};
+}
+Compiled from "AccountingEvaluator.java"
+public class br.edu.ufcg.lsd.oursim.events.peer.accounting.AccountingEvaluator {
+  public br.edu.ufcg.lsd.oursim.events.peer.accounting.AccountingEvaluator(java.util.Map<java.lang.String, java.util.List<br.edu.ufcg.lsd.oursim.entities.accounting.ReplicaAccounting>>, java.lang.String);
+  public void evaluate();
+  public java.lang.Double getCPU(java.lang.String);
+}
+Compiled from "AccountingHelper.java"
+public class br.edu.ufcg.lsd.oursim.events.peer.accounting.AccountingHelper {
+  public br.edu.ufcg.lsd.oursim.events.peer.accounting.AccountingHelper();
+  public static void commitReplicaAccountings(br.edu.ufcg.lsd.oursim.entities.grid.Peer, long);
+  public static void commitWorkerAccounting(br.edu.ufcg.lsd.oursim.entities.grid.Peer, br.edu.ufcg.lsd.oursim.entities.accounting.WorkAccounting);
+}
+Compiled from "AccountingStrategy.java"
+public interface br.edu.ufcg.lsd.oursim.events.peer.accounting.AccountingStrategy {
+  public abstract java.util.Map<java.lang.String, java.lang.Double> evaluate(java.util.Map<java.lang.String, java.util.List<br.edu.ufcg.lsd.oursim.entities.accounting.ReplicaAccounting>>);
+}
+Compiled from "RelativeCPUAccountingStrategy.java"
+public class br.edu.ufcg.lsd.oursim.events.peer.accounting.RelativeCPUAccountingStrategy implements br.edu.ufcg.lsd.oursim.events.peer.accounting.AccountingStrategy {
+  public br.edu.ufcg.lsd.oursim.events.peer.accounting.RelativeCPUAccountingStrategy(java.lang.String);
+  public java.util.Map<java.lang.String, java.lang.Double> evaluate(java.util.Map<java.lang.String, java.util.List<br.edu.ufcg.lsd.oursim.entities.accounting.ReplicaAccounting>>);
+}
+Compiled from "RemoteCPUAccountingStrategy.java"
+public class br.edu.ufcg.lsd.oursim.events.peer.accounting.RemoteCPUAccountingStrategy implements br.edu.ufcg.lsd.oursim.events.peer.accounting.AccountingStrategy {
+  public br.edu.ufcg.lsd.oursim.events.peer.accounting.RemoteCPUAccountingStrategy();
+  public java.util.Map<java.lang.String, java.lang.Double> evaluate(java.util.Map<java.lang.String, java.util.List<br.edu.ufcg.lsd.oursim.entities.accounting.ReplicaAccounting>>);
+}
+Compiled from "AllocationHelper.java"
+public class br.edu.ufcg.lsd.oursim.events.peer.allocation.AllocationHelper {
+  public br.edu.ufcg.lsd.oursim.events.peer.allocation.AllocationHelper();
+  public static java.util.List<br.edu.ufcg.lsd.oursim.entities.allocation.Allocation> getAllocationsForLocalRequest(br.edu.ufcg.lsd.oursim.entities.grid.Peer, br.edu.ufcg.lsd.oursim.entities.request.PeerRequest);
+  public static java.util.List<br.edu.ufcg.lsd.oursim.entities.allocation.Allocation> getAllocationsForRemoteRequest(br.edu.ufcg.lsd.oursim.entities.grid.Peer, br.edu.ufcg.lsd.oursim.entities.request.RequestSpec, java.lang.String);
+  public static java.util.List<br.edu.ufcg.lsd.oursim.entities.allocation.AllocationInfo> generateAllocationInfoList(java.lang.String, java.util.List<br.edu.ufcg.lsd.oursim.entities.allocation.Allocation>, int);
+  public static br.edu.ufcg.lsd.oursim.entities.allocation.AllocationInfo getRequestInfo(java.util.List<br.edu.ufcg.lsd.oursim.entities.allocation.AllocationInfo>, java.lang.String);
+  public static boolean isThereAnIdleAllocation(java.util.List<br.edu.ufcg.lsd.oursim.entities.allocation.AllocationInfo>);
+  public static br.edu.ufcg.lsd.oursim.entities.allocation.Allocation takeNewerAllocation(br.edu.ufcg.lsd.oursim.entities.allocation.AllocationInfo);
+  public static java.lang.Double getPeerBalance(java.lang.String, java.util.Map<java.lang.String, java.lang.Double>);
+  public static br.edu.ufcg.lsd.oursim.entities.allocation.AllocationInfo getLeastNOFBalanced(java.util.List<br.edu.ufcg.lsd.oursim.entities.allocation.AllocationInfo>, java.util.List<br.edu.ufcg.lsd.oursim.entities.allocation.AllocationInfo>, br.edu.ufcg.lsd.oursim.entities.allocation.AllocationInfo, java.util.Map<java.lang.String, java.lang.Double>);
+  protected static int compareNewerAllocations(br.edu.ufcg.lsd.oursim.entities.allocation.AllocationInfo, br.edu.ufcg.lsd.oursim.entities.allocation.AllocationInfo);
+  public static java.lang.Double getPrejudice(br.edu.ufcg.lsd.oursim.entities.allocation.AllocationInfo, br.edu.ufcg.lsd.oursim.entities.allocation.AllocationInfo, java.util.List<br.edu.ufcg.lsd.oursim.entities.allocation.AllocationInfo>, java.util.Map<java.lang.String, java.lang.Double>);
+  public static void takeNeededWorkers(java.util.List<br.edu.ufcg.lsd.oursim.entities.allocation.Allocation>, int, java.util.List<br.edu.ufcg.lsd.oursim.entities.allocation.Allocation>);
+  public static br.edu.ufcg.lsd.oursim.entities.request.PeerRequest getDownBalancedRequest(br.edu.ufcg.lsd.oursim.entities.grid.Peer);
+  public static java.util.List<br.edu.ufcg.lsd.oursim.entities.request.PeerRequest> getNeededRequests(br.edu.ufcg.lsd.oursim.entities.grid.Peer);
+}
+Compiled from "AllocationHelper.java"
+final class br.edu.ufcg.lsd.oursim.events.peer.allocation.AllocationHelper$1 implements java.util.Comparator<br.edu.ufcg.lsd.oursim.entities.allocation.Allocation> {
+  br.edu.ufcg.lsd.oursim.events.peer.allocation.AllocationHelper$1();
+  public int compare(br.edu.ufcg.lsd.oursim.entities.allocation.Allocation, br.edu.ufcg.lsd.oursim.entities.allocation.Allocation);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "AllocationHelper.java"
+final class br.edu.ufcg.lsd.oursim.events.peer.allocation.AllocationHelper$2 implements java.util.Comparator<br.edu.ufcg.lsd.oursim.entities.allocation.AllocationInfo> {
+  final br.edu.ufcg.lsd.oursim.entities.allocation.AllocationInfo val$requestInfo;
+  final java.util.List val$allAllocations;
+  final java.util.Map val$balances;
+  br.edu.ufcg.lsd.oursim.events.peer.allocation.AllocationHelper$2(br.edu.ufcg.lsd.oursim.entities.allocation.AllocationInfo, java.util.List, java.util.Map);
+  public int compare(br.edu.ufcg.lsd.oursim.entities.allocation.AllocationInfo, br.edu.ufcg.lsd.oursim.entities.allocation.AllocationInfo);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "AllocationHelper.java"
+final class br.edu.ufcg.lsd.oursim.events.peer.allocation.AllocationHelper$3 implements java.util.Comparator<br.edu.ufcg.lsd.oursim.entities.request.PeerRequest> {
+  final java.util.List val$requests;
+  br.edu.ufcg.lsd.oursim.events.peer.allocation.AllocationHelper$3(java.util.List);
+  public int compare(br.edu.ufcg.lsd.oursim.entities.request.PeerRequest, br.edu.ufcg.lsd.oursim.entities.request.PeerRequest);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "AllocationHelper.java"
+final class br.edu.ufcg.lsd.oursim.events.peer.allocation.AllocationHelper$Priority extends java.lang.Enum<br.edu.ufcg.lsd.oursim.events.peer.allocation.AllocationHelper$Priority> {
+  public static final br.edu.ufcg.lsd.oursim.events.peer.allocation.AllocationHelper$Priority IDLE;
+  public static final br.edu.ufcg.lsd.oursim.events.peer.allocation.AllocationHelper$Priority REMOTE;
+  public static final br.edu.ufcg.lsd.oursim.events.peer.allocation.AllocationHelper$Priority LOCAL;
+  public static br.edu.ufcg.lsd.oursim.events.peer.allocation.AllocationHelper$Priority[] values();
+  public static br.edu.ufcg.lsd.oursim.events.peer.allocation.AllocationHelper$Priority valueOf(java.lang.String);
+  static {};
+}
+Compiled from "LowerPriorityAllocationHelper.java"
+public class br.edu.ufcg.lsd.oursim.events.peer.allocation.LowerPriorityAllocationHelper {
+  public br.edu.ufcg.lsd.oursim.events.peer.allocation.LowerPriorityAllocationHelper();
+  public static void processAllocation(java.lang.String, int, int, java.util.List<br.edu.ufcg.lsd.oursim.entities.allocation.Allocation>, java.util.List<br.edu.ufcg.lsd.oursim.entities.allocation.Allocation>, java.util.Map<java.lang.String, java.lang.Double>);
+}
+Compiled from "SamePriorityAllocationHelper.java"
+public class br.edu.ufcg.lsd.oursim.events.peer.allocation.SamePriorityAllocationHelper {
+  public br.edu.ufcg.lsd.oursim.events.peer.allocation.SamePriorityAllocationHelper();
+  public static void processAllocation(java.lang.String, int, int, java.util.List<br.edu.ufcg.lsd.oursim.entities.allocation.Allocation>, java.util.List<br.edu.ufcg.lsd.oursim.entities.allocation.Allocation>, java.util.Map<java.lang.String, java.lang.Double>);
+}
+Compiled from "WorkerDistributionHelper.java"
+public class br.edu.ufcg.lsd.oursim.events.peer.allocation.WorkerDistributionHelper {
+  public br.edu.ufcg.lsd.oursim.events.peer.allocation.WorkerDistributionHelper();
+  public static void redistributeWorker(long, br.edu.ufcg.lsd.oursim.entities.grid.Peer, java.lang.String, br.edu.ufcg.lsd.oursim.OurSim);
+  public static void redistributeIdleWorker(long, br.edu.ufcg.lsd.oursim.entities.grid.Peer, java.lang.String, br.edu.ufcg.lsd.oursim.OurSim);
+  public static void redistributeRemoteWorker(java.lang.Long, br.edu.ufcg.lsd.oursim.entities.grid.Peer, java.lang.String, br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "CleanWorkerHelper.java"
+public class br.edu.ufcg.lsd.oursim.events.worker.CleanWorkerHelper {
+  public br.edu.ufcg.lsd.oursim.events.worker.CleanWorkerHelper();
+  public static void cleanWorker(long, br.edu.ufcg.lsd.oursim.entities.grid.Worker, boolean, br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "SendHereIsExecutionEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.worker.SendHereIsExecutionEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.worker.SendHereIsExecutionEvent(br.edu.ufcg.lsd.oursim.entities.job.Replica, java.lang.String, java.lang.String);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "SendReportWorkAccountingEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.worker.SendReportWorkAccountingEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.worker.SendReportWorkAccountingEvent(java.lang.String);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "SetPeerEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.worker.SetPeerEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.worker.SetPeerEvent(java.lang.String, java.lang.String);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "StartWorkEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.worker.StartWorkEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.worker.StartWorkEvent(br.edu.ufcg.lsd.oursim.entities.job.Replica, java.lang.String, java.lang.String);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "StopWorkingEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.worker.StopWorkingEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.worker.StopWorkingEvent(java.lang.String);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "WorkForBrokerEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.worker.WorkForBrokerEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.worker.WorkForBrokerEvent(java.lang.String, java.lang.String, br.edu.ufcg.lsd.oursim.entities.request.RequestSpec, java.lang.String);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "WorkForPeerEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.worker.WorkForPeerEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.events.worker.WorkForPeerEvent(java.lang.String, java.lang.String, java.lang.String);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "WorkerDownEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.worker.WorkerDownEvent extends br.edu.ufcg.lsd.oursim.events.fd.ActiveEntityDownEvent {
+  public br.edu.ufcg.lsd.oursim.events.worker.WorkerDownEvent(java.lang.String);
+  protected void entityDown(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "WorkerEvents.java"
+public class br.edu.ufcg.lsd.oursim.events.worker.WorkerEvents {
+  public static final java.lang.String WORKER_DOWN;
+  public static final java.lang.String WORKER_UP;
+  public static final java.lang.String START_WORK;
+  public static final java.lang.String WORK_FOR_BROKER;
+  public static final java.lang.String STOP_WORKING;
+  public static final java.lang.String WORK_FOR_PEER;
+  public static final java.lang.String SEND_HERE_IS_EXECUTION_RESULT;
+  public static final java.lang.String SET_PEER;
+  public static final java.lang.String SEND_REPORT_WORK_ACCOUNTING;
+  public br.edu.ufcg.lsd.oursim.events.worker.WorkerEvents();
+  public static java.util.Map<java.lang.String, java.lang.Class<? extends br.edu.ufcg.lsd.oursim.events.Event>> createEvents();
+}
+Compiled from "WorkerUpEvent.java"
+public class br.edu.ufcg.lsd.oursim.events.worker.WorkerUpEvent extends br.edu.ufcg.lsd.oursim.events.fd.ActiveEntityUpEvent {
+  public br.edu.ufcg.lsd.oursim.events.worker.WorkerUpEvent(java.lang.String);
+  protected void entityUp(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "JDependRunner.java"
+public class br.edu.ufcg.lsd.oursim.experiments.JDependRunner {
+  public br.edu.ufcg.lsd.oursim.experiments.JDependRunner();
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+}
+Compiled from "LocalConcurrentScenarioGenerator.java"
+public class br.edu.ufcg.lsd.oursim.experiments.LocalConcurrentScenarioGenerator {
+  static int TASKS_DURATION;
+  static double LOCALHOST_DELAY;
+  static int MAX_WORKERS;
+  static int[] TASKS;
+  static long[] SECONDJOBDELAY;
+  static int JOBS_PER_BROKER;
+  static java.lang.String SCENARIO;
+  static int[][] SEEDS;
+  public br.edu.ufcg.lsd.oursim.experiments.LocalConcurrentScenarioGenerator();
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+  static {};
+}
+Compiled from "LocalConcurrentScenarioGenerator.java"
+class br.edu.ufcg.lsd.oursim.experiments.LocalConcurrentScenarioGenerator$JobFinishedCondition extends br.edu.ufcg.lsd.oursim.events.global.HaltCondition {
+  public br.edu.ufcg.lsd.oursim.experiments.LocalConcurrentScenarioGenerator$JobFinishedCondition(br.edu.ufcg.lsd.oursim.OurSim, int);
+  public boolean halt(br.edu.ufcg.lsd.oursim.events.Event, br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "LocalScenarioGenerator.java"
+public class br.edu.ufcg.lsd.oursim.experiments.LocalScenarioGenerator {
+  static int MAX_WORKERS;
+  static int[] TASKS;
+  static int TASKS_DURATION;
+  static double LOCALHOST_DELAY;
+  static int[][] SEEDS;
+  public br.edu.ufcg.lsd.oursim.experiments.LocalScenarioGenerator();
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+  static {};
+}
+Compiled from "LocalScenarioGenerator.java"
+class br.edu.ufcg.lsd.oursim.experiments.LocalScenarioGenerator$JobFinishedCondition extends br.edu.ufcg.lsd.oursim.events.global.HaltCondition {
+  public br.edu.ufcg.lsd.oursim.experiments.LocalScenarioGenerator$JobFinishedCondition(br.edu.ufcg.lsd.oursim.OurSim, br.edu.ufcg.lsd.oursim.entities.grid.Broker, int);
+  public boolean halt(br.edu.ufcg.lsd.oursim.events.Event, br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "RemoteAndLocalConcurrentScenarioGenerator.java"
+public class br.edu.ufcg.lsd.oursim.experiments.RemoteAndLocalConcurrentScenarioGenerator {
+  static int TASKS_DURATION;
+  static double LOCALHOST_DELAY;
+  static int MAX_WORKERS;
+  static int[] TASKS;
+  static long[] SECONDJOBDELAY;
+  static int JOBS_PER_BROKER;
+  static java.lang.String SCENARIO;
+  static int[][] SEEDS;
+  public br.edu.ufcg.lsd.oursim.experiments.RemoteAndLocalConcurrentScenarioGenerator();
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+  static {};
+}
+Compiled from "RemoteAndLocalConcurrentScenarioGenerator.java"
+class br.edu.ufcg.lsd.oursim.experiments.RemoteAndLocalConcurrentScenarioGenerator$JobFinishedCondition extends br.edu.ufcg.lsd.oursim.events.global.HaltCondition {
+  public br.edu.ufcg.lsd.oursim.experiments.RemoteAndLocalConcurrentScenarioGenerator$JobFinishedCondition(br.edu.ufcg.lsd.oursim.OurSim, int);
+  public boolean halt(br.edu.ufcg.lsd.oursim.events.Event, br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "RemoteNoFScenarioGenerator.java"
+public class br.edu.ufcg.lsd.oursim.experiments.RemoteNoFScenarioGenerator {
+  static int TASKS_DURATION;
+  static double LOCALHOST_DELAY;
+  static int MAX_WORKERS;
+  static int[] TASKS;
+  static long[] SECONDJOBDELAY;
+  static java.lang.String SCENARIO;
+  static int[][] SEEDS;
+  public br.edu.ufcg.lsd.oursim.experiments.RemoteNoFScenarioGenerator();
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+  static {};
+}
+Compiled from "RemoteNoFScenarioGenerator.java"
+class br.edu.ufcg.lsd.oursim.experiments.RemoteNoFScenarioGenerator$JobFinishedCondition extends br.edu.ufcg.lsd.oursim.events.global.HaltCondition {
+  public br.edu.ufcg.lsd.oursim.experiments.RemoteNoFScenarioGenerator$JobFinishedCondition(br.edu.ufcg.lsd.oursim.OurSim, int);
+  public boolean halt(br.edu.ufcg.lsd.oursim.events.Event, br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "ScalabilityScenarioGenerator.java"
+public class br.edu.ufcg.lsd.oursim.experiments.ScalabilityScenarioGenerator {
+  static int TASKS_DURATION;
+  static double LOCALHOST_DELAY;
+  static int WORKERS_PER_SITE;
+  static int CONTENTION_LEVEL;
+  static int[] SITES;
+  static int JOBS_PER_BROKER;
+  static java.lang.String SCENARIO;
+  static int[][] SEEDS;
+  public br.edu.ufcg.lsd.oursim.experiments.ScalabilityScenarioGenerator();
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+  static {};
+}
+Compiled from "ScalabilityScenarioGenerator.java"
+class br.edu.ufcg.lsd.oursim.experiments.ScalabilityScenarioGenerator$JobFinishedCondition extends br.edu.ufcg.lsd.oursim.events.global.HaltCondition {
+  int msgs;
+  public br.edu.ufcg.lsd.oursim.experiments.ScalabilityScenarioGenerator$JobFinishedCondition(br.edu.ufcg.lsd.oursim.OurSim, int);
+  public boolean halt(br.edu.ufcg.lsd.oursim.events.Event, br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "ScenarioEvaluator.java"
+public class br.edu.ufcg.lsd.oursim.experiments.ScenarioEvaluator {
+  static java.lang.String SCENARIO;
+  public br.edu.ufcg.lsd.oursim.experiments.ScenarioEvaluator();
+  public static void main(java.lang.String[]) throws java.io.FileNotFoundException, java.io.IOException;
+  static {};
+}
+Compiled from "EventFactory.java"
+public class br.edu.ufcg.lsd.oursim.factories.EventFactory {
+  public br.edu.ufcg.lsd.oursim.factories.EventFactory();
+  public void addEventClass(java.lang.String, java.lang.Class<?>);
+  public br.edu.ufcg.lsd.oursim.events.Event createEvent(java.lang.String, long, java.lang.Object...);
+  public br.edu.ufcg.lsd.oursim.events.Event createEvent(br.edu.ufcg.lsd.oursim.events.EventSpec);
+}
+Compiled from "GridFactory.java"
+public interface br.edu.ufcg.lsd.oursim.factories.GridFactory {
+  public abstract br.edu.ufcg.lsd.oursim.entities.grid.Grid createGrid();
+}
+Compiled from "JsonGridFactory.java"
+public class br.edu.ufcg.lsd.oursim.factories.JsonGridFactory implements br.edu.ufcg.lsd.oursim.factories.GridFactory {
+  public br.edu.ufcg.lsd.oursim.factories.JsonGridFactory(java.util.Properties, java.io.InputStream);
+  public br.edu.ufcg.lsd.oursim.entities.grid.Grid createGrid();
+}
+Compiled from "JsonGridFactoryTest.java"
+public class br.edu.ufcg.lsd.oursim.factories.JsonGridFactoryTest {
+  public br.edu.ufcg.lsd.oursim.factories.JsonGridFactoryTest();
+  public void testParseGrid();
+  public void testBadGrid();
+  public void testBadPeer();
+  public void testBadWorker();
+  public void testBadBroker();
+  public void testNoDetector();
+  public void testFailureDetectorOptParser();
+}
+Compiled from "AbstractFDTest.java"
+public class br.edu.ufcg.lsd.oursim.fd.AbstractFDTest {
+  public br.edu.ufcg.lsd.oursim.fd.AbstractFDTest();
+  public void testSettersAndGetters();
+}
+Compiled from "AbstractFDTest.java"
+class br.edu.ufcg.lsd.oursim.fd.AbstractFDTest$1 {
+}
+Compiled from "AbstractFDTest.java"
+class br.edu.ufcg.lsd.oursim.fd.AbstractFDTest$SimpleFailureDetector extends br.edu.ufcg.lsd.oursim.fd.AbstractFailureDetector {
+  final br.edu.ufcg.lsd.oursim.fd.AbstractFDTest this$0;
+  public boolean messageReceived(java.lang.String, long, br.edu.ufcg.lsd.oursim.fd.MessageType);
+  public boolean updatePingSample(java.lang.String, long, long, long);
+  public void registerMonitored(java.lang.String, long, long, long);
+  public boolean isFailed(java.lang.String, long);
+  br.edu.ufcg.lsd.oursim.fd.AbstractFDTest$SimpleFailureDetector(br.edu.ufcg.lsd.oursim.fd.AbstractFDTest, br.edu.ufcg.lsd.oursim.fd.AbstractFDTest$1);
+}
+Compiled from "AbstractFailureDetector.java"
+public abstract class br.edu.ufcg.lsd.oursim.fd.AbstractFailureDetector implements br.edu.ufcg.lsd.oursim.fd.FailureDetector {
+  public br.edu.ufcg.lsd.oursim.fd.AbstractFailureDetector();
+  protected br.edu.ufcg.lsd.oursim.fd.Monitored getMonitored(java.lang.String);
+  protected void addMonitored(br.edu.ufcg.lsd.oursim.fd.Monitored);
+  protected boolean containsMonitored(java.lang.String);
+  protected br.edu.ufcg.lsd.oursim.fd.Monitored removeMonitored(java.lang.String);
+  public boolean setTimeout(java.lang.String, long);
+  public boolean setPingInterval(java.lang.String, long);
+  public java.lang.Long getTimeout(java.lang.String);
+  public boolean releaseMonitored(java.lang.String);
+  public java.lang.Long getIdleTime(java.lang.String, long);
+  public java.lang.Long getTimeToNextPing(java.lang.String, long);
+  public boolean shouldPing(java.lang.String, long);
+  public boolean messageSent(java.lang.String, long, br.edu.ufcg.lsd.oursim.fd.MessageType);
+}
+Compiled from "BertierFDTest.java"
+public class br.edu.ufcg.lsd.oursim.fd.BertierFDTest {
+  public br.edu.ufcg.lsd.oursim.fd.BertierFDTest();
+  public void init();
+  public void testNoPingNoHeartbeat();
+  public void testPingObjects();
+  public void testHeartbeatReceiving();
+  public void testAppHeartbeatReceiving();
+  public void testAppHeartbeatReceivingAdaptiveTo();
+  public void testUpdatePingSample();
+}
+Compiled from "BertierFailureDetector.java"
+public class br.edu.ufcg.lsd.oursim.fd.BertierFailureDetector extends br.edu.ufcg.lsd.oursim.fd.AbstractFailureDetector {
+  protected static final long DEFAULT_MODERATIONSTEP;
+  protected static final double DEFAULT_PHI;
+  protected static final double DEFAULT_BETA;
+  protected static final double DEFAULT_GAMMA;
+  public br.edu.ufcg.lsd.oursim.fd.BertierFailureDetector();
+  public br.edu.ufcg.lsd.oursim.fd.BertierFailureDetector(double, double, double, long);
+  public br.edu.ufcg.lsd.oursim.fd.BertierFailureDetector(java.util.Map<java.lang.String, java.lang.String>);
+  public boolean isFailed(java.lang.String, long);
+  public boolean updatePingSample(java.lang.String, long, long, long);
+  public boolean messageReceived(java.lang.String, long, br.edu.ufcg.lsd.oursim.fd.MessageType);
+  public void registerMonitored(java.lang.String, long, long, long);
+}
+Compiled from "BertierFailureDetector.java"
+class br.edu.ufcg.lsd.oursim.fd.BertierFailureDetector$BertierMonitored extends br.edu.ufcg.lsd.oursim.fd.Monitored {
+  br.edu.ufcg.lsd.oursim.fd.InterArrivalSamplingWindow sampWindow;
+  long eA;
+  long deltaP;
+  double alpha;
+  double var;
+  double error;
+  long delay;
+  public br.edu.ufcg.lsd.oursim.fd.BertierFailureDetector$BertierMonitored(java.lang.String);
+}
+Compiled from "ChenFDTest.java"
+public class br.edu.ufcg.lsd.oursim.fd.ChenFDTest {
+  public br.edu.ufcg.lsd.oursim.fd.ChenFDTest();
+  public void init();
+  public void testNoPingNoHeartbeat();
+  public void testPingObjects();
+  public void testHeartbeatReceiving();
+  public void testAppHeartbeatReceiving();
+  public void testAppHeartbeatReceivingAdaptiveTo();
+  public void testUpdatePingSample();
+}
+Compiled from "ChenFailureDetector.java"
+public class br.edu.ufcg.lsd.oursim.fd.ChenFailureDetector extends br.edu.ufcg.lsd.oursim.fd.AbstractFailureDetector {
+  protected static final long DEFAULT_ALPHA;
+  public br.edu.ufcg.lsd.oursim.fd.ChenFailureDetector(long);
+  public br.edu.ufcg.lsd.oursim.fd.ChenFailureDetector(java.util.Map<java.lang.String, java.lang.String>);
+  public br.edu.ufcg.lsd.oursim.fd.ChenFailureDetector();
+  public boolean isFailed(java.lang.String, long);
+  public boolean updatePingSample(java.lang.String, long, long, long);
+  public boolean messageReceived(java.lang.String, long, br.edu.ufcg.lsd.oursim.fd.MessageType);
+  public void registerMonitored(java.lang.String, long, long, long);
+}
+Compiled from "ChenFailureDetector.java"
+class br.edu.ufcg.lsd.oursim.fd.ChenFailureDetector$ChenMonitored extends br.edu.ufcg.lsd.oursim.fd.Monitored {
+  br.edu.ufcg.lsd.oursim.fd.InterArrivalSamplingWindow sampWindow;
+  public br.edu.ufcg.lsd.oursim.fd.ChenFailureDetector$ChenMonitored(java.lang.String);
+}
+Compiled from "FailureDetector.java"
+public interface br.edu.ufcg.lsd.oursim.fd.FailureDetector {
+  public abstract boolean messageReceived(java.lang.String, long, br.edu.ufcg.lsd.oursim.fd.MessageType);
+  public abstract boolean messageSent(java.lang.String, long, br.edu.ufcg.lsd.oursim.fd.MessageType);
+  public abstract boolean setTimeout(java.lang.String, long);
+  public abstract boolean updatePingSample(java.lang.String, long, long, long);
+  public abstract void registerMonitored(java.lang.String, long, long, long);
+  public abstract boolean releaseMonitored(java.lang.String);
+  public abstract boolean isFailed(java.lang.String, long);
+  public abstract boolean shouldPing(java.lang.String, long);
+  public abstract boolean setPingInterval(java.lang.String, long);
+  public abstract java.lang.Long getIdleTime(java.lang.String, long);
+  public abstract java.lang.Long getTimeToNextPing(java.lang.String, long);
+  public abstract java.lang.Long getTimeout(java.lang.String);
+}
+Compiled from "FailureDetectorFactory.java"
+public class br.edu.ufcg.lsd.oursim.fd.FailureDetectorFactory {
+  public br.edu.ufcg.lsd.oursim.fd.FailureDetectorFactory();
+  public br.edu.ufcg.lsd.oursim.fd.FailureDetector createFd(java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.String>) throws java.lang.Exception;
+  public java.util.List<java.lang.String> getAvailableDetectorsNames();
+}
+Compiled from "FailureDetectorFactoryTest.java"
+public class br.edu.ufcg.lsd.oursim.fd.FailureDetectorFactoryTest {
+  public br.edu.ufcg.lsd.oursim.fd.FailureDetectorFactoryTest();
+  public void testFactoryInavalidDetector() throws java.lang.Exception;
+  public void testFactoryNoDetector() throws java.lang.Exception;
+  public void testFactoryByName() throws java.lang.Exception;
+  public void testFactoryByClass() throws java.lang.Exception;
+}
+Compiled from "FailureDetectorOptInjector.java"
+public class br.edu.ufcg.lsd.oursim.fd.FailureDetectorOptInjector {
+  public br.edu.ufcg.lsd.oursim.fd.FailureDetectorOptInjector();
+  public void inject(br.edu.ufcg.lsd.oursim.entities.grid.Grid, java.util.Properties);
+}
+Compiled from "FailureDetectorOptParser.java"
+public class br.edu.ufcg.lsd.oursim.fd.FailureDetectorOptParser {
+  public br.edu.ufcg.lsd.oursim.fd.FailureDetectorOptParser();
+  public static int parseInt(int, java.lang.String);
+  public static double parseDouble(double, java.lang.String);
+  public static long parseLong(long, java.lang.String);
+}
+Compiled from "FailureDetectorOptParserTest.java"
+public class br.edu.ufcg.lsd.oursim.fd.FailureDetectorOptParserTest {
+  public br.edu.ufcg.lsd.oursim.fd.FailureDetectorOptParserTest();
+  public void testParseInt();
+  public void testParseIntError();
+  public void testParseDouble();
+  public void testParseDoubleError();
+  public void testParseLong();
+  public void testParseLongError();
+}
+Compiled from "FixedHeartbeatFDTest.java"
+public class br.edu.ufcg.lsd.oursim.fd.FixedHeartbeatFDTest {
+  public br.edu.ufcg.lsd.oursim.fd.FixedHeartbeatFDTest();
+  public void init();
+  public void testNoPingNoHeartbeat();
+  public void testPingObjects();
+  public void testHeartbeatReceiving();
+  public void testUpdatePingSample();
+}
+Compiled from "FixedPingFailureDetector.java"
+public class br.edu.ufcg.lsd.oursim.fd.FixedPingFailureDetector extends br.edu.ufcg.lsd.oursim.fd.AbstractFailureDetector {
+  public br.edu.ufcg.lsd.oursim.fd.FixedPingFailureDetector();
+  public br.edu.ufcg.lsd.oursim.fd.FixedPingFailureDetector(java.util.Map<java.lang.String, java.lang.String>);
+  public boolean updatePingSample(java.lang.String, long, long, long);
+  public void registerMonitored(java.lang.String, long, long, long);
+  public boolean isFailed(java.lang.String, long);
+  public boolean messageReceived(java.lang.String, long, br.edu.ufcg.lsd.oursim.fd.MessageType);
+}
+Compiled from "InterArrivalSamplingWindow.java"
+public class br.edu.ufcg.lsd.oursim.fd.InterArrivalSamplingWindow {
+  public br.edu.ufcg.lsd.oursim.fd.InterArrivalSamplingWindow(int);
+  public void addPing(java.lang.Long);
+  public void addInterArrival(java.lang.Long);
+  public double getMean();
+  public int size();
+  public void clear();
+  public double getStandardDeviation();
+}
+Compiled from "InterArrivalSamplingWindowTest.java"
+public class br.edu.ufcg.lsd.oursim.fd.InterArrivalSamplingWindowTest {
+  public br.edu.ufcg.lsd.oursim.fd.InterArrivalSamplingWindowTest();
+  public void testScrolling();
+}
+Compiled from "MessageType.java"
+public final class br.edu.ufcg.lsd.oursim.fd.MessageType extends java.lang.Enum<br.edu.ufcg.lsd.oursim.fd.MessageType> {
+  public static final br.edu.ufcg.lsd.oursim.fd.MessageType APPLICATION;
+  public static final br.edu.ufcg.lsd.oursim.fd.MessageType PING;
+  public static br.edu.ufcg.lsd.oursim.fd.MessageType[] values();
+  public static br.edu.ufcg.lsd.oursim.fd.MessageType valueOf(java.lang.String);
+  static {};
+}
+Compiled from "Monitored.java"
+public class br.edu.ufcg.lsd.oursim.fd.Monitored {
+  public br.edu.ufcg.lsd.oursim.fd.Monitored(java.lang.String);
+  public long getTimeout();
+  public void setTimeout(long);
+  public long getLastSent();
+  public void setLastSent(long);
+  public long getLastHeard();
+  public void setLastHeard(long);
+  public long getPingInterval();
+  public void setPingInterval(long);
+  public java.lang.String getId();
+  public void setId(java.lang.String);
+}
+Compiled from "PhiAccrualFDTest.java"
+public class br.edu.ufcg.lsd.oursim.fd.PhiAccrualFDTest {
+  public br.edu.ufcg.lsd.oursim.fd.PhiAccrualFDTest();
+  public void init();
+  public void testNoPingNoHeartbeat();
+  public void testPingObjects();
+  public void testHeartbeatReceiving();
+  public void testAppHeartbeatReceiving();
+  public void testAppHeartbeatReceivingAdaptiveTo();
+  public void testUpdatePingSample();
+}
+Compiled from "PhiAccrualFailureDetector.java"
+public class br.edu.ufcg.lsd.oursim.fd.PhiAccrualFailureDetector extends br.edu.ufcg.lsd.oursim.fd.AbstractFailureDetector {
+  protected static final int DEFAULT_MINWINDOWSIZE;
+  protected static final double DEFAULT_THRESHOLD;
+  public br.edu.ufcg.lsd.oursim.fd.PhiAccrualFailureDetector();
+  public br.edu.ufcg.lsd.oursim.fd.PhiAccrualFailureDetector(double, int);
+  public br.edu.ufcg.lsd.oursim.fd.PhiAccrualFailureDetector(java.util.Map<java.lang.String, java.lang.String>);
+  public boolean isFailed(java.lang.String, long);
+  public boolean updatePingSample(java.lang.String, long, long, long);
+  public void registerMonitored(java.lang.String, long, long, long);
+  public boolean messageReceived(java.lang.String, long, br.edu.ufcg.lsd.oursim.fd.MessageType);
+}
+Compiled from "PhiAccrualFailureDetector.java"
+class br.edu.ufcg.lsd.oursim.fd.PhiAccrualFailureDetector$PhiAccrualMonitored extends br.edu.ufcg.lsd.oursim.fd.Monitored {
+  br.edu.ufcg.lsd.oursim.fd.InterArrivalSamplingWindow sampWindow;
+  public br.edu.ufcg.lsd.oursim.fd.PhiAccrualFailureDetector$PhiAccrualMonitored(java.lang.String);
+}
+Compiled from "SlicedHeartbeatFDTest.java"
+public class br.edu.ufcg.lsd.oursim.fd.SlicedHeartbeatFDTest {
+  public br.edu.ufcg.lsd.oursim.fd.SlicedHeartbeatFDTest();
+  public void init();
+  public void testNoPingNoHeartbeat();
+  public void testPingObjects();
+  public void testHeartbeatReceiving();
+  public void testUpdatePingSample();
+}
+Compiled from "SlicedPingFailureDetector.java"
+public class br.edu.ufcg.lsd.oursim.fd.SlicedPingFailureDetector extends br.edu.ufcg.lsd.oursim.fd.AbstractFailureDetector {
+  protected static final long DEFAULT_SLICE_SIZE;
+  public br.edu.ufcg.lsd.oursim.fd.SlicedPingFailureDetector(long);
+  public br.edu.ufcg.lsd.oursim.fd.SlicedPingFailureDetector();
+  public br.edu.ufcg.lsd.oursim.fd.SlicedPingFailureDetector(java.util.Map<java.lang.String, java.lang.String>);
+  public void registerMonitored(java.lang.String, long, long, long);
+  public boolean isFailed(java.lang.String, long);
+  public boolean messageReceived(java.lang.String, long, br.edu.ufcg.lsd.oursim.fd.MessageType);
+  public boolean updatePingSample(java.lang.String, long, long, long);
+}
+Compiled from "SlicedPingFailureDetector.java"
+class br.edu.ufcg.lsd.oursim.fd.SlicedPingFailureDetector$SlicedMonitored extends br.edu.ufcg.lsd.oursim.fd.Monitored {
+  long expirationSlice;
+  public br.edu.ufcg.lsd.oursim.fd.SlicedPingFailureDetector$SlicedMonitored(java.lang.String);
+}
+Compiled from "BlankNetwork.java"
+public class br.edu.ufcg.lsd.oursim.network.BlankNetwork implements br.edu.ufcg.lsd.oursim.network.Network {
+  public br.edu.ufcg.lsd.oursim.network.BlankNetwork();
+  public java.lang.Long generateDelay();
+}
+Compiled from "DefaultWANNetwork.java"
+public class br.edu.ufcg.lsd.oursim.network.DefaultWANNetwork implements br.edu.ufcg.lsd.oursim.network.Network {
+  public br.edu.ufcg.lsd.oursim.network.DefaultWANNetwork(java.lang.Double);
+  public br.edu.ufcg.lsd.oursim.network.DefaultWANNetwork();
+  public static void setSeed(int[]);
+  public java.lang.Long generateDelay();
+  static {};
+}
+Compiled from "DefaultWANNetworkTest.java"
+public class br.edu.ufcg.lsd.oursim.network.DefaultWANNetworkTest {
+  public br.edu.ufcg.lsd.oursim.network.DefaultWANNetworkTest();
+  public void testDefaultWANSeed();
+  public void testWANWithParameters();
+}
+Compiled from "Network.java"
+public interface br.edu.ufcg.lsd.oursim.network.Network {
+  public abstract java.lang.Long generateDelay();
+}
+Compiled from "BlankEvent.java"
+public class br.edu.ufcg.lsd.oursim.queue.BlankEvent extends br.edu.ufcg.lsd.oursim.events.AbstractEvent {
+  public br.edu.ufcg.lsd.oursim.queue.BlankEvent(java.lang.Long, java.lang.Integer);
+  public br.edu.ufcg.lsd.oursim.queue.BlankEvent(java.lang.Long);
+  public void process(br.edu.ufcg.lsd.oursim.OurSim);
+}
+Compiled from "EventProxy.java"
+public interface br.edu.ufcg.lsd.oursim.queue.EventProxy {
+  public abstract java.util.List<br.edu.ufcg.lsd.oursim.events.EventSpec> nextEventPage(int);
+  public abstract java.lang.Long nextEventTime();
+  public abstract boolean hasNextEvent();
+}
+Compiled from "EventQueue.java"
+public class br.edu.ufcg.lsd.oursim.queue.EventQueue {
+  public br.edu.ufcg.lsd.oursim.queue.EventQueue(br.edu.ufcg.lsd.oursim.queue.EventProxy, br.edu.ufcg.lsd.oursim.factories.EventFactory);
+  public br.edu.ufcg.lsd.oursim.events.Event poll();
+  public java.util.List<br.edu.ufcg.lsd.oursim.events.Event> getEvents();
+  public boolean hasNext();
+  public void add(br.edu.ufcg.lsd.oursim.events.Event);
+  public void clear();
+}
+Compiled from "EventQueueTest.java"
+public class br.edu.ufcg.lsd.oursim.queue.EventQueueTest {
+  public br.edu.ufcg.lsd.oursim.queue.EventQueueTest();
+  public void testTimeOrdering();
+  public void testPriorityOrdering();
+  public void testAddFirst();
+  public void testAddAfter();
+  public void testFIFOOrdering();
+}
+Compiled from "FileEventProxy.java"
+public class br.edu.ufcg.lsd.oursim.queue.FileEventProxy implements br.edu.ufcg.lsd.oursim.queue.EventProxy {
+  public br.edu.ufcg.lsd.oursim.queue.FileEventProxy(java.io.InputStream);
+  public java.util.List<br.edu.ufcg.lsd.oursim.events.EventSpec> nextEventPage(int);
+  public java.lang.Long nextEventTime();
+  public boolean hasNextEvent();
+}
+Compiled from "FileEventProxyTest.java"
+public class br.edu.ufcg.lsd.oursim.queue.FileEventProxyTest {
+  public br.edu.ufcg.lsd.oursim.queue.FileEventProxyTest();
+  public void testBlankFile();
+  public void testPaging();
+  public void testLastPage();
+  public void testBadFormat();
+}
+Compiled from "ListEventProxy.java"
+public class br.edu.ufcg.lsd.oursim.queue.ListEventProxy implements br.edu.ufcg.lsd.oursim.queue.EventProxy {
+  public br.edu.ufcg.lsd.oursim.queue.ListEventProxy();
+  public java.util.List<br.edu.ufcg.lsd.oursim.events.EventSpec> nextEventPage(int);
+  public java.lang.Long nextEventTime();
+  public void add(br.edu.ufcg.lsd.oursim.events.EventSpec);
+  public boolean hasNextEvent();
+  public void sort(java.util.Comparator<br.edu.ufcg.lsd.oursim.events.EventSpec>);
+}
+Compiled from "DefaultTraceCollector.java"
+public class br.edu.ufcg.lsd.oursim.trace.DefaultTraceCollector implements br.edu.ufcg.lsd.oursim.trace.TraceCollector {
+  public br.edu.ufcg.lsd.oursim.trace.DefaultTraceCollector(java.io.OutputStream);
+  public void replicaEnded(long, br.edu.ufcg.lsd.oursim.entities.job.Replica, java.lang.String);
+  public void jobEnded(long, br.edu.ufcg.lsd.oursim.entities.job.Job, java.lang.String);
+  public void taskEnded(long, br.edu.ufcg.lsd.oursim.entities.job.Task, java.lang.String);
+}
+Compiled from "DefaultTraceCollectorTest.java"
+public class br.edu.ufcg.lsd.oursim.trace.DefaultTraceCollectorTest {
+  public br.edu.ufcg.lsd.oursim.trace.DefaultTraceCollectorTest();
+  public void setup();
+  public void testReplicaEnded();
+  public void testTaskEnded();
+  public void testJobEnded();
+}
+Compiled from "TraceCollector.java"
+public interface br.edu.ufcg.lsd.oursim.trace.TraceCollector {
+  public abstract void replicaEnded(long, br.edu.ufcg.lsd.oursim.entities.job.Replica, java.lang.String);
+  public abstract void jobEnded(long, br.edu.ufcg.lsd.oursim.entities.job.Job, java.lang.String);
+  public abstract void taskEnded(long, br.edu.ufcg.lsd.oursim.entities.job.Task, java.lang.String);
+}
+Compiled from "Configuration.java"
+public class br.edu.ufcg.lsd.oursim.util.Configuration {
+  public static final java.lang.String PROP_LIVENESS_CHECK_INTERVAL;
+  public static final java.lang.String DEF_LIVENESS_CHECK_INTERVAL;
+  public static final java.lang.String PROP_USE_FAILURE_DETECTOR;
+  public static final java.lang.String DEF_USE_FAILURE_DETECTOR;
+  public static final java.lang.String PROP_USE_SPEED_HACK;
+  public static final java.lang.String DEF_USE_SPEED_HACK;
+  public static final java.lang.String PROP_BROKER_MAX_FAILS;
+  public static final java.lang.String DEF_BROKER_MAX_FAILS;
+  public static final java.lang.String PROP_BROKER_MAX_REPLICAS;
+  public static final java.lang.String DEF_BROKER_MAX_REPLICAS;
+  public static final java.lang.String PROP_BROKER_MAX_SIMULTANEOUS_REPLICAS;
+  public static final java.lang.String DEF_BROKER_MAX_SIMULTANEOUS_REPLICAS;
+  public static final java.lang.String PROP_BROKER_SCHEDULER_INTERVAL;
+  public static final java.lang.String DEF_BROKER_SCHEDULER_INTERVAL;
+  public static final java.lang.String PROP_REQUEST_REPETITION_INTERVAL;
+  public static final java.lang.String DEF_REQUEST_REPETITION_INTERVAL;
+  public static final java.lang.String PROP_GET_PROVIDERS_REPETITION_INTERVAL;
+  public static final java.lang.String DEF_GET_PROVIDERS_REPETITION_INTERVAL;
+  public static final java.lang.String PROP_REPORT_WORK_ACCOUNTING_REPETITION_INTERVAL;
+  public static final java.lang.String DEF_REPORT_WORK_ACCOUNTING_REPETITION_INTERVAL;
+  public static final java.lang.String PROP_FAILURE_DETECTOR_NAME;
+  public static final java.lang.String DEF_FAILURE_DETECTOR_NAME;
+  public static final java.lang.String PROP_FAILURE_DETECTOR_TIMEOUT;
+  public static final java.lang.String DEF_FAILURE_DETECTOR_TIMEOUT;
+  public static final java.lang.String PROP_FAILURE_DETECTOR_PING_INTERVAL;
+  public static final java.lang.String DEF_FAILURE_DETECTOR_PING_INTERVAL;
+  public br.edu.ufcg.lsd.oursim.util.Configuration();
+  public static java.util.Properties createDefaults();
+  public static java.util.Properties createConfiguration(java.util.Properties);
+  static {};
+}
+Compiled from "JSONUtils.java"
+public class br.edu.ufcg.lsd.oursim.util.JSONUtils {
+  public br.edu.ufcg.lsd.oursim.util.JSONUtils();
+  public static java.lang.String getJSONString(org.json.JSONObject, java.lang.String);
+  public static org.json.JSONObject getJSONObject(org.json.JSONObject, java.lang.String);
+  public static org.json.JSONObject getJSONObject(org.json.JSONArray, int);
+  public static org.json.JSONArray getJSONArray(org.json.JSONObject, java.lang.String);
+  public static org.json.JSONObject asJSON(java.lang.String);
+  public static int getJSONInteger(org.json.JSONObject, java.lang.String);
+  public static long getJSONLong(org.json.JSONObject, java.lang.String);
+  public static double getJSONDouble(org.json.JSONObject, java.lang.String);
+}
+Compiled from "LineParser.java"
+public class br.edu.ufcg.lsd.oursim.util.LineParser {
+  public br.edu.ufcg.lsd.oursim.util.LineParser(java.lang.String);
+  public java.lang.String next();
+  public java.lang.String restOfLine();
+}

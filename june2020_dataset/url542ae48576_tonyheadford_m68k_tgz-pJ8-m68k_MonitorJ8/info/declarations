@@ -1,0 +1,3125 @@
+Compiled from "Monitor.java"
+public class m68k.Monitor implements java.lang.Runnable {
+  public m68k.Monitor(m68k.cpu.Cpu, m68k.memory.AddressSpace);
+  public static void main(java.lang.String[]);
+  public void run();
+  protected void handleCommand(java.lang.String);
+  protected void handleGo(java.lang.String[]);
+  protected void handleBreakPoints(java.lang.String[]);
+  protected void handleAutoRegs(java.lang.String[]);
+  protected void handleShowBytes(java.lang.String[]);
+  protected void handleDataRegs(java.lang.String[]);
+  protected void handleAddrRegs(java.lang.String[]);
+  protected void handleStep(java.lang.String[]);
+  protected void handleMemDump(java.lang.String[]);
+  protected void handleDisassemble(java.lang.String[]);
+  protected void dumpInfo();
+  protected java.lang.String makeFlagView();
+  protected char getPrintable(int);
+  protected int parseInt(java.lang.String) throws java.lang.NumberFormatException;
+  protected void handlePC(java.lang.String[]);
+  protected void handleSR(java.lang.String[]);
+  protected void handleCCR(java.lang.String[]);
+  protected void handleUSP(java.lang.String[]);
+  protected void handleSSP(java.lang.String[]);
+  protected void handleMemLong(java.lang.String[]);
+  protected void handleMemWord(java.lang.String[]);
+  protected void handleMemByte(java.lang.String[]);
+  protected void handleLoad(java.lang.String[]);
+  protected void showHelp(java.lang.String[]);
+}
+Compiled from "Cpu.java"
+public interface m68k.cpu.Cpu {
+  public static final int C_FLAG;
+  public static final int V_FLAG;
+  public static final int Z_FLAG;
+  public static final int N_FLAG;
+  public static final int X_FLAG;
+  public static final int INTERRUPT_FLAGS_MASK;
+  public static final int SUPERVISOR_FLAG;
+  public static final int TRACE_FLAG;
+  public abstract void setAddressSpace(m68k.memory.AddressSpace);
+  public abstract void reset();
+  public abstract void stop();
+  public abstract int execute();
+  public abstract int getDataRegisterByte(int);
+  public abstract int getDataRegisterByteSigned(int);
+  public abstract int getDataRegisterWord(int);
+  public abstract int getDataRegisterWordSigned(int);
+  public abstract int getDataRegisterLong(int);
+  public abstract void setDataRegisterByte(int, int);
+  public abstract void setDataRegisterWord(int, int);
+  public abstract void setDataRegisterLong(int, int);
+  public abstract int getAddrRegisterByte(int);
+  public abstract int getAddrRegisterByteSigned(int);
+  public abstract int getAddrRegisterWord(int);
+  public abstract int getAddrRegisterWordSigned(int);
+  public abstract int getAddrRegisterLong(int);
+  public abstract void setAddrRegisterByte(int, int);
+  public abstract void setAddrRegisterWord(int, int);
+  public abstract void setAddrRegisterLong(int, int);
+  public abstract int readMemoryByte(int);
+  public abstract int readMemoryByteSigned(int);
+  public abstract int readMemoryWord(int);
+  public abstract int readMemoryWordSigned(int);
+  public abstract int readMemoryLong(int);
+  public abstract void writeMemoryByte(int, int);
+  public abstract void writeMemoryWord(int, int);
+  public abstract void writeMemoryLong(int, int);
+  public abstract void incrementAddrRegister(int, int);
+  public abstract void decrementAddrRegister(int, int);
+  public abstract int getPC();
+  public abstract void setPC(int);
+  public abstract int fetchPCWord();
+  public abstract int fetchPCWordSigned();
+  public abstract int fetchPCLong();
+  public abstract boolean isSupervisorMode();
+  public abstract int getCCRegister();
+  public abstract int getSR();
+  public abstract void setCCRegister(int);
+  public abstract void setSR(int);
+  public abstract void setSR2(int);
+  public abstract void setFlags(int);
+  public abstract void clrFlags(int);
+  public abstract boolean isFlagSet(int);
+  public abstract void calcFlags(m68k.cpu.InstructionType, int, int, int, m68k.cpu.Size);
+  public abstract void calcFlagsParam(m68k.cpu.InstructionType, int, int, int, int, m68k.cpu.Size);
+  public abstract boolean testCC(int);
+  public abstract int getUSP();
+  public abstract void setUSP(int);
+  public abstract int getSSP();
+  public abstract void setSSP(int);
+  public abstract void pushWord(int);
+  public abstract void pushLong(int);
+  public abstract int popWord();
+  public abstract int popLong();
+  public abstract void raiseException(int);
+  public abstract void raiseSRException();
+  public abstract void raiseInterrupt(int);
+  public abstract int getInterruptLevel();
+  public abstract m68k.cpu.Operand resolveSrcEA(int, int, m68k.cpu.Size);
+  public abstract m68k.cpu.Operand resolveDstEA(int, int, m68k.cpu.Size);
+  public abstract m68k.cpu.Instruction getInstructionAt(int);
+  public abstract m68k.cpu.Instruction getInstructionFor(int);
+  public abstract m68k.cpu.DisassembledOperand disassembleSrcEA(int, int, int, m68k.cpu.Size);
+  public abstract m68k.cpu.DisassembledOperand disassembleDstEA(int, int, int, m68k.cpu.Size);
+}
+Compiled from "CpuCore.java"
+public abstract class m68k.cpu.CpuCore implements m68k.cpu.Cpu {
+  protected m68k.memory.AddressSpace memory;
+  protected int[] data_regs;
+  protected int[] addr_regs;
+  protected int reg_pc;
+  protected int reg_sr;
+  protected int reg_usp;
+  protected int reg_ssp;
+  protected m68k.cpu.Operand[] srcHandlers;
+  protected m68k.cpu.Operand[] dstHandlers;
+  protected m68k.cpu.Operand srcEAHandler;
+  protected m68k.cpu.Operand dstEAHandler;
+  protected int currentInstructionAddress;
+  protected java.lang.StringBuilder disasmBuffer;
+  public m68k.cpu.CpuCore();
+  public void setAddressSpace(m68k.memory.AddressSpace);
+  public void reset();
+  public void stop();
+  public int getDataRegisterByte(int);
+  public int getDataRegisterByteSigned(int);
+  public int getDataRegisterWord(int);
+  public int getDataRegisterWordSigned(int);
+  public int getDataRegisterLong(int);
+  public void setDataRegisterByte(int, int);
+  public void setDataRegisterWord(int, int);
+  public void setDataRegisterLong(int, int);
+  public int getAddrRegisterByte(int);
+  public int getAddrRegisterByteSigned(int);
+  public int getAddrRegisterWord(int);
+  public int getAddrRegisterWordSigned(int);
+  public int getAddrRegisterLong(int);
+  public void setAddrRegisterByte(int, int);
+  public void setAddrRegisterWord(int, int);
+  public void setAddrRegisterLong(int, int);
+  public int getPC();
+  public void setPC(int);
+  public int fetchPCWord();
+  public int fetchPCWordSigned();
+  public int fetchPCLong();
+  public int getCCRegister();
+  public int getSR();
+  public void setCCRegister(int);
+  public void setSR(int);
+  public void setSR2(int);
+  public void setFlags(int);
+  public void clrFlags(int);
+  public boolean isFlagSet(int);
+  public void calcFlags(m68k.cpu.InstructionType, int, int, int, m68k.cpu.Size);
+  public void calcFlagsParam(m68k.cpu.InstructionType, int, int, int, int, m68k.cpu.Size);
+  public boolean testCC(int);
+  public boolean isSupervisorMode();
+  public void pushWord(int);
+  public void pushLong(int);
+  public int popWord();
+  public int popLong();
+  public int getUSP();
+  public void setUSP(int);
+  public int getSSP();
+  public void setSSP(int);
+  public void setSupervisorMode(boolean);
+  public void raiseException(int);
+  public void raiseSRException();
+  public int getInterruptLevel();
+  protected void setInterruptLevel(int);
+  public void raiseInterrupt(int);
+  public int readMemoryByte(int);
+  public int readMemoryByteSigned(int);
+  public int readMemoryWord(int);
+  public int readMemoryWordSigned(int);
+  public int readMemoryLong(int);
+  public void writeMemoryByte(int, int);
+  public void writeMemoryWord(int, int);
+  public void writeMemoryLong(int, int);
+  public m68k.cpu.Operand resolveSrcEA(int, int, m68k.cpu.Size);
+  public m68k.cpu.Operand resolveDstEA(int, int, m68k.cpu.Size);
+  public m68k.cpu.DisassembledOperand disassembleSrcEA(int, int, int, m68k.cpu.Size);
+  public m68k.cpu.DisassembledOperand disassembleDstEA(int, int, int, m68k.cpu.Size);
+  protected m68k.cpu.DisassembledOperand disassembleEA(int, int, int, m68k.cpu.Size, boolean);
+  public void incrementAddrRegister(int, int);
+  public void decrementAddrRegister(int, int);
+  protected int signExtendByte(int);
+  protected int signExtendWord(int);
+  protected void initEAHandlers();
+}
+Compiled from "CpuCore.java"
+class m68k.cpu.CpuCore$1 {
+  static final int[] $SwitchMap$m68k$cpu$InstructionType;
+  static final int[] $SwitchMap$m68k$cpu$Size;
+  static {};
+}
+Compiled from "CpuCore.java"
+class m68k.cpu.CpuCore$AbsoluteLongOperand implements m68k.cpu.Operand {
+  protected m68k.cpu.Size size;
+  protected int address;
+  protected final int index;
+  final m68k.cpu.CpuCore this$0;
+  m68k.cpu.CpuCore$AbsoluteLongOperand(m68k.cpu.CpuCore);
+  public void init(int, m68k.cpu.Size);
+  public int getByte();
+  public int getWord();
+  public int getLong();
+  public int getByteSigned();
+  public int getWordSigned();
+  public void setByte(int);
+  public void setWord(int);
+  public void setLong(int);
+  public boolean isRegisterMode();
+  public boolean isSR();
+  public int getTiming();
+  public int getComputedAddress();
+  public int index();
+  public java.lang.String toString();
+}
+Compiled from "CpuCore.java"
+class m68k.cpu.CpuCore$AbsoluteShortOperand implements m68k.cpu.Operand {
+  protected m68k.cpu.Size size;
+  protected int address;
+  protected final int index;
+  final m68k.cpu.CpuCore this$0;
+  m68k.cpu.CpuCore$AbsoluteShortOperand(m68k.cpu.CpuCore);
+  public void init(int, m68k.cpu.Size);
+  public int getByte();
+  public int getWord();
+  public int getLong();
+  public int getByteSigned();
+  public int getWordSigned();
+  public void setByte(int);
+  public void setWord(int);
+  public void setLong(int);
+  public boolean isRegisterMode();
+  public boolean isSR();
+  public int getTiming();
+  public int getComputedAddress();
+  public int index();
+  public java.lang.String toString();
+}
+Compiled from "CpuCore.java"
+class m68k.cpu.CpuCore$AddressRegisterIndirectOperand implements m68k.cpu.Operand {
+  protected int regNumber;
+  protected m68k.cpu.Size size;
+  protected int address;
+  protected final int index;
+  final m68k.cpu.CpuCore this$0;
+  m68k.cpu.CpuCore$AddressRegisterIndirectOperand(m68k.cpu.CpuCore);
+  public void init(int, m68k.cpu.Size);
+  public int getByte();
+  public int getWord();
+  public int getLong();
+  public int getByteSigned();
+  public int getWordSigned();
+  public void setByte(int);
+  public void setWord(int);
+  public void setLong(int);
+  public boolean isRegisterMode();
+  public boolean isSR();
+  public int getTiming();
+  public int getComputedAddress();
+  public int index();
+  public java.lang.String toString();
+}
+Compiled from "CpuCore.java"
+class m68k.cpu.CpuCore$AddressRegisterOperand implements m68k.cpu.Operand {
+  protected int regNumber;
+  protected m68k.cpu.Size size;
+  protected final int index;
+  final m68k.cpu.CpuCore this$0;
+  m68k.cpu.CpuCore$AddressRegisterOperand(m68k.cpu.CpuCore);
+  public void init(int, m68k.cpu.Size);
+  public int getByte();
+  public int getWord();
+  public int getLong();
+  public int getByteSigned();
+  public int getWordSigned();
+  public void setByte(int);
+  public void setWord(int);
+  public void setLong(int);
+  public boolean isRegisterMode();
+  public boolean isSR();
+  public int getTiming();
+  public int getComputedAddress();
+  public int index();
+  public java.lang.String toString();
+}
+Compiled from "CpuCore.java"
+class m68k.cpu.CpuCore$AddressRegisterPostIncOperand implements m68k.cpu.Operand {
+  protected int regNumber;
+  protected m68k.cpu.Size size;
+  protected int address;
+  protected final int index;
+  final m68k.cpu.CpuCore this$0;
+  m68k.cpu.CpuCore$AddressRegisterPostIncOperand(m68k.cpu.CpuCore);
+  public void init(int, m68k.cpu.Size);
+  public int getByte();
+  public int getWord();
+  public int getLong();
+  public int getByteSigned();
+  public int getWordSigned();
+  public void setByte(int);
+  public void setWord(int);
+  public void setLong(int);
+  public boolean isRegisterMode();
+  public boolean isSR();
+  public int getTiming();
+  public int getComputedAddress();
+  public int index();
+  public java.lang.String toString();
+}
+Compiled from "CpuCore.java"
+class m68k.cpu.CpuCore$AddressRegisterPreDecOperand implements m68k.cpu.Operand {
+  protected int regNumber;
+  protected m68k.cpu.Size size;
+  protected int address;
+  protected final int index;
+  final m68k.cpu.CpuCore this$0;
+  m68k.cpu.CpuCore$AddressRegisterPreDecOperand(m68k.cpu.CpuCore);
+  public void init(int, m68k.cpu.Size);
+  public int getByte();
+  public int getWord();
+  public int getLong();
+  public int getByteSigned();
+  public int getWordSigned();
+  public void setByte(int);
+  public void setWord(int);
+  public void setLong(int);
+  public boolean isSR();
+  public boolean isRegisterMode();
+  public int getTiming();
+  public int getComputedAddress();
+  public int index();
+  public java.lang.String toString();
+}
+Compiled from "CpuCore.java"
+class m68k.cpu.CpuCore$AddressRegisterWithDisplacementOperand implements m68k.cpu.Operand {
+  protected int regNumber;
+  protected m68k.cpu.Size size;
+  protected int address;
+  protected int displacement;
+  protected final int index;
+  final m68k.cpu.CpuCore this$0;
+  m68k.cpu.CpuCore$AddressRegisterWithDisplacementOperand(m68k.cpu.CpuCore);
+  public void init(int, m68k.cpu.Size);
+  public int getByte();
+  public int getWord();
+  public int getLong();
+  public int getByteSigned();
+  public int getWordSigned();
+  public void setByte(int);
+  public void setWord(int);
+  public void setLong(int);
+  public boolean isRegisterMode();
+  public boolean isSR();
+  public int getTiming();
+  public int getComputedAddress();
+  public int index();
+  public java.lang.String toString();
+}
+Compiled from "CpuCore.java"
+class m68k.cpu.CpuCore$AddressRegisterWithIndexOperand implements m68k.cpu.Operand {
+  protected int regNumber;
+  protected m68k.cpu.Size size;
+  protected int address;
+  protected int displacement;
+  protected int idxRegNumber;
+  protected m68k.cpu.Size idxSize;
+  protected boolean idxIsAddressReg;
+  protected final int index;
+  final m68k.cpu.CpuCore this$0;
+  m68k.cpu.CpuCore$AddressRegisterWithIndexOperand(m68k.cpu.CpuCore);
+  public void init(int, m68k.cpu.Size);
+  public int getByte();
+  public int getWord();
+  public int getLong();
+  public int getByteSigned();
+  public int getWordSigned();
+  public void setByte(int);
+  public void setWord(int);
+  public void setLong(int);
+  public boolean isSR();
+  public boolean isRegisterMode();
+  public int getTiming();
+  public int getComputedAddress();
+  public int index();
+  public java.lang.String toString();
+}
+Compiled from "CpuCore.java"
+class m68k.cpu.CpuCore$DataRegisterOperand implements m68k.cpu.Operand {
+  protected int regNumber;
+  protected m68k.cpu.Size size;
+  protected final int index;
+  final m68k.cpu.CpuCore this$0;
+  m68k.cpu.CpuCore$DataRegisterOperand(m68k.cpu.CpuCore);
+  public void init(int, m68k.cpu.Size);
+  public int getByte();
+  public int getWord();
+  public int getLong();
+  public int getByteSigned();
+  public int getWordSigned();
+  public void setByte(int);
+  public void setWord(int);
+  public void setLong(int);
+  public boolean isRegisterMode();
+  public boolean isSR();
+  public int getTiming();
+  public int getComputedAddress();
+  public int index();
+  public java.lang.String toString();
+}
+Compiled from "CpuCore.java"
+class m68k.cpu.CpuCore$ImmediateOperand implements m68k.cpu.Operand {
+  protected m68k.cpu.Size size;
+  protected int value;
+  protected final int index;
+  final m68k.cpu.CpuCore this$0;
+  m68k.cpu.CpuCore$ImmediateOperand(m68k.cpu.CpuCore);
+  public void init(int, m68k.cpu.Size);
+  public int getByte();
+  public int getWord();
+  public int getLong();
+  public int getByteSigned();
+  public int getWordSigned();
+  public void setByte(int);
+  public void setWord(int);
+  public void setLong(int);
+  public boolean isRegisterMode();
+  public boolean isSR();
+  public int getTiming();
+  public int getComputedAddress();
+  public int index();
+  public java.lang.String toString();
+}
+Compiled from "CpuCore.java"
+class m68k.cpu.CpuCore$PCWithDisplacementOperand implements m68k.cpu.Operand {
+  protected m68k.cpu.Size size;
+  protected int address;
+  protected int displacement;
+  protected final int index;
+  final m68k.cpu.CpuCore this$0;
+  m68k.cpu.CpuCore$PCWithDisplacementOperand(m68k.cpu.CpuCore);
+  public void init(int, m68k.cpu.Size);
+  public int getByte();
+  public int getWord();
+  public int getLong();
+  public int getByteSigned();
+  public int getWordSigned();
+  public void setByte(int);
+  public void setWord(int);
+  public void setLong(int);
+  public boolean isRegisterMode();
+  public boolean isSR();
+  public int getTiming();
+  public int getComputedAddress();
+  public int index();
+  public java.lang.String toString();
+}
+Compiled from "CpuCore.java"
+class m68k.cpu.CpuCore$PCWithIndexOperand implements m68k.cpu.Operand {
+  protected m68k.cpu.Size size;
+  protected int address;
+  protected int displacement;
+  protected int idxRegNumber;
+  protected m68k.cpu.Size idxSize;
+  protected boolean idxIsAddressReg;
+  protected final int index;
+  final m68k.cpu.CpuCore this$0;
+  m68k.cpu.CpuCore$PCWithIndexOperand(m68k.cpu.CpuCore);
+  public void init(int, m68k.cpu.Size);
+  public int getByte();
+  public int getWord();
+  public int getLong();
+  public int getByteSigned();
+  public int getWordSigned();
+  public void setByte(int);
+  public void setWord(int);
+  public void setLong(int);
+  public boolean isRegisterMode();
+  public boolean isSR();
+  public int getTiming();
+  public int getComputedAddress();
+  public int index();
+  public java.lang.String toString();
+}
+Compiled from "CpuCore.java"
+class m68k.cpu.CpuCore$StatusRegisterOperand implements m68k.cpu.Operand {
+  protected m68k.cpu.Size size;
+  protected int value;
+  protected java.lang.String name;
+  protected final int index;
+  final m68k.cpu.CpuCore this$0;
+  m68k.cpu.CpuCore$StatusRegisterOperand(m68k.cpu.CpuCore);
+  public void init(int, m68k.cpu.Size);
+  public int getByte();
+  public int getWord();
+  public int getLong();
+  public int getByteSigned();
+  public int getWordSigned();
+  public void setByte(int);
+  public void setWord(int);
+  public void setLong(int);
+  public boolean isRegisterMode();
+  public boolean isSR();
+  public int getTiming();
+  public int getComputedAddress();
+  public int index();
+  public java.lang.String toString();
+}
+Compiled from "CpuException.java"
+public class m68k.cpu.CpuException extends java.lang.RuntimeException {
+  public m68k.cpu.CpuException();
+  public m68k.cpu.CpuException(java.lang.String);
+  public m68k.cpu.CpuException(java.lang.String, java.lang.Throwable);
+  public m68k.cpu.CpuException(java.lang.Throwable);
+}
+Compiled from "CpuUtils.java"
+public final class m68k.cpu.CpuUtils {
+  public m68k.cpu.CpuUtils();
+  public static int signExtendByte(int);
+  public static int signExtendWord(int);
+}
+Compiled from "DisassembledInstruction.java"
+public class m68k.cpu.DisassembledInstruction {
+  public final int address;
+  public final int opcode;
+  public final int num_operands;
+  public final java.lang.String instruction;
+  public final m68k.cpu.DisassembledOperand op1;
+  public final m68k.cpu.DisassembledOperand op2;
+  public m68k.cpu.DisassembledInstruction(int, int, java.lang.String);
+  public m68k.cpu.DisassembledInstruction(int, int, java.lang.String, m68k.cpu.DisassembledOperand);
+  public m68k.cpu.DisassembledInstruction(int, int, java.lang.String, m68k.cpu.DisassembledOperand, m68k.cpu.DisassembledOperand);
+  public int size();
+  public void shortFormat(java.lang.StringBuilder);
+  public void formatInstruction(java.lang.StringBuilder);
+  public java.lang.String toString();
+}
+Compiled from "DisassembledOperand.java"
+public class m68k.cpu.DisassembledOperand {
+  public final int bytes;
+  public final int memory_read;
+  public final java.lang.String operand;
+  public m68k.cpu.DisassembledOperand(java.lang.String);
+  public m68k.cpu.DisassembledOperand(java.lang.String, int, int);
+}
+Compiled from "Instruction.java"
+public interface m68k.cpu.Instruction {
+  public abstract int execute(int);
+  public abstract m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "InstructionHandler.java"
+public interface m68k.cpu.InstructionHandler {
+  public abstract void register(m68k.cpu.InstructionSet);
+}
+Compiled from "InstructionSet.java"
+public interface m68k.cpu.InstructionSet {
+  public abstract void addInstruction(int, m68k.cpu.Instruction);
+}
+Compiled from "InstructionType.java"
+public final class m68k.cpu.InstructionType extends java.lang.Enum<m68k.cpu.InstructionType> {
+  public static final m68k.cpu.InstructionType ADD;
+  public static final m68k.cpu.InstructionType ADDX;
+  public static final m68k.cpu.InstructionType AND;
+  public static final m68k.cpu.InstructionType ASL;
+  public static final m68k.cpu.InstructionType ASR;
+  public static final m68k.cpu.InstructionType CMP;
+  public static final m68k.cpu.InstructionType EOR;
+  public static final m68k.cpu.InstructionType LSL;
+  public static final m68k.cpu.InstructionType LSR;
+  public static final m68k.cpu.InstructionType MOVE;
+  public static final m68k.cpu.InstructionType NEG;
+  public static final m68k.cpu.InstructionType NEGX;
+  public static final m68k.cpu.InstructionType NOT;
+  public static final m68k.cpu.InstructionType OR;
+  public static final m68k.cpu.InstructionType ROL;
+  public static final m68k.cpu.InstructionType ROR;
+  public static final m68k.cpu.InstructionType ROXL;
+  public static final m68k.cpu.InstructionType ROXR;
+  public static final m68k.cpu.InstructionType SUB;
+  public static final m68k.cpu.InstructionType SUBX;
+  public static final m68k.cpu.InstructionType SWAP;
+  public static m68k.cpu.InstructionType[] values();
+  public static m68k.cpu.InstructionType valueOf(java.lang.String);
+  static {};
+}
+Compiled from "MC68000.java"
+public class m68k.cpu.MC68000 extends m68k.cpu.CpuCore implements m68k.cpu.InstructionSet {
+  protected m68k.cpu.Instruction[] i_table;
+  protected final m68k.cpu.Instruction unknown;
+  protected int loaded_ops;
+  public m68k.cpu.MC68000();
+  public int execute();
+  protected void loadInstructionSet();
+  public void addInstruction(int, m68k.cpu.Instruction);
+  public m68k.cpu.Instruction getInstructionFor(int);
+  public m68k.cpu.Instruction getInstructionAt(int);
+}
+Compiled from "MC68000Test.java"
+public class m68k.cpu.MC68000Test extends junit.framework.TestCase {
+  m68k.memory.AddressSpace bus;
+  m68k.cpu.Cpu cpu;
+  public m68k.cpu.MC68000Test();
+  public void setUp();
+  public void testDataRegs();
+  public void testAddrRegs();
+  public void testPC();
+  public void testFlags();
+  public void testException();
+}
+Compiled from "Operand.java"
+public interface m68k.cpu.Operand {
+  public abstract void init(int, m68k.cpu.Size);
+  public abstract int getByte();
+  public abstract int getWord();
+  public abstract int getLong();
+  public abstract int getByteSigned();
+  public abstract int getWordSigned();
+  public abstract void setByte(int);
+  public abstract void setWord(int);
+  public abstract void setLong(int);
+  public abstract boolean isRegisterMode();
+  public abstract boolean isSR();
+  public abstract int getTiming();
+  public abstract int getComputedAddress();
+  public abstract int index();
+}
+Compiled from "Size.java"
+public final class m68k.cpu.Size extends java.lang.Enum<m68k.cpu.Size> {
+  public static final m68k.cpu.Size Byte;
+  public static final m68k.cpu.Size Word;
+  public static final m68k.cpu.Size Long;
+  public static final m68k.cpu.Size Unsized;
+  public static m68k.cpu.Size[] values();
+  public static m68k.cpu.Size valueOf(java.lang.String);
+  public final int byteCount();
+  public final java.lang.String ext();
+  public final int msb();
+  static {};
+}
+Compiled from "ABCD.java"
+public class m68k.cpu.instructions.ABCD implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.ABCD(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+  protected final int abcd_dr(int);
+  protected final int abcd_ar(int);
+  protected final int doCalc(int, int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, boolean);
+}
+Compiled from "ABCD.java"
+class m68k.cpu.instructions.ABCD$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ABCD this$0;
+  m68k.cpu.instructions.ABCD$1(m68k.cpu.instructions.ABCD);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ABCD.java"
+class m68k.cpu.instructions.ABCD$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ABCD this$0;
+  m68k.cpu.instructions.ABCD$2(m68k.cpu.instructions.ABCD);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ADD.java"
+public class m68k.cpu.instructions.ADD implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.ADD(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+  protected final int add_byte_dn_dest(int);
+  protected final int add_byte_ea_dest(int);
+  protected final int add_word_dn_dest(int);
+  protected final int add_word_ea_dest(int);
+  protected final int add_long_dn_dest(int);
+  protected final int add_long_ea_dest(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "ADD.java"
+class m68k.cpu.instructions.ADD$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ADD this$0;
+  m68k.cpu.instructions.ADD$1(m68k.cpu.instructions.ADD);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ADD.java"
+class m68k.cpu.instructions.ADD$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ADD this$0;
+  m68k.cpu.instructions.ADD$2(m68k.cpu.instructions.ADD);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ADD.java"
+class m68k.cpu.instructions.ADD$3 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ADD this$0;
+  m68k.cpu.instructions.ADD$3(m68k.cpu.instructions.ADD);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ADD.java"
+class m68k.cpu.instructions.ADD$4 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ADD this$0;
+  m68k.cpu.instructions.ADD$4(m68k.cpu.instructions.ADD);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ADD.java"
+class m68k.cpu.instructions.ADD$5 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ADD this$0;
+  m68k.cpu.instructions.ADD$5(m68k.cpu.instructions.ADD);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ADD.java"
+class m68k.cpu.instructions.ADD$6 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ADD this$0;
+  m68k.cpu.instructions.ADD$6(m68k.cpu.instructions.ADD);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ADDA.java"
+public class m68k.cpu.instructions.ADDA implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.ADDA(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+  protected final int adda_word(int);
+  protected final int adda_long(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "ADDA.java"
+class m68k.cpu.instructions.ADDA$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ADDA this$0;
+  m68k.cpu.instructions.ADDA$1(m68k.cpu.instructions.ADDA);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ADDA.java"
+class m68k.cpu.instructions.ADDA$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ADDA this$0;
+  m68k.cpu.instructions.ADDA$2(m68k.cpu.instructions.ADDA);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ADDI.java"
+public class m68k.cpu.instructions.ADDI implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.ADDI(m68k.cpu.Cpu);
+  public void register(m68k.cpu.InstructionSet);
+  protected int addi_byte(int);
+  protected int addi_word(int);
+  protected int addi_long(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "ADDI.java"
+class m68k.cpu.instructions.ADDI$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ADDI this$0;
+  m68k.cpu.instructions.ADDI$1(m68k.cpu.instructions.ADDI);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ADDI.java"
+class m68k.cpu.instructions.ADDI$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ADDI this$0;
+  m68k.cpu.instructions.ADDI$2(m68k.cpu.instructions.ADDI);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ADDI.java"
+class m68k.cpu.instructions.ADDI$3 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ADDI this$0;
+  m68k.cpu.instructions.ADDI$3(m68k.cpu.instructions.ADDI);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ADDI.java"
+class m68k.cpu.instructions.ADDI$4 {
+  static final int[] $SwitchMap$m68k$cpu$Size;
+  static {};
+}
+Compiled from "ADDQ.java"
+public class m68k.cpu.instructions.ADDQ implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.ADDQ(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+  protected final int addq_byte(int);
+  protected final int addq_word(int);
+  protected final int addq_long(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "ADDQ.java"
+class m68k.cpu.instructions.ADDQ$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ADDQ this$0;
+  m68k.cpu.instructions.ADDQ$1(m68k.cpu.instructions.ADDQ);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ADDQ.java"
+class m68k.cpu.instructions.ADDQ$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ADDQ this$0;
+  m68k.cpu.instructions.ADDQ$2(m68k.cpu.instructions.ADDQ);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ADDQ.java"
+class m68k.cpu.instructions.ADDQ$3 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ADDQ this$0;
+  m68k.cpu.instructions.ADDQ$3(m68k.cpu.instructions.ADDQ);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ADDTest.java"
+public class m68k.cpu.instructions.ADDTest extends junit.framework.TestCase {
+  m68k.memory.AddressSpace bus;
+  m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.ADDTest();
+  public void setUp();
+  public void testADD();
+}
+Compiled from "ADDX.java"
+public class m68k.cpu.instructions.ADDX implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.ADDX(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+  protected int addx_byte_reg(int);
+  protected int addx_word_reg(int);
+  protected int addx_long_reg(int);
+  protected int addx_byte_mem(int);
+  protected int addx_word_mem(int);
+  protected int addx_long_mem(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "ADDX.java"
+class m68k.cpu.instructions.ADDX$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ADDX this$0;
+  m68k.cpu.instructions.ADDX$1(m68k.cpu.instructions.ADDX);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ADDX.java"
+class m68k.cpu.instructions.ADDX$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ADDX this$0;
+  m68k.cpu.instructions.ADDX$2(m68k.cpu.instructions.ADDX);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ADDX.java"
+class m68k.cpu.instructions.ADDX$3 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ADDX this$0;
+  m68k.cpu.instructions.ADDX$3(m68k.cpu.instructions.ADDX);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ADDX.java"
+class m68k.cpu.instructions.ADDX$4 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ADDX this$0;
+  m68k.cpu.instructions.ADDX$4(m68k.cpu.instructions.ADDX);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ADDX.java"
+class m68k.cpu.instructions.ADDX$5 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ADDX this$0;
+  m68k.cpu.instructions.ADDX$5(m68k.cpu.instructions.ADDX);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ADDX.java"
+class m68k.cpu.instructions.ADDX$6 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ADDX this$0;
+  m68k.cpu.instructions.ADDX$6(m68k.cpu.instructions.ADDX);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "AND.java"
+public class m68k.cpu.instructions.AND implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.AND(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+  protected final int and_byte_dn_dest(int);
+  protected final int and_byte_ea_dest(int);
+  protected final int and_word_dn_dest(int);
+  protected final int and_word_ea_dest(int);
+  protected final int and_long_dn_dest(int);
+  protected final int and_long_ea_dest(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "AND.java"
+class m68k.cpu.instructions.AND$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.AND this$0;
+  m68k.cpu.instructions.AND$1(m68k.cpu.instructions.AND);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "AND.java"
+class m68k.cpu.instructions.AND$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.AND this$0;
+  m68k.cpu.instructions.AND$2(m68k.cpu.instructions.AND);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "AND.java"
+class m68k.cpu.instructions.AND$3 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.AND this$0;
+  m68k.cpu.instructions.AND$3(m68k.cpu.instructions.AND);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "AND.java"
+class m68k.cpu.instructions.AND$4 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.AND this$0;
+  m68k.cpu.instructions.AND$4(m68k.cpu.instructions.AND);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "AND.java"
+class m68k.cpu.instructions.AND$5 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.AND this$0;
+  m68k.cpu.instructions.AND$5(m68k.cpu.instructions.AND);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "AND.java"
+class m68k.cpu.instructions.AND$6 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.AND this$0;
+  m68k.cpu.instructions.AND$6(m68k.cpu.instructions.AND);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ANDI.java"
+public class m68k.cpu.instructions.ANDI implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.ANDI(m68k.cpu.Cpu);
+  public void register(m68k.cpu.InstructionSet);
+  protected int andi_byte(int);
+  protected int andi_word(int);
+  protected int andi_long(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "ANDI.java"
+class m68k.cpu.instructions.ANDI$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ANDI this$0;
+  m68k.cpu.instructions.ANDI$1(m68k.cpu.instructions.ANDI);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ANDI.java"
+class m68k.cpu.instructions.ANDI$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ANDI this$0;
+  m68k.cpu.instructions.ANDI$2(m68k.cpu.instructions.ANDI);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ANDI.java"
+class m68k.cpu.instructions.ANDI$3 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ANDI this$0;
+  m68k.cpu.instructions.ANDI$3(m68k.cpu.instructions.ANDI);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ANDI.java"
+class m68k.cpu.instructions.ANDI$4 {
+  static final int[] $SwitchMap$m68k$cpu$Size;
+  static {};
+}
+Compiled from "ANDI_TO_CCR.java"
+public class m68k.cpu.instructions.ANDI_TO_CCR implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.ANDI_TO_CCR(m68k.cpu.Cpu);
+  public void register(m68k.cpu.InstructionSet);
+  protected int andi_word(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "ANDI_TO_CCR.java"
+class m68k.cpu.instructions.ANDI_TO_CCR$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ANDI_TO_CCR this$0;
+  m68k.cpu.instructions.ANDI_TO_CCR$1(m68k.cpu.instructions.ANDI_TO_CCR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ANDI_TO_CCR.java"
+class m68k.cpu.instructions.ANDI_TO_CCR$2 {
+  static final int[] $SwitchMap$m68k$cpu$Size;
+  static {};
+}
+Compiled from "ANDI_TO_SR.java"
+public class m68k.cpu.instructions.ANDI_TO_SR implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.ANDI_TO_SR(m68k.cpu.Cpu);
+  public void register(m68k.cpu.InstructionSet);
+  protected int andi_word(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "ANDI_TO_SR.java"
+class m68k.cpu.instructions.ANDI_TO_SR$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ANDI_TO_SR this$0;
+  m68k.cpu.instructions.ANDI_TO_SR$1(m68k.cpu.instructions.ANDI_TO_SR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ASL.java"
+public class m68k.cpu.instructions.ASL implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.ASL(m68k.cpu.Cpu);
+  public void register(m68k.cpu.InstructionSet);
+  protected int asl_byte_imm(int);
+  protected int asl_word_imm(int);
+  protected int asl_long_imm(int);
+  protected int asl_byte_reg(int);
+  protected int asl_word_reg(int);
+  protected int asl_long_reg(int);
+  protected int asl_word_mem(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "ASL.java"
+class m68k.cpu.instructions.ASL$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ASL this$0;
+  m68k.cpu.instructions.ASL$1(m68k.cpu.instructions.ASL);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ASL.java"
+class m68k.cpu.instructions.ASL$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ASL this$0;
+  m68k.cpu.instructions.ASL$2(m68k.cpu.instructions.ASL);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ASL.java"
+class m68k.cpu.instructions.ASL$3 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ASL this$0;
+  m68k.cpu.instructions.ASL$3(m68k.cpu.instructions.ASL);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ASL.java"
+class m68k.cpu.instructions.ASL$4 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ASL this$0;
+  m68k.cpu.instructions.ASL$4(m68k.cpu.instructions.ASL);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ASL.java"
+class m68k.cpu.instructions.ASL$5 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ASL this$0;
+  m68k.cpu.instructions.ASL$5(m68k.cpu.instructions.ASL);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ASL.java"
+class m68k.cpu.instructions.ASL$6 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ASL this$0;
+  m68k.cpu.instructions.ASL$6(m68k.cpu.instructions.ASL);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ASL.java"
+class m68k.cpu.instructions.ASL$7 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ASL this$0;
+  m68k.cpu.instructions.ASL$7(m68k.cpu.instructions.ASL);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ASR.java"
+public class m68k.cpu.instructions.ASR implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.ASR(m68k.cpu.Cpu);
+  public void register(m68k.cpu.InstructionSet);
+  protected int asr_byte_imm(int);
+  protected int asr_word_imm(int);
+  protected int asr_long_imm(int);
+  protected int asr_byte_reg(int);
+  protected int asr_word_reg(int);
+  protected int asr_long_reg(int);
+  protected int asr_word_mem(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "ASR.java"
+class m68k.cpu.instructions.ASR$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ASR this$0;
+  m68k.cpu.instructions.ASR$1(m68k.cpu.instructions.ASR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ASR.java"
+class m68k.cpu.instructions.ASR$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ASR this$0;
+  m68k.cpu.instructions.ASR$2(m68k.cpu.instructions.ASR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ASR.java"
+class m68k.cpu.instructions.ASR$3 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ASR this$0;
+  m68k.cpu.instructions.ASR$3(m68k.cpu.instructions.ASR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ASR.java"
+class m68k.cpu.instructions.ASR$4 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ASR this$0;
+  m68k.cpu.instructions.ASR$4(m68k.cpu.instructions.ASR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ASR.java"
+class m68k.cpu.instructions.ASR$5 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ASR this$0;
+  m68k.cpu.instructions.ASR$5(m68k.cpu.instructions.ASR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ASR.java"
+class m68k.cpu.instructions.ASR$6 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ASR this$0;
+  m68k.cpu.instructions.ASR$6(m68k.cpu.instructions.ASR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ASR.java"
+class m68k.cpu.instructions.ASR$7 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ASR this$0;
+  m68k.cpu.instructions.ASR$7(m68k.cpu.instructions.ASR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "BCHG.java"
+public class m68k.cpu.instructions.BCHG implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.BCHG(m68k.cpu.Cpu);
+  public void register(m68k.cpu.InstructionSet);
+  protected final int bchg_dyn_byte(int);
+  protected final int bchg_dyn_long(int);
+  protected final int bchg_static_byte(int);
+  protected final int bchg_static_long(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "BCHG.java"
+class m68k.cpu.instructions.BCHG$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.BCHG this$0;
+  m68k.cpu.instructions.BCHG$1(m68k.cpu.instructions.BCHG);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "BCHG.java"
+class m68k.cpu.instructions.BCHG$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.BCHG this$0;
+  m68k.cpu.instructions.BCHG$2(m68k.cpu.instructions.BCHG);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "BCHG.java"
+class m68k.cpu.instructions.BCHG$3 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.BCHG this$0;
+  m68k.cpu.instructions.BCHG$3(m68k.cpu.instructions.BCHG);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "BCHG.java"
+class m68k.cpu.instructions.BCHG$4 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.BCHG this$0;
+  m68k.cpu.instructions.BCHG$4(m68k.cpu.instructions.BCHG);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "BCLR.java"
+public class m68k.cpu.instructions.BCLR implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.BCLR(m68k.cpu.Cpu);
+  public void register(m68k.cpu.InstructionSet);
+  protected final int bclr_dyn_byte(int);
+  protected final int bclr_dyn_long(int);
+  protected final int bclr_static_byte(int);
+  protected final int bclr_static_long(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "BCLR.java"
+class m68k.cpu.instructions.BCLR$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.BCLR this$0;
+  m68k.cpu.instructions.BCLR$1(m68k.cpu.instructions.BCLR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "BCLR.java"
+class m68k.cpu.instructions.BCLR$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.BCLR this$0;
+  m68k.cpu.instructions.BCLR$2(m68k.cpu.instructions.BCLR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "BCLR.java"
+class m68k.cpu.instructions.BCLR$3 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.BCLR this$0;
+  m68k.cpu.instructions.BCLR$3(m68k.cpu.instructions.BCLR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "BCLR.java"
+class m68k.cpu.instructions.BCLR$4 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.BCLR this$0;
+  m68k.cpu.instructions.BCLR$4(m68k.cpu.instructions.BCLR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "BSET.java"
+public class m68k.cpu.instructions.BSET implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.BSET(m68k.cpu.Cpu);
+  public void register(m68k.cpu.InstructionSet);
+  protected final int bset_dyn_byte(int);
+  protected final int bset_dyn_long(int);
+  protected final int bset_static_byte(int);
+  protected final int bset_static_long(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "BSET.java"
+class m68k.cpu.instructions.BSET$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.BSET this$0;
+  m68k.cpu.instructions.BSET$1(m68k.cpu.instructions.BSET);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "BSET.java"
+class m68k.cpu.instructions.BSET$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.BSET this$0;
+  m68k.cpu.instructions.BSET$2(m68k.cpu.instructions.BSET);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "BSET.java"
+class m68k.cpu.instructions.BSET$3 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.BSET this$0;
+  m68k.cpu.instructions.BSET$3(m68k.cpu.instructions.BSET);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "BSET.java"
+class m68k.cpu.instructions.BSET$4 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.BSET this$0;
+  m68k.cpu.instructions.BSET$4(m68k.cpu.instructions.BSET);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "BTST.java"
+public class m68k.cpu.instructions.BTST implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.BTST(m68k.cpu.Cpu);
+  public void register(m68k.cpu.InstructionSet);
+  protected final int btst_dyn_byte(int);
+  protected final int btst_dyn_long(int);
+  protected final int btst_static_byte(int);
+  protected final int btst_static_long(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "BTST.java"
+class m68k.cpu.instructions.BTST$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.BTST this$0;
+  m68k.cpu.instructions.BTST$1(m68k.cpu.instructions.BTST);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "BTST.java"
+class m68k.cpu.instructions.BTST$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.BTST this$0;
+  m68k.cpu.instructions.BTST$2(m68k.cpu.instructions.BTST);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "BTST.java"
+class m68k.cpu.instructions.BTST$3 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.BTST this$0;
+  m68k.cpu.instructions.BTST$3(m68k.cpu.instructions.BTST);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "BTST.java"
+class m68k.cpu.instructions.BTST$4 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.BTST this$0;
+  m68k.cpu.instructions.BTST$4(m68k.cpu.instructions.BTST);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "Bcc.java"
+public class m68k.cpu.instructions.Bcc implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  protected static final java.lang.String[] names;
+  public m68k.cpu.instructions.Bcc(m68k.cpu.Cpu);
+  public void register(m68k.cpu.InstructionSet);
+  protected final int bxx_byte(int);
+  protected final int bxx_word(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int);
+  static {};
+}
+Compiled from "Bcc.java"
+class m68k.cpu.instructions.Bcc$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.Bcc this$0;
+  m68k.cpu.instructions.Bcc$1(m68k.cpu.instructions.Bcc);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "Bcc.java"
+class m68k.cpu.instructions.Bcc$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.Bcc this$0;
+  m68k.cpu.instructions.Bcc$2(m68k.cpu.instructions.Bcc);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "CHK.java"
+public class m68k.cpu.instructions.CHK implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.CHK(m68k.cpu.Cpu);
+  public void register(m68k.cpu.InstructionSet);
+  protected final int chk(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "CHK.java"
+class m68k.cpu.instructions.CHK$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.CHK this$0;
+  m68k.cpu.instructions.CHK$1(m68k.cpu.instructions.CHK);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "CLR.java"
+public class m68k.cpu.instructions.CLR implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.CLR(m68k.cpu.Cpu);
+  public void register(m68k.cpu.InstructionSet);
+  protected final int clr_byte(int);
+  protected final int clr_word(int);
+  protected final int clr_long(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "CLR.java"
+class m68k.cpu.instructions.CLR$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.CLR this$0;
+  m68k.cpu.instructions.CLR$1(m68k.cpu.instructions.CLR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "CLR.java"
+class m68k.cpu.instructions.CLR$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.CLR this$0;
+  m68k.cpu.instructions.CLR$2(m68k.cpu.instructions.CLR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "CLR.java"
+class m68k.cpu.instructions.CLR$3 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.CLR this$0;
+  m68k.cpu.instructions.CLR$3(m68k.cpu.instructions.CLR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "CMP.java"
+public class m68k.cpu.instructions.CMP implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.CMP(m68k.cpu.Cpu);
+  public void register(m68k.cpu.InstructionSet);
+  protected final int cmp_byte(int);
+  protected final int cmp_word(int);
+  protected final int cmp_long(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "CMP.java"
+class m68k.cpu.instructions.CMP$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.CMP this$0;
+  m68k.cpu.instructions.CMP$1(m68k.cpu.instructions.CMP);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "CMP.java"
+class m68k.cpu.instructions.CMP$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.CMP this$0;
+  m68k.cpu.instructions.CMP$2(m68k.cpu.instructions.CMP);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "CMP.java"
+class m68k.cpu.instructions.CMP$3 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.CMP this$0;
+  m68k.cpu.instructions.CMP$3(m68k.cpu.instructions.CMP);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "CMPA.java"
+public class m68k.cpu.instructions.CMPA implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.CMPA(m68k.cpu.Cpu);
+  public void register(m68k.cpu.InstructionSet);
+  protected final int cmpa_word(int);
+  protected final int cmpa_long(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "CMPA.java"
+class m68k.cpu.instructions.CMPA$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.CMPA this$0;
+  m68k.cpu.instructions.CMPA$1(m68k.cpu.instructions.CMPA);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "CMPA.java"
+class m68k.cpu.instructions.CMPA$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.CMPA this$0;
+  m68k.cpu.instructions.CMPA$2(m68k.cpu.instructions.CMPA);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "CMPI.java"
+public class m68k.cpu.instructions.CMPI implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.CMPI(m68k.cpu.Cpu);
+  public void register(m68k.cpu.InstructionSet);
+  protected final int cmpi_byte(int);
+  protected final int cmpi_word(int);
+  protected final int cmpi_long(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "CMPI.java"
+class m68k.cpu.instructions.CMPI$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.CMPI this$0;
+  m68k.cpu.instructions.CMPI$1(m68k.cpu.instructions.CMPI);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "CMPI.java"
+class m68k.cpu.instructions.CMPI$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.CMPI this$0;
+  m68k.cpu.instructions.CMPI$2(m68k.cpu.instructions.CMPI);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "CMPI.java"
+class m68k.cpu.instructions.CMPI$3 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.CMPI this$0;
+  m68k.cpu.instructions.CMPI$3(m68k.cpu.instructions.CMPI);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "CMPI.java"
+class m68k.cpu.instructions.CMPI$4 {
+  static final int[] $SwitchMap$m68k$cpu$Size;
+  static {};
+}
+Compiled from "CMPM.java"
+public class m68k.cpu.instructions.CMPM implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.CMPM(m68k.cpu.Cpu);
+  public void register(m68k.cpu.InstructionSet);
+  protected final int cmpm_byte(int);
+  protected final int cmpm_word(int);
+  protected final int cmpm_long(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "CMPM.java"
+class m68k.cpu.instructions.CMPM$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.CMPM this$0;
+  m68k.cpu.instructions.CMPM$1(m68k.cpu.instructions.CMPM);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "CMPM.java"
+class m68k.cpu.instructions.CMPM$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.CMPM this$0;
+  m68k.cpu.instructions.CMPM$2(m68k.cpu.instructions.CMPM);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "CMPM.java"
+class m68k.cpu.instructions.CMPM$3 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.CMPM this$0;
+  m68k.cpu.instructions.CMPM$3(m68k.cpu.instructions.CMPM);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "DBcc.java"
+public class m68k.cpu.instructions.DBcc implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  protected static final java.lang.String[] names;
+  public m68k.cpu.instructions.DBcc(m68k.cpu.Cpu);
+  public void register(m68k.cpu.InstructionSet);
+  protected final int dbxx(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int);
+  static {};
+}
+Compiled from "DBcc.java"
+class m68k.cpu.instructions.DBcc$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.DBcc this$0;
+  m68k.cpu.instructions.DBcc$1(m68k.cpu.instructions.DBcc);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "DIVS.java"
+public class m68k.cpu.instructions.DIVS implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.DIVS(m68k.cpu.Cpu);
+  public void register(m68k.cpu.InstructionSet);
+  protected final int divs(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "DIVS.java"
+class m68k.cpu.instructions.DIVS$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.DIVS this$0;
+  m68k.cpu.instructions.DIVS$1(m68k.cpu.instructions.DIVS);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "DIVU.java"
+public class m68k.cpu.instructions.DIVU implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.DIVU(m68k.cpu.Cpu);
+  public void register(m68k.cpu.InstructionSet);
+  protected final int divu(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "DIVU.java"
+class m68k.cpu.instructions.DIVU$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.DIVU this$0;
+  m68k.cpu.instructions.DIVU$1(m68k.cpu.instructions.DIVU);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "EOR.java"
+public class m68k.cpu.instructions.EOR implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.EOR(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+  protected final int eor_byte(int);
+  protected final int eor_word(int);
+  protected final int eor_long(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "EOR.java"
+class m68k.cpu.instructions.EOR$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.EOR this$0;
+  m68k.cpu.instructions.EOR$1(m68k.cpu.instructions.EOR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "EOR.java"
+class m68k.cpu.instructions.EOR$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.EOR this$0;
+  m68k.cpu.instructions.EOR$2(m68k.cpu.instructions.EOR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "EOR.java"
+class m68k.cpu.instructions.EOR$3 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.EOR this$0;
+  m68k.cpu.instructions.EOR$3(m68k.cpu.instructions.EOR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "EORI.java"
+public class m68k.cpu.instructions.EORI implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.EORI(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+  protected final int eori_byte(int);
+  protected final int eori_word(int);
+  protected final int eori_long(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "EORI.java"
+class m68k.cpu.instructions.EORI$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.EORI this$0;
+  m68k.cpu.instructions.EORI$1(m68k.cpu.instructions.EORI);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "EORI.java"
+class m68k.cpu.instructions.EORI$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.EORI this$0;
+  m68k.cpu.instructions.EORI$2(m68k.cpu.instructions.EORI);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "EORI.java"
+class m68k.cpu.instructions.EORI$3 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.EORI this$0;
+  m68k.cpu.instructions.EORI$3(m68k.cpu.instructions.EORI);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "EORI.java"
+class m68k.cpu.instructions.EORI$4 {
+  static final int[] $SwitchMap$m68k$cpu$Size;
+  static {};
+}
+Compiled from "EORI_TO_CCR.java"
+public class m68k.cpu.instructions.EORI_TO_CCR implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.EORI_TO_CCR(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+  protected final int eori_word(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "EORI_TO_CCR.java"
+class m68k.cpu.instructions.EORI_TO_CCR$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.EORI_TO_CCR this$0;
+  m68k.cpu.instructions.EORI_TO_CCR$1(m68k.cpu.instructions.EORI_TO_CCR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "EORI_TO_SR.java"
+public class m68k.cpu.instructions.EORI_TO_SR implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.EORI_TO_SR(m68k.cpu.Cpu);
+  public void register(m68k.cpu.InstructionSet);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "EORI_TO_SR.java"
+class m68k.cpu.instructions.EORI_TO_SR$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.EORI_TO_SR this$0;
+  m68k.cpu.instructions.EORI_TO_SR$1(m68k.cpu.instructions.EORI_TO_SR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "EXG.java"
+public class m68k.cpu.instructions.EXG implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.EXG(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+  protected final int exg_dd(int);
+  protected final int exg_aa(int);
+  protected final int exg_da(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.instructions.EXG$ExgMode);
+}
+Compiled from "EXG.java"
+class m68k.cpu.instructions.EXG$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.EXG this$0;
+  m68k.cpu.instructions.EXG$1(m68k.cpu.instructions.EXG);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "EXG.java"
+class m68k.cpu.instructions.EXG$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.EXG this$0;
+  m68k.cpu.instructions.EXG$2(m68k.cpu.instructions.EXG);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "EXG.java"
+class m68k.cpu.instructions.EXG$3 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.EXG this$0;
+  m68k.cpu.instructions.EXG$3(m68k.cpu.instructions.EXG);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "EXG.java"
+class m68k.cpu.instructions.EXG$4 {
+  static final int[] $SwitchMap$m68k$cpu$instructions$EXG$ExgMode;
+  static {};
+}
+Compiled from "EXG.java"
+final class m68k.cpu.instructions.EXG$ExgMode extends java.lang.Enum<m68k.cpu.instructions.EXG$ExgMode> {
+  public static final m68k.cpu.instructions.EXG$ExgMode EXG_DATA;
+  public static final m68k.cpu.instructions.EXG$ExgMode EXG_ADDR;
+  public static final m68k.cpu.instructions.EXG$ExgMode EXG_DATA_ADDR;
+  public static m68k.cpu.instructions.EXG$ExgMode[] values();
+  public static m68k.cpu.instructions.EXG$ExgMode valueOf(java.lang.String);
+  static {};
+}
+Compiled from "EXT.java"
+public class m68k.cpu.instructions.EXT implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.EXT(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+  protected final int ext_byte_to_word(int);
+  protected final int ext_word_to_long(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "EXT.java"
+class m68k.cpu.instructions.EXT$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.EXT this$0;
+  m68k.cpu.instructions.EXT$1(m68k.cpu.instructions.EXT);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "EXT.java"
+class m68k.cpu.instructions.EXT$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.EXT this$0;
+  m68k.cpu.instructions.EXT$2(m68k.cpu.instructions.EXT);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ILLEGAL.java"
+public class m68k.cpu.instructions.ILLEGAL implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.ILLEGAL(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+}
+Compiled from "ILLEGAL.java"
+class m68k.cpu.instructions.ILLEGAL$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ILLEGAL this$0;
+  m68k.cpu.instructions.ILLEGAL$1(m68k.cpu.instructions.ILLEGAL);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "JMP.java"
+public class m68k.cpu.instructions.JMP implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  protected static final int[] TIMING;
+  public m68k.cpu.instructions.JMP(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+  protected final int jmp(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+  static {};
+}
+Compiled from "JMP.java"
+class m68k.cpu.instructions.JMP$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.JMP this$0;
+  m68k.cpu.instructions.JMP$1(m68k.cpu.instructions.JMP);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "JSR.java"
+public class m68k.cpu.instructions.JSR implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  protected static final int[] TIMING;
+  public m68k.cpu.instructions.JSR(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+  protected final int jsr(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+  static {};
+}
+Compiled from "JSR.java"
+class m68k.cpu.instructions.JSR$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.JSR this$0;
+  m68k.cpu.instructions.JSR$1(m68k.cpu.instructions.JSR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "LEA.java"
+public class m68k.cpu.instructions.LEA implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  protected static final int[] TIMING;
+  public m68k.cpu.instructions.LEA(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+  protected final int lea(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+  static {};
+}
+Compiled from "LEA.java"
+class m68k.cpu.instructions.LEA$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.LEA this$0;
+  m68k.cpu.instructions.LEA$1(m68k.cpu.instructions.LEA);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "LINK.java"
+public class m68k.cpu.instructions.LINK implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.LINK(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+  protected int link(int);
+  public final m68k.cpu.DisassembledInstruction disassembleOp(int, int);
+}
+Compiled from "LINK.java"
+class m68k.cpu.instructions.LINK$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.LINK this$0;
+  m68k.cpu.instructions.LINK$1(m68k.cpu.instructions.LINK);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "LSL.java"
+public class m68k.cpu.instructions.LSL implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.LSL(m68k.cpu.Cpu);
+  public void register(m68k.cpu.InstructionSet);
+  protected int lsl_byte_imm(int);
+  protected int lsl_word_imm(int);
+  protected int lsl_long_imm(int);
+  protected int lsl_byte_reg(int);
+  protected int lsl_word_reg(int);
+  protected int lsl_long_reg(int);
+  protected int lsl_word_mem(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "LSL.java"
+class m68k.cpu.instructions.LSL$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.LSL this$0;
+  m68k.cpu.instructions.LSL$1(m68k.cpu.instructions.LSL);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "LSL.java"
+class m68k.cpu.instructions.LSL$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.LSL this$0;
+  m68k.cpu.instructions.LSL$2(m68k.cpu.instructions.LSL);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "LSL.java"
+class m68k.cpu.instructions.LSL$3 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.LSL this$0;
+  m68k.cpu.instructions.LSL$3(m68k.cpu.instructions.LSL);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "LSL.java"
+class m68k.cpu.instructions.LSL$4 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.LSL this$0;
+  m68k.cpu.instructions.LSL$4(m68k.cpu.instructions.LSL);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "LSL.java"
+class m68k.cpu.instructions.LSL$5 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.LSL this$0;
+  m68k.cpu.instructions.LSL$5(m68k.cpu.instructions.LSL);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "LSL.java"
+class m68k.cpu.instructions.LSL$6 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.LSL this$0;
+  m68k.cpu.instructions.LSL$6(m68k.cpu.instructions.LSL);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "LSL.java"
+class m68k.cpu.instructions.LSL$7 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.LSL this$0;
+  m68k.cpu.instructions.LSL$7(m68k.cpu.instructions.LSL);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "LSR.java"
+public class m68k.cpu.instructions.LSR implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.LSR(m68k.cpu.Cpu);
+  public void register(m68k.cpu.InstructionSet);
+  protected int lsr_byte_imm(int);
+  protected int lsr_word_imm(int);
+  protected int lsr_long_imm(int);
+  protected int lsr_byte_reg(int);
+  protected int lsr_word_reg(int);
+  protected int lsr_long_reg(int);
+  protected int lsr_word_mem(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "LSR.java"
+class m68k.cpu.instructions.LSR$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.LSR this$0;
+  m68k.cpu.instructions.LSR$1(m68k.cpu.instructions.LSR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "LSR.java"
+class m68k.cpu.instructions.LSR$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.LSR this$0;
+  m68k.cpu.instructions.LSR$2(m68k.cpu.instructions.LSR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "LSR.java"
+class m68k.cpu.instructions.LSR$3 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.LSR this$0;
+  m68k.cpu.instructions.LSR$3(m68k.cpu.instructions.LSR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "LSR.java"
+class m68k.cpu.instructions.LSR$4 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.LSR this$0;
+  m68k.cpu.instructions.LSR$4(m68k.cpu.instructions.LSR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "LSR.java"
+class m68k.cpu.instructions.LSR$5 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.LSR this$0;
+  m68k.cpu.instructions.LSR$5(m68k.cpu.instructions.LSR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "LSR.java"
+class m68k.cpu.instructions.LSR$6 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.LSR this$0;
+  m68k.cpu.instructions.LSR$6(m68k.cpu.instructions.LSR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "LSR.java"
+class m68k.cpu.instructions.LSR$7 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.LSR this$0;
+  m68k.cpu.instructions.LSR$7(m68k.cpu.instructions.LSR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "MOVE.java"
+public class m68k.cpu.instructions.MOVE implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  static final int[][] ShortExecutionTime;
+  static final int[][] LongExecutionTime;
+  public m68k.cpu.instructions.MOVE(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+  protected final int move_byte(int);
+  protected final int move_word(int);
+  protected final int move_long(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+  static {};
+}
+Compiled from "MOVE.java"
+class m68k.cpu.instructions.MOVE$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.MOVE this$0;
+  m68k.cpu.instructions.MOVE$1(m68k.cpu.instructions.MOVE);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "MOVE.java"
+class m68k.cpu.instructions.MOVE$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.MOVE this$0;
+  m68k.cpu.instructions.MOVE$2(m68k.cpu.instructions.MOVE);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "MOVE.java"
+class m68k.cpu.instructions.MOVE$3 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.MOVE this$0;
+  m68k.cpu.instructions.MOVE$3(m68k.cpu.instructions.MOVE);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "MOVEA.java"
+public class m68k.cpu.instructions.MOVEA implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.MOVEA(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+  protected final int movea_word(int);
+  protected final int movea_long(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "MOVEA.java"
+class m68k.cpu.instructions.MOVEA$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.MOVEA this$0;
+  m68k.cpu.instructions.MOVEA$1(m68k.cpu.instructions.MOVEA);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "MOVEA.java"
+class m68k.cpu.instructions.MOVEA$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.MOVEA this$0;
+  m68k.cpu.instructions.MOVEA$2(m68k.cpu.instructions.MOVEA);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "MOVEM.java"
+public class m68k.cpu.instructions.MOVEM implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.MOVEM(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+  protected final int movem_word_r2m(int);
+  protected final int movem_long_r2m(int);
+  protected final int movem_word_m2r(int);
+  protected final int movem_long_m2r(int);
+  public final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size, boolean);
+  protected final java.lang.String regListToString(int, boolean);
+  protected int getMultipleWord(int, int);
+  protected final int getMultipleWordPostInc(int, int, int);
+  protected int getMultipleLong(int, int);
+  protected final int getMultipleLongPostInc(int, int, int);
+  protected final int putMultipleWord(int, int);
+  protected final int putMultipleWordPreDec(int, int, int);
+  protected final int putMultipleLong(int, int);
+  protected final int putMultipleLongPreDec(int, int, int);
+  static {};
+}
+Compiled from "MOVEM.java"
+class m68k.cpu.instructions.MOVEM$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.MOVEM this$0;
+  m68k.cpu.instructions.MOVEM$1(m68k.cpu.instructions.MOVEM);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "MOVEM.java"
+class m68k.cpu.instructions.MOVEM$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.MOVEM this$0;
+  m68k.cpu.instructions.MOVEM$2(m68k.cpu.instructions.MOVEM);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "MOVEM.java"
+class m68k.cpu.instructions.MOVEM$3 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.MOVEM this$0;
+  m68k.cpu.instructions.MOVEM$3(m68k.cpu.instructions.MOVEM);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "MOVEM.java"
+class m68k.cpu.instructions.MOVEM$4 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.MOVEM this$0;
+  m68k.cpu.instructions.MOVEM$4(m68k.cpu.instructions.MOVEM);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "MOVEP.java"
+public class m68k.cpu.instructions.MOVEP implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.MOVEP(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+  protected final int r2m_word(int);
+  protected final int r2m_long(int);
+  protected final int m2r_word(int);
+  protected final int m2r_long(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size, boolean);
+}
+Compiled from "MOVEP.java"
+class m68k.cpu.instructions.MOVEP$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.MOVEP this$0;
+  m68k.cpu.instructions.MOVEP$1(m68k.cpu.instructions.MOVEP);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "MOVEP.java"
+class m68k.cpu.instructions.MOVEP$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.MOVEP this$0;
+  m68k.cpu.instructions.MOVEP$2(m68k.cpu.instructions.MOVEP);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "MOVEP.java"
+class m68k.cpu.instructions.MOVEP$3 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.MOVEP this$0;
+  m68k.cpu.instructions.MOVEP$3(m68k.cpu.instructions.MOVEP);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "MOVEP.java"
+class m68k.cpu.instructions.MOVEP$4 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.MOVEP this$0;
+  m68k.cpu.instructions.MOVEP$4(m68k.cpu.instructions.MOVEP);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "MOVEQ.java"
+public class m68k.cpu.instructions.MOVEQ implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.MOVEQ(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+  protected final int moveq(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int);
+}
+Compiled from "MOVEQ.java"
+class m68k.cpu.instructions.MOVEQ$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.MOVEQ this$0;
+  m68k.cpu.instructions.MOVEQ$1(m68k.cpu.instructions.MOVEQ);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "MOVE_FROM_SR.java"
+public class m68k.cpu.instructions.MOVE_FROM_SR implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.MOVE_FROM_SR(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+  protected final int move_from_sr(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "MOVE_FROM_SR.java"
+class m68k.cpu.instructions.MOVE_FROM_SR$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.MOVE_FROM_SR this$0;
+  m68k.cpu.instructions.MOVE_FROM_SR$1(m68k.cpu.instructions.MOVE_FROM_SR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "MOVE_TO_CCR.java"
+public class m68k.cpu.instructions.MOVE_TO_CCR implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.MOVE_TO_CCR(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+  protected final int move_to_ccr(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "MOVE_TO_CCR.java"
+class m68k.cpu.instructions.MOVE_TO_CCR$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.MOVE_TO_CCR this$0;
+  m68k.cpu.instructions.MOVE_TO_CCR$1(m68k.cpu.instructions.MOVE_TO_CCR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "MOVE_TO_SR.java"
+public class m68k.cpu.instructions.MOVE_TO_SR implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.MOVE_TO_SR(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+  protected final int move_to_sr(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "MOVE_TO_SR.java"
+class m68k.cpu.instructions.MOVE_TO_SR$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.MOVE_TO_SR this$0;
+  m68k.cpu.instructions.MOVE_TO_SR$1(m68k.cpu.instructions.MOVE_TO_SR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "MOVE_USP.java"
+public class m68k.cpu.instructions.MOVE_USP implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.MOVE_USP(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+  protected final int move_to_usp(int);
+  protected final int move_from_usp(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, boolean);
+}
+Compiled from "MOVE_USP.java"
+class m68k.cpu.instructions.MOVE_USP$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.MOVE_USP this$0;
+  m68k.cpu.instructions.MOVE_USP$1(m68k.cpu.instructions.MOVE_USP);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "MOVE_USP.java"
+class m68k.cpu.instructions.MOVE_USP$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.MOVE_USP this$0;
+  m68k.cpu.instructions.MOVE_USP$2(m68k.cpu.instructions.MOVE_USP);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "MULS.java"
+public class m68k.cpu.instructions.MULS implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.MULS(m68k.cpu.Cpu);
+  public void register(m68k.cpu.InstructionSet);
+  protected final int muls(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "MULS.java"
+class m68k.cpu.instructions.MULS$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.MULS this$0;
+  m68k.cpu.instructions.MULS$1(m68k.cpu.instructions.MULS);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "MULU.java"
+public class m68k.cpu.instructions.MULU implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.MULU(m68k.cpu.Cpu);
+  public void register(m68k.cpu.InstructionSet);
+  protected final int mulu(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "MULU.java"
+class m68k.cpu.instructions.MULU$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.MULU this$0;
+  m68k.cpu.instructions.MULU$1(m68k.cpu.instructions.MULU);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "NBCD.java"
+public class m68k.cpu.instructions.NBCD implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.NBCD(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+  protected final int nbcd(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "NBCD.java"
+class m68k.cpu.instructions.NBCD$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.NBCD this$0;
+  m68k.cpu.instructions.NBCD$1(m68k.cpu.instructions.NBCD);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "NEG.java"
+public class m68k.cpu.instructions.NEG implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.NEG(m68k.cpu.Cpu);
+  public void register(m68k.cpu.InstructionSet);
+  protected int neg_byte(int);
+  protected int neg_word(int);
+  protected int neg_long(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "NEG.java"
+class m68k.cpu.instructions.NEG$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.NEG this$0;
+  m68k.cpu.instructions.NEG$1(m68k.cpu.instructions.NEG);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "NEG.java"
+class m68k.cpu.instructions.NEG$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.NEG this$0;
+  m68k.cpu.instructions.NEG$2(m68k.cpu.instructions.NEG);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "NEG.java"
+class m68k.cpu.instructions.NEG$3 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.NEG this$0;
+  m68k.cpu.instructions.NEG$3(m68k.cpu.instructions.NEG);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "NEGX.java"
+public class m68k.cpu.instructions.NEGX implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.NEGX(m68k.cpu.Cpu);
+  public void register(m68k.cpu.InstructionSet);
+  protected int negx_byte(int);
+  protected int negx_word(int);
+  protected int negx_long(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "NEGX.java"
+class m68k.cpu.instructions.NEGX$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.NEGX this$0;
+  m68k.cpu.instructions.NEGX$1(m68k.cpu.instructions.NEGX);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "NEGX.java"
+class m68k.cpu.instructions.NEGX$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.NEGX this$0;
+  m68k.cpu.instructions.NEGX$2(m68k.cpu.instructions.NEGX);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "NEGX.java"
+class m68k.cpu.instructions.NEGX$3 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.NEGX this$0;
+  m68k.cpu.instructions.NEGX$3(m68k.cpu.instructions.NEGX);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "NOP.java"
+public class m68k.cpu.instructions.NOP implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.NOP(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+}
+Compiled from "NOP.java"
+class m68k.cpu.instructions.NOP$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.NOP this$0;
+  m68k.cpu.instructions.NOP$1(m68k.cpu.instructions.NOP);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "NOT.java"
+public class m68k.cpu.instructions.NOT implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.NOT(m68k.cpu.Cpu);
+  public void register(m68k.cpu.InstructionSet);
+  protected final int not_byte(int);
+  protected final int not_word(int);
+  protected final int not_long(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "NOT.java"
+class m68k.cpu.instructions.NOT$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.NOT this$0;
+  m68k.cpu.instructions.NOT$1(m68k.cpu.instructions.NOT);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "NOT.java"
+class m68k.cpu.instructions.NOT$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.NOT this$0;
+  m68k.cpu.instructions.NOT$2(m68k.cpu.instructions.NOT);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "NOT.java"
+class m68k.cpu.instructions.NOT$3 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.NOT this$0;
+  m68k.cpu.instructions.NOT$3(m68k.cpu.instructions.NOT);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "OR.java"
+public class m68k.cpu.instructions.OR implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.OR(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+  protected final int or_byte_dn_dest(int);
+  protected final int or_byte_ea_dest(int);
+  protected final int or_word_dn_dest(int);
+  protected final int or_word_ea_dest(int);
+  protected final int or_long_dn_dest(int);
+  protected final int or_long_ea_dest(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "OR.java"
+class m68k.cpu.instructions.OR$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.OR this$0;
+  m68k.cpu.instructions.OR$1(m68k.cpu.instructions.OR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "OR.java"
+class m68k.cpu.instructions.OR$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.OR this$0;
+  m68k.cpu.instructions.OR$2(m68k.cpu.instructions.OR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "OR.java"
+class m68k.cpu.instructions.OR$3 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.OR this$0;
+  m68k.cpu.instructions.OR$3(m68k.cpu.instructions.OR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "OR.java"
+class m68k.cpu.instructions.OR$4 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.OR this$0;
+  m68k.cpu.instructions.OR$4(m68k.cpu.instructions.OR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "OR.java"
+class m68k.cpu.instructions.OR$5 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.OR this$0;
+  m68k.cpu.instructions.OR$5(m68k.cpu.instructions.OR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "OR.java"
+class m68k.cpu.instructions.OR$6 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.OR this$0;
+  m68k.cpu.instructions.OR$6(m68k.cpu.instructions.OR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ORI.java"
+public class m68k.cpu.instructions.ORI implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.ORI(m68k.cpu.Cpu);
+  public void register(m68k.cpu.InstructionSet);
+  protected int ori_byte(int);
+  protected int ori_word(int);
+  protected int ori_long(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "ORI.java"
+class m68k.cpu.instructions.ORI$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ORI this$0;
+  m68k.cpu.instructions.ORI$1(m68k.cpu.instructions.ORI);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ORI.java"
+class m68k.cpu.instructions.ORI$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ORI this$0;
+  m68k.cpu.instructions.ORI$2(m68k.cpu.instructions.ORI);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ORI.java"
+class m68k.cpu.instructions.ORI$3 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ORI this$0;
+  m68k.cpu.instructions.ORI$3(m68k.cpu.instructions.ORI);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ORI.java"
+class m68k.cpu.instructions.ORI$4 {
+  static final int[] $SwitchMap$m68k$cpu$Size;
+  static {};
+}
+Compiled from "ORI_TO_CCR.java"
+public class m68k.cpu.instructions.ORI_TO_CCR implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.ORI_TO_CCR(m68k.cpu.Cpu);
+  public void register(m68k.cpu.InstructionSet);
+  protected int ori_word(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "ORI_TO_CCR.java"
+class m68k.cpu.instructions.ORI_TO_CCR$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ORI_TO_CCR this$0;
+  m68k.cpu.instructions.ORI_TO_CCR$1(m68k.cpu.instructions.ORI_TO_CCR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ORI_TO_SR.java"
+public class m68k.cpu.instructions.ORI_TO_SR implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.ORI_TO_SR(m68k.cpu.Cpu);
+  public void register(m68k.cpu.InstructionSet);
+  protected int ori_word(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+  protected final m68k.cpu.DisassembledInstruction bdisassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "ORI_TO_SR.java"
+class m68k.cpu.instructions.ORI_TO_SR$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ORI_TO_SR this$0;
+  m68k.cpu.instructions.ORI_TO_SR$1(m68k.cpu.instructions.ORI_TO_SR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "PEA.java"
+public class m68k.cpu.instructions.PEA implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  protected static final int[] TIMING;
+  public m68k.cpu.instructions.PEA(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+  protected final int pea(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+  static {};
+}
+Compiled from "PEA.java"
+class m68k.cpu.instructions.PEA$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.PEA this$0;
+  m68k.cpu.instructions.PEA$1(m68k.cpu.instructions.PEA);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "RESET.java"
+public class m68k.cpu.instructions.RESET implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.RESET(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+}
+Compiled from "RESET.java"
+class m68k.cpu.instructions.RESET$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.RESET this$0;
+  m68k.cpu.instructions.RESET$1(m68k.cpu.instructions.RESET);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ROL.java"
+public class m68k.cpu.instructions.ROL implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.ROL(m68k.cpu.Cpu);
+  public void register(m68k.cpu.InstructionSet);
+  protected int rol_byte_imm(int);
+  protected int rol_word_imm(int);
+  protected int rol_long_imm(int);
+  protected int rol_byte_reg(int);
+  protected int rol_word_reg(int);
+  protected int rol_long_reg(int);
+  protected int rol_word_mem(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "ROL.java"
+class m68k.cpu.instructions.ROL$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ROL this$0;
+  m68k.cpu.instructions.ROL$1(m68k.cpu.instructions.ROL);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ROL.java"
+class m68k.cpu.instructions.ROL$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ROL this$0;
+  m68k.cpu.instructions.ROL$2(m68k.cpu.instructions.ROL);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ROL.java"
+class m68k.cpu.instructions.ROL$3 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ROL this$0;
+  m68k.cpu.instructions.ROL$3(m68k.cpu.instructions.ROL);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ROL.java"
+class m68k.cpu.instructions.ROL$4 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ROL this$0;
+  m68k.cpu.instructions.ROL$4(m68k.cpu.instructions.ROL);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ROL.java"
+class m68k.cpu.instructions.ROL$5 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ROL this$0;
+  m68k.cpu.instructions.ROL$5(m68k.cpu.instructions.ROL);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ROL.java"
+class m68k.cpu.instructions.ROL$6 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ROL this$0;
+  m68k.cpu.instructions.ROL$6(m68k.cpu.instructions.ROL);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ROL.java"
+class m68k.cpu.instructions.ROL$7 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ROL this$0;
+  m68k.cpu.instructions.ROL$7(m68k.cpu.instructions.ROL);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ROR.java"
+public class m68k.cpu.instructions.ROR implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.ROR(m68k.cpu.Cpu);
+  public void register(m68k.cpu.InstructionSet);
+  protected int ror_byte_imm(int);
+  protected int ror_word_imm(int);
+  protected int ror_long_imm(int);
+  protected int ror_byte_reg(int);
+  protected int ror_word_reg(int);
+  protected int ror_long_reg(int);
+  protected int ror_word_mem(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "ROR.java"
+class m68k.cpu.instructions.ROR$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ROR this$0;
+  m68k.cpu.instructions.ROR$1(m68k.cpu.instructions.ROR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ROR.java"
+class m68k.cpu.instructions.ROR$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ROR this$0;
+  m68k.cpu.instructions.ROR$2(m68k.cpu.instructions.ROR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ROR.java"
+class m68k.cpu.instructions.ROR$3 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ROR this$0;
+  m68k.cpu.instructions.ROR$3(m68k.cpu.instructions.ROR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ROR.java"
+class m68k.cpu.instructions.ROR$4 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ROR this$0;
+  m68k.cpu.instructions.ROR$4(m68k.cpu.instructions.ROR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ROR.java"
+class m68k.cpu.instructions.ROR$5 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ROR this$0;
+  m68k.cpu.instructions.ROR$5(m68k.cpu.instructions.ROR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ROR.java"
+class m68k.cpu.instructions.ROR$6 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ROR this$0;
+  m68k.cpu.instructions.ROR$6(m68k.cpu.instructions.ROR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ROR.java"
+class m68k.cpu.instructions.ROR$7 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ROR this$0;
+  m68k.cpu.instructions.ROR$7(m68k.cpu.instructions.ROR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ROXL.java"
+public class m68k.cpu.instructions.ROXL implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.ROXL(m68k.cpu.Cpu);
+  public void register(m68k.cpu.InstructionSet);
+  protected int roxl_byte_imm(int);
+  protected int roxl_word_imm(int);
+  protected int roxl_long_imm(int);
+  protected int roxl_byte_reg(int);
+  protected int roxl_word_reg(int);
+  protected int roxl_long_reg(int);
+  protected int roxl_word_mem(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "ROXL.java"
+class m68k.cpu.instructions.ROXL$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ROXL this$0;
+  m68k.cpu.instructions.ROXL$1(m68k.cpu.instructions.ROXL);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ROXL.java"
+class m68k.cpu.instructions.ROXL$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ROXL this$0;
+  m68k.cpu.instructions.ROXL$2(m68k.cpu.instructions.ROXL);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ROXL.java"
+class m68k.cpu.instructions.ROXL$3 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ROXL this$0;
+  m68k.cpu.instructions.ROXL$3(m68k.cpu.instructions.ROXL);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ROXL.java"
+class m68k.cpu.instructions.ROXL$4 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ROXL this$0;
+  m68k.cpu.instructions.ROXL$4(m68k.cpu.instructions.ROXL);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ROXL.java"
+class m68k.cpu.instructions.ROXL$5 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ROXL this$0;
+  m68k.cpu.instructions.ROXL$5(m68k.cpu.instructions.ROXL);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ROXL.java"
+class m68k.cpu.instructions.ROXL$6 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ROXL this$0;
+  m68k.cpu.instructions.ROXL$6(m68k.cpu.instructions.ROXL);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ROXL.java"
+class m68k.cpu.instructions.ROXL$7 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ROXL this$0;
+  m68k.cpu.instructions.ROXL$7(m68k.cpu.instructions.ROXL);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ROXR.java"
+public class m68k.cpu.instructions.ROXR implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.ROXR(m68k.cpu.Cpu);
+  public void register(m68k.cpu.InstructionSet);
+  protected int roxr_byte_imm(int);
+  protected int roxr_word_imm(int);
+  protected int roxr_long_imm(int);
+  protected int roxr_byte_reg(int);
+  protected int roxr_word_reg(int);
+  protected int roxr_long_reg(int);
+  protected int roxr_word_mem(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "ROXR.java"
+class m68k.cpu.instructions.ROXR$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ROXR this$0;
+  m68k.cpu.instructions.ROXR$1(m68k.cpu.instructions.ROXR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ROXR.java"
+class m68k.cpu.instructions.ROXR$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ROXR this$0;
+  m68k.cpu.instructions.ROXR$2(m68k.cpu.instructions.ROXR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ROXR.java"
+class m68k.cpu.instructions.ROXR$3 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ROXR this$0;
+  m68k.cpu.instructions.ROXR$3(m68k.cpu.instructions.ROXR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ROXR.java"
+class m68k.cpu.instructions.ROXR$4 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ROXR this$0;
+  m68k.cpu.instructions.ROXR$4(m68k.cpu.instructions.ROXR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ROXR.java"
+class m68k.cpu.instructions.ROXR$5 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ROXR this$0;
+  m68k.cpu.instructions.ROXR$5(m68k.cpu.instructions.ROXR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ROXR.java"
+class m68k.cpu.instructions.ROXR$6 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ROXR this$0;
+  m68k.cpu.instructions.ROXR$6(m68k.cpu.instructions.ROXR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "ROXR.java"
+class m68k.cpu.instructions.ROXR$7 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.ROXR this$0;
+  m68k.cpu.instructions.ROXR$7(m68k.cpu.instructions.ROXR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "RTE.java"
+public class m68k.cpu.instructions.RTE implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.RTE(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+}
+Compiled from "RTE.java"
+class m68k.cpu.instructions.RTE$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.RTE this$0;
+  m68k.cpu.instructions.RTE$1(m68k.cpu.instructions.RTE);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "RTR.java"
+public class m68k.cpu.instructions.RTR implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.RTR(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+}
+Compiled from "RTR.java"
+class m68k.cpu.instructions.RTR$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.RTR this$0;
+  m68k.cpu.instructions.RTR$1(m68k.cpu.instructions.RTR);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "RTS.java"
+public class m68k.cpu.instructions.RTS implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.RTS(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+}
+Compiled from "RTS.java"
+class m68k.cpu.instructions.RTS$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.RTS this$0;
+  m68k.cpu.instructions.RTS$1(m68k.cpu.instructions.RTS);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "SBCD.java"
+public class m68k.cpu.instructions.SBCD implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.SBCD(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+  protected final int sbcd_dr(int);
+  protected final int sbcd_ar(int);
+  protected final int doCalc(int, int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, boolean);
+}
+Compiled from "SBCD.java"
+class m68k.cpu.instructions.SBCD$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.SBCD this$0;
+  m68k.cpu.instructions.SBCD$1(m68k.cpu.instructions.SBCD);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "SBCD.java"
+class m68k.cpu.instructions.SBCD$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.SBCD this$0;
+  m68k.cpu.instructions.SBCD$2(m68k.cpu.instructions.SBCD);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "STOP.java"
+public class m68k.cpu.instructions.STOP implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.STOP(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+}
+Compiled from "STOP.java"
+class m68k.cpu.instructions.STOP$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.STOP this$0;
+  m68k.cpu.instructions.STOP$1(m68k.cpu.instructions.STOP);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "SUB.java"
+public class m68k.cpu.instructions.SUB implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.SUB(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+  protected final int sub_byte_dn_dest(int);
+  protected final int sub_byte_ea_dest(int);
+  protected final int sub_word_dn_dest(int);
+  protected final int sub_word_ea_dest(int);
+  protected final int sub_long_dn_dest(int);
+  protected final int sub_long_ea_dest(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "SUB.java"
+class m68k.cpu.instructions.SUB$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.SUB this$0;
+  m68k.cpu.instructions.SUB$1(m68k.cpu.instructions.SUB);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "SUB.java"
+class m68k.cpu.instructions.SUB$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.SUB this$0;
+  m68k.cpu.instructions.SUB$2(m68k.cpu.instructions.SUB);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "SUB.java"
+class m68k.cpu.instructions.SUB$3 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.SUB this$0;
+  m68k.cpu.instructions.SUB$3(m68k.cpu.instructions.SUB);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "SUB.java"
+class m68k.cpu.instructions.SUB$4 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.SUB this$0;
+  m68k.cpu.instructions.SUB$4(m68k.cpu.instructions.SUB);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "SUB.java"
+class m68k.cpu.instructions.SUB$5 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.SUB this$0;
+  m68k.cpu.instructions.SUB$5(m68k.cpu.instructions.SUB);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "SUB.java"
+class m68k.cpu.instructions.SUB$6 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.SUB this$0;
+  m68k.cpu.instructions.SUB$6(m68k.cpu.instructions.SUB);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "SUBA.java"
+public class m68k.cpu.instructions.SUBA implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.SUBA(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+  protected final int suba_word(int);
+  protected final int suba_long(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "SUBA.java"
+class m68k.cpu.instructions.SUBA$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.SUBA this$0;
+  m68k.cpu.instructions.SUBA$1(m68k.cpu.instructions.SUBA);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "SUBA.java"
+class m68k.cpu.instructions.SUBA$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.SUBA this$0;
+  m68k.cpu.instructions.SUBA$2(m68k.cpu.instructions.SUBA);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "SUBI.java"
+public class m68k.cpu.instructions.SUBI implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.SUBI(m68k.cpu.Cpu);
+  public void register(m68k.cpu.InstructionSet);
+  protected int subi_byte(int);
+  protected int subi_word(int);
+  protected int subi_long(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "SUBI.java"
+class m68k.cpu.instructions.SUBI$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.SUBI this$0;
+  m68k.cpu.instructions.SUBI$1(m68k.cpu.instructions.SUBI);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "SUBI.java"
+class m68k.cpu.instructions.SUBI$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.SUBI this$0;
+  m68k.cpu.instructions.SUBI$2(m68k.cpu.instructions.SUBI);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "SUBI.java"
+class m68k.cpu.instructions.SUBI$3 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.SUBI this$0;
+  m68k.cpu.instructions.SUBI$3(m68k.cpu.instructions.SUBI);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "SUBI.java"
+class m68k.cpu.instructions.SUBI$4 {
+  static final int[] $SwitchMap$m68k$cpu$Size;
+  static {};
+}
+Compiled from "SUBQ.java"
+public class m68k.cpu.instructions.SUBQ implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.SUBQ(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+  protected final int subq_byte(int);
+  protected final int subq_word(int);
+  protected final int subq_long(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "SUBQ.java"
+class m68k.cpu.instructions.SUBQ$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.SUBQ this$0;
+  m68k.cpu.instructions.SUBQ$1(m68k.cpu.instructions.SUBQ);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "SUBQ.java"
+class m68k.cpu.instructions.SUBQ$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.SUBQ this$0;
+  m68k.cpu.instructions.SUBQ$2(m68k.cpu.instructions.SUBQ);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "SUBQ.java"
+class m68k.cpu.instructions.SUBQ$3 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.SUBQ this$0;
+  m68k.cpu.instructions.SUBQ$3(m68k.cpu.instructions.SUBQ);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "SUBX.java"
+public class m68k.cpu.instructions.SUBX implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.SUBX(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+  protected int subx_byte_reg(int);
+  protected int subx_word_reg(int);
+  protected int subx_long_reg(int);
+  protected int subx_byte_mem(int);
+  protected int subx_word_mem(int);
+  protected int subx_long_mem(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "SUBX.java"
+class m68k.cpu.instructions.SUBX$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.SUBX this$0;
+  m68k.cpu.instructions.SUBX$1(m68k.cpu.instructions.SUBX);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "SUBX.java"
+class m68k.cpu.instructions.SUBX$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.SUBX this$0;
+  m68k.cpu.instructions.SUBX$2(m68k.cpu.instructions.SUBX);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "SUBX.java"
+class m68k.cpu.instructions.SUBX$3 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.SUBX this$0;
+  m68k.cpu.instructions.SUBX$3(m68k.cpu.instructions.SUBX);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "SUBX.java"
+class m68k.cpu.instructions.SUBX$4 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.SUBX this$0;
+  m68k.cpu.instructions.SUBX$4(m68k.cpu.instructions.SUBX);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "SUBX.java"
+class m68k.cpu.instructions.SUBX$5 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.SUBX this$0;
+  m68k.cpu.instructions.SUBX$5(m68k.cpu.instructions.SUBX);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "SUBX.java"
+class m68k.cpu.instructions.SUBX$6 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.SUBX this$0;
+  m68k.cpu.instructions.SUBX$6(m68k.cpu.instructions.SUBX);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "SWAP.java"
+public class m68k.cpu.instructions.SWAP implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.SWAP(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+  protected int swap(int);
+  public final m68k.cpu.DisassembledInstruction disassembleOp(int, int);
+}
+Compiled from "SWAP.java"
+class m68k.cpu.instructions.SWAP$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.SWAP this$0;
+  m68k.cpu.instructions.SWAP$1(m68k.cpu.instructions.SWAP);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "Scc.java"
+public class m68k.cpu.instructions.Scc implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  protected static final java.lang.String[] names;
+  public m68k.cpu.instructions.Scc(m68k.cpu.Cpu);
+  public void register(m68k.cpu.InstructionSet);
+  protected final int sxx(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int);
+  static {};
+}
+Compiled from "Scc.java"
+class m68k.cpu.instructions.Scc$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.Scc this$0;
+  m68k.cpu.instructions.Scc$1(m68k.cpu.instructions.Scc);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "TAS.java"
+public class m68k.cpu.instructions.TAS implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.TAS(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+  protected final synchronized int tas(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "TAS.java"
+class m68k.cpu.instructions.TAS$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.TAS this$0;
+  m68k.cpu.instructions.TAS$1(m68k.cpu.instructions.TAS);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "TRAP.java"
+public class m68k.cpu.instructions.TRAP implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.TRAP(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+  protected final int trap(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int);
+}
+Compiled from "TRAP.java"
+class m68k.cpu.instructions.TRAP$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.TRAP this$0;
+  m68k.cpu.instructions.TRAP$1(m68k.cpu.instructions.TRAP);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "TRAPV.java"
+public class m68k.cpu.instructions.TRAPV implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.TRAPV(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+  protected final int trapv(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int);
+}
+Compiled from "TRAPV.java"
+class m68k.cpu.instructions.TRAPV$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.TRAPV this$0;
+  m68k.cpu.instructions.TRAPV$1(m68k.cpu.instructions.TRAPV);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "TST.java"
+public class m68k.cpu.instructions.TST implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.TST(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+  protected final int tst_byte(int);
+  protected final int tst_word(int);
+  protected final int tst_long(int);
+  protected final m68k.cpu.DisassembledInstruction disassembleOp(int, int, m68k.cpu.Size);
+}
+Compiled from "TST.java"
+class m68k.cpu.instructions.TST$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.TST this$0;
+  m68k.cpu.instructions.TST$1(m68k.cpu.instructions.TST);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "TST.java"
+class m68k.cpu.instructions.TST$2 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.TST this$0;
+  m68k.cpu.instructions.TST$2(m68k.cpu.instructions.TST);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "TST.java"
+class m68k.cpu.instructions.TST$3 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.TST this$0;
+  m68k.cpu.instructions.TST$3(m68k.cpu.instructions.TST);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "UNKNOWN.java"
+public class m68k.cpu.instructions.UNKNOWN implements m68k.cpu.Instruction {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.UNKNOWN(m68k.cpu.Cpu);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "UNLK.java"
+public class m68k.cpu.instructions.UNLK implements m68k.cpu.InstructionHandler {
+  protected final m68k.cpu.Cpu cpu;
+  public m68k.cpu.instructions.UNLK(m68k.cpu.Cpu);
+  public final void register(m68k.cpu.InstructionSet);
+  protected int unlk(int);
+  public final m68k.cpu.DisassembledInstruction disassembleOp(int, int);
+}
+Compiled from "UNLK.java"
+class m68k.cpu.instructions.UNLK$1 implements m68k.cpu.Instruction {
+  final m68k.cpu.instructions.UNLK this$0;
+  m68k.cpu.instructions.UNLK$1(m68k.cpu.instructions.UNLK);
+  public int execute(int);
+  public m68k.cpu.DisassembledInstruction disassemble(int, int);
+}
+Compiled from "AddressSpace.java"
+public interface m68k.memory.AddressSpace {
+  public abstract void reset();
+  public abstract int getStartAddress();
+  public abstract int getEndAddress();
+  public abstract int readByte(int);
+  public abstract int readWord(int);
+  public abstract int readLong(int);
+  public abstract void writeByte(int, int);
+  public abstract void writeWord(int, int);
+  public abstract void writeLong(int, int);
+  public abstract int internalReadByte(int);
+  public abstract int internalReadWord(int);
+  public abstract int internalReadLong(int);
+  public abstract void internalWriteByte(int, int);
+  public abstract void internalWriteWord(int, int);
+  public abstract void internalWriteLong(int, int);
+  public abstract int size();
+}
+Compiled from "MemorySpace.java"
+public class m68k.memory.MemorySpace implements m68k.memory.AddressSpace {
+  public m68k.memory.MemorySpace(int);
+  public void reset();
+  public int getStartAddress();
+  public int getEndAddress();
+  public int readByte(int);
+  public int readWord(int);
+  public int readLong(int);
+  public void writeByte(int, int);
+  public void writeWord(int, int);
+  public void writeLong(int, int);
+  public int internalReadByte(int);
+  public int internalReadWord(int);
+  public int internalReadLong(int);
+  public void internalWriteByte(int, int);
+  public void internalWriteWord(int, int);
+  public void internalWriteLong(int, int);
+  public int size();
+}
+Compiled from "MemorySpaceTest.java"
+public class m68k.memory.MemorySpaceTest extends junit.framework.TestCase {
+  public m68k.memory.MemorySpaceTest();
+  public void testCreate();
+  public void testMemory();
+}

@@ -1,0 +1,326 @@
+Compiled from "BasicField.java"
+public abstract class ru.drunkard.field.BasicField implements ru.drunkard.field.GameField {
+  protected java.util.List<ru.drunkard.fieldobjects.IFieldObj> objects;
+  protected java.util.List<ru.drunkard.fieldobjects.IFieldObj> lastAdded;
+  protected java.util.List<java.util.List<ru.drunkard.field.Sector>> sectors;
+  protected int width;
+  protected int height;
+  protected ru.drunkard.field.BasicField(int, int);
+  public void makeAllObjectsDoActions();
+  public void setObjectInSector(int, int, ru.drunkard.fieldobjects.IFieldObj);
+  public void addNewObject(ru.drunkard.fieldobjects.IFieldObj);
+  public boolean sectorIsEmpty(int, int);
+  public void sendVisitorToSector(int, int, ru.drunkard.fieldobjects.IFieldObj);
+  public void sendVisitorToSector(int, int, ru.drunkard.gameprinters.GamePrinter);
+  public java.util.List<ru.drunkard.utility.Point> getFreeNeighbours(ru.drunkard.utility.Point, ru.drunkard.utility.Point);
+  protected void tryAddValidNeighbour(ru.drunkard.utility.Point, java.util.List<ru.drunkard.utility.Point>);
+  public java.util.Iterator<ru.drunkard.utility.Point> getIterator();
+  public java.util.Iterator<ru.drunkard.utility.Point> getIterator(ru.drunkard.utility.Point, ru.drunkard.utility.Point);
+  public boolean pointIsOutOfBorders(ru.drunkard.utility.Point);
+}
+Compiled from "BasicField.java"
+class ru.drunkard.field.BasicField$AreaIterator implements java.util.Iterator<ru.drunkard.utility.Point> {
+  final ru.drunkard.field.BasicField this$0;
+  public ru.drunkard.field.BasicField$AreaIterator(ru.drunkard.field.BasicField, ru.drunkard.utility.Point, ru.drunkard.utility.Point);
+  public boolean hasNext();
+  public ru.drunkard.utility.Point next();
+  public void remove();
+  public java.lang.Object next();
+}
+Compiled from "GameField.java"
+public interface ru.drunkard.field.GameField {
+  public abstract void makeAllObjectsDoActions();
+  public abstract void setObjectInSector(int, int, ru.drunkard.fieldobjects.IFieldObj);
+  public abstract void addNewObject(ru.drunkard.fieldobjects.IFieldObj);
+  public abstract boolean sectorIsEmpty(int, int);
+  public abstract void sendVisitorToSector(int, int, ru.drunkard.fieldobjects.IFieldObj);
+  public abstract void sendVisitorToSector(int, int, ru.drunkard.gameprinters.GamePrinter);
+  public abstract boolean pointIsOutOfBorders(ru.drunkard.utility.Point);
+  public abstract java.util.List<ru.drunkard.utility.Point> getAllNeighbours(ru.drunkard.utility.Point);
+  public abstract java.util.List<ru.drunkard.utility.Point> getFreeNeighbours(ru.drunkard.utility.Point, ru.drunkard.utility.Point);
+  public abstract java.util.Iterator<ru.drunkard.utility.Point> getIterator(ru.drunkard.utility.Point, ru.drunkard.utility.Point);
+  public abstract java.util.Iterator<ru.drunkard.utility.Point> getIterator();
+}
+Compiled from "HexField.java"
+public class ru.drunkard.field.HexField extends ru.drunkard.field.BasicField {
+  public ru.drunkard.field.HexField(int, int);
+  public java.util.List<ru.drunkard.utility.Point> getAllNeighbours(ru.drunkard.utility.Point);
+}
+Compiled from "RectField.java"
+public class ru.drunkard.field.RectField extends ru.drunkard.field.BasicField {
+  public ru.drunkard.field.RectField(int, int);
+  public java.util.List<ru.drunkard.utility.Point> getAllNeighbours(ru.drunkard.utility.Point);
+}
+Compiled from "Sector.java"
+public class ru.drunkard.field.Sector {
+  ru.drunkard.field.Sector(ru.drunkard.fieldobjects.IFieldObj);
+  public boolean isEmpty();
+  public void setObject(ru.drunkard.fieldobjects.IFieldObj);
+  public void acceptVisitor(ru.drunkard.fieldobjects.IFieldObj);
+  public void acceptVisitor(ru.drunkard.gameprinters.GamePrinter);
+}
+Compiled from "Bottle.java"
+public class ru.drunkard.fieldobjects.Bottle implements ru.drunkard.fieldobjects.IFieldObj {
+  public ru.drunkard.fieldobjects.Bottle();
+  public void doActions(ru.drunkard.field.GameField);
+  public void visit(ru.drunkard.fieldobjects.Drunkard);
+  public void visit(ru.drunkard.fieldobjects.Column);
+  public void visit(ru.drunkard.fieldobjects.Bottle);
+  public void visit(ru.drunkard.fieldobjects.LampPost);
+  public void visit(ru.drunkard.fieldobjects.Cop);
+  public void visit(ru.drunkard.fieldobjects.Hobo);
+  public void accept(ru.drunkard.fieldobjects.IFieldObj);
+  public void accept(ru.drunkard.gameprinters.GamePrinter);
+}
+Compiled from "Column.java"
+public class ru.drunkard.fieldobjects.Column implements ru.drunkard.fieldobjects.IFieldObj {
+  public ru.drunkard.fieldobjects.Column();
+  public void doActions(ru.drunkard.field.GameField);
+  public void visit(ru.drunkard.fieldobjects.Drunkard);
+  public void visit(ru.drunkard.fieldobjects.Column);
+  public void visit(ru.drunkard.fieldobjects.Bottle);
+  public void visit(ru.drunkard.fieldobjects.LampPost);
+  public void visit(ru.drunkard.fieldobjects.Cop);
+  public void visit(ru.drunkard.fieldobjects.Hobo);
+  public void accept(ru.drunkard.fieldobjects.IFieldObj);
+  public void accept(ru.drunkard.gameprinters.GamePrinter);
+}
+Compiled from "Cop.java"
+public class ru.drunkard.fieldobjects.Cop extends ru.drunkard.fieldobjects.DirectedMovableObj implements ru.drunkard.fieldobjects.ISeekerWithState {
+  public ru.drunkard.fieldobjects.Cop(ru.drunkard.utility.Point, ru.drunkard.movestrategies.IDirectedMoveStrategy, ru.drunkard.utility.Point, ru.drunkard.utility.Point);
+  public void doActions(ru.drunkard.field.GameField);
+  public void waitSome(ru.drunkard.field.GameField);
+  public void exitStartPos(ru.drunkard.field.GameField);
+  public void seekTarget(ru.drunkard.field.GameField);
+  public void goToTarget(ru.drunkard.utility.Point, ru.drunkard.field.GameField);
+  public void returnToStartPos(ru.drunkard.field.GameField);
+  public void enterStartPos(ru.drunkard.field.GameField);
+  public void visit(ru.drunkard.fieldobjects.Drunkard);
+  public void visit(ru.drunkard.fieldobjects.Column);
+  public void visit(ru.drunkard.fieldobjects.Bottle);
+  public void visit(ru.drunkard.fieldobjects.LampPost);
+  public void visit(ru.drunkard.fieldobjects.Cop);
+  public void visit(ru.drunkard.fieldobjects.Hobo);
+  public void accept(ru.drunkard.fieldobjects.IFieldObj);
+  public void accept(ru.drunkard.gameprinters.GamePrinter);
+}
+Compiled from "DirectedMovableObj.java"
+public abstract class ru.drunkard.fieldobjects.DirectedMovableObj extends ru.drunkard.fieldobjects.MovableObj {
+  protected ru.drunkard.movestrategies.IDirectedMoveStrategy moveStrategy;
+  protected ru.drunkard.utility.Point searchAreaStart;
+  protected ru.drunkard.utility.Point searchAreaEnd;
+  protected boolean hasTarget;
+  protected ru.drunkard.fieldobjects.DirectedMovableObj(ru.drunkard.utility.Point, ru.drunkard.movestrategies.IDirectedMoveStrategy, ru.drunkard.utility.Point, ru.drunkard.utility.Point);
+  protected ru.drunkard.utility.Point tryFindTarget(ru.drunkard.field.GameField);
+  protected boolean isNeighbourToStartPos(ru.drunkard.utility.Point, ru.drunkard.field.GameField);
+}
+Compiled from "Drunkard.java"
+public class ru.drunkard.fieldobjects.Drunkard extends ru.drunkard.fieldobjects.UndirectedMovableObj {
+  public boolean isSleeping;
+  public boolean isFallen;
+  public ru.drunkard.fieldobjects.Drunkard(int, int);
+  public void doActions(ru.drunkard.field.GameField);
+  public void visit(ru.drunkard.fieldobjects.Drunkard);
+  public void visit(ru.drunkard.fieldobjects.Column);
+  public void visit(ru.drunkard.fieldobjects.Bottle);
+  public void visit(ru.drunkard.fieldobjects.LampPost);
+  public void visit(ru.drunkard.fieldobjects.Cop);
+  public void visit(ru.drunkard.fieldobjects.Hobo);
+  public void accept(ru.drunkard.fieldobjects.IFieldObj);
+  public void accept(ru.drunkard.gameprinters.GamePrinter);
+}
+Compiled from "Hobo.java"
+public class ru.drunkard.fieldobjects.Hobo extends ru.drunkard.fieldobjects.DirectedMovableObj implements ru.drunkard.fieldobjects.ISeekerWithState {
+  public ru.drunkard.fieldobjects.Hobo(ru.drunkard.utility.Point, ru.drunkard.movestrategies.IDirectedMoveStrategy, ru.drunkard.utility.Point, ru.drunkard.utility.Point);
+  public void doActions(ru.drunkard.field.GameField);
+  public void waitSome(ru.drunkard.field.GameField);
+  public void exitStartPos(ru.drunkard.field.GameField);
+  public void seekTarget(ru.drunkard.field.GameField);
+  public void goToTarget(ru.drunkard.utility.Point, ru.drunkard.field.GameField);
+  public void returnToStartPos(ru.drunkard.field.GameField);
+  public void enterStartPos(ru.drunkard.field.GameField);
+  public void visit(ru.drunkard.fieldobjects.Drunkard);
+  public void visit(ru.drunkard.fieldobjects.Column);
+  public void visit(ru.drunkard.fieldobjects.Bottle);
+  public void visit(ru.drunkard.fieldobjects.LampPost);
+  public void visit(ru.drunkard.fieldobjects.Cop);
+  public void visit(ru.drunkard.fieldobjects.Hobo);
+  public void accept(ru.drunkard.fieldobjects.IFieldObj);
+  public void accept(ru.drunkard.gameprinters.GamePrinter);
+}
+Compiled from "IFieldObj.java"
+public interface ru.drunkard.fieldobjects.IFieldObj {
+  public abstract void doActions(ru.drunkard.field.GameField);
+  public abstract void visit(ru.drunkard.fieldobjects.Drunkard);
+  public abstract void visit(ru.drunkard.fieldobjects.Column);
+  public abstract void visit(ru.drunkard.fieldobjects.Bottle);
+  public abstract void visit(ru.drunkard.fieldobjects.LampPost);
+  public abstract void visit(ru.drunkard.fieldobjects.Cop);
+  public abstract void visit(ru.drunkard.fieldobjects.Hobo);
+  public abstract void accept(ru.drunkard.fieldobjects.IFieldObj);
+  public abstract void accept(ru.drunkard.gameprinters.GamePrinter);
+}
+Compiled from "ISeekerWithState.java"
+public interface ru.drunkard.fieldobjects.ISeekerWithState {
+  public abstract void waitSome(ru.drunkard.field.GameField);
+  public abstract void exitStartPos(ru.drunkard.field.GameField);
+  public abstract void seekTarget(ru.drunkard.field.GameField);
+  public abstract void goToTarget(ru.drunkard.utility.Point, ru.drunkard.field.GameField);
+  public abstract void returnToStartPos(ru.drunkard.field.GameField);
+  public abstract void enterStartPos(ru.drunkard.field.GameField);
+}
+Compiled from "LampPost.java"
+public class ru.drunkard.fieldobjects.LampPost implements ru.drunkard.fieldobjects.IFieldObj {
+  public ru.drunkard.fieldobjects.LampPost();
+  public void doActions(ru.drunkard.field.GameField);
+  public void visit(ru.drunkard.fieldobjects.Drunkard);
+  public void visit(ru.drunkard.fieldobjects.Column);
+  public void visit(ru.drunkard.fieldobjects.Bottle);
+  public void visit(ru.drunkard.fieldobjects.LampPost);
+  public void visit(ru.drunkard.fieldobjects.Cop);
+  public void visit(ru.drunkard.fieldobjects.Hobo);
+  public void accept(ru.drunkard.fieldobjects.IFieldObj);
+  public void accept(ru.drunkard.gameprinters.GamePrinter);
+}
+Compiled from "MovableObj.java"
+public abstract class ru.drunkard.fieldobjects.MovableObj implements ru.drunkard.fieldobjects.IFieldObj {
+  protected ru.drunkard.utility.Point pos;
+  protected ru.drunkard.fieldobjects.MovableObj(ru.drunkard.utility.Point);
+  public void moveInSector(ru.drunkard.utility.Point, ru.drunkard.field.GameField);
+}
+Compiled from "UndirectedMovableObj.java"
+public abstract class ru.drunkard.fieldobjects.UndirectedMovableObj extends ru.drunkard.fieldobjects.MovableObj {
+  protected ru.drunkard.movestrategies.IUndirectedMoveStrategy moveStrategy;
+  protected ru.drunkard.fieldobjects.UndirectedMovableObj(ru.drunkard.utility.Point, ru.drunkard.movestrategies.IUndirectedMoveStrategy);
+}
+Compiled from "DrunkardTheGame.java"
+public class ru.drunkard.game.DrunkardTheGame {
+  public ru.drunkard.game.DrunkardTheGame();
+  public static void main(java.lang.String[]);
+}
+Compiled from "GameController.java"
+public class ru.drunkard.game.GameController {
+  public ru.drunkard.game.GameController(boolean);
+  public void startGame(int, int, int);
+}
+Compiled from "BasicGamePrinter.java"
+public abstract class ru.drunkard.gameprinters.BasicGamePrinter implements ru.drunkard.gameprinters.GamePrinter {
+  protected java.util.List<java.lang.Character> frameUpperPart;
+  protected java.util.List<java.lang.Character> frameBottomPart;
+  protected java.util.List<java.lang.Character> frameRightPart;
+  protected java.util.List<java.lang.Character> frameLeftPart;
+  protected final char FRAME_EMPTY_ELEM;
+  protected final char EMPTY_SECTOR;
+  protected final char LIGHTEN_SECTOR;
+  protected final char TAVERN;
+  protected final char POLICE_STATION;
+  protected final char GLASS_STATION;
+  protected final java.lang.String HORIZONTAL_DELIMITER;
+  protected ru.drunkard.utility.Point lightAreaStart;
+  protected ru.drunkard.utility.Point lightAreaEnd;
+  protected ru.drunkard.gameprinters.BasicGamePrinter(int, int);
+  public void setTavern(ru.drunkard.utility.Point);
+  public void setPoliceStation(ru.drunkard.utility.Point);
+  public void setGlassStation(ru.drunkard.utility.Point);
+  public void setLampPost(ru.drunkard.utility.Point, ru.drunkard.utility.Point);
+  protected void initFramePart(java.util.List<java.lang.Character>, int);
+  protected void setFrameObject(ru.drunkard.utility.Point, char);
+  protected void printChar(char);
+  public void visit(ru.drunkard.fieldobjects.Drunkard);
+  public void visit(ru.drunkard.fieldobjects.Bottle);
+  public void visit(ru.drunkard.fieldobjects.Column);
+  public void visit(ru.drunkard.fieldobjects.LampPost);
+  public void visit(ru.drunkard.fieldobjects.Cop);
+  public void visit(ru.drunkard.fieldobjects.Hobo);
+}
+Compiled from "GamePrinter.java"
+public interface ru.drunkard.gameprinters.GamePrinter {
+  public abstract void print(java.lang.Integer, ru.drunkard.field.GameField);
+  public abstract void setTavern(ru.drunkard.utility.Point);
+  public abstract void setPoliceStation(ru.drunkard.utility.Point);
+  public abstract void setGlassStation(ru.drunkard.utility.Point);
+  public abstract void setLampPost(ru.drunkard.utility.Point, ru.drunkard.utility.Point);
+  public abstract void visit(ru.drunkard.fieldobjects.Drunkard);
+  public abstract void visit(ru.drunkard.fieldobjects.Bottle);
+  public abstract void visit(ru.drunkard.fieldobjects.Column);
+  public abstract void visit(ru.drunkard.fieldobjects.LampPost);
+  public abstract void visit(ru.drunkard.fieldobjects.Cop);
+  public abstract void visit(ru.drunkard.fieldobjects.Hobo);
+}
+Compiled from "HexGamePrinter.java"
+public class ru.drunkard.gameprinters.HexGamePrinter extends ru.drunkard.gameprinters.BasicGamePrinter {
+  public ru.drunkard.gameprinters.HexGamePrinter(int, int);
+  public void print(java.lang.Integer, ru.drunkard.field.GameField);
+}
+Compiled from "RectGamePrinter.java"
+public class ru.drunkard.gameprinters.RectGamePrinter extends ru.drunkard.gameprinters.BasicGamePrinter {
+  public ru.drunkard.gameprinters.RectGamePrinter(int, int);
+  public void print(java.lang.Integer, ru.drunkard.field.GameField);
+}
+Compiled from "DrunkardMoveStrategy.java"
+public class ru.drunkard.movestrategies.DrunkardMoveStrategy implements ru.drunkard.movestrategies.IUndirectedMoveStrategy {
+  public ru.drunkard.movestrategies.DrunkardMoveStrategy();
+  public ru.drunkard.utility.Point nextPosition(ru.drunkard.utility.Point, ru.drunkard.field.GameField);
+}
+Compiled from "IDirectedMoveStrategy.java"
+public interface ru.drunkard.movestrategies.IDirectedMoveStrategy {
+  public abstract ru.drunkard.utility.Point nextPosition(ru.drunkard.utility.Point, ru.drunkard.utility.Point, ru.drunkard.field.GameField);
+}
+Compiled from "IUndirectedMoveStrategy.java"
+public interface ru.drunkard.movestrategies.IUndirectedMoveStrategy {
+  public abstract ru.drunkard.utility.Point nextPosition(ru.drunkard.utility.Point, ru.drunkard.field.GameField);
+}
+Compiled from "ShortestPathMoveStrategy.java"
+public class ru.drunkard.movestrategies.ShortestPathMoveStrategy implements ru.drunkard.movestrategies.IDirectedMoveStrategy {
+  public ru.drunkard.movestrategies.ShortestPathMoveStrategy();
+  public ru.drunkard.utility.Point nextPosition(ru.drunkard.utility.Point, ru.drunkard.utility.Point, ru.drunkard.field.GameField);
+}
+Compiled from "EnterStartPosState.java"
+public class ru.drunkard.states.movableobjstate.EnterStartPosState implements ru.drunkard.states.movableobjstate.ISeekerState {
+  public ru.drunkard.states.movableobjstate.EnterStartPosState();
+  public void initActions(ru.drunkard.fieldobjects.ISeekerWithState, ru.drunkard.field.GameField);
+}
+Compiled from "ExitStartPosState.java"
+public class ru.drunkard.states.movableobjstate.ExitStartPosState implements ru.drunkard.states.movableobjstate.ISeekerState {
+  public ru.drunkard.states.movableobjstate.ExitStartPosState();
+  public void initActions(ru.drunkard.fieldobjects.ISeekerWithState, ru.drunkard.field.GameField);
+}
+Compiled from "ISeekerState.java"
+public interface ru.drunkard.states.movableobjstate.ISeekerState {
+  public abstract void initActions(ru.drunkard.fieldobjects.ISeekerWithState, ru.drunkard.field.GameField);
+}
+Compiled from "ReturnToStartState.java"
+public class ru.drunkard.states.movableobjstate.ReturnToStartState implements ru.drunkard.states.movableobjstate.ISeekerState {
+  public ru.drunkard.states.movableobjstate.ReturnToStartState();
+  public void initActions(ru.drunkard.fieldobjects.ISeekerWithState, ru.drunkard.field.GameField);
+}
+Compiled from "SeekingState.java"
+public class ru.drunkard.states.movableobjstate.SeekingState implements ru.drunkard.states.movableobjstate.ISeekerState {
+  public ru.drunkard.states.movableobjstate.SeekingState();
+  public void initActions(ru.drunkard.fieldobjects.ISeekerWithState, ru.drunkard.field.GameField);
+}
+Compiled from "TargetedState.java"
+public class ru.drunkard.states.movableobjstate.TargetedState implements ru.drunkard.states.movableobjstate.ISeekerState {
+  public ru.drunkard.states.movableobjstate.TargetedState(ru.drunkard.utility.Point);
+  public void initActions(ru.drunkard.fieldobjects.ISeekerWithState, ru.drunkard.field.GameField);
+}
+Compiled from "WaitingState.java"
+public class ru.drunkard.states.movableobjstate.WaitingState implements ru.drunkard.states.movableobjstate.ISeekerState {
+  public ru.drunkard.states.movableobjstate.WaitingState();
+  public void initActions(ru.drunkard.fieldobjects.ISeekerWithState, ru.drunkard.field.GameField);
+}
+Compiled from "BFSNodeInfo.java"
+public class ru.drunkard.utility.BFSNodeInfo {
+  public ru.drunkard.utility.Point predecessor;
+  public java.lang.Integer pathLength;
+  public ru.drunkard.utility.BFSNodeInfo(ru.drunkard.utility.Point, java.lang.Integer);
+}
+Compiled from "Point.java"
+public class ru.drunkard.utility.Point {
+  public int x;
+  public int y;
+  public ru.drunkard.utility.Point(int, int);
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public static boolean rectCoversPoint(ru.drunkard.utility.Point, ru.drunkard.utility.Point, ru.drunkard.utility.Point);
+}

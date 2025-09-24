@@ -1,0 +1,217 @@
+Compiled from "Arrow.java"
+public class Arrow {
+  public Arrow(Tensor, Tensor);
+  public Tensor getFrom();
+  public Tensor getTo();
+  public void delete();
+  public boolean equals(Arrow);
+  public boolean isDeleted();
+  public java.lang.String toString();
+}
+Compiled from "BasisElement.java"
+public interface BasisElement {
+  public abstract java.lang.String toString();
+  public abstract java.lang.String getCode();
+  public abstract boolean getSign();
+  public abstract int getName();
+  public abstract boolean equals(BasisElement);
+}
+Compiled from "Crossing.java"
+public class Crossing {
+  public Crossing(int, int, int, int, boolean);
+  public int get1st();
+  public int get2nd();
+  public int get3rd();
+  public int get4th();
+  public int getMaxVertex();
+  public int getMinVertex();
+  public void swapOverstrand();
+  public void swapUnderstrand();
+  public void swapSign();
+  public boolean getSign();
+  public Smoothing getZeroSmoothing();
+  public Smoothing getOneSmoothing();
+  public java.lang.String toString();
+}
+Compiled from "DMap.java"
+public interface DMap {
+  public abstract KhovanovMapNode getToNode();
+  public abstract java.lang.String toString();
+}
+Compiled from "DotRow.java"
+public class DotRow {
+  public DotRow(int);
+  public void add(Tensor);
+  public Tensor[] getDots();
+  public int numDotsRemaining();
+}
+Compiled from "DotsAndArrows.java"
+public class DotsAndArrows {
+  public DotsAndArrows(KhovanovMap);
+  public void fillRows();
+  public void fillArrows();
+  public void resolve();
+  public void output();
+  public static void main(java.lang.String[]);
+}
+Compiled from "Edge.java"
+public class Edge {
+  public Edge(Vertex, Vertex);
+  public void swap();
+}
+Compiled from "KhovanovMap.java"
+public class KhovanovMap {
+  public KhovanovMap(Knot);
+  public void fillResolvedKnots(Knot);
+  public void setMaps();
+  public KhovanovMapNode findNode(java.lang.String);
+  public KhovanovRow[] getKhovanovRows();
+  public int getNumRows();
+  public void debug();
+  public static void main(java.lang.String[]);
+}
+Compiled from "KhovanovMapNode.java"
+public class KhovanovMapNode {
+  public KhovanovMapNode(java.lang.String, java.util.ArrayList<SeifertCircle>);
+  public void makeBasis();
+  public void addOutMap(DMap);
+  public void addInMap(DMap);
+  public java.lang.String getBinCode();
+  public java.util.ArrayList<SeifertCircle> getCircles();
+  public Tensor[] getBasis();
+  public int basisSize();
+  public int numCircles();
+  public boolean containsCircle(SeifertCircle);
+  public java.util.ArrayList<SeifertCircle> findCircleMatch(SeifertCircle);
+  public java.util.ArrayList<SeifertCircle> findDifferentCircles(KhovanovMapNode);
+  public java.lang.String[] outMaps();
+  public static int nthOccurrence(java.lang.String, char, int);
+  public java.lang.String toString();
+}
+Compiled from "KhovanovRow.java"
+public class KhovanovRow {
+  public KhovanovRow(int);
+  public void add(KhovanovMapNode);
+  public int size();
+  public int howManyDots();
+  public KhovanovMapNode[] getNodes();
+  public KhovanovMapNode findNode(java.lang.String);
+  public KhovanovMapNode nthNode(int);
+  public java.lang.String toString();
+}
+Compiled from "Knot.java"
+public class Knot {
+  public Knot(Crossing[]);
+  public Knot(Crossing[], java.lang.String, Smoothing, Vertex[]);
+  public int numCrossings();
+  public java.lang.String getBinCode();
+  public Knot getLeftKnot();
+  public Knot getRightKnot();
+  public void resolveknot();
+  public void makeCircles();
+  public java.util.ArrayList<SeifertCircle> getCircles();
+  public void output();
+  public static void main(java.lang.String[]);
+}
+Compiled from "MergeMap.java"
+public class MergeMap implements DMap {
+  public MergeMap(KhovanovMapNode, KhovanovMapNode, java.util.ArrayList<SeifertCircle>, SeifertCircle);
+  public KhovanovMapNode getToNode();
+  public void addTensorArrows();
+  public java.lang.String toString();
+}
+Compiled from "SeifertCircle.java"
+public class SeifertCircle implements java.lang.Comparable<SeifertCircle> {
+  public SeifertCircle(java.lang.String);
+  public int compareTo(SeifertCircle);
+  public int compareName(SeifertCircle);
+  public int findMinEdge();
+  public BasisElement getVplus();
+  public BasisElement getVminus();
+  public java.lang.String getCode();
+  public int getMinEdge();
+  public int compareTo(java.lang.Object);
+}
+Compiled from "Smoothing.java"
+public class Smoothing {
+  public int one;
+  public int two;
+  public int three;
+  public int four;
+  public boolean reorder;
+  public Smoothing();
+  public Smoothing(int, int, int, int, boolean);
+  public int getOne();
+  public int getTwo();
+  public int getThree();
+  public int getFour();
+  public boolean needOrientationReorder();
+  public java.lang.String toString();
+}
+Compiled from "SplitMap.java"
+public class SplitMap implements DMap {
+  public SplitMap(KhovanovMapNode, KhovanovMapNode, SeifertCircle, java.util.ArrayList<SeifertCircle>);
+  public KhovanovMapNode getToNode();
+  public void addTensorArrows();
+  public java.lang.String toString();
+}
+Compiled from "Tensor.java"
+public class Tensor {
+  public Tensor(java.util.ArrayList<BasisElement>, java.lang.String);
+  public int getNumArrows();
+  public boolean isDeleted();
+  public void deleteArrowFromIn(Arrow);
+  public void deleteArrowFromOut(Arrow);
+  public void addInArrowModTwo(Arrow);
+  public void addOutArrowModTwo(Arrow);
+  public void delete();
+  public java.lang.String getCode();
+  public void addOutArrow(Arrow);
+  public void addOutArrows(java.util.ArrayList<Arrow>);
+  public void addInArrow(Arrow);
+  public void addInArrows(java.util.ArrayList<Arrow>);
+  public void removeDeletedArrows();
+  public java.util.ArrayList<Arrow> getOutArrows();
+  public java.util.ArrayList<Arrow> getInArrows();
+  public boolean contains(BasisElement);
+  public boolean isIdentityMinusOne(Tensor, BasisElement);
+  public BasisElement[] getElements();
+  public boolean equals(Tensor);
+  public java.lang.String basisToString();
+  public java.lang.String toString();
+}
+Compiled from "Vertex.java"
+public class Vertex {
+  public Vertex();
+  public Vertex(int);
+  public Vertex(int, Vertex, Vertex);
+  public void setPointers(Vertex, Vertex);
+  public int getNum();
+  public Vertex getFrom();
+  public Vertex getTo();
+  public boolean wasVisited();
+  public void setFrom(Vertex);
+  public void setTo(Vertex);
+  public void visit();
+  public java.lang.String toString();
+}
+Compiled from "Vminus.java"
+public class Vminus implements BasisElement {
+  public Vminus(java.lang.String);
+  public int findName();
+  public boolean getSign();
+  public java.lang.String getCode();
+  public int getName();
+  public boolean equals(BasisElement);
+  public java.lang.String toString();
+}
+Compiled from "Vplus.java"
+public class Vplus implements BasisElement {
+  public Vplus(java.lang.String);
+  public int findName();
+  public boolean getSign();
+  public java.lang.String getCode();
+  public int getName();
+  public boolean equals(BasisElement);
+  public java.lang.String toString();
+}

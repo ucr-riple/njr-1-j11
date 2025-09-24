@@ -1,0 +1,2060 @@
+Compiled from "Lisp.java"
+public class org.jatha.Lisp extends org.jatha.LispProcessor {
+  public org.jatha.read.LispParser PARSER;
+  public org.jatha.compile.LispCompiler COMPILER;
+  public org.jatha.util.SymbolTable SYMTAB;
+  public org.jatha.machine.SECDMachine MACHINE;
+  public final java.lang.Runtime SYSTEM_INFO;
+  public static int APROPOS_TAB;
+  org.jatha.dynatype.LispValue prompt;
+  org.jatha.dynatype.LispValue userPrompt;
+  org.jatha.dynatype.LispValue packages;
+  public static long MAX_LIST_LENGTH_VALUE;
+  public static long PRINT_LENGTH_VALUE;
+  public static long PRINT_LEVEL_VALUE;
+  public org.jatha.Lisp();
+  public java.lang.String getVersionString();
+  public java.lang.String getVersionName();
+  public java.lang.String getVersionDate();
+  public java.lang.String getVersionURL();
+  public java.lang.String getVersionType();
+  public int getVersionMajor();
+  public int getVersionMinor();
+  public int getVersionMicro();
+  void showHelp();
+  public void init();
+  protected void loadInitFiles();
+  public org.jatha.dynatype.LispValue loadFromJar(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue loadFromJar(java.lang.String, java.lang.String);
+  public org.jatha.dynatype.LispValue loadFromJar(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue loadFromJar(java.lang.String);
+  public org.jatha.dynatype.LispValue eval(java.lang.String);
+  public org.jatha.dynatype.LispValue eval(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue eval(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue);
+  void readEvalPrintLoop();
+  public org.jatha.compile.LispCompiler getCompiler();
+  public org.jatha.read.LispParser getParser();
+  public org.jatha.util.SymbolTable getSymbolTable();
+  public org.jatha.dynatype.LispValue parse(java.lang.String, int) throws java.io.EOFException;
+  public org.jatha.dynatype.LispValue parse(java.lang.String) throws java.io.EOFException;
+  public org.jatha.dynatype.LispValue load(java.io.Reader) throws org.jatha.exception.CompilerException;
+  public org.jatha.dynatype.LispValue load(java.io.Reader, boolean) throws org.jatha.exception.CompilerException;
+  public org.jatha.dynatype.LispValue load(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue load(java.lang.String);
+  public org.jatha.dynatype.LispValue load(java.lang.String, boolean);
+  public long free();
+  public long free(java.io.PrintStream);
+  public void javaTrace(boolean);
+  public void gc();
+  public void gc_full();
+  public org.jatha.dynatype.LispCons makeCons(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue makeBool(boolean);
+  public org.jatha.dynatype.LispString makeString(java.lang.String);
+  public org.jatha.dynatype.LispSymbol makeSymbol(java.lang.String);
+  public org.jatha.dynatype.LispSymbol makeSymbol(org.jatha.dynatype.LispString);
+  public org.jatha.dynatype.LispSymbol makeConstant(java.lang.String);
+  public org.jatha.dynatype.LispSymbol makeConstant(org.jatha.dynatype.LispString);
+  public static org.jatha.dynatype.LispValue toLisp(java.lang.Object);
+  public static void main(java.lang.String[]);
+  public void exit();
+  public org.jatha.dynatype.LispSymbol intern(java.lang.String, org.jatha.dynatype.LispSymbol);
+  public org.jatha.dynatype.LispSymbol intern(org.jatha.dynatype.LispString, org.jatha.dynatype.LispSymbol);
+  public org.jatha.dynatype.LispSymbol intern(java.lang.String);
+  public org.jatha.dynatype.LispSymbol intern(org.jatha.dynatype.LispString);
+  public org.jatha.dynatype.LispValue setf_symbol_value(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue);
+  public static boolean isBuiltinFunction(org.jatha.dynatype.LispValue);
+  static {};
+}
+Compiled from "LispProcessor.java"
+public class org.jatha.LispProcessor {
+  public org.jatha.LispProcessor();
+  public static final org.jatha.dynatype.LispValue car(org.jatha.dynatype.LispValue);
+  public static final org.jatha.dynatype.LispValue cdr(org.jatha.dynatype.LispValue);
+  public static final org.jatha.dynatype.LispValue nth(long, org.jatha.dynatype.LispCons);
+  public static org.jatha.dynatype.LispValue nth(org.jatha.dynatype.LispCons, org.jatha.dynatype.LispCons);
+  public static final org.jatha.dynatype.LispValue cddr(org.jatha.dynatype.LispValue);
+  public static final org.jatha.dynatype.LispCons cons(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue);
+  public static final org.jatha.dynatype.LispCons variable(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue);
+  public static final org.jatha.dynatype.LispList list(org.jatha.dynatype.LispValue...);
+  public static final org.jatha.dynatype.LispSymbol symbol(java.lang.String);
+  public static final org.jatha.dynatype.LispString string(java.lang.String);
+  public static final org.jatha.dynatype.LispNumber number(long);
+  public static final org.jatha.dynatype.LispNumber number(float);
+  public static final org.jatha.dynatype.LispNumber number(java.math.BigInteger);
+  public static final org.jatha.dynatype.LispInteger integer(java.lang.Long);
+  public static final org.jatha.dynatype.LispInteger integer(long);
+  public static final org.jatha.dynatype.LispInteger integer(java.lang.Integer);
+  public static final org.jatha.dynatype.LispInteger integer(int);
+  public static final org.jatha.dynatype.LispBignum bignum(java.math.BigInteger);
+  public static final org.jatha.dynatype.LispBignum bignum(org.jatha.dynatype.LispInteger);
+  public static final org.jatha.dynatype.LispBignum bignum(double);
+  public static final org.jatha.dynatype.LispBignum bignum(long);
+  public static final org.jatha.dynatype.LispInteger integer();
+}
+Compiled from "Tests.java"
+public class org.jatha.Tests {
+  public org.jatha.Tests();
+  public static void main(java.lang.String[]);
+}
+Compiled from "LispCompiler.java"
+public class org.jatha.compile.LispCompiler extends org.jatha.LispProcessor {
+  static boolean DEBUG;
+  static final org.jatha.dynatype.LispSymbol PROGN;
+  static final org.jatha.dynatype.LispSymbol DEFUN;
+  static final org.jatha.dynatype.LispSymbol BLOCK;
+  org.jatha.dynatype.LispValue AND;
+  org.jatha.dynatype.LispValue DEFMACRO;
+  org.jatha.dynatype.LispValue IF;
+  org.jatha.dynatype.LispValue LAMBDA;
+  org.jatha.dynatype.LispValue LET;
+  org.jatha.dynatype.LispValue SET;
+  org.jatha.dynatype.LispValue LETREC;
+  org.jatha.dynatype.LispValue OR;
+  static final org.jatha.dynatype.LispSymbol AMP_REST;
+  org.jatha.dynatype.LispValue DUMMY_FUNCTION;
+  org.jatha.dynatype.LispValue DUMMY_MACRO;
+  org.jatha.compile.LispPrimitive CONS;
+  org.jatha.compile.LispPrimitive LIST;
+  org.jatha.compile.LispPrimitive SETQ;
+  java.util.Map<org.jatha.dynatype.LispValue, org.jatha.compile.LispCompiler$Compiler> SpecialOperators;
+  boolean WarnAboutSpecialsP;
+  java.util.Set<java.lang.String> requires;
+  java.util.List<java.lang.String> defaultPackages;
+  static final boolean $assertionsDisabled;
+  public org.jatha.Lisp getLisp();
+  public org.jatha.compile.LispCompiler(org.jatha.Lisp);
+  public final org.jatha.dynatype.LispValue require(java.lang.String);
+  public void init();
+  public org.jatha.dynatype.LispValue eval(java.lang.String) throws org.jatha.exception.CompilerException;
+  public org.jatha.dynatype.LispValue load(java.io.Reader) throws org.jatha.exception.CompilerException;
+  public void Register(org.jatha.compile.LispPrimitive);
+  public java.util.Stack<org.jatha.dynatype.LispValue> getLegalBlocks();
+  public void WarnAboutSpecials(boolean);
+  public static int indexInList(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue[]);
+  public static org.jatha.dynatype.LispCons indexAndAttribute(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispCons compileArgsLeftToRight(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispList, org.jatha.dynatype.LispCons) throws org.jatha.exception.CompilerException;
+  public org.jatha.dynatype.LispCons compileConstantArgsLeftToRight(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispList, org.jatha.dynatype.LispCons);
+  public org.jatha.dynatype.LispCons compile(org.jatha.machine.SECDMachine, org.jatha.dynatype.LispValue, org.jatha.dynatype.LispList) throws org.jatha.exception.CompilerException;
+  public org.jatha.dynatype.LispCons compile(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispList, org.jatha.dynatype.LispCons) throws org.jatha.exception.CompilerException;
+  org.jatha.dynatype.LispCons compileAtom(org.jatha.machine.SECDMachine, org.jatha.dynatype.LispAtom, org.jatha.dynatype.LispList, org.jatha.dynatype.LispCons);
+  org.jatha.dynatype.LispCons compileList(org.jatha.machine.SECDMachine, org.jatha.dynatype.LispList, org.jatha.dynatype.LispList, org.jatha.dynatype.LispCons) throws org.jatha.exception.CompilerException;
+  org.jatha.dynatype.LispValue compileSpecialForm(org.jatha.machine.SECDMachine, org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue, org.jatha.dynatype.LispList, org.jatha.dynatype.LispValue) throws org.jatha.exception.CompilerException;
+  public org.jatha.dynatype.LispCons compileLet(org.jatha.machine.SECDMachine, org.jatha.dynatype.LispList, org.jatha.dynatype.LispList, org.jatha.dynatype.LispList, org.jatha.dynatype.LispValue, org.jatha.dynatype.LispCons) throws org.jatha.exception.CompilerException;
+  org.jatha.dynatype.LispCons compileSpecialBind(org.jatha.machine.SECDMachine, org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue, org.jatha.dynatype.LispList, org.jatha.dynatype.LispCons) throws org.jatha.exception.CompilerException;
+  org.jatha.dynatype.LispCons compileSpecialUnbind(org.jatha.machine.SECDMachine, org.jatha.dynatype.LispValue, org.jatha.dynatype.LispCons);
+  public org.jatha.dynatype.LispList varsFromLetBindings(org.jatha.dynatype.LispList);
+  public org.jatha.dynatype.LispList valuesFromLetBindings(org.jatha.dynatype.LispList);
+  org.jatha.dynatype.LispCons compileApp(org.jatha.machine.SECDMachine, org.jatha.dynatype.LispValue, org.jatha.dynatype.LispList, org.jatha.dynatype.LispCons) throws org.jatha.exception.CompilerException;
+  org.jatha.dynatype.LispCons compileAppConstant(org.jatha.machine.SECDMachine, org.jatha.dynatype.LispList, org.jatha.dynatype.LispList, org.jatha.dynatype.LispCons);
+  org.jatha.dynatype.LispCons compileBuiltin(org.jatha.machine.SECDMachine, org.jatha.dynatype.LispValue, org.jatha.dynatype.LispList, org.jatha.dynatype.LispList, org.jatha.dynatype.LispCons) throws org.jatha.exception.CompilerException;
+  org.jatha.dynatype.LispCons compileUserDefinedFunction(org.jatha.machine.SECDMachine, org.jatha.dynatype.LispValue, org.jatha.dynatype.LispList, org.jatha.dynatype.LispList, org.jatha.dynatype.LispCons) throws org.jatha.exception.CompilerException;
+  org.jatha.dynatype.LispCons compileAnd(org.jatha.machine.SECDMachine, org.jatha.dynatype.LispList, org.jatha.dynatype.LispList, org.jatha.dynatype.LispCons) throws org.jatha.exception.CompilerException;
+  org.jatha.dynatype.LispValue compileAndAux(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue);
+  org.jatha.dynatype.LispCons compileOr(org.jatha.machine.SECDMachine, org.jatha.dynatype.LispList, org.jatha.dynatype.LispList, org.jatha.dynatype.LispCons) throws org.jatha.exception.CompilerException;
+  org.jatha.dynatype.LispValue compileOrAux(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue);
+  org.jatha.dynatype.LispCons compileQuote(org.jatha.dynatype.LispList, org.jatha.dynatype.LispList, org.jatha.dynatype.LispCons) throws org.jatha.exception.CompilerException;
+  org.jatha.dynatype.LispCons compileDefun(org.jatha.machine.SECDMachine, org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue, org.jatha.dynatype.LispList, org.jatha.dynatype.LispCons) throws org.jatha.exception.CompilerException;
+  org.jatha.dynatype.LispCons compileBlock(org.jatha.machine.SECDMachine, org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue, org.jatha.dynatype.LispList, org.jatha.dynatype.LispCons) throws org.jatha.exception.CompilerException;
+  org.jatha.dynatype.LispCons compileDefmacro(org.jatha.machine.SECDMachine, org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue, org.jatha.dynatype.LispList, org.jatha.dynatype.LispCons) throws org.jatha.exception.CompilerException;
+  org.jatha.dynatype.LispCons compileIf(org.jatha.machine.SECDMachine, org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue, org.jatha.dynatype.LispList, org.jatha.dynatype.LispCons) throws org.jatha.exception.CompilerException;
+  org.jatha.dynatype.LispCons compileOptimizedIf(org.jatha.machine.SECDMachine, org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue, org.jatha.dynatype.LispList, org.jatha.dynatype.LispCons) throws org.jatha.exception.CompilerException;
+  org.jatha.dynatype.LispCons compileProgn(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispList, org.jatha.dynatype.LispCons) throws org.jatha.exception.CompilerException;
+  org.jatha.dynatype.LispCons compileLambda(org.jatha.machine.SECDMachine, org.jatha.dynatype.LispValue, org.jatha.dynatype.LispList, org.jatha.dynatype.LispCons) throws org.jatha.exception.CompilerException;
+  public static boolean is_atom(org.jatha.dynatype.LispValue);
+  public static boolean is_null(org.jatha.dynatype.LispValue);
+  static org.jatha.Lisp access$000(org.jatha.compile.LispCompiler);
+  static {};
+}
+Compiled from "LispCompiler.java"
+class org.jatha.compile.LispCompiler$1 extends java.util.TreeMap<org.jatha.dynatype.LispValue, org.jatha.compile.LispCompiler$Compiler> {
+  final org.jatha.compile.LispCompiler this$0;
+  org.jatha.compile.LispCompiler$1(org.jatha.compile.LispCompiler);
+}
+Compiled from "LispCompiler.java"
+class org.jatha.compile.LispCompiler$1$1 implements org.jatha.compile.LispCompiler$Compiler {
+  final org.jatha.compile.LispCompiler$1 this$1;
+  org.jatha.compile.LispCompiler$1$1(org.jatha.compile.LispCompiler$1);
+  public org.jatha.dynatype.LispCons compile(org.jatha.machine.SECDMachine, org.jatha.dynatype.LispList, org.jatha.dynatype.LispList, org.jatha.dynatype.LispCons) throws org.jatha.exception.CompilerException;
+}
+Compiled from "LispCompiler.java"
+class org.jatha.compile.LispCompiler$1$10 implements org.jatha.compile.LispCompiler$Compiler {
+  final org.jatha.compile.LispCompiler$1 this$1;
+  org.jatha.compile.LispCompiler$1$10(org.jatha.compile.LispCompiler$1);
+  public org.jatha.dynatype.LispCons compile(org.jatha.machine.SECDMachine, org.jatha.dynatype.LispList, org.jatha.dynatype.LispList, org.jatha.dynatype.LispCons) throws org.jatha.exception.CompilerException;
+}
+Compiled from "LispCompiler.java"
+class org.jatha.compile.LispCompiler$1$11 implements org.jatha.compile.LispCompiler$Compiler {
+  final org.jatha.compile.LispCompiler$1 this$1;
+  org.jatha.compile.LispCompiler$1$11(org.jatha.compile.LispCompiler$1);
+  public org.jatha.dynatype.LispCons compile(org.jatha.machine.SECDMachine, org.jatha.dynatype.LispList, org.jatha.dynatype.LispList, org.jatha.dynatype.LispCons) throws org.jatha.exception.CompilerException;
+}
+Compiled from "LispCompiler.java"
+class org.jatha.compile.LispCompiler$1$12 implements org.jatha.compile.LispCompiler$Compiler {
+  final org.jatha.compile.LispCompiler$1 this$1;
+  org.jatha.compile.LispCompiler$1$12(org.jatha.compile.LispCompiler$1);
+  public org.jatha.dynatype.LispCons compile(org.jatha.machine.SECDMachine, org.jatha.dynatype.LispList, org.jatha.dynatype.LispList, org.jatha.dynatype.LispCons) throws org.jatha.exception.CompilerException;
+}
+Compiled from "LispCompiler.java"
+class org.jatha.compile.LispCompiler$1$2 implements org.jatha.compile.LispCompiler$Compiler {
+  final org.jatha.compile.LispCompiler$1 this$1;
+  org.jatha.compile.LispCompiler$1$2(org.jatha.compile.LispCompiler$1);
+  public org.jatha.dynatype.LispCons compile(org.jatha.machine.SECDMachine, org.jatha.dynatype.LispList, org.jatha.dynatype.LispList, org.jatha.dynatype.LispCons) throws org.jatha.exception.CompilerException;
+}
+Compiled from "LispCompiler.java"
+class org.jatha.compile.LispCompiler$1$3 implements org.jatha.compile.LispCompiler$Compiler {
+  final org.jatha.compile.LispCompiler$1 this$1;
+  org.jatha.compile.LispCompiler$1$3(org.jatha.compile.LispCompiler$1);
+  public org.jatha.dynatype.LispCons compile(org.jatha.machine.SECDMachine, org.jatha.dynatype.LispList, org.jatha.dynatype.LispList, org.jatha.dynatype.LispCons) throws org.jatha.exception.CompilerException;
+}
+Compiled from "LispCompiler.java"
+class org.jatha.compile.LispCompiler$1$4 implements org.jatha.compile.LispCompiler$Compiler {
+  final org.jatha.compile.LispCompiler$1 this$1;
+  org.jatha.compile.LispCompiler$1$4(org.jatha.compile.LispCompiler$1);
+  public org.jatha.dynatype.LispCons compile(org.jatha.machine.SECDMachine, org.jatha.dynatype.LispList, org.jatha.dynatype.LispList, org.jatha.dynatype.LispCons) throws org.jatha.exception.CompilerException;
+}
+Compiled from "LispCompiler.java"
+class org.jatha.compile.LispCompiler$1$5 implements org.jatha.compile.LispCompiler$Compiler {
+  final org.jatha.compile.LispCompiler$1 this$1;
+  org.jatha.compile.LispCompiler$1$5(org.jatha.compile.LispCompiler$1);
+  public org.jatha.dynatype.LispCons compile(org.jatha.machine.SECDMachine, org.jatha.dynatype.LispList, org.jatha.dynatype.LispList, org.jatha.dynatype.LispCons) throws org.jatha.exception.CompilerException;
+}
+Compiled from "LispCompiler.java"
+class org.jatha.compile.LispCompiler$1$6 implements org.jatha.compile.LispCompiler$Compiler {
+  final org.jatha.compile.LispCompiler$1 this$1;
+  org.jatha.compile.LispCompiler$1$6(org.jatha.compile.LispCompiler$1);
+  public org.jatha.dynatype.LispCons compile(org.jatha.machine.SECDMachine, org.jatha.dynatype.LispList, org.jatha.dynatype.LispList, org.jatha.dynatype.LispCons) throws org.jatha.exception.CompilerException;
+}
+Compiled from "LispCompiler.java"
+class org.jatha.compile.LispCompiler$1$7 implements org.jatha.compile.LispCompiler$Compiler {
+  final org.jatha.compile.LispCompiler$1 this$1;
+  org.jatha.compile.LispCompiler$1$7(org.jatha.compile.LispCompiler$1);
+  public org.jatha.dynatype.LispCons compile(org.jatha.machine.SECDMachine, org.jatha.dynatype.LispList, org.jatha.dynatype.LispList, org.jatha.dynatype.LispCons) throws org.jatha.exception.CompilerException;
+}
+Compiled from "LispCompiler.java"
+class org.jatha.compile.LispCompiler$1$8 implements org.jatha.compile.LispCompiler$Compiler {
+  final org.jatha.compile.LispCompiler$1 this$1;
+  org.jatha.compile.LispCompiler$1$8(org.jatha.compile.LispCompiler$1);
+  public org.jatha.dynatype.LispCons compile(org.jatha.machine.SECDMachine, org.jatha.dynatype.LispList, org.jatha.dynatype.LispList, org.jatha.dynatype.LispCons) throws org.jatha.exception.CompilerException;
+}
+Compiled from "LispCompiler.java"
+class org.jatha.compile.LispCompiler$1$9 implements org.jatha.compile.LispCompiler$Compiler {
+  final org.jatha.compile.LispCompiler$1 this$1;
+  org.jatha.compile.LispCompiler$1$9(org.jatha.compile.LispCompiler$1);
+  public org.jatha.dynatype.LispCons compile(org.jatha.machine.SECDMachine, org.jatha.dynatype.LispList, org.jatha.dynatype.LispList, org.jatha.dynatype.LispCons) throws org.jatha.exception.CompilerException;
+}
+Compiled from "LispCompiler.java"
+class org.jatha.compile.LispCompiler$10 extends org.jatha.compile.LispPrimitive1 {
+  final org.jatha.compile.LispCompiler this$0;
+  org.jatha.compile.LispCompiler$10(org.jatha.compile.LispCompiler, java.lang.String);
+  protected org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispValue);
+}
+Compiled from "LispCompiler.java"
+class org.jatha.compile.LispCompiler$11 extends org.jatha.compile.LispPrimitive1 {
+  final org.jatha.compile.LispCompiler this$0;
+  org.jatha.compile.LispCompiler$11(org.jatha.compile.LispCompiler, java.lang.String);
+  protected org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispValue);
+}
+Compiled from "LispCompiler.java"
+class org.jatha.compile.LispCompiler$12 extends org.jatha.compile.LispPrimitive1 {
+  final org.jatha.compile.LispCompiler this$0;
+  org.jatha.compile.LispCompiler$12(org.jatha.compile.LispCompiler, java.lang.String);
+  protected org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispValue);
+}
+Compiled from "LispCompiler.java"
+class org.jatha.compile.LispCompiler$13 extends org.jatha.compile.LispPrimitiveC {
+  final org.jatha.compile.LispCompiler this$0;
+  org.jatha.compile.LispCompiler$13(org.jatha.compile.LispCompiler, java.lang.String, long);
+  protected org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispList);
+  org.jatha.dynatype.LispValue appendArgs(org.jatha.dynatype.LispValue);
+}
+Compiled from "LispCompiler.java"
+class org.jatha.compile.LispCompiler$14 extends org.jatha.compile.LispPrimitive1 {
+  final org.jatha.compile.LispCompiler this$0;
+  org.jatha.compile.LispCompiler$14(org.jatha.compile.LispCompiler, java.lang.String);
+  protected org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispValue);
+}
+Compiled from "LispCompiler.java"
+class org.jatha.compile.LispCompiler$15 extends org.jatha.compile.LispPrimitive1 {
+  final org.jatha.compile.LispCompiler this$0;
+  org.jatha.compile.LispCompiler$15(org.jatha.compile.LispCompiler, java.lang.String);
+  protected org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispValue);
+}
+Compiled from "LispCompiler.java"
+class org.jatha.compile.LispCompiler$16 extends org.jatha.compile.LispPrimitive1 {
+  final org.jatha.compile.LispCompiler this$0;
+  org.jatha.compile.LispCompiler$16(org.jatha.compile.LispCompiler, java.lang.String);
+  protected org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispValue);
+}
+Compiled from "LispCompiler.java"
+class org.jatha.compile.LispCompiler$17 extends org.jatha.compile.LispPrimitive1 {
+  final org.jatha.compile.LispCompiler this$0;
+  org.jatha.compile.LispCompiler$17(org.jatha.compile.LispCompiler, java.lang.String);
+  protected org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispValue);
+}
+Compiled from "LispCompiler.java"
+class org.jatha.compile.LispCompiler$18 extends org.jatha.compile.LispPrimitive1 {
+  final org.jatha.compile.LispCompiler this$0;
+  org.jatha.compile.LispCompiler$18(org.jatha.compile.LispCompiler, java.lang.String);
+  protected org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispValue);
+}
+Compiled from "LispCompiler.java"
+class org.jatha.compile.LispCompiler$19 extends org.jatha.compile.LispPrimitive1 {
+  final org.jatha.compile.LispCompiler this$0;
+  org.jatha.compile.LispCompiler$19(org.jatha.compile.LispCompiler, java.lang.String);
+  protected org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispValue);
+}
+Compiled from "LispCompiler.java"
+class org.jatha.compile.LispCompiler$2 extends java.util.ArrayList<java.lang.String> {
+  final org.jatha.compile.LispCompiler this$0;
+  org.jatha.compile.LispCompiler$2(org.jatha.compile.LispCompiler);
+}
+Compiled from "LispCompiler.java"
+class org.jatha.compile.LispCompiler$20 extends org.jatha.compile.LispPrimitive1 {
+  final org.jatha.compile.LispCompiler this$0;
+  org.jatha.compile.LispCompiler$20(org.jatha.compile.LispCompiler, java.lang.String);
+  protected org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispValue);
+}
+Compiled from "LispCompiler.java"
+class org.jatha.compile.LispCompiler$21 extends org.jatha.compile.LispPrimitive1 {
+  final org.jatha.compile.LispCompiler this$0;
+  org.jatha.compile.LispCompiler$21(org.jatha.compile.LispCompiler, java.lang.String);
+  protected org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispValue);
+}
+Compiled from "LispCompiler.java"
+class org.jatha.compile.LispCompiler$22 extends org.jatha.compile.LispPrimitive1 {
+  final org.jatha.compile.LispCompiler this$0;
+  org.jatha.compile.LispCompiler$22(org.jatha.compile.LispCompiler, java.lang.String);
+  protected org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispValue);
+}
+Compiled from "LispCompiler.java"
+class org.jatha.compile.LispCompiler$23 extends org.jatha.compile.LispPrimitiveC {
+  final org.jatha.compile.LispCompiler this$0;
+  org.jatha.compile.LispCompiler$23(org.jatha.compile.LispCompiler, java.lang.String, long, long);
+  public org.jatha.dynatype.LispCons CompileArgs(org.jatha.compile.LispCompiler, org.jatha.machine.SECDMachine, org.jatha.dynatype.LispList, org.jatha.dynatype.LispList, org.jatha.dynatype.LispCons) throws org.jatha.exception.CompilerException;
+  public void Execute(org.jatha.machine.SECDMachine) throws org.jatha.exception.CompilerException;
+  protected org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispList) throws org.jatha.exception.CompilerException;
+}
+Compiled from "LispCompiler.java"
+class org.jatha.compile.LispCompiler$24 extends org.jatha.compile.LispPrimitive1 {
+  final org.jatha.compile.LispCompiler this$0;
+  org.jatha.compile.LispCompiler$24(org.jatha.compile.LispCompiler, java.lang.String);
+  protected org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispValue);
+}
+Compiled from "LispCompiler.java"
+class org.jatha.compile.LispCompiler$25 extends org.jatha.compile.LispPrimitive1 {
+  final org.jatha.compile.LispCompiler this$0;
+  org.jatha.compile.LispCompiler$25(org.jatha.compile.LispCompiler, java.lang.String);
+  protected org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispValue);
+}
+Compiled from "LispCompiler.java"
+class org.jatha.compile.LispCompiler$26 extends org.jatha.compile.LispPrimitive2 {
+  final org.jatha.compile.LispCompiler this$0;
+  org.jatha.compile.LispCompiler$26(org.jatha.compile.LispCompiler, java.lang.String);
+  protected org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue);
+}
+Compiled from "LispCompiler.java"
+class org.jatha.compile.LispCompiler$3 extends org.jatha.compile.LispPrimitiveC {
+  final org.jatha.compile.LispCompiler this$0;
+  org.jatha.compile.LispCompiler$3(org.jatha.compile.LispCompiler, java.lang.String, long);
+  protected org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispList) throws org.jatha.exception.CompilerException;
+  org.jatha.dynatype.LispValue require(org.jatha.dynatype.LispValue);
+}
+Compiled from "LispCompiler.java"
+class org.jatha.compile.LispCompiler$4 extends org.jatha.compile.LispPrimitive2 {
+  final org.jatha.compile.LispCompiler this$0;
+  org.jatha.compile.LispCompiler$4(org.jatha.compile.LispCompiler, java.lang.String);
+  public org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue);
+}
+Compiled from "LispCompiler.java"
+class org.jatha.compile.LispCompiler$5 extends org.jatha.compile.LispPrimitiveC {
+  final org.jatha.compile.LispCompiler this$0;
+  org.jatha.compile.LispCompiler$5(org.jatha.compile.LispCompiler, java.lang.String, long);
+  public org.jatha.dynatype.LispCons CompileArgs(org.jatha.compile.LispCompiler, org.jatha.machine.SECDMachine, org.jatha.dynatype.LispValue, org.jatha.dynatype.LispList, org.jatha.dynatype.LispList, org.jatha.dynatype.LispCons) throws org.jatha.exception.CompilerException;
+  protected org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispList) throws org.jatha.exception.CompilerException;
+}
+Compiled from "LispCompiler.java"
+class org.jatha.compile.LispCompiler$6 extends org.jatha.compile.LispPrimitive2 {
+  final org.jatha.compile.LispCompiler this$0;
+  org.jatha.compile.LispCompiler$6(org.jatha.compile.LispCompiler, java.lang.String);
+  public org.jatha.dynatype.LispCons CompileArgs(org.jatha.compile.LispCompiler, org.jatha.machine.SECDMachine, org.jatha.dynatype.LispValue, org.jatha.dynatype.LispList, org.jatha.dynatype.LispList, org.jatha.dynatype.LispCons) throws org.jatha.exception.CompilerException;
+  protected org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue) throws org.jatha.exception.CompilerException;
+}
+Compiled from "LispCompiler.java"
+class org.jatha.compile.LispCompiler$7 extends org.jatha.compile.LispPrimitive0 {
+  final org.jatha.compile.LispCompiler this$0;
+  org.jatha.compile.LispCompiler$7(org.jatha.compile.LispCompiler, java.lang.String);
+  protected org.jatha.dynatype.LispValue Execute();
+}
+Compiled from "LispCompiler.java"
+class org.jatha.compile.LispCompiler$8 extends org.jatha.compile.LispPrimitive2 {
+  final org.jatha.compile.LispCompiler this$0;
+  org.jatha.compile.LispCompiler$8(org.jatha.compile.LispCompiler, java.lang.String);
+  public org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue);
+}
+Compiled from "LispCompiler.java"
+class org.jatha.compile.LispCompiler$9 extends org.jatha.compile.LispPrimitive2 {
+  final org.jatha.compile.LispCompiler this$0;
+  org.jatha.compile.LispCompiler$9(org.jatha.compile.LispCompiler, java.lang.String);
+  public org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue);
+}
+Compiled from "LispCompiler.java"
+interface org.jatha.compile.LispCompiler$Compiler {
+  public abstract org.jatha.dynatype.LispCons compile(org.jatha.machine.SECDMachine, org.jatha.dynatype.LispList, org.jatha.dynatype.LispList, org.jatha.dynatype.LispCons) throws org.jatha.exception.CompilerException;
+}
+Compiled from "LispExtension.java"
+public interface org.jatha.compile.LispExtension {
+  public abstract void Register(org.jatha.compile.LispCompiler);
+}
+Compiled from "LispPrimitive.java"
+public abstract class org.jatha.compile.LispPrimitive extends org.jatha.dynatype.StandardLispValue {
+  protected java.lang.String functionName;
+  public java.lang.String toString();
+  public org.jatha.compile.LispPrimitive(java.lang.String);
+  public java.lang.String LispFunctionNameString();
+  public org.jatha.dynatype.LispValue LispFunctionNameSymbol();
+  public void internal_princ(java.io.PrintStream);
+  public void internal_prin1(java.io.PrintStream);
+  public void internal_print(java.io.PrintStream);
+  abstract boolean validArgumentLength(int);
+  public boolean validArgumentList(org.jatha.dynatype.LispValue);
+  public abstract java.lang.String parameterCountString();
+  public void Execute(org.jatha.machine.SECDMachine) throws org.jatha.exception.CompilerException;
+  public org.jatha.dynatype.LispCons CompileArgs(org.jatha.compile.LispCompiler, org.jatha.machine.SECDMachine, org.jatha.dynatype.LispList, org.jatha.dynatype.LispList, org.jatha.dynatype.LispCons) throws org.jatha.exception.CompilerException;
+  public org.jatha.dynatype.LispCons CompileArgs(org.jatha.compile.LispCompiler, org.jatha.machine.SECDMachine, org.jatha.dynatype.LispValue, org.jatha.dynatype.LispList, org.jatha.dynatype.LispList, org.jatha.dynatype.LispCons) throws org.jatha.exception.CompilerException;
+}
+Compiled from "LispPrimitive0.java"
+public abstract class org.jatha.compile.LispPrimitive0 extends org.jatha.compile.LispPrimitive {
+  public org.jatha.compile.LispPrimitive0(java.lang.String);
+  public void Execute(org.jatha.machine.SECDMachine) throws org.jatha.exception.CompilerException;
+  boolean validArgumentLength(int);
+  public java.lang.String parameterCountString();
+  protected abstract org.jatha.dynatype.LispValue Execute() throws org.jatha.exception.CompilerException;
+}
+Compiled from "LispPrimitive1.java"
+public abstract class org.jatha.compile.LispPrimitive1 extends org.jatha.compile.LispPrimitive {
+  public org.jatha.compile.LispPrimitive1(java.lang.String);
+  public void Execute(org.jatha.machine.SECDMachine) throws org.jatha.exception.CompilerException;
+  boolean validArgumentLength(int);
+  public java.lang.String parameterCountString();
+  protected abstract org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispValue) throws org.jatha.exception.CompilerException;
+}
+Compiled from "LispPrimitive2.java"
+public abstract class org.jatha.compile.LispPrimitive2 extends org.jatha.compile.LispPrimitive {
+  public org.jatha.compile.LispPrimitive2(java.lang.String);
+  public void Execute(org.jatha.machine.SECDMachine) throws org.jatha.exception.CompilerException;
+  boolean validArgumentLength(int);
+  public java.lang.String parameterCountString();
+  protected abstract org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue) throws org.jatha.exception.CompilerException;
+}
+Compiled from "LispPrimitive3.java"
+public abstract class org.jatha.compile.LispPrimitive3 extends org.jatha.compile.LispPrimitive {
+  public org.jatha.compile.LispPrimitive3(java.lang.String);
+  public void Execute(org.jatha.machine.SECDMachine) throws org.jatha.exception.CompilerException;
+  boolean validArgumentLength(int);
+  public java.lang.String parameterCountString();
+  protected abstract org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue) throws org.jatha.exception.CompilerException;
+}
+Compiled from "LispPrimitiveC.java"
+public abstract class org.jatha.compile.LispPrimitiveC extends org.jatha.compile.LispPrimitive {
+  protected long minNumberOfArgs;
+  protected long maxNumberOfArgs;
+  public org.jatha.compile.LispPrimitiveC(java.lang.String, long);
+  public org.jatha.compile.LispPrimitiveC(java.lang.String, long, long);
+  public void Execute(org.jatha.machine.SECDMachine) throws org.jatha.exception.CompilerException;
+  protected abstract org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispList) throws org.jatha.exception.CompilerException;
+  boolean validArgumentLength(int);
+  public java.lang.String parameterCountString();
+  public org.jatha.dynatype.LispCons CompileArgs(org.jatha.compile.LispCompiler, org.jatha.machine.SECDMachine, org.jatha.dynatype.LispList, org.jatha.dynatype.LispList, org.jatha.dynatype.LispCons) throws org.jatha.exception.CompilerException;
+}
+Compiled from "LispAtom.java"
+public interface org.jatha.dynatype.LispAtom extends org.jatha.dynatype.LispValue {
+}
+Compiled from "LispBignum.java"
+public interface org.jatha.dynatype.LispBignum extends org.jatha.dynatype.LispInteger {
+  public static final java.math.BigInteger ZERO;
+  public static final java.math.BigInteger BIGZERO;
+  public static final java.math.BigInteger MAXINT;
+  public static final java.math.BigInteger MININT;
+  static {};
+}
+Compiled from "LispCharacter.java"
+public interface org.jatha.dynatype.LispCharacter extends org.jatha.dynatype.LispAtom {
+  public abstract char getCharacterValue();
+}
+Compiled from "LispComplex.java"
+public interface org.jatha.dynatype.LispComplex extends org.jatha.dynatype.LispNumber {
+  public abstract void setReal(org.jatha.dynatype.LispValue);
+  public abstract void setImaginary(org.jatha.dynatype.LispValue);
+  public abstract void setValue(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue);
+  public abstract void polar(double, double);
+  public abstract org.jatha.dynatype.LispValue getReal();
+  public abstract org.jatha.dynatype.LispValue getImaginary();
+  public abstract double abs(org.jatha.dynatype.LispComplex);
+  public abstract double squareAbs();
+  public abstract double squareAbs(org.jatha.dynatype.LispComplex);
+  public abstract double arg();
+  public abstract double arg(org.jatha.dynatype.LispComplex);
+  public abstract org.jatha.dynatype.LispComplex conjugate();
+  public abstract org.jatha.dynatype.LispComplex conjugate(org.jatha.dynatype.LispComplex);
+  public abstract org.jatha.dynatype.LispComplex plus(org.jatha.dynatype.LispComplex);
+  public abstract org.jatha.dynatype.LispComplex plus(org.jatha.dynatype.LispComplex, org.jatha.dynatype.LispComplex);
+  public abstract org.jatha.dynatype.LispComplex plus(double);
+  public abstract org.jatha.dynatype.LispComplex plus(org.jatha.dynatype.LispComplex, double);
+  public abstract org.jatha.dynatype.LispComplex plus(double, org.jatha.dynatype.LispComplex);
+  public abstract org.jatha.dynatype.LispComplex plus(double, double);
+  public abstract void plusEquals(org.jatha.dynatype.LispComplex);
+  public abstract void plusEquals(double);
+  public abstract org.jatha.dynatype.LispComplex minus(org.jatha.dynatype.LispComplex);
+  public abstract org.jatha.dynatype.LispComplex minus(org.jatha.dynatype.LispComplex, org.jatha.dynatype.LispComplex);
+  public abstract org.jatha.dynatype.LispComplex minus(double);
+  public abstract org.jatha.dynatype.LispComplex minus(org.jatha.dynatype.LispComplex, double);
+  public abstract org.jatha.dynatype.LispComplex transposedMinus(double);
+  public abstract org.jatha.dynatype.LispComplex minus(double, org.jatha.dynatype.LispComplex);
+  public abstract org.jatha.dynatype.LispComplex minus(double, double);
+  public abstract void minusEquals(org.jatha.dynatype.LispComplex);
+  public abstract void minusEquals(double);
+  public abstract void setInfOption(int);
+  public abstract boolean getInfOption();
+  public abstract org.jatha.dynatype.LispComplex times(org.jatha.dynatype.LispComplex);
+  public abstract org.jatha.dynatype.LispComplex times(org.jatha.dynatype.LispComplex, org.jatha.dynatype.LispComplex);
+  public abstract org.jatha.dynatype.LispComplex times(double);
+  public abstract org.jatha.dynatype.LispComplex times(org.jatha.dynatype.LispComplex, double);
+  public abstract org.jatha.dynatype.LispComplex times(double, org.jatha.dynatype.LispComplex);
+  public abstract org.jatha.dynatype.LispComplex times(double, double);
+  public abstract void timesEquals(org.jatha.dynatype.LispComplex);
+  public abstract void timesEquals(double);
+  public abstract org.jatha.dynatype.LispComplex over(org.jatha.dynatype.LispComplex);
+  public abstract org.jatha.dynatype.LispComplex over(org.jatha.dynatype.LispComplex, org.jatha.dynatype.LispComplex);
+  public abstract org.jatha.dynatype.LispComplex over(double);
+  public abstract org.jatha.dynatype.LispComplex over(org.jatha.dynatype.LispComplex, double);
+  public abstract org.jatha.dynatype.LispComplex transposedOver(double);
+  public abstract org.jatha.dynatype.LispComplex over(double, org.jatha.dynatype.LispComplex);
+  public abstract org.jatha.dynatype.LispComplex over(double, double);
+  public abstract void overEquals(org.jatha.dynatype.LispComplex);
+  public abstract void overEquals(double);
+  public abstract org.jatha.dynatype.LispComplex inverse();
+  public abstract org.jatha.dynatype.LispComplex inverse(org.jatha.dynatype.LispComplex);
+  public abstract org.jatha.dynatype.LispComplex negate(org.jatha.dynatype.LispComplex);
+  public abstract org.jatha.dynatype.LispComplex exp(org.jatha.dynatype.LispComplex);
+  public abstract org.jatha.dynatype.LispComplex exp(double);
+  public abstract org.jatha.dynatype.LispComplex expPlusJayArg(double);
+  public abstract org.jatha.dynatype.LispComplex expMinusJayArg(double);
+  public abstract org.jatha.dynatype.LispComplex log(org.jatha.dynatype.LispComplex);
+  public abstract org.jatha.dynatype.LispComplex sqrt(org.jatha.dynatype.LispComplex);
+  public abstract org.jatha.dynatype.LispComplex nthRoot(org.jatha.dynatype.LispComplex, int);
+  public abstract org.jatha.dynatype.LispComplex square(org.jatha.dynatype.LispComplex);
+  public abstract org.jatha.dynatype.LispComplex pow(org.jatha.dynatype.LispComplex, int);
+  public abstract org.jatha.dynatype.LispComplex pow(org.jatha.dynatype.LispComplex, double);
+  public abstract org.jatha.dynatype.LispComplex pow(org.jatha.dynatype.LispComplex, org.jatha.dynatype.LispComplex);
+  public abstract org.jatha.dynatype.LispComplex pow(int, org.jatha.dynatype.LispComplex);
+  public abstract org.jatha.dynatype.LispComplex pow(double, org.jatha.dynatype.LispComplex);
+  public abstract double hypot(org.jatha.dynatype.LispComplex, org.jatha.dynatype.LispComplex);
+  public abstract boolean isEqual(org.jatha.dynatype.LispComplex, org.jatha.dynatype.LispComplex);
+  public abstract boolean isEqualWithinLimits(org.jatha.dynatype.LispComplex, double);
+  public abstract boolean isEqualWithinLimits(org.jatha.dynatype.LispComplex, org.jatha.dynatype.LispComplex, double);
+  public abstract boolean isReal();
+  public abstract boolean isReal(org.jatha.dynatype.LispComplex);
+  public abstract boolean isZero();
+  public abstract boolean isZero(org.jatha.dynatype.LispComplex);
+  public abstract boolean isInfinite();
+  public abstract boolean isInfinite(org.jatha.dynatype.LispComplex);
+  public abstract boolean isPlusInfinity();
+  public abstract boolean isPlusInfinity(org.jatha.dynatype.LispComplex);
+  public abstract boolean isMinusInfinity();
+  public abstract boolean isMinusInfinity(org.jatha.dynatype.LispComplex);
+  public abstract boolean isNaN();
+  public abstract boolean isNaN(org.jatha.dynatype.LispComplex);
+  public abstract org.jatha.dynatype.LispComplex[] oneDarray(int);
+  public abstract org.jatha.dynatype.LispComplex[] oneDarray(int, double, double);
+  public abstract org.jatha.dynatype.LispComplex[] oneDarray(int, org.jatha.dynatype.LispComplex);
+  public abstract org.jatha.dynatype.LispComplex[][] twoDarray(int, int);
+  public abstract org.jatha.dynatype.LispComplex[][] twoDarray(int, int, double, double);
+  public abstract org.jatha.dynatype.LispComplex[][] twoDarray(int, int, org.jatha.dynatype.LispComplex);
+  public abstract org.jatha.dynatype.LispComplex copy(org.jatha.dynatype.LispComplex);
+  public abstract org.jatha.dynatype.LispComplex[] copy(org.jatha.dynatype.LispComplex[]);
+  public abstract org.jatha.dynatype.LispComplex[][] copy(org.jatha.dynatype.LispComplex[][]);
+  public abstract org.jatha.dynatype.LispComplex zero();
+  public abstract org.jatha.dynatype.LispComplex plusOne();
+  public abstract org.jatha.dynatype.LispComplex minusOne();
+  public abstract org.jatha.dynatype.LispComplex plusJay();
+  public abstract org.jatha.dynatype.LispComplex minusJay();
+  public abstract org.jatha.dynatype.LispComplex pi();
+  public abstract org.jatha.dynatype.LispComplex twoPiJay();
+}
+Compiled from "LispCons.java"
+public interface org.jatha.dynatype.LispCons extends org.jatha.dynatype.LispList {
+  public abstract org.jatha.dynatype.LispValue setf_car(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue setf_cdr(org.jatha.dynatype.LispValue);
+}
+Compiled from "LispConsIterator.java"
+public class org.jatha.dynatype.LispConsIterator implements java.util.Iterator<org.jatha.dynatype.LispValue> {
+  protected org.jatha.dynatype.LispValue m_list;
+  public org.jatha.dynatype.LispConsIterator(org.jatha.dynatype.LispValue);
+  public boolean hasNext();
+  public org.jatha.dynatype.LispValue next();
+  public void remove();
+  static final org.jatha.dynatype.LispValue car(org.jatha.dynatype.LispValue);
+  static final org.jatha.dynatype.LispValue cdr(org.jatha.dynatype.LispValue);
+  public java.lang.Object next();
+}
+Compiled from "LispConstant.java"
+public interface org.jatha.dynatype.LispConstant extends org.jatha.dynatype.LispSymbol {
+}
+Compiled from "LispFunction.java"
+public interface org.jatha.dynatype.LispFunction extends org.jatha.dynatype.LispValue {
+  public abstract org.jatha.dynatype.LispValue getCode();
+  public abstract org.jatha.dynatype.LispValue getSymbol();
+  public abstract boolean isBuiltin();
+}
+Compiled from "LispInteger.java"
+public interface org.jatha.dynatype.LispInteger extends org.jatha.dynatype.LispNumber {
+}
+Compiled from "LispList.java"
+public interface org.jatha.dynatype.LispList extends org.jatha.dynatype.LispValue {
+  public abstract org.jatha.dynatype.LispValue car();
+  public abstract org.jatha.dynatype.LispValue cdr();
+  public abstract org.jatha.dynatype.LispValue append(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue first();
+}
+Compiled from "LispMacro.java"
+public interface org.jatha.dynatype.LispMacro extends org.jatha.dynatype.LispFunction {
+}
+Compiled from "LispNumber.java"
+public interface org.jatha.dynatype.LispNumber extends org.jatha.dynatype.LispAtom {
+  public static final org.jatha.dynatype.LispInteger ZERO;
+  public static final org.jatha.dynatype.LispInteger ONE;
+  public static final org.jatha.dynatype.LispInteger TWO;
+  public abstract double getDoubleValue();
+  public abstract java.math.BigInteger getBigIntegerValue();
+  public abstract long getLongValue();
+  public abstract org.jatha.dynatype.LispNumber abs();
+  public abstract org.jatha.dynatype.LispNumber negate();
+  public abstract org.jatha.dynatype.LispNumber add(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispNumber div(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispNumber mul(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispNumber sub(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue mod(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispNumber power(org.jatha.dynatype.LispNumber);
+  public abstract org.jatha.dynatype.LispValue degreesToRadians();
+  static {};
+}
+Compiled from "LispReal.java"
+public interface org.jatha.dynatype.LispReal extends org.jatha.dynatype.LispNumber {
+}
+Compiled from "LispSpecialSymbol.java"
+public interface org.jatha.dynatype.LispSpecialSymbol extends org.jatha.dynatype.LispSymbol {
+}
+Compiled from "LispString.java"
+public interface org.jatha.dynatype.LispString extends org.jatha.dynatype.LispAtom {
+  public abstract java.lang.String getValue();
+  public abstract org.jatha.dynatype.LispValue basic_elt(int);
+}
+Compiled from "LispSymbol.java"
+public interface org.jatha.dynatype.LispSymbol extends org.jatha.dynatype.LispAtom {
+  public abstract java.lang.String getName();
+  public abstract org.jatha.dynatype.LispValue setq(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue symbol_value() throws org.jatha.exception.LispException;
+  public abstract org.jatha.dynatype.LispString symbol_name();
+  public abstract org.jatha.dynatype.LispValue funcall(org.jatha.machine.SECDMachine, org.jatha.dynatype.LispValue);
+}
+Compiled from "LispValue.java"
+public interface org.jatha.dynatype.LispValue extends java.lang.Comparable<org.jatha.dynatype.LispValue> {
+  public static final org.jatha.dynatype.LispList NIL;
+  public static final org.jatha.dynatype.LispConstant T;
+  public static final org.jatha.dynatype.LispSymbol QUOTE;
+  public static final org.jatha.dynatype.LispSymbol BACKQUOTE;
+  public static final org.jatha.dynatype.LispSymbol MACRO;
+  public static final org.jatha.dynatype.LispValue COLON;
+  public static final org.jatha.dynatype.LispValue NEWLINE;
+  public static final org.jatha.dynatype.LispValue SPACE;
+  public abstract void internal_princ(java.io.PrintStream);
+  public abstract void internal_princ_as_cdr(java.io.PrintStream);
+  public abstract void internal_prin1(java.io.PrintStream);
+  public abstract void internal_prin1_as_cdr(java.io.PrintStream);
+  public abstract void internal_print(java.io.PrintStream);
+  public abstract void internal_print_as_cdr(java.io.PrintStream);
+  public abstract java.lang.String toString();
+  public abstract java.lang.String toString(java.lang.String);
+  public abstract java.lang.String toStringSimple();
+  public abstract java.lang.String toStringShort();
+  public abstract java.lang.String toStringShort(int);
+  public abstract java.lang.String toStringAsCdr();
+  public abstract java.lang.String toString_internal(long, long);
+  public abstract java.lang.String toStringAsCar_internal(long, long);
+  public abstract java.lang.String toStringAsCdr_internal(long, long);
+  public abstract boolean constantp();
+  public abstract boolean basic_foreignp();
+  public abstract int basic_length();
+  public abstract boolean contains(org.jatha.dynatype.LispValue);
+  public abstract int compareTo(org.jatha.dynatype.LispValue);
+  public abstract java.util.Iterator<org.jatha.dynatype.LispValue> iterator();
+  public abstract java.util.Collection<org.jatha.dynatype.LispValue> toCollection();
+  public abstract java.util.List<org.jatha.dynatype.LispValue> toRandomAccess();
+  public abstract void set_special(boolean);
+  public abstract boolean specialP();
+  public abstract void adjustSpecialCount(int);
+  public abstract int get_specialCount();
+  public abstract org.jatha.dynatype.LispValue apply(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue aref(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue setf_aref(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue arrayDimensions();
+  public abstract org.jatha.dynatype.LispValue arrayp();
+  public abstract org.jatha.dynatype.LispValue assoc(org.jatha.dynatype.LispValue);
+  public abstract boolean boundp();
+  public abstract org.jatha.dynatype.LispValue butlast();
+  public abstract org.jatha.dynatype.LispValue clrhash();
+  public abstract org.jatha.dynatype.LispValue copy_list();
+  public abstract org.jatha.dynatype.LispValue copy();
+  public abstract org.jatha.dynatype.LispValue elt(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue eq(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue eql(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue equal(org.jatha.dynatype.LispValue);
+  public abstract boolean fboundp();
+  public abstract org.jatha.dynatype.LispValue gethash(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue gethash(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue setf_gethash(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue hashtablep();
+  public abstract org.jatha.dynatype.LispValue hash_table_count();
+  public abstract org.jatha.dynatype.LispValue hash_table_size();
+  public abstract org.jatha.dynatype.LispValue hash_table_rehash_size();
+  public abstract org.jatha.dynatype.LispValue hash_table_rehash_threshold();
+  public abstract org.jatha.dynatype.LispValue last();
+  public abstract int length();
+  public abstract org.jatha.dynatype.LispValue member(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue nconc(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue neql(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue nreverse();
+  public abstract org.jatha.dynatype.LispValue pop();
+  public abstract org.jatha.dynatype.LispValue position(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue prin1();
+  public abstract org.jatha.dynatype.LispValue princ();
+  public abstract org.jatha.dynatype.LispValue print();
+  public abstract org.jatha.dynatype.LispValue push(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue rassoc(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue reciprocal();
+  public abstract org.jatha.dynatype.LispValue remhash(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue remove(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue rest();
+  public abstract org.jatha.dynatype.LispValue reverse();
+  public abstract org.jatha.dynatype.LispValue rplaca(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue rplacd(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue second();
+  public abstract org.jatha.dynatype.LispValue setf_symbol_function(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue setf_symbol_value(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue string();
+  public abstract org.jatha.dynatype.LispValue stringp();
+  public abstract org.jatha.dynatype.LispValue stringUpcase();
+  public abstract org.jatha.dynatype.LispValue stringDowncase();
+  public abstract org.jatha.dynatype.LispValue stringCapitalize();
+  public abstract org.jatha.dynatype.LispValue nstringUpcase();
+  public abstract org.jatha.dynatype.LispValue nstringDowncase();
+  public abstract org.jatha.dynatype.LispValue nstringCapitalize();
+  public abstract org.jatha.dynatype.LispValue stringEqual(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue stringEq(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue stringNeq(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue stringLessThan(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue stringLessP(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue stringGreaterThan(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue stringGreaterP(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue stringLessThanOrEqual(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue stringGreaterThanOrEqual(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue stringNotLessP(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue stringNotGreaterP(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue stringEndsWith(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue stringStartsWith(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue stringTrim();
+  public abstract org.jatha.dynatype.LispValue stringTrim(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue stringLeftTrim();
+  public abstract org.jatha.dynatype.LispValue stringLeftTrim(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue stringRightTrim();
+  public abstract org.jatha.dynatype.LispValue stringRightTrim(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue subst(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue substring(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue substring(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue symbol_function() throws org.jatha.exception.LispException;
+  public abstract org.jatha.dynatype.LispValue third();
+  public abstract org.jatha.dynatype.LispValue radiansToDegrees();
+  public abstract org.jatha.dynatype.LispValue zerop();
+  public abstract org.jatha.dynatype.LispValue greaterThan(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue greaterThanOrEqual(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue lessThan(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue lessThanOrEqual(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue equalNumeric(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue max(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue min(org.jatha.dynatype.LispValue);
+  public abstract org.jatha.dynatype.LispValue sqrt();
+  public abstract org.jatha.dynatype.LispValue ceiling();
+  public abstract org.jatha.dynatype.LispValue floor();
+  public abstract org.jatha.dynatype.LispValue elt(int);
+  public abstract org.jatha.dynatype.LispValue functionp();
+  public abstract boolean uses(org.jatha.dynatype.LispValue);
+  public int compareTo(java.lang.Object);
+  static {};
+}
+Compiled from "LispVariable.java"
+public interface org.jatha.dynatype.LispVariable extends org.jatha.dynatype.LispCons {
+}
+Compiled from "StandardLispAtom.java"
+public abstract class org.jatha.dynatype.StandardLispAtom extends org.jatha.dynatype.StandardLispValue implements org.jatha.dynatype.LispAtom {
+  public org.jatha.dynatype.StandardLispAtom();
+}
+Compiled from "StandardLispBignum.java"
+public class org.jatha.dynatype.StandardLispBignum extends org.jatha.dynatype.StandardLispInteger implements org.jatha.dynatype.LispBignum {
+  public org.jatha.dynatype.StandardLispBignum(java.math.BigInteger);
+  public org.jatha.dynatype.StandardLispBignum(long);
+  public org.jatha.dynatype.StandardLispBignum(double);
+  public org.jatha.dynatype.StandardLispBignum();
+  public double getDoubleValue();
+  public java.math.BigInteger getBigIntegerValue();
+  public long getLongValue();
+  public void internal_princ(java.io.PrintStream);
+  public void internal_prin1(java.io.PrintStream);
+  public void internal_print(java.io.PrintStream);
+  public java.lang.String toString();
+  public org.jatha.dynatype.LispNumber abs();
+  public org.jatha.dynatype.LispValue eql(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue equal(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispNumber add(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispNumber div(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispNumber mul(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispNumber sub(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispNumber negate();
+  public org.jatha.dynatype.LispValue zerop();
+  public org.jatha.dynatype.LispValue sub(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue mul(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue div(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue add(org.jatha.dynatype.LispValue);
+}
+Compiled from "StandardLispCharacter.java"
+public class org.jatha.dynatype.StandardLispCharacter extends org.jatha.dynatype.StandardLispAtom implements org.jatha.dynatype.LispCharacter {
+  public org.jatha.dynatype.StandardLispCharacter(char);
+  public org.jatha.dynatype.StandardLispCharacter();
+  public void internal_princ(java.io.PrintStream);
+  public void internal_prin1(java.io.PrintStream);
+  public void internal_print(java.io.PrintStream);
+  char getValue();
+  public java.lang.String toString();
+  public boolean constantp();
+  public org.jatha.dynatype.LispValue eql(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue equal(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue string();
+  public char getCharacterValue();
+}
+Compiled from "StandardLispComplex.java"
+public class org.jatha.dynatype.StandardLispComplex extends org.jatha.dynatype.StandardLispNumber implements org.jatha.dynatype.LispComplex {
+  protected org.jatha.dynatype.LispValue f_realPart;
+  protected org.jatha.dynatype.LispValue f_imaginaryPart;
+  public org.jatha.dynatype.StandardLispComplex();
+  public org.jatha.dynatype.StandardLispComplex(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue);
+  public java.lang.String toString();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public void setImaginary(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue getImaginary();
+  public org.jatha.dynatype.LispValue getReal();
+  public void setReal(org.jatha.dynatype.LispValue);
+  public double abs(org.jatha.dynatype.LispComplex);
+  public org.jatha.dynatype.LispComplex acos(org.jatha.dynatype.LispComplex);
+  public org.jatha.dynatype.LispComplex acosh(org.jatha.dynatype.LispComplex);
+  public double arg();
+  public double arg(org.jatha.dynatype.LispComplex);
+  public org.jatha.dynatype.LispComplex conjugate();
+  public org.jatha.dynatype.LispComplex conjugate(org.jatha.dynatype.LispComplex);
+  public org.jatha.dynatype.LispComplex copy(org.jatha.dynatype.LispComplex);
+  public org.jatha.dynatype.LispComplex[] copy(org.jatha.dynatype.LispComplex[]);
+  public org.jatha.dynatype.LispComplex[][] copy(org.jatha.dynatype.LispComplex[][]);
+  public org.jatha.dynatype.LispComplex cos(org.jatha.dynatype.LispComplex);
+  public org.jatha.dynatype.LispComplex cosh(org.jatha.dynatype.LispComplex);
+  public org.jatha.dynatype.LispComplex exp(double);
+  public org.jatha.dynatype.LispComplex exp(org.jatha.dynatype.LispComplex);
+  public org.jatha.dynatype.LispComplex expMinusJayArg(double);
+  public org.jatha.dynatype.LispComplex expPlusJayArg(double);
+  public java.math.BigInteger getBigIntegerValue();
+  public double getDoubleValue();
+  public boolean getInfOption();
+  public long getLongValue();
+  public double hypot(org.jatha.dynatype.LispComplex, org.jatha.dynatype.LispComplex);
+  public org.jatha.dynatype.LispComplex inverse();
+  public org.jatha.dynatype.LispComplex inverse(org.jatha.dynatype.LispComplex);
+  public boolean isEqual(org.jatha.dynatype.LispComplex, org.jatha.dynatype.LispComplex);
+  public boolean isEqualWithinLimits(org.jatha.dynatype.LispComplex, org.jatha.dynatype.LispComplex, double);
+  public boolean isEqualWithinLimits(org.jatha.dynatype.LispComplex, double);
+  public boolean isInfinite();
+  public boolean isInfinite(org.jatha.dynatype.LispComplex);
+  public boolean isMinusInfinity();
+  public boolean isMinusInfinity(org.jatha.dynatype.LispComplex);
+  public boolean isNaN();
+  public boolean isNaN(org.jatha.dynatype.LispComplex);
+  public boolean isPlusInfinity();
+  public boolean isPlusInfinity(org.jatha.dynatype.LispComplex);
+  public boolean isReal();
+  public boolean isReal(org.jatha.dynatype.LispComplex);
+  public boolean isZero();
+  public boolean isZero(org.jatha.dynatype.LispComplex);
+  public org.jatha.dynatype.LispComplex log(org.jatha.dynatype.LispComplex);
+  public org.jatha.dynatype.LispComplex minus(double);
+  public org.jatha.dynatype.LispComplex minus(double, double);
+  public org.jatha.dynatype.LispComplex minus(double, org.jatha.dynatype.LispComplex);
+  public org.jatha.dynatype.LispComplex minus(org.jatha.dynatype.LispComplex);
+  public org.jatha.dynatype.LispComplex minus(org.jatha.dynatype.LispComplex, double);
+  public org.jatha.dynatype.LispComplex minus(org.jatha.dynatype.LispComplex, org.jatha.dynatype.LispComplex);
+  public void minusEquals(double);
+  public void minusEquals(org.jatha.dynatype.LispComplex);
+  public org.jatha.dynatype.LispComplex minusJay();
+  public org.jatha.dynatype.LispComplex minusOne();
+  public org.jatha.dynatype.LispComplex negate(org.jatha.dynatype.LispComplex);
+  public org.jatha.dynatype.LispComplex nthRoot(org.jatha.dynatype.LispComplex, int);
+  public org.jatha.dynatype.LispComplex[] oneDarray(int);
+  public org.jatha.dynatype.LispComplex[] oneDarray(int, double, double);
+  public org.jatha.dynatype.LispComplex[] oneDarray(int, org.jatha.dynatype.LispComplex);
+  public org.jatha.dynatype.LispComplex over(double);
+  public org.jatha.dynatype.LispComplex over(double, double);
+  public org.jatha.dynatype.LispComplex over(double, org.jatha.dynatype.LispComplex);
+  public org.jatha.dynatype.LispComplex over(org.jatha.dynatype.LispComplex);
+  public org.jatha.dynatype.LispComplex over(org.jatha.dynatype.LispComplex, double);
+  public org.jatha.dynatype.LispComplex over(org.jatha.dynatype.LispComplex, org.jatha.dynatype.LispComplex);
+  public void overEquals(double);
+  public void overEquals(org.jatha.dynatype.LispComplex);
+  public org.jatha.dynatype.LispComplex pi();
+  public org.jatha.dynatype.LispComplex plus(double);
+  public org.jatha.dynatype.LispComplex plus(double, double);
+  public org.jatha.dynatype.LispComplex plus(double, org.jatha.dynatype.LispComplex);
+  public org.jatha.dynatype.LispComplex plus(org.jatha.dynatype.LispComplex);
+  public org.jatha.dynatype.LispComplex plus(org.jatha.dynatype.LispComplex, double);
+  public org.jatha.dynatype.LispComplex plus(org.jatha.dynatype.LispComplex, org.jatha.dynatype.LispComplex);
+  public void plusEquals(double);
+  public void plusEquals(org.jatha.dynatype.LispComplex);
+  public org.jatha.dynatype.LispComplex plusJay();
+  public org.jatha.dynatype.LispComplex plusOne();
+  public void polar(double, double);
+  public org.jatha.dynatype.LispComplex pow(double, org.jatha.dynatype.LispComplex);
+  public org.jatha.dynatype.LispComplex pow(int, org.jatha.dynatype.LispComplex);
+  public org.jatha.dynatype.LispComplex pow(org.jatha.dynatype.LispComplex, double);
+  public org.jatha.dynatype.LispComplex pow(org.jatha.dynatype.LispComplex, int);
+  public org.jatha.dynatype.LispComplex pow(org.jatha.dynatype.LispComplex, org.jatha.dynatype.LispComplex);
+  public void setInfOption(int);
+  public void setValue(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispComplex sinh(org.jatha.dynatype.LispComplex);
+  public org.jatha.dynatype.LispComplex sqrt(org.jatha.dynatype.LispComplex);
+  public org.jatha.dynatype.LispComplex square(org.jatha.dynatype.LispComplex);
+  public double squareAbs();
+  public double squareAbs(org.jatha.dynatype.LispComplex);
+  public org.jatha.dynatype.LispComplex tan(org.jatha.dynatype.LispComplex);
+  public org.jatha.dynatype.LispComplex tanh(org.jatha.dynatype.LispComplex);
+  public org.jatha.dynatype.LispComplex times(double);
+  public org.jatha.dynatype.LispComplex times(double, double);
+  public org.jatha.dynatype.LispComplex times(double, org.jatha.dynatype.LispComplex);
+  public org.jatha.dynatype.LispComplex times(org.jatha.dynatype.LispComplex);
+  public org.jatha.dynatype.LispComplex times(org.jatha.dynatype.LispComplex, double);
+  public org.jatha.dynatype.LispComplex times(org.jatha.dynatype.LispComplex, org.jatha.dynatype.LispComplex);
+  public void timesEquals(double);
+  public void timesEquals(org.jatha.dynatype.LispComplex);
+  public org.jatha.dynatype.LispComplex transposedMinus(double);
+  public org.jatha.dynatype.LispComplex transposedOver(double);
+  public org.jatha.dynatype.LispComplex[][] twoDarray(int, int);
+  public org.jatha.dynatype.LispComplex[][] twoDarray(int, int, double, double);
+  public org.jatha.dynatype.LispComplex[][] twoDarray(int, int, org.jatha.dynatype.LispComplex);
+  public org.jatha.dynatype.LispComplex twoPiJay();
+  public org.jatha.dynatype.LispComplex zero();
+}
+Compiled from "StandardLispCons.java"
+public class org.jatha.dynatype.StandardLispCons extends org.jatha.dynatype.StandardLispList implements org.jatha.dynatype.LispCons {
+  public static final long serialVersionUID;
+  public static boolean DEBUG;
+  protected org.jatha.dynatype.LispValue carCell;
+  protected org.jatha.dynatype.LispValue cdrCell;
+  public org.jatha.dynatype.StandardLispCons(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.StandardLispCons();
+  public org.jatha.dynatype.LispValue car();
+  public org.jatha.dynatype.LispValue setf_car(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue cdr();
+  public org.jatha.dynatype.LispValue setf_cdr(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue first();
+  public org.jatha.dynatype.LispValue second();
+  public org.jatha.dynatype.LispValue third();
+  public void internal_princ(java.io.PrintStream);
+  public void internal_princ_as_cdr(java.io.PrintStream);
+  public void internal_prin1(java.io.PrintStream);
+  public void internal_prin1_as_cdr(java.io.PrintStream);
+  public void internal_print(java.io.PrintStream);
+  public void internal_print_as_cdr(java.io.PrintStream);
+  public boolean constantp();
+  public int basic_length();
+  public java.lang.String toString();
+  public java.lang.String toString_internal(long, long);
+  public java.lang.String toStringAsCar_internal(long, long);
+  public java.lang.String toStringAsCdr_internal(long, long);
+  public java.lang.String toStringAsCdr();
+  public boolean contains(org.jatha.dynatype.LispValue);
+  public java.util.Collection<org.jatha.dynatype.LispValue> toCollection();
+  public org.jatha.dynatype.LispValue assoc(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue copy_list();
+  public org.jatha.dynatype.LispValue copy();
+  public org.jatha.dynatype.LispValue equal(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue last();
+  public int length();
+  public org.jatha.dynatype.LispValue member(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue pop();
+  public org.jatha.dynatype.LispValue push(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue rassoc(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue rest();
+  public org.jatha.dynatype.LispValue remove(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue rplaca(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue rplacd(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue subst(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue append(org.jatha.dynatype.LispValue);
+  static {};
+}
+Compiled from "StandardLispConstant.java"
+public class org.jatha.dynatype.StandardLispConstant extends org.jatha.dynatype.StandardLispSymbol implements org.jatha.dynatype.LispConstant {
+  public org.jatha.dynatype.StandardLispConstant(java.lang.String);
+  public org.jatha.dynatype.StandardLispConstant(org.jatha.dynatype.LispString);
+  public org.jatha.dynatype.StandardLispConstant(java.lang.String, org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.StandardLispConstant(org.jatha.dynatype.LispString, org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.StandardLispConstant(org.jatha.dynatype.LispSymbol);
+  public boolean constantp();
+  public org.jatha.dynatype.LispValue setf_symbol_value(org.jatha.dynatype.LispValue);
+}
+Compiled from "StandardLispFunction.java"
+public class org.jatha.dynatype.StandardLispFunction extends org.jatha.dynatype.StandardLispValue implements org.jatha.dynatype.LispFunction {
+  protected boolean f_isBuiltin;
+  public org.jatha.dynatype.StandardLispFunction();
+  public org.jatha.dynatype.StandardLispFunction(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue);
+  public java.lang.String toString();
+  protected java.lang.String toStringNamed(java.lang.String);
+  public void internal_princ(java.io.PrintStream);
+  public void internal_prin1(java.io.PrintStream);
+  public void internal_print(java.io.PrintStream);
+  public org.jatha.dynatype.LispValue getCode();
+  public org.jatha.dynatype.LispValue getSymbol();
+  public boolean isBuiltin();
+}
+Compiled from "StandardLispInteger.java"
+public class org.jatha.dynatype.StandardLispInteger extends org.jatha.dynatype.StandardLispNumber implements org.jatha.dynatype.LispInteger {
+  public org.jatha.dynatype.StandardLispInteger(long);
+  public org.jatha.dynatype.StandardLispInteger();
+  public long getValue();
+  public double getDoubleValue();
+  public long getLongValue();
+  public java.math.BigInteger getBigIntegerValue();
+  public void internal_princ(java.io.PrintStream);
+  public void internal_prin1(java.io.PrintStream);
+  public void internal_print(java.io.PrintStream);
+  public java.lang.String toString();
+  public org.jatha.dynatype.LispNumber abs();
+  public org.jatha.dynatype.LispValue eql(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue equal(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue zerop();
+}
+Compiled from "StandardLispList.java"
+public abstract class org.jatha.dynatype.StandardLispList extends org.jatha.dynatype.StandardLispValue implements org.jatha.dynatype.LispList {
+  public org.jatha.dynatype.StandardLispList();
+  public org.jatha.dynatype.LispValue butlast();
+  public org.jatha.dynatype.LispValue elt(org.jatha.dynatype.LispValue);
+  public int length();
+  public org.jatha.dynatype.LispValue nconc(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue nreverse();
+  public org.jatha.dynatype.LispValue pop();
+  public org.jatha.dynatype.LispValue position(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue reverse();
+  public java.util.Iterator<org.jatha.dynatype.LispValue> iterator();
+  public abstract org.jatha.dynatype.LispValue car();
+  public abstract org.jatha.dynatype.LispValue cdr();
+  public abstract org.jatha.dynatype.LispValue append(org.jatha.dynatype.LispValue);
+}
+Compiled from "StandardLispMacro.java"
+public class org.jatha.dynatype.StandardLispMacro extends org.jatha.dynatype.StandardLispFunction implements org.jatha.dynatype.LispMacro {
+  public org.jatha.dynatype.StandardLispMacro(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue);
+  public java.lang.String toString();
+}
+Compiled from "StandardLispNIL.java"
+public class org.jatha.dynatype.StandardLispNIL extends org.jatha.dynatype.StandardLispList {
+  protected org.jatha.dynatype.StandardLispNIL();
+  public org.jatha.dynatype.LispValue car();
+  public org.jatha.dynatype.LispValue cdr();
+  public void internal_princ(java.io.PrintStream);
+  public void internal_princ_as_cdr(java.io.PrintStream);
+  public void internal_prin1(java.io.PrintStream);
+  public void internal_prin1_as_cdr(java.io.PrintStream);
+  public void internal_print(java.io.PrintStream);
+  public void internal_print_as_cdr(java.io.PrintStream);
+  public java.lang.String toString();
+  public java.lang.String toStringAsCdr();
+  public boolean constantp();
+  public int basic_length();
+  public org.jatha.dynatype.LispValue assoc(org.jatha.dynatype.LispValue);
+  public boolean boundp();
+  public org.jatha.dynatype.LispValue butlast();
+  public org.jatha.dynatype.LispValue copy_list();
+  public org.jatha.dynatype.LispValue elt(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue first();
+  public org.jatha.dynatype.LispValue second();
+  public org.jatha.dynatype.LispValue third();
+  public org.jatha.dynatype.LispValue fourth();
+  public org.jatha.dynatype.LispValue fifth();
+  public org.jatha.dynatype.LispValue sixth();
+  public org.jatha.dynatype.LispValue seventh();
+  public org.jatha.dynatype.LispValue eighth();
+  public org.jatha.dynatype.LispValue ninth();
+  public org.jatha.dynatype.LispValue tenth();
+  public org.jatha.dynatype.LispValue last();
+  public int length();
+  public org.jatha.dynatype.LispValue member(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue nreverse(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue rassoc(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue remove(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue rest();
+  public org.jatha.dynatype.LispValue reverse(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue rplaca(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue rplacd(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue setf_symbol_function(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue setf_symbol_value(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispString symbol_name();
+  public org.jatha.dynatype.LispValue symbol_package();
+  public org.jatha.dynatype.LispValue symbol_value();
+  public org.jatha.dynatype.LispValue subst(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue append(org.jatha.dynatype.LispValue);
+}
+Compiled from "StandardLispNumber.java"
+public abstract class org.jatha.dynatype.StandardLispNumber extends org.jatha.dynatype.StandardLispAtom implements org.jatha.dynatype.LispNumber {
+  public org.jatha.dynatype.StandardLispNumber();
+  public boolean constantp();
+  public abstract double getDoubleValue();
+  public org.jatha.dynatype.LispNumber abs();
+  public org.jatha.dynatype.LispNumber add(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue degreesToRadians();
+  public org.jatha.dynatype.LispValue radiansToDegrees();
+  public org.jatha.dynatype.LispNumber power(org.jatha.dynatype.LispNumber);
+  public org.jatha.dynatype.LispValue mod(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue max(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue min(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispNumber negate();
+  public org.jatha.dynatype.LispValue reciprocal();
+  public org.jatha.dynatype.LispNumber div(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispNumber mul(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispNumber sub(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue ceiling();
+  public org.jatha.dynatype.LispValue floor();
+  public org.jatha.dynatype.LispValue sqrt();
+  public org.jatha.dynatype.LispValue greaterThan(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue greaterThanOrEqual(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue lessThan(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue lessThanOrEqual(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue equalNumeric(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue eql(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue sub(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue mul(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue div(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue add(org.jatha.dynatype.LispValue);
+}
+Compiled from "StandardLispReal.java"
+public class org.jatha.dynatype.StandardLispReal extends org.jatha.dynatype.StandardLispNumber implements org.jatha.dynatype.LispReal {
+  public void internal_print(java.io.PrintStream);
+  public void internal_prin1(java.io.PrintStream);
+  public void internal_princ(java.io.PrintStream);
+  public org.jatha.dynatype.StandardLispReal(double);
+  public org.jatha.dynatype.StandardLispReal();
+  public double getDoubleValue();
+  public java.math.BigInteger getBigIntegerValue();
+  public long getLongValue();
+  public java.lang.String toString();
+  public org.jatha.dynatype.LispValue eql(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue equal(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue zerop();
+}
+Compiled from "StandardLispString.java"
+public class org.jatha.dynatype.StandardLispString extends org.jatha.dynatype.StandardLispAtom implements org.jatha.dynatype.LispString {
+  public org.jatha.dynatype.StandardLispString(java.lang.String);
+  public java.lang.String getValue();
+  public void internal_princ(java.io.PrintStream);
+  public void internal_prin1(java.io.PrintStream);
+  public void internal_print(java.io.PrintStream);
+  public java.lang.String toString();
+  public java.lang.String toStringSimple();
+  public boolean constantp();
+  public org.jatha.dynatype.LispValue basic_elt(int);
+  public int basic_length();
+  public boolean basic_stringp();
+  public org.jatha.dynatype.LispValue elt(int);
+  public org.jatha.dynatype.LispValue elt(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue eql(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue equal(org.jatha.dynatype.LispValue);
+  public boolean equals(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue first();
+  public org.jatha.dynatype.LispValue second();
+  public org.jatha.dynatype.LispValue third();
+  public org.jatha.dynatype.LispValue fourth();
+  public org.jatha.dynatype.LispValue fifth();
+  public org.jatha.dynatype.LispValue sixth();
+  public org.jatha.dynatype.LispValue seventh();
+  public org.jatha.dynatype.LispValue eighth();
+  public org.jatha.dynatype.LispValue ninth();
+  public org.jatha.dynatype.LispValue tenth();
+  public org.jatha.dynatype.LispValue last();
+  public int length();
+  public org.jatha.dynatype.LispValue stringp();
+  public org.jatha.dynatype.LispValue nstringUpcase();
+  public org.jatha.dynatype.LispValue nstringCapitalize();
+  public org.jatha.dynatype.LispValue nstringDowncase();
+  public org.jatha.dynatype.LispValue position(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue string();
+  public org.jatha.dynatype.LispValue stringCapitalize();
+  public org.jatha.dynatype.LispValue stringDowncase();
+  public org.jatha.dynatype.LispValue stringEndsWith(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue stringEq(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue stringEqual(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue stringGreaterP(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue stringGreaterThan(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue stringGreaterThanOrEqual(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue stringLeftTrim();
+  public org.jatha.dynatype.LispValue stringLeftTrim(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue stringLessP(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue stringLessThan(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue stringLessThanOrEqual(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue stringNeq(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue stringNotGreaterP(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue stringNotLessP(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue stringRightTrim();
+  public org.jatha.dynatype.LispValue stringRightTrim(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue stringStartsWith(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue stringTrim();
+  public org.jatha.dynatype.LispValue stringTrim(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue stringUpcase();
+  public org.jatha.dynatype.LispValue substring(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue substring(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue);
+}
+Compiled from "StandardLispSymbol.java"
+public class org.jatha.dynatype.StandardLispSymbol extends org.jatha.dynatype.StandardLispAtom implements org.jatha.dynatype.LispSymbol {
+  static long randomname;
+  protected org.jatha.dynatype.LispValue f_function;
+  protected org.jatha.dynatype.LispString f_name;
+  protected org.jatha.dynatype.LispValue f_value;
+  protected boolean f_isExternalInPackage;
+  protected boolean f_isSpecial;
+  protected int f_specialCount;
+  protected java.util.Map f_documentation;
+  public org.jatha.dynatype.StandardLispSymbol();
+  public org.jatha.dynatype.StandardLispSymbol(java.lang.String);
+  public org.jatha.dynatype.StandardLispSymbol(org.jatha.dynatype.LispString);
+  public boolean equals(org.jatha.dynatype.LispSymbol);
+  public java.lang.String getName();
+  public void internal_prin1(java.io.PrintStream);
+  public void internal_princ(java.io.PrintStream);
+  public void internal_print(java.io.PrintStream);
+  public java.lang.String toString();
+  public java.lang.String toStringSimple();
+  public void set_special(boolean);
+  public boolean specialP();
+  public void adjustSpecialCount(int);
+  public int get_specialCount();
+  public org.jatha.dynatype.LispValue apply(org.jatha.dynatype.LispValue);
+  public boolean boundp();
+  public boolean fboundp();
+  public org.jatha.dynatype.LispValue funcall(org.jatha.machine.SECDMachine, org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue pop();
+  public org.jatha.dynatype.LispValue push(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue setf_symbol_function(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue setf_symbol_value(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue setq(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue string();
+  public org.jatha.dynatype.LispValue symbol_function() throws org.jatha.exception.LispException;
+  public org.jatha.dynatype.LispString symbol_name();
+  public org.jatha.dynatype.LispValue symbol_value() throws org.jatha.exception.LispException;
+  public static boolean isMacroCode(org.jatha.dynatype.LispValue);
+  static {};
+}
+Compiled from "StandardLispT.java"
+public class org.jatha.dynatype.StandardLispT extends org.jatha.dynatype.StandardLispConstant {
+  protected org.jatha.dynatype.StandardLispT();
+}
+Compiled from "StandardLispValue.java"
+public abstract class org.jatha.dynatype.StandardLispValue extends org.jatha.LispProcessor implements org.jatha.dynatype.LispValue {
+  public org.jatha.dynatype.StandardLispValue();
+  public void internal_princ(java.io.PrintStream);
+  public void internal_princ_as_cdr(java.io.PrintStream);
+  public void internal_prin1(java.io.PrintStream);
+  public void internal_prin1_as_cdr(java.io.PrintStream);
+  public void internal_print(java.io.PrintStream);
+  public void internal_print_as_cdr(java.io.PrintStream);
+  public boolean constantp();
+  public boolean basic_foreignp();
+  public int basic_length();
+  public boolean uses(org.jatha.dynatype.LispValue);
+  public boolean contains(org.jatha.dynatype.LispValue);
+  public int compareTo(org.jatha.dynatype.LispValue);
+  public java.util.Iterator<org.jatha.dynatype.LispValue> iterator();
+  public java.util.Collection<org.jatha.dynatype.LispValue> toCollection();
+  public java.util.List<org.jatha.dynatype.LispValue> toRandomAccess();
+  public java.lang.String toString();
+  public java.lang.String toString(java.lang.String);
+  public java.lang.String toStringShort();
+  public java.lang.String toStringShort(int);
+  public java.lang.String toStringSimple();
+  public java.lang.String toStringAsCdr();
+  public java.lang.String toString_internal(long, long);
+  public java.lang.String toStringAsCar_internal(long, long);
+  public java.lang.String toStringAsCdr_internal(long, long);
+  public void set_special(boolean);
+  public boolean specialP();
+  public void adjustSpecialCount(int);
+  public int get_specialCount();
+  public void setPackage(boolean);
+  public org.jatha.dynatype.LispValue acos();
+  public org.jatha.dynatype.LispValue aref(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue setf_aref(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue arrayDimensions();
+  public org.jatha.dynatype.LispValue arrayp();
+  public org.jatha.dynatype.LispValue apply(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue assoc(org.jatha.dynatype.LispValue);
+  public boolean boundp();
+  public org.jatha.dynatype.LispValue butlast();
+  public org.jatha.dynatype.LispValue car();
+  public org.jatha.dynatype.LispValue cdr();
+  public org.jatha.dynatype.LispValue ceiling();
+  public org.jatha.dynatype.LispValue clrhash();
+  public org.jatha.dynatype.LispValue copy_list();
+  public org.jatha.dynatype.LispValue copy();
+  public org.jatha.dynatype.LispValue cot();
+  public org.jatha.dynatype.LispValue csc();
+  public org.jatha.dynatype.LispValue eighth();
+  public org.jatha.dynatype.LispValue elt(int);
+  public org.jatha.dynatype.LispValue elt(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue eq(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue eql(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue equal(org.jatha.dynatype.LispValue);
+  public boolean fboundp();
+  public org.jatha.dynatype.LispValue fifth();
+  public org.jatha.dynatype.LispValue first();
+  public org.jatha.dynatype.LispValue floor();
+  public org.jatha.dynatype.LispValue fourth();
+  public org.jatha.dynatype.LispValue functionp();
+  public org.jatha.dynatype.LispValue gethash(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue gethash(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue setf_gethash(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue hashtablep();
+  public org.jatha.dynatype.LispValue hash_table_count();
+  public org.jatha.dynatype.LispValue hash_table_size();
+  public org.jatha.dynatype.LispValue hash_table_rehash_size();
+  public org.jatha.dynatype.LispValue hash_table_rehash_threshold();
+  public org.jatha.dynatype.LispValue last();
+  public int length();
+  public org.jatha.dynatype.LispValue max(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue min(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue member(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue nconc(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue neql(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue ninth();
+  public org.jatha.dynatype.LispValue nreverse();
+  public org.jatha.dynatype.LispValue pop();
+  public org.jatha.dynatype.LispValue position(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue prin1();
+  public org.jatha.dynatype.LispValue princ();
+  public org.jatha.dynatype.LispValue print();
+  public org.jatha.dynatype.LispValue push(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue radiansToDegrees();
+  public org.jatha.dynatype.LispValue rassoc(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue reciprocal();
+  public org.jatha.dynatype.LispValue remhash(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue remove(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue rest();
+  public org.jatha.dynatype.LispValue reverse();
+  public org.jatha.dynatype.LispValue rplaca(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue rplacd(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue sec();
+  public org.jatha.dynatype.LispValue second();
+  public org.jatha.dynatype.LispValue setf_symbol_function(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue setf_symbol_value(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue seventh();
+  public org.jatha.dynatype.LispValue sixth();
+  public org.jatha.dynatype.LispValue sin();
+  public org.jatha.dynatype.LispValue sqrt();
+  public org.jatha.dynatype.LispValue stringp();
+  public org.jatha.dynatype.LispValue nstringCapitalize();
+  public org.jatha.dynatype.LispValue nstringDowncase();
+  public org.jatha.dynatype.LispValue nstringUpcase();
+  public org.jatha.dynatype.LispValue string();
+  public org.jatha.dynatype.LispValue stringCapitalize();
+  public org.jatha.dynatype.LispValue stringDowncase();
+  public org.jatha.dynatype.LispValue stringEndsWith(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue stringEq(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue stringEqual(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue stringGreaterP(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue stringGreaterThan(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue stringGreaterThanOrEqual(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue stringLeftTrim();
+  public org.jatha.dynatype.LispValue stringLeftTrim(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue stringLessP(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue stringLessThan(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue stringLessThanOrEqual(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue stringNeq(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue stringNotGreaterP(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue stringNotLessP(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue stringRightTrim();
+  public org.jatha.dynatype.LispValue stringRightTrim(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue stringStartsWith(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue stringTrim();
+  public org.jatha.dynatype.LispValue stringTrim(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue stringUpcase();
+  public org.jatha.dynatype.LispValue subst(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue substring(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue substring(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue symbol_function() throws org.jatha.exception.LispException;
+  public org.jatha.dynatype.LispValue symbol_package();
+  public org.jatha.dynatype.LispValue tan();
+  public org.jatha.dynatype.LispValue tenth();
+  public org.jatha.dynatype.LispValue third();
+  public org.jatha.dynatype.LispValue zerop();
+  public org.jatha.dynatype.LispValue add(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue div(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue mul(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue sub(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue greaterThan(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue greaterThanOrEqual(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue lessThan(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue lessThanOrEqual(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue equalNumeric(org.jatha.dynatype.LispValue);
+  public void showStackTrace();
+  public static org.jatha.dynatype.LispValue rest(org.jatha.dynatype.LispCons, org.jatha.dynatype.LispCons);
+  public static org.jatha.dynatype.LispReal real(java.lang.Double);
+  public static org.jatha.dynatype.LispReal real(double);
+  public static org.jatha.dynatype.LispReal real(java.lang.Float);
+  public static org.jatha.dynatype.LispReal real(float);
+  public static org.jatha.dynatype.LispReal real();
+  public static final org.jatha.dynatype.LispNumber assertNumber(org.jatha.dynatype.LispValue);
+  public static final org.jatha.dynatype.LispString assertString(org.jatha.dynatype.LispValue);
+  public static final org.jatha.dynatype.LispAtom assertAtom(org.jatha.dynatype.LispValue);
+  public static final org.jatha.dynatype.LispCons assertCons(org.jatha.dynatype.LispValue);
+  public static final org.jatha.dynatype.LispList assertList(org.jatha.dynatype.LispValue);
+  public static final org.jatha.dynatype.LispInteger assertInteger(org.jatha.dynatype.LispValue);
+  public static final org.jatha.dynatype.LispValue BOOL(boolean);
+  public int compareTo(java.lang.Object);
+}
+Compiled from "StandardLispVariable.java"
+public class org.jatha.dynatype.StandardLispVariable extends org.jatha.dynatype.StandardLispCons implements org.jatha.dynatype.LispVariable {
+  public org.jatha.dynatype.StandardLispVariable(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.StandardLispVariable();
+}
+Compiled from "ArgumentCountMismatchException.java"
+public class org.jatha.exception.ArgumentCountMismatchException extends org.jatha.exception.CompilerException {
+  org.jatha.exception.ArgumentCountMismatchException();
+  public org.jatha.exception.ArgumentCountMismatchException(java.lang.String, java.lang.String, long);
+  public org.jatha.exception.ArgumentCountMismatchException(org.jatha.compile.LispPrimitive, long);
+}
+Compiled from "CompilerException.java"
+public abstract class org.jatha.exception.CompilerException extends java.lang.Exception {
+  org.jatha.exception.CompilerException();
+  org.jatha.exception.CompilerException(java.lang.String);
+}
+Compiled from "LispAlreadyDefinedPackageException.java"
+public class org.jatha.exception.LispAlreadyDefinedPackageException extends org.jatha.exception.LispException {
+  public org.jatha.exception.LispAlreadyDefinedPackageException();
+  public org.jatha.exception.LispAlreadyDefinedPackageException(java.lang.String);
+}
+Compiled from "LispAssertionException.java"
+public class org.jatha.exception.LispAssertionException extends org.jatha.exception.CompilerException {
+  public org.jatha.exception.LispAssertionException();
+  public org.jatha.exception.LispAssertionException(java.lang.String);
+}
+Compiled from "LispConstantRedefinedException.java"
+public class org.jatha.exception.LispConstantRedefinedException extends org.jatha.exception.LispException {
+  org.jatha.exception.LispConstantRedefinedException();
+  public org.jatha.exception.LispConstantRedefinedException(java.lang.String);
+}
+Compiled from "LispException.java"
+public class org.jatha.exception.LispException extends java.lang.RuntimeException {
+  public org.jatha.exception.LispException();
+  public org.jatha.exception.LispException(java.lang.String);
+}
+Compiled from "LispIndexOutOfRangeException.java"
+public class org.jatha.exception.LispIndexOutOfRangeException extends org.jatha.exception.LispException {
+  org.jatha.exception.LispIndexOutOfRangeException();
+  public org.jatha.exception.LispIndexOutOfRangeException(java.lang.String);
+}
+Compiled from "LispUnboundVariableException.java"
+public class org.jatha.exception.LispUnboundVariableException extends org.jatha.exception.LispException {
+  org.jatha.exception.LispUnboundVariableException();
+  public org.jatha.exception.LispUnboundVariableException(java.lang.String);
+}
+Compiled from "LispUndefinedFunctionException.java"
+public class org.jatha.exception.LispUndefinedFunctionException extends org.jatha.exception.LispException {
+  public org.jatha.exception.LispUndefinedFunctionException();
+  public org.jatha.exception.LispUndefinedFunctionException(java.lang.String);
+}
+Compiled from "LispUndefinedPackageException.java"
+public class org.jatha.exception.LispUndefinedPackageException extends org.jatha.exception.LispException {
+  public org.jatha.exception.LispUndefinedPackageException();
+  public org.jatha.exception.LispUndefinedPackageException(java.lang.String);
+}
+Compiled from "LispValueNotACharacterException.java"
+public class org.jatha.exception.LispValueNotACharacterException extends org.jatha.exception.LispException {
+  org.jatha.exception.LispValueNotACharacterException();
+  public org.jatha.exception.LispValueNotACharacterException(java.lang.String);
+}
+Compiled from "LispValueNotAConsException.java"
+public class org.jatha.exception.LispValueNotAConsException extends org.jatha.exception.LispException {
+  public org.jatha.exception.LispValueNotAConsException();
+  public org.jatha.exception.LispValueNotAConsException(java.lang.String);
+  public org.jatha.exception.LispValueNotAConsException(org.jatha.dynatype.LispValue);
+}
+Compiled from "LispValueNotAFunctionException.java"
+public class org.jatha.exception.LispValueNotAFunctionException extends org.jatha.exception.LispException {
+  org.jatha.exception.LispValueNotAFunctionException();
+  public org.jatha.exception.LispValueNotAFunctionException(java.lang.String);
+}
+Compiled from "LispValueNotAHashtableException.java"
+public class org.jatha.exception.LispValueNotAHashtableException extends org.jatha.exception.LispException {
+  org.jatha.exception.LispValueNotAHashtableException();
+  public org.jatha.exception.LispValueNotAHashtableException(java.lang.String);
+}
+Compiled from "LispValueNotAListException.java"
+public class org.jatha.exception.LispValueNotAListException extends org.jatha.exception.LispException {
+  public org.jatha.exception.LispValueNotAListException();
+  public org.jatha.exception.LispValueNotAListException(java.lang.String);
+  public org.jatha.exception.LispValueNotAListException(org.jatha.dynatype.LispValue);
+}
+Compiled from "LispValueNotANumberException.java"
+public class org.jatha.exception.LispValueNotANumberException extends org.jatha.exception.LispException {
+  public org.jatha.exception.LispValueNotANumberException();
+  public org.jatha.exception.LispValueNotANumberException(java.lang.String);
+  public org.jatha.exception.LispValueNotANumberException(org.jatha.dynatype.LispValue);
+}
+Compiled from "LispValueNotAPackageException.java"
+public class org.jatha.exception.LispValueNotAPackageException extends org.jatha.exception.LispException {
+  org.jatha.exception.LispValueNotAPackageException();
+  public org.jatha.exception.LispValueNotAPackageException(java.lang.String);
+}
+Compiled from "LispValueNotASequenceException.java"
+public class org.jatha.exception.LispValueNotASequenceException extends org.jatha.exception.LispException {
+  org.jatha.exception.LispValueNotASequenceException();
+  public org.jatha.exception.LispValueNotASequenceException(java.lang.String);
+}
+Compiled from "LispValueNotAStringException.java"
+public class org.jatha.exception.LispValueNotAStringException extends org.jatha.exception.LispException {
+  public org.jatha.exception.LispValueNotAStringException();
+  public org.jatha.exception.LispValueNotAStringException(java.lang.String);
+  public org.jatha.exception.LispValueNotAStringException(org.jatha.dynatype.LispValue);
+}
+Compiled from "LispValueNotASymbolException.java"
+public class org.jatha.exception.LispValueNotASymbolException extends org.jatha.exception.LispException {
+  public org.jatha.exception.LispValueNotASymbolException();
+  public org.jatha.exception.LispValueNotASymbolException(java.lang.String);
+  public org.jatha.exception.LispValueNotASymbolException(org.jatha.dynatype.LispValue);
+}
+Compiled from "LispValueNotASymbolOrConsException.java"
+public class org.jatha.exception.LispValueNotASymbolOrConsException extends org.jatha.exception.LispException {
+  public org.jatha.exception.LispValueNotASymbolOrConsException();
+  public org.jatha.exception.LispValueNotASymbolOrConsException(java.lang.String);
+  public org.jatha.exception.LispValueNotASymbolOrConsException(org.jatha.dynatype.LispValue);
+}
+Compiled from "LispValueNotAnArrayException.java"
+public class org.jatha.exception.LispValueNotAnArrayException extends org.jatha.exception.LispException {
+  org.jatha.exception.LispValueNotAnArrayException();
+  public org.jatha.exception.LispValueNotAnArrayException(java.lang.String);
+}
+Compiled from "LispValueNotAnAtomException.java"
+public class org.jatha.exception.LispValueNotAnAtomException extends org.jatha.exception.LispException {
+  public org.jatha.exception.LispValueNotAnAtomException();
+  public org.jatha.exception.LispValueNotAnAtomException(java.lang.String);
+  public org.jatha.exception.LispValueNotAnAtomException(org.jatha.dynatype.LispValue);
+}
+Compiled from "LispValueNotAnIntegerException.java"
+public class org.jatha.exception.LispValueNotAnIntegerException extends org.jatha.exception.LispException {
+  org.jatha.exception.LispValueNotAnIntegerException();
+  public org.jatha.exception.LispValueNotAnIntegerException(java.lang.String);
+}
+Compiled from "LispValueNotConvertableToAStringException.java"
+public class org.jatha.exception.LispValueNotConvertableToAStringException extends org.jatha.exception.LispException {
+  org.jatha.exception.LispValueNotConvertableToAStringException();
+  public org.jatha.exception.LispValueNotConvertableToAStringException(java.lang.String);
+}
+Compiled from "UndefinedFunctionException.java"
+public class org.jatha.exception.UndefinedFunctionException extends org.jatha.exception.CompilerException {
+  public org.jatha.exception.UndefinedFunctionException();
+  public org.jatha.exception.UndefinedFunctionException(java.lang.String);
+}
+Compiled from "UndefinedVariableException.java"
+public class org.jatha.exception.UndefinedVariableException extends org.jatha.exception.CompilerException {
+  org.jatha.exception.UndefinedVariableException();
+  org.jatha.exception.UndefinedVariableException(java.lang.String);
+}
+Compiled from "WrongArgumentTypeException.java"
+public class org.jatha.exception.WrongArgumentTypeException extends org.jatha.exception.CompilerException {
+  org.jatha.exception.WrongArgumentTypeException();
+  public org.jatha.exception.WrongArgumentTypeException(java.lang.String, java.lang.String, java.lang.String);
+}
+Compiled from "FUNCTION.java"
+public class org.jatha.extras.FUNCTION implements org.jatha.compile.LispExtension {
+  public org.jatha.extras.FUNCTION();
+  public void Register(org.jatha.compile.LispCompiler);
+}
+Compiled from "FUNCTION.java"
+class org.jatha.extras.FUNCTION$1 extends org.jatha.compile.LispPrimitive1 {
+  final org.jatha.compile.LispCompiler val$compiler;
+  final org.jatha.extras.FUNCTION this$0;
+  org.jatha.extras.FUNCTION$1(org.jatha.extras.FUNCTION, java.lang.String, org.jatha.compile.LispCompiler);
+  public void Execute(org.jatha.machine.SECDMachine) throws org.jatha.exception.CompilerException;
+  protected org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispValue) throws org.jatha.exception.CompilerException;
+}
+Compiled from "FUNCTION.java"
+class org.jatha.extras.FUNCTION$2 extends org.jatha.compile.LispPrimitive1 {
+  final org.jatha.extras.FUNCTION this$0;
+  org.jatha.extras.FUNCTION$2(org.jatha.extras.FUNCTION, java.lang.String);
+  protected org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispValue) throws org.jatha.exception.CompilerException;
+  public org.jatha.dynatype.LispCons CompileArgs(org.jatha.compile.LispCompiler, org.jatha.machine.SECDMachine, org.jatha.dynatype.LispList, org.jatha.dynatype.LispList, org.jatha.dynatype.LispCons) throws org.jatha.exception.CompilerException;
+}
+Compiled from "FUNCTION.java"
+class org.jatha.extras.FUNCTION$3 extends org.jatha.compile.LispPrimitiveC {
+  final org.jatha.compile.LispPrimitive val$EVAL;
+  final org.jatha.extras.FUNCTION this$0;
+  org.jatha.extras.FUNCTION$3(org.jatha.extras.FUNCTION, java.lang.String, long, org.jatha.compile.LispPrimitive);
+  public void Execute(org.jatha.machine.SECDMachine) throws org.jatha.exception.CompilerException;
+  org.jatha.dynatype.LispList quoteList(org.jatha.dynatype.LispValue);
+  org.jatha.dynatype.LispValue constructArgList(org.jatha.dynatype.LispValue);
+  public boolean validArgumentList(org.jatha.dynatype.LispValue);
+  protected org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispList) throws org.jatha.exception.CompilerException;
+}
+Compiled from "MATH.java"
+public class org.jatha.extras.MATH implements org.jatha.compile.LispExtension {
+  public org.jatha.extras.MATH();
+  public void Register(org.jatha.compile.LispCompiler);
+}
+Compiled from "MATH.java"
+class org.jatha.extras.MATH$1 extends org.jatha.compile.LispPrimitiveC {
+  final org.jatha.extras.MATH this$0;
+  org.jatha.extras.MATH$1(org.jatha.extras.MATH, java.lang.String, long);
+  protected org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispList);
+}
+Compiled from "MATH.java"
+class org.jatha.extras.MATH$10 extends org.jatha.compile.LispPrimitive2 {
+  final org.jatha.extras.MATH this$0;
+  org.jatha.extras.MATH$10(org.jatha.extras.MATH, java.lang.String);
+  protected org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue);
+}
+Compiled from "MATH.java"
+class org.jatha.extras.MATH$2 extends org.jatha.compile.LispPrimitiveC {
+  final org.jatha.extras.MATH this$0;
+  org.jatha.extras.MATH$2(org.jatha.extras.MATH, java.lang.String, long);
+  protected org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispList);
+}
+Compiled from "MATH.java"
+class org.jatha.extras.MATH$3 extends org.jatha.compile.LispPrimitiveC {
+  final org.jatha.extras.MATH this$0;
+  org.jatha.extras.MATH$3(org.jatha.extras.MATH, java.lang.String, long);
+  protected org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispList);
+}
+Compiled from "MATH.java"
+class org.jatha.extras.MATH$4 extends org.jatha.compile.LispPrimitiveC {
+  final org.jatha.extras.MATH this$0;
+  org.jatha.extras.MATH$4(org.jatha.extras.MATH, java.lang.String, long);
+  protected org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispList);
+}
+Compiled from "MATH.java"
+class org.jatha.extras.MATH$5 extends org.jatha.compile.LispPrimitiveC {
+  final org.jatha.extras.MATH this$0;
+  org.jatha.extras.MATH$5(org.jatha.extras.MATH, java.lang.String, long);
+  protected org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispList);
+}
+Compiled from "MATH.java"
+class org.jatha.extras.MATH$6 extends org.jatha.compile.LispPrimitiveC {
+  final org.jatha.extras.MATH this$0;
+  org.jatha.extras.MATH$6(org.jatha.extras.MATH, java.lang.String, long);
+  protected final org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispList);
+}
+Compiled from "MATH.java"
+class org.jatha.extras.MATH$7 extends org.jatha.compile.LispPrimitiveC {
+  final org.jatha.extras.MATH this$0;
+  org.jatha.extras.MATH$7(org.jatha.extras.MATH, java.lang.String, long);
+  protected final org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispList);
+}
+Compiled from "MATH.java"
+class org.jatha.extras.MATH$8 extends org.jatha.compile.LispPrimitive2 {
+  final org.jatha.extras.MATH this$0;
+  org.jatha.extras.MATH$8(org.jatha.extras.MATH, java.lang.String);
+  protected org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue);
+}
+Compiled from "MATH.java"
+class org.jatha.extras.MATH$9 extends org.jatha.compile.LispPrimitive1 {
+  final org.jatha.extras.MATH this$0;
+  org.jatha.extras.MATH$9(org.jatha.extras.MATH, java.lang.String);
+  protected org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispValue);
+}
+Compiled from "SETF.java"
+public class org.jatha.extras.SETF implements org.jatha.compile.LispExtension {
+  public org.jatha.extras.SETF();
+  public void Register(org.jatha.compile.LispCompiler);
+}
+Compiled from "SETF.java"
+class org.jatha.extras.SETF$1 extends org.jatha.compile.LispPrimitive2 {
+  final org.jatha.extras.SETF this$0;
+  org.jatha.extras.SETF$1(org.jatha.extras.SETF, java.lang.String);
+  protected org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue);
+}
+Compiled from "SETF.java"
+class org.jatha.extras.SETF$2 extends org.jatha.compile.LispPrimitive2 {
+  final org.jatha.extras.SETF this$0;
+  org.jatha.extras.SETF$2(org.jatha.extras.SETF, java.lang.String);
+  protected org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue);
+}
+Compiled from "SETF.java"
+class org.jatha.extras.SETF$3 extends org.jatha.compile.LispPrimitive2 {
+  final org.jatha.extras.SETF this$0;
+  org.jatha.extras.SETF$3(org.jatha.extras.SETF, java.lang.String);
+  protected org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue);
+}
+Compiled from "SETF.java"
+class org.jatha.extras.SETF$4 extends org.jatha.compile.LispPrimitive2 {
+  final org.jatha.extras.SETF this$0;
+  org.jatha.extras.SETF$4(org.jatha.extras.SETF, java.lang.String);
+  protected org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue);
+}
+Compiled from "Strings.java"
+public class org.jatha.extras.Strings implements org.jatha.compile.LispExtension {
+  public org.jatha.extras.Strings();
+  public void Register(org.jatha.compile.LispCompiler);
+}
+Compiled from "Strings.java"
+class org.jatha.extras.Strings$1 extends org.jatha.compile.LispPrimitive1 {
+  final org.jatha.extras.Strings this$0;
+  org.jatha.extras.Strings$1(org.jatha.extras.Strings, java.lang.String);
+  protected org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispValue);
+}
+Compiled from "Strings.java"
+class org.jatha.extras.Strings$2 extends org.jatha.compile.LispPrimitive2 {
+  final org.jatha.extras.Strings this$0;
+  org.jatha.extras.Strings$2(org.jatha.extras.Strings, java.lang.String);
+  protected org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue);
+}
+Compiled from "Strings.java"
+class org.jatha.extras.Strings$3 extends org.jatha.compile.LispPrimitiveC {
+  final org.jatha.extras.Strings this$0;
+  org.jatha.extras.Strings$3(org.jatha.extras.Strings, java.lang.String, long);
+  protected org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispList);
+}
+Compiled from "Trigonometry.java"
+public class org.jatha.extras.Trigonometry implements org.jatha.compile.LispExtension {
+  public org.jatha.extras.Trigonometry();
+  public void Register(org.jatha.compile.LispCompiler);
+}
+Compiled from "Trigonometry.java"
+class org.jatha.extras.Trigonometry$1 extends org.jatha.compile.LispPrimitive1 {
+  final org.jatha.extras.Trigonometry this$0;
+  org.jatha.extras.Trigonometry$1(org.jatha.extras.Trigonometry, java.lang.String);
+  protected final org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispValue) throws org.jatha.exception.CompilerException;
+}
+Compiled from "Trigonometry.java"
+class org.jatha.extras.Trigonometry$2 extends org.jatha.compile.LispPrimitive1 {
+  final org.jatha.extras.Trigonometry this$0;
+  org.jatha.extras.Trigonometry$2(org.jatha.extras.Trigonometry, java.lang.String);
+  protected final org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispValue) throws org.jatha.exception.CompilerException;
+}
+Compiled from "Trigonometry.java"
+class org.jatha.extras.Trigonometry$3 extends org.jatha.compile.LispPrimitive1 {
+  final org.jatha.extras.Trigonometry this$0;
+  org.jatha.extras.Trigonometry$3(org.jatha.extras.Trigonometry, java.lang.String);
+  protected final org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispValue) throws org.jatha.exception.CompilerException;
+}
+Compiled from "Trigonometry.java"
+class org.jatha.extras.Trigonometry$4 extends org.jatha.compile.LispPrimitive1 {
+  final org.jatha.extras.Trigonometry this$0;
+  org.jatha.extras.Trigonometry$4(org.jatha.extras.Trigonometry, java.lang.String);
+  protected final org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispValue) throws org.jatha.exception.CompilerException;
+}
+Compiled from "Trigonometry.java"
+class org.jatha.extras.Trigonometry$5 extends org.jatha.compile.LispPrimitive1 {
+  final org.jatha.extras.Trigonometry this$0;
+  org.jatha.extras.Trigonometry$5(org.jatha.extras.Trigonometry, java.lang.String);
+  protected final org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispValue) throws org.jatha.exception.CompilerException;
+}
+Compiled from "Trigonometry.java"
+class org.jatha.extras.Trigonometry$6 extends org.jatha.compile.LispPrimitive1 {
+  final org.jatha.extras.Trigonometry this$0;
+  org.jatha.extras.Trigonometry$6(org.jatha.extras.Trigonometry, java.lang.String);
+  protected final org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispValue) throws org.jatha.exception.CompilerException;
+}
+Compiled from "Types.java"
+public class org.jatha.extras.Types implements org.jatha.compile.LispExtension {
+  public org.jatha.extras.Types();
+  public void Register(org.jatha.compile.LispCompiler);
+}
+Compiled from "SECDMachine.java"
+public class org.jatha.machine.SECDMachine extends org.jatha.LispProcessor {
+  public static boolean DEBUG;
+  public final org.jatha.machine.SECDRegister S;
+  public final org.jatha.machine.SECDRegister E;
+  public final org.jatha.machine.SECDRegister C;
+  public final org.jatha.machine.SECDRegister D;
+  public final org.jatha.machine.SECDRegister X;
+  public final java.util.HashMap<org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue> B;
+  public static final org.jatha.machine.SECDop BLK;
+  public static final org.jatha.machine.SECDop LDNIL;
+  public static final org.jatha.machine.SECDop LDT;
+  public static final org.jatha.machine.SECDop LDC;
+  public static final org.jatha.machine.SECDop ST;
+  public static final org.jatha.machine.SECDop LDR;
+  public static final org.jatha.machine.SECDop LD;
+  public static final org.jatha.machine.SECDop LD_GLOBAL;
+  public static final org.jatha.machine.SECDop LDF;
+  public static final org.jatha.machine.SECDop LDFC;
+  public static final org.jatha.machine.SECDop SEL;
+  public static final org.jatha.machine.SECDop TEST;
+  public static final org.jatha.machine.SECDop JOIN;
+  public static final org.jatha.machine.SECDop AP;
+  public static final org.jatha.machine.SECDop RAP;
+  public static final org.jatha.machine.SECDop RTN;
+  public static final org.jatha.machine.SECDop RTN_IF;
+  public static final org.jatha.machine.SECDop RTN_IT;
+  public static final org.jatha.machine.SECDop DAP;
+  public static final org.jatha.machine.SECDop DUM;
+  public static final org.jatha.machine.SECDop LIS;
+  public static final org.jatha.machine.SECDop SP_BIND;
+  public static final org.jatha.machine.SECDop SP_UNBIND;
+  public static final org.jatha.machine.SECDop STOP;
+  public org.jatha.machine.SECDMachine();
+  public void special_bind(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue);
+  public void special_unbind(org.jatha.dynatype.LispValue);
+  public void special_set(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue Execute(org.jatha.dynatype.LispValue, org.jatha.dynatype.LispList) throws org.jatha.exception.CompilerException;
+  public void setStackValue(org.jatha.machine.SECDRegister, org.jatha.dynatype.LispValue);
+  static {};
+}
+Compiled from "SECDMachine.java"
+final class org.jatha.machine.SECDMachine$1 extends org.jatha.machine.SECDop {
+  org.jatha.machine.SECDMachine$1(java.lang.String);
+  public void Execute(org.jatha.machine.SECDMachine);
+}
+Compiled from "SECDMachine.java"
+final class org.jatha.machine.SECDMachine$10 extends org.jatha.machine.SECDop {
+  org.jatha.machine.SECDMachine$10(java.lang.String);
+  public void Execute(org.jatha.machine.SECDMachine);
+}
+Compiled from "SECDMachine.java"
+final class org.jatha.machine.SECDMachine$11 extends org.jatha.machine.SECDop {
+  org.jatha.machine.SECDMachine$11(java.lang.String);
+  public void Execute(org.jatha.machine.SECDMachine);
+}
+Compiled from "SECDMachine.java"
+final class org.jatha.machine.SECDMachine$12 extends org.jatha.machine.SECDop {
+  org.jatha.machine.SECDMachine$12(java.lang.String);
+  public void Execute(org.jatha.machine.SECDMachine);
+}
+Compiled from "SECDMachine.java"
+final class org.jatha.machine.SECDMachine$13 extends org.jatha.machine.SECDop {
+  org.jatha.machine.SECDMachine$13(java.lang.String);
+  public void Execute(org.jatha.machine.SECDMachine);
+}
+Compiled from "SECDMachine.java"
+final class org.jatha.machine.SECDMachine$14 extends org.jatha.machine.SECDop {
+  org.jatha.machine.SECDMachine$14(java.lang.String);
+  public void Execute(org.jatha.machine.SECDMachine);
+}
+Compiled from "SECDMachine.java"
+final class org.jatha.machine.SECDMachine$15 extends org.jatha.machine.SECDop {
+  org.jatha.machine.SECDMachine$15(java.lang.String);
+  public void Execute(org.jatha.machine.SECDMachine);
+}
+Compiled from "SECDMachine.java"
+final class org.jatha.machine.SECDMachine$16 extends org.jatha.machine.SECDop {
+  org.jatha.machine.SECDMachine$16(java.lang.String);
+  public void Execute(org.jatha.machine.SECDMachine);
+}
+Compiled from "SECDMachine.java"
+final class org.jatha.machine.SECDMachine$17 extends org.jatha.machine.SECDop {
+  org.jatha.machine.SECDMachine$17(java.lang.String);
+  public void Execute(org.jatha.machine.SECDMachine);
+}
+Compiled from "SECDMachine.java"
+final class org.jatha.machine.SECDMachine$18 extends org.jatha.machine.SECDop {
+  org.jatha.machine.SECDMachine$18(java.lang.String);
+  public void Execute(org.jatha.machine.SECDMachine);
+}
+Compiled from "SECDMachine.java"
+final class org.jatha.machine.SECDMachine$19 extends org.jatha.machine.SECDop {
+  org.jatha.machine.SECDMachine$19(java.lang.String);
+  public void Execute(org.jatha.machine.SECDMachine);
+}
+Compiled from "SECDMachine.java"
+final class org.jatha.machine.SECDMachine$2 extends org.jatha.machine.SECDop {
+  org.jatha.machine.SECDMachine$2(java.lang.String);
+  public void Execute(org.jatha.machine.SECDMachine);
+}
+Compiled from "SECDMachine.java"
+final class org.jatha.machine.SECDMachine$20 extends org.jatha.machine.SECDop {
+  org.jatha.machine.SECDMachine$20(java.lang.String);
+  public void Execute(org.jatha.machine.SECDMachine);
+}
+Compiled from "SECDMachine.java"
+final class org.jatha.machine.SECDMachine$21 extends org.jatha.machine.SECDop {
+  org.jatha.machine.SECDMachine$21(java.lang.String);
+  public void Execute(org.jatha.machine.SECDMachine);
+}
+Compiled from "SECDMachine.java"
+final class org.jatha.machine.SECDMachine$22 extends org.jatha.machine.SECDop {
+  org.jatha.machine.SECDMachine$22(java.lang.String);
+  public void Execute(org.jatha.machine.SECDMachine);
+}
+Compiled from "SECDMachine.java"
+final class org.jatha.machine.SECDMachine$23 extends org.jatha.machine.SECDop {
+  org.jatha.machine.SECDMachine$23(java.lang.String);
+  public void Execute(org.jatha.machine.SECDMachine);
+}
+Compiled from "SECDMachine.java"
+final class org.jatha.machine.SECDMachine$24 extends org.jatha.machine.SECDop {
+  org.jatha.machine.SECDMachine$24(java.lang.String);
+  public void Execute(org.jatha.machine.SECDMachine);
+}
+Compiled from "SECDMachine.java"
+final class org.jatha.machine.SECDMachine$3 extends org.jatha.machine.SECDop {
+  org.jatha.machine.SECDMachine$3(java.lang.String);
+  public void Execute(org.jatha.machine.SECDMachine);
+}
+Compiled from "SECDMachine.java"
+final class org.jatha.machine.SECDMachine$4 extends org.jatha.machine.SECDop {
+  org.jatha.machine.SECDMachine$4(java.lang.String);
+  public void Execute(org.jatha.machine.SECDMachine);
+}
+Compiled from "SECDMachine.java"
+final class org.jatha.machine.SECDMachine$5 extends org.jatha.machine.SECDop {
+  org.jatha.machine.SECDMachine$5(java.lang.String);
+  public void Execute(org.jatha.machine.SECDMachine);
+}
+Compiled from "SECDMachine.java"
+final class org.jatha.machine.SECDMachine$6 extends org.jatha.machine.SECDop {
+  org.jatha.machine.SECDMachine$6(java.lang.String);
+  public void Execute(org.jatha.machine.SECDMachine);
+}
+Compiled from "SECDMachine.java"
+final class org.jatha.machine.SECDMachine$7 extends org.jatha.machine.SECDop {
+  org.jatha.machine.SECDMachine$7(java.lang.String);
+  public void Execute(org.jatha.machine.SECDMachine);
+}
+Compiled from "SECDMachine.java"
+final class org.jatha.machine.SECDMachine$8 extends org.jatha.machine.SECDop {
+  org.jatha.machine.SECDMachine$8(java.lang.String);
+  public void Execute(org.jatha.machine.SECDMachine);
+}
+Compiled from "SECDMachine.java"
+final class org.jatha.machine.SECDMachine$9 extends org.jatha.machine.SECDop {
+  org.jatha.machine.SECDMachine$9(java.lang.String);
+  public void Execute(org.jatha.machine.SECDMachine);
+}
+Compiled from "SECDRegister.java"
+public class org.jatha.machine.SECDRegister extends org.jatha.LispProcessor {
+  protected java.lang.String f_name;
+  protected org.jatha.dynatype.LispList f_value;
+  public org.jatha.machine.SECDRegister(java.lang.String);
+  public org.jatha.dynatype.LispValue push(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue pop();
+  public void assign(org.jatha.dynatype.LispValue);
+  public org.jatha.dynatype.LispValue value();
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "SECDMachine.java"
+abstract class org.jatha.machine.SECDop extends org.jatha.compile.LispPrimitive0 {
+  public org.jatha.machine.SECDop(java.lang.String);
+  public java.lang.String toString();
+  protected org.jatha.dynatype.LispValue Execute() throws org.jatha.exception.CompilerException;
+}
+Compiled from "LispParser.java"
+public class org.jatha.read.LispParser extends org.jatha.LispProcessor {
+  public static final org.jatha.dynatype.LispSymbol COMMA_FN;
+  public static final org.jatha.dynatype.LispSymbol COMMA_ATSIGN_FN;
+  public static final org.jatha.dynatype.LispSymbol COMMA_DOT_FN;
+  public static final int UPCASE;
+  public static final int DOWNCASE;
+  public static final int PRESERVE;
+  static final char AT_SIGN;
+  static final char BACK_QUOTE;
+  static final char SINGLE_QUOTE;
+  static final char BACKSLASH;
+  static final char COLON;
+  static final char COMMA;
+  static final char DECIMAL;
+  static final char DOUBLE_QUOTE;
+  static final char EQUAL_SIGN;
+  static final char LEFT_ANGLE_BRACKET;
+  static final char LEFT_PAREN;
+  static final char HYPHEN;
+  static final char OR_BAR;
+  static final char POUND;
+  static final char PERIOD;
+  static final char RIGHT_PAREN;
+  static final char SEMICOLON;
+  static final char RIGHT_ANGLE_BRACKET;
+  static final char UNDERSCORE;
+  static final int READING_NOTHING;
+  static final int READING_SYMBOL;
+  static final int READING_MIXED_CASE_SYMBOL;
+  static final int READING_CHARACTER;
+  static final int READING_STRING;
+  static final int READING_BACKQUOTED_LIST;
+  public org.jatha.read.LispParser(org.jatha.Lisp, java.io.Reader);
+  public org.jatha.read.LispParser(org.jatha.Lisp, java.lang.String);
+  public org.jatha.read.LispParser(org.jatha.Lisp, java.io.Reader, int);
+  public org.jatha.read.LispParser(org.jatha.Lisp, java.lang.String, int);
+  public int getCaseSensitivity();
+  public void setCaseSensitivity(int);
+  public java.io.PushbackReader getInputReader();
+  public void setInputReader(java.io.PushbackReader);
+  public void setInputString(java.lang.String);
+  public org.jatha.dynatype.LispValue parse() throws java.io.EOFException;
+  public org.jatha.dynatype.LispValue read() throws java.io.EOFException;
+  public org.jatha.dynatype.LispValue read_list_token(java.io.PushbackReader) throws java.io.EOFException;
+  org.jatha.dynatype.LispValue read_quoted_token(java.io.PushbackReader, int) throws java.io.EOFException;
+  public org.jatha.dynatype.LispValue read_backquoted_token(java.io.PushbackReader) throws java.io.EOFException;
+  org.jatha.dynatype.LispValue read_comma_token(java.io.PushbackReader) throws java.io.EOFException;
+  public org.jatha.dynatype.LispValue applyReaderMacro(java.io.PushbackReader) throws java.io.EOFException;
+  public org.jatha.dynatype.LispValue read_backquoted_list_token(java.io.PushbackReader);
+  public org.jatha.dynatype.LispValue tokenToLispValue(java.lang.String);
+  static final boolean isLparen(char);
+  static final boolean isRparen(char);
+  static final boolean isAtSign(char);
+  static final boolean isBackQuote(char);
+  static final boolean isBackSlash(char);
+  static final boolean isColon(char);
+  static final boolean isComma(char);
+  static final boolean isDoubleQuote(char);
+  static final boolean isOrBar(char);
+  static final boolean isPound(char);
+  static final boolean isPeriod(char);
+  static final boolean isQuote(char);
+  static final boolean isSemicolon(char);
+  static final boolean isLeftAngleBracket(char);
+  static final boolean isRightAngleBracket(char);
+  static boolean isSpace(char);
+  static boolean isTerminator(char);
+  boolean REAL_token_p(java.lang.String);
+  boolean REAL_token_p_old(java.lang.String);
+  boolean INTEGER_token_p(java.lang.String);
+  boolean STRING_token_p(java.lang.String);
+  boolean T_token_p(java.lang.String);
+  boolean NIL_token_p(java.lang.String);
+  boolean SYMBOL_token_p(java.lang.String);
+  public void test_parser(java.lang.String);
+  public static boolean hasBalancedParentheses(org.jatha.Lisp, org.jatha.dynatype.LispValue);
+  public static boolean hasBalancedParentheses(org.jatha.Lisp, java.lang.String);
+  static {};
+}
+Compiled from "SymbolTable.java"
+public class org.jatha.util.SymbolTable extends java.util.TreeMap<java.lang.String, org.jatha.dynatype.LispSymbol> {
+  public static final long serialVersionUID;
+  public static final int HASH_TABLE_DEFAULT_SIZE;
+  public static final float HASH_TABLE_DEFAULT_LOAD_FACTOR;
+  static final boolean $assertionsDisabled;
+  public org.jatha.util.SymbolTable();
+  public org.jatha.util.SymbolTable(org.jatha.Lisp, int);
+  public org.jatha.util.SymbolTable(org.jatha.Lisp, int, float);
+  public synchronized org.jatha.dynatype.LispSymbol put(org.jatha.dynatype.LispString, org.jatha.dynatype.LispSymbol);
+  public synchronized org.jatha.dynatype.LispSymbol put(java.lang.String, org.jatha.dynatype.LispSymbol);
+  public synchronized org.jatha.dynatype.LispSymbol get(java.lang.String);
+  public synchronized org.jatha.dynatype.LispSymbol get(org.jatha.dynatype.LispString);
+  public synchronized org.jatha.dynatype.LispSymbol replace(org.jatha.dynatype.LispString, org.jatha.dynatype.LispSymbol);
+  public java.util.Iterator<java.lang.String> keys();
+  public java.lang.Object put(java.lang.Object, java.lang.Object);
+  static {};
+}
+Compiled from "SymbolTools.java"
+public class org.jatha.util.SymbolTools {
+  public org.jatha.util.SymbolTools();
+  public static int firstCharNotInSet(int, java.lang.String, java.lang.String);
+}

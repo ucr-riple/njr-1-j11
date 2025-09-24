@@ -1,0 +1,2595 @@
+Compiled from "Main.java"
+public class Main {
+  public Main();
+  public static void main(java.lang.String[]) throws java.io.IOException;
+}
+Compiled from "FieldDef.java"
+public class a.FieldDef extends a.MemberDef {
+  public final java.lang.String[] quals;
+  public final a.Type type;
+  public final java.lang.String[] names;
+  public a.FieldDef(java.lang.String[], a.Type, java.lang.String[]);
+  public boolean hasQual(java.lang.String);
+  public b.FieldDef[] refine();
+  public java.lang.String toString();
+}
+Compiled from "Import.java"
+public class a.Import {
+  public final java.lang.String module;
+  public final java.lang.String type;
+  public a.Import(java.lang.String, java.lang.String);
+  public java.lang.String toString();
+}
+Compiled from "MemberDef.java"
+public abstract class a.MemberDef {
+  public a.MemberDef();
+}
+Compiled from "MethodDef.java"
+public class a.MethodDef extends a.MemberDef {
+  public final a.gen.GenericConstraint[] genericConstraints;
+  public final java.lang.String[] quals;
+  public final a.Type returnType;
+  public final java.lang.String name;
+  public final java.lang.String[] genericParams;
+  public final a.Type[] paramTypes;
+  public final java.lang.String[] paramNames;
+  public final a.stm.Block body;
+  public a.MethodDef(a.gen.GenericConstraint[], java.lang.String[], a.Type, java.lang.String, java.lang.String[], a.Type[], java.lang.String[], a.stm.Block);
+  public boolean hasQual(java.lang.String);
+  public b.MethodDef refine();
+  public java.lang.String toString();
+}
+Compiled from "MethodDef.java"
+class a.MethodDef$1 {
+  static final int[] $SwitchMap$a$gen$GenericConstraintRel;
+  static {};
+}
+Compiled from "Project.java"
+public class a.Project {
+  public static a.Project singleton;
+  public final a.SourceFile[] sourceFiles;
+  static final boolean $assertionsDisabled;
+  public a.Project(a.SourceFile[]);
+  public b.Project refine();
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "SourceFile.java"
+public class a.SourceFile {
+  public final java.lang.String module;
+  public final a.Import[] imports;
+  public final a.TypeDef[] typeDefs;
+  public a.SourceFile(java.lang.String, a.Import[], a.TypeDef[]);
+  public b.TypeDef[] refine();
+  public java.lang.String toString();
+}
+Compiled from "Type.java"
+public class a.Type {
+  public static final a.Type[] NONE;
+  public final java.lang.String rawType;
+  public final a.Type[] genericArgs;
+  public a.Type(java.lang.String, a.Type[]);
+  public a.Type(java.lang.String);
+  public b.Type refine();
+  public static b.Type[] refineAll(a.Type[]);
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "TypeDef.java"
+public class a.TypeDef {
+  public final a.gen.GenericConstraint[] genericConstraints;
+  public final java.lang.String[] quals;
+  public final java.lang.String name;
+  public final a.gen.TypeGenericParam[] genericParams;
+  public final a.Type[] parents;
+  public final a.MemberDef[] memberDefs;
+  public a.TypeDef(a.gen.GenericConstraint[], java.lang.String[], java.lang.String, a.gen.TypeGenericParam[], a.Type[], a.MemberDef[]);
+  public boolean hasQual(java.lang.String);
+  public b.TypeDef refine(a.SourceFile);
+  public java.lang.String toString();
+}
+Compiled from "TypeDef.java"
+class a.TypeDef$1 {
+  static final int[] $SwitchMap$a$gen$GenericConstraintRel;
+  static {};
+}
+Compiled from "Assignment.java"
+public class a.exp.Assignment extends a.exp.Expression {
+  public final a.exp.Expression left;
+  public final a.exp.Expression right;
+  public a.exp.Assignment(a.exp.Expression, a.exp.Expression);
+  public b.exp.Expression refine();
+  public java.lang.String toString();
+}
+Compiled from "Expression.java"
+public abstract class a.exp.Expression {
+  public static final a.exp.Expression[] NONE;
+  public a.exp.Expression();
+  public abstract b.exp.Expression refine();
+  public static b.exp.Expression[] refineAll(a.exp.Expression[]);
+  static {};
+}
+Compiled from "InfixOperation.java"
+public class a.exp.InfixOperation extends a.exp.Expression {
+  public final a.exp.Expression left;
+  public final java.lang.String operator;
+  public final a.exp.Expression right;
+  public a.exp.InfixOperation(a.exp.Expression, java.lang.String, a.exp.Expression);
+  public b.exp.Expression refine();
+  public java.lang.String toString();
+}
+Compiled from "Instantiation.java"
+public class a.exp.Instantiation extends a.exp.Expression {
+  public final a.Type type;
+  public final a.exp.Expression[] args;
+  public a.exp.Instantiation(a.Type, a.exp.Expression[]);
+  public b.exp.Expression refine();
+  public java.lang.String toString();
+}
+Compiled from "Invocation.java"
+public class a.exp.Invocation extends a.exp.Expression {
+  public final a.exp.Expression target;
+  public final a.Type[] genericArgs;
+  public final a.exp.Expression[] args;
+  public a.exp.Invocation(a.exp.Expression, a.Type[], a.exp.Expression[]);
+  public b.exp.Expression refine();
+  public java.lang.String toString();
+}
+Compiled from "MemberAccess.java"
+public class a.exp.MemberAccess extends a.exp.Expression {
+  public final a.exp.Expression target;
+  public final java.lang.String memberName;
+  public a.exp.MemberAccess(a.exp.Expression, java.lang.String);
+  public b.exp.MemberAccess refine();
+  public java.lang.String toString();
+  public b.exp.Expression refine();
+}
+Compiled from "PrefixOperation.java"
+public class a.exp.PrefixOperation extends a.exp.Expression {
+  public final java.lang.String operator;
+  public final a.exp.Expression target;
+  public a.exp.PrefixOperation(java.lang.String, a.exp.Expression);
+  public b.exp.Expression refine();
+  public java.lang.String toString();
+}
+Compiled from "Variable.java"
+public class a.exp.Variable extends a.exp.Expression {
+  public final java.lang.String name;
+  public a.exp.Variable(java.lang.String);
+  public b.exp.Expression refine();
+  public java.lang.String toString();
+}
+Compiled from "LiteralBool.java"
+public class a.exp.lit.LiteralBool extends a.exp.Expression {
+  public final boolean value;
+  public a.exp.lit.LiteralBool(boolean);
+  public b.exp.Expression refine();
+  public java.lang.String toString();
+}
+Compiled from "LiteralChar.java"
+public class a.exp.lit.LiteralChar extends a.exp.Expression {
+  public final java.lang.String value;
+  public a.exp.lit.LiteralChar(java.lang.String);
+  public b.exp.Expression refine();
+  public java.lang.String toString();
+}
+Compiled from "LiteralDouble.java"
+public class a.exp.lit.LiteralDouble extends a.exp.Expression {
+  public final double value;
+  public a.exp.lit.LiteralDouble(double);
+  public b.exp.Expression refine();
+  public java.lang.String toString();
+}
+Compiled from "LiteralInt.java"
+public class a.exp.lit.LiteralInt extends a.exp.Expression {
+  public final int value;
+  public a.exp.lit.LiteralInt(int);
+  public b.exp.Expression refine();
+  public java.lang.String toString();
+}
+Compiled from "LiteralLong.java"
+public class a.exp.lit.LiteralLong extends a.exp.Expression {
+  public final long value;
+  public a.exp.lit.LiteralLong(long);
+  public b.exp.Expression refine();
+  public java.lang.String toString();
+}
+Compiled from "LiteralSequence.java"
+public class a.exp.lit.LiteralSequence extends a.exp.Expression {
+  public final a.exp.Expression[] elements;
+  public a.exp.lit.LiteralSequence(a.exp.Expression[]);
+  public b.exp.Expression refine();
+  public java.lang.String toString();
+}
+Compiled from "LiteralString.java"
+public class a.exp.lit.LiteralString extends a.exp.Expression {
+  public final java.lang.String value;
+  public a.exp.lit.LiteralString(java.lang.String);
+  public b.exp.Expression refine();
+  public java.lang.String toString();
+}
+Compiled from "GenericConstraint.java"
+public class a.gen.GenericConstraint {
+  public final java.lang.String genericParam;
+  public final a.gen.GenericConstraintRel rel;
+  public final a.Type otherType;
+  public a.gen.GenericConstraint(java.lang.String, a.gen.GenericConstraintRel, a.Type);
+  public java.lang.String toString();
+}
+Compiled from "GenericConstraintRel.java"
+public final class a.gen.GenericConstraintRel extends java.lang.Enum<a.gen.GenericConstraintRel> {
+  public static final a.gen.GenericConstraintRel SUBTYPE;
+  public static final a.gen.GenericConstraintRel SUPERTYPE;
+  public static a.gen.GenericConstraintRel[] values();
+  public static a.gen.GenericConstraintRel valueOf(java.lang.String);
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "TypeGenericParam.java"
+public class a.gen.TypeGenericParam {
+  public final common.Variance var;
+  public final java.lang.String name;
+  public a.gen.TypeGenericParam(common.Variance, java.lang.String);
+  public java.lang.String toString();
+}
+Compiled from "Block.java"
+public class a.stm.Block extends a.stm.Statement {
+  public final a.stm.Statement[] parts;
+  public a.stm.Block(a.stm.Statement...);
+  public b.stm.Block refine();
+  public java.lang.String toString();
+  public b.stm.Statement refine();
+}
+Compiled from "Evaluation.java"
+public class a.stm.Evaluation extends a.stm.Statement {
+  public final a.exp.Expression exp;
+  public a.stm.Evaluation(a.exp.Expression);
+  public b.stm.Statement refine();
+  public java.lang.String toString();
+}
+Compiled from "For.java"
+public class a.stm.For extends a.stm.Statement {
+  public final a.stm.Statement a;
+  public final a.exp.Expression b;
+  public final a.exp.Expression c;
+  public final a.stm.Statement body;
+  public a.stm.For(a.stm.Statement, a.exp.Expression, a.exp.Expression, a.stm.Statement);
+  public b.stm.Statement refine();
+  public java.lang.String toString();
+}
+Compiled from "ForEach.java"
+public class a.stm.ForEach extends a.stm.Statement {
+  public final a.Type elemType;
+  public final java.lang.String elemName;
+  public final a.exp.Expression iterable;
+  public final a.stm.Statement body;
+  public a.stm.ForEach(a.Type, java.lang.String, a.exp.Expression, a.stm.Statement);
+  public b.stm.Statement refine();
+  public java.lang.String toString();
+}
+Compiled from "Forever.java"
+public class a.stm.Forever extends a.stm.Statement {
+  public final a.stm.Statement body;
+  public a.stm.Forever(a.stm.Statement);
+  public b.stm.Statement refine();
+  public java.lang.String toString();
+}
+Compiled from "If.java"
+public class a.stm.If extends a.stm.Statement {
+  public final a.exp.Expression cond;
+  public final a.stm.Statement body;
+  public a.stm.If(a.exp.Expression, a.stm.Statement);
+  public b.stm.Statement refine();
+  public java.lang.String toString();
+}
+Compiled from "IfElse.java"
+public class a.stm.IfElse extends a.stm.Statement {
+  public final a.exp.Expression cond;
+  public final a.stm.Statement bodyTrue;
+  public final a.stm.Statement bodyFalse;
+  public a.stm.IfElse(a.exp.Expression, a.stm.Statement, a.stm.Statement);
+  public b.stm.Statement refine();
+  public java.lang.String toString();
+}
+Compiled from "LocalDef.java"
+public class a.stm.LocalDef extends a.stm.Statement {
+  public final a.Type type;
+  public final java.lang.String[] names;
+  public final a.exp.Expression[] initVals;
+  public a.stm.LocalDef(a.Type, java.lang.String[], a.exp.Expression[]);
+  public a.stm.LocalDef(a.Type, java.lang.String, a.exp.Expression);
+  public b.stm.Statement refine();
+  public java.lang.String toString();
+}
+Compiled from "Pass.java"
+public class a.stm.Pass extends a.stm.Statement {
+  public static a.stm.Pass singleton;
+  public b.stm.Statement refine();
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "Repeat.java"
+public class a.stm.Repeat extends a.stm.Statement {
+  public final a.exp.Expression count;
+  public final a.stm.Statement body;
+  public a.stm.Repeat(a.exp.Expression, a.stm.Statement);
+  public b.stm.Statement refine();
+  public java.lang.String toString();
+}
+Compiled from "Return.java"
+public class a.stm.Return extends a.stm.Statement {
+  public final a.exp.Expression value;
+  public a.stm.Return(a.exp.Expression);
+  public b.stm.Statement refine();
+  public java.lang.String toString();
+}
+Compiled from "Statement.java"
+public abstract class a.stm.Statement {
+  public a.stm.Statement();
+  public abstract b.stm.Statement refine();
+  public static b.stm.Statement[] refineAll(a.stm.Statement[]);
+}
+Compiled from "Switch.java"
+public class a.stm.Switch extends a.stm.Statement {
+  public final a.exp.Expression subject;
+  public final a.stm.Switch$Pattern[] patterns;
+  public final a.stm.Statement[] bodies;
+  public a.stm.Switch(a.exp.Expression, a.stm.Switch$Pattern[], a.stm.Statement[]);
+  public b.stm.Statement refine();
+  public java.lang.String toString();
+}
+Compiled from "Switch.java"
+public class a.stm.Switch$OtherPattern extends a.stm.Switch$Pattern {
+  public static final a.stm.Switch$OtherPattern singleton;
+  b.stm.Switch$Pattern refine();
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "Switch.java"
+public abstract class a.stm.Switch$Pattern {
+  public a.stm.Switch$Pattern();
+  abstract b.stm.Switch$Pattern refine();
+}
+Compiled from "Switch.java"
+public class a.stm.Switch$TypePattern extends a.stm.Switch$Pattern {
+  public final a.Type type;
+  public final java.lang.String localName;
+  public a.stm.Switch$TypePattern(a.Type, java.lang.String);
+  b.stm.Switch$Pattern refine();
+  public java.lang.String toString();
+}
+Compiled from "Switch.java"
+public class a.stm.Switch$ValuePattern extends a.stm.Switch$Pattern {
+  public final a.exp.Expression value;
+  public a.stm.Switch$ValuePattern(a.exp.Expression);
+  b.stm.Switch$Pattern refine();
+  public java.lang.String toString();
+}
+Compiled from "While.java"
+public class a.stm.While extends a.stm.Statement {
+  public final a.exp.Expression cond;
+  public final a.stm.Statement body;
+  public a.stm.While(a.exp.Expression, a.stm.Statement);
+  public b.stm.Statement refine();
+  public java.lang.String toString();
+}
+Compiled from "FieldDef.java"
+public class b.FieldDef {
+  public final common.FieldVisibility visibility;
+  public final boolean isStatic;
+  public final boolean isReadOnly;
+  public final b.Type type;
+  public final java.lang.String name;
+  public b.FieldDef(common.FieldVisibility, boolean, boolean, b.Type, java.lang.String);
+  public c.FieldDef refine(b.TypeDef);
+  public java.lang.String toString();
+}
+Compiled from "MethodDef.java"
+public class b.MethodDef {
+  public final common.MethodVisibility visibility;
+  public final boolean isStatic;
+  public final boolean isSealed;
+  public final b.Type returnType;
+  public final java.lang.String name;
+  public final b.gen.MethodGenericParam[] genericParams;
+  public final java.lang.String[] paramNames;
+  public final b.Type[] paramTypes;
+  public final b.stm.Block body;
+  public b.MethodDef(common.MethodVisibility, boolean, boolean, b.Type, java.lang.String, b.gen.MethodGenericParam[], b.Type[], java.lang.String[], b.stm.Block);
+  public int genericParamIndex(java.lang.String);
+  public c.MethodDef refine(b.TypeDef);
+  public java.lang.String toString();
+}
+Compiled from "Project.java"
+public class b.Project {
+  public static b.Project singleton;
+  public final java.util.Map<common.RawType, b.TypeDef> typeDefs;
+  static final boolean $assertionsDisabled;
+  public b.Project(b.TypeDef[]);
+  public boolean hasType(common.RawType);
+  public c.Project refine();
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "Type.java"
+public class b.Type {
+  public static final b.Type[] NONE;
+  public final java.lang.String rawType;
+  public final b.Type[] genericArgs;
+  public b.Type(java.lang.String, b.Type[]);
+  public b.Type(java.lang.String);
+  public c.ty.Type refine(b.TypeDef, b.MethodDef);
+  public static c.ty.Type[] refineAll(b.Type[], b.TypeDef, b.MethodDef);
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "TypeDef.java"
+public class b.TypeDef {
+  public final b.imp.WildcardImport[] wildcardImports;
+  public final b.imp.SpecificImport[] specificImports;
+  public final common.TypeVisibility visibility;
+  public final boolean isAbstract;
+  public final boolean isSealed;
+  public final common.RawType desc;
+  public final b.gen.TypeGenericParam[] genericParams;
+  public final b.Type[] parents;
+  public final b.FieldDef[] staticFieldDefs;
+  public final b.FieldDef[] instanceFieldDefs;
+  public final b.MethodDef[] staticMethodDefs;
+  public final b.MethodDef[] instanceMethodDefs;
+  public b.TypeDef(b.imp.WildcardImport[], b.imp.SpecificImport[], common.TypeVisibility, boolean, boolean, common.RawType, b.gen.TypeGenericParam[], b.Type[], b.FieldDef[], b.FieldDef[], b.MethodDef[], b.MethodDef[]);
+  public int genericParameterIndex(java.lang.String);
+  public common.RawType qualifyType(java.lang.String);
+  public boolean typeExists(java.lang.String);
+  public c.TypeDef refine();
+  public java.lang.String toString();
+}
+Compiled from "Expression.java"
+public abstract class b.exp.Expression {
+  public b.exp.Expression();
+  public abstract c.exp.Expression refine(b.TypeDef, b.MethodDef);
+  public static c.exp.Expression[] refineAll(b.exp.Expression[], b.TypeDef, b.MethodDef);
+  public abstract java.lang.String toString();
+}
+Compiled from "FieldAssignment.java"
+public class b.exp.FieldAssignment extends b.exp.Expression {
+  public final b.exp.Expression target;
+  public final java.lang.String fieldName;
+  public final b.exp.Expression value;
+  public b.exp.FieldAssignment(b.exp.Expression, java.lang.String, b.exp.Expression);
+  public c.exp.Expression refine(b.TypeDef, b.MethodDef);
+  public java.lang.String toString();
+}
+Compiled from "Instantiation.java"
+public class b.exp.Instantiation extends b.exp.Expression {
+  public final b.Type type;
+  public final b.exp.Expression[] args;
+  public b.exp.Instantiation(b.Type, b.exp.Expression[]);
+  public c.exp.Expression refine(b.TypeDef, b.MethodDef);
+  public java.lang.String toString();
+}
+Compiled from "Invocation.java"
+public class b.exp.Invocation extends b.exp.Expression {
+  public final b.exp.Expression target;
+  public final b.Type[] genericArgs;
+  public final b.exp.Expression[] args;
+  public b.exp.Invocation(b.exp.Expression, b.Type[], b.exp.Expression[]);
+  public c.exp.Expression refine(b.TypeDef, b.MethodDef);
+  public java.lang.String toString();
+}
+Compiled from "LocalAssignment.java"
+public class b.exp.LocalAssignment extends b.exp.Expression {
+  public final java.lang.String localName;
+  public final b.exp.Expression value;
+  public b.exp.LocalAssignment(java.lang.String, b.exp.Expression);
+  public c.exp.Expression refine(b.TypeDef, b.MethodDef);
+  public java.lang.String toString();
+}
+Compiled from "MemberAccess.java"
+public class b.exp.MemberAccess extends b.exp.Expression {
+  public final b.exp.Expression target;
+  public final java.lang.String memberName;
+  public b.exp.MemberAccess(b.exp.Expression, java.lang.String);
+  public c.exp.Expression refine(b.TypeDef, b.MethodDef);
+  public java.lang.String toString();
+}
+Compiled from "Variable.java"
+public class b.exp.Variable extends b.exp.Expression {
+  public final java.lang.String name;
+  public b.exp.Variable(java.lang.String);
+  public c.exp.Expression refine(b.TypeDef, b.MethodDef);
+  public java.lang.String toString();
+}
+Compiled from "LiteralBool.java"
+public class b.exp.lit.LiteralBool extends b.exp.Expression {
+  public final boolean value;
+  public b.exp.lit.LiteralBool(boolean);
+  public c.exp.Expression refine(b.TypeDef, b.MethodDef);
+  public java.lang.String toString();
+}
+Compiled from "LiteralChar.java"
+public class b.exp.lit.LiteralChar extends b.exp.Expression {
+  public final char value;
+  public b.exp.lit.LiteralChar(char);
+  public c.exp.Expression refine(b.TypeDef, b.MethodDef);
+  public java.lang.String toString();
+}
+Compiled from "LiteralDouble.java"
+public class b.exp.lit.LiteralDouble extends b.exp.Expression {
+  public final double value;
+  public b.exp.lit.LiteralDouble(double);
+  public c.exp.Expression refine(b.TypeDef, b.MethodDef);
+  public java.lang.String toString();
+}
+Compiled from "LiteralInt.java"
+public class b.exp.lit.LiteralInt extends b.exp.Expression {
+  public final int value;
+  public b.exp.lit.LiteralInt(int);
+  public c.exp.Expression refine(b.TypeDef, b.MethodDef);
+  public java.lang.String toString();
+}
+Compiled from "LiteralLong.java"
+public class b.exp.lit.LiteralLong extends b.exp.Expression {
+  public final long value;
+  public b.exp.lit.LiteralLong(long);
+  public c.exp.Expression refine(b.TypeDef, b.MethodDef);
+  public java.lang.String toString();
+}
+Compiled from "LiteralSequence.java"
+public class b.exp.lit.LiteralSequence extends b.exp.Expression {
+  public final b.exp.Expression[] elements;
+  public b.exp.lit.LiteralSequence(b.exp.Expression[]);
+  public c.exp.Expression refine(b.TypeDef, b.MethodDef);
+  public java.lang.String toString();
+}
+Compiled from "LiteralString.java"
+public class b.exp.lit.LiteralString extends b.exp.Expression {
+  public final java.lang.String value;
+  public b.exp.lit.LiteralString(java.lang.String);
+  public c.exp.Expression refine(b.TypeDef, b.MethodDef);
+  public java.lang.String toString();
+}
+Compiled from "GenericParam.java"
+public abstract class b.gen.GenericParam {
+  public final java.lang.String name;
+  public final b.Type[] subOf;
+  public final b.Type[] supOf;
+  public b.gen.GenericParam(java.lang.String, b.Type[], b.Type[]);
+  public java.lang.String toString();
+}
+Compiled from "MethodGenericParam.java"
+public class b.gen.MethodGenericParam extends b.gen.GenericParam {
+  public b.gen.MethodGenericParam(java.lang.String, b.Type[], b.Type[]);
+  public c.gen.MethodGenericInfo refine(b.TypeDef, b.MethodDef, int);
+}
+Compiled from "TypeGenericParam.java"
+public class b.gen.TypeGenericParam extends b.gen.GenericParam {
+  public final common.Variance var;
+  public b.gen.TypeGenericParam(common.Variance, java.lang.String, b.Type[], b.Type[]);
+  public c.gen.TypeGenericInfo refine(b.TypeDef, int);
+  public java.lang.String toString();
+}
+Compiled from "Import.java"
+public abstract class b.imp.Import {
+  public b.imp.Import();
+  public abstract java.lang.String toString();
+}
+Compiled from "SpecificImport.java"
+public class b.imp.SpecificImport extends b.imp.Import {
+  public final java.lang.String module;
+  public final java.lang.String type;
+  public b.imp.SpecificImport(java.lang.String, java.lang.String);
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public java.lang.String toString();
+}
+Compiled from "WildcardImport.java"
+public class b.imp.WildcardImport extends b.imp.Import {
+  public final java.lang.String module;
+  public b.imp.WildcardImport(java.lang.String);
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public java.lang.String toString();
+}
+Compiled from "Block.java"
+public class b.stm.Block extends b.stm.Statement {
+  public final b.stm.Statement[] parts;
+  public b.stm.Block(b.stm.Statement...);
+  public c.stm.Block refine(b.TypeDef, b.MethodDef);
+  public java.lang.String toString();
+  public c.stm.Statement refine(b.TypeDef, b.MethodDef);
+}
+Compiled from "Evaluation.java"
+public class b.stm.Evaluation extends b.stm.Statement {
+  public final b.exp.Expression exp;
+  public b.stm.Evaluation(b.exp.Expression);
+  public c.stm.Statement refine(b.TypeDef, b.MethodDef);
+  public java.lang.String toString();
+}
+Compiled from "IfElse.java"
+public class b.stm.IfElse extends b.stm.Statement {
+  public final b.exp.Expression cond;
+  public final b.stm.Statement bodyTrue;
+  public final b.stm.Statement bodyFalse;
+  public b.stm.IfElse(b.exp.Expression, b.stm.Statement, b.stm.Statement);
+  public c.stm.Statement refine(b.TypeDef, b.MethodDef);
+  public java.lang.String toString();
+}
+Compiled from "LocalDef.java"
+public class b.stm.LocalDef extends b.stm.Statement {
+  public final b.Type type;
+  public final java.lang.String[] names;
+  public final b.exp.Expression[] initVals;
+  public b.stm.LocalDef(b.Type, java.lang.String[], b.exp.Expression[]);
+  public c.stm.Statement refine(b.TypeDef, b.MethodDef);
+  public java.lang.String toString();
+}
+Compiled from "Return.java"
+public class b.stm.Return extends b.stm.Statement {
+  public final b.exp.Expression value;
+  public b.stm.Return(b.exp.Expression);
+  public c.stm.Statement refine(b.TypeDef, b.MethodDef);
+  public java.lang.String toString();
+}
+Compiled from "Statement.java"
+public abstract class b.stm.Statement {
+  public b.stm.Statement();
+  public abstract c.stm.Statement refine(b.TypeDef, b.MethodDef);
+  public static c.stm.Statement[] refineAll(b.stm.Statement[], b.TypeDef, b.MethodDef);
+  public abstract java.lang.String toString();
+}
+Compiled from "Switch.java"
+public class b.stm.Switch extends b.stm.Statement {
+  public final b.exp.Expression subject;
+  public final b.stm.Switch$Pattern[] patterns;
+  public final b.stm.Statement[] bodies;
+  public b.stm.Switch(b.exp.Expression, b.stm.Switch$Pattern[], b.stm.Statement[]);
+  public c.stm.Statement refine(b.TypeDef, b.MethodDef);
+  public java.lang.String toString();
+}
+Compiled from "Switch.java"
+public class b.stm.Switch$OtherPattern extends b.stm.Switch$Pattern {
+  public static final b.stm.Switch$OtherPattern singleton;
+  c.stm.Switch$Pattern refine(b.TypeDef, b.MethodDef);
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "Switch.java"
+public abstract class b.stm.Switch$Pattern {
+  public b.stm.Switch$Pattern();
+  abstract c.stm.Switch$Pattern refine(b.TypeDef, b.MethodDef);
+}
+Compiled from "Switch.java"
+public class b.stm.Switch$TypePattern extends b.stm.Switch$Pattern {
+  public final b.Type type;
+  public final java.lang.String localName;
+  public b.stm.Switch$TypePattern(b.Type, java.lang.String);
+  c.stm.Switch$Pattern refine(b.TypeDef, b.MethodDef);
+  public java.lang.String toString();
+}
+Compiled from "Switch.java"
+public class b.stm.Switch$ValuePattern extends b.stm.Switch$Pattern {
+  public final b.exp.Expression value;
+  public b.stm.Switch$ValuePattern(b.exp.Expression);
+  c.stm.Switch$Pattern refine(b.TypeDef, b.MethodDef);
+  public java.lang.String toString();
+}
+Compiled from "While.java"
+public class b.stm.While extends b.stm.Statement {
+  public final b.exp.Expression cond;
+  public final b.stm.Statement body;
+  public b.stm.While(b.exp.Expression, b.stm.Statement);
+  public c.stm.Statement refine(b.TypeDef, b.MethodDef);
+  public java.lang.String toString();
+}
+Compiled from "CodeContext.java"
+public class c.CodeContext {
+  public final c.TypeDef type;
+  public final c.MethodDef method;
+  public c.CodeContext(c.TypeDef, c.MethodDef);
+  public c.CodeContext(c.CodeContext);
+  public c.ty.Type getLocalType(java.lang.String);
+  public int getLocalIndex(java.lang.String);
+  public c.CodeContext addLocal(c.ty.Type, java.lang.String);
+  public java.lang.String toString();
+}
+Compiled from "CodeContext.java"
+public class c.CodeContext$LocalInfo {
+  public final c.ty.Type type;
+  public final java.lang.String name;
+  public c.CodeContext$LocalInfo(c.ty.Type, java.lang.String);
+  public java.lang.String toString();
+}
+Compiled from "CodeTree.java"
+public final class c.CodeTree {
+  static final boolean $assertionsDisabled;
+  public c.CodeTree(java.lang.Object...);
+  public int getSize();
+  public int[] getCode();
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "FieldDef.java"
+public class c.FieldDef {
+  public final common.RawType owner;
+  public final common.FieldVisibility visibility;
+  public final boolean isStatic;
+  public final boolean isReadOnly;
+  public final c.ty.Type type;
+  public final java.lang.String name;
+  public c.FieldDef(common.RawType, common.FieldVisibility, boolean, boolean, c.ty.Type, java.lang.String);
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public java.lang.String toString();
+}
+Compiled from "MethodDef.java"
+public class c.MethodDef {
+  public final common.RawType owner;
+  public final common.MethodVisibility visibility;
+  public final boolean isStatic;
+  public final boolean isSealed;
+  public final c.ty.Type returnType;
+  public final java.lang.String name;
+  public final c.gen.MethodGenericInfo[] genericInfos;
+  public final c.ty.Type[] paramTypes;
+  public final java.lang.String[] paramNames;
+  public final c.stm.Block body;
+  static final boolean $assertionsDisabled;
+  public c.MethodDef(common.RawType, common.MethodVisibility, boolean, boolean, c.ty.Type, java.lang.String, c.gen.MethodGenericInfo[], c.ty.Type[], java.lang.String[], c.stm.Block);
+  public boolean canImplement(c.MethodDef);
+  public void observeNumLocals(int);
+  public int getRawTypeTableIndex(common.RawType);
+  public int getFullTypeTableIndex(c.ty.Type);
+  public int[] getFullTypeTableIndices(c.ty.Type[]);
+  public int getMethodTableIndex(c.MethodDef);
+  public int getStringTableIndex(java.lang.String);
+  public d.RawMethod refineDesc();
+  public d.MethodDef compile(c.TypeDef);
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "Project.java"
+public class c.Project {
+  public static c.Project singleton;
+  public final java.util.HashMap<common.RawType, c.TypeDef> typeDefs;
+  static final boolean $assertionsDisabled;
+  public c.Project(c.TypeDef[]);
+  public boolean hasType(common.RawType);
+  public c.TypeDef resolve(common.RawType);
+  public d.TypeDef[] compile();
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "TypeDef.java"
+public class c.TypeDef {
+  public final common.TypeVisibility visibility;
+  public final boolean isAbstract;
+  public final boolean isSealed;
+  public final common.RawType desc;
+  public final c.gen.TypeGenericInfo[] genericInfos;
+  public final c.ty.ParameterizedType[] parents;
+  public final c.FieldDef[] staticFieldDefs;
+  public final c.FieldDef[] instanceFieldDefs;
+  public final c.MethodDef[] staticMethodDefs;
+  public final c.MethodDef[] instanceMethodDefs;
+  public final c.MethodDef[] allMethodDefs;
+  public c.TypeDef(common.TypeVisibility, boolean, boolean, common.RawType, c.gen.TypeGenericInfo[], c.ty.ParameterizedType[], c.FieldDef[], c.FieldDef[], c.MethodDef[], c.MethodDef[]);
+  public c.ty.ParameterizedType thisType();
+  public java.util.Set<common.RawType> allSupertypes();
+  public c.ty.ParameterizedType[] parentsWithGenerics(c.ty.Type[]);
+  public int getStaticFieldIndex(java.lang.String);
+  public c.FieldDef getStaticField(java.lang.String);
+  public c.MethodDef getStaticMethod(java.lang.String, c.ty.Type[], c.ty.Type[], c.CodeContext);
+  public c.FieldDef getInstanceField(java.lang.String);
+  public c.MethodDef getInstanceMethod(java.lang.String, c.ty.Type[], c.ty.Type[], c.ty.Type[], c.CodeContext);
+  public d.TypeDef compile();
+  public java.lang.String toString();
+}
+Compiled from "TypeUtils.java"
+public final class c.TypeUtils {
+  public static c.ty.Type union(c.ty.Type...);
+  public static c.ty.Type intersectionNoBottom(c.ty.Type[], c.TypeDef, c.MethodDef);
+  public static boolean containsTypeParams(c.ty.Type[]);
+}
+Compiled from "Expression.java"
+public abstract class c.exp.Expression {
+  public c.exp.Expression();
+  public abstract c.ty.Type inferType(c.CodeContext);
+  public boolean hasType(c.ty.Type, c.CodeContext);
+  public abstract c.CodeTree compile(c.ty.Type, c.CodeContext);
+  public c.CodeTree compile(c.CodeContext);
+  public static c.ty.Type[] inferAllTypes(c.exp.Expression[], c.CodeContext);
+  public static c.CodeTree compileAll(c.exp.Expression[], c.CodeContext);
+  public abstract java.lang.String toString();
+}
+Compiled from "InstanceFieldAssignment.java"
+public class c.exp.InstanceFieldAssignment extends c.exp.Expression {
+  public final c.exp.Expression target;
+  public final java.lang.String fieldName;
+  public final c.exp.Expression value;
+  public c.exp.InstanceFieldAssignment(c.exp.Expression, java.lang.String, c.exp.Expression);
+  public c.ty.Type inferType(c.CodeContext);
+  public c.CodeTree compile(c.ty.Type, c.CodeContext);
+  public java.lang.String toString();
+}
+Compiled from "InstanceFieldGet.java"
+public class c.exp.InstanceFieldGet extends c.exp.Expression {
+  public final c.exp.Expression target;
+  public final java.lang.String fieldName;
+  public c.exp.InstanceFieldGet(c.exp.Expression, java.lang.String);
+  c.FieldDef getField(c.CodeContext);
+  public c.ty.Type inferType(c.CodeContext);
+  public c.CodeTree compile(c.ty.Type, c.CodeContext);
+  public java.lang.String toString();
+}
+Compiled from "InstanceMemberInvocation.java"
+public class c.exp.InstanceMemberInvocation extends c.exp.Expression {
+  public final c.exp.Expression target;
+  public final java.lang.String memberName;
+  public final c.ty.Type[] genericArgs;
+  public final c.exp.Expression[] args;
+  public c.exp.InstanceMemberInvocation(c.exp.Expression, java.lang.String, c.ty.Type[], c.exp.Expression[]);
+  public c.ty.Type inferType(c.CodeContext);
+  public c.CodeTree compile(c.ty.Type, c.CodeContext);
+  public java.lang.String toString();
+}
+Compiled from "InstanceMethodInvocation.java"
+public class c.exp.InstanceMethodInvocation extends c.exp.Expression {
+  public final c.exp.Expression target;
+  public final java.lang.String methodName;
+  public final c.ty.Type[] genericArgs;
+  public final c.exp.Expression[] args;
+  public c.exp.InstanceMethodInvocation(c.exp.Expression, java.lang.String, c.ty.Type[], c.exp.Expression[]);
+  public boolean isValid(c.CodeContext);
+  public c.ty.Type inferType(c.CodeContext);
+  public c.CodeTree compile(c.ty.Type, c.CodeContext);
+  public java.lang.String toString();
+}
+Compiled from "Instantiation.java"
+public class c.exp.Instantiation extends c.exp.Expression {
+  public final c.ty.ParameterizedType type;
+  public final c.exp.Expression[] args;
+  static final boolean $assertionsDisabled;
+  public c.exp.Instantiation(c.ty.ParameterizedType, c.exp.Expression[]);
+  public c.ty.Type inferType(c.CodeContext);
+  public c.CodeTree compile(c.ty.Type, c.CodeContext);
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "LocalAssignment.java"
+public class c.exp.LocalAssignment extends c.exp.Expression {
+  public final java.lang.String name;
+  public final c.exp.Expression value;
+  public c.exp.LocalAssignment(java.lang.String, c.exp.Expression);
+  public c.ty.Type inferType(c.CodeContext);
+  public c.CodeTree compile(c.ty.Type, c.CodeContext);
+  public java.lang.String toString();
+}
+Compiled from "LocalGet.java"
+public class c.exp.LocalGet extends c.exp.Expression {
+  public final java.lang.String name;
+  public c.exp.LocalGet(java.lang.String);
+  public c.ty.Type inferType(c.CodeContext);
+  public c.CodeTree compile(c.ty.Type, c.CodeContext);
+  public java.lang.String toString();
+}
+Compiled from "StaticFieldAssignment.java"
+public class c.exp.StaticFieldAssignment extends c.exp.Expression {
+  public final common.RawType owner;
+  public final java.lang.String fieldName;
+  public final c.exp.Expression value;
+  public c.exp.StaticFieldAssignment(common.RawType, java.lang.String, c.exp.Expression);
+  public c.ty.Type inferType(c.CodeContext);
+  public c.CodeTree compile(c.ty.Type, c.CodeContext);
+  public java.lang.String toString();
+}
+Compiled from "StaticFieldGet.java"
+public class c.exp.StaticFieldGet extends c.exp.Expression {
+  public final common.RawType owner;
+  public final java.lang.String fieldName;
+  public c.exp.StaticFieldGet(common.RawType, java.lang.String);
+  public c.ty.Type inferType(c.CodeContext);
+  public c.CodeTree compile(c.ty.Type, c.CodeContext);
+  public java.lang.String toString();
+}
+Compiled from "StaticMethodInvocation.java"
+public class c.exp.StaticMethodInvocation extends c.exp.Expression {
+  public final common.RawType owner;
+  public final java.lang.String methodName;
+  public final c.ty.Type[] genericArgs;
+  public final c.exp.Expression[] args;
+  public c.exp.StaticMethodInvocation(common.RawType, java.lang.String, c.ty.Type[], c.exp.Expression[]);
+  public c.ty.Type inferType(c.CodeContext);
+  public c.CodeTree compile(c.ty.Type, c.CodeContext);
+  public c.CodeTree compile(c.CodeContext);
+  public java.lang.String toString();
+}
+Compiled from "LiteralBool.java"
+public class c.exp.lit.LiteralBool extends c.exp.Expression {
+  public final boolean value;
+  public c.exp.lit.LiteralBool(boolean);
+  public c.ty.Type inferType(c.CodeContext);
+  public c.CodeTree compile(c.ty.Type, c.CodeContext);
+  public java.lang.String toString();
+}
+Compiled from "LiteralChar.java"
+public class c.exp.lit.LiteralChar extends c.exp.Expression {
+  public final char value;
+  public c.exp.lit.LiteralChar(char);
+  public c.ty.Type inferType(c.CodeContext);
+  public c.CodeTree compile(c.ty.Type, c.CodeContext);
+  public java.lang.String toString();
+}
+Compiled from "LiteralDouble.java"
+public class c.exp.lit.LiteralDouble extends c.exp.Expression {
+  public final double value;
+  public c.exp.lit.LiteralDouble(double);
+  public c.ty.Type inferType(c.CodeContext);
+  public c.CodeTree compile(c.ty.Type, c.CodeContext);
+  public java.lang.String toString();
+}
+Compiled from "LiteralInt.java"
+public class c.exp.lit.LiteralInt extends c.exp.Expression {
+  public final int value;
+  public c.exp.lit.LiteralInt(int);
+  public c.ty.Type inferType(c.CodeContext);
+  public c.CodeTree compile(c.ty.Type, c.CodeContext);
+  public java.lang.String toString();
+}
+Compiled from "LiteralLong.java"
+public class c.exp.lit.LiteralLong extends c.exp.Expression {
+  public final long value;
+  public c.exp.lit.LiteralLong(long);
+  public c.ty.Type inferType(c.CodeContext);
+  public c.CodeTree compile(c.ty.Type, c.CodeContext);
+  public java.lang.String toString();
+}
+Compiled from "LiteralSequence.java"
+public class c.exp.lit.LiteralSequence extends c.exp.Expression {
+  public final c.exp.Expression[] elements;
+  public c.exp.lit.LiteralSequence(c.exp.Expression[]);
+  public c.ty.ParameterizedType inferType(c.CodeContext);
+  public boolean hasType(c.ty.Type, c.CodeContext);
+  public c.CodeTree compile(c.ty.Type, c.CodeContext);
+  public java.lang.String toString();
+  public c.ty.Type inferType(c.CodeContext);
+}
+Compiled from "LiteralString.java"
+public class c.exp.lit.LiteralString extends c.exp.Expression {
+  public final java.lang.String value;
+  public c.exp.lit.LiteralString(java.lang.String);
+  public c.ty.Type inferType(c.CodeContext);
+  public c.CodeTree compile(c.ty.Type, c.CodeContext);
+  public java.lang.String toString();
+}
+Compiled from "GenericInfo.java"
+public abstract class c.gen.GenericInfo {
+  public final int index;
+  public final c.ty.Type[] subOf;
+  public final c.ty.Type[] supOf;
+  public c.gen.GenericInfo(int, c.ty.Type[], c.ty.Type[]);
+  public java.lang.String toString();
+}
+Compiled from "MethodGenericInfo.java"
+public class c.gen.MethodGenericInfo extends c.gen.GenericInfo {
+  public c.gen.MethodGenericInfo(int, c.ty.Type[], c.ty.Type[]);
+  public java.lang.String toString();
+}
+Compiled from "TypeGenericInfo.java"
+public class c.gen.TypeGenericInfo extends c.gen.GenericInfo {
+  public final common.Variance var;
+  public c.gen.TypeGenericInfo(common.Variance, int, c.ty.Type[], c.ty.Type[]);
+  public java.lang.String toString();
+}
+Compiled from "Block.java"
+public class c.stm.Block extends c.stm.Statement {
+  public final c.stm.Statement[] parts;
+  public c.stm.Block(c.stm.Statement[]);
+  public c.stm.CompilationResult compile(c.CodeContext);
+  public java.lang.String toString();
+}
+Compiled from "CompilationResult.java"
+public class c.stm.CompilationResult {
+  public final c.CodeTree code;
+  public final c.CodeContext newCtx;
+  public c.stm.CompilationResult(c.CodeTree, c.CodeContext);
+}
+Compiled from "Evaluation.java"
+public class c.stm.Evaluation extends c.stm.Statement {
+  public final c.exp.Expression exp;
+  public c.stm.Evaluation(c.exp.Expression);
+  public c.stm.CompilationResult compile(c.CodeContext);
+  public java.lang.String toString();
+}
+Compiled from "IfElse.java"
+public class c.stm.IfElse extends c.stm.Statement {
+  public final c.exp.Expression cond;
+  public final c.stm.Statement bodyTrue;
+  public final c.stm.Statement bodyFalse;
+  public c.stm.IfElse(c.exp.Expression, c.stm.Statement, c.stm.Statement);
+  public c.stm.CompilationResult compile(c.CodeContext);
+  public java.lang.String toString();
+}
+Compiled from "LocalDef.java"
+public class c.stm.LocalDef extends c.stm.Statement {
+  public final c.ty.Type type;
+  public final java.lang.String[] names;
+  public final c.exp.Expression[] initVals;
+  public c.stm.LocalDef(c.ty.Type, java.lang.String[], c.exp.Expression[]);
+  public c.stm.CompilationResult compile(c.CodeContext);
+  public java.lang.String toString();
+}
+Compiled from "Return.java"
+public class c.stm.Return extends c.stm.Statement {
+  public final c.exp.Expression value;
+  public c.stm.Return(c.exp.Expression);
+  public c.stm.CompilationResult compile(c.CodeContext);
+  public java.lang.String toString();
+}
+Compiled from "Statement.java"
+public abstract class c.stm.Statement {
+  public c.stm.Statement();
+  public abstract c.stm.CompilationResult compile(c.CodeContext);
+  public abstract java.lang.String toString();
+}
+Compiled from "Switch.java"
+public class c.stm.Switch extends c.stm.Statement {
+  public final c.exp.Expression subject;
+  public final c.stm.Switch$Pattern[] patterns;
+  public final c.stm.Statement[] bodies;
+  public c.stm.Switch(c.exp.Expression, c.stm.Switch$Pattern[], c.stm.Statement[]);
+  public c.stm.CompilationResult compile(c.CodeContext);
+  public java.lang.String toString();
+}
+Compiled from "Switch.java"
+public class c.stm.Switch$OtherPattern extends c.stm.Switch$Pattern {
+  public static final c.stm.Switch$OtherPattern singleton;
+  c.CodeTree testCode(c.CodeContext, java.lang.String);
+  c.stm.CompilationResult prefix(c.CodeContext, java.lang.String);
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "Switch.java"
+public abstract class c.stm.Switch$Pattern {
+  public c.stm.Switch$Pattern();
+  abstract c.CodeTree testCode(c.CodeContext, java.lang.String);
+  abstract c.stm.CompilationResult prefix(c.CodeContext, java.lang.String);
+}
+Compiled from "Switch.java"
+public class c.stm.Switch$TypePattern extends c.stm.Switch$Pattern {
+  public final c.ty.Type type;
+  public final java.lang.String localName;
+  public c.stm.Switch$TypePattern(c.ty.Type, java.lang.String);
+  c.CodeTree testCode(c.CodeContext, java.lang.String);
+  c.stm.CompilationResult prefix(c.CodeContext, java.lang.String);
+  public java.lang.String toString();
+}
+Compiled from "Switch.java"
+public class c.stm.Switch$ValuePattern extends c.stm.Switch$Pattern {
+  public final c.exp.Expression value;
+  public c.stm.Switch$ValuePattern(c.exp.Expression);
+  c.CodeTree testCode(c.CodeContext, java.lang.String);
+  c.stm.CompilationResult prefix(c.CodeContext, java.lang.String);
+  public java.lang.String toString();
+}
+Compiled from "While.java"
+public class c.stm.While extends c.stm.Statement {
+  public final c.exp.Expression cond;
+  public final c.stm.Statement body;
+  public c.stm.While(c.exp.Expression, c.stm.Statement);
+  public c.stm.CompilationResult compile(c.CodeContext);
+  public java.lang.String toString();
+}
+Compiled from "MethodGenericType.java"
+public class c.ty.MethodGenericType extends c.ty.Type {
+  public final int index;
+  public c.ty.MethodGenericType(int);
+  public c.ty.Type withGenericArgs(c.ty.Type[], c.ty.Type[]);
+  public c.ty.Type[] getSupertypes(c.TypeDef, c.MethodDef);
+  public c.ty.Type[] getSubtypes(c.TypeDef, c.MethodDef);
+  public d.ty.desc.TypeDesc refine();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public java.lang.String toString();
+}
+Compiled from "ParameterizedType.java"
+public class c.ty.ParameterizedType extends c.ty.Type {
+  public final common.RawType rawType;
+  public final c.ty.Type[] genericArgs;
+  public c.ty.ParameterizedType(common.RawType, c.ty.Type[]);
+  public c.ty.ParameterizedType(common.RawType);
+  public c.ty.ParameterizedType(java.lang.String, java.lang.String);
+  public c.ty.ParameterizedType withGenericArgs(c.ty.Type[], c.ty.Type[]);
+  public c.ty.Type[] getSupertypes(c.TypeDef, c.MethodDef);
+  public c.ty.Type[] getSubtypes(c.TypeDef, c.MethodDef);
+  public final c.ty.ParameterizedType[] getConcreteSupertypes(c.TypeDef, c.MethodDef);
+  public boolean isSubtype(c.ty.Type, c.TypeDef, c.MethodDef);
+  public c.ty.ParameterizedType asSupertype(common.RawType, c.CodeContext);
+  public d.ty.desc.ParameterizedTypeDesc refine();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public java.lang.String toString();
+  public d.ty.desc.TypeDesc refine();
+  public c.ty.Type withGenericArgs(c.ty.Type[], c.ty.Type[]);
+}
+Compiled from "ParameterizedType.java"
+class c.ty.ParameterizedType$1 {
+  static final int[] $SwitchMap$common$Variance;
+  static {};
+}
+Compiled from "Type.java"
+public abstract class c.ty.Type {
+  public static final c.ty.Type[] NONE;
+  public static final c.ty.Type coreTop;
+  public static final c.ty.Type coreUnit;
+  public static final c.ty.Type coreInt;
+  public static final c.ty.Type coreBool;
+  static final boolean $assertionsDisabled;
+  public c.ty.Type();
+  public abstract c.ty.Type withGenericArgs(c.ty.Type[], c.ty.Type[]);
+  protected abstract c.ty.Type[] getSupertypes(c.TypeDef, c.MethodDef);
+  protected abstract c.ty.Type[] getSubtypes(c.TypeDef, c.MethodDef);
+  public c.ty.ParameterizedType[] getConcreteSupertypes(c.TypeDef, c.MethodDef);
+  public boolean isSubtype(c.ty.Type, c.TypeDef, c.MethodDef);
+  public final boolean isSupertype(c.ty.Type, c.TypeDef, c.MethodDef);
+  public final boolean isSubtype(c.ty.Type, c.CodeContext);
+  public final boolean isSupertype(c.ty.Type, c.CodeContext);
+  public c.ty.ParameterizedType asSupertype(common.RawType, c.CodeContext);
+  public abstract d.ty.desc.TypeDesc refine();
+  public abstract boolean equals(java.lang.Object);
+  public abstract int hashCode();
+  public abstract java.lang.String toString();
+  static {};
+}
+Compiled from "TypeGenericType.java"
+public class c.ty.TypeGenericType extends c.ty.Type {
+  public final int index;
+  public c.ty.TypeGenericType(int);
+  public c.ty.Type withGenericArgs(c.ty.Type[], c.ty.Type[]);
+  public c.ty.Type[] getSupertypes(c.TypeDef, c.MethodDef);
+  public c.ty.Type[] getSubtypes(c.TypeDef, c.MethodDef);
+  public d.ty.desc.TypeDesc refine();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public java.lang.String toString();
+}
+Compiled from "FieldVisibility.java"
+public final class common.FieldVisibility extends java.lang.Enum<common.FieldVisibility> {
+  public static final common.FieldVisibility PUBLIC;
+  public static final common.FieldVisibility MODULE;
+  public static final common.FieldVisibility PRIVATE;
+  public static common.FieldVisibility[] values();
+  public static common.FieldVisibility valueOf(java.lang.String);
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "MethodVisibility.java"
+public final class common.MethodVisibility extends java.lang.Enum<common.MethodVisibility> {
+  public static final common.MethodVisibility PUBLIC;
+  public static final common.MethodVisibility MODULE;
+  public static final common.MethodVisibility PRIVATE;
+  public static common.MethodVisibility[] values();
+  public static common.MethodVisibility valueOf(java.lang.String);
+  public boolean lessAccessible(common.MethodVisibility);
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "NiftyException.java"
+public class common.NiftyException extends java.lang.RuntimeException {
+  public common.NiftyException(java.lang.String, java.lang.Object...);
+  public common.NiftyException(java.lang.Throwable, java.lang.String, java.lang.Object...);
+}
+Compiled from "RawType.java"
+public class common.RawType {
+  public static final common.RawType[] NONE;
+  public static final common.RawType coreTop;
+  public static final common.RawType coreBottom;
+  public static final common.RawType coreUnit;
+  public static final common.RawType coreInt;
+  public static final common.RawType coreLong;
+  public static final common.RawType coreByte;
+  public static final common.RawType coreChar;
+  public static final common.RawType coreBool;
+  public static final common.RawType coreDouble;
+  public static final common.RawType coreArray;
+  public static final common.RawType coreEnumerable;
+  public static final common.RawType coreCollection;
+  public static final common.RawType coreSequence;
+  public static final common.RawType coreSource;
+  public static final common.RawType coreMaybe;
+  public static final common.RawType coreString;
+  public static final common.RawType coreConsole;
+  public static final common.RawType coreRelation;
+  public final java.lang.String module;
+  public final java.lang.String name;
+  public common.RawType(java.lang.String, java.lang.String);
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "TypeVisibility.java"
+public final class common.TypeVisibility extends java.lang.Enum<common.TypeVisibility> {
+  public static final common.TypeVisibility PUBLIC;
+  public static final common.TypeVisibility MODULE;
+  public static common.TypeVisibility[] values();
+  public static common.TypeVisibility valueOf(java.lang.String);
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "VariableGenerator.java"
+public final class common.VariableGenerator {
+  public static java.lang.String randomId(java.lang.String);
+  public static java.lang.String randomId();
+  static {};
+}
+Compiled from "Variance.java"
+public final class common.Variance extends java.lang.Enum<common.Variance> {
+  public static final common.Variance COVARIANT;
+  public static final common.Variance NONVARIANT;
+  public static final common.Variance CONTRAVARIANT;
+  public static common.Variance[] NONE;
+  public static common.Variance[] values();
+  public static common.Variance valueOf(java.lang.String);
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "AbstractMethodDef.java"
+public class d.AbstractMethodDef extends d.MethodDef {
+  public d.AbstractMethodDef(d.RawMethod);
+  public void link();
+}
+Compiled from "BaseObject.java"
+public abstract class d.BaseObject {
+  public final d.ty.ConcreteType type;
+  public final d.BaseObject[] fields;
+  public d.BaseObject(d.ty.ConcreteType);
+  public d.ty.ConcreteType getGenericArg(d.TypeDef, int);
+  public boolean instanceOf(d.ty.ConcreteType);
+  public java.lang.String toString();
+}
+Compiled from "BytecodeMethodDef.java"
+public class d.BytecodeMethodDef extends d.ConcreteMethodDef {
+  public final java.lang.String[] stringTable;
+  public final d.BaseObject[] zeptoStringTable;
+  static final boolean $assertionsDisabled;
+  public d.BytecodeMethodDef(d.RawMethod, common.RawType[], d.ty.desc.TypeDesc[], d.RawMethod[], java.lang.String[], int, int[]);
+  public void link();
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "ConcreteMethodDef.java"
+public abstract class d.ConcreteMethodDef extends d.MethodDef {
+  public common.RawType[] rawTypeDescTable;
+  public final d.TypeDef[] rawTypeTable;
+  public d.ty.desc.TypeDesc[] fullTypeDescTable;
+  public final d.ty.nf.NonFinalType[] fullTypeTable;
+  public d.RawMethod[] methodDescTable;
+  public final d.MethodDef[] methodTable;
+  public d.ConcreteMethodDef(d.RawMethod, common.RawType[], d.ty.desc.TypeDesc[], d.RawMethod[]);
+  public void link();
+  public abstract void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+  public final void invoke(d.BaseObject[], d.ty.ConcreteType[]);
+  public final void invoke(d.ty.ConcreteType[]);
+}
+Compiled from "God.java"
+public final class d.God {
+  public static d.BaseObject objUnit;
+  public static d.BaseObject objLT;
+  public static d.BaseObject objGT;
+  public static d.BaseObject objEQ;
+  public static boolean initializationComplete;
+  static final boolean $assertionsDisabled;
+  public static boolean hasType(common.RawType);
+  public static d.TypeDef resolveType(common.RawType);
+  public static void newType(d.TypeDef);
+  public static d.MethodDef resolveMethod(d.RawMethod);
+  public static void newMethod(d.MethodDef);
+  public static void linkAll();
+  public static void runStaticInitializers();
+  static {};
+}
+Compiled from "MethodDef.java"
+public abstract class d.MethodDef {
+  public final d.RawMethod desc;
+  public d.MethodDef(d.RawMethod);
+  public abstract void link();
+  public java.lang.String toString();
+}
+Compiled from "NormalObject.java"
+public class d.NormalObject extends d.BaseObject {
+  public d.NormalObject(d.ty.ConcreteType);
+}
+Compiled from "Opcodes.java"
+public final class d.Opcodes {
+  public static final int POP;
+  public static final int DUP;
+  public static final int CONST_TRUE;
+  public static final int CONST_FALSE;
+  public static final int CONST_INT;
+  public static final int CONST_CHAR;
+  public static final int CONST_LONG;
+  public static final int CONST_DOUBLE;
+  public static final int CONST_STRING;
+  public static final int CREATE_SEQ;
+  public static final int GET_LOCAL;
+  public static final int PUT_LOCAL;
+  public static final int GET_STATIC_FIELD;
+  public static final int PUT_STATIC_FIELD;
+  public static final int GET_INSTANCE_FIELD;
+  public static final int PUT_INSTANCE_FIELD;
+  public static final int INVOKE_STATIC;
+  public static final int INVOKE_VIRTUAL;
+  public static final int NEW;
+  public static final int NEW_NO_GENERICS;
+  public static final int JUMP;
+  public static final int JUMP_COND;
+  public static final int RETURN;
+  public static final int RETURN_UNIT;
+  public static final int BOOL_NEG;
+  public static final int INT_NEG;
+  public static final int INT_ADD;
+  public static final int INT_SUB;
+  public static final int INT_MUL;
+  public static final int INT_DIV;
+  public static final int INT_MOD;
+  public static final int INT_IOR;
+  public static final int INT_XOR;
+  public static final int INT_AND;
+  public static final int INT_LSHIFT;
+  public static final int INT_RSHIFT_UNSIGNED;
+  public static final int INT_RSHIFT_SIGNED;
+  public static final int INT_COMPARETO;
+  public static final int INT_LT;
+  public static final int INT_LTE;
+  public static final int INT_GT;
+  public static final int INT_GTE;
+  static final boolean $assertionsDisabled;
+  public static java.lang.String repr(int[], common.RawType[], d.ty.desc.TypeDesc[], d.RawMethod[], java.lang.String[]);
+  static {};
+}
+Compiled from "RawMethod.java"
+public class d.RawMethod {
+  public static final d.RawMethod[] NONE;
+  public static final d.RawMethod coreEnumerable_enumerator;
+  public static final d.RawMethod coreSource_tryTake;
+  public static final d.RawMethod coreCollection_isEmpty;
+  public static final d.RawMethod coreMaybe_get;
+  public final boolean isStatic;
+  public final common.RawType owner;
+  public final java.lang.String name;
+  public final int numGenericParams;
+  public final d.ty.desc.TypeDesc[] paramTypes;
+  public d.RawMethod(boolean, common.RawType, java.lang.String, int, d.ty.desc.TypeDesc[]);
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "TypeDef.java"
+public class d.TypeDef {
+  public final common.RawType desc;
+  public common.Variance[] genericVariances;
+  public final d.BaseObject[] staticFields;
+  public final int numInstanceFields;
+  public d.ConcreteMethodDef[] staticMethods;
+  public d.MethodDef[] instanceMethods;
+  public final java.util.IdentityHashMap<java.lang.String, java.lang.Integer> virtualFieldTable;
+  public java.util.Map<d.RawMethod, d.RawMethod> virtualMethodDescTable;
+  public final java.util.Map<d.MethodDef, d.ConcreteMethodDef> virtualMethodTable;
+  public java.util.Map<common.RawType, d.ty.desc.TypeDesc[]> superGenericDescs;
+  public final java.util.Map<d.TypeDef, d.ty.sup.SuperType[]> superGenerics;
+  public int initializationStatus;
+  static final boolean $assertionsDisabled;
+  public d.TypeDef(common.RawType, common.Variance[], int, java.lang.String[], d.ConcreteMethodDef[], d.MethodDef[], java.util.Map<d.RawMethod, d.RawMethod>, java.util.Map<common.RawType, d.ty.desc.TypeDesc[]>);
+  public void link();
+  public void init();
+  public d.BaseObject rawInstance(d.ty.ConcreteType);
+  public d.BaseObject rawInstanceNoGenerics();
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "VMUtils.java"
+public final class d.VMUtils {
+  public static d.BaseObject makeString(java.lang.String);
+  public static java.lang.String extractString(d.BaseObject);
+}
+Compiled from "NativeArray.java"
+public class d.nat.NativeArray extends d.nat.NativeObject {
+  public static final d.nat.NativeTypeDef TYPE;
+  public d.BaseObject[] contents;
+  public d.nat.NativeArray(d.ty.ConcreteType, d.BaseObject[]);
+  public d.nat.NativeArray(d.ty.ConcreteType);
+  static {};
+}
+Compiled from "NativeArray.java"
+final class d.nat.NativeArray$1 extends d.nat.NativeMethodDef {
+  d.nat.NativeArray$1(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeArray.java"
+final class d.nat.NativeArray$2 extends d.nat.NativeMethodDef {
+  d.nat.NativeArray$2(d.RawMethod, common.RawType[], d.ty.desc.TypeDesc[], d.RawMethod[]);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeArray.java"
+final class d.nat.NativeArray$3 extends d.nat.NativeMethodDef {
+  d.nat.NativeArray$3(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeArray.java"
+final class d.nat.NativeArray$4 extends d.nat.NativeMethodDef {
+  d.nat.NativeArray$4(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeArray.java"
+final class d.nat.NativeArray$5 extends d.nat.NativeMethodDef {
+  d.nat.NativeArray$5(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeArray.java"
+final class d.nat.NativeArray$6 extends d.nat.NativeMethodDef {
+  d.nat.NativeArray$6(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeArray.java"
+final class d.nat.NativeArray$7 extends d.nat.NativeTypeDef {
+  d.nat.NativeArray$7(common.RawType, int, java.lang.String[], d.nat.NativeMethodDef[], d.nat.NativeMethodDef[]);
+  public d.BaseObject rawInstance(d.ty.ConcreteType);
+}
+Compiled from "NativeBool.java"
+public class d.nat.NativeBool extends d.nat.NativeObject {
+  public static final d.nat.NativeBool TRUE;
+  public static final d.nat.NativeBool FALSE;
+  public static final d.ty.ConcreteType CONCRETE_TYPE;
+  public static final d.nat.NativeTypeDef TYPE;
+  public final boolean value;
+  public d.nat.NativeBool(boolean);
+  public d.nat.NativeBool();
+  static {};
+}
+Compiled from "NativeBool.java"
+final class d.nat.NativeBool$1 extends d.nat.NativeMethodDef {
+  d.nat.NativeBool$1(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeBool.java"
+final class d.nat.NativeBool$2 extends d.nat.NativeMethodDef {
+  d.nat.NativeBool$2(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeBool.java"
+final class d.nat.NativeBool$3 extends d.nat.NativeMethodDef {
+  d.nat.NativeBool$3(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeBool.java"
+final class d.nat.NativeBool$4 extends d.nat.NativeMethodDef {
+  d.nat.NativeBool$4(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeBool.java"
+final class d.nat.NativeBool$5 extends d.nat.NativeMethodDef {
+  d.nat.NativeBool$5(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeBool.java"
+final class d.nat.NativeBool$6 extends d.nat.NativeMethodDef {
+  d.nat.NativeBool$6(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeBool.java"
+final class d.nat.NativeBool$7 extends d.nat.NativeMethodDef {
+  d.nat.NativeBool$7(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeBool.java"
+final class d.nat.NativeBool$8 extends d.nat.NativeTypeDef {
+  d.nat.NativeBool$8(common.RawType, int, java.lang.String[], d.nat.NativeMethodDef[], d.nat.NativeMethodDef[]);
+  public d.BaseObject rawInstance(d.ty.ConcreteType);
+}
+Compiled from "NativeByte.java"
+public class d.nat.NativeByte extends d.nat.NativeObject {
+  public static final d.nat.NativeTypeDef TYPE;
+  public static final d.ty.ConcreteType CONCRETE_TYPE;
+  public byte value;
+  public d.nat.NativeByte(byte);
+  public d.nat.NativeByte();
+  static {};
+}
+Compiled from "NativeByte.java"
+final class d.nat.NativeByte$1 extends d.nat.NativeMethodDef {
+  d.nat.NativeByte$1(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeByte.java"
+final class d.nat.NativeByte$10 extends d.nat.NativeMethodDef {
+  d.nat.NativeByte$10(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeByte.java"
+final class d.nat.NativeByte$11 extends d.nat.NativeMethodDef {
+  d.nat.NativeByte$11(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeByte.java"
+final class d.nat.NativeByte$12 extends d.nat.NativeMethodDef {
+  d.nat.NativeByte$12(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeByte.java"
+final class d.nat.NativeByte$13 extends d.nat.NativeMethodDef {
+  d.nat.NativeByte$13(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeByte.java"
+final class d.nat.NativeByte$14 extends d.nat.NativeMethodDef {
+  d.nat.NativeByte$14(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeByte.java"
+final class d.nat.NativeByte$15 extends d.nat.NativeMethodDef {
+  d.nat.NativeByte$15(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeByte.java"
+final class d.nat.NativeByte$16 extends d.nat.NativeMethodDef {
+  d.nat.NativeByte$16(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeByte.java"
+final class d.nat.NativeByte$17 extends d.nat.NativeMethodDef {
+  d.nat.NativeByte$17(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeByte.java"
+final class d.nat.NativeByte$18 extends d.nat.NativeMethodDef {
+  d.nat.NativeByte$18(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeByte.java"
+final class d.nat.NativeByte$19 extends d.nat.NativeTypeDef {
+  d.nat.NativeByte$19(common.RawType, int, java.lang.String[], d.nat.NativeMethodDef[], d.nat.NativeMethodDef[]);
+  public d.BaseObject rawInstance(d.ty.ConcreteType);
+}
+Compiled from "NativeByte.java"
+final class d.nat.NativeByte$2 extends d.nat.NativeMethodDef {
+  d.nat.NativeByte$2(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeByte.java"
+final class d.nat.NativeByte$3 extends d.nat.NativeMethodDef {
+  d.nat.NativeByte$3(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeByte.java"
+final class d.nat.NativeByte$4 extends d.nat.NativeMethodDef {
+  d.nat.NativeByte$4(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeByte.java"
+final class d.nat.NativeByte$5 extends d.nat.NativeMethodDef {
+  d.nat.NativeByte$5(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeByte.java"
+final class d.nat.NativeByte$6 extends d.nat.NativeMethodDef {
+  d.nat.NativeByte$6(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeByte.java"
+final class d.nat.NativeByte$7 extends d.nat.NativeMethodDef {
+  d.nat.NativeByte$7(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeByte.java"
+final class d.nat.NativeByte$8 extends d.nat.NativeMethodDef {
+  d.nat.NativeByte$8(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeByte.java"
+final class d.nat.NativeByte$9 extends d.nat.NativeMethodDef {
+  d.nat.NativeByte$9(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeChar.java"
+public class d.nat.NativeChar extends d.nat.NativeObject {
+  public static final d.nat.NativeTypeDef TYPE;
+  public static final d.ty.ConcreteType CONCRETE_TYPE;
+  public char value;
+  public d.nat.NativeChar(char);
+  public d.nat.NativeChar();
+  static {};
+}
+Compiled from "NativeChar.java"
+final class d.nat.NativeChar$1 extends d.nat.NativeMethodDef {
+  d.nat.NativeChar$1(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeChar.java"
+final class d.nat.NativeChar$10 extends d.nat.NativeMethodDef {
+  d.nat.NativeChar$10(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeChar.java"
+final class d.nat.NativeChar$11 extends d.nat.NativeTypeDef {
+  d.nat.NativeChar$11(common.RawType, int, java.lang.String[], d.nat.NativeMethodDef[], d.nat.NativeMethodDef[]);
+  public d.BaseObject rawInstance(d.ty.ConcreteType);
+}
+Compiled from "NativeChar.java"
+final class d.nat.NativeChar$2 extends d.nat.NativeMethodDef {
+  d.nat.NativeChar$2(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeChar.java"
+final class d.nat.NativeChar$3 extends d.nat.NativeMethodDef {
+  d.nat.NativeChar$3(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeChar.java"
+final class d.nat.NativeChar$4 extends d.nat.NativeMethodDef {
+  d.nat.NativeChar$4(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeChar.java"
+final class d.nat.NativeChar$5 extends d.nat.NativeMethodDef {
+  d.nat.NativeChar$5(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeChar.java"
+final class d.nat.NativeChar$6 extends d.nat.NativeMethodDef {
+  d.nat.NativeChar$6(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeChar.java"
+final class d.nat.NativeChar$7 extends d.nat.NativeMethodDef {
+  d.nat.NativeChar$7(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeChar.java"
+final class d.nat.NativeChar$8 extends d.nat.NativeMethodDef {
+  d.nat.NativeChar$8(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeChar.java"
+final class d.nat.NativeChar$9 extends d.nat.NativeMethodDef {
+  d.nat.NativeChar$9(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeConsole.java"
+public class d.nat.NativeConsole extends d.nat.NativeObject {
+  public static final d.nat.NativeTypeDef TYPE;
+  static final boolean $assertionsDisabled;
+  static {};
+}
+Compiled from "NativeConsole.java"
+final class d.nat.NativeConsole$1 extends d.nat.NativeMethodDef {
+  d.nat.NativeConsole$1(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeConsole.java"
+final class d.nat.NativeConsole$2 extends d.nat.NativeMethodDef {
+  d.nat.NativeConsole$2(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeConsole.java"
+final class d.nat.NativeConsole$3 extends d.nat.NativeTypeDef {
+  static final boolean $assertionsDisabled;
+  d.nat.NativeConsole$3(common.RawType, int, java.lang.String[], d.nat.NativeMethodDef[], d.nat.NativeMethodDef[]);
+  public d.BaseObject rawInstance(d.ty.ConcreteType);
+  static {};
+}
+Compiled from "NativeDouble.java"
+public class d.nat.NativeDouble extends d.nat.NativeObject {
+  public static final d.nat.NativeTypeDef TYPE;
+  public static final d.ty.ConcreteType CONCRETE_TYPE;
+  public double value;
+  public d.nat.NativeDouble(double);
+  public d.nat.NativeDouble();
+  static {};
+}
+Compiled from "NativeDouble.java"
+final class d.nat.NativeDouble$1 extends d.nat.NativeMethodDef {
+  d.nat.NativeDouble$1(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeDouble.java"
+final class d.nat.NativeDouble$10 extends d.nat.NativeMethodDef {
+  d.nat.NativeDouble$10(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeDouble.java"
+final class d.nat.NativeDouble$11 extends d.nat.NativeMethodDef {
+  d.nat.NativeDouble$11(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeDouble.java"
+final class d.nat.NativeDouble$12 extends d.nat.NativeMethodDef {
+  d.nat.NativeDouble$12(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeDouble.java"
+final class d.nat.NativeDouble$13 extends d.nat.NativeMethodDef {
+  d.nat.NativeDouble$13(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeDouble.java"
+final class d.nat.NativeDouble$14 extends d.nat.NativeMethodDef {
+  d.nat.NativeDouble$14(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeDouble.java"
+final class d.nat.NativeDouble$15 extends d.nat.NativeMethodDef {
+  d.nat.NativeDouble$15(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeDouble.java"
+final class d.nat.NativeDouble$16 extends d.nat.NativeMethodDef {
+  d.nat.NativeDouble$16(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeDouble.java"
+final class d.nat.NativeDouble$17 extends d.nat.NativeMethodDef {
+  d.nat.NativeDouble$17(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeDouble.java"
+final class d.nat.NativeDouble$18 extends d.nat.NativeMethodDef {
+  d.nat.NativeDouble$18(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeDouble.java"
+final class d.nat.NativeDouble$19 extends d.nat.NativeMethodDef {
+  d.nat.NativeDouble$19(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeDouble.java"
+final class d.nat.NativeDouble$2 extends d.nat.NativeMethodDef {
+  d.nat.NativeDouble$2(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeDouble.java"
+final class d.nat.NativeDouble$20 extends d.nat.NativeTypeDef {
+  d.nat.NativeDouble$20(common.RawType, int, java.lang.String[], d.nat.NativeMethodDef[], d.nat.NativeMethodDef[]);
+  public d.BaseObject rawInstance(d.ty.ConcreteType);
+}
+Compiled from "NativeDouble.java"
+final class d.nat.NativeDouble$3 extends d.nat.NativeMethodDef {
+  d.nat.NativeDouble$3(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeDouble.java"
+final class d.nat.NativeDouble$4 extends d.nat.NativeMethodDef {
+  d.nat.NativeDouble$4(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeDouble.java"
+final class d.nat.NativeDouble$5 extends d.nat.NativeMethodDef {
+  d.nat.NativeDouble$5(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeDouble.java"
+final class d.nat.NativeDouble$6 extends d.nat.NativeMethodDef {
+  d.nat.NativeDouble$6(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeDouble.java"
+final class d.nat.NativeDouble$7 extends d.nat.NativeMethodDef {
+  d.nat.NativeDouble$7(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeDouble.java"
+final class d.nat.NativeDouble$8 extends d.nat.NativeMethodDef {
+  d.nat.NativeDouble$8(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeDouble.java"
+final class d.nat.NativeDouble$9 extends d.nat.NativeMethodDef {
+  d.nat.NativeDouble$9(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeInt.java"
+public class d.nat.NativeInt extends d.nat.NativeObject {
+  public static final d.nat.NativeTypeDef TYPE;
+  public static final d.ty.ConcreteType CONCRETE_TYPE;
+  public int value;
+  public d.nat.NativeInt(int);
+  public d.nat.NativeInt();
+  static {};
+}
+Compiled from "NativeInt.java"
+final class d.nat.NativeInt$1 extends d.nat.NativeMethodDef {
+  d.nat.NativeInt$1(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeInt.java"
+final class d.nat.NativeInt$10 extends d.nat.NativeMethodDef {
+  d.nat.NativeInt$10(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeInt.java"
+final class d.nat.NativeInt$11 extends d.nat.NativeMethodDef {
+  d.nat.NativeInt$11(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeInt.java"
+final class d.nat.NativeInt$12 extends d.nat.NativeMethodDef {
+  d.nat.NativeInt$12(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeInt.java"
+final class d.nat.NativeInt$13 extends d.nat.NativeMethodDef {
+  d.nat.NativeInt$13(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeInt.java"
+final class d.nat.NativeInt$14 extends d.nat.NativeMethodDef {
+  d.nat.NativeInt$14(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeInt.java"
+final class d.nat.NativeInt$15 extends d.nat.NativeMethodDef {
+  d.nat.NativeInt$15(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeInt.java"
+final class d.nat.NativeInt$16 extends d.nat.NativeMethodDef {
+  d.nat.NativeInt$16(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeInt.java"
+final class d.nat.NativeInt$17 extends d.nat.NativeMethodDef {
+  d.nat.NativeInt$17(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeInt.java"
+final class d.nat.NativeInt$18 extends d.nat.NativeMethodDef {
+  d.nat.NativeInt$18(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeInt.java"
+final class d.nat.NativeInt$19 extends d.nat.NativeMethodDef {
+  d.nat.NativeInt$19(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeInt.java"
+final class d.nat.NativeInt$2 extends d.nat.NativeMethodDef {
+  d.nat.NativeInt$2(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeInt.java"
+final class d.nat.NativeInt$20 extends d.nat.NativeMethodDef {
+  d.nat.NativeInt$20(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeInt.java"
+final class d.nat.NativeInt$21 extends d.nat.NativeMethodDef {
+  d.nat.NativeInt$21(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeInt.java"
+final class d.nat.NativeInt$22 extends d.nat.NativeMethodDef {
+  d.nat.NativeInt$22(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeInt.java"
+final class d.nat.NativeInt$23 extends d.nat.NativeMethodDef {
+  d.nat.NativeInt$23(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeInt.java"
+final class d.nat.NativeInt$24 extends d.nat.NativeMethodDef {
+  d.nat.NativeInt$24(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeInt.java"
+final class d.nat.NativeInt$25 extends d.nat.NativeTypeDef {
+  d.nat.NativeInt$25(common.RawType, int, java.lang.String[], d.nat.NativeMethodDef[], d.nat.NativeMethodDef[]);
+  public d.BaseObject rawInstance(d.ty.ConcreteType);
+}
+Compiled from "NativeInt.java"
+final class d.nat.NativeInt$3 extends d.nat.NativeMethodDef {
+  d.nat.NativeInt$3(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeInt.java"
+final class d.nat.NativeInt$4 extends d.nat.NativeMethodDef {
+  d.nat.NativeInt$4(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeInt.java"
+final class d.nat.NativeInt$5 extends d.nat.NativeMethodDef {
+  d.nat.NativeInt$5(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeInt.java"
+final class d.nat.NativeInt$6 extends d.nat.NativeMethodDef {
+  d.nat.NativeInt$6(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeInt.java"
+final class d.nat.NativeInt$7 extends d.nat.NativeMethodDef {
+  d.nat.NativeInt$7(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeInt.java"
+final class d.nat.NativeInt$8 extends d.nat.NativeMethodDef {
+  d.nat.NativeInt$8(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeInt.java"
+final class d.nat.NativeInt$9 extends d.nat.NativeMethodDef {
+  d.nat.NativeInt$9(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeLong.java"
+public class d.nat.NativeLong extends d.nat.NativeObject {
+  public static final d.nat.NativeTypeDef TYPE;
+  public static final d.ty.ConcreteType CONCRETE_TYPE;
+  public long value;
+  public d.nat.NativeLong(long);
+  public d.nat.NativeLong();
+  static {};
+}
+Compiled from "NativeLong.java"
+final class d.nat.NativeLong$1 extends d.nat.NativeMethodDef {
+  d.nat.NativeLong$1(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeLong.java"
+final class d.nat.NativeLong$10 extends d.nat.NativeMethodDef {
+  d.nat.NativeLong$10(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeLong.java"
+final class d.nat.NativeLong$11 extends d.nat.NativeMethodDef {
+  d.nat.NativeLong$11(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeLong.java"
+final class d.nat.NativeLong$12 extends d.nat.NativeMethodDef {
+  d.nat.NativeLong$12(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeLong.java"
+final class d.nat.NativeLong$13 extends d.nat.NativeMethodDef {
+  d.nat.NativeLong$13(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeLong.java"
+final class d.nat.NativeLong$14 extends d.nat.NativeMethodDef {
+  d.nat.NativeLong$14(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeLong.java"
+final class d.nat.NativeLong$15 extends d.nat.NativeMethodDef {
+  d.nat.NativeLong$15(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeLong.java"
+final class d.nat.NativeLong$16 extends d.nat.NativeMethodDef {
+  d.nat.NativeLong$16(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeLong.java"
+final class d.nat.NativeLong$17 extends d.nat.NativeMethodDef {
+  d.nat.NativeLong$17(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeLong.java"
+final class d.nat.NativeLong$18 extends d.nat.NativeMethodDef {
+  d.nat.NativeLong$18(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeLong.java"
+final class d.nat.NativeLong$19 extends d.nat.NativeMethodDef {
+  d.nat.NativeLong$19(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeLong.java"
+final class d.nat.NativeLong$2 extends d.nat.NativeMethodDef {
+  d.nat.NativeLong$2(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeLong.java"
+final class d.nat.NativeLong$20 extends d.nat.NativeMethodDef {
+  d.nat.NativeLong$20(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeLong.java"
+final class d.nat.NativeLong$21 extends d.nat.NativeMethodDef {
+  d.nat.NativeLong$21(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeLong.java"
+final class d.nat.NativeLong$22 extends d.nat.NativeMethodDef {
+  d.nat.NativeLong$22(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeLong.java"
+final class d.nat.NativeLong$23 extends d.nat.NativeMethodDef {
+  d.nat.NativeLong$23(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeLong.java"
+final class d.nat.NativeLong$24 extends d.nat.NativeMethodDef {
+  d.nat.NativeLong$24(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeLong.java"
+final class d.nat.NativeLong$25 extends d.nat.NativeTypeDef {
+  d.nat.NativeLong$25(common.RawType, int, java.lang.String[], d.nat.NativeMethodDef[], d.nat.NativeMethodDef[]);
+  public d.BaseObject rawInstance(d.ty.ConcreteType);
+}
+Compiled from "NativeLong.java"
+final class d.nat.NativeLong$3 extends d.nat.NativeMethodDef {
+  d.nat.NativeLong$3(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeLong.java"
+final class d.nat.NativeLong$4 extends d.nat.NativeMethodDef {
+  d.nat.NativeLong$4(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeLong.java"
+final class d.nat.NativeLong$5 extends d.nat.NativeMethodDef {
+  d.nat.NativeLong$5(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeLong.java"
+final class d.nat.NativeLong$6 extends d.nat.NativeMethodDef {
+  d.nat.NativeLong$6(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeLong.java"
+final class d.nat.NativeLong$7 extends d.nat.NativeMethodDef {
+  d.nat.NativeLong$7(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeLong.java"
+final class d.nat.NativeLong$8 extends d.nat.NativeMethodDef {
+  d.nat.NativeLong$8(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeLong.java"
+final class d.nat.NativeLong$9 extends d.nat.NativeMethodDef {
+  d.nat.NativeLong$9(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeMethodDef.java"
+public abstract class d.nat.NativeMethodDef extends d.ConcreteMethodDef {
+  public d.nat.NativeMethodDef(d.RawMethod, common.RawType[], d.ty.desc.TypeDesc[], d.RawMethod[]);
+  public d.nat.NativeMethodDef(d.RawMethod);
+}
+Compiled from "NativeObject.java"
+public abstract class d.nat.NativeObject extends d.BaseObject {
+  public static final d.nat.NativeTypeDef TOP_TYPE;
+  protected d.nat.NativeObject(d.ty.ConcreteType);
+  static {};
+}
+Compiled from "NativeObject.java"
+final class d.nat.NativeObject$1 extends d.nat.NativeMethodDef {
+  d.nat.NativeObject$1(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeObject.java"
+final class d.nat.NativeObject$2 extends d.nat.NativeMethodDef {
+  d.nat.NativeObject$2(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeObject.java"
+final class d.nat.NativeObject$3 extends d.nat.NativeMethodDef {
+  d.nat.NativeObject$3(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeObject.java"
+final class d.nat.NativeObject$4 extends d.nat.NativeMethodDef {
+  d.nat.NativeObject$4(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeObject.java"
+final class d.nat.NativeObject$5 extends d.nat.NativeMethodDef {
+  d.nat.NativeObject$5(d.RawMethod);
+  public void invoke(d.BaseObject[], int, d.ty.ConcreteType[]);
+}
+Compiled from "NativeObject.java"
+final class d.nat.NativeObject$6 extends d.nat.NativeTypeDef {
+  d.nat.NativeObject$6(common.RawType, int, java.lang.String[], d.nat.NativeMethodDef[], d.nat.NativeMethodDef[]);
+  public d.BaseObject rawInstance(d.ty.ConcreteType);
+}
+Compiled from "NativeTypeDef.java"
+public abstract class d.nat.NativeTypeDef extends d.TypeDef {
+  static final boolean $assertionsDisabled;
+  public d.nat.NativeTypeDef(common.RawType, int, java.lang.String[], d.nat.NativeMethodDef[], d.nat.NativeMethodDef[]);
+  public abstract d.BaseObject rawInstance(d.ty.ConcreteType);
+  static {};
+}
+Compiled from "ConcreteType.java"
+public class d.ty.ConcreteType {
+  public static final d.ty.ConcreteType[] NONE;
+  public final d.TypeDef rawType;
+  public final d.ty.ConcreteType[] genericArgs;
+  static final boolean $assertionsDisabled;
+  public d.ty.ConcreteType(d.TypeDef, d.ty.ConcreteType[]);
+  public d.ty.ConcreteType(d.TypeDef);
+  public boolean isSubtype(d.ty.ConcreteType);
+  public d.BaseObject rawInstance();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "ConcreteType.java"
+class d.ty.ConcreteType$1 {
+  static final int[] $SwitchMap$common$Variance;
+  static {};
+}
+Compiled from "MethodGenericTypeDesc.java"
+public class d.ty.desc.MethodGenericTypeDesc extends d.ty.desc.TypeDesc {
+  public final int index;
+  public d.ty.desc.MethodGenericTypeDesc(int);
+  public d.ty.nf.NonFinalType toNonFinal(d.TypeDef);
+  public d.ty.sup.SuperType toSuper();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public java.lang.String toString();
+}
+Compiled from "ParameterizedTypeDesc.java"
+public class d.ty.desc.ParameterizedTypeDesc extends d.ty.desc.TypeDesc {
+  public final common.RawType rawType;
+  public final d.ty.desc.TypeDesc[] genericArgs;
+  static final boolean $assertionsDisabled;
+  public d.ty.desc.ParameterizedTypeDesc(common.RawType, d.ty.desc.TypeDesc[]);
+  public d.ty.desc.ParameterizedTypeDesc(common.RawType);
+  public d.ty.nf.NonFinalType toNonFinal(d.TypeDef);
+  public d.ty.sup.SuperType toSuper();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "TypeDesc.java"
+public abstract class d.ty.desc.TypeDesc {
+  public static final d.ty.desc.TypeDesc[] NONE;
+  public static final d.ty.desc.TypeDesc coreTop;
+  public static final d.ty.desc.TypeDesc coreBottom;
+  public static final d.ty.desc.TypeDesc coreInt;
+  public static final d.ty.desc.TypeDesc coreLong;
+  public static final d.ty.desc.TypeDesc coreByte;
+  public static final d.ty.desc.TypeDesc coreDouble;
+  public static final d.ty.desc.TypeDesc coreChar;
+  public static final d.ty.desc.TypeDesc coreBool;
+  public static final d.ty.desc.TypeDesc coreString;
+  public static final d.ty.desc.TypeDesc[] coreTopOnly;
+  public static final d.ty.desc.TypeDesc[] coreBottomOnly;
+  public static final d.ty.desc.TypeDesc[] coreIntOnly;
+  public static final d.ty.desc.TypeDesc[] coreLongOnly;
+  public static final d.ty.desc.TypeDesc[] coreByteOnly;
+  public static final d.ty.desc.TypeDesc[] coreDoubleOnly;
+  public static final d.ty.desc.TypeDesc[] coreCharOnly;
+  public static final d.ty.desc.TypeDesc[] coreBoolOnly;
+  public static final d.ty.desc.TypeDesc[] coreStringOnly;
+  public d.ty.desc.TypeDesc();
+  public abstract d.ty.nf.NonFinalType toNonFinal(d.TypeDef);
+  public abstract d.ty.sup.SuperType toSuper();
+  public abstract boolean equals(java.lang.Object);
+  public abstract int hashCode();
+  public abstract java.lang.String toString();
+  static {};
+}
+Compiled from "TypeGenericTypeDesc.java"
+public class d.ty.desc.TypeGenericTypeDesc extends d.ty.desc.TypeDesc {
+  public final int index;
+  public d.ty.desc.TypeGenericTypeDesc(int);
+  public d.ty.nf.NonFinalType toNonFinal(d.TypeDef);
+  public d.ty.sup.SuperType toSuper();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public java.lang.String toString();
+}
+Compiled from "MethodGenericNonFinalType.java"
+public class d.ty.nf.MethodGenericNonFinalType extends d.ty.nf.NonFinalType {
+  public d.ty.nf.MethodGenericNonFinalType(int);
+  public d.ty.ConcreteType toConcrete(d.BaseObject, d.ty.ConcreteType[]);
+  public java.lang.String toString();
+}
+Compiled from "NonFinalType.java"
+public abstract class d.ty.nf.NonFinalType {
+  public d.ty.nf.NonFinalType();
+  public abstract d.ty.ConcreteType toConcrete(d.BaseObject, d.ty.ConcreteType[]);
+  public abstract java.lang.String toString();
+}
+Compiled from "ParameterizedNonFinalType.java"
+public class d.ty.nf.ParameterizedNonFinalType extends d.ty.nf.NonFinalType {
+  public d.ty.nf.ParameterizedNonFinalType(d.TypeDef, d.ty.nf.NonFinalType[]);
+  public d.ty.ConcreteType toConcrete(d.BaseObject, d.ty.ConcreteType[]);
+  public java.lang.String toString();
+}
+Compiled from "TypeGenericNonFinalType.java"
+public class d.ty.nf.TypeGenericNonFinalType extends d.ty.nf.NonFinalType {
+  public d.ty.nf.TypeGenericNonFinalType(d.TypeDef, int);
+  public d.ty.ConcreteType toConcrete(d.BaseObject, d.ty.ConcreteType[]);
+  public java.lang.String toString();
+}
+Compiled from "ParameterizedSuperType.java"
+public class d.ty.sup.ParameterizedSuperType extends d.ty.sup.SuperType {
+  public d.ty.sup.ParameterizedSuperType(d.TypeDef, d.ty.sup.SuperType[]);
+  public d.ty.ConcreteType toConcrete(d.ty.ConcreteType[]);
+  public java.lang.String toString();
+}
+Compiled from "SuperType.java"
+public abstract class d.ty.sup.SuperType {
+  public d.ty.sup.SuperType();
+  public abstract d.ty.ConcreteType toConcrete(d.ty.ConcreteType[]);
+  public abstract java.lang.String toString();
+}
+Compiled from "TypeGenericSuperType.java"
+public class d.ty.sup.TypeGenericSuperType extends d.ty.sup.SuperType {
+  public d.ty.sup.TypeGenericSuperType(int);
+  public d.ty.ConcreteType toConcrete(d.ty.ConcreteType[]);
+  public java.lang.String toString();
+}
+Compiled from "FieldDefParser.java"
+public class parse.FieldDefParser extends parse.Parser<a.MemberDef> {
+  public static final parse.Parser<a.MemberDef> singleton;
+  public parse.Success<a.MemberDef> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "MemberDefParser.java"
+public class parse.MemberDefParser extends parse.Parser<a.MemberDef> {
+  public static final parse.Parser<a.MemberDef> singleton;
+  public parse.Success<a.MemberDef> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "MemoParser.java"
+public class parse.MemoParser<T> extends parse.Parser<T> {
+  public parse.MemoParser(parse.Parser<T>);
+  public parse.Success<T> parse(java.lang.String, int);
+  public parse.Parser<T> memo();
+}
+Compiled from "MethodDefParser.java"
+public class parse.MethodDefParser extends parse.Parser<a.MemberDef> {
+  public static final parse.Parser<a.MemberDef> singleton;
+  public parse.Success<a.MemberDef> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "Parser.java"
+public abstract class parse.Parser<T> {
+  public parse.Parser();
+  public abstract parse.Success<T> parse(java.lang.String, int);
+  public parse.Parser<T> memo();
+  protected int optWS(java.lang.String, int);
+}
+Compiled from "SourceFileParser.java"
+public class parse.SourceFileParser extends parse.Parser<a.SourceFile> {
+  public static final parse.Parser<a.SourceFile> singleton;
+  public parse.Success<a.SourceFile> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "Success.java"
+public class parse.Success<T> {
+  public final T value;
+  public final int rem;
+  public parse.Success(T, int);
+  public java.lang.String toString();
+}
+Compiled from "TypeDefParser.java"
+public class parse.TypeDefParser extends parse.Parser<a.TypeDef> {
+  public static final parse.Parser<a.TypeDef> singleton;
+  public parse.Success<a.TypeDef> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "AtomParser.java"
+public class parse.exp.AtomParser extends parse.Parser<a.exp.Expression> {
+  public static final parse.Parser<a.exp.Expression> singleton;
+  public parse.Success<a.exp.Expression> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "ChainParser.java"
+public class parse.exp.ChainParser extends parse.Parser<a.exp.Expression> {
+  public static final parse.Parser<a.exp.Expression> singleton;
+  public parse.Success<a.exp.Expression> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "ExpressionParser.java"
+public class parse.exp.ExpressionParser extends parse.Parser<a.exp.Expression> {
+  public static final parse.Parser<a.exp.Expression> singleton;
+  public parse.Success<a.exp.Expression> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "InfixExpressionParser.java"
+public class parse.exp.InfixExpressionParser extends parse.Parser<a.exp.Expression> {
+  public static final parse.Parser<a.exp.Expression> exponentiationParser;
+  public static final parse.Parser<a.exp.Expression> mulDivModParser;
+  public static final parse.Parser<a.exp.Expression> plusMinusParser;
+  public static final parse.Parser<a.exp.Expression> appendParser;
+  public static final parse.Parser<a.exp.Expression> prependParser;
+  public static final parse.Parser<a.exp.Expression> shiftParser;
+  public static final parse.Parser<a.exp.Expression> relationParser;
+  public static final parse.Parser<a.exp.Expression> equalityParser;
+  public static final parse.Parser<a.exp.Expression> andParser;
+  public static final parse.Parser<a.exp.Expression> xorParser;
+  public static final parse.Parser<a.exp.Expression> iorParser;
+  public static final parse.Parser<a.exp.Expression> rangeParser;
+  public static final parse.Parser<a.exp.Expression> assignmentParser;
+  static final boolean $assertionsDisabled;
+  public parse.Success<a.exp.Expression> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "InstantiationParser.java"
+public class parse.exp.InstantiationParser extends parse.Parser<a.exp.Expression> {
+  public static final parse.exp.InstantiationParser singleton;
+  public parse.Success<a.exp.Expression> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "ParentheticalExpressionParser.java"
+public class parse.exp.ParentheticalExpressionParser extends parse.Parser<a.exp.Expression> {
+  public static final parse.Parser<a.exp.Expression> singleton;
+  public parse.Success<a.exp.Expression> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "PrefixExpressionParser.java"
+public class parse.exp.PrefixExpressionParser extends parse.Parser<a.exp.Expression> {
+  public static final parse.Parser<a.exp.Expression> singleton;
+  public parse.Success<a.exp.Expression> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "VarParser.java"
+public class parse.exp.VarParser extends parse.Parser<a.exp.Expression> {
+  public static final parse.Parser<a.exp.Expression> singleton;
+  public parse.Success<a.exp.Expression> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "LiteralBoolParser.java"
+public class parse.exp.lit.LiteralBoolParser extends parse.Parser<a.exp.Expression> {
+  public static final parse.Parser<a.exp.Expression> singleton;
+  public parse.Success<a.exp.Expression> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "LiteralCharParser.java"
+public class parse.exp.lit.LiteralCharParser extends parse.Parser<a.exp.Expression> {
+  public static final parse.Parser<a.exp.Expression> singleton;
+  public parse.Success<a.exp.Expression> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "LiteralDoubleParser.java"
+public class parse.exp.lit.LiteralDoubleParser extends parse.Parser<a.exp.Expression> {
+  public static final parse.Parser<a.exp.Expression> singleton;
+  public parse.Success<a.exp.Expression> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "LiteralIntParser.java"
+public class parse.exp.lit.LiteralIntParser extends parse.Parser<a.exp.Expression> {
+  public static final parse.Parser<a.exp.Expression> singleton;
+  public parse.Success<a.exp.Expression> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "LiteralSequenceParser.java"
+public class parse.exp.lit.LiteralSequenceParser extends parse.Parser<a.exp.Expression> {
+  public static final parse.Parser<a.exp.Expression> singleton;
+  public parse.Success<a.exp.Expression> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "LiteralStringParser.java"
+public class parse.exp.lit.LiteralStringParser extends parse.Parser<a.exp.Expression> {
+  public static final parse.exp.lit.LiteralStringParser singleton;
+  public parse.Success<a.exp.Expression> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "ArgumentListParser.java"
+public class parse.misc.ArgumentListParser extends parse.Parser<a.exp.Expression[]> {
+  public static final parse.Parser<a.exp.Expression[]> singleton;
+  public parse.Success<a.exp.Expression[]> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "GenericArgumentListParser.java"
+public class parse.misc.GenericArgumentListParser extends parse.Parser<a.Type[]> {
+  public static final parse.Parser<a.Type[]> singleton;
+  public parse.misc.GenericArgumentListParser();
+  public parse.Success<a.Type[]> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "GenericConstraintListParser.java"
+public class parse.misc.GenericConstraintListParser extends parse.Parser<a.gen.GenericConstraint[]> {
+  public static final parse.Parser<a.gen.GenericConstraint[]> singleton;
+  public parse.Success<a.gen.GenericConstraint[]> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "GenericConstraintParser.java"
+public class parse.misc.GenericConstraintParser extends parse.Parser<a.gen.GenericConstraint> {
+  public static final parse.Parser<a.gen.GenericConstraint> singleton;
+  public parse.Success<a.gen.GenericConstraint> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "GenericsAndArgumentsParser.java"
+public class parse.misc.GenericsAndArgumentsParser extends parse.Parser<parse.misc.GenericsAndArgumentsParser$GenericsAndArgs> {
+  public static final parse.Parser<parse.misc.GenericsAndArgumentsParser$GenericsAndArgs> singleton;
+  public parse.misc.GenericsAndArgumentsParser();
+  public parse.Success<parse.misc.GenericsAndArgumentsParser$GenericsAndArgs> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "GenericsAndArgumentsParser.java"
+public class parse.misc.GenericsAndArgumentsParser$GenericsAndArgs {
+  public final a.Type[] genericArgs;
+  public final a.exp.Expression[] arguments;
+  parse.misc.GenericsAndArgumentsParser$GenericsAndArgs(a.Type[], a.exp.Expression[]);
+}
+Compiled from "IdentifierOrOpParser.java"
+public class parse.misc.IdentifierOrOpParser extends parse.Parser<java.lang.String> {
+  public static final parse.Parser<java.lang.String> singleton;
+  public parse.Success<java.lang.String> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "IdentifierParser.java"
+public class parse.misc.IdentifierParser extends parse.Parser<java.lang.String> {
+  public static final parse.Parser<java.lang.String> singleton;
+  public parse.Success<java.lang.String> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "ImportParser.java"
+public class parse.misc.ImportParser extends parse.Parser<a.Import> {
+  public static final parse.Parser<a.Import> singleton;
+  public parse.Success<a.Import> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "OperatorParser.java"
+public class parse.misc.OperatorParser extends parse.Parser<java.lang.String> {
+  public static final parse.Parser<java.lang.String> singleton;
+  public static final java.lang.String[] operators;
+  public parse.Success<java.lang.String> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "TypeGenericParamParser.java"
+public class parse.misc.TypeGenericParamParser extends parse.Parser<a.gen.TypeGenericParam> {
+  public static final parse.Parser<a.gen.TypeGenericParam> singleton;
+  public parse.Success<a.gen.TypeGenericParam> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "TypeListParser.java"
+public class parse.misc.TypeListParser extends parse.Parser<a.Type[]> {
+  public static final parse.Parser<a.Type[]> singleton;
+  public parse.Success<a.Type[]> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "TypeParser.java"
+public class parse.misc.TypeParser extends parse.Parser<a.Type> {
+  public static final parse.misc.TypeParser singleton;
+  public parse.Success<a.Type> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "BlockParser.java"
+public class parse.stm.BlockParser extends parse.Parser<a.stm.Block> {
+  public static final parse.Parser<a.stm.Block> singleton;
+  public parse.Success<a.stm.Block> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "EvaluationParser.java"
+public class parse.stm.EvaluationParser extends parse.Parser<a.stm.Statement> {
+  public static final parse.Parser<a.stm.Statement> singleton;
+  public parse.Success<a.stm.Statement> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "ForEachParser.java"
+public class parse.stm.ForEachParser extends parse.Parser<a.stm.Statement> {
+  public static final parse.Parser<a.stm.Statement> singleton;
+  public parse.Success<a.stm.Statement> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "ForParser.java"
+public class parse.stm.ForParser extends parse.Parser<a.stm.Statement> {
+  public static final parse.Parser<a.stm.Statement> singleton;
+  public parse.Success<a.stm.Statement> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "ForeverParser.java"
+public class parse.stm.ForeverParser extends parse.Parser<a.stm.Statement> {
+  public static final parse.Parser<a.stm.Statement> singleton;
+  public parse.Success<a.stm.Statement> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "IfParser.java"
+public class parse.stm.IfParser extends parse.Parser<a.stm.Statement> {
+  public static final parse.Parser<a.stm.Statement> singleton;
+  public parse.Success<a.stm.Statement> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "LocalDefParser.java"
+public class parse.stm.LocalDefParser extends parse.Parser<a.stm.Statement> {
+  public static final parse.Parser<a.stm.Statement> singleton;
+  public parse.Success<a.stm.Statement> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "PassParser.java"
+public class parse.stm.PassParser extends parse.Parser<a.stm.Statement> {
+  public static final parse.Parser<a.stm.Statement> singleton;
+  public parse.Success<a.stm.Statement> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "RepeatParser.java"
+public class parse.stm.RepeatParser extends parse.Parser<a.stm.Statement> {
+  public static final parse.Parser<a.stm.Statement> singleton;
+  public parse.Success<a.stm.Statement> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "ReturnParser.java"
+public class parse.stm.ReturnParser extends parse.Parser<a.stm.Statement> {
+  public static final parse.Parser<a.stm.Statement> singleton;
+  public parse.Success<a.stm.Statement> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "StatementParser.java"
+public class parse.stm.StatementParser extends parse.Parser<a.stm.Statement> {
+  public static final parse.Parser<a.stm.Statement> singleton;
+  public parse.Success<a.stm.Statement> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "SwitchParser.java"
+public class parse.stm.SwitchParser extends parse.Parser<a.stm.Statement> {
+  public static final parse.Parser<a.stm.Statement> singleton;
+  public parse.Success<a.stm.Statement> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "SwitchParser.java"
+class parse.stm.SwitchParser$OtherPatternParser extends parse.Parser<a.stm.Switch$Pattern> {
+  static final parse.stm.SwitchParser$OtherPatternParser sing;
+  public parse.Success<a.stm.Switch$Pattern> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "SwitchParser.java"
+class parse.stm.SwitchParser$PatternParser extends parse.Parser<a.stm.Switch$Pattern> {
+  static final parse.stm.SwitchParser$PatternParser sing;
+  public parse.Success<a.stm.Switch$Pattern> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "SwitchParser.java"
+class parse.stm.SwitchParser$TypePatternParser extends parse.Parser<a.stm.Switch$Pattern> {
+  static final parse.stm.SwitchParser$TypePatternParser sing;
+  public parse.Success<a.stm.Switch$Pattern> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "SwitchParser.java"
+class parse.stm.SwitchParser$ValuePatternParser extends parse.Parser<a.stm.Switch$Pattern> {
+  static final parse.stm.SwitchParser$ValuePatternParser sing;
+  public parse.Success<a.stm.Switch$Pattern> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "WhileParser.java"
+public class parse.stm.WhileParser extends parse.Parser<a.stm.Statement> {
+  public static final parse.Parser<a.stm.Statement> singleton;
+  public parse.Success<a.stm.Statement> parse(java.lang.String, int);
+  static {};
+}
+Compiled from "ArrayUtils.java"
+public final class util.ArrayUtils {
+  public static boolean contains(java.lang.Object[], java.lang.Object);
+  public static boolean hasDuplicates(java.lang.Object[]);
+  public static java.lang.Integer[] boxArray(int[]);
+}
+Compiled from "FileUtils.java"
+public final class util.FileUtils {
+  public static byte[] readFile(java.io.File) throws java.io.IOException;
+  public static java.lang.String readFileAsUTF8(java.io.File) throws java.io.IOException;
+}
+Compiled from "StringUtils.java"
+public final class util.StringUtils {
+  public static java.util.Comparator<java.lang.String> descendingLengthComparator;
+  public static void sortDescendingLength(java.lang.String[]);
+  public static java.lang.String implode(java.lang.String, java.lang.Object[]);
+  public static java.lang.String implode(char, java.lang.Object[]);
+  public static java.lang.String implode(java.lang.String, java.util.Collection<?>);
+  public static java.lang.String implode(char, java.util.Collection<?>);
+  public static java.lang.String indent(java.lang.Object, int);
+  public static java.lang.String indent(java.lang.Object);
+  public static char unescape(char);
+  public static boolean containsAt(java.lang.String, java.lang.String, int);
+  static {};
+}
+Compiled from "StringUtils.java"
+final class util.StringUtils$1 implements java.util.Comparator<java.lang.String> {
+  util.StringUtils$1();
+  public int compare(java.lang.String, java.lang.String);
+  public int compare(java.lang.Object, java.lang.Object);
+}

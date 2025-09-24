@@ -1,0 +1,1109 @@
+Compiled from "AAllTests.java"
+public class io.core9.core.AAllTests {
+  public io.core9.core.AAllTests();
+}
+Compiled from "Config.java"
+public final class io.core9.core.Config {
+  public void setPluginDirs(java.lang.String[]);
+  public java.lang.String[] getPluginDirs();
+  public static io.core9.core.Config getInstance();
+}
+Compiled from "PluginRegistry.java"
+public interface io.core9.core.PluginRegistry {
+  public abstract void registerPlugin(java.lang.Class<? extends net.xeoh.plugins.base.Plugin>, net.xeoh.plugins.base.Plugin);
+  public abstract net.xeoh.plugins.base.Plugin getPlugin(java.lang.Class<? extends net.xeoh.plugins.base.Plugin>);
+  public abstract void registerPlugins(java.util.Collection<net.xeoh.plugins.base.Plugin>);
+  public abstract java.util.Collection<net.xeoh.plugins.base.Plugin> getPlugins();
+  public abstract net.xeoh.plugins.base.impl.PluginManagerImpl getManager();
+}
+Compiled from "PluginRegistryImpl.java"
+public class io.core9.core.PluginRegistryImpl implements io.core9.core.PluginRegistry {
+  public void registerPlugin(java.lang.Class<? extends net.xeoh.plugins.base.Plugin>, net.xeoh.plugins.base.Plugin);
+  public net.xeoh.plugins.base.Plugin getPlugin(java.lang.Class<? extends net.xeoh.plugins.base.Plugin>);
+  public void registerPlugins(java.util.Collection<net.xeoh.plugins.base.Plugin>);
+  public java.util.Collection<net.xeoh.plugins.base.Plugin> getPlugins();
+  public static io.core9.core.PluginRegistry getInstance();
+  public net.xeoh.plugins.base.impl.PluginManagerImpl getManager();
+}
+Compiled from "BootStrategy.java"
+public interface io.core9.core.boot.BootStrategy {
+  public abstract void processPlugins();
+  public abstract void setRegistry(io.core9.core.PluginRegistry);
+  public abstract java.lang.Integer getPriority();
+}
+Compiled from "BootstrapFramework.java"
+public class io.core9.core.boot.BootstrapFramework {
+  public io.core9.core.boot.BootstrapFramework();
+  public void runInstance();
+  public static void run();
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+  static {};
+}
+Compiled from "BootstrapPlugins.java"
+public interface io.core9.core.boot.BootstrapPlugins {
+  public abstract void bootstrap();
+  public abstract void setRegistry(io.core9.core.PluginRegistry);
+}
+Compiled from "BootstrapPluginsImpl.java"
+public class io.core9.core.boot.BootstrapPluginsImpl implements io.core9.core.boot.BootstrapPlugins {
+  public io.core9.core.boot.BootstrapPluginsImpl();
+  public void bootstrap();
+  public void setRegistry(io.core9.core.PluginRegistry);
+  public static void addPath(java.lang.String) throws java.lang.Exception;
+}
+Compiled from "BootstrapStrategies.java"
+public interface io.core9.core.boot.BootstrapStrategies {
+  public abstract void bootstrap();
+  public abstract java.util.SortedMap<java.lang.Integer, java.util.ArrayList<io.core9.core.boot.BootStrategy>> getStrategies();
+  public abstract void setRegistry(io.core9.core.PluginRegistry);
+}
+Compiled from "BootstrapStrategiesImpl.java"
+public class io.core9.core.boot.BootstrapStrategiesImpl implements io.core9.core.boot.BootstrapStrategies {
+  public io.core9.core.boot.BootstrapStrategiesImpl();
+  public java.util.SortedMap<java.lang.Integer, java.util.ArrayList<io.core9.core.boot.BootStrategy>> getStrategies();
+  public void bootstrap();
+  public void setRegistry(io.core9.core.PluginRegistry);
+  static {};
+}
+Compiled from "CoreBootStrategy.java"
+public abstract class io.core9.core.boot.CoreBootStrategy implements io.core9.core.boot.BootStrategy {
+  protected io.core9.core.PluginRegistry registry;
+  public io.core9.core.boot.CoreBootStrategy();
+  public void setRegistry(io.core9.core.PluginRegistry);
+}
+Compiled from "Command.java"
+public abstract class io.core9.core.commands.Command {
+  public java.lang.String getClassName();
+  public void setClassName(java.lang.String);
+  public java.lang.String getMethod();
+  public void setMethod(java.lang.String);
+  public java.lang.String getType();
+  public void setType(java.lang.String);
+  public java.lang.Integer getPriority();
+  public void setPriority(java.lang.Integer);
+  public abstract java.lang.Object[] execute(java.lang.Object...);
+  public io.core9.core.commands.Command(java.lang.String, java.lang.Integer);
+}
+Compiled from "CommandProvider.java"
+public class io.core9.core.commands.CommandProvider {
+  public static io.core9.core.commands.CommandProvider getInstance();
+  public void registerCommands(java.util.Collection<io.core9.core.commands.Command>);
+  public java.util.Collection<io.core9.core.commands.Command> getCommands(java.lang.String, java.lang.String);
+}
+Compiled from "CommandStrategy.java"
+public interface io.core9.core.commands.CommandStrategy extends io.core9.core.plugin.Core9Plugin {
+}
+Compiled from "CommandStrategyImpl.java"
+public class io.core9.core.commands.CommandStrategyImpl extends io.core9.core.boot.CoreBootStrategy implements io.core9.core.commands.CommandStrategy {
+  io.core9.core.commands.CommandProvider provider;
+  public io.core9.core.commands.CommandStrategyImpl();
+  public void processPlugins();
+  public java.lang.Integer getPriority();
+}
+Compiled from "ConsumesCommandHandlers.java"
+public interface io.core9.core.commands.ConsumesCommandHandlers {
+  public abstract void setCommands(java.util.List<? extends io.core9.core.commands.Command>);
+}
+Compiled from "ProvidesCommands.java"
+public interface io.core9.core.commands.ProvidesCommands {
+  public abstract java.util.Collection<io.core9.core.commands.Command> getCommands();
+}
+Compiled from "Executor.java"
+public interface io.core9.core.executor.Executor {
+  public abstract void execute();
+}
+Compiled from "ExecutorStrategy.java"
+public interface io.core9.core.executor.ExecutorStrategy extends io.core9.core.plugin.Core9Plugin {
+}
+Compiled from "ExecutorStrategyImpl.java"
+public class io.core9.core.executor.ExecutorStrategyImpl extends io.core9.core.boot.CoreBootStrategy implements io.core9.core.executor.ExecutorStrategy {
+  public io.core9.core.executor.ExecutorStrategyImpl();
+  public void processPlugins();
+  public java.lang.Integer getPriority();
+}
+Compiled from "ExecutorTest.java"
+public class io.core9.core.executor.ExecutorTest {
+  io.core9.core.PluginRegistry registry;
+  public io.core9.core.executor.ExecutorTest();
+  public void setUp();
+  public void testPluginWithHook();
+}
+Compiled from "TestPlugin.java"
+public interface io.core9.core.executor.TestPlugin extends io.core9.core.plugin.Core9Plugin,io.core9.core.executor.Executor {
+  public abstract boolean getState();
+}
+Compiled from "TestPluginImpl.java"
+public class io.core9.core.executor.TestPluginImpl implements io.core9.core.executor.TestPlugin {
+  public io.core9.core.executor.TestPluginImpl();
+  public void execute();
+  public boolean getState();
+}
+Compiled from "ConsumesHookHandlers.java"
+public interface io.core9.core.hooks.ConsumesHookHandlers {
+  public abstract void setHooks(java.util.List<? extends io.core9.core.hooks.Hook>);
+}
+Compiled from "Hook.java"
+public abstract class io.core9.core.hooks.Hook {
+  public java.lang.String getClassName();
+  public void setClassName(java.lang.String);
+  public java.lang.String getMethod();
+  public void setMethod(java.lang.String);
+  public java.lang.String getType();
+  public void setType(java.lang.String);
+  public java.lang.Integer getPriority();
+  public void setPriority(java.lang.Integer);
+  public abstract java.lang.Object[] execute(java.lang.Object...);
+  public io.core9.core.hooks.Hook(java.lang.String, java.lang.Integer);
+}
+Compiled from "HookProvider.java"
+public class io.core9.core.hooks.HookProvider {
+  public static io.core9.core.hooks.HookProvider getInstance();
+  public void registerHooks(java.util.Collection<io.core9.core.hooks.Hook>);
+  public java.util.Collection<io.core9.core.hooks.Hook> getHooks(java.lang.String, java.lang.String);
+}
+Compiled from "HookStrategy.java"
+public interface io.core9.core.hooks.HookStrategy extends io.core9.core.plugin.Core9Plugin {
+}
+Compiled from "HookStrategyImpl.java"
+public class io.core9.core.hooks.HookStrategyImpl extends io.core9.core.boot.CoreBootStrategy implements io.core9.core.hooks.HookStrategy {
+  io.core9.core.hooks.HookProvider provider;
+  public io.core9.core.hooks.HookStrategyImpl();
+  public void processPlugins();
+  public java.lang.Integer getPriority();
+}
+Compiled from "HooksTest.java"
+public class io.core9.core.hooks.HooksTest {
+  io.core9.core.PluginRegistry registry;
+  public io.core9.core.hooks.HooksTest();
+  public void setUp();
+  public void testPluginWithHook();
+}
+Compiled from "ProvidesHooks.java"
+public interface io.core9.core.hooks.ProvidesHooks {
+  public abstract java.util.Collection<io.core9.core.hooks.Hook> getHooks();
+}
+Compiled from "TestPlugin.java"
+public interface io.core9.core.hooks.TestPlugin extends io.core9.core.plugin.Core9Plugin,io.core9.core.hooks.ConsumesHookHandlers {
+  public abstract java.lang.String realTest(java.lang.String);
+}
+Compiled from "TestPlugin2.java"
+public interface io.core9.core.hooks.TestPlugin2 extends io.core9.core.plugin.Core9Plugin,io.core9.core.hooks.ProvidesHooks {
+}
+Compiled from "TestPluginImpl.java"
+public class io.core9.core.hooks.TestPluginImpl implements io.core9.core.hooks.TestPlugin {
+  public io.core9.core.hooks.TestPluginImpl();
+  public void setHooks(java.util.List<? extends io.core9.core.hooks.Hook>);
+  public java.lang.String realTest(java.lang.String);
+}
+Compiled from "TestPluginImpl2.java"
+public class io.core9.core.hooks.TestPluginImpl2 implements io.core9.core.hooks.TestPlugin2 {
+  public io.core9.core.hooks.TestPluginImpl2();
+  public java.util.Collection<io.core9.core.hooks.Hook> getHooks();
+}
+Compiled from "TestPluginImpl2.java"
+class io.core9.core.hooks.TestPluginImpl2$1 extends io.core9.core.hooks.Hook {
+  final io.core9.core.hooks.TestPluginImpl2 this$0;
+  io.core9.core.hooks.TestPluginImpl2$1(io.core9.core.hooks.TestPluginImpl2, java.lang.String, java.lang.Integer);
+  public java.lang.Object[] execute(java.lang.Object...);
+}
+Compiled from "TestPluginImpl2.java"
+class io.core9.core.hooks.TestPluginImpl2$2 extends io.core9.core.hooks.Hook {
+  final io.core9.core.hooks.TestPluginImpl2 this$0;
+  io.core9.core.hooks.TestPluginImpl2$2(io.core9.core.hooks.TestPluginImpl2, java.lang.String, java.lang.Integer);
+  public java.lang.Object[] execute(java.lang.Object...);
+}
+Compiled from "InvocationHandlersTest.java"
+public class io.core9.core.invocation.InvocationHandlersTest {
+  io.core9.core.PluginRegistry registry;
+  public io.core9.core.invocation.InvocationHandlersTest();
+  public void setUp();
+  public void testPluginWithDefaultInvocationHandler();
+  public void testPluginWithOverride();
+}
+Compiled from "TestPlugin.java"
+public interface io.core9.core.invocation.TestPlugin extends io.core9.core.plugin.Core9Plugin,io.core9.core.hooks.ConsumesHookHandlers,io.core9.core.hooks.ProvidesHooks,io.core9.core.proxy.HasInvocationHandler {
+  public abstract java.lang.String dummyTest();
+}
+Compiled from "TestPlugin2.java"
+public interface io.core9.core.invocation.TestPlugin2 extends io.core9.core.plugin.Core9Plugin,io.core9.core.hooks.ConsumesHookHandlers,io.core9.core.hooks.ProvidesHooks,io.core9.core.proxy.HasInvocationHandler {
+  public abstract java.lang.String dummyTest();
+}
+Compiled from "TestPlugin2InvocationHandler.java"
+public class io.core9.core.invocation.TestPlugin2InvocationHandler implements java.lang.reflect.InvocationHandler {
+  public io.core9.core.invocation.TestPlugin2InvocationHandler(java.lang.Object);
+  public java.lang.Object invoke(java.lang.Object, java.lang.reflect.Method, java.lang.Object[]) throws java.lang.Throwable;
+}
+Compiled from "TestPluginImpl.java"
+public class io.core9.core.invocation.TestPluginImpl implements io.core9.core.invocation.TestPlugin {
+  public io.core9.core.invocation.TestPluginImpl();
+  public java.lang.String dummyTest();
+  public java.lang.Class<? extends java.lang.reflect.InvocationHandler> getInvocationHandler();
+  public java.util.Collection<io.core9.core.hooks.Hook> getHooks();
+  public void setHooks(java.util.List<? extends io.core9.core.hooks.Hook>);
+}
+Compiled from "TestPluginImpl2.java"
+public class io.core9.core.invocation.TestPluginImpl2 implements io.core9.core.invocation.TestPlugin2 {
+  public io.core9.core.invocation.TestPluginImpl2();
+  public java.lang.Class<? extends java.lang.reflect.InvocationHandler> getInvocationHandler();
+  public void setHooks(java.util.List<? extends io.core9.core.hooks.Hook>);
+  public java.util.Collection<io.core9.core.hooks.Hook> getHooks();
+  public java.lang.String dummyTest();
+}
+Compiled from "TestPluginInvocationHandler.java"
+public class io.core9.core.invocation.TestPluginInvocationHandler implements java.lang.reflect.InvocationHandler {
+  java.lang.Object plugin;
+  public io.core9.core.invocation.TestPluginInvocationHandler(java.lang.Object);
+  public java.lang.Object invoke(java.lang.Object, java.lang.reflect.Method, java.lang.Object[]) throws java.lang.Throwable;
+}
+Compiled from "Core9Plugin.java"
+public interface io.core9.core.plugin.Core9Plugin extends net.xeoh.plugins.base.Plugin {
+}
+Compiled from "DefaultInvocationHandler.java"
+public class io.core9.core.proxy.DefaultInvocationHandler implements java.lang.reflect.InvocationHandler {
+  public io.core9.core.proxy.DefaultInvocationHandler(java.lang.Object);
+  public java.lang.Object invoke(java.lang.Object, java.lang.reflect.Method, java.lang.Object[]) throws java.lang.Throwable;
+  protected java.lang.Object execute(java.lang.Object, java.lang.reflect.Method, java.lang.Object[]) throws java.lang.Throwable;
+  public java.lang.Object getOriginalObject();
+}
+Compiled from "HasInvocationHandler.java"
+public interface io.core9.core.proxy.HasInvocationHandler {
+  public abstract java.lang.Class<? extends java.lang.reflect.InvocationHandler> getInvocationHandler();
+}
+Compiled from "InvocationHandlerProvider.java"
+public class io.core9.core.proxy.InvocationHandlerProvider {
+  public void addInvocationHandler(java.lang.Class<? extends net.xeoh.plugins.base.Plugin>, java.lang.Integer, java.lang.Class<? extends java.lang.reflect.InvocationHandler>);
+  public java.lang.Class<? extends java.lang.reflect.InvocationHandler> getInvocationHandler(java.lang.Class<? extends net.xeoh.plugins.base.Plugin>);
+  public static io.core9.core.proxy.InvocationHandlerProvider getInstance();
+  public void setDefaultInvocationHandler(java.lang.Class<?>, java.lang.Class<? extends java.lang.reflect.InvocationHandler>);
+}
+Compiled from "InvocationHandlerStrategy.java"
+public interface io.core9.core.proxy.InvocationHandlerStrategy extends io.core9.core.plugin.Core9Plugin {
+}
+Compiled from "InvocationHandlerStrategyImpl.java"
+public class io.core9.core.proxy.InvocationHandlerStrategyImpl extends io.core9.core.boot.CoreBootStrategy implements io.core9.core.proxy.InvocationHandlerStrategy {
+  io.core9.core.proxy.InvocationHandlerProvider provider;
+  public io.core9.core.proxy.InvocationHandlerStrategyImpl();
+  public void processPlugins();
+  public java.lang.Integer getPriority();
+}
+Compiled from "Abstract2StageLocator.java"
+public abstract class net.xeoh.nexus.Abstract2StageLocator extends net.xeoh.nexus.AbstractLocator {
+  protected static final java.lang.String DEFAULT_REALM;
+  protected org.codehaus.classworlds.ClassWorld classWorld;
+  protected org.codehaus.classworlds.ClassRealm realm;
+  protected net.xeoh.nexus.Abstract2StageLocator(net.xeoh.nexus.options.Option...);
+  public abstract java.util.Collection<net.xeoh.nexus.Candidate> candidates();
+  public abstract java.util.Collection<net.xeoh.nexus.Service> locate(java.util.Collection<net.xeoh.nexus.Candidate>);
+}
+Compiled from "AbstractAnnotationProcessor.java"
+public abstract class net.xeoh.nexus.AbstractAnnotationProcessor extends net.xeoh.nexus.AbstractProcessor {
+  public net.xeoh.nexus.AbstractAnnotationProcessor();
+  public static java.util.Collection<java.lang.reflect.Method> allMethods(java.lang.Class<?>);
+  public static java.util.Collection<java.lang.reflect.Method> findMethodsFor(java.util.Collection<java.lang.reflect.Method>, java.lang.annotation.Annotation);
+}
+Compiled from "AbstractCandidateFilter.java"
+public abstract class net.xeoh.nexus.AbstractCandidateFilter implements net.xeoh.nexus.CandidateFilter {
+  protected java.util.Collection<net.xeoh.nexus.FilterRule> rules;
+  public net.xeoh.nexus.AbstractCandidateFilter(java.util.Collection<net.xeoh.nexus.FilterRule>);
+  public net.xeoh.nexus.AbstractCandidateFilter(net.xeoh.nexus.FilterRule);
+}
+Compiled from "AbstractLocator.java"
+public abstract class net.xeoh.nexus.AbstractLocator implements net.xeoh.nexus.Locator {
+  public net.xeoh.nexus.AbstractLocator();
+  public abstract java.util.Collection<net.xeoh.nexus.Service> locate();
+}
+Compiled from "AbstractProcessor.java"
+public abstract class net.xeoh.nexus.AbstractProcessor implements net.xeoh.nexus.Processor {
+  public net.xeoh.nexus.AbstractProcessor();
+  public void process(java.util.Collection<net.xeoh.nexus.Service>);
+  public abstract void doProcess(net.xeoh.nexus.Service);
+}
+Compiled from "AbstractService.java"
+public abstract class net.xeoh.nexus.AbstractService<T> implements net.xeoh.nexus.Service {
+  protected T object;
+  protected net.xeoh.nexus.states.StateManager stateManager;
+  public net.xeoh.nexus.AbstractService(T);
+  public T getService();
+  public net.xeoh.nexus.states.StateManager getStates();
+}
+Compiled from "Blacklist.java"
+public class net.xeoh.nexus.Blacklist extends net.xeoh.nexus.AbstractCandidateFilter {
+  public net.xeoh.nexus.Blacklist(java.util.Collection<net.xeoh.nexus.FilterRule>);
+  public net.xeoh.nexus.Blacklist(net.xeoh.nexus.FilterRule);
+  public java.util.Collection<net.xeoh.nexus.Candidate> filter(java.util.Collection<net.xeoh.nexus.Candidate>);
+}
+Compiled from "Candidate.java"
+public interface net.xeoh.nexus.Candidate {
+  public abstract net.xeoh.nexus.Abstract2StageLocator getLocator();
+  public abstract java.lang.String getCandidateClassName();
+  public abstract java.lang.Class<?> getCandidateClass();
+}
+Compiled from "CandidateFilter.java"
+public interface net.xeoh.nexus.CandidateFilter {
+  public abstract java.util.Collection<net.xeoh.nexus.Candidate> filter(java.util.Collection<net.xeoh.nexus.Candidate>);
+}
+Compiled from "ClassPathFolderLocator.java"
+public class net.xeoh.nexus.ClassPathFolderLocator extends net.xeoh.nexus.Abstract2StageLocator {
+  public net.xeoh.nexus.ClassPathFolderLocator();
+  public java.util.Collection<net.xeoh.nexus.Candidate> candidates();
+  public java.util.Collection<net.xeoh.nexus.Service> locate(java.util.Collection<net.xeoh.nexus.Candidate>);
+  public java.util.Collection<net.xeoh.nexus.Service> locate();
+}
+Compiled from "DefaultNexus.java"
+public class net.xeoh.nexus.DefaultNexus implements net.xeoh.nexus.Nexus {
+  final java.util.concurrent.ConcurrentLinkedQueue<net.xeoh.nexus.Service> services;
+  final java.util.concurrent.ConcurrentLinkedQueue<net.xeoh.nexus.ServiceListener> serviceListeners;
+  final java.util.Map<java.lang.Class<?>, java.util.concurrent.ConcurrentLinkedQueue<net.xeoh.nexus.Service>> cache;
+  public net.xeoh.nexus.DefaultNexus();
+  public net.xeoh.nexus.Nexus register(net.xeoh.nexus.Service);
+  public net.xeoh.nexus.Nexus deregister(net.xeoh.nexus.Service);
+  public java.util.Collection<net.xeoh.nexus.Service> list();
+  public net.xeoh.nexus.Nexus register(java.util.Collection<? extends net.xeoh.nexus.Service>);
+  public net.xeoh.nexus.Nexus deregister(java.util.Collection<? extends net.xeoh.nexus.Service>);
+  public <T> T get(java.lang.Class<T>, net.xeoh.nexus.options.Option...);
+  public net.xeoh.nexus.Nexus addServiceListener(net.xeoh.nexus.ServiceListener);
+  public net.xeoh.nexus.Nexus removeServiceListener(net.xeoh.nexus.ServiceListener);
+  public <T> java.util.Collection<T> getAll(java.lang.Class<T>, net.xeoh.nexus.options.Option...);
+}
+Compiled from "FilterRule.java"
+public abstract class net.xeoh.nexus.FilterRule {
+  public net.xeoh.nexus.FilterRule();
+  public static final net.xeoh.nexus.FilterRule NAME(java.lang.String);
+  public abstract boolean matches(net.xeoh.nexus.Candidate);
+}
+Compiled from "FilterRule.java"
+final class net.xeoh.nexus.FilterRule$1 extends net.xeoh.nexus.FilterRule {
+  final java.lang.String val$name;
+  net.xeoh.nexus.FilterRule$1(java.lang.String);
+  public boolean matches(net.xeoh.nexus.Candidate);
+}
+Compiled from "InternalService.java"
+public class net.xeoh.nexus.InternalService<T> extends net.xeoh.nexus.AbstractService<T> {
+  public net.xeoh.nexus.InternalService(T);
+  public static java.util.Collection<? extends net.xeoh.nexus.Service> wrap(java.lang.Object);
+}
+Compiled from "JARLocator.java"
+public class net.xeoh.nexus.JARLocator extends net.xeoh.nexus.URILoader {
+  public net.xeoh.nexus.JARLocator(java.net.URI, net.xeoh.nexus.options.Option...);
+  public net.xeoh.nexus.JARLocator(java.io.File);
+  public java.util.Collection<net.xeoh.nexus.Candidate> candidates();
+  public java.util.Collection<net.xeoh.nexus.Service> locate(java.util.Collection<net.xeoh.nexus.Candidate>);
+  public java.util.Collection<net.xeoh.nexus.Service> locate();
+  protected java.util.Collection<java.lang.String> listAll(java.net.URI) throws java.io.IOException;
+}
+Compiled from "Locator.java"
+public interface net.xeoh.nexus.Locator {
+  public abstract java.util.Collection<net.xeoh.nexus.Service> locate();
+}
+Compiled from "Nexus.java"
+public interface net.xeoh.nexus.Nexus {
+  public abstract net.xeoh.nexus.Nexus register(java.util.Collection<? extends net.xeoh.nexus.Service>);
+  public abstract net.xeoh.nexus.Nexus deregister(java.util.Collection<? extends net.xeoh.nexus.Service>);
+  public abstract <T> T get(java.lang.Class<T>, net.xeoh.nexus.options.Option...);
+  public abstract <T> java.util.Collection<T> getAll(java.lang.Class<T>, net.xeoh.nexus.options.Option...);
+  public abstract java.util.Collection<net.xeoh.nexus.Service> list();
+  public abstract net.xeoh.nexus.Nexus addServiceListener(net.xeoh.nexus.ServiceListener);
+  public abstract net.xeoh.nexus.Nexus removeServiceListener(net.xeoh.nexus.ServiceListener);
+}
+Compiled from "Processor.java"
+public interface net.xeoh.nexus.Processor {
+  public abstract void process(java.util.Collection<net.xeoh.nexus.Service>);
+}
+Compiled from "Service.java"
+public interface net.xeoh.nexus.Service {
+  public abstract java.lang.Object getService();
+  public abstract net.xeoh.nexus.states.StateManager getStates();
+}
+Compiled from "ServiceListener.java"
+public interface net.xeoh.nexus.ServiceListener {
+  public abstract void serviceRegistered(net.xeoh.nexus.Service);
+  public abstract void serviceDeregistered(net.xeoh.nexus.Service);
+}
+Compiled from "URILoader.java"
+public abstract class net.xeoh.nexus.URILoader extends net.xeoh.nexus.Abstract2StageLocator {
+  protected java.net.URI uri;
+  public net.xeoh.nexus.URILoader(java.net.URI, net.xeoh.nexus.options.Option...);
+}
+Compiled from "Whitelist.java"
+public class net.xeoh.nexus.Whitelist extends net.xeoh.nexus.AbstractCandidateFilter {
+  public net.xeoh.nexus.Whitelist(java.util.Collection<net.xeoh.nexus.FilterRule>);
+  public net.xeoh.nexus.Whitelist(net.xeoh.nexus.FilterRule);
+  public java.util.Collection<net.xeoh.nexus.Candidate> filter(java.util.Collection<net.xeoh.nexus.Candidate>);
+}
+Compiled from "InjectService.java"
+public interface net.xeoh.nexus.annotations.InjectService extends java.lang.annotation.Annotation {
+}
+Compiled from "SingletonService.java"
+public interface net.xeoh.nexus.annotations.SingletonService extends java.lang.annotation.Annotation {
+}
+Compiled from "Get.java"
+public class net.xeoh.nexus.options.Get extends net.xeoh.nexus.options.Option {
+  public static final net.xeoh.nexus.options.Get X;
+  static {};
+}
+Compiled from "Option.java"
+public class net.xeoh.nexus.options.Option {
+  public net.xeoh.nexus.options.Option();
+}
+Compiled from "Capabilities.java"
+public class net.xeoh.nexus.states.Capabilities extends net.xeoh.nexus.states.State {
+  final java.util.Collection<java.lang.String> capabilitites;
+  public net.xeoh.nexus.states.Capabilities(java.lang.String, java.lang.String...);
+  public java.util.Collection<java.lang.String> getCapabilities();
+}
+Compiled from "Dependency.java"
+public abstract class net.xeoh.nexus.states.Dependency extends net.xeoh.nexus.states.State {
+  protected net.xeoh.nexus.states.Dependency(java.lang.String);
+  public static net.xeoh.nexus.states.Dependency CLASS(java.lang.String, java.lang.Class<?>);
+  public java.util.Collection<net.xeoh.nexus.Service> resolve(java.util.Collection<net.xeoh.nexus.Service>);
+  protected abstract boolean check(net.xeoh.nexus.Service);
+}
+Compiled from "Dependency.java"
+final class net.xeoh.nexus.states.Dependency$1 extends net.xeoh.nexus.states.Dependency {
+  net.xeoh.nexus.states.Dependency$1(java.lang.String);
+  protected boolean check(net.xeoh.nexus.Service);
+}
+Compiled from "State.java"
+public class net.xeoh.nexus.states.State {
+  public static final java.lang.String DEFAULT_OWNERID;
+  protected net.xeoh.nexus.states.State(java.lang.String);
+  public java.lang.String getOwnerID();
+}
+Compiled from "StateDisabled.java"
+public class net.xeoh.nexus.states.StateDisabled extends net.xeoh.nexus.states.State {
+  public net.xeoh.nexus.states.StateDisabled(java.lang.String);
+}
+Compiled from "StateManager.java"
+public class net.xeoh.nexus.states.StateManager {
+  final java.util.Collection<net.xeoh.nexus.states.State> states;
+  public net.xeoh.nexus.states.StateManager();
+  public java.util.Collection<net.xeoh.nexus.states.State> getStates();
+  public java.util.Collection<net.xeoh.nexus.states.State> getStatesBy(java.lang.String);
+  public void addState(net.xeoh.nexus.states.State);
+  public void removeState(net.xeoh.nexus.states.State);
+}
+Compiled from "Option.java"
+public interface net.xeoh.plugins.base.Option extends java.io.Serializable {
+}
+Compiled from "Plugin.java"
+public interface net.xeoh.plugins.base.Plugin {
+}
+Compiled from "PluginConfiguration.java"
+public interface net.xeoh.plugins.base.PluginConfiguration extends net.xeoh.plugins.base.Plugin {
+  public abstract java.lang.String getConfiguration(java.lang.Class<?>, java.lang.String);
+  public abstract void setConfiguration(java.lang.Class<?>, java.lang.String, java.lang.String);
+}
+Compiled from "PluginInformation.java"
+public interface net.xeoh.plugins.base.PluginInformation extends net.xeoh.plugins.base.Plugin {
+  public abstract java.util.Collection<java.lang.String> getInformation(net.xeoh.plugins.base.PluginInformation$Information, net.xeoh.plugins.base.Plugin);
+}
+Compiled from "PluginInformation.java"
+public final class net.xeoh.plugins.base.PluginInformation$Information extends java.lang.Enum<net.xeoh.plugins.base.PluginInformation$Information> {
+  public static final net.xeoh.plugins.base.PluginInformation$Information AUTHORS;
+  public static final net.xeoh.plugins.base.PluginInformation$Information CAPABILITIES;
+  public static final net.xeoh.plugins.base.PluginInformation$Information VERSION;
+  public static final net.xeoh.plugins.base.PluginInformation$Information INIT_DATE;
+  public static final net.xeoh.plugins.base.PluginInformation$Information CLASSPATH_ORIGIN;
+  public static net.xeoh.plugins.base.PluginInformation$Information[] values();
+  public static net.xeoh.plugins.base.PluginInformation$Information valueOf(java.lang.String);
+  static {};
+}
+Compiled from "PluginManager.java"
+public interface net.xeoh.plugins.base.PluginManager extends net.xeoh.plugins.base.Plugin {
+  public abstract void addPluginsFrom(java.net.URI, net.xeoh.plugins.base.options.AddPluginsFromOption...);
+  public abstract <P extends net.xeoh.plugins.base.Plugin> P getPlugin(java.lang.Class<P>, net.xeoh.plugins.base.options.GetPluginOption...);
+  public abstract <P extends net.xeoh.plugins.base.Plugin> P getPlugin(java.lang.Class<P>, java.lang.Class<? extends java.lang.reflect.InvocationHandler>, net.xeoh.plugins.base.options.GetPluginOption...);
+  public abstract void shutdown();
+  public abstract net.xeoh.plugins.base.impl.registry.PluginRegistry getPluginRegistry();
+}
+Compiled from "Capabilities.java"
+public interface net.xeoh.plugins.base.annotations.Capabilities extends java.lang.annotation.Annotation {
+}
+Compiled from "PluginImplementation.java"
+public interface net.xeoh.plugins.base.annotations.PluginImplementation extends java.lang.annotation.Annotation {
+}
+Compiled from "Thread.java"
+public interface net.xeoh.plugins.base.annotations.Thread extends java.lang.annotation.Annotation {
+  public abstract boolean isDaemonic();
+}
+Compiled from "Timer.java"
+public interface net.xeoh.plugins.base.annotations.Timer extends java.lang.annotation.Annotation {
+  public abstract long period();
+  public abstract long startupDelay();
+  public abstract net.xeoh.plugins.base.annotations.Timer$TimerType timerType();
+}
+Compiled from "Timer.java"
+public final class net.xeoh.plugins.base.annotations.Timer$TimerType extends java.lang.Enum<net.xeoh.plugins.base.annotations.Timer$TimerType> {
+  public static final net.xeoh.plugins.base.annotations.Timer$TimerType DELAY_BASED;
+  public static final net.xeoh.plugins.base.annotations.Timer$TimerType RATE_BASED;
+  public static net.xeoh.plugins.base.annotations.Timer$TimerType[] values();
+  public static net.xeoh.plugins.base.annotations.Timer$TimerType valueOf(java.lang.String);
+  static {};
+}
+Compiled from "ConfigurationFile.java"
+public interface net.xeoh.plugins.base.annotations.configuration.ConfigurationFile extends java.lang.annotation.Annotation {
+  public abstract java.lang.String file();
+}
+Compiled from "IsDisabled.java"
+public interface net.xeoh.plugins.base.annotations.configuration.IsDisabled extends java.lang.annotation.Annotation {
+}
+Compiled from "Init.java"
+public interface net.xeoh.plugins.base.annotations.events.Init extends java.lang.annotation.Annotation {
+}
+Compiled from "PluginLoaded.java"
+public interface net.xeoh.plugins.base.annotations.events.PluginLoaded extends java.lang.annotation.Annotation {
+}
+Compiled from "Shutdown.java"
+public interface net.xeoh.plugins.base.annotations.events.Shutdown extends java.lang.annotation.Annotation {
+}
+Compiled from "InjectPlugin.java"
+public interface net.xeoh.plugins.base.annotations.injections.InjectPlugin extends java.lang.annotation.Annotation {
+  public abstract java.lang.String[] requiredCapabilities();
+  public abstract boolean isOptional();
+}
+Compiled from "Author.java"
+public interface net.xeoh.plugins.base.annotations.meta.Author extends java.lang.annotation.Annotation {
+  public abstract java.lang.String name();
+}
+Compiled from "RecognizesOption.java"
+public interface net.xeoh.plugins.base.annotations.meta.RecognizesOption extends java.lang.annotation.Annotation {
+  public abstract java.lang.Class<? extends net.xeoh.plugins.base.Option> option();
+}
+Compiled from "Stateless.java"
+public interface net.xeoh.plugins.base.annotations.meta.Stateless extends java.lang.annotation.Annotation {
+}
+Compiled from "Version.java"
+public interface net.xeoh.plugins.base.annotations.meta.Version extends java.lang.annotation.Annotation {
+  public static final int UNIT_MAJOR;
+  public static final int UNIT_MINOR;
+  public static final int UNIT_RELEASE;
+  public abstract int version();
+}
+Compiled from "PluginManagerTracer.java"
+public class net.xeoh.plugins.base.diagnosis.channels.tracing.PluginManagerTracer extends net.xeoh.plugins.diagnosis.local.DiagnosisChannelID<java.lang.String> {
+  public net.xeoh.plugins.base.diagnosis.channels.tracing.PluginManagerTracer();
+  public java.lang.String toUserRepresentation(java.lang.String, java.util.Map<java.lang.String, java.io.Serializable>);
+  public java.lang.String toUserRepresentation(java.io.Serializable, java.util.Map);
+}
+Compiled from "SpawnerTracer.java"
+public class net.xeoh.plugins.base.diagnosis.channels.tracing.SpawnerTracer extends net.xeoh.plugins.diagnosis.local.DiagnosisChannelID<java.lang.String> {
+  public net.xeoh.plugins.base.diagnosis.channels.tracing.SpawnerTracer();
+  public java.lang.String toUserRepresentation(java.lang.String, java.util.Map<java.lang.String, java.io.Serializable>);
+  public java.lang.String toUserRepresentation(java.io.Serializable, java.util.Map);
+}
+Compiled from "PluginConfigurationImpl.java"
+public class net.xeoh.plugins.base.impl.PluginConfigurationImpl implements net.xeoh.plugins.base.PluginConfiguration {
+  protected net.xeoh.plugins.base.impl.PluginConfigurationImpl(java.util.Properties);
+  public synchronized java.lang.String getConfiguration(java.lang.Class<?>, java.lang.String);
+  public synchronized void setConfiguration(java.lang.Class<?>, java.lang.String, java.lang.String);
+}
+Compiled from "PluginInformationImpl.java"
+public class net.xeoh.plugins.base.impl.PluginInformationImpl implements net.xeoh.plugins.base.PluginInformation {
+  public net.xeoh.plugins.base.impl.PluginInformationImpl();
+  public java.util.Collection<java.lang.String> getInformation(net.xeoh.plugins.base.PluginInformation$Information, net.xeoh.plugins.base.Plugin);
+}
+Compiled from "PluginInformationImpl.java"
+class net.xeoh.plugins.base.impl.PluginInformationImpl$1 {
+  static final int[] $SwitchMap$net$xeoh$plugins$base$PluginInformation$Information;
+  static {};
+}
+Compiled from "PluginManagerFactory.java"
+public class net.xeoh.plugins.base.impl.PluginManagerFactory {
+  public static net.xeoh.plugins.base.PluginManager createPluginManager();
+  public static net.xeoh.plugins.base.PluginManager createPluginManager(java.util.Properties);
+}
+Compiled from "PluginManagerImpl.java"
+public class net.xeoh.plugins.base.impl.PluginManagerImpl implements net.xeoh.plugins.base.PluginManager {
+  net.xeoh.plugins.base.PluginInformation information;
+  net.xeoh.plugins.diagnosis.local.Diagnosis diagnosis;
+  protected net.xeoh.plugins.base.impl.PluginManagerImpl(java.util.Properties);
+  public void addPluginsFrom(java.net.URI, net.xeoh.plugins.base.options.AddPluginsFromOption...);
+  public <P extends net.xeoh.plugins.base.Plugin> P getPlugin(java.lang.Class<P>, java.lang.Class<? extends java.lang.reflect.InvocationHandler>, net.xeoh.plugins.base.options.GetPluginOption...);
+  public <P extends net.xeoh.plugins.base.Plugin> P getPlugin(java.lang.Class<P>, net.xeoh.plugins.base.options.GetPluginOption...);
+  public void shutdown();
+  public void hookPlugin(net.xeoh.plugins.base.impl.spawning.SpawnResult);
+  public net.xeoh.plugins.base.impl.classpath.ClassPathManager getClassPathManager();
+  public net.xeoh.plugins.base.impl.registry.PluginRegistry getPluginRegistry();
+  public net.xeoh.plugins.base.PluginConfiguration getPluginConfiguration();
+  public net.xeoh.plugins.diagnosis.local.Diagnosis getDiagnosis();
+  public net.xeoh.plugins.base.impl.spawning.Spawner getSpawner();
+}
+Compiled from "PluginManagerImpl.java"
+class net.xeoh.plugins.base.impl.PluginManagerImpl$1 implements net.xeoh.plugins.base.options.getplugin.PluginSelector<P> {
+  final java.util.Collection val$caps;
+  final net.xeoh.plugins.base.impl.PluginManagerImpl this$0;
+  net.xeoh.plugins.base.impl.PluginManagerImpl$1(net.xeoh.plugins.base.impl.PluginManagerImpl, java.util.Collection);
+  public boolean selectPlugin(net.xeoh.plugins.base.Plugin);
+}
+Compiled from "ClassPathManager.java"
+public class net.xeoh.plugins.base.impl.classpath.ClassPathManager {
+  org.codehaus.classworlds.ClassWorld classWorld;
+  boolean initializedProperly;
+  public net.xeoh.plugins.base.impl.classpath.ClassPathManager(net.xeoh.plugins.base.impl.PluginManagerImpl);
+  public boolean addFromLocation(java.net.URI);
+  public java.lang.Class<?> loadClass(net.xeoh.plugins.base.impl.classpath.locator.AbstractClassPathLocation, java.lang.String) throws java.lang.ClassNotFoundException;
+  public java.util.Collection<java.lang.String> findSubclassesFor(net.xeoh.plugins.base.impl.classpath.locator.AbstractClassPathLocation, java.lang.Class<?>);
+  public void registerLocation(net.xeoh.plugins.base.impl.classpath.locator.AbstractClassPathLocation);
+  public java.io.InputStream getResourceAsStream(net.xeoh.plugins.base.impl.classpath.locator.AbstractClassPathLocation, java.lang.String);
+  public net.xeoh.plugins.base.impl.classpath.locator.ClassPathLocator getLocator();
+  public net.xeoh.plugins.base.impl.classpath.cache.JARCache getCache();
+  static java.util.logging.Logger access$000(net.xeoh.plugins.base.impl.classpath.ClassPathManager);
+}
+Compiled from "ClassPathManager.java"
+class net.xeoh.plugins.base.impl.classpath.ClassPathManager$1 implements java.security.PrivilegedAction<java.lang.Object> {
+  final net.xeoh.plugins.base.impl.classpath.ClassPathManager this$0;
+  net.xeoh.plugins.base.impl.classpath.ClassPathManager$1(net.xeoh.plugins.base.impl.classpath.ClassPathManager);
+  public java.lang.Object run();
+}
+Compiled from "JARCache.java"
+public class net.xeoh.plugins.base.impl.classpath.cache.JARCache {
+  final java.util.logging.Logger logger;
+  public net.xeoh.plugins.base.impl.classpath.cache.JARCache();
+  public void loadCache();
+  public net.xeoh.plugins.base.impl.classpath.cache.JARCache$JARInformation getJARInformationFor(java.net.URI);
+  public void saveCache();
+  public void setEnabled(boolean);
+  public void setWeakMode(boolean);
+  public void setCachePath(java.lang.String);
+}
+Compiled from "JARCache.java"
+public class net.xeoh.plugins.base.impl.classpath.cache.JARCache$JARInformation implements java.io.Serializable {
+  public java.util.List<java.lang.String> classes;
+  public java.util.Map<java.lang.String, java.util.Collection<java.lang.String>> subclasses;
+  public long lastAccess;
+  public int usageCount;
+  public boolean classesValid;
+  public net.xeoh.plugins.base.impl.classpath.cache.JARCache$JARInformation();
+}
+Compiled from "AbstractLoader.java"
+public abstract class net.xeoh.plugins.base.impl.classpath.loader.AbstractLoader {
+  protected final java.util.logging.Logger logger;
+  protected final net.xeoh.plugins.base.impl.PluginManagerImpl pluginManager;
+  public net.xeoh.plugins.base.impl.classpath.loader.AbstractLoader(net.xeoh.plugins.base.impl.PluginManagerImpl);
+  public abstract boolean handlesURI(java.net.URI);
+  public abstract void loadFrom(java.net.URI);
+  protected void tryToLoadClassAsPlugin(net.xeoh.plugins.base.impl.classpath.locator.AbstractClassPathLocation, java.lang.String);
+  protected void processPending();
+}
+Compiled from "FileLoader.java"
+public class net.xeoh.plugins.base.impl.classpath.loader.FileLoader extends net.xeoh.plugins.base.impl.classpath.loader.AbstractLoader {
+  public net.xeoh.plugins.base.impl.classpath.loader.FileLoader(net.xeoh.plugins.base.impl.PluginManagerImpl);
+  public boolean handlesURI(java.net.URI);
+  public void loadFrom(java.net.URI);
+  void locateAllPluginsAt(java.io.File);
+}
+Compiled from "HTTPLoader.java"
+public class net.xeoh.plugins.base.impl.classpath.loader.HTTPLoader extends net.xeoh.plugins.base.impl.classpath.loader.FileLoader {
+  public net.xeoh.plugins.base.impl.classpath.loader.HTTPLoader(net.xeoh.plugins.base.impl.PluginManagerImpl);
+  public boolean handlesURI(java.net.URI);
+  public void loadFrom(java.net.URI);
+}
+Compiled from "InternalClasspathLoader.java"
+public class net.xeoh.plugins.base.impl.classpath.loader.InternalClasspathLoader extends net.xeoh.plugins.base.impl.classpath.loader.AbstractLoader {
+  public net.xeoh.plugins.base.impl.classpath.loader.InternalClasspathLoader(net.xeoh.plugins.base.impl.PluginManagerImpl);
+  public boolean handlesURI(java.net.URI);
+  public void loadFrom(java.net.URI);
+}
+Compiled from "AbstractClassPathLocation.java"
+public abstract class net.xeoh.plugins.base.impl.classpath.locator.AbstractClassPathLocation {
+  protected final java.util.logging.Logger logger;
+  protected final java.net.URI location;
+  protected final java.lang.String realm;
+  protected final net.xeoh.plugins.base.impl.classpath.cache.JARCache cache;
+  protected net.xeoh.plugins.base.impl.classpath.cache.JARCache$JARInformation cacheEntry;
+  protected net.xeoh.plugins.base.impl.classpath.locator.AbstractClassPathLocation(net.xeoh.plugins.base.impl.classpath.cache.JARCache, java.lang.String, java.net.URI);
+  public static net.xeoh.plugins.base.impl.classpath.locator.AbstractClassPathLocation newClasspathLocation(net.xeoh.plugins.base.impl.classpath.cache.JARCache, java.lang.String, java.net.URI);
+  public java.net.URI getToplevelLocation();
+  public java.net.URI[] getClasspathLocations();
+  public java.lang.String getRealm();
+  public abstract net.xeoh.plugins.base.impl.classpath.locator.AbstractClassPathLocation$LocationType getType();
+  public abstract java.util.Collection<java.lang.String> listToplevelClassNames();
+  public abstract java.util.Collection<java.lang.String> listAllEntries();
+  public abstract java.io.InputStream getInputStream(java.lang.String);
+}
+Compiled from "AbstractClassPathLocation.java"
+public final class net.xeoh.plugins.base.impl.classpath.locator.AbstractClassPathLocation$LocationType extends java.lang.Enum<net.xeoh.plugins.base.impl.classpath.locator.AbstractClassPathLocation$LocationType> {
+  public static final net.xeoh.plugins.base.impl.classpath.locator.AbstractClassPathLocation$LocationType JAR;
+  public static final net.xeoh.plugins.base.impl.classpath.locator.AbstractClassPathLocation$LocationType DIRECTORY;
+  public static final net.xeoh.plugins.base.impl.classpath.locator.AbstractClassPathLocation$LocationType MULTI_PLUGIN;
+  public static net.xeoh.plugins.base.impl.classpath.locator.AbstractClassPathLocation$LocationType[] values();
+  public static net.xeoh.plugins.base.impl.classpath.locator.AbstractClassPathLocation$LocationType valueOf(java.lang.String);
+  static {};
+}
+Compiled from "ClassPathLocator.java"
+public class net.xeoh.plugins.base.impl.classpath.locator.ClassPathLocator {
+  protected final java.util.logging.Logger logger;
+  public net.xeoh.plugins.base.impl.classpath.locator.ClassPathLocator(net.xeoh.plugins.base.impl.PluginManagerImpl, net.xeoh.plugins.base.impl.classpath.cache.JARCache);
+  public java.util.Collection<net.xeoh.plugins.base.impl.classpath.locator.AbstractClassPathLocation> findBelow(java.net.URI);
+  public java.util.Collection<net.xeoh.plugins.base.impl.classpath.locator.AbstractClassPathLocation> findInCurrentClassPath();
+}
+Compiled from "FileClasspathLocation.java"
+public class net.xeoh.plugins.base.impl.classpath.locator.locations.FileClasspathLocation extends net.xeoh.plugins.base.impl.classpath.locator.AbstractClassPathLocation {
+  public net.xeoh.plugins.base.impl.classpath.locator.locations.FileClasspathLocation(net.xeoh.plugins.base.impl.classpath.cache.JARCache, java.lang.String, java.net.URI);
+  public java.io.InputStream getInputStream(java.lang.String);
+  public net.xeoh.plugins.base.impl.classpath.locator.AbstractClassPathLocation$LocationType getType();
+  public java.util.Collection<java.lang.String> listAllEntries();
+  public java.util.Collection<java.lang.String> listToplevelClassNames();
+}
+Compiled from "JARClasspathLocation.java"
+public class net.xeoh.plugins.base.impl.classpath.locator.locations.JARClasspathLocation extends net.xeoh.plugins.base.impl.classpath.locator.AbstractClassPathLocation {
+  public net.xeoh.plugins.base.impl.classpath.locator.locations.JARClasspathLocation(net.xeoh.plugins.base.impl.classpath.cache.JARCache, java.lang.String, java.net.URI);
+  public net.xeoh.plugins.base.impl.classpath.cache.JARCache$JARInformation getCacheEntry();
+  public net.xeoh.plugins.base.impl.classpath.locator.AbstractClassPathLocation$LocationType getType();
+  public java.io.InputStream getInputStream(java.lang.String);
+  public java.util.Collection<java.lang.String> getPredefinedPluginList();
+  public java.util.Collection<java.lang.String> listAllEntries();
+  public java.util.Collection<java.lang.String> listToplevelClassNames();
+  public static java.util.Collection<java.lang.String> listAllEntriesFor(java.net.URI);
+  public static java.util.Collection<java.lang.String> listToplevelClassNamesForURI(java.net.URI);
+}
+Compiled from "MultiPluginClasspathLocation.java"
+public class net.xeoh.plugins.base.impl.classpath.locator.locations.MultiPluginClasspathLocation extends net.xeoh.plugins.base.impl.classpath.locator.AbstractClassPathLocation {
+  final java.util.Map<java.lang.String, java.lang.String> entryMapping;
+  final java.util.Collection<java.lang.String> allJARs;
+  public net.xeoh.plugins.base.impl.classpath.locator.locations.MultiPluginClasspathLocation(net.xeoh.plugins.base.impl.classpath.cache.JARCache, java.lang.String, java.net.URI);
+  public net.xeoh.plugins.base.impl.classpath.locator.AbstractClassPathLocation$LocationType getType();
+  public java.net.URI[] getClasspathLocations();
+  public java.io.InputStream getInputStream(java.lang.String);
+  public java.util.Collection<java.lang.String> listAllEntries();
+  public java.util.Collection<java.lang.String> listToplevelClassNames();
+}
+Compiled from "PluginClassMetaInformation.java"
+public class net.xeoh.plugins.base.impl.registry.PluginClassMetaInformation {
+  public net.xeoh.plugins.base.impl.registry.PluginClassMetaInformation$PluginClassStatus pluginClassStatus;
+  public java.net.URI pluginOrigin;
+  public java.util.Collection<net.xeoh.plugins.base.impl.registry.PluginClassMetaInformation$Dependency> dependencies;
+  public net.xeoh.plugins.base.impl.registry.PluginClassMetaInformation();
+}
+Compiled from "PluginClassMetaInformation.java"
+public class net.xeoh.plugins.base.impl.registry.PluginClassMetaInformation$Dependency {
+  public java.lang.Class<? extends net.xeoh.plugins.base.Plugin> pluginClass;
+  public java.lang.String[] capabilites;
+  public boolean isOptional;
+  public net.xeoh.plugins.base.impl.registry.PluginClassMetaInformation$Dependency();
+}
+Compiled from "PluginClassMetaInformation.java"
+public final class net.xeoh.plugins.base.impl.registry.PluginClassMetaInformation$PluginClassStatus extends java.lang.Enum<net.xeoh.plugins.base.impl.registry.PluginClassMetaInformation$PluginClassStatus> {
+  public static final net.xeoh.plugins.base.impl.registry.PluginClassMetaInformation$PluginClassStatus UNDEFINED;
+  public static final net.xeoh.plugins.base.impl.registry.PluginClassMetaInformation$PluginClassStatus ACCEPTED;
+  public static final net.xeoh.plugins.base.impl.registry.PluginClassMetaInformation$PluginClassStatus DISABLED;
+  public static final net.xeoh.plugins.base.impl.registry.PluginClassMetaInformation$PluginClassStatus CONTAINS_UNRESOLVED_DEPENDENCIES;
+  public static final net.xeoh.plugins.base.impl.registry.PluginClassMetaInformation$PluginClassStatus SPAWNABLE;
+  public static final net.xeoh.plugins.base.impl.registry.PluginClassMetaInformation$PluginClassStatus LAZY_SPAWNED;
+  public static final net.xeoh.plugins.base.impl.registry.PluginClassMetaInformation$PluginClassStatus SPAWNED;
+  public static final net.xeoh.plugins.base.impl.registry.PluginClassMetaInformation$PluginClassStatus FAILED;
+  public static net.xeoh.plugins.base.impl.registry.PluginClassMetaInformation$PluginClassStatus[] values();
+  public static net.xeoh.plugins.base.impl.registry.PluginClassMetaInformation$PluginClassStatus valueOf(java.lang.String);
+  static {};
+}
+Compiled from "PluginMetaInformation.java"
+public class net.xeoh.plugins.base.impl.registry.PluginMetaInformation {
+  public net.xeoh.plugins.base.impl.registry.PluginMetaInformation$PluginStatus pluginStatus;
+  public net.xeoh.plugins.base.impl.registry.PluginClassMetaInformation classMeta;
+  public final java.util.List<java.lang.Thread> threads;
+  public final java.util.List<java.util.TimerTask> timerTasks;
+  public final java.util.List<java.util.Timer> timers;
+  public final java.util.List<net.xeoh.plugins.base.impl.registry.PluginMetaInformation$PluginLoadedInformation> pluginLoadedInformation;
+  public long spawnTime;
+  public net.xeoh.plugins.base.impl.registry.PluginMetaInformation();
+}
+Compiled from "PluginMetaInformation.java"
+public class net.xeoh.plugins.base.impl.registry.PluginMetaInformation$PluginLoadedInformation {
+  public java.lang.reflect.Method method;
+  public java.lang.Class<? extends net.xeoh.plugins.base.Plugin> baseType;
+  public java.util.List<net.xeoh.plugins.base.Plugin> calledWith;
+  public net.xeoh.plugins.base.impl.registry.PluginMetaInformation$PluginLoadedInformation();
+}
+Compiled from "PluginMetaInformation.java"
+public final class net.xeoh.plugins.base.impl.registry.PluginMetaInformation$PluginStatus extends java.lang.Enum<net.xeoh.plugins.base.impl.registry.PluginMetaInformation$PluginStatus> {
+  public static final net.xeoh.plugins.base.impl.registry.PluginMetaInformation$PluginStatus UNDEFINED;
+  public static final net.xeoh.plugins.base.impl.registry.PluginMetaInformation$PluginStatus SPAWNED;
+  public static final net.xeoh.plugins.base.impl.registry.PluginMetaInformation$PluginStatus INITIALIZED;
+  public static final net.xeoh.plugins.base.impl.registry.PluginMetaInformation$PluginStatus ACTIVE;
+  public static final net.xeoh.plugins.base.impl.registry.PluginMetaInformation$PluginStatus TERMINATED;
+  public static final net.xeoh.plugins.base.impl.registry.PluginMetaInformation$PluginStatus FAILED;
+  public static net.xeoh.plugins.base.impl.registry.PluginMetaInformation$PluginStatus[] values();
+  public static net.xeoh.plugins.base.impl.registry.PluginMetaInformation$PluginStatus valueOf(java.lang.String);
+  static {};
+}
+Compiled from "PluginRegistry.java"
+public class net.xeoh.plugins.base.impl.registry.PluginRegistry {
+  public net.xeoh.plugins.base.impl.registry.PluginRegistry();
+  public java.util.Collection<net.xeoh.plugins.base.Plugin> getAllPlugins();
+  public net.xeoh.plugins.base.impl.registry.PluginMetaInformation getMetaInformationFor(net.xeoh.plugins.base.Plugin);
+  public net.xeoh.plugins.base.impl.registry.PluginClassMetaInformation getMetaInformationFor(java.lang.Class<? extends net.xeoh.plugins.base.Plugin>);
+  public void clear();
+  public void registerPlugin(net.xeoh.plugins.base.Plugin, net.xeoh.plugins.base.impl.registry.PluginMetaInformation);
+  public void registerPluginClass(java.lang.Class<? extends net.xeoh.plugins.base.Plugin>, net.xeoh.plugins.base.impl.registry.PluginClassMetaInformation);
+  public java.util.Collection<java.lang.Class<? extends net.xeoh.plugins.base.Plugin>> getPluginClassesWithStatus(net.xeoh.plugins.base.impl.registry.PluginClassMetaInformation$PluginClassStatus);
+  public void report();
+}
+Compiled from "SpawnResult.java"
+public class net.xeoh.plugins.base.impl.spawning.SpawnResult {
+  public final net.xeoh.plugins.base.Plugin plugin;
+  public final net.xeoh.plugins.base.impl.registry.PluginMetaInformation metaInformation;
+  public net.xeoh.plugins.base.impl.spawning.SpawnResult(net.xeoh.plugins.base.Plugin);
+}
+Compiled from "Spawner.java"
+public class net.xeoh.plugins.base.impl.spawning.Spawner {
+  net.xeoh.plugins.diagnosis.local.DiagnosisChannel<java.lang.String> diagnosis;
+  public net.xeoh.plugins.base.impl.spawning.Spawner(net.xeoh.plugins.base.impl.PluginManagerImpl);
+  public void destroyPlugin(net.xeoh.plugins.base.Plugin, net.xeoh.plugins.base.impl.registry.PluginMetaInformation);
+  public void processThisPluginLoadedAnnotation(net.xeoh.plugins.base.Plugin, net.xeoh.plugins.base.impl.registry.PluginMetaInformation);
+  public void processOtherPluginLoadedAnnotation(net.xeoh.plugins.base.Plugin);
+  public net.xeoh.plugins.base.impl.spawning.SpawnResult spawnPlugin(java.lang.Class);
+  public java.util.Collection<net.xeoh.plugins.base.impl.registry.PluginClassMetaInformation$Dependency> getDependencies(java.lang.Class<? extends net.xeoh.plugins.base.Plugin>);
+  void log(java.lang.String, net.xeoh.plugins.diagnosis.local.options.StatusOption...);
+}
+Compiled from "Spawner.java"
+class net.xeoh.plugins.base.impl.spawning.Spawner$1 extends java.util.TimerTask {
+  final java.lang.Class val$c;
+  final net.xeoh.plugins.base.impl.spawning.Spawner this$0;
+  net.xeoh.plugins.base.impl.spawning.Spawner$1(net.xeoh.plugins.base.impl.spawning.Spawner, java.lang.Class);
+  public void run();
+}
+Compiled from "Spawner.java"
+class net.xeoh.plugins.base.impl.spawning.Spawner$2 implements java.lang.Runnable {
+  final java.lang.reflect.Method val$method;
+  final net.xeoh.plugins.base.impl.spawning.SpawnResult val$spawnResult;
+  final net.xeoh.plugins.base.impl.spawning.Spawner this$0;
+  net.xeoh.plugins.base.impl.spawning.Spawner$2(net.xeoh.plugins.base.impl.spawning.Spawner, java.lang.reflect.Method, net.xeoh.plugins.base.impl.spawning.SpawnResult);
+  public void run();
+}
+Compiled from "Spawner.java"
+class net.xeoh.plugins.base.impl.spawning.Spawner$3 extends java.util.TimerTask {
+  final java.lang.reflect.Method val$method;
+  final net.xeoh.plugins.base.impl.spawning.SpawnResult val$spawnResult;
+  final java.util.Timer val$t;
+  final net.xeoh.plugins.base.impl.spawning.Spawner this$0;
+  net.xeoh.plugins.base.impl.spawning.Spawner$3(net.xeoh.plugins.base.impl.spawning.Spawner, java.lang.reflect.Method, net.xeoh.plugins.base.impl.spawning.SpawnResult, java.util.Timer);
+  public void run();
+}
+Compiled from "AbstractHandler.java"
+public abstract class net.xeoh.plugins.base.impl.spawning.handler.AbstractHandler {
+  final net.xeoh.plugins.base.PluginManager pluginManager;
+  final java.util.logging.Logger logger;
+  public net.xeoh.plugins.base.impl.spawning.handler.AbstractHandler(net.xeoh.plugins.base.PluginManager);
+  public abstract void init(net.xeoh.plugins.base.Plugin) throws java.lang.Exception;
+  public abstract void deinit(net.xeoh.plugins.base.Plugin) throws java.lang.Exception;
+}
+Compiled from "InjectHandler.java"
+public class net.xeoh.plugins.base.impl.spawning.handler.InjectHandler extends net.xeoh.plugins.base.impl.spawning.handler.AbstractHandler {
+  public net.xeoh.plugins.base.impl.spawning.handler.InjectHandler(net.xeoh.plugins.base.PluginManager);
+  public void init(net.xeoh.plugins.base.Plugin) throws java.lang.Exception;
+  public void deinit(net.xeoh.plugins.base.Plugin) throws java.lang.Exception;
+}
+Compiled from "Benchmarker.java"
+public class net.xeoh.plugins.base.impl.util.Benchmarker {
+  static java.util.Map<java.lang.Integer, java.lang.Long> times;
+  public net.xeoh.plugins.base.impl.util.Benchmarker();
+  public static void start(int);
+  public static void stop(int, java.lang.String);
+  static {};
+}
+Compiled from "AddPluginsFromOption.java"
+public interface net.xeoh.plugins.base.options.AddPluginsFromOption extends net.xeoh.plugins.base.Option {
+}
+Compiled from "GetPluginOption.java"
+public interface net.xeoh.plugins.base.options.GetPluginOption extends net.xeoh.plugins.base.Option {
+}
+Compiled from "OptionReportAfter.java"
+public class net.xeoh.plugins.base.options.addpluginsfrom.OptionReportAfter implements net.xeoh.plugins.base.options.AddPluginsFromOption {
+  public net.xeoh.plugins.base.options.addpluginsfrom.OptionReportAfter();
+}
+Compiled from "OptionCapabilities.java"
+public class net.xeoh.plugins.base.options.getplugin.OptionCapabilities implements net.xeoh.plugins.base.options.GetPluginOption {
+  public net.xeoh.plugins.base.options.getplugin.OptionCapabilities(java.lang.String...);
+  public java.lang.String[] getCapabilities();
+}
+Compiled from "OptionPluginSelector.java"
+public final class net.xeoh.plugins.base.options.getplugin.OptionPluginSelector<P extends net.xeoh.plugins.base.Plugin> implements net.xeoh.plugins.base.options.GetPluginOption {
+  public net.xeoh.plugins.base.options.getplugin.OptionPluginSelector(net.xeoh.plugins.base.options.getplugin.PluginSelector<P>);
+  public net.xeoh.plugins.base.options.getplugin.PluginSelector<P> getSelector();
+}
+Compiled from "PluginSelector.java"
+public interface net.xeoh.plugins.base.options.getplugin.PluginSelector<T extends net.xeoh.plugins.base.Plugin> {
+  public abstract boolean selectPlugin(T);
+}
+Compiled from "JSPFProperties.java"
+public class net.xeoh.plugins.base.util.JSPFProperties extends java.util.Properties {
+  public net.xeoh.plugins.base.util.JSPFProperties();
+  public void setProperty(java.lang.Class<?>, java.lang.String, java.lang.String);
+  public static java.lang.String getKey(java.lang.Class<?>, java.lang.String);
+}
+Compiled from "OptionHandler.java"
+public interface net.xeoh.plugins.base.util.OptionHandler<T extends net.xeoh.plugins.base.Option> {
+  public abstract void handle(T);
+}
+Compiled from "OptionUtils.java"
+public class net.xeoh.plugins.base.util.OptionUtils<T extends net.xeoh.plugins.base.Option> {
+  public net.xeoh.plugins.base.util.OptionUtils(T...);
+  public boolean contains(java.lang.Class<? extends T>);
+  public boolean containsAny(java.lang.Class<? extends T>...);
+  public <O extends T> O get(java.lang.Class<? extends O>, O...);
+  public <O extends T> java.util.Collection<O> getAll(java.lang.Class<? extends O>);
+  public <O extends T> void handle(java.lang.Class<? extends O>, net.xeoh.plugins.base.util.OptionHandler<O>);
+}
+Compiled from "PluginConfigurationUtil.java"
+public class net.xeoh.plugins.base.util.PluginConfigurationUtil {
+  public net.xeoh.plugins.base.util.PluginConfigurationUtil(net.xeoh.plugins.base.PluginConfiguration);
+  public int getInt(java.lang.Class<?>, java.lang.String, java.lang.Integer...);
+  public java.lang.String getString(java.lang.Class<?>, java.lang.String, java.lang.String...);
+  public float getFloat(java.lang.Class<?>, java.lang.String, java.lang.Float...);
+  public boolean getBoolean(java.lang.Class<?>, java.lang.String, java.lang.Boolean...);
+  public double getDouble(java.lang.Class<?>, java.lang.String, java.lang.Double...);
+}
+Compiled from "PluginManagerUtil.java"
+public class net.xeoh.plugins.base.util.PluginManagerUtil {
+  public net.xeoh.plugins.base.util.PluginManagerUtil(net.xeoh.plugins.base.PluginManager);
+  public <P extends net.xeoh.plugins.base.Plugin> java.util.Collection<P> getPlugins(java.lang.Class<P>);
+  public <P extends net.xeoh.plugins.base.Plugin> java.util.Collection<P> getPlugins(java.lang.Class<P>, net.xeoh.plugins.base.options.getplugin.PluginSelector<P>);
+}
+Compiled from "PluginManagerUtil.java"
+class net.xeoh.plugins.base.util.PluginManagerUtil$1 implements net.xeoh.plugins.base.options.getplugin.PluginSelector<P> {
+  final net.xeoh.plugins.base.util.PluginManagerUtil this$0;
+  net.xeoh.plugins.base.util.PluginManagerUtil$1(net.xeoh.plugins.base.util.PluginManagerUtil);
+  public boolean selectPlugin(P);
+}
+Compiled from "PluginManagerUtil.java"
+class net.xeoh.plugins.base.util.PluginManagerUtil$2 implements net.xeoh.plugins.base.options.getplugin.PluginSelector<P> {
+  final net.xeoh.plugins.base.options.getplugin.PluginSelector val$selector;
+  final java.util.Collection val$allPlugins;
+  final net.xeoh.plugins.base.util.PluginManagerUtil this$0;
+  net.xeoh.plugins.base.util.PluginManagerUtil$2(net.xeoh.plugins.base.util.PluginManagerUtil, net.xeoh.plugins.base.options.getplugin.PluginSelector, java.util.Collection);
+  public boolean selectPlugin(P);
+}
+Compiled from "PluginUtil.java"
+public class net.xeoh.plugins.base.util.PluginUtil {
+  public net.xeoh.plugins.base.util.PluginUtil(net.xeoh.plugins.base.Plugin);
+  public java.util.Collection<java.lang.Class<? extends net.xeoh.plugins.base.Plugin>> getPrimaryInterfaces();
+  public java.util.Collection<java.lang.Class<? extends net.xeoh.plugins.base.Plugin>> getPluginInterfaces();
+  public java.util.Collection<java.lang.Class<? extends net.xeoh.plugins.base.Plugin>> getAllPluginInterfaces();
+}
+Compiled from "ClassURI.java"
+public class net.xeoh.plugins.base.util.uri.ClassURI extends net.xeoh.plugins.base.util.uri.URIUtil {
+  public static final java.net.URI CLASSPATH;
+  public static final java.net.URI CLASSPATH(java.lang.String);
+  public static final java.net.URI PLUGIN(java.lang.Class<? extends net.xeoh.plugins.base.Plugin>);
+  public net.xeoh.plugins.base.util.uri.ClassURI(java.lang.Class<? extends net.xeoh.plugins.base.Plugin>);
+  public java.net.URI toURI();
+  static {};
+}
+Compiled from "URIUtil.java"
+public abstract class net.xeoh.plugins.base.util.uri.URIUtil {
+  public net.xeoh.plugins.base.util.uri.URIUtil();
+  public abstract java.net.URI toURI();
+}
+Compiled from "Diagnosis.java"
+public interface net.xeoh.plugins.diagnosis.local.Diagnosis extends net.xeoh.plugins.base.Plugin {
+  public abstract <T extends java.io.Serializable> net.xeoh.plugins.diagnosis.local.DiagnosisChannel<T> channel(java.lang.Class<? extends net.xeoh.plugins.diagnosis.local.DiagnosisChannelID<T>>, net.xeoh.plugins.diagnosis.local.options.ChannelOption...);
+}
+Compiled from "DiagnosisChannel.java"
+public interface net.xeoh.plugins.diagnosis.local.DiagnosisChannel<T> {
+  public abstract void status(T, net.xeoh.plugins.diagnosis.local.options.StatusOption...);
+}
+Compiled from "DiagnosisChannelID.java"
+public abstract class net.xeoh.plugins.diagnosis.local.DiagnosisChannelID<T extends java.io.Serializable> {
+  public net.xeoh.plugins.diagnosis.local.DiagnosisChannelID();
+  public java.lang.String toUserRepresentation(T, java.util.Map<java.lang.String, java.io.Serializable>);
+}
+Compiled from "DiagnosisCondition.java"
+public abstract class net.xeoh.plugins.diagnosis.local.DiagnosisCondition {
+  public net.xeoh.plugins.diagnosis.local.DiagnosisCondition();
+  public abstract java.lang.Class<? extends net.xeoh.plugins.diagnosis.local.DiagnosisChannelID<?>>[] observedChannels();
+}
+Compiled from "DiagnosisChannelDummyImpl.java"
+public class net.xeoh.plugins.diagnosis.local.impl.DiagnosisChannelDummyImpl implements net.xeoh.plugins.diagnosis.local.DiagnosisChannel<java.lang.Object> {
+  public net.xeoh.plugins.diagnosis.local.impl.DiagnosisChannelDummyImpl(net.xeoh.plugins.diagnosis.local.impl.DiagnosisImpl, java.lang.Class<? extends net.xeoh.plugins.diagnosis.local.DiagnosisChannelID<?>>);
+  public void status(java.lang.Object, net.xeoh.plugins.diagnosis.local.options.StatusOption...);
+}
+Compiled from "DiagnosisChannelImpl.java"
+public class net.xeoh.plugins.diagnosis.local.impl.DiagnosisChannelImpl implements net.xeoh.plugins.diagnosis.local.DiagnosisChannel<java.lang.Object> {
+  public net.xeoh.plugins.diagnosis.local.impl.DiagnosisChannelImpl(net.xeoh.plugins.diagnosis.local.impl.DiagnosisImpl, java.lang.Class<? extends net.xeoh.plugins.diagnosis.local.DiagnosisChannelID<?>>);
+  public void status(java.lang.Object, net.xeoh.plugins.diagnosis.local.options.StatusOption...);
+}
+Compiled from "DiagnosisImpl.java"
+public class net.xeoh.plugins.diagnosis.local.impl.DiagnosisImpl implements net.xeoh.plugins.diagnosis.local.Diagnosis {
+  public net.xeoh.plugins.base.PluginConfiguration configuration;
+  boolean isDisabled;
+  boolean useStackTraces;
+  boolean compressOutput;
+  int stackTracesDepth;
+  java.lang.String recordingFile;
+  volatile net.xeoh.plugins.diagnosis.local.impl.serialization.java.LogFileWriter serializer;
+  public net.xeoh.plugins.diagnosis.local.impl.DiagnosisImpl();
+  public <T extends java.io.Serializable> net.xeoh.plugins.diagnosis.local.DiagnosisChannel<T> channel(java.lang.Class<? extends net.xeoh.plugins.diagnosis.local.DiagnosisChannelID<T>>, net.xeoh.plugins.diagnosis.local.options.ChannelOption...);
+  public void recordEntry(net.xeoh.plugins.diagnosis.local.impl.serialization.java.Entry);
+  public void init();
+  public void shutdown();
+}
+Compiled from "Entry.java"
+public class net.xeoh.plugins.diagnosis.local.impl.serialization.java.Entry implements java.io.Serializable {
+  public long date;
+  public long threadID;
+  public java.lang.String[] stackTrace;
+  public java.lang.String channel;
+  public java.lang.Object value;
+  public java.util.Map<java.lang.String, java.lang.Object> additionalInfo;
+  public net.xeoh.plugins.diagnosis.local.impl.serialization.java.Entry();
+}
+Compiled from "EntryCallback.java"
+public interface net.xeoh.plugins.diagnosis.local.impl.serialization.java.EntryCallback {
+  public abstract void nextEntry(net.xeoh.plugins.diagnosis.local.impl.serialization.java.Entry);
+}
+Compiled from "LogFileReader.java"
+public class net.xeoh.plugins.diagnosis.local.impl.serialization.java.LogFileReader {
+  public net.xeoh.plugins.diagnosis.local.impl.serialization.java.LogFileReader(java.lang.String);
+  public void replay(net.xeoh.plugins.diagnosis.local.impl.serialization.java.EntryCallback);
+  public static void main(java.lang.String[]);
+}
+Compiled from "LogFileReader.java"
+final class net.xeoh.plugins.diagnosis.local.impl.serialization.java.LogFileReader$1 implements net.xeoh.plugins.diagnosis.local.impl.serialization.java.EntryCallback {
+  net.xeoh.plugins.diagnosis.local.impl.serialization.java.LogFileReader$1();
+  public void nextEntry(net.xeoh.plugins.diagnosis.local.impl.serialization.java.Entry);
+}
+Compiled from "LogFileWriter.java"
+public class net.xeoh.plugins.diagnosis.local.impl.serialization.java.LogFileWriter {
+  public net.xeoh.plugins.diagnosis.local.impl.serialization.java.LogFileWriter(java.lang.String, boolean);
+  void terminate();
+  public void record(net.xeoh.plugins.diagnosis.local.impl.serialization.java.Entry);
+  static java.util.concurrent.LinkedBlockingQueue access$000(net.xeoh.plugins.diagnosis.local.impl.serialization.java.LogFileWriter);
+  static java.io.ObjectOutputStream access$100(net.xeoh.plugins.diagnosis.local.impl.serialization.java.LogFileWriter);
+  static java.util.zip.GZIPOutputStream access$200(net.xeoh.plugins.diagnosis.local.impl.serialization.java.LogFileWriter);
+  static java.io.FileOutputStream access$300(net.xeoh.plugins.diagnosis.local.impl.serialization.java.LogFileWriter);
+}
+Compiled from "LogFileWriter.java"
+class net.xeoh.plugins.diagnosis.local.impl.serialization.java.LogFileWriter$1 implements java.lang.Runnable {
+  final net.xeoh.plugins.diagnosis.local.impl.serialization.java.LogFileWriter this$0;
+  net.xeoh.plugins.diagnosis.local.impl.serialization.java.LogFileWriter$1(net.xeoh.plugins.diagnosis.local.impl.serialization.java.LogFileWriter);
+  public void run();
+}
+Compiled from "LogFileWriter.java"
+class net.xeoh.plugins.diagnosis.local.impl.serialization.java.LogFileWriter$2 implements java.lang.Runnable {
+  final net.xeoh.plugins.diagnosis.local.impl.serialization.java.LogFileWriter this$0;
+  net.xeoh.plugins.diagnosis.local.impl.serialization.java.LogFileWriter$2(net.xeoh.plugins.diagnosis.local.impl.serialization.java.LogFileWriter);
+  public void run();
+}
+Compiled from "ChannelOption.java"
+public interface net.xeoh.plugins.diagnosis.local.options.ChannelOption extends net.xeoh.plugins.base.Option {
+}
+Compiled from "RegisterConditionOption.java"
+public interface net.xeoh.plugins.diagnosis.local.options.RegisterConditionOption extends net.xeoh.plugins.base.Option {
+}
+Compiled from "StatusOption.java"
+public interface net.xeoh.plugins.diagnosis.local.options.StatusOption extends net.xeoh.plugins.base.Option {
+}
+Compiled from "OptionAtomic.java"
+public class net.xeoh.plugins.diagnosis.local.options.status.OptionAtomic implements net.xeoh.plugins.diagnosis.local.options.StatusOption {
+  public net.xeoh.plugins.diagnosis.local.options.status.OptionAtomic();
+}
+Compiled from "OptionComment.java"
+public class net.xeoh.plugins.diagnosis.local.options.status.OptionComment implements net.xeoh.plugins.diagnosis.local.options.StatusOption {
+  public net.xeoh.plugins.diagnosis.local.options.status.OptionComment(java.lang.String);
+}
+Compiled from "OptionInfo.java"
+public class net.xeoh.plugins.diagnosis.local.options.status.OptionInfo implements net.xeoh.plugins.diagnosis.local.options.StatusOption {
+  public net.xeoh.plugins.diagnosis.local.options.status.OptionInfo(java.lang.String, java.io.Serializable);
+  public java.io.Serializable getValue();
+  public java.lang.String getKey();
+}

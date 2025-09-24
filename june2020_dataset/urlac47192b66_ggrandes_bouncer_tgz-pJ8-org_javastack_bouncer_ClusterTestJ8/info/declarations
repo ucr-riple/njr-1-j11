@@ -1,0 +1,1087 @@
+Compiled from "AutoRotateFileOutputStream.java"
+public class org.javastack.bouncer.AutoRotateFileOutputStream extends java.io.OutputStream {
+  public org.javastack.bouncer.AutoRotateFileOutputStream(java.lang.String);
+  public org.javastack.bouncer.AutoRotateFileOutputStream(java.lang.String, java.lang.String);
+  public synchronized void close() throws java.io.IOException;
+  public synchronized void flush() throws java.io.IOException;
+  public void write(byte[]) throws java.io.IOException;
+  public final synchronized void write(byte[], int, int) throws java.io.IOException;
+  public final synchronized void write(int) throws java.io.IOException;
+}
+Compiled from "AutoRotateFileOutputStream.java"
+class org.javastack.bouncer.AutoRotateFileOutputStream$1 extends java.util.LinkedHashMap<java.lang.Integer, java.lang.String> {
+  final org.javastack.bouncer.AutoRotateFileOutputStream this$0;
+  org.javastack.bouncer.AutoRotateFileOutputStream$1(org.javastack.bouncer.AutoRotateFileOutputStream, int);
+  protected boolean removeEldestEntry(java.util.Map$Entry<java.lang.Integer, java.lang.String>);
+}
+Compiled from "Awaiter.java"
+public interface org.javastack.bouncer.Awaiter extends org.javastack.bouncer.Shutdownable {
+}
+Compiled from "Bouncer.java"
+public class org.javastack.bouncer.Bouncer implements org.javastack.bouncer.ServerContext {
+  public org.javastack.bouncer.Bouncer();
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+  static java.lang.String getVersion();
+  static void doSleep(long);
+  java.net.URL getConfigSource(java.lang.String, java.lang.String[]) throws java.net.MalformedURLException;
+  org.javastack.bouncer.SSLFactory getSSLFactory(org.javastack.bouncer.Options, java.lang.String) throws java.io.IOException, java.security.GeneralSecurityException;
+  void initJMX() throws javax.management.JMException;
+  void destroyJMX() throws javax.management.JMException;
+  void reload(java.io.InputStream) throws java.security.NoSuchAlgorithmException, java.io.IOException;
+  boolean startBouncerStyle(org.javastack.bouncer.Bouncer$ConnectionType, java.lang.String, int, org.javastack.bouncer.Options) throws java.io.IOException, java.security.GeneralSecurityException;
+  boolean startCluster(org.javastack.bouncer.Bouncer$ConnectionType, long, java.lang.String, int, org.javastack.bouncer.Options) throws java.io.IOException, java.security.GeneralSecurityException;
+  boolean startRinetdStyle(java.lang.String, int, java.lang.String, int, org.javastack.bouncer.Options) throws java.io.IOException, java.security.GeneralSecurityException;
+  public org.javastack.bouncer.CipherSuites getCipherSuites();
+  public org.javastack.bouncer.RawPacket allocateRawPacket();
+  public void releaseRawPacket(org.javastack.bouncer.RawPacket);
+  public org.javastack.bouncer.MuxPacket allocateMuxPacket();
+  public void releaseMuxPacket(org.javastack.bouncer.MuxPacket);
+  public org.javastack.bouncer.ClusterPacket allocateClusterPacket();
+  public void releaseClusterPacket(org.javastack.bouncer.ClusterPacket);
+  public java.io.ByteArrayOutputStream allocateByteArrayOutputStream();
+  public void releaseByteArrayOutputStream(java.io.ByteArrayOutputStream);
+  public void submitTask(java.lang.Runnable, java.lang.String, long);
+  public void addReloadableAwaiter(org.javastack.bouncer.Awaiter);
+  public boolean awaitShutdown(org.javastack.bouncer.Awaiter);
+  public void addShutdownable(org.javastack.bouncer.Shutdownable);
+  public void removeShutdownable(org.javastack.bouncer.Shutdownable);
+  public void registerSocket(java.net.Socket) throws java.net.SocketException;
+  public void registerSocket(java.net.ServerSocket) throws java.net.SocketException;
+  public void closeSilent(java.net.Socket);
+  public void closeSilent(java.net.ServerSocket);
+  public void stickyRegister(org.javastack.bouncer.StickyStore<java.net.InetAddress, java.net.InetAddress>);
+  public void stickyLocalUpdateNotify(long, long, java.net.InetAddress, java.net.InetAddress);
+  public void stickyRemoteUpdateNotify(org.javastack.bouncer.ClusterPacket);
+  public java.util.List<org.javastack.bouncer.StickyStore<java.net.InetAddress, java.net.InetAddress>> stickyGetForCluster(long);
+  public org.javastack.bouncer.Statistics getStatistics();
+  static {};
+}
+Compiled from "Bouncer.java"
+final class org.javastack.bouncer.Bouncer$1 implements org.javastack.bouncer.GenericPool$GenericPoolFactory<java.io.ByteArrayOutputStream> {
+  org.javastack.bouncer.Bouncer$1();
+  public java.io.ByteArrayOutputStream newInstance();
+  public java.lang.Object newInstance();
+}
+Compiled from "Bouncer.java"
+final class org.javastack.bouncer.Bouncer$2 extends java.util.TimerTask {
+  final org.javastack.bouncer.Bouncer val$bouncer;
+  org.javastack.bouncer.Bouncer$2(org.javastack.bouncer.Bouncer);
+  public void run();
+}
+Compiled from "Bouncer.java"
+class org.javastack.bouncer.Bouncer$3 extends java.net.URLStreamHandler {
+  final java.io.ByteArrayInputStream val$baos;
+  final long val$mtime;
+  final org.javastack.bouncer.Bouncer this$0;
+  org.javastack.bouncer.Bouncer$3(org.javastack.bouncer.Bouncer, java.io.ByteArrayInputStream, long);
+  protected java.net.URLConnection openConnection(java.net.URL) throws java.io.IOException;
+}
+Compiled from "Bouncer.java"
+class org.javastack.bouncer.Bouncer$3$1 extends java.net.URLConnection {
+  final org.javastack.bouncer.Bouncer$3 this$1;
+  org.javastack.bouncer.Bouncer$3$1(org.javastack.bouncer.Bouncer$3, java.net.URL);
+  public void connect() throws java.io.IOException;
+  public java.io.InputStream getInputStream() throws java.io.IOException;
+  public long getLastModified();
+}
+Compiled from "Bouncer.java"
+class org.javastack.bouncer.Bouncer$4 {
+  static final int[] $SwitchMap$org$javastack$bouncer$Bouncer$ConnectionType;
+  static {};
+}
+Compiled from "Bouncer.java"
+final class org.javastack.bouncer.Bouncer$ConnectionType extends java.lang.Enum<org.javastack.bouncer.Bouncer$ConnectionType> {
+  public static final org.javastack.bouncer.Bouncer$ConnectionType MUX_IN;
+  public static final org.javastack.bouncer.Bouncer$ConnectionType MUX_LISTEN;
+  public static final org.javastack.bouncer.Bouncer$ConnectionType MUX_OUT;
+  public static final org.javastack.bouncer.Bouncer$ConnectionType MUX_CONNECT;
+  public static final org.javastack.bouncer.Bouncer$ConnectionType TUN_LISTEN;
+  public static final org.javastack.bouncer.Bouncer$ConnectionType TUN_CONNECT;
+  public static final org.javastack.bouncer.Bouncer$ConnectionType CLUSTER_IN;
+  public static final org.javastack.bouncer.Bouncer$ConnectionType CLUSTER_OUT;
+  public static final org.javastack.bouncer.Bouncer$ConnectionType UNKNOWN_VALUE;
+  public static org.javastack.bouncer.Bouncer$ConnectionType[] values();
+  public static org.javastack.bouncer.Bouncer$ConnectionType valueOf(java.lang.String);
+  static org.javastack.bouncer.Bouncer$ConnectionType getTypeFromString(java.lang.String);
+  static {};
+}
+Compiled from "Bouncer.java"
+class org.javastack.bouncer.Bouncer$StickyKey {
+  final long clusterId;
+  final long replicationId;
+  org.javastack.bouncer.Bouncer$StickyKey(long, long);
+  static org.javastack.bouncer.Bouncer$StickyKey valueOf(long, long);
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+}
+Compiled from "BouncerAddress.java"
+public abstract class org.javastack.bouncer.BouncerAddress {
+  final org.javastack.bouncer.ServerContext context;
+  long lastResolv;
+  org.javastack.bouncer.BouncerAddress(org.javastack.bouncer.ServerContext);
+  abstract void setSSLFactory(org.javastack.bouncer.SSLFactory);
+  abstract org.javastack.bouncer.Options getOpts();
+  abstract void resolve() throws java.net.UnknownHostException;
+  boolean checkUpdateResolv();
+  static java.lang.String fromArrAddress(java.net.InetAddress[]);
+}
+Compiled from "CipherSuites.java"
+public class org.javastack.bouncer.CipherSuites {
+  public org.javastack.bouncer.CipherSuites() throws java.security.NoSuchAlgorithmException, java.io.IOException;
+  public void setupClientCipherSuites(javax.net.ssl.SSLParameters);
+  public void setupServerCipherSuites(javax.net.ssl.SSLParameters);
+  public java.lang.String[] getProtocols();
+  public java.lang.String[] getClientCipherSuites();
+  public java.lang.String[] getServerCipherSuites();
+  public static void main(java.lang.String[]) throws java.lang.Throwable;
+}
+Compiled from "ClientId.java"
+public class org.javastack.bouncer.ClientId {
+  public org.javastack.bouncer.ClientId();
+  public static long newId();
+  public static long getId();
+  public static void setId(java.lang.Long);
+  public static void destroy();
+  static java.util.concurrent.atomic.AtomicLong access$000();
+  static {};
+}
+Compiled from "ClientId.java"
+final class org.javastack.bouncer.ClientId$1 extends java.lang.ThreadLocal<java.lang.Long> {
+  org.javastack.bouncer.ClientId$1();
+  protected java.lang.Long initialValue();
+  protected java.lang.Object initialValue();
+}
+Compiled from "ClusterClient.java"
+class org.javastack.bouncer.ClusterClient {
+  final org.javastack.bouncer.ServerContext context;
+  final org.javastack.bouncer.OutboundAddress right;
+  org.javastack.bouncer.ClusterClient$ClusterClientRemote remote;
+  org.javastack.bouncer.ClusterClient(org.javastack.bouncer.ServerContext, org.javastack.bouncer.OutboundAddress);
+  void openRemote() throws java.io.IOException;
+  static void doSleep(long);
+}
+Compiled from "ClusterClient.java"
+class org.javastack.bouncer.ClusterClient$ClusterClientRemote implements org.javastack.bouncer.Awaiter,java.lang.Runnable {
+  final org.javastack.bouncer.OutboundAddress outboundAddress;
+  java.net.Socket sock;
+  java.io.InputStream is;
+  java.io.OutputStream os;
+  boolean shutdown;
+  final org.javastack.bouncer.SealerAES seal;
+  final org.javastack.bouncer.ClusterClient this$0;
+  org.javastack.bouncer.ClusterClient$ClusterClientRemote(org.javastack.bouncer.ClusterClient, org.javastack.bouncer.OutboundAddress) throws java.io.IOException;
+  void sendRemote(org.javastack.bouncer.ClusterPacket) throws java.io.IOException, java.security.GeneralSecurityException;
+  void sendHELLO();
+  void sendNOP();
+  public void setShutdown();
+  void close();
+  public void run();
+}
+Compiled from "ClusterPacket.java"
+public class org.javastack.bouncer.ClusterPacket {
+  public static final org.javastack.bouncer.GenericPool$GenericPoolFactory<org.javastack.bouncer.ClusterPacket> GENERIC_POOL_FACTORY;
+  public static final int CLUSTER_MSG_TYPE_NOP;
+  public static final int CLUSTER_MSG_TYPE_HELLO;
+  public static final int CLUSTER_MSG_TYPE_STICKY_UPDATE;
+  public static final int CLUSTER_MSG_TYPE_SYNC_BEGIN;
+  public static final int CLUSTER_MSG_TYPE_SYNC_END;
+  public void clear();
+  public void hello();
+  public void nop();
+  public void rawType(int);
+  public void put(long, long, java.net.InetAddress, java.net.InetAddress);
+  public int getMsgType();
+  public long getClusterId();
+  public long getReplicationId();
+  public java.net.InetAddress getStickyAddr();
+  public java.net.InetAddress getMapAddr();
+  public void toWire(java.io.OutputStream) throws java.io.IOException;
+  public void fromWire(java.io.InputStream) throws java.io.IOException;
+  public java.lang.String toString();
+  org.javastack.bouncer.ClusterPacket(org.javastack.bouncer.ClusterPacket$1);
+  static {};
+}
+Compiled from "ClusterPacket.java"
+final class org.javastack.bouncer.ClusterPacket$1 implements org.javastack.bouncer.GenericPool$GenericPoolFactory<org.javastack.bouncer.ClusterPacket> {
+  org.javastack.bouncer.ClusterPacket$1();
+  public org.javastack.bouncer.ClusterPacket newInstance();
+  public java.lang.Object newInstance();
+}
+Compiled from "ClusterServer.java"
+class org.javastack.bouncer.ClusterServer {
+  final org.javastack.bouncer.ServerContext context;
+  final org.javastack.bouncer.InboundAddress left;
+  org.javastack.bouncer.ClusterServer$ClusterServerListen localListen;
+  org.javastack.bouncer.ClusterServer(org.javastack.bouncer.ServerContext, org.javastack.bouncer.InboundAddress);
+  void listenLocal() throws java.io.IOException;
+  static void doSleep(long);
+}
+Compiled from "ClusterServer.java"
+class org.javastack.bouncer.ClusterServer$ClusterServerListen implements org.javastack.bouncer.Awaiter,java.lang.Runnable {
+  final org.javastack.bouncer.InboundAddress inboundAddress;
+  final java.net.ServerSocket listen;
+  boolean shutdown;
+  final org.javastack.bouncer.ClusterServer this$0;
+  org.javastack.bouncer.ClusterServer$ClusterServerListen(org.javastack.bouncer.ClusterServer, org.javastack.bouncer.InboundAddress) throws java.io.IOException;
+  public void setShutdown();
+  void close();
+  public void run();
+  protected synchronized void attender(java.net.Socket) throws java.io.IOException;
+}
+Compiled from "ClusterServer.java"
+class org.javastack.bouncer.ClusterServer$ClusterServerLocal implements org.javastack.bouncer.Awaiter,java.lang.Runnable {
+  final java.net.Socket sock;
+  final org.javastack.bouncer.InboundAddress inboundAddress;
+  final java.io.InputStream is;
+  final java.io.OutputStream os;
+  boolean shutdown;
+  final org.javastack.bouncer.SealerAES seal;
+  final org.javastack.bouncer.ClusterServer this$0;
+  org.javastack.bouncer.ClusterServer$ClusterServerLocal(org.javastack.bouncer.ClusterServer, java.net.Socket, org.javastack.bouncer.InboundAddress) throws java.io.IOException;
+  public void setShutdown();
+  void close();
+  boolean isClosed();
+  void sendLocal(org.javastack.bouncer.ClusterPacket) throws java.io.IOException, java.security.GeneralSecurityException;
+  void sendNOP();
+  void sendStickyTable(long);
+  public void run();
+}
+Compiled from "ClusterServer.java"
+class org.javastack.bouncer.ClusterServer$ClusterServerLocal$1 implements java.lang.Runnable {
+  final java.util.ArrayList val$lcp;
+  final org.javastack.bouncer.ClusterServer$ClusterServerLocal this$1;
+  org.javastack.bouncer.ClusterServer$ClusterServerLocal$1(org.javastack.bouncer.ClusterServer$ClusterServerLocal, java.util.ArrayList);
+  public void run();
+}
+Compiled from "ClusterTest.java"
+public class org.javastack.bouncer.ClusterTest implements org.javastack.bouncer.ServerContext {
+  public org.javastack.bouncer.ClusterTest();
+  public static void main(java.lang.String[]) throws java.lang.Throwable;
+  public void start() throws java.lang.Throwable;
+  public org.javastack.bouncer.ClusterPacket allocateClusterPacket();
+  public void releaseClusterPacket(org.javastack.bouncer.ClusterPacket);
+  public java.io.ByteArrayOutputStream allocateByteArrayOutputStream();
+  public void releaseByteArrayOutputStream(java.io.ByteArrayOutputStream);
+  public void submitTask(java.lang.Runnable, java.lang.String, long);
+  public void addShutdownable(org.javastack.bouncer.Shutdownable);
+  public void removeShutdownable(org.javastack.bouncer.Shutdownable);
+  public void addReloadableAwaiter(org.javastack.bouncer.Awaiter);
+  public boolean awaitShutdown(org.javastack.bouncer.Awaiter);
+  public void registerSocket(java.net.Socket) throws java.net.SocketException;
+  public void registerSocket(java.net.ServerSocket) throws java.net.SocketException;
+  public void closeSilent(java.net.ServerSocket);
+  public void closeSilent(java.net.Socket);
+  public org.javastack.bouncer.CipherSuites getCipherSuites();
+  public org.javastack.bouncer.RawPacket allocateRawPacket();
+  public void releaseRawPacket(org.javastack.bouncer.RawPacket);
+  public org.javastack.bouncer.MuxPacket allocateMuxPacket();
+  public void releaseMuxPacket(org.javastack.bouncer.MuxPacket);
+  public void stickyRegister(org.javastack.bouncer.StickyStore<java.net.InetAddress, java.net.InetAddress>);
+  public void stickyLocalUpdateNotify(long, long, java.net.InetAddress, java.net.InetAddress);
+  public void stickyRemoteUpdateNotify(org.javastack.bouncer.ClusterPacket);
+  public org.javastack.bouncer.Statistics getStatistics();
+  public java.util.List<org.javastack.bouncer.StickyStore<java.net.InetAddress, java.net.InetAddress>> stickyGetForCluster(long);
+}
+Compiled from "Constants.java"
+public class org.javastack.bouncer.Constants {
+  public static final java.lang.String VERSION_FILE;
+  public static final java.lang.String SUITES_FILE;
+  public static final java.lang.String PROP_OUT_FILE;
+  public static final java.lang.String PROP_ERR_FILE;
+  public static final java.lang.String PROP_OUT_STDTOO;
+  public static final int RELOAD_CONFIG;
+  public static final int RELOAD_TIMEOUT;
+  public static final int STATISTICS_PRINT_INTVL;
+  public static final int BUFFER_LEN;
+  public static final int IO_BUFFERS;
+  public static final int BUFFER_POOL_SIZE;
+  public static final int CONNECT_TIMEOUT;
+  public static final int ACCEPT_TIMEOUT;
+  public static final int READ_TIMEOUT;
+  public static final int MUX_READ_TIMEOUT;
+  public static final int MUX_KEEP_ALIVE;
+  public static final int DNS_CACHE_TIME;
+  public static final int CLUSTER_READ_TIMEOUT;
+  public static final int CLUSTER_KEEP_ALIVE;
+  public static final java.lang.String SEALER_PBKDF_ALG;
+  public static final java.lang.String SEALER_MD_ALG;
+  public static final java.lang.String SEALER_HMAC_ALG;
+  public static final java.lang.String SEALER_CIPHER_ALG;
+  public static final int SEALER_CIPHER_MIN_KEY_BITS;
+  public static final int SEALER_REKEY_PACKETS;
+  public static final int SEALER_TS_WINDOW;
+  public org.javastack.bouncer.Constants();
+}
+Compiled from "GenericPool.java"
+public class org.javastack.bouncer.GenericPool<T> {
+  public org.javastack.bouncer.GenericPool(org.javastack.bouncer.GenericPool$GenericPoolFactory<T>, int);
+  public T checkout();
+  public void release(T);
+  public void destroy();
+}
+Compiled from "GenericPool.java"
+class org.javastack.bouncer.GenericPool$1 extends java.lang.ThreadLocal<java.util.concurrent.ArrayBlockingQueue<T>> {
+  final int val$size;
+  final org.javastack.bouncer.GenericPool this$0;
+  org.javastack.bouncer.GenericPool$1(org.javastack.bouncer.GenericPool, int);
+  protected java.util.concurrent.ArrayBlockingQueue<T> initialValue();
+  protected java.lang.Object initialValue();
+}
+Compiled from "GenericPool.java"
+public interface org.javastack.bouncer.GenericPool$GenericPoolFactory<T> {
+  public abstract T newInstance();
+}
+Compiled from "IOHelper.java"
+public class org.javastack.bouncer.IOHelper {
+  public org.javastack.bouncer.IOHelper();
+  public static final int fullRead(java.io.InputStream, byte[], int) throws java.io.IOException;
+  public static final void intToByteArray(int, byte[], int);
+  public static final int intFromByteArray(byte[], int);
+  public static final void longToByteArray(long, byte[], int);
+  public static final long longFromByteArray(byte[], int);
+  public static int intIdFromString(java.lang.String);
+  public static long longIdFromString(java.lang.String);
+  public static final void toWireWithHeader(java.io.OutputStream, byte[], int) throws java.io.IOException;
+  public static final byte[] fromWireWithHeader(java.io.InputStream) throws java.io.IOException;
+  public static void setupSocket(java.net.ServerSocket) throws java.net.SocketException;
+  public static void setupSocket(java.net.Socket) throws java.net.SocketException;
+  public static void closeSilent(java.io.Reader);
+  public static void closeSilent(java.io.InputStream);
+  public static void closeSilent(java.io.OutputStream);
+  public static void closeSilent(java.net.Socket);
+  public static void closeSilent(java.net.ServerSocket);
+  public static java.lang.String socketRemoteToString(java.net.Socket);
+  static {};
+}
+Compiled from "InboundAddress.java"
+class org.javastack.bouncer.InboundAddress extends org.javastack.bouncer.BouncerAddress {
+  final java.lang.String host;
+  final int port;
+  final org.javastack.bouncer.Options opts;
+  org.javastack.bouncer.SSLFactory sslFactory;
+  java.net.InetAddress[] addrs;
+  org.javastack.bouncer.InboundAddress(org.javastack.bouncer.ServerContext, java.lang.String, int, org.javastack.bouncer.Options);
+  void setSSLFactory(org.javastack.bouncer.SSLFactory);
+  org.javastack.bouncer.Options getOpts();
+  public java.lang.String toString();
+  void resolve() throws java.net.UnknownHostException;
+  java.net.InetSocketAddress[] getSocketAddress();
+  java.net.ServerSocket listen() throws java.io.IOException;
+}
+Compiled from "InetAddressComparator.java"
+public class org.javastack.bouncer.InetAddressComparator implements java.util.Comparator<java.net.InetAddress> {
+  public org.javastack.bouncer.InetAddressComparator();
+  public static org.javastack.bouncer.InetAddressComparator getInstance();
+  public int compare(java.net.InetAddress, java.net.InetAddress);
+  public int compare(java.lang.Object, java.lang.Object);
+  static {};
+}
+Compiled from "IpAddress.java"
+public class org.javastack.bouncer.IpAddress {
+  public org.javastack.bouncer.IpAddress();
+  public static final byte[] getBytesByCIDR(int, boolean);
+  public static final java.net.InetAddress getAddressByBytes(byte[]);
+  public static final java.net.InetAddress getAddressByCIDR(int, boolean);
+  public static final void applyMask(byte[], byte[]);
+  public static final java.net.InetAddress getAddressMasked(java.net.InetAddress, int);
+}
+Compiled from "KeyGenerator.java"
+public class org.javastack.bouncer.KeyGenerator {
+  public org.javastack.bouncer.KeyGenerator();
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+  static java.security.cert.X509Certificate generateCertificate(java.lang.String, java.security.KeyPair, int, java.lang.String) throws java.lang.Exception;
+  static void writeBufferBase64(java.io.OutputStream, byte[]) throws java.io.IOException;
+  static void writeCertificate(java.io.OutputStream, java.security.cert.X509Certificate) throws java.lang.Exception;
+  static void writeKey(java.io.OutputStream, java.security.PrivateKey) throws java.lang.Exception;
+}
+Compiled from "Log.java"
+public class org.javastack.bouncer.Log {
+  public static final int LOG_NULL;
+  public static final int LOG_CURR_STDOUT;
+  public static final int LOG_ORIG_STDOUT;
+  public org.javastack.bouncer.Log();
+  static void setMode(int);
+  static boolean isModeOrigEnabled();
+  static boolean isModeCurrEnabled();
+  static void redirStdOutLog(java.lang.String);
+  static void restoreStdOutLog();
+  static void redirStdErrLog(java.lang.String);
+  static void restoreStdErrLog();
+  static void enableDebug();
+  static boolean isDebug();
+  static java.lang.String getTimeStamp();
+  static void debug(java.lang.String);
+  static void info(java.lang.String);
+  static void warn(java.lang.String);
+  static void error(java.lang.String);
+  static void error(java.lang.String, java.lang.Throwable);
+  static {};
+}
+Compiled from "Message.java"
+public interface org.javastack.bouncer.Message {
+  public abstract int getIdChannel();
+  public abstract int getBufferLen();
+  public abstract byte[] getBuffer();
+  public abstract void put(int, int, byte[]);
+  public abstract void clear();
+  public abstract void fromWire(java.io.InputStream) throws java.io.IOException;
+  public abstract void toWire(java.io.OutputStream) throws java.io.IOException;
+}
+Compiled from "MuxClient.java"
+class org.javastack.bouncer.MuxClient {
+  final org.javastack.bouncer.MuxClient$MuxClientMessageRouter router;
+  final java.util.HashMap<java.lang.Integer, org.javastack.bouncer.MuxClient$MuxClientLocal> mapLocals;
+  final org.javastack.bouncer.ServerContext context;
+  final java.util.Map<java.lang.Integer, org.javastack.bouncer.OutboundAddress> left;
+  final org.javastack.bouncer.OutboundAddress right;
+  org.javastack.bouncer.MuxClient$MuxClientRemote remote;
+  org.javastack.bouncer.MuxClient(org.javastack.bouncer.ServerContext, org.javastack.bouncer.OutboundAddress, org.javastack.bouncer.OutboundAddress);
+  void addLeft(org.javastack.bouncer.OutboundAddress);
+  void openRemote() throws java.io.IOException;
+  void openLocal(int, int, java.net.InetAddress);
+  void closeLocal(int);
+  void sendACK(org.javastack.bouncer.RawPacket);
+  void sendNOP();
+  org.javastack.bouncer.MuxClient$MuxClientLocal getLocal(int);
+  static void doSleep(long);
+}
+Compiled from "MuxClient.java"
+abstract class org.javastack.bouncer.MuxClient$MuxClientConnection implements org.javastack.bouncer.Shutdownable,java.lang.Runnable {
+  final org.javastack.bouncer.OutboundAddress outboundAddress;
+  java.net.Socket sock;
+  java.io.InputStream is;
+  java.io.OutputStream os;
+  org.javastack.bouncer.MuxClient$MuxClientMessageRouter router;
+  boolean shutdown;
+  final org.javastack.bouncer.MuxClient this$0;
+  org.javastack.bouncer.MuxClient$MuxClientConnection(org.javastack.bouncer.MuxClient, org.javastack.bouncer.OutboundAddress);
+  void setRouter(org.javastack.bouncer.MuxClient$MuxClientMessageRouter);
+  public void setShutdown();
+  synchronized void close();
+}
+Compiled from "MuxClient.java"
+class org.javastack.bouncer.MuxClient$MuxClientLocal extends org.javastack.bouncer.MuxClient$MuxClientConnection {
+  final java.util.concurrent.Semaphore isLocked;
+  final java.util.concurrent.ArrayBlockingQueue<org.javastack.bouncer.RawPacket> queue;
+  int id;
+  java.net.InetAddress stickyAddress;
+  long keepalive;
+  final org.javastack.bouncer.MuxClient this$0;
+  org.javastack.bouncer.MuxClient$MuxClientLocal(org.javastack.bouncer.MuxClient, org.javastack.bouncer.OutboundAddress);
+  public void setSticky(java.net.InetAddress);
+  void unlock(int);
+  boolean lock(int) throws java.lang.InterruptedException;
+  void setId(int);
+  void sendQueueLocal(org.javastack.bouncer.RawPacket) throws java.io.IOException;
+  public void run();
+}
+Compiled from "MuxClient.java"
+class org.javastack.bouncer.MuxClient$MuxClientLocal$1 implements java.lang.Runnable {
+  final org.javastack.bouncer.MuxClient$MuxClientLocal this$1;
+  org.javastack.bouncer.MuxClient$MuxClientLocal$1(org.javastack.bouncer.MuxClient$MuxClientLocal);
+  public void run();
+}
+Compiled from "MuxClient.java"
+class org.javastack.bouncer.MuxClient$MuxClientMessageRouter {
+  final org.javastack.bouncer.MuxClient this$0;
+  org.javastack.bouncer.MuxClient$MuxClientMessageRouter(org.javastack.bouncer.MuxClient);
+  void onReceiveFromRemote(org.javastack.bouncer.MuxClient$MuxClientRemote, org.javastack.bouncer.MuxPacket);
+  void onReceiveFromLocal(org.javastack.bouncer.MuxClient$MuxClientLocal, org.javastack.bouncer.RawPacket);
+}
+Compiled from "MuxClient.java"
+class org.javastack.bouncer.MuxClient$MuxClientRemote extends org.javastack.bouncer.MuxClient$MuxClientConnection implements org.javastack.bouncer.Awaiter {
+  final org.javastack.bouncer.SealerAES seal;
+  final org.javastack.bouncer.MuxClient this$0;
+  org.javastack.bouncer.MuxClient$MuxClientRemote(org.javastack.bouncer.MuxClient, org.javastack.bouncer.OutboundAddress) throws java.io.IOException;
+  void sendRemote(org.javastack.bouncer.MuxPacket) throws java.io.IOException, java.security.GeneralSecurityException;
+  public void setShutdown();
+  public void run();
+}
+Compiled from "MuxPacket.java"
+public class org.javastack.bouncer.MuxPacket implements org.javastack.bouncer.Message {
+  public static final org.javastack.bouncer.GenericPool$GenericPoolFactory<org.javastack.bouncer.MuxPacket> GENERIC_POOL_FACTORY;
+  public int getIdChannel();
+  public int getBufferLen();
+  public byte[] getBuffer();
+  public int getIdEndPoint();
+  public java.net.InetAddress getSourceAddress();
+  public void syn(int, int, java.net.InetAddress);
+  public void syn(int);
+  public void fin(int);
+  public void ack(int, int);
+  public void nop(int);
+  public boolean syn();
+  public boolean fin();
+  public boolean ack();
+  public int ackSize();
+  public boolean nop();
+  public void put(int, int, byte[]);
+  public void clear();
+  public void toWire(java.io.OutputStream) throws java.io.IOException;
+  public void fromWire(java.io.InputStream) throws java.io.IOException;
+  public java.lang.String toString();
+  org.javastack.bouncer.MuxPacket(org.javastack.bouncer.MuxPacket$1);
+  static {};
+}
+Compiled from "MuxPacket.java"
+final class org.javastack.bouncer.MuxPacket$1 implements org.javastack.bouncer.GenericPool$GenericPoolFactory<org.javastack.bouncer.MuxPacket> {
+  org.javastack.bouncer.MuxPacket$1();
+  public org.javastack.bouncer.MuxPacket newInstance();
+  public java.lang.Object newInstance();
+}
+Compiled from "MuxServer.java"
+class org.javastack.bouncer.MuxServer {
+  final org.javastack.bouncer.MuxServer$MuxServerMessageRouter router;
+  final java.util.HashMap<java.lang.Integer, org.javastack.bouncer.MuxServer$MuxServerRemote> mapRemotes;
+  final org.javastack.bouncer.ServerContext context;
+  org.javastack.bouncer.MuxServer$MuxServerListenLocal localListen;
+  java.util.ArrayList<org.javastack.bouncer.MuxServer$MuxServerListenRemote> remoteListen;
+  org.javastack.bouncer.MuxServer$MuxServerLocal local;
+  final org.javastack.bouncer.InboundAddress left;
+  final java.util.Map<java.lang.Integer, org.javastack.bouncer.InboundAddress> right;
+  org.javastack.bouncer.MuxServer(org.javastack.bouncer.ServerContext, org.javastack.bouncer.InboundAddress, org.javastack.bouncer.InboundAddress);
+  void addRight(org.javastack.bouncer.InboundAddress);
+  void listenLocal() throws java.io.IOException;
+  void listenRemote() throws java.io.IOException;
+  void closeRemote();
+  void closeRemote(int);
+  void sendACK(org.javastack.bouncer.RawPacket);
+  void sendNOP();
+  org.javastack.bouncer.MuxServer$MuxServerRemote getRemote(int);
+  static void doSleep(long);
+}
+Compiled from "MuxServer.java"
+abstract class org.javastack.bouncer.MuxServer$MuxServerConnection implements org.javastack.bouncer.Shutdownable,java.lang.Runnable {
+  final java.net.Socket sock;
+  final org.javastack.bouncer.InboundAddress inboundAddress;
+  final java.io.InputStream is;
+  final java.io.OutputStream os;
+  org.javastack.bouncer.MuxServer$MuxServerMessageRouter router;
+  boolean shutdown;
+  final org.javastack.bouncer.MuxServer this$0;
+  org.javastack.bouncer.MuxServer$MuxServerConnection(org.javastack.bouncer.MuxServer, java.net.Socket, org.javastack.bouncer.InboundAddress) throws java.io.IOException;
+  void setRouter(org.javastack.bouncer.MuxServer$MuxServerMessageRouter);
+  public void setShutdown();
+  void close();
+  boolean isClosed();
+}
+Compiled from "MuxServer.java"
+abstract class org.javastack.bouncer.MuxServer$MuxServerListen implements org.javastack.bouncer.Awaiter,java.lang.Runnable {
+  final org.javastack.bouncer.InboundAddress inboundAddress;
+  final java.net.ServerSocket listen;
+  boolean shutdown;
+  final org.javastack.bouncer.MuxServer this$0;
+  org.javastack.bouncer.MuxServer$MuxServerListen(org.javastack.bouncer.MuxServer, org.javastack.bouncer.InboundAddress) throws java.io.IOException;
+  public void setShutdown();
+  void close();
+  public void run();
+  protected abstract void attender(java.net.Socket) throws java.io.IOException;
+}
+Compiled from "MuxServer.java"
+class org.javastack.bouncer.MuxServer$MuxServerListenLocal extends org.javastack.bouncer.MuxServer$MuxServerListen {
+  final org.javastack.bouncer.MuxServer this$0;
+  org.javastack.bouncer.MuxServer$MuxServerListenLocal(org.javastack.bouncer.MuxServer, org.javastack.bouncer.InboundAddress) throws java.io.IOException;
+  protected synchronized void attender(java.net.Socket) throws java.io.IOException;
+}
+Compiled from "MuxServer.java"
+class org.javastack.bouncer.MuxServer$MuxServerListenRemote extends org.javastack.bouncer.MuxServer$MuxServerListen {
+  final org.javastack.bouncer.MuxServer this$0;
+  org.javastack.bouncer.MuxServer$MuxServerListenRemote(org.javastack.bouncer.MuxServer, org.javastack.bouncer.InboundAddress) throws java.io.IOException;
+  protected synchronized void attender(java.net.Socket) throws java.io.IOException;
+}
+Compiled from "MuxServer.java"
+class org.javastack.bouncer.MuxServer$MuxServerLocal extends org.javastack.bouncer.MuxServer$MuxServerConnection implements org.javastack.bouncer.Awaiter {
+  final org.javastack.bouncer.SealerAES seal;
+  final org.javastack.bouncer.MuxServer this$0;
+  org.javastack.bouncer.MuxServer$MuxServerLocal(org.javastack.bouncer.MuxServer, java.net.Socket, org.javastack.bouncer.InboundAddress) throws java.io.IOException;
+  void sendLocal(org.javastack.bouncer.MuxPacket) throws java.io.IOException, java.security.GeneralSecurityException;
+  public void run();
+}
+Compiled from "MuxServer.java"
+class org.javastack.bouncer.MuxServer$MuxServerMessageRouter {
+  final org.javastack.bouncer.MuxServer this$0;
+  org.javastack.bouncer.MuxServer$MuxServerMessageRouter(org.javastack.bouncer.MuxServer);
+  void onReceiveFromLocal(org.javastack.bouncer.MuxServer$MuxServerLocal, org.javastack.bouncer.MuxPacket);
+  void onReceiveFromRemote(org.javastack.bouncer.MuxServer$MuxServerRemote, org.javastack.bouncer.RawPacket);
+}
+Compiled from "MuxServer.java"
+class org.javastack.bouncer.MuxServer$MuxServerRemote extends org.javastack.bouncer.MuxServer$MuxServerConnection {
+  final java.util.concurrent.Semaphore isLocked;
+  final java.util.concurrent.ArrayBlockingQueue<org.javastack.bouncer.RawPacket> queue;
+  final int id;
+  long keepalive;
+  final org.javastack.bouncer.MuxServer this$0;
+  org.javastack.bouncer.MuxServer$MuxServerRemote(org.javastack.bouncer.MuxServer, java.net.Socket, org.javastack.bouncer.InboundAddress) throws java.io.IOException;
+  void unlock(int);
+  boolean lock(int) throws java.lang.InterruptedException;
+  int getId();
+  void sendQueueRemote(org.javastack.bouncer.RawPacket) throws java.io.IOException;
+  public void run();
+}
+Compiled from "MuxServer.java"
+class org.javastack.bouncer.MuxServer$MuxServerRemote$1 implements java.lang.Runnable {
+  final org.javastack.bouncer.MuxServer$MuxServerRemote this$1;
+  org.javastack.bouncer.MuxServer$MuxServerRemote$1(org.javastack.bouncer.MuxServer$MuxServerRemote);
+  public void run();
+}
+Compiled from "Options.java"
+public class org.javastack.bouncer.Options {
+  public static final java.lang.String S_NULL;
+  public static final java.lang.Integer I_NULL;
+  public static final java.lang.Long L_NULL;
+  public static final int LB_ORDER;
+  public static final int LB_RR;
+  public static final int LB_RAND;
+  public static final int TUN_SSL;
+  public static final int MUX_AES;
+  public static final int MUX_SSL;
+  public static final int TUN_ENDSSL;
+  public static final int MUX_OUT;
+  public static final int MUX_IN;
+  public static final int PROXY_SEND;
+  public static final int CLUSTER_AES;
+  public static final int CLUSTER_SSL;
+  public static final java.lang.String P_AES;
+  public static final java.lang.String P_AES_ALG;
+  public static final java.lang.String P_AES_BITS;
+  public static final java.lang.String P_SSL;
+  public static final java.lang.String P_ENDSSL;
+  public static final java.lang.String P_CONNECT_TIMEOUT;
+  public static final java.lang.String P_READ_TIMEOUT;
+  public static final java.lang.String P_MUX_NAME;
+  public static final java.lang.String P_TUN_ID;
+  public static final java.lang.String P_STICKY;
+  public static final java.lang.String P_CLUSTER_ID;
+  org.javastack.bouncer.StickyConfig stickyConfig;
+  int flags;
+  final java.util.Map<java.lang.String, java.lang.String> strParams;
+  final java.util.Map<java.lang.String, java.lang.Integer> intParams;
+  final java.util.Map<java.lang.String, java.lang.Long> longParams;
+  public org.javastack.bouncer.Options(java.lang.String);
+  public org.javastack.bouncer.Options(org.javastack.bouncer.Options);
+  public int getFlags(int);
+  public org.javastack.bouncer.Options setFlags(int);
+  public org.javastack.bouncer.Options unsetFlags(int);
+  public java.lang.String getString(java.lang.String, java.lang.String);
+  public java.lang.String getString(java.lang.String);
+  public void setString(java.lang.String, java.lang.String);
+  public java.lang.Integer getInteger(java.lang.String, java.lang.Integer);
+  public java.lang.Integer getInteger(java.lang.String);
+  public void setInteger(java.lang.String, java.lang.Integer);
+  public java.lang.Long getLong(java.lang.String, java.lang.Long);
+  public java.lang.Long getLong(java.lang.String);
+  public void setLong(java.lang.String, java.lang.Long);
+  public org.javastack.bouncer.Options unsetOptionsMUX();
+  public org.javastack.bouncer.Options unsetOptionsPlain();
+  public org.javastack.bouncer.Options unsetOptionsCluster();
+  public boolean isOption(int);
+  int parseOptions(java.lang.String);
+  public synchronized java.lang.String toString();
+  public void setMuxName(java.lang.String);
+  public java.lang.String getMuxName();
+  public java.lang.Integer getTunID();
+  public org.javastack.bouncer.StickyConfig getStickyConfig();
+  public void setClusterID(long);
+  public java.lang.Long getClusterID();
+  static {};
+}
+Compiled from "Options.java"
+final class org.javastack.bouncer.Options$1 extends java.util.HashMap<java.lang.String, java.lang.Integer> {
+  org.javastack.bouncer.Options$1();
+}
+Compiled from "Options.java"
+class org.javastack.bouncer.Options$2 extends java.util.HashMap<java.lang.String, java.lang.String> {
+  final org.javastack.bouncer.Options this$0;
+  org.javastack.bouncer.Options$2(org.javastack.bouncer.Options);
+}
+Compiled from "Options.java"
+class org.javastack.bouncer.Options$3 extends java.util.HashMap<java.lang.String, java.lang.Integer> {
+  final org.javastack.bouncer.Options this$0;
+  org.javastack.bouncer.Options$3(org.javastack.bouncer.Options);
+}
+Compiled from "Options.java"
+class org.javastack.bouncer.Options$4 extends java.util.HashMap<java.lang.String, java.lang.Long> {
+  final org.javastack.bouncer.Options this$0;
+  org.javastack.bouncer.Options$4(org.javastack.bouncer.Options);
+}
+Compiled from "OutboundAddress.java"
+class org.javastack.bouncer.OutboundAddress extends org.javastack.bouncer.BouncerAddress {
+  final java.lang.String host;
+  final int port;
+  final org.javastack.bouncer.Options opts;
+  final org.javastack.bouncer.StickyStore<java.net.InetAddress, java.net.InetAddress> stickies;
+  org.javastack.bouncer.SSLFactory sslFactory;
+  java.net.InetAddress[] addrs;
+  int roundrobin;
+  org.javastack.bouncer.OutboundAddress(org.javastack.bouncer.ServerContext, java.lang.String, int, org.javastack.bouncer.Options);
+  void setSSLFactory(org.javastack.bouncer.SSLFactory);
+  org.javastack.bouncer.Options getOpts();
+  public java.lang.String toString();
+  void resolve() throws java.net.UnknownHostException;
+  java.net.Socket connect() throws java.net.UnknownHostException;
+  java.net.Socket connectFrom(java.net.InetAddress) throws java.net.UnknownHostException;
+}
+Compiled from "PlainServer.java"
+class org.javastack.bouncer.PlainServer {
+  final org.javastack.bouncer.ServerContext context;
+  final org.javastack.bouncer.InboundAddress inboundAddress;
+  final org.javastack.bouncer.OutboundAddress outboundAddress;
+  org.javastack.bouncer.PlainServer(org.javastack.bouncer.ServerContext, org.javastack.bouncer.InboundAddress, org.javastack.bouncer.OutboundAddress);
+  void listenLocal();
+}
+Compiled from "PlainServer.java"
+class org.javastack.bouncer.PlainServer$PlainConnector implements org.javastack.bouncer.Shutdownable,java.lang.Runnable {
+  final java.net.Socket client;
+  final org.javastack.bouncer.Options options;
+  java.net.Socket remote;
+  volatile boolean shutdown;
+  final org.javastack.bouncer.PlainServer this$0;
+  org.javastack.bouncer.PlainServer$PlainConnector(org.javastack.bouncer.PlainServer, java.net.Socket, org.javastack.bouncer.Options);
+  public void setShutdown();
+  void close();
+  public void run();
+}
+Compiled from "PlainServer.java"
+class org.javastack.bouncer.PlainServer$PlainListen implements org.javastack.bouncer.Awaiter,java.lang.Runnable {
+  java.net.ServerSocket listen;
+  volatile boolean shutdown;
+  final org.javastack.bouncer.PlainServer this$0;
+  org.javastack.bouncer.PlainServer$PlainListen(org.javastack.bouncer.PlainServer);
+  public void setShutdown();
+  public void run();
+}
+Compiled from "PlainServer.java"
+class org.javastack.bouncer.PlainServer$PlainSocketTransfer implements org.javastack.bouncer.Shutdownable,java.lang.Runnable {
+  final byte[] buf;
+  final java.net.Socket sockin;
+  final java.net.Socket sockout;
+  final java.io.InputStream is;
+  final java.io.OutputStream os;
+  volatile boolean shutdown;
+  byte[] headers;
+  long keepalive;
+  org.javastack.bouncer.PlainServer$PlainSocketTransfer brother;
+  final org.javastack.bouncer.PlainServer this$0;
+  org.javastack.bouncer.PlainServer$PlainSocketTransfer(org.javastack.bouncer.PlainServer, java.net.Socket, java.net.Socket) throws java.io.IOException;
+  void setBrother(org.javastack.bouncer.PlainServer$PlainSocketTransfer);
+  void setHeadersBuffer(byte[]);
+  public void setShutdown();
+  public void run();
+  boolean transfer() throws java.io.IOException;
+}
+Compiled from "ProxyProtocol.java"
+public class org.javastack.bouncer.ProxyProtocol {
+  public org.javastack.bouncer.ProxyProtocol();
+  public static org.javastack.bouncer.ProxyProtocol getInstance();
+  public java.lang.String formatV1(java.net.Socket);
+  public byte[] formatHELO(java.net.Inet4Address);
+  public static void main(java.lang.String[]) throws java.lang.Throwable;
+  static {};
+}
+Compiled from "ProxyProtocol.java"
+final class org.javastack.bouncer.ProxyProtocol$1 implements java.lang.Runnable {
+  org.javastack.bouncer.ProxyProtocol$1();
+  public void run();
+}
+Compiled from "RawPacket.java"
+public class org.javastack.bouncer.RawPacket implements org.javastack.bouncer.Message {
+  public static final org.javastack.bouncer.GenericPool$GenericPoolFactory<org.javastack.bouncer.RawPacket> GENERIC_POOL_FACTORY;
+  public void setIdChannel(int);
+  public int getIdChannel();
+  public int getBufferLen();
+  public byte[] getBuffer();
+  public void put(int, int, byte[]);
+  public void clear();
+  public void toWire(java.io.OutputStream) throws java.io.IOException;
+  public void fromWire(java.io.InputStream) throws java.io.IOException;
+  public java.lang.String toString();
+  org.javastack.bouncer.RawPacket(org.javastack.bouncer.RawPacket$1);
+  static {};
+}
+Compiled from "RawPacket.java"
+final class org.javastack.bouncer.RawPacket$1 implements org.javastack.bouncer.GenericPool$GenericPoolFactory<org.javastack.bouncer.RawPacket> {
+  org.javastack.bouncer.RawPacket$1();
+  public org.javastack.bouncer.RawPacket newInstance();
+  public java.lang.Object newInstance();
+}
+Compiled from "SSLFactory.java"
+public class org.javastack.bouncer.SSLFactory {
+  public org.javastack.bouncer.SSLFactory(org.javastack.bouncer.CipherSuites, java.lang.String, java.lang.String) throws java.io.IOException, java.security.GeneralSecurityException;
+  public org.javastack.bouncer.SSLFactory(org.javastack.bouncer.CipherSuites, java.lang.String, java.lang.String, java.lang.String) throws java.io.IOException, java.security.GeneralSecurityException;
+  public javax.net.ssl.SSLServerSocket createSSLServerSocket() throws java.io.IOException;
+  public javax.net.ssl.SSLSocket createSSLSocket() throws java.io.IOException;
+  public org.javastack.bouncer.CipherSuites getCipherSuites();
+  public static java.security.PrivateKey loadPriKey(java.lang.String) throws java.io.IOException, java.security.GeneralSecurityException;
+  public static java.security.cert.X509Certificate loadX509(java.lang.String) throws java.security.GeneralSecurityException;
+  public static java.security.KeyStore initKeyStore(java.security.cert.X509Certificate, java.security.PrivateKey, java.security.cert.X509Certificate) throws java.io.IOException, java.security.GeneralSecurityException;
+  public static javax.net.ssl.SSLContext initSSLContext(java.security.KeyStore) throws java.security.GeneralSecurityException;
+  public static java.lang.String getSocketProtocol(java.net.Socket);
+  static {};
+}
+Compiled from "SealerAES.java"
+public class org.javastack.bouncer.SealerAES {
+  public org.javastack.bouncer.SealerAES(java.lang.String, boolean);
+  public org.javastack.bouncer.SealerAES(java.lang.String, java.lang.String, int, boolean);
+  public java.lang.String toString();
+  public void reset() throws java.security.GeneralSecurityException;
+  static final javax.crypto.spec.SecretKeySpec key(char[], java.lang.String, int, int, int, java.lang.String) throws java.security.NoSuchAlgorithmException, java.security.spec.InvalidKeySpecException;
+  static final int miniHash(char[]);
+  static final byte[] saltSeq(java.lang.String, int) throws java.security.NoSuchAlgorithmException;
+  static final byte[] hashPassword(char[], java.lang.String, int, int, int) throws java.security.NoSuchAlgorithmException, java.security.spec.InvalidKeySpecException;
+  public byte[] code(byte[], int, int) throws java.io.IOException, java.security.GeneralSecurityException;
+  static final char[] binaryBytesToChars(byte[], int, int);
+  public byte[] getIV() throws java.io.IOException, java.security.GeneralSecurityException;
+  public byte[] decode(byte[], int, int) throws java.io.IOException, java.security.GeneralSecurityException;
+  public static void main(java.lang.String[]) throws java.lang.Throwable;
+  static {};
+}
+Compiled from "ServerContext.java"
+public interface org.javastack.bouncer.ServerContext {
+  public abstract org.javastack.bouncer.CipherSuites getCipherSuites();
+  public abstract org.javastack.bouncer.RawPacket allocateRawPacket();
+  public abstract void releaseRawPacket(org.javastack.bouncer.RawPacket);
+  public abstract org.javastack.bouncer.MuxPacket allocateMuxPacket();
+  public abstract org.javastack.bouncer.ClusterPacket allocateClusterPacket();
+  public abstract void releaseClusterPacket(org.javastack.bouncer.ClusterPacket);
+  public abstract java.io.ByteArrayOutputStream allocateByteArrayOutputStream();
+  public abstract void releaseByteArrayOutputStream(java.io.ByteArrayOutputStream);
+  public abstract void releaseMuxPacket(org.javastack.bouncer.MuxPacket);
+  public abstract void submitTask(java.lang.Runnable, java.lang.String, long);
+  public abstract void addShutdownable(org.javastack.bouncer.Shutdownable);
+  public abstract void removeShutdownable(org.javastack.bouncer.Shutdownable);
+  public abstract void addReloadableAwaiter(org.javastack.bouncer.Awaiter);
+  public abstract boolean awaitShutdown(org.javastack.bouncer.Awaiter);
+  public abstract void registerSocket(java.net.Socket) throws java.net.SocketException;
+  public abstract void registerSocket(java.net.ServerSocket) throws java.net.SocketException;
+  public abstract void closeSilent(java.net.ServerSocket);
+  public abstract void closeSilent(java.net.Socket);
+  public abstract void stickyRegister(org.javastack.bouncer.StickyStore<java.net.InetAddress, java.net.InetAddress>);
+  public abstract void stickyLocalUpdateNotify(long, long, java.net.InetAddress, java.net.InetAddress);
+  public abstract void stickyRemoteUpdateNotify(org.javastack.bouncer.ClusterPacket);
+  public abstract java.util.List<org.javastack.bouncer.StickyStore<java.net.InetAddress, java.net.InetAddress>> stickyGetForCluster(long);
+  public abstract org.javastack.bouncer.Statistics getStatistics();
+}
+Compiled from "Shutdownable.java"
+public interface org.javastack.bouncer.Shutdownable {
+  public abstract void setShutdown();
+}
+Compiled from "SimpleHex.java"
+public class org.javastack.bouncer.SimpleHex {
+  public org.javastack.bouncer.SimpleHex();
+  public static java.lang.String intAsHex(int);
+  public static java.lang.String longAsHex(long);
+  public static java.lang.String bytesAsHex(byte[]);
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "SocketRegistrator.java"
+class org.javastack.bouncer.SocketRegistrator {
+  org.javastack.bouncer.SocketRegistrator();
+  boolean registerSocket(java.net.ServerSocket);
+  boolean unregisterSocket(java.net.ServerSocket);
+  boolean registerSocket(java.net.Socket);
+  boolean unregisterSocket(java.net.Socket);
+  java.util.Set<java.net.Socket> getClientSockets();
+  java.util.Set<java.net.ServerSocket> getServerSockets();
+}
+Compiled from "Statistics.java"
+public class org.javastack.bouncer.Statistics implements org.javastack.bouncer.jmx.BouncerStatisticsMBean {
+  public org.javastack.bouncer.Statistics();
+  public void incTryingConnections();
+  public void decTryingConnections();
+  public int getTryingConnections();
+  public void incActiveConnections();
+  public void decActiveConnections();
+  public int getActiveConnections();
+  public void incReloads();
+  public int getReloads();
+  public void incAttendedConnections();
+  public long getAttendedConnections();
+  public void incFailedConnections();
+  public long getFailedConnections();
+  public org.javastack.bouncer.Statistics incInMsgs();
+  public long getInMsgs();
+  public org.javastack.bouncer.Statistics incOutMsgs();
+  public long getOutMsgs();
+  public org.javastack.bouncer.Statistics incInBytes(int);
+  public long getInBytes();
+  public org.javastack.bouncer.Statistics incOutBytes(int);
+  public long getOutBytes();
+  public java.lang.String toString();
+  public static void main(java.lang.String[]);
+}
+Compiled from "StickyConfig.java"
+public class org.javastack.bouncer.StickyConfig {
+  public static final org.javastack.bouncer.StickyConfig NULL;
+  public final org.javastack.bouncer.StickyConfig$Type type;
+  public final int bitmask;
+  public final int elements;
+  public final int ttlsec;
+  public final long clusterId;
+  public final long replicationId;
+  public org.javastack.bouncer.StickyConfig(org.javastack.bouncer.StickyConfig$Type, int, int, int, long, long);
+  public boolean isReplicated();
+  static {};
+}
+Compiled from "StickyConfig.java"
+public final class org.javastack.bouncer.StickyConfig$Type extends java.lang.Enum<org.javastack.bouncer.StickyConfig$Type> {
+  public static final org.javastack.bouncer.StickyConfig$Type NULL;
+  public static final org.javastack.bouncer.StickyConfig$Type MEM;
+  public static org.javastack.bouncer.StickyConfig$Type[] values();
+  public static org.javastack.bouncer.StickyConfig$Type valueOf(java.lang.String);
+  static {};
+}
+Compiled from "StickyStore.java"
+public abstract class org.javastack.bouncer.StickyStore<K extends java.net.InetAddress, V extends java.net.InetAddress> {
+  protected final org.javastack.bouncer.StickyConfig stickyConfig;
+  protected org.javastack.bouncer.StickyStore(org.javastack.bouncer.StickyConfig);
+  public static <K extends java.net.InetAddress, V extends java.net.InetAddress> org.javastack.bouncer.StickyStore<K, V> getInstance(org.javastack.bouncer.StickyConfig);
+  public org.javastack.bouncer.StickyConfig getConfig();
+  public abstract void put(K, V);
+  public abstract V get(K);
+  public abstract java.util.List<org.javastack.bouncer.StickyStore$StickyEntry<K, V>> getEntries();
+  public static void main(java.lang.String[]) throws java.lang.Throwable;
+}
+Compiled from "StickyStore.java"
+class org.javastack.bouncer.StickyStore$1 {
+  static final int[] $SwitchMap$org$javastack$bouncer$StickyConfig$Type;
+  static {};
+}
+Compiled from "StickyStore.java"
+class org.javastack.bouncer.StickyStore$StickyEntry<K extends java.net.InetAddress, V extends java.net.InetAddress> {
+  public final K key;
+  public final V value;
+  org.javastack.bouncer.StickyStore$StickyEntry(K, V);
+}
+Compiled from "StickyStore.java"
+class org.javastack.bouncer.StickyStore$StickyStoreMEM<K extends java.net.InetAddress, V extends java.net.InetAddress> extends org.javastack.bouncer.StickyStore<K, V> {
+  public synchronized void put(K, V);
+  public synchronized V get(K);
+  public synchronized java.util.List<org.javastack.bouncer.StickyStore$StickyEntry<K, V>> getEntries();
+  org.javastack.bouncer.StickyStore$StickyStoreMEM(org.javastack.bouncer.StickyConfig, org.javastack.bouncer.StickyStore$1);
+}
+Compiled from "StickyStore.java"
+class org.javastack.bouncer.StickyStore$StickyStoreMEM$1 extends java.util.LinkedHashMap<K, org.javastack.bouncer.StickyStore$StickyStoreMEM$TSEntry<V>> {
+  final org.javastack.bouncer.StickyStore$StickyStoreMEM this$0;
+  org.javastack.bouncer.StickyStore$StickyStoreMEM$1(org.javastack.bouncer.StickyStore$StickyStoreMEM, int, float, boolean);
+  protected boolean removeEldestEntry(java.util.Map$Entry<K, org.javastack.bouncer.StickyStore$StickyStoreMEM$TSEntry<V>>);
+}
+Compiled from "StickyStore.java"
+class org.javastack.bouncer.StickyStore$StickyStoreMEM$TSEntry<E> {
+  final long ts;
+  final E value;
+  public org.javastack.bouncer.StickyStore$StickyStoreMEM$TSEntry(E);
+}
+Compiled from "StickyStore.java"
+class org.javastack.bouncer.StickyStore$StickyStoreNULL<K extends java.net.InetAddress, V extends java.net.InetAddress> extends org.javastack.bouncer.StickyStore<K, V> {
+  public void put(K, V);
+  public V get(K);
+  public java.util.List<org.javastack.bouncer.StickyStore$StickyEntry<K, V>> getEntries();
+  org.javastack.bouncer.StickyStore$StickyStoreNULL(org.javastack.bouncer.StickyStore$1);
+}
+Compiled from "TaskManager.java"
+class org.javastack.bouncer.TaskManager {
+  org.javastack.bouncer.TaskManager();
+  void submitTask(java.lang.Runnable, java.lang.String, long);
+  java.util.Map<java.lang.Integer, org.javastack.bouncer.TaskManager$AuditableRunner> getTaskList();
+  static java.util.Map access$000(org.javastack.bouncer.TaskManager);
+}
+Compiled from "TaskManager.java"
+class org.javastack.bouncer.TaskManager$1 extends org.javastack.bouncer.TaskManager$AuditableRunner {
+  final long val$clientId;
+  final int val$taskNum;
+  final java.lang.String val$traceName;
+  final java.lang.Runnable val$task;
+  final org.javastack.bouncer.TaskManager this$0;
+  org.javastack.bouncer.TaskManager$1(org.javastack.bouncer.TaskManager, long, int, java.lang.String, java.lang.Runnable);
+  public void run();
+  public java.lang.String toString();
+}
+Compiled from "TaskManager.java"
+abstract class org.javastack.bouncer.TaskManager$AuditableRunner implements java.lang.Runnable {
+  java.lang.Thread thread;
+  org.javastack.bouncer.TaskManager$AuditableRunner();
+  void setThread(java.lang.Thread);
+  java.lang.Thread getThread();
+  long getClientId();
+  void setClientId(long);
+  void destroyClientId();
+}
+Compiled from "TaskManager.java"
+class org.javastack.bouncer.TaskManager$AuditableThreadFactory implements java.util.concurrent.ThreadFactory {
+  final java.util.concurrent.ThreadFactory defThreadFactory;
+  org.javastack.bouncer.TaskManager$AuditableThreadFactory();
+  public java.lang.Thread newThread(java.lang.Runnable);
+}
+Compiled from "BenchmarkLatency.java"
+public class org.javastack.bouncer.benchmark.BenchmarkLatency {
+  public org.javastack.bouncer.benchmark.BenchmarkLatency();
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+  static {};
+}
+Compiled from "BenchmarkThroughput.java"
+public class org.javastack.bouncer.benchmark.BenchmarkThroughput {
+  public org.javastack.bouncer.benchmark.BenchmarkThroughput();
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+  static java.util.concurrent.ExecutorService access$000();
+  static char[] access$100();
+  static {};
+}
+Compiled from "BenchmarkThroughput.java"
+class org.javastack.bouncer.benchmark.BenchmarkThroughput$SocketReader implements java.lang.Runnable {
+  java.net.Socket sock;
+  java.io.InputStream is;
+  java.util.concurrent.CountDownLatch cdl;
+  public org.javastack.bouncer.benchmark.BenchmarkThroughput$SocketReader(java.net.Socket, java.util.concurrent.CountDownLatch);
+  public void run();
+}
+Compiled from "BenchmarkThroughput.java"
+class org.javastack.bouncer.benchmark.BenchmarkThroughput$SocketSync implements java.lang.Runnable {
+  java.net.Socket sock;
+  public org.javastack.bouncer.benchmark.BenchmarkThroughput$SocketSync(java.net.Socket);
+  public void run();
+  public void close();
+}
+Compiled from "BenchmarkThroughput.java"
+class org.javastack.bouncer.benchmark.BenchmarkThroughput$SocketWriter implements java.lang.Runnable {
+  java.net.Socket sock;
+  java.io.OutputStream os;
+  java.util.concurrent.CountDownLatch cdl;
+  public org.javastack.bouncer.benchmark.BenchmarkThroughput$SocketWriter(java.net.Socket, java.util.concurrent.CountDownLatch);
+  public void run();
+}
+Compiled from "AnnotatedStandardMBean.java"
+public class org.javastack.bouncer.jmx.AnnotatedStandardMBean extends javax.management.StandardMBean {
+  public static void registerMBean(javax.management.MBeanServer, java.lang.Object, javax.management.ObjectName) throws javax.management.JMException;
+  public static void unregisterMBean(javax.management.MBeanServer, javax.management.ObjectName) throws javax.management.JMException;
+  public <T> org.javastack.bouncer.jmx.AnnotatedStandardMBean(T, java.lang.Class<T>) throws javax.management.NotCompliantMBeanException;
+  protected org.javastack.bouncer.jmx.AnnotatedStandardMBean(java.lang.Class<?>) throws javax.management.NotCompliantMBeanException;
+  protected java.lang.String getDescription(javax.management.MBeanAttributeInfo);
+  protected java.lang.String getDescription(javax.management.MBeanOperationInfo);
+  protected java.lang.String getParameterName(javax.management.MBeanOperationInfo, javax.management.MBeanParameterInfo, int);
+  static {};
+}
+Compiled from "BouncerStatistics.java"
+public class org.javastack.bouncer.jmx.BouncerStatistics extends org.javastack.bouncer.Statistics implements org.javastack.bouncer.jmx.BouncerStatisticsMBean {
+  public static final java.lang.String MY_NAME;
+  public org.javastack.bouncer.jmx.BouncerStatistics();
+  public void init() throws javax.management.JMException;
+  public void destroy() throws javax.management.JMException;
+  static {};
+}
+Compiled from "BouncerStatisticsMBean.java"
+public interface org.javastack.bouncer.jmx.BouncerStatisticsMBean {
+  public abstract int getTryingConnections();
+  public abstract int getActiveConnections();
+  public abstract int getReloads();
+  public abstract long getAttendedConnections();
+  public abstract long getFailedConnections();
+  public abstract long getInMsgs();
+  public abstract long getOutMsgs();
+  public abstract long getInBytes();
+  public abstract long getOutBytes();
+}
+Compiled from "Description.java"
+public interface org.javastack.bouncer.jmx.Description extends java.lang.annotation.Annotation {
+  public abstract java.lang.String value();
+}

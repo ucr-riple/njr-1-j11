@@ -1,0 +1,316 @@
+Compiled from "AllDatanode.java"
+public class hdfs.replicationsimulator.AllDatanode {
+  public hdfs.replicationsimulator.Daemon hbthread;
+  public hdfs.replicationsimulator.Daemon commandsthread;
+  boolean checkingPending;
+  public hdfs.replicationsimulator.AllDatanode();
+  void addNode(hdfs.replicationsimulator.Datanode);
+  hdfs.replicationsimulator.Datanode getNode(int);
+  boolean killNode(int);
+  int datanodeListSize();
+  public boolean addToNamenodeQueue(hdfs.replicationsimulator.Event);
+  public boolean addToDatanodeQueue(hdfs.replicationsimulator.Event);
+  public void start();
+  public void stop();
+  public boolean sendHeartbeat(int);
+  static boolean access$000(hdfs.replicationsimulator.AllDatanode);
+  static long access$100(hdfs.replicationsimulator.AllDatanode);
+  static java.util.List access$200(hdfs.replicationsimulator.AllDatanode);
+  static int access$300(hdfs.replicationsimulator.AllDatanode);
+  static long access$400(hdfs.replicationsimulator.AllDatanode);
+  static java.util.Queue access$500(hdfs.replicationsimulator.AllDatanode);
+  static java.util.Queue access$600(hdfs.replicationsimulator.AllDatanode);
+  static long access$700(hdfs.replicationsimulator.AllDatanode);
+}
+Compiled from "AllDatanode.java"
+class hdfs.replicationsimulator.AllDatanode$CommandsHandler implements java.lang.Runnable {
+  final hdfs.replicationsimulator.AllDatanode this$0;
+  hdfs.replicationsimulator.AllDatanode$CommandsHandler(hdfs.replicationsimulator.AllDatanode);
+  public void run();
+  public boolean handleTransfer(int, int, int);
+}
+Compiled from "AllDatanode.java"
+class hdfs.replicationsimulator.AllDatanode$HeartbeatSender implements java.lang.Runnable {
+  final hdfs.replicationsimulator.AllDatanode this$0;
+  hdfs.replicationsimulator.AllDatanode$HeartbeatSender(hdfs.replicationsimulator.AllDatanode);
+  public void run();
+}
+Compiled from "Block.java"
+public class hdfs.replicationsimulator.Block {
+  hdfs.replicationsimulator.Block(int);
+  int getId();
+}
+Compiled from "BlockInfo.java"
+public class hdfs.replicationsimulator.BlockInfo extends hdfs.replicationsimulator.Block implements java.lang.Comparable<hdfs.replicationsimulator.BlockInfo> {
+  hdfs.replicationsimulator.BlockInfo(int);
+  public void addDatanode(hdfs.replicationsimulator.DatanodeInfo);
+  boolean removeDataNode(hdfs.replicationsimulator.DatanodeInfo);
+  boolean hasFailed();
+  int numberOfReplicas();
+  public java.util.Iterator<hdfs.replicationsimulator.DatanodeInfo> nodeIterator();
+  public int compareTo(hdfs.replicationsimulator.BlockInfo);
+  public java.util.List<hdfs.replicationsimulator.DatanodeInfo> getContainingNodes();
+  public int compareTo(java.lang.Object);
+}
+Compiled from "BlocksMap.java"
+public class hdfs.replicationsimulator.BlocksMap {
+  hdfs.replicationsimulator.BlocksMap();
+  public void addBlock(hdfs.replicationsimulator.BlockInfo);
+  boolean removeNode(hdfs.replicationsimulator.BlockInfo, hdfs.replicationsimulator.DatanodeInfo);
+  public java.util.Iterator<hdfs.replicationsimulator.DatanodeInfo> nodeIterator(hdfs.replicationsimulator.BlockInfo);
+  public int getcontainingNodes(hdfs.replicationsimulator.BlockInfo);
+  public hdfs.replicationsimulator.BlockInfo getBlockInfo(int);
+}
+Compiled from "Daemon.java"
+public class hdfs.replicationsimulator.Daemon extends java.lang.Thread {
+  java.lang.Runnable runnable;
+  public hdfs.replicationsimulator.Daemon();
+  public hdfs.replicationsimulator.Daemon(java.lang.Runnable);
+  public hdfs.replicationsimulator.Daemon(java.lang.ThreadGroup, java.lang.Runnable);
+  public java.lang.Runnable getRunnable();
+}
+Compiled from "Datanode.java"
+public class hdfs.replicationsimulator.Datanode extends hdfs.replicationsimulator.Node {
+  public boolean blockChecking;
+  public hdfs.replicationsimulator.Datanode(int, int);
+  int getId();
+  public boolean addCommand(hdfs.replicationsimulator.Event);
+  public void addBlock(hdfs.replicationsimulator.Block);
+  boolean hasFailed();
+  public long getLastHB();
+  public void setLastHB(long);
+  public void setUploadingTime(long);
+  public long getUploadingTime();
+  public void setDownloadingTime(long);
+  public long getDownloadingTime();
+  public boolean kill();
+}
+Compiled from "DatanodeInfo.java"
+public class hdfs.replicationsimulator.DatanodeInfo {
+  java.lang.Object datanodeLock;
+  public hdfs.replicationsimulator.DatanodeInfo(int, int);
+  int getId();
+  public long getLastHB();
+  public void setLastHB(long);
+  public void addBlock(hdfs.replicationsimulator.BlockInfo);
+  public boolean removeBlock(hdfs.replicationsimulator.Block);
+  java.util.Iterator<hdfs.replicationsimulator.BlockInfo> getBlockIterator();
+  java.util.List<hdfs.replicationsimulator.BlockInfo> getBlockList();
+  public int getCapacity();
+  public boolean isGoodTarget(int, java.util.List<hdfs.replicationsimulator.DatanodeInfo>);
+  public void addBlockToBeReplicated(hdfs.replicationsimulator.BlockInfo, hdfs.replicationsimulator.DatanodeInfo[]);
+  public java.util.List<hdfs.replicationsimulator.Event> getCommands();
+}
+Compiled from "DatanodesMap.java"
+public class hdfs.replicationsimulator.DatanodesMap {
+  java.util.Random r;
+  hdfs.replicationsimulator.DatanodesMap();
+  public void addDatanodeInfo(hdfs.replicationsimulator.DatanodeInfo);
+  public hdfs.replicationsimulator.DatanodeInfo getDatanodeInfo(int);
+  public java.util.List<hdfs.replicationsimulator.DatanodeInfo> getHeartbeats();
+  public void removeDatanode(hdfs.replicationsimulator.DatanodeInfo);
+  public hdfs.replicationsimulator.DatanodeInfo randomNode();
+}
+Compiled from "Event.java"
+public class hdfs.replicationsimulator.Event {
+  public static final int HEARTBEAT;
+  public static final int BLOCKRECEPTION;
+  public static final int REPLICATION;
+  public static final int PENDINGTRANSFER;
+  public static final int FAILURE;
+  public hdfs.replicationsimulator.Event(int, int, long);
+  public hdfs.replicationsimulator.Event(int, int, long, int);
+  public hdfs.replicationsimulator.Event(int, int, long, int, int);
+  public int getSource();
+  public int getAction();
+  public long getTime();
+  public int getDestination();
+  public int getBlockId();
+}
+Compiled from "Main.java"
+public class hdfs.replicationsimulator.Main {
+  public hdfs.replicationsimulator.Main();
+  public static void main(java.lang.String[]) throws java.lang.InterruptedException;
+}
+Compiled from "Namenode.java"
+public class hdfs.replicationsimulator.Namenode extends hdfs.replicationsimulator.Node {
+  java.lang.Object datanodeLock;
+  public hdfs.replicationsimulator.Daemon hbthread;
+  public hdfs.replicationsimulator.Daemon replthread;
+  public hdfs.replicationsimulator.Daemon communicationthread;
+  boolean isRunning;
+  volatile long pendingReplicationBlocksCount;
+  volatile long corruptReplicaBlocksCount;
+  volatile long underReplicatedBlocksCount;
+  volatile long scheduledReplicationBlocksCount;
+  volatile long excessBlocksCount;
+  volatile long pendingDeletionBlocksCount;
+  java.util.Random r;
+  static final boolean $assertionsDisabled;
+  public hdfs.replicationsimulator.Namenode();
+  void addNode(hdfs.replicationsimulator.DatanodeInfo);
+  void addBlock(hdfs.replicationsimulator.BlockInfo);
+  void start();
+  void heartbeatCheck();
+  public int computeDatanodeWork();
+  synchronized java.util.List<java.util.List<hdfs.replicationsimulator.BlockInfo>> chooseUnderReplicatedBlocks(int);
+  boolean computeReplicationWorkForBlock(hdfs.replicationsimulator.BlockInfo, int);
+  public void CommunicationCheck();
+  public void initAddBlock(int, hdfs.replicationsimulator.BlockInfo);
+  synchronized void removeStoredBlock(hdfs.replicationsimulator.BlockInfo, hdfs.replicationsimulator.DatanodeInfo);
+  synchronized void updateNeededReplications(hdfs.replicationsimulator.BlockInfo, int, int);
+  public boolean addToDatanodeQueue(hdfs.replicationsimulator.Event);
+  public hdfs.replicationsimulator.BlocksMap getBlocksMap();
+  static long access$000(hdfs.replicationsimulator.Namenode);
+  static long access$100(hdfs.replicationsimulator.Namenode);
+  static hdfs.replicationsimulator.PendingReplicationBlocks access$200(hdfs.replicationsimulator.Namenode);
+  static int access$300(hdfs.replicationsimulator.Namenode);
+  static hdfs.replicationsimulator.UnderReplicatedBlocks access$400(hdfs.replicationsimulator.Namenode);
+  static long access$500(hdfs.replicationsimulator.Namenode);
+  static {};
+}
+Compiled from "Namenode.java"
+class hdfs.replicationsimulator.Namenode$CommunicationMonitor implements java.lang.Runnable {
+  final hdfs.replicationsimulator.Namenode this$0;
+  hdfs.replicationsimulator.Namenode$CommunicationMonitor(hdfs.replicationsimulator.Namenode);
+  public void run();
+}
+Compiled from "Namenode.java"
+class hdfs.replicationsimulator.Namenode$HeartbeatMonitor implements java.lang.Runnable {
+  final hdfs.replicationsimulator.Namenode this$0;
+  hdfs.replicationsimulator.Namenode$HeartbeatMonitor(hdfs.replicationsimulator.Namenode);
+  public void run();
+}
+Compiled from "Namenode.java"
+class hdfs.replicationsimulator.Namenode$ReplicationMonitor implements java.lang.Runnable {
+  static final int INVALIDATE_WORK_PCT_PER_ITERATION;
+  static final float REPLICATION_WORK_MULTIPLIER_PER_ITERATION;
+  final hdfs.replicationsimulator.Namenode this$0;
+  hdfs.replicationsimulator.Namenode$ReplicationMonitor(hdfs.replicationsimulator.Namenode);
+  public void run();
+}
+Compiled from "Node.java"
+public class hdfs.replicationsimulator.Node {
+  public hdfs.replicationsimulator.Node();
+  static long now();
+}
+Compiled from "NodeKiller.java"
+public class hdfs.replicationsimulator.NodeKiller implements java.lang.Runnable {
+  public hdfs.replicationsimulator.NodeKiller();
+  public void run();
+}
+Compiled from "PendingReplicationBlocks.java"
+class hdfs.replicationsimulator.PendingReplicationBlocks {
+  hdfs.replicationsimulator.Daemon timerThread;
+  hdfs.replicationsimulator.PendingReplicationBlocks(long);
+  hdfs.replicationsimulator.PendingReplicationBlocks();
+  void init();
+  void add(hdfs.replicationsimulator.BlockInfo, int);
+  void remove(hdfs.replicationsimulator.BlockInfo);
+  int size();
+  int getNumReplicas(hdfs.replicationsimulator.BlockInfo);
+  hdfs.replicationsimulator.BlockInfo[] getTimedOutBlocks();
+  void stop();
+  void metaSave(java.io.PrintWriter);
+  static boolean access$000(hdfs.replicationsimulator.PendingReplicationBlocks);
+  static long access$100(hdfs.replicationsimulator.PendingReplicationBlocks);
+  static long access$200(hdfs.replicationsimulator.PendingReplicationBlocks);
+  static java.util.Map access$300(hdfs.replicationsimulator.PendingReplicationBlocks);
+  static java.util.ArrayList access$400(hdfs.replicationsimulator.PendingReplicationBlocks);
+}
+Compiled from "PendingReplicationBlocks.java"
+class hdfs.replicationsimulator.PendingReplicationBlocks$PendingBlockInfo {
+  static final boolean $assertionsDisabled;
+  hdfs.replicationsimulator.PendingReplicationBlocks$PendingBlockInfo(int);
+  long getTimeStamp();
+  void setTimeStamp();
+  void incrementReplicas(int);
+  void decrementReplicas();
+  int getNumReplicas();
+  static long access$500(hdfs.replicationsimulator.PendingReplicationBlocks$PendingBlockInfo);
+  static int access$600(hdfs.replicationsimulator.PendingReplicationBlocks$PendingBlockInfo);
+  static {};
+}
+Compiled from "PendingReplicationBlocks.java"
+class hdfs.replicationsimulator.PendingReplicationBlocks$PendingReplicationMonitor implements java.lang.Runnable {
+  final hdfs.replicationsimulator.PendingReplicationBlocks this$0;
+  hdfs.replicationsimulator.PendingReplicationBlocks$PendingReplicationMonitor(hdfs.replicationsimulator.PendingReplicationBlocks);
+  public void run();
+  void pendingReplicationCheck();
+}
+Compiled from "SimFileGenerator.java"
+public class hdfs.replicationsimulator.SimFileGenerator {
+  public hdfs.replicationsimulator.SimFileGenerator();
+  public static void main(java.lang.String[]);
+  public static int constant();
+  public static int exponential();
+  public static int gaussian();
+  public static double uniform(double, double);
+  public static int poisson(int);
+  static {};
+}
+Compiled from "SimTrace.java"
+public class hdfs.replicationsimulator.SimTrace {
+  public static final int FAILURE_DETECTION;
+  public static final int SCHEDULED_FOR_REPAIR;
+  public static final int DATA_LOSS;
+  public static final int BLOCK_RECEIVED;
+  public static final int INFO;
+  public hdfs.replicationsimulator.SimTrace(long, java.lang.String);
+  public hdfs.replicationsimulator.SimTrace(int, int);
+  public hdfs.replicationsimulator.SimTrace(java.lang.String);
+  public hdfs.replicationsimulator.SimTrace(int, int, int);
+  public long getTimestamp();
+  public java.lang.String getMessage();
+  public java.lang.String toString();
+  public int getAction();
+  public int getId();
+  public boolean isLossEvent();
+  public int getIdBlock();
+}
+Compiled from "Simulator.java"
+public class hdfs.replicationsimulator.Simulator {
+  public hdfs.replicationsimulator.Simulator();
+  public static void init(java.lang.String);
+  public static void start();
+  public static int getBandwidth();
+  public static int getHeartbeat();
+  public static int getTimeout();
+  public static int getBlockSize();
+  public static int getNumberofReplicas();
+  public static java.util.Queue<hdfs.replicationsimulator.Event> getToNamenode();
+  public static java.util.Queue<hdfs.replicationsimulator.Event> getToDatanodes();
+  public static hdfs.replicationsimulator.Namenode getNamenode();
+  public static void addTrace(hdfs.replicationsimulator.SimTrace);
+  public static void printResults();
+  public static java.util.List<hdfs.replicationsimulator.Event> getSimulationFailureEvents();
+  public static hdfs.replicationsimulator.AllDatanode getAllDatanodes();
+  static {};
+}
+Compiled from "UnderReplicatedBlocks.java"
+public class hdfs.replicationsimulator.UnderReplicatedBlocks implements java.lang.Iterable<hdfs.replicationsimulator.BlockInfo> {
+  static int LEVEL;
+  hdfs.replicationsimulator.UnderReplicatedBlocks();
+  hdfs.replicationsimulator.UnderReplicatedBlocks(int);
+  void clear();
+  synchronized int size();
+  synchronized boolean contains(hdfs.replicationsimulator.BlockInfo);
+  synchronized boolean add(hdfs.replicationsimulator.BlockInfo, int, int, int);
+  synchronized boolean remove(hdfs.replicationsimulator.BlockInfo, int, int, int);
+  boolean remove(hdfs.replicationsimulator.BlockInfo, int);
+  synchronized void update(hdfs.replicationsimulator.BlockInfo, int, int, int, int, int);
+  public synchronized hdfs.replicationsimulator.UnderReplicatedBlocks$BlockIterator iterator();
+  public java.util.Iterator iterator();
+  static java.util.List access$000(hdfs.replicationsimulator.UnderReplicatedBlocks);
+  static {};
+}
+Compiled from "UnderReplicatedBlocks.java"
+class hdfs.replicationsimulator.UnderReplicatedBlocks$BlockIterator implements java.util.Iterator<hdfs.replicationsimulator.BlockInfo> {
+  final hdfs.replicationsimulator.UnderReplicatedBlocks this$0;
+  hdfs.replicationsimulator.UnderReplicatedBlocks$BlockIterator(hdfs.replicationsimulator.UnderReplicatedBlocks);
+  public hdfs.replicationsimulator.BlockInfo next();
+  public boolean hasNext();
+  public void remove();
+  public int getPriority();
+  public java.lang.Object next();
+}

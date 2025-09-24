@@ -1,0 +1,448 @@
+Compiled from "Entry.java"
+public class ocr.Entry extends javax.swing.JPanel {
+  protected java.awt.Image entryImage;
+  protected java.awt.Graphics entryGraphics;
+  protected int lastX;
+  protected int lastY;
+  protected ocr.Sample sample;
+  protected int downSampleLeft;
+  protected int downSampleRight;
+  protected int downSampleTop;
+  protected int downSampleBottom;
+  protected double ratioX;
+  protected double ratioY;
+  protected int[] pixelMap;
+  ocr.Entry();
+  protected void initImage();
+  public void paint(java.awt.Graphics);
+  protected void processMouseEvent(java.awt.event.MouseEvent);
+  protected void processMouseMotionEvent(java.awt.event.MouseEvent);
+  public void setSample(ocr.Sample);
+  public ocr.Sample getSample();
+  protected boolean hLineClear(int);
+  protected boolean vLineClear(int);
+  protected void findBounds(int, int);
+  protected boolean downSampleQuadrant(int, int);
+  public void downSample();
+  public void clear();
+}
+Compiled from "KohonenNetwork.java"
+public class ocr.KohonenNetwork extends ocr.Network {
+  double[][] outputWeights;
+  protected int learnMethod;
+  protected double learnRate;
+  protected double quitError;
+  protected int retries;
+  protected double reduction;
+  protected ocr.MainEntry owner;
+  public boolean halt;
+  protected ocr.TrainingSet train;
+  public ocr.KohonenNetwork(int, int, ocr.MainEntry);
+  public void setTrainingSet(ocr.TrainingSet);
+  public static void copyWeights(ocr.KohonenNetwork, ocr.KohonenNetwork);
+  public void clearWeights();
+  void normalizeInput(double[], double[], double[]);
+  void normalizeWeight(double[]);
+  void trial(double[]);
+  public int winner(double[], double[], double[]);
+  void evaluateErrors(double, int, int[], double[], double[][], double[]) throws java.lang.RuntimeException;
+  void adjustWeights(double, int, int[], double[], double[][]);
+  void forceWin(int[]) throws java.lang.RuntimeException;
+  public void learn() throws java.lang.RuntimeException;
+  public void initialize();
+}
+Compiled from "MainEntry.java"
+public class ocr.MainEntry extends javax.swing.JFrame implements java.lang.Runnable {
+  static final int DOWNSAMPLE_WIDTH;
+  static final int DOWNSAMPLE_HEIGHT;
+  ocr.Entry entry;
+  ocr.Sample sample;
+  javax.swing.DefaultListModel letterListModel;
+  ocr.KohonenNetwork net;
+  java.lang.Thread trainThread;
+  javax.swing.JLabel JLabel1;
+  javax.swing.JLabel JLabel2;
+  javax.swing.JButton downSample;
+  javax.swing.JButton add;
+  javax.swing.JButton clear;
+  javax.swing.JButton recognize;
+  javax.swing.JScrollPane JScrollPane1;
+  javax.swing.JList letters;
+  javax.swing.JButton del;
+  javax.swing.JButton load;
+  javax.swing.JButton save;
+  javax.swing.JButton train;
+  javax.swing.JLabel JLabel3;
+  javax.swing.JLabel JLabel4;
+  javax.swing.JLabel tries;
+  javax.swing.JLabel lastError;
+  javax.swing.JLabel bestError;
+  javax.swing.JLabel JLabel8;
+  javax.swing.JLabel JLabel5;
+  ocr.MainEntry();
+  public static void main(java.lang.String[]);
+  void downSample_actionPerformed(java.awt.event.ActionEvent);
+  void clear_actionPerformed(java.awt.event.ActionEvent);
+  void add_actionPerformed(java.awt.event.ActionEvent);
+  void del_actionPerformed(java.awt.event.ActionEvent);
+  void letters_valueChanged(javax.swing.event.ListSelectionEvent);
+  void load_actionPerformed(java.awt.event.ActionEvent);
+  void save_actionPerformed(java.awt.event.ActionEvent);
+  public void run();
+  void updateStats(long, double, double);
+  void train_actionPerformed(java.awt.event.ActionEvent);
+  void recognize_actionPerformed(java.awt.event.ActionEvent);
+  char[] mapNeurons();
+}
+Compiled from "MainEntry.java"
+class ocr.MainEntry$SymAction implements java.awt.event.ActionListener {
+  final ocr.MainEntry this$0;
+  ocr.MainEntry$SymAction(ocr.MainEntry);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "MainEntry.java"
+class ocr.MainEntry$SymListSelection implements javax.swing.event.ListSelectionListener {
+  final ocr.MainEntry this$0;
+  ocr.MainEntry$SymListSelection(ocr.MainEntry);
+  public void valueChanged(javax.swing.event.ListSelectionEvent);
+}
+Compiled from "MainEntry.java"
+public class ocr.MainEntry$UpdateStats implements java.lang.Runnable {
+  long _tries;
+  double _lastError;
+  double _bestError;
+  final ocr.MainEntry this$0;
+  public ocr.MainEntry$UpdateStats(ocr.MainEntry);
+  public void run();
+}
+Compiled from "Network.java"
+public abstract class ocr.Network {
+  public static final double NEURON_ON;
+  public static final double NEURON_OFF;
+  protected double[] output;
+  protected double totalError;
+  protected int inputNeuronCount;
+  protected int outputNeuronCount;
+  protected java.util.Random random;
+  public ocr.Network();
+  public abstract void learn() throws java.lang.RuntimeException;
+  abstract void trial(double[]);
+  double[] getOutput();
+  double calculateTrialError(ocr.TrainingSet) throws java.lang.RuntimeException;
+  static double vectorLength(double[]);
+  double dotProduct(double[], double[]);
+  void randomizeWeights(double[][]);
+}
+Compiled from "Sample.java"
+public class ocr.Sample extends javax.swing.JPanel {
+  ocr.SampleData data;
+  ocr.Sample(int, int);
+  ocr.SampleData getData();
+  void setData(ocr.SampleData);
+  public void paint(java.awt.Graphics);
+}
+Compiled from "SampleData.java"
+public class ocr.SampleData implements java.lang.Comparable,java.lang.Cloneable {
+  protected boolean[][] grid;
+  protected char letter;
+  public ocr.SampleData(char, int, int);
+  public void setData(int, int, boolean);
+  public boolean getData(int, int);
+  public void clear();
+  public int getHeight();
+  public int getWidth();
+  public char getLetter();
+  public void setLetter(char);
+  public int compareTo(java.lang.Object);
+  public java.lang.String toString();
+  public java.lang.Object clone();
+}
+Compiled from "TrainingSet.java"
+public class ocr.TrainingSet {
+  protected int inputCount;
+  protected int outputCount;
+  protected double[][] input;
+  protected double[][] output;
+  protected double[] classify;
+  protected int trainingSetCount;
+  ocr.TrainingSet(int, int);
+  public int getInputCount();
+  public int getOutputCount();
+  public void setTrainingSetCount(int);
+  public int getTrainingSetCount();
+  void setInput(int, int, double) throws java.lang.RuntimeException;
+  void setOutput(int, int, double) throws java.lang.RuntimeException;
+  void setClassify(int, double) throws java.lang.RuntimeException;
+  double getInput(int, int) throws java.lang.RuntimeException;
+  double getOutput(int, int) throws java.lang.RuntimeException;
+  double getClassify(int) throws java.lang.RuntimeException;
+  void CalculateClass(int);
+  double[] getOutputSet(int) throws java.lang.RuntimeException;
+  double[] getInputSet(int) throws java.lang.RuntimeException;
+}
+Compiled from "SolveStep.java"
+public class solver.SolveStep {
+  public solver.methods.SolveMethod sm;
+  public solver.structures.Cell cell;
+  public java.lang.Integer value;
+  public java.lang.String info;
+  java.util.Map<java.lang.String, java.lang.Object> params;
+  public solver.SolveStep();
+  public void debug();
+  public void apply(solver.Sudoku);
+  public void setMethod(solver.methods.SolveMethod);
+  public void setCell(solver.structures.Cell);
+  public void setValue(int);
+  public void setInfo(java.lang.String);
+  public void setObjects(java.util.Map<java.lang.String, java.lang.Object>);
+  public solver.methods.SolveMethod getSm();
+  public void setSm(solver.methods.SolveMethod);
+  public java.lang.Integer getValue();
+  public void setValue(java.lang.Integer);
+  public java.util.Map<java.lang.String, java.lang.Object> getParams();
+  public void setParams(java.util.Map<java.lang.String, java.lang.Object>);
+  public solver.structures.Cell getCell();
+  public java.lang.String getInfo();
+}
+Compiled from "Solver.java"
+public class solver.Solver {
+  public solver.Solver();
+  public void solve(solver.Sudoku) throws solver.exceptions.UnsolvableException;
+  public solver.SolveStep solveStep(solver.Sudoku) throws solver.exceptions.UnsolvableException;
+  public void initializeCandidates(solver.Sudoku);
+  static {};
+}
+Compiled from "Sudoku.java"
+public class solver.Sudoku {
+  protected int SIZE;
+  protected int BLOCK_SIZE;
+  public solver.structures.Cell getCell(int, int);
+  public void setCell(int, int, solver.structures.Cell);
+  public solver.Sudoku();
+  public java.lang.String toString(boolean);
+  public static solver.Sudoku NULL();
+  public static solver.Sudoku EASIEST();
+  public static solver.Sudoku EASY();
+  public static solver.Sudoku INTRICATE();
+  public static solver.Sudoku DIFFICULT();
+  public static solver.Sudoku CIOSCA1();
+  public static solver.Sudoku CIOSCA2();
+  public boolean contains(int);
+  public boolean isSolved();
+  public solver.structures.SudokuBlock getBlock(int);
+  public solver.structures.SudokuBlock getBlock(int, int);
+  public solver.structures.SudokuRowCol getRow(int);
+  public solver.structures.SudokuCol getCol(int);
+  public java.lang.String printCandidates(int, int);
+  public int getSize();
+  public void removeCandidateFromRow(java.lang.Integer, int);
+  public void removeCandidateFromCol(java.lang.Integer, int);
+  public void removeCandidateFromBlock(java.lang.Integer, int, int);
+  public void solveCell(solver.structures.Cell, java.lang.Integer);
+  public void checkSolution() throws solver.exceptions.InvalidSolutionException;
+  public java.util.List<solver.structures.Cell> getCellList();
+}
+Compiled from "UnsolvableException.java"
+public class solver.UnsolvableException extends java.lang.Exception {
+  public solver.UnsolvableException(java.lang.String);
+}
+Compiled from "InvalidSolutionException.java"
+public class solver.exceptions.InvalidSolutionException extends java.lang.Exception {
+  public solver.exceptions.InvalidSolutionException(java.lang.String);
+}
+Compiled from "UnsolvableException.java"
+public class solver.exceptions.UnsolvableException extends java.lang.Exception {
+  public solver.exceptions.UnsolvableException(java.lang.String);
+}
+Compiled from "BUG.java"
+public class solver.methods.BUG implements solver.methods.SolveMethod {
+  public solver.methods.BUG();
+  public void apply(solver.Sudoku, solver.SolveStep);
+  public void printInfo(solver.SolveStep);
+  public java.lang.String getName();
+  public solver.SolveStep getStep(solver.Sudoku);
+}
+Compiled from "HiddenSingleBlock.java"
+public class solver.methods.HiddenSingleBlock implements solver.methods.SolveMethod {
+  public solver.methods.HiddenSingleBlock();
+  public java.lang.String getName();
+  public solver.SolveStep getStep(solver.Sudoku);
+  public void apply(solver.Sudoku, solver.SolveStep);
+  public void printInfo(solver.SolveStep);
+}
+Compiled from "HiddenSingleBlock.java"
+class solver.methods.HiddenSingleBlock$1 {
+}
+Compiled from "HiddenSingleBlock.java"
+class solver.methods.HiddenSingleBlock$Freq {
+  public java.util.List<solver.structures.Cell> cells;
+  final solver.methods.HiddenSingleBlock this$0;
+  public void add(solver.structures.Cell);
+  solver.methods.HiddenSingleBlock$Freq(solver.methods.HiddenSingleBlock, solver.methods.HiddenSingleBlock$1);
+}
+Compiled from "HiddenSingleCol.java"
+public class solver.methods.HiddenSingleCol implements solver.methods.SolveMethod {
+  public solver.methods.HiddenSingleCol();
+  public java.lang.String getName();
+  public solver.SolveStep getStep(solver.Sudoku);
+  public void apply(solver.Sudoku, solver.SolveStep);
+  public void printInfo(solver.SolveStep);
+}
+Compiled from "HiddenSingleCol.java"
+class solver.methods.HiddenSingleCol$1 {
+}
+Compiled from "HiddenSingleCol.java"
+class solver.methods.HiddenSingleCol$Freq {
+  public java.util.List<solver.structures.Cell> cells;
+  final solver.methods.HiddenSingleCol this$0;
+  public void add(solver.structures.Cell);
+  solver.methods.HiddenSingleCol$Freq(solver.methods.HiddenSingleCol, solver.methods.HiddenSingleCol$1);
+}
+Compiled from "HiddenSingleRow.java"
+public class solver.methods.HiddenSingleRow implements solver.methods.SolveMethod {
+  public solver.methods.HiddenSingleRow();
+  public java.lang.String getName();
+  public solver.SolveStep getStep(solver.Sudoku);
+  public void apply(solver.Sudoku, solver.SolveStep);
+  public void printInfo(solver.SolveStep);
+}
+Compiled from "HiddenSingleRow.java"
+class solver.methods.HiddenSingleRow$1 {
+}
+Compiled from "HiddenSingleRow.java"
+class solver.methods.HiddenSingleRow$Freq {
+  public java.util.List<solver.structures.Cell> cells;
+  final solver.methods.HiddenSingleRow this$0;
+  public void add(solver.structures.Cell);
+  solver.methods.HiddenSingleRow$Freq(solver.methods.HiddenSingleRow, solver.methods.HiddenSingleRow$1);
+}
+Compiled from "LockedCandidatesPointing.java"
+public class solver.methods.LockedCandidatesPointing implements solver.methods.SolveMethod {
+  public solver.methods.LockedCandidatesPointing();
+  public java.lang.String getName();
+  public solver.SolveStep getStep(solver.Sudoku);
+  public void apply(solver.Sudoku, solver.SolveStep);
+  public void printInfo(solver.SolveStep);
+}
+Compiled from "NakedSingle.java"
+public class solver.methods.NakedSingle implements solver.methods.SolveMethod {
+  public solver.methods.NakedSingle();
+  public java.lang.String getName();
+  public solver.SolveStep getStep(solver.Sudoku);
+  public void apply(solver.Sudoku, solver.SolveStep);
+  public void printInfo(solver.SolveStep);
+}
+Compiled from "SolveMethod.java"
+public interface solver.methods.SolveMethod {
+  public abstract solver.SolveStep getStep(solver.Sudoku);
+  public abstract java.lang.String getName();
+  public abstract void apply(solver.Sudoku, solver.SolveStep);
+  public abstract void printInfo(solver.SolveStep);
+}
+Compiled from "NakedNCol.java"
+public class solver.methods.naked.n.NakedNCol extends solver.methods.naked.pair.NakedPairCol implements solver.methods.SolveMethod {
+  public solver.methods.naked.n.NakedNCol();
+  public java.lang.String getName();
+  public solver.SolveStep getStep(solver.Sudoku);
+}
+Compiled from "NakedNRow.java"
+public class solver.methods.naked.n.NakedNRow extends solver.methods.naked.pair.NakedPairRow implements solver.methods.SolveMethod {
+  public solver.methods.naked.n.NakedNRow();
+  public java.lang.String getName();
+  public solver.SolveStep getStep(solver.Sudoku);
+}
+Compiled from "NakedPairBlock.java"
+public class solver.methods.naked.pair.NakedPairBlock implements solver.methods.SolveMethod {
+  public solver.methods.naked.pair.NakedPairBlock();
+  public void apply(solver.Sudoku, solver.SolveStep);
+  public void printInfo(solver.SolveStep);
+  public java.lang.String getName();
+  public solver.SolveStep getStep(solver.Sudoku);
+}
+Compiled from "NakedPairCol.java"
+public class solver.methods.naked.pair.NakedPairCol implements solver.methods.SolveMethod {
+  public solver.methods.naked.pair.NakedPairCol();
+  public void apply(solver.Sudoku, solver.SolveStep);
+  public void printInfo(solver.SolveStep);
+  public java.lang.String getName();
+  public solver.SolveStep getStep(solver.Sudoku);
+}
+Compiled from "NakedPairRow.java"
+public class solver.methods.naked.pair.NakedPairRow implements solver.methods.SolveMethod {
+  public solver.methods.naked.pair.NakedPairRow();
+  public void apply(solver.Sudoku, solver.SolveStep);
+  public void printInfo(solver.SolveStep);
+  public java.lang.String getName();
+  public solver.SolveStep getStep(solver.Sudoku);
+}
+Compiled from "Couple.java"
+public class solver.methods.naked.sets.Couple {
+  public java.lang.Integer a;
+  public java.lang.Integer b;
+  public solver.methods.naked.sets.Couple(int, int);
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+  public boolean isIn(java.util.List<java.lang.Integer>);
+  public boolean atLeastOneIsIn(java.util.List<java.lang.Integer>);
+  public int size();
+}
+Compiled from "Cell.java"
+public class solver.structures.Cell {
+  public solver.structures.Cell(int, int);
+  public solver.structures.Cell(int, int, java.lang.Integer);
+  public boolean isSolved();
+  public void setSolved(boolean);
+  public java.lang.Integer getValue();
+  public void setValue(java.lang.Integer);
+  public java.util.List<java.lang.Integer> getCandidates();
+  public void setCandidates(java.util.List<java.lang.Integer>);
+  public boolean is(int);
+  public java.lang.String printCandidates();
+  public void addCandidate(java.lang.Integer);
+  public void removeCandidate(java.lang.Integer);
+  public int getRow();
+  public int getCol();
+  public java.lang.String toString();
+  public int getBlock();
+}
+Compiled from "Cell.java"
+class solver.structures.Cell$1 implements java.util.Comparator<java.lang.Integer> {
+  final solver.structures.Cell this$0;
+  solver.structures.Cell$1(solver.structures.Cell);
+  public int compare(java.lang.Integer, java.lang.Integer);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "SudokuBlock.java"
+public class solver.structures.SudokuBlock extends solver.Sudoku {
+  public solver.structures.SudokuBlock();
+  public solver.structures.SudokuBlock getBlock(int);
+  public solver.structures.SudokuBlock getBlock(int, int);
+  public void removeCandidate(java.lang.Integer);
+}
+Compiled from "SudokuCol.java"
+public class solver.structures.SudokuCol extends solver.structures.SudokuRowCol {
+  public solver.structures.SudokuCol(int);
+}
+Compiled from "SudokuRow.java"
+public class solver.structures.SudokuRow extends solver.structures.SudokuRowCol {
+  public solver.structures.SudokuRow(int);
+}
+Compiled from "SudokuRowCol.java"
+public abstract class solver.structures.SudokuRowCol {
+  protected int SIZE;
+  protected java.util.ArrayList<solver.structures.Cell> cells;
+  public solver.structures.SudokuRowCol(int);
+  public boolean contains(int);
+  public void setCell(int, solver.structures.Cell);
+  public solver.structures.Cell getCell(int);
+  public void removeCandidate(java.lang.Integer);
+  public void removeCandidateExceptBlock(java.lang.Integer, int);
+  public void checkSolution() throws solver.exceptions.InvalidSolutionException;
+  public java.util.List<solver.structures.Cell> getCells();
+}
+Compiled from "test.java"
+public class test.test {
+  public test.test();
+  public static void main(java.lang.String[]);
+}

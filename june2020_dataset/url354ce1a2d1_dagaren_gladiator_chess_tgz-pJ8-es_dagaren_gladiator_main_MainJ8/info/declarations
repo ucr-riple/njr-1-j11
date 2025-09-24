@@ -1,0 +1,1287 @@
+Compiled from "CommandController.java"
+public abstract class es.dagaren.gladiator.communication.CommandController {
+  protected java.util.List<es.dagaren.gladiator.communication.CommandReceiver> receivers;
+  public es.dagaren.gladiator.communication.CommandController();
+  public void addCommandReceiver(es.dagaren.gladiator.communication.CommandReceiver);
+  public void removeCommandRecevier(es.dagaren.gladiator.communication.CommandReceiver);
+  public abstract void sendCommand(java.lang.String);
+  public abstract void recieveCommand(java.lang.String);
+  public abstract void start();
+  public abstract void stop();
+}
+Compiled from "CommandReceiver.java"
+public interface es.dagaren.gladiator.communication.CommandReceiver {
+  public abstract void onCommandReceived(java.lang.String);
+}
+Compiled from "ConsoleCommandController.java"
+public class es.dagaren.gladiator.communication.ConsoleCommandController extends es.dagaren.gladiator.communication.CommandController implements java.lang.Runnable {
+  boolean stopped;
+  java.lang.Thread t;
+  public es.dagaren.gladiator.communication.ConsoleCommandController();
+  public void sendCommand(java.lang.String);
+  public void recieveCommand(java.lang.String);
+  public synchronized void start();
+  public synchronized void stop();
+  public void run();
+}
+Compiled from "ProtocolController.java"
+public abstract class es.dagaren.gladiator.communication.ProtocolController implements es.dagaren.gladiator.communication.CommandReceiver {
+  protected es.dagaren.gladiator.communication.CommandController commandController;
+  public es.dagaren.gladiator.communication.ProtocolController();
+  public void setCommandController(es.dagaren.gladiator.communication.CommandController);
+  public es.dagaren.gladiator.communication.CommandController getCommandController();
+  public void onCommandReceived(java.lang.String);
+  public void sendCommand(java.lang.String);
+}
+Compiled from "EngineAdapter.java"
+public class es.dagaren.gladiator.communication.xboard.EngineAdapter implements es.dagaren.gladiator.communication.xboard.UserToEngine,es.dagaren.gladiator.engine.EngineObserver {
+  public es.dagaren.gladiator.communication.xboard.EngineAdapter();
+  public void setEngineController(es.dagaren.gladiator.communication.xboard.EngineController);
+  public es.dagaren.gladiator.communication.xboard.EngineController getEngineController();
+  public void setEngine(es.dagaren.gladiator.engine.Engine);
+  public es.dagaren.gladiator.engine.Engine getEngine();
+  public synchronized void New();
+  public synchronized void analyze();
+  public synchronized void bk();
+  public synchronized void white();
+  public synchronized void black();
+  public synchronized void computer();
+  public synchronized void pause();
+  public synchronized void resume();
+  public void ping(java.lang.String);
+  public synchronized void draw();
+  public synchronized void easy();
+  public synchronized void hard();
+  public synchronized void edit();
+  public synchronized void force();
+  public synchronized void go();
+  public synchronized void playother();
+  public synchronized void hint();
+  public synchronized void holding(java.lang.String, java.lang.String, java.lang.String, java.lang.String);
+  public synchronized void usermove(es.dagaren.gladiator.representation.Movement);
+  public synchronized void moveNow();
+  public synchronized void name(java.lang.String);
+  public synchronized void post();
+  public synchronized void nopost();
+  public synchronized void partner(java.lang.String);
+  public synchronized void partner();
+  public synchronized void ptell(java.lang.String);
+  public synchronized void quit();
+  public synchronized void random();
+  public synchronized void rating();
+  public synchronized void ics(java.lang.String);
+  public synchronized void remove();
+  public synchronized void result(java.lang.String, java.lang.String);
+  public synchronized void setboard(java.lang.String);
+  public synchronized void sd(java.lang.String);
+  public synchronized void st(java.lang.String);
+  public synchronized void level(java.lang.String, java.lang.String, java.lang.String);
+  public synchronized void time(java.lang.String);
+  public synchronized void otim(java.lang.String);
+  public synchronized void undo();
+  public synchronized void variant(java.lang.String);
+  public synchronized void xboard();
+  public synchronized void protover(java.lang.String);
+  public synchronized void accepted(java.lang.String);
+  public synchronized void rejected(java.lang.String);
+  public void onGameFinished(java.lang.String, java.lang.String);
+  public void onIncorrectMove(es.dagaren.gladiator.representation.Movement);
+  public void onMoveDone(es.dagaren.gladiator.representation.Movement);
+  public void onPublishInfo(es.dagaren.gladiator.search.SearchInfo);
+}
+Compiled from "EngineController.java"
+public class es.dagaren.gladiator.communication.xboard.EngineController extends es.dagaren.gladiator.communication.ProtocolController implements es.dagaren.gladiator.communication.xboard.EngineToUser {
+  protected es.dagaren.gladiator.communication.xboard.UserToEngine receiver;
+  public es.dagaren.gladiator.communication.xboard.EngineController();
+  public void setReceiver(es.dagaren.gladiator.communication.xboard.UserToEngine);
+  public es.dagaren.gladiator.communication.xboard.UserToEngine getReceiver();
+  public void onCommandReceived(java.lang.String);
+  public synchronized void feature(java.util.Map<java.lang.String, java.lang.String>);
+  public synchronized void askuser(java.lang.String, java.lang.String);
+  public synchronized void error(java.lang.String, java.lang.String);
+  public synchronized void illegalMove(java.lang.String, java.lang.String);
+  public synchronized void move(java.lang.String);
+  public void offerDraw();
+  public void resign();
+  public void result(java.lang.String, java.lang.String);
+  public void tellics(java.lang.String);
+  public void telluser(java.lang.String);
+  public void tellusererror(java.lang.String);
+  public void thinkingOutput(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String);
+  public void tellall(java.lang.String);
+  public void tellicsnoalias(java.lang.String);
+  public void tellopponent(java.lang.String);
+  public void tellothers(java.lang.String);
+  public void pong(java.lang.String);
+}
+Compiled from "EngineToUser.java"
+public interface es.dagaren.gladiator.communication.xboard.EngineToUser {
+  public abstract void feature(java.util.Map<java.lang.String, java.lang.String>);
+  public abstract void illegalMove(java.lang.String, java.lang.String);
+  public abstract void error(java.lang.String, java.lang.String);
+  public abstract void move(java.lang.String);
+  public abstract void result(java.lang.String, java.lang.String);
+  public abstract void pong(java.lang.String);
+  public abstract void resign();
+  public abstract void offerDraw();
+  public abstract void tellopponent(java.lang.String);
+  public abstract void tellothers(java.lang.String);
+  public abstract void tellall(java.lang.String);
+  public abstract void telluser(java.lang.String);
+  public abstract void tellusererror(java.lang.String);
+  public abstract void askuser(java.lang.String, java.lang.String);
+  public abstract void tellics(java.lang.String);
+  public abstract void tellicsnoalias(java.lang.String);
+  public abstract void thinkingOutput(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String);
+}
+Compiled from "States.java"
+public final class es.dagaren.gladiator.communication.xboard.States extends java.lang.Enum<es.dagaren.gladiator.communication.xboard.States> {
+  public static final es.dagaren.gladiator.communication.xboard.States OBSERVING;
+  public static final es.dagaren.gladiator.communication.xboard.States WAITING;
+  public static final es.dagaren.gladiator.communication.xboard.States THINKING;
+  public static final es.dagaren.gladiator.communication.xboard.States PONDERING;
+  public static final es.dagaren.gladiator.communication.xboard.States ANALYZING;
+  public static final es.dagaren.gladiator.communication.xboard.States EDITING;
+  public static es.dagaren.gladiator.communication.xboard.States[] values();
+  public static es.dagaren.gladiator.communication.xboard.States valueOf(java.lang.String);
+  static {};
+}
+Compiled from "UserController.java"
+public class es.dagaren.gladiator.communication.xboard.UserController extends es.dagaren.gladiator.communication.ProtocolController implements es.dagaren.gladiator.communication.xboard.UserToEngine {
+  es.dagaren.gladiator.communication.xboard.EngineToUser receiver;
+  public es.dagaren.gladiator.communication.xboard.UserController();
+  void setReceiver(es.dagaren.gladiator.communication.xboard.EngineToUser);
+  es.dagaren.gladiator.communication.xboard.EngineToUser getReceiver();
+  public void onCommandReceived(java.lang.String);
+  public synchronized void protover(java.lang.String);
+  public synchronized void rejected(java.lang.String);
+  public synchronized void accepted(java.lang.String);
+  public synchronized void New();
+  public synchronized void analyze();
+  public synchronized void bk();
+  public synchronized void black();
+  public synchronized void computer();
+  public synchronized void draw();
+  public synchronized void easy();
+  public synchronized void edit();
+  public synchronized void force();
+  public synchronized void go();
+  public synchronized void playother();
+  public synchronized void hard();
+  public synchronized void hint();
+  public synchronized void holding(java.lang.String, java.lang.String, java.lang.String, java.lang.String);
+  public synchronized void level(java.lang.String, java.lang.String, java.lang.String);
+  public synchronized void usermove(es.dagaren.gladiator.representation.Movement);
+  public synchronized void moveNow();
+  public synchronized void name(java.lang.String);
+  public synchronized void nopost();
+  public synchronized void otim(java.lang.String);
+  public synchronized void partner(java.lang.String);
+  public synchronized void partner();
+  public synchronized void post();
+  public synchronized void ptell(java.lang.String);
+  public synchronized void quit();
+  public synchronized void random();
+  public synchronized void rating();
+  public synchronized void ics(java.lang.String);
+  public synchronized void pause();
+  public synchronized void resume();
+  public synchronized void remove();
+  public synchronized void result(java.lang.String, java.lang.String);
+  public synchronized void setboard(java.lang.String);
+  public synchronized void sd(java.lang.String);
+  public synchronized void st(java.lang.String);
+  public synchronized void time(java.lang.String);
+  public synchronized void undo();
+  public synchronized void variant(java.lang.String);
+  public synchronized void white();
+  public synchronized void xboard();
+  public synchronized void ping(java.lang.String);
+}
+Compiled from "UserToEngine.java"
+public interface es.dagaren.gladiator.communication.xboard.UserToEngine {
+  public abstract void xboard();
+  public abstract void protover(java.lang.String);
+  public abstract void accepted(java.lang.String);
+  public abstract void rejected(java.lang.String);
+  public abstract void New();
+  public abstract void variant(java.lang.String);
+  public abstract void quit();
+  public abstract void random();
+  public abstract void force();
+  public abstract void go();
+  public abstract void playother();
+  public abstract void white();
+  public abstract void black();
+  public abstract void level(java.lang.String, java.lang.String, java.lang.String);
+  public abstract void st(java.lang.String);
+  public abstract void sd(java.lang.String);
+  public abstract void time(java.lang.String);
+  public abstract void otim(java.lang.String);
+  public abstract void usermove(es.dagaren.gladiator.representation.Movement);
+  public abstract void moveNow();
+  public abstract void ping(java.lang.String);
+  public abstract void draw();
+  public abstract void result(java.lang.String, java.lang.String);
+  public abstract void setboard(java.lang.String);
+  public abstract void edit();
+  public abstract void hint();
+  public abstract void bk();
+  public abstract void undo();
+  public abstract void remove();
+  public abstract void hard();
+  public abstract void easy();
+  public abstract void post();
+  public abstract void nopost();
+  public abstract void analyze();
+  public abstract void name(java.lang.String);
+  public abstract void rating();
+  public abstract void ics(java.lang.String);
+  public abstract void computer();
+  public abstract void pause();
+  public abstract void resume();
+  public abstract void partner(java.lang.String);
+  public abstract void partner();
+  public abstract void ptell(java.lang.String);
+  public abstract void holding(java.lang.String, java.lang.String, java.lang.String, java.lang.String);
+}
+Compiled from "Engine.java"
+public class es.dagaren.gladiator.engine.Engine implements es.dagaren.gladiator.search.SearcherObserver {
+  protected final java.lang.String name;
+  protected final java.lang.String version;
+  protected final java.lang.String rating;
+  protected boolean active;
+  protected es.dagaren.gladiator.representation.Position position;
+  protected es.dagaren.gladiator.search.Searcher searcher;
+  protected es.dagaren.gladiator.time.TimeControl timeControl;
+  protected es.dagaren.gladiator.time.Clock clock;
+  protected java.util.Timer searchTimer;
+  protected es.dagaren.gladiator.representation.Colour ownTurn;
+  protected es.dagaren.gladiator.representation.Colour gameTurn;
+  protected es.dagaren.gladiator.engine.EngineObserver observer;
+  protected final int defaultDepthLimit;
+  protected int depthLimit;
+  protected long remainingTime;
+  protected long timePerMove;
+  protected int numMoves;
+  protected boolean debug;
+  public es.dagaren.gladiator.engine.Engine();
+  public int getDepthLimit();
+  public void setDepthLimit(int);
+  public es.dagaren.gladiator.representation.Position getPosition();
+  public void setPosition(es.dagaren.gladiator.representation.Position);
+  public es.dagaren.gladiator.time.TimeControl getTimeControl();
+  public void setTimeControl(es.dagaren.gladiator.time.TimeControl);
+  public es.dagaren.gladiator.time.Clock getClock();
+  public void resetDepthLimit();
+  public es.dagaren.gladiator.representation.Colour getOwnTurn();
+  public void setOwnTurn(es.dagaren.gladiator.representation.Colour);
+  public synchronized void newGame();
+  public synchronized void stop();
+  public synchronized void resume();
+  public synchronized void finish();
+  public synchronized void waitForFinish();
+  public void doMove(es.dagaren.gladiator.representation.Movement);
+  public synchronized void doMove(es.dagaren.gladiator.representation.Movement, boolean);
+  public synchronized void forceMove();
+  public void think();
+  public es.dagaren.gladiator.representation.Movement getFullMove(es.dagaren.gladiator.representation.Movement);
+  protected void initMoveTimer();
+  public void onInformationPublished(es.dagaren.gladiator.search.SearchInfo);
+  public void onSearchFinished(es.dagaren.gladiator.search.Searcher);
+  public void setPublishSearchInfo(boolean);
+  public boolean isPublishSearchInfo();
+  public es.dagaren.gladiator.engine.EngineObserver getObserver();
+  public void setObserver(es.dagaren.gladiator.engine.EngineObserver);
+  public java.lang.String getName();
+  public java.lang.String getVersion();
+  public java.lang.String getRating();
+  public long getRemainingTime();
+  public void setRemainingTime(long);
+  public long getTimePerMove();
+  public void setTimePerMove(long);
+  static org.apache.log4j.Logger access$000(es.dagaren.gladiator.engine.Engine);
+}
+Compiled from "Engine.java"
+class es.dagaren.gladiator.engine.Engine$1 extends java.util.TimerTask {
+  final es.dagaren.gladiator.engine.Engine this$0;
+  es.dagaren.gladiator.engine.Engine$1(es.dagaren.gladiator.engine.Engine);
+  public void run();
+}
+Compiled from "EngineObserver.java"
+public interface es.dagaren.gladiator.engine.EngineObserver {
+  public abstract void onPublishInfo(es.dagaren.gladiator.search.SearchInfo);
+  public abstract void onMoveDone(es.dagaren.gladiator.representation.Movement);
+  public abstract void onGameFinished(java.lang.String, java.lang.String);
+  public abstract void onIncorrectMove(es.dagaren.gladiator.representation.Movement);
+}
+Compiled from "Evaluator.java"
+public class es.dagaren.gladiator.evaluation.Evaluator {
+  protected static java.util.Random random;
+  public int PAWN_SCORE;
+  public int KNIGHT_SCORE;
+  public int BISHOP_SCORE;
+  public int ROOK_SCORE;
+  public int QUEEN_SCORE;
+  public static final int[] pawnPieceSquare;
+  public static final int[] knightPieceSquare;
+  public static final int[] bishopPieceSquare;
+  public static final int[] rookPieceSquare;
+  public static final int[] queenPieceSquare;
+  public static final int[] kingPieceSquare;
+  public static final int[] endKingPieceSquare;
+  public static int[][] pieceSquareValue;
+  public es.dagaren.gladiator.evaluation.Evaluator();
+  public int evaluate(es.dagaren.gladiator.representation.Position);
+  public int evaluateMove(es.dagaren.gladiator.representation.Movement);
+  static {};
+}
+Compiled from "Main.java"
+public class es.dagaren.gladiator.main.Main {
+  public es.dagaren.gladiator.main.Main();
+  public static void main(java.lang.String[]);
+  public static void executeEvaluatePosition(java.lang.String);
+  public static void executeXboard();
+  static {};
+}
+Compiled from "ExtendedPositionDescription.java"
+public class es.dagaren.gladiator.notation.ExtendedPositionDescription {
+  protected es.dagaren.gladiator.representation.Position position;
+  protected java.util.Map<java.lang.String, java.util.List<java.lang.String>> operationsMap;
+  public es.dagaren.gladiator.notation.ExtendedPositionDescription();
+  public es.dagaren.gladiator.representation.Position getPosition();
+  public void setPosition(es.dagaren.gladiator.representation.Position);
+  public java.util.Map<java.lang.String, java.util.List<java.lang.String>> getOperationsMap();
+  public void setOperationsMap(java.util.Map<java.lang.String, java.util.List<java.lang.String>>);
+  public java.lang.String toString();
+  public static es.dagaren.gladiator.notation.ExtendedPositionDescription load(java.lang.String);
+  static {};
+}
+Compiled from "Notation.java"
+public class es.dagaren.gladiator.notation.Notation {
+  public es.dagaren.gladiator.notation.Notation();
+  public static es.dagaren.gladiator.representation.Movement parseMove(java.lang.String);
+  public static java.lang.String toString(es.dagaren.gladiator.representation.Movement);
+}
+Compiled from "AbstractPosition.java"
+public abstract class es.dagaren.gladiator.representation.AbstractPosition implements es.dagaren.gladiator.representation.Position {
+  protected es.dagaren.gladiator.representation.Colour turn;
+  protected boolean whiteCastlingShort;
+  protected boolean blackCastlingShort;
+  protected boolean whiteCastlingLong;
+  protected boolean blackCastlingLong;
+  protected es.dagaren.gladiator.representation.Square enPassantSquare;
+  protected int moveIndex;
+  protected int fiftyMovesRuleIndex;
+  protected es.dagaren.gladiator.representation.ZobristKey zobristKey;
+  protected java.util.Map<java.lang.Long, java.lang.Integer> gamePositionsHash;
+  public es.dagaren.gladiator.representation.AbstractPosition();
+  public void setInitialPosition();
+  public boolean isValidMove(es.dagaren.gladiator.representation.Movement);
+  public boolean isValidPosition();
+  public java.lang.String toFen();
+  public boolean loadFen(java.lang.String);
+  public java.lang.String toString();
+  public void setTurn(es.dagaren.gladiator.representation.Colour);
+  public es.dagaren.gladiator.representation.Colour getTurn();
+  public void setCastlingShort(es.dagaren.gladiator.representation.Colour, boolean);
+  public void setCastlingLong(es.dagaren.gladiator.representation.Colour, boolean);
+  public boolean getCastlingShort(es.dagaren.gladiator.representation.Colour);
+  public boolean getCastlingLong(es.dagaren.gladiator.representation.Colour);
+  public void setEnPassantSquare(es.dagaren.gladiator.representation.Square);
+  public es.dagaren.gladiator.representation.Square getEnPassantSquare();
+  public void setMoveIndex(int);
+  public int getMoveIndex();
+  public int getFiftyMovesRuleIndex();
+  public void setFiftyMovesRuleIndex(int);
+  public boolean isCheckmate();
+  public boolean isStalemate();
+  public es.dagaren.gladiator.representation.ZobristKey getZobristKey();
+  protected void setZobristKey(long);
+  public java.util.Map<java.lang.Long, java.lang.Integer> getPositionsHash();
+  public void setPositionsHash(java.util.Map<java.lang.Long, java.lang.Integer>);
+}
+Compiled from "BitboardPosition.java"
+public class es.dagaren.gladiator.representation.BitboardPosition extends es.dagaren.gladiator.representation.AbstractPosition {
+  public long tiempoRecuperarPeones;
+  public long tgiempoRecuperarMovements;
+  public static long[] bbSquareRight;
+  public static long[] bbSquareTopLeft;
+  public static long[] bbSquareTop;
+  public static long[] bbSquareTopRight;
+  public static long[] bbSquareLeft;
+  public static long[] bbSquareBottomRight;
+  public static long[] bbSquareBottom;
+  public static long[] bbSquareBottomLeft;
+  public static long[] bbRank;
+  public static long[] bbFile;
+  public static long[][] bbRankAttack;
+  public static long[][] bbFileAttack;
+  public static long[][] bbPrincipalDiagonalAttack;
+  public static long[][] bbSecondaryDiagonalAttack;
+  public static long[] bbKnightAttack;
+  public static long[] bbKingAttack;
+  public static long[] bbQueenAttack;
+  public static long[] bbWhitePawnAttack;
+  public static long[] bbBlackPawnAttack;
+  public static long[] bbWhitePawnReach;
+  public static long[] bbBlackPawnReach;
+  public static final long bbBlackSquares;
+  public static final long bbWhiteSquares;
+  public static es.dagaren.gladiator.representation.Square[] square;
+  public static int[] rankSquare;
+  public static int[] fileSquare;
+  public static int[] diagonalSquare;
+  public static long[] bbSquare;
+  public static int[] squareRotated90DLeft;
+  public static int[] squareRotated90DRight;
+  public static int[] squareRotated45DLeft;
+  public static int[] squareRotated45DRight;
+  public static int[] inverseSquareRotated45DLeft;
+  public static int[] inverseSquareRotated45DRight;
+  public static long[] mainDiagonalMask;
+  public static long[] secondaryDiagonalMask;
+  public static long[][] bbMainDiagonalFullConnection;
+  public static long[][] bbSecondaryDiagonalFullConnection;
+  public static long[][] bbRankFullConnection;
+  public static long[][] bbFileFullConnection;
+  public static long[][] bbDiagonalFullConnection;
+  public static long[][] bbLinealFullConnection;
+  public static long[][] bbFullConnection;
+  public static long[][] bbMainDiagonalInclusiveConnection;
+  public static long[][] bbSecondaryDiagonalInclusiveConnection;
+  public static long[][] bbRankInclusiveConnection;
+  public static long[][] bbFileInclusiveConnection;
+  public static long[][] bbDiagonalInclusiveConnection;
+  public static long[][] bbLinearInclusiveConnection;
+  public static long[][] bbInclusiveConnection;
+  public static long[][] bbMainDiagonalExclusiveConnection;
+  public static long[][] bbSecondaryDiagonalExclusiveConnection;
+  public static long[][] bbRankExclusiveConnection;
+  public static long[][] bbFileExclusiveConnection;
+  public static long[][] bbDiagonalExclusiveConnection;
+  public static long[][] bbLinealExclusiveConnection;
+  public static long[][] bbExclusiveConnection;
+  public static long[] bbCastlingLongSquares;
+  public static es.dagaren.gladiator.representation.Square[][] bbCastlingShortSquares;
+  public static long[] castlingLongKingSquares;
+  public static es.dagaren.gladiator.representation.Square[][] castlingShortKingSquares;
+  public static es.dagaren.gladiator.representation.Square[] castlingSourceSquares;
+  public static es.dagaren.gladiator.representation.Square[] castlingLongDestinationSquares;
+  public static es.dagaren.gladiator.representation.Square[] castlingShortDestinationSquares;
+  public static es.dagaren.gladiator.representation.Square[] enPassantSquareDestination;
+  public static es.dagaren.gladiator.representation.Square[] enPassantSquareSource;
+  protected java.util.LinkedList<es.dagaren.gladiator.representation.IrreversibleState> stateStack;
+  es.dagaren.gladiator.representation.Piece[] pieceInSquare;
+  long[] bbPiecesOccupation;
+  protected long bbWhiteOccupation;
+  protected long bbBlackOccupation;
+  long[] bbColourOccupation;
+  protected long bbOccupation;
+  protected long bbOccupationR90L;
+  protected long bbOccupationR45L;
+  protected long bbOccupationR45R;
+  protected long[] bbAttackedFromSquare;
+  long[] bbAttackerToSquare;
+  protected boolean movesGenerated;
+  protected java.util.List<es.dagaren.gladiator.representation.Movement> movesList;
+  long bbPieceOccupation;
+  long bbTurnOccupied;
+  long bbOppositeOccupied;
+  int numPieces;
+  int numSquares;
+  int squareIndex;
+  int pieceSquareIndex;
+  int checkSquareIndex;
+  long bbAttacked;
+  long bbAttackedBefore;
+  long bbConnection;
+  int kingSquareIndex;
+  long bbKing;
+  long bbAttacker;
+  int attackerSquareIndex;
+  int attackedSquareIndex;
+  int numAttacked;
+  long bbAdvances;
+  long bbAttackers;
+  long bbKingAttackers;
+  int numAttackers;
+  boolean isPinned;
+  es.dagaren.gladiator.representation.Piece piece;
+  es.dagaren.gladiator.representation.Piece capture;
+  es.dagaren.gladiator.representation.Movement mov;
+  long advances1;
+  long advances2;
+  es.dagaren.gladiator.representation.GenericPiece genericPiece;
+  es.dagaren.gladiator.representation.Piece squarePiece;
+  es.dagaren.gladiator.representation.Piece capturePiece;
+  es.dagaren.gladiator.representation.Square sourceSquare;
+  es.dagaren.gladiator.representation.Square destinationSquare;
+  long bbEnPassantCapture;
+  int uaNumPieces;
+  long uaBbOccupiedTemp;
+  int uaSquareIndex;
+  long uaBbAttacked;
+  long uaBbAttackerSquare;
+  int uatNumAtacked;
+  int uatSquareIndex;
+  public es.dagaren.gladiator.representation.BitboardPosition();
+  public void clean();
+  protected void updateOcupied();
+  public void updateAttackedFromFull();
+  public long getAttackedInRank(int);
+  public long getAttackedInFile(int);
+  public long getAttackedInMainDiagonal(int);
+  public long getAttackedInSecondaryDiagonal(int);
+  protected void resetMoves();
+  public boolean loadFen(java.lang.String);
+  public boolean undoMove(es.dagaren.gladiator.representation.Movement);
+  public boolean doMove(es.dagaren.gladiator.representation.Movement);
+  public void getMoves(java.util.List<es.dagaren.gladiator.representation.Movement>);
+  public java.util.List<es.dagaren.gladiator.representation.Movement> getMovements();
+  public void generarMovements(java.util.List<es.dagaren.gladiator.representation.Movement>);
+  protected void generateMoves(java.util.List<es.dagaren.gladiator.representation.Movement>, es.dagaren.gladiator.representation.Piece);
+  public es.dagaren.gladiator.representation.Colour getPieceColour(es.dagaren.gladiator.representation.Square);
+  public es.dagaren.gladiator.representation.GenericPiece getGenericPieceInSquare(es.dagaren.gladiator.representation.Square);
+  public int getNumPieces(es.dagaren.gladiator.representation.GenericPiece, es.dagaren.gladiator.representation.Colour);
+  public boolean hasGenericPiece(es.dagaren.gladiator.representation.GenericPiece, es.dagaren.gladiator.representation.Colour, es.dagaren.gladiator.representation.Square);
+  public boolean hasGenericPiece(es.dagaren.gladiator.representation.GenericPiece, es.dagaren.gladiator.representation.Colour, es.dagaren.gladiator.representation.Rank);
+  public boolean hasPiece(es.dagaren.gladiator.representation.GenericPiece, es.dagaren.gladiator.representation.Colour, es.dagaren.gladiator.representation.File);
+  public boolean hasPiece(es.dagaren.gladiator.representation.Piece, es.dagaren.gladiator.representation.File);
+  public boolean isInCheck(es.dagaren.gladiator.representation.Colour);
+  public void putGenericPiece(es.dagaren.gladiator.representation.GenericPiece, es.dagaren.gladiator.representation.Colour, es.dagaren.gladiator.representation.Square);
+  public void putPiece(es.dagaren.gladiator.representation.Piece, es.dagaren.gladiator.representation.Square);
+  public void removePiece(es.dagaren.gladiator.representation.Square);
+  public es.dagaren.gladiator.representation.Piece getPieceInSquare(es.dagaren.gladiator.representation.Square);
+  public int getNumPieces(es.dagaren.gladiator.representation.Piece);
+  public boolean hasPiece(es.dagaren.gladiator.representation.Piece, es.dagaren.gladiator.representation.Square);
+  public boolean hasPiece(es.dagaren.gladiator.representation.Piece, es.dagaren.gladiator.representation.Rank);
+  public es.dagaren.gladiator.representation.Square[] getPiecesSquares(es.dagaren.gladiator.representation.Colour);
+  public void setInitialPosition();
+  public es.dagaren.gladiator.representation.Position getCopy();
+  public int getMobility(es.dagaren.gladiator.representation.Colour);
+  static {};
+}
+Compiled from "BitboardSee.java"
+public class es.dagaren.gladiator.representation.BitboardSee {
+  public es.dagaren.gladiator.representation.BitboardSee();
+  public static int getValue(es.dagaren.gladiator.representation.BitboardPosition, es.dagaren.gladiator.representation.Square, es.dagaren.gladiator.representation.Square, es.dagaren.gladiator.representation.GenericPiece);
+  static {};
+}
+Compiled from "BitboardUtils.java"
+public class es.dagaren.gladiator.representation.BitboardUtils {
+  public es.dagaren.gladiator.representation.BitboardUtils();
+  public static long flipVertical(long);
+  public static long flipDiagonalA1H8(long);
+  public static long rotate90DegreesLeft(long);
+  public static long rotate90DegreesRight(long);
+  public static long rotate45DegreesRight(long);
+  public static long unrotate45DegreesRight(long);
+  public static long rotate45DegreesLeft(long);
+  public static long unrotate45DegreesLeft(long);
+  public static void printInConsole(long);
+  public static java.lang.String toString(long);
+}
+Compiled from "Colour.java"
+public class es.dagaren.gladiator.representation.Colour {
+  public static final es.dagaren.gladiator.representation.Colour WHITE;
+  public static final es.dagaren.gladiator.representation.Colour BLACK;
+  public int index;
+  protected static es.dagaren.gladiator.representation.Colour[] colours;
+  protected static java.lang.String[] coloursNames;
+  protected static java.util.Map<java.lang.String, es.dagaren.gladiator.representation.Colour> coloursMap;
+  public es.dagaren.gladiator.representation.Colour opposite();
+  public static es.dagaren.gladiator.representation.Colour valueOf(java.lang.String);
+  public java.lang.String name();
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "File.java"
+public class es.dagaren.gladiator.representation.File {
+  public static final es.dagaren.gladiator.representation.File a;
+  public static final es.dagaren.gladiator.representation.File b;
+  public static final es.dagaren.gladiator.representation.File c;
+  public static final es.dagaren.gladiator.representation.File d;
+  public static final es.dagaren.gladiator.representation.File e;
+  public static final es.dagaren.gladiator.representation.File f;
+  public static final es.dagaren.gladiator.representation.File g;
+  public static final es.dagaren.gladiator.representation.File h;
+  public int index;
+  protected static es.dagaren.gladiator.representation.File[] files;
+  protected static java.lang.String[] filesNames;
+  protected static java.util.Map<java.lang.String, es.dagaren.gladiator.representation.File> filesMap;
+  public static es.dagaren.gladiator.representation.File fromIndex(int);
+  public static es.dagaren.gladiator.representation.File valueOf(java.lang.String);
+  public java.lang.String name();
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "GenericPiece.java"
+public class es.dagaren.gladiator.representation.GenericPiece {
+  public static final es.dagaren.gladiator.representation.GenericPiece PAWN;
+  public static final es.dagaren.gladiator.representation.GenericPiece ROOK;
+  public static final es.dagaren.gladiator.representation.GenericPiece KNIGHT;
+  public static final es.dagaren.gladiator.representation.GenericPiece BISHOP;
+  public static final es.dagaren.gladiator.representation.GenericPiece QUEEN;
+  public static final es.dagaren.gladiator.representation.GenericPiece KING;
+  public static final es.dagaren.gladiator.representation.GenericPiece[] genericPieces;
+  public static final java.lang.String[] genericPiecesNames;
+  public static final java.util.Map<java.lang.String, es.dagaren.gladiator.representation.GenericPiece> genericPiecesMap;
+  public int index;
+  public int value;
+  public static es.dagaren.gladiator.representation.GenericPiece valueOf(java.lang.String);
+  public java.lang.String name();
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "IrreversibleState.java"
+public class es.dagaren.gladiator.representation.IrreversibleState {
+  public boolean[] longCastling;
+  public boolean[] shortCastling;
+  public es.dagaren.gladiator.representation.Square enPassantSquare;
+  public int fiftyMovesCounter;
+  public es.dagaren.gladiator.representation.IrreversibleState();
+}
+Compiled from "Movement.java"
+public class es.dagaren.gladiator.representation.Movement {
+  protected int value;
+  public es.dagaren.gladiator.representation.Movement();
+  public es.dagaren.gladiator.representation.Movement(es.dagaren.gladiator.representation.Square, es.dagaren.gladiator.representation.Square);
+  public es.dagaren.gladiator.representation.Movement(es.dagaren.gladiator.representation.Square, es.dagaren.gladiator.representation.Square, es.dagaren.gladiator.representation.Piece);
+  public es.dagaren.gladiator.representation.Movement(es.dagaren.gladiator.representation.Square, es.dagaren.gladiator.representation.Square, es.dagaren.gladiator.representation.Piece, es.dagaren.gladiator.representation.Piece);
+  public es.dagaren.gladiator.representation.Movement(es.dagaren.gladiator.representation.Square, es.dagaren.gladiator.representation.Square, es.dagaren.gladiator.representation.Piece, es.dagaren.gladiator.representation.Piece, es.dagaren.gladiator.representation.Piece);
+  public es.dagaren.gladiator.representation.Movement(java.lang.String);
+  public boolean isInPassant();
+  public void setEnPassant(boolean);
+  public es.dagaren.gladiator.representation.Square getDestination();
+  public void setDestination(es.dagaren.gladiator.representation.Square);
+  public es.dagaren.gladiator.representation.Square getSource();
+  public void setSource(es.dagaren.gladiator.representation.Square);
+  public es.dagaren.gladiator.representation.Piece getPromotionPiece();
+  public void setPromotionPiece(es.dagaren.gladiator.representation.Piece);
+  public es.dagaren.gladiator.representation.Piece getDestinationPiece();
+  public void setDestinationPiece(es.dagaren.gladiator.representation.Piece);
+  public es.dagaren.gladiator.representation.Piece getSourcePiece();
+  public void setSourcePiece(es.dagaren.gladiator.representation.Piece);
+  public int getValue();
+  public void setValue(int);
+  public boolean equals(java.lang.Object);
+  public es.dagaren.gladiator.representation.GenericPiece getPromotionGenericPiece();
+  public void setFichaCoronacion(es.dagaren.gladiator.representation.GenericPiece);
+  public static es.dagaren.gladiator.representation.Movement getMovementEnroqueLargo(es.dagaren.gladiator.representation.Colour);
+  public static es.dagaren.gladiator.representation.Movement getMovementEnroqueCorto(es.dagaren.gladiator.representation.Colour);
+}
+Compiled from "Piece.java"
+public class es.dagaren.gladiator.representation.Piece {
+  public static final es.dagaren.gladiator.representation.Piece WHITE_PAWN;
+  public static final es.dagaren.gladiator.representation.Piece BLACK_PAWN;
+  public static final es.dagaren.gladiator.representation.Piece WHITE_ROOK;
+  public static final es.dagaren.gladiator.representation.Piece BLACK_ROOK;
+  public static final es.dagaren.gladiator.representation.Piece WHITE_KNIGHT;
+  public static final es.dagaren.gladiator.representation.Piece BLACK_KNIGHT;
+  public static final es.dagaren.gladiator.representation.Piece WHITE_BISHOP;
+  public static final es.dagaren.gladiator.representation.Piece BLACK_BISHOP;
+  public static final es.dagaren.gladiator.representation.Piece WHITE_QUEEN;
+  public static final es.dagaren.gladiator.representation.Piece BLACK_QUEEN;
+  public static final es.dagaren.gladiator.representation.Piece WHITE_KING;
+  public static final es.dagaren.gladiator.representation.Piece BLACK_KING;
+  public int index;
+  public es.dagaren.gladiator.representation.Colour colour;
+  public es.dagaren.gladiator.representation.GenericPiece genericPiece;
+  protected static es.dagaren.gladiator.representation.Piece[] pieces;
+  protected static java.lang.String[] piecesNames;
+  protected static java.util.Map<java.lang.String, es.dagaren.gladiator.representation.Piece> piecesMap;
+  protected static es.dagaren.gladiator.representation.Piece[][] piecesTable;
+  public static es.dagaren.gladiator.representation.Piece get(es.dagaren.gladiator.representation.GenericPiece, es.dagaren.gladiator.representation.Colour);
+  public java.lang.String toFenString();
+  public static es.dagaren.gladiator.representation.Piece valueOf(java.lang.String);
+  public java.lang.String name();
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "Position.java"
+public interface es.dagaren.gladiator.representation.Position {
+  public abstract es.dagaren.gladiator.representation.Colour getTurn();
+  public abstract void setTurn(es.dagaren.gladiator.representation.Colour);
+  public abstract void setMoveIndex(int);
+  public abstract int getMoveIndex();
+  public abstract void setEnPassantSquare(es.dagaren.gladiator.representation.Square);
+  public abstract es.dagaren.gladiator.representation.Square getEnPassantSquare();
+  public abstract void setFiftyMovesRuleIndex(int);
+  public abstract int getFiftyMovesRuleIndex();
+  public abstract void setCastlingLong(es.dagaren.gladiator.representation.Colour, boolean);
+  public abstract boolean getCastlingLong(es.dagaren.gladiator.representation.Colour);
+  public abstract void setCastlingShort(es.dagaren.gladiator.representation.Colour, boolean);
+  public abstract boolean getCastlingShort(es.dagaren.gladiator.representation.Colour);
+  public abstract java.util.List<es.dagaren.gladiator.representation.Movement> getMovements();
+  public abstract void getMoves(java.util.List<es.dagaren.gladiator.representation.Movement>);
+  public abstract void putGenericPiece(es.dagaren.gladiator.representation.GenericPiece, es.dagaren.gladiator.representation.Colour, es.dagaren.gladiator.representation.Square);
+  public abstract void putPiece(es.dagaren.gladiator.representation.Piece, es.dagaren.gladiator.representation.Square);
+  public abstract void removePiece(es.dagaren.gladiator.representation.Square);
+  public abstract boolean doMove(es.dagaren.gladiator.representation.Movement);
+  public abstract boolean undoMove(es.dagaren.gladiator.representation.Movement);
+  public abstract boolean isInCheck(es.dagaren.gladiator.representation.Colour);
+  public abstract boolean isCheckmate();
+  public abstract boolean isStalemate();
+  public abstract void setInitialPosition();
+  public abstract void clean();
+  public abstract boolean hasPiece(es.dagaren.gladiator.representation.Piece, es.dagaren.gladiator.representation.Square);
+  public abstract boolean hasGenericPiece(es.dagaren.gladiator.representation.GenericPiece, es.dagaren.gladiator.representation.Colour, es.dagaren.gladiator.representation.Square);
+  public abstract boolean hasPiece(es.dagaren.gladiator.representation.Piece, es.dagaren.gladiator.representation.Rank);
+  public abstract boolean hasGenericPiece(es.dagaren.gladiator.representation.GenericPiece, es.dagaren.gladiator.representation.Colour, es.dagaren.gladiator.representation.Rank);
+  public abstract boolean hasPiece(es.dagaren.gladiator.representation.Piece, es.dagaren.gladiator.representation.File);
+  public abstract boolean hasPiece(es.dagaren.gladiator.representation.GenericPiece, es.dagaren.gladiator.representation.Colour, es.dagaren.gladiator.representation.File);
+  public abstract int getNumPieces(es.dagaren.gladiator.representation.GenericPiece, es.dagaren.gladiator.representation.Colour);
+  public abstract int getNumPieces(es.dagaren.gladiator.representation.Piece);
+  public abstract es.dagaren.gladiator.representation.Square[] getPiecesSquares(es.dagaren.gladiator.representation.Colour);
+  public abstract es.dagaren.gladiator.representation.Piece getPieceInSquare(es.dagaren.gladiator.representation.Square);
+  public abstract es.dagaren.gladiator.representation.GenericPiece getGenericPieceInSquare(es.dagaren.gladiator.representation.Square);
+  public abstract es.dagaren.gladiator.representation.Colour getPieceColour(es.dagaren.gladiator.representation.Square);
+  public abstract boolean loadFen(java.lang.String);
+  public abstract java.lang.String toFen();
+  public abstract boolean isValidMove(es.dagaren.gladiator.representation.Movement);
+  public abstract boolean isValidPosition();
+  public abstract es.dagaren.gladiator.representation.Position getCopy();
+  public abstract int getMobility(es.dagaren.gladiator.representation.Colour);
+  public abstract es.dagaren.gladiator.representation.ZobristKey getZobristKey();
+  public abstract java.util.Map<java.lang.Long, java.lang.Integer> getPositionsHash();
+}
+Compiled from "Rank.java"
+public class es.dagaren.gladiator.representation.Rank {
+  public static final es.dagaren.gladiator.representation.Rank _1;
+  public static final es.dagaren.gladiator.representation.Rank _2;
+  public static final es.dagaren.gladiator.representation.Rank _3;
+  public static final es.dagaren.gladiator.representation.Rank _4;
+  public static final es.dagaren.gladiator.representation.Rank _5;
+  public static final es.dagaren.gladiator.representation.Rank _6;
+  public static final es.dagaren.gladiator.representation.Rank _7;
+  public static final es.dagaren.gladiator.representation.Rank _8;
+  public int index;
+  protected static es.dagaren.gladiator.representation.Rank[] ranks;
+  protected static java.lang.String[] ranksNames;
+  protected static java.util.Map<java.lang.String, es.dagaren.gladiator.representation.Rank> ranksMap;
+  public static es.dagaren.gladiator.representation.Rank fromIndex(int);
+  public static es.dagaren.gladiator.representation.Rank valueOf(java.lang.String);
+  public java.lang.String name();
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "Square.java"
+public class es.dagaren.gladiator.representation.Square {
+  public static final es.dagaren.gladiator.representation.Square a1;
+  public static final es.dagaren.gladiator.representation.Square b1;
+  public static final es.dagaren.gladiator.representation.Square c1;
+  public static final es.dagaren.gladiator.representation.Square d1;
+  public static final es.dagaren.gladiator.representation.Square e1;
+  public static final es.dagaren.gladiator.representation.Square f1;
+  public static final es.dagaren.gladiator.representation.Square g1;
+  public static final es.dagaren.gladiator.representation.Square h1;
+  public static final es.dagaren.gladiator.representation.Square a2;
+  public static final es.dagaren.gladiator.representation.Square b2;
+  public static final es.dagaren.gladiator.representation.Square c2;
+  public static final es.dagaren.gladiator.representation.Square d2;
+  public static final es.dagaren.gladiator.representation.Square e2;
+  public static final es.dagaren.gladiator.representation.Square f2;
+  public static final es.dagaren.gladiator.representation.Square g2;
+  public static final es.dagaren.gladiator.representation.Square h2;
+  public static final es.dagaren.gladiator.representation.Square a3;
+  public static final es.dagaren.gladiator.representation.Square b3;
+  public static final es.dagaren.gladiator.representation.Square c3;
+  public static final es.dagaren.gladiator.representation.Square d3;
+  public static final es.dagaren.gladiator.representation.Square e3;
+  public static final es.dagaren.gladiator.representation.Square f3;
+  public static final es.dagaren.gladiator.representation.Square g3;
+  public static final es.dagaren.gladiator.representation.Square h3;
+  public static final es.dagaren.gladiator.representation.Square a4;
+  public static final es.dagaren.gladiator.representation.Square b4;
+  public static final es.dagaren.gladiator.representation.Square c4;
+  public static final es.dagaren.gladiator.representation.Square d4;
+  public static final es.dagaren.gladiator.representation.Square e4;
+  public static final es.dagaren.gladiator.representation.Square f4;
+  public static final es.dagaren.gladiator.representation.Square g4;
+  public static final es.dagaren.gladiator.representation.Square h4;
+  public static final es.dagaren.gladiator.representation.Square a5;
+  public static final es.dagaren.gladiator.representation.Square b5;
+  public static final es.dagaren.gladiator.representation.Square c5;
+  public static final es.dagaren.gladiator.representation.Square d5;
+  public static final es.dagaren.gladiator.representation.Square e5;
+  public static final es.dagaren.gladiator.representation.Square f5;
+  public static final es.dagaren.gladiator.representation.Square g5;
+  public static final es.dagaren.gladiator.representation.Square h5;
+  public static final es.dagaren.gladiator.representation.Square a6;
+  public static final es.dagaren.gladiator.representation.Square b6;
+  public static final es.dagaren.gladiator.representation.Square c6;
+  public static final es.dagaren.gladiator.representation.Square d6;
+  public static final es.dagaren.gladiator.representation.Square e6;
+  public static final es.dagaren.gladiator.representation.Square f6;
+  public static final es.dagaren.gladiator.representation.Square g6;
+  public static final es.dagaren.gladiator.representation.Square h6;
+  public static final es.dagaren.gladiator.representation.Square a7;
+  public static final es.dagaren.gladiator.representation.Square b7;
+  public static final es.dagaren.gladiator.representation.Square c7;
+  public static final es.dagaren.gladiator.representation.Square d7;
+  public static final es.dagaren.gladiator.representation.Square e7;
+  public static final es.dagaren.gladiator.representation.Square f7;
+  public static final es.dagaren.gladiator.representation.Square g7;
+  public static final es.dagaren.gladiator.representation.Square h7;
+  public static final es.dagaren.gladiator.representation.Square a8;
+  public static final es.dagaren.gladiator.representation.Square b8;
+  public static final es.dagaren.gladiator.representation.Square c8;
+  public static final es.dagaren.gladiator.representation.Square d8;
+  public static final es.dagaren.gladiator.representation.Square e8;
+  public static final es.dagaren.gladiator.representation.Square f8;
+  public static final es.dagaren.gladiator.representation.Square g8;
+  public static final es.dagaren.gladiator.representation.Square h8;
+  public int index;
+  protected static es.dagaren.gladiator.representation.Square[] squares;
+  protected static es.dagaren.gladiator.representation.Square[] squaresMirror;
+  protected static java.lang.String[] squaresNames;
+  protected static java.util.Map<java.lang.String, es.dagaren.gladiator.representation.Square> squaresMap;
+  public es.dagaren.gladiator.representation.Rank getRank();
+  public es.dagaren.gladiator.representation.File getFile();
+  public es.dagaren.gladiator.representation.Square getNext();
+  public es.dagaren.gladiator.representation.Square getPrevious();
+  public es.dagaren.gladiator.representation.Square getNextInRank();
+  public es.dagaren.gladiator.representation.Square getPreviousInRank();
+  public es.dagaren.gladiator.representation.Square getNextInFile();
+  public es.dagaren.gladiator.representation.Square getPreviousInFile();
+  public static es.dagaren.gladiator.representation.Square fromRankAndFile(int, int);
+  public static es.dagaren.gladiator.representation.Square fromIndex(int);
+  public es.dagaren.gladiator.representation.Square mirror();
+  public static es.dagaren.gladiator.representation.Square valueOf(java.lang.String);
+  public java.lang.String name();
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "ZobristKey.java"
+public class es.dagaren.gladiator.representation.ZobristKey {
+  public es.dagaren.gladiator.representation.ZobristKey();
+  public long getKey();
+  public void setKey(long);
+  public void xorPiece(es.dagaren.gladiator.representation.Piece, es.dagaren.gladiator.representation.Square);
+  public void xorEnPassant(es.dagaren.gladiator.representation.Square);
+  public void xorCastlingLong(es.dagaren.gladiator.representation.Colour);
+  public void xorCastlingShort(es.dagaren.gladiator.representation.Colour);
+  public void xorTurn(es.dagaren.gladiator.representation.Colour);
+  static {};
+}
+Compiled from "AlphaBetaSearcher.java"
+public class es.dagaren.gladiator.search.AlphaBetaSearcher extends es.dagaren.gladiator.search.Searcher {
+  protected long numUpdates;
+  protected final int INITIAL_ALPHA;
+  protected final int INITIAL_BETA;
+  protected es.dagaren.gladiator.representation.Movement[][] killerMoves;
+  protected java.util.Comparator<es.dagaren.gladiator.representation.Movement> mvvLvaComparator;
+  protected java.util.Comparator<es.dagaren.gladiator.representation.Movement> moveValueComparator;
+  protected es.dagaren.gladiator.search.PrincipalVariation principalVariation;
+  protected int depth;
+  protected int bestScore;
+  protected es.dagaren.gladiator.transposition.Table transpositionTable;
+  protected es.dagaren.gladiator.representation.Movement transpositionMove;
+  protected java.util.List<es.dagaren.gladiator.representation.Movement> movesForDelete;
+  protected int cutoffs;
+  protected int qcutoffs;
+  protected int nodes;
+  protected int qnodes;
+  protected int iterationNodes;
+  protected int aspirationSearchs;
+  protected int aspirationSearchsFails;
+  protected int aspirationSearchInstabilityFails;
+  protected int transpositionCutoffs;
+  protected int firstMoveHits;
+  protected int pvsHits;
+  protected int pvsFails;
+  protected int withTranspositionMove;
+  protected int withoutTranspositionMove;
+  protected int futilityPrunings;
+  int alpha;
+  int beta;
+  int windowSize;
+  public es.dagaren.gladiator.search.AlphaBetaSearcher();
+  public void search();
+  public int alphaBeta(es.dagaren.gladiator.representation.Position, int, int, int, int);
+  public int alphaBetaQuiescence(es.dagaren.gladiator.representation.Position, int, int, int, int);
+  public void sortMoves(java.util.List<es.dagaren.gladiator.representation.Movement>, es.dagaren.gladiator.representation.Position, int);
+  public void sortQuiescenceMoves(java.util.List<es.dagaren.gladiator.representation.Movement>, es.dagaren.gladiator.representation.Position);
+  public void setDepthLimit(int);
+}
+Compiled from "MoveValueComparator.java"
+public class es.dagaren.gladiator.search.MoveValueComparator implements java.util.Comparator<es.dagaren.gladiator.representation.Movement> {
+  public es.dagaren.gladiator.search.MoveValueComparator();
+  public int compare(es.dagaren.gladiator.representation.Movement, es.dagaren.gladiator.representation.Movement);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "MvvLvaMoveComparator.java"
+public class es.dagaren.gladiator.search.MvvLvaMoveComparator implements java.util.Comparator<es.dagaren.gladiator.representation.Movement> {
+  public es.dagaren.gladiator.search.MvvLvaMoveComparator();
+  public int compare(es.dagaren.gladiator.representation.Movement, es.dagaren.gladiator.representation.Movement);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "PrincipalVariation.java"
+public class es.dagaren.gladiator.search.PrincipalVariation {
+  public es.dagaren.gladiator.search.PrincipalVariation();
+  public void initDepth(int);
+  public void saveInDepth(es.dagaren.gladiator.representation.Movement, int);
+  public es.dagaren.gladiator.representation.Movement[] getPrincipalVariation();
+}
+Compiled from "SearchInfo.java"
+public class es.dagaren.gladiator.search.SearchInfo {
+  public long depth;
+  public long score;
+  public long time;
+  public long nodes;
+  public es.dagaren.gladiator.representation.Movement[] principalVariation;
+  public es.dagaren.gladiator.search.SearchInfo();
+}
+Compiled from "Searcher.java"
+public class es.dagaren.gladiator.search.Searcher implements java.lang.Runnable {
+  protected int depthLimit;
+  protected long timeLimit;
+  protected long nodesLimit;
+  protected long initTime;
+  protected volatile boolean search;
+  protected volatile boolean exit;
+  java.util.List<java.util.List<es.dagaren.gladiator.representation.Movement>> movesLists;
+  protected es.dagaren.gladiator.representation.Movement[] bestPrincipalVariation;
+  protected int bestScore;
+  protected java.lang.Thread thread;
+  protected es.dagaren.gladiator.representation.Position position;
+  protected es.dagaren.gladiator.evaluation.Evaluator evaluator;
+  protected long visitedNodes;
+  protected long cutoffs;
+  protected final int DRAW_SCORE;
+  protected final int CHECKMATE_SCORE;
+  protected final int EXIT_SCORE;
+  protected final int MIN_RATING;
+  protected final int MAX_RATING;
+  protected es.dagaren.gladiator.search.SearcherObserver observer;
+  public es.dagaren.gladiator.search.Searcher();
+  public void run();
+  public synchronized void initSearch(es.dagaren.gladiator.representation.Position);
+  public synchronized void finish();
+  public void searchLoop();
+  protected void publishInfo(long, long, long, long, es.dagaren.gladiator.representation.Movement[]);
+  public void search();
+  public synchronized void stop();
+  public int getDepthLimit();
+  public void setDepthLimit(int);
+  public long getTimeLimit();
+  public void setTimeLimit(long);
+  public long getNodesLimit();
+  public void setNodesLimit(long);
+  public es.dagaren.gladiator.representation.Movement[] getPrincipalVariation();
+  public int getScore();
+  public es.dagaren.gladiator.representation.Position getPosition();
+  public void setPosition(es.dagaren.gladiator.representation.Position);
+  public es.dagaren.gladiator.evaluation.Evaluator getEvaluator();
+  public void setEvaluator(es.dagaren.gladiator.evaluation.Evaluator);
+  public es.dagaren.gladiator.search.SearcherObserver getObserver();
+  public void setObserver(es.dagaren.gladiator.search.SearcherObserver);
+  public long getVisitedNodes();
+  public java.util.List<es.dagaren.gladiator.representation.Movement> getMovesList(int);
+}
+Compiled from "SearcherObserver.java"
+public interface es.dagaren.gladiator.search.SearcherObserver {
+  public abstract void onSearchFinished(es.dagaren.gladiator.search.Searcher);
+  public abstract void onInformationPublished(es.dagaren.gladiator.search.SearchInfo);
+}
+Compiled from "ExtendedPositionDescriptionTest.java"
+public class es.dagaren.gladiator.testing.notation.ExtendedPositionDescriptionTest {
+  public es.dagaren.gladiator.testing.notation.ExtendedPositionDescriptionTest();
+  public static void init();
+  public void test();
+}
+Compiled from "BitboardPositionTest.java"
+public class es.dagaren.gladiator.testing.representation.BitboardPositionTest {
+  public es.dagaren.gladiator.testing.representation.BitboardPositionTest();
+  public static void init();
+  public void loadFen1Test();
+  public void loadFen2Test();
+  public void clonePositionTest();
+}
+Compiled from "BitboardSeeTest.java"
+public class es.dagaren.gladiator.testing.representation.BitboardSeeTest {
+  public es.dagaren.gladiator.testing.representation.BitboardSeeTest();
+  public void seeTest();
+  public void seeTest2();
+  public void seeTest3();
+  public void seeTest4();
+  public void seeTest5();
+  public void seeTest6();
+  public void seeTest7();
+  public void seeTest8();
+}
+Compiled from "GeneralTest.java"
+public class es.dagaren.gladiator.testing.representation.GeneralTest {
+  public es.dagaren.gladiator.testing.representation.GeneralTest();
+  public void getBitboardBitTest();
+}
+Compiled from "MovesGenerationTest.java"
+public class es.dagaren.gladiator.testing.representation.MovesGenerationTest {
+  java.lang.String fen;
+  es.dagaren.gladiator.representation.BitboardPosition position;
+  es.dagaren.gladiator.representation.Movement[] generatedMoves;
+  es.dagaren.gladiator.representation.Movement[] realMoves;
+  public es.dagaren.gladiator.testing.representation.MovesGenerationTest();
+  public static void init();
+  public void checkTest1();
+  public void checkTest2();
+  public void checkTest3();
+  public void checkTest4();
+  public void checkTest5();
+  public void checkTest6();
+  public void checkTest7();
+  public void checkTest8();
+  public void checkTest9();
+  public void promotionTest1();
+  public void promotionTest2();
+  public void promotionTest3();
+  public void checkTest10();
+  public void promotionTest4();
+  public void promotionTest5();
+  public void checkTest11();
+  public void checkTest12();
+  public void positionTest1();
+  public void checkTest13();
+  public void checkTest14();
+  public void positionTest2();
+  public void positionTest3();
+  public void pinnedTest1();
+  public void positionTest4();
+  public void positionTest5();
+  public void checkTest15();
+  public void checkTest16();
+  public void checkTest17();
+  public void checkTest18();
+  public void checkTest19();
+  public void checkTest20();
+  public void checkTest21();
+  public void checkTest22();
+  public void checkTest23();
+  public void checkTest24();
+  public void checkTest25();
+  public void checkTest26();
+  public void checkmateTest1();
+  public void positionTest6();
+  public void castlingTest1();
+  public void castlingTest2();
+  public void castlingTest3();
+  public void castlingTest4();
+  public void castlingTest5();
+  public void castlingTest6();
+  public void enPassantBlackTest();
+  public void enPassantBlackTest2();
+  public void enPassantBlackTest3();
+  public void enPassantBlackTest4();
+  public void enPassantBlackTest5();
+  public void enPassantWhiteTest();
+  public void enPassantWhiteTest2();
+  public void enPassantWhiteTest3();
+  public void enPassantWhiteTest4();
+  public void enPassantWhiteTest5();
+  public void enPassantWhiteTest6();
+  public void enPassantWhiteTest7();
+}
+Compiled from "ZobristKeyTest.java"
+public class es.dagaren.gladiator.testing.representation.ZobristKeyTest {
+  public es.dagaren.gladiator.testing.representation.ZobristKeyTest();
+  public static void init();
+  protected void checkPosition(es.dagaren.gladiator.representation.Position, int);
+  protected void checkPosition(java.lang.String);
+  public void checkTest1();
+  public void checkTest2();
+  public void checkTest3();
+  public void checkTest4();
+  public void checkTest5();
+  public void checkTest6();
+  public void checkTest7();
+  public void checkTest8();
+  public void checkTest9();
+  public void checkTest10();
+  public void checkTest11();
+  public void checkTest12();
+  public void checkTest13();
+  public void promotionTest1();
+  public void promotionTest2();
+  public void promotionTest3();
+  public void promotionTest4();
+  public void promotionTest5();
+  public void positionTest1();
+  public void positionTest2();
+  public void positionTest3();
+  public void positionTest4();
+  public void positionTest5();
+  public void positionTest6();
+  public void pinnedTest1();
+  public void checkmateTest1();
+  public void castlingTest1();
+  public void castlingTest2();
+  public void castlingTest3();
+  public void castlingTest4();
+  public void castlingTest5();
+  public void castlingTest6();
+  public void enPassantBlackTest1();
+  public void enPassantBlackTest2();
+  public void enPassantBlackTest3();
+  public void enPassantBlackTest4();
+  public void enPassantBlackTest5();
+  public void enPassantWhiteTest1();
+  public void enPassantWhiteTest2();
+  public void enPassantWhiteTest3();
+  public void enPassantWhiteTest4();
+  public void enPassantWhiteTest5();
+  public void enPassantWhiteTest6();
+  public void enPassantWhiteTest7();
+}
+Compiled from "ClockTest.java"
+public class es.dagaren.gladiator.testing.time.ClockTest {
+  public es.dagaren.gladiator.time.Clock clock;
+  public es.dagaren.gladiator.testing.time.ClockTest();
+  public static void init();
+  public void test();
+  public void test2();
+  public java.lang.String formatTime(long);
+}
+Compiled from "ClockTest.java"
+class es.dagaren.gladiator.testing.time.ClockTest$1 implements java.lang.Runnable {
+  final es.dagaren.gladiator.testing.time.ClockTest this$0;
+  es.dagaren.gladiator.testing.time.ClockTest$1(es.dagaren.gladiator.testing.time.ClockTest);
+  public void run();
+}
+Compiled from "ClockTest.java"
+class es.dagaren.gladiator.testing.time.ClockTest$2 implements java.lang.Runnable {
+  final es.dagaren.gladiator.testing.time.ClockTest this$0;
+  es.dagaren.gladiator.testing.time.ClockTest$2(es.dagaren.gladiator.testing.time.ClockTest);
+  public void run();
+}
+Compiled from "StopwatchTest.java"
+public class es.dagaren.gladiator.testing.time.StopwatchTest {
+  public es.dagaren.gladiator.testing.time.StopwatchTest();
+  public static void init();
+  public void test();
+  public void test2();
+  public void test3();
+  public void test4();
+  public void test5();
+}
+Compiled from "TimeControlTest.java"
+public class es.dagaren.gladiator.testing.time.TimeControlTest {
+  public es.dagaren.gladiator.testing.time.TimeControlTest();
+  public static void init();
+  public void testSuddenDeath1();
+  public void testSuddenDeath2();
+  public void testSuddenDeath3();
+  public void testSuddenDeath4();
+  public void testSuddenDeath5();
+  public void testSuddenDeath6();
+  public void testSuddenDeath7();
+  public void testSuddenDeath8();
+  public void testSuddenDeath9();
+  public void testSuddenDeath10();
+}
+Compiled from "Clock.java"
+public class es.dagaren.gladiator.time.Clock {
+  es.dagaren.gladiator.time.States state;
+  public es.dagaren.gladiator.time.Clock();
+  public synchronized void setTimeControl(es.dagaren.gladiator.time.TimeControl);
+  public synchronized void setWhiteTime(long);
+  public synchronized long getWhiteTime();
+  public synchronized void setBlackTime(long);
+  public synchronized long getBlackTime();
+  public synchronized void setMove(int);
+  public synchronized int getMove();
+  public synchronized void setTurn(es.dagaren.gladiator.representation.Colour);
+  public synchronized es.dagaren.gladiator.representation.Colour getTurn();
+  public synchronized void init();
+  public synchronized void start();
+  public synchronized void pause();
+  public synchronized void resume();
+  public synchronized void switchClocks();
+}
+Compiled from "IncrementTypes.java"
+public final class es.dagaren.gladiator.time.IncrementTypes extends java.lang.Enum<es.dagaren.gladiator.time.IncrementTypes> {
+  public static final es.dagaren.gladiator.time.IncrementTypes FISCHER;
+  public static final es.dagaren.gladiator.time.IncrementTypes BRONSTEIN;
+  public static final es.dagaren.gladiator.time.IncrementTypes NONE;
+  public static es.dagaren.gladiator.time.IncrementTypes[] values();
+  public static es.dagaren.gladiator.time.IncrementTypes valueOf(java.lang.String);
+  static {};
+}
+Compiled from "Quota.java"
+public class es.dagaren.gladiator.time.Quota implements es.dagaren.gladiator.time.TimeControl {
+  public es.dagaren.gladiator.time.Quota(int, long, long, es.dagaren.gladiator.time.IncrementTypes);
+  public void startTurn(long[], int, es.dagaren.gladiator.representation.Colour);
+  public void finishTurn(long[], long[], int, es.dagaren.gladiator.representation.Colour);
+  public long getStartTime(es.dagaren.gladiator.representation.Colour);
+  public int getNumMoves();
+}
+Compiled from "States.java"
+public final class es.dagaren.gladiator.time.States extends java.lang.Enum<es.dagaren.gladiator.time.States> {
+  public static final es.dagaren.gladiator.time.States STOPPED;
+  public static final es.dagaren.gladiator.time.States RUNNING;
+  public static final es.dagaren.gladiator.time.States PAUSED;
+  public static es.dagaren.gladiator.time.States[] values();
+  public static es.dagaren.gladiator.time.States valueOf(java.lang.String);
+  static {};
+}
+Compiled from "Stopwatch.java"
+public class es.dagaren.gladiator.time.Stopwatch {
+  public es.dagaren.gladiator.time.Stopwatch();
+  public synchronized void setTime(long);
+  public synchronized long getTime();
+  public synchronized void start();
+  public synchronized void stop();
+}
+Compiled from "SuddenDeath.java"
+public class es.dagaren.gladiator.time.SuddenDeath implements es.dagaren.gladiator.time.TimeControl {
+  public es.dagaren.gladiator.time.SuddenDeath(long, long, es.dagaren.gladiator.time.IncrementTypes);
+  public void startTurn(long[], int, es.dagaren.gladiator.representation.Colour);
+  public void finishTurn(long[], long[], int, es.dagaren.gladiator.representation.Colour);
+  public long getStartTime(es.dagaren.gladiator.representation.Colour);
+  public int getNumMoves();
+}
+Compiled from "TimeControl.java"
+public interface es.dagaren.gladiator.time.TimeControl {
+  public abstract int getNumMoves();
+  public abstract void startTurn(long[], int, es.dagaren.gladiator.representation.Colour);
+  public abstract void finishTurn(long[], long[], int, es.dagaren.gladiator.representation.Colour);
+  public abstract long getStartTime(es.dagaren.gladiator.representation.Colour);
+}
+Compiled from "Entry.java"
+public class es.dagaren.gladiator.transposition.Entry {
+  public es.dagaren.gladiator.transposition.Entry();
+  public es.dagaren.gladiator.transposition.Entry(long, int, int, es.dagaren.gladiator.transposition.Entry$Type, int, es.dagaren.gladiator.representation.Movement);
+  public void init(long, int, int, es.dagaren.gladiator.transposition.Entry$Type, int, es.dagaren.gladiator.representation.Movement);
+  public long getHash();
+  public void setHash(long);
+  public int getDepth();
+  public void setDepth(int);
+  public int getScore();
+  public void setScore(int);
+  public es.dagaren.gladiator.transposition.Entry$Type getType();
+  public void setType(es.dagaren.gladiator.transposition.Entry$Type);
+  public int getAge();
+  public void setAge(int);
+  public es.dagaren.gladiator.representation.Movement getBestMove();
+  public void setBestMove(es.dagaren.gladiator.representation.Movement);
+  public java.lang.Integer probe(int, int, int);
+}
+Compiled from "Entry.java"
+public final class es.dagaren.gladiator.transposition.Entry$Type extends java.lang.Enum<es.dagaren.gladiator.transposition.Entry$Type> {
+  public static final es.dagaren.gladiator.transposition.Entry$Type EXACT;
+  public static final es.dagaren.gladiator.transposition.Entry$Type ALPHA;
+  public static final es.dagaren.gladiator.transposition.Entry$Type BETA;
+  public static es.dagaren.gladiator.transposition.Entry$Type[] values();
+  public static es.dagaren.gladiator.transposition.Entry$Type valueOf(java.lang.String);
+  static {};
+}
+Compiled from "Table.java"
+public class es.dagaren.gladiator.transposition.Table {
+  public es.dagaren.gladiator.transposition.Table(int);
+  public es.dagaren.gladiator.transposition.Entry get(long);
+  public boolean save(long, int, int, es.dagaren.gladiator.transposition.Entry$Type, int, es.dagaren.gladiator.representation.Movement);
+  public long getHits();
+  public void setHits(long);
+  public long getMisses();
+  public void setMisses(long);
+}

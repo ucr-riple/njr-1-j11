@@ -1,0 +1,185 @@
+Compiled from "AntigenFitnessData.java"
+public class edu.sdsu.cs652.si.baldwin.AntigenFitnessData {
+  public edu.sdsu.cs652.si.baldwin.AntigenFitnessData(boolean[], boolean[], int, int, double, double, double);
+  public int getGeneticMatchScore();
+  public int getLearnedScore();
+  public double getBindingValue();
+  public double getLearningPenalty();
+  public double getFitnessValue();
+  public boolean[] getAntigen();
+  public boolean[] getBestAntibody();
+}
+Compiled from "AntigenUniverse.java"
+public class edu.sdsu.cs652.si.baldwin.AntigenUniverse {
+  public static edu.sdsu.cs652.si.baldwin.AntigenUniverse createAntigenUnivers(int, int);
+  public static java.lang.String antigenToString(boolean[]);
+  public static java.lang.String xorToString(boolean[], boolean[]);
+  public boolean[][] getAntigents();
+  public boolean[][] getAnitgenSubset(int);
+  static {};
+}
+Compiled from "BaldwinFitnessFunction.java"
+public class edu.sdsu.cs652.si.baldwin.BaldwinFitnessFunction extends org.jgap.FitnessFunction {
+  protected static final java.util.Random RANDOM;
+  protected final edu.sdsu.cs652.si.baldwin.AntigenUniverse antigenUniverse;
+  protected final double learningPenalty;
+  public edu.sdsu.cs652.si.baldwin.BaldwinFitnessFunction(edu.sdsu.cs652.si.baldwin.AntigenUniverse, int, double);
+  public double evaluate(org.jgap.IChromosome);
+  public edu.sdsu.cs652.si.baldwin.BaldwinFitnessFunction$LearningResult calculateLearnedComponet(int, int);
+  public double calculateLearningPenalty(int);
+  public double calculateBindingValue(int);
+  public edu.sdsu.cs652.si.baldwin.GeneticMatchResult findBestGeneticMatch(boolean[], boolean[][]);
+  public edu.sdsu.cs652.si.baldwin.GeneticMatchResult findBestGeneticMatch(boolean[], org.jgap.IChromosome);
+  public int getSegmentGeneticMatchScore(int, boolean[], boolean[]);
+  public int getGeneticMatchScore(boolean[], boolean[]);
+  static {};
+}
+Compiled from "BaldwinFitnessFunction.java"
+class edu.sdsu.cs652.si.baldwin.BaldwinFitnessFunction$LearningResult {
+  final edu.sdsu.cs652.si.baldwin.BaldwinFitnessFunction this$0;
+  public edu.sdsu.cs652.si.baldwin.BaldwinFitnessFunction$LearningResult(edu.sdsu.cs652.si.baldwin.BaldwinFitnessFunction, int, int);
+  public int getNumberOfGuessesUsed();
+  public int getNumberOfLearnedBits();
+}
+Compiled from "BaldwinGA.java"
+public class edu.sdsu.cs652.si.baldwin.BaldwinGA {
+  public edu.sdsu.cs652.si.baldwin.BaldwinGA(edu.sdsu.cs652.si.baldwin.BaldwinGASimulationProfile) throws org.jgap.InvalidConfigurationException;
+  public double runSimulation(boolean) throws org.jgap.InvalidConfigurationException;
+  public double getPopulationAverageFitness(edu.sdsu.cs652.si.baldwin.AntigenUniverse, org.jgap.Genotype, edu.sdsu.cs652.si.baldwin.BaldwinFitnessFunction);
+  public org.jgap.Chromosome createEmptyChromosome(org.jgap.Configuration) throws org.jgap.InvalidConfigurationException;
+  public static void main(java.lang.String[]) throws org.jgap.InvalidConfigurationException;
+}
+Compiled from "BaldwinGASimulationProfile.java"
+public class edu.sdsu.cs652.si.baldwin.BaldwinGASimulationProfile {
+  int antigenUniverseSize;
+  int exposedAntigensPerIndividual;
+  int numberOfGenerations;
+  int maxLearningGuesses;
+  double learningPenalty;
+  public edu.sdsu.cs652.si.baldwin.BaldwinGASimulationProfile(int, int, int, int, double);
+  public int getAntigenUniverseSize();
+  public int getExposedAntigensPerIndividual();
+  public int getNumberOfGenerations();
+  public int getMaxLearningGuesses();
+  public double getLearningPenalty();
+}
+Compiled from "ChromosomeMetaData.java"
+public class edu.sdsu.cs652.si.baldwin.ChromosomeMetaData {
+  public edu.sdsu.cs652.si.baldwin.ChromosomeMetaData(int);
+  public void appendFitnessData(edu.sdsu.cs652.si.baldwin.AntigenFitnessData);
+  public java.util.List<edu.sdsu.cs652.si.baldwin.AntigenFitnessData> getAntigenFitnessData();
+  public double getPopulationAverageGeneticMatch();
+}
+Compiled from "ChromosomePrinter.java"
+public class edu.sdsu.cs652.si.baldwin.ChromosomePrinter {
+  public edu.sdsu.cs652.si.baldwin.ChromosomePrinter();
+  public static java.lang.String toString(org.jgap.IChromosome);
+  public static java.util.BitSet toBits(org.jgap.IChromosome);
+}
+Compiled from "Constants.java"
+public interface edu.sdsu.cs652.si.baldwin.Constants {
+  public static final int NUMBER_OF_LIBRARIES;
+  public static final int SEGMENTS_PER_LIBRARY;
+  public static final int BITS_PER_SEGMENT;
+  public static final int CHROMOSOME_LENGTH;
+  public static final int ANTIBODY_LENGTH;
+  public static final int NUMBER_OF_ANIBODIES;
+  public static final int LIBRARY_1;
+  public static final int LIBRARY_2;
+  public static final int LIBRARY_3;
+  public static final int LIBRARY_4;
+}
+Compiled from "GeneticMatchResult.java"
+public class edu.sdsu.cs652.si.baldwin.GeneticMatchResult {
+  public edu.sdsu.cs652.si.baldwin.GeneticMatchResult(boolean[], int);
+  public boolean[] getAntibody();
+  public int getGeneticMatchScore();
+}
+Compiled from "MyFixedBinaryGene.java"
+public class edu.sdsu.cs652.si.baldwin.MyFixedBinaryGene extends org.jgap.impl.FixedBinaryGene {
+  public edu.sdsu.cs652.si.baldwin.MyFixedBinaryGene(org.jgap.Configuration, int) throws org.jgap.InvalidConfigurationException;
+  public edu.sdsu.cs652.si.baldwin.MyFixedBinaryGene(org.jgap.Configuration, org.jgap.impl.FixedBinaryGene) throws org.jgap.InvalidConfigurationException;
+  public int size();
+  public java.lang.Object clone();
+  protected org.jgap.Gene newGeneInternal();
+  public edu.sdsu.cs652.si.baldwin.MyFixedBinaryGene substring(int, int);
+  public org.jgap.impl.FixedBinaryGene substring(int, int);
+}
+Compiled from "PhenotypeExpressor.java"
+public class edu.sdsu.cs652.si.baldwin.PhenotypeExpressor {
+  public edu.sdsu.cs652.si.baldwin.PhenotypeExpressor();
+  public static boolean[][] createAntibodies(org.jgap.Chromosome);
+  public static boolean[] createAntiBody(org.jgap.Chromosome, int, int, int, int);
+  public static boolean getBit(org.jgap.Chromosome, int, int, int);
+  public static boolean[] getSegment(org.jgap.IChromosome, int, int);
+}
+Compiled from "RankProportionalRouletteSelector.java"
+public class edu.sdsu.cs652.si.baldwin.RankProportionalRouletteSelector extends org.jgap.NaturalSelectorExt implements org.jgap.util.ICloneable {
+  public edu.sdsu.cs652.si.baldwin.RankProportionalRouletteSelector() throws org.jgap.InvalidConfigurationException;
+  public edu.sdsu.cs652.si.baldwin.RankProportionalRouletteSelector(org.jgap.Configuration) throws org.jgap.InvalidConfigurationException;
+  protected synchronized void add(org.jgap.IChromosome);
+  public synchronized void selectChromosomes(int, org.jgap.Population);
+  public synchronized void empty();
+  public boolean returnsUniqueChromosomes();
+  public void setDoubletteChromosomesAllowed(boolean);
+  public boolean getDoubletteChromosomesAllowed();
+  public java.lang.Object clone();
+  public boolean equals(java.lang.Object);
+  static {};
+}
+Compiled from "RankProportionalRouletteSelector.java"
+class edu.sdsu.cs652.si.baldwin.RankProportionalRouletteSelector$1 implements java.util.Comparator<org.jgap.IChromosome> {
+  final edu.sdsu.cs652.si.baldwin.RankProportionalRouletteSelector this$0;
+  edu.sdsu.cs652.si.baldwin.RankProportionalRouletteSelector$1(edu.sdsu.cs652.si.baldwin.RankProportionalRouletteSelector);
+  public int compare(org.jgap.IChromosome, org.jgap.IChromosome);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "RankProportionalRouletteSelector.java"
+class edu.sdsu.cs652.si.baldwin.RankProportionalRouletteSelector$WeightedRouletteSelConfig implements java.io.Serializable {
+  public boolean m_doublettesAllowed;
+  final edu.sdsu.cs652.si.baldwin.RankProportionalRouletteSelector this$0;
+  edu.sdsu.cs652.si.baldwin.RankProportionalRouletteSelector$WeightedRouletteSelConfig(edu.sdsu.cs652.si.baldwin.RankProportionalRouletteSelector);
+}
+Compiled from "RankProportionalSelector.java"
+public class edu.sdsu.cs652.si.baldwin.RankProportionalSelector extends org.jgap.NaturalSelectorExt implements org.jgap.util.ICloneable {
+  public edu.sdsu.cs652.si.baldwin.RankProportionalSelector() throws org.jgap.InvalidConfigurationException;
+  public edu.sdsu.cs652.si.baldwin.RankProportionalSelector(org.jgap.Configuration) throws org.jgap.InvalidConfigurationException;
+  protected synchronized void add(org.jgap.IChromosome);
+  public synchronized void selectChromosomes(int, org.jgap.Population);
+  public synchronized void empty();
+  public boolean returnsUniqueChromosomes();
+  public void setDoubletteChromosomesAllowed(boolean);
+  public boolean getDoubletteChromosomesAllowed();
+  public java.lang.Object clone();
+  public boolean equals(java.lang.Object);
+}
+Compiled from "RankProportionalSelector.java"
+class edu.sdsu.cs652.si.baldwin.RankProportionalSelector$1 implements java.util.Comparator<org.jgap.IChromosome> {
+  final edu.sdsu.cs652.si.baldwin.RankProportionalSelector this$0;
+  edu.sdsu.cs652.si.baldwin.RankProportionalSelector$1(edu.sdsu.cs652.si.baldwin.RankProportionalSelector);
+  public int compare(org.jgap.IChromosome, org.jgap.IChromosome);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "SimulationEngine.java"
+public class edu.sdsu.cs652.si.baldwin.SimulationEngine {
+  public edu.sdsu.cs652.si.baldwin.SimulationEngine(int, int, int);
+  public void addProfile(edu.sdsu.cs652.si.baldwin.SimulationProfile);
+  public void setTestsPerProfile(int);
+  public void runSimulations() throws org.jgap.InvalidConfigurationException;
+  public static void main(java.lang.String[]) throws org.jgap.InvalidConfigurationException;
+}
+Compiled from "SimulationProfile.java"
+public class edu.sdsu.cs652.si.baldwin.SimulationProfile {
+  public edu.sdsu.cs652.si.baldwin.SimulationProfile(int, double);
+  public int getMaxLearningGuesses();
+  public double getLearningPenalty();
+}
+Compiled from "RankProportionalRouletteSelector.java"
+class edu.sdsu.cs652.si.baldwin.SlotCounter {
+  edu.sdsu.cs652.si.baldwin.SlotCounter();
+  public void reset(double);
+  public double getFitnessValue();
+  public void increment();
+  public int getCounterValue();
+  public void scaleFitnessValue(double);
+}

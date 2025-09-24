@@ -1,0 +1,239 @@
+Compiled from "Face.java"
+class com.github.quickhull3d.Face {
+  protected static final int DELETED;
+  protected static final int NON_CONVEX;
+  protected static final int VISIBLE;
+  protected double area;
+  protected com.github.quickhull3d.HalfEdge he0;
+  protected int mark;
+  protected com.github.quickhull3d.Face next;
+  protected int numVerts;
+  protected com.github.quickhull3d.Vertex outside;
+  protected double planeOffset;
+  public com.github.quickhull3d.Face();
+  public static com.github.quickhull3d.Face create(com.github.quickhull3d.Vertex[], int[]);
+  public static com.github.quickhull3d.Face createTriangle(com.github.quickhull3d.Vertex, com.github.quickhull3d.Vertex, com.github.quickhull3d.Vertex);
+  public static com.github.quickhull3d.Face createTriangle(com.github.quickhull3d.Vertex, com.github.quickhull3d.Vertex, com.github.quickhull3d.Vertex, double);
+  public void computeCentroid(com.github.quickhull3d.Point3d);
+  public void computeNormal(com.github.quickhull3d.Vector3d);
+  public void computeNormal(com.github.quickhull3d.Vector3d, double);
+  public double distanceToPlane(com.github.quickhull3d.Point3d);
+  public com.github.quickhull3d.HalfEdge findEdge(com.github.quickhull3d.Vertex, com.github.quickhull3d.Vertex);
+  public com.github.quickhull3d.Point3d getCentroid();
+  public com.github.quickhull3d.HalfEdge getEdge(int);
+  public com.github.quickhull3d.HalfEdge getFirstEdge();
+  public com.github.quickhull3d.Vector3d getNormal();
+  public void getVertexIndices(int[]);
+  public java.lang.String getVertexString();
+  public int mergeAdjacentFace(com.github.quickhull3d.HalfEdge, com.github.quickhull3d.Face[]);
+  public int numVertices();
+  public void triangulate(com.github.quickhull3d.FaceList, double);
+  public double areaSquared(com.github.quickhull3d.HalfEdge, com.github.quickhull3d.HalfEdge);
+  void checkConsistency();
+}
+Compiled from "FaceList.java"
+class com.github.quickhull3d.FaceList {
+  com.github.quickhull3d.FaceList();
+  public void clear();
+  public void add(com.github.quickhull3d.Face);
+  public com.github.quickhull3d.Face first();
+  public boolean isEmpty();
+}
+Compiled from "HalfEdge.java"
+class com.github.quickhull3d.HalfEdge {
+  protected com.github.quickhull3d.Vertex vertex;
+  protected com.github.quickhull3d.Face face;
+  protected com.github.quickhull3d.HalfEdge next;
+  protected com.github.quickhull3d.HalfEdge prev;
+  protected com.github.quickhull3d.HalfEdge opposite;
+  public com.github.quickhull3d.HalfEdge(com.github.quickhull3d.Vertex, com.github.quickhull3d.Face);
+  public com.github.quickhull3d.HalfEdge();
+  public void setNext(com.github.quickhull3d.HalfEdge);
+  public com.github.quickhull3d.HalfEdge getNext();
+  public void setPrev(com.github.quickhull3d.HalfEdge);
+  public com.github.quickhull3d.HalfEdge getPrev();
+  public com.github.quickhull3d.Face getFace();
+  public com.github.quickhull3d.HalfEdge getOpposite();
+  public void setOpposite(com.github.quickhull3d.HalfEdge);
+  public com.github.quickhull3d.Vertex head();
+  public com.github.quickhull3d.Vertex tail();
+  public com.github.quickhull3d.Face oppositeFace();
+  public java.lang.String getVertexString();
+  public double length();
+  public double lengthSquared();
+}
+Compiled from "InternalErrorException.java"
+public class com.github.quickhull3d.InternalErrorException extends java.lang.RuntimeException {
+  public com.github.quickhull3d.InternalErrorException(java.lang.String);
+}
+Compiled from "Point3d.java"
+public class com.github.quickhull3d.Point3d extends com.github.quickhull3d.Vector3d {
+  public com.github.quickhull3d.Point3d();
+  public com.github.quickhull3d.Point3d(com.github.quickhull3d.Vector3d);
+  public com.github.quickhull3d.Point3d(double, double, double);
+}
+Compiled from "QhullTest.java"
+class com.github.quickhull3d.QhullTest {
+  static double[] coords;
+  static int[][] faces;
+  com.github.quickhull3d.QhullTest();
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "QuickHull3D.java"
+public class com.github.quickhull3d.QuickHull3D {
+  public static final int CLOCKWISE;
+  public static final int INDEXED_FROM_ONE;
+  public static final int INDEXED_FROM_ZERO;
+  public static final int POINT_RELATIVE;
+  public static final double AUTOMATIC_TOLERANCE;
+  protected int findIndex;
+  protected double charLength;
+  protected com.github.quickhull3d.Vertex[] pointBuffer;
+  protected int[] vertexPointIndices;
+  protected java.util.Vector faces;
+  protected java.util.Vector horizon;
+  protected int numVertices;
+  protected int numFaces;
+  protected int numPoints;
+  protected double explicitTolerance;
+  protected double tolerance;
+  public double getDistanceTolerance();
+  public void setExplicitDistanceTolerance(double);
+  public double getExplicitDistanceTolerance();
+  public com.github.quickhull3d.QuickHull3D();
+  public com.github.quickhull3d.QuickHull3D(double[]) throws java.lang.IllegalArgumentException;
+  public com.github.quickhull3d.QuickHull3D(com.github.quickhull3d.Point3d[]) throws java.lang.IllegalArgumentException;
+  protected void setHull(double[], int, int[][], int);
+  protected void setFromQhull(double[], int, boolean);
+  public void printPoints(java.io.PrintStream);
+  public void build(double[]) throws java.lang.IllegalArgumentException;
+  public void build(double[], int) throws java.lang.IllegalArgumentException;
+  public void build(com.github.quickhull3d.Point3d[]) throws java.lang.IllegalArgumentException;
+  public void build(com.github.quickhull3d.Point3d[], int) throws java.lang.IllegalArgumentException;
+  public void triangulate();
+  protected void initBuffers(int);
+  protected void setPoints(double[], int);
+  protected void setPoints(com.github.quickhull3d.Point3d[], int);
+  protected void computeMaxAndMin();
+  protected void createInitialSimplex() throws java.lang.IllegalArgumentException;
+  public int getNumVertices();
+  public com.github.quickhull3d.Point3d[] getVertices();
+  public int getVertices(double[]);
+  public int[] getVertexPointIndices();
+  public int getNumFaces();
+  public int[][] getFaces();
+  public int[][] getFaces(int);
+  public void print(java.io.PrintStream);
+  public void print(java.io.PrintStream, int);
+  protected void resolveUnclaimedPoints(com.github.quickhull3d.FaceList);
+  protected void deleteFacePoints(com.github.quickhull3d.Face, com.github.quickhull3d.Face);
+  protected double oppFaceDistance(com.github.quickhull3d.HalfEdge);
+  protected void calculateHorizon(com.github.quickhull3d.Point3d, com.github.quickhull3d.HalfEdge, com.github.quickhull3d.Face, java.util.Vector);
+  protected void addNewFaces(com.github.quickhull3d.FaceList, com.github.quickhull3d.Vertex, java.util.Vector);
+  protected com.github.quickhull3d.Vertex nextPointToAdd();
+  protected void addPointToHull(com.github.quickhull3d.Vertex);
+  protected void buildHull();
+  protected void reindexFacesAndVertices();
+  protected boolean checkFaceConvexity(com.github.quickhull3d.Face, double, java.io.PrintStream);
+  protected boolean checkFaces(double, java.io.PrintStream);
+  public boolean check(java.io.PrintStream);
+  public boolean check(java.io.PrintStream, double);
+  static {};
+}
+Compiled from "QuickHull3DTest.java"
+public class com.github.quickhull3d.QuickHull3DTest {
+  static boolean triangulate;
+  static boolean doTesting;
+  static boolean doTiming;
+  static boolean debugEnable;
+  static final int NO_DEGENERACY;
+  static final int EDGE_DEGENERACY;
+  static final int VERTEX_DEGENERACY;
+  java.util.Random rand;
+  static boolean testRotation;
+  static int degeneracyTest;
+  static double epsScale;
+  int cnt;
+  public com.github.quickhull3d.QuickHull3DTest();
+  public boolean faceIndicesEqual(int[], int[]);
+  public double[] randomPoints(int, double);
+  public double[] randomDegeneratePoints(int, int);
+  public double[] randomSphericalPoints(int, double);
+  public double[] randomCubedPoints(int, double, double);
+  public double[] randomGridPoints(int, double);
+  void explicitFaceCheck(com.github.quickhull3d.QuickHull3D, int[][]) throws java.lang.Exception;
+  void singleTest(double[], int[][]) throws java.lang.Exception;
+  double[] addDegeneracy(int, double[], com.github.quickhull3d.QuickHull3D);
+  void degenerateTest(com.github.quickhull3d.QuickHull3D, double[]) throws java.lang.Exception;
+  void rotateCoords(double[], double[], double, double, double);
+  void printCoords(double[]);
+  void testException(double[], java.lang.String);
+  void test(double[], int[][]) throws java.lang.Exception;
+  public void explicitAndRandomTests();
+  public void timingTests();
+  public static void main(java.lang.String[]);
+  public void doTest();
+  static {};
+}
+Compiled from "SimpleExample.java"
+public class com.github.quickhull3d.SimpleExample {
+  public com.github.quickhull3d.SimpleExample();
+  public static void main(java.lang.String[]);
+}
+Compiled from "TestConvexHull.java"
+public class com.github.quickhull3d.TestConvexHull {
+  public com.github.quickhull3d.TestConvexHull();
+  public void testConvexHull() throws java.lang.Exception;
+}
+Compiled from "Vector3d.java"
+public class com.github.quickhull3d.Vector3d {
+  public double x;
+  public double y;
+  public double z;
+  public com.github.quickhull3d.Vector3d();
+  public com.github.quickhull3d.Vector3d(com.github.quickhull3d.Vector3d);
+  public com.github.quickhull3d.Vector3d(double, double, double);
+  public double get(int);
+  public void set(int, double);
+  public void set(com.github.quickhull3d.Vector3d);
+  public void add(com.github.quickhull3d.Vector3d, com.github.quickhull3d.Vector3d);
+  public void add(com.github.quickhull3d.Vector3d);
+  public void sub(com.github.quickhull3d.Vector3d, com.github.quickhull3d.Vector3d);
+  public void sub(com.github.quickhull3d.Vector3d);
+  public void scale(double);
+  public void scale(double, com.github.quickhull3d.Vector3d);
+  public double norm();
+  public double normSquared();
+  public double distance(com.github.quickhull3d.Vector3d);
+  public double distanceSquared(com.github.quickhull3d.Vector3d);
+  public double dot(com.github.quickhull3d.Vector3d);
+  public void normalize();
+  public void setZero();
+  public void set(double, double, double);
+  public void cross(com.github.quickhull3d.Vector3d, com.github.quickhull3d.Vector3d);
+  protected void setRandom(double, double, java.util.Random);
+  public java.lang.String toString();
+}
+Compiled from "Vertex.java"
+class com.github.quickhull3d.Vertex {
+  com.github.quickhull3d.Point3d pnt;
+  int index;
+  com.github.quickhull3d.Vertex prev;
+  com.github.quickhull3d.Vertex next;
+  com.github.quickhull3d.Face face;
+  public com.github.quickhull3d.Vertex();
+  public com.github.quickhull3d.Vertex(double, double, double, int);
+}
+Compiled from "VertexList.java"
+class com.github.quickhull3d.VertexList {
+  com.github.quickhull3d.VertexList();
+  public void clear();
+  public void add(com.github.quickhull3d.Vertex);
+  public void addAll(com.github.quickhull3d.Vertex);
+  public void delete(com.github.quickhull3d.Vertex);
+  public void delete(com.github.quickhull3d.Vertex, com.github.quickhull3d.Vertex);
+  public void insertBefore(com.github.quickhull3d.Vertex, com.github.quickhull3d.Vertex);
+  public com.github.quickhull3d.Vertex first();
+  public boolean isEmpty();
+}

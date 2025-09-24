@@ -1,0 +1,993 @@
+Compiled from "EmetteurThreadMulti.java"
+public class EmetteurThreadMulti extends java.lang.Thread {
+  java.net.InetAddress groupeIP;
+  java.net.MulticastSocket socketEmission;
+  EmetteurThreadMulti(java.net.InetAddress, int) throws java.lang.Exception;
+  public void setAckType(int);
+  public void run();
+  void sendMsg() throws java.lang.Exception;
+}
+Compiled from "Emetteur_thread.java"
+public class Emetteur_thread extends java.lang.Thread {
+  java.net.InetAddress groupeIP;
+  int port;
+  java.net.DatagramSocket socketEmission;
+  Emetteur_thread(java.net.InetAddress, int) throws java.lang.Exception;
+  public byte get_ACK_NACK();
+  public void set_ACK_NACK(byte);
+  public void run();
+  void send_thing() throws java.lang.Exception;
+}
+Compiled from "ComparatorEncodingSymbol.java"
+final class RQLibrary.ComparatorEncodingSymbol implements java.util.Comparator<RQLibrary.EncodingSymbol> {
+  RQLibrary.ComparatorEncodingSymbol();
+  public int compare(RQLibrary.EncodingSymbol, RQLibrary.EncodingSymbol);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "Deg.java"
+abstract class RQLibrary.Deg {
+  RQLibrary.Deg();
+  protected static long deg(long, long);
+  static {};
+}
+Compiled from "Encoder.java"
+public class RQLibrary.Encoder {
+  public static final int MAX_PAYLOAD_SIZE;
+  public static final int ALIGN_PARAM;
+  public static final int MAX_SIZE_BLOCK;
+  public static final int SSYMBOL_LOWER_BOUND;
+  public static final int KMAX;
+  public static final byte ALPHA;
+  public int Z;
+  RQLibrary.EncodingPacket encoded_symbols_reparation;
+  public RQLibrary.Encoder(byte[], float, int);
+  public RQLibrary.Encoder(int);
+  public int getKt();
+  public int getNumRepairSymbols();
+  public void setNumRepairSymbols(int);
+  public static final int ceil(double);
+  public static final int floor(double);
+  public RQLibrary.SourceBlock[] partition();
+  public byte[] unPartition(RQLibrary.SourceBlock[]);
+  public static RQLibrary.SourceBlock decode(RQLibrary.EncodingPacket) throws RQLibrary.SingularMatrixException;
+  public static RQLibrary.SourceBlock[] decode(RQLibrary.EncodingPacket[]) throws RQLibrary.SingularMatrixException;
+  public RQLibrary.EncodingPacket get_encoded_symbols_reparation();
+  public void set_encoded_symbols_reparation(RQLibrary.EncodingPacket);
+  public RQLibrary.EncodingPacket encode(RQLibrary.SourceBlock);
+  public RQLibrary.EncodingPacket[] encode(RQLibrary.SourceBlock[]);
+  public static byte[][] generateConstraintMatrix(int, int);
+  public static byte[] PInactivationDecoding(byte[][], byte[][], int, int) throws RQLibrary.SingularMatrixException;
+  public java.util.Map<RQLibrary.SourceBlock, RQLibrary.Tuple[]> generateTuples(RQLibrary.SourceBlock[]);
+  public byte[] enc(int, byte[], RQLibrary.Tuple);
+  public static java.util.Set<java.lang.Integer> encIndexes(int, RQLibrary.Tuple);
+  static {};
+}
+Compiled from "EncodingPacket.java"
+public final class RQLibrary.EncodingPacket implements java.io.Serializable {
+  public RQLibrary.EncodingPacket(int, RQLibrary.EncodingSymbol[], int, int);
+  protected int getK();
+  protected int getT();
+  protected int getSBN();
+  public RQLibrary.EncodingSymbol[] getEncoding_symbols();
+}
+Compiled from "EncodingSymbol.java"
+public final class RQLibrary.EncodingSymbol implements java.lang.Comparable<RQLibrary.EncodingSymbol>, java.io.Serializable {
+  public RQLibrary.EncodingSymbol(int, int, byte[]);
+  public int getSBN();
+  public int getESI();
+  public byte[] getData();
+  public int getISI(int);
+  public int compareTo(RQLibrary.EncodingSymbol);
+  public int compareTo(java.lang.Object);
+}
+Compiled from "OctectOps.java"
+abstract class RQLibrary.OctectOps {
+  RQLibrary.OctectOps();
+  protected static final short UNSIGN(byte);
+  protected static final byte getExp(int);
+  protected static final byte getLog(int);
+  protected static final byte addition(byte, byte);
+  protected static final byte subtraction(byte, byte);
+  protected static final byte division(byte, byte);
+  protected static final byte product(byte, byte);
+  protected static final byte alphaPower(int);
+  protected static final byte[] betaProduct(byte, byte[]);
+  protected static final byte[] betaDivision(byte[], byte);
+  protected static final byte[] betaProduct(byte, byte[], int, int);
+  protected static final byte[] betaDivision(byte[], int, int, byte);
+  static {};
+}
+Compiled from "Partition.java"
+public class RQLibrary.Partition {
+  public RQLibrary.Partition(int, int);
+  public int get(int);
+}
+Compiled from "Rand.java"
+abstract class RQLibrary.Rand {
+  RQLibrary.Rand();
+  protected static long rand(long, int, long);
+  static {};
+}
+Compiled from "Row.java"
+class RQLibrary.Row {
+  public int id;
+  public int nonZeros;
+  public int degree;
+  public java.util.Set<java.lang.Integer> edges;
+  public boolean isHDPC;
+  protected RQLibrary.Row(int, int, int, boolean);
+  protected RQLibrary.Row(int, int, int, boolean, java.util.Set<java.lang.Integer>);
+  public boolean equals(java.lang.Object);
+}
+Compiled from "SingularMatrixException.java"
+public class RQLibrary.SingularMatrixException extends java.lang.Exception {
+  public static final java.lang.String msg;
+  public RQLibrary.SingularMatrixException();
+  public RQLibrary.SingularMatrixException(java.lang.String);
+  public RQLibrary.SingularMatrixException(java.lang.String, java.lang.Throwable);
+  public RQLibrary.SingularMatrixException(java.lang.Throwable);
+}
+Compiled from "SourceBlock.java"
+public class RQLibrary.SourceBlock {
+  protected RQLibrary.SourceBlock(int, byte[], int, int);
+  public int getK();
+  protected int getSBN();
+  protected byte[] getSymbols();
+  protected int getT();
+}
+Compiled from "SubBlock.java"
+class RQLibrary.SubBlock {
+  protected RQLibrary.SubBlock(byte[], long);
+  protected long getT();
+  protected void setT(long);
+  protected byte[] getData();
+  protected void setData(byte[]);
+}
+Compiled from "SystematicIndices.java"
+final class RQLibrary.SystematicIndices {
+  static int getKIndex(int);
+  static int K(int);
+  static int J(int);
+  static int S(int);
+  static int H(int);
+  static int W(int);
+  static int KL(int, int, int, int);
+  static int ceil(int);
+  static int floor(int);
+  static {};
+}
+Compiled from "Tuple.java"
+public class RQLibrary.Tuple {
+  public RQLibrary.Tuple(int, long);
+  public long getD();
+  public long getA();
+  public long getB();
+  public long getD1();
+  public long getA1();
+  public long getB1();
+}
+Compiled from "Utilities.java"
+public final class RQLibrary.Utilities {
+  public RQLibrary.Utilities();
+  public static final void printMatrix(byte[][]);
+  public static final byte[][] multiplyMatrices(byte[][], byte[][]);
+  public static byte[][] multiplyMatrices(byte[][], int, int, int, int, byte[][], int, int, int, int);
+  public static void multiplyMatrices(byte[][], int, int, int, int, byte[][], int, int, int, int, byte[][], int, int, int, int);
+  public static byte[] multiplyByteLineBySymbolVector(byte[], byte[], int);
+  public static byte[] multiplyByteLineBySymbolVector(byte[], int, byte[][], int);
+  public static void reduceToRowEchelonForm(byte[][], int, int, int, int, int[], byte[][]);
+  public static void reduceToRowEchelonForm(byte[][], int, int, int, int);
+  public static void swapColumns(byte[][], int, int);
+  public void swapRows(byte[][], int, int);
+  public static byte[] xorSymbol(byte[], byte[]);
+  public static byte[] xorSymbol(byte[], int, byte[], int, int);
+  public static long ceilPrime(long);
+  public static boolean isPrime(long);
+  public static boolean checkIdentity(byte[][], int);
+  public static boolean validateRank(byte[][], int, int, int, int, int);
+  public static void rowEchelonForm(byte[][]) throws RQLibrary.SingularMatrixException;
+  public boolean symbolIsZero(byte[]);
+  public static byte[] gaussElimination(byte[][], byte[][]) throws RQLibrary.SingularMatrixException;
+  public static final int necessaryRepairSymbols(int, int, float);
+  public static final byte convert(byte);
+}
+Compiled from "Receiver_2.java"
+public class Receiver_2 {
+  static final int size_int;
+  static final int ACK;
+  static final int NACK;
+  static final int FLAG_PUSH;
+  static final int FLAG_STOP;
+  byte[] serialized_data;
+  public Receiver_2();
+  public static boolean packet_is_loss(float);
+  public static final int byte_array_to_int(byte[]);
+  public static byte[] parameter_test(byte[], int);
+  public static final int look_for_the_answer(java.net.InetAddress, int) throws java.io.IOException;
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+}
+Compiled from "Receiver_for_the_test.java"
+public class Receiver_for_the_test extends java.lang.Thread {
+  byte[] serialized_data;
+  public static boolean packet_is_loss(float);
+  public Receiver_for_the_test(java.lang.String, long, int, java.net.InetAddress, int, float) throws java.io.IOException;
+  public void run();
+}
+Compiled from "Receiver_multicast.java"
+public class Receiver_multicast {
+  public Receiver_multicast();
+  public static boolean packetIsLost(float);
+  public static final int lookForTheAnswer(java.net.InetAddress, int) throws java.io.IOException;
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+}
+Compiled from "RecepteurThreadMulti.java"
+public class RecepteurThreadMulti extends java.lang.Thread {
+  int packetData;
+  public RecepteurThreadMulti(int, java.net.InetAddress, int, boolean) throws java.io.IOException;
+  public boolean getNeedMore();
+  public void setNeedMore(boolean);
+  public boolean getStatusEndLoop();
+  public void changeStatusEndLoop();
+  public void setTotalNumberOfPackets(int);
+  public int getNumberOfPackets();
+  public void setNumberOfPackets(int);
+  public void resetNumberOfPackets();
+  public long getTime_1();
+  public long getTime_2();
+  public int getNbAck();
+  public void setTimeSimu();
+  public void run();
+}
+Compiled from "Recepteur_thread.java"
+public class Recepteur_thread extends java.lang.Thread {
+  byte[] packetData;
+  public Recepteur_thread(int) throws java.net.SocketException;
+  public boolean get_status_end_loop();
+  public void change_status_end_loop();
+  public int get_number_of_packets();
+  public void set_number_of_packets(int);
+  public void run();
+  public byte[] get_packetData();
+}
+Compiled from "Sender_multicast.java"
+public class Sender_multicast {
+  static java.util.Random randomGenerator;
+  static final int ID_PACKET;
+  public Sender_multicast();
+  public static final double redundancyInLine(double, double);
+  public static final byte[] packetMaker(int, int, RQLibrary.EncodingSymbol);
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+  static {};
+}
+Compiled from "Thread_traitement.java"
+public class Thread_traitement {
+  static final int size_int;
+  static final int ACK;
+  static final int NACK;
+  Thread_traitement(int, java.lang.String);
+  public int get_total_symbols();
+  public void set_total_symbols(int);
+  public void treatement(byte[]) throws java.io.IOException;
+  public int decodage();
+  public void reconstruction() throws java.io.IOException;
+}
+Compiled from "Treatment.java"
+public class Treatment extends java.lang.Thread {
+  static final int size_int;
+  byte[][] matrice;
+  long[] temps;
+  int RTT;
+  boolean start;
+  boolean boucle;
+  int nb;
+  int nbRecv;
+  int ESI;
+  Treatment(int);
+  int getESI();
+  int getNb();
+  int getNbRecv();
+  void setEndBoucle();
+  public void run();
+  RQLibrary.EncodingSymbol treatPacket(byte[]);
+  void addPacket(byte[]);
+  java.util.Set<RQLibrary.EncodingSymbol> getEncodingSymbol();
+}
+Compiled from "Utils.java"
+public class Utils {
+  public static int RTT;
+  public static int ACK;
+  public static int NACK;
+  public static int FLAG_PUSH;
+  public static int FLAG_STOP;
+  public static int SYMB_LENGTH;
+  public static double LOST;
+  public static int BIT_RATE;
+  public static int INLINE_REDON_RATE;
+  public static int IntegerSize;
+  public static float ALPHA;
+  public Utils();
+  public static int byteArrayToInt(byte[]);
+  public static final byte[] intToByteArray(int);
+  public static void printInFile(java.lang.String, int, int);
+  static {};
+}
+Compiled from "ArrayDataDecoder.java"
+public final class net.fec.openrq.core.ArrayDataDecoder implements net.fec.openrq.core.decoder.DataDecoder {
+  static net.fec.openrq.core.ArrayDataDecoder newDecoder(net.fec.openrq.core.FECParameters, int);
+  public net.fec.openrq.core.FECParameters fecParameters();
+  public long dataLength();
+  public int symbolSize();
+  public int numberOfSourceBlocks();
+  public boolean isDataDecoded();
+  public net.fec.openrq.core.decoder.SourceBlockDecoder decoderForSourceBlock(int);
+  public byte[] dataArray();
+}
+Compiled from "ArrayDataEncoder.java"
+public final class net.fec.openrq.core.ArrayDataEncoder implements net.fec.openrq.core.encoder.DataEncoder {
+  static net.fec.openrq.core.ArrayDataEncoder newEncoder(byte[], int, net.fec.openrq.core.FECParameters);
+  public net.fec.openrq.core.FECParameters fecParameters();
+  public long dataLength();
+  public int symbolSize();
+  public int numberOfSourceBlocks();
+  public net.fec.openrq.core.encoder.SourceBlockEncoder encoderForSourceBlock(int);
+  public byte[] dataArray();
+  public int dataOffset();
+}
+Compiled from "ArraySourceBlockDecoder.java"
+final class net.fec.openrq.core.ArraySourceBlockDecoder implements net.fec.openrq.core.decoder.SourceBlockDecoder {
+  static net.fec.openrq.core.ArraySourceBlockDecoder newDecoder(byte[], int, net.fec.openrq.core.FECParameters, int, int, int);
+  public int sourceBlockNumber();
+  public int numberOfSourceSymbols();
+  public boolean containsSourceSymbol(int);
+  public boolean containsRepairSymbol(int);
+  public boolean isSourceBlockDecoded();
+  public java.util.Set<java.lang.Integer> missingSourceSymbols();
+  public net.fec.openrq.core.decoder.SourceBlockState putSourceSymbol(int, java.nio.ByteBuffer);
+  public net.fec.openrq.core.decoder.SourceBlockState putSourceSymbol(int, byte[], int);
+  public net.fec.openrq.core.decoder.SourceBlockState putRepairSymbol(int, java.nio.ByteBuffer);
+  public net.fec.openrq.core.decoder.SourceBlockState putRepairSymbol(int, byte[], int);
+}
+Compiled from "ArraySourceBlockEncoder.java"
+final class net.fec.openrq.core.ArraySourceBlockEncoder implements net.fec.openrq.core.encoder.SourceBlockEncoder {
+  static net.fec.openrq.core.ArraySourceBlockEncoder newEncoder(byte[], int, net.fec.openrq.core.FECParameters, int, int);
+  public int sourceBlockNumber();
+  public int numberOfSourceSymbols();
+  public net.fec.openrq.core.encoder.EncodingPacket getSourcePacket(int);
+  public net.fec.openrq.core.encoder.EncodingPacket getSourcePacket(int, int);
+  public net.fec.openrq.core.encoder.EncodingPacket getRepairPacket(int);
+  public net.fec.openrq.core.encoder.EncodingPacket getRepairPacket(int, int);
+}
+Compiled from "ArraySourceBlockEncoder.java"
+abstract class net.fec.openrq.core.ArraySourceBlockEncoder$AbstractEncodingPacket implements net.fec.openrq.core.encoder.EncodingPacket {
+  net.fec.openrq.core.ArraySourceBlockEncoder$AbstractEncodingPacket(net.fec.openrq.core.FECPayloadID, net.fec.openrq.core.util.collection.ImmutableList<java.nio.ByteBuffer>);
+  public net.fec.openrq.core.FECPayloadID fecPayloadID();
+  public java.util.List<java.nio.ByteBuffer> getSymbolData();
+  public int numberOfSymbols();
+}
+Compiled from "ArraySourceBlockEncoder.java"
+final class net.fec.openrq.core.ArraySourceBlockEncoder$RepairPacket extends net.fec.openrq.core.ArraySourceBlockEncoder$AbstractEncodingPacket {
+  net.fec.openrq.core.ArraySourceBlockEncoder$RepairPacket(net.fec.openrq.core.FECPayloadID, net.fec.openrq.core.util.collection.ImmutableList<java.nio.ByteBuffer>);
+  public net.fec.openrq.core.SymbolType symbolType();
+}
+Compiled from "ArraySourceBlockEncoder.java"
+final class net.fec.openrq.core.ArraySourceBlockEncoder$SourcePacket extends net.fec.openrq.core.ArraySourceBlockEncoder$AbstractEncodingPacket {
+  net.fec.openrq.core.ArraySourceBlockEncoder$SourcePacket(net.fec.openrq.core.FECPayloadID, net.fec.openrq.core.util.collection.ImmutableList<java.nio.ByteBuffer>);
+  public net.fec.openrq.core.SymbolType symbolType();
+}
+Compiled from "Builders.java"
+final class net.fec.openrq.core.Builders {
+  static net.fec.openrq.core.encoder.DataEncoderBuilder<net.fec.openrq.core.ArrayDataEncoder> newEncoderBuilder(byte[], int, int);
+  static net.fec.openrq.core.FECParameters access$000(long, int, int);
+}
+Compiled from "Builders.java"
+abstract class net.fec.openrq.core.Builders$AbstractEncBuilder<T extends net.fec.openrq.core.encoder.DataEncoder> implements net.fec.openrq.core.encoder.DataEncoderBuilder<T> {
+  protected final long dataLength;
+  protected int symbolSize;
+  protected int maxDecBlock;
+  protected net.fec.openrq.core.Builders$AbstractEncBuilder(long);
+  public net.fec.openrq.core.encoder.DataEncoderBuilder<T> maxPayload(int);
+  public net.fec.openrq.core.encoder.DataEncoderBuilder<T> defaultMaxPayload();
+  public net.fec.openrq.core.encoder.DataEncoderBuilder<T> maxDecoderBlock(int);
+  public net.fec.openrq.core.encoder.DataEncoderBuilder<T> defaultMaxDecoderBlock();
+  public abstract T build();
+}
+Compiled from "Builders.java"
+final class net.fec.openrq.core.Builders$ArrayEncBuilder extends net.fec.openrq.core.Builders$AbstractEncBuilder<net.fec.openrq.core.ArrayDataEncoder> {
+  net.fec.openrq.core.Builders$ArrayEncBuilder(byte[], int, int);
+  public net.fec.openrq.core.ArrayDataEncoder build();
+  public net.fec.openrq.core.encoder.DataEncoder build();
+}
+Compiled from "EncodingSymbol.java"
+abstract class net.fec.openrq.core.EncodingSymbol {
+  static net.fec.openrq.core.EncodingSymbol newSourceSymbol(net.fec.openrq.core.FECPayloadID, net.fec.openrq.core.PaddedByteArray);
+  static net.fec.openrq.core.EncodingSymbol newRepairSymbol(net.fec.openrq.core.FECPayloadID, byte[]);
+  abstract byte[] data();
+  abstract java.nio.ByteBuffer transportData();
+  net.fec.openrq.core.FECPayloadID getFECPayloadID();
+  int getSBN();
+  int getESI();
+  int getISI(int);
+  net.fec.openrq.core.EncodingSymbol(net.fec.openrq.core.FECPayloadID, net.fec.openrq.core.EncodingSymbol$1);
+}
+Compiled from "EncodingSymbol.java"
+class net.fec.openrq.core.EncodingSymbol$1 {
+}
+Compiled from "EncodingSymbol.java"
+final class net.fec.openrq.core.EncodingSymbol$RepairSymbol extends net.fec.openrq.core.EncodingSymbol {
+  net.fec.openrq.core.EncodingSymbol$RepairSymbol(net.fec.openrq.core.FECPayloadID, byte[]);
+  byte[] data();
+  java.nio.ByteBuffer transportData();
+}
+Compiled from "EncodingSymbol.java"
+final class net.fec.openrq.core.EncodingSymbol$SourceSymbol extends net.fec.openrq.core.EncodingSymbol {
+  net.fec.openrq.core.EncodingSymbol$SourceSymbol(net.fec.openrq.core.FECPayloadID, net.fec.openrq.core.PaddedByteArray);
+  byte[] data();
+  java.nio.ByteBuffer transportData();
+}
+Compiled from "FECParameters.java"
+public final class net.fec.openrq.core.FECParameters {
+  public static net.fec.openrq.core.FECParameters readFromBuffer(java.nio.ByteBuffer);
+  public static net.fec.openrq.core.FECParameters readFromArray(byte[], int);
+  static net.fec.openrq.core.FECParameters makeFECParameters(long, int, int, int);
+  public void writeToBuffer(java.nio.ByteBuffer);
+  public void writeToArray(byte[], int);
+  public long dataLength();
+  public int symbolSize();
+  public int numberOfSourceBlocks();
+  public int numberOfSubBlocks();
+  public int symbolAlignment();
+  public int totalSymbols();
+  public boolean isValid();
+}
+Compiled from "FECPayloadID.java"
+public final class net.fec.openrq.core.FECPayloadID {
+  public static net.fec.openrq.core.FECPayloadID readFromBuffer(java.nio.ByteBuffer, net.fec.openrq.core.FECParameters);
+  public static net.fec.openrq.core.FECPayloadID readFromArray(byte[], int, net.fec.openrq.core.FECParameters);
+  static net.fec.openrq.core.FECPayloadID makeFECPayloadID(int, int, net.fec.openrq.core.FECParameters);
+  public void writeToBuffer(java.nio.ByteBuffer);
+  public void writeToArray(byte[], int);
+  public int sourceBlockNumber();
+  public int encodingSymbolID();
+  public boolean isValid();
+}
+Compiled from "LinearSystem.java"
+final class net.fec.openrq.core.LinearSystem {
+  net.fec.openrq.core.LinearSystem();
+  public static byte[][] generateConstraintMatrix(int, int);
+  public static java.util.Set<java.lang.Integer> encIndexes(int, net.fec.openrq.core.Tuple);
+  public static byte[] enc(int, byte[], net.fec.openrq.core.Tuple, int);
+  public static byte[] PInactivationDecoding(byte[][], byte[][], int, int) throws net.fec.openrq.core.util.rq.SingularMatrixException;
+}
+Compiled from "OpenRQ.java"
+public final class net.fec.openrq.core.OpenRQ {
+  public static net.fec.openrq.core.encoder.DataEncoderBuilder<net.fec.openrq.core.ArrayDataEncoder> newEncoderBuilder(byte[]);
+  public static net.fec.openrq.core.encoder.DataEncoderBuilder<net.fec.openrq.core.ArrayDataEncoder> newEncoderBuilder(byte[], int, int);
+  public static net.fec.openrq.core.ArrayDataEncoder newEncoder(int, int, int, byte[]);
+  public static net.fec.openrq.core.ArrayDataEncoder newEncoder(int, int, int, byte[], int, int);
+  public static net.fec.openrq.core.ArrayDataDecoder newDecoder(net.fec.openrq.core.FECParameters, int);
+  public static net.fec.openrq.core.ArrayDataDecoder newDecoder(int, int, int, int, int);
+}
+Compiled from "PaddedByteArray.java"
+final class net.fec.openrq.core.PaddedByteArray {
+  static net.fec.openrq.core.PaddedByteArray newArray(byte[], int);
+  static net.fec.openrq.core.PaddedByteArray newArray(byte[], int, int, int);
+  byte[] array();
+  int arrayOffset();
+  int paddinglessLength();
+  int length();
+  byte get(int);
+  void set(int, byte);
+  byte[] getBytes(byte[]);
+  byte[] getBytes(byte[], int, int);
+  byte[] getBytes(int, byte[]);
+  byte[] getBytes(int, byte[], int, int);
+  void putBytes(byte[]);
+  void putBytes(byte[], int, int);
+  void putBytes(int, byte[]);
+  void putBytes(int, byte[], int, int);
+  static {};
+}
+Compiled from "Partition.java"
+final class net.fec.openrq.core.Partition {
+  net.fec.openrq.core.Partition(int, int);
+  int get(int);
+}
+Compiled from "Row.java"
+class net.fec.openrq.core.Row {
+  public int id;
+  public int nonZeros;
+  public int degree;
+  public java.util.Set<java.lang.Integer> edges;
+  public boolean isHDPC;
+  protected net.fec.openrq.core.Row(int, int, int, boolean);
+  protected net.fec.openrq.core.Row(int, int, int, boolean, java.util.Set<java.lang.Integer>);
+  public boolean equals(java.lang.Object);
+}
+Compiled from "SymbolType.java"
+public final class net.fec.openrq.core.SymbolType extends java.lang.Enum<net.fec.openrq.core.SymbolType> {
+  public static final net.fec.openrq.core.SymbolType SOURCE;
+  public static final net.fec.openrq.core.SymbolType REPAIR;
+  public static net.fec.openrq.core.SymbolType[] values();
+  public static net.fec.openrq.core.SymbolType valueOf(java.lang.String);
+  static {};
+}
+Compiled from "SystematicIndices.java"
+final class net.fec.openrq.core.SystematicIndices {
+  static int getKIndex(int);
+  static int K(int);
+  static int J(int);
+  static int S(int);
+  static int H(int);
+  static int W(int);
+  static int KL(int, int, int, int);
+  static int ceil(int);
+  static int floor(int);
+  static {};
+}
+Compiled from "Tuple.java"
+class net.fec.openrq.core.Tuple {
+  public net.fec.openrq.core.Tuple(int, long);
+  protected long getD();
+  protected long getA();
+  protected long getB();
+  protected long getD1();
+  protected long getA1();
+  protected long getB1();
+}
+Compiled from "DataDecoder.java"
+public interface net.fec.openrq.core.decoder.DataDecoder {
+  public abstract net.fec.openrq.core.FECParameters fecParameters();
+  public abstract long dataLength();
+  public abstract int symbolSize();
+  public abstract int numberOfSourceBlocks();
+  public abstract boolean isDataDecoded();
+  public abstract net.fec.openrq.core.decoder.SourceBlockDecoder decoderForSourceBlock(int);
+}
+Compiled from "SourceBlockDecoder.java"
+public interface net.fec.openrq.core.decoder.SourceBlockDecoder {
+  public abstract int sourceBlockNumber();
+  public abstract int numberOfSourceSymbols();
+  public abstract boolean containsSourceSymbol(int);
+  public abstract boolean containsRepairSymbol(int);
+  public abstract boolean isSourceBlockDecoded();
+  public abstract java.util.Set<java.lang.Integer> missingSourceSymbols();
+  public abstract net.fec.openrq.core.decoder.SourceBlockState putSourceSymbol(int, java.nio.ByteBuffer);
+  public abstract net.fec.openrq.core.decoder.SourceBlockState putSourceSymbol(int, byte[], int);
+  public abstract net.fec.openrq.core.decoder.SourceBlockState putRepairSymbol(int, java.nio.ByteBuffer);
+  public abstract net.fec.openrq.core.decoder.SourceBlockState putRepairSymbol(int, byte[], int);
+}
+Compiled from "SourceBlockState.java"
+public final class net.fec.openrq.core.decoder.SourceBlockState extends java.lang.Enum<net.fec.openrq.core.decoder.SourceBlockState> {
+  public static final net.fec.openrq.core.decoder.SourceBlockState DECODED;
+  public static final net.fec.openrq.core.decoder.SourceBlockState INCOMPLETE;
+  public static final net.fec.openrq.core.decoder.SourceBlockState DECODING_FAILURE;
+  public static net.fec.openrq.core.decoder.SourceBlockState[] values();
+  public static net.fec.openrq.core.decoder.SourceBlockState valueOf(java.lang.String);
+  static {};
+}
+Compiled from "DataEncoder.java"
+public interface net.fec.openrq.core.encoder.DataEncoder {
+  public abstract net.fec.openrq.core.FECParameters fecParameters();
+  public abstract long dataLength();
+  public abstract int symbolSize();
+  public abstract int numberOfSourceBlocks();
+  public abstract net.fec.openrq.core.encoder.SourceBlockEncoder encoderForSourceBlock(int);
+}
+Compiled from "DataEncoderBuilder.java"
+public interface net.fec.openrq.core.encoder.DataEncoderBuilder<T extends net.fec.openrq.core.encoder.DataEncoder> {
+  public static final int DEF_MAX_PAYLOAD_LENGTH;
+  public static final int DEF_MAX_DEC_BLOCK_SIZE;
+  public abstract net.fec.openrq.core.encoder.DataEncoderBuilder<T> maxPayload(int);
+  public abstract net.fec.openrq.core.encoder.DataEncoderBuilder<T> defaultMaxPayload();
+  public abstract net.fec.openrq.core.encoder.DataEncoderBuilder<T> maxDecoderBlock(int);
+  public abstract net.fec.openrq.core.encoder.DataEncoderBuilder<T> defaultMaxDecoderBlock();
+  public abstract T build();
+}
+Compiled from "EncodingPacket.java"
+public interface net.fec.openrq.core.encoder.EncodingPacket {
+  public abstract net.fec.openrq.core.FECPayloadID fecPayloadID();
+  public abstract java.util.List<java.nio.ByteBuffer> getSymbolData();
+  public abstract int numberOfSymbols();
+  public abstract net.fec.openrq.core.SymbolType symbolType();
+}
+Compiled from "SourceBlockEncoder.java"
+public interface net.fec.openrq.core.encoder.SourceBlockEncoder {
+  public abstract int sourceBlockNumber();
+  public abstract int numberOfSourceSymbols();
+  public abstract net.fec.openrq.core.encoder.EncodingPacket getSourcePacket(int);
+  public abstract net.fec.openrq.core.encoder.EncodingPacket getSourcePacket(int, int);
+  public abstract net.fec.openrq.core.encoder.EncodingPacket getRepairPacket(int);
+  public abstract net.fec.openrq.core.encoder.EncodingPacket getRepairPacket(int, int);
+}
+Compiled from "InternalConstants.java"
+final class net.fec.openrq.core.parameters.InternalConstants {
+  static final int K_MIN;
+  static final int K_MAX;
+  static final long MIN_F;
+  static final long MAX_F;
+  static final int NUM_BYTES_F;
+  static final int MIN_T;
+  static final int MAX_T;
+  static final int MIN_Z;
+  static final int MAX_Z;
+  static final int MIN_N;
+  static final int MAX_N;
+  static final int ALIGN_VALUE;
+  static final int MIN_SBN;
+  static final int MAX_SBN;
+  static final int MIN_ESI;
+  static final int MAX_ESI;
+  static final int NUM_BYTES_ESI;
+  net.fec.openrq.core.parameters.InternalConstants();
+}
+Compiled from "ParameterChecker.java"
+public final class net.fec.openrq.core.parameters.ParameterChecker {
+  public static long minDataLength();
+  public static long maxDataLength();
+  public static int minSymbolSize();
+  public static int maxSymbolSize();
+  public static int symbolSizeLowerBound(long);
+  public static int symbolSizeUpperBound(long);
+  public static int minNumSourceBlocks();
+  public static int maxNumSourceBlocks();
+  public static int minNumSubBlocks();
+  public static int maxNumSubBlocks();
+  public static boolean areValidFECParameters(long, int, int, int);
+  public static int symbolAlignmentValue();
+  public static boolean isValidSymbolAlignment(int);
+  public static int minSourceBlockNumber();
+  public static int maxSourceBlockNumber();
+  public static int minEncodingSymbolID();
+  public static int maxEncodingSymbolID();
+  public static boolean isValidFECPayloadID(int, int, int);
+  public static int maxNumSourceSymbolsPerBlock();
+  public static int minNumSourceSymbolsPerBlock();
+}
+Compiled from "ParameterIO.java"
+public class net.fec.openrq.core.parameters.ParameterIO {
+  public static long extractDataLength(long);
+  public static int extractSymbolSize(long);
+  public static int extractNumSourceBlocks(int);
+  public static int extractNumSubBlocks(int);
+  public static int extractSymbolAlignment(int);
+  public static int extractSourceBlockNumber(int);
+  public static int extractEncodingSymbolID(int);
+  public static long buildCommonFecOTI(long, int);
+  public static void writeCommonFecOTI(long, java.nio.ByteBuffer);
+  public static long readCommonFecOTI(java.nio.ByteBuffer);
+  public static int buildSchemeSpecFecOTI(int, int);
+  public static void writeSchemeSpecFecOTI(int, java.nio.ByteBuffer);
+  public static int readSchemeSpecFecOTI(java.nio.ByteBuffer);
+  public static int buildFECpayloadID(int, int);
+  public static void writeFECpayloadID(int, java.nio.ByteBuffer);
+  public static int readFECpayloadID(java.nio.ByteBuffer);
+}
+Compiled from "ExtraMath.java"
+public final class net.fec.openrq.core.util.arithmetic.ExtraMath {
+  public static int ceilDiv(int, int);
+  public static long ceilDiv(long, long);
+  public static final int ceil(double);
+  public static final int floor(double);
+}
+Compiled from "ImmutableList.java"
+public class net.fec.openrq.core.util.collection.ImmutableList<E> extends java.util.AbstractList<E> implements java.util.RandomAccess {
+  public static <T> net.fec.openrq.core.util.collection.ImmutableList<T> newList(T...);
+  public static <T> net.fec.openrq.core.util.collection.ImmutableList<T> newNullFreeList(T...);
+  public static <T> net.fec.openrq.core.util.collection.ImmutableList<T> copy(java.util.Collection<T>);
+  public static <T> net.fec.openrq.core.util.collection.ImmutableList<T> copyNullFree(java.util.Collection<T>);
+  public E get(int);
+  public int size();
+  public int indexOf(java.lang.Object);
+  public int lastIndexOf(java.lang.Object);
+}
+Compiled from "SizeOf.java"
+public final class net.fec.openrq.core.util.numericaltype.SizeOf {
+  public static final int BYTE;
+  public static final int UNSIGNED_BYTE;
+  public static final int CHAR;
+  public static final int SHORT;
+  public static final int UNSIGNED_SHORT;
+  public static final int UNSIGNED_3_BYTES;
+  public static final int INT;
+  public static final int UNSIGNED_INT;
+  public static final int LONG;
+  public static final int FLOAT;
+  public static final int DOUBLE;
+  public static final int bitsInBytes(int);
+  public static final int bitsInChars(int);
+  public static final int bitsInShorts(int);
+  public static final int bitsInInts(int);
+  public static final int bitsInLongs(int);
+  public static final int bitsInFloats(int);
+  public static final int bitsInDoubles(int);
+}
+Compiled from "UnsignedTypes.java"
+public final class net.fec.openrq.core.util.numericaltype.UnsignedTypes {
+  public static final int MAX_UNSIGNED_BYTE_VALUE;
+  public static final int MAX_UNSIGNED_SHORT_VALUE;
+  public static final long MAX_UNSIGNED_INT_VALUE;
+  public static int getUnsignedByte(int);
+  public static int getExtendedUnsignedByte(int);
+  public static int readUnsignedByte(java.nio.ByteBuffer);
+  public static int readExtendedUnsignedByte(java.nio.ByteBuffer);
+  public static void writeUnsignedByte(int, java.nio.ByteBuffer);
+  public static int getUnsignedShort(int);
+  public static int getExtendedUnsignedShort(int);
+  public static int readUnsignedShort(java.nio.ByteBuffer);
+  public static int readExtendedUnsignedShort(java.nio.ByteBuffer);
+  public static void writeUnsignedShort(int, java.nio.ByteBuffer);
+  public static long getUnsignedInt(long);
+  public static long getExtendedUnsignedInt(long);
+  public static long readUnsignedInt(java.nio.ByteBuffer);
+  public static long readExtendedUnsignedInt(java.nio.ByteBuffer);
+  public static void writeUnsignedInt(long, java.nio.ByteBuffer);
+  public static int getUnsignedBytes(int, int);
+  public static long getLongUnsignedBytes(long, int);
+  public static int readUnsignedBytes(java.nio.ByteBuffer, int);
+  public static long readLongUnsignedBytes(java.nio.ByteBuffer, int);
+  public static void writeUnsignedBytes(int, java.nio.ByteBuffer, int);
+  public static void writeLongUnsignedBytes(long, java.nio.ByteBuffer, int);
+}
+Compiled from "Deg.java"
+public abstract class net.fec.openrq.core.util.rq.Deg {
+  public net.fec.openrq.core.util.rq.Deg();
+  public static long deg(long, long);
+  static {};
+}
+Compiled from "OctectOps.java"
+public abstract class net.fec.openrq.core.util.rq.OctectOps {
+  public net.fec.openrq.core.util.rq.OctectOps();
+  public static final short UNSIGN(byte);
+  public static final byte getExp(int);
+  public static final byte getLog(int);
+  public static final byte addition(byte, byte);
+  public static final byte subtraction(byte, byte);
+  public static final byte division(byte, byte);
+  public static final byte product(byte, byte);
+  public static final byte alphaPower(int);
+  public static final byte[] betaProduct(byte, byte[]);
+  public static final byte[] betaDivision(byte[], byte);
+  public static final byte[] betaProduct(byte, byte[], int, int);
+  public static final byte[] betaDivision(byte[], int, int, byte);
+  static {};
+}
+Compiled from "Rand.java"
+public abstract class net.fec.openrq.core.util.rq.Rand {
+  public net.fec.openrq.core.util.rq.Rand();
+  public static long rand(long, int, long);
+  static {};
+}
+Compiled from "SingularMatrixException.java"
+public class net.fec.openrq.core.util.rq.SingularMatrixException extends java.lang.Exception {
+  public static final java.lang.String msg;
+  public net.fec.openrq.core.util.rq.SingularMatrixException();
+  public net.fec.openrq.core.util.rq.SingularMatrixException(java.lang.String);
+  public net.fec.openrq.core.util.rq.SingularMatrixException(java.lang.String, java.lang.Throwable);
+  public net.fec.openrq.core.util.rq.SingularMatrixException(java.lang.Throwable);
+}
+Compiled from "Utilities.java"
+public final class net.fec.openrq.core.util.rq.Utilities {
+  public net.fec.openrq.core.util.rq.Utilities();
+  public static final void printMatrix(byte[][]);
+  public static final byte[][] multiplyMatrices(byte[][], byte[][]);
+  public static byte[][] multiplyMatrices(byte[][], int, int, int, int, byte[][], int, int, int, int);
+  public static void multiplyMatrices(byte[][], int, int, int, int, byte[][], int, int, int, int, byte[][], int, int, int, int);
+  public static byte[] multiplyByteLineBySymbolVector(byte[], byte[], int);
+  public static byte[] multiplyByteLineBySymbolVector(byte[], int, byte[][], int);
+  public static void reduceToRowEchelonForm(byte[][], int, int, int, int, int[], byte[][]);
+  public static void reduceToRowEchelonForm(byte[][], int, int, int, int);
+  public static void swapColumns(byte[][], int, int);
+  public void swapRows(byte[][], int, int);
+  public static byte[] xorSymbol(byte[], byte[]);
+  public static byte[] xorSymbol(byte[], int, byte[], int, int);
+  public static long ceilPrime(long);
+  public static boolean isPrime(long);
+  public static boolean checkIdentity(byte[][], int);
+  public static boolean validateRank(byte[][], int, int, int, int, int);
+  public static void rowEchelonForm(byte[][]) throws net.fec.openrq.core.util.rq.SingularMatrixException;
+  public boolean symbolIsZero(byte[]);
+  public static byte[] gaussElimination(byte[][], byte[][]) throws net.fec.openrq.core.util.rq.SingularMatrixException;
+  public static final int necessaryRepairSymbols(int, int, float);
+  public static final byte convert(byte);
+}
+Compiled from "TestRunner.java"
+public final class net.fec.openrq.test.TestRunner {
+  public net.fec.openrq.test.TestRunner();
+  public static void main(java.lang.String[]) throws java.lang.InterruptedException, java.io.IOException;
+  static {};
+}
+Compiled from "TestRunner.java"
+final class net.fec.openrq.test.TestRunner$DecChecker implements net.fec.openrq.test.encodecode.DecoderTask$DecodedDataChecker {
+  net.fec.openrq.test.TestRunner$DecChecker(byte[]);
+  public boolean checkData(byte[]);
+}
+Compiled from "TestRunner.java"
+final class net.fec.openrq.test.TestRunner$EncProvider implements net.fec.openrq.test.encodecode.EncoderTask$DataEncoderProvider {
+  net.fec.openrq.test.TestRunner$EncProvider(net.fec.openrq.core.encoder.DataEncoderBuilder<net.fec.openrq.core.ArrayDataEncoder>);
+  public net.fec.openrq.core.encoder.DataEncoder newEncoder();
+}
+Compiled from "DecoderTask.java"
+public final class net.fec.openrq.test.encodecode.DecoderTask implements net.fec.openrq.test.util.summary.Summarizable<net.fec.openrq.test.encodecode.StatsType> {
+  public static net.fec.openrq.test.encodecode.DecoderTask newDecoderTask(java.nio.channels.ReadableByteChannel, int);
+  public static net.fec.openrq.test.encodecode.DecoderTask newDecoderTask(net.fec.openrq.test.encodecode.DecoderTask$DecodedDataChecker, java.nio.channels.ReadableByteChannel, int);
+  public java.util.Map<net.fec.openrq.test.encodecode.StatsType, net.fec.openrq.test.util.summary.LongSummaryStatistics> call() throws java.io.IOException;
+  public java.lang.Object call() throws java.lang.Exception;
+  static void access$000(java.nio.channels.ReadableByteChannel);
+  static void access$100(net.fec.openrq.test.encodecode.DecoderTask$DecodedDataChecker);
+  net.fec.openrq.test.encodecode.DecoderTask(net.fec.openrq.test.encodecode.DecoderTask$DecodedDataChecker, java.nio.channels.ReadableByteChannel, int, net.fec.openrq.test.encodecode.DecoderTask$1);
+}
+Compiled from "DecoderTask.java"
+class net.fec.openrq.test.encodecode.DecoderTask$1 {
+  static final int[] $SwitchMap$net$fec$openrq$core$decoder$SourceBlockState;
+  static {};
+}
+Compiled from "DecoderTask.java"
+public final class net.fec.openrq.test.encodecode.DecoderTask$Builder {
+  public net.fec.openrq.test.encodecode.DecoderTask$Builder(java.nio.channels.ReadableByteChannel);
+  public net.fec.openrq.test.encodecode.DecoderTask$Builder(net.fec.openrq.test.encodecode.DecoderTask$DecodedDataChecker, java.nio.channels.ReadableByteChannel);
+  public net.fec.openrq.test.encodecode.DecoderTask$Builder numIterations(int);
+  public net.fec.openrq.test.encodecode.DecoderTask$Builder defNumIterations();
+  public net.fec.openrq.test.encodecode.DecoderTask build();
+}
+Compiled from "DecoderTask.java"
+final class net.fec.openrq.test.encodecode.DecoderTask$DataHeader {
+  static java.nio.ByteBuffer allocateNewBuffer();
+  static net.fec.openrq.test.encodecode.DecoderTask$DataHeader parseDataHeader(java.nio.ByteBuffer);
+  net.fec.openrq.core.FECParameters getFECParams();
+  int getExtraSymbols();
+}
+Compiled from "DecoderTask.java"
+public interface net.fec.openrq.test.encodecode.DecoderTask$DecodedDataChecker {
+  public abstract boolean checkData(byte[]);
+}
+Compiled from "DecoderTask.java"
+final class net.fec.openrq.test.encodecode.DecoderTask$SymbolHeader {
+  static java.nio.ByteBuffer allocateNewBuffer();
+  static net.fec.openrq.test.encodecode.DecoderTask$SymbolHeader parseSymbolHeader(java.nio.ByteBuffer, net.fec.openrq.core.FECParameters, int);
+  net.fec.openrq.test.encodecode.DecoderTask$SymbolHeader(net.fec.openrq.core.FECPayloadID, int);
+  net.fec.openrq.core.FECPayloadID getFECPayloadID();
+  int getNumSymbols();
+}
+Compiled from "Defaults.java"
+public final class net.fec.openrq.test.encodecode.Defaults {
+  public static final int EXTRA_SYMBOLS;
+  public static final int MAX_SYMBOLS_PER_PACKET;
+  public static final int NUM_ITERATIONS;
+}
+Compiled from "EncoderTask.java"
+public final class net.fec.openrq.test.encodecode.EncoderTask implements net.fec.openrq.test.util.summary.Summarizable<net.fec.openrq.test.encodecode.StatsType> {
+  public static net.fec.openrq.test.encodecode.EncoderTask newEncoderTask(net.fec.openrq.test.encodecode.EncoderTask$DataEncoderProvider, java.nio.channels.WritableByteChannel, net.fec.openrq.test.encodecode.EncoderTask$Type, int, int, int);
+  public java.util.Map<net.fec.openrq.test.encodecode.StatsType, net.fec.openrq.test.util.summary.LongSummaryStatistics> call() throws java.io.IOException;
+  public java.lang.Object call() throws java.lang.Exception;
+  static void access$000(net.fec.openrq.test.encodecode.EncoderTask$DataEncoderProvider);
+  static void access$100(java.nio.channels.WritableByteChannel);
+  static void access$200(net.fec.openrq.test.encodecode.EncoderTask$Type);
+  static void access$300(int, net.fec.openrq.test.encodecode.EncoderTask$Type);
+  static void access$400(int, net.fec.openrq.test.encodecode.EncoderTask$Type);
+  static void access$500(int);
+  net.fec.openrq.test.encodecode.EncoderTask(net.fec.openrq.test.encodecode.EncoderTask$DataEncoderProvider, java.nio.channels.WritableByteChannel, net.fec.openrq.test.encodecode.EncoderTask$Type, int, int, int, net.fec.openrq.test.encodecode.EncoderTask$1);
+}
+Compiled from "EncoderTask.java"
+class net.fec.openrq.test.encodecode.EncoderTask$1 {
+  static final int[] $SwitchMap$net$fec$openrq$test$encodecode$EncoderTask$Type;
+  static {};
+}
+Compiled from "EncoderTask.java"
+public final class net.fec.openrq.test.encodecode.EncoderTask$Builder {
+  public net.fec.openrq.test.encodecode.EncoderTask$Builder(net.fec.openrq.test.encodecode.EncoderTask$DataEncoderProvider, java.nio.channels.WritableByteChannel, net.fec.openrq.test.encodecode.EncoderTask$Type);
+  public net.fec.openrq.test.encodecode.EncoderTask$Builder extraSymbols(int);
+  public net.fec.openrq.test.encodecode.EncoderTask$Builder defExtraSymbols();
+  public net.fec.openrq.test.encodecode.EncoderTask$Builder maxSymbolsPerPacket(int);
+  public net.fec.openrq.test.encodecode.EncoderTask$Builder defMaxSymbolsPerPacket();
+  public net.fec.openrq.test.encodecode.EncoderTask$Builder numIterations(int);
+  public net.fec.openrq.test.encodecode.EncoderTask$Builder defNumIterations();
+  public net.fec.openrq.test.encodecode.EncoderTask build();
+}
+Compiled from "EncoderTask.java"
+public interface net.fec.openrq.test.encodecode.EncoderTask$DataEncoderProvider {
+  public abstract net.fec.openrq.core.encoder.DataEncoder newEncoder();
+}
+Compiled from "EncoderTask.java"
+public final class net.fec.openrq.test.encodecode.EncoderTask$Type extends java.lang.Enum<net.fec.openrq.test.encodecode.EncoderTask$Type> {
+  public static final net.fec.openrq.test.encodecode.EncoderTask$Type SOURCE_SYMBOLS_ONLY_SEQUENTIAL;
+  public static final net.fec.openrq.test.encodecode.EncoderTask$Type SOURCE_SYMBOLS_ONLY_RANDOM;
+  public static final net.fec.openrq.test.encodecode.EncoderTask$Type SOURCE_PLUS_REPAIR_SYMBOLS_RANDOM;
+  public static final net.fec.openrq.test.encodecode.EncoderTask$Type ANY_SYMBOL_RANDOM;
+  public static net.fec.openrq.test.encodecode.EncoderTask$Type[] values();
+  public static net.fec.openrq.test.encodecode.EncoderTask$Type valueOf(java.lang.String);
+  static {};
+}
+Compiled from "StatsType.java"
+public abstract class net.fec.openrq.test.encodecode.StatsType extends java.lang.Enum<net.fec.openrq.test.encodecode.StatsType> implements net.fec.openrq.test.util.StringConverter<net.fec.openrq.test.util.summary.LongSummaryStatistics> {
+  public static final net.fec.openrq.test.encodecode.StatsType ENCODER_INIT_TIME;
+  public static final net.fec.openrq.test.encodecode.StatsType SYMBOL_ENCODING_TIME;
+  public static final net.fec.openrq.test.encodecode.StatsType DECODER_INIT_TIME;
+  public static final net.fec.openrq.test.encodecode.StatsType SYMBOL_INPUT_TIME;
+  public static final net.fec.openrq.test.encodecode.StatsType DECODING_TIME;
+  public static final net.fec.openrq.test.encodecode.StatsType NUM_DECODING_FAILURES;
+  public static final net.fec.openrq.test.encodecode.StatsType DECODING_FAILURE_TIME;
+  public static net.fec.openrq.test.encodecode.StatsType[] values();
+  public static net.fec.openrq.test.encodecode.StatsType valueOf(java.lang.String);
+  net.fec.openrq.test.encodecode.StatsType(java.lang.String, int, net.fec.openrq.test.encodecode.StatsType$1);
+  static java.util.concurrent.TimeUnit access$100();
+  static double access$200(double);
+  static {};
+}
+Compiled from "StatsType.java"
+final class net.fec.openrq.test.encodecode.StatsType$1 extends net.fec.openrq.test.encodecode.StatsType {
+  net.fec.openrq.test.encodecode.StatsType$1(java.lang.String, int);
+  public java.lang.String toString(net.fec.openrq.test.util.summary.LongSummaryStatistics);
+  public java.lang.String toString(java.lang.Object);
+}
+Compiled from "StatsType.java"
+final class net.fec.openrq.test.encodecode.StatsType$2 extends net.fec.openrq.test.encodecode.StatsType {
+  net.fec.openrq.test.encodecode.StatsType$2(java.lang.String, int);
+  public java.lang.String toString(net.fec.openrq.test.util.summary.LongSummaryStatistics);
+  public java.lang.String toString(java.lang.Object);
+}
+Compiled from "StatsType.java"
+final class net.fec.openrq.test.encodecode.StatsType$3 extends net.fec.openrq.test.encodecode.StatsType {
+  net.fec.openrq.test.encodecode.StatsType$3(java.lang.String, int);
+  public java.lang.String toString(net.fec.openrq.test.util.summary.LongSummaryStatistics);
+  public java.lang.String toString(java.lang.Object);
+}
+Compiled from "StatsType.java"
+final class net.fec.openrq.test.encodecode.StatsType$4 extends net.fec.openrq.test.encodecode.StatsType {
+  net.fec.openrq.test.encodecode.StatsType$4(java.lang.String, int);
+  public java.lang.String toString(net.fec.openrq.test.util.summary.LongSummaryStatistics);
+  public java.lang.String toString(java.lang.Object);
+}
+Compiled from "StatsType.java"
+final class net.fec.openrq.test.encodecode.StatsType$5 extends net.fec.openrq.test.encodecode.StatsType {
+  net.fec.openrq.test.encodecode.StatsType$5(java.lang.String, int);
+  public java.lang.String toString(net.fec.openrq.test.util.summary.LongSummaryStatistics);
+  public java.lang.String toString(java.lang.Object);
+}
+Compiled from "StatsType.java"
+final class net.fec.openrq.test.encodecode.StatsType$6 extends net.fec.openrq.test.encodecode.StatsType {
+  net.fec.openrq.test.encodecode.StatsType$6(java.lang.String, int);
+  public java.lang.String toString(net.fec.openrq.test.util.summary.LongSummaryStatistics);
+  public java.lang.String toString(java.lang.Object);
+}
+Compiled from "StatsType.java"
+final class net.fec.openrq.test.encodecode.StatsType$7 extends net.fec.openrq.test.encodecode.StatsType {
+  net.fec.openrq.test.encodecode.StatsType$7(java.lang.String, int);
+  public java.lang.String toString(net.fec.openrq.test.util.summary.LongSummaryStatistics);
+  public java.lang.String toString(java.lang.Object);
+}
+Compiled from "StringConverter.java"
+public interface net.fec.openrq.test.util.StringConverter<T> {
+  public abstract java.lang.String toString(T);
+}
+Compiled from "LongSummaryStatistics.java"
+public class net.fec.openrq.test.util.summary.LongSummaryStatistics {
+  public net.fec.openrq.test.util.summary.LongSummaryStatistics();
+  public net.fec.openrq.test.util.summary.LongSummaryStatistics(net.fec.openrq.test.util.summary.LongSummaryStatistics);
+  public void accept(int);
+  public void accept(long);
+  public void combine(net.fec.openrq.test.util.summary.LongSummaryStatistics);
+  public final long getCount();
+  public final long getSum();
+  public final long getMin();
+  public final long getMax();
+  public final double getAverage();
+  public boolean hasNext();
+  public final net.fec.openrq.test.util.summary.LongSummaryStatistics getNext();
+  public java.lang.String toString();
+}
+Compiled from "Summaries.java"
+public final class net.fec.openrq.test.util.summary.Summaries {
+  public static <T extends net.fec.openrq.test.util.StringConverter<net.fec.openrq.test.util.summary.LongSummaryStatistics>> java.lang.String printToString(java.util.Map<T, net.fec.openrq.test.util.summary.LongSummaryStatistics>);
+  public static <T extends net.fec.openrq.test.util.StringConverter<net.fec.openrq.test.util.summary.LongSummaryStatistics>> void printToStream(java.util.Map<T, net.fec.openrq.test.util.summary.LongSummaryStatistics>, java.io.PrintStream);
+  public static <T extends net.fec.openrq.test.util.StringConverter<net.fec.openrq.test.util.summary.LongSummaryStatistics>> void printlnToStream(java.util.Map<T, net.fec.openrq.test.util.summary.LongSummaryStatistics>, java.io.PrintStream);
+  public static <T extends net.fec.openrq.test.util.StringConverter<net.fec.openrq.test.util.summary.LongSummaryStatistics>> void printToWriter(java.util.Map<T, net.fec.openrq.test.util.summary.LongSummaryStatistics>, java.io.PrintWriter);
+  public static <T extends net.fec.openrq.test.util.StringConverter<net.fec.openrq.test.util.summary.LongSummaryStatistics>> void printlnToWriter(java.util.Map<T, net.fec.openrq.test.util.summary.LongSummaryStatistics>, java.io.PrintWriter);
+}
+Compiled from "Summarizable.java"
+public interface net.fec.openrq.test.util.summary.Summarizable<E extends net.fec.openrq.test.util.StringConverter<net.fec.openrq.test.util.summary.LongSummaryStatistics>> extends java.util.concurrent.Callable<java.util.Map<E, net.fec.openrq.test.util.summary.LongSummaryStatistics>> {
+}
+Compiled from "recepteur_test.java"
+public class recepteur_test {
+  public recepteur_test();
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+}

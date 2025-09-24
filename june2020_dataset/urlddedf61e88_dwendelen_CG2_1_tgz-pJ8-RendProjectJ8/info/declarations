@@ -1,0 +1,456 @@
+Compiled from "RGBColor.java"
+public class Color.RGBColor {
+  public double r;
+  public double g;
+  public double b;
+  public Color.RGBColor();
+  public Color.RGBColor(double, double, double);
+  public static Color.RGBColor add(Color.RGBColor, Color.RGBColor);
+  public static Color.RGBColor subtract(Color.RGBColor, Color.RGBColor);
+  public static Color.RGBColor multiply(Color.RGBColor, Color.RGBColor);
+  public Color.RGBColor scale(double);
+  public void scaleSelf(double);
+  public Color.RGBColor scaleInverse(double);
+  public void printlnRGBColor();
+  public Color.RGBColor makeCopy();
+  public static Color.RGBColor linearCombination(double, Color.RGBColor, double, Color.RGBColor);
+  public static Color.RGBColor linearCombination(double, Color.RGBColor, double, Color.RGBColor, double, Color.RGBColor);
+  public static Color.RGBColor linearCombination(Color.RGBColor, double, Color.RGBColor);
+  public static Color.RGBColor linearCombination(double, Color.RGBColor, Color.RGBColor);
+  public void clampZero();
+  public void absoluteValue();
+  public double sumOfComponents();
+}
+Compiled from "FormFactor.java"
+public class Geometry.FormFactor {
+  public Geometry.FormFactor();
+  public static double G(Vectormath.Vector3, Vectormath.Vector3, Vectormath.Vector3, Vectormath.Vector3);
+}
+Compiled from "GeomRecord.java"
+public class Geometry.GeomRecord {
+  public Vectormath.Vector3 point;
+  public Vectormath.Vector3 normal;
+  public double distance;
+  public double probability;
+  public Geometry.GeomRecord();
+  public void printlnGeomRecord();
+  public Geometry.GeomRecord makeCopy();
+  public void makeCopyOf(Geometry.GeomRecord);
+}
+Compiled from "GeometricObject.java"
+public interface Geometry.GeometricObject {
+  public abstract boolean intersect(Vectormath.Ray, Mathtools.Interval, Geometry.GeomRecord);
+  public abstract Geometry.GeomRecord randomSurfacePoint(double, double);
+  public abstract double getArea();
+}
+Compiled from "Rectangle.java"
+public class Geometry.Rectangle implements Geometry.GeometricObject {
+  public Geometry.Rectangle();
+  public Geometry.Rectangle(Vectormath.Vector3, Vectormath.Vector3, Vectormath.Vector3, Vectormath.Vector3);
+  public boolean intersect(Vectormath.Ray, Mathtools.Interval, Geometry.GeomRecord);
+  public Geometry.GeomRecord randomSurfacePoint(double, double);
+  public double getArea();
+  public java.util.Vector splitRectangle(int, int);
+}
+Compiled from "Sphere.java"
+public class Geometry.Sphere implements Geometry.GeometricObject {
+  Vectormath.Vector3 center;
+  double radius;
+  public Geometry.Sphere();
+  public Geometry.Sphere(Vectormath.Vector3, double);
+  public boolean intersect(Vectormath.Ray, Mathtools.Interval, Geometry.GeomRecord);
+  public static void main(java.lang.String[]);
+  public Geometry.GeomRecord randomSurfacePoint(double, double);
+  public double getArea();
+}
+Compiled from "Triangle.java"
+public class Geometry.Triangle implements Geometry.GeometricObject {
+  public Geometry.Triangle();
+  public Geometry.Triangle(Vectormath.Vector3, Vectormath.Vector3, Vectormath.Vector3);
+  public boolean intersect(Vectormath.Ray, Mathtools.Interval, Geometry.GeomRecord);
+  public static void main(java.lang.String[]);
+  public Geometry.GeomRecord randomSurfacePoint(double, double);
+  public double getArea();
+}
+Compiled from "Image.java"
+public class ImagePack.Image {
+  Color.RGBColor[][] pixel;
+  double[][] depthBuffer;
+  int height;
+  int width;
+  public ImagePack.Image(int, int);
+  public void setColorOfPixel(int, int, Color.RGBColor);
+  public void setColorAndDepthOfPixel(int, int, double, Color.RGBColor);
+  public Color.RGBColor getColorOfPixel(int, int);
+  public void writeImageAsRGBE(java.lang.String);
+  public int getWidth();
+  public int getHeight();
+  public Color.RGBColor accumulateColorOfAllPixels();
+  public static ImagePack.Image subtract(ImagePack.Image, ImagePack.Image);
+  public static void main(java.lang.String[]);
+}
+Compiled from "RGBEFormat.java"
+public abstract class ImagePack.RGBEFormat {
+  public ImagePack.RGBEFormat();
+  public static synchronized void write(ImagePack.Image, java.lang.Double, java.lang.Double, java.lang.String) throws java.io.IOException;
+}
+Compiled from "AshikhminShirleyReflection.java"
+public class Material.AshikhminShirleyReflection extends Material.ModelReflection {
+  public Material.AshikhminShirleyReflection(Material.DiffuseReflection, Color.RGBColor, double, double);
+  public double calculateSpecularScale(Vectormath.Vector3, Vectormath.Vector3, Vectormath.Vector3);
+  protected double fresnel(double);
+}
+Compiled from "BlinnPhongReflection.java"
+public class Material.BlinnPhongReflection extends Material.ModelReflection {
+  public Material.BlinnPhongReflection(Material.DiffuseReflection, Color.RGBColor, double);
+  public double calculateSpecularScale(Vectormath.Vector3, Vectormath.Vector3, Vectormath.Vector3);
+}
+Compiled from "DiffuseEmission.java"
+public class Material.DiffuseEmission implements Material.Emission {
+  public Material.DiffuseEmission(double);
+  public Material.DiffuseEmission(double, double, double);
+  public void computeRadiance(double);
+  public Color.RGBColor evaluate(Vectormath.Ray);
+}
+Compiled from "DiffuseReflection.java"
+public class Material.DiffuseReflection implements Material.Reflection {
+  public Material.DiffuseReflection();
+  public Material.DiffuseReflection(double);
+  public Material.DiffuseReflection(double, double, double);
+  public Color.RGBColor evaluate(Vectormath.Vector3, Vectormath.Vector3);
+  public Color.RGBColor evaluate(Vectormath.Vector3, Vectormath.Vector3, Vectormath.Vector3);
+}
+Compiled from "Emission.java"
+public interface Material.Emission {
+  public abstract Color.RGBColor evaluate(Vectormath.Ray);
+  public abstract void computeRadiance(double);
+}
+Compiled from "MaterialFactory.java"
+public class Material.MaterialFactory {
+  public Material.MaterialFactory();
+  public Material.ModelReflection createBPBrass();
+  public Material.ModelReflection createASBrass();
+  public Material.ModelReflection createBPCherry235();
+  public Material.ModelReflection createASCherry235();
+  public Material.ModelReflection createBPOrangeBball();
+  public Material.ModelReflection createASOrangeBball();
+  protected Material.BlinnPhongReflection createBP(double, double, double, double, double, double, double);
+  protected Material.AshikhminShirleyReflection createAS(double, double, double, double, double, double, double, double);
+}
+Compiled from "ModelReflection.java"
+public abstract class Material.ModelReflection implements Material.Reflection {
+  public Material.ModelReflection(Material.DiffuseReflection, Color.RGBColor);
+  public Color.RGBColor evaluate(Vectormath.Vector3, Vectormath.Vector3);
+  public Color.RGBColor evaluate(Vectormath.Vector3, Vectormath.Vector3, Vectormath.Vector3);
+  public abstract double calculateSpecularScale(Vectormath.Vector3, Vectormath.Vector3, Vectormath.Vector3);
+}
+Compiled from "Reflection.java"
+public interface Material.Reflection {
+  public abstract Color.RGBColor evaluate(Vectormath.Vector3, Vectormath.Vector3);
+  public abstract Color.RGBColor evaluate(Vectormath.Vector3, Vectormath.Vector3, Vectormath.Vector3);
+}
+Compiled from "CenterSampler.java"
+public class Mathtools.CenterSampler extends Mathtools.Sampler {
+  public Mathtools.CenterSampler();
+  public double[] generateNextRandomPair();
+  public void reset();
+  public static void main(java.lang.String[]);
+}
+Compiled from "Interval.java"
+public class Mathtools.Interval {
+  public Mathtools.Interval();
+  public Mathtools.Interval(double, double);
+  public boolean contains(double);
+  public boolean overlaps(Mathtools.Interval);
+  public Mathtools.Interval intersect(Mathtools.Interval);
+  public double getLowerBound();
+  public void setLowerBound(double);
+  public double getUpperBound();
+  public void setUpperBound(double);
+  public Mathtools.Interval makeCopy();
+  public void printlnInterval();
+}
+Compiled from "RandomSampler.java"
+public class Mathtools.RandomSampler extends Mathtools.Sampler {
+  public Mathtools.RandomSampler();
+  public double[] generateNextRandomPair();
+  public void reset();
+  public static void main(java.lang.String[]);
+}
+Compiled from "RegularGridSampler.java"
+public class Mathtools.RegularGridSampler extends Mathtools.Sampler {
+  public Mathtools.RegularGridSampler(int);
+  public double[] generateNextRandomPair();
+  public void reset();
+  public static void main(java.lang.String[]);
+}
+Compiled from "Sampler.java"
+public abstract class Mathtools.Sampler {
+  public static final int CENTER;
+  public static final int RANDOM;
+  public static final int REGULAR_GRID;
+  public Mathtools.Sampler();
+  public abstract double[] generateNextRandomPair();
+  public abstract void reset();
+  public static Mathtools.Sampler constructSampler(int, int);
+}
+Compiled from "RendProject.java"
+public class RendProject {
+  public RendProject();
+  public static void main(java.lang.String[]);
+}
+Compiled from "RayTracer.java"
+public class Renderers.RayTracer {
+  public Renderers.RayTracer();
+  public static ImagePack.Image generateImage(ScenePack.Scene, ScenePack.Camera);
+}
+Compiled from "Camera.java"
+public class ScenePack.Camera {
+  public static final int PERSPECTIVE;
+  public static final int ORTHOGRAPHIC;
+  public static final int FISHEYE;
+  public Vectormath.FrameOfReference cameraFrame;
+  public ScenePack.Camera(Vectormath.Vector3, Vectormath.Vector3, Vectormath.Vector3);
+  public void setResolution(int, int);
+  public void setScreen(double, double, double, double, double);
+  public void setScreen(double, double);
+  public void setProjectionType(int);
+  public int getProjectionType();
+  public Vectormath.Ray rayAtImageLocation(double, double);
+  public Vectormath.Ray rayAtPixelCenter(int, int);
+  public Vectormath.Ray rayAtPixelLocation(int, int, double, double);
+  public Vectormath.Vector3 project(Vectormath.Vector3);
+  public Vectormath.Vector4 project(Vectormath.Vector4);
+  public int getXres();
+  public int getYres();
+  public Vectormath.Vector3 getEyePoint();
+  public Vectormath.Vector3 getLookDirection();
+  public Vectormath.Vector3 getLowerLeftCorner();
+  public Vectormath.Vector3 getWidthOffset();
+  public Vectormath.Vector3 getHeightOffset();
+  public void printCamera();
+  public ScenePack.Camera rotateRight();
+  public ScenePack.Camera rotateUp();
+  public double getSurface();
+  public static void main(java.lang.String[]);
+}
+Compiled from "PathNode.java"
+public class ScenePack.PathNode {
+  public boolean hit;
+  public ScenePack.Primitive primitive;
+  public Vectormath.Vector3 point;
+  public Vectormath.Vector3 normal;
+  public Vectormath.Vector3 direction;
+  public double probability;
+  public double distance;
+  public ScenePack.PathNode();
+  public void makeCopyOf(ScenePack.PathNode);
+  public Color.RGBColor shade(ScenePack.PrimitiveGroup, ScenePack.Scene);
+  public Color.RGBColor shadeSelfEmission();
+  public Color.RGBColor shadeDirect(ScenePack.PrimitiveGroup);
+  public Color.RGBColor shadeDirectLightSourceSampling(ScenePack.Primitive, ScenePack.PrimitiveGroup);
+  public Color.RGBColor shadeFromPointOnSource(Geometry.GeomRecord, ScenePack.Primitive, ScenePack.PrimitiveGroup);
+}
+Compiled from "Primitive.java"
+public class ScenePack.Primitive {
+  public int idNumber;
+  static int nextIdNumber;
+  public ScenePack.Primitive(Geometry.GeometricObject, Material.Reflection, Material.Emission);
+  public ScenePack.PathNode intersect(Vectormath.Ray, Mathtools.Interval);
+  public Color.RGBColor evaluateReflection(Vectormath.Vector3, Vectormath.Vector3, Vectormath.Vector3, Vectormath.Vector3);
+  public Color.RGBColor evaluateEmission(Vectormath.Ray);
+  public Geometry.GeomRecord randomSurfacePoint();
+  public double getArea();
+  public Geometry.GeomRecord randomSurfacePoint(double, double);
+  public boolean isLightSource();
+  public void setCastsShadow(boolean);
+  public void setReceivesShadow(boolean);
+  public boolean castsShadow();
+  public boolean receivesShadow();
+  public boolean castsNoShadow();
+  public boolean receivesNoShadow();
+  static {};
+}
+Compiled from "PrimitiveGroup.java"
+public class ScenePack.PrimitiveGroup extends java.util.Vector {
+  public ScenePack.PrimitiveGroup(int, int);
+  public int numberOfPrimitives();
+  public int numberOfLightSources();
+  public int numberOfShadowCasters();
+  public int numberOfShadowReceivers();
+  public double totalSurfaceArea();
+  public ScenePack.Primitive getPrimitive(int);
+  public ScenePack.Primitive getLightSource(int);
+  public void addPrimitive(ScenePack.Primitive, boolean, boolean);
+  public void addLightSource(ScenePack.Primitive);
+  public ScenePack.PathNode intersect(Vectormath.Ray);
+  public ScenePack.PathNode intersect(Vectormath.Ray, Mathtools.Interval);
+  public ScenePack.PathNode intersectShadowRay(Vectormath.Ray, Mathtools.Interval);
+  public ScenePack.PathNode intersectShadowRay(Vectormath.Vector3, Vectormath.Vector3);
+  public Geometry.GeomRecord randomSurfacePoint();
+}
+Compiled from "Scene.java"
+public class ScenePack.Scene {
+  public ScenePack.PrimitiveGroup primitiveGroup;
+  public ScenePack.Camera defaultCamera;
+  public ScenePack.Scene();
+  public void printSceneInfo();
+  public ScenePack.PathNode intersect(Vectormath.Ray);
+  public ScenePack.PathNode intersect(Vectormath.Ray, Mathtools.Interval);
+  public Color.RGBColor shade(ScenePack.PathNode);
+}
+Compiled from "SceneBuilder.java"
+public class ScenePack.SceneBuilder {
+  public ScenePack.SceneBuilder();
+  public static void cornellBox(ScenePack.Scene);
+  public static void addPrimitive(ScenePack.Scene, ScenePack.Primitive, boolean, boolean);
+  public static void addLightSource(ScenePack.Scene, ScenePack.Primitive);
+}
+Compiled from "Settings.java"
+public class ScenePack.Settings {
+  public static final int IMAGE_WIDTH;
+  public static final int IMAGE_HEIGHT;
+  public static final Color.RGBColor BACKGROUND_COLOR;
+  public static final int MAX_PRIMITIVES_IN_GROUP;
+  public static final int MAX_LIGHTSOURCES_IN_GROUP;
+  public static final double SELF_INTERSECT_EPSILON;
+  public static final int SAMPLES_PER_PIXEL;
+  public static final int PIXEL_SAMPLING_PATTERN;
+  public static final boolean SELF_ILLUMINATION;
+  public static final boolean DIRECT_ILLUMINATION;
+  public static final int SHADOWRAYS_PER_POINT;
+  public static final int LIGHTSOURCE_SAMPLING_PATTERN;
+  public ScenePack.Settings();
+  public static void printSettings();
+  static {};
+}
+Compiled from "Statistics.java"
+public class ScenePack.Statistics {
+  public ScenePack.Statistics();
+  public static void oneMoreIntersection(ScenePack.Primitive);
+  public static void reset();
+  public static void printStatistics();
+  static {};
+}
+Compiled from "Timer.java"
+public class Timer {
+  static long timeMilliseconds;
+  public Timer();
+  static void startTime();
+  static double endTime();
+}
+Compiled from "FrameOfReference.java"
+public class Vectormath.FrameOfReference {
+  public Vectormath.OrthoNormalBasis onb;
+  public Vectormath.Vector3 origin;
+  public Vectormath.FrameOfReference();
+  public Vectormath.FrameOfReference(Vectormath.Vector3, Vectormath.OrthoNormalBasis);
+  public void setOrigin(Vectormath.Vector3);
+  public void setOrthoNormalBasis(Vectormath.OrthoNormalBasis);
+}
+Compiled from "OrthoNormalBasis.java"
+public class Vectormath.OrthoNormalBasis {
+  public Vectormath.Vector3 u;
+  public Vectormath.Vector3 v;
+  public Vectormath.Vector3 w;
+  public Vectormath.OrthoNormalBasis();
+  public void constructUVFrom(Vectormath.Vector3, Vectormath.Vector3);
+  public void constructVUFrom(Vectormath.Vector3, Vectormath.Vector3);
+  public void constructVWFrom(Vectormath.Vector3, Vectormath.Vector3);
+  public void constructWVFrom(Vectormath.Vector3, Vectormath.Vector3);
+  public void constructUWFrom(Vectormath.Vector3, Vectormath.Vector3);
+  public void constructWUFrom(Vectormath.Vector3, Vectormath.Vector3);
+  public void constructWFrom(Vectormath.Vector3);
+  public Vectormath.Vector3 convert(Vectormath.Vector3);
+  public void printOrthoNormalBasis();
+  public static void main(java.lang.String[]);
+  public Vectormath.OrthoNormalBasis makeCopy();
+}
+Compiled from "Ray.java"
+public class Vectormath.Ray {
+  public Vectormath.Vector3 origin;
+  public Vectormath.Vector3 direction;
+  public Vectormath.Ray();
+  public Vectormath.Ray(Vectormath.Vector3, Vectormath.Vector3);
+  public Vectormath.Vector3 pointAtParameter(double);
+  public Vectormath.Vector3 pointAtParameterNormalizedDirection(double);
+  public void printRay();
+  public void printlnRay();
+}
+Compiled from "TransformationMatrix.java"
+public class Vectormath.TransformationMatrix {
+  double[][] data;
+  double[][] invdata;
+  public Vectormath.TransformationMatrix();
+  public static Vectormath.TransformationMatrix identity();
+  public static Vectormath.TransformationMatrix translation(Vectormath.Vector3);
+  public static Vectormath.TransformationMatrix scale(Vectormath.Vector3);
+  public static Vectormath.TransformationMatrix rotateX(double);
+  public static Vectormath.TransformationMatrix rotateY(double);
+  public static Vectormath.TransformationMatrix rotateZ(double);
+  public static Vectormath.TransformationMatrix perspective(double);
+  public Vectormath.Vector3 transformAsLocation(Vectormath.Vector3);
+  public Vectormath.Vector4 transformAsLocation(Vectormath.Vector4);
+  public Vectormath.Vector3 transformAsDirection(Vectormath.Vector3);
+  public Vectormath.Vector3 transformAsNormal(Vectormath.Vector3);
+  public static Vectormath.TransformationMatrix rotateXYZtoUVW(Vectormath.OrthoNormalBasis);
+  public static Vectormath.TransformationMatrix coordinateTransformOXYZtoPUVW(Vectormath.FrameOfReference);
+  public void invert();
+  public Vectormath.TransformationMatrix multiply(Vectormath.TransformationMatrix);
+  static void main(java.lang.String[]);
+}
+Compiled from "Vector2.java"
+public class Vectormath.Vector2 {
+  public double[] data;
+  public Vectormath.Vector2();
+  public Vectormath.Vector2(double, double);
+}
+Compiled from "Vector3.java"
+public class Vectormath.Vector3 {
+  public double[] data;
+  public Vectormath.Vector3();
+  public Vectormath.Vector3(double, double, double);
+  public double norm();
+  public double norm2();
+  public static Vectormath.Vector3 add(Vectormath.Vector3, Vectormath.Vector3);
+  public static Vectormath.Vector3 add(Vectormath.Vector3, Vectormath.Vector3, Vectormath.Vector3);
+  public static Vectormath.Vector3 subtract(Vectormath.Vector3, Vectormath.Vector3);
+  public Vectormath.Vector3 scale(double);
+  public Vectormath.Vector3 scaleInverse(double);
+  public static double dot(Vectormath.Vector3, Vectormath.Vector3);
+  public static Vectormath.Vector3 cross(Vectormath.Vector3, Vectormath.Vector3);
+  public void printVector3();
+  public void printlnVector3();
+  public static Vectormath.Vector3 normalize(Vectormath.Vector3);
+  public void normalize();
+  public Vectormath.Vector3 makeCopy();
+  public static double cosine(Vectormath.Vector3, Vectormath.Vector3);
+  public static double cosinePositiveOnly(Vectormath.Vector3, Vectormath.Vector3);
+  public static double distance(Vectormath.Vector3, Vectormath.Vector3);
+  public static Vectormath.Vector3 linearCombination(double, Vectormath.Vector3, double, Vectormath.Vector3);
+  public static Vectormath.Vector3 linearCombination(double, Vectormath.Vector3, double, Vectormath.Vector3, double, Vectormath.Vector3);
+  public static Vectormath.Vector3 linearCombination(Vectormath.Vector3, double, Vectormath.Vector3, double, Vectormath.Vector3);
+  public static Vectormath.Vector3 linearCombination(Vectormath.Vector3, double, Vectormath.Vector3);
+  public static Vectormath.Vector3 linearCombination(double, Vectormath.Vector3, Vectormath.Vector3);
+  public static Vectormath.Vector3 halfVector(Vectormath.Vector3, Vectormath.Vector3);
+}
+Compiled from "Vector4.java"
+public class Vectormath.Vector4 {
+  public double[] data;
+  public Vectormath.Vector4();
+  public Vectormath.Vector4(Vectormath.Vector3);
+  public Vectormath.Vector4(Vectormath.Vector3, double);
+  public Vectormath.Vector4(double, double, double, double);
+  public Vectormath.Vector3 toVector3();
+  public static Vectormath.Vector4 add(Vectormath.Vector4, Vectormath.Vector4);
+  public static Vectormath.Vector4 add(Vectormath.Vector4, Vectormath.Vector4, Vectormath.Vector4);
+  public static Vectormath.Vector4 subtract(Vectormath.Vector4, Vectormath.Vector4);
+  public Vectormath.Vector4 scale(double);
+  public void printlnVector4();
+  public Vectormath.Vector4 makeCopy();
+  public static Vectormath.Vector4 linearCombination(double, Vectormath.Vector4, double, Vectormath.Vector4);
+  public static Vectormath.Vector4 linearCombination(double, Vectormath.Vector4, double, Vectormath.Vector4, double, Vectormath.Vector4);
+  public static Vectormath.Vector4 linearCombination(Vectormath.Vector4, double, Vectormath.Vector4, double, Vectormath.Vector4);
+  public static Vectormath.Vector4 linearCombination(Vectormath.Vector4, double, Vectormath.Vector4);
+  public static Vectormath.Vector4 linearCombination(double, Vectormath.Vector4, Vectormath.Vector4);
+}

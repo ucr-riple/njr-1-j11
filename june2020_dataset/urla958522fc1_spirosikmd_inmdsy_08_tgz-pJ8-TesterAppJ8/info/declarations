@@ -1,0 +1,731 @@
+Compiled from "Message.java"
+public class Message implements java.io.Serializable {
+  public Message(java.util.UUID, java.lang.String);
+  public java.util.UUID getID();
+  public java.lang.String getMessage();
+}
+Compiled from "MessagePrinter.java"
+public class MessagePrinter extends nl.rug.peerbox.middleware.PrettyPrinter {
+  public MessagePrinter();
+  public java.lang.String printPayload(byte[]);
+}
+Compiled from "Multicast.java"
+public class Multicast {
+  public Multicast();
+  public static void main(java.lang.String[]) throws java.io.IOException;
+}
+Compiled from "Peer.java"
+public class Peer implements java.lang.Runnable,ReadEventListener {
+  public Peer(java.net.InetAddress, int);
+  public synchronized void start() throws java.io.IOException;
+  public synchronized void stop() throws java.io.IOException;
+  public synchronized void handleReadEvent(ReadEvent);
+  public void run();
+}
+Compiled from "ReadEvent.java"
+public class ReadEvent extends java.util.EventObject {
+  public ReadEvent(java.lang.Object, byte[]);
+  public synchronized byte[] getReadInput();
+}
+Compiled from "ReadEventListener.java"
+public interface ReadEventListener {
+  public abstract void handleReadEvent(ReadEvent);
+}
+Compiled from "ReadSource.java"
+public class ReadSource implements java.lang.Runnable {
+  public ReadSource();
+  public void run();
+  public synchronized void addEventListener(ReadEventListener);
+  public synchronized void removeEventListener(ReadEventListener);
+}
+Compiled from "TesterApp.java"
+public class TesterApp {
+  public TesterApp();
+  public static void main(java.lang.String[]);
+}
+Compiled from "VirtualFileSystem.java"
+public class VirtualFileSystem implements org.apache.commons.io.monitor.FileAlterationListener {
+  public VirtualFileSystem(java.lang.String);
+  public void onDirectoryChange(java.io.File);
+  public void onDirectoryCreate(java.io.File);
+  public void onDirectoryDelete(java.io.File);
+  public void onFileChange(java.io.File);
+  public void onFileCreate(java.io.File);
+  public void onFileDelete(java.io.File);
+  public void onStart(org.apache.commons.io.monitor.FileAlterationObserver);
+  public void onStop(org.apache.commons.io.monitor.FileAlterationObserver);
+}
+Compiled from "ft2client.java"
+public class ft2client {
+  public ft2client();
+  public static void main(java.lang.String[]) throws java.io.IOException;
+}
+Compiled from "ft2server.java"
+public class ft2server {
+  public ft2server();
+  public static void main(java.lang.String[]) throws java.io.IOException;
+}
+Compiled from "FindingPeersApp.java"
+public class nl.rug.peerbox.FindingPeersApp {
+  public static final java.lang.String LOGGER_PROPERTIES_FILE;
+  public nl.rug.peerbox.FindingPeersApp();
+  public static void main(java.lang.String[]) throws java.io.IOException, java.lang.InterruptedException;
+  static {};
+}
+Compiled from "Context.java"
+public interface nl.rug.peerbox.logic.Context {
+  public abstract nl.rug.peerbox.middleware.Multicast getMulticastGroup();
+  public abstract java.lang.String getPathToPeerbox();
+  public abstract nl.rug.peerbox.logic.Peer getLocalPeer();
+  public abstract nl.rug.peerbox.logic.filesystem.VirtualFileSystem getVirtualFilesystem();
+  public abstract java.lang.String getDatafileName();
+  public abstract void join();
+  public abstract void leave();
+  public abstract void addPeerListener(nl.rug.peerbox.logic.PeerListener);
+  public abstract void removePeerListener(nl.rug.peerbox.logic.PeerListener);
+  public abstract void peerLeft(nl.rug.peerbox.logic.Peer);
+  public abstract java.util.Collection<nl.rug.peerbox.logic.PeerHost> getPeers();
+}
+Compiled from "Peer.java"
+public class nl.rug.peerbox.logic.Peer implements java.io.Serializable {
+  public nl.rug.peerbox.logic.Peer();
+  public static nl.rug.peerbox.logic.Peer createPeer(byte[], int, java.lang.String);
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public java.net.InetAddress getAddress();
+  public int getPort();
+  public java.lang.String getName();
+  public java.lang.String toString();
+}
+Compiled from "PeerHost.java"
+public final class nl.rug.peerbox.logic.PeerHost {
+  nl.rug.peerbox.logic.PeerHost(int, nl.rug.peerbox.logic.Peer);
+  public final int getHostID();
+  public final nl.rug.peerbox.logic.Peer getPeer();
+}
+Compiled from "PeerListener.java"
+public interface nl.rug.peerbox.logic.PeerListener {
+  public abstract void updated(nl.rug.peerbox.logic.PeerHost);
+  public abstract void deleted(nl.rug.peerbox.logic.PeerHost);
+  public abstract void joined(nl.rug.peerbox.logic.PeerHost);
+}
+Compiled from "PeerManager.java"
+public class nl.rug.peerbox.logic.PeerManager implements nl.rug.peerbox.middleware.HostListener {
+  public nl.rug.peerbox.logic.PeerManager(nl.rug.peerbox.middleware.Multicast);
+  public void updatePeer(int, nl.rug.peerbox.logic.Peer);
+  public void removePeer(nl.rug.peerbox.logic.Peer);
+  public void removed(int);
+  public void detected(int);
+  public void addPeerListener(nl.rug.peerbox.logic.PeerListener);
+  public void removePeerListener(nl.rug.peerbox.logic.PeerListener);
+  public java.util.Collection<nl.rug.peerbox.logic.PeerHost> getPeers();
+}
+Compiled from "Peerbox.java"
+public class nl.rug.peerbox.logic.Peerbox implements nl.rug.peerbox.middleware.MessageListener,nl.rug.peerbox.logic.Context {
+  public static synchronized nl.rug.peerbox.logic.Context getInstance();
+  public void join();
+  public void leave();
+  public void receivedMessage(byte[], int);
+  public nl.rug.peerbox.middleware.Multicast getMulticastGroup();
+  public java.lang.String getPathToPeerbox();
+  public nl.rug.peerbox.logic.filesystem.VirtualFileSystem getVirtualFilesystem();
+  public nl.rug.peerbox.logic.Peer getLocalPeer();
+  public java.lang.String getDatafileName();
+  public void addPeerListener(nl.rug.peerbox.logic.PeerListener);
+  public void removePeerListener(nl.rug.peerbox.logic.PeerListener);
+  public void peerLeft(nl.rug.peerbox.logic.Peer);
+  public java.util.Collection<nl.rug.peerbox.logic.PeerHost> getPeers();
+  static nl.rug.peerbox.logic.Peerbox access$000();
+  static {};
+}
+Compiled from "Peerbox.java"
+class nl.rug.peerbox.logic.Peerbox$Holder {
+  static nl.rug.peerbox.logic.Context access$100();
+  static {};
+}
+Compiled from "Property.java"
+public interface nl.rug.peerbox.logic.Property {
+  public static final java.lang.String SERVER_PORT;
+  public static final java.lang.String MULTICAST_ADDRESS;
+  public static final java.lang.String PATH;
+  public static final java.lang.String MULTICAST_PORT;
+  public static final java.lang.String NAME;
+  public static final java.lang.String DATAFILE_NAME;
+}
+Compiled from "FileRequestTask.java"
+public final class nl.rug.peerbox.logic.filesystem.FileRequestTask implements java.lang.Runnable {
+  public nl.rug.peerbox.logic.filesystem.FileRequestTask(nl.rug.peerbox.logic.filesystem.PeerboxFile, nl.rug.peerbox.logic.Context);
+  java.io.File hide(java.io.File);
+  public void run();
+  static {};
+}
+Compiled from "FileServer.java"
+public final class nl.rug.peerbox.logic.filesystem.FileServer implements java.lang.Runnable {
+  boolean alive;
+  public nl.rug.peerbox.logic.filesystem.FileServer(nl.rug.peerbox.logic.Context);
+  public void run();
+  static org.apache.log4j.Logger access$100();
+  static {};
+}
+Compiled from "FileServer.java"
+class nl.rug.peerbox.logic.filesystem.FileServer$1 {
+}
+Compiled from "FileServer.java"
+final class nl.rug.peerbox.logic.filesystem.FileServer$SendFileTask implements java.lang.Runnable {
+  final nl.rug.peerbox.logic.filesystem.FileServer this$0;
+  public void run();
+  nl.rug.peerbox.logic.filesystem.FileServer$SendFileTask(nl.rug.peerbox.logic.filesystem.FileServer, java.net.Socket, nl.rug.peerbox.logic.filesystem.FileServer$1);
+}
+Compiled from "Filelist.java"
+class nl.rug.peerbox.logic.filesystem.Filelist extends java.util.concurrent.ConcurrentHashMap<nl.rug.peerbox.logic.filesystem.UFID, nl.rug.peerbox.logic.filesystem.PeerboxFile> {
+  nl.rug.peerbox.logic.filesystem.Filelist();
+  void serialize(java.lang.String, java.lang.String);
+  static nl.rug.peerbox.logic.filesystem.Filelist deserialize(java.lang.String, java.lang.String);
+  static {};
+}
+Compiled from "MD5Util.java"
+public abstract class nl.rug.peerbox.logic.filesystem.MD5Util {
+  public nl.rug.peerbox.logic.filesystem.MD5Util();
+  static java.lang.String md5(java.lang.String);
+  static java.lang.String md5(java.io.File);
+}
+Compiled from "PeerboxFile.java"
+public class nl.rug.peerbox.logic.filesystem.PeerboxFile implements java.io.Serializable {
+  public nl.rug.peerbox.logic.filesystem.PeerboxFile(java.lang.String, nl.rug.peerbox.logic.Peer);
+  public nl.rug.peerbox.logic.filesystem.PeerboxFile(java.lang.String, nl.rug.peerbox.logic.Peer, java.io.File);
+  public java.lang.String getFilename();
+  public void setFilename(java.lang.String);
+  public nl.rug.peerbox.logic.filesystem.UFID getUFID();
+  public int getVersion();
+  public void setVersion(int);
+  public nl.rug.peerbox.logic.Peer getOwner();
+  public java.lang.String getChecksum();
+  public boolean isOwn();
+  public boolean exists();
+  public java.io.File getFile();
+  public void setFile(java.io.File);
+  public void addListener(nl.rug.peerbox.logic.filesystem.PeerboxFileListener);
+  public void removeListener(nl.rug.peerbox.logic.filesystem.PeerboxFileListener);
+  public boolean equals(java.lang.Object);
+  public long getSize();
+}
+Compiled from "PeerboxFileListener.java"
+public interface nl.rug.peerbox.logic.filesystem.PeerboxFileListener {
+  public abstract void modelUpdated();
+}
+Compiled from "UFID.java"
+public class nl.rug.peerbox.logic.filesystem.UFID implements java.io.Serializable {
+  public nl.rug.peerbox.logic.filesystem.UFID(java.lang.String, nl.rug.peerbox.logic.Peer);
+  public java.lang.String getFileid();
+  public java.lang.String getOwner();
+  public java.lang.String getFilename();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public java.lang.String toString();
+}
+Compiled from "VFSListener.java"
+public interface nl.rug.peerbox.logic.filesystem.VFSListener {
+  public abstract void added(nl.rug.peerbox.logic.filesystem.PeerboxFile);
+  public abstract void deleted(nl.rug.peerbox.logic.filesystem.PeerboxFile);
+  public abstract void updated(nl.rug.peerbox.logic.filesystem.PeerboxFile);
+}
+Compiled from "VirtualFileSystem.java"
+public class nl.rug.peerbox.logic.filesystem.VirtualFileSystem implements nl.rug.peerbox.logic.PeerListener {
+  public static nl.rug.peerbox.logic.filesystem.VirtualFileSystem initVirtualFileSystem(nl.rug.peerbox.logic.Context);
+  public void addFile(nl.rug.peerbox.logic.filesystem.PeerboxFile);
+  public nl.rug.peerbox.logic.filesystem.PeerboxFile removeFile(nl.rug.peerbox.logic.filesystem.UFID);
+  public void addVFSListener(nl.rug.peerbox.logic.filesystem.VFSListener);
+  public void removeVFSListener(nl.rug.peerbox.logic.filesystem.VFSListener);
+  public java.util.Collection<nl.rug.peerbox.logic.filesystem.PeerboxFile> getLocalFileList();
+  public java.util.Collection<nl.rug.peerbox.logic.filesystem.PeerboxFile> getFileList();
+  public void deleted(nl.rug.peerbox.logic.PeerHost);
+  public void joined(nl.rug.peerbox.logic.PeerHost);
+  public void updated(nl.rug.peerbox.logic.PeerHost);
+  public void refresh();
+  static org.apache.log4j.Logger access$000();
+  static nl.rug.peerbox.logic.filesystem.Filelist access$100(nl.rug.peerbox.logic.filesystem.VirtualFileSystem);
+  static {};
+}
+Compiled from "VirtualFileSystem.java"
+final class nl.rug.peerbox.logic.filesystem.VirtualFileSystem$PeerboxPathWatcher implements java.lang.Runnable {
+  public nl.rug.peerbox.logic.filesystem.VirtualFileSystem$PeerboxPathWatcher(nl.rug.peerbox.logic.Context, nl.rug.peerbox.logic.filesystem.VirtualFileSystem);
+  public void run();
+}
+Compiled from "ByeByeMessageHandler.java"
+public class nl.rug.peerbox.logic.messaging.ByeByeMessageHandler extends nl.rug.peerbox.logic.messaging.MessageHandler {
+  public nl.rug.peerbox.logic.messaging.ByeByeMessageHandler();
+  void handle(nl.rug.peerbox.logic.messaging.Message, nl.rug.peerbox.logic.Context);
+}
+Compiled from "CreatedMessageHandler.java"
+public class nl.rug.peerbox.logic.messaging.CreatedMessageHandler extends nl.rug.peerbox.logic.messaging.MessageHandler {
+  public nl.rug.peerbox.logic.messaging.CreatedMessageHandler();
+  void handle(nl.rug.peerbox.logic.messaging.Message, nl.rug.peerbox.logic.Context);
+}
+Compiled from "DeletedMessageHandler.java"
+public class nl.rug.peerbox.logic.messaging.DeletedMessageHandler extends nl.rug.peerbox.logic.messaging.MessageHandler {
+  public nl.rug.peerbox.logic.messaging.DeletedMessageHandler();
+  void handle(nl.rug.peerbox.logic.messaging.Message, nl.rug.peerbox.logic.Context);
+}
+Compiled from "JoinMessageHandler.java"
+final class nl.rug.peerbox.logic.messaging.JoinMessageHandler extends nl.rug.peerbox.logic.messaging.MessageHandler {
+  nl.rug.peerbox.logic.messaging.JoinMessageHandler();
+  final void handle(nl.rug.peerbox.logic.messaging.Message, nl.rug.peerbox.logic.Context);
+}
+Compiled from "ListMessageHandler.java"
+final class nl.rug.peerbox.logic.messaging.ListMessageHandler extends nl.rug.peerbox.logic.messaging.MessageHandler {
+  nl.rug.peerbox.logic.messaging.ListMessageHandler();
+  final void handle(nl.rug.peerbox.logic.messaging.Message, nl.rug.peerbox.logic.Context);
+}
+Compiled from "Message.java"
+public class nl.rug.peerbox.logic.messaging.Message implements java.io.Serializable {
+  public static final java.lang.Object NULLOBJ;
+  public nl.rug.peerbox.logic.messaging.Message();
+  public void put(nl.rug.peerbox.logic.messaging.Message$Key, java.lang.Object);
+  public java.lang.Object get(nl.rug.peerbox.logic.messaging.Message$Key);
+  public byte[] serialize();
+  public static nl.rug.peerbox.logic.messaging.Message deserialize(byte[]);
+  static {};
+}
+Compiled from "Message.java"
+public final class nl.rug.peerbox.logic.messaging.Message$Command extends java.lang.Enum<nl.rug.peerbox.logic.messaging.Message$Command> {
+  public static final nl.rug.peerbox.logic.messaging.Message$Command Created;
+  public static final nl.rug.peerbox.logic.messaging.Message$Command Deleted;
+  public static final nl.rug.peerbox.logic.messaging.Message$Command Modified;
+  public static final nl.rug.peerbox.logic.messaging.Message$Command ByeBye;
+  public static final nl.rug.peerbox.logic.messaging.Message$Command List;
+  public static final nl.rug.peerbox.logic.messaging.Message$Command Join;
+  public static final nl.rug.peerbox.logic.messaging.Message$Command Refresh;
+  public static nl.rug.peerbox.logic.messaging.Message$Command[] values();
+  public static nl.rug.peerbox.logic.messaging.Message$Command valueOf(java.lang.String);
+  static {};
+}
+Compiled from "Message.java"
+public final class nl.rug.peerbox.logic.messaging.Message$Key extends java.lang.Enum<nl.rug.peerbox.logic.messaging.Message$Key> {
+  public static final nl.rug.peerbox.logic.messaging.Message$Key Command;
+  public static final nl.rug.peerbox.logic.messaging.Message$Key Files;
+  public static final nl.rug.peerbox.logic.messaging.Message$Key Peer;
+  public static final nl.rug.peerbox.logic.messaging.Message$Key File;
+  public static final nl.rug.peerbox.logic.messaging.Message$Key FileId;
+  public static nl.rug.peerbox.logic.messaging.Message$Key[] values();
+  public static nl.rug.peerbox.logic.messaging.Message$Key valueOf(java.lang.String);
+  static {};
+}
+Compiled from "Message.java"
+public class nl.rug.peerbox.logic.messaging.Message$MessagePrinter extends nl.rug.peerbox.middleware.PrettyPrinter {
+  public nl.rug.peerbox.logic.messaging.Message$MessagePrinter();
+  public java.lang.String printPayload(byte[]);
+}
+Compiled from "MessageHandler.java"
+public abstract class nl.rug.peerbox.logic.messaging.MessageHandler {
+  public nl.rug.peerbox.logic.messaging.MessageHandler();
+  static void registerHandler(nl.rug.peerbox.logic.messaging.MessageHandler, java.lang.Object);
+  public static void process(nl.rug.peerbox.logic.messaging.Message, nl.rug.peerbox.logic.Context) throws nl.rug.peerbox.logic.messaging.UnsupportedCommandException;
+  abstract void handle(nl.rug.peerbox.logic.messaging.Message, nl.rug.peerbox.logic.Context);
+  static {};
+}
+Compiled from "RefreshMessageHandler.java"
+final class nl.rug.peerbox.logic.messaging.RefreshMessageHandler extends nl.rug.peerbox.logic.messaging.MessageHandler {
+  nl.rug.peerbox.logic.messaging.RefreshMessageHandler();
+  final void handle(nl.rug.peerbox.logic.messaging.Message, nl.rug.peerbox.logic.Context);
+}
+Compiled from "UnsupportedCommandException.java"
+public class nl.rug.peerbox.logic.messaging.UnsupportedCommandException extends java.lang.Exception {
+  public nl.rug.peerbox.logic.messaging.UnsupportedCommandException(java.lang.Object);
+  public java.lang.Object getUnsupportedCommand();
+}
+Compiled from "Announcement.java"
+final class nl.rug.peerbox.middleware.Announcement {
+  static final byte MESSAGE;
+  static final byte ACK;
+  static final byte NACK;
+  static final byte HEARTBEAT;
+  static final int HEADER_SIZE;
+  static final int MAX_MESSAGE_SIZE;
+  static final int MAX_PAYLOAD_SIZE;
+  static nl.rug.peerbox.middleware.Announcement send(int, int, byte[]);
+  static nl.rug.peerbox.middleware.Announcement ack(int, int, int);
+  static nl.rug.peerbox.middleware.Announcement heartbeat(int, int, byte[]);
+  static nl.rug.peerbox.middleware.Announcement nack(int, int);
+  static nl.rug.peerbox.middleware.Announcement fromByte(byte[]) throws nl.rug.peerbox.middleware.ChecksumFailedException;
+  byte[] toByte();
+  byte getCommand();
+  int getPeerID();
+  int getMessageID();
+  long getChecksum();
+  short getLength();
+  byte[] getPayload();
+  public java.lang.String toString();
+  public boolean equals(java.lang.Object);
+}
+Compiled from "ChecksumFailedException.java"
+public class nl.rug.peerbox.middleware.ChecksumFailedException extends java.lang.Exception {
+  public nl.rug.peerbox.middleware.ChecksumFailedException();
+}
+Compiled from "HostListener.java"
+public interface nl.rug.peerbox.middleware.HostListener {
+  public abstract void detected(int);
+  public abstract void removed(int);
+}
+Compiled from "Listener.java"
+final class nl.rug.peerbox.middleware.Listener {
+  nl.rug.peerbox.middleware.Listener(nl.rug.peerbox.middleware.ReliableMulticast);
+  void start();
+  static org.apache.log4j.Logger access$000();
+  static nl.rug.peerbox.middleware.ReliableMulticast access$100(nl.rug.peerbox.middleware.Listener);
+  static {};
+}
+Compiled from "Listener.java"
+class nl.rug.peerbox.middleware.Listener$1 implements java.lang.Runnable {
+  final nl.rug.peerbox.middleware.Listener this$0;
+  nl.rug.peerbox.middleware.Listener$1(nl.rug.peerbox.middleware.Listener);
+  public void run();
+}
+Compiled from "MessageListener.java"
+public interface nl.rug.peerbox.middleware.MessageListener {
+  public abstract void receivedMessage(byte[], int);
+}
+Compiled from "Multicast.java"
+public interface nl.rug.peerbox.middleware.Multicast {
+  public abstract void announce(byte[]);
+  public abstract void addMessageListener(nl.rug.peerbox.middleware.MessageListener);
+  public abstract void shutdown();
+  public abstract nl.rug.peerbox.middleware.RemoteHostManager getHostManager();
+}
+Compiled from "PrettyPrinter.java"
+public abstract class nl.rug.peerbox.middleware.PrettyPrinter {
+  static java.util.List<nl.rug.peerbox.middleware.PrettyPrinter> printers;
+  public nl.rug.peerbox.middleware.PrettyPrinter();
+  public abstract java.lang.String printPayload(byte[]);
+  public static void registerPrinter(nl.rug.peerbox.middleware.PrettyPrinter);
+  static java.lang.String print(nl.rug.peerbox.middleware.Announcement);
+  static {};
+}
+Compiled from "Receiver.java"
+final class nl.rug.peerbox.middleware.Receiver {
+  public nl.rug.peerbox.middleware.Receiver(nl.rug.peerbox.middleware.ReliableMulticast);
+  void start();
+  void shutdown();
+  void pushDataPacket(java.net.DatagramPacket);
+  void sendMiss(int, int);
+  static boolean access$000(nl.rug.peerbox.middleware.Receiver);
+  static java.util.concurrent.BlockingQueue access$100(nl.rug.peerbox.middleware.Receiver);
+  static void access$200(nl.rug.peerbox.middleware.Receiver, byte[]);
+  static org.apache.log4j.Logger access$300();
+  static java.util.Timer access$400(nl.rug.peerbox.middleware.Receiver);
+  static {};
+}
+Compiled from "Receiver.java"
+class nl.rug.peerbox.middleware.Receiver$1 implements java.lang.Runnable {
+  final nl.rug.peerbox.middleware.Receiver this$0;
+  nl.rug.peerbox.middleware.Receiver$1(nl.rug.peerbox.middleware.Receiver);
+  public void run();
+}
+Compiled from "Receiver.java"
+class nl.rug.peerbox.middleware.Receiver$MissTimerTask extends java.util.TimerTask {
+  final nl.rug.peerbox.middleware.Receiver this$0;
+  public nl.rug.peerbox.middleware.Receiver$MissTimerTask(nl.rug.peerbox.middleware.Receiver, nl.rug.peerbox.middleware.RemoteHost, int);
+  public void run();
+}
+Compiled from "ReliableMulticast.java"
+public class nl.rug.peerbox.middleware.ReliableMulticast implements nl.rug.peerbox.middleware.Multicast {
+  static org.apache.log4j.Logger logger;
+  java.util.concurrent.ExecutorService pool;
+  public static nl.rug.peerbox.middleware.Multicast createPeer(java.lang.String, int);
+  public void announce(byte[]);
+  void sendMessage(nl.rug.peerbox.middleware.Announcement);
+  void rdeliver(nl.rug.peerbox.middleware.Announcement);
+  public java.net.MulticastSocket getSocket();
+  public java.net.InetAddress getAddress();
+  public int getPort();
+  public int getPeerId();
+  public nl.rug.peerbox.middleware.Sender getSender();
+  public nl.rug.peerbox.middleware.Receiver getReceiver();
+  public nl.rug.peerbox.middleware.RemoteHostManager getHostManager();
+  public void shutdown();
+  public void addMessageListener(nl.rug.peerbox.middleware.MessageListener);
+  static java.util.concurrent.atomic.AtomicInteger access$000(nl.rug.peerbox.middleware.ReliableMulticast);
+  static java.util.ArrayList access$100(nl.rug.peerbox.middleware.ReliableMulticast);
+  static {};
+}
+Compiled from "ReliableMulticast.java"
+final class nl.rug.peerbox.middleware.ReliableMulticast$1 extends java.util.TimerTask {
+  final nl.rug.peerbox.middleware.ReliableMulticast val$group;
+  nl.rug.peerbox.middleware.ReliableMulticast$1(nl.rug.peerbox.middleware.ReliableMulticast);
+  public void run();
+}
+Compiled from "ReliableMulticast.java"
+class nl.rug.peerbox.middleware.ReliableMulticast$2 implements java.lang.Runnable {
+  final nl.rug.peerbox.middleware.Announcement val$about;
+  final nl.rug.peerbox.middleware.ReliableMulticast this$0;
+  nl.rug.peerbox.middleware.ReliableMulticast$2(nl.rug.peerbox.middleware.ReliableMulticast, nl.rug.peerbox.middleware.Announcement);
+  public void run();
+}
+Compiled from "RemoteHost.java"
+class nl.rug.peerbox.middleware.RemoteHost {
+  nl.rug.peerbox.middleware.RemoteHost();
+  static nl.rug.peerbox.middleware.RemoteHost find(int);
+  synchronized void heartbeated();
+  synchronized int incrementCount();
+  synchronized int getCount();
+  synchronized long getLastLifeSign();
+  int getHostID();
+  void setHostID(int);
+  int getReceivedMessageID();
+  void setReceivedMessageID(int);
+  int getSeenMessageID();
+  void setSeenMessageID(int);
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+}
+Compiled from "RemoteHostManager.java"
+public class nl.rug.peerbox.middleware.RemoteHostManager {
+  nl.rug.peerbox.middleware.RemoteHostManager();
+  nl.rug.peerbox.middleware.RemoteHost getRemoteHost(int);
+  void addRemoteHost(int, nl.rug.peerbox.middleware.RemoteHost);
+  public java.lang.Integer[] getHostIDs();
+  public void addListener(nl.rug.peerbox.middleware.HostListener);
+  public void removeListener(nl.rug.peerbox.middleware.HostListener);
+  static java.util.concurrent.ConcurrentHashMap access$000(nl.rug.peerbox.middleware.RemoteHostManager);
+  static org.apache.log4j.Logger access$100();
+  static java.util.List access$200(nl.rug.peerbox.middleware.RemoteHostManager);
+  static {};
+}
+Compiled from "RemoteHostManager.java"
+class nl.rug.peerbox.middleware.RemoteHostManager$1 extends java.util.TimerTask {
+  final nl.rug.peerbox.middleware.RemoteHostManager this$0;
+  nl.rug.peerbox.middleware.RemoteHostManager$1(nl.rug.peerbox.middleware.RemoteHostManager);
+  public void run();
+}
+Compiled from "Sender.java"
+final class nl.rug.peerbox.middleware.Sender {
+  nl.rug.peerbox.middleware.Sender(nl.rug.peerbox.middleware.ReliableMulticast);
+  void start();
+  void shutdown();
+  void resendMessage(int, int);
+  void pushMessage(nl.rug.peerbox.middleware.Announcement);
+  static boolean access$000(nl.rug.peerbox.middleware.Sender);
+  static org.apache.commons.lang3.concurrent.TimedSemaphore access$100(nl.rug.peerbox.middleware.Sender);
+  static java.util.concurrent.BlockingQueue access$200(nl.rug.peerbox.middleware.Sender);
+  static nl.rug.peerbox.middleware.ReliableMulticast access$300(nl.rug.peerbox.middleware.Sender);
+  static java.util.Queue access$400(nl.rug.peerbox.middleware.Sender);
+  static boolean access$002(nl.rug.peerbox.middleware.Sender, boolean);
+  static org.apache.log4j.Logger access$500();
+  static {};
+}
+Compiled from "Sender.java"
+class nl.rug.peerbox.middleware.Sender$1 implements java.lang.Runnable {
+  final nl.rug.peerbox.middleware.Sender this$0;
+  nl.rug.peerbox.middleware.Sender$1(nl.rug.peerbox.middleware.Sender);
+  public void run();
+}
+Compiled from "FileListView.java"
+public class nl.rug.peerbox.ui.FileListView extends org.eclipse.swt.widgets.Composite implements org.eclipse.swt.events.DisposeListener,nl.rug.peerbox.logic.filesystem.VFSListener,org.eclipse.swt.events.SelectionListener {
+  public nl.rug.peerbox.ui.FileListView(org.eclipse.swt.widgets.Composite);
+  public void widgetDisposed(org.eclipse.swt.events.DisposeEvent);
+  public void widgetDefaultSelected(org.eclipse.swt.events.SelectionEvent);
+  public void widgetSelected(org.eclipse.swt.events.SelectionEvent);
+  public void updated(nl.rug.peerbox.logic.filesystem.PeerboxFile);
+  public void added(nl.rug.peerbox.logic.filesystem.PeerboxFile);
+  public void deleted(nl.rug.peerbox.logic.filesystem.PeerboxFile);
+  static org.eclipse.swt.custom.ScrolledComposite access$000(nl.rug.peerbox.ui.FileListView);
+  static org.eclipse.swt.widgets.Composite access$100(nl.rug.peerbox.ui.FileListView);
+  static {};
+}
+Compiled from "FileListView.java"
+class nl.rug.peerbox.ui.FileListView$1 implements org.eclipse.swt.events.PaintListener {
+  final nl.rug.peerbox.ui.FileListView this$0;
+  nl.rug.peerbox.ui.FileListView$1(nl.rug.peerbox.ui.FileListView);
+  public void paintControl(org.eclipse.swt.events.PaintEvent);
+}
+Compiled from "FileListView.java"
+class nl.rug.peerbox.ui.FileListView$2 implements org.eclipse.swt.events.ControlListener {
+  final nl.rug.peerbox.ui.FileListView this$0;
+  nl.rug.peerbox.ui.FileListView$2(nl.rug.peerbox.ui.FileListView);
+  public void controlResized(org.eclipse.swt.events.ControlEvent);
+  public void controlMoved(org.eclipse.swt.events.ControlEvent);
+}
+Compiled from "FileListView.java"
+class nl.rug.peerbox.ui.FileListView$3 implements java.lang.Runnable {
+  final nl.rug.peerbox.ui.FileListView val$parent;
+  final nl.rug.peerbox.logic.filesystem.PeerboxFile val$f;
+  final nl.rug.peerbox.ui.FileListView this$0;
+  nl.rug.peerbox.ui.FileListView$3(nl.rug.peerbox.ui.FileListView, nl.rug.peerbox.ui.FileListView, nl.rug.peerbox.logic.filesystem.PeerboxFile);
+  public void run();
+}
+Compiled from "FileListView.java"
+class nl.rug.peerbox.ui.FileListView$4 implements java.lang.Runnable {
+  final nl.rug.peerbox.ui.FileListView val$sfv;
+  final nl.rug.peerbox.logic.filesystem.PeerboxFile val$f;
+  final nl.rug.peerbox.ui.FileListView this$0;
+  nl.rug.peerbox.ui.FileListView$4(nl.rug.peerbox.ui.FileListView, nl.rug.peerbox.ui.FileListView, nl.rug.peerbox.logic.filesystem.PeerboxFile);
+  public void run();
+}
+Compiled from "FileView.java"
+public class nl.rug.peerbox.ui.FileView extends org.eclipse.swt.widgets.Composite implements org.eclipse.swt.events.DisposeListener,org.eclipse.swt.events.SelectionListener,nl.rug.peerbox.logic.filesystem.PeerboxFileListener {
+  public nl.rug.peerbox.ui.FileView(org.eclipse.swt.widgets.Composite);
+  public void setModel(nl.rug.peerbox.logic.filesystem.PeerboxFile);
+  public nl.rug.peerbox.logic.filesystem.PeerboxFile getModel();
+  public org.eclipse.swt.graphics.Point computeSize(int, int, boolean);
+  public void widgetDisposed(org.eclipse.swt.events.DisposeEvent);
+  public void widgetDefaultSelected(org.eclipse.swt.events.SelectionEvent);
+  public void widgetSelected(org.eclipse.swt.events.SelectionEvent);
+  public void modelUpdated();
+  static org.eclipse.swt.widgets.Button access$000(nl.rug.peerbox.ui.FileView);
+}
+Compiled from "FileView.java"
+class nl.rug.peerbox.ui.FileView$1 implements java.lang.Runnable {
+  final nl.rug.peerbox.ui.FileView this$0;
+  nl.rug.peerbox.ui.FileView$1(nl.rug.peerbox.ui.FileView);
+  public void run();
+}
+Compiled from "LogView.java"
+public class nl.rug.peerbox.ui.LogView extends org.eclipse.swt.widgets.Composite implements org.eclipse.swt.events.DisposeListener,org.apache.commons.io.input.TailerListener {
+  public nl.rug.peerbox.ui.LogView(org.eclipse.swt.widgets.Composite);
+  public void widgetDisposed(org.eclipse.swt.events.DisposeEvent);
+  public void fileNotFound();
+  public void fileRotated();
+  public void handle(java.lang.String);
+  public void handle(java.lang.Exception);
+  public void init(org.apache.commons.io.input.Tailer);
+  static org.eclipse.swt.widgets.Text access$000(nl.rug.peerbox.ui.LogView);
+  static {};
+}
+Compiled from "LogView.java"
+class nl.rug.peerbox.ui.LogView$1 implements org.eclipse.swt.events.PaintListener {
+  final nl.rug.peerbox.ui.LogView this$0;
+  nl.rug.peerbox.ui.LogView$1(nl.rug.peerbox.ui.LogView);
+  public void paintControl(org.eclipse.swt.events.PaintEvent);
+}
+Compiled from "LogView.java"
+class nl.rug.peerbox.ui.LogView$2 extends org.eclipse.swt.events.SelectionAdapter {
+  final nl.rug.peerbox.ui.LogView this$0;
+  nl.rug.peerbox.ui.LogView$2(nl.rug.peerbox.ui.LogView);
+  public void widgetSelected(org.eclipse.swt.events.SelectionEvent);
+}
+Compiled from "LogView.java"
+class nl.rug.peerbox.ui.LogView$3 implements java.lang.Runnable {
+  final java.lang.String val$text;
+  final nl.rug.peerbox.ui.LogView this$0;
+  nl.rug.peerbox.ui.LogView$3(nl.rug.peerbox.ui.LogView, java.lang.String);
+  public void run();
+}
+Compiled from "MenuButton.java"
+public class nl.rug.peerbox.ui.MenuButton extends org.eclipse.swt.widgets.Canvas implements org.eclipse.swt.events.DisposeListener {
+  public nl.rug.peerbox.ui.MenuButton(org.eclipse.swt.widgets.Composite, int);
+  public void setText(java.lang.String);
+  public java.lang.String getText();
+  public void setActive(boolean);
+  public boolean getActive();
+  public org.eclipse.swt.graphics.Point computeSize(int, int, boolean);
+  public void widgetDisposed(org.eclipse.swt.events.DisposeEvent);
+  static java.lang.String access$000(nl.rug.peerbox.ui.MenuButton);
+  static boolean access$100(nl.rug.peerbox.ui.MenuButton);
+  static org.eclipse.swt.graphics.Color access$200(nl.rug.peerbox.ui.MenuButton);
+  static org.eclipse.swt.graphics.Color access$300(nl.rug.peerbox.ui.MenuButton);
+  static org.eclipse.swt.graphics.Color access$400(nl.rug.peerbox.ui.MenuButton);
+  static org.eclipse.swt.graphics.Color access$500(nl.rug.peerbox.ui.MenuButton);
+  static org.eclipse.swt.graphics.Color access$600(nl.rug.peerbox.ui.MenuButton);
+  static org.eclipse.swt.graphics.Color access$700(nl.rug.peerbox.ui.MenuButton);
+  static org.eclipse.swt.graphics.Color access$800(nl.rug.peerbox.ui.MenuButton);
+  static org.eclipse.swt.graphics.Color access$900(nl.rug.peerbox.ui.MenuButton);
+  static boolean access$1000(nl.rug.peerbox.ui.MenuButton);
+  static int access$1102(nl.rug.peerbox.ui.MenuButton, int);
+  static boolean access$1002(nl.rug.peerbox.ui.MenuButton, boolean);
+  static int access$1100(nl.rug.peerbox.ui.MenuButton);
+}
+Compiled from "MenuButton.java"
+class nl.rug.peerbox.ui.MenuButton$1 implements org.eclipse.swt.events.PaintListener {
+  final nl.rug.peerbox.ui.MenuButton this$0;
+  nl.rug.peerbox.ui.MenuButton$1(nl.rug.peerbox.ui.MenuButton);
+  public void paintControl(org.eclipse.swt.events.PaintEvent);
+}
+Compiled from "MenuButton.java"
+class nl.rug.peerbox.ui.MenuButton$2 implements org.eclipse.swt.events.MouseMoveListener {
+  final nl.rug.peerbox.ui.MenuButton this$0;
+  nl.rug.peerbox.ui.MenuButton$2(nl.rug.peerbox.ui.MenuButton);
+  public void mouseMove(org.eclipse.swt.events.MouseEvent);
+}
+Compiled from "MenuButton.java"
+class nl.rug.peerbox.ui.MenuButton$3 extends org.eclipse.swt.events.MouseTrackAdapter {
+  final nl.rug.peerbox.ui.MenuButton this$0;
+  nl.rug.peerbox.ui.MenuButton$3(nl.rug.peerbox.ui.MenuButton);
+  public void mouseEnter(org.eclipse.swt.events.MouseEvent);
+  public void mouseExit(org.eclipse.swt.events.MouseEvent);
+}
+Compiled from "MenuButton.java"
+class nl.rug.peerbox.ui.MenuButton$4 extends org.eclipse.swt.events.MouseAdapter {
+  final nl.rug.peerbox.ui.MenuButton this$0;
+  nl.rug.peerbox.ui.MenuButton$4(nl.rug.peerbox.ui.MenuButton);
+  public void mouseDown(org.eclipse.swt.events.MouseEvent);
+  public void mouseUp(org.eclipse.swt.events.MouseEvent);
+}
+Compiled from "MenuButton.java"
+class nl.rug.peerbox.ui.MenuButton$5 extends org.eclipse.swt.events.KeyAdapter {
+  final nl.rug.peerbox.ui.MenuButton this$0;
+  nl.rug.peerbox.ui.MenuButton$5(nl.rug.peerbox.ui.MenuButton);
+  public void keyPressed(org.eclipse.swt.events.KeyEvent);
+}
+Compiled from "PeerListView.java"
+public class nl.rug.peerbox.ui.PeerListView extends org.eclipse.swt.widgets.Composite implements org.eclipse.swt.events.DisposeListener,nl.rug.peerbox.logic.PeerListener {
+  public nl.rug.peerbox.ui.PeerListView(org.eclipse.swt.widgets.Composite);
+  public void widgetDisposed(org.eclipse.swt.events.DisposeEvent);
+  public void updated(nl.rug.peerbox.logic.PeerHost);
+  public void deleted(nl.rug.peerbox.logic.PeerHost);
+  public void joined(nl.rug.peerbox.logic.PeerHost);
+  static org.eclipse.swt.custom.ScrolledComposite access$000(nl.rug.peerbox.ui.PeerListView);
+  static org.eclipse.swt.widgets.Composite access$100(nl.rug.peerbox.ui.PeerListView);
+  static {};
+}
+Compiled from "PeerListView.java"
+class nl.rug.peerbox.ui.PeerListView$1 implements org.eclipse.swt.events.PaintListener {
+  final nl.rug.peerbox.ui.PeerListView this$0;
+  nl.rug.peerbox.ui.PeerListView$1(nl.rug.peerbox.ui.PeerListView);
+  public void paintControl(org.eclipse.swt.events.PaintEvent);
+}
+Compiled from "PeerListView.java"
+class nl.rug.peerbox.ui.PeerListView$2 implements org.eclipse.swt.events.ControlListener {
+  final nl.rug.peerbox.ui.PeerListView this$0;
+  nl.rug.peerbox.ui.PeerListView$2(nl.rug.peerbox.ui.PeerListView);
+  public void controlResized(org.eclipse.swt.events.ControlEvent);
+  public void controlMoved(org.eclipse.swt.events.ControlEvent);
+}
+Compiled from "PeerListView.java"
+class nl.rug.peerbox.ui.PeerListView$3 implements java.lang.Runnable {
+  final nl.rug.peerbox.ui.PeerListView val$parent;
+  final nl.rug.peerbox.logic.PeerHost val$ph;
+  final nl.rug.peerbox.ui.PeerListView this$0;
+  nl.rug.peerbox.ui.PeerListView$3(nl.rug.peerbox.ui.PeerListView, nl.rug.peerbox.ui.PeerListView, nl.rug.peerbox.logic.PeerHost);
+  public void run();
+}
+Compiled from "PeerListView.java"
+class nl.rug.peerbox.ui.PeerListView$4 implements java.lang.Runnable {
+  final nl.rug.peerbox.ui.PeerListView val$plv;
+  final nl.rug.peerbox.logic.PeerHost val$ph;
+  final nl.rug.peerbox.ui.PeerListView this$0;
+  nl.rug.peerbox.ui.PeerListView$4(nl.rug.peerbox.ui.PeerListView, nl.rug.peerbox.ui.PeerListView, nl.rug.peerbox.logic.PeerHost);
+  public void run();
+}
+Compiled from "PeerListView.java"
+class nl.rug.peerbox.ui.PeerListView$5 implements java.lang.Runnable {
+  final nl.rug.peerbox.ui.PeerListView val$parent;
+  final nl.rug.peerbox.logic.PeerHost val$ph;
+  final nl.rug.peerbox.ui.PeerListView this$0;
+  nl.rug.peerbox.ui.PeerListView$5(nl.rug.peerbox.ui.PeerListView, nl.rug.peerbox.ui.PeerListView, nl.rug.peerbox.logic.PeerHost);
+  public void run();
+}
+Compiled from "PeerView.java"
+public class nl.rug.peerbox.ui.PeerView extends org.eclipse.swt.widgets.Composite implements org.eclipse.swt.events.DisposeListener {
+  public nl.rug.peerbox.ui.PeerView(org.eclipse.swt.widgets.Composite);
+  public org.eclipse.swt.graphics.Point computeSize(int, int, boolean);
+  public void widgetDisposed(org.eclipse.swt.events.DisposeEvent);
+  public nl.rug.peerbox.logic.PeerHost getModel();
+  public void setModel(nl.rug.peerbox.logic.PeerHost);
+}
+Compiled from "PeerboxUI.java"
+public class nl.rug.peerbox.ui.PeerboxUI implements org.eclipse.swt.events.DisposeListener,org.eclipse.swt.widgets.Listener {
+  public nl.rug.peerbox.ui.PeerboxUI(org.eclipse.swt.widgets.Display, int);
+  public nl.rug.peerbox.ui.PeerboxUI(org.eclipse.swt.widgets.Display);
+  public org.eclipse.swt.widgets.Shell getShell();
+  public void widgetDisposed(org.eclipse.swt.events.DisposeEvent);
+  public void handleEvent(org.eclipse.swt.widgets.Event);
+}

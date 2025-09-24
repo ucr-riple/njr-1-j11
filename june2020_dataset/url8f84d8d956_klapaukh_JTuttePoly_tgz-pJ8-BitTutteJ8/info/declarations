@@ -1,0 +1,473 @@
+Compiled from "BitTutte.java"
+public class BitTutte {
+  public static final int V_RANDOM;
+  public static final int V_MINIMISE_UNDERLYING_DEGREE;
+  public static final int V_MAXIMISE_UNDERLYING_DEGREE;
+  public static final int V_MINIMISE_DEGREE;
+  public static final int V_MAXIMISE_DEGREE;
+  public static final int V_BFS;
+  public static final int V_NONE;
+  MyTimer global_timer;
+  boolean status_flag;
+  boolean write_tree;
+  int resize_stats;
+  long num_steps;
+  long num_bicomps;
+  long num_cycles;
+  long num_disbicomps;
+  long num_trees;
+  long num_completed;
+  long old_num_steps;
+  int tree_id;
+  boolean reduce_multicycles;
+  boolean reduce_multiedges;
+  boolean use_add_contract;
+  int split_threshold;
+  util.Cache cache;
+  selection.EdgeSelection edgeSelection;
+  long totalWork;
+  long workDone;
+  static java.util.List<util.Triple<java.lang.Integer, java.lang.Integer, java.lang.Integer>> line;
+  public static void main(java.lang.String[]);
+  public BitTutte(java.lang.String);
+  int reduce_loops(graph.Graph);
+  public void debug(java.lang.Object);
+  static {};
+}
+Compiled from "MyTimer.java"
+public class MyTimer {
+  public MyTimer();
+  public MyTimer(boolean);
+  public double elapsed();
+}
+Compiled from "Tutte.java"
+public class Tutte {
+  MyTimer global_timer;
+  boolean status_flag;
+  boolean write_tree;
+  int resize_stats;
+  long num_steps;
+  long num_bicomps;
+  long num_cycles;
+  long num_disbicomps;
+  long num_trees;
+  long num_completed;
+  long old_num_steps;
+  int tree_id;
+  boolean reduce_multicycles;
+  boolean reduce_multiedges;
+  boolean use_add_contract;
+  int split_threshold;
+  static java.util.List<util.Triple<java.lang.Integer, java.lang.Integer, java.lang.Integer>> line;
+  public static void main(java.lang.String[]);
+  public Tutte(java.lang.String);
+  int reduce_loops(graph.SpanningGraph);
+  static {};
+}
+Compiled from "AdjacencyList.java"
+public class graph.AdjacencyList {
+  public graph.AdjacencyList(int);
+  public graph.AdjacencyList(graph.AdjacencyList);
+  public int domainSize();
+  public java.lang.Iterable<java.lang.Integer> vertices();
+  public java.lang.Iterable<java.util.Map$Entry<java.lang.Integer, java.lang.Integer>> edges(int);
+  public boolean equals(java.lang.Object);
+  public boolean equals(graph.AdjacencyList);
+  public int numVertices();
+  public int numEdges();
+  public int numUnderlyingEdges();
+  public int numEdges(int);
+  public int numUnderlyingEdges(int);
+  public int numEdges(int, int);
+  public int numMultiedges();
+  public boolean isMultiGraph();
+  public void clear(int);
+  public void remove(int);
+  public boolean addEdge(int, int, int);
+  public boolean addEdge(int, int);
+  public boolean removeEdge(int, int, int);
+  public int removeAllEdges(int, int);
+  public boolean removeEdge(int, int);
+  public void remove(graph.AdjacencyList);
+  void contractEdge(int, int);
+  public java.lang.String toString();
+}
+Compiled from "AdjacencyMatrix.java"
+public class graph.AdjacencyMatrix {
+  public graph.AdjacencyMatrix(int);
+  public graph.AdjacencyMatrix(graph.AdjacencyMatrix);
+  public int domainSize();
+  public java.lang.Iterable<java.lang.Integer> vertices();
+  public java.lang.Iterable<util.Pair<java.lang.Integer, java.lang.Integer>> edges(int);
+  public boolean equals(java.lang.Object);
+  public boolean equals(graph.AdjacencyMatrix);
+  public int numVertices();
+  public int numEdges();
+  public int numUnderlyingEdges();
+  public int numEdges(int);
+  public int numUnderlyingEdges(int);
+  public int numEdges(int, int);
+  public int numMultiedges();
+  public boolean isMultiGraph();
+  public void clear(int);
+  public boolean addEdge(int, int, int);
+  public boolean addEdge(int, int);
+  public boolean removeEdge(int, int, int);
+  public int removeAllEdges(int, int);
+  public boolean removeEdge(int, int);
+  public void remove(graph.AdjacencyMatrix);
+  void contractEdge(int, int);
+  public java.lang.String toString();
+  public static void setValue(int, int, int, int, int[]);
+  public int[] label(util.Label);
+  public int hashCode(int[]);
+  public static void main(java.lang.String[]);
+  static int[] access$100(graph.AdjacencyMatrix);
+  static int[] access$200(graph.AdjacencyMatrix);
+  static int access$300(graph.AdjacencyMatrix);
+  static int access$400(graph.AdjacencyMatrix);
+  static int access$500(graph.AdjacencyMatrix);
+}
+Compiled from "AdjacencyMatrix.java"
+class graph.AdjacencyMatrix$1 {
+}
+Compiled from "AdjacencyMatrix.java"
+class graph.AdjacencyMatrix$EdgeIterable implements java.lang.Iterable<util.Pair<java.lang.Integer, java.lang.Integer>> {
+  final graph.AdjacencyMatrix this$0;
+  public graph.AdjacencyMatrix$EdgeIterable(graph.AdjacencyMatrix, int);
+  public java.util.Iterator<util.Pair<java.lang.Integer, java.lang.Integer>> iterator();
+}
+Compiled from "AdjacencyMatrix.java"
+public class graph.AdjacencyMatrix$EdgeIterator implements java.util.Iterator<util.Pair<java.lang.Integer, java.lang.Integer>> {
+  long startBit;
+  long endBit;
+  long currBit;
+  int dest;
+  final graph.AdjacencyMatrix this$0;
+  public graph.AdjacencyMatrix$EdgeIterator(graph.AdjacencyMatrix, int[], int);
+  public boolean hasNext();
+  public util.Pair<java.lang.Integer, java.lang.Integer> next();
+  public void remove();
+  public java.lang.Object next();
+}
+Compiled from "AdjacencyMatrix.java"
+class graph.AdjacencyMatrix$VertexIterable implements java.lang.Iterable<java.lang.Integer> {
+  final graph.AdjacencyMatrix this$0;
+  public java.util.Iterator<java.lang.Integer> iterator();
+  graph.AdjacencyMatrix$VertexIterable(graph.AdjacencyMatrix, graph.AdjacencyMatrix$1);
+}
+Compiled from "AdjacencyMatrix.java"
+class graph.AdjacencyMatrix$VertexIterator implements java.util.Iterator<java.lang.Integer> {
+  final graph.AdjacencyMatrix this$0;
+  public graph.AdjacencyMatrix$VertexIterator(graph.AdjacencyMatrix, int[]);
+  public boolean hasNext();
+  public java.lang.Integer next();
+  public void remove();
+  public java.lang.Object next();
+}
+Compiled from "BCDat.java"
+public class graph.BCDat {
+  public int vindex;
+  public java.util.List<java.lang.Boolean> visited;
+  public java.util.List<java.lang.Integer> lowlink;
+  public java.util.List<java.lang.Integer> dfsnum;
+  public java.util.List<util.Triple<java.lang.Integer, java.lang.Integer, java.lang.Integer>> cstack;
+  public graph.BCDat();
+  public void reset(int);
+}
+Compiled from "Graph.java"
+public class graph.Graph {
+  public graph.Graph(int);
+  public graph.Graph(graph.AdjacencyMatrix);
+  public graph.Graph(graph.Graph);
+  public void addEdge(int, int);
+  public void addEdge(int, int, int);
+  public java.lang.Iterable<java.lang.Integer> vertices();
+  public int removeAllEdges(int, int);
+  public int numEdges();
+  public boolean isMulticycle();
+  public java.lang.Iterable<util.Pair<java.lang.Integer, java.lang.Integer>> edges(int);
+  public void contractEdge(util.Triple<java.lang.Integer, java.lang.Integer, java.lang.Integer>);
+  public boolean removeEdge(util.Triple<java.lang.Integer, java.lang.Integer, java.lang.Integer>);
+  public boolean isMultitree();
+  public void removeGraphs(java.util.List<graph.Graph>);
+  public boolean isBiconnected();
+  public void extractBiconnectedComponents(java.util.List<graph.Graph>);
+  public void clear(int);
+  public int pendant();
+  public int numEdges(int);
+  public int numUnderlyingEdges(int);
+  public java.lang.String toString();
+  public int numVertices();
+  public int[] label(util.Label);
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public int numUnderlyingEdges(int, int);
+  public int domainSize();
+  public int numEdges(int, int);
+}
+Compiled from "Hash.java"
+public class graph.Hash {
+  public graph.Hash();
+  public static int rot(int, int);
+  public static util.Triple<java.lang.Integer, java.lang.Integer, java.lang.Integer> mix(util.Triple<java.lang.Integer, java.lang.Integer, java.lang.Integer>);
+  public static util.Triple<java.lang.Integer, java.lang.Integer, java.lang.Integer> finalise(util.Triple<java.lang.Integer, java.lang.Integer, java.lang.Integer>);
+  public static int hashcode(int[]);
+}
+Compiled from "Matrix.java"
+public class graph.Matrix {
+  public graph.Matrix(int, int);
+  public int get(int, int);
+  public void set(int, int, int);
+  public boolean equals(java.lang.Object);
+}
+Compiled from "SpanningGraph.java"
+public class graph.SpanningGraph {
+  static graph.BCDat datae;
+  static graph.BCDat datac;
+  public graph.SpanningGraph(int);
+  public graph.SpanningGraph(int, boolean);
+  public graph.SpanningGraph(graph.AdjacencyList);
+  public graph.SpanningGraph(graph.AdjacencyList, boolean);
+  public graph.SpanningGraph(graph.SpanningGraph);
+  public java.lang.Iterable<java.lang.Integer> vertices();
+  public java.lang.Iterable<java.util.Map$Entry<java.lang.Integer, java.lang.Integer>> edges(int);
+  public int domain_size();
+  public int num_vertices();
+  public int numEdges();
+  public int numEdges(int);
+  public int numEdges(int, int);
+  public int numUnderlying_edges();
+  public int numUnderlying_edges(int);
+  public int numMultiedges();
+  public int numComponents();
+  public boolean isConnected();
+  public boolean isBiconnected();
+  public boolean isTree();
+  public boolean isMultitree();
+  public boolean isMulticycle();
+  public boolean clear(int);
+  public void remove(int);
+  public void addEdge(int, int);
+  public void addEdge(int, int, int);
+  public int removeAllEdges(int, int);
+  public boolean removeLine(java.util.List<util.Triple<java.lang.Integer, java.lang.Integer, java.lang.Integer>>);
+  public boolean removeEdge(int, int);
+  public boolean removeEdge(int, int, int);
+  public boolean removeEdge(util.Triple<java.lang.Integer, java.lang.Integer, java.lang.Integer>);
+  public void contractEdge(util.Triple<java.lang.Integer, java.lang.Integer, java.lang.Integer>);
+  public void contractLine(java.util.List<util.Triple<java.lang.Integer, java.lang.Integer, java.lang.Integer>>);
+  public void extractBiconnectedComponents(java.util.List<graph.SpanningGraph>);
+  public void removeGraphs(java.util.List<graph.SpanningGraph>);
+  public java.lang.String toString();
+  public boolean equals(java.lang.Object);
+  public boolean equals(graph.SpanningGraph);
+  static {};
+}
+Compiled from "Util.java"
+public final class graph.Util {
+  public graph.Util();
+  public static boolean isomorphic(graph.Graph, graph.Graph);
+  public static graph.Matrix normalise(java.util.ArrayList<java.util.BitSet>, graph.Graph);
+  public static void partition(int, java.util.ArrayList<java.util.BitSet>, graph.Graph);
+  public static boolean split(int, java.util.ArrayList<java.util.BitSet>, graph.Graph);
+  public static java.util.ArrayList<java.util.BitSet> initialPartition(int, graph.Graph);
+  public static int[] reversePartitions(java.util.ArrayList<java.util.BitSet>, graph.Graph);
+  static {};
+}
+Compiled from "FactorPoly.java"
+public class polynomial.FactorPoly {
+  public static final int FPOLY_PADDING_FACTOR;
+  public polynomial.FactorPoly();
+  public polynomial.FactorPoly(polynomial.XYTerm);
+  public polynomial.FactorPoly(polynomial.FactorPoly);
+  public polynomial.FactorPoly(int, polynomial.YTerms[]);
+  public polynomial.FactorPoly assign(polynomial.FactorPoly);
+  public void swap(polynomial.FactorPoly);
+  public void add(polynomial.XYTerm);
+  public void add(polynomial.FactorPoly);
+  public void minus(polynomial.XYTerm);
+  public void minus(polynomial.FactorPoly);
+  public void times(java.math.BigInteger);
+  public void times(polynomial.XYTerm);
+  public void times(polynomial.FactorPoly);
+  public polynomial.FactorPoly addnew(polynomial.FactorPoly);
+  public polynomial.FactorPoly minusnew(polynomial.FactorPoly);
+  public polynomial.FactorPoly timesnew(polynomial.XYTerm);
+  public polynomial.FactorPoly timesnew(polynomial.FactorPoly);
+  public void insert(int, polynomial.XYTerm);
+  public java.lang.String compact_str();
+  public java.lang.String toString();
+  public java.math.BigInteger substitute(int, int);
+  public int nterms();
+  public static void main(java.lang.String[]);
+}
+Compiled from "SimplePoly.java"
+public class polynomial.SimplePoly {
+  public polynomial.SimplePoly();
+  public polynomial.SimplePoly(polynomial.XYTerm);
+  public polynomial.SimplePoly(int, int, int);
+  public polynomial.SimplePoly(polynomial.SimplePoly);
+  public polynomial.SimplePoly equals(polynomial.SimplePoly);
+  public void insert(int, polynomial.XYTerm);
+  public int nterms();
+  public java.lang.Iterable<java.util.Map$Entry<polynomial.SimplePolyTerm, java.lang.Integer>> begin();
+  public boolean equals(java.lang.Object);
+  public boolean notEqual(polynomial.SimplePoly);
+  public void add(polynomial.SimplePoly);
+  public void times(polynomial.XYTerm);
+  public java.lang.String toString();
+  public double substitute(double, double);
+}
+Compiled from "SimplePolyTerm.java"
+public class polynomial.SimplePolyTerm implements java.lang.Comparable<polynomial.SimplePolyTerm> {
+  public int xpower;
+  public int ypower;
+  public polynomial.SimplePolyTerm(int, int);
+  public boolean lessthan(polynomial.SimplePolyTerm);
+  public int compareTo(polynomial.SimplePolyTerm);
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+  public double substitute(double, double);
+  public int compareTo(java.lang.Object);
+}
+Compiled from "X.java"
+public class polynomial.X extends polynomial.XYTerm {
+  public polynomial.X(int);
+  public polynomial.XYTerm times(polynomial.Y);
+  public polynomial.X times(polynomial.X);
+}
+Compiled from "XYTerm.java"
+public class polynomial.XYTerm {
+  public int xpower;
+  public int ypower;
+  public int ypowerend;
+  public polynomial.XYTerm(int, int);
+  public polynomial.XYTerm(int, int, int);
+  public boolean lessThan(polynomial.XYTerm);
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+  public double substitute(double, double);
+}
+Compiled from "Y.java"
+public class polynomial.Y extends polynomial.XYTerm {
+  public polynomial.Y(int);
+  public polynomial.Y(int, int);
+}
+Compiled from "YTerms.java"
+public class polynomial.YTerms {
+  public int ymin;
+  public int ymax;
+  java.math.BigInteger[] coefficients;
+  public polynomial.YTerms();
+  public polynomial.YTerms(int, int);
+  public polynomial.YTerms(polynomial.YTerms);
+  public polynomial.YTerms copy(polynomial.YTerms);
+  public void swap(polynomial.YTerms);
+  public void add(polynomial.XYTerm);
+  public void add(polynomial.YTerms);
+  public void minus(polynomial.XYTerm);
+  public void minus(polynomial.YTerms);
+  void times(java.math.BigInteger);
+  public void times(polynomial.XYTerm);
+  public void times(polynomial.YTerms);
+  public int size();
+  public boolean is_empty();
+  public java.math.BigInteger get(int);
+  public void set(int, java.math.BigInteger);
+  public java.math.BigInteger substitute(int);
+  public java.lang.String toString();
+  public void insert(int, polynomial.XYTerm);
+}
+Compiled from "EdgeSelection.java"
+public interface selection.EdgeSelection {
+  public abstract util.Triple<java.lang.Integer, java.lang.Integer, java.lang.Integer> select_edge(graph.Graph, boolean);
+}
+Compiled from "HeuristicCollection.java"
+public class selection.HeuristicCollection implements selection.EdgeSelection {
+  public int edge_selection_heuristic;
+  public static final int RANDOM;
+  public static final int CUT;
+  public static final int VERTEX_ORDER;
+  public static final int MAXIMISE_SDEGREE;
+  public static final int MAXIMISE_MDEGREE;
+  public static final int MINIMISE_DEGREE;
+  public static final int MINIMISE_SDEGREE;
+  public static final int MINIMISE_MDEGREE;
+  public static final int MAXIMISE_DEGREE;
+  public selection.HeuristicCollection(int);
+  public util.Triple<java.lang.Integer, java.lang.Integer, java.lang.Integer> select_edge(graph.Graph, boolean);
+}
+Compiled from "RandomEdge.java"
+public class selection.RandomEdge implements selection.EdgeSelection {
+  public selection.RandomEdge();
+  public util.Triple<java.lang.Integer, java.lang.Integer, java.lang.Integer> select_edge(graph.Graph, boolean);
+}
+Compiled from "Cache.java"
+public class util.Cache {
+  public util.Cache();
+  public void add(graph.Graph, polynomial.FactorPoly);
+  public polynomial.FactorPoly get(graph.Graph);
+  public java.lang.String statistics();
+}
+Compiled from "Debug.java"
+public class util.Debug {
+  public static boolean debug;
+  public util.Debug();
+  public static void debug(java.lang.Object);
+  static {};
+}
+Compiled from "Isomorphism.java"
+public class util.Isomorphism {
+  public util.Isomorphism();
+  public static int[] canonicalLabel(graph.Graph);
+  public static void main(java.lang.String[]);
+}
+Compiled from "Label.java"
+public class util.Label {
+  int[] to;
+  int[] from;
+  int oldDomain;
+  int newDomain;
+  public util.Label(int, int);
+  public int oldDomain();
+  public int newDomain();
+  public void set(int, int);
+  public int oldName(int);
+  public int newName(int);
+  public java.lang.String toString();
+}
+Compiled from "Pair.java"
+public class util.Pair<FIRST extends java.lang.Comparable<FIRST>, SECOND extends java.lang.Comparable<SECOND>> implements java.lang.Comparable<util.Pair<FIRST, SECOND>> {
+  public util.Pair(FIRST, SECOND);
+  public FIRST first();
+  public SECOND second();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+  public int compareTo(util.Pair<FIRST, SECOND>);
+  public int compareTo(java.lang.Object);
+  static java.lang.Comparable access$000(util.Pair);
+}
+Compiled from "Pair.java"
+public class util.Pair$MaximizeSecondComparator implements java.util.Comparator<util.Pair<java.lang.Integer, java.lang.Integer>> {
+  public util.Pair$MaximizeSecondComparator();
+  public int compare(util.Pair<java.lang.Integer, java.lang.Integer>, util.Pair<java.lang.Integer, java.lang.Integer>);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "Pair.java"
+public class util.Pair$MinimizeSecondComparator implements java.util.Comparator<util.Pair<java.lang.Integer, java.lang.Integer>> {
+  public util.Pair$MinimizeSecondComparator();
+  public int compare(util.Pair<java.lang.Integer, java.lang.Integer>, util.Pair<java.lang.Integer, java.lang.Integer>);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "Triple.java"
+public class util.Triple<A, B, C> {
+  public A first;
+  public B second;
+  public C third;
+  public util.Triple(A, B, C);
+  public util.Triple(util.Triple<A, B, C>);
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+}

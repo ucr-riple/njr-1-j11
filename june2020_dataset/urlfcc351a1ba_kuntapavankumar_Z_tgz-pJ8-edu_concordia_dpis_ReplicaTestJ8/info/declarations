@@ -1,0 +1,559 @@
+Compiled from "Command.java"
+public interface edu.concordia.dpis.Command {
+  public abstract java.lang.Object execute(java.util.List<java.lang.Object>);
+}
+Compiled from "CreateCriminalRecord.java"
+public class edu.concordia.dpis.CreateCriminalRecord extends edu.concordia.dpis.StationCommand {
+  public edu.concordia.dpis.CreateCriminalRecord(edu.concordia.dpis.StationServer, edu.concordia.dpis.StationServer, edu.concordia.dpis.StationServer);
+  public java.lang.Object execute(java.util.List<java.lang.Object>);
+}
+Compiled from "CreateMissingRecord.java"
+public class edu.concordia.dpis.CreateMissingRecord extends edu.concordia.dpis.StationCommand {
+  public edu.concordia.dpis.CreateMissingRecord(edu.concordia.dpis.StationServer, edu.concordia.dpis.StationServer, edu.concordia.dpis.StationServer);
+  public java.lang.Object execute(java.util.List<java.lang.Object>);
+}
+Compiled from "DefaultRequestHandler.java"
+public class edu.concordia.dpis.DefaultRequestHandler implements edu.concordia.dpis.RequestHandler {
+  public edu.concordia.dpis.DefaultRequestHandler();
+  public java.lang.String getOperationName(edu.concordia.dpis.commons.Message);
+  public java.util.List<java.lang.Object> getArguments(edu.concordia.dpis.commons.Message);
+  public java.lang.Object doOperation(edu.concordia.dpis.commons.Message);
+  public void addCommand(java.lang.String, edu.concordia.dpis.Command);
+}
+Compiled from "EditRecord.java"
+public class edu.concordia.dpis.EditRecord extends edu.concordia.dpis.StationCommand {
+  public edu.concordia.dpis.EditRecord(edu.concordia.dpis.StationServer, edu.concordia.dpis.StationServer, edu.concordia.dpis.StationServer);
+  public java.lang.Object execute(java.util.List<java.lang.Object>);
+}
+Compiled from "FrontEndAware.java"
+public interface edu.concordia.dpis.FrontEndAware {
+  public abstract void setFrontEndAddress(edu.concordia.dpis.commons.Address);
+}
+Compiled from "GetRecordCounts.java"
+public class edu.concordia.dpis.GetRecordCounts extends edu.concordia.dpis.StationCommand {
+  public edu.concordia.dpis.GetRecordCounts(edu.concordia.dpis.StationServer, edu.concordia.dpis.StationServer, edu.concordia.dpis.StationServer);
+  public java.lang.Object execute(java.util.List<java.lang.Object>);
+}
+Compiled from "HeartbeatScheduler.java"
+public abstract class edu.concordia.dpis.HeartbeatScheduler {
+  public edu.concordia.dpis.HeartbeatScheduler();
+  public void start();
+  protected abstract java.util.List<edu.concordia.dpis.Node> getNodes();
+  protected abstract void onFailedNode(edu.concordia.dpis.Node);
+  protected abstract boolean isLeader(java.lang.String);
+}
+Compiled from "HeartbeatScheduler.java"
+class edu.concordia.dpis.HeartbeatScheduler$HeartBeatTask implements java.lang.Runnable {
+  final edu.concordia.dpis.HeartbeatScheduler this$0;
+  edu.concordia.dpis.HeartbeatScheduler$HeartBeatTask(edu.concordia.dpis.HeartbeatScheduler);
+  public void run();
+}
+Compiled from "LeaderTest.java"
+public class edu.concordia.dpis.LeaderTest {
+  public edu.concordia.dpis.LeaderTest();
+  public static void main(java.lang.String[]) throws java.net.UnknownHostException;
+  public static void start() throws java.net.UnknownHostException;
+}
+Compiled from "LeaderTest.java"
+final class edu.concordia.dpis.LeaderTest$1 implements edu.concordia.dpis.Command {
+  edu.concordia.dpis.LeaderTest$1();
+  public java.lang.Object execute(java.util.List<java.lang.Object>);
+}
+Compiled from "MessageType.java"
+public final class edu.concordia.dpis.MessageType extends java.lang.Enum<edu.concordia.dpis.MessageType> {
+  public static final edu.concordia.dpis.MessageType ELECTION;
+  public static final edu.concordia.dpis.MessageType OK;
+  public static final edu.concordia.dpis.MessageType COORDINATOR;
+  public static edu.concordia.dpis.MessageType[] values();
+  public static edu.concordia.dpis.MessageType valueOf(java.lang.String);
+  static {};
+}
+Compiled from "MulticastListener.java"
+public class edu.concordia.dpis.MulticastListener {
+  public edu.concordia.dpis.MulticastListener(int, java.lang.String);
+  public void joinGroup();
+  public edu.concordia.dpis.commons.Message onMessage(edu.concordia.dpis.commons.ReliableMessage);
+  public void leaveGroup();
+  public boolean isClosed();
+  static java.net.MulticastSocket access$000(edu.concordia.dpis.MulticastListener);
+}
+Compiled from "MulticastListener.java"
+class edu.concordia.dpis.MulticastListener$1 implements java.lang.Runnable {
+  final edu.concordia.dpis.MulticastListener this$0;
+  edu.concordia.dpis.MulticastListener$1(edu.concordia.dpis.MulticastListener);
+  public void run();
+}
+Compiled from "MulticastReceiver.java"
+public class edu.concordia.dpis.MulticastReceiver extends java.lang.Thread {
+  public edu.concordia.dpis.MulticastReceiver(int);
+  public void run();
+}
+Compiled from "MulticastReceiverReplica1.java"
+public class edu.concordia.dpis.MulticastReceiverReplica1 {
+  public edu.concordia.dpis.MulticastReceiverReplica1();
+  public static void main(java.lang.String[]);
+}
+Compiled from "MulticastReceiverReplica2.java"
+public class edu.concordia.dpis.MulticastReceiverReplica2 {
+  public edu.concordia.dpis.MulticastReceiverReplica2();
+  public static void main(java.lang.String[]);
+}
+Compiled from "MulticastServer.java"
+public class edu.concordia.dpis.MulticastServer extends java.lang.Thread {
+  public edu.concordia.dpis.MulticastServer(int);
+  public void run();
+}
+Compiled from "MulticastServerMain.java"
+public class edu.concordia.dpis.MulticastServerMain {
+  public edu.concordia.dpis.MulticastServerMain();
+  public static void main(java.lang.String[]);
+}
+Compiled from "Node.java"
+public interface edu.concordia.dpis.Node {
+  public abstract edu.concordia.dpis.commons.Address getAddress();
+  public abstract java.lang.String getLeaderName() throws edu.concordia.dpis.commons.DeadNodeException;
+  public abstract void newLeader(java.lang.String) throws edu.concordia.dpis.commons.DeadNodeException;
+  public abstract edu.concordia.dpis.MessageType election(java.lang.String) throws edu.concordia.dpis.commons.DeadNodeException;
+  public abstract boolean isAlive();
+}
+Compiled from "ProxyNode.java"
+public class edu.concordia.dpis.ProxyNode implements edu.concordia.dpis.Node {
+  public edu.concordia.dpis.ProxyNode(edu.concordia.dpis.commons.Address);
+  public java.lang.String getLeaderName() throws edu.concordia.dpis.commons.DeadNodeException;
+  public void newLeader(java.lang.String) throws edu.concordia.dpis.commons.DeadNodeException;
+  public edu.concordia.dpis.MessageType election(java.lang.String) throws edu.concordia.dpis.commons.DeadNodeException;
+  public edu.concordia.dpis.commons.Address getAddress();
+  public boolean isAlive();
+}
+Compiled from "Replica.java"
+public class edu.concordia.dpis.Replica extends edu.concordia.dpis.messenger.UDPServer implements edu.concordia.dpis.Node,edu.concordia.dpis.FrontEndAware {
+  public edu.concordia.dpis.Replica(int, int, edu.concordia.dpis.commons.Address) throws java.net.UnknownHostException;
+  public edu.concordia.dpis.Replica(int, boolean, int, edu.concordia.dpis.commons.Address) throws java.net.UnknownHostException;
+  public void startFailureDetection();
+  protected java.lang.String getReplyMessage(edu.concordia.dpis.commons.Message);
+  public java.lang.String getLeaderName();
+  public void newLeader(java.lang.String);
+  public edu.concordia.dpis.MessageType election(java.lang.String);
+  public edu.concordia.dpis.commons.Address getAddress();
+  public boolean isAlive();
+  public void setRequestHandler(edu.concordia.dpis.RequestHandler);
+  public void setFrontEndAddress(edu.concordia.dpis.commons.Address);
+  public edu.concordia.dpis.Replica addNode(edu.concordia.dpis.Node);
+  static java.lang.String access$000(edu.concordia.dpis.Replica);
+  static edu.concordia.dpis.commons.Address access$100(edu.concordia.dpis.Replica);
+  static java.util.List access$200(edu.concordia.dpis.Replica);
+  static boolean access$302(edu.concordia.dpis.Replica, boolean);
+}
+Compiled from "Replica.java"
+class edu.concordia.dpis.Replica$1 extends edu.concordia.dpis.MulticastListener {
+  final edu.concordia.dpis.Replica this$0;
+  edu.concordia.dpis.Replica$1(edu.concordia.dpis.Replica, int, java.lang.String);
+  public edu.concordia.dpis.commons.Message onMessage(edu.concordia.dpis.commons.ReliableMessage);
+}
+Compiled from "Replica.java"
+class edu.concordia.dpis.Replica$2 extends edu.concordia.dpis.HeartbeatScheduler {
+  final edu.concordia.dpis.Replica this$0;
+  edu.concordia.dpis.Replica$2(edu.concordia.dpis.Replica);
+  protected boolean isLeader(java.lang.String);
+  protected void onFailedNode(edu.concordia.dpis.Node);
+  public java.util.List<edu.concordia.dpis.Node> getNodes();
+}
+Compiled from "Replica.java"
+class edu.concordia.dpis.Replica$3 implements java.lang.Runnable {
+  final edu.concordia.dpis.Replica this$0;
+  edu.concordia.dpis.Replica$3(edu.concordia.dpis.Replica);
+  public void run();
+}
+Compiled from "Replica2Test.java"
+public class edu.concordia.dpis.Replica2Test {
+  public edu.concordia.dpis.Replica2Test();
+  public static void main(java.lang.String[]) throws java.net.UnknownHostException;
+  public static void start() throws java.net.UnknownHostException;
+}
+Compiled from "Replica2Test.java"
+final class edu.concordia.dpis.Replica2Test$1 implements edu.concordia.dpis.Command {
+  edu.concordia.dpis.Replica2Test$1();
+  public java.lang.Object execute(java.util.List<java.lang.Object>);
+}
+Compiled from "Replica3Test.java"
+public class edu.concordia.dpis.Replica3Test {
+  public edu.concordia.dpis.Replica3Test();
+  public static void main(java.lang.String[]) throws java.net.UnknownHostException;
+  public static void start() throws java.net.UnknownHostException;
+}
+Compiled from "Replica3Test.java"
+final class edu.concordia.dpis.Replica3Test$1 implements edu.concordia.dpis.Command {
+  edu.concordia.dpis.Replica3Test$1();
+  public java.lang.Object execute(java.util.List<java.lang.Object>);
+}
+Compiled from "Replica4Test.java"
+public class edu.concordia.dpis.Replica4Test {
+  public edu.concordia.dpis.Replica4Test();
+  public static void main(java.lang.String[]) throws java.net.UnknownHostException;
+  public static void start() throws java.net.UnknownHostException;
+}
+Compiled from "Replica4Test.java"
+final class edu.concordia.dpis.Replica4Test$1 implements edu.concordia.dpis.Command {
+  edu.concordia.dpis.Replica4Test$1();
+  public java.lang.Object execute(java.util.List<java.lang.Object>);
+}
+Compiled from "ReplicaTest.java"
+public class edu.concordia.dpis.ReplicaTest {
+  public edu.concordia.dpis.ReplicaTest();
+  public static void main(java.lang.String[]) throws java.net.UnknownHostException;
+}
+Compiled from "ReplicaTest.java"
+final class edu.concordia.dpis.ReplicaTest$1 implements java.lang.Runnable {
+  edu.concordia.dpis.ReplicaTest$1();
+  public void run();
+}
+Compiled from "ReplicaTest.java"
+final class edu.concordia.dpis.ReplicaTest$2 implements java.lang.Runnable {
+  edu.concordia.dpis.ReplicaTest$2();
+  public void run();
+}
+Compiled from "ReplicaTest.java"
+final class edu.concordia.dpis.ReplicaTest$3 implements java.lang.Runnable {
+  edu.concordia.dpis.ReplicaTest$3();
+  public void run();
+}
+Compiled from "ReplicaTest.java"
+final class edu.concordia.dpis.ReplicaTest$4 implements java.lang.Runnable {
+  edu.concordia.dpis.ReplicaTest$4();
+  public void run();
+}
+Compiled from "RequestHandler.java"
+public interface edu.concordia.dpis.RequestHandler extends edu.concordia.dpis.fifo.RequestResolver {
+  public abstract java.lang.Object doOperation(edu.concordia.dpis.commons.Message) throws java.lang.UnsupportedOperationException;
+}
+Compiled from "StationCommand.java"
+public abstract class edu.concordia.dpis.StationCommand implements edu.concordia.dpis.Command {
+  public edu.concordia.dpis.StationCommand(edu.concordia.dpis.StationServer, edu.concordia.dpis.StationServer, edu.concordia.dpis.StationServer);
+  protected edu.concordia.dpis.StationServer getStation(java.lang.String);
+}
+Compiled from "StationServer.java"
+public interface edu.concordia.dpis.StationServer {
+  public abstract boolean createCRecord(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String);
+  public abstract boolean createMRecord(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String);
+  public abstract java.lang.String getRecordCounts(java.lang.String);
+  public abstract boolean editRecord(java.lang.String, java.lang.String, java.lang.String, java.lang.String);
+  public abstract boolean transferRecord(java.lang.String, java.lang.String, java.lang.String);
+}
+Compiled from "TransferRecord.java"
+public class edu.concordia.dpis.TransferRecord extends edu.concordia.dpis.StationCommand {
+  public edu.concordia.dpis.TransferRecord(edu.concordia.dpis.StationServer, edu.concordia.dpis.StationServer, edu.concordia.dpis.StationServer);
+  public java.lang.Object execute(java.util.List<java.lang.Object>);
+}
+Compiled from "Address.java"
+public class edu.concordia.dpis.commons.Address implements java.io.Serializable {
+  public edu.concordia.dpis.commons.Address(java.lang.String, int);
+  public java.lang.String getHost();
+  public int getPort();
+  public void setId(java.lang.String);
+  public java.lang.String getId();
+}
+Compiled from "DeadNodeException.java"
+public class edu.concordia.dpis.commons.DeadNodeException extends java.lang.Exception {
+  public edu.concordia.dpis.commons.DeadNodeException();
+}
+Compiled from "IReliable.java"
+public interface edu.concordia.dpis.commons.IReliable {
+  public abstract void setSequenceNumber(int);
+}
+Compiled from "Imessenger.java"
+public interface edu.concordia.dpis.commons.Imessenger {
+  public abstract edu.concordia.dpis.commons.Message send(edu.concordia.dpis.commons.Message, int) throws edu.concordia.dpis.commons.TimeoutException;
+}
+Compiled from "Message.java"
+public interface edu.concordia.dpis.commons.Message extends edu.concordia.dpis.commons.IReliable,java.io.Serializable {
+  public abstract java.lang.String getActualMessage();
+  public abstract java.util.List<java.lang.Object> getArguments();
+  public abstract edu.concordia.dpis.commons.Address getToAddress();
+  public abstract int getSequenceNumber();
+  public abstract boolean isMulticast();
+  public abstract boolean isReply();
+  public abstract boolean isReplyToThisMessage();
+}
+Compiled from "MessageTransformer.java"
+public class edu.concordia.dpis.commons.MessageTransformer {
+  public edu.concordia.dpis.commons.MessageTransformer();
+  public static byte[] serializeMessage(edu.concordia.dpis.commons.Message) throws java.io.IOException;
+  public static edu.concordia.dpis.commons.Message deserializeMessage(byte[]) throws java.io.IOException;
+}
+Compiled from "ReliableMessage.java"
+public class edu.concordia.dpis.commons.ReliableMessage implements edu.concordia.dpis.commons.Message {
+  public edu.concordia.dpis.commons.ReliableMessage(java.lang.String, java.lang.String, int);
+  public java.lang.String getActualMessage();
+  public edu.concordia.dpis.commons.Address getToAddress();
+  public int getSequenceNumber();
+  public void setSequenceNumber(int);
+  public void addArgument(java.lang.Object);
+  public java.util.List<java.lang.Object> getArguments();
+  public boolean isMulticast();
+  public void setMulticast(boolean);
+  public boolean isReply();
+  public void setReply(boolean);
+  public void setReplyToThisMessage(boolean);
+  public boolean isReplyToThisMessage();
+}
+Compiled from "TimeoutException.java"
+public class edu.concordia.dpis.commons.TimeoutException extends java.lang.Exception {
+  public edu.concordia.dpis.commons.TimeoutException();
+}
+Compiled from "FIFO.java"
+public class edu.concordia.dpis.fifo.FIFO implements edu.concordia.dpis.commons.Imessenger {
+  public static final edu.concordia.dpis.fifo.FIFO INSTANCE;
+  public edu.concordia.dpis.commons.Message send(edu.concordia.dpis.commons.Message, int) throws edu.concordia.dpis.commons.TimeoutException;
+  public void multicast(edu.concordia.dpis.commons.Message) throws java.io.IOException;
+  static {};
+}
+Compiled from "MulticastSender.java"
+public class edu.concordia.dpis.fifo.MulticastSender {
+  public edu.concordia.dpis.fifo.MulticastSender(int, java.lang.String);
+  public void send(byte[]) throws java.io.IOException;
+  public void close();
+}
+Compiled from "RequestResolver.java"
+public interface edu.concordia.dpis.fifo.RequestResolver {
+  public abstract java.lang.String getOperationName(edu.concordia.dpis.commons.Message);
+  public abstract java.util.List<java.lang.Object> getArguments(edu.concordia.dpis.commons.Message);
+}
+Compiled from "UDPClient.java"
+public class edu.concordia.dpis.messenger.UDPClient implements edu.concordia.dpis.commons.Imessenger {
+  public static final edu.concordia.dpis.messenger.UDPClient INSTANCE;
+  public edu.concordia.dpis.messenger.UDPClient();
+  public edu.concordia.dpis.commons.Message send(edu.concordia.dpis.commons.Message, int) throws edu.concordia.dpis.commons.TimeoutException;
+  static {};
+}
+Compiled from "UDPServer.java"
+public abstract class edu.concordia.dpis.messenger.UDPServer {
+  public edu.concordia.dpis.messenger.UDPServer(int);
+  public void start();
+  public void close();
+  protected abstract java.lang.String getReplyMessage(edu.concordia.dpis.commons.Message);
+  static java.net.DatagramSocket access$002(edu.concordia.dpis.messenger.UDPServer, java.net.DatagramSocket);
+  static int access$100(edu.concordia.dpis.messenger.UDPServer);
+  static java.net.DatagramSocket access$000(edu.concordia.dpis.messenger.UDPServer);
+}
+Compiled from "UDPServer.java"
+class edu.concordia.dpis.messenger.UDPServer$1 implements java.lang.Runnable {
+  final edu.concordia.dpis.messenger.UDPServer this$0;
+  edu.concordia.dpis.messenger.UDPServer$1(edu.concordia.dpis.messenger.UDPServer);
+  public void run();
+}
+Compiled from "UDPServer.java"
+class edu.concordia.dpis.messenger.UDPServer$1$1 implements java.lang.Runnable {
+  final java.net.DatagramPacket val$request;
+  final edu.concordia.dpis.messenger.UDPServer$1 this$1;
+  edu.concordia.dpis.messenger.UDPServer$1$1(edu.concordia.dpis.messenger.UDPServer$1, java.net.DatagramPacket);
+  public void run();
+}
+Compiled from "FaultyStationServerImpl.java"
+public class edu.concordia.dpis.stationserver.FaultyStationServerImpl implements edu.concordia.dpis.StationServer {
+  public edu.concordia.dpis.stationserver.FaultyStationServerImpl startUDPServer(java.lang.String);
+  public edu.concordia.dpis.stationserver.FaultyStationServerImpl startUDPServer();
+  public edu.concordia.dpis.stationserver.FaultyStationServerImpl startTCPPServer(java.lang.String);
+  public void addOtherUDPStationHostNPort(edu.concordia.dpis.stationserver.domain.StationType, java.lang.String, java.lang.String);
+  public void addOtherTCPStationHostNPort(edu.concordia.dpis.stationserver.domain.StationType, java.lang.String, java.lang.String);
+  public edu.concordia.dpis.stationserver.FaultyStationServerImpl startTCPPServer();
+  public edu.concordia.dpis.stationserver.FaultyStationServerImpl(edu.concordia.dpis.stationserver.domain.StationType);
+  public boolean createRecord(java.lang.String, edu.concordia.dpis.stationserver.domain.Record);
+  public boolean createCRecord(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String);
+  public boolean createMRecord(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String);
+  public boolean editRecord(java.lang.String, java.lang.String, java.lang.String, java.lang.String);
+  public java.lang.String getRecordCounts(java.lang.String);
+  public boolean transferRecord(java.lang.String, java.lang.String, java.lang.String);
+  static java.util.Properties access$000(edu.concordia.dpis.stationserver.FaultyStationServerImpl);
+  static java.lang.String[] access$100(edu.concordia.dpis.stationserver.FaultyStationServerImpl, java.lang.String);
+  static org.apache.log4j.Logger access$200(edu.concordia.dpis.stationserver.FaultyStationServerImpl);
+  static edu.concordia.dpis.stationserver.domain.StationType access$300(edu.concordia.dpis.stationserver.FaultyStationServerImpl);
+  static long access$400(edu.concordia.dpis.stationserver.FaultyStationServerImpl);
+}
+Compiled from "FaultyStationServerImpl.java"
+class edu.concordia.dpis.stationserver.FaultyStationServerImpl$TCPClient {
+  final edu.concordia.dpis.stationserver.FaultyStationServerImpl this$0;
+  edu.concordia.dpis.stationserver.FaultyStationServerImpl$TCPClient(edu.concordia.dpis.stationserver.FaultyStationServerImpl);
+}
+Compiled from "FaultyStationServerImpl.java"
+class edu.concordia.dpis.stationserver.FaultyStationServerImpl$TCPServer {
+  final edu.concordia.dpis.stationserver.FaultyStationServerImpl this$0;
+  public edu.concordia.dpis.stationserver.FaultyStationServerImpl$TCPServer(edu.concordia.dpis.stationserver.FaultyStationServerImpl, int);
+  public void start();
+  static int access$500(edu.concordia.dpis.stationserver.FaultyStationServerImpl$TCPServer);
+}
+Compiled from "FaultyStationServerImpl.java"
+class edu.concordia.dpis.stationserver.FaultyStationServerImpl$TCPServer$1 implements java.lang.Runnable {
+  final edu.concordia.dpis.stationserver.FaultyStationServerImpl$TCPServer this$1;
+  edu.concordia.dpis.stationserver.FaultyStationServerImpl$TCPServer$1(edu.concordia.dpis.stationserver.FaultyStationServerImpl$TCPServer);
+  public void run();
+}
+Compiled from "FaultyStationServerImpl.java"
+class edu.concordia.dpis.stationserver.FaultyStationServerImpl$TCPServer$Connection extends java.lang.Thread {
+  java.io.DataInputStream in;
+  java.io.DataOutputStream out;
+  java.net.Socket clientSocket;
+  final edu.concordia.dpis.stationserver.FaultyStationServerImpl$TCPServer this$1;
+  public edu.concordia.dpis.stationserver.FaultyStationServerImpl$TCPServer$Connection(edu.concordia.dpis.stationserver.FaultyStationServerImpl$TCPServer, java.net.Socket);
+  public void run();
+}
+Compiled from "FaultyStationServerImpl.java"
+class edu.concordia.dpis.stationserver.FaultyStationServerImpl$UDPClient {
+  final edu.concordia.dpis.stationserver.FaultyStationServerImpl this$0;
+  edu.concordia.dpis.stationserver.FaultyStationServerImpl$UDPClient(edu.concordia.dpis.stationserver.FaultyStationServerImpl);
+}
+Compiled from "FaultyStationServerImpl.java"
+class edu.concordia.dpis.stationserver.FaultyStationServerImpl$UDPServer {
+  java.net.DatagramSocket aSocket;
+  final int port;
+  final edu.concordia.dpis.stationserver.FaultyStationServerImpl this$0;
+  public edu.concordia.dpis.stationserver.FaultyStationServerImpl$UDPServer(edu.concordia.dpis.stationserver.FaultyStationServerImpl, int);
+  public void start();
+  public void close();
+}
+Compiled from "FaultyStationServerImpl.java"
+class edu.concordia.dpis.stationserver.FaultyStationServerImpl$UDPServer$1 implements java.lang.Runnable {
+  final edu.concordia.dpis.stationserver.FaultyStationServerImpl$UDPServer this$1;
+  edu.concordia.dpis.stationserver.FaultyStationServerImpl$UDPServer$1(edu.concordia.dpis.stationserver.FaultyStationServerImpl$UDPServer);
+  public void run();
+}
+Compiled from "StationServerImpl.java"
+public class edu.concordia.dpis.stationserver.StationServerImpl implements edu.concordia.dpis.StationServer {
+  public edu.concordia.dpis.stationserver.StationServerImpl startUDPServer(java.lang.String);
+  public edu.concordia.dpis.stationserver.StationServerImpl startUDPServer();
+  public edu.concordia.dpis.stationserver.StationServerImpl startTCPPServer(java.lang.String);
+  public void addOtherUDPStationHostNPort(edu.concordia.dpis.stationserver.domain.StationType, java.lang.String, java.lang.String);
+  public void addOtherTCPStationHostNPort(edu.concordia.dpis.stationserver.domain.StationType, java.lang.String, java.lang.String);
+  public edu.concordia.dpis.stationserver.StationServerImpl startTCPPServer();
+  public edu.concordia.dpis.stationserver.StationServerImpl(edu.concordia.dpis.stationserver.domain.StationType);
+  public boolean createRecord(java.lang.String, edu.concordia.dpis.stationserver.domain.Record);
+  public boolean createCRecord(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String);
+  public boolean createMRecord(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String);
+  public boolean editRecord(java.lang.String, java.lang.String, java.lang.String, java.lang.String);
+  public java.lang.String getRecordCounts(java.lang.String);
+  public boolean transferRecord(java.lang.String, java.lang.String, java.lang.String);
+  static java.util.Properties access$200(edu.concordia.dpis.stationserver.StationServerImpl);
+  static java.lang.String[] access$300(edu.concordia.dpis.stationserver.StationServerImpl, java.lang.String);
+  static org.apache.log4j.Logger access$400(edu.concordia.dpis.stationserver.StationServerImpl);
+  static edu.concordia.dpis.stationserver.domain.StationType access$500(edu.concordia.dpis.stationserver.StationServerImpl);
+  static long access$600(edu.concordia.dpis.stationserver.StationServerImpl);
+}
+Compiled from "StationServerImpl.java"
+class edu.concordia.dpis.stationserver.StationServerImpl$TCPClient {
+  final edu.concordia.dpis.stationserver.StationServerImpl this$0;
+  edu.concordia.dpis.stationserver.StationServerImpl$TCPClient(edu.concordia.dpis.stationserver.StationServerImpl);
+  static boolean access$100(edu.concordia.dpis.stationserver.StationServerImpl$TCPClient, java.lang.String, edu.concordia.dpis.stationserver.domain.StationType);
+}
+Compiled from "StationServerImpl.java"
+class edu.concordia.dpis.stationserver.StationServerImpl$TCPServer {
+  final edu.concordia.dpis.stationserver.StationServerImpl this$0;
+  public edu.concordia.dpis.stationserver.StationServerImpl$TCPServer(edu.concordia.dpis.stationserver.StationServerImpl, int);
+  public void start();
+  static int access$700(edu.concordia.dpis.stationserver.StationServerImpl$TCPServer);
+}
+Compiled from "StationServerImpl.java"
+class edu.concordia.dpis.stationserver.StationServerImpl$TCPServer$1 implements java.lang.Runnable {
+  final edu.concordia.dpis.stationserver.StationServerImpl$TCPServer this$1;
+  edu.concordia.dpis.stationserver.StationServerImpl$TCPServer$1(edu.concordia.dpis.stationserver.StationServerImpl$TCPServer);
+  public void run();
+}
+Compiled from "StationServerImpl.java"
+class edu.concordia.dpis.stationserver.StationServerImpl$TCPServer$Connection extends java.lang.Thread {
+  java.io.DataInputStream in;
+  java.io.DataOutputStream out;
+  java.net.Socket clientSocket;
+  final edu.concordia.dpis.stationserver.StationServerImpl$TCPServer this$1;
+  public edu.concordia.dpis.stationserver.StationServerImpl$TCPServer$Connection(edu.concordia.dpis.stationserver.StationServerImpl$TCPServer, java.net.Socket);
+  public void run();
+}
+Compiled from "StationServerImpl.java"
+class edu.concordia.dpis.stationserver.StationServerImpl$UDPClient {
+  final edu.concordia.dpis.stationserver.StationServerImpl this$0;
+  edu.concordia.dpis.stationserver.StationServerImpl$UDPClient(edu.concordia.dpis.stationserver.StationServerImpl);
+  static java.lang.String access$000(edu.concordia.dpis.stationserver.StationServerImpl$UDPClient, java.lang.String, int) throws java.io.FileNotFoundException, java.io.IOException;
+}
+Compiled from "StationServerImpl.java"
+class edu.concordia.dpis.stationserver.StationServerImpl$UDPServer {
+  java.net.DatagramSocket aSocket;
+  final int port;
+  final edu.concordia.dpis.stationserver.StationServerImpl this$0;
+  public edu.concordia.dpis.stationserver.StationServerImpl$UDPServer(edu.concordia.dpis.stationserver.StationServerImpl, int);
+  public void start();
+  public void close();
+}
+Compiled from "StationServerImpl.java"
+class edu.concordia.dpis.stationserver.StationServerImpl$UDPServer$1 implements java.lang.Runnable {
+  final edu.concordia.dpis.stationserver.StationServerImpl$UDPServer this$1;
+  edu.concordia.dpis.stationserver.StationServerImpl$UDPServer$1(edu.concordia.dpis.stationserver.StationServerImpl$UDPServer);
+  public void run();
+}
+Compiled from "StationTypeResolver.java"
+public class edu.concordia.dpis.stationserver.StationTypeResolver {
+  public edu.concordia.dpis.stationserver.StationTypeResolver();
+  public static edu.concordia.dpis.stationserver.domain.StationType resolveStation(java.lang.String);
+}
+Compiled from "CriminalRecord.java"
+public class edu.concordia.dpis.stationserver.domain.CriminalRecord extends edu.concordia.dpis.stationserver.domain.Record {
+  public edu.concordia.dpis.stationserver.domain.CriminalRecord(java.lang.String, java.lang.String, java.lang.String, java.lang.String, edu.concordia.dpis.stationserver.domain.CriminalStatus);
+  public java.lang.String getDescription();
+  public java.lang.String getStatus();
+  public void setStatus(java.lang.String);
+}
+Compiled from "CriminalStatus.java"
+public final class edu.concordia.dpis.stationserver.domain.CriminalStatus extends java.lang.Enum<edu.concordia.dpis.stationserver.domain.CriminalStatus> {
+  public static final edu.concordia.dpis.stationserver.domain.CriminalStatus CAPTURED;
+  public static final edu.concordia.dpis.stationserver.domain.CriminalStatus ON_THE_RUN;
+  public static edu.concordia.dpis.stationserver.domain.CriminalStatus[] values();
+  public static edu.concordia.dpis.stationserver.domain.CriminalStatus valueOf(java.lang.String);
+  static {};
+}
+Compiled from "MissingRecord.java"
+public class edu.concordia.dpis.stationserver.domain.MissingRecord extends edu.concordia.dpis.stationserver.domain.Record {
+  public edu.concordia.dpis.stationserver.domain.MissingRecord(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Date, java.lang.String, edu.concordia.dpis.stationserver.domain.MissingStatus);
+  public java.lang.String getLastKnownAddress();
+  public java.util.Date getLastSeenDate();
+  public java.lang.String getLastSeenPlace();
+  public void setStatus(java.lang.String);
+  public java.lang.String getStatus();
+}
+Compiled from "MissingStatus.java"
+public final class edu.concordia.dpis.stationserver.domain.MissingStatus extends java.lang.Enum<edu.concordia.dpis.stationserver.domain.MissingStatus> {
+  public static final edu.concordia.dpis.stationserver.domain.MissingStatus FOUND;
+  public static final edu.concordia.dpis.stationserver.domain.MissingStatus MISSING;
+  public static edu.concordia.dpis.stationserver.domain.MissingStatus[] values();
+  public static edu.concordia.dpis.stationserver.domain.MissingStatus valueOf(java.lang.String);
+  static {};
+}
+Compiled from "Record.java"
+public abstract class edu.concordia.dpis.stationserver.domain.Record {
+  public edu.concordia.dpis.stationserver.domain.Record(java.lang.String, java.lang.String, java.lang.String);
+  public java.lang.String getRecordID();
+  public edu.concordia.dpis.stationserver.domain.RecordType getRecordType();
+  protected void setRecordType(edu.concordia.dpis.stationserver.domain.RecordType);
+  public java.lang.String getFirstName();
+  public java.lang.String getLastName();
+  public abstract void setStatus(java.lang.String);
+  public abstract java.lang.String getStatus();
+  public java.lang.String toString();
+}
+Compiled from "RecordType.java"
+public final class edu.concordia.dpis.stationserver.domain.RecordType extends java.lang.Enum<edu.concordia.dpis.stationserver.domain.RecordType> {
+  public static final edu.concordia.dpis.stationserver.domain.RecordType CRIMINAL;
+  public static final edu.concordia.dpis.stationserver.domain.RecordType MISSING;
+  public static edu.concordia.dpis.stationserver.domain.RecordType[] values();
+  public static edu.concordia.dpis.stationserver.domain.RecordType valueOf(java.lang.String);
+  public java.lang.String getCode();
+  public java.lang.String getName();
+  static {};
+}
+Compiled from "StationType.java"
+public final class edu.concordia.dpis.stationserver.domain.StationType extends java.lang.Enum<edu.concordia.dpis.stationserver.domain.StationType> {
+  public static final edu.concordia.dpis.stationserver.domain.StationType SPVM;
+  public static final edu.concordia.dpis.stationserver.domain.StationType SPL;
+  public static final edu.concordia.dpis.stationserver.domain.StationType SPB;
+  public static edu.concordia.dpis.stationserver.domain.StationType[] values();
+  public static edu.concordia.dpis.stationserver.domain.StationType valueOf(java.lang.String);
+  public java.lang.String getStationName();
+  public java.lang.String getStationCode();
+  public java.lang.String toString();
+  static {};
+}

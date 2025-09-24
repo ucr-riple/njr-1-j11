@@ -1,0 +1,1709 @@
+Compiled from "DarwinSheet.java"
+public class darwInvest.DarwinSheet implements darwin.problemObject.DarwinSheet {
+  public darwInvest.DarwinSheet();
+  public darwin.problemObject.FitnessAnalyzer getFitnessAnalyzer();
+  public darwin.problemObject.NodeFactory getNodeFactory();
+  public darwin.problemObject.Output getOutput();
+}
+Compiled from "FitnessAnalyzer.java"
+public class darwInvest.FitnessAnalyzer extends darwin.problemObject.FitnessAnalyzer {
+  public darwInvest.FitnessAnalyzer();
+  public double[] assessFitness(darwin.population.Individual, java.lang.Object);
+  public darwin.problemObject.FitnessAnalyzer clone();
+  public int getNumberMetrics();
+  public double standardize(int, double);
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "NodeFactory.java"
+public class darwInvest.NodeFactory extends darwin.problemObject.DefaultNodeFactory {
+  public darwInvest.NodeFactory();
+  public java.util.List<darwin.problemObject.NodeType> getAvailableNodes();
+  public java.lang.Class<?>[] getReturnTypes();
+}
+Compiled from "RegexTestHarness.java"
+public class darwInvest.RegexTestHarness {
+  public darwInvest.RegexTestHarness();
+  public static void main(java.lang.String[]);
+}
+Compiled from "Test.java"
+public class darwInvest.Test {
+  public darwInvest.Test();
+  public static void main(java.lang.String[]);
+}
+Compiled from "DataLoader.java"
+public class darwInvest.data.DataLoader {
+  public darwInvest.data.DataLoader();
+  public static darwInvest.data.index.TickerIndex[] getDataSources(darwInvest.data.utility.Serializer);
+}
+Compiled from "FileManager.java"
+public class darwInvest.data.FileManager {
+  public darwInvest.data.FileManager();
+  public static java.lang.String readWhole(java.lang.String);
+  public static java.util.List<java.lang.String> readLines(java.lang.String);
+}
+Compiled from "NewsEvent.java"
+public class darwInvest.data.NewsEvent implements java.io.Serializable {
+  public darwInvest.data.NewsEvent(java.lang.String, java.lang.String, long);
+  public java.lang.String getTitle();
+  public void setTitle(java.lang.String);
+  public java.lang.String getContent();
+  public void setContent(java.lang.String);
+  public long getDate();
+  public void setDate(long);
+}
+Compiled from "Ticker.java"
+public class darwInvest.data.Ticker implements java.io.Serializable {
+  public darwInvest.data.Ticker(java.lang.String);
+  public void addData(long, double[]);
+  public void addData(java.util.Date, double[]);
+  public void addData(java.util.Map<java.lang.Long, double[]>);
+  public void addNews(darwInvest.data.NewsEvent);
+  public java.lang.String getSymbol();
+  public int getNumberDataPoints();
+  public int getNumberNewsEvents();
+  public double getData(long, int);
+  public double getPrice(long);
+  public double normalizeData(int, double);
+  public java.util.List<darwInvest.data.NewsEvent> getNews(long, long);
+  public long getFirstTime();
+  public long getLastTime();
+  public long getFirstNews();
+  public long getLastNews();
+  public java.util.Set<java.lang.Long> getTimesBetween(long, long);
+  public long ceilingTime(long);
+  public long floorTime(long);
+  public java.lang.String lookupGooglecompanyid() throws java.io.IOException;
+  public java.lang.String lookupCompanyname() throws java.io.IOException;
+  public java.lang.String getCompanyname();
+  public java.lang.String getGooglecompanyid();
+}
+Compiled from "CSVFilter.java"
+public class darwInvest.data.gathering.CSVFilter implements java.io.FilenameFilter {
+  public darwInvest.data.gathering.CSVFilter();
+  public boolean accept(java.io.File, java.lang.String);
+}
+Compiled from "Driver.java"
+public class darwInvest.data.gathering.Driver {
+  public darwInvest.data.gathering.Driver();
+  public static void main(java.lang.String[]);
+}
+Compiled from "CSVReader.java"
+public abstract class darwInvest.data.gathering.dataSource.CSVReader extends darwInvest.data.gathering.dataSource.DataSource {
+  public darwInvest.data.gathering.dataSource.CSVReader(java.lang.String, darwInvest.data.utility.Serializer);
+  public void gatherData();
+  public java.util.Map<java.lang.Long, double[]> readIn(java.io.File);
+  public java.util.Map<java.lang.Long, double[]> readIn(java.io.BufferedReader);
+}
+Compiled from "ConstantSlope.java"
+public class darwInvest.data.gathering.dataSource.ConstantSlope extends darwInvest.data.gathering.dataSource.DataSource {
+  public darwInvest.data.gathering.dataSource.ConstantSlope(double, darwInvest.data.utility.Serializer);
+  public void gatherData();
+}
+Compiled from "DataSource.java"
+public abstract class darwInvest.data.gathering.dataSource.DataSource {
+  protected darwInvest.data.index.TickerIndex index;
+  protected java.util.Date startdate;
+  protected java.util.Date enddate;
+  public darwInvest.data.gathering.dataSource.DataSource(java.lang.String, darwInvest.data.utility.Serializer);
+  public darwInvest.data.gathering.dataSource.DataSource(java.lang.String, darwInvest.data.utility.Serializer, java.util.Date, java.util.Date);
+  public java.lang.String getName();
+  protected void addTicker(darwInvest.data.Ticker);
+  public darwInvest.data.index.TickerIndex getTickerIndex();
+  public void writeTickerIndex();
+  public abstract void gatherData();
+  public java.util.Date getStartdate();
+  public java.util.Date getEnddate();
+}
+Compiled from "GoogleFinanceAutoNASDAQ.java"
+public class darwInvest.data.gathering.dataSource.GoogleFinanceAutoNASDAQ extends darwInvest.data.gathering.dataSource.DataSource {
+  public darwInvest.data.gathering.dataSource.GoogleFinanceAutoNASDAQ(darwInvest.data.utility.Serializer, java.util.Date, java.util.Date);
+  public void gatherData();
+}
+Compiled from "GoogleFinanceAutoNYSE.java"
+public class darwInvest.data.gathering.dataSource.GoogleFinanceAutoNYSE extends darwInvest.data.gathering.dataSource.DataSource {
+  public darwInvest.data.gathering.dataSource.GoogleFinanceAutoNYSE(darwInvest.data.utility.Serializer, java.util.Date, java.util.Date);
+  public void gatherData();
+}
+Compiled from "GoogleFinanceManual.java"
+public class darwInvest.data.gathering.dataSource.GoogleFinanceManual extends darwInvest.data.gathering.dataSource.CSVReader {
+  public darwInvest.data.gathering.dataSource.GoogleFinanceManual(darwInvest.data.utility.Serializer);
+  public int GoogletoMonth(java.lang.String);
+  public java.lang.String MonthtoGoogle(java.util.Calendar);
+}
+Compiled from "ProquestGoogleFinanceNYSE.java"
+public class darwInvest.data.gathering.dataSource.ProquestGoogleFinanceNYSE extends darwInvest.data.gathering.dataSource.DataSource {
+  public darwInvest.data.gathering.dataSource.ProquestGoogleFinanceNYSE(darwInvest.data.utility.Serializer, java.util.Date, java.util.Date);
+  public void gatherData();
+  public java.lang.String lookupGooglecompanyid(java.lang.String) throws java.io.IOException;
+}
+Compiled from "ReutersGoogleFinanceNYSE.java"
+public class darwInvest.data.gathering.dataSource.ReutersGoogleFinanceNYSE extends darwInvest.data.gathering.dataSource.DataSource {
+  public darwInvest.data.gathering.dataSource.ReutersGoogleFinanceNYSE(darwInvest.data.utility.Serializer, java.util.Date, java.util.Date, int);
+  public void gatherData();
+}
+Compiled from "ReutersNews.java"
+public class darwInvest.data.gathering.dataSource.ReutersNews extends darwInvest.data.gathering.dataSource.DataSource {
+  public darwInvest.data.gathering.dataSource.ReutersNews(darwInvest.data.utility.Serializer, java.util.Date, java.util.Date);
+  public void gatherData();
+}
+Compiled from "URLExploreJob.java"
+public class darwInvest.data.gathering.dataSource.proquest.URLExploreJob implements darwin.work.Job {
+  public darwInvest.data.gathering.dataSource.proquest.URLExploreJob();
+  public java.lang.Object run(java.lang.Object, java.util.HashMap<java.lang.String, java.lang.Object>);
+}
+Compiled from "URLExploreJobInput.java"
+public class darwInvest.data.gathering.dataSource.proquest.URLExploreJobInput {
+  public java.lang.String title;
+  public java.net.URL exploreurl;
+  public long time;
+  public darwInvest.data.gathering.dataSource.proquest.URLExploreJobInput();
+}
+Compiled from "URLExploreJobOutput.java"
+public class darwInvest.data.gathering.dataSource.proquest.URLExploreJobOutput {
+  public java.lang.String title;
+  public java.lang.String content;
+  public long time;
+  public darwInvest.data.gathering.dataSource.proquest.URLExploreJobOutput();
+}
+Compiled from "URLExploreJob.java"
+public class darwInvest.data.gathering.dataSource.reuters.URLExploreJob implements darwin.work.Job {
+  public darwInvest.data.gathering.dataSource.reuters.URLExploreJob();
+  public java.lang.Object run(java.lang.Object, java.util.HashMap<java.lang.String, java.lang.Object>);
+}
+Compiled from "URLExploreJobInput.java"
+public class darwInvest.data.gathering.dataSource.reuters.URLExploreJobInput {
+  public java.lang.String title;
+  public java.net.URL exploreurl;
+  public long time;
+  public darwInvest.data.gathering.dataSource.reuters.URLExploreJobInput();
+}
+Compiled from "URLExploreJobOutput.java"
+public class darwInvest.data.gathering.dataSource.reuters.URLExploreJobOutput {
+  public java.lang.String title;
+  public java.lang.String content;
+  public long time;
+  public darwInvest.data.gathering.dataSource.reuters.URLExploreJobOutput();
+}
+Compiled from "IndexItem.java"
+public class darwInvest.data.index.IndexItem implements java.io.Serializable {
+  public darwInvest.data.index.IndexItem(darwInvest.data.Ticker);
+  public java.lang.String getSymbol();
+  public int getDataPointCount();
+  public int getNewsCount();
+  public long getFirstTime();
+  public long getLastTime();
+  public long getFirstNews();
+  public long getLastNews();
+  public java.lang.String toString();
+}
+Compiled from "TickerIndex.java"
+public class darwInvest.data.index.TickerIndex implements java.io.Serializable {
+  public darwInvest.data.index.TickerIndex(java.lang.String);
+  public void addTicker(darwInvest.data.Ticker);
+  public boolean symbolExists(java.lang.String);
+  public darwInvest.data.Ticker getTickerFile(java.lang.String);
+  public java.lang.String getSource();
+  public int getSize();
+  public java.util.Collection<darwInvest.data.index.IndexItem> getIndex();
+  public java.lang.String toString();
+}
+Compiled from "DefaultSerializer.java"
+public class darwInvest.data.utility.DefaultSerializer implements darwInvest.data.utility.Serializer {
+  public darwInvest.data.utility.DefaultSerializer();
+  public java.lang.Object readObject(java.io.File);
+  public void writeObject(java.io.Serializable, java.io.File);
+}
+Compiled from "Serializer.java"
+public interface darwInvest.data.utility.Serializer {
+  public abstract void writeObject(java.io.Serializable, java.io.File);
+  public abstract java.lang.Object readObject(java.io.File);
+}
+Compiled from "Settings.java"
+public class darwInvest.environment.Settings {
+  public darwInvest.data.Ticker ticker;
+  public long testLength;
+  public long lookback;
+  public int numTrials;
+  public double initialBalance;
+  public double commission;
+  public double minCommission;
+  public double threshold;
+  public double maxSentiment;
+  public double maxSentimentBuildup;
+  public double bankruptcy;
+  public long testBeginning;
+  public long testEnd;
+  public double cutoffSentimentProportion;
+  public double cutoffTimeProportion;
+  public java.util.TreeMap<java.lang.Long, java.util.List<java.lang.Double>> cache;
+  public darwInvest.environment.Settings();
+  public darwInvest.environment.Settings clone();
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "StrategyParameters.java"
+public class darwInvest.environment.StrategyParameters {
+  public darwInvest.data.Ticker ticker;
+  public long time;
+  public long lookback;
+  public java.util.TreeMap<java.lang.Long, java.util.List<java.lang.Double>> cache;
+  public darwInvest.environment.StrategyParameters();
+  public long getTime(double);
+  public double restrict(double);
+  public darwInvest.environment.StrategyParameters clone();
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "Account.java"
+public class darwInvest.evaluation.Account {
+  public darwInvest.evaluation.Account(double, double, double);
+  public double getLiquidationValue();
+  public double getCashBalance();
+  public void setPrice(double);
+  public int buy(int);
+  public int sell(int);
+  public int getPosition();
+}
+Compiled from "BalanceRecorder.java"
+public class darwInvest.evaluation.BalanceRecorder extends darwInvest.evaluation.BalanceTracker {
+  public darwInvest.evaluation.BalanceRecorder(double, double, double, double, double);
+  public void notifySentiment(double, double);
+  public int buy(int);
+  public int sell(int);
+  public void setPrice(double);
+  public java.util.TreeMap<java.lang.Long, java.lang.Integer> getOrderHistory();
+  public java.util.TreeMap<java.lang.Long, java.lang.Double> getBalanceHistory();
+  public java.util.TreeMap<java.lang.Long, java.lang.Double> getCashHistory();
+  public java.util.TreeMap<java.lang.Long, java.lang.Double> getSentimentHistory();
+  public java.util.TreeMap<java.lang.Long, java.lang.Double> getBuildupHistory();
+  public double getMaxOrder();
+  public double getMinBalance();
+  public double getMaxBalance();
+  public double getMaxCash();
+  public double getMinSentiment();
+  public double getMaxSentiment();
+  public double getMaxPosition();
+}
+Compiled from "BalanceTracker.java"
+public class darwInvest.evaluation.BalanceTracker {
+  protected darwInvest.evaluation.Account account;
+  protected double minBalance;
+  protected double maxBalance;
+  protected double bankruptcy;
+  protected int numBuys;
+  protected int numSells;
+  protected boolean alive;
+  protected long lastTime;
+  protected long timeIn;
+  protected long time;
+  protected int evaluationCount;
+  protected int positiveCount;
+  public darwInvest.evaluation.BalanceTracker(double, double, double, double);
+  public double getLiquidationValue();
+  public int getNumBuys();
+  public int getNumSells();
+  public double getMinBalance();
+  public double getMaxBalance();
+  public int buy(int);
+  public int sell(int);
+  public void setPrice(double);
+  public void notifyTime(long);
+  public void notifySentiment(double, double);
+  public boolean isAlive();
+  public long getTimeIn();
+  public double getPositiveSentimentProportion();
+}
+Compiled from "StrategyExecutive.java"
+public class darwInvest.evaluation.StrategyExecutive {
+  public darwInvest.evaluation.StrategyExecutive(darwInvest.evaluation.BalanceTracker, darwin.population.Individual, long, long, darwInvest.environment.Settings);
+  public void execute();
+}
+Compiled from "NewsAnalyzer.java"
+public interface darwInvest.news.NewsAnalyzer {
+  public abstract double score(darwInvest.data.NewsEvent, long);
+}
+Compiled from "NewsTrainer.java"
+public interface darwInvest.news.NewsTrainer {
+  public abstract darwInvest.news.NewsAnalyzer train(darwInvest.data.Ticker, long, long);
+}
+Compiled from "KnnAnalyzer.java"
+public class darwInvest.news.knn.KnnAnalyzer implements darwInvest.news.NewsAnalyzer {
+  public darwInvest.news.knn.KnnAnalyzer(darwInvest.data.Ticker, java.util.List<darwInvest.data.NewsEvent>, darwInvest.news.tfidf.Index, int, boolean);
+  public double score(darwInvest.data.NewsEvent, long);
+}
+Compiled from "KnnTrainer.java"
+public class darwInvest.news.knn.KnnTrainer implements darwInvest.news.NewsTrainer {
+  public darwInvest.news.knn.KnnTrainer(int, boolean);
+  public darwInvest.news.NewsAnalyzer train(darwInvest.data.Ticker, long, long);
+}
+Compiled from "NewsTestResult.java"
+public class darwInvest.news.test.NewsTestResult {
+  public darwInvest.news.test.NewsTestResult();
+  public void put(int, java.lang.String, double, double);
+  public java.lang.String output(java.lang.String, boolean);
+}
+Compiled from "NewsTestSummarizer.java"
+public class darwInvest.news.test.NewsTestSummarizer {
+  public darwInvest.news.test.NewsTestSummarizer();
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "NewsTester.java"
+public class darwInvest.news.test.NewsTester {
+  public darwInvest.news.test.NewsTester();
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "Index.java"
+public class darwInvest.news.tfidf.Index {
+  public darwInvest.news.tfidf.Index();
+  public int getNumberDocuments();
+  public int getNumberTerms();
+  public int addDocument();
+  public void addInstance(int, java.lang.String);
+  public int getDocumentFrequency(java.lang.String);
+  public java.lang.String getTermByIndex(int);
+  public int getTermFrequency(java.lang.String, int);
+  public org.ujmp.core.Matrix getPseudoDocumentVector(java.util.List<java.lang.String>);
+  public org.ujmp.core.Matrix getDocumentIncidenceMatrix();
+  public java.lang.String toString();
+}
+Compiled from "IndexBuilder.java"
+public class darwInvest.news.tfidf.IndexBuilder {
+  public darwInvest.news.tfidf.IndexBuilder();
+  public static darwInvest.news.tfidf.Index buildIndex(java.util.List<darwInvest.data.NewsEvent>);
+}
+Compiled from "TfidfAnalyzer.java"
+public class darwInvest.news.tfidf.TfidfAnalyzer implements darwInvest.news.NewsAnalyzer {
+  public darwInvest.news.tfidf.TfidfAnalyzer(darwInvest.data.Ticker, java.util.List<darwInvest.data.NewsEvent>, darwInvest.news.tfidf.Index);
+  public double score(darwInvest.data.NewsEvent, long);
+}
+Compiled from "TfidfTrainer.java"
+public class darwInvest.news.tfidf.TfidfTrainer implements darwInvest.news.NewsTrainer {
+  public darwInvest.news.tfidf.TfidfTrainer();
+  public darwInvest.news.NewsAnalyzer train(darwInvest.data.Ticker, long, long);
+}
+Compiled from "LowerCase.java"
+public class darwInvest.news.utility.LowerCase implements darwInvest.news.utility.Normalizer {
+  public darwInvest.news.utility.LowerCase();
+  public java.lang.String normalize(java.lang.String);
+}
+Compiled from "NonAlphabet.java"
+public class darwInvest.news.utility.NonAlphabet implements darwInvest.news.utility.Normalizer {
+  public darwInvest.news.utility.NonAlphabet();
+  public java.lang.String normalize(java.lang.String);
+}
+Compiled from "Normalizer.java"
+public interface darwInvest.news.utility.Normalizer {
+  public abstract java.lang.String normalize(java.lang.String);
+}
+Compiled from "Stemmer.java"
+public class darwInvest.news.utility.Stemmer {
+  public darwInvest.news.utility.Stemmer();
+  public void add(char);
+  public void add(char[], int);
+  public java.lang.String toString();
+  public int getResultLength();
+  public char[] getResultBuffer();
+  public void stem();
+}
+Compiled from "Stemming.java"
+public class darwInvest.news.utility.Stemming implements darwInvest.news.utility.Normalizer {
+  public darwInvest.news.utility.Stemming();
+  public java.lang.String normalize(java.lang.String);
+}
+Compiled from "StopWords.java"
+public class darwInvest.news.utility.StopWords implements darwInvest.news.utility.Normalizer {
+  public java.lang.String normalize(java.lang.String);
+  public darwInvest.news.utility.StopWords();
+}
+Compiled from "Tokenizer.java"
+public class darwInvest.news.utility.Tokenizer {
+  public darwInvest.news.utility.Tokenizer();
+  public darwInvest.news.utility.Tokenizer(java.lang.String);
+  public void addNormalizer(darwInvest.news.utility.Normalizer);
+  public java.util.List<java.lang.String> tokenize(java.lang.String);
+}
+Compiled from "GetPeriod.java"
+public class darwInvest.nodeType.GetPeriod extends darwin.problemObject.NodeType {
+  public darwInvest.nodeType.GetPeriod();
+  public java.lang.Class<?>[] getChildTypes();
+  public darwin.problemObject.Processable<?> getProcessable();
+  public java.lang.Class<?> getReturnType();
+  public boolean isMutable();
+}
+Compiled from "GetPrice.java"
+public class darwInvest.nodeType.GetPrice extends darwin.problemObject.NodeType {
+  public darwInvest.nodeType.GetPrice();
+  public java.lang.Class<?>[] getChildTypes();
+  public darwin.problemObject.Processable<?> getProcessable();
+  public java.lang.Class<?> getReturnType();
+  public boolean isMutable();
+}
+Compiled from "LoopBoolean.java"
+public class darwInvest.nodeType.LoopBoolean extends darwin.problemObject.NodeType {
+  public darwInvest.nodeType.LoopBoolean();
+  public java.lang.Class<?>[] getChildTypes();
+  public darwin.problemObject.Processable<?> getProcessable();
+  public java.lang.Class<?> getReturnType();
+}
+Compiled from "LoopDouble.java"
+public class darwInvest.nodeType.LoopDouble extends darwin.problemObject.NodeType {
+  public darwInvest.nodeType.LoopDouble();
+  public java.lang.Class<?>[] getChildTypes();
+  public darwin.problemObject.Processable<?> getProcessable();
+  public java.lang.Class<?> getReturnType();
+}
+Compiled from "NewsScore.java"
+public class darwInvest.nodeType.NewsScore extends darwin.problemObject.NodeType {
+  public darwInvest.nodeType.NewsScore();
+  public java.lang.Class<?>[] getChildTypes();
+  public darwin.problemObject.Processable<?> getProcessable();
+  public java.lang.Class<?> getReturnType();
+}
+Compiled from "BarChart.java"
+public class darwInvest.output.BarChart extends darwin.output.Grid {
+  public darwInvest.output.BarChart(darwInvest.data.Ticker, long, long);
+  public void setRange(long, long);
+  public double timeToProportion(long);
+  public void paint(java.awt.Graphics);
+}
+Compiled from "Output.java"
+public class darwInvest.output.Output implements darwin.problemObject.Output {
+  public darwInvest.output.Output();
+  public javax.swing.JComponent getOutput(darwin.population.Individual, java.lang.Object);
+}
+Compiled from "Performance.java"
+public class darwInvest.output.Performance extends darwin.output.ScatterPlot {
+  public darwInvest.output.Performance(darwin.population.Individual, darwInvest.environment.Settings, long, long);
+  public void setRange(long, long);
+  public double timeToProportion(long);
+  public void paint(java.awt.Graphics);
+}
+Compiled from "TimeFrameSelected.java"
+public class darwInvest.output.TimeFrameSelected implements java.awt.event.MouseListener {
+  public darwInvest.output.TimeFrameSelected(darwInvest.environment.Settings);
+  public void setSelector(darwInvest.output.TimeFrameSelector);
+  public void setBarChart(darwInvest.output.BarChart);
+  public void setVolumeChart(darwInvest.output.VolumeChart);
+  public void setPerformance(darwInvest.output.Performance);
+  public void mouseClicked(java.awt.event.MouseEvent);
+  public void mouseEntered(java.awt.event.MouseEvent);
+  public void mouseExited(java.awt.event.MouseEvent);
+  public void mousePressed(java.awt.event.MouseEvent);
+  public void mouseReleased(java.awt.event.MouseEvent);
+}
+Compiled from "TimeFrameSelector.java"
+public class darwInvest.output.TimeFrameSelector extends darwin.output.ScatterPlot {
+  public darwInvest.output.TimeFrameSelector(darwin.population.Individual, darwInvest.environment.Settings, int, darwInvest.output.TimeFrameSelected);
+  public long proportionToTime(double);
+  public double timeToProportion(long);
+  public void setActiveTime(long);
+  public void paint(java.awt.Graphics);
+}
+Compiled from "VolumeChart.java"
+public class darwInvest.output.VolumeChart extends darwin.output.ScatterPlot {
+  public darwInvest.output.VolumeChart(darwInvest.data.Ticker, long, long);
+  public void setRange(long, long);
+  public double timeToProportion(long);
+}
+Compiled from "GetPeriod.java"
+public class darwInvest.processable.GetPeriod extends darwin.problemObject.Processable<java.lang.Double> {
+  public static final int MONTH;
+  public static final int DAY_OF_MONTH;
+  public static final int DAY_OF_WEEK;
+  public static final int DAY_OF_WEEK_IN_MONTH;
+  public static final int AM_PM;
+  public static final int HOUR_OF_DAY;
+  public static final int MINUTE;
+  public static final int SEASON;
+  public static final int FISCAL_QUARTER;
+  public darwInvest.processable.GetPeriod(int);
+  public java.lang.Double getValue(java.lang.Object, darwin.population.Node[]);
+  public darwin.problemObject.Processable<java.lang.Double> clone();
+  protected boolean equalsValue(darwin.problemObject.Processable<?>);
+  public double getWhich();
+  public java.lang.String toString();
+  public java.lang.Object getValue(java.lang.Object, darwin.population.Node[]);
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "GetPrice.java"
+public class darwInvest.processable.GetPrice extends darwin.problemObject.Processable<java.lang.Double> {
+  public darwInvest.processable.GetPrice(int);
+  public java.lang.Double getValue(java.lang.Object, darwin.population.Node[]);
+  public darwin.problemObject.Processable<java.lang.Double> clone();
+  protected boolean equalsValue(darwin.problemObject.Processable<?>);
+  public double getWhich();
+  public java.lang.String toString();
+  public java.lang.Object getValue(java.lang.Object, darwin.population.Node[]);
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "LoopBoolean.java"
+public class darwInvest.processable.LoopBoolean extends darwin.problemObject.Processable<java.lang.Double> {
+  public final int COUNT_TRUE;
+  public final int COUNT_FALSE;
+  public darwInvest.processable.LoopBoolean(int);
+  public java.lang.Double getValue(java.lang.Object, darwin.population.Node[]);
+  public darwin.problemObject.Processable<java.lang.Double> clone();
+  protected boolean equalsValue(darwin.problemObject.Processable<?>);
+  public double getWhich();
+  public java.lang.String toString();
+  public java.lang.Object getValue(java.lang.Object, darwin.population.Node[]);
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "LoopDouble.java"
+public class darwInvest.processable.LoopDouble extends darwin.problemObject.Processable<java.lang.Double> {
+  public final int SUM;
+  public final int PRODUCT;
+  public final int MAX;
+  public final int MIN;
+  public final int AVG;
+  public darwInvest.processable.LoopDouble(int);
+  public java.lang.Double getValue(java.lang.Object, darwin.population.Node[]);
+  public darwin.problemObject.Processable<java.lang.Double> clone();
+  protected boolean equalsValue(darwin.problemObject.Processable<?>);
+  public double getWhich();
+  public java.lang.String toString();
+  public java.lang.Object getValue(java.lang.Object, darwin.population.Node[]);
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "NewsScore.java"
+public class darwInvest.processable.NewsScore extends darwin.problemObject.Processable<java.lang.Double> {
+  public darwInvest.processable.NewsScore();
+  public java.lang.Double getValue(java.lang.Object, darwin.population.Node[]);
+  public darwin.problemObject.Processable<java.lang.Double> clone();
+  public java.lang.Object getValue(java.lang.Object, darwin.population.Node[]);
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "Unit.java"
+public class darwin.common.Unit {
+  public darwin.common.Unit();
+}
+Compiled from "And.java"
+public class darwin.common.logic.nodeType.And extends darwin.problemObject.NodeType {
+  public darwin.common.logic.nodeType.And();
+  public java.lang.Class<?>[] getChildTypes();
+  public darwin.problemObject.Processable<?> getProcessable();
+  public java.lang.Class<?> getReturnType();
+}
+Compiled from "EqualTo.java"
+public class darwin.common.logic.nodeType.EqualTo extends darwin.problemObject.NodeType {
+  public darwin.common.logic.nodeType.EqualTo();
+  public java.lang.Class<?>[] getChildTypes();
+  public darwin.problemObject.Processable<?> getProcessable();
+  public java.lang.Class<?> getReturnType();
+}
+Compiled from "GreaterThan.java"
+public class darwin.common.logic.nodeType.GreaterThan extends darwin.problemObject.NodeType {
+  public darwin.common.logic.nodeType.GreaterThan();
+  public java.lang.Class<?>[] getChildTypes();
+  public darwin.problemObject.Processable<?> getProcessable();
+  public java.lang.Class<?> getReturnType();
+}
+Compiled from "GreaterThanOrEqualTo.java"
+public class darwin.common.logic.nodeType.GreaterThanOrEqualTo extends darwin.problemObject.NodeType {
+  public darwin.common.logic.nodeType.GreaterThanOrEqualTo();
+  public java.lang.Class<?>[] getChildTypes();
+  public darwin.problemObject.Processable<?> getProcessable();
+  public java.lang.Class<?> getReturnType();
+}
+Compiled from "IfElseBoolean.java"
+public class darwin.common.logic.nodeType.IfElseBoolean extends darwin.problemObject.NodeType {
+  public darwin.common.logic.nodeType.IfElseBoolean();
+  public java.lang.Class<?>[] getChildTypes();
+  public darwin.problemObject.Processable<?> getProcessable();
+  public java.lang.Class<?> getReturnType();
+}
+Compiled from "IfElseDouble.java"
+public class darwin.common.logic.nodeType.IfElseDouble extends darwin.problemObject.NodeType {
+  public darwin.common.logic.nodeType.IfElseDouble();
+  public java.lang.Class<?>[] getChildTypes();
+  public darwin.problemObject.Processable<?> getProcessable();
+  public java.lang.Class<?> getReturnType();
+}
+Compiled from "LessThan.java"
+public class darwin.common.logic.nodeType.LessThan extends darwin.problemObject.NodeType {
+  public darwin.common.logic.nodeType.LessThan();
+  public java.lang.Class<?>[] getChildTypes();
+  public darwin.problemObject.Processable<?> getProcessable();
+  public java.lang.Class<?> getReturnType();
+}
+Compiled from "LessThanOrEqualTo.java"
+public class darwin.common.logic.nodeType.LessThanOrEqualTo extends darwin.problemObject.NodeType {
+  public darwin.common.logic.nodeType.LessThanOrEqualTo();
+  public java.lang.Class<?>[] getChildTypes();
+  public darwin.problemObject.Processable<?> getProcessable();
+  public java.lang.Class<?> getReturnType();
+}
+Compiled from "Or.java"
+public class darwin.common.logic.nodeType.Or extends darwin.problemObject.NodeType {
+  public darwin.common.logic.nodeType.Or();
+  public java.lang.Class<?>[] getChildTypes();
+  public darwin.problemObject.Processable<?> getProcessable();
+  public java.lang.Class<?> getReturnType();
+}
+Compiled from "TrueFalse.java"
+public class darwin.common.logic.nodeType.TrueFalse extends darwin.problemObject.NodeType {
+  public darwin.common.logic.nodeType.TrueFalse();
+  public java.lang.Class<?>[] getChildTypes();
+  public darwin.problemObject.Processable<?> getProcessable();
+  public java.lang.Class<?> getReturnType();
+  public boolean isMutable();
+}
+Compiled from "And.java"
+public class darwin.common.logic.processable.And extends darwin.problemObject.Processable<java.lang.Boolean> {
+  public darwin.common.logic.processable.And();
+  public java.lang.Boolean getValue(java.lang.Object, darwin.population.Node[]);
+  public darwin.problemObject.Processable<java.lang.Boolean> clone();
+  public java.lang.Object getValue(java.lang.Object, darwin.population.Node[]);
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "EqualTo.java"
+public class darwin.common.logic.processable.EqualTo extends darwin.problemObject.Processable<java.lang.Boolean> {
+  public darwin.common.logic.processable.EqualTo();
+  public java.lang.Boolean getValue(java.lang.Object, darwin.population.Node[]);
+  public darwin.problemObject.Processable<java.lang.Boolean> clone();
+  public java.lang.Object getValue(java.lang.Object, darwin.population.Node[]);
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "GreaterThan.java"
+public class darwin.common.logic.processable.GreaterThan extends darwin.problemObject.Processable<java.lang.Boolean> {
+  public darwin.common.logic.processable.GreaterThan();
+  public java.lang.Boolean getValue(java.lang.Object, darwin.population.Node[]);
+  public darwin.problemObject.Processable<java.lang.Boolean> clone();
+  public java.lang.Object getValue(java.lang.Object, darwin.population.Node[]);
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "GreaterThanOrEqualTo.java"
+public class darwin.common.logic.processable.GreaterThanOrEqualTo extends darwin.problemObject.Processable<java.lang.Boolean> {
+  public darwin.common.logic.processable.GreaterThanOrEqualTo();
+  public java.lang.Boolean getValue(java.lang.Object, darwin.population.Node[]);
+  public darwin.problemObject.Processable<java.lang.Boolean> clone();
+  public java.lang.Object getValue(java.lang.Object, darwin.population.Node[]);
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "IfElse.java"
+public class darwin.common.logic.processable.IfElse<Type> extends darwin.problemObject.Processable<Type> {
+  public darwin.common.logic.processable.IfElse();
+  public Type getValue(java.lang.Object, darwin.population.Node[]);
+  public darwin.problemObject.Processable<Type> clone();
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "LessThan.java"
+public class darwin.common.logic.processable.LessThan extends darwin.problemObject.Processable<java.lang.Boolean> {
+  public darwin.common.logic.processable.LessThan();
+  public java.lang.Boolean getValue(java.lang.Object, darwin.population.Node[]);
+  public darwin.problemObject.Processable<java.lang.Boolean> clone();
+  public java.lang.Object getValue(java.lang.Object, darwin.population.Node[]);
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "LessThanOrEqualTo.java"
+public class darwin.common.logic.processable.LessThanOrEqualTo extends darwin.problemObject.Processable<java.lang.Boolean> {
+  public darwin.common.logic.processable.LessThanOrEqualTo();
+  public java.lang.Boolean getValue(java.lang.Object, darwin.population.Node[]);
+  public darwin.problemObject.Processable<java.lang.Boolean> clone();
+  public java.lang.Object getValue(java.lang.Object, darwin.population.Node[]);
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "Or.java"
+public class darwin.common.logic.processable.Or extends darwin.problemObject.Processable<java.lang.Boolean> {
+  public darwin.common.logic.processable.Or();
+  public java.lang.Boolean getValue(java.lang.Object, darwin.population.Node[]);
+  public darwin.problemObject.Processable<java.lang.Boolean> clone();
+  public java.lang.Object getValue(java.lang.Object, darwin.population.Node[]);
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "TrueFalse.java"
+public class darwin.common.logic.processable.TrueFalse extends darwin.problemObject.Processable<java.lang.Boolean> {
+  public darwin.common.logic.processable.TrueFalse(boolean);
+  public java.lang.Boolean getValue(java.lang.Object, darwin.population.Node[]);
+  public darwin.problemObject.Processable<java.lang.Boolean> clone();
+  protected boolean equalsValue(darwin.problemObject.Processable<?>);
+  public boolean getValue();
+  public java.lang.String toString();
+  public java.lang.Object getValue(java.lang.Object, darwin.population.Node[]);
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "Add.java"
+public class darwin.common.math.nodeType.Add extends darwin.problemObject.NodeType {
+  public darwin.common.math.nodeType.Add();
+  public java.lang.Class<?>[] getChildTypes();
+  public darwin.problemObject.Processable<?> getProcessable();
+  public java.lang.Class<?> getReturnType();
+}
+Compiled from "Constant.java"
+public abstract class darwin.common.math.nodeType.Constant extends darwin.problemObject.NodeType {
+  public darwin.common.math.nodeType.Constant();
+  public java.lang.Class<?>[] getChildTypes();
+  public darwin.problemObject.Processable<?> getProcessable();
+  public java.lang.Class<?> getReturnType();
+  public boolean isMutable();
+  public abstract double getMax();
+  public abstract double getMin();
+}
+Compiled from "ConstantMedium.java"
+public class darwin.common.math.nodeType.ConstantMedium extends darwin.common.math.nodeType.Constant {
+  public darwin.common.math.nodeType.ConstantMedium();
+  public double getMax();
+  public double getMin();
+}
+Compiled from "ConstantNarrow.java"
+public class darwin.common.math.nodeType.ConstantNarrow extends darwin.common.math.nodeType.Constant {
+  public darwin.common.math.nodeType.ConstantNarrow();
+  public double getMax();
+  public double getMin();
+}
+Compiled from "ConstantProportion.java"
+public class darwin.common.math.nodeType.ConstantProportion extends darwin.common.math.nodeType.Constant {
+  public darwin.common.math.nodeType.ConstantProportion();
+  public double getMax();
+  public double getMin();
+}
+Compiled from "ConstantWide.java"
+public class darwin.common.math.nodeType.ConstantWide extends darwin.common.math.nodeType.Constant {
+  public darwin.common.math.nodeType.ConstantWide();
+  public double getMax();
+  public double getMin();
+}
+Compiled from "Cosine.java"
+public class darwin.common.math.nodeType.Cosine extends darwin.problemObject.NodeType {
+  public darwin.common.math.nodeType.Cosine();
+  public java.lang.Class<?>[] getChildTypes();
+  public darwin.problemObject.Processable<?> getProcessable();
+  public java.lang.Class<?> getReturnType();
+}
+Compiled from "Divide.java"
+public class darwin.common.math.nodeType.Divide extends darwin.problemObject.NodeType {
+  public darwin.common.math.nodeType.Divide();
+  public java.lang.Class<?>[] getChildTypes();
+  public darwin.problemObject.Processable<?> getProcessable();
+  public java.lang.Class<?> getReturnType();
+}
+Compiled from "Log.java"
+public class darwin.common.math.nodeType.Log extends darwin.problemObject.NodeType {
+  public darwin.common.math.nodeType.Log();
+  public java.lang.Class<?>[] getChildTypes();
+  public darwin.problemObject.Processable<?> getProcessable();
+  public java.lang.Class<?> getReturnType();
+}
+Compiled from "Multiply.java"
+public class darwin.common.math.nodeType.Multiply extends darwin.problemObject.NodeType {
+  public darwin.common.math.nodeType.Multiply();
+  public java.lang.Class<?>[] getChildTypes();
+  public darwin.problemObject.Processable<?> getProcessable();
+  public java.lang.Class<?> getReturnType();
+}
+Compiled from "Sine.java"
+public class darwin.common.math.nodeType.Sine extends darwin.problemObject.NodeType {
+  public darwin.common.math.nodeType.Sine();
+  public java.lang.Class<?>[] getChildTypes();
+  public darwin.problemObject.Processable<?> getProcessable();
+  public java.lang.Class<?> getReturnType();
+}
+Compiled from "Subtract.java"
+public class darwin.common.math.nodeType.Subtract extends darwin.problemObject.NodeType {
+  public darwin.common.math.nodeType.Subtract();
+  public java.lang.Class<?>[] getChildTypes();
+  public darwin.problemObject.Processable<?> getProcessable();
+  public java.lang.Class<?> getReturnType();
+}
+Compiled from "Tangent.java"
+public class darwin.common.math.nodeType.Tangent extends darwin.problemObject.NodeType {
+  public darwin.common.math.nodeType.Tangent();
+  public java.lang.Class<?>[] getChildTypes();
+  public darwin.problemObject.Processable<?> getProcessable();
+  public java.lang.Class<?> getReturnType();
+}
+Compiled from "Add.java"
+public class darwin.common.math.processable.Add extends darwin.problemObject.Processable<java.lang.Double> {
+  public darwin.common.math.processable.Add();
+  public java.lang.Double getValue(java.lang.Object, darwin.population.Node[]);
+  public darwin.problemObject.Processable<java.lang.Double> clone();
+  public java.lang.Object getValue(java.lang.Object, darwin.population.Node[]);
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "Constant.java"
+public class darwin.common.math.processable.Constant extends darwin.problemObject.Processable<java.lang.Double> {
+  public darwin.common.math.processable.Constant(double);
+  public java.lang.Double getValue(java.lang.Object, darwin.population.Node[]);
+  public darwin.problemObject.Processable<java.lang.Double> clone();
+  protected boolean equalsValue(darwin.problemObject.Processable<?>);
+  public double getValue();
+  public java.lang.String toString();
+  public java.lang.Object getValue(java.lang.Object, darwin.population.Node[]);
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "Cosine.java"
+public class darwin.common.math.processable.Cosine extends darwin.problemObject.Processable<java.lang.Double> {
+  public darwin.common.math.processable.Cosine();
+  public java.lang.Double getValue(java.lang.Object, darwin.population.Node[]);
+  public darwin.problemObject.Processable<java.lang.Double> clone();
+  public java.lang.Object getValue(java.lang.Object, darwin.population.Node[]);
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "Divide.java"
+public class darwin.common.math.processable.Divide extends darwin.problemObject.Processable<java.lang.Double> {
+  public darwin.common.math.processable.Divide();
+  public java.lang.Double getValue(java.lang.Object, darwin.population.Node[]);
+  public darwin.problemObject.Processable<java.lang.Double> clone();
+  public java.lang.Object getValue(java.lang.Object, darwin.population.Node[]);
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "Log.java"
+public class darwin.common.math.processable.Log extends darwin.problemObject.Processable<java.lang.Double> {
+  public darwin.common.math.processable.Log();
+  public java.lang.Double getValue(java.lang.Object, darwin.population.Node[]);
+  public darwin.problemObject.Processable<java.lang.Double> clone();
+  public java.lang.Object getValue(java.lang.Object, darwin.population.Node[]);
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "Multiply.java"
+public class darwin.common.math.processable.Multiply extends darwin.problemObject.Processable<java.lang.Double> {
+  public darwin.common.math.processable.Multiply();
+  public java.lang.Double getValue(java.lang.Object, darwin.population.Node[]);
+  public darwin.problemObject.Processable<java.lang.Double> clone();
+  public java.lang.Object getValue(java.lang.Object, darwin.population.Node[]);
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "Sine.java"
+public class darwin.common.math.processable.Sine extends darwin.problemObject.Processable<java.lang.Double> {
+  public darwin.common.math.processable.Sine();
+  public java.lang.Double getValue(java.lang.Object, darwin.population.Node[]);
+  public darwin.problemObject.Processable<java.lang.Double> clone();
+  public java.lang.Object getValue(java.lang.Object, darwin.population.Node[]);
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "Subtract.java"
+public class darwin.common.math.processable.Subtract extends darwin.problemObject.Processable<java.lang.Double> {
+  public darwin.common.math.processable.Subtract();
+  public java.lang.Double getValue(java.lang.Object, darwin.population.Node[]);
+  public darwin.problemObject.Processable<java.lang.Double> clone();
+  public java.lang.Object getValue(java.lang.Object, darwin.population.Node[]);
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "Tangent.java"
+public class darwin.common.math.processable.Tangent extends darwin.problemObject.Processable<java.lang.Double> {
+  public darwin.common.math.processable.Tangent();
+  public java.lang.Double getValue(java.lang.Object, darwin.population.Node[]);
+  public darwin.problemObject.Processable<java.lang.Double> clone();
+  public java.lang.Object getValue(java.lang.Object, darwin.population.Node[]);
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "Darwin.java"
+public class darwin.control.Darwin {
+  public darwin.control.Darwin(darwin.control.Parameters);
+  public darwin.fitness.Fitness getFitness();
+  public darwin.population.Population getPopulation(int);
+  public void executeGenerations(int);
+  public int getGeneration();
+}
+Compiled from "EventListener.java"
+public interface darwin.control.EventListener {
+  public abstract void generationCompleted(darwin.control.Darwin);
+}
+Compiled from "Parameters.java"
+public class darwin.control.Parameters {
+  public java.lang.Object[] environments;
+  public darwin.problemObject.NodeFactory nodeFactory;
+  public darwin.problemObject.FitnessAnalyzer fitnessAnalyzer;
+  public int initialDepth;
+  public int populationSize;
+  public double migrationProbability;
+  public double migrationFactor;
+  public darwin.migration.Migration migration;
+  public darwin.selection.Selection selection;
+  public darwin.geneticOperation.GeneticOperation[] operations;
+  public double[] operationProbabilities;
+  public darwin.initialization.Initializer initializer;
+  public darwin.work.JobRunner jobRunner;
+  public int elite;
+  public int maxSize;
+  public double functionSelectionProbability;
+  public darwin.control.EventListener eventListener;
+  public darwin.fitness.multiobjective.Multiobjective multiobjective;
+  public darwin.control.Parameters();
+}
+Compiled from "Fitness.java"
+public class darwin.fitness.Fitness {
+  public darwin.fitness.Fitness(darwin.population.Population[], darwin.problemObject.FitnessAnalyzer, darwin.work.JobRunner, darwin.fitness.multiobjective.Multiobjective);
+  public int getNumberMetrics();
+  public int getPopulationSize();
+  public double getRawFitness(int, int, int);
+  public double getRawFitness(int, int);
+  public double getStandardFitness(int, int, int);
+  public double getStandardFitness(int, int);
+  public double getAdjustedFitness(int, int, int);
+  public double getAdjustedFitness(int, int);
+  public double getNormalizedFitness(int, int, int);
+  public double getNormalizedFitness(int, int);
+  public int getComplexity(int, int);
+  public java.util.Collection<java.lang.Integer> getBestOfGeneration(int, int);
+  public void assessFitness() throws darwin.work.BusyException;
+}
+Compiled from "FitnessJob.java"
+public class darwin.fitness.FitnessJob implements darwin.work.Job {
+  public darwin.fitness.FitnessJob(darwin.problemObject.FitnessAnalyzer);
+  public java.lang.Object run(java.lang.Object, java.util.HashMap<java.lang.String, java.lang.Object>);
+}
+Compiled from "FitnessJobInput.java"
+public class darwin.fitness.FitnessJobInput {
+  public int populationIndex;
+  public int individualIndex;
+  public darwin.population.Individual individual;
+  public darwin.fitness.FitnessJobInput();
+}
+Compiled from "FitnessJobOutput.java"
+public class darwin.fitness.FitnessJobOutput {
+  public int populationIndex;
+  public int individualIndex;
+  public double[] result;
+  public int complexity;
+  public darwin.fitness.FitnessJobOutput();
+}
+Compiled from "DominationJob.java"
+public class darwin.fitness.multiobjective.DominationJob implements darwin.work.Job {
+  public darwin.fitness.multiobjective.DominationJob();
+  public java.lang.Object run(java.lang.Object, java.util.HashMap<java.lang.String, java.lang.Object>);
+}
+Compiled from "Euclidean.java"
+public class darwin.fitness.multiobjective.Euclidean implements darwin.fitness.multiobjective.Multiobjective {
+  public darwin.fitness.multiobjective.Euclidean(int);
+  public darwin.work.Job getJob();
+  public double standardizeFitness(double);
+}
+Compiled from "EuclideanJob.java"
+public class darwin.fitness.multiobjective.EuclideanJob implements darwin.work.Job {
+  public darwin.fitness.multiobjective.EuclideanJob();
+  public java.lang.Object run(java.lang.Object, java.util.HashMap<java.lang.String, java.lang.Object>);
+}
+Compiled from "Multiobjective.java"
+public interface darwin.fitness.multiobjective.Multiobjective {
+  public abstract darwin.work.Job getJob();
+  public abstract double standardizeFitness(double);
+}
+Compiled from "MultiobjectiveJobInput.java"
+public class darwin.fitness.multiobjective.MultiobjectiveJobInput {
+  public int populationIndex;
+  public int individualIndex;
+  public darwin.fitness.multiobjective.MultiobjectiveJobInput();
+}
+Compiled from "MultiobjectiveJobOutput.java"
+public class darwin.fitness.multiobjective.MultiobjectiveJobOutput {
+  public int populationIndex;
+  public int individualIndex;
+  public double result;
+  public darwin.fitness.multiobjective.MultiobjectiveJobOutput();
+}
+Compiled from "Pareto.java"
+public class darwin.fitness.multiobjective.Pareto implements darwin.fitness.multiobjective.Multiobjective {
+  public darwin.fitness.multiobjective.Pareto(int);
+  public darwin.work.Job getJob();
+  public double standardizeFitness(double);
+}
+Compiled from "ConstantMutation.java"
+public class darwin.geneticOperation.ConstantMutation implements darwin.geneticOperation.GeneticOperation {
+  public darwin.geneticOperation.ConstantMutation();
+  public int getNumberInputs();
+  public darwin.population.Individual[] performOperation(darwin.population.Individual[], int, boolean) throws darwin.geneticOperation.UnableToPerformOperationException;
+}
+Compiled from "GeneticOperation.java"
+public interface darwin.geneticOperation.GeneticOperation {
+  public abstract int getNumberInputs();
+  public abstract darwin.population.Individual[] performOperation(darwin.population.Individual[], int, boolean) throws darwin.geneticOperation.UnableToPerformOperationException;
+}
+Compiled from "HoistMutation.java"
+public class darwin.geneticOperation.HoistMutation implements darwin.geneticOperation.GeneticOperation {
+  public darwin.geneticOperation.HoistMutation();
+  public int getNumberInputs();
+  public darwin.population.Individual[] performOperation(darwin.population.Individual[], int, boolean) throws darwin.geneticOperation.UnableToPerformOperationException;
+}
+Compiled from "NodeReplacementMutation.java"
+public class darwin.geneticOperation.NodeReplacementMutation implements darwin.geneticOperation.GeneticOperation {
+  public darwin.geneticOperation.NodeReplacementMutation(darwin.problemObject.NodeFactory);
+  public int getNumberInputs();
+  public darwin.population.Individual[] performOperation(darwin.population.Individual[], int, boolean) throws darwin.geneticOperation.UnableToPerformOperationException;
+}
+Compiled from "Reproduction.java"
+public class darwin.geneticOperation.Reproduction implements darwin.geneticOperation.GeneticOperation {
+  public darwin.geneticOperation.Reproduction();
+  public int getNumberInputs();
+  public darwin.population.Individual[] performOperation(darwin.population.Individual[], int, boolean);
+}
+Compiled from "ShrinkMutation.java"
+public class darwin.geneticOperation.ShrinkMutation implements darwin.geneticOperation.GeneticOperation {
+  public darwin.geneticOperation.ShrinkMutation(darwin.problemObject.NodeFactory);
+  public int getNumberInputs();
+  public darwin.population.Individual[] performOperation(darwin.population.Individual[], int, boolean) throws darwin.geneticOperation.UnableToPerformOperationException;
+}
+Compiled from "SubtreeCrossover.java"
+public class darwin.geneticOperation.SubtreeCrossover implements darwin.geneticOperation.GeneticOperation {
+  public darwin.geneticOperation.SubtreeCrossover();
+  public int getNumberInputs();
+  public darwin.population.Individual[] performOperation(darwin.population.Individual[], int, boolean) throws darwin.geneticOperation.UnableToPerformOperationException;
+}
+Compiled from "SubtreeMutation.java"
+public class darwin.geneticOperation.SubtreeMutation implements darwin.geneticOperation.GeneticOperation {
+  public darwin.geneticOperation.SubtreeMutation(darwin.initialization.Generator);
+  public int getNumberInputs();
+  public darwin.population.Individual[] performOperation(darwin.population.Individual[], int, boolean) throws darwin.geneticOperation.UnableToPerformOperationException;
+}
+Compiled from "Swap.java"
+public class darwin.geneticOperation.Swap implements darwin.geneticOperation.GeneticOperation {
+  public darwin.geneticOperation.Swap();
+  public int getNumberInputs();
+  public darwin.population.Individual[] performOperation(darwin.population.Individual[], int, boolean) throws darwin.geneticOperation.UnableToPerformOperationException;
+}
+Compiled from "UnableToPerformOperationException.java"
+public class darwin.geneticOperation.UnableToPerformOperationException extends java.lang.Exception {
+  public darwin.geneticOperation.UnableToPerformOperationException();
+}
+Compiled from "Full.java"
+public class darwin.initialization.Full implements darwin.initialization.Generator {
+  public darwin.initialization.Full(darwin.problemObject.NodeFactory);
+  public darwin.population.Node generate(int, int, java.lang.Class<?>) throws darwin.geneticOperation.UnableToPerformOperationException;
+}
+Compiled from "Generator.java"
+public interface darwin.initialization.Generator {
+  public abstract darwin.population.Node generate(int, int, java.lang.Class<?>) throws darwin.geneticOperation.UnableToPerformOperationException;
+}
+Compiled from "Grow.java"
+public class darwin.initialization.Grow implements darwin.initialization.Generator {
+  public darwin.initialization.Grow(darwin.problemObject.NodeFactory);
+  public darwin.population.Node generate(int, int, java.lang.Class<?>) throws darwin.geneticOperation.UnableToPerformOperationException;
+}
+Compiled from "Initializer.java"
+public interface darwin.initialization.Initializer {
+  public abstract java.util.List<darwin.population.Individual> initialize(int, int, int, darwin.problemObject.NodeFactory);
+}
+Compiled from "NoAvailableNodeException.java"
+public class darwin.initialization.NoAvailableNodeException extends java.lang.Exception {
+  public darwin.initialization.NoAvailableNodeException();
+}
+Compiled from "RampedHalfAndHalf.java"
+public class darwin.initialization.RampedHalfAndHalf implements darwin.initialization.Initializer {
+  public darwin.initialization.RampedHalfAndHalf();
+  public java.util.List<darwin.population.Individual> initialize(int, int, int, darwin.problemObject.NodeFactory);
+}
+Compiled from "Migration.java"
+public interface darwin.migration.Migration {
+  public abstract int getDestination(int, int);
+}
+Compiled from "Next.java"
+public class darwin.migration.Next implements darwin.migration.Migration {
+  public darwin.migration.Next();
+  public int getDestination(int, int);
+}
+Compiled from "Parity.java"
+public class darwin.migration.Parity implements darwin.migration.Migration {
+  public darwin.migration.Parity();
+  public int getDestination(int, int);
+}
+Compiled from "Uniform.java"
+public class darwin.migration.Uniform implements darwin.migration.Migration {
+  public darwin.migration.Uniform();
+  public int getDestination(int, int);
+}
+Compiled from "All.java"
+public class darwin.nodeFilter.All extends darwin.nodeFilter.Filter {
+  public darwin.nodeFilter.All();
+  public boolean accept(darwin.nodeFilter.Filterable);
+}
+Compiled from "Constant.java"
+public class darwin.nodeFilter.Constant extends darwin.nodeFilter.Filter {
+  public darwin.nodeFilter.Constant();
+  public boolean accept(darwin.nodeFilter.Filterable);
+}
+Compiled from "DepthRange.java"
+public class darwin.nodeFilter.DepthRange extends darwin.nodeFilter.Filter {
+  public darwin.nodeFilter.DepthRange(java.lang.Class<?>, int, int);
+  public boolean accept(darwin.nodeFilter.Filterable);
+}
+Compiled from "Filter.java"
+public abstract class darwin.nodeFilter.Filter {
+  public darwin.nodeFilter.Filter();
+  public abstract boolean accept(darwin.nodeFilter.Filterable);
+  public java.util.List<darwin.population.Node> applyFilter(java.util.List<darwin.population.Node>);
+}
+Compiled from "Filterable.java"
+public interface darwin.nodeFilter.Filterable {
+  public abstract int getArity();
+  public abstract java.lang.Class<?> getReturnType();
+  public abstract java.lang.Class<?> getChildType(int);
+  public abstract darwin.problemObject.NodeType getNodeType();
+  public abstract int getDepth(boolean);
+  public abstract int getHeight(boolean);
+  public abstract int getSize(boolean);
+  public abstract boolean isMutable();
+}
+Compiled from "Functions.java"
+public class darwin.nodeFilter.Functions extends darwin.nodeFilter.Filter {
+  public darwin.nodeFilter.Functions(java.lang.Class<?>);
+  public boolean accept(darwin.nodeFilter.Filterable);
+}
+Compiled from "HeightRange.java"
+public class darwin.nodeFilter.HeightRange extends darwin.nodeFilter.Filter {
+  public darwin.nodeFilter.HeightRange(java.lang.Class<?>, int, int);
+  public boolean accept(darwin.nodeFilter.Filterable);
+}
+Compiled from "NodeType.java"
+public class darwin.nodeFilter.NodeType extends darwin.nodeFilter.Filter {
+  public darwin.nodeFilter.NodeType(darwin.nodeFilter.NodeType);
+  public boolean accept(darwin.nodeFilter.Filterable);
+}
+Compiled from "ReturnType.java"
+public class darwin.nodeFilter.ReturnType extends darwin.nodeFilter.Filter {
+  public darwin.nodeFilter.ReturnType(java.lang.Class<?>);
+  public boolean accept(darwin.nodeFilter.Filterable);
+}
+Compiled from "Signature.java"
+public class darwin.nodeFilter.Signature extends darwin.nodeFilter.Filter {
+  public darwin.nodeFilter.Signature(java.lang.Class<?>, java.lang.Class<?>[]);
+  public boolean accept(darwin.nodeFilter.Filterable);
+}
+Compiled from "SizeRange.java"
+public class darwin.nodeFilter.SizeRange extends darwin.nodeFilter.Filter {
+  public darwin.nodeFilter.SizeRange(java.lang.Class<?>, int, int);
+  public boolean accept(darwin.nodeFilter.Filterable);
+}
+Compiled from "Terminals.java"
+public class darwin.nodeFilter.Terminals extends darwin.nodeFilter.Filter {
+  public darwin.nodeFilter.Terminals(java.lang.Class<?>);
+  public boolean accept(darwin.nodeFilter.Filterable);
+}
+Compiled from "Grid.java"
+public abstract class darwin.output.Grid extends javax.swing.JComponent {
+  public static final int TOP_LEFT;
+  public static final int TOP_RIGHT;
+  public static final int BOTTOM_RIGHT;
+  public static final int BOTTOM_LEFT;
+  protected int anchor;
+  protected int horizontalLines;
+  protected int verticalLines;
+  protected double heightProportion;
+  protected double widthProportion;
+  protected java.awt.Color backgroundColor;
+  protected java.awt.Color gridColor;
+  protected int width;
+  protected int height;
+  protected int left;
+  protected int right;
+  protected int top;
+  protected int bottom;
+  protected int xSpace;
+  protected int ySpace;
+  protected double minX;
+  protected double maxX;
+  protected double minY;
+  protected double maxY;
+  protected double xRange;
+  protected double yRange;
+  public darwin.output.Grid();
+  public void setAnchor(int);
+  public void setHorizontalLines(int);
+  public void setVerticalLines(int);
+  public void setHeightProportion(double);
+  public void setWidthProportion(double);
+  public void setBackgroundColor(java.awt.Color);
+  public void setGridColor(java.awt.Color);
+  protected void calculateValues();
+  public int getXPixel(double);
+  public int getYPixel(double);
+  public double getXCoord(int);
+  public double getYCoord(int);
+  protected double interpolate(double, double, double);
+  public void paint(java.awt.Graphics);
+}
+Compiled from "Plot.java"
+public class darwin.output.Plot {
+  public darwin.output.Plot(java.util.List<java.awt.geom.Point2D$Double>);
+  public java.util.List<java.awt.geom.Point2D$Double> getPoints();
+  public void setPoints(java.util.List<java.awt.geom.Point2D$Double>);
+  public java.awt.Color getPointColor();
+  public java.awt.Color getConnectColor();
+  public void setPointColor(java.awt.Color);
+  public void setConnectColor(java.awt.Color);
+  public boolean isConnect();
+  public void setConnect(boolean);
+  public boolean isCircle();
+  public void setCircle(boolean);
+  public boolean isFill();
+  public void setFill(boolean);
+  public int getSize();
+  public void setSize(int);
+}
+Compiled from "ScatterPlot.java"
+public class darwin.output.ScatterPlot extends darwin.output.Grid {
+  public darwin.output.ScatterPlot();
+  public void addPlot(darwin.output.Plot);
+  public int getNumPlots();
+  public darwin.output.Plot getPlot(int);
+  protected void processRange();
+  public void paint(java.awt.Graphics);
+}
+Compiled from "Individual.java"
+public class darwin.population.Individual implements java.io.Serializable {
+  darwin.population.Node[] trees;
+  java.lang.Class<?>[] treeTypes;
+  public darwin.population.Individual(java.lang.Class<?>[]);
+  public darwin.population.Individual(darwin.population.Node[]);
+  public int getNumTrees();
+  public java.lang.Class<?> getTreeType(int);
+  public darwin.population.Node getTree(int);
+  public void setTree(int, darwin.population.Node) throws darwin.population.TypeMismatchException;
+  public int getComplexity();
+  public boolean equals(darwin.population.Individual);
+  public darwin.population.Individual clone();
+  public java.util.List<darwin.population.Node> filterTrees(darwin.nodeFilter.Filter);
+  public java.lang.String toString();
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "Node.java"
+public class darwin.population.Node implements java.io.Serializable,darwin.nodeFilter.Filterable {
+  public darwin.population.Node(darwin.problemObject.NodeType);
+  public darwin.population.Node(darwin.problemObject.NodeType, darwin.problemObject.Processable<?>);
+  public int getArity();
+  public darwin.problemObject.NodeType getNodeType();
+  public darwin.problemObject.Processable<?> getProcessable();
+  public java.lang.Object getValue(java.lang.Object);
+  public java.lang.Class<?> getReturnType();
+  public darwin.population.Node getChildNode(int);
+  public darwin.population.Node[] getChildNodes();
+  public java.lang.Class<?> getChildType(int);
+  public java.lang.Class<?>[] getChildTypes();
+  public darwin.population.Node getParent();
+  public int getBirthOrder();
+  public java.lang.Class<?> getExpectedType();
+  public void setParent(int, darwin.population.Node);
+  public void setChildNode(int, darwin.population.Node) throws darwin.population.TypeMismatchException;
+  public void setProcessable(darwin.problemObject.Processable<?>);
+  public void replace(darwin.population.Node) throws darwin.population.TypeMismatchException;
+  public void swap(darwin.population.Node) throws darwin.population.TypeMismatchException;
+  public int getSize(boolean);
+  public int getHeight(boolean);
+  public int getDepth(boolean);
+  public darwin.population.Node cloneSubtree();
+  public darwin.population.Node clone();
+  public java.util.List<darwin.population.Node> filterSubtree(darwin.nodeFilter.Filter, boolean);
+  public void setGrandParent(darwin.population.Individual, int);
+  public darwin.population.Individual getGrandParent();
+  public int getFamily();
+  public boolean equals(darwin.population.Node);
+  public boolean isMutable();
+  public java.lang.String toString();
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "Population.java"
+public class darwin.population.Population {
+  public darwin.population.Population(java.util.List<darwin.population.Individual>, java.lang.Object);
+  public java.util.List<darwin.population.Individual> getIndividuals();
+  public java.lang.Object getEnvironment();
+  public int getPopulationSize();
+  public darwin.population.Individual getIndividual(int);
+  public void setIndividuals(java.util.List<darwin.population.Individual>);
+}
+Compiled from "TypeMismatchException.java"
+public class darwin.population.TypeMismatchException extends java.lang.Exception {
+  public darwin.population.TypeMismatchException();
+}
+Compiled from "DarwinSheet.java"
+public interface darwin.problemObject.DarwinSheet {
+  public abstract darwin.problemObject.NodeFactory getNodeFactory();
+  public abstract darwin.problemObject.FitnessAnalyzer getFitnessAnalyzer();
+  public abstract darwin.problemObject.Output getOutput();
+}
+Compiled from "DefaultNodeFactory.java"
+public abstract class darwin.problemObject.DefaultNodeFactory implements darwin.problemObject.NodeFactory {
+  public darwin.problemObject.DefaultNodeFactory();
+  public abstract java.util.List<darwin.problemObject.NodeType> getAvailableNodes();
+  public darwin.population.Node getNode(darwin.nodeFilter.Filter) throws darwin.initialization.NoAvailableNodeException;
+}
+Compiled from "FitnessAnalyzer.java"
+public abstract class darwin.problemObject.FitnessAnalyzer {
+  public darwin.problemObject.FitnessAnalyzer();
+  public abstract int getNumberMetrics();
+  public abstract double[] assessFitness(darwin.population.Individual, java.lang.Object);
+  public abstract double standardize(int, double);
+  public java.lang.String getFitnessName(int);
+  public void generationComplete();
+  public abstract darwin.problemObject.FitnessAnalyzer clone();
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "NodeFactory.java"
+public interface darwin.problemObject.NodeFactory {
+  public abstract darwin.population.Node getNode(darwin.nodeFilter.Filter) throws darwin.initialization.NoAvailableNodeException;
+  public abstract java.lang.Class<?>[] getReturnTypes();
+}
+Compiled from "NodeType.java"
+public abstract class darwin.problemObject.NodeType implements darwin.nodeFilter.Filterable {
+  public darwin.problemObject.NodeType();
+  public int getHeight(boolean);
+  public int getDepth(boolean);
+  public int getSize(boolean);
+  public int getArity();
+  public java.lang.Class<?> getChildType(int);
+  public darwin.problemObject.NodeType getNodeType();
+  public boolean isMutable();
+  public boolean equals(darwin.problemObject.NodeType);
+  public abstract darwin.problemObject.Processable<?> getProcessable();
+  public abstract java.lang.Class<?>[] getChildTypes();
+}
+Compiled from "Output.java"
+public interface darwin.problemObject.Output {
+  public abstract javax.swing.JComponent getOutput(darwin.population.Individual, java.lang.Object);
+}
+Compiled from "Processable.java"
+public abstract class darwin.problemObject.Processable<returnType> {
+  public darwin.problemObject.Processable();
+  public abstract returnType getValue(java.lang.Object, darwin.population.Node[]);
+  public abstract darwin.problemObject.Processable<returnType> clone();
+  public boolean equalsIdentity(darwin.problemObject.Processable<?>);
+  protected boolean equalsValue(darwin.problemObject.Processable<?>);
+  public boolean equals(darwin.problemObject.Processable<?>);
+  public java.lang.String toString();
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "FitnessProportional.java"
+public class darwin.selection.FitnessProportional extends darwin.selection.Selection {
+  public darwin.selection.FitnessProportional();
+  public int select(int);
+}
+Compiled from "NegativeTournament.java"
+public class darwin.selection.NegativeTournament extends darwin.selection.Selection {
+  public darwin.selection.NegativeTournament(int);
+  public int select(int);
+}
+Compiled from "Selection.java"
+public abstract class darwin.selection.Selection {
+  protected darwin.fitness.Fitness fitness;
+  protected darwin.population.Population[] universe;
+  public darwin.selection.Selection();
+  public void setUniverse(darwin.population.Population[]);
+  public void setFitness(darwin.fitness.Fitness);
+  public abstract int select(int);
+  public darwin.population.Individual selectIndividual(int);
+}
+Compiled from "Tournament.java"
+public class darwin.selection.Tournament extends darwin.selection.Selection {
+  public darwin.selection.Tournament(int);
+  public int select(int);
+}
+Compiled from "BusyException.java"
+public class darwin.work.BusyException extends java.lang.Exception {
+  public darwin.work.BusyException();
+}
+Compiled from "Job.java"
+public interface darwin.work.Job {
+  public abstract java.lang.Object run(java.lang.Object, java.util.HashMap<java.lang.String, java.lang.Object>);
+}
+Compiled from "JobRunner.java"
+public interface darwin.work.JobRunner {
+  public abstract void putSharedData(java.lang.String, java.lang.Object);
+  public abstract void addJob(darwin.work.Job, java.lang.Object) throws darwin.work.BusyException;
+  public abstract java.util.List<java.lang.Object> dispatch() throws darwin.work.BusyException;
+}
+Compiled from "Pair.java"
+public class darwin.work.threadPool.Pair<T, U> {
+  public darwin.work.threadPool.Pair(T, U);
+  public T fst();
+  public U snd();
+}
+Compiled from "ThreadPool.java"
+public class darwin.work.threadPool.ThreadPool extends java.lang.Thread implements darwin.work.JobRunner {
+  public darwin.work.threadPool.ThreadPool(int);
+  public void addJob(darwin.work.Job, java.lang.Object) throws darwin.work.BusyException;
+  public void putSharedData(java.lang.String, java.lang.Object);
+  public java.util.List<java.lang.Object> dispatch() throws darwin.work.BusyException;
+  public void notifyResult(java.lang.Object);
+  public void killThreads();
+  public void run();
+}
+Compiled from "Worker.java"
+public class darwin.work.threadPool.Worker extends java.lang.Thread {
+  public darwin.work.threadPool.Worker(darwin.work.threadPool.ThreadPool);
+  public void putSharedData(java.lang.String, java.lang.Object);
+  public boolean isBusy();
+  public void doWork(darwin.work.Job, java.lang.Object) throws darwin.work.BusyException;
+  public void run();
+  public void killThread();
+}
+Compiled from "DarwinSheet.java"
+public class glass.DarwinSheet implements darwin.problemObject.DarwinSheet {
+  public glass.DarwinSheet();
+  public darwin.problemObject.FitnessAnalyzer getFitnessAnalyzer();
+  public darwin.problemObject.NodeFactory getNodeFactory();
+  public darwin.problemObject.Output getOutput();
+}
+Compiled from "FitnessAnalyzer.java"
+public class glass.FitnessAnalyzer extends darwin.problemObject.FitnessAnalyzer {
+  public glass.FitnessAnalyzer();
+  public java.lang.String getFitnessName(int);
+  public double[] assessFitness(darwin.population.Individual, java.lang.Object);
+  public int getNumberMetrics();
+  public glass.FitnessAnalyzer clone();
+  public double standardize(int, double);
+  public darwin.problemObject.FitnessAnalyzer clone();
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "NodeFactory.java"
+public class glass.NodeFactory extends darwin.problemObject.DefaultNodeFactory {
+  public glass.NodeFactory();
+  public java.util.List<darwin.problemObject.NodeType> getAvailableNodes();
+  public java.lang.Class<?>[] getReturnTypes();
+}
+Compiled from "Output.java"
+public class glass.Output implements darwin.problemObject.Output {
+  public glass.Output();
+  public javax.swing.JComponent getOutput(darwin.population.Individual, java.lang.Object);
+}
+Compiled from "Test.java"
+public class glass.Test {
+  public glass.Test();
+  public static void main(java.lang.String[]);
+}
+Compiled from "Circle.java"
+public class glass.drawing.Circle extends glass.drawing.Shape {
+  public glass.drawing.Circle(java.awt.geom.Point2D$Double, double, java.awt.Color, double);
+  public boolean containsPoint(java.awt.geom.Point2D$Double);
+}
+Compiled from "Picture.java"
+public class glass.drawing.Picture extends javax.swing.JComponent {
+  public glass.drawing.Picture(glass.drawing.ShapeSet);
+  public void paint(java.awt.Graphics);
+}
+Compiled from "Shape.java"
+public abstract class glass.drawing.Shape {
+  public glass.drawing.Shape(java.awt.Color, double);
+  public java.awt.Color getColor();
+  public double getOpacity();
+  public abstract boolean containsPoint(java.awt.geom.Point2D$Double);
+}
+Compiled from "ShapeSet.java"
+public class glass.drawing.ShapeSet {
+  public glass.drawing.ShapeSet(java.awt.Color);
+  public void addShape(glass.drawing.Shape);
+  public java.awt.Color getPointColor(java.awt.geom.Point2D$Double);
+}
+Compiled from "Triangle.java"
+public class glass.drawing.Triangle extends glass.drawing.Shape {
+  public glass.drawing.Triangle(java.awt.geom.Point2D$Double, java.awt.geom.Point2D$Double, java.awt.geom.Point2D$Double, java.awt.Color, double);
+  public boolean containsPoint(java.awt.geom.Point2D$Double);
+}
+Compiled from "Color.java"
+public class glass.nodeType.Color extends darwin.problemObject.NodeType {
+  public glass.nodeType.Color();
+  public java.lang.Class<?>[] getChildTypes();
+  public darwin.problemObject.Processable<?> getProcessable();
+  public java.lang.Class<?> getReturnType();
+}
+Compiled from "DrawCircle.java"
+public class glass.nodeType.DrawCircle extends darwin.problemObject.NodeType {
+  public glass.nodeType.DrawCircle();
+  public java.lang.Class<?>[] getChildTypes();
+  public darwin.problemObject.Processable<?> getProcessable();
+  public java.lang.Class<?> getReturnType();
+}
+Compiled from "DrawTriangle.java"
+public class glass.nodeType.DrawTriangle extends darwin.problemObject.NodeType {
+  public glass.nodeType.DrawTriangle();
+  public java.lang.Class<?>[] getChildTypes();
+  public darwin.problemObject.Processable<?> getProcessable();
+  public java.lang.Class<?> getReturnType();
+}
+Compiled from "Point.java"
+public class glass.nodeType.Point extends darwin.problemObject.NodeType {
+  public glass.nodeType.Point();
+  public java.lang.Class<?>[] getChildTypes();
+  public darwin.problemObject.Processable<?> getProcessable();
+  public java.lang.Class<?> getReturnType();
+}
+Compiled from "Split.java"
+public class glass.nodeType.Split extends darwin.problemObject.NodeType {
+  public glass.nodeType.Split();
+  public java.lang.Class<?>[] getChildTypes();
+  public darwin.problemObject.Processable<?> getProcessable();
+  public java.lang.Class<?> getReturnType();
+}
+Compiled from "Terminal.java"
+public class glass.nodeType.Terminal extends darwin.problemObject.NodeType {
+  public glass.nodeType.Terminal();
+  public java.lang.Class<?>[] getChildTypes();
+  public darwin.problemObject.Processable<?> getProcessable();
+  public java.lang.Class<?> getReturnType();
+}
+Compiled from "Color.java"
+public class glass.processable.Color extends darwin.problemObject.Processable<java.awt.Color> {
+  public glass.processable.Color();
+  public java.awt.Color getValue(java.lang.Object, darwin.population.Node[]);
+  public darwin.problemObject.Processable<java.awt.Color> clone();
+  public java.lang.Object getValue(java.lang.Object, darwin.population.Node[]);
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "DrawCircle.java"
+public class glass.processable.DrawCircle extends darwin.problemObject.Processable<darwin.common.Unit> {
+  public glass.processable.DrawCircle();
+  public darwin.common.Unit getValue(java.lang.Object, darwin.population.Node[]);
+  public darwin.problemObject.Processable<darwin.common.Unit> clone();
+  public java.lang.Object getValue(java.lang.Object, darwin.population.Node[]);
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "DrawTriangle.java"
+public class glass.processable.DrawTriangle extends darwin.problemObject.Processable<darwin.common.Unit> {
+  public glass.processable.DrawTriangle();
+  public darwin.common.Unit getValue(java.lang.Object, darwin.population.Node[]);
+  public darwin.problemObject.Processable<darwin.common.Unit> clone();
+  public java.lang.Object getValue(java.lang.Object, darwin.population.Node[]);
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "Point.java"
+public class glass.processable.Point extends darwin.problemObject.Processable<java.awt.geom.Point2D$Double> {
+  public glass.processable.Point();
+  public java.awt.geom.Point2D$Double getValue(java.lang.Object, darwin.population.Node[]);
+  public darwin.problemObject.Processable<java.awt.geom.Point2D$Double> clone();
+  public java.lang.Object getValue(java.lang.Object, darwin.population.Node[]);
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "Split.java"
+public class glass.processable.Split extends darwin.problemObject.Processable<darwin.common.Unit> {
+  public glass.processable.Split();
+  public darwin.common.Unit getValue(java.lang.Object, darwin.population.Node[]);
+  public darwin.problemObject.Processable<darwin.common.Unit> clone();
+  public java.lang.Object getValue(java.lang.Object, darwin.population.Node[]);
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "Terminal.java"
+public class glass.processable.Terminal extends darwin.problemObject.Processable<darwin.common.Unit> {
+  public glass.processable.Terminal();
+  public darwin.common.Unit getValue(java.lang.Object, darwin.population.Node[]);
+  public darwin.problemObject.Processable<darwin.common.Unit> clone();
+  public java.lang.Object getValue(java.lang.Object, darwin.population.Node[]);
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "DarwinSheet.java"
+public class imageCompression.DarwinSheet implements darwin.problemObject.DarwinSheet {
+  public imageCompression.DarwinSheet();
+  public darwin.problemObject.FitnessAnalyzer getFitnessAnalyzer();
+  public darwin.problemObject.NodeFactory getNodeFactory();
+  public darwin.problemObject.Output getOutput();
+}
+Compiled from "FitnessAnalyzer.java"
+public class imageCompression.FitnessAnalyzer extends darwin.problemObject.FitnessAnalyzer {
+  public imageCompression.FitnessAnalyzer();
+  public java.lang.String getFitnessName(int);
+  public double[] assessFitness(darwin.population.Individual, java.lang.Object);
+  public int getNumberMetrics();
+  public imageCompression.FitnessAnalyzer clone();
+  public double standardize(int, double);
+  public darwin.problemObject.FitnessAnalyzer clone();
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "NodeFactory.java"
+public class imageCompression.NodeFactory extends darwin.problemObject.DefaultNodeFactory {
+  public imageCompression.NodeFactory();
+  public java.util.List<darwin.problemObject.NodeType> getAvailableNodes();
+  public java.lang.Class<?>[] getReturnTypes();
+}
+Compiled from "Output.java"
+public class imageCompression.Output implements darwin.problemObject.Output {
+  public imageCompression.Output();
+  public javax.swing.JComponent getOutput(darwin.population.Individual, java.lang.Object);
+}
+Compiled from "Picture.java"
+public class imageCompression.Picture extends javax.swing.JComponent {
+  public imageCompression.Picture(darwin.population.Individual, java.awt.image.BufferedImage);
+  public void paint(java.awt.Graphics);
+}
+Compiled from "Variable.java"
+public class imageCompression.nodeType.Variable extends darwin.problemObject.NodeType {
+  public imageCompression.nodeType.Variable();
+  public java.lang.Class<?>[] getChildTypes();
+  public darwin.problemObject.Processable<?> getProcessable();
+  public java.lang.Class<?> getReturnType();
+}
+Compiled from "Variable.java"
+public class imageCompression.processable.Variable extends darwin.problemObject.Processable<java.lang.Double> {
+  public static final int X;
+  public static final int Y;
+  public imageCompression.processable.Variable(int);
+  public java.lang.Double getValue(java.lang.Object, darwin.population.Node[]);
+  public darwin.problemObject.Processable<java.lang.Double> clone();
+  public java.lang.Object getValue(java.lang.Object, darwin.population.Node[]);
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "DarwinSheet.java"
+public class symbolicRegression.DarwinSheet implements darwin.problemObject.DarwinSheet {
+  public symbolicRegression.DarwinSheet();
+  public darwin.problemObject.FitnessAnalyzer getFitnessAnalyzer();
+  public darwin.problemObject.NodeFactory getNodeFactory();
+  public darwin.problemObject.Output getOutput();
+}
+Compiled from "FitnessAnalyzer.java"
+public class symbolicRegression.FitnessAnalyzer extends darwin.problemObject.FitnessAnalyzer {
+  public symbolicRegression.FitnessAnalyzer();
+  public java.lang.String getFitnessName(int);
+  public double[] assessFitness(darwin.population.Individual, java.lang.Object);
+  public int getNumberMetrics();
+  public symbolicRegression.FitnessAnalyzer clone();
+  public double standardize(int, double);
+  public darwin.problemObject.FitnessAnalyzer clone();
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "FunctionGraph.java"
+public class symbolicRegression.FunctionGraph extends darwin.output.ScatterPlot {
+  public symbolicRegression.FunctionGraph(darwin.population.Individual, symbolicRegression.environment.XYValues);
+  public void paint(java.awt.Graphics);
+}
+Compiled from "NodeFactory.java"
+public class symbolicRegression.NodeFactory extends darwin.problemObject.DefaultNodeFactory {
+  public symbolicRegression.NodeFactory();
+  public java.util.List<darwin.problemObject.NodeType> getAvailableNodes();
+  public java.lang.Class<?>[] getReturnTypes();
+}
+Compiled from "Output.java"
+public class symbolicRegression.Output implements darwin.problemObject.Output {
+  public symbolicRegression.Output();
+  public javax.swing.JComponent getOutput(darwin.population.Individual, java.lang.Object);
+}
+Compiled from "Function.java"
+public interface symbolicRegression.environment.Function {
+  public abstract double getY(double);
+}
+Compiled from "Position.java"
+public class symbolicRegression.environment.Position {
+  public double x;
+  public double y;
+  public symbolicRegression.environment.Position(double, double);
+}
+Compiled from "TargetFunction.java"
+public class symbolicRegression.environment.TargetFunction implements symbolicRegression.environment.XYValues {
+  java.util.ArrayList<java.awt.geom.Point2D$Double> values;
+  public symbolicRegression.environment.TargetFunction(symbolicRegression.environment.Function, double, double, int);
+  public java.util.ArrayList<java.awt.geom.Point2D$Double> getValues();
+}
+Compiled from "XYValues.java"
+public interface symbolicRegression.environment.XYValues {
+  public abstract java.util.ArrayList<java.awt.geom.Point2D$Double> getValues();
+}
+Compiled from "Variable.java"
+public class symbolicRegression.nodeType.Variable extends darwin.problemObject.NodeType {
+  public symbolicRegression.nodeType.Variable();
+  public java.lang.Class<?>[] getChildTypes();
+  public darwin.problemObject.Processable<?> getProcessable();
+  public java.lang.Class<?> getReturnType();
+}
+Compiled from "Variable.java"
+public class symbolicRegression.processable.Variable extends darwin.problemObject.Processable<java.lang.Double> {
+  public symbolicRegression.processable.Variable();
+  public java.lang.Double getValue(java.lang.Object, darwin.population.Node[]);
+  public darwin.problemObject.Processable<java.lang.Double> clone();
+  public java.lang.Object getValue(java.lang.Object, darwin.population.Node[]);
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "Driver.java"
+public class tui.Driver {
+  public tui.Driver();
+  public static void main(java.lang.String[]);
+}
+Compiled from "txtListener.java"
+public class tui.txtListener implements darwin.control.EventListener {
+  darwin.control.Parameters parameters;
+  public tui.txtListener(darwin.control.Parameters);
+  public void generationCompleted(darwin.control.Darwin);
+}

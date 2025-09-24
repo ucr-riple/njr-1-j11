@@ -1,0 +1,1321 @@
+Compiled from "KyoroByteOutput.java"
+public interface net.hetimatan.io.file.KyoroByteOutput {
+  public abstract int write(int) throws java.io.IOException;
+  public abstract int write(byte[]) throws java.io.IOException;
+  public abstract int write(byte[], int, int) throws java.io.IOException;
+}
+Compiled from "KyoroFile.java"
+public interface net.hetimatan.io.file.KyoroFile {
+  public abstract long getFilePointer();
+  public abstract void seek(long) throws java.io.IOException;
+  public abstract long length() throws java.io.IOException;
+  public abstract int waitForUnreadable(int) throws java.io.IOException;
+  public abstract int read(byte[]) throws java.io.IOException;
+  public abstract int read(byte[], int, int) throws java.io.IOException;
+  public abstract void close() throws java.io.IOException;
+  public abstract void addChunk(byte[], int, int) throws java.io.IOException;
+  public abstract void addChunk(byte[]) throws java.io.IOException;
+  public abstract void syncWrite() throws java.io.IOException;
+}
+Compiled from "KyoroFileForFiles.java"
+public class net.hetimatan.io.file.KyoroFileForFiles implements net.hetimatan.io.file.KyoroFile {
+  public static net.hetimatan.io.file.KyoroFileForFiles create(java.util.LinkedList<java.io.File>) throws java.io.IOException;
+  public net.hetimatan.io.file.KyoroFileForFiles(net.hetimatan.io.file.KyoroFile[]) throws java.io.IOException;
+  public net.hetimatan.io.filen.CashKyoroFile getVF();
+  public long getFilePointer();
+  public void seek(long) throws java.io.IOException;
+  public long length() throws java.io.IOException;
+  public synchronized int read(byte[]) throws java.io.IOException;
+  public synchronized int read(byte[], int, int) throws java.io.IOException;
+  public void close() throws java.io.IOException;
+  public void addChunk(byte[], int, int) throws java.io.IOException;
+  public void addChunk(byte[]) throws java.io.IOException;
+  public void syncWrite() throws java.io.IOException;
+  public int waitForUnreadable(int) throws java.io.IOException;
+}
+Compiled from "KyoroFileForKyoroSocket.java"
+public class net.hetimatan.io.file.KyoroFileForKyoroSocket extends java.io.OutputStream implements net.hetimatan.io.file.KyoroFile {
+  public static final java.lang.String TAG;
+  public net.hetimatan.io.file.KyoroFileForKyoroSocket(net.hetimatan.util.event.net.io.KyoroSocket, int) throws java.io.IOException;
+  public void setSelector(net.hetimatan.util.event.net.io.KyoroSelector);
+  public net.hetimatan.io.filen.CashKyoroFile getVF();
+  public long getFilePointer();
+  public void seek(long) throws java.io.IOException;
+  public long length() throws java.io.IOException;
+  public synchronized int read(byte[]) throws java.io.IOException;
+  public synchronized int read(byte[], int, int) throws java.io.IOException;
+  public void close() throws java.io.IOException;
+  public void addChunk(byte[], int, int) throws java.io.IOException;
+  public void addChunk(byte[]) throws java.io.IOException;
+  public void syncWrite() throws java.io.IOException;
+  public void baseFileIsClosedWhenCallClose(boolean);
+  public void write(int) throws java.io.IOException;
+  public int waitForUnreadable(int) throws java.io.IOException;
+}
+Compiled from "MarkableFileReader.java"
+public class net.hetimatan.io.file.MarkableFileReader implements net.hetimatan.io.file.MarkableReader {
+  public static final int TIMEOUT;
+  public boolean setBlockOn(boolean);
+  public void pushMark();
+  public void backToMark();
+  public long popMark();
+  public int markSize();
+  public net.hetimatan.io.file.MarkableFileReader(byte[]) throws java.io.IOException;
+  public net.hetimatan.io.file.MarkableFileReader(java.io.File, int) throws java.io.IOException;
+  public net.hetimatan.io.file.MarkableFileReader(net.hetimatan.io.file.KyoroFile, int) throws java.io.FileNotFoundException;
+  public int peek() throws java.io.IOException;
+  public void seek(long) throws java.io.IOException;
+  public long getFilePointer() throws java.io.IOException;
+  public long length() throws java.io.IOException;
+  public void baseFileIsClosedWhenCallClose(boolean);
+  public void close() throws java.io.IOException;
+  public int waitForUnreadable(int) throws java.io.IOException;
+  public int read() throws java.io.IOException;
+  public int read(byte[], int, int) throws java.io.IOException;
+  public int read(byte[]) throws java.io.IOException;
+  public boolean isEOF() throws java.io.IOException;
+}
+Compiled from "MarkableReader.java"
+public interface net.hetimatan.io.file.MarkableReader {
+  public static final int EOF;
+  public static final int STOCK_IS_NONE;
+  public abstract void pushMark();
+  public abstract long popMark();
+  public abstract void backToMark();
+  public abstract int peek() throws java.io.IOException;
+  public abstract int read() throws java.io.IOException;
+  public abstract int read(byte[], int, int) throws java.io.IOException;
+  public abstract void seek(long) throws java.io.IOException;
+  public abstract long getFilePointer() throws java.io.IOException;
+  public abstract boolean setBlockOn(boolean);
+  public abstract int waitForUnreadable(int) throws java.io.IOException;
+  public abstract long length() throws java.io.IOException;
+  public abstract void close() throws java.io.IOException;
+  public abstract boolean isEOF() throws java.io.IOException;
+}
+Compiled from "MarkableReaderHelper.java"
+public class net.hetimatan.io.file.MarkableReaderHelper {
+  public net.hetimatan.io.file.MarkableReaderHelper();
+  public static byte[] asciiAndGet(net.hetimatan.io.file.MarkableReader, byte[], int) throws java.io.IOException;
+  public static void ascii(net.hetimatan.io.file.MarkableReader, byte[], int) throws java.io.IOException;
+  public static byte[] jumpAndGet(net.hetimatan.io.file.MarkableReader, byte[], int) throws java.io.IOException;
+  public static void jumpPattern(net.hetimatan.io.file.MarkableReader, byte[], int) throws java.io.IOException;
+  public static void match(net.hetimatan.io.file.MarkableReader, byte[]) throws java.io.IOException;
+  public static int readInt(net.hetimatan.io.file.MarkableReader, int) throws java.io.IOException;
+  public static int readShort(net.hetimatan.io.file.MarkableReader, int) throws java.io.IOException;
+  public static byte[] readBuffer(net.hetimatan.io.file.MarkableReader, int) throws java.io.IOException;
+}
+Compiled from "TestForKyoroFileForFiles.java"
+public class net.hetimatan.io.file.TestForKyoroFileForFiles extends junit.framework.TestCase {
+  public net.hetimatan.io.file.TestForKyoroFileForFiles();
+  public void testHello();
+  public void testOne001() throws java.io.IOException;
+  public void testOne002() throws java.io.IOException;
+  public void testTwo001() throws java.io.IOException;
+  public void testTwo002() throws java.io.IOException;
+  public void testTwo001_ByteKyoroFile() throws java.io.IOException;
+  public void testOne003() throws java.io.IOException;
+}
+Compiled from "TestForMarkableFileReader.java"
+public class net.hetimatan.io.file.TestForMarkableFileReader extends junit.framework.TestCase {
+  public net.hetimatan.io.file.TestForMarkableFileReader();
+  public void testHello();
+  public void test000() throws java.io.IOException;
+  public void test001() throws java.io.IOException;
+  public void test002() throws java.io.IOException;
+  public void test003() throws java.io.IOException;
+  public void test004() throws java.io.IOException;
+}
+Compiled from "TestForVirtualFile.java"
+public class net.hetimatan.io.file.TestForVirtualFile extends junit.framework.TestCase {
+  public net.hetimatan.io.file.TestForVirtualFile();
+  public void log(java.lang.String);
+  public void testHello();
+  public void testZeroByte() throws java.io.IOException;
+  public void testSync() throws java.io.IOException;
+  public void testUnsync() throws java.io.IOException;
+  public void testSecound();
+  public void testThird();
+  public void testExtra1();
+  public java.io.File getFile();
+}
+Compiled from "ByteKyoroFile.java"
+public class net.hetimatan.io.filen.ByteKyoroFile implements net.hetimatan.io.file.KyoroFile,net.hetimatan.io.file.KyoroByteOutput {
+  public net.hetimatan.io.filen.ByteKyoroFile();
+  public net.hetimatan.io.filen.ByteKyoroFile(net.hetimatan.util.io.ByteArrayBuilder);
+  public net.hetimatan.io.filen.ByteKyoroFile(int, int);
+  public byte[] getBuffer();
+  public boolean isUpdated();
+  public void update(java.io.RandomAccessFile) throws java.io.IOException;
+  public void update(net.hetimatan.io.file.KyoroFile) throws java.io.IOException;
+  public boolean have(int);
+  public long getFilePointer();
+  public long skip();
+  public void reset(long) throws java.io.IOException;
+  public void skip(long) throws java.io.IOException;
+  public void seek(long) throws java.io.IOException;
+  public long length() throws java.io.IOException;
+  public long Limit();
+  public int read(byte[]) throws java.io.IOException;
+  public int read(byte[], int, int) throws java.io.IOException;
+  public void addChunk(byte[], int, int) throws java.io.IOException;
+  public void addChunk(byte[]) throws java.io.IOException;
+  public int write(int) throws java.io.IOException;
+  public int write(byte[], int, int) throws java.io.IOException;
+  public int stockedLen();
+  public void writeTo(java.io.RandomAccessFile) throws java.io.IOException;
+  public int waitForUnreadable(int) throws java.io.IOException;
+  public void syncWrite() throws java.io.IOException;
+  public int write(byte[]) throws java.io.IOException;
+  public java.io.OutputStream getLastOutput();
+  public void close() throws java.io.IOException;
+}
+Compiled from "ByteKyoroFile.java"
+public class net.hetimatan.io.filen.ByteKyoroFile$MyOutputStream extends java.io.OutputStream {
+  final net.hetimatan.io.filen.ByteKyoroFile this$0;
+  public net.hetimatan.io.filen.ByteKyoroFile$MyOutputStream(net.hetimatan.io.filen.ByteKyoroFile);
+  public synchronized void write(int) throws java.io.IOException;
+}
+Compiled from "CashKyoroFile.java"
+public class net.hetimatan.io.filen.CashKyoroFile implements net.hetimatan.io.file.KyoroFile,net.hetimatan.io.file.KyoroByteOutput {
+  public static final java.lang.String TAG;
+  public net.hetimatan.io.filen.CashKyoroFile(byte[]) throws java.io.IOException;
+  public net.hetimatan.io.filen.CashKyoroFile(int) throws java.io.IOException;
+  public net.hetimatan.io.filen.CashKyoroFile(int, int) throws java.io.IOException;
+  public net.hetimatan.io.filen.CashKyoroFile(java.io.File, int, int) throws java.io.IOException;
+  public void isCashMode(boolean);
+  public boolean isCashMode();
+  public void close() throws java.io.IOException;
+  public long getFilePointer();
+  public void seek(long) throws java.io.IOException;
+  public long length() throws java.io.IOException;
+  public int waitForUnreadable(int) throws java.io.IOException;
+  public int read(byte[]) throws java.io.IOException;
+  public int read(byte[], int, int) throws java.io.IOException;
+  public int write(byte[]) throws java.io.IOException;
+  public int write(byte[], int, int) throws java.io.IOException;
+  public int write(int) throws java.io.IOException;
+  public net.hetimatan.io.filen.ByteKyoroFile getCash() throws java.io.IOException;
+  public void addChunk(byte[], int, int) throws java.io.IOException;
+  public void addChunk(byte[]) throws java.io.IOException;
+  public void syncWrite() throws java.io.IOException;
+  public net.hetimatan.io.filen.ByteKyoroFile syncWrite(int) throws java.io.IOException;
+  public java.io.OutputStream getLastOutput();
+}
+Compiled from "CashKyoroFile.java"
+public class net.hetimatan.io.filen.CashKyoroFile$MyOutputStream extends java.io.OutputStream {
+  final net.hetimatan.io.filen.CashKyoroFile this$0;
+  public net.hetimatan.io.filen.CashKyoroFile$MyOutputStream(net.hetimatan.io.filen.CashKyoroFile);
+  public synchronized void write(int) throws java.io.IOException;
+}
+Compiled from "CashKyoroFileHelper.java"
+public class net.hetimatan.io.filen.CashKyoroFileHelper {
+  public static final java.lang.String GATAG_DEFAULTCASH;
+  public net.hetimatan.io.filen.CashKyoroFileHelper();
+  public static java.io.File newCashFile();
+  public static byte[] newBinary(net.hetimatan.io.file.KyoroFile) throws java.io.IOException;
+  public static byte[] newBinary(net.hetimatan.io.file.KyoroFile, long) throws java.io.IOException;
+  public static void xcopy(java.io.File[], net.hetimatan.io.filen.CashKyoroFile) throws java.io.IOException;
+  public static void copy(net.hetimatan.io.file.KyoroFile, net.hetimatan.io.filen.CashKyoroFile) throws java.io.IOException;
+  public static net.hetimatan.io.file.KyoroFile subSequence(net.hetimatan.io.filen.CashKyoroFile, long, long) throws java.io.IOException;
+  public static void write(java.io.OutputStream, net.hetimatan.io.file.KyoroFile) throws java.io.IOException;
+  static {};
+}
+Compiled from "ReferenceModifierKyoroFile.java"
+public class net.hetimatan.io.filen.ReferenceModifierKyoroFile implements net.hetimatan.io.file.KyoroFile {
+  public net.hetimatan.io.filen.ReferenceModifierKyoroFile(net.hetimatan.io.file.KyoroFile, long, long, int, int) throws java.io.IOException;
+  public void cash(boolean);
+  public boolean cash();
+  public void close() throws java.io.IOException;
+  public long getFilePointer();
+  public void seek(long) throws java.io.IOException;
+  public long length() throws java.io.IOException;
+  public int waitForUnreadable(int) throws java.io.IOException;
+  public int read(byte[]) throws java.io.IOException;
+  public int read(byte[], int, int) throws java.io.IOException;
+  public net.hetimatan.io.filen.ByteKyoroFile getCash() throws java.io.IOException;
+  public void addChunk(byte[], int, int) throws java.io.IOException;
+  public void addChunk(byte[]) throws java.io.IOException;
+  public void syncWrite() throws java.io.IOException;
+}
+Compiled from "HttpGet.java"
+public class net.hetimatan.net.http.HttpGet {
+  public static final java.lang.String TAG;
+  public java.lang.String sId;
+  public net.hetimatan.net.http.HttpGet() throws java.io.IOException;
+  public net.hetimatan.net.http.HttpGet(net.hetimatan.net.http.HttpGetListener) throws java.io.IOException;
+  public net.hetimatan.util.event.EventTaskRunner getRunner();
+  public net.hetimatan.util.event.net.io.KyoroSocket getSocket();
+  protected net.hetimatan.net.http.request.HttpGetResponse getGetResponse();
+  protected net.hetimatan.net.http.request.HttpGetRequester createGetRequest();
+  public net.hetimatan.net.http.HttpGet update(java.lang.String, java.lang.String, int) throws java.io.IOException;
+  public net.hetimatan.net.http.HttpGet update(java.lang.String) throws java.io.IOException;
+  public void setBody(net.hetimatan.io.file.KyoroFile) throws java.io.IOException;
+  public void addHeader(java.lang.String, java.lang.String);
+  public net.hetimatan.util.event.net.KyoroSocketEventRunner startTask(net.hetimatan.util.event.net.KyoroSocketEventRunner, net.hetimatan.util.event.EventTask);
+  public void connect() throws java.io.IOException, java.lang.InterruptedException;
+  public void send() throws java.lang.InterruptedException, java.io.IOException;
+  public void recvHeader() throws java.io.IOException, java.lang.InterruptedException;
+  public void recvBody() throws java.io.IOException, java.lang.InterruptedException;
+  public byte[] getHeader() throws java.io.IOException;
+  public byte[] getBody() throws java.io.IOException;
+  public boolean isRedirect() throws java.io.IOException;
+  public java.lang.String getLocation() throws java.io.IOException;
+  public void close() throws java.io.IOException;
+  public void dispose() throws java.io.IOException;
+  public boolean isConnected() throws java.io.IOException;
+  public boolean headerIsReadeable() throws java.io.IOException, java.lang.InterruptedException;
+  public boolean bodyIsReadeable() throws java.io.IOException, java.lang.InterruptedException;
+}
+Compiled from "HttpGet.java"
+public class net.hetimatan.net.http.HttpGet$HttpGetTaskManager {
+  public net.hetimatan.util.event.net.MessageSendTask mSendTaskChain;
+  public net.hetimatan.util.event.EventTask mLast;
+  public net.hetimatan.net.http.HttpGet$HttpGetTaskManager();
+}
+Compiled from "HttpGetListener.java"
+public interface net.hetimatan.net.http.HttpGetListener {
+  public abstract boolean onReceiveHeader(net.hetimatan.net.http.HttpGet) throws java.io.IOException;
+  public abstract boolean onReceiveBody(net.hetimatan.net.http.HttpGet) throws java.io.IOException;
+}
+Compiled from "HttpGetListener.java"
+public class net.hetimatan.net.http.HttpGetListener$NullHttpGetListener implements net.hetimatan.net.http.HttpGetListener {
+  public net.hetimatan.net.http.HttpGetListener$NullHttpGetListener();
+  public boolean onReceiveHeader(net.hetimatan.net.http.HttpGet) throws java.io.IOException;
+  public boolean onReceiveBody(net.hetimatan.net.http.HttpGet) throws java.io.IOException;
+}
+Compiled from "HttpHistory.java"
+public class net.hetimatan.net.http.HttpHistory {
+  public static net.hetimatan.net.http.HttpHistory get();
+  public void sync();
+  public synchronized void pushMessage(java.lang.String);
+  static {};
+}
+Compiled from "HttpHistory.java"
+public class net.hetimatan.net.http.HttpHistory$ShutdonwTask implements java.lang.Runnable {
+  final net.hetimatan.net.http.HttpHistory this$0;
+  public net.hetimatan.net.http.HttpHistory$ShutdonwTask(net.hetimatan.net.http.HttpHistory);
+  public void run();
+}
+Compiled from "HttpServer.java"
+public class net.hetimatan.net.http.HttpServer {
+  public static final java.lang.String TAG;
+  public java.lang.String sId;
+  public net.hetimatan.net.http.HttpServer$HttpServerEventDispatcher getDispatcher();
+  public net.hetimatan.util.event.net.KyoroSocketEventRunner getEventRunner();
+  public net.hetimatan.util.event.net.io.KyoroServerSocketImpl getServerSocket();
+  public net.hetimatan.net.http.HttpServer();
+  public net.hetimatan.net.http.HttpServer(net.hetimatan.net.http.HttpServerListener);
+  public boolean isBinded();
+  public void setPort(int);
+  public void boot() throws java.io.IOException;
+  public void accept() throws java.io.IOException;
+  public net.hetimatan.io.file.KyoroFile createResponse(net.hetimatan.net.http.HttpServerFront) throws java.io.IOException;
+  public void close();
+  public void addManagedHttpFront(net.hetimatan.net.http.HttpServerFront);
+  public void removeManagedHttpFront(net.hetimatan.net.http.HttpServerFront);
+  public net.hetimatan.util.event.net.KyoroSocketEventRunner startServer(net.hetimatan.util.event.net.KyoroSocketEventRunner);
+}
+Compiled from "HttpServer.java"
+public class net.hetimatan.net.http.HttpServer$HttpServerEventDispatcher {
+  public net.hetimatan.net.http.HttpServer$HttpServerEventDispatcher();
+  public void dispatchOnBoot(net.hetimatan.net.http.HttpServer);
+  public void addHttpServerListener(net.hetimatan.net.http.HttpServer$HttpServerEventDispatcher$HttpServerListener);
+}
+Compiled from "HttpServer.java"
+public interface net.hetimatan.net.http.HttpServer$HttpServerEventDispatcher$HttpServerListener {
+  public abstract void onBoot(net.hetimatan.net.http.HttpServer);
+}
+Compiled from "HttpServer3xx.java"
+public class net.hetimatan.net.http.HttpServer3xx extends net.hetimatan.net.http.HttpServerTemplate {
+  public net.hetimatan.net.http.HttpServer3xx();
+  public static void main(java.lang.String[]);
+  public net.hetimatan.io.file.KyoroFile createResponse(net.hetimatan.net.http.HttpServerFront, net.hetimatan.util.event.net.io.KyoroSocket, net.hetimatan.util.http.HttpRequest) throws java.io.IOException;
+  public net.hetimatan.io.file.KyoroFile createHeader(java.lang.String, java.lang.String) throws java.io.IOException;
+  static {};
+}
+Compiled from "HttpServerFront.java"
+public class net.hetimatan.net.http.HttpServerFront {
+  public static final java.lang.String TAG;
+  public java.lang.String sId;
+  public long sTimeout;
+  public net.hetimatan.net.http.HttpServerFront(net.hetimatan.net.http.HttpServer, net.hetimatan.util.event.net.io.KyoroSocket) throws java.io.IOException;
+  public void addMyTask(net.hetimatan.util.event.EventTask);
+  public boolean parseableHeader() throws java.io.IOException;
+  public boolean parseableBody() throws java.io.IOException;
+  public void parseHeader() throws java.io.IOException;
+  public void startResponseTask() throws java.io.IOException;
+  public boolean executeFrontWork() throws java.lang.Throwable;
+  public boolean isClosed();
+  public void close() throws java.io.IOException;
+  public net.hetimatan.util.event.net.io.KyoroSocket getSocket();
+  public net.hetimatan.util.http.HttpRequest getHttpRequest();
+}
+Compiled from "HttpServerListener.java"
+public interface net.hetimatan.net.http.HttpServerListener {
+  public abstract net.hetimatan.io.file.KyoroFile onRequest(net.hetimatan.net.http.HttpServerFront) throws java.io.IOException;
+}
+Compiled from "HttpServerResponseCheck.java"
+public class net.hetimatan.net.http.HttpServerResponseCheck extends net.hetimatan.net.http.HttpServerTemplate {
+  public net.hetimatan.net.http.HttpServerResponseCheck();
+  public static void main(java.lang.String[]);
+  public net.hetimatan.io.file.KyoroFile createResponse(net.hetimatan.net.http.HttpServerFront, net.hetimatan.util.event.net.io.KyoroSocket, net.hetimatan.util.http.HttpRequest) throws java.io.IOException;
+  public net.hetimatan.io.file.KyoroFile createContent(net.hetimatan.util.event.net.io.KyoroSocket, net.hetimatan.util.http.HttpRequest) throws java.io.IOException;
+  public int getResponseNumber();
+  static {};
+}
+Compiled from "HttpServerTemplate.java"
+public class net.hetimatan.net.http.HttpServerTemplate extends net.hetimatan.net.http.HttpServer {
+  public static final java.lang.String TAG;
+  public net.hetimatan.net.http.HttpServerTemplate();
+  public net.hetimatan.io.file.KyoroFile createResponse(net.hetimatan.net.http.HttpServerFront) throws java.io.IOException;
+  public net.hetimatan.io.file.KyoroFile createResponse(net.hetimatan.net.http.HttpServerFront, net.hetimatan.util.event.net.io.KyoroSocket, net.hetimatan.util.http.HttpRequest) throws java.io.IOException;
+  public net.hetimatan.util.io.ByteArrayBuilder createHeader(net.hetimatan.util.event.net.io.KyoroSocket, net.hetimatan.util.http.HttpRequest, net.hetimatan.io.file.KyoroFile) throws java.io.IOException;
+  public net.hetimatan.io.file.KyoroFile createContent(net.hetimatan.util.event.net.io.KyoroSocket, net.hetimatan.util.http.HttpRequest) throws java.io.IOException;
+}
+Compiled from "PieceInfo.java"
+public class net.hetimatan.net.http.PieceInfo implements java.lang.Comparable<net.hetimatan.net.http.PieceInfo> {
+  protected long mStart;
+  protected long mEnd;
+  public net.hetimatan.net.http.PieceInfo(long, long);
+  public long getStart();
+  public long getEnd();
+  public int compareTo(net.hetimatan.net.http.PieceInfo);
+  public int compareTo(java.lang.Object);
+}
+Compiled from "PieceInfoList.java"
+public class net.hetimatan.net.http.PieceInfoList {
+  public net.hetimatan.net.http.PieceInfoList();
+  public int size();
+  public net.hetimatan.net.http.PieceInfo getPieceInfo(int);
+  public void append(long, long);
+  public void remove(long, long);
+  public void normalize();
+}
+Compiled from "SimpleHttpServer.java"
+public class net.hetimatan.net.http.SimpleHttpServer extends net.hetimatan.net.http.HttpServerTemplate {
+  public static net.hetimatan.net.http.SimpleHttpServer sServer;
+  public net.hetimatan.net.http.SimpleHttpServer();
+  public net.hetimatan.io.file.KyoroFile createResponse(net.hetimatan.net.http.HttpServerFront, net.hetimatan.util.event.net.io.KyoroSocket, net.hetimatan.util.http.HttpRequest) throws java.io.IOException;
+  public java.lang.String getMimeType(java.lang.String);
+  public net.hetimatan.io.file.KyoroFile createDefaultResponse(net.hetimatan.net.http.HttpServerFront, net.hetimatan.util.event.net.io.KyoroSocket, net.hetimatan.util.http.HttpRequest) throws java.io.IOException;
+  public net.hetimatan.io.file.KyoroFile createSingleRangeResponse(net.hetimatan.net.http.PieceInfo, net.hetimatan.net.http.HttpServerFront, net.hetimatan.util.event.net.io.KyoroSocket, net.hetimatan.util.http.HttpRequest) throws java.io.IOException;
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "TestForHttpGet.java"
+public class net.hetimatan.net.http.TestForHttpGet extends junit.framework.TestCase {
+  public net.hetimatan.net.http.TestForHttpGet();
+  public void testRedirect() throws java.lang.InterruptedException, java.io.IOException;
+}
+Compiled from "TestForHttpPost.java"
+public class net.hetimatan.net.http.TestForHttpPost extends junit.framework.TestCase {
+  public net.hetimatan.net.http.TestForHttpPost();
+  public void testRedirect() throws java.lang.InterruptedException, java.io.IOException;
+}
+Compiled from "HttpGetRequester.java"
+public class net.hetimatan.net.http.request.HttpGetRequester {
+  public static final java.lang.String REQUEST_METHOD_GET;
+  public static final java.lang.String SCHEME_HTTP;
+  public static final java.lang.String HTTP10;
+  public static final java.lang.String HTTP11;
+  public static final java.lang.String HEADER_HOST;
+  public static final java.lang.String USER_AGENT;
+  public static final java.lang.String CONTENT_LENGTH;
+  public void setBody(net.hetimatan.io.file.KyoroFile);
+  public void isPostMode(boolean);
+  public boolean isPostMode();
+  public net.hetimatan.net.http.request.HttpGetRequester();
+  public static void log(java.lang.String);
+  public net.hetimatan.net.http.request.HttpRequestBuilder getUrlBuilder();
+  public net.hetimatan.util.event.net.io.KyoroSocket connect(net.hetimatan.util.event.net.io.KyoroSocket) throws java.io.IOException, java.lang.InterruptedException;
+  public net.hetimatan.util.event.net.MessageSendTask getRequestTask(net.hetimatan.util.event.net.io.KyoroSocket) throws java.io.IOException;
+  public net.hetimatan.net.http.request.HttpGetResponse getResponse(net.hetimatan.util.event.net.io.KyoroSocket) throws java.io.IOException, java.lang.InterruptedException;
+  public synchronized net.hetimatan.util.http.HttpRequest createHttpRequest() throws java.io.IOException;
+  public synchronized byte[] createRequest() throws java.io.IOException;
+  public void close();
+  public static net.hetimatan.net.http.request.HttpGetResponse syncRequest(net.hetimatan.net.http.request.HttpGetRequester, net.hetimatan.util.event.net.io.KyoroSelector) throws java.lang.Throwable;
+  public static net.hetimatan.net.http.request.HttpGetResponse doRequest(net.hetimatan.net.http.request.HttpGetRequester) throws java.lang.Throwable;
+}
+Compiled from "HttpGetResponse.java"
+public class net.hetimatan.net.http.request.HttpGetResponse {
+  public net.hetimatan.net.http.request.HttpGetResponse(net.hetimatan.util.event.net.io.KyoroSocket) throws java.io.IOException;
+  public void todo_setSocket(net.hetimatan.util.event.net.io.KyoroSocket);
+  public int getVFOffset();
+  public net.hetimatan.io.filen.CashKyoroFile getVF();
+  public net.hetimatan.util.http.HttpResponse getHttpResponse() throws java.io.IOException;
+  public void close();
+  public boolean headerIsReadable() throws java.io.IOException;
+  public boolean bodyIsReadable() throws java.io.IOException;
+  public void readHeader() throws java.io.IOException, java.lang.InterruptedException;
+  public void readBody() throws java.io.IOException, java.lang.InterruptedException;
+}
+Compiled from "HttpRequestBuilder.java"
+public class net.hetimatan.net.http.request.HttpRequestBuilder {
+  public static final java.lang.String REQUEST_METHOD_GET;
+  public static final java.lang.String REQUEST_METHOD_POST;
+  public static final java.lang.String SCHEME_HTTP;
+  public static final java.lang.String HTTP10;
+  public static final java.lang.String HTTP11;
+  public static final java.lang.String HEADER_HOST;
+  public static final java.lang.String USER_AGENT;
+  public static final java.lang.String CONTENT_LENGTH;
+  public net.hetimatan.net.http.request.HttpRequestBuilder();
+  public java.lang.String getHost();
+  public int getPort();
+  public net.hetimatan.net.http.request.HttpRequestBuilder setPort(int);
+  public net.hetimatan.net.http.request.HttpRequestBuilder setHttpVersion(java.lang.String);
+  public net.hetimatan.net.http.request.HttpRequestBuilder setHost(java.lang.String);
+  public net.hetimatan.net.http.request.HttpRequestBuilder setPath(java.lang.String);
+  public net.hetimatan.net.http.request.HttpRequestBuilder putValue(java.lang.String, java.lang.String);
+  public net.hetimatan.net.http.request.HttpRequestBuilder putHeader(java.lang.String, java.lang.String);
+  public net.hetimatan.net.http.request.HttpRequestBuilder putBody(net.hetimatan.io.file.KyoroFile);
+  public synchronized net.hetimatan.util.http.HttpRequest createHttpGetRequest() throws java.io.IOException;
+  public synchronized net.hetimatan.util.http.HttpRequest createHttpPostRequest() throws java.io.IOException;
+  public synchronized net.hetimatan.util.http.HttpGetRequestUri createHttpGetRequestUri() throws java.io.IOException;
+}
+Compiled from "HttpGetConnectionTask.java"
+public class net.hetimatan.net.http.task.client.HttpGetConnectionTask extends net.hetimatan.util.event.EventTask {
+  public static final java.lang.String TAG;
+  public net.hetimatan.net.http.task.client.HttpGetConnectionTask(net.hetimatan.net.http.HttpGet, net.hetimatan.util.event.EventTask);
+  public java.lang.String toString();
+  public boolean isKeep();
+  public void action(net.hetimatan.util.event.EventTaskRunner) throws java.lang.InterruptedException, java.io.IOException;
+}
+Compiled from "HttpGetReadBodyTask.java"
+public class net.hetimatan.net.http.task.client.HttpGetReadBodyTask extends net.hetimatan.util.event.EventTask {
+  public static final java.lang.String TAG;
+  public net.hetimatan.net.http.task.client.HttpGetReadBodyTask(net.hetimatan.net.http.HttpGet, net.hetimatan.util.event.EventTask);
+  public java.lang.String toString();
+  public boolean isKeep();
+  public void action(net.hetimatan.util.event.EventTaskRunner) throws java.io.IOException, java.lang.InterruptedException;
+}
+Compiled from "HttpGetReadHeaderTask.java"
+public class net.hetimatan.net.http.task.client.HttpGetReadHeaderTask extends net.hetimatan.util.event.EventTask {
+  public static final java.lang.String TAG;
+  public net.hetimatan.net.http.task.client.HttpGetReadHeaderTask(net.hetimatan.net.http.HttpGet, net.hetimatan.util.event.EventTask);
+  public java.lang.String toString();
+  public boolean isKeep();
+  public void action(net.hetimatan.util.event.EventTaskRunner) throws java.io.IOException, java.lang.InterruptedException;
+}
+Compiled from "HttpGetRequestTask.java"
+public class net.hetimatan.net.http.task.client.HttpGetRequestTask extends net.hetimatan.util.event.EventTask {
+  public static final java.lang.String TAG;
+  public net.hetimatan.net.http.task.client.HttpGetRequestTask(net.hetimatan.net.http.HttpGet, net.hetimatan.util.event.EventTask);
+  public java.lang.String toString();
+  public void action(net.hetimatan.util.event.EventTaskRunner) throws java.lang.InterruptedException, java.io.IOException;
+}
+Compiled from "HttpFrontCloseTask.java"
+public class net.hetimatan.net.http.task.server.HttpFrontCloseTask extends net.hetimatan.util.event.EventTask {
+  public static int sid;
+  public static final java.lang.String TAG;
+  public int mId;
+  public net.hetimatan.net.http.task.server.HttpFrontCloseTask(net.hetimatan.net.http.HttpServerFront);
+  public java.lang.String toString();
+  public void action(net.hetimatan.util.event.EventTaskRunner) throws java.lang.Throwable;
+  static {};
+}
+Compiled from "HttpFrontRequestTask.java"
+public class net.hetimatan.net.http.task.server.HttpFrontRequestTask extends net.hetimatan.util.event.EventTask {
+  public static final java.lang.String TAG;
+  public net.hetimatan.net.http.task.server.HttpFrontRequestTask(net.hetimatan.net.http.HttpServerFront);
+  public java.lang.String toString();
+  public void action(net.hetimatan.util.event.EventTaskRunner) throws java.lang.Throwable;
+}
+Compiled from "HttpFrontWaitParseableHeader.java"
+public class net.hetimatan.net.http.task.server.HttpFrontWaitParseableHeader extends net.hetimatan.util.event.EventTask {
+  public static final java.lang.String TAG;
+  public net.hetimatan.net.http.task.server.HttpFrontWaitParseableHeader(net.hetimatan.net.http.HttpServerFront);
+  public java.lang.String toString();
+  public void action(net.hetimatan.util.event.EventTaskRunner) throws java.lang.Throwable;
+}
+Compiled from "HttpServerAcceptTask.java"
+public class net.hetimatan.net.http.task.server.HttpServerAcceptTask extends net.hetimatan.util.event.EventTask {
+  public static final java.lang.String TAG;
+  public net.hetimatan.net.http.task.server.HttpServerAcceptTask(net.hetimatan.net.http.HttpServer);
+  public java.lang.String toString();
+  public void action(net.hetimatan.util.event.EventTaskRunner) throws java.lang.Throwable;
+}
+Compiled from "HttpServerBootTask.java"
+public class net.hetimatan.net.http.task.server.HttpServerBootTask extends net.hetimatan.util.event.EventTask {
+  public static final java.lang.String TAG;
+  public net.hetimatan.net.http.task.server.HttpServerBootTask(net.hetimatan.net.http.HttpServer);
+  public java.lang.String toString();
+  public void action(net.hetimatan.util.event.EventTaskRunner) throws java.lang.Throwable;
+}
+Compiled from "HttpServerClose.java"
+public class net.hetimatan.net.http.task.server.HttpServerClose extends net.hetimatan.util.event.EventTask {
+  public static final java.lang.String TAG;
+  public net.hetimatan.net.http.task.server.HttpServerClose(net.hetimatan.net.http.HttpServer);
+  public java.lang.String toString();
+  public void action(net.hetimatan.util.event.EventTaskRunner) throws java.lang.Throwable;
+}
+Compiled from "SimpleHttpServer.java"
+public class net.hetimatan.tool.SimpleHttpServer extends net.hetimatan.net.http.HttpServerTemplate {
+  public static java.util.HashMap<java.lang.String, java.lang.String> sMimeType;
+  public static void main(java.lang.String[]);
+  public net.hetimatan.tool.SimpleHttpServer(java.io.File);
+  public net.hetimatan.io.file.KyoroFile createResponse(net.hetimatan.net.http.HttpServerFront, net.hetimatan.util.event.net.io.KyoroSocket, net.hetimatan.util.http.HttpRequest) throws java.io.IOException;
+  public net.hetimatan.io.file.KyoroFile createReturnFileResponse(net.hetimatan.util.http.HttpRequest, java.io.File) throws java.io.IOException;
+  public net.hetimatan.io.file.KyoroFile createDirResponse(net.hetimatan.util.http.HttpRequest, java.io.File) throws java.io.IOException;
+  public static java.lang.String getContentType(java.lang.String);
+  static {};
+}
+Compiled from "WGet.java"
+public class net.hetimatan.tool.WGet {
+  public net.hetimatan.tool.WGet();
+  public static void main(java.lang.String[]);
+}
+Compiled from "WGet.java"
+final class net.hetimatan.tool.WGet$1 implements net.hetimatan.net.http.HttpGetListener {
+  net.hetimatan.tool.WGet$1();
+  public boolean onReceiveHeader(net.hetimatan.net.http.HttpGet) throws java.io.IOException;
+  public boolean onReceiveBody(net.hetimatan.net.http.HttpGet) throws java.io.IOException;
+}
+Compiled from "BitField.java"
+public class net.hetimatan.util.bitfield.BitField {
+  public static final int[] BIT;
+  public static net.hetimatan.util.bitfield.BitField relative(net.hetimatan.util.bitfield.BitField, net.hetimatan.util.bitfield.BitField, net.hetimatan.util.bitfield.BitField);
+  public static int numOfOn(net.hetimatan.util.bitfield.BitField);
+  public void update();
+  public net.hetimatan.util.bitfield.BitField(int);
+  public int getOffPieceAtRandom();
+  public int getOnPieceAtRandom();
+  public int getPieceAtRandom(boolean);
+  protected void shuffle(int[]);
+  public int getOffPieceAtRandomPerByte(int);
+  public int getOnPieceAtRandomPerByte(int);
+  public int getPieceAtRandomPerByte(int, boolean);
+  public boolean isAllOff();
+  public boolean isAllOn();
+  public void oneClear();
+  public void zeroClear();
+  public int lengthPerBit();
+  public int lengthPerByte();
+  public byte[] getBinary();
+  public void setBitfield(byte[]);
+  public void isOn(int, boolean);
+  public boolean isOn(int);
+  public boolean isAllOnPerByte(int);
+  public boolean isAllOffPerByte(int);
+  public java.lang.String toURLString();
+  static {};
+}
+Compiled from "FastBitField.java"
+public class net.hetimatan.util.bitfield.FastBitField extends net.hetimatan.util.bitfield.BitField {
+  public net.hetimatan.util.bitfield.FastBitField(int);
+  public boolean isAllOff();
+  public boolean isAllOn();
+  public void oneClear();
+  public void zeroClear();
+  public void setBitfield(byte[]);
+  public void update();
+  public int getOffPieceAtRandom();
+  public int getPieceAtRandomPer8Byte(int);
+  public void isOn(int, boolean);
+  public net.hetimatan.util.bitfield.BitField getIndex();
+}
+Compiled from "TestForBitField.java"
+public class net.hetimatan.util.bitfield.TestForBitField extends junit.framework.TestCase {
+  public net.hetimatan.util.bitfield.TestForBitField();
+  net.hetimatan.util.bitfield.BitField newBitField(int);
+  public void test_bitsizeIsZero();
+  public void test_bitsizeIsOne();
+  public void test_bitsizeIsNine();
+  public void test_bitsizeIs72();
+  public void test_isAllOnPerByte();
+  public void test_getPieceAtRandom();
+  public void test_getOffPieceAtRandom();
+  public void test_relative();
+  public void testUnique();
+}
+Compiled from "TestForFastBitField.java"
+public class net.hetimatan.util.bitfield.TestForFastBitField extends net.hetimatan.util.bitfield.TestForBitField {
+  public net.hetimatan.util.bitfield.TestForFastBitField();
+  net.hetimatan.util.bitfield.BitField newBitField(int);
+  public void testfast_bitsizeIs72();
+  public void testfast_setBitField();
+}
+Compiled from "AsyncronousTask.java"
+public class net.hetimatan.util.event.AsyncronousTask implements java.lang.Runnable {
+  public net.hetimatan.util.event.AsyncronousTask(java.lang.Runnable);
+  public java.lang.Runnable getTask();
+  public void run();
+  public synchronized void awake();
+  public synchronized boolean syncTask();
+}
+Compiled from "CloseRunnerTask.java"
+public class net.hetimatan.util.event.CloseRunnerTask extends net.hetimatan.util.event.EventTask {
+  public static final java.lang.String TAG;
+  public net.hetimatan.util.event.CloseRunnerTask(net.hetimatan.util.event.EventTask);
+  public java.lang.String toString();
+  public boolean isKeep();
+  public void action(net.hetimatan.util.event.EventTaskRunner) throws java.lang.Throwable;
+}
+Compiled from "EventTask.java"
+public abstract class net.hetimatan.util.event.EventTask {
+  public int mid;
+  public net.hetimatan.util.event.EventTask();
+  public boolean isKeep();
+  public boolean isNext();
+  public final void run(net.hetimatan.util.event.EventTaskRunner);
+  public void action(net.hetimatan.util.event.EventTaskRunner) throws java.lang.Throwable;
+  public final net.hetimatan.util.event.EventTask nextAction();
+  public final net.hetimatan.util.event.EventTask nextAction(net.hetimatan.util.event.EventTask);
+  public final net.hetimatan.util.event.EventTask errorAction(net.hetimatan.util.event.EventTask);
+  static {};
+}
+Compiled from "EventTaskRunner.java"
+public abstract class net.hetimatan.util.event.EventTaskRunner {
+  public net.hetimatan.util.event.EventTaskRunner();
+  public abstract int numOfWork();
+  public abstract void releaseTask(net.hetimatan.util.event.EventTask);
+  public abstract void pushTask(net.hetimatan.util.event.EventTask);
+  public abstract void pushTask(net.hetimatan.util.event.EventTask, int);
+  public abstract net.hetimatan.util.event.EventTask popTask();
+  public abstract boolean contains(net.hetimatan.util.event.EventTask);
+  public void close();
+  public boolean waitByClose(int) throws java.lang.InterruptedException;
+  public void start(net.hetimatan.util.event.EventTask);
+  public boolean isAlive();
+  public static synchronized void putWorker(java.lang.Thread, net.hetimatan.util.event.EventTaskRunner);
+  public static synchronized net.hetimatan.util.event.EventTaskRunner getYourWorker();
+  public net.hetimatan.util.io.ByteArrayBuilder getTemp();
+  public static net.hetimatan.util.io.ByteArrayBuilder getByteArrayBuilder();
+  static {};
+}
+Compiled from "EventTaskRunnerImple.java"
+public class net.hetimatan.util.event.EventTaskRunnerImple extends net.hetimatan.util.event.EventTaskRunner {
+  public int mId;
+  public boolean currentThreadIsMine();
+  public net.hetimatan.util.event.EventTaskRunnerImple();
+  public boolean isAlive();
+  public synchronized void pushTask(net.hetimatan.util.event.EventTask);
+  public synchronized void pushTask(net.hetimatan.util.event.EventTask, int);
+  public void releaseTask(net.hetimatan.util.event.EventTask);
+  public int updateDeffer();
+  public synchronized net.hetimatan.util.event.EventTask popTask();
+  public void start(net.hetimatan.util.event.EventTask);
+  public void dispose();
+  public void kickWorker();
+  public synchronized void kick();
+  public synchronized void waitPlus(int) throws java.lang.InterruptedException, java.io.IOException;
+  public void close();
+  public boolean contains(net.hetimatan.util.event.EventTask);
+  public int numOfWork();
+  static net.hetimatan.util.event.SingleTaskRunner access$000(net.hetimatan.util.event.EventTaskRunnerImple);
+  static {};
+}
+Compiled from "EventTaskRunnerImple.java"
+public class net.hetimatan.util.event.EventTaskRunnerImple$DefferTask {
+  public static java.lang.String TAG;
+  public net.hetimatan.util.event.EventTaskRunnerImple$DefferTask(net.hetimatan.util.event.EventTask, int);
+  public long deffer(long);
+  public net.hetimatan.util.event.EventTask getEventTask();
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "EventTaskRunnerImple.java"
+public class net.hetimatan.util.event.EventTaskRunnerImple$Worker implements java.lang.Runnable {
+  java.lang.ref.WeakReference<net.hetimatan.util.event.EventTaskRunnerImple> mRunner;
+  public net.hetimatan.util.event.EventTaskRunnerImple$Worker(net.hetimatan.util.event.EventTaskRunnerImple);
+  public void kick();
+  public void run();
+}
+Compiled from "GlobalAccessProperty.java"
+public class net.hetimatan.util.event.GlobalAccessProperty {
+  public static net.hetimatan.util.event.GlobalAccessProperty sInstance;
+  public static net.hetimatan.util.event.GlobalAccessProperty getInstance();
+  public void put(java.lang.String, java.lang.String);
+  public java.lang.String get(java.lang.String, java.lang.String);
+  static {};
+}
+Compiled from "SingleTaskRunner.java"
+public class net.hetimatan.util.event.SingleTaskRunner {
+  public net.hetimatan.util.event.SingleTaskRunner();
+  public java.lang.Runnable getCurrentTask();
+  public boolean isAliveUpdater();
+  public boolean isAlive();
+  public synchronized void startTask(java.lang.Runnable);
+  public synchronized void endTask();
+  public synchronized boolean currentThreaddIsMime();
+  public synchronized void updateTask();
+  public synchronized void updateTask(java.lang.Runnable);
+}
+Compiled from "SingleTaskRunner.java"
+public class net.hetimatan.util.event.SingleTaskRunner$UpdateTaskThread extends java.lang.Thread {
+  final net.hetimatan.util.event.SingleTaskRunner this$0;
+  public net.hetimatan.util.event.SingleTaskRunner$UpdateTaskThread(net.hetimatan.util.event.SingleTaskRunner);
+  public void run();
+}
+Compiled from "KyoroSocketEventRunner.java"
+public class net.hetimatan.util.event.net.KyoroSocketEventRunner extends net.hetimatan.util.event.EventTaskRunnerImple {
+  public static final java.lang.String TAG;
+  public net.hetimatan.util.event.net.KyoroSocketEventRunner();
+  public net.hetimatan.util.event.net.io.KyoroSelector getSelector();
+  public void waitIsSelect(boolean);
+  public void waitPlus(int) throws java.lang.InterruptedException, java.io.IOException;
+  public void kickWorker();
+  public boolean waitBySelectable(int) throws java.io.IOException, java.lang.InterruptedException;
+  public void close();
+  public static synchronized net.hetimatan.util.event.net.KyoroSocketEventRunner getYourWorker();
+}
+Compiled from "KyoroSocketEventRunner.java"
+public class net.hetimatan.util.event.net.KyoroSocketEventRunner$SelctorLoopTask extends net.hetimatan.util.event.EventTask {
+  public static final java.lang.String TAG;
+  public net.hetimatan.util.event.net.KyoroSocketEventRunner$SelctorLoopTask();
+  public java.lang.String toString();
+  public void action(net.hetimatan.util.event.EventTaskRunner) throws java.lang.Throwable;
+}
+Compiled from "MessageSendTask.java"
+public class net.hetimatan.util.event.net.MessageSendTask extends net.hetimatan.util.event.EventTask {
+  public static final java.lang.String TAG;
+  public net.hetimatan.util.event.net.MessageSendTask(net.hetimatan.util.event.net.io.KyoroSocket, net.hetimatan.io.file.KyoroFile);
+  public java.lang.String toString();
+  public void setLength(int);
+  public boolean isKeep();
+  public void action(net.hetimatan.util.event.EventTaskRunner) throws java.lang.Throwable;
+}
+Compiled from "KyoroDatagram.java"
+public abstract class net.hetimatan.util.event.net.io.KyoroDatagram extends net.hetimatan.util.event.net.io.KyoroSelectable {
+  public net.hetimatan.util.event.net.io.KyoroDatagram();
+  public abstract java.nio.channels.SelectableChannel getRawChannel();
+  public abstract void bind(byte[]) throws java.io.IOException;
+  public abstract void bind(int) throws java.io.IOException;
+  public abstract byte[] getByte();
+  public abstract byte[] receive() throws java.io.IOException;
+  public abstract int send(byte[], byte[]) throws java.io.IOException;
+  public abstract int send(byte[], int, int, byte[]) throws java.io.IOException;
+  public abstract void regist(net.hetimatan.util.event.net.io.KyoroSelector, int) throws java.io.IOException;
+  public void close() throws java.io.IOException;
+}
+Compiled from "KyoroDatagramImpl.java"
+public class net.hetimatan.util.event.net.io.KyoroDatagramImpl extends net.hetimatan.util.event.net.io.KyoroDatagram {
+  public net.hetimatan.util.event.net.io.KyoroDatagramImpl() throws java.io.IOException;
+  public java.nio.channels.SelectableChannel getRawChannel();
+  public void bind(byte[]) throws java.io.IOException;
+  public void bind(int) throws java.io.IOException;
+  public byte[] getByte();
+  public byte[] receive() throws java.io.IOException;
+  public int send(byte[], byte[]) throws java.io.IOException;
+  public int send(byte[], int, int, byte[]) throws java.io.IOException;
+  public void regist(net.hetimatan.util.event.net.io.KyoroSelector, int) throws java.io.IOException;
+  java.net.InetSocketAddress getInetSocketAddress(byte[]);
+  public void close() throws java.io.IOException;
+}
+Compiled from "KyoroSelectable.java"
+public abstract class net.hetimatan.util.event.net.io.KyoroSelectable {
+  public net.hetimatan.util.event.net.io.KyoroSelectable();
+  public abstract java.nio.channels.SelectableChannel getRawChannel();
+  public void setMemo(byte[]);
+  public java.lang.Object getMemo();
+  public void setRelative(java.lang.Object);
+  public void setDebug(java.lang.String);
+  public java.lang.Object getRelative();
+  public void rejectEventTask(net.hetimatan.util.event.EventTask);
+  public void setEventTaskAtWrakReference(net.hetimatan.util.event.EventTask, int);
+  public boolean startEventTask(net.hetimatan.util.event.EventTaskRunner, int);
+  public void close() throws java.io.IOException;
+}
+Compiled from "KyoroSelector.java"
+public class net.hetimatan.util.event.net.io.KyoroSelector {
+  public static final int ACCEPT;
+  public static final int READ;
+  public static final int WRITE;
+  public static final int CONNECT;
+  public static final int ALL;
+  public static final int READ_WRITE;
+  public static final int CANCEL;
+  public net.hetimatan.util.event.net.io.KyoroSelector();
+  public void putClient(net.hetimatan.util.event.net.io.KyoroSelectable);
+  public java.nio.channels.Selector getSelector() throws java.io.IOException;
+  public int select(int) throws java.io.IOException;
+  public synchronized void wakeup();
+  public void close() throws java.io.IOException;
+  public boolean next();
+  public net.hetimatan.util.event.net.io.KyoroSelectable getCurrentSocket();
+  public static int convertKey(java.nio.channels.SelectionKey);
+  public int getkey();
+  public synchronized void wakeup(net.hetimatan.util.event.net.io.KyoroSelectable, int);
+  public int selectFromMock_Zero();
+}
+Compiled from "KyoroSelector.java"
+public class net.hetimatan.util.event.net.io.KyoroSelector$MockSelectorInfo {
+  public net.hetimatan.util.event.net.io.KyoroSelectable mSelectable;
+  public int mKey;
+  public net.hetimatan.util.event.net.io.KyoroSelector$MockSelectorInfo(net.hetimatan.util.event.net.io.KyoroSelectable, int);
+}
+Compiled from "KyoroServerSocket.java"
+public abstract class net.hetimatan.util.event.net.io.KyoroServerSocket extends net.hetimatan.util.event.net.io.KyoroSelectable {
+  public net.hetimatan.util.event.net.io.KyoroServerSocket();
+  public abstract void regist(net.hetimatan.util.event.net.io.KyoroSelector, int) throws java.io.IOException;
+  public abstract void bind(int) throws java.io.IOException;
+  public abstract int getPort() throws java.io.IOException;
+  public abstract net.hetimatan.util.event.net.io.KyoroSocket accept() throws java.io.IOException;
+  public abstract boolean isBinded();
+  public abstract void setEventTaskAtWrakReference(net.hetimatan.util.event.net.io.KyoroSelector, net.hetimatan.util.event.EventTask, int) throws java.nio.channels.ClosedChannelException, java.io.IOException;
+}
+Compiled from "KyoroServerSocketImpl.java"
+public class net.hetimatan.util.event.net.io.KyoroServerSocketImpl extends net.hetimatan.util.event.net.io.KyoroServerSocket {
+  public net.hetimatan.util.event.net.io.KyoroServerSocketImpl() throws java.io.IOException;
+  public void bind(int) throws java.io.IOException;
+  public boolean isBinded();
+  public int getPort() throws java.io.IOException;
+  public net.hetimatan.util.event.net.io.KyoroSocket accept() throws java.io.IOException;
+  public void close() throws java.io.IOException;
+  public void regist(net.hetimatan.util.event.net.io.KyoroSelector, int) throws java.nio.channels.ClosedChannelException, java.io.IOException;
+  public void setEventTaskAtWrakReference(net.hetimatan.util.event.net.io.KyoroSelector, net.hetimatan.util.event.EventTask, int) throws java.nio.channels.ClosedChannelException, java.io.IOException;
+  public java.nio.channels.ServerSocketChannel getRawChannel();
+  public java.lang.String test();
+  public java.nio.channels.SelectableChannel getRawChannel();
+}
+Compiled from "KyoroSocket.java"
+public abstract class net.hetimatan.util.event.net.io.KyoroSocket extends net.hetimatan.util.event.net.io.KyoroSelectable {
+  public static final int CN_CONNECTED;
+  public static final int CN_CONNECTING;
+  public static final int CN_DISCONNECTED;
+  public net.hetimatan.util.event.net.io.KyoroSocket();
+  public abstract void connect(java.lang.String, int) throws java.io.IOException;
+  public abstract int getConnectionState();
+  public abstract int write(byte[], int, int) throws java.io.IOException;
+  public abstract int read(byte[], int, int) throws java.io.IOException;
+  public abstract java.lang.String getHost() throws java.io.IOException;
+  public abstract int getPort() throws java.io.IOException;
+  public abstract boolean isEOF();
+  public abstract void regist(net.hetimatan.util.event.net.io.KyoroSelector, int) throws java.io.IOException;
+}
+Compiled from "KyoroSocketImpl.java"
+public class net.hetimatan.util.event.net.io.KyoroSocketImpl extends net.hetimatan.util.event.net.io.KyoroSocket {
+  public static final java.lang.String TAG;
+  public net.hetimatan.util.event.net.io.KyoroSocketImpl() throws java.io.IOException;
+  public net.hetimatan.util.event.net.io.KyoroSocketImpl(java.nio.channels.SocketChannel) throws java.io.IOException;
+  public java.net.Socket getSocket();
+  public void connect(java.lang.String, int) throws java.io.IOException;
+  public java.nio.channels.SocketChannel getRawChannel();
+  public int read(byte[], int, int) throws java.io.IOException;
+  protected void finalize() throws java.lang.Throwable;
+  public void close() throws java.io.IOException;
+  public int write(byte[], int, int) throws java.io.IOException;
+  public int getConnectionState();
+  public java.lang.String getHost() throws java.io.IOException;
+  public int getPort() throws java.io.IOException;
+  public boolean isEOF();
+  public void regist(net.hetimatan.util.event.net.io.KyoroSelector, int) throws java.io.IOException;
+  public java.nio.channels.SelectableChannel getRawChannel();
+}
+Compiled from "KyoroSocketOutputStream.java"
+public class net.hetimatan.util.event.net.io.KyoroSocketOutputStream extends java.io.OutputStream {
+  public net.hetimatan.util.event.net.io.KyoroSocketOutputStream(net.hetimatan.util.event.net.io.KyoroSocket);
+  public void writeToCash(byte[], int, int) throws java.io.IOException;
+  public void write(byte[], int, int) throws java.io.IOException;
+  public void write(int) throws java.io.IOException;
+  public void close() throws java.io.IOException;
+}
+Compiled from "KyoroDatagramMock.java"
+public class net.hetimatan.util.event.net.mock.KyoroDatagramMock extends net.hetimatan.util.event.net.io.KyoroDatagram {
+  public static final int NAT_TYPE_OPEN_INTERNET;
+  public static final int NAT_TYPE_FULL_CONE;
+  public static final int NAT_TYPE_RESTRICTED_ADDRESS;
+  public static final int NAT_TYPE_RESTRICTED_PORT;
+  public static final int NAT_TYPE_SYMMETRIC;
+  public net.hetimatan.util.event.net.mock.KyoroDatagramMock(int, int);
+  public int getDeviceId();
+  public int getNatType();
+  public void onReceivePacket(byte[], byte[]) throws java.io.IOException;
+  public boolean isConnectable(byte[]);
+  public java.nio.channels.SelectableChannel getRawChannel();
+  public void bind(byte[]) throws java.io.IOException;
+  public int numOfMappedAddress();
+  public net.hetimatan.util.event.net.mock.KyoroDatagramMock$MappedAddress getMappedAddress(int);
+  public byte[] getRawIp();
+  public byte[] getMappedIp();
+  public void bind(int) throws java.io.IOException;
+  public byte[] getByte();
+  public byte[] receive() throws java.io.IOException;
+  public int send(byte[], byte[]) throws java.io.IOException;
+  public int send(byte[], int, int, byte[]) throws java.io.IOException;
+  public void regist(net.hetimatan.util.event.net.io.KyoroSelector, int) throws java.io.IOException;
+  public void close() throws java.io.IOException;
+}
+Compiled from "KyoroDatagramMock.java"
+public class net.hetimatan.util.event.net.mock.KyoroDatagramMock$DatagramMockMgr {
+  public static net.hetimatan.util.event.net.mock.KyoroDatagramMock$DatagramMockMgr getInstance();
+  public net.hetimatan.util.event.net.mock.KyoroDatagramMock$DatagramMockMgr();
+  public void bind(net.hetimatan.util.event.net.mock.KyoroDatagramMock);
+  public void close(net.hetimatan.util.event.net.mock.KyoroDatagramMock);
+  public net.hetimatan.util.event.net.mock.KyoroDatagramMock find(byte[]);
+  static {};
+}
+Compiled from "KyoroDatagramMock.java"
+public class net.hetimatan.util.event.net.mock.KyoroDatagramMock$DatagramPacket {
+  public net.hetimatan.util.event.net.mock.KyoroDatagramMock$DatagramPacket(byte[], byte[]);
+  static byte[] access$000(net.hetimatan.util.event.net.mock.KyoroDatagramMock$DatagramPacket);
+  static byte[] access$100(net.hetimatan.util.event.net.mock.KyoroDatagramMock$DatagramPacket);
+}
+Compiled from "KyoroDatagramMock.java"
+public class net.hetimatan.util.event.net.mock.KyoroDatagramMock$MappedAddress {
+  public static final int BASE;
+  public static java.util.LinkedList<net.hetimatan.util.event.net.mock.KyoroDatagramMock$MappedAddress> sList;
+  public net.hetimatan.util.event.net.mock.KyoroDatagramMock$MappedAddress(byte[], byte[], byte[]);
+  public net.hetimatan.util.event.net.mock.KyoroDatagramMock$MappedAddress(byte[], byte[]);
+  public byte[] getMappedAd();
+  public byte[] getRawAd();
+  public byte[] getSendAd();
+  static {};
+}
+Compiled from "Main.java"
+public class net.hetimatan.util.event.net.mock.Main extends javafx.application.Application {
+  int width;
+  int height;
+  public net.hetimatan.util.event.net.mock.Main();
+  public static void main(java.lang.String[]);
+  public void start(javafx.stage.Stage) throws java.lang.Exception;
+  public void showDevice(javafx.scene.canvas.GraphicsContext);
+}
+Compiled from "Hmac.java"
+public class net.hetimatan.util.hmac.Hmac {
+  public static final int SHA1;
+  public static void main(java.lang.String[]);
+  public net.hetimatan.util.hmac.Hmac(int);
+  public static int getBlockSizePerByte(int);
+  public byte[] hmac(byte[], byte[]) throws java.security.NoSuchAlgorithmException;
+  public static byte[] hash(byte[]) throws java.security.NoSuchAlgorithmException;
+}
+Compiled from "HttpGetRequestUri.java"
+public class net.hetimatan.util.http.HttpGetRequestUri extends net.hetimatan.util.http.HttpObject {
+  public static net.hetimatan.util.http.HttpGetRequestUri crateHttpGetRequestUri(java.lang.String);
+  public net.hetimatan.util.http.HttpGetRequestUri(java.lang.String);
+  public java.lang.String toString();
+  public void setHost(java.lang.String);
+  public void setPort(int);
+  public void putVale(java.lang.String, java.lang.String);
+  public java.util.Set<java.lang.String> keySet();
+  public void setPath(java.lang.String);
+  public java.lang.String getPath();
+  public java.lang.String getValue(java.lang.String);
+  public void IsAbsolutePath(boolean);
+  public void encode(java.io.OutputStream) throws java.io.IOException;
+  public void encodeAbsolutePath(java.io.OutputStream) throws java.io.IOException;
+  public void encodeAbsPath(java.io.OutputStream) throws java.io.IOException;
+  public static net.hetimatan.util.http.HttpGetRequestUri decode(java.lang.String) throws java.io.IOException;
+  public static net.hetimatan.util.http.HttpGetRequestUri decode(net.hetimatan.io.file.MarkableReader) throws java.io.IOException;
+  public java.lang.String getHost();
+  public int getPort();
+  public java.lang.String getMethod();
+  public static net.hetimatan.util.http.HttpGetRequestUri astarisk(net.hetimatan.io.file.MarkableReader) throws java.io.IOException;
+  public static net.hetimatan.util.http.HttpGetRequestUri absPath(net.hetimatan.io.file.MarkableReader) throws java.io.IOException;
+  public static net.hetimatan.util.http.HttpGetRequestUri absoluteUri(net.hetimatan.io.file.MarkableReader) throws java.io.IOException;
+  public static java.lang.String fragment(net.hetimatan.io.file.MarkableReader) throws java.io.IOException;
+  public static void query(net.hetimatan.io.file.MarkableReader, net.hetimatan.util.http.HttpGetRequestUri) throws java.io.IOException;
+  public static java.lang.String path(net.hetimatan.io.file.MarkableReader) throws java.io.IOException;
+  public static int port(net.hetimatan.io.file.MarkableReader) throws java.io.IOException, java.lang.NumberFormatException;
+  public static java.lang.String host(net.hetimatan.io.file.MarkableReader) throws java.io.IOException;
+  public static java.lang.String scheme(net.hetimatan.io.file.MarkableReader) throws java.io.IOException;
+  public static net.hetimatan.util.http.HttpGetRequestUri createHttpRequestUri(java.lang.String) throws java.io.IOException;
+}
+Compiled from "HttpObject.java"
+public abstract class net.hetimatan.util.http.HttpObject {
+  public static final java.lang.String SP;
+  public static final java.lang.String CRLF;
+  public static final int TYPE_STRI;
+  public static final int TYPE_INTE;
+  public static final int TYPE_LIST;
+  public static final int TYPE_DICT;
+  public net.hetimatan.util.http.HttpObject();
+  public static synchronized java.lang.String createEncode(net.hetimatan.util.http.HttpObject) throws java.io.IOException;
+  public static void log(java.lang.CharSequence);
+  public static void _crlf(net.hetimatan.io.file.MarkableReader) throws java.io.IOException;
+  public static void _sp(net.hetimatan.io.file.MarkableReader) throws java.io.IOException;
+  public static java.lang.String parseString(java.lang.String, java.lang.String);
+  public static int parseInt(java.lang.String, int);
+  public static byte[] aton(java.lang.String) throws java.net.UnknownHostException;
+  public static java.lang.String ntoa(int);
+  public static byte[] address(java.lang.String, int) throws java.net.UnknownHostException;
+  public static java.lang.String ntoa(byte[]);
+  public static byte[] ip2Address(byte[]);
+  public static byte[] portToB(int);
+  public static int bToPort(byte[]);
+  public static int bToPort(byte[], int);
+  public int getType();
+  public byte[] toByte();
+  public int size();
+  public abstract void encode(java.io.OutputStream) throws java.io.IOException;
+  static {};
+}
+Compiled from "HttpObjectHelper.java"
+public class net.hetimatan.util.http.HttpObjectHelper {
+  public net.hetimatan.util.http.HttpObjectHelper();
+  public static net.hetimatan.net.http.PieceInfoList getRangeList(java.lang.String, long);
+  public static long[] getRange(java.lang.String);
+  public static long[] getRange(java.lang.String, long);
+  static {};
+}
+Compiled from "HttpRequest.java"
+public class net.hetimatan.util.http.HttpRequest extends net.hetimatan.util.http.HttpObject {
+  public static net.hetimatan.util.http.HttpRequest newInstance(java.lang.String, java.lang.String, java.lang.String);
+  public net.hetimatan.util.http.HttpRequest(net.hetimatan.util.http.HttpRequestLine);
+  public net.hetimatan.util.http.HttpRequestLine getLine();
+  public java.util.LinkedList<net.hetimatan.util.http.HttpRequestHeader> getHeader();
+  public net.hetimatan.util.http.HttpRequest putValue(java.lang.String, java.lang.String);
+  public java.lang.String getValue(java.lang.String);
+  public java.lang.String getHeaderValue(java.lang.String);
+  public net.hetimatan.util.http.HttpRequest addHeader(java.lang.String, java.lang.String);
+  public net.hetimatan.util.http.HttpRequest addHeader(net.hetimatan.util.http.HttpRequestHeader);
+  public void setBody(net.hetimatan.io.file.KyoroFile);
+  public net.hetimatan.io.file.KyoroFile getBody();
+  public void encode(java.io.OutputStream) throws java.io.IOException;
+  public java.lang.String toString();
+  public static net.hetimatan.util.http.HttpRequest decode(net.hetimatan.io.file.MarkableReader) throws java.io.IOException;
+  public static boolean isCrlf(net.hetimatan.io.file.MarkableReader);
+}
+Compiled from "HttpRequestHeader.java"
+public class net.hetimatan.util.http.HttpRequestHeader extends net.hetimatan.util.http.HttpObject {
+  public static final java.lang.String SEPARATOR;
+  public static final java.lang.String HEADER_CONTENT_LENGTH;
+  public static final java.lang.String HEADER_CONTENT_TyPE;
+  public static final java.lang.String HEADER_LOCATION;
+  public static final java.lang.String HEADER_HOST;
+  public net.hetimatan.util.http.HttpRequestHeader(java.lang.String, java.lang.String);
+  public void encode(java.io.OutputStream) throws java.io.IOException;
+  public java.lang.String getKey();
+  public java.lang.String getValue();
+  public static net.hetimatan.util.http.HttpRequestHeader decode(java.lang.String) throws java.io.IOException;
+  public static net.hetimatan.util.http.HttpRequestHeader decode(net.hetimatan.io.file.MarkableReader) throws java.io.IOException;
+}
+Compiled from "HttpRequestLine.java"
+public class net.hetimatan.util.http.HttpRequestLine extends net.hetimatan.util.http.HttpObject {
+  public static final java.lang.String HTTP11;
+  public static final java.lang.String HTTP10;
+  public static final java.lang.String GET;
+  public static final java.lang.String POST;
+  public static final byte[] available;
+  public net.hetimatan.util.http.HttpRequestLine(java.lang.String, net.hetimatan.util.http.HttpGetRequestUri, java.lang.String);
+  public net.hetimatan.util.http.HttpRequestLine(java.lang.String, java.lang.String, java.lang.String);
+  public void setHttpVersion(java.lang.String);
+  public boolean isPost();
+  public boolean isGet();
+  public java.lang.String toString();
+  public net.hetimatan.util.http.HttpRequestLine putValue(java.lang.String, java.lang.String);
+  public java.lang.String getMethod();
+  public net.hetimatan.util.http.HttpGetRequestUri getRequestURI();
+  public java.lang.String getHttpVersion();
+  public void encode(java.io.OutputStream) throws java.io.IOException;
+  public static net.hetimatan.util.http.HttpRequestLine decode(java.lang.String) throws java.io.IOException;
+  public static net.hetimatan.util.http.HttpRequestLine decode(net.hetimatan.io.file.MarkableReader) throws java.io.IOException;
+  static {};
+}
+Compiled from "HttpResponse.java"
+public class net.hetimatan.util.http.HttpResponse extends net.hetimatan.util.http.HttpObject {
+  public static final java.lang.String STATUS_CODE_301_MOVE_PERMANENTLY;
+  public static final java.lang.String STATUS_CODE_302_Found;
+  public static final java.lang.String STATUS_CODE_303_SEE_OTHER;
+  public static final java.lang.String STATUS_CODE_304_NOT_MODIFIED;
+  public static final java.lang.String STATUS_CODE_305_USE_PROXY;
+  public static final java.lang.String STATUS_CODE_307_TEMPORARY_REDIRECT;
+  public static final java.lang.String[] REDIRECT_STATUSCODE;
+  public static final byte[] available;
+  public static final byte[] available_pharse;
+  public net.hetimatan.util.http.HttpResponse(java.lang.String, java.lang.String, java.lang.String);
+  public java.lang.String getHttpVersion();
+  public java.lang.String getStatusCode();
+  public java.lang.String getReasonPharse();
+  public net.hetimatan.io.file.KyoroFile getContent();
+  public void setContent(byte[]) throws java.io.IOException;
+  public void setContent(net.hetimatan.io.file.KyoroFile);
+  public java.util.LinkedList<net.hetimatan.util.http.HttpRequestHeader> getHeader();
+  public java.lang.String getHeader(java.lang.String);
+  public net.hetimatan.util.http.HttpResponse addHeader(java.lang.String, java.lang.String);
+  public net.hetimatan.util.http.HttpResponse addHeader(net.hetimatan.util.http.HttpRequestHeader);
+  public long getContentSizeFromHeader();
+  public void encode(java.io.OutputStream) throws java.io.IOException;
+  public static net.hetimatan.util.http.HttpResponse decode(net.hetimatan.io.file.MarkableReader, boolean) throws java.io.IOException;
+  public static java.lang.String _httpVersion(net.hetimatan.io.file.MarkableReader) throws java.io.IOException;
+  public static java.lang.String _statusCode(net.hetimatan.io.file.MarkableReader) throws java.io.IOException;
+  public static java.lang.String _reasonPhrase(net.hetimatan.io.file.MarkableReader) throws java.io.IOException;
+  public static boolean isCrlf(net.hetimatan.io.file.MarkableReader);
+  static {};
+}
+Compiled from "LookaheadHttpBody.java"
+public class net.hetimatan.util.http.LookaheadHttpBody {
+  public net.hetimatan.util.http.LookaheadHttpBody(net.hetimatan.io.file.MarkableReader, long, int) throws java.io.IOException;
+  public long getElapsedTime();
+  public boolean lookahead() throws java.io.IOException;
+  public boolean readable(net.hetimatan.io.file.MarkableReader) throws java.io.IOException;
+}
+Compiled from "LookaheadHttpHeader.java"
+public class net.hetimatan.util.http.LookaheadHttpHeader {
+  public static final int EOF;
+  public static final int CRLF;
+  public static final int KEEP;
+  public static final byte[] FIRST_LF1;
+  public static final byte[] FIRST_LF2;
+  public static final byte[] LF1;
+  public static final byte[] LF2;
+  public static final byte[] LF3;
+  public static final byte[] LF4;
+  public net.hetimatan.util.http.LookaheadHttpHeader(net.hetimatan.io.file.MarkableReader, int) throws java.io.IOException;
+  public long getStart();
+  public long getElapsedTime();
+  public int readByEndOfHeader(boolean) throws java.io.IOException;
+  public static boolean readByEndOfHeader(net.hetimatan.util.http.LookaheadHttpHeader, net.hetimatan.io.file.MarkableReader) throws java.io.IOException;
+  static {};
+}
+Compiled from "TestForHttpHeader.java"
+public class net.hetimatan.util.http.TestForHttpHeader extends junit.framework.TestCase {
+  public net.hetimatan.util.http.TestForHttpHeader();
+  public void testHello();
+  public void testEncode001() throws java.io.IOException;
+  public void testDecode001() throws java.io.IOException;
+}
+Compiled from "TestForHttpObject.java"
+public class net.hetimatan.util.http.TestForHttpObject extends junit.framework.TestCase {
+  public net.hetimatan.util.http.TestForHttpObject();
+  public void testHello();
+  public void testEncode001() throws java.io.IOException;
+}
+Compiled from "TestForHttpObjectHelper.java"
+public class net.hetimatan.util.http.TestForHttpObjectHelper extends junit.framework.TestCase {
+  public net.hetimatan.util.http.TestForHttpObjectHelper();
+  public void testHttpHeaderRange();
+}
+Compiled from "TestForHttpRequest.java"
+public class net.hetimatan.util.http.TestForHttpRequest extends junit.framework.TestCase {
+  public net.hetimatan.util.http.TestForHttpRequest();
+  public void testEncode001() throws java.io.IOException;
+  public void testEncode002() throws java.io.IOException;
+  public void testEncode003() throws java.io.IOException;
+  public void testDecode001() throws java.io.IOException;
+  public void testDecode002() throws java.io.IOException;
+  public void testDecodeError001() throws java.io.IOException;
+}
+Compiled from "TestForHttpRequestLine.java"
+public class net.hetimatan.util.http.TestForHttpRequestLine extends junit.framework.TestCase {
+  public net.hetimatan.util.http.TestForHttpRequestLine();
+  public void testHello();
+  public void testEncode001() throws java.io.IOException;
+  public void testDecode001() throws java.io.IOException;
+}
+Compiled from "TestForHttpRequestUri.java"
+public class net.hetimatan.util.http.TestForHttpRequestUri extends junit.framework.TestCase {
+  public net.hetimatan.util.http.TestForHttpRequestUri();
+  public void testHello();
+  public void testDecodeFragment() throws java.io.IOException;
+  public void testDecodePath() throws java.io.IOException;
+  public void testDecodePort() throws java.io.IOException;
+  public void testDecodeHost() throws java.io.IOException;
+  public void testDecodeScheme() throws java.io.IOException;
+  public void testEncode001() throws java.io.IOException;
+  public void testEncode002() throws java.io.IOException;
+  public void testEncode003() throws java.io.IOException;
+  public void testDecode001() throws java.io.IOException;
+  public void testDecode002() throws java.io.IOException;
+  public void testDecode003() throws java.io.IOException;
+}
+Compiled from "TestForHttpResponse.java"
+public class net.hetimatan.util.http.TestForHttpResponse extends junit.framework.TestCase {
+  public net.hetimatan.util.http.TestForHttpResponse();
+  public void testEncode001_emptyBody() throws java.io.IOException;
+  public void testEncode002_Body() throws java.io.IOException;
+  public void testDecode001() throws java.io.IOException;
+  public void testDecode002() throws java.io.IOException;
+  public void testDecode003() throws java.io.IOException;
+}
+Compiled from "ByteArrayBuilder.java"
+public class net.hetimatan.util.io.ByteArrayBuilder {
+  public static final int BYTEORDER_BIG_ENDIAN;
+  public static final int BYTEORDER_LITTLE_ENDIAN;
+  public net.hetimatan.util.io.ByteArrayBuilder();
+  public net.hetimatan.util.io.ByteArrayBuilder(int);
+  public void append(byte[]);
+  public void append(byte[], int, int);
+  public void append(byte);
+  public void setBufferLength(int);
+  public void leftShift(int);
+  public void shift(int);
+  public void zeroClear();
+  public void clear();
+  public byte[] getBuffer();
+  public byte[] createBuffer();
+  public byte getLast();
+  public int length();
+  public void removeLast();
+  public void setPointer(int);
+  public void appendInt(int);
+  public static byte[] parseInt(int, int);
+  public static int parseInt(byte[], int);
+  public static long parseLong(byte[], int);
+  public static byte[] parseLong(long, int);
+  public static byte[] parseShort(int, int);
+  public static int parseShort(byte[], int, int);
+}
+Compiled from "TestForByteArrayBuilder.java"
+public class net.hetimatan.util.io.TestForByteArrayBuilder extends junit.framework.TestCase {
+  public static int LEVEL;
+  public net.hetimatan.util.io.TestForByteArrayBuilder();
+  public void testHello();
+  public void testParsrShort();
+  public void testAppend();
+  public void testClear();
+  public void testSetBufferLength();
+  public void testRemoveLast();
+  static {};
+}
+Compiled from "TestForMockUDP.java"
+public class net.hetimatan.util.io.net.TestForMockUDP extends junit.framework.TestCase {
+  public net.hetimatan.util.io.net.TestForMockUDP();
+  public void testSendReceive() throws java.net.UnknownHostException, java.io.IOException;
+  public void testSelector() throws java.net.UnknownHostException, java.io.IOException;
+  public void testNatTest() throws java.net.UnknownHostException, java.io.IOException;
+}
+Compiled from "Log.java"
+public class net.hetimatan.util.log.Log {
+  public static final boolean ON;
+  public static final long start;
+  public static final int MODE_STDOUT;
+  public static final int MODE_FILE;
+  public static final net.hetimatan.util.log.Log log;
+  public static final int mode;
+  public static final boolean isTime;
+  public static final int loglevel;
+  public net.hetimatan.util.log.Log();
+  public static void d(java.lang.String, java.lang.String);
+  public static void v(java.lang.String, java.lang.String);
+  public static void sync();
+  static {};
+}
+Compiled from "Log.java"
+public class net.hetimatan.util.log.Log$ShutdonwTask implements java.lang.Runnable {
+  public net.hetimatan.util.log.Log$ShutdonwTask();
+  public void run();
+}
+Compiled from "ShowInfo.java"
+public class net.hetimatan.util.sample.ShowInfo {
+  public net.hetimatan.util.sample.ShowInfo();
+  public static void main(java.lang.String[]);
+}
+Compiled from "TestUtil.java"
+public class net.hetimatan.util.test.TestUtil {
+  public net.hetimatan.util.test.TestUtil();
+  public static void assertArrayEquals(junit.framework.TestCase, java.lang.String, long[], long[]);
+  public static void assertArrayEquals(junit.framework.TestCase, java.lang.String, byte[], byte[]);
+  public static byte[] createBuffer(net.hetimatan.io.file.KyoroFile) throws java.io.IOException;
+}
+Compiled from "PercentEncoder.java"
+public class net.hetimatan.util.url.PercentEncoder {
+  public net.hetimatan.util.url.PercentEncoder();
+  public synchronized byte[] decode(byte[]) throws java.io.IOException;
+  public synchronized java.lang.String encode(byte[]);
+  public synchronized java.lang.String encode(byte[], int, int);
+  public static byte convertChar2Byte(byte[], int) throws java.io.IOException;
+  public static byte convertChar2HalfByte(byte) throws java.io.IOException;
+  protected boolean isConvert(byte);
+  static {};
+}
+Compiled from "TestForPercentEncoder.java"
+public class net.hetimatan.util.url.TestForPercentEncoder extends junit.framework.TestCase {
+  public net.hetimatan.util.url.TestForPercentEncoder();
+  public void testOne() throws java.io.IOException;
+  public void testTwo() throws java.io.IOException;
+  public void testThree() throws java.io.IOException;
+  public void testFour() throws java.io.IOException;
+}

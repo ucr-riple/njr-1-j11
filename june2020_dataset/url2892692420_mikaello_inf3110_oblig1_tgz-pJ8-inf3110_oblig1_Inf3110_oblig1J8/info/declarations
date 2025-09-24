@@ -1,0 +1,323 @@
+Compiled from "RobotOutOfGridException.java"
+public class exceptions.RobotOutOfGridException extends java.lang.Exception {
+  public exceptions.RobotOutOfGridException();
+  public exceptions.RobotOutOfGridException(java.lang.String);
+}
+Compiled from "BooleanExp.java"
+public class expressions.BooleanExp extends expressions.Exp implements interfaces.Handler {
+  public expressions.BooleanExp(expressions.Exp, expressions.Booleans, expressions.Exp);
+  public void interpret();
+  public boolean getBooleanResult();
+  public java.lang.String toString();
+}
+Compiled from "BooleanExp.java"
+class expressions.BooleanExp$1 {
+  static final int[] $SwitchMap$expressions$Booleans;
+  static {};
+}
+Compiled from "Booleans.java"
+public final class expressions.Booleans extends java.lang.Enum<expressions.Booleans> {
+  public static final expressions.Booleans greaterThan;
+  public static final expressions.Booleans lessThan;
+  public static final expressions.Booleans equal;
+  public final java.lang.String symbol;
+  public static expressions.Booleans[] values();
+  public static expressions.Booleans valueOf(java.lang.String);
+  public expressions.Booleans getBooleans(java.lang.String);
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "Exp.java"
+public class expressions.Exp implements interfaces.Handler {
+  protected expressions.Numbers result;
+  public expressions.Exp();
+  public expressions.Exp(expressions.Numbers);
+  public void interpret();
+  public expressions.Numbers getNumberResult();
+  public java.lang.String toString();
+}
+Compiled from "Identifier.java"
+public class expressions.Identifier extends expressions.Exp implements interfaces.Handler {
+  java.lang.String name;
+  public expressions.Identifier(java.lang.String);
+  public expressions.Identifier(expressions.Identifier);
+  public void interpret();
+  public expressions.Numbers getNumberResult();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public java.lang.String toString();
+}
+Compiled from "Numbers.java"
+public class expressions.Numbers implements java.lang.Comparable<expressions.Numbers> {
+  public final int number;
+  public expressions.Numbers(int);
+  public expressions.Numbers(expressions.Numbers);
+  public java.lang.String toString();
+  public boolean isPositive();
+  public int compareTo(expressions.Numbers);
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public int compareTo(java.lang.Object);
+}
+Compiled from "Operand.java"
+public final class expressions.Operand extends java.lang.Enum<expressions.Operand> {
+  public static final expressions.Operand plus;
+  public static final expressions.Operand minus;
+  public static final expressions.Operand times;
+  public final java.lang.String symbol;
+  public static expressions.Operand[] values();
+  public static expressions.Operand valueOf(java.lang.String);
+  public expressions.Operand getOperand(java.lang.String);
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "PlusExp.java"
+public class expressions.PlusExp extends expressions.Exp implements interfaces.Handler {
+  public expressions.PlusExp(expressions.Exp, expressions.Operand, expressions.Exp);
+  public void interpret();
+  public java.lang.String toString();
+}
+Compiled from "PlusExp.java"
+class expressions.PlusExp$1 {
+  static final int[] $SwitchMap$expressions$Operand;
+  static {};
+}
+Compiled from "Inf3110_oblig1.java"
+public class inf3110_oblig1.Inf3110_oblig1 {
+  public inf3110_oblig1.Inf3110_oblig1();
+  public static void main(java.lang.String[]);
+}
+Compiled from "Handler.java"
+public interface interfaces.Handler {
+  public abstract void interpret();
+}
+Compiled from "Log.java"
+public class log.Log {
+  public log.Log();
+  public static void writeLogLine(java.lang.String);
+  public static void printLog();
+  public static void writeLogToFile();
+  static {};
+}
+Compiled from "Assignment.java"
+public class statements.Assignment extends statements.Stmt implements interfaces.Handler {
+  expressions.Identifier ident;
+  expressions.Exp e;
+  public statements.Assignment(expressions.Identifier, expressions.Exp);
+  public void interpret();
+  public java.lang.String toString();
+}
+Compiled from "Backward.java"
+public class statements.Backward extends statements.Move implements interfaces.Handler {
+  public statements.Backward(expressions.Exp);
+  public void interpret();
+  public java.lang.String toString();
+}
+Compiled from "Backward.java"
+class statements.Backward$1 {
+  static final int[] $SwitchMap$util$Direction;
+  static {};
+}
+Compiled from "Forward.java"
+public class statements.Forward extends statements.Move implements interfaces.Handler {
+  public statements.Forward(expressions.Exp);
+  public void interpret();
+  public java.lang.String toString();
+}
+Compiled from "Forward.java"
+class statements.Forward$1 {
+  static final int[] $SwitchMap$util$Direction;
+  static {};
+}
+Compiled from "IfThenElse.java"
+public class statements.IfThenElse extends statements.Stmt implements interfaces.Handler {
+  public statements.IfThenElse(expressions.BooleanExp, statements.Stmt[]);
+  public statements.IfThenElse(expressions.BooleanExp, statements.Stmt[], statements.Stmt[]);
+  public void interpret();
+  public java.lang.String toString();
+}
+Compiled from "Left.java"
+public class statements.Left extends statements.Move implements interfaces.Handler {
+  public statements.Left(expressions.Exp);
+  public void interpret();
+  public java.lang.String toString();
+}
+Compiled from "Left.java"
+class statements.Left$1 {
+  static final int[] $SwitchMap$util$Direction;
+  static {};
+}
+Compiled from "Move.java"
+public abstract class statements.Move extends statements.Stmt implements interfaces.Handler {
+  protected util.Position curPos;
+  protected expressions.Numbers lastMovedDistance;
+  public statements.Move();
+  public static void clearPenPositions();
+  void updateRobot(util.Position);
+  void updateGrid(util.Position);
+  static {};
+}
+Compiled from "Move.java"
+class statements.Move$1 {
+  static final int[] $SwitchMap$util$Direction;
+  static {};
+}
+Compiled from "Pen.java"
+public abstract class statements.Pen extends statements.Stmt implements interfaces.Handler {
+  public statements.Pen();
+}
+Compiled from "PenDown.java"
+public class statements.PenDown extends statements.Pen implements interfaces.Handler {
+  public statements.PenDown();
+  public void interpret();
+  public java.lang.String toString();
+}
+Compiled from "PenUp.java"
+public class statements.PenUp extends statements.Pen implements interfaces.Handler {
+  public statements.PenUp();
+  public void interpret();
+  public java.lang.String toString();
+}
+Compiled from "Right.java"
+public class statements.Right extends statements.Move implements interfaces.Handler {
+  public statements.Right(expressions.Exp);
+  public void interpret();
+  public java.lang.String toString();
+}
+Compiled from "Right.java"
+class statements.Right$1 {
+  static final int[] $SwitchMap$util$Direction;
+  static {};
+}
+Compiled from "Size.java"
+public class statements.Size extends statements.Stmt implements interfaces.Handler {
+  public void interpret();
+  public statements.Size(statements.Size);
+  public statements.Size(expressions.Numbers, expressions.Numbers);
+  public int getXBound();
+  public int getYBound();
+  public boolean isBiggerThanOrEqual(expressions.Numbers, expressions.Numbers);
+  public java.lang.String toString();
+}
+Compiled from "Start.java"
+public class statements.Start extends statements.Stmt implements interfaces.Handler {
+  public statements.Start(expressions.Exp, expressions.Exp, util.Direction);
+  public void interpret();
+  public java.lang.String toString();
+}
+Compiled from "Stmt.java"
+public class statements.Stmt implements interfaces.Handler {
+  public statements.Stmt();
+  public void interpret();
+}
+Compiled from "Stop.java"
+public class statements.Stop extends statements.Stmt implements interfaces.Handler {
+  public statements.Stop();
+  public void interpret();
+  public java.lang.String toString();
+}
+Compiled from "VarDecl.java"
+public class statements.VarDecl implements interfaces.Handler {
+  expressions.Identifier ident;
+  expressions.Exp e;
+  public void assignNewExp(expressions.Exp);
+  public statements.VarDecl(expressions.Identifier, expressions.Exp);
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public void interpret();
+  public java.lang.String toString();
+  public expressions.Identifier getIdentifier();
+  public expressions.Numbers getResult();
+}
+Compiled from "While.java"
+public class statements.While extends statements.Stmt implements interfaces.Handler {
+  public statements.While(expressions.BooleanExp, statements.Stmt...);
+  public void interpret();
+  public java.lang.String toString();
+}
+Compiled from "Direction.java"
+public final class util.Direction extends java.lang.Enum<util.Direction> {
+  public static final util.Direction minusX;
+  public static final util.Direction x;
+  public static final util.Direction minusY;
+  public static final util.Direction y;
+  public static final util.Direction standby;
+  public final java.lang.String symbol;
+  public final java.lang.String representation;
+  public static util.Direction[] values();
+  public static util.Direction valueOf(java.lang.String);
+  public util.Direction getDirection(java.lang.String);
+  public java.lang.String toString();
+  public java.lang.String getSymbol();
+  static {};
+}
+Compiled from "Grid.java"
+public class util.Grid implements interfaces.Handler {
+  public util.Grid();
+  public util.Grid(statements.Size);
+  public void interpret();
+  public void printGrid();
+  public void printGrid(util.Position);
+  public void printGrid(expressions.Numbers, expressions.Numbers, util.Direction);
+  public void printGrid(java.util.HashMap<util.Position, util.Direction>, util.Position);
+  public boolean isInsideGrid(expressions.Numbers, expressions.Numbers);
+  public statements.Size getSize();
+}
+Compiled from "Grid.java"
+class util.Grid$1 {
+  static final int[] $SwitchMap$util$Direction;
+  static {};
+}
+Compiled from "Position.java"
+public class util.Position implements java.lang.Comparable<util.Position> {
+  public util.Position();
+  public util.Position(util.Position);
+  public util.Position(expressions.Numbers, expressions.Numbers);
+  public util.Position(expressions.Numbers, expressions.Numbers, util.Direction);
+  public void setDirection(util.Direction);
+  public void setXCord(expressions.Numbers);
+  public void setYCord(expressions.Numbers);
+  public util.Direction getDirection();
+  public expressions.Numbers getXCord();
+  public expressions.Numbers getYCord();
+  public java.lang.String toString();
+  public int compareTo(util.Position);
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public boolean equals(util.Position);
+  public int compareTo(java.lang.Object);
+}
+Compiled from "Program.java"
+public class util.Program implements interfaces.Handler {
+  public static util.Grid gridGlobal;
+  public static util.Robot robotGlobal;
+  public static final java.lang.String STARS;
+  public static boolean printGrid;
+  public static boolean printPrettyPrint;
+  public void interpret();
+  public static void addPrettyPrint(java.lang.String...);
+  public static void printPrettyPrint();
+  public util.Program();
+  public util.Program(boolean, boolean);
+  public util.Program(java.lang.String, boolean, boolean);
+  public void addGrid(util.Grid);
+  public void addRobot(util.Robot);
+  public void addStmt(interfaces.Handler);
+  public void addVarDecl(statements.VarDecl);
+  static {};
+}
+Compiled from "Robot.java"
+public class util.Robot implements interfaces.Handler {
+  public static boolean penDown;
+  public void interpret();
+  public util.Robot();
+  public void addVarDecl(statements.VarDecl);
+  public void printVarDecls();
+  public void addStmt(interfaces.Handler);
+  public void setPos(util.Direction, expressions.Numbers, expressions.Numbers);
+  public util.Position getPos();
+  public statements.VarDecl getVarDecl(expressions.Identifier);
+  public void setPos(util.Position);
+  public util.Direction getDirection();
+  static {};
+}

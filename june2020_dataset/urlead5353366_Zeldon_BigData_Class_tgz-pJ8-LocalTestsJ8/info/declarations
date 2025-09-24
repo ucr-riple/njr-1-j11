@@ -1,0 +1,834 @@
+Compiled from "LocalTests.java"
+public class LocalTests {
+  public LocalTests();
+  public static void main(java.lang.String[]) throws java.io.FileNotFoundException, java.text.ParseException;
+}
+Compiled from "DynamicParameter.java"
+public interface com.beust.jcommander.DynamicParameter extends java.lang.annotation.Annotation {
+  public abstract java.lang.String[] names();
+  public abstract boolean required();
+  public abstract java.lang.String description();
+  public abstract java.lang.String descriptionKey();
+  public abstract boolean hidden();
+  public abstract java.lang.Class<? extends com.beust.jcommander.IParameterValidator> validateWith();
+  public abstract java.lang.String assignment();
+  public abstract java.lang.Class<? extends com.beust.jcommander.IValueValidator> validateValueWith();
+}
+Compiled from "FuzzyMap.java"
+public class com.beust.jcommander.FuzzyMap {
+  public com.beust.jcommander.FuzzyMap();
+  public static <V> V findInMap(java.util.Map<? extends com.beust.jcommander.FuzzyMap$IKey, V>, com.beust.jcommander.FuzzyMap$IKey, boolean, boolean);
+}
+Compiled from "FuzzyMap.java"
+interface com.beust.jcommander.FuzzyMap$IKey {
+  public abstract java.lang.String getName();
+}
+Compiled from "IDefaultProvider.java"
+public interface com.beust.jcommander.IDefaultProvider {
+  public abstract java.lang.String getDefaultValueFor(java.lang.String);
+}
+Compiled from "IParameterValidator.java"
+public interface com.beust.jcommander.IParameterValidator {
+  public abstract void validate(java.lang.String, java.lang.String) throws com.beust.jcommander.ParameterException;
+}
+Compiled from "IParameterValidator2.java"
+public interface com.beust.jcommander.IParameterValidator2 extends com.beust.jcommander.IParameterValidator {
+  public abstract void validate(java.lang.String, java.lang.String, com.beust.jcommander.ParameterDescription) throws com.beust.jcommander.ParameterException;
+}
+Compiled from "IStringConverter.java"
+public interface com.beust.jcommander.IStringConverter<T> {
+  public abstract T convert(java.lang.String);
+}
+Compiled from "IStringConverterFactory.java"
+public interface com.beust.jcommander.IStringConverterFactory {
+  public abstract <T> java.lang.Class<? extends com.beust.jcommander.IStringConverter<T>> getConverter(java.lang.Class<T>);
+}
+Compiled from "IValueValidator.java"
+public interface com.beust.jcommander.IValueValidator<T> {
+  public abstract void validate(java.lang.String, T) throws com.beust.jcommander.ParameterException;
+}
+Compiled from "IVariableArity.java"
+public interface com.beust.jcommander.IVariableArity {
+  public abstract int processVariableArity(java.lang.String, java.lang.String[]);
+}
+Compiled from "JCommander.java"
+public class com.beust.jcommander.JCommander {
+  public static final java.lang.String DEBUG_PROPERTY;
+  public com.beust.jcommander.JCommander();
+  public com.beust.jcommander.JCommander(java.lang.Object);
+  public com.beust.jcommander.JCommander(java.lang.Object, java.util.ResourceBundle);
+  public com.beust.jcommander.JCommander(java.lang.Object, java.util.ResourceBundle, java.lang.String...);
+  public com.beust.jcommander.JCommander(java.lang.Object, java.lang.String...);
+  public static com.beust.jcommander.internal.Console getConsole();
+  public final void addObject(java.lang.Object);
+  public final void setDescriptionsBundle(java.util.ResourceBundle);
+  public void parse(java.lang.String...);
+  public void parseWithoutValidation(java.lang.String...);
+  public java.lang.String getMainParameterDescription();
+  public void setProgramName(java.lang.String);
+  public void setProgramName(java.lang.String, java.lang.String...);
+  public void usage(java.lang.String);
+  public void usage(java.lang.String, java.lang.StringBuilder);
+  public void usage(java.lang.String, java.lang.StringBuilder, java.lang.String);
+  public java.lang.String getCommandDescription(java.lang.String);
+  public void usage();
+  public void usage(java.lang.StringBuilder);
+  public void usage(java.lang.StringBuilder, java.lang.String);
+  public void setParameterDescriptionComparator(java.util.Comparator<? super com.beust.jcommander.ParameterDescription>);
+  public void setColumnSize(int);
+  public int getColumnSize();
+  public java.util.List<com.beust.jcommander.ParameterDescription> getParameters();
+  public com.beust.jcommander.ParameterDescription getMainParameter();
+  public void setDefaultProvider(com.beust.jcommander.IDefaultProvider);
+  public void addConverterFactory(com.beust.jcommander.IStringConverterFactory);
+  public <T> java.lang.Class<? extends com.beust.jcommander.IStringConverter<T>> findConverter(java.lang.Class<T>);
+  public java.lang.Object convertValue(com.beust.jcommander.ParameterDescription, java.lang.String);
+  public java.lang.Object convertValue(com.beust.jcommander.Parameterized, java.lang.Class, java.lang.String);
+  public void addCommand(java.lang.String, java.lang.Object);
+  public void addCommand(java.lang.Object);
+  public void addCommand(java.lang.String, java.lang.Object, java.lang.String...);
+  public java.util.Map<java.lang.String, com.beust.jcommander.JCommander> getCommands();
+  public java.lang.String getParsedCommand();
+  public java.lang.String getParsedAlias();
+  public java.util.List<java.lang.Object> getObjects();
+  public void setVerbose(int);
+  public void setCaseSensitiveOptions(boolean);
+  public void setAllowAbbreviatedOptions(boolean);
+  public void setAcceptUnknownOptions(boolean);
+  public java.util.List<java.lang.String> getUnknownOptions();
+  static boolean access$100(com.beust.jcommander.JCommander, java.lang.String[], java.lang.String);
+  static {};
+}
+Compiled from "JCommander.java"
+class com.beust.jcommander.JCommander$1 implements java.util.Comparator<com.beust.jcommander.ParameterDescription> {
+  final com.beust.jcommander.JCommander this$0;
+  com.beust.jcommander.JCommander$1(com.beust.jcommander.JCommander);
+  public int compare(com.beust.jcommander.ParameterDescription, com.beust.jcommander.ParameterDescription);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "JCommander.java"
+class com.beust.jcommander.JCommander$DefaultVariableArity implements com.beust.jcommander.IVariableArity {
+  final com.beust.jcommander.JCommander this$0;
+  public int processVariableArity(java.lang.String, java.lang.String[]);
+  com.beust.jcommander.JCommander$DefaultVariableArity(com.beust.jcommander.JCommander, com.beust.jcommander.JCommander$1);
+}
+Compiled from "JCommander.java"
+final class com.beust.jcommander.JCommander$ProgramName implements com.beust.jcommander.FuzzyMap$IKey {
+  com.beust.jcommander.JCommander$ProgramName(java.lang.String, java.util.List<java.lang.String>);
+  public java.lang.String getName();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+  static java.lang.String access$000(com.beust.jcommander.JCommander$ProgramName);
+  static java.lang.String access$300(com.beust.jcommander.JCommander$ProgramName);
+}
+Compiled from "MissingCommandException.java"
+public class com.beust.jcommander.MissingCommandException extends com.beust.jcommander.ParameterException {
+  public com.beust.jcommander.MissingCommandException(java.lang.String);
+  public com.beust.jcommander.MissingCommandException(java.lang.Throwable);
+}
+Compiled from "Parameter.java"
+public interface com.beust.jcommander.Parameter extends java.lang.annotation.Annotation {
+  public abstract java.lang.String[] names();
+  public abstract java.lang.String description();
+  public abstract boolean required();
+  public abstract java.lang.String descriptionKey();
+  public abstract int arity();
+  public abstract boolean password();
+  public abstract java.lang.Class<? extends com.beust.jcommander.IStringConverter<?>> converter();
+  public abstract java.lang.Class<? extends com.beust.jcommander.IStringConverter<?>> listConverter();
+  public abstract boolean hidden();
+  public abstract java.lang.Class<? extends com.beust.jcommander.IParameterValidator> validateWith();
+  public abstract java.lang.Class<? extends com.beust.jcommander.IValueValidator> validateValueWith();
+  public abstract boolean variableArity();
+  public abstract java.lang.Class<? extends com.beust.jcommander.converters.IParameterSplitter> splitter();
+  public abstract boolean echoInput();
+  public abstract boolean help();
+}
+Compiled from "ParameterDescription.java"
+public class com.beust.jcommander.ParameterDescription {
+  public com.beust.jcommander.ParameterDescription(java.lang.Object, com.beust.jcommander.DynamicParameter, com.beust.jcommander.Parameterized, java.util.ResourceBundle, com.beust.jcommander.JCommander);
+  public com.beust.jcommander.ParameterDescription(java.lang.Object, com.beust.jcommander.Parameter, com.beust.jcommander.Parameterized, java.util.ResourceBundle, com.beust.jcommander.JCommander);
+  public java.lang.String getLongestName();
+  public java.lang.Object getDefault();
+  public java.lang.String getDescription();
+  public java.lang.Object getObject();
+  public java.lang.String getNames();
+  public com.beust.jcommander.WrappedParameter getParameter();
+  public com.beust.jcommander.Parameterized getParameterized();
+  public void addValue(java.lang.String);
+  public boolean isAssigned();
+  public void setAssigned(boolean);
+  public void addValue(java.lang.String, boolean);
+  public static void validateValueParameter(java.lang.Class<? extends com.beust.jcommander.IValueValidator>, java.lang.String, java.lang.Object);
+  public static void validateParameter(com.beust.jcommander.ParameterDescription, java.lang.Class<? extends com.beust.jcommander.IParameterValidator>, java.lang.String, java.lang.String);
+  public java.lang.String toString();
+  public boolean isDynamicParameter();
+  public boolean isHelp();
+}
+Compiled from "ParameterException.java"
+public class com.beust.jcommander.ParameterException extends java.lang.RuntimeException {
+  public com.beust.jcommander.ParameterException(java.lang.Throwable);
+  public com.beust.jcommander.ParameterException(java.lang.String);
+}
+Compiled from "Parameterized.java"
+public class com.beust.jcommander.Parameterized {
+  public com.beust.jcommander.Parameterized(com.beust.jcommander.WrappedParameter, com.beust.jcommander.ParametersDelegate, java.lang.reflect.Field, java.lang.reflect.Method);
+  public static java.util.List<com.beust.jcommander.Parameterized> parseArg(java.lang.Object);
+  public com.beust.jcommander.WrappedParameter getWrappedParameter();
+  public java.lang.Class<?> getType();
+  public java.lang.String getName();
+  public java.lang.Object get(java.lang.Object);
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public boolean isDynamicParameter(java.lang.reflect.Field);
+  public void set(java.lang.Object, java.lang.Object);
+  public com.beust.jcommander.ParametersDelegate getDelegateAnnotation();
+  public java.lang.reflect.Type getGenericType();
+  public com.beust.jcommander.Parameter getParameter();
+  public java.lang.reflect.Type findFieldGenericType();
+  public boolean isDynamicParameter();
+}
+Compiled from "Parameters.java"
+public interface com.beust.jcommander.Parameters extends java.lang.annotation.Annotation {
+  public static final java.lang.String DEFAULT_OPTION_PREFIXES;
+  public abstract java.lang.String resourceBundle();
+  public abstract java.lang.String separators();
+  public abstract java.lang.String optionPrefixes();
+  public abstract java.lang.String commandDescription();
+  public abstract java.lang.String commandDescriptionKey();
+  public abstract java.lang.String[] commandNames();
+}
+Compiled from "ParametersDelegate.java"
+public interface com.beust.jcommander.ParametersDelegate extends java.lang.annotation.Annotation {
+}
+Compiled from "ResourceBundle.java"
+public interface com.beust.jcommander.ResourceBundle extends java.lang.annotation.Annotation {
+  public abstract java.lang.String value();
+}
+Compiled from "StringKey.java"
+public class com.beust.jcommander.StringKey implements com.beust.jcommander.FuzzyMap$IKey {
+  public com.beust.jcommander.StringKey(java.lang.String);
+  public java.lang.String getName();
+  public java.lang.String toString();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+}
+Compiled from "Strings.java"
+public class com.beust.jcommander.Strings {
+  public com.beust.jcommander.Strings();
+  public static boolean isStringEmpty(java.lang.String);
+}
+Compiled from "WrappedParameter.java"
+public class com.beust.jcommander.WrappedParameter {
+  public com.beust.jcommander.WrappedParameter(com.beust.jcommander.Parameter);
+  public com.beust.jcommander.WrappedParameter(com.beust.jcommander.DynamicParameter);
+  public com.beust.jcommander.Parameter getParameter();
+  public com.beust.jcommander.DynamicParameter getDynamicParameter();
+  public int arity();
+  public boolean hidden();
+  public boolean required();
+  public boolean password();
+  public java.lang.String[] names();
+  public boolean variableArity();
+  public java.lang.Class<? extends com.beust.jcommander.IParameterValidator> validateWith();
+  public java.lang.Class<? extends com.beust.jcommander.IValueValidator> validateValueWith();
+  public boolean echoInput();
+  public void addValue(com.beust.jcommander.Parameterized, java.lang.Object, java.lang.Object);
+  public java.lang.String getAssignment();
+  public boolean isHelp();
+}
+Compiled from "BaseConverter.java"
+public abstract class com.beust.jcommander.converters.BaseConverter<T> implements com.beust.jcommander.IStringConverter<T> {
+  public com.beust.jcommander.converters.BaseConverter(java.lang.String);
+  public java.lang.String getOptionName();
+  protected java.lang.String getErrorString(java.lang.String, java.lang.String);
+}
+Compiled from "BigDecimalConverter.java"
+public class com.beust.jcommander.converters.BigDecimalConverter extends com.beust.jcommander.converters.BaseConverter<java.math.BigDecimal> {
+  public com.beust.jcommander.converters.BigDecimalConverter(java.lang.String);
+  public java.math.BigDecimal convert(java.lang.String);
+  public java.lang.Object convert(java.lang.String);
+}
+Compiled from "BooleanConverter.java"
+public class com.beust.jcommander.converters.BooleanConverter extends com.beust.jcommander.converters.BaseConverter<java.lang.Boolean> {
+  public com.beust.jcommander.converters.BooleanConverter(java.lang.String);
+  public java.lang.Boolean convert(java.lang.String);
+  public java.lang.Object convert(java.lang.String);
+}
+Compiled from "CommaParameterSplitter.java"
+public class com.beust.jcommander.converters.CommaParameterSplitter implements com.beust.jcommander.converters.IParameterSplitter {
+  public com.beust.jcommander.converters.CommaParameterSplitter();
+  public java.util.List<java.lang.String> split(java.lang.String);
+}
+Compiled from "DoubleConverter.java"
+public class com.beust.jcommander.converters.DoubleConverter extends com.beust.jcommander.converters.BaseConverter<java.lang.Double> {
+  public com.beust.jcommander.converters.DoubleConverter(java.lang.String);
+  public java.lang.Double convert(java.lang.String);
+  public java.lang.Object convert(java.lang.String);
+}
+Compiled from "FileConverter.java"
+public class com.beust.jcommander.converters.FileConverter implements com.beust.jcommander.IStringConverter<java.io.File> {
+  public com.beust.jcommander.converters.FileConverter();
+  public java.io.File convert(java.lang.String);
+  public java.lang.Object convert(java.lang.String);
+}
+Compiled from "FloatConverter.java"
+public class com.beust.jcommander.converters.FloatConverter extends com.beust.jcommander.converters.BaseConverter<java.lang.Float> {
+  public com.beust.jcommander.converters.FloatConverter(java.lang.String);
+  public java.lang.Float convert(java.lang.String);
+  public java.lang.Object convert(java.lang.String);
+}
+Compiled from "IParameterSplitter.java"
+public interface com.beust.jcommander.converters.IParameterSplitter {
+  public abstract java.util.List<java.lang.String> split(java.lang.String);
+}
+Compiled from "ISO8601DateConverter.java"
+public class com.beust.jcommander.converters.ISO8601DateConverter extends com.beust.jcommander.converters.BaseConverter<java.util.Date> {
+  public com.beust.jcommander.converters.ISO8601DateConverter(java.lang.String);
+  public java.util.Date convert(java.lang.String);
+  public java.lang.Object convert(java.lang.String);
+  static {};
+}
+Compiled from "IntegerConverter.java"
+public class com.beust.jcommander.converters.IntegerConverter extends com.beust.jcommander.converters.BaseConverter<java.lang.Integer> {
+  public com.beust.jcommander.converters.IntegerConverter(java.lang.String);
+  public java.lang.Integer convert(java.lang.String);
+  public java.lang.Object convert(java.lang.String);
+}
+Compiled from "LongConverter.java"
+public class com.beust.jcommander.converters.LongConverter extends com.beust.jcommander.converters.BaseConverter<java.lang.Long> {
+  public com.beust.jcommander.converters.LongConverter(java.lang.String);
+  public java.lang.Long convert(java.lang.String);
+  public java.lang.Object convert(java.lang.String);
+}
+Compiled from "NoConverter.java"
+public class com.beust.jcommander.converters.NoConverter implements com.beust.jcommander.IStringConverter<java.lang.String> {
+  public com.beust.jcommander.converters.NoConverter();
+  public java.lang.String convert(java.lang.String);
+  public java.lang.Object convert(java.lang.String);
+}
+Compiled from "StringConverter.java"
+public class com.beust.jcommander.converters.StringConverter implements com.beust.jcommander.IStringConverter<java.lang.String> {
+  public com.beust.jcommander.converters.StringConverter();
+  public java.lang.String convert(java.lang.String);
+  public java.lang.Object convert(java.lang.String);
+}
+Compiled from "PropertyFileDefaultProvider.java"
+public class com.beust.jcommander.defaultprovider.PropertyFileDefaultProvider implements com.beust.jcommander.IDefaultProvider {
+  public static final java.lang.String DEFAULT_FILE_NAME;
+  public com.beust.jcommander.defaultprovider.PropertyFileDefaultProvider();
+  public com.beust.jcommander.defaultprovider.PropertyFileDefaultProvider(java.lang.String);
+  public java.lang.String getDefaultValueFor(java.lang.String);
+}
+Compiled from "Console.java"
+public interface com.beust.jcommander.internal.Console {
+  public abstract void print(java.lang.String);
+  public abstract void println(java.lang.String);
+  public abstract char[] readPassword(boolean);
+}
+Compiled from "DefaultConsole.java"
+public class com.beust.jcommander.internal.DefaultConsole implements com.beust.jcommander.internal.Console {
+  public com.beust.jcommander.internal.DefaultConsole();
+  public void print(java.lang.String);
+  public void println(java.lang.String);
+  public char[] readPassword(boolean);
+}
+Compiled from "DefaultConverterFactory.java"
+public class com.beust.jcommander.internal.DefaultConverterFactory implements com.beust.jcommander.IStringConverterFactory {
+  public com.beust.jcommander.internal.DefaultConverterFactory();
+  public java.lang.Class<? extends com.beust.jcommander.IStringConverter<?>> getConverter(java.lang.Class);
+  static {};
+}
+Compiled from "JDK6Console.java"
+public class com.beust.jcommander.internal.JDK6Console implements com.beust.jcommander.internal.Console {
+  public com.beust.jcommander.internal.JDK6Console(java.lang.Object) throws java.lang.Exception;
+  public void print(java.lang.String);
+  public void println(java.lang.String);
+  public char[] readPassword(boolean);
+}
+Compiled from "Lists.java"
+public class com.beust.jcommander.internal.Lists {
+  public com.beust.jcommander.internal.Lists();
+  public static <K> java.util.List<K> newArrayList();
+  public static <K> java.util.List<K> newArrayList(java.util.Collection<K>);
+  public static <K> java.util.List<K> newArrayList(K...);
+  public static <K> java.util.List<K> newArrayList(int);
+  public static <K> java.util.LinkedList<K> newLinkedList();
+  public static <K> java.util.LinkedList<K> newLinkedList(java.util.Collection<K>);
+}
+Compiled from "Maps.java"
+public class com.beust.jcommander.internal.Maps {
+  public com.beust.jcommander.internal.Maps();
+  public static <K, V> java.util.Map<K, V> newHashMap();
+  public static <K, V> java.util.Map<K, V> newLinkedHashMap();
+  public static <T> java.util.Map<T, T> newHashMap(T...);
+}
+Compiled from "Nullable.java"
+public interface com.beust.jcommander.internal.Nullable extends java.lang.annotation.Annotation {
+}
+Compiled from "Sets.java"
+public class com.beust.jcommander.internal.Sets {
+  public com.beust.jcommander.internal.Sets();
+  public static <K> java.util.Set<K> newHashSet();
+  public static <K> java.util.Set<K> newLinkedHashSet();
+}
+Compiled from "NoValidator.java"
+public class com.beust.jcommander.validators.NoValidator implements com.beust.jcommander.IParameterValidator {
+  public com.beust.jcommander.validators.NoValidator();
+  public void validate(java.lang.String, java.lang.String) throws com.beust.jcommander.ParameterException;
+}
+Compiled from "NoValueValidator.java"
+public class com.beust.jcommander.validators.NoValueValidator<T> implements com.beust.jcommander.IValueValidator<T> {
+  public com.beust.jcommander.validators.NoValueValidator();
+  public void validate(java.lang.String, T) throws com.beust.jcommander.ParameterException;
+}
+Compiled from "PositiveInteger.java"
+public class com.beust.jcommander.validators.PositiveInteger implements com.beust.jcommander.IParameterValidator {
+  public com.beust.jcommander.validators.PositiveInteger();
+  public void validate(java.lang.String, java.lang.String) throws com.beust.jcommander.ParameterException;
+}
+Compiled from "CmdArguments.java"
+public class sg.edu.nus.cs5344.spring14.twitter.CmdArguments {
+  public static sg.edu.nus.cs5344.spring14.twitter.CmdArguments getArgs();
+  public static sg.edu.nus.cs5344.spring14.twitter.CmdArguments instantiate(java.lang.String[]);
+  public java.lang.String getWorkingDir();
+  public boolean skipJob(java.lang.String);
+  static {};
+}
+Compiled from "ConfUtils.java"
+public class sg.edu.nus.cs5344.spring14.twitter.ConfUtils {
+  public sg.edu.nus.cs5344.spring14.twitter.ConfUtils();
+  public static org.apache.hadoop.fs.Path getPath(org.apache.hadoop.conf.Configuration, java.lang.String);
+}
+Compiled from "FileLocations.java"
+public class sg.edu.nus.cs5344.spring14.twitter.FileLocations {
+  public static final java.lang.String INPUT_FOLDER;
+  public static final java.lang.String TEMP_FOLDER;
+  public static final java.lang.String SPECIAL_FOLDER;
+  public static final java.lang.String OUTPUT_FOLDER;
+  public sg.edu.nus.cs5344.spring14.twitter.FileLocations();
+  public static org.apache.hadoop.fs.Path getInput();
+  public static org.apache.hadoop.fs.Path getOutputForJob(java.lang.String);
+  public static org.apache.hadoop.fs.Path getTextOutputPath(java.lang.String);
+  public static org.apache.hadoop.fs.Path getSpecaialFolder();
+  public static org.apache.hadoop.fs.Path getSpecialFile(java.lang.String);
+}
+Compiled from "FileUtils.java"
+public class sg.edu.nus.cs5344.spring14.twitter.FileUtils {
+  public static org.apache.hadoop.fs.Path[] getAllParts(org.apache.hadoop.fs.Path, org.apache.hadoop.fs.FileSystem) throws java.io.IOException;
+}
+Compiled from "JobAParseText.java"
+public class sg.edu.nus.cs5344.spring14.twitter.Jobs.JobAParseText {
+  public sg.edu.nus.cs5344.spring14.twitter.Jobs.JobAParseText();
+  static org.apache.hadoop.io.NullWritable access$000();
+  static {};
+}
+Compiled from "JobAParseText.java"
+public class sg.edu.nus.cs5344.spring14.twitter.Jobs.JobAParseText$MapperImpl extends org.apache.hadoop.mapreduce.Mapper<org.apache.hadoop.io.LongWritable, org.apache.hadoop.io.Text, sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet, org.apache.hadoop.io.NullWritable> {
+  public sg.edu.nus.cs5344.spring14.twitter.Jobs.JobAParseText$MapperImpl();
+  protected void map(org.apache.hadoop.io.LongWritable, org.apache.hadoop.io.Text, org.apache.hadoop.mapreduce.Mapper<org.apache.hadoop.io.LongWritable, org.apache.hadoop.io.Text, sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet, org.apache.hadoop.io.NullWritable>.Context) throws java.io.IOException, java.lang.InterruptedException;
+  protected void map(java.lang.Object, java.lang.Object, org.apache.hadoop.mapreduce.Mapper$Context) throws java.io.IOException, java.lang.InterruptedException;
+}
+Compiled from "JobAParseText.java"
+public class sg.edu.nus.cs5344.spring14.twitter.Jobs.JobAParseText$ReducerImpl extends org.apache.hadoop.mapreduce.Reducer<sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet, org.apache.hadoop.io.NullWritable, sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet, org.apache.hadoop.io.NullWritable> {
+  public sg.edu.nus.cs5344.spring14.twitter.Jobs.JobAParseText$ReducerImpl();
+  protected void reduce(sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet, java.lang.Iterable<org.apache.hadoop.io.NullWritable>, org.apache.hadoop.mapreduce.Reducer<sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet, org.apache.hadoop.io.NullWritable, sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet, org.apache.hadoop.io.NullWritable>.Context) throws java.io.IOException, java.lang.InterruptedException;
+  protected void reduce(java.lang.Object, java.lang.Iterable, org.apache.hadoop.mapreduce.Reducer$Context) throws java.io.IOException, java.lang.InterruptedException;
+}
+Compiled from "JobBCountHashtags.java"
+public class sg.edu.nus.cs5344.spring14.twitter.Jobs.JobBCountHashtags {
+  public sg.edu.nus.cs5344.spring14.twitter.Jobs.JobBCountHashtags();
+}
+Compiled from "JobBCountHashtags.java"
+public class sg.edu.nus.cs5344.spring14.twitter.Jobs.JobBCountHashtags$MapperImpl extends org.apache.hadoop.mapreduce.Mapper<sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet, org.apache.hadoop.io.NullWritable, sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.DayHashtagPair, org.apache.hadoop.io.VIntWritable> {
+  public sg.edu.nus.cs5344.spring14.twitter.Jobs.JobBCountHashtags$MapperImpl();
+  protected void map(sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet, org.apache.hadoop.io.NullWritable, org.apache.hadoop.mapreduce.Mapper<sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet, org.apache.hadoop.io.NullWritable, sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.DayHashtagPair, org.apache.hadoop.io.VIntWritable>.Context) throws java.io.IOException, java.lang.InterruptedException;
+  protected void map(java.lang.Object, java.lang.Object, org.apache.hadoop.mapreduce.Mapper$Context) throws java.io.IOException, java.lang.InterruptedException;
+}
+Compiled from "JobBCountHashtags.java"
+public class sg.edu.nus.cs5344.spring14.twitter.Jobs.JobBCountHashtags$ReducerImpl extends org.apache.hadoop.mapreduce.Reducer<sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.DayHashtagPair, org.apache.hadoop.io.VIntWritable, sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.DayHashtagPair, org.apache.hadoop.io.VIntWritable> {
+  public sg.edu.nus.cs5344.spring14.twitter.Jobs.JobBCountHashtags$ReducerImpl();
+  protected void reduce(sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.DayHashtagPair, java.lang.Iterable<org.apache.hadoop.io.VIntWritable>, org.apache.hadoop.mapreduce.Reducer<sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.DayHashtagPair, org.apache.hadoop.io.VIntWritable, sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.DayHashtagPair, org.apache.hadoop.io.VIntWritable>.Context) throws java.io.IOException, java.lang.InterruptedException;
+  protected void reduce(java.lang.Object, java.lang.Iterable, org.apache.hadoop.mapreduce.Reducer$Context) throws java.io.IOException, java.lang.InterruptedException;
+}
+Compiled from "JobCFindTrends.java"
+public class sg.edu.nus.cs5344.spring14.twitter.Jobs.JobCFindTrends {
+  public sg.edu.nus.cs5344.spring14.twitter.Jobs.JobCFindTrends();
+}
+Compiled from "JobCFindTrends.java"
+public class sg.edu.nus.cs5344.spring14.twitter.Jobs.JobCFindTrends$MapperImpl extends org.apache.hadoop.mapreduce.Mapper<sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.DayHashtagPair, org.apache.hadoop.io.VIntWritable, sg.edu.nus.cs5344.spring14.twitter.datastructure.Hashtag, sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.DayCountPair> {
+  public sg.edu.nus.cs5344.spring14.twitter.Jobs.JobCFindTrends$MapperImpl();
+  protected void map(sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.DayHashtagPair, org.apache.hadoop.io.VIntWritable, org.apache.hadoop.mapreduce.Mapper<sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.DayHashtagPair, org.apache.hadoop.io.VIntWritable, sg.edu.nus.cs5344.spring14.twitter.datastructure.Hashtag, sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.DayCountPair>.Context) throws java.io.IOException, java.lang.InterruptedException;
+  protected void map(java.lang.Object, java.lang.Object, org.apache.hadoop.mapreduce.Mapper$Context) throws java.io.IOException, java.lang.InterruptedException;
+}
+Compiled from "JobCFindTrends.java"
+public class sg.edu.nus.cs5344.spring14.twitter.Jobs.JobCFindTrends$ReducerImpl extends org.apache.hadoop.mapreduce.Reducer<sg.edu.nus.cs5344.spring14.twitter.datastructure.Hashtag, sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.DayCountPair, sg.edu.nus.cs5344.spring14.twitter.datastructure.Hashtag, sg.edu.nus.cs5344.spring14.twitter.datastructure.Trend> {
+  public sg.edu.nus.cs5344.spring14.twitter.Jobs.JobCFindTrends$ReducerImpl();
+  protected void setup(org.apache.hadoop.mapreduce.Reducer<sg.edu.nus.cs5344.spring14.twitter.datastructure.Hashtag, sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.DayCountPair, sg.edu.nus.cs5344.spring14.twitter.datastructure.Hashtag, sg.edu.nus.cs5344.spring14.twitter.datastructure.Trend>.Context) throws java.io.IOException, java.lang.InterruptedException;
+  protected void reduce(sg.edu.nus.cs5344.spring14.twitter.datastructure.Hashtag, java.lang.Iterable<sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.DayCountPair>, org.apache.hadoop.mapreduce.Reducer<sg.edu.nus.cs5344.spring14.twitter.datastructure.Hashtag, sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.DayCountPair, sg.edu.nus.cs5344.spring14.twitter.datastructure.Hashtag, sg.edu.nus.cs5344.spring14.twitter.datastructure.Trend>.Context) throws java.io.IOException, java.lang.InterruptedException;
+  protected void cleanup(org.apache.hadoop.mapreduce.Reducer<sg.edu.nus.cs5344.spring14.twitter.datastructure.Hashtag, sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.DayCountPair, sg.edu.nus.cs5344.spring14.twitter.datastructure.Hashtag, sg.edu.nus.cs5344.spring14.twitter.datastructure.Trend>.Context) throws java.io.IOException, java.lang.InterruptedException;
+  protected void reduce(java.lang.Object, java.lang.Iterable, org.apache.hadoop.mapreduce.Reducer$Context) throws java.io.IOException, java.lang.InterruptedException;
+}
+Compiled from "JobDDayStats.java"
+public class sg.edu.nus.cs5344.spring14.twitter.Jobs.JobDDayStats {
+  public sg.edu.nus.cs5344.spring14.twitter.Jobs.JobDDayStats();
+}
+Compiled from "JobDDayStats.java"
+public class sg.edu.nus.cs5344.spring14.twitter.Jobs.JobDDayStats$MapperImpl extends org.apache.hadoop.mapreduce.Mapper<sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet, org.apache.hadoop.io.NullWritable, sg.edu.nus.cs5344.spring14.twitter.datastructure.Day, org.apache.hadoop.io.VIntWritable> {
+  public sg.edu.nus.cs5344.spring14.twitter.Jobs.JobDDayStats$MapperImpl();
+  protected void map(sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet, org.apache.hadoop.io.NullWritable, org.apache.hadoop.mapreduce.Mapper<sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet, org.apache.hadoop.io.NullWritable, sg.edu.nus.cs5344.spring14.twitter.datastructure.Day, org.apache.hadoop.io.VIntWritable>.Context) throws java.io.IOException, java.lang.InterruptedException;
+  protected void map(java.lang.Object, java.lang.Object, org.apache.hadoop.mapreduce.Mapper$Context) throws java.io.IOException, java.lang.InterruptedException;
+}
+Compiled from "JobDDayStats.java"
+public class sg.edu.nus.cs5344.spring14.twitter.Jobs.JobDDayStats$ReducerImpl extends org.apache.hadoop.mapreduce.Reducer<sg.edu.nus.cs5344.spring14.twitter.datastructure.Day, org.apache.hadoop.io.VIntWritable, sg.edu.nus.cs5344.spring14.twitter.datastructure.Day, org.apache.hadoop.io.VIntWritable> {
+  public sg.edu.nus.cs5344.spring14.twitter.Jobs.JobDDayStats$ReducerImpl();
+  protected void reduce(sg.edu.nus.cs5344.spring14.twitter.datastructure.Day, java.lang.Iterable<org.apache.hadoop.io.VIntWritable>, org.apache.hadoop.mapreduce.Reducer<sg.edu.nus.cs5344.spring14.twitter.datastructure.Day, org.apache.hadoop.io.VIntWritable, sg.edu.nus.cs5344.spring14.twitter.datastructure.Day, org.apache.hadoop.io.VIntWritable>.Context) throws java.io.IOException, java.lang.InterruptedException;
+  protected void reduce(java.lang.Object, java.lang.Iterable, org.apache.hadoop.mapreduce.Reducer$Context) throws java.io.IOException, java.lang.InterruptedException;
+}
+Compiled from "JobEFilterTweets.java"
+public class sg.edu.nus.cs5344.spring14.twitter.Jobs.JobEFilterTweets {
+  public sg.edu.nus.cs5344.spring14.twitter.Jobs.JobEFilterTweets();
+  public static java.util.Set<sg.edu.nus.cs5344.spring14.twitter.datastructure.Day> loadIncludedDays(org.apache.hadoop.conf.Configuration) throws java.io.IOException;
+}
+Compiled from "JobEFilterTweets.java"
+public class sg.edu.nus.cs5344.spring14.twitter.Jobs.JobEFilterTweets$MapperImpl extends org.apache.hadoop.mapreduce.Mapper<sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet, org.apache.hadoop.io.NullWritable, sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet, org.apache.hadoop.io.NullWritable> {
+  public sg.edu.nus.cs5344.spring14.twitter.Jobs.JobEFilterTweets$MapperImpl();
+  protected void setup(org.apache.hadoop.mapreduce.Mapper<sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet, org.apache.hadoop.io.NullWritable, sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet, org.apache.hadoop.io.NullWritable>.Context) throws java.io.IOException, java.lang.InterruptedException;
+  protected void map(sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet, org.apache.hadoop.io.NullWritable, org.apache.hadoop.mapreduce.Mapper<sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet, org.apache.hadoop.io.NullWritable, sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet, org.apache.hadoop.io.NullWritable>.Context) throws java.io.IOException, java.lang.InterruptedException;
+  protected void map(java.lang.Object, java.lang.Object, org.apache.hadoop.mapreduce.Mapper$Context) throws java.io.IOException, java.lang.InterruptedException;
+}
+Compiled from "JobEFilterTweets.java"
+public class sg.edu.nus.cs5344.spring14.twitter.Jobs.JobEFilterTweets$ReducerImpl extends org.apache.hadoop.mapreduce.Reducer<sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet, org.apache.hadoop.io.NullWritable, sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet, org.apache.hadoop.io.NullWritable> {
+  public sg.edu.nus.cs5344.spring14.twitter.Jobs.JobEFilterTweets$ReducerImpl();
+  protected void reduce(sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet, java.lang.Iterable<org.apache.hadoop.io.NullWritable>, org.apache.hadoop.mapreduce.Reducer<sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet, org.apache.hadoop.io.NullWritable, sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet, org.apache.hadoop.io.NullWritable>.Context) throws java.io.IOException, java.lang.InterruptedException;
+  protected void reduce(java.lang.Object, java.lang.Iterable, org.apache.hadoop.mapreduce.Reducer$Context) throws java.io.IOException, java.lang.InterruptedException;
+  static {};
+}
+Compiled from "JobFTweetsForTrends.java"
+public class sg.edu.nus.cs5344.spring14.twitter.Jobs.JobFTweetsForTrends {
+  public sg.edu.nus.cs5344.spring14.twitter.Jobs.JobFTweetsForTrends();
+  public static java.util.Map<sg.edu.nus.cs5344.spring14.twitter.datastructure.Hashtag, sg.edu.nus.cs5344.spring14.twitter.datastructure.Trend> loadTrends(org.apache.hadoop.conf.Configuration) throws java.io.IOException;
+}
+Compiled from "JobFTweetsForTrends.java"
+public class sg.edu.nus.cs5344.spring14.twitter.Jobs.JobFTweetsForTrends$MapperImpl extends org.apache.hadoop.mapreduce.Mapper<sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet, org.apache.hadoop.io.NullWritable, sg.edu.nus.cs5344.spring14.twitter.datastructure.Hashtag, sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet> {
+  public sg.edu.nus.cs5344.spring14.twitter.Jobs.JobFTweetsForTrends$MapperImpl();
+  protected void setup(org.apache.hadoop.mapreduce.Mapper<sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet, org.apache.hadoop.io.NullWritable, sg.edu.nus.cs5344.spring14.twitter.datastructure.Hashtag, sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet>.Context) throws java.io.IOException, java.lang.InterruptedException;
+  protected void map(sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet, org.apache.hadoop.io.NullWritable, org.apache.hadoop.mapreduce.Mapper<sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet, org.apache.hadoop.io.NullWritable, sg.edu.nus.cs5344.spring14.twitter.datastructure.Hashtag, sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet>.Context) throws java.io.IOException, java.lang.InterruptedException;
+  protected void map(java.lang.Object, java.lang.Object, org.apache.hadoop.mapreduce.Mapper$Context) throws java.io.IOException, java.lang.InterruptedException;
+}
+Compiled from "JobFTweetsForTrends.java"
+public class sg.edu.nus.cs5344.spring14.twitter.Jobs.JobFTweetsForTrends$ReducerImpl extends org.apache.hadoop.mapreduce.Reducer<sg.edu.nus.cs5344.spring14.twitter.datastructure.Hashtag, sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet, sg.edu.nus.cs5344.spring14.twitter.datastructure.Hashtag, sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.TweetList> {
+  public sg.edu.nus.cs5344.spring14.twitter.Jobs.JobFTweetsForTrends$ReducerImpl();
+  protected void reduce(sg.edu.nus.cs5344.spring14.twitter.datastructure.Hashtag, java.lang.Iterable<sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet>, org.apache.hadoop.mapreduce.Reducer<sg.edu.nus.cs5344.spring14.twitter.datastructure.Hashtag, sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet, sg.edu.nus.cs5344.spring14.twitter.datastructure.Hashtag, sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.TweetList>.Context) throws java.io.IOException, java.lang.InterruptedException;
+  protected void reduce(java.lang.Object, java.lang.Iterable, org.apache.hadoop.mapreduce.Reducer$Context) throws java.io.IOException, java.lang.InterruptedException;
+}
+Compiled from "KeyValueFormatter.java"
+public interface sg.edu.nus.cs5344.spring14.twitter.KeyValueFormatter<K, V> {
+  public abstract java.lang.String format(K, V);
+}
+Compiled from "KeyValueFormatters.java"
+public class sg.edu.nus.cs5344.spring14.twitter.KeyValueFormatters {
+  public sg.edu.nus.cs5344.spring14.twitter.KeyValueFormatters();
+  public static <K, V> sg.edu.nus.cs5344.spring14.twitter.KeyValueFormatter<K, V> getTabDelimimted();
+}
+Compiled from "KeyValueFormatters.java"
+final class sg.edu.nus.cs5344.spring14.twitter.KeyValueFormatters$1 implements sg.edu.nus.cs5344.spring14.twitter.KeyValueFormatter<K, V> {
+  sg.edu.nus.cs5344.spring14.twitter.KeyValueFormatters$1();
+  public java.lang.String format(K, V);
+}
+Compiled from "TwConsts.java"
+public class sg.edu.nus.cs5344.spring14.twitter.TwConsts {
+  public static final int TREND_LOOKBACK;
+  public static final int TREND_MISSING_DAY_TOLLERANCE;
+  public static final int TREND_MIN_DAYLY_TWEETS;
+  public static final double TREND_WEEKDAY_BOOST;
+  public static final double TREND_CHI_THRESHOLD;
+  public static final boolean TREND_USE_ALT_CHI;
+  public static final int NUM_BEST_TRENDS;
+  public static final int DAYS_BEFORE_TREND;
+  public static final int DAYS_AFTER_TREND;
+  public static final int FILTER_FIRST_DAY;
+  public static final int FILTER_MIN_HASHTAGS_PER_DAY;
+  public static final java.lang.String DAY_STATS_DATA_FOLDER_ATT;
+  public static final java.lang.String TRENDS_DATA_FOLDER_ATT;
+  public sg.edu.nus.cs5344.spring14.twitter.TwConsts();
+}
+Compiled from "TwMain.java"
+public class sg.edu.nus.cs5344.spring14.twitter.TwMain {
+  public sg.edu.nus.cs5344.spring14.twitter.TwMain();
+  public static void main(java.lang.String[]) throws java.io.IOException, java.lang.ClassNotFoundException, java.lang.InterruptedException;
+}
+Compiled from "TweetFormater.java"
+public class sg.edu.nus.cs5344.spring14.twitter.TweetFormater implements sg.edu.nus.cs5344.spring14.twitter.KeyValueFormatter<sg.edu.nus.cs5344.spring14.twitter.datastructure.Hashtag, sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.TweetList> {
+  java.text.SimpleDateFormat dateFormat;
+  public sg.edu.nus.cs5344.spring14.twitter.TweetFormater();
+  public java.lang.String format(sg.edu.nus.cs5344.spring14.twitter.datastructure.Hashtag, sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.TweetList);
+  public java.lang.String format(java.lang.Object, java.lang.Object);
+}
+Compiled from "Copyable.java"
+public interface sg.edu.nus.cs5344.spring14.twitter.datastructure.Copyable<E> {
+  public abstract E copy();
+}
+Compiled from "Day.java"
+public class sg.edu.nus.cs5344.spring14.twitter.datastructure.Day extends org.apache.hadoop.io.VIntWritable implements sg.edu.nus.cs5344.spring14.twitter.datastructure.Copyable<sg.edu.nus.cs5344.spring14.twitter.datastructure.Day> {
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.Day();
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.Day(int);
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.Day(sg.edu.nus.cs5344.spring14.twitter.datastructure.Time);
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.Day copy();
+  public java.lang.Object copy();
+  static {};
+}
+Compiled from "Hashtag.java"
+public class sg.edu.nus.cs5344.spring14.twitter.datastructure.Hashtag extends org.apache.hadoop.io.Text implements sg.edu.nus.cs5344.spring14.twitter.datastructure.Copyable<sg.edu.nus.cs5344.spring14.twitter.datastructure.Hashtag> {
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.Hashtag();
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.Hashtag(java.lang.String);
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.Hashtag copy();
+  public java.lang.String getTagString();
+  public java.lang.String toString();
+  public java.lang.Object copy();
+}
+Compiled from "LatLong.java"
+public class sg.edu.nus.cs5344.spring14.twitter.datastructure.LatLong extends sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.Pair<org.apache.hadoop.io.DoubleWritable, org.apache.hadoop.io.DoubleWritable> implements sg.edu.nus.cs5344.spring14.twitter.datastructure.Copyable<sg.edu.nus.cs5344.spring14.twitter.datastructure.LatLong> {
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.LatLong();
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.LatLong(double, double);
+  public double getLat();
+  public double getLong();
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.LatLong copy();
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.XYZCoordinate toXYZ();
+  public double distanceInMetersTo(sg.edu.nus.cs5344.spring14.twitter.datastructure.LatLong);
+  public java.lang.Object copy();
+}
+Compiled from "Time.java"
+public class sg.edu.nus.cs5344.spring14.twitter.datastructure.Time implements org.apache.hadoop.io.WritableComparable<sg.edu.nus.cs5344.spring14.twitter.datastructure.Time>, sg.edu.nus.cs5344.spring14.twitter.datastructure.Copyable<sg.edu.nus.cs5344.spring14.twitter.datastructure.Time> {
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.Time(long);
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.Time();
+  public void write(java.io.DataOutput) throws java.io.IOException;
+  public void readFields(java.io.DataInput) throws java.io.IOException;
+  public int compareTo(sg.edu.nus.cs5344.spring14.twitter.datastructure.Time);
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.Time copy();
+  public int getDaysBetween(sg.edu.nus.cs5344.spring14.twitter.datastructure.Time);
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.Day getDay();
+  public java.lang.String toString();
+  public java.util.Date getDateCopy();
+  public int compareTo(java.lang.Object);
+  public java.lang.Object copy();
+}
+Compiled from "Trend.java"
+public class sg.edu.nus.cs5344.spring14.twitter.datastructure.Trend implements org.apache.hadoop.io.WritableComparable<sg.edu.nus.cs5344.spring14.twitter.datastructure.Trend>, sg.edu.nus.cs5344.spring14.twitter.datastructure.Copyable<sg.edu.nus.cs5344.spring14.twitter.datastructure.Trend> {
+  protected sg.edu.nus.cs5344.spring14.twitter.datastructure.Trend(sg.edu.nus.cs5344.spring14.twitter.datastructure.Hashtag, sg.edu.nus.cs5344.spring14.twitter.datastructure.Day, sg.edu.nus.cs5344.spring14.twitter.datastructure.Day, int, double);
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.Trend();
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.Hashtag getHashTag();
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.Day getFirstDay();
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.Day getLastDay();
+  public int getTotalCount();
+  public double getMaxChiSq();
+  public void readFields(java.io.DataInput) throws java.io.IOException;
+  public void write(java.io.DataOutput) throws java.io.IOException;
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.Trend copy();
+  public boolean equals(java.lang.Object);
+  public int compareTo(sg.edu.nus.cs5344.spring14.twitter.datastructure.Trend);
+  public java.lang.String toString();
+  public int compareTo(java.lang.Object);
+  public java.lang.Object copy();
+}
+Compiled from "Trend.java"
+public class sg.edu.nus.cs5344.spring14.twitter.datastructure.Trend$TrendsBuilder {
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.Trend$TrendsBuilder(sg.edu.nus.cs5344.spring14.twitter.datastructure.Hashtag);
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.Trend$TrendsBuilder withDay(sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.DayCountPair, double);
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.Trend build();
+}
+Compiled from "Tweet.java"
+public class sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet implements org.apache.hadoop.io.WritableComparable<sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet>, sg.edu.nus.cs5344.spring14.twitter.datastructure.Copyable<sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet> {
+  public static final int EXPECTED_COLUMNS;
+  public static java.lang.String[] split(java.lang.String);
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet();
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet(sg.edu.nus.cs5344.spring14.twitter.datastructure.Time, sg.edu.nus.cs5344.spring14.twitter.datastructure.LatLong, sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.HashTagList);
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet(java.lang.String);
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet(java.lang.String[]);
+  public void write(java.io.DataOutput) throws java.io.IOException;
+  public void readFields(java.io.DataInput) throws java.io.IOException;
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public int compareTo(sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet);
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet copy();
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.HashTagList getHashTagList();
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.LatLong getLatLong();
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.Time getTime();
+  public int compareTo(java.lang.Object);
+  public java.lang.Object copy();
+  static {};
+}
+Compiled from "XYZCoordinate.java"
+public class sg.edu.nus.cs5344.spring14.twitter.datastructure.XYZCoordinate {
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.XYZCoordinate(double, double, double);
+  public double getX();
+  public double getY();
+  public double getZ();
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.LatLong toLatLong();
+}
+Compiled from "DayCountPair.java"
+public class sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.DayCountPair extends sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.Pair<sg.edu.nus.cs5344.spring14.twitter.datastructure.Day, org.apache.hadoop.io.VIntWritable> implements sg.edu.nus.cs5344.spring14.twitter.datastructure.Copyable<sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.DayCountPair> {
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.DayCountPair();
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.DayCountPair(sg.edu.nus.cs5344.spring14.twitter.datastructure.Day, org.apache.hadoop.io.VIntWritable);
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.Day getDay();
+  public org.apache.hadoop.io.VIntWritable getCount();
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.DayCountPair copy();
+  public java.lang.Object copy();
+}
+Compiled from "DayHashtagPair.java"
+public class sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.DayHashtagPair extends sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.Pair<sg.edu.nus.cs5344.spring14.twitter.datastructure.Day, sg.edu.nus.cs5344.spring14.twitter.datastructure.Hashtag> implements sg.edu.nus.cs5344.spring14.twitter.datastructure.Copyable<sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.DayHashtagPair> {
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.DayHashtagPair();
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.DayHashtagPair(sg.edu.nus.cs5344.spring14.twitter.datastructure.Day, sg.edu.nus.cs5344.spring14.twitter.datastructure.Hashtag);
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.Day getDay();
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.Hashtag getHashtag();
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.DayHashtagPair copy();
+  public java.lang.Object copy();
+}
+Compiled from "HashTagList.java"
+public class sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.HashTagList extends sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.ListWritable<sg.edu.nus.cs5344.spring14.twitter.datastructure.Hashtag> implements sg.edu.nus.cs5344.spring14.twitter.datastructure.Copyable<sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.HashTagList> {
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.HashTagList();
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.HashTagList copy();
+  public java.lang.Object copy();
+}
+Compiled from "IteratorWithoutRemove.java"
+public class sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.IteratorWithoutRemove<T> implements java.util.Iterator<T> {
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.IteratorWithoutRemove(java.util.Iterator<T>);
+  public boolean hasNext();
+  public T next();
+  public void remove();
+}
+Compiled from "ListWritable.java"
+public abstract class sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.ListWritable<E extends org.apache.hadoop.io.WritableComparable<? super E> & sg.edu.nus.cs5344.spring14.twitter.datastructure.Copyable<E>> implements java.lang.Iterable<E>, org.apache.hadoop.io.WritableComparable<sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.ListWritable<E>> {
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.ListWritable(E);
+  public void add(E);
+  public void addAll(java.lang.Iterable<E>);
+  public int size();
+  public boolean isEmpty();
+  public boolean contains(E);
+  public java.util.Iterator<E> iterator();
+  public void write(java.io.DataOutput) throws java.io.IOException;
+  public void readFields(java.io.DataInput) throws java.io.IOException;
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public int compareTo(sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.ListWritable<E>);
+  public java.lang.String toString();
+  public int compareTo(java.lang.Object);
+}
+Compiled from "Pair.java"
+public abstract class sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.Pair<T extends org.apache.hadoop.io.WritableComparable, S extends org.apache.hadoop.io.WritableComparable> implements org.apache.hadoop.io.WritableComparable<sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.Pair<T, S>> {
+  protected sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.Pair(T, S);
+  protected T getFirst();
+  protected S getSecond();
+  public int compareTo(sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.Pair<T, S>);
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public java.lang.String toString();
+  public void write(java.io.DataOutput) throws java.io.IOException;
+  public void readFields(java.io.DataInput) throws java.io.IOException;
+  public int compareTo(java.lang.Object);
+}
+Compiled from "TopKList.java"
+public class sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.TopKList<E extends org.apache.hadoop.io.WritableComparable<? super E> & sg.edu.nus.cs5344.spring14.twitter.datastructure.Copyable<E>> implements java.lang.Iterable<E> {
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.TopKList(int);
+  public void add(E);
+  public java.util.Iterator<E> iterator();
+  public java.util.List<E> sortedList();
+  public java.lang.String toString();
+}
+Compiled from "TweetList.java"
+public class sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.TweetList extends sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.ListWritable<sg.edu.nus.cs5344.spring14.twitter.datastructure.Tweet> implements sg.edu.nus.cs5344.spring14.twitter.datastructure.Copyable<sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.TweetList> {
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.TweetList();
+  public sg.edu.nus.cs5344.spring14.twitter.datastructure.collections.TweetList copy();
+  public java.lang.Object copy();
+}
+Compiled from "DayHashCount1.java"
+public class sg.edu.nus.cs5344.spring14.twitter.hashCounts.DayHashCount1 {
+  public sg.edu.nus.cs5344.spring14.twitter.hashCounts.DayHashCount1();
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+}
+Compiled from "DayHashCount1.java"
+public class sg.edu.nus.cs5344.spring14.twitter.hashCounts.DayHashCount1$MapperD1 extends org.apache.hadoop.mapreduce.Mapper<org.apache.hadoop.io.LongWritable, org.apache.hadoop.io.Text, org.apache.hadoop.io.Text, org.apache.hadoop.io.IntWritable> {
+  public sg.edu.nus.cs5344.spring14.twitter.hashCounts.DayHashCount1$MapperD1();
+  public void map(org.apache.hadoop.io.LongWritable, org.apache.hadoop.io.Text, org.apache.hadoop.mapreduce.Mapper<org.apache.hadoop.io.LongWritable, org.apache.hadoop.io.Text, org.apache.hadoop.io.Text, org.apache.hadoop.io.IntWritable>.Context) throws java.io.IOException, java.lang.InterruptedException;
+  public void map(java.lang.Object, java.lang.Object, org.apache.hadoop.mapreduce.Mapper$Context) throws java.io.IOException, java.lang.InterruptedException;
+  static {};
+}
+Compiled from "DayHashCount1.java"
+public class sg.edu.nus.cs5344.spring14.twitter.hashCounts.DayHashCount1$MapperD2 extends org.apache.hadoop.mapreduce.Mapper<org.apache.hadoop.io.LongWritable, org.apache.hadoop.io.Text, org.apache.hadoop.io.IntWritable, org.apache.hadoop.io.Text> {
+  public sg.edu.nus.cs5344.spring14.twitter.hashCounts.DayHashCount1$MapperD2();
+  public void map(org.apache.hadoop.io.LongWritable, org.apache.hadoop.io.Text, org.apache.hadoop.mapreduce.Mapper<org.apache.hadoop.io.LongWritable, org.apache.hadoop.io.Text, org.apache.hadoop.io.IntWritable, org.apache.hadoop.io.Text>.Context) throws java.io.IOException, java.lang.InterruptedException;
+  public void map(java.lang.Object, java.lang.Object, org.apache.hadoop.mapreduce.Mapper$Context) throws java.io.IOException, java.lang.InterruptedException;
+}
+Compiled from "DayHashCount1.java"
+public class sg.edu.nus.cs5344.spring14.twitter.hashCounts.DayHashCount1$ReducerD1 extends org.apache.hadoop.mapreduce.Reducer<org.apache.hadoop.io.Text, org.apache.hadoop.io.IntWritable, org.apache.hadoop.io.Text, org.apache.hadoop.io.IntWritable> {
+  public sg.edu.nus.cs5344.spring14.twitter.hashCounts.DayHashCount1$ReducerD1();
+  public void reduce(org.apache.hadoop.io.Text, java.lang.Iterable<org.apache.hadoop.io.IntWritable>, org.apache.hadoop.mapreduce.Reducer<org.apache.hadoop.io.Text, org.apache.hadoop.io.IntWritable, org.apache.hadoop.io.Text, org.apache.hadoop.io.IntWritable>.Context) throws java.io.IOException, java.lang.InterruptedException;
+  public void reduce(java.lang.Object, java.lang.Iterable, org.apache.hadoop.mapreduce.Reducer$Context) throws java.io.IOException, java.lang.InterruptedException;
+}
+Compiled from "DayHashCount1.java"
+public class sg.edu.nus.cs5344.spring14.twitter.hashCounts.DayHashCount1$ReducerD2 extends org.apache.hadoop.mapreduce.Reducer<org.apache.hadoop.io.IntWritable, org.apache.hadoop.io.Text, org.apache.hadoop.io.Text, org.apache.hadoop.io.IntWritable> {
+  public sg.edu.nus.cs5344.spring14.twitter.hashCounts.DayHashCount1$ReducerD2();
+  protected void reduce(org.apache.hadoop.io.IntWritable, java.lang.Iterable<org.apache.hadoop.io.Text>, org.apache.hadoop.mapreduce.Reducer<org.apache.hadoop.io.IntWritable, org.apache.hadoop.io.Text, org.apache.hadoop.io.Text, org.apache.hadoop.io.IntWritable>.Context) throws java.io.IOException, java.lang.InterruptedException;
+  protected void reduce(java.lang.Object, java.lang.Iterable, org.apache.hadoop.mapreduce.Reducer$Context) throws java.io.IOException, java.lang.InterruptedException;
+}
+Compiled from "HashCount1.java"
+public class sg.edu.nus.cs5344.spring14.twitter.hashCounts.HashCount1 {
+  public sg.edu.nus.cs5344.spring14.twitter.hashCounts.HashCount1();
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+}
+Compiled from "HashCount1.java"
+public class sg.edu.nus.cs5344.spring14.twitter.hashCounts.HashCount1$Mapper1 extends org.apache.hadoop.mapreduce.Mapper<org.apache.hadoop.io.LongWritable, org.apache.hadoop.io.Text, org.apache.hadoop.io.Text, org.apache.hadoop.io.IntWritable> {
+  public sg.edu.nus.cs5344.spring14.twitter.hashCounts.HashCount1$Mapper1();
+  public void map(org.apache.hadoop.io.LongWritable, org.apache.hadoop.io.Text, org.apache.hadoop.mapreduce.Mapper<org.apache.hadoop.io.LongWritable, org.apache.hadoop.io.Text, org.apache.hadoop.io.Text, org.apache.hadoop.io.IntWritable>.Context) throws java.io.IOException, java.lang.InterruptedException;
+  public void map(java.lang.Object, java.lang.Object, org.apache.hadoop.mapreduce.Mapper$Context) throws java.io.IOException, java.lang.InterruptedException;
+  static {};
+}
+Compiled from "HashCount1.java"
+public class sg.edu.nus.cs5344.spring14.twitter.hashCounts.HashCount1$Mapper2 extends org.apache.hadoop.mapreduce.Mapper<org.apache.hadoop.io.LongWritable, org.apache.hadoop.io.Text, org.apache.hadoop.io.IntWritable, org.apache.hadoop.io.Text> {
+  public sg.edu.nus.cs5344.spring14.twitter.hashCounts.HashCount1$Mapper2();
+  public void map(org.apache.hadoop.io.LongWritable, org.apache.hadoop.io.Text, org.apache.hadoop.mapreduce.Mapper<org.apache.hadoop.io.LongWritable, org.apache.hadoop.io.Text, org.apache.hadoop.io.IntWritable, org.apache.hadoop.io.Text>.Context) throws java.io.IOException, java.lang.InterruptedException;
+  public void map(java.lang.Object, java.lang.Object, org.apache.hadoop.mapreduce.Mapper$Context) throws java.io.IOException, java.lang.InterruptedException;
+}
+Compiled from "HashCount1.java"
+public class sg.edu.nus.cs5344.spring14.twitter.hashCounts.HashCount1$Reducer1 extends org.apache.hadoop.mapreduce.Reducer<org.apache.hadoop.io.Text, org.apache.hadoop.io.IntWritable, org.apache.hadoop.io.Text, org.apache.hadoop.io.IntWritable> {
+  public sg.edu.nus.cs5344.spring14.twitter.hashCounts.HashCount1$Reducer1();
+  public void reduce(org.apache.hadoop.io.Text, java.lang.Iterable<org.apache.hadoop.io.IntWritable>, org.apache.hadoop.mapreduce.Reducer<org.apache.hadoop.io.Text, org.apache.hadoop.io.IntWritable, org.apache.hadoop.io.Text, org.apache.hadoop.io.IntWritable>.Context) throws java.io.IOException, java.lang.InterruptedException;
+  public void reduce(java.lang.Object, java.lang.Iterable, org.apache.hadoop.mapreduce.Reducer$Context) throws java.io.IOException, java.lang.InterruptedException;
+}
+Compiled from "HashCount1.java"
+public class sg.edu.nus.cs5344.spring14.twitter.hashCounts.HashCount1$Reducer2 extends org.apache.hadoop.mapreduce.Reducer<org.apache.hadoop.io.IntWritable, org.apache.hadoop.io.Text, org.apache.hadoop.io.Text, org.apache.hadoop.io.IntWritable> {
+  public sg.edu.nus.cs5344.spring14.twitter.hashCounts.HashCount1$Reducer2();
+  protected void reduce(org.apache.hadoop.io.IntWritable, java.lang.Iterable<org.apache.hadoop.io.Text>, org.apache.hadoop.mapreduce.Reducer<org.apache.hadoop.io.IntWritable, org.apache.hadoop.io.Text, org.apache.hadoop.io.Text, org.apache.hadoop.io.IntWritable>.Context) throws java.io.IOException, java.lang.InterruptedException;
+  protected void reduce(java.lang.Object, java.lang.Iterable, org.apache.hadoop.mapreduce.Reducer$Context) throws java.io.IOException, java.lang.InterruptedException;
+}
+Compiled from "MonthHashCount1.java"
+public class sg.edu.nus.cs5344.spring14.twitter.hashCounts.MonthHashCount1 {
+  public sg.edu.nus.cs5344.spring14.twitter.hashCounts.MonthHashCount1();
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+}
+Compiled from "MonthHashCount1.java"
+public class sg.edu.nus.cs5344.spring14.twitter.hashCounts.MonthHashCount1$Mapper1 extends org.apache.hadoop.mapreduce.Mapper<org.apache.hadoop.io.LongWritable, org.apache.hadoop.io.Text, org.apache.hadoop.io.Text, org.apache.hadoop.io.IntWritable> {
+  public sg.edu.nus.cs5344.spring14.twitter.hashCounts.MonthHashCount1$Mapper1();
+  public void map(org.apache.hadoop.io.LongWritable, org.apache.hadoop.io.Text, org.apache.hadoop.mapreduce.Mapper<org.apache.hadoop.io.LongWritable, org.apache.hadoop.io.Text, org.apache.hadoop.io.Text, org.apache.hadoop.io.IntWritable>.Context) throws java.io.IOException, java.lang.InterruptedException;
+  public void map(java.lang.Object, java.lang.Object, org.apache.hadoop.mapreduce.Mapper$Context) throws java.io.IOException, java.lang.InterruptedException;
+  static {};
+}
+Compiled from "MonthHashCount1.java"
+public class sg.edu.nus.cs5344.spring14.twitter.hashCounts.MonthHashCount1$Mapper2 extends org.apache.hadoop.mapreduce.Mapper<org.apache.hadoop.io.LongWritable, org.apache.hadoop.io.Text, org.apache.hadoop.io.IntWritable, org.apache.hadoop.io.Text> {
+  public sg.edu.nus.cs5344.spring14.twitter.hashCounts.MonthHashCount1$Mapper2();
+  public void map(org.apache.hadoop.io.LongWritable, org.apache.hadoop.io.Text, org.apache.hadoop.mapreduce.Mapper<org.apache.hadoop.io.LongWritable, org.apache.hadoop.io.Text, org.apache.hadoop.io.IntWritable, org.apache.hadoop.io.Text>.Context) throws java.io.IOException, java.lang.InterruptedException;
+  public void map(java.lang.Object, java.lang.Object, org.apache.hadoop.mapreduce.Mapper$Context) throws java.io.IOException, java.lang.InterruptedException;
+}
+Compiled from "MonthHashCount1.java"
+public class sg.edu.nus.cs5344.spring14.twitter.hashCounts.MonthHashCount1$Reducer1 extends org.apache.hadoop.mapreduce.Reducer<org.apache.hadoop.io.Text, org.apache.hadoop.io.IntWritable, org.apache.hadoop.io.Text, org.apache.hadoop.io.IntWritable> {
+  public sg.edu.nus.cs5344.spring14.twitter.hashCounts.MonthHashCount1$Reducer1();
+  public void reduce(org.apache.hadoop.io.Text, java.lang.Iterable<org.apache.hadoop.io.IntWritable>, org.apache.hadoop.mapreduce.Reducer<org.apache.hadoop.io.Text, org.apache.hadoop.io.IntWritable, org.apache.hadoop.io.Text, org.apache.hadoop.io.IntWritable>.Context) throws java.io.IOException, java.lang.InterruptedException;
+  public void reduce(java.lang.Object, java.lang.Iterable, org.apache.hadoop.mapreduce.Reducer$Context) throws java.io.IOException, java.lang.InterruptedException;
+}
+Compiled from "MonthHashCount1.java"
+public class sg.edu.nus.cs5344.spring14.twitter.hashCounts.MonthHashCount1$Reducer2 extends org.apache.hadoop.mapreduce.Reducer<org.apache.hadoop.io.IntWritable, org.apache.hadoop.io.Text, org.apache.hadoop.io.Text, org.apache.hadoop.io.IntWritable> {
+  public sg.edu.nus.cs5344.spring14.twitter.hashCounts.MonthHashCount1$Reducer2();
+  protected void reduce(org.apache.hadoop.io.IntWritable, java.lang.Iterable<org.apache.hadoop.io.Text>, org.apache.hadoop.mapreduce.Reducer<org.apache.hadoop.io.IntWritable, org.apache.hadoop.io.Text, org.apache.hadoop.io.Text, org.apache.hadoop.io.IntWritable>.Context) throws java.io.IOException, java.lang.InterruptedException;
+  protected void reduce(java.lang.Object, java.lang.Iterable, org.apache.hadoop.mapreduce.Reducer$Context) throws java.io.IOException, java.lang.InterruptedException;
+}

@@ -1,0 +1,299 @@
+Compiled from "Dtran.java"
+public class NFAToDNA.Dtran {
+  java.util.TreeSet<java.lang.Integer> nodes;
+  NFAToDNA.NewNode mark;
+  java.lang.String tran;
+  NFAToDNA.NewNode d;
+  public NFAToDNA.Dtran(java.util.TreeSet<java.lang.Integer>, NFAToDNA.NewNode, java.lang.String, NFAToDNA.NewNode);
+  public java.util.TreeSet<java.lang.Integer> getNodes();
+  public NFAToDNA.NewNode getMark();
+  public java.lang.String getTran();
+  public NFAToDNA.NewNode getD();
+}
+Compiled from "NewNode.java"
+public class NFAToDNA.NewNode {
+  boolean start;
+  boolean end;
+  public NFAToDNA.NewNode(int);
+  public void setStart();
+  public boolean isStart();
+  public void setEnd();
+  public boolean isEnd();
+  public java.util.TreeSet<java.lang.Integer> getNodes();
+  public void setNodes(java.util.TreeSet<java.lang.Integer>);
+  public void addNode(java.lang.Integer);
+  public void setId(int);
+  public int getId();
+  public boolean getMark();
+  public void mark();
+  public boolean isSame(java.util.TreeSet<java.lang.Integer>);
+}
+Compiled from "ToDFA.java"
+public class NFAToDNA.ToDFA {
+  java.util.Hashtable<java.lang.Integer, java.util.LinkedList<NFAToDNA.Dtran>> dtrans;
+  NFAToDNA.NewNode startNewNode;
+  java.util.LinkedList<NFAToDNA.NewNode> endNewNodes;
+  public NFAToDNA.ToDFA(java.util.Hashtable<java.lang.Integer, regexpToNFA.Node>, java.util.TreeSet<java.lang.String>);
+  public NFAToDNA.NewNode getStartNewNode();
+  public java.util.Hashtable<java.lang.Integer, java.util.LinkedList<NFAToDNA.Dtran>> getDtrans();
+  public java.util.LinkedList<NFAToDNA.NewNode> getNewNodes();
+  public void handle();
+  public NFAToDNA.NewNode getNotMark();
+  public void addDtrans(java.util.TreeSet<java.lang.Integer>, NFAToDNA.NewNode, java.lang.String, NFAToDNA.NewNode);
+  public void removeRedundancy();
+  public void removeNotRecFormStart();
+  public void removeNotRecToEnd();
+  public void removeKey(java.util.TreeSet<java.lang.Integer>);
+  public java.util.LinkedList<NFAToDNA.Dtran> getDtransByD(int);
+  public java.util.TreeSet<java.lang.Integer> closure(java.util.TreeSet<java.lang.Integer>);
+  public java.util.TreeSet<java.lang.Integer> move(java.util.TreeSet<java.lang.Integer>, java.lang.String);
+  public int getNote();
+  public boolean isExit(java.util.TreeSet<java.lang.Integer>);
+  public NFAToDNA.NewNode getNewNode(java.util.TreeSet<java.lang.Integer>);
+  public static void main(java.lang.String[]);
+}
+Compiled from "LL.java"
+class ll.AnalysisTable {
+  java.lang.String startChar;
+  java.util.TreeSet<java.lang.String> list;
+  java.util.Hashtable<java.lang.String, java.util.Hashtable<java.lang.String, java.lang.String[]>> collection;
+  public ll.AnalysisTable(java.lang.String);
+  public void add(ll.AnalysisUnit);
+  public java.lang.String[] get(java.lang.String, java.lang.String);
+}
+Compiled from "LL.java"
+class ll.AnalysisUnit {
+  java.lang.String endChar;
+  java.lang.String notEndChar;
+  java.lang.String[] translation;
+  public ll.AnalysisUnit(java.lang.String, java.lang.String, java.lang.String[]);
+}
+Compiled from "LL.java"
+public class ll.LL {
+  ll.AnalysisTable at;
+  java.lang.String[] str;
+  java.util.TreeSet<java.lang.String> notEndChars;
+  public ll.LL(ll.AnalysisTable, java.lang.String[]);
+  public void handle() throws java.lang.Exception;
+  public static void main(java.lang.String[]);
+}
+Compiled from "Match.java"
+public class matcher.Match {
+  java.util.Hashtable<java.lang.Integer, java.util.LinkedList<NFAToDNA.Dtran>> dtrans;
+  NFAToDNA.NewNode startNode;
+  NFAToDNA.NewNode nowNode;
+  NFAToDNA.NewNode lastNode;
+  matcher.MatchAbout ma;
+  java.lang.String rex;
+  java.lang.String content;
+  char[] chList;
+  int pointer;
+  java.lang.String tran;
+  java.util.Stack<matcher.Recall> stack;
+  public matcher.Match(java.lang.String);
+  public void match(java.lang.String);
+  public boolean find();
+  public int isMatch(char, int);
+  public java.util.LinkedList<NFAToDNA.Dtran> getDtran();
+  public java.lang.String group();
+  public java.lang.String group(int);
+  public static void main(java.lang.String[]);
+}
+Compiled from "MatchAbout.java"
+public class matcher.MatchAbout {
+  matcher.MatchGroups mgs;
+  public matcher.MatchAbout(java.util.LinkedList<regexpToNFA.K>);
+  public void addCh(char, NFAToDNA.NewNode, NFAToDNA.NewNode, java.lang.String);
+  public void handle(NFAToDNA.NewNode, NFAToDNA.NewNode, int);
+  public void init();
+  public boolean isLengthZero();
+  public void setString();
+  public java.lang.String group();
+  public java.lang.String group(int);
+}
+Compiled from "MatchGroups.java"
+public class matcher.MatchGroups {
+  java.util.HashMap<java.lang.Integer, matcher.MatchGroups$MatchGroup> group;
+  java.util.LinkedList<matcher.MatchGroups$MatchGroup> mgs;
+  java.util.LinkedList<regexpToNFA.K> en;
+  java.lang.String matchString;
+  public matcher.MatchGroups(java.util.LinkedList<regexpToNFA.K>);
+  public void firstHandle();
+  public void handle(int, int, int);
+  public void init();
+  public void setMatchString(java.lang.String);
+  public java.lang.String group(int);
+}
+Compiled from "MatchGroups.java"
+class matcher.MatchGroups$MatchGroup {
+  int k;
+  int startIndex;
+  int endIndex;
+  final matcher.MatchGroups this$0;
+  public matcher.MatchGroups$MatchGroup(matcher.MatchGroups, int);
+  public boolean isCanReach(int);
+  public boolean isStartInit(int);
+  public boolean isCanSetStartIndex(int);
+  public boolean isCanSetEndIndex(int);
+  public void setStartIndex(int);
+  public void setEndIndex(int);
+  public void setNode(java.util.LinkedList<java.lang.Integer>, java.util.LinkedList<java.lang.Integer>, java.util.LinkedList<java.lang.Integer>);
+  public java.lang.String getString(java.lang.String);
+  public void init();
+}
+Compiled from "Recall.java"
+public class matcher.Recall {
+  int index;
+  NFAToDNA.NewNode nowNode;
+  NFAToDNA.NewNode lastNode;
+  NFAToDNA.Dtran d;
+  char ch;
+  public matcher.Recall(int, NFAToDNA.NewNode, NFAToDNA.NewNode, NFAToDNA.Dtran, char);
+  public char getCh();
+  public NFAToDNA.Dtran getDtran();
+  public NFAToDNA.NewNode getNowNode();
+  public NFAToDNA.NewNode getLastNode();
+  public int getIndex();
+}
+Compiled from "K.java"
+public class regexpToNFA.K {
+  public regexpToNFA.K(regexpToNFA.Unit);
+  public void addStartNewNode(NFAToDNA.NewNode);
+  public java.util.LinkedList<java.lang.Integer> getStartNewNode();
+  public void addEndNewNode(NFAToDNA.NewNode);
+  public java.util.LinkedList<java.lang.Integer> getEndNewNode();
+  public void addCanReachNode(NFAToDNA.NewNode);
+  public java.util.LinkedList<java.lang.Integer> getCanReachNode();
+  public regexpToNFA.Unit getUnit();
+  public void setK(int);
+  public int getK();
+  public void handle(java.util.LinkedList<NFAToDNA.NewNode>, java.util.Hashtable<java.lang.Integer, regexpToNFA.Node>);
+  public java.util.LinkedList<java.lang.Integer> getCanReach(java.util.Hashtable<java.lang.Integer, regexpToNFA.Node>);
+}
+Compiled from "MainClass.java"
+public class regexpToNFA.MainClass {
+  int i;
+  public regexpToNFA.MainClass(java.lang.String);
+  public java.util.Hashtable<java.lang.Integer, regexpToNFA.Node> getNodeList();
+  public java.util.TreeSet<java.lang.String> getInputChar();
+  public java.lang.String initRegexp();
+  public void handle();
+  public regexpToNFA.Unit handle(regexpToNFA.Unit, regexpToNFA.Unit, int, int);
+  public int getNowNum();
+  public void createNFA();
+  public void createNFA(regexpToNFA.Unit);
+  public void h(int, int);
+  public void h(int, int, java.lang.String);
+  public void addNodeOfNode(int, int, java.lang.String);
+  public java.util.LinkedList<regexpToNFA.Transfer> getTransferList();
+  public void print(int, int);
+  public static void main(java.lang.String[]);
+}
+Compiled from "ManagerK.java"
+public class regexpToNFA.ManagerK {
+  static int count_k;
+  static java.util.LinkedList<regexpToNFA.K> en;
+  public regexpToNFA.ManagerK();
+  public static void addUnit(regexpToNFA.K);
+  public static void handle(java.util.LinkedList<NFAToDNA.NewNode>, java.util.Hashtable<java.lang.Integer, regexpToNFA.Node>);
+  public static void printK();
+  public static java.util.LinkedList<regexpToNFA.K> getEn();
+  static {};
+}
+Compiled from "Node.java"
+public class regexpToNFA.Node {
+  public regexpToNFA.Node(int);
+  public int getValue();
+  public void addEnableReachValue(int, java.lang.String);
+  public java.util.Hashtable<java.lang.Integer, java.util.LinkedList<java.lang.String>> getEnableReachValues();
+  public java.util.TreeSet<java.lang.Integer> getNodeMove(java.lang.String);
+}
+Compiled from "Syntax.java"
+public class regexpToNFA.Syntax {
+  public static char closure;
+  public static char positiveClosure;
+  public static char or;
+  public static char transMean;
+  public static char[] keyChar;
+  public static char includeLeft;
+  public static char includeRight;
+  public static char lastChar;
+  public static char nextChar;
+  public static java.lang.String[] noPlace;
+  public static char[] keyCharForS;
+  public regexpToNFA.Syntax();
+  public static boolean isNoPlace(java.lang.String);
+  public static boolean isIncludeLeft(char);
+  public static boolean isIncludeRight(char);
+  public static boolean isKeyWord(char);
+  public static boolean isThransMean(char);
+  public static boolean isMatch(java.lang.String, char);
+  public static void setLastNext(char, char);
+  public static boolean isMatchScope(char[], char);
+  public static boolean isMatchScope(char, char, char);
+  static {};
+}
+Compiled from "Transfer.java"
+public class regexpToNFA.Transfer {
+  public regexpToNFA.Transfer(int, int, java.lang.String);
+  public int getStart();
+  public int getEnd();
+  public java.lang.String getCh();
+}
+Compiled from "Unit.java"
+public class regexpToNFA.Unit {
+  public regexpToNFA.Unit(int, int, regexpToNFA.Unit);
+  public int getStart();
+  public int getEnd();
+  public regexpToNFA.Unit getNextUnit();
+  public void setNextUnit(regexpToNFA.Unit);
+  public java.util.LinkedList<regexpToNFA.Unit> getInnerFirstUnit();
+  public void addInnerFirstUnit(regexpToNFA.Unit);
+  public java.lang.String getTranChar();
+  public void setTranChar(char);
+  public int getState();
+  public void setState(int);
+  public regexpToNFA.Unit getFather();
+}
+Compiled from "ReadFile.java"
+public class test.ReadFile {
+  public test.ReadFile();
+  public java.lang.String readProgramFile(java.lang.String);
+  public test.Word[] readWordFile(java.lang.String);
+  public static void main(java.lang.String[]);
+}
+Compiled from "SignAnalysis.java"
+public class test.SignAnalysis {
+  public test.SignAnalysis();
+  public java.lang.String removeNote(java.lang.String);
+  public void search();
+  public java.util.LinkedList<test.SonContent> searchSon(java.lang.String, java.lang.String, int);
+  public static void main(java.lang.String[]);
+}
+Compiled from "SignAnalysis.java"
+class test.SonContent {
+  java.lang.String str;
+  int level;
+  test.SonContent();
+  public java.lang.String getStr();
+  public void setStr(java.lang.String);
+  public int getLevel();
+  public void setLevel(int);
+}
+Compiled from "Test_1.java"
+public class test.Test_1 {
+  static char ch;
+  public test.Test_1();
+  public static void main(java.lang.String[]);
+}
+Compiled from "Word.java"
+public class test.Word {
+  public test.Word();
+  public java.lang.String getName();
+  public void setName(java.lang.String);
+  public java.lang.String getMark();
+  public void setMark(java.lang.String);
+  public java.lang.String[] getWords();
+  public void setWords(java.lang.String[]);
+  public static void main(java.lang.String[]);
+}

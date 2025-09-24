@@ -1,0 +1,1271 @@
+Compiled from "RopeTest.java"
+public class com.warrenfalk.jbox2d.RopeTest extends org.jbox2d.testbed.framework.TestbedTest {
+  com.warrenfalk.jbox2d.RopeTest$Rope rope;
+  float thickness;
+  float resolution;
+  org.jbox2d.dynamics.Body base;
+  org.jbox2d.dynamics.Body weight;
+  static final int ROPE;
+  public com.warrenfalk.jbox2d.RopeTest();
+  public void initTest(boolean);
+  public void keyPressed(char, int);
+  public java.lang.String getTestName();
+}
+Compiled from "RopeTest.java"
+class com.warrenfalk.jbox2d.RopeTest$Rope {
+  public java.util.LinkedList<org.jbox2d.dynamics.Body> segments;
+  public java.util.LinkedList<org.jbox2d.dynamics.joints.Joint> joints;
+  final com.warrenfalk.jbox2d.RopeTest this$0;
+  com.warrenfalk.jbox2d.RopeTest$Rope(com.warrenfalk.jbox2d.RopeTest);
+}
+Compiled from "RopeTest.java"
+class com.warrenfalk.jbox2d.RopeTest$RopeRaycast implements org.jbox2d.callbacks.RayCastCallback {
+  org.jbox2d.dynamics.Fixture fixture;
+  org.jbox2d.common.Vec2 strikePoint;
+  org.jbox2d.common.Vec2 normal;
+  float fraction;
+  org.jbox2d.dynamics.Body fromBody;
+  public com.warrenfalk.jbox2d.RopeTest$RopeRaycast(org.jbox2d.dynamics.World, org.jbox2d.dynamics.Body, org.jbox2d.common.Vec2, float, float);
+  public float reportFixture(org.jbox2d.dynamics.Fixture, org.jbox2d.common.Vec2, org.jbox2d.common.Vec2, float);
+}
+Compiled from "ContactPoint.java"
+public class org.jbox2d.testbed.framework.ContactPoint {
+  public org.jbox2d.dynamics.Fixture fixtureA;
+  public org.jbox2d.dynamics.Fixture fixtureB;
+  public final org.jbox2d.common.Vec2 normal;
+  public final org.jbox2d.common.Vec2 position;
+  public org.jbox2d.collision.Collision$PointState state;
+  public float normalImpulse;
+  public float tangentImpulse;
+  public org.jbox2d.testbed.framework.ContactPoint();
+}
+Compiled from "TestbedTest.java"
+class org.jbox2d.testbed.framework.ListenerAdapter implements org.jbox2d.serialization.JbDeserializer$ObjectListener {
+  public org.jbox2d.testbed.framework.ListenerAdapter(org.jbox2d.serialization.JbDeserializer$ObjectListener);
+  public void processWorld(org.jbox2d.dynamics.World, java.lang.Long);
+  public void processBody(org.jbox2d.dynamics.Body, java.lang.Long);
+  public void processFixture(org.jbox2d.dynamics.Fixture, java.lang.Long);
+  public void processShape(org.jbox2d.collision.shapes.Shape, java.lang.Long);
+  public void processJoint(org.jbox2d.dynamics.joints.Joint, java.lang.Long);
+}
+Compiled from "TestbedTest.java"
+class org.jbox2d.testbed.framework.QueueItem {
+  public org.jbox2d.testbed.framework.QueueItemType type;
+  public org.jbox2d.common.Vec2 p;
+  public char c;
+  public int code;
+  public org.jbox2d.testbed.framework.QueueItem(org.jbox2d.testbed.framework.QueueItemType, org.jbox2d.common.Vec2);
+  public org.jbox2d.testbed.framework.QueueItem(org.jbox2d.testbed.framework.QueueItemType, char, int);
+}
+Compiled from "TestbedTest.java"
+final class org.jbox2d.testbed.framework.QueueItemType extends java.lang.Enum<org.jbox2d.testbed.framework.QueueItemType> {
+  public static final org.jbox2d.testbed.framework.QueueItemType MouseDown;
+  public static final org.jbox2d.testbed.framework.QueueItemType MouseMove;
+  public static final org.jbox2d.testbed.framework.QueueItemType MouseUp;
+  public static final org.jbox2d.testbed.framework.QueueItemType ShiftMouseDown;
+  public static final org.jbox2d.testbed.framework.QueueItemType KeyPressed;
+  public static final org.jbox2d.testbed.framework.QueueItemType KeyReleased;
+  public static org.jbox2d.testbed.framework.QueueItemType[] values();
+  public static org.jbox2d.testbed.framework.QueueItemType valueOf(java.lang.String);
+  static {};
+}
+Compiled from "TestbedTest.java"
+class org.jbox2d.testbed.framework.SignerAdapter implements org.jbox2d.serialization.JbSerializer$ObjectSigner {
+  public org.jbox2d.testbed.framework.SignerAdapter(org.jbox2d.serialization.JbSerializer$ObjectSigner);
+  public java.lang.Long getTag(org.jbox2d.dynamics.World);
+  public java.lang.Long getTag(org.jbox2d.dynamics.Body);
+  public java.lang.Long getTag(org.jbox2d.collision.shapes.Shape);
+  public java.lang.Long getTag(org.jbox2d.dynamics.Fixture);
+  public java.lang.Long getTag(org.jbox2d.dynamics.joints.Joint);
+}
+Compiled from "TestList.java"
+public class org.jbox2d.testbed.framework.TestList {
+  public org.jbox2d.testbed.framework.TestList();
+  public static void populateModel(org.jbox2d.testbed.framework.TestbedModel);
+}
+Compiled from "TestbedTest.java"
+class org.jbox2d.testbed.framework.TestQueryCallback implements org.jbox2d.callbacks.QueryCallback {
+  public final org.jbox2d.common.Vec2 point;
+  public org.jbox2d.dynamics.Fixture fixture;
+  public org.jbox2d.testbed.framework.TestQueryCallback();
+  public boolean reportFixture(org.jbox2d.dynamics.Fixture);
+}
+Compiled from "TestbedController.java"
+public class org.jbox2d.testbed.framework.TestbedController implements java.lang.Runnable {
+  public static final int DEFAULT_FPS;
+  public org.jbox2d.testbed.framework.TestbedController(org.jbox2d.testbed.framework.TestbedModel, org.jbox2d.testbed.framework.TestbedPanel, org.jbox2d.testbed.framework.TestbedController$UpdateBehavior);
+  protected void loopInit();
+  protected void update();
+  public void nextTest();
+  public void resetTest();
+  public void saveTest();
+  public void loadTest();
+  public void lastTest();
+  public void playTest(int);
+  public void setFrameRate(int);
+  public int getFrameRate();
+  public float getCalculatedFrameRate();
+  public long getStartTime();
+  public long getFrameCount();
+  public boolean isAnimating();
+  public synchronized void start();
+  public synchronized void stop();
+  public void run();
+  static org.jbox2d.testbed.framework.TestbedTest access$002(org.jbox2d.testbed.framework.TestbedController, org.jbox2d.testbed.framework.TestbedTest);
+  static org.jbox2d.testbed.framework.TestbedPanel access$100(org.jbox2d.testbed.framework.TestbedController);
+  static org.jbox2d.testbed.framework.TestbedModel access$200(org.jbox2d.testbed.framework.TestbedController);
+  static {};
+}
+Compiled from "TestbedController.java"
+class org.jbox2d.testbed.framework.TestbedController$1 implements org.jbox2d.testbed.framework.TestbedModel$TestChangedListener {
+  final org.jbox2d.testbed.framework.TestbedController this$0;
+  org.jbox2d.testbed.framework.TestbedController$1(org.jbox2d.testbed.framework.TestbedController);
+  public void testChanged(org.jbox2d.testbed.framework.TestbedTest, int);
+}
+Compiled from "TestbedController.java"
+class org.jbox2d.testbed.framework.TestbedController$2 implements java.awt.event.KeyListener {
+  final org.jbox2d.testbed.framework.TestbedController this$0;
+  org.jbox2d.testbed.framework.TestbedController$2(org.jbox2d.testbed.framework.TestbedController);
+  public void keyTyped(java.awt.event.KeyEvent);
+  public void keyReleased(java.awt.event.KeyEvent);
+  public void keyPressed(java.awt.event.KeyEvent);
+}
+Compiled from "TestbedController.java"
+class org.jbox2d.testbed.framework.TestbedController$3 extends java.awt.event.MouseAdapter {
+  final org.jbox2d.testbed.framework.TestbedController this$0;
+  org.jbox2d.testbed.framework.TestbedController$3(org.jbox2d.testbed.framework.TestbedController);
+  public void mouseReleased(java.awt.event.MouseEvent);
+  public void mousePressed(java.awt.event.MouseEvent);
+}
+Compiled from "TestbedController.java"
+class org.jbox2d.testbed.framework.TestbedController$4 implements java.awt.event.MouseMotionListener {
+  final org.jbox2d.common.Vec2 posDif;
+  final org.jbox2d.common.Vec2 pos;
+  final org.jbox2d.common.Vec2 pos2;
+  final org.jbox2d.testbed.framework.TestbedController this$0;
+  org.jbox2d.testbed.framework.TestbedController$4(org.jbox2d.testbed.framework.TestbedController);
+  public void mouseDragged(java.awt.event.MouseEvent);
+  public void mouseMoved(java.awt.event.MouseEvent);
+}
+Compiled from "TestbedController.java"
+public final class org.jbox2d.testbed.framework.TestbedController$UpdateBehavior extends java.lang.Enum<org.jbox2d.testbed.framework.TestbedController$UpdateBehavior> {
+  public static final org.jbox2d.testbed.framework.TestbedController$UpdateBehavior UPDATE_CALLED;
+  public static final org.jbox2d.testbed.framework.TestbedController$UpdateBehavior UPDATE_IGNORED;
+  public static org.jbox2d.testbed.framework.TestbedController$UpdateBehavior[] values();
+  public static org.jbox2d.testbed.framework.TestbedController$UpdateBehavior valueOf(java.lang.String);
+  static {};
+}
+Compiled from "TestbedFrame.java"
+public class org.jbox2d.testbed.framework.TestbedFrame extends javax.swing.JFrame {
+  public org.jbox2d.testbed.framework.TestbedFrame(org.jbox2d.testbed.framework.TestbedModel, org.jbox2d.testbed.framework.TestbedPanel, org.jbox2d.testbed.framework.TestbedController$UpdateBehavior);
+}
+Compiled from "TestbedMain.java"
+public class org.jbox2d.testbed.framework.TestbedMain {
+  public org.jbox2d.testbed.framework.TestbedMain();
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "TestbedModel.java"
+public class org.jbox2d.testbed.framework.TestbedModel {
+  public org.jbox2d.testbed.framework.TestbedModel();
+  public void setCalculatedFps(float);
+  public float getCalculatedFps();
+  public void setPanelWidth(float);
+  public float getPanelWidth();
+  public void setDebugDraw(org.jbox2d.callbacks.DebugDraw);
+  public org.jbox2d.callbacks.DebugDraw getDebugDraw();
+  public org.jbox2d.testbed.framework.TestbedTest getCurrTest();
+  public org.jbox2d.common.Vec2 getMouse();
+  public void setMouse(org.jbox2d.common.Vec2);
+  public boolean[] getKeys();
+  public boolean[] getCodedKeys();
+  public void setCurrTestIndex(int);
+  public int getCurrTestIndex();
+  public void setRunningTest(org.jbox2d.testbed.framework.TestbedTest);
+  public org.jbox2d.testbed.framework.TestbedTest getRunningTest();
+  public void addTestChangeListener(org.jbox2d.testbed.framework.TestbedModel$TestChangedListener);
+  public void removeTestChangeListener(org.jbox2d.testbed.framework.TestbedModel$TestChangedListener);
+  public void addTest(org.jbox2d.testbed.framework.TestbedTest);
+  public void addCategory(java.lang.String);
+  public org.jbox2d.testbed.framework.TestbedTest getTestAt(int);
+  public boolean isTestAt(int);
+  public void clearTestList();
+  public int getTestsSize();
+  public javax.swing.DefaultComboBoxModel getComboModel();
+  public org.jbox2d.testbed.framework.TestbedSettings getSettings();
+}
+Compiled from "TestbedModel.java"
+public class org.jbox2d.testbed.framework.TestbedModel$ListItem {
+  public java.lang.String category;
+  public org.jbox2d.testbed.framework.TestbedTest test;
+  final org.jbox2d.testbed.framework.TestbedModel this$0;
+  public org.jbox2d.testbed.framework.TestbedModel$ListItem(org.jbox2d.testbed.framework.TestbedModel, java.lang.String);
+  public org.jbox2d.testbed.framework.TestbedModel$ListItem(org.jbox2d.testbed.framework.TestbedModel, org.jbox2d.testbed.framework.TestbedTest);
+  public boolean isCategory();
+  public java.lang.String toString();
+}
+Compiled from "TestbedModel.java"
+public interface org.jbox2d.testbed.framework.TestbedModel$TestChangedListener {
+  public abstract void testChanged(org.jbox2d.testbed.framework.TestbedTest, int);
+}
+Compiled from "TestbedPanel.java"
+public interface org.jbox2d.testbed.framework.TestbedPanel {
+  public abstract void addKeyListener(java.awt.event.KeyListener);
+  public abstract void addMouseListener(java.awt.event.MouseListener);
+  public abstract void addMouseMotionListener(java.awt.event.MouseMotionListener);
+  public abstract void grabFocus();
+  public abstract org.jbox2d.callbacks.DebugDraw getDebugDraw();
+  public abstract boolean render();
+  public abstract void paintScreen();
+}
+Compiled from "TestbedSetting.java"
+public class org.jbox2d.testbed.framework.TestbedSetting {
+  public final java.lang.String name;
+  public final org.jbox2d.testbed.framework.TestbedSetting$SettingType settingsType;
+  public final org.jbox2d.testbed.framework.TestbedSetting$ConstraintType constraintType;
+  public boolean enabled;
+  public int value;
+  public final int min;
+  public final int max;
+  public org.jbox2d.testbed.framework.TestbedSetting(java.lang.String, org.jbox2d.testbed.framework.TestbedSetting$SettingType, boolean);
+  public org.jbox2d.testbed.framework.TestbedSetting(java.lang.String, org.jbox2d.testbed.framework.TestbedSetting$SettingType, int, int, int);
+}
+Compiled from "TestbedSetting.java"
+public final class org.jbox2d.testbed.framework.TestbedSetting$ConstraintType extends java.lang.Enum<org.jbox2d.testbed.framework.TestbedSetting$ConstraintType> {
+  public static final org.jbox2d.testbed.framework.TestbedSetting$ConstraintType BOOLEAN;
+  public static final org.jbox2d.testbed.framework.TestbedSetting$ConstraintType RANGE;
+  public static org.jbox2d.testbed.framework.TestbedSetting$ConstraintType[] values();
+  public static org.jbox2d.testbed.framework.TestbedSetting$ConstraintType valueOf(java.lang.String);
+  static {};
+}
+Compiled from "TestbedSetting.java"
+public final class org.jbox2d.testbed.framework.TestbedSetting$SettingType extends java.lang.Enum<org.jbox2d.testbed.framework.TestbedSetting$SettingType> {
+  public static final org.jbox2d.testbed.framework.TestbedSetting$SettingType DRAWING;
+  public static final org.jbox2d.testbed.framework.TestbedSetting$SettingType ENGINE;
+  public static org.jbox2d.testbed.framework.TestbedSetting$SettingType[] values();
+  public static org.jbox2d.testbed.framework.TestbedSetting$SettingType valueOf(java.lang.String);
+  static {};
+}
+Compiled from "TestbedSettings.java"
+public class org.jbox2d.testbed.framework.TestbedSettings {
+  public static final java.lang.String Hz;
+  public static final java.lang.String PositionIterations;
+  public static final java.lang.String VelocityIterations;
+  public static final java.lang.String AllowSleep;
+  public static final java.lang.String WarmStarting;
+  public static final java.lang.String SubStepping;
+  public static final java.lang.String ContinuousCollision;
+  public static final java.lang.String DrawShapes;
+  public static final java.lang.String DrawJoints;
+  public static final java.lang.String DrawAABBs;
+  public static final java.lang.String DrawContactPoints;
+  public static final java.lang.String DrawContactNormals;
+  public static final java.lang.String DrawContactImpulses;
+  public static final java.lang.String DrawFrictionImpulses;
+  public static final java.lang.String DrawCOMs;
+  public static final java.lang.String DrawStats;
+  public static final java.lang.String DrawHelp;
+  public static final java.lang.String DrawTree;
+  public boolean pause;
+  public boolean singleStep;
+  public org.jbox2d.testbed.framework.TestbedSettings();
+  public void addSetting(org.jbox2d.testbed.framework.TestbedSetting);
+  public java.util.List<org.jbox2d.testbed.framework.TestbedSetting> getSettings();
+  public org.jbox2d.testbed.framework.TestbedSetting getSetting(java.lang.String);
+}
+Compiled from "TestbedTest.java"
+public abstract class org.jbox2d.testbed.framework.TestbedTest implements org.jbox2d.callbacks.ContactListener,org.jbox2d.serialization.JbDeserializer$ObjectListener,org.jbox2d.serialization.JbSerializer$ObjectSigner,org.jbox2d.serialization.UnsupportedListener {
+  public static final int MAX_CONTACT_POINTS;
+  protected static final long GROUND_BODY_TAG;
+  protected static final long BOMB_TAG;
+  protected static final long MOUSE_JOINT_TAG;
+  public static final org.jbox2d.testbed.framework.ContactPoint[] points;
+  protected org.jbox2d.dynamics.World m_world;
+  protected org.jbox2d.dynamics.Body groundBody;
+  protected org.jbox2d.callbacks.DestructionListener destructionListener;
+  protected int m_textLine;
+  public org.jbox2d.testbed.framework.TestbedTest();
+  public void init(org.jbox2d.testbed.framework.TestbedModel);
+  public void init(org.jbox2d.dynamics.World, boolean);
+  public org.jbox2d.dynamics.World getWorld();
+  public org.jbox2d.testbed.framework.TestbedModel getModel();
+  public static org.jbox2d.testbed.framework.ContactPoint[] getContactPoints();
+  public org.jbox2d.dynamics.Body getGroundBody();
+  public org.jbox2d.callbacks.DebugDraw getDebugDraw();
+  public org.jbox2d.common.Vec2 getWorldMouse();
+  public int getStepCount();
+  public int getPointCount();
+  public org.jbox2d.dynamics.Body getBomb();
+  public float getCachedCameraScale();
+  public void setCachedCameraScale(float);
+  public org.jbox2d.common.Vec2 getCachedCameraPos();
+  public void setCachedCameraPos(org.jbox2d.common.Vec2);
+  public boolean isHasCachedCamera();
+  public void setHasCachedCamera(boolean);
+  public boolean isDialogOnSaveLoadErrors();
+  public void setDialogOnSaveLoadErrors(boolean);
+  public org.jbox2d.common.Vec2 getDefaultCameraPos();
+  public float getDefaultCameraScale();
+  public java.lang.String getFilename();
+  public void reset();
+  public void save();
+  public void load();
+  protected void _reset();
+  protected void _save();
+  protected void _load();
+  public void setCamera(org.jbox2d.common.Vec2);
+  public void setCamera(org.jbox2d.common.Vec2, float);
+  public abstract void initTest(boolean);
+  public abstract java.lang.String getTestName();
+  public void exit();
+  public void update();
+  public synchronized void step(org.jbox2d.testbed.framework.TestbedSettings);
+  public void queueShiftMouseDown(org.jbox2d.common.Vec2);
+  public void queueMouseUp(org.jbox2d.common.Vec2);
+  public void queueMouseDown(org.jbox2d.common.Vec2);
+  public void queueMouseMove(org.jbox2d.common.Vec2);
+  public void queueKeyPressed(char, int);
+  public void queueKeyReleased(char, int);
+  public void shiftMouseDown(org.jbox2d.common.Vec2);
+  public void mouseUp(org.jbox2d.common.Vec2);
+  public void mouseDown(org.jbox2d.common.Vec2);
+  public void mouseMove(org.jbox2d.common.Vec2);
+  public void setTitle(java.lang.String);
+  public void addTextLine(java.lang.String);
+  public void lanchBomb();
+  public synchronized void launchBomb(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  public synchronized void spawnBomb(org.jbox2d.common.Vec2);
+  public synchronized void completeBombSpawn(org.jbox2d.common.Vec2);
+  public boolean isSaveLoadEnabled();
+  public java.lang.Long getTag(org.jbox2d.dynamics.Body);
+  public java.lang.Long getTag(org.jbox2d.dynamics.Fixture);
+  public java.lang.Long getTag(org.jbox2d.dynamics.joints.Joint);
+  public java.lang.Long getTag(org.jbox2d.collision.shapes.Shape);
+  public java.lang.Long getTag(org.jbox2d.dynamics.World);
+  public void processBody(org.jbox2d.dynamics.Body, java.lang.Long);
+  public void processFixture(org.jbox2d.dynamics.Fixture, java.lang.Long);
+  public void processJoint(org.jbox2d.dynamics.joints.Joint, java.lang.Long);
+  public void processShape(org.jbox2d.collision.shapes.Shape, java.lang.Long);
+  public void processWorld(org.jbox2d.dynamics.World, java.lang.Long);
+  public boolean isUnsupported(org.jbox2d.serialization.UnsupportedObjectException);
+  public void jointDestroyed(org.jbox2d.dynamics.joints.Joint);
+  public void beginContact(org.jbox2d.dynamics.contacts.Contact);
+  public void endContact(org.jbox2d.dynamics.contacts.Contact);
+  public void postSolve(org.jbox2d.dynamics.contacts.Contact, org.jbox2d.callbacks.ContactImpulse);
+  public void preSolve(org.jbox2d.dynamics.contacts.Contact, org.jbox2d.collision.Manifold);
+  public void keyPressed(char, int);
+  public void keyReleased(char, int);
+  static org.jbox2d.dynamics.Body access$000(org.jbox2d.testbed.framework.TestbedTest);
+  static org.jbox2d.dynamics.joints.MouseJoint access$100(org.jbox2d.testbed.framework.TestbedTest);
+  static org.jbox2d.dynamics.Body access$002(org.jbox2d.testbed.framework.TestbedTest, org.jbox2d.dynamics.Body);
+  static org.jbox2d.dynamics.joints.MouseJoint access$102(org.jbox2d.testbed.framework.TestbedTest, org.jbox2d.dynamics.joints.MouseJoint);
+  static {};
+}
+Compiled from "TestbedTest.java"
+class org.jbox2d.testbed.framework.TestbedTest$1 extends org.jbox2d.testbed.framework.SignerAdapter {
+  final org.jbox2d.testbed.framework.TestbedTest this$0;
+  org.jbox2d.testbed.framework.TestbedTest$1(org.jbox2d.testbed.framework.TestbedTest, org.jbox2d.serialization.JbSerializer$ObjectSigner);
+  public java.lang.Long getTag(org.jbox2d.dynamics.Body);
+  public java.lang.Long getTag(org.jbox2d.dynamics.joints.Joint);
+}
+Compiled from "TestbedTest.java"
+class org.jbox2d.testbed.framework.TestbedTest$2 extends org.jbox2d.testbed.framework.ListenerAdapter {
+  final org.jbox2d.testbed.framework.TestbedTest this$0;
+  org.jbox2d.testbed.framework.TestbedTest$2(org.jbox2d.testbed.framework.TestbedTest, org.jbox2d.serialization.JbDeserializer$ObjectListener);
+  public void processBody(org.jbox2d.dynamics.Body, java.lang.Long);
+  public void processJoint(org.jbox2d.dynamics.joints.Joint, java.lang.Long);
+}
+Compiled from "TestbedTest.java"
+class org.jbox2d.testbed.framework.TestbedTest$3 implements org.jbox2d.callbacks.DestructionListener {
+  final org.jbox2d.testbed.framework.TestbedTest this$0;
+  org.jbox2d.testbed.framework.TestbedTest$3(org.jbox2d.testbed.framework.TestbedTest);
+  public void sayGoodbye(org.jbox2d.dynamics.Fixture);
+  public void sayGoodbye(org.jbox2d.dynamics.joints.Joint);
+}
+Compiled from "TestbedTest.java"
+class org.jbox2d.testbed.framework.TestbedTest$4 {
+  static final int[] $SwitchMap$org$jbox2d$testbed$framework$QueueItemType;
+  static {};
+}
+Compiled from "DebugDrawJ2D.java"
+public class org.jbox2d.testbed.framework.j2d.DebugDrawJ2D extends org.jbox2d.callbacks.DebugDraw {
+  public static int circlePoints;
+  public org.jbox2d.testbed.framework.j2d.DebugDrawJ2D(org.jbox2d.testbed.framework.j2d.TestPanelJ2D);
+  public void drawCircle(org.jbox2d.common.Vec2, float, org.jbox2d.common.Color3f);
+  public void drawPoint(org.jbox2d.common.Vec2, float, org.jbox2d.common.Color3f);
+  public void drawSegment(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2, org.jbox2d.common.Color3f);
+  public void drawAABB(org.jbox2d.collision.AABB, org.jbox2d.common.Color3f);
+  public void drawSolidCircle(org.jbox2d.common.Vec2, float, org.jbox2d.common.Vec2, org.jbox2d.common.Color3f);
+  public void drawSolidPolygon(org.jbox2d.common.Vec2[], int, org.jbox2d.common.Color3f);
+  public void drawString(float, float, java.lang.String, org.jbox2d.common.Color3f);
+  public void drawTransform(org.jbox2d.common.Transform);
+  static {};
+}
+Compiled from "TestPanelJ2D.java"
+public class org.jbox2d.testbed.framework.j2d.TestPanelJ2D extends javax.swing.JPanel implements org.jbox2d.testbed.framework.TestbedPanel {
+  public static final int INIT_WIDTH;
+  public static final int INIT_HEIGHT;
+  public org.jbox2d.testbed.framework.j2d.TestPanelJ2D(org.jbox2d.testbed.framework.TestbedModel);
+  public org.jbox2d.callbacks.DebugDraw getDebugDraw();
+  public java.awt.Graphics2D getDBGraphics();
+  public boolean render();
+  public void paintScreen();
+  static org.jbox2d.testbed.framework.j2d.DebugDrawJ2D access$000(org.jbox2d.testbed.framework.j2d.TestPanelJ2D);
+  static org.jbox2d.testbed.framework.TestbedModel access$100(org.jbox2d.testbed.framework.j2d.TestPanelJ2D);
+  static org.jbox2d.common.Vec2 access$200(org.jbox2d.testbed.framework.j2d.TestPanelJ2D);
+  static boolean access$302(org.jbox2d.testbed.framework.j2d.TestPanelJ2D, boolean);
+  static boolean access$300(org.jbox2d.testbed.framework.j2d.TestPanelJ2D);
+  static void access$400(org.jbox2d.testbed.framework.j2d.TestPanelJ2D, int, int);
+  static java.awt.Image access$502(org.jbox2d.testbed.framework.j2d.TestPanelJ2D, java.awt.Image);
+  static {};
+}
+Compiled from "TestPanelJ2D.java"
+class org.jbox2d.testbed.framework.j2d.TestPanelJ2D$1 implements java.awt.event.MouseWheelListener {
+  final org.jbox2d.testbed.framework.j2d.TestPanelJ2D this$0;
+  org.jbox2d.testbed.framework.j2d.TestPanelJ2D$1(org.jbox2d.testbed.framework.j2d.TestPanelJ2D);
+  public void mouseWheelMoved(java.awt.event.MouseWheelEvent);
+}
+Compiled from "TestPanelJ2D.java"
+class org.jbox2d.testbed.framework.j2d.TestPanelJ2D$2 extends java.awt.event.MouseAdapter {
+  final org.jbox2d.testbed.framework.j2d.TestPanelJ2D this$0;
+  org.jbox2d.testbed.framework.j2d.TestPanelJ2D$2(org.jbox2d.testbed.framework.j2d.TestPanelJ2D);
+  public void mousePressed(java.awt.event.MouseEvent);
+}
+Compiled from "TestPanelJ2D.java"
+class org.jbox2d.testbed.framework.j2d.TestPanelJ2D$3 extends java.awt.event.MouseMotionAdapter {
+  final org.jbox2d.testbed.framework.j2d.TestPanelJ2D this$0;
+  org.jbox2d.testbed.framework.j2d.TestPanelJ2D$3(org.jbox2d.testbed.framework.j2d.TestPanelJ2D);
+  public void mouseDragged(java.awt.event.MouseEvent);
+}
+Compiled from "TestPanelJ2D.java"
+class org.jbox2d.testbed.framework.j2d.TestPanelJ2D$4 extends java.awt.event.ComponentAdapter {
+  final org.jbox2d.testbed.framework.j2d.TestPanelJ2D this$0;
+  org.jbox2d.testbed.framework.j2d.TestPanelJ2D$4(org.jbox2d.testbed.framework.j2d.TestPanelJ2D);
+  public void componentResized(java.awt.event.ComponentEvent);
+}
+Compiled from "TestbedSidePanel.java"
+public class org.jbox2d.testbed.framework.j2d.TestbedSidePanel extends javax.swing.JPanel implements javax.swing.event.ChangeListener,java.awt.event.ActionListener {
+  final org.jbox2d.testbed.framework.TestbedModel model;
+  final org.jbox2d.testbed.framework.TestbedController controller;
+  public javax.swing.JComboBox tests;
+  public javax.swing.JButton saveButton;
+  public javax.swing.JButton loadButton;
+  public org.jbox2d.testbed.framework.j2d.TestbedSidePanel(org.jbox2d.testbed.framework.TestbedModel, org.jbox2d.testbed.framework.TestbedController);
+  public void initComponents();
+  public void addListeners();
+  public void stateChanged(javax.swing.event.ChangeEvent);
+  public void actionPerformed(java.awt.event.ActionEvent);
+  static javax.swing.JButton access$000(org.jbox2d.testbed.framework.j2d.TestbedSidePanel);
+}
+Compiled from "TestbedSidePanel.java"
+class org.jbox2d.testbed.framework.j2d.TestbedSidePanel$1 implements org.jbox2d.testbed.framework.TestbedModel$TestChangedListener {
+  final org.jbox2d.testbed.framework.j2d.TestbedSidePanel this$0;
+  org.jbox2d.testbed.framework.j2d.TestbedSidePanel$1(org.jbox2d.testbed.framework.j2d.TestbedSidePanel);
+  public void testChanged(org.jbox2d.testbed.framework.TestbedTest, int);
+}
+Compiled from "TestbedSidePanel.java"
+class org.jbox2d.testbed.framework.j2d.TestbedSidePanel$2 implements javax.swing.ListCellRenderer {
+  javax.swing.JLabel categoryLabel;
+  javax.swing.JLabel testLabel;
+  final org.jbox2d.testbed.framework.j2d.TestbedSidePanel this$0;
+  org.jbox2d.testbed.framework.j2d.TestbedSidePanel$2(org.jbox2d.testbed.framework.j2d.TestbedSidePanel);
+  public java.awt.Component getListCellRendererComponent(javax.swing.JList, java.lang.Object, int, boolean, boolean);
+}
+Compiled from "TestbedSidePanel.java"
+class org.jbox2d.testbed.framework.j2d.TestbedSidePanel$3 implements java.awt.event.ActionListener {
+  final org.jbox2d.testbed.framework.j2d.TestbedSidePanel this$0;
+  org.jbox2d.testbed.framework.j2d.TestbedSidePanel$3(org.jbox2d.testbed.framework.j2d.TestbedSidePanel);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "TestbedSidePanel.java"
+class org.jbox2d.testbed.framework.j2d.TestbedSidePanel$4 implements java.awt.event.ActionListener {
+  final org.jbox2d.testbed.framework.j2d.TestbedSidePanel this$0;
+  org.jbox2d.testbed.framework.j2d.TestbedSidePanel$4(org.jbox2d.testbed.framework.j2d.TestbedSidePanel);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "TestbedSidePanel.java"
+class org.jbox2d.testbed.framework.j2d.TestbedSidePanel$5 implements java.awt.event.ActionListener {
+  final org.jbox2d.testbed.framework.j2d.TestbedSidePanel this$0;
+  org.jbox2d.testbed.framework.j2d.TestbedSidePanel$5(org.jbox2d.testbed.framework.j2d.TestbedSidePanel);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "TestbedSidePanel.java"
+class org.jbox2d.testbed.framework.j2d.TestbedSidePanel$6 implements java.awt.event.ActionListener {
+  final org.jbox2d.testbed.framework.j2d.TestbedSidePanel this$0;
+  org.jbox2d.testbed.framework.j2d.TestbedSidePanel$6(org.jbox2d.testbed.framework.j2d.TestbedSidePanel);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "TestbedSidePanel.java"
+class org.jbox2d.testbed.framework.j2d.TestbedSidePanel$7 implements java.awt.event.ActionListener {
+  final org.jbox2d.testbed.framework.j2d.TestbedSidePanel this$0;
+  org.jbox2d.testbed.framework.j2d.TestbedSidePanel$7(org.jbox2d.testbed.framework.j2d.TestbedSidePanel);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "TestbedSidePanel.java"
+class org.jbox2d.testbed.framework.j2d.TestbedSidePanel$8 implements java.awt.event.ActionListener {
+  final org.jbox2d.testbed.framework.j2d.TestbedSidePanel this$0;
+  org.jbox2d.testbed.framework.j2d.TestbedSidePanel$8(org.jbox2d.testbed.framework.j2d.TestbedSidePanel);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "TestbedSidePanel.java"
+class org.jbox2d.testbed.framework.j2d.TestbedSidePanel$9 {
+  static final int[] $SwitchMap$org$jbox2d$testbed$framework$TestbedSetting$ConstraintType;
+  static {};
+}
+Compiled from "MathPerf.java"
+public class org.jbox2d.testbed.perf.MathPerf extends org.jbox2d.profile.BasicPerformanceTest {
+  public static int INNER_ITERS;
+  public static int OUTER_ITERS;
+  java.lang.String[] tests;
+  public float aStore;
+  public org.jbox2d.testbed.perf.MathPerf();
+  public void runTest(int);
+  public void runSinTest(float);
+  public void runSinLUTTest(float);
+  public void runPowTest(float);
+  public void runFastPowTest(float);
+  public void runMaxTest(float);
+  public void runFastMaxTest(float);
+  public void runFloorTest(float);
+  public void runFastFloorTest(float);
+  public void runAtan2Test(float);
+  public void runFastAtan2Test(float);
+  public void runCeilTest(float);
+  public void runFastCeilTest(float);
+  public java.lang.String getTestName(int);
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "PoolingPerf.java"
+public class org.jbox2d.testbed.perf.PoolingPerf extends org.jbox2d.profile.BasicPerformanceTest {
+  public static final int INNER_ITERS;
+  public static final int OUTER_ITERS;
+  public java.lang.String[] tests;
+  public float aStore;
+  public org.jbox2d.pooling.IWorldPool wp;
+  public org.jbox2d.testbed.perf.PoolingPerf$CirclePool cp;
+  public org.jbox2d.testbed.perf.PoolingPerf$TLVec2 tlv;
+  public org.jbox2d.common.Vec2 mv;
+  public org.jbox2d.testbed.perf.PoolingPerf$CustStack stack;
+  public org.jbox2d.testbed.perf.PoolingPerf();
+  public float op(org.jbox2d.common.Vec2);
+  public void runTest(int);
+  public void runCreationTest();
+  public void runWorldPoolTest();
+  public void runCirclePoolTest();
+  public void runThreadLocalTest();
+  public void runCustStackTest();
+  public void runMemberTest();
+  public java.lang.String getTestName(int);
+  public static void main(java.lang.String[]);
+}
+Compiled from "PoolingPerf.java"
+public class org.jbox2d.testbed.perf.PoolingPerf$CirclePool {
+  final org.jbox2d.common.Vec2[] pool;
+  int index;
+  final int length;
+  public org.jbox2d.testbed.perf.PoolingPerf$CirclePool();
+  public final org.jbox2d.common.Vec2 get();
+}
+Compiled from "PoolingPerf.java"
+public class org.jbox2d.testbed.perf.PoolingPerf$CustStack {
+  final org.jbox2d.common.Vec2[] pool;
+  int index;
+  public org.jbox2d.testbed.perf.PoolingPerf$CustStack();
+  public final org.jbox2d.common.Vec2 get();
+  public final void reduce(int);
+}
+Compiled from "PoolingPerf.java"
+public class org.jbox2d.testbed.perf.PoolingPerf$TLVec2 extends java.lang.ThreadLocal<org.jbox2d.common.Vec2> {
+  public org.jbox2d.testbed.perf.PoolingPerf$TLVec2();
+  protected org.jbox2d.common.Vec2 initialValue();
+  protected java.lang.Object initialValue();
+}
+Compiled from "StackTest.java"
+public class org.jbox2d.testbed.perf.StackTest extends org.jbox2d.profile.BasicPerformanceTest {
+  public static final int INNER_ITERS;
+  public static final int OUTER_ITERS;
+  public static java.lang.String[] tests;
+  public static float aStore;
+  public org.jbox2d.testbed.perf.StackTest();
+  public float op(org.jbox2d.common.Vec2);
+  public void runTest(int);
+  public java.lang.String getTestName(int);
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "ColorPool.java"
+class org.jbox2d.testbed.pooling.ColorKey {
+  float r;
+  float g;
+  float b;
+  float a;
+  org.jbox2d.testbed.pooling.ColorKey();
+  public void set(float, float, float);
+  public void set(float, float, float, float);
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+}
+Compiled from "ColorPool.java"
+public class org.jbox2d.testbed.pooling.ColorPool {
+  public org.jbox2d.testbed.pooling.ColorPool();
+  public java.awt.Color getColor(float, float, float, float);
+  public java.awt.Color getColor(float, float, float);
+}
+Compiled from "ApplyForce.java"
+public class org.jbox2d.testbed.tests.ApplyForce extends org.jbox2d.testbed.framework.TestbedTest {
+  org.jbox2d.dynamics.Body m_body;
+  public org.jbox2d.testbed.tests.ApplyForce();
+  public void initTest(boolean);
+  public void keyPressed(char, int);
+  public void step(org.jbox2d.testbed.framework.TestbedSettings);
+  public boolean isSaveLoadEnabled();
+  public java.lang.Long getTag(org.jbox2d.dynamics.Body);
+  public void processBody(org.jbox2d.dynamics.Body, java.lang.Long);
+  public java.lang.String getTestName();
+}
+Compiled from "BlobTest4.java"
+public class org.jbox2d.testbed.tests.BlobTest4 extends org.jbox2d.testbed.framework.TestbedTest {
+  public org.jbox2d.testbed.tests.BlobTest4();
+  public float getDefaultCameraScale();
+  public boolean isSaveLoadEnabled();
+  public void initTest(boolean);
+  public java.lang.String getTestName();
+}
+Compiled from "BodyTypes.java"
+public class org.jbox2d.testbed.tests.BodyTypes extends org.jbox2d.testbed.framework.TestbedTest {
+  org.jbox2d.dynamics.Body m_attachment;
+  org.jbox2d.dynamics.Body m_platform;
+  float m_speed;
+  public org.jbox2d.testbed.tests.BodyTypes();
+  public java.lang.Long getTag(org.jbox2d.dynamics.Body);
+  public void processBody(org.jbox2d.dynamics.Body, java.lang.Long);
+  public boolean isSaveLoadEnabled();
+  public void initTest(boolean);
+  public void step(org.jbox2d.testbed.framework.TestbedSettings);
+  public void keyPressed(char, int);
+  public java.lang.String getTestName();
+}
+Compiled from "Breakable.java"
+public class org.jbox2d.testbed.tests.Breakable extends org.jbox2d.testbed.framework.TestbedTest {
+  org.jbox2d.dynamics.Body m_body1;
+  org.jbox2d.common.Vec2 m_velocity;
+  float m_angularVelocity;
+  org.jbox2d.collision.shapes.PolygonShape m_shape1;
+  org.jbox2d.collision.shapes.PolygonShape m_shape2;
+  org.jbox2d.dynamics.Fixture m_piece1;
+  org.jbox2d.dynamics.Fixture m_piece2;
+  boolean m_broke;
+  boolean m_break;
+  public org.jbox2d.testbed.tests.Breakable();
+  public void initTest(boolean);
+  public void postSolve(org.jbox2d.dynamics.contacts.Contact, org.jbox2d.callbacks.ContactImpulse);
+  void Break();
+  public void step(org.jbox2d.testbed.framework.TestbedSettings);
+  public java.lang.String getTestName();
+}
+Compiled from "Cantilever.java"
+public class org.jbox2d.testbed.tests.Cantilever extends org.jbox2d.testbed.framework.TestbedTest {
+  int e_count;
+  public org.jbox2d.testbed.tests.Cantilever();
+  public boolean isSaveLoadEnabled();
+  public void initTest(boolean);
+  public java.lang.String getTestName();
+}
+Compiled from "Car.java"
+public class org.jbox2d.testbed.tests.Car extends org.jbox2d.testbed.framework.TestbedTest {
+  public org.jbox2d.testbed.tests.Car();
+  public java.lang.Long getTag(org.jbox2d.dynamics.Body);
+  public java.lang.Long getTag(org.jbox2d.dynamics.joints.Joint);
+  public void processBody(org.jbox2d.dynamics.Body, java.lang.Long);
+  public void processJoint(org.jbox2d.dynamics.joints.Joint, java.lang.Long);
+  public boolean isSaveLoadEnabled();
+  public java.lang.String getTestName();
+  public void initTest(boolean);
+  public void keyPressed(char, int);
+  public void keyReleased(char, int);
+  public float getDefaultCameraScale();
+  public synchronized void step(org.jbox2d.testbed.framework.TestbedSettings);
+}
+Compiled from "Chain.java"
+public class org.jbox2d.testbed.tests.Chain extends org.jbox2d.testbed.framework.TestbedTest {
+  public org.jbox2d.testbed.tests.Chain();
+  public boolean isSaveLoadEnabled();
+  public void initTest(boolean);
+  public java.lang.String getTestName();
+}
+Compiled from "CharacterCollision.java"
+public class org.jbox2d.testbed.tests.CharacterCollision extends org.jbox2d.testbed.framework.TestbedTest {
+  public org.jbox2d.testbed.tests.CharacterCollision();
+  public java.lang.Long getTag(org.jbox2d.dynamics.Body);
+  public void processBody(org.jbox2d.dynamics.Body, java.lang.Long);
+  public boolean isSaveLoadEnabled();
+  public void initTest(boolean);
+  public void step(org.jbox2d.testbed.framework.TestbedSettings);
+  public java.lang.String getTestName();
+}
+Compiled from "CircleStress.java"
+public class org.jbox2d.testbed.tests.CircleStress extends org.jbox2d.testbed.framework.TestbedTest {
+  public org.jbox2d.testbed.tests.CircleStress();
+  public java.lang.Long getTag(org.jbox2d.dynamics.joints.Joint);
+  public void processJoint(org.jbox2d.dynamics.joints.Joint, java.lang.Long);
+  public boolean isSaveLoadEnabled();
+  public org.jbox2d.common.Vec2 getDefaultCameraPos();
+  public float getDefaultCameraScale();
+  public void initTest(boolean);
+  public void keyPressed(char, int);
+  public void step(org.jbox2d.testbed.framework.TestbedSettings);
+  public java.lang.String getTestName();
+}
+Compiled from "CollisionFiltering.java"
+public class org.jbox2d.testbed.tests.CollisionFiltering extends org.jbox2d.testbed.framework.TestbedTest {
+  final int k_smallGroup;
+  final int k_largeGroup;
+  final int k_defaultCategory;
+  final int k_triangleCategory;
+  final int k_boxCategory;
+  final int k_circleCategory;
+  final int k_triangleMask;
+  final int k_boxMask;
+  final int k_circleMask;
+  public org.jbox2d.testbed.tests.CollisionFiltering();
+  public boolean isSaveLoadEnabled();
+  public void initTest(boolean);
+  public java.lang.String getTestName();
+}
+Compiled from "CollisionProcessing.java"
+public class org.jbox2d.testbed.tests.CollisionProcessing extends org.jbox2d.testbed.framework.TestbedTest {
+  public org.jbox2d.testbed.tests.CollisionProcessing();
+  public boolean isSaveLoadEnabled();
+  public void initTest(boolean);
+  public void step(org.jbox2d.testbed.framework.TestbedSettings);
+  public java.lang.String getTestName();
+}
+Compiled from "CompoundShapes.java"
+public class org.jbox2d.testbed.tests.CompoundShapes extends org.jbox2d.testbed.framework.TestbedTest {
+  public org.jbox2d.testbed.tests.CompoundShapes();
+  public boolean isSaveLoadEnabled();
+  public void initTest(boolean);
+  public java.lang.String getTestName();
+}
+Compiled from "ConfinedTest.java"
+public class org.jbox2d.testbed.tests.ConfinedTest extends org.jbox2d.testbed.framework.TestbedTest {
+  int e_columnCount;
+  int e_rowCount;
+  public org.jbox2d.testbed.tests.ConfinedTest();
+  public boolean isSaveLoadEnabled();
+  public java.lang.String getTestName();
+  public void initTest(boolean);
+  public void createCircle();
+  public void step(org.jbox2d.testbed.framework.TestbedSettings);
+  public void keyPressed(char, int);
+}
+Compiled from "ContinuousTest.java"
+public class org.jbox2d.testbed.tests.ContinuousTest extends org.jbox2d.testbed.framework.TestbedTest {
+  org.jbox2d.dynamics.Body m_body;
+  org.jbox2d.dynamics.Fixture currFixture;
+  org.jbox2d.collision.shapes.PolygonShape m_poly;
+  org.jbox2d.collision.shapes.CircleShape m_circle;
+  org.jbox2d.collision.shapes.Shape nextShape;
+  boolean polygon;
+  float m_angularVelocity;
+  public org.jbox2d.testbed.tests.ContinuousTest();
+  public java.lang.String getTestName();
+  public void switchObjects();
+  public void initTest(boolean);
+  public void launch();
+  public void step(org.jbox2d.testbed.framework.TestbedSettings);
+  public void keyPressed(char, int);
+}
+Compiled from "ConvexHull.java"
+public class org.jbox2d.testbed.tests.ConvexHull extends org.jbox2d.testbed.framework.TestbedTest {
+  org.jbox2d.collision.shapes.PolygonShape shape;
+  org.jbox2d.common.Color3f color;
+  org.jbox2d.common.Color3f color2;
+  static final boolean $assertionsDisabled;
+  public org.jbox2d.testbed.tests.ConvexHull();
+  public void initTest(boolean);
+  void generate();
+  public void keyPressed(char, int);
+  public synchronized void step(org.jbox2d.testbed.framework.TestbedSettings);
+  public java.lang.String getTestName();
+  static {};
+}
+Compiled from "ConveyorBelt.java"
+public class org.jbox2d.testbed.tests.ConveyorBelt extends org.jbox2d.testbed.framework.TestbedTest {
+  public org.jbox2d.testbed.tests.ConveyorBelt();
+  public java.lang.Long getTag(org.jbox2d.dynamics.Fixture);
+  public void processFixture(org.jbox2d.dynamics.Fixture, java.lang.Long);
+  public boolean isSaveLoadEnabled();
+  public void initTest(boolean);
+  public void preSolve(org.jbox2d.dynamics.contacts.Contact, org.jbox2d.collision.Manifold);
+  public java.lang.String getTestName();
+  static {};
+}
+Compiled from "DistanceTest.java"
+public class org.jbox2d.testbed.tests.DistanceTest extends org.jbox2d.testbed.framework.TestbedTest {
+  org.jbox2d.common.Vec2 m_positionB;
+  float m_angleB;
+  org.jbox2d.common.Transform m_transformA;
+  org.jbox2d.common.Transform m_transformB;
+  org.jbox2d.collision.shapes.PolygonShape m_polygonA;
+  org.jbox2d.collision.shapes.PolygonShape m_polygonB;
+  org.jbox2d.collision.DistanceInput input;
+  org.jbox2d.collision.Distance$SimplexCache cache;
+  org.jbox2d.collision.DistanceOutput output;
+  org.jbox2d.common.Color3f color;
+  org.jbox2d.common.Vec2[] v;
+  org.jbox2d.common.Color3f c1;
+  org.jbox2d.common.Color3f c2;
+  public org.jbox2d.testbed.tests.DistanceTest();
+  public java.lang.String getTestName();
+  public void initTest(boolean);
+  public void step(org.jbox2d.testbed.framework.TestbedSettings);
+  public void keyPressed(char, int);
+}
+Compiled from "DominoTest.java"
+public class org.jbox2d.testbed.tests.DominoTest extends org.jbox2d.testbed.framework.TestbedTest {
+  public org.jbox2d.testbed.tests.DominoTest();
+  public boolean isSaveLoadEnabled();
+  public void initTest(boolean);
+  public java.lang.String getTestName();
+}
+Compiled from "DominoTower.java"
+public class org.jbox2d.testbed.tests.DominoTower extends org.jbox2d.testbed.framework.TestbedTest {
+  final float dwidth;
+  final float dheight;
+  float ddensity;
+  final float dfriction;
+  int baseCount;
+  public org.jbox2d.testbed.tests.DominoTower();
+  public void makeDomino(float, float, boolean, org.jbox2d.dynamics.World);
+  public org.jbox2d.common.Vec2 getDefaultCameraPos();
+  public boolean isSaveLoadEnabled();
+  public void initTest(boolean);
+  public java.lang.String getTestName();
+}
+Compiled from "DynamicTreeTest.java"
+public class org.jbox2d.testbed.tests.DynamicTreeTest extends org.jbox2d.testbed.framework.TestbedTest implements org.jbox2d.callbacks.TreeCallback,org.jbox2d.callbacks.TreeRayCastCallback {
+  int e_actorCount;
+  float worldExtent;
+  float m_proxyExtent;
+  org.jbox2d.collision.broadphase.BroadPhaseStrategy m_tree;
+  org.jbox2d.collision.AABB m_queryAABB;
+  org.jbox2d.collision.RayCastInput m_rayCastInput;
+  org.jbox2d.collision.RayCastOutput m_rayCastOutput;
+  org.jbox2d.testbed.tests.DynamicTreeTest$Actor m_rayActor;
+  org.jbox2d.testbed.tests.DynamicTreeTest$Actor[] m_actors;
+  int m_stepCount;
+  boolean m_automated;
+  java.util.Random rand;
+  static final boolean $assertionsDisabled;
+  public org.jbox2d.testbed.tests.DynamicTreeTest();
+  public void initTest(boolean);
+  public void keyPressed(char, int);
+  public void step(org.jbox2d.testbed.framework.TestbedSettings);
+  public boolean treeCallback(int);
+  public float raycastCallback(org.jbox2d.collision.RayCastInput, int);
+  public void GetRandomAABB(org.jbox2d.collision.AABB);
+  public void MoveAABB(org.jbox2d.collision.AABB);
+  public void CreateProxy();
+  public void DestroyProxy();
+  public void MoveProxy();
+  public void Action();
+  public void Query();
+  public void RayCast();
+  public java.lang.String getTestName();
+  static {};
+}
+Compiled from "DynamicTreeTest.java"
+public class org.jbox2d.testbed.tests.DynamicTreeTest$Actor {
+  org.jbox2d.collision.AABB aabb;
+  float fraction;
+  boolean overlap;
+  int proxyId;
+  public org.jbox2d.testbed.tests.DynamicTreeTest$Actor();
+}
+Compiled from "EdgeShapes.java"
+public class org.jbox2d.testbed.tests.EdgeShapes extends org.jbox2d.testbed.framework.TestbedTest {
+  int e_maxBodies;
+  int m_bodyIndex;
+  org.jbox2d.dynamics.Body[] m_bodies;
+  org.jbox2d.collision.shapes.PolygonShape[] m_polygons;
+  org.jbox2d.collision.shapes.CircleShape m_circle;
+  float m_angle;
+  org.jbox2d.testbed.tests.EdgeShapesCallback callback;
+  public org.jbox2d.testbed.tests.EdgeShapes();
+  public void initTest(boolean);
+  void Create(int);
+  void DestroyBody();
+  public void keyPressed(char, int);
+  public void step(org.jbox2d.testbed.framework.TestbedSettings);
+  public java.lang.String getTestName();
+}
+Compiled from "EdgeShapes.java"
+class org.jbox2d.testbed.tests.EdgeShapesCallback implements org.jbox2d.callbacks.RayCastCallback {
+  org.jbox2d.dynamics.Fixture m_fixture;
+  org.jbox2d.common.Vec2 m_point;
+  org.jbox2d.common.Vec2 m_normal;
+  org.jbox2d.testbed.tests.EdgeShapesCallback();
+  public float reportFixture(org.jbox2d.dynamics.Fixture, org.jbox2d.common.Vec2, org.jbox2d.common.Vec2, float);
+}
+Compiled from "FixedPendulumTest.java"
+public class org.jbox2d.testbed.tests.FixedPendulumTest extends org.jbox2d.testbed.framework.TestbedTest {
+  public org.jbox2d.testbed.tests.FixedPendulumTest(boolean);
+  public boolean isSaveLoadEnabled();
+  public void initTest(boolean);
+  public java.lang.String getTestName();
+}
+Compiled from "FreePendulumTest.java"
+public class org.jbox2d.testbed.tests.FreePendulumTest extends org.jbox2d.testbed.framework.TestbedTest {
+  public org.jbox2d.testbed.tests.FreePendulumTest(boolean);
+  public boolean isSaveLoadEnabled();
+  public void initTest(boolean);
+  public java.lang.String getTestName();
+}
+Compiled from "Gears.java"
+public class org.jbox2d.testbed.tests.Gears extends org.jbox2d.testbed.framework.TestbedTest {
+  org.jbox2d.dynamics.joints.RevoluteJoint m_joint1;
+  org.jbox2d.dynamics.joints.RevoluteJoint m_joint2;
+  org.jbox2d.dynamics.joints.PrismaticJoint m_joint3;
+  org.jbox2d.dynamics.joints.GearJoint m_joint4;
+  org.jbox2d.dynamics.joints.GearJoint m_joint5;
+  public org.jbox2d.testbed.tests.Gears();
+  public void initTest(boolean);
+  public void step(org.jbox2d.testbed.framework.TestbedSettings);
+  public java.lang.String getTestName();
+}
+Compiled from "LiquidTest.java"
+public class org.jbox2d.testbed.tests.LiquidTest extends org.jbox2d.testbed.framework.TestbedTest {
+  public static java.lang.Integer LIQUID_INT;
+  public org.jbox2d.testbed.tests.LiquidTest();
+  public void initTest(boolean);
+  public void step(org.jbox2d.testbed.framework.TestbedSettings);
+  public java.lang.String getTestName();
+  static {};
+}
+Compiled from "OneSidedTest.java"
+public class org.jbox2d.testbed.tests.OneSidedTest extends org.jbox2d.testbed.framework.TestbedTest {
+  float m_radius;
+  float m_top;
+  float m_bottom;
+  org.jbox2d.testbed.tests.OneSidedTest$State m_state;
+  org.jbox2d.dynamics.Fixture m_platform;
+  org.jbox2d.dynamics.Fixture m_character;
+  public org.jbox2d.testbed.tests.OneSidedTest();
+  public java.lang.Long getTag(org.jbox2d.dynamics.Fixture);
+  public void processFixture(org.jbox2d.dynamics.Fixture, java.lang.Long);
+  public boolean isSaveLoadEnabled();
+  public java.lang.String getTestName();
+  public void initTest(boolean);
+  public void preSolve(org.jbox2d.dynamics.contacts.Contact, org.jbox2d.collision.Manifold);
+}
+Compiled from "OneSidedTest.java"
+final class org.jbox2d.testbed.tests.OneSidedTest$State extends java.lang.Enum<org.jbox2d.testbed.tests.OneSidedTest$State> {
+  public static final org.jbox2d.testbed.tests.OneSidedTest$State e_unknown;
+  public static final org.jbox2d.testbed.tests.OneSidedTest$State e_above;
+  public static final org.jbox2d.testbed.tests.OneSidedTest$State e_below;
+  public static org.jbox2d.testbed.tests.OneSidedTest$State[] values();
+  public static org.jbox2d.testbed.tests.OneSidedTest$State valueOf(java.lang.String);
+  static {};
+}
+Compiled from "PistonTest.java"
+public class org.jbox2d.testbed.tests.PistonTest extends org.jbox2d.testbed.framework.TestbedTest {
+  public org.jbox2d.testbed.tests.PistonTest();
+  public boolean isSaveLoadEnabled();
+  public void initTest(boolean);
+  public java.lang.String getTestName();
+}
+Compiled from "PolyShapes.java"
+public class org.jbox2d.testbed.tests.PolyShapes extends org.jbox2d.testbed.framework.TestbedTest {
+  int k_maxBodies;
+  int m_bodyIndex;
+  org.jbox2d.dynamics.Body[] m_bodies;
+  org.jbox2d.collision.shapes.PolygonShape[] m_polygons;
+  org.jbox2d.collision.shapes.CircleShape m_circle;
+  public org.jbox2d.testbed.tests.PolyShapes();
+  public void initTest(boolean);
+  void Create(int);
+  void DestroyBody();
+  public void keyPressed(char, int);
+  public void step(org.jbox2d.testbed.framework.TestbedSettings);
+  public java.lang.String getTestName();
+}
+Compiled from "PolyShapes.java"
+class org.jbox2d.testbed.tests.PolyShapesCallback implements org.jbox2d.callbacks.QueryCallback {
+  int e_maxCount;
+  org.jbox2d.collision.shapes.CircleShape m_circle;
+  org.jbox2d.common.Transform m_transform;
+  org.jbox2d.callbacks.DebugDraw debugDraw;
+  int m_count;
+  org.jbox2d.pooling.IWorldPool p;
+  static final boolean $assertionsDisabled;
+  public org.jbox2d.testbed.tests.PolyShapesCallback(org.jbox2d.pooling.IWorldPool);
+  void DrawFixture(org.jbox2d.dynamics.Fixture);
+  public boolean reportFixture(org.jbox2d.dynamics.Fixture);
+  static {};
+}
+Compiled from "PolyShapes.java"
+class org.jbox2d.testbed.tests.PolyShapesCallback$1 {
+  static final int[] $SwitchMap$org$jbox2d$collision$shapes$ShapeType;
+  static {};
+}
+Compiled from "PrismaticTest.java"
+public class org.jbox2d.testbed.tests.PrismaticTest extends org.jbox2d.testbed.framework.TestbedTest {
+  org.jbox2d.dynamics.joints.PrismaticJoint m_joint;
+  public org.jbox2d.testbed.tests.PrismaticTest();
+  public java.lang.Long getTag(org.jbox2d.dynamics.joints.Joint);
+  public void processJoint(org.jbox2d.dynamics.joints.Joint, java.lang.Long);
+  public boolean isSaveLoadEnabled();
+  public void initTest(boolean);
+  public void step(org.jbox2d.testbed.framework.TestbedSettings);
+  public void keyPressed(char, int);
+  public java.lang.String getTestName();
+}
+Compiled from "Pulleys.java"
+public class org.jbox2d.testbed.tests.Pulleys extends org.jbox2d.testbed.framework.TestbedTest {
+  org.jbox2d.dynamics.joints.PulleyJoint m_joint1;
+  public org.jbox2d.testbed.tests.Pulleys();
+  public java.lang.Long getTag(org.jbox2d.dynamics.joints.Joint);
+  public void processJoint(org.jbox2d.dynamics.joints.Joint, java.lang.Long);
+  public boolean isSaveLoadEnabled();
+  public void initTest(boolean);
+  public void step(org.jbox2d.testbed.framework.TestbedSettings);
+  public java.lang.String getTestName();
+}
+Compiled from "PyramidTest.java"
+public class org.jbox2d.testbed.tests.PyramidTest extends org.jbox2d.testbed.framework.TestbedTest {
+  public org.jbox2d.testbed.tests.PyramidTest();
+  public boolean isSaveLoadEnabled();
+  public void initTest(boolean);
+  public java.lang.String getTestName();
+}
+Compiled from "RayCastTest.java"
+class org.jbox2d.testbed.tests.RayCastAnyCallback implements org.jbox2d.callbacks.RayCastCallback {
+  boolean m_hit;
+  org.jbox2d.common.Vec2 m_point;
+  org.jbox2d.common.Vec2 m_normal;
+  org.jbox2d.testbed.tests.RayCastAnyCallback();
+  public void init();
+  public float reportFixture(org.jbox2d.dynamics.Fixture, org.jbox2d.common.Vec2, org.jbox2d.common.Vec2, float);
+}
+Compiled from "RayCastTest.java"
+class org.jbox2d.testbed.tests.RayCastClosestCallback implements org.jbox2d.callbacks.RayCastCallback {
+  boolean m_hit;
+  org.jbox2d.common.Vec2 m_point;
+  org.jbox2d.common.Vec2 m_normal;
+  org.jbox2d.testbed.tests.RayCastClosestCallback();
+  public void init();
+  public float reportFixture(org.jbox2d.dynamics.Fixture, org.jbox2d.common.Vec2, org.jbox2d.common.Vec2, float);
+}
+Compiled from "RayCastTest.java"
+class org.jbox2d.testbed.tests.RayCastMultipleCallback implements org.jbox2d.callbacks.RayCastCallback {
+  public int e_maxCount;
+  org.jbox2d.common.Vec2[] m_points;
+  org.jbox2d.common.Vec2[] m_normals;
+  int m_count;
+  static final boolean $assertionsDisabled;
+  org.jbox2d.testbed.tests.RayCastMultipleCallback();
+  public void init();
+  public float reportFixture(org.jbox2d.dynamics.Fixture, org.jbox2d.common.Vec2, org.jbox2d.common.Vec2, float);
+  static {};
+}
+Compiled from "RayCastTest.java"
+public class org.jbox2d.testbed.tests.RayCastTest extends org.jbox2d.testbed.framework.TestbedTest {
+  public static final int e_maxBodies;
+  int m_bodyIndex;
+  org.jbox2d.dynamics.Body[] m_bodies;
+  java.lang.Integer[] m_userData;
+  org.jbox2d.collision.shapes.PolygonShape[] m_polygons;
+  org.jbox2d.collision.shapes.CircleShape m_circle;
+  float m_angle;
+  org.jbox2d.testbed.tests.RayCastTest$Mode m_mode;
+  org.jbox2d.testbed.tests.RayCastClosestCallback ccallback;
+  org.jbox2d.testbed.tests.RayCastAnyCallback acallback;
+  org.jbox2d.testbed.tests.RayCastMultipleCallback mcallback;
+  org.jbox2d.common.Vec2 point1;
+  org.jbox2d.common.Vec2 d;
+  org.jbox2d.common.Vec2 pooledHead;
+  org.jbox2d.common.Vec2 point2;
+  public org.jbox2d.testbed.tests.RayCastTest();
+  public java.lang.String getTestName();
+  public void initTest(boolean);
+  public void step(org.jbox2d.testbed.framework.TestbedSettings);
+  void Create(int);
+  void DestroyBody();
+  public void keyPressed(char, int);
+}
+Compiled from "RayCastTest.java"
+final class org.jbox2d.testbed.tests.RayCastTest$Mode extends java.lang.Enum<org.jbox2d.testbed.tests.RayCastTest$Mode> {
+  public static final org.jbox2d.testbed.tests.RayCastTest$Mode e_closest;
+  public static final org.jbox2d.testbed.tests.RayCastTest$Mode e_any;
+  public static final org.jbox2d.testbed.tests.RayCastTest$Mode e_multiple;
+  public static org.jbox2d.testbed.tests.RayCastTest$Mode[] values();
+  public static org.jbox2d.testbed.tests.RayCastTest$Mode valueOf(java.lang.String);
+  static {};
+}
+Compiled from "RevoluteTest.java"
+public class org.jbox2d.testbed.tests.RevoluteTest extends org.jbox2d.testbed.framework.TestbedTest {
+  public org.jbox2d.testbed.tests.RevoluteTest();
+  public java.lang.Long getTag(org.jbox2d.dynamics.joints.Joint);
+  public void processJoint(org.jbox2d.dynamics.joints.Joint, java.lang.Long);
+  public boolean isSaveLoadEnabled();
+  public void initTest(boolean);
+  public void step(org.jbox2d.testbed.framework.TestbedSettings);
+  public void keyPressed(char, int);
+  public java.lang.String getTestName();
+}
+Compiled from "RopeTest.java"
+public class org.jbox2d.testbed.tests.RopeTest extends org.jbox2d.testbed.framework.TestbedTest {
+  org.jbox2d.dynamics.joints.RopeJointDef m_ropeDef;
+  org.jbox2d.dynamics.joints.Joint m_rope;
+  public org.jbox2d.testbed.tests.RopeTest();
+  public void initTest(boolean);
+  public void keyPressed(char, int);
+  public synchronized void step(org.jbox2d.testbed.framework.TestbedSettings);
+  public java.lang.String getTestName();
+}
+Compiled from "SensorTest.java"
+public class org.jbox2d.testbed.tests.SensorTest extends org.jbox2d.testbed.framework.TestbedTest {
+  int e_count;
+  org.jbox2d.dynamics.Fixture m_sensor;
+  org.jbox2d.dynamics.Body[] m_bodies;
+  org.jbox2d.testbed.tests.SensorTest$BoolWrapper[] m_touching;
+  public org.jbox2d.testbed.tests.SensorTest();
+  public void initTest(boolean);
+  public void beginContact(org.jbox2d.dynamics.contacts.Contact);
+  public void endContact(org.jbox2d.dynamics.contacts.Contact);
+  public void step(org.jbox2d.testbed.framework.TestbedSettings);
+  public java.lang.String getTestName();
+}
+Compiled from "SensorTest.java"
+class org.jbox2d.testbed.tests.SensorTest$BoolWrapper {
+  boolean tf;
+  final org.jbox2d.testbed.tests.SensorTest this$0;
+  org.jbox2d.testbed.tests.SensorTest$BoolWrapper(org.jbox2d.testbed.tests.SensorTest);
+}
+Compiled from "ShapeEditing.java"
+public class org.jbox2d.testbed.tests.ShapeEditing extends org.jbox2d.testbed.framework.TestbedTest {
+  org.jbox2d.dynamics.Body m_body;
+  org.jbox2d.dynamics.Fixture m_fixture1;
+  org.jbox2d.dynamics.Fixture m_fixture2;
+  public org.jbox2d.testbed.tests.ShapeEditing();
+  public void initTest(boolean);
+  public void keyPressed(char, int);
+  public void step(org.jbox2d.testbed.framework.TestbedSettings);
+  public java.lang.String getTestName();
+}
+Compiled from "SliderCrankTest.java"
+public class org.jbox2d.testbed.tests.SliderCrankTest extends org.jbox2d.testbed.framework.TestbedTest {
+  public org.jbox2d.testbed.tests.SliderCrankTest();
+  public void initTest(boolean);
+  public void step(org.jbox2d.testbed.framework.TestbedSettings);
+  public void keyPressed(char, int);
+  public java.lang.String getTestName();
+}
+Compiled from "SphereStack.java"
+public class org.jbox2d.testbed.tests.SphereStack extends org.jbox2d.testbed.framework.TestbedTest {
+  int e_count;
+  public org.jbox2d.testbed.tests.SphereStack();
+  public boolean isSaveLoadEnabled();
+  public void initTest(boolean);
+  public java.lang.String getTestName();
+}
+Compiled from "TheoJansen.java"
+public class org.jbox2d.testbed.tests.TheoJansen extends org.jbox2d.testbed.framework.TestbedTest {
+  org.jbox2d.common.Vec2 m_offset;
+  org.jbox2d.dynamics.Body m_chassis;
+  org.jbox2d.dynamics.Body m_wheel;
+  org.jbox2d.dynamics.joints.RevoluteJoint m_motorJoint;
+  boolean m_motorOn;
+  float m_motorSpeed;
+  public org.jbox2d.testbed.tests.TheoJansen();
+  public java.lang.Long getTag(org.jbox2d.dynamics.Body);
+  public java.lang.Long getTag(org.jbox2d.dynamics.joints.Joint);
+  public void processBody(org.jbox2d.dynamics.Body, java.lang.Long);
+  public void processJoint(org.jbox2d.dynamics.joints.Joint, java.lang.Long);
+  public boolean isSaveLoadEnabled();
+  public void initTest(boolean);
+  void createLeg(float, org.jbox2d.common.Vec2);
+  public void keyPressed(char, int);
+  public void step(org.jbox2d.testbed.framework.TestbedSettings);
+  public java.lang.String getTestName();
+}
+Compiled from "Tumbler.java"
+public class org.jbox2d.testbed.tests.Tumbler extends org.jbox2d.testbed.framework.TestbedTest {
+  org.jbox2d.dynamics.joints.RevoluteJoint m_joint;
+  int m_count;
+  public org.jbox2d.testbed.tests.Tumbler();
+  public void initTest(boolean);
+  public synchronized void step(org.jbox2d.testbed.framework.TestbedSettings);
+  public java.lang.String getTestName();
+}
+Compiled from "VaryingFrictionTest.java"
+public class org.jbox2d.testbed.tests.VaryingFrictionTest extends org.jbox2d.testbed.framework.TestbedTest {
+  public org.jbox2d.testbed.tests.VaryingFrictionTest();
+  public java.lang.String getTestName();
+  public boolean isSaveLoadEnabled();
+  public void initTest(boolean);
+}
+Compiled from "VaryingRestitution.java"
+public class org.jbox2d.testbed.tests.VaryingRestitution extends org.jbox2d.testbed.framework.TestbedTest {
+  public org.jbox2d.testbed.tests.VaryingRestitution();
+  public boolean isSaveLoadEnabled();
+  public void initTest(boolean);
+  public java.lang.String getTestName();
+}
+Compiled from "VerticalStack.java"
+public class org.jbox2d.testbed.tests.VerticalStack extends org.jbox2d.testbed.framework.TestbedTest {
+  public static final int e_columnCount;
+  public static final int e_rowCount;
+  org.jbox2d.dynamics.Body m_bullet;
+  static final boolean $assertionsDisabled;
+  public org.jbox2d.testbed.tests.VerticalStack();
+  public java.lang.Long getTag(org.jbox2d.dynamics.Body);
+  public void processBody(org.jbox2d.dynamics.Body, java.lang.Long);
+  public boolean isSaveLoadEnabled();
+  public void initTest(boolean);
+  public void keyPressed(char, int);
+  public void step(org.jbox2d.testbed.framework.TestbedSettings);
+  public java.lang.String getTestName();
+  static {};
+}
+Compiled from "Web.java"
+public class org.jbox2d.testbed.tests.Web extends org.jbox2d.testbed.framework.TestbedTest {
+  org.jbox2d.dynamics.Body[] m_bodies;
+  org.jbox2d.dynamics.joints.Joint[] m_joints;
+  public org.jbox2d.testbed.tests.Web();
+  public void initTest(boolean);
+  public void keyPressed(char, int);
+  public void step(org.jbox2d.testbed.framework.TestbedSettings);
+  public void jointDestroyed(org.jbox2d.dynamics.joints.Joint);
+  public java.lang.String getTestName();
+}
+Compiled from "SinCosTable.java"
+public class org.jbox2d.tests.math.SinCosTable {
+  public static final float TWOPI;
+  public static boolean LERP_LOOKUP;
+  public final float precision;
+  public final int tableLength;
+  public final float[] sinLUT;
+  public org.jbox2d.tests.math.SinCosTable(float);
+  public final float sin(float);
+  static {};
+}
+Compiled from "SinCosTest.java"
+public class org.jbox2d.tests.math.SinCosTest {
+  public static final int COLUMN_PADDING;
+  public static final int NUM_DECIMALS;
+  public static int numTables;
+  public static float mostPreciseTable;
+  public static float leastPreciseTable;
+  public static int accuracyIterations;
+  public static int speedTrials;
+  public static int speedIterations;
+  public org.jbox2d.tests.math.SinCosTest();
+  public static void main(java.lang.String[]);
+  public static final void constructTables();
+  public static final double[][] doAccuracyTest(boolean);
+  public static final double[][] doSpeedTest(boolean);
+  static {};
+}

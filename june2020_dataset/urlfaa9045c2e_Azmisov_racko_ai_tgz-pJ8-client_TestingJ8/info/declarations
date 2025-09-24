@@ -1,0 +1,560 @@
+Compiled from "Network.java"
+public class NeuralNetworks.Network {
+  public final java.util.ArrayList<NeuralNetworks.Node[]> layers;
+  static final boolean $assertionsDisabled;
+  public NeuralNetworks.Network(int[]);
+  public NeuralNetworks.Network(java.lang.String) throws java.lang.Exception;
+  public int inputNodes();
+  public int outputNodes();
+  public int hiddenLayers();
+  public void freeze(int);
+  public void addHiddenLayer(int);
+  public void compute(double[]);
+  public int getOutput();
+  public double getOutput(int);
+  public void trainBackprop(double, double[]);
+  public void trainBackprop(double, int);
+  public boolean export(java.lang.String);
+  static {};
+}
+Compiled from "Node.java"
+public class NeuralNetworks.Node {
+  protected double net;
+  protected double out;
+  protected double err;
+  protected final boolean is_bias;
+  protected final java.util.ArrayList<NeuralNetworks.Node> links_out;
+  protected final java.util.ArrayList<java.lang.Double> weights;
+  public NeuralNetworks.Node(boolean);
+  public void addOutlink(NeuralNetworks.Node);
+  public double getNetValue();
+  static {};
+}
+Compiled from "Main.java"
+public class client.Main extends javax.swing.JFrame implements interfaces.GUI {
+  public static void main(java.lang.String[]);
+  public void turn(interfaces.Player, int, racko.Rack);
+  public void draw(int, boolean);
+  public void discard(int);
+  public void scoreRound(interfaces.Player, int);
+  public void scoreGame(interfaces.Player, int);
+  public void beginRound();
+  public void beginGame();
+  public void requestDiscard(client.PlayerGUI);
+  public void requestSlot(client.PlayerGUI);
+  static boolean access$102(client.Main, boolean);
+  static client.Main$Board access$200(client.Main);
+  client.Main(int, interfaces.Player, client.Main$1) throws java.lang.Exception;
+  static void access$400(client.Main);
+  static void access$500(client.Main, int, int);
+  static int access$700();
+  static int access$800();
+  static int access$900();
+  static {};
+}
+Compiled from "Main.java"
+class client.Main$1 extends java.awt.event.KeyAdapter {
+  final client.Main this$0;
+  client.Main$1(client.Main);
+  public void keyPressed(java.awt.event.KeyEvent);
+}
+Compiled from "Main.java"
+final class client.Main$2 implements java.lang.Runnable {
+  final java.lang.String[] val$args;
+  client.Main$2(java.lang.String[]);
+  public void run();
+}
+Compiled from "Main.java"
+class client.Main$3 extends java.awt.event.MouseAdapter {
+  final client.Main this$0;
+  client.Main$3(client.Main);
+  public void mouseClicked(java.awt.event.MouseEvent);
+}
+Compiled from "Main.java"
+class client.Main$Board extends javax.swing.JPanel {
+  public boolean loaded;
+  public boolean spymode;
+  public boolean animate_visible;
+  public boolean won;
+  public final client.Main$Card[] rack_ai;
+  public final client.Main$Card[] rack_human;
+  public client.Main$Card pile_discard;
+  public client.Main$Card pile_draw;
+  public client.Main$Card animate;
+  public final int pile_start_x;
+  public final int pile_start_y;
+  public final int rack_start_y;
+  public client.Main$Button new_game;
+  public client.Main$Board(java.lang.String);
+  public void loadRacks(interfaces.Player, interfaces.Player);
+  public client.Main$Card hitTest(int, int);
+  public void turn(int);
+  public void playDiscard(client.Main$Card);
+  public void playDraw(int, boolean, int, boolean);
+  public void setDiscard(int);
+  public void showEndGame(boolean, boolean);
+  public boolean toggleSpyMode();
+  protected void paintComponent(java.awt.Graphics);
+  static {};
+}
+Compiled from "Main.java"
+final class client.Main$Board$1 extends java.util.HashMap<java.awt.RenderingHints$Key, java.lang.Object> {
+  client.Main$Board$1();
+}
+Compiled from "Main.java"
+class client.Main$Button {
+  public boolean visible;
+  public boolean has_rendered;
+  public client.Main$Button(java.lang.String, int, int);
+  public void paint(java.awt.Graphics2D);
+  public boolean hitTest(int, int);
+  static int access$1402(client.Main$Button, int);
+  static {};
+}
+Compiled from "Main.java"
+class client.Main$Card {
+  public client.Main$Card(int, int, int, boolean);
+  public void paint(java.awt.Graphics2D, boolean);
+  public boolean hitTest(int, int);
+  public boolean equals(java.lang.Object);
+  static int access$002(int);
+  static int access$600(client.Main$Card);
+  static int access$1000(client.Main$Card);
+  static int access$1100(client.Main$Card);
+  static int access$602(client.Main$Card, int);
+  static boolean access$1202(client.Main$Card, boolean);
+  static int access$1002(client.Main$Card, int);
+  static int access$1102(client.Main$Card, int);
+  static java.awt.Font access$1300();
+  static java.awt.Font access$1500();
+  static {};
+}
+Compiled from "Main.java"
+class client.Main$GameThread extends java.lang.Thread {
+  final client.Main this$0;
+  public client.Main$GameThread(client.Main, racko.Game);
+  public void run();
+}
+Compiled from "PlayerComputer.java"
+public class client.PlayerComputer extends interfaces.Player {
+  public client.PlayerComputer(interfaces.Model);
+  public boolean register(racko.Game, racko.Rack);
+  public int play();
+  public void beginRound();
+  public void scoreRound(boolean, int);
+  public void epoch();
+}
+Compiled from "PlayerConsole.java"
+public class client.PlayerConsole extends interfaces.Player {
+  public client.PlayerConsole();
+  public boolean register(racko.Game, racko.Rack);
+  public int play();
+  public void scoreRound(boolean, int);
+  public void scoreGame(boolean, int);
+}
+Compiled from "PlayerGUI.java"
+public class client.PlayerGUI extends interfaces.Player {
+  public boolean guiDiscard;
+  public int guiSlot;
+  public client.PlayerGUI(interfaces.GUI);
+  public int play();
+}
+Compiled from "Testing.java"
+public class client.Testing {
+  public client.Testing();
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "DistributionFlat.java"
+public class distributions.DistributionFlat extends interfaces.Distribution {
+  public distributions.DistributionFlat(int, int);
+  public double eval(double);
+}
+Compiled from "DistributionSkew.java"
+public class distributions.DistributionSkew extends interfaces.Distribution {
+  public distributions.DistributionSkew(int, int, double);
+  public double eval(double);
+}
+Compiled from "Distribution.java"
+public abstract class interfaces.Distribution {
+  protected int rack_size;
+  protected int max_card;
+  public interfaces.Distribution(int, int);
+  public abstract double eval(double);
+}
+Compiled from "GUI.java"
+public interface interfaces.GUI {
+  public abstract void turn(interfaces.Player, int, racko.Rack);
+  public abstract void draw(int, boolean);
+  public abstract void discard(int);
+  public abstract void scoreRound(interfaces.Player, int);
+  public abstract void scoreGame(interfaces.Player, int);
+  public abstract void beginRound();
+  public abstract void beginGame();
+  public abstract void requestDiscard(client.PlayerGUI);
+  public abstract void requestSlot(client.PlayerGUI);
+}
+Compiled from "Model.java"
+public abstract class interfaces.Model {
+  protected racko.Game game;
+  protected racko.Rack rack;
+  public interfaces.Model();
+  public java.lang.String getName();
+  public boolean register(racko.Game, racko.Rack);
+  public abstract boolean decideDraw(int);
+  public abstract int decidePlay(int, int, boolean);
+  public void beginRound();
+  public void scoreRound(boolean, int);
+  public void epoch(interfaces.Player);
+}
+Compiled from "Player.java"
+public abstract class interfaces.Player {
+  public racko.Game game;
+  public racko.Rack rack;
+  public static int playerCount;
+  public final int playerNumber;
+  public final java.lang.String name;
+  public int score;
+  public int wins;
+  public int STAT_badmoves;
+  public int STAT_allmoves;
+  public int STAT_wins;
+  public int STAT_score;
+  public int STAT_rounds;
+  public double EPOCH_badmoves;
+  public double EPOCH_allmoves;
+  public double EPOCH_wins;
+  public static double modelCreep;
+  public double MODEL_badmoves;
+  public double MODEL_allmoves;
+  public double MODEL_wins;
+  protected interfaces.Player();
+  protected interfaces.Player(java.lang.String);
+  public boolean register(racko.Game, racko.Rack);
+  public abstract int play();
+  public void scoreRound(boolean, int);
+  public void scoreGame(boolean, int);
+  public void beginRound();
+  public void beginGame();
+  public void epoch();
+  public void resetModel();
+  static {};
+}
+Compiled from "DataInstance.java"
+public class models.DataInstance {
+  public double[] inputs;
+  public double output;
+  public models.DataInstance(int);
+  public void addFeature(int[], double);
+  public void addFeature(int, double);
+  public void addFeature(double[], double);
+  public void addFeature(double, double);
+  public void addFeature(boolean[]);
+  public void addFeature(boolean);
+  public void setOutput(int, double);
+  public void setOutput(double, double);
+  public void setOutput(boolean);
+}
+Compiled from "ModelAI.java"
+public class models.ModelAI extends interfaces.Model {
+  public NeuralNetworks.Network drawNet;
+  public NeuralNetworks.Network playNet;
+  public int rand_count;
+  public models.ModelAI(java.lang.String, java.lang.String, int, boolean, boolean);
+  public models.ModelAI(models.ModelAI, boolean, boolean);
+  public models.ModelAI(boolean);
+  public boolean register(racko.Game, racko.Rack);
+  public boolean decideDraw(int);
+  public int decidePlay(int, int, boolean);
+  public void beginRound();
+  public void scoreRound(boolean, int);
+  public void epoch(interfaces.Player);
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "ModelBaltar.java"
+public class models.ModelBaltar extends interfaces.Model {
+  public models.ModelBaltar() throws java.lang.Exception;
+  public boolean register(racko.Game, racko.Rack);
+  public boolean decideDraw(int);
+  public int decidePlay(int, int, boolean);
+  public java.lang.String toString();
+}
+Compiled from "ModelCasandra.java"
+public class models.ModelCasandra extends interfaces.Model {
+  public NeuralNetworks.Network drawNet;
+  public NeuralNetworks.Network playNet;
+  public models.ModelCasandra(java.lang.String, java.lang.String, interfaces.Model, int) throws java.lang.Exception;
+  public models.ModelCasandra(models.ModelCasandra, interfaces.Model);
+  public boolean register(racko.Game, racko.Rack);
+  public boolean decideDraw(int);
+  public int decidePlay(int, int, boolean);
+  public void epoch(interfaces.Player);
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "ModelDiablo.java"
+public class models.ModelDiablo extends interfaces.Model {
+  public NeuralNetworks.Network score_net;
+  public models.ModelDiablo(java.lang.String, boolean);
+  public models.ModelDiablo(models.ModelDiablo, boolean, boolean);
+  public boolean register(racko.Game, racko.Rack);
+  public void scoreRound(boolean, int);
+  public void epoch(interfaces.Player);
+  public boolean decideDraw(int);
+  public int decidePlay(int, int, boolean);
+  public java.lang.String toString();
+}
+Compiled from "ModelEnsemble.java"
+public class models.ModelEnsemble extends interfaces.Model {
+  public models.ModelEnsemble() throws java.lang.Exception;
+  public boolean register(racko.Game, racko.Rack);
+  public boolean decideDraw(int);
+  public int decidePlay(int, int, boolean);
+  public java.lang.String toString();
+}
+Compiled from "ModelKyle.java"
+public class models.ModelKyle extends interfaces.Model {
+  public models.ModelKyle(boolean);
+  public boolean register(racko.Game, racko.Rack);
+  public void beginRound();
+  public void scoreRound(boolean, int);
+  public void epoch(interfaces.Player);
+  public boolean decideDraw(int);
+  public int decidePlay(int, int, boolean);
+  public java.lang.String toString();
+}
+Compiled from "ModelKyle.java"
+public class models.ModelKyle$Decision {
+  final models.ModelKyle this$0;
+  public models.ModelKyle$Decision(models.ModelKyle, int, int);
+  public int getSlot();
+  public int getCard();
+  public void setSlot(int);
+  public void setCard(int);
+}
+Compiled from "ModelKyle.java"
+public class models.ModelKyle$Range {
+  final models.ModelKyle this$0;
+  public models.ModelKyle$Range(models.ModelKyle, int, int, int, int);
+  public int getLowEnd();
+  public int getHighEnd();
+  public int getStartSlot();
+  public int getNumSlots();
+  public void setLowEnd(int);
+  public void setHighEnd(int);
+  public void setStartSlot(int);
+  public void setNumSlots(int);
+}
+Compiled from "ModelMax.java"
+public class models.ModelMax extends interfaces.Model {
+  public models.ModelMax();
+  public boolean decideDraw(int);
+  public int decidePlay(int, int, boolean);
+  public static int maxSequence(racko.Rack, int, int, boolean);
+  public java.lang.String toString();
+}
+Compiled from "ModelRandom.java"
+public class models.ModelRandom extends interfaces.Model {
+  public models.ModelRandom();
+  public boolean register(racko.Game, racko.Rack);
+  public boolean decideDraw(int);
+  public int decidePlay(int, int, boolean);
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "ModelTD.java"
+public class models.ModelTD extends interfaces.Player {
+  public models.ModelTD();
+  public boolean register(racko.Game, racko.Rack);
+  public int play();
+  public void beginRound();
+  public void scoreRound(boolean, int);
+  public void epoch();
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "StoppingCriteria.java"
+public class models.StoppingCriteria {
+  public static double EPSILON;
+  public models.StoppingCriteria();
+  public models.StoppingCriteria(double, int);
+  public boolean epoch(interfaces.Player);
+  public void reset();
+  static {};
+}
+Compiled from "Deck.java"
+public class racko.Deck {
+  protected final int cards;
+  protected final int rack_size;
+  static final boolean $assertionsDisabled;
+  public racko.Deck(interfaces.Player[], int);
+  protected void registerGUI(interfaces.GUI);
+  protected void deal();
+  public int peek(boolean);
+  public int draw(boolean);
+  protected void discard(int);
+  public double getProbability(int, boolean, racko.Rack, int);
+  public double getRealProbability(int, boolean);
+  public int getMaxCard();
+  public int getTurns();
+  static {};
+}
+Compiled from "Game.java"
+public class racko.Game {
+  public static boolean verbose;
+  public static boolean spymode;
+  public static int score_win;
+  public static int score_all;
+  public static int score_single;
+  public static int score_bonus;
+  public static int score_bonus_fac;
+  public static int bonus_min;
+  public static int bonus_max;
+  public distributions.DistributionSkew dist_skew;
+  public distributions.DistributionFlat dist_flat;
+  public final int rack_size;
+  public final int min_streak;
+  public final int player_count;
+  public final int card_count;
+  public final boolean bonus_mode;
+  public final racko.Deck deck;
+  public static racko.Game create(interfaces.Player[], int, int, boolean);
+  public void registerGUI(interfaces.GUI);
+  public void limitMoves(int);
+  public void play(int);
+  public int maxPoints();
+  static {};
+}
+Compiled from "Rack.java"
+public class racko.Rack {
+  static final boolean $assertionsDisabled;
+  public racko.Rack(int, racko.Game);
+  public void deal(int[]);
+  public int swap(int, int, boolean);
+  public int swap(int, int);
+  public boolean isSorted();
+  public int maxStreak();
+  public int getVisibleCards(int, boolean);
+  public int getVisibleCardCount();
+  public boolean isVisible(int);
+  public int[] getCards();
+  public int getCardAt(int);
+  public boolean contains(int);
+  public int scorePoints(boolean);
+  public double scoreRackDE(interfaces.Distribution, interfaces.Distribution);
+  public double scoreClumpDE(racko.Rack$LUS, interfaces.Distribution, interfaces.Distribution);
+  public double scoreProbability(racko.Rack$LUS, interfaces.Distribution, boolean, boolean, int);
+  public double scoreDensityAdjacent(racko.Rack$LUS, interfaces.Distribution, int);
+  public double scoreDensityCenter(racko.Rack$LUS, interfaces.Distribution);
+  public java.util.ArrayList<racko.Rack$LUS> getLUS(boolean);
+  public int getLUSLength();
+  public void setLUSMetric(racko.Rack$UsableMetric);
+  public double[][] getProbabilities(boolean, int);
+  public java.lang.String toString();
+  public java.lang.String toStringVisible();
+  static {};
+}
+Compiled from "Rack.java"
+public class racko.Rack$LUS {
+  public int[] cards;
+  public int[] indexes;
+  public racko.Rack$LUS(int[], int[]);
+}
+Compiled from "Rack.java"
+class racko.Rack$LUSTree {
+  public final java.util.ArrayList<racko.Rack$LUSTree> branches;
+  public final int card;
+  public final int index;
+  public racko.Rack$LUSTree(int, int, int, int);
+  public void insert(racko.Rack$LUSTree);
+  public java.util.ArrayList<racko.Rack$LUS> linearize(boolean);
+  static {};
+}
+Compiled from "Rack.java"
+public interface racko.Rack$UsableMetric {
+  public abstract boolean above(int, int);
+  public abstract boolean below(int, int);
+  public abstract boolean between(int, int, int, int);
+}
+Compiled from "Action.java"
+public class reinforcement.Action {
+  public reinforcement.Action();
+  public reinforcement.Action(java.io.BufferedReader);
+  public double getReward();
+  public int getVisits();
+  public void updateReward(reinforcement.State);
+  public java.lang.String saveString();
+}
+Compiled from "LossState.java"
+public class reinforcement.LossState extends reinforcement.State {
+  public reinforcement.LossState(boolean);
+  public double stateScore();
+}
+Compiled from "ModelExploiter.java"
+public class reinforcement.ModelExploiter extends interfaces.Model {
+  public reinforcement.ModelExploiter();
+  public boolean decideDraw(int);
+  public int decidePlay(int, int, boolean);
+  public void scoreRound(boolean, int);
+  public void save();
+}
+Compiled from "ModelExplorer.java"
+public class reinforcement.ModelExplorer extends interfaces.Model {
+  public reinforcement.ModelExplorer();
+  public boolean decideDraw(int);
+  public int decidePlay(int, int, boolean);
+  public void scoreRound(boolean, int);
+  public void train();
+  public reinforcement.ReinforcementLearner getRL();
+}
+Compiled from "ReinforcementLearner.java"
+public class reinforcement.ReinforcementLearner {
+  public reinforcement.ReinforcementLearner();
+  public reinforcement.ReinforcementLearner(java.io.BufferedReader);
+  public boolean fromDiscardForReal(racko.Game, racko.Rack);
+  public boolean fromDiscard(racko.Game, racko.Rack);
+  public int cardPositionForReal(racko.Game, racko.Rack, int);
+  public int cardPosition(racko.Game, racko.Rack, int);
+  public int gamesSinceBelowMin();
+  public void gameEnd(boolean);
+  public java.lang.String saveString();
+  public reinforcement.ReinforcementLearner$IndexingCriterion createCriterion(java.lang.String);
+}
+Compiled from "ReinforcementLearner.java"
+class reinforcement.ReinforcementLearner$1 {
+}
+Compiled from "ReinforcementLearner.java"
+class reinforcement.ReinforcementLearner$AboveBelowCriterion extends reinforcement.ReinforcementLearner$IndexingCriterion {
+  final reinforcement.ReinforcementLearner this$0;
+  public int maxStates();
+  public int index(racko.Game, racko.Rack);
+  public int index(racko.Game, racko.Rack, int);
+  reinforcement.ReinforcementLearner$AboveBelowCriterion(reinforcement.ReinforcementLearner, reinforcement.ReinforcementLearner$1);
+}
+Compiled from "ReinforcementLearner.java"
+abstract class reinforcement.ReinforcementLearner$IndexingCriterion {
+  final reinforcement.ReinforcementLearner this$0;
+  public abstract int maxStates();
+  public abstract int index(racko.Game, racko.Rack);
+  public abstract int index(racko.Game, racko.Rack, int);
+  reinforcement.ReinforcementLearner$IndexingCriterion(reinforcement.ReinforcementLearner, reinforcement.ReinforcementLearner$1);
+}
+Compiled from "State.java"
+public class reinforcement.State {
+  reinforcement.Action[] actions;
+  boolean drawState;
+  public reinforcement.State(boolean);
+  public reinforcement.State(boolean, java.io.BufferedReader);
+  public double stateScore();
+  public int getLeastVisited();
+  public void updateReward(reinforcement.State, int);
+  public int getBestReward();
+  public boolean allVisitedMore(int);
+  public java.lang.String saveString();
+}
+Compiled from "WinState.java"
+public class reinforcement.WinState extends reinforcement.State {
+  public reinforcement.WinState(boolean);
+  public double stateScore();
+}

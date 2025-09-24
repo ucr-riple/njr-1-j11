@@ -1,0 +1,576 @@
+Compiled from "Battle.java"
+public class org.washcom.cardgames.battleroyale.Battle {
+  public static final int MAXIMUM_BATTLE_CONTINUATIONS;
+  public org.washcom.cardgames.battleroyale.Battle(int, org.washcom.cardgames.battleroyale.BattleRoyaleGame);
+  public java.util.List<org.washcom.cardgames.battleroyale.Player> getBattlers();
+  public int getNumber();
+  public org.washcom.cardgames.battleroyale.BattleRoyaleGame getGame();
+  public java.util.List<org.washcom.cardgames.battleroyale.BattleCard> getBattleCards();
+  public int getContinuations();
+  public void fight(org.washcom.cardgames.battleroyale.BattleAssessor);
+  static {};
+}
+Compiled from "BattleAssessor.java"
+public interface org.washcom.cardgames.battleroyale.BattleAssessor {
+  public abstract org.washcom.cardgames.battleroyale.BattleCard pickWinner(org.washcom.cardgames.battleroyale.Battle);
+  public abstract java.util.Map<org.washcom.cardgames.battleroyale.Player, java.lang.Integer> determineFees(org.washcom.cardgames.battleroyale.Battle);
+}
+Compiled from "BattleCard.java"
+public class org.washcom.cardgames.battleroyale.BattleCard {
+  public org.washcom.cardgames.battleroyale.BattleCard(org.washcom.cardgames.core.Card, org.washcom.cardgames.battleroyale.Player);
+  public org.washcom.cardgames.core.Card getCard();
+  public org.washcom.cardgames.battleroyale.Player getPlayedBy();
+  public boolean isBattleRoyaleEligible();
+  public int computeValueDifference(org.washcom.cardgames.battleroyale.BattleCard);
+  static {};
+}
+Compiled from "BattleCardTest.java"
+public class org.washcom.cardgames.battleroyale.BattleCardTest {
+  public org.washcom.cardgames.battleroyale.BattleCardTest();
+  org.washcom.cardgames.battleroyale.Player player(int);
+  org.washcom.cardgames.battleroyale.BattleCard bc(org.washcom.cardgames.core.Denomination);
+  org.washcom.cardgames.battleroyale.BattleCard bc(org.washcom.cardgames.core.Denomination, int);
+  public void testEqualCardsHaveZeroDifference();
+  public void testOneOffCards();
+  public void testNegativeOneOffCards();
+  public void testTwoOffCards();
+  public void testNegativeTwoOffCards();
+  public void testMoreThanTwoOffCards();
+  public void testLessThanNegativeTwoOffCards();
+  public void testBattleRoyaleEligible();
+}
+Compiled from "BattleRoyaleGame.java"
+public class org.washcom.cardgames.battleroyale.BattleRoyaleGame {
+  public org.washcom.cardgames.battleroyale.BattleRoyaleGame();
+  public org.washcom.cardgames.battleroyale.BattleRoyaleGame(org.washcom.cardgames.battleroyale.BattleAssessor);
+  public void play(org.washcom.cardgames.core.Deck, org.washcom.cardgames.battleroyale.Player...);
+  void battle();
+  void swapHands(org.washcom.cardgames.battleroyale.Player, org.washcom.cardgames.battleroyale.Player);
+  org.washcom.cardgames.battleroyale.BattleCard burnAThreeAndPlayAnother(org.washcom.cardgames.battleroyale.BattleCard);
+  public org.washcom.cardgames.battleroyale.Battle getCurrentBattle();
+  public java.util.List<org.washcom.cardgames.battleroyale.Player> getPlayers();
+  public org.washcom.cardgames.core.Deck getGameCards();
+  public java.util.List<org.washcom.cardgames.battleroyale.Player> getActivePlayers();
+  public org.washcom.cardgames.battleroyale.Player getWinner();
+  public int getRoundsPlayed();
+  public int getSwappedHandsCount();
+  public int getNbrOfBattlesByLength(int);
+  void incrementNbrOfBattlesByLength(int);
+  public int getUnresolvedBattleCount();
+  void incrementUnresolvedBattleCount();
+  static {};
+}
+Compiled from "BattleRoyaleGameSimulator.java"
+public class org.washcom.cardgames.battleroyale.BattleRoyaleGameSimulator {
+  public static final org.washcom.cardgames.battleroyale.Player player1;
+  public static final org.washcom.cardgames.battleroyale.Player player2;
+  public static final org.washcom.cardgames.battleroyale.Player player3;
+  public org.washcom.cardgames.battleroyale.BattleRoyaleGameSimulator(int);
+  public int getTotalGamesPlayed();
+  public int getLongestGameLength();
+  public int getShortestGameLength();
+  public double getAverageGameLength();
+  public double getGameLengthVariance();
+  public double getGameLengthStdDev();
+  public int getNumberOfGamesWonByPlayer(org.washcom.cardgames.battleroyale.Player);
+  public double getPercentageOfGamesWonByPlayer(org.washcom.cardgames.battleroyale.Player);
+  public int getNumberOfUnresolvedGames();
+  public double getPercentageOfUnresolvedGames();
+  public java.util.List<java.lang.Integer> getDeckSwapsPerGame();
+  public int getMostDeckSwapsPerGame();
+  public int getFewestDeckSwapsPerGame();
+  public double getAverageDeckSwapsPerGame();
+  public double getDeckSwapsPerGameVariance();
+  public java.util.List<java.lang.Integer> getUnresolvedBattlesPerGame();
+  public int getMostUnresolvedBattlesPerGame();
+  public int getFewestUnresolvedBattlesPerGame();
+  public double getAverageUnresolvedBattlesPerGame();
+  public double getUnresolvedBattlesPerGameVariance();
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "BattleRoyaleGameTest.java"
+public class org.washcom.cardgames.battleroyale.BattleRoyaleGameTest {
+  public org.washcom.cardgames.battleroyale.BattleRoyaleGameTest();
+  public void testHookup();
+  public void testFirstPlayerAlwaysWins();
+  public void testSecondPlayerAlwaysWins();
+  public void testThirdPlayerAlwaysWins();
+  public void testFirstPlayerWinsOnFirstContinuationNoFees();
+  public void testFirstPlayerWinsOnFirstContinuationFeeOf1();
+  public void testFirstPlayerWinsOnFirstContinuationFeeOf3();
+}
+Compiled from "BattleRoyaleGameTest.java"
+class org.washcom.cardgames.battleroyale.BattleRoyaleGameTest$1 implements org.washcom.cardgames.battleroyale.BattleAssessor {
+  final org.washcom.cardgames.battleroyale.BattleRoyaleGameTest this$0;
+  org.washcom.cardgames.battleroyale.BattleRoyaleGameTest$1(org.washcom.cardgames.battleroyale.BattleRoyaleGameTest);
+  public org.washcom.cardgames.battleroyale.BattleCard pickWinner(org.washcom.cardgames.battleroyale.Battle);
+  public java.util.Map<org.washcom.cardgames.battleroyale.Player, java.lang.Integer> determineFees(org.washcom.cardgames.battleroyale.Battle);
+}
+Compiled from "BattleRoyaleGameTest.java"
+class org.washcom.cardgames.battleroyale.BattleRoyaleGameTest$1$1 extends java.util.HashMap<org.washcom.cardgames.battleroyale.Player, java.lang.Integer> {
+  final org.washcom.cardgames.battleroyale.BattleRoyaleGameTest$1 this$1;
+  org.washcom.cardgames.battleroyale.BattleRoyaleGameTest$1$1(org.washcom.cardgames.battleroyale.BattleRoyaleGameTest$1);
+}
+Compiled from "BattleRoyaleGameTest.java"
+class org.washcom.cardgames.battleroyale.BattleRoyaleGameTest$2 implements org.washcom.cardgames.battleroyale.BattleAssessor {
+  final org.washcom.cardgames.battleroyale.BattleRoyaleGameTest this$0;
+  org.washcom.cardgames.battleroyale.BattleRoyaleGameTest$2(org.washcom.cardgames.battleroyale.BattleRoyaleGameTest);
+  public org.washcom.cardgames.battleroyale.BattleCard pickWinner(org.washcom.cardgames.battleroyale.Battle);
+  public java.util.Map<org.washcom.cardgames.battleroyale.Player, java.lang.Integer> determineFees(org.washcom.cardgames.battleroyale.Battle);
+}
+Compiled from "BattleRoyaleGameTest.java"
+class org.washcom.cardgames.battleroyale.BattleRoyaleGameTest$2$1 extends java.util.HashMap<org.washcom.cardgames.battleroyale.Player, java.lang.Integer> {
+  final org.washcom.cardgames.battleroyale.BattleRoyaleGameTest$2 this$1;
+  org.washcom.cardgames.battleroyale.BattleRoyaleGameTest$2$1(org.washcom.cardgames.battleroyale.BattleRoyaleGameTest$2);
+}
+Compiled from "BattleRoyaleGameTest.java"
+class org.washcom.cardgames.battleroyale.BattleRoyaleGameTest$3 implements org.washcom.cardgames.battleroyale.BattleAssessor {
+  final org.washcom.cardgames.battleroyale.BattleRoyaleGameTest this$0;
+  org.washcom.cardgames.battleroyale.BattleRoyaleGameTest$3(org.washcom.cardgames.battleroyale.BattleRoyaleGameTest);
+  public org.washcom.cardgames.battleroyale.BattleCard pickWinner(org.washcom.cardgames.battleroyale.Battle);
+  public java.util.Map<org.washcom.cardgames.battleroyale.Player, java.lang.Integer> determineFees(org.washcom.cardgames.battleroyale.Battle);
+}
+Compiled from "BattleRoyaleGameTest.java"
+class org.washcom.cardgames.battleroyale.BattleRoyaleGameTest$3$1 extends java.util.HashMap<org.washcom.cardgames.battleroyale.Player, java.lang.Integer> {
+  final org.washcom.cardgames.battleroyale.BattleRoyaleGameTest$3 this$1;
+  org.washcom.cardgames.battleroyale.BattleRoyaleGameTest$3$1(org.washcom.cardgames.battleroyale.BattleRoyaleGameTest$3);
+}
+Compiled from "BattleRoyaleGameTest.java"
+class org.washcom.cardgames.battleroyale.BattleRoyaleGameTest$AlwaysWinsAssessor extends org.washcom.cardgames.battleroyale.BattleRoyaleGameTest$FixedFeeAssessor {
+  public org.washcom.cardgames.battleroyale.BattleRoyaleGameTest$AlwaysWinsAssessor(int);
+  public org.washcom.cardgames.battleroyale.BattleCard pickWinner(org.washcom.cardgames.battleroyale.Battle);
+}
+Compiled from "BattleRoyaleGameTest.java"
+abstract class org.washcom.cardgames.battleroyale.BattleRoyaleGameTest$FixedFeeAssessor implements org.washcom.cardgames.battleroyale.BattleAssessor {
+  public org.washcom.cardgames.battleroyale.BattleRoyaleGameTest$FixedFeeAssessor();
+  public org.washcom.cardgames.battleroyale.BattleRoyaleGameTest$FixedFeeAssessor(int);
+  public java.util.Map<org.washcom.cardgames.battleroyale.Player, java.lang.Integer> determineFees(org.washcom.cardgames.battleroyale.Battle);
+  static int access$000(org.washcom.cardgames.battleroyale.BattleRoyaleGameTest$FixedFeeAssessor);
+}
+Compiled from "BattleRoyaleGameTest.java"
+class org.washcom.cardgames.battleroyale.BattleRoyaleGameTest$FixedFeeAssessor$1 extends java.util.HashMap<org.washcom.cardgames.battleroyale.Player, java.lang.Integer> {
+  final org.washcom.cardgames.battleroyale.BattleRoyaleGameTest$FixedFeeAssessor this$0;
+  org.washcom.cardgames.battleroyale.BattleRoyaleGameTest$FixedFeeAssessor$1(org.washcom.cardgames.battleroyale.BattleRoyaleGameTest$FixedFeeAssessor);
+}
+Compiled from "DefaultBattleAccessor.java"
+public class org.washcom.cardgames.battleroyale.DefaultBattleAccessor implements org.washcom.cardgames.battleroyale.BattleAssessor {
+  public org.washcom.cardgames.battleroyale.DefaultBattleAccessor();
+  public org.washcom.cardgames.battleroyale.BattleCard pickWinner(org.washcom.cardgames.battleroyale.Battle);
+  public java.util.Map<org.washcom.cardgames.battleroyale.Player, java.lang.Integer> determineFees(org.washcom.cardgames.battleroyale.Battle);
+}
+Compiled from "DefaultBattleAccessorTest.java"
+public class org.washcom.cardgames.battleroyale.DefaultBattleAccessorTest {
+  org.washcom.cardgames.battleroyale.DefaultBattleAccessor accessor;
+  public org.washcom.cardgames.battleroyale.DefaultBattleAccessorTest();
+  public void testJackEight();
+  public void testThreeFour();
+  public void testThreeFive();
+  public void testJackAceFive();
+}
+Compiled from "DefaultBattleAccessorTest.java"
+class org.washcom.cardgames.battleroyale.DefaultBattleAccessorTest$1 extends org.washcom.cardgames.battleroyale.BattleRoyaleGame {
+  final boolean[] val$swapOccurred;
+  final org.washcom.cardgames.battleroyale.DefaultBattleAccessorTest this$0;
+  org.washcom.cardgames.battleroyale.DefaultBattleAccessorTest$1(org.washcom.cardgames.battleroyale.DefaultBattleAccessorTest, boolean[]);
+  void swapHands(org.washcom.cardgames.battleroyale.Player, org.washcom.cardgames.battleroyale.Player);
+}
+Compiled from "OptimalSecondChanceStrategy.java"
+public class org.washcom.cardgames.battleroyale.OptimalSecondChanceStrategy implements org.washcom.cardgames.battleroyale.SecondChanceStrategy {
+  public org.washcom.cardgames.battleroyale.OptimalSecondChanceStrategy();
+  public boolean shouldTryForAnotherCard(org.washcom.cardgames.battleroyale.BattleCard, java.util.List<org.washcom.cardgames.battleroyale.BattleCard>);
+}
+Compiled from "Player.java"
+public class org.washcom.cardgames.battleroyale.Player extends org.washcom.cardgames.core.Player {
+  public org.washcom.cardgames.battleroyale.Player(java.lang.String);
+  public org.washcom.cardgames.battleroyale.SecondChanceStrategy getSecondChanceStrategy();
+  public void setSecondChanceStrategy(org.washcom.cardgames.battleroyale.SecondChanceStrategy);
+  public boolean isParticipatingInBattle();
+  public void setParticipatingInBattle(boolean);
+  public int getNbrOfBattlesFought();
+  public void incrementNbrOfBattlesFought();
+  public int getNbrOfBattlesWon();
+  public void incrementNbrOfBattlesWon();
+  public void swapHands(org.washcom.cardgames.battleroyale.Player);
+}
+Compiled from "Player.java"
+class org.washcom.cardgames.battleroyale.Player$1 implements org.washcom.cardgames.battleroyale.SecondChanceStrategy {
+  final org.washcom.cardgames.battleroyale.Player this$0;
+  org.washcom.cardgames.battleroyale.Player$1(org.washcom.cardgames.battleroyale.Player);
+  public boolean shouldTryForAnotherCard(org.washcom.cardgames.battleroyale.BattleCard, java.util.List<org.washcom.cardgames.battleroyale.BattleCard>);
+}
+Compiled from "PlayerTest.java"
+public class org.washcom.cardgames.battleroyale.PlayerTest {
+  public org.washcom.cardgames.battleroyale.PlayerTest();
+  public void testSwapHandsWithSelf();
+  public void testSwapHandsTwoEmpty();
+  public void testSwapHandsTwoEmptySymmetric();
+  public void testSwapHandsWithEmptyHandedPlayer();
+  public void testSwapHandsWithEmptyHandedPlayerSymmetric();
+  public void testSwapNonEmpty();
+  public void testSwapNonEmptySymmetric();
+}
+Compiled from "Rules.java"
+public class org.washcom.cardgames.battleroyale.Rules {
+  public static int MAX_VALUE_DIFF_FEE;
+  public static int VALUE_DIFF_BATTLE_THRESHOLD;
+  public static final java.util.Map<org.washcom.cardgames.core.Denomination, java.lang.Integer> battleRoyaleFees;
+  public org.washcom.cardgames.battleroyale.Rules();
+  public static java.lang.Integer battleRoyaleFee(org.washcom.cardgames.battleroyale.BattleCard);
+  public static boolean isDifferentialUnderBattleThreshold(int);
+  public static boolean isBattleRoyale(org.washcom.cardgames.battleroyale.BattleCard, org.washcom.cardgames.battleroyale.BattleCard);
+  public static boolean isAceTwoCombo(org.washcom.cardgames.battleroyale.BattleCard, org.washcom.cardgames.battleroyale.BattleCard);
+  public static boolean isJackEightCombo(org.washcom.cardgames.battleroyale.BattleCard, org.washcom.cardgames.battleroyale.BattleCard);
+  public static boolean isLosingCardAThree(org.washcom.cardgames.battleroyale.BattleCard, org.washcom.cardgames.battleroyale.BattleCard);
+  public static org.washcom.cardgames.battleroyale.BattleCard highCard(org.washcom.cardgames.battleroyale.BattleCard, org.washcom.cardgames.battleroyale.BattleCard);
+  public static org.washcom.cardgames.battleroyale.BattleCard highCard(org.washcom.cardgames.battleroyale.BattleCard, org.washcom.cardgames.battleroyale.BattleCard, org.washcom.cardgames.battleroyale.BattleCard);
+  static {};
+}
+Compiled from "Rules.java"
+final class org.washcom.cardgames.battleroyale.Rules$1 extends java.util.HashMap<org.washcom.cardgames.core.Denomination, java.lang.Integer> {
+  org.washcom.cardgames.battleroyale.Rules$1();
+}
+Compiled from "SecondChanceStrategy.java"
+public interface org.washcom.cardgames.battleroyale.SecondChanceStrategy {
+  public abstract boolean shouldTryForAnotherCard(org.washcom.cardgames.battleroyale.BattleCard, java.util.List<org.washcom.cardgames.battleroyale.BattleCard>);
+}
+Compiled from "ThreeBattlerAssessor.java"
+public class org.washcom.cardgames.battleroyale.ThreeBattlerAssessor implements org.washcom.cardgames.battleroyale.BattleAssessor {
+  public org.washcom.cardgames.battleroyale.ThreeBattlerAssessor();
+  public org.washcom.cardgames.battleroyale.BattleCard pickWinner(org.washcom.cardgames.battleroyale.Battle);
+  public java.util.Map<org.washcom.cardgames.battleroyale.Player, java.lang.Integer> determineFees(org.washcom.cardgames.battleroyale.Battle);
+  static {};
+}
+Compiled from "TwoBattlerAssessor.java"
+public class org.washcom.cardgames.battleroyale.TwoBattlerAssessor implements org.washcom.cardgames.battleroyale.BattleAssessor {
+  public static final java.util.Map<org.washcom.cardgames.core.Denomination, java.lang.Integer> battleRoyaleFees;
+  public org.washcom.cardgames.battleroyale.TwoBattlerAssessor();
+  public org.washcom.cardgames.battleroyale.BattleCard pickWinner(org.washcom.cardgames.battleroyale.Battle);
+  public java.util.Map<org.washcom.cardgames.battleroyale.Player, java.lang.Integer> determineFees(org.washcom.cardgames.battleroyale.Battle);
+  static {};
+}
+Compiled from "TwoBattlerAssessor.java"
+final class org.washcom.cardgames.battleroyale.TwoBattlerAssessor$1 extends java.util.HashMap<org.washcom.cardgames.core.Denomination, java.lang.Integer> {
+  org.washcom.cardgames.battleroyale.TwoBattlerAssessor$1();
+}
+Compiled from "TwoBattlerAssessorTest.java"
+public class org.washcom.cardgames.battleroyale.TwoBattlerAssessorTest {
+  org.washcom.cardgames.battleroyale.TwoBattlerAssessor assessor;
+  public org.washcom.cardgames.battleroyale.TwoBattlerAssessorTest();
+  org.washcom.cardgames.core.Denomination pickWinner(org.washcom.cardgames.core.Denomination, org.washcom.cardgames.core.Denomination);
+  public java.util.Map<org.washcom.cardgames.battleroyale.Player, java.lang.Integer> determineFees(org.washcom.cardgames.battleroyale.Battle);
+  org.washcom.cardgames.battleroyale.Player player(int);
+  org.washcom.cardgames.battleroyale.BattleCard bc(org.washcom.cardgames.core.Denomination, int);
+  org.washcom.cardgames.battleroyale.Battle battle(org.washcom.cardgames.core.Denomination, org.washcom.cardgames.core.Denomination);
+  public void testTwoWinsOverAce();
+  public void testAceBeatsAllButRoyaltyAndTwo();
+  public void testTwoBeatsAce();
+  public void testBattleRoyaleCombosResultInNoWinner();
+  public void testIdenticalCardsResultInNoWinner();
+  public void testOneOffCardsResultInNoWinner();
+  public void testTwoOffCardsResultInNoWinner();
+  public void testNoWrappingAroundForDiffsOfTwo();
+  public void testMoreThanTwoDiffMeansAWinner();
+}
+Compiled from "TwoBattlerAssessorTest.java"
+class org.washcom.cardgames.battleroyale.TwoBattlerAssessorTest$1 extends org.washcom.cardgames.battleroyale.Battle {
+  final org.washcom.cardgames.core.Denomination val$denom1;
+  final org.washcom.cardgames.core.Denomination val$denom2;
+  final org.washcom.cardgames.battleroyale.TwoBattlerAssessorTest this$0;
+  org.washcom.cardgames.battleroyale.TwoBattlerAssessorTest$1(org.washcom.cardgames.battleroyale.TwoBattlerAssessorTest, int, org.washcom.cardgames.battleroyale.BattleRoyaleGame, org.washcom.cardgames.core.Denomination, org.washcom.cardgames.core.Denomination);
+  public java.util.List<org.washcom.cardgames.battleroyale.BattleCard> getBattleCards();
+  public java.util.List<org.washcom.cardgames.battleroyale.Player> getBattlers();
+}
+Compiled from "UnresolvedThreeWayBattleException.java"
+public class org.washcom.cardgames.battleroyale.UnresolvedThreeWayBattleException extends java.lang.RuntimeException {
+  public org.washcom.cardgames.battleroyale.UnresolvedThreeWayBattleException();
+}
+Compiled from "CallOutGame.java"
+public class org.washcom.cardgames.callout.CallOutGame {
+  public org.washcom.cardgames.callout.CallOutGame(org.washcom.cardgames.core.Deck);
+  public org.washcom.cardgames.core.SolitaireGameResult playGame();
+}
+Compiled from "CallOutGameSimulator.java"
+public class org.washcom.cardgames.callout.CallOutGameSimulator {
+  public org.washcom.cardgames.callout.CallOutGameSimulator(int);
+  public int getGamesPlayed();
+  public int getGamesWon();
+  public static void main(java.lang.String[]);
+}
+Compiled from "AcesHighCardComparator.java"
+public class org.washcom.cardgames.core.AcesHighCardComparator implements java.util.Comparator<org.washcom.cardgames.core.Card> {
+  public org.washcom.cardgames.core.AcesHighCardComparator();
+  public int compare(org.washcom.cardgames.core.Card, org.washcom.cardgames.core.Card);
+  public int compare(java.lang.Object, java.lang.Object);
+  static {};
+}
+Compiled from "AcesHighCardComparator.java"
+final class org.washcom.cardgames.core.AcesHighCardComparator$1 extends java.util.EnumMap<org.washcom.cardgames.core.Denomination, java.lang.Integer> {
+  org.washcom.cardgames.core.AcesHighCardComparator$1(java.lang.Class);
+}
+Compiled from "Card.java"
+public class org.washcom.cardgames.core.Card {
+  public org.washcom.cardgames.core.Card(org.washcom.cardgames.core.Denomination, org.washcom.cardgames.core.Suit);
+  public org.washcom.cardgames.core.Suit getSuit();
+  public org.washcom.cardgames.core.Denomination getDenomination();
+  public java.lang.String toString();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+}
+Compiled from "Color.java"
+public final class org.washcom.cardgames.core.Color extends java.lang.Enum<org.washcom.cardgames.core.Color> {
+  public static final org.washcom.cardgames.core.Color RED;
+  public static final org.washcom.cardgames.core.Color BLACK;
+  public static org.washcom.cardgames.core.Color[] values();
+  public static org.washcom.cardgames.core.Color valueOf(java.lang.String);
+  static {};
+}
+Compiled from "Deck.java"
+public class org.washcom.cardgames.core.Deck extends org.washcom.util.Deck<org.washcom.cardgames.core.Card> {
+  public org.washcom.cardgames.core.Deck();
+  public org.washcom.cardgames.core.Deck(java.util.Collection<org.washcom.cardgames.core.Card>);
+  public java.util.List<org.washcom.cardgames.core.Card> drawUpTo(int);
+  public java.util.List<org.washcom.cardgames.core.Card> drawFromBottomUpTo(int);
+  public boolean hasCards();
+}
+Compiled from "DeckBuilder.java"
+public final class org.washcom.cardgames.core.DeckBuilder {
+  static final boolean $assertionsDisabled;
+  public static org.washcom.cardgames.core.Deck build52CardDeck();
+  public static org.washcom.cardgames.core.Deck buildShuffled52CardDeck();
+  static {};
+}
+Compiled from "DeckDealer.java"
+public class org.washcom.cardgames.core.DeckDealer {
+  public org.washcom.cardgames.core.DeckDealer();
+  public static <P extends org.washcom.cardgames.core.Player> void dealEntirely(org.washcom.cardgames.core.Deck, P...);
+  public static <P extends org.washcom.cardgames.core.Player> void dealEntirely(org.washcom.cardgames.core.Deck, java.util.Collection<P>);
+  public static <P extends org.washcom.cardgames.core.Player> void dealFairly(org.washcom.cardgames.core.Deck, P...);
+  public static <P extends org.washcom.cardgames.core.Player> void dealFairly(org.washcom.cardgames.core.Deck, java.util.Collection<P>);
+}
+Compiled from "DeckDealerTest.java"
+public class org.washcom.cardgames.core.DeckDealerTest {
+  public org.washcom.cardgames.core.DeckDealerTest();
+  public void setUp();
+  public void testDealEntirelyNullPlayerArray();
+  public void testDealEntirelyEmptyPlayerArray();
+  public void testDealEntirelySingleItemArrayNullPlayer();
+  public void testDealEntirelyEmptyDeck();
+  public void testDealEntirelyToSinglePlayer();
+  public void testDealEntirelyToPerfectNbrOfPlayers();
+  public void testDealEntirelyToFewerNbrOfPlayers();
+  public void testDealEntirelyToGreaterNbrOfPlayers();
+  public void testDealFairlyNullPlayerArray();
+  public void testDealFairlyEmptyPlayerArray();
+  public void testDeaFairlySingleItemArrayNullPlayer();
+  public void testDealFairlyEmptyDeck();
+  public void testDealFairlySmallerDeckThanPlayers();
+  public void testDealFairlyToSinglePlayer();
+  public void testDealFairlyToPerfectNbrOfPlayers();
+  public void testDealFairlyToGreaterNbrOfPlayersWithLeftovers();
+  public void testDealFairlyToGreaterNbrOfPlayersWithNoLeftovers();
+}
+Compiled from "DeckTest.java"
+public class org.washcom.cardgames.core.DeckTest {
+  public org.washcom.cardgames.core.DeckTest();
+  public void setUp();
+  public void testDrawZeroFromEmptyDeck();
+  public void testDrawZeroFromNonEmptyDeck();
+  public void testDrawLessThanZeroFromEmptyDeck();
+  public void testDrawLessThanZeroFromNonEmptyDeck();
+  public void testDrawFromEmptyDeckThrowsExhaustedException();
+  public void testDrawFromSingleCardDeck();
+  public void testDrawFromMultiCardDeck();
+  public void testBottomDrawFromMultiCardDeck();
+  public void testPutNullCard();
+  public void testPutNullCardList();
+  public void testPutEmptyCardList();
+  public void testPutCardOnEmptyDeck();
+  public void testPutCardOnBottomOfEmptyDeck();
+  public void testPutCardOnNonEmptyDeck();
+  public void testPutCardOnBottomOfNonEmptyDeck();
+  public void testPutCardsOn();
+  public void testPutCardsOnBottom();
+  public void testSize();
+}
+Compiled from "Denomination.java"
+public final class org.washcom.cardgames.core.Denomination extends java.lang.Enum<org.washcom.cardgames.core.Denomination> {
+  public static final org.washcom.cardgames.core.Denomination TWO;
+  public static final org.washcom.cardgames.core.Denomination THREE;
+  public static final org.washcom.cardgames.core.Denomination FOUR;
+  public static final org.washcom.cardgames.core.Denomination FIVE;
+  public static final org.washcom.cardgames.core.Denomination SIX;
+  public static final org.washcom.cardgames.core.Denomination SEVEN;
+  public static final org.washcom.cardgames.core.Denomination EIGHT;
+  public static final org.washcom.cardgames.core.Denomination NINE;
+  public static final org.washcom.cardgames.core.Denomination TEN;
+  public static final org.washcom.cardgames.core.Denomination JACK;
+  public static final org.washcom.cardgames.core.Denomination QUEEN;
+  public static final org.washcom.cardgames.core.Denomination KING;
+  public static final org.washcom.cardgames.core.Denomination ACE;
+  public static org.washcom.cardgames.core.Denomination[] values();
+  public static org.washcom.cardgames.core.Denomination valueOf(java.lang.String);
+  public boolean isRoyalty();
+  public int getValue();
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "Player.java"
+public class org.washcom.cardgames.core.Player {
+  public org.washcom.cardgames.core.Player(java.lang.String);
+  public java.lang.String getName();
+  public org.washcom.cardgames.core.Deck getHand();
+  public boolean handHasAtLeast(int);
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public java.lang.String toString();
+}
+Compiled from "SolitaireGameResult.java"
+public final class org.washcom.cardgames.core.SolitaireGameResult extends java.lang.Enum<org.washcom.cardgames.core.SolitaireGameResult> {
+  public static final org.washcom.cardgames.core.SolitaireGameResult WIN;
+  public static final org.washcom.cardgames.core.SolitaireGameResult LOSE;
+  public static org.washcom.cardgames.core.SolitaireGameResult[] values();
+  public static org.washcom.cardgames.core.SolitaireGameResult valueOf(java.lang.String);
+  static {};
+}
+Compiled from "Suit.java"
+public final class org.washcom.cardgames.core.Suit extends java.lang.Enum<org.washcom.cardgames.core.Suit> {
+  public static final org.washcom.cardgames.core.Suit HEARTS;
+  public static final org.washcom.cardgames.core.Suit DIAMONDS;
+  public static final org.washcom.cardgames.core.Suit SPADES;
+  public static final org.washcom.cardgames.core.Suit CLUBS;
+  final org.washcom.cardgames.core.Color color;
+  public static org.washcom.cardgames.core.Suit[] values();
+  public static org.washcom.cardgames.core.Suit valueOf(java.lang.String);
+  public org.washcom.cardgames.core.Color getColor();
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "CardValuePolicy.java"
+public interface org.washcom.cardgames.doors.CardValuePolicy {
+  public abstract int getValue(org.washcom.cardgames.core.Card);
+}
+Compiled from "ColorValuePolicy.java"
+public class org.washcom.cardgames.doors.ColorValuePolicy implements org.washcom.cardgames.doors.CardValuePolicy {
+  public static final int DEFAULT_BLACK_VALUE;
+  public static final int DEFAULT_RED_VALUE;
+  public org.washcom.cardgames.doors.ColorValuePolicy();
+  public org.washcom.cardgames.doors.ColorValuePolicy(int, int);
+  public int getValue(org.washcom.cardgames.core.Card);
+  public int getValue(org.washcom.cardgames.core.Color);
+}
+Compiled from "DenominationValuePolicy.java"
+public class org.washcom.cardgames.doors.DenominationValuePolicy implements org.washcom.cardgames.doors.CardValuePolicy {
+  public org.washcom.cardgames.doors.DenominationValuePolicy();
+  public int getValue(org.washcom.cardgames.core.Card);
+  public int getValue(org.washcom.cardgames.core.Denomination);
+}
+Compiled from "DoorsGame.java"
+public class org.washcom.cardgames.doors.DoorsGame {
+  public org.washcom.cardgames.doors.DoorsGame(org.washcom.cardgames.core.Deck, org.washcom.cardgames.doors.CardValuePolicy);
+  public boolean playRound();
+  public org.washcom.cardgames.core.Card getTopCard();
+  public int getTopCardValue();
+  public int getRound();
+  public org.washcom.cardgames.core.SolitaireGameResult getResult();
+  public org.washcom.cardgames.core.Deck getDeck();
+  public org.washcom.cardgames.doors.CardValuePolicy getValuePolicy();
+}
+Compiled from "DoorsGameSimulator.java"
+public class org.washcom.cardgames.doors.DoorsGameSimulator {
+  public org.washcom.cardgames.doors.DoorsGameSimulator(int, org.washcom.cardgames.doors.CardValuePolicy);
+  public int getGamesPlayed();
+  public int getGamesWon();
+  public static void main(java.lang.String[]);
+  static float getInverseOfAvgCardValue(org.washcom.cardgames.doors.CardValuePolicy);
+}
+Compiled from "FixedRoyaltyPolicy.java"
+public class org.washcom.cardgames.doors.FixedRoyaltyPolicy extends org.washcom.cardgames.doors.DenominationValuePolicy {
+  public static final int DEFAULT_ROYALTY_VALUE;
+  public org.washcom.cardgames.doors.FixedRoyaltyPolicy();
+  public org.washcom.cardgames.doors.FixedRoyaltyPolicy(int);
+  public int getValue(org.washcom.cardgames.core.Denomination);
+}
+Compiled from "RoyaltyAsSpelledPolicy.java"
+public class org.washcom.cardgames.doors.RoyaltyAsSpelledPolicy extends org.washcom.cardgames.doors.DenominationValuePolicy {
+  public org.washcom.cardgames.doors.RoyaltyAsSpelledPolicy();
+  public int getValue(org.washcom.cardgames.core.Denomination);
+}
+Compiled from "WarGame.java"
+public class org.washcom.cardgames.war.WarGame {
+  public static final int WAR_FEE;
+  public org.washcom.cardgames.war.WarGame();
+  public org.washcom.cardgames.war.WarGame(org.washcom.cardgames.core.Deck);
+  public org.washcom.cardgames.war.WarGame(org.washcom.cardgames.core.Player, org.washcom.cardgames.core.Player);
+  public org.washcom.cardgames.war.WarGame(org.washcom.cardgames.core.Player, org.washcom.cardgames.core.Player, org.washcom.cardgames.core.Deck);
+  public boolean isGameOver();
+  int battle();
+  public org.washcom.cardgames.war.WarGame$Result play();
+}
+Compiled from "WarGame.java"
+public class org.washcom.cardgames.war.WarGame$Result {
+  org.washcom.cardgames.core.Player winner;
+  int totalBattles;
+  final java.util.Map<java.lang.Integer, java.lang.Integer> totalWars;
+  public org.washcom.cardgames.war.WarGame$Result();
+  static void access$000(org.washcom.cardgames.war.WarGame$Result, int);
+}
+Compiled from "WarGameSimulator.java"
+public class org.washcom.cardgames.war.WarGameSimulator {
+  public org.washcom.cardgames.war.WarGameSimulator(int, boolean);
+  public java.util.List<java.lang.Integer> getGameLengths();
+  public java.util.Map<java.lang.Integer, java.util.List<java.lang.Integer>> getWarCounts();
+  public int getTotalGamesPlayed();
+  public int getLongestGameLength();
+  public int getShortestGameLength();
+  public double getAverageGameLength();
+  public double getGameLengthVariance();
+  public double getGameLengthStdDev();
+  public int getMostWarsInGame(int);
+  public double getAverageWarsPerGame(int);
+  public static void main(java.lang.String[]);
+  static java.lang.String describeWar(int);
+}
+Compiled from "WarHistogram.java"
+public class org.washcom.cardgames.war.WarHistogram extends javafx.application.Application {
+  public static final int NBR_OF_GAMES;
+  public static final int GROUP_SIZE;
+  public org.washcom.cardgames.war.WarHistogram();
+  public static void main(java.lang.String[]);
+  public void start(javafx.stage.Stage) throws java.lang.Exception;
+}
+Compiled from "CollectionFilter.java"
+public interface org.washcom.util.CollectionFilter<T, C extends java.util.Collection<T>> {
+  public abstract C filter(C);
+}
+Compiled from "Deck.java"
+public class org.washcom.util.Deck<T> {
+  public org.washcom.util.Deck();
+  public org.washcom.util.Deck(java.util.Collection<T>);
+  public void shuffle();
+  public T draw() throws org.washcom.util.DeckExhaustedException;
+  public java.util.List<T> draw(int) throws org.washcom.util.DeckExhaustedException;
+  public T drawFromBottom() throws org.washcom.util.DeckExhaustedException;
+  public java.util.List<T> drawFromBottom(int) throws org.washcom.util.DeckExhaustedException;
+  public java.util.List<T> drawAll();
+  public T drawAtRandom() throws org.washcom.util.DeckExhaustedException;
+  public void putOnBottom(T);
+  public void putOnBottom(java.util.List<T>);
+  public void put(T);
+  public void put(java.util.List<T>);
+  public int size();
+  public boolean isEmpty();
+}
+Compiled from "DeckExhaustedException.java"
+public class org.washcom.util.DeckExhaustedException extends java.lang.RuntimeException {
+  public org.washcom.util.DeckExhaustedException();
+  public org.washcom.util.DeckExhaustedException(java.util.List<?>);
+  public <T> java.util.List<T> getDrawn();
+}
+Compiled from "LoopingIterator.java"
+public class org.washcom.util.LoopingIterator<T> implements java.util.Iterator<T> {
+  public org.washcom.util.LoopingIterator(java.lang.Iterable<T>);
+  public boolean hasNext();
+  public T next();
+  public void remove();
+}

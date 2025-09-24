@@ -1,0 +1,426 @@
+Compiled from "EstadoCasilla.java"
+public final class core.EstadoCasilla extends java.lang.Enum<core.EstadoCasilla> {
+  public static final core.EstadoCasilla BLACK;
+  public static final core.EstadoCasilla WHITE;
+  public static final core.EstadoCasilla PSSBL;
+  public static final core.EstadoCasilla EMPTY;
+  public static final core.EstadoCasilla WALL;
+  public static core.EstadoCasilla[] values();
+  public static core.EstadoCasilla valueOf(java.lang.String);
+  public char symbol();
+  public core.EstadoCasilla opposite();
+  public java.lang.String toString();
+  public static core.EstadoCasilla obtenerEstado(java.lang.String);
+  static {};
+}
+Compiled from "Jugador.java"
+public class core.Jugador {
+  public core.Jugador(core.EstadoCasilla);
+  public core.Jugador(core.EstadoCasilla, int, int[]);
+  public core.EstadoCasilla color();
+  public int getPuntaje();
+  public void setPuntaje(int);
+  public int[] getEstrategia();
+  public void setEstrategia(int[]);
+}
+Compiled from "Tablero.java"
+public class core.Tablero {
+  public static int TABLERO_LARGO;
+  public static int TABLERO_ANCHO;
+  public core.Tablero();
+  public core.Tablero(int, int, core.Tablero$TipoTablero);
+  public core.Tablero(java.util.Map<java.awt.Point, core.EstadoCasilla>, core.Tablero$TipoTablero);
+  public void inicializar();
+  public java.util.Map<java.awt.Point, core.EstadoCasilla> obtenerTablero();
+  public core.EstadoCasilla obtenerEstadoCasilla(java.awt.Point);
+  public java.util.Set<java.awt.Point> obtenerCasillas(core.EstadoCasilla);
+  public boolean estaLleno();
+  public int contar(core.EstadoCasilla);
+  public java.util.Set<java.awt.Point> obtenerMovidasPosibles(core.Jugador);
+  public void marcarMovidasPosibles(java.util.Set<java.awt.Point>);
+  public void actualizarEstadoCasilla(java.awt.Point, core.EstadoCasilla);
+  public void desmarcarMovidasPosibles();
+  public void marcarEstado(java.util.Set<java.awt.Point>, core.EstadoCasilla);
+  public java.util.Set<java.awt.Point> hacerMovimiento(java.awt.Point, core.EstadoCasilla);
+  public core.Tablero$TipoTablero obtenerTipoTablero();
+  public core.Tablero clone();
+  public static final core.Tablero$TipoTablero stringToTipoTablero(java.lang.String);
+  public static int getCasillasjugablesIniciales();
+  public static void setCasillasjugablesIniciales(int);
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+  static {};
+}
+Compiled from "Tablero.java"
+public final class core.Tablero$TipoTablero extends java.lang.Enum<core.Tablero$TipoTablero> {
+  public static final core.Tablero$TipoTablero CLASICO;
+  public static final core.Tablero$TipoTablero OCTOGONAL;
+  public static final core.Tablero$TipoTablero PERSONALIZADO;
+  public static core.Tablero$TipoTablero[] values();
+  public static core.Tablero$TipoTablero valueOf(java.lang.String);
+  static {};
+}
+Compiled from "Controlador.java"
+public final class logica.Controlador {
+  public static final int PROFUNDIDAD_POR_DEFECTO;
+  public static int esquinasNegro;
+  public static int esquinasBlanco;
+  public logica.Controlador();
+  public void inicializar();
+  public void inicializar(int, int, core.Tablero$TipoTablero);
+  public void inicializar(java.util.Map<java.awt.Point, core.EstadoCasilla>, core.EstadoCasilla, core.Tablero$TipoTablero);
+  public void setEstrategiaJugadores(int[], int[]);
+  public java.util.Set<java.awt.Point> hacerMovimiento(java.awt.Point);
+  public java.awt.Point evaluarMovida();
+  public java.util.Set<java.awt.Point> marcarMovidasPosibles();
+  public void desmarcarMovidasPosibles();
+  public void actualizarEstadoCasilla(java.awt.Point, core.EstadoCasilla);
+  public int obtenerPuntajeNegro();
+  public int obtenerPuntajeBlanco();
+  public core.Jugador obtenerGanador();
+  public boolean esEmpate();
+  public boolean finDelJuego();
+  public void cambiarTurno();
+  public core.Jugador jugadorActual();
+  public core.Tablero obtenerTableroLogica();
+  public static logica.Controlador obtenerInstancia();
+  static {};
+}
+Compiled from "Controlador.java"
+public final class logica.Controlador$Turno extends java.lang.Enum<logica.Controlador$Turno> {
+  public static final logica.Controlador$Turno NEGRAS;
+  public static final logica.Controlador$Turno BLANCAS;
+  public static logica.Controlador$Turno[] values();
+  public static logica.Controlador$Turno valueOf(java.lang.String);
+  static {};
+}
+Compiled from "Controlador.java"
+class logica.Controlador$soporteControlador {
+  static logica.Controlador access$000();
+  static {};
+}
+Compiled from "Direccion.java"
+public final class logica.Direccion extends java.lang.Enum<logica.Direccion> {
+  public static final logica.Direccion NORTH;
+  public static final logica.Direccion SOUTH;
+  public static final logica.Direccion WEST;
+  public static final logica.Direccion EAST;
+  public static final logica.Direccion NORTHWEST;
+  public static final logica.Direccion SOUTHEAST;
+  public static final logica.Direccion SOUTHWEST;
+  public static final logica.Direccion NORTHEAST;
+  public static logica.Direccion[] values();
+  public static logica.Direccion valueOf(java.lang.String);
+  public java.awt.Point siguiente(java.awt.Point);
+  static {};
+}
+Compiled from "ExploradorMovimientos.java"
+public class logica.ExploradorMovimientos {
+  public logica.ExploradorMovimientos();
+  public static java.util.Set<java.awt.Point> explorar(core.Tablero, core.EstadoCasilla);
+  public static java.util.Set<java.awt.Point> casillasParaLlenar(core.Tablero, java.awt.Point);
+}
+Compiled from "JuegoTorneo.java"
+public class logica.JuegoTorneo extends java.lang.Thread {
+  public logica.JuegoTorneo(int[], int[], core.Tablero$TipoTablero, int);
+  public void run();
+  public int[] getGanador();
+  public void definirTipoTablero(int, core.Tablero$TipoTablero);
+}
+Compiled from "JuegoTorneo.java"
+class logica.JuegoTorneo$1 extends javax.swing.filechooser.FileFilter {
+  final logica.JuegoTorneo this$0;
+  logica.JuegoTorneo$1(logica.JuegoTorneo);
+  public java.lang.String getDescription();
+  public boolean accept(java.io.File);
+}
+Compiled from "Torneo.java"
+public class logica.Torneo {
+  public static int numeroTorneosCreados;
+  public java.lang.String datosTorneo;
+  public logica.Torneo(int[], int[][], int);
+  public int getCantidadVictorias();
+  public void guardarDatosTorneo(java.lang.String, java.lang.String);
+  public java.lang.String getDatosTorneo();
+  static {};
+}
+Compiled from "Estrategia.java"
+public class logica.ia.algoritmosGeneticos.Estrategia {
+  public static int numeroEvolucion;
+  public static java.lang.String cadena;
+  public static int numeroCromosomasCreados;
+  public static org.jgap.Configuration conf;
+  public logica.ia.algoritmosGeneticos.Estrategia();
+  public static void calcularMejorEstrategia() throws org.jgap.InvalidConfigurationException;
+  public static void guardarPoblacion(org.jgap.Genotype) throws java.lang.Exception;
+  public static org.jgap.Genotype obtenerPoblacion(org.jgap.Configuration) throws org.jgap.InvalidConfigurationException;
+  public static int cantidadCompetidores();
+  public static java.lang.String poblacionToString(org.jgap.IChromosome[]);
+  public static void guardarDatosEvolucion(java.lang.String, java.lang.String);
+  public static java.util.List mutarYCruzar(org.jgap.Population, java.util.List);
+  static {};
+}
+Compiled from "Estrategia.java"
+final class logica.ia.algoritmosGeneticos.Estrategia$1 implements org.jgap.GeneticOperator {
+  logica.ia.algoritmosGeneticos.Estrategia$1();
+  public void operate(org.jgap.Population, java.util.List);
+}
+Compiled from "EstrategiaFuncionAptitud.java"
+public class logica.ia.algoritmosGeneticos.EstrategiaFuncionAptitud extends org.jgap.FitnessFunction {
+  public logica.ia.algoritmosGeneticos.EstrategiaFuncionAptitud(org.jgap.IChromosome[]);
+  public logica.ia.algoritmosGeneticos.EstrategiaFuncionAptitud();
+  protected double evaluate(org.jgap.IChromosome);
+  public static int getPesoPuntosGen(org.jgap.IChromosome);
+  public static int getPesoEsquinasGen(org.jgap.IChromosome);
+  public static int getPesoLibertadesRivalGen(org.jgap.IChromosome);
+  public static int getPesoCasillasCentralesGen(org.jgap.IChromosome);
+  public static org.jgap.IChromosome[] getEstrategiasCompetidoras();
+  public static void setEstrategiasCompetidoras(org.jgap.IChromosome[]);
+}
+Compiled from "BuscadorAbstracto.java"
+public abstract class logica.ia.buscadores.BuscadorAbstracto implements logica.ia.buscadores.BuscadorSimple {
+  public logica.ia.buscadores.BuscadorAbstracto();
+  public abstract logica.ia.buscadores.ResultadoBusqueda busquedaSimple(core.Tablero, core.Tablero$TipoTablero, core.EstadoCasilla, int, logica.ia.evaluacion.Evaluacion);
+  protected int maximo(int, int);
+  protected int minimo(int, int);
+  protected java.awt.Point eleccionAleatoria(core.Tablero, core.Jugador);
+  protected boolean esEstadoFinal(core.Tablero);
+}
+Compiled from "BuscadorSimple.java"
+interface logica.ia.buscadores.BuscadorSimple {
+  public abstract logica.ia.buscadores.ResultadoBusqueda busquedaSimple(core.Tablero, core.Tablero$TipoTablero, core.EstadoCasilla, int, logica.ia.evaluacion.Evaluacion);
+}
+Compiled from "NegaMax.java"
+public class logica.ia.buscadores.NegaMax extends logica.ia.buscadores.BuscadorAbstracto implements logica.ia.buscadores.BuscadorSimple {
+  public logica.ia.buscadores.NegaMax();
+  public logica.ia.buscadores.ResultadoBusqueda busquedaSimple(core.Tablero, core.Tablero$TipoTablero, core.EstadoCasilla, int, logica.ia.evaluacion.Evaluacion);
+}
+Compiled from "ResultadoBusqueda.java"
+public class logica.ia.buscadores.ResultadoBusqueda {
+  public double obtenerPuntaje();
+  public java.awt.Point obtenerPunto();
+  public logica.ia.buscadores.ResultadoBusqueda negado();
+  public logica.ia.buscadores.ResultadoBusqueda(java.awt.Point, double);
+}
+Compiled from "Evaluacion.java"
+public interface logica.ia.evaluacion.Evaluacion {
+  public abstract double evaluar(core.Tablero, core.Tablero$TipoTablero, core.EstadoCasilla);
+}
+Compiled from "EvaluacionEstrategica.java"
+public class logica.ia.evaluacion.EvaluacionEstrategica implements logica.ia.evaluacion.Evaluacion {
+  public logica.ia.evaluacion.EvaluacionEstrategica(int[]);
+  public double evaluar(core.Tablero, core.Tablero$TipoTablero, core.EstadoCasilla);
+  public double getX1();
+  public double getX2();
+  public double getX3();
+  public double getX4();
+}
+Compiled from "Entrenamiento.java"
+public class othello.Entrenamiento extends java.lang.Thread {
+  public othello.Entrenamiento();
+  public void run();
+}
+Compiled from "Juego.java"
+public class othello.Juego extends java.lang.Thread {
+  public othello.Juego();
+  public void run();
+}
+Compiled from "Othello.java"
+public class othello.Othello {
+  public othello.Othello();
+  public static void main(java.lang.String[]);
+}
+Compiled from "UIJuego.java"
+public class othello.UIJuego implements java.lang.Runnable {
+  public othello.UIJuego();
+  public void run();
+  public core.Tablero$TipoTablero obtenerTipoTableroElegido();
+  public int obtenerTamTableroElegido();
+  public void definirTipoTablero(int, core.Tablero$TipoTablero);
+  static java.io.File access$000();
+  static javax.swing.filechooser.FileFilter access$100(othello.UIJuego);
+  static ui.TableroUI access$200(othello.UIJuego);
+  static void access$300(othello.UIJuego, java.io.File, core.Tablero$TipoTablero) throws java.io.FileNotFoundException;
+  static ui.TableroUI access$202(othello.UIJuego, ui.TableroUI);
+  static logica.Controlador access$400(othello.UIJuego);
+  static void access$500(othello.UIJuego);
+  static void access$600(othello.UIJuego, java.io.File);
+  static boolean access$702(othello.UIJuego, boolean);
+  static boolean access$700(othello.UIJuego);
+  static void access$800(othello.UIJuego, java.awt.Component, java.awt.event.MouseEvent);
+  static void access$900(othello.UIJuego, java.awt.Component);
+  static {};
+}
+Compiled from "UIJuego.java"
+class othello.UIJuego$1 extends javax.swing.filechooser.FileFilter {
+  final othello.UIJuego this$0;
+  othello.UIJuego$1(othello.UIJuego);
+  public java.lang.String getDescription();
+  public boolean accept(java.io.File);
+}
+Compiled from "UIJuego.java"
+class othello.UIJuego$2 implements java.awt.event.ActionListener {
+  final othello.UIJuego this$0;
+  othello.UIJuego$2(othello.UIJuego);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "UIJuego.java"
+class othello.UIJuego$3 implements java.awt.event.ActionListener {
+  final othello.UIJuego this$0;
+  othello.UIJuego$3(othello.UIJuego);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "UIJuego.java"
+class othello.UIJuego$4 implements java.awt.event.ActionListener {
+  final othello.UIJuego this$0;
+  othello.UIJuego$4(othello.UIJuego);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "UIJuego.java"
+class othello.UIJuego$5 implements java.awt.event.ActionListener {
+  final othello.UIJuego this$0;
+  othello.UIJuego$5(othello.UIJuego);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "UIJuego.java"
+class othello.UIJuego$6 implements java.awt.event.ActionListener {
+  final othello.UIJuego this$0;
+  othello.UIJuego$6(othello.UIJuego);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "UIJuego.java"
+class othello.UIJuego$7 implements java.awt.event.ActionListener {
+  final othello.UIJuego this$0;
+  othello.UIJuego$7(othello.UIJuego);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "UIJuego.java"
+class othello.UIJuego$8 extends java.awt.event.MouseAdapter {
+  final othello.UIJuego this$0;
+  othello.UIJuego$8(othello.UIJuego);
+  public void mouseClicked(java.awt.event.MouseEvent);
+}
+Compiled from "ComponenteImagen.java"
+public class ui.ComponenteImagen extends javax.swing.JComponent {
+  java.awt.Image imagen;
+  java.awt.Dimension size;
+  public ui.ComponenteImagen(java.awt.Image);
+  public void paint(java.awt.Graphics);
+  public java.awt.Dimension getPreferredSize();
+}
+Compiled from "FabricaImagenCasilla.java"
+public class ui.FabricaImagenCasilla {
+  public ui.FabricaImagenCasilla();
+  public static ui.ComponenteImagen construirCasilla(ui.FabricaImagenCasilla$TipoCasilla);
+  static {};
+}
+Compiled from "FabricaImagenCasilla.java"
+class ui.FabricaImagenCasilla$1 {
+  static final int[] $SwitchMap$ui$FabricaImagenCasilla$TipoCasilla;
+  static {};
+}
+Compiled from "FabricaImagenCasilla.java"
+public final class ui.FabricaImagenCasilla$TipoCasilla extends java.lang.Enum<ui.FabricaImagenCasilla$TipoCasilla> {
+  public static final ui.FabricaImagenCasilla$TipoCasilla BLACK;
+  public static final ui.FabricaImagenCasilla$TipoCasilla WHITE;
+  public static final ui.FabricaImagenCasilla$TipoCasilla EMPTY;
+  public static final ui.FabricaImagenCasilla$TipoCasilla PSSBLBLK;
+  public static final ui.FabricaImagenCasilla$TipoCasilla PSSBLWHT;
+  public static final ui.FabricaImagenCasilla$TipoCasilla WALL;
+  public static ui.FabricaImagenCasilla$TipoCasilla[] values();
+  public static ui.FabricaImagenCasilla$TipoCasilla valueOf(java.lang.String);
+  static {};
+}
+Compiled from "TableroUI.java"
+public final class ui.TableroUI extends javax.swing.JFrame {
+  public static final int HUM_HUM;
+  public static final int HUM_ROB;
+  public static final int ROB_ROB;
+  public static int largoTablero;
+  public static int anchoTablero;
+  public javax.swing.JButton boton;
+  core.Tablero$TipoTablero tipoTablero;
+  public ui.TableroUI() throws java.awt.HeadlessException;
+  public ui.TableroUI(int, int, core.Tablero, core.Tablero$TipoTablero) throws java.awt.HeadlessException;
+  public void mostrarBarraEstado();
+  public void mostrarBarraBoton();
+  public void definirCasilla(java.awt.Point, ui.FabricaImagenCasilla$TipoCasilla);
+  public void marcarMovidasPosibles(java.util.Collection<java.awt.Point>, ui.FabricaImagenCasilla$TipoCasilla);
+  public void desmarcarMovidasPosibles(java.util.Collection<java.awt.Point>);
+  public void rellenar(java.util.Collection<java.awt.Point>, ui.FabricaImagenCasilla$TipoCasilla);
+  public void actualizarPuntaje(int, int);
+  public void actualizarTurno(java.lang.String);
+  public void declararEmpate();
+  public void declararGanador(java.lang.String);
+  public void notificarTurnoPerdido(core.Jugador);
+  public void notificarVictoria(core.Jugador);
+  public java.util.List<ui.ComponenteImagen> obtenerCasillas();
+  public javax.swing.JMenuItem obtenerItemNuevoJuego();
+  public javax.swing.JMenuItem obtenerItemGuardarJuego();
+  public javax.swing.JMenuItem obtenerItemAbrirJuego();
+  public javax.swing.JRadioButtonMenuItem[] obtenerTipoTableroButton();
+  public javax.swing.JRadioButtonMenuItem[] obtenerTamTableroButton();
+  public javax.swing.JButton obtenerBoton();
+  public core.Jugador obtenerJugadorSeleccionado();
+  public int obtenerOponentes();
+  static core.Jugador access$002(core.Jugador);
+  static int access$102(int);
+  static javax.swing.JPanel access$200(ui.TableroUI);
+  static {};
+}
+Compiled from "TableroUI.java"
+class ui.TableroUI$1 implements java.awt.event.ActionListener {
+  final ui.TableroUI this$0;
+  ui.TableroUI$1(ui.TableroUI);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "TableroUI.java"
+class ui.TableroUI$2 implements java.awt.event.ActionListener {
+  final ui.TableroUI this$0;
+  ui.TableroUI$2(ui.TableroUI);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "TableroUI.java"
+class ui.TableroUI$3 implements java.awt.event.ActionListener {
+  final ui.TableroUI this$0;
+  ui.TableroUI$3(ui.TableroUI);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "TableroUI.java"
+class ui.TableroUI$4 implements java.awt.event.ActionListener {
+  final ui.TableroUI this$0;
+  ui.TableroUI$4(ui.TableroUI);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "TableroUI.java"
+class ui.TableroUI$5 implements java.awt.event.ActionListener {
+  final ui.TableroUI this$0;
+  ui.TableroUI$5(ui.TableroUI);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "TableroUI.java"
+class ui.TableroUI$6 implements java.awt.event.ActionListener {
+  final ui.TableroUI this$0;
+  ui.TableroUI$6(ui.TableroUI);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "TableroUI.java"
+class ui.TableroUI$7 implements java.awt.event.ActionListener {
+  final ui.TableroUI this$0;
+  ui.TableroUI$7(ui.TableroUI);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "TableroUI.java"
+class ui.TableroUI$8 {
+  static final int[] $SwitchMap$core$EstadoCasilla;
+  static {};
+}
+Compiled from "Transform.java"
+public class utilidades.Transform {
+  public utilidades.Transform();
+  public static java.awt.Point indexToPoint(int);
+  public static java.awt.Point indexToPoint(int, int);
+  public static int pointToIndex(java.awt.Point);
+  public static int pointToIndex(java.awt.Point, int);
+  public static java.lang.String toBoardNotation(java.awt.Point);
+  public static java.awt.Point fromBoardNotation(java.lang.String);
+}

@@ -1,0 +1,403 @@
+Compiled from "IntSequenceMemoizer.java"
+public class edu.columbia.stat.wood.pub.sequencememoizer.IntSequenceMemoizer implements edu.columbia.stat.wood.pub.sequencememoizer.IntSequenceMemoizerInterface,java.io.Serializable {
+  static final long serialVersionUID;
+  public static edu.columbia.stat.wood.pub.sequencememoizer.util.MersenneTwisterFast RNG;
+  public int maxCustomersInRestaurant;
+  static final boolean $assertionsDisabled;
+  public edu.columbia.stat.wood.pub.sequencememoizer.IntSequenceMemoizer(edu.columbia.stat.wood.pub.sequencememoizer.IntSequenceMemoizerParameters);
+  public edu.columbia.stat.wood.pub.sequencememoizer.IntSequenceMemoizer();
+  public void newSequence();
+  public double continueSequence(int);
+  public double continueSequence(int[]);
+  public int[] generate(int[], int);
+  public int[] generateSequence(int[], int);
+  public edu.columbia.stat.wood.pub.sequencememoizer.util.IntDiscreteDistribution predictiveDistribution(int[]);
+  public double predictiveProbability(int[], int);
+  public double sequenceProbability(int[], int[]);
+  public double sample(int);
+  public void sampleSeatingArrangements(int);
+  public double sampleDiscounts(int);
+  public double score();
+  public edu.columbia.stat.wood.pub.sequencememoizer.IntSequenceMemoizerParameters getParameters();
+  public static void main(java.lang.String[]) throws java.io.FileNotFoundException, java.io.IOException;
+  static {};
+}
+Compiled from "IntSequenceMemoizer.java"
+public class edu.columbia.stat.wood.pub.sequencememoizer.IntSequenceMemoizer$NewKey {
+  final edu.columbia.stat.wood.pub.sequencememoizer.IntSequenceMemoizer this$0;
+  public edu.columbia.stat.wood.pub.sequencememoizer.IntSequenceMemoizer$NewKey(edu.columbia.stat.wood.pub.sequencememoizer.IntSequenceMemoizer);
+  public boolean isNull();
+  public int value();
+  public void set(int);
+  public void setNull();
+}
+Compiled from "IntSequenceMemoizer.java"
+public class edu.columbia.stat.wood.pub.sequencememoizer.IntSequenceMemoizer$SeatReturn {
+  public boolean seatInParent;
+  public int typeTables;
+  public int customers;
+  public int tables;
+  final edu.columbia.stat.wood.pub.sequencememoizer.IntSequenceMemoizer this$0;
+  public edu.columbia.stat.wood.pub.sequencememoizer.IntSequenceMemoizer$SeatReturn(edu.columbia.stat.wood.pub.sequencememoizer.IntSequenceMemoizer);
+  public void set(boolean, int, int, int);
+}
+Compiled from "IntSequenceMemoizerInterface.java"
+public interface edu.columbia.stat.wood.pub.sequencememoizer.IntSequenceMemoizerInterface {
+  public abstract void newSequence();
+  public abstract double continueSequence(int);
+  public abstract double continueSequence(int[]);
+  public abstract int[] generate(int[], int);
+  public abstract int[] generateSequence(int[], int);
+  public abstract edu.columbia.stat.wood.pub.sequencememoizer.util.IntDiscreteDistribution predictiveDistribution(int[]);
+  public abstract double predictiveProbability(int[], int);
+  public abstract double sequenceProbability(int[], int[]);
+  public abstract double sample(int);
+  public abstract void sampleSeatingArrangements(int);
+  public abstract double sampleDiscounts(int);
+  public abstract double score();
+  public abstract edu.columbia.stat.wood.pub.sequencememoizer.IntSequenceMemoizerParameters getParameters();
+}
+Compiled from "IntSequenceMemoizerParameters.java"
+public class edu.columbia.stat.wood.pub.sequencememoizer.IntSequenceMemoizerParameters extends edu.columbia.stat.wood.pub.sequencememoizer.SequenceMemoizerParameters {
+  public edu.columbia.stat.wood.pub.sequencememoizer.util.IntDiscreteDistribution baseDistribution;
+  public edu.columbia.stat.wood.pub.sequencememoizer.IntSequenceMemoizerParameters(edu.columbia.stat.wood.pub.sequencememoizer.util.IntDiscreteDistribution, double[], double, int, long, long, long, long);
+  public edu.columbia.stat.wood.pub.sequencememoizer.IntSequenceMemoizerParameters(int, long, long, int);
+  public edu.columbia.stat.wood.pub.sequencememoizer.IntSequenceMemoizerParameters(int, int);
+  public edu.columbia.stat.wood.pub.sequencememoizer.IntSequenceMemoizerParameters(int);
+}
+Compiled from "SequenceMemoizerParameters.java"
+public class edu.columbia.stat.wood.pub.sequencememoizer.SequenceMemoizerParameters {
+  public double[] discounts;
+  public double infiniteDiscount;
+  public int depth;
+  public long seed;
+  public long maxNumberRestaurants;
+  public long maxCustomersInRestaurant;
+  public long maxSequenceLength;
+  public edu.columbia.stat.wood.pub.sequencememoizer.SequenceMemoizerParameters(double[], double, int, long, long, long, long);
+  public edu.columbia.stat.wood.pub.sequencememoizer.SequenceMemoizerParameters(int, long, long);
+  public edu.columbia.stat.wood.pub.sequencememoizer.SequenceMemoizerParameters(int);
+  public edu.columbia.stat.wood.pub.sequencememoizer.SequenceMemoizerParameters(long, long);
+  public edu.columbia.stat.wood.pub.sequencememoizer.SequenceMemoizerParameters();
+}
+Compiled from "Discounts.java"
+public class edu.columbia.stat.wood.pub.sequencememoizer.util.Discounts implements java.io.Serializable {
+  static final long serialVersionUID;
+  public edu.columbia.stat.wood.pub.sequencememoizer.util.Discounts(double[], double);
+  public double get(int);
+  public void set(int, double);
+  public double getdInfinity();
+  public void setDInfinity(double);
+  public double get(int, int);
+  public int length();
+  public void clearGradient();
+  public void updateGradient(int, int, int, int, int, double, double, double);
+  public void stepDiscounts(double, double);
+  public void print();
+}
+Compiled from "DoubleStack.java"
+public class edu.columbia.stat.wood.pub.sequencememoizer.util.DoubleStack implements java.io.Serializable {
+  static final long serialVersionUID;
+  public edu.columbia.stat.wood.pub.sequencememoizer.util.DoubleStack();
+  public boolean hasNext();
+  public double peak();
+  public void push(double);
+  public double pop();
+  public int index();
+  public void setIndex(int);
+  public void print();
+}
+Compiled from "IntDiscreteDistribution.java"
+public interface edu.columbia.stat.wood.pub.sequencememoizer.util.IntDiscreteDistribution {
+  public abstract double probability(int);
+  public abstract java.util.Iterator<edu.columbia.stat.wood.pub.sequencememoizer.util.Pair<java.lang.Integer, java.lang.Double>> iterator();
+}
+Compiled from "IntHashMapDiscreteDistribution.java"
+public class edu.columbia.stat.wood.pub.sequencememoizer.util.IntHashMapDiscreteDistribution implements edu.columbia.stat.wood.pub.sequencememoizer.util.IntDiscreteDistribution,java.io.Serializable {
+  static final long serialVersionUID;
+  public edu.columbia.stat.wood.pub.sequencememoizer.util.IntHashMapDiscreteDistribution(gnu.trove.map.hash.TIntObjectHashMap<edu.columbia.stat.wood.pub.sequencememoizer.util.MutableDouble>, edu.columbia.stat.wood.pub.sequencememoizer.util.IntDiscreteDistribution, double);
+  public double probability(int);
+  public java.util.Iterator<edu.columbia.stat.wood.pub.sequencememoizer.util.Pair<java.lang.Integer, java.lang.Double>> iterator();
+  static edu.columbia.stat.wood.pub.sequencememoizer.util.IntDiscreteDistribution access$100(edu.columbia.stat.wood.pub.sequencememoizer.util.IntHashMapDiscreteDistribution);
+  static gnu.trove.map.hash.TIntObjectHashMap access$200(edu.columbia.stat.wood.pub.sequencememoizer.util.IntHashMapDiscreteDistribution);
+  static double access$300(edu.columbia.stat.wood.pub.sequencememoizer.util.IntHashMapDiscreteDistribution);
+}
+Compiled from "IntHashMapDiscreteDistribution.java"
+class edu.columbia.stat.wood.pub.sequencememoizer.util.IntHashMapDiscreteDistribution$1 {
+}
+Compiled from "IntHashMapDiscreteDistribution.java"
+class edu.columbia.stat.wood.pub.sequencememoizer.util.IntHashMapDiscreteDistribution$FirstIterator implements java.util.Iterator<edu.columbia.stat.wood.pub.sequencememoizer.util.Pair<java.lang.Integer, java.lang.Double>> {
+  gnu.trove.iterator.TIntObjectIterator<edu.columbia.stat.wood.pub.sequencememoizer.util.MutableDouble> iter;
+  final edu.columbia.stat.wood.pub.sequencememoizer.util.IntHashMapDiscreteDistribution this$0;
+  public boolean hasNext();
+  public edu.columbia.stat.wood.pub.sequencememoizer.util.Pair<java.lang.Integer, java.lang.Double> next();
+  public void remove();
+  public java.lang.Object next();
+  edu.columbia.stat.wood.pub.sequencememoizer.util.IntHashMapDiscreteDistribution$FirstIterator(edu.columbia.stat.wood.pub.sequencememoizer.util.IntHashMapDiscreteDistribution, edu.columbia.stat.wood.pub.sequencememoizer.util.IntHashMapDiscreteDistribution$1);
+}
+Compiled from "IntHashMapDiscreteDistribution.java"
+class edu.columbia.stat.wood.pub.sequencememoizer.util.IntHashMapDiscreteDistribution$Iter implements java.util.Iterator<edu.columbia.stat.wood.pub.sequencememoizer.util.Pair<java.lang.Integer, java.lang.Double>> {
+  java.util.Iterator<edu.columbia.stat.wood.pub.sequencememoizer.util.Pair<java.lang.Integer, java.lang.Double>> iter;
+  public boolean secondIterator;
+  final edu.columbia.stat.wood.pub.sequencememoizer.util.IntHashMapDiscreteDistribution this$0;
+  public boolean hasNext();
+  public edu.columbia.stat.wood.pub.sequencememoizer.util.Pair<java.lang.Integer, java.lang.Double> next();
+  public void remove();
+  public java.lang.Object next();
+  edu.columbia.stat.wood.pub.sequencememoizer.util.IntHashMapDiscreteDistribution$Iter(edu.columbia.stat.wood.pub.sequencememoizer.util.IntHashMapDiscreteDistribution, edu.columbia.stat.wood.pub.sequencememoizer.util.IntHashMapDiscreteDistribution$1);
+}
+Compiled from "IntHashMapDiscreteDistribution.java"
+class edu.columbia.stat.wood.pub.sequencememoizer.util.IntHashMapDiscreteDistribution$SecondIterator implements java.util.Iterator<edu.columbia.stat.wood.pub.sequencememoizer.util.Pair<java.lang.Integer, java.lang.Double>> {
+  final edu.columbia.stat.wood.pub.sequencememoizer.util.IntHashMapDiscreteDistribution this$0;
+  public boolean hasNext();
+  public edu.columbia.stat.wood.pub.sequencememoizer.util.Pair<java.lang.Integer, java.lang.Double> next();
+  public void remove();
+  public java.lang.Object next();
+  edu.columbia.stat.wood.pub.sequencememoizer.util.IntHashMapDiscreteDistribution$SecondIterator(edu.columbia.stat.wood.pub.sequencememoizer.util.IntHashMapDiscreteDistribution, edu.columbia.stat.wood.pub.sequencememoizer.util.IntHashMapDiscreteDistribution$1);
+}
+Compiled from "IntMap.java"
+public class edu.columbia.stat.wood.pub.sequencememoizer.util.IntMap<E> implements java.io.Serializable {
+  static final long serialVersionUID;
+  static final boolean $assertionsDisabled;
+  public edu.columbia.stat.wood.pub.sequencememoizer.util.IntMap();
+  public boolean isEmpty();
+  public int size();
+  public E get(int);
+  public E put(int, E);
+  public void remove(int);
+  public int[] keys();
+  public java.lang.Object[] values();
+  public void set(int[], E[]);
+  public void print();
+  static {};
+}
+Compiled from "IntRestaurant.java"
+public class edu.columbia.stat.wood.pub.sequencememoizer.util.IntRestaurant extends edu.columbia.stat.wood.pub.sequencememoizer.util.IntMap<edu.columbia.stat.wood.pub.sequencememoizer.util.IntRestaurant> implements java.io.Serializable {
+  static final long serialVersionUID;
+  public int[] types;
+  public int[] customersAndTables;
+  public int customers;
+  public int tables;
+  public int edgeStart;
+  public int edgeLength;
+  public int numLeafNodesAtOrBelow;
+  public edu.columbia.stat.wood.pub.sequencememoizer.util.IntRestaurant parent;
+  public edu.columbia.stat.wood.pub.sequencememoizer.util.IntSequence$IntSeqNode edgeNode;
+  static final boolean $assertionsDisabled;
+  public edu.columbia.stat.wood.pub.sequencememoizer.util.IntRestaurant(edu.columbia.stat.wood.pub.sequencememoizer.util.IntRestaurant, int, int, edu.columbia.stat.wood.pub.sequencememoizer.util.IntSequence$IntSeqNode, int, edu.columbia.stat.wood.pub.sequencememoizer.util.MutableLong);
+  public void setTableConfig(int[], int[], int, int);
+  public double getPP(int, double, double, edu.columbia.stat.wood.pub.sequencememoizer.IntSequenceMemoizer$SeatReturn);
+  public void deleteCustomers(int, double);
+  public double seat(int, double, double, edu.columbia.stat.wood.pub.sequencememoizer.IntSequenceMemoizer$SeatReturn, edu.columbia.stat.wood.pub.sequencememoizer.IntSequenceMemoizer);
+  public edu.columbia.stat.wood.pub.sequencememoizer.util.IntRestaurant fragmentForInsertion(edu.columbia.stat.wood.pub.sequencememoizer.util.IntRestaurant, int, int, edu.columbia.stat.wood.pub.sequencememoizer.util.IntSequence$IntSeqNode, double, double, edu.columbia.stat.wood.pub.sequencememoizer.util.MutableLong);
+  public edu.columbia.stat.wood.pub.sequencememoizer.util.IntRestaurant fragmentForPrediction(edu.columbia.stat.wood.pub.sequencememoizer.util.IntRestaurant, double, double, edu.columbia.stat.wood.pub.sequencememoizer.util.MutableLong);
+  public int getIndex(int);
+  public final void removeFromTree(edu.columbia.stat.wood.pub.sequencememoizer.util.MutableLong);
+  public final void removeFromTreeAndEdgeNode(edu.columbia.stat.wood.pub.sequencememoizer.util.MutableLong);
+  public void incrementLeafNodeCount();
+  public void decrementLeafNodeCount();
+  static {};
+}
+Compiled from "IntSamplingNode.java"
+public class edu.columbia.stat.wood.pub.sequencememoizer.util.IntSamplingNode {
+  static final boolean $assertionsDisabled;
+  public edu.columbia.stat.wood.pub.sequencememoizer.util.IntSamplingNode(edu.columbia.stat.wood.pub.sequencememoizer.util.IntSamplingNode, double, edu.columbia.stat.wood.pub.sequencememoizer.util.IntDiscreteDistribution);
+  public void setTypeSeatingArrangement(int, int[], int, int);
+  public double predictiveProbability(int);
+  public void seat(int);
+  public void unseat(int);
+  public void sample();
+  public void sampleCustomer(int, int);
+  public void fillRestaurant(edu.columbia.stat.wood.pub.sequencememoizer.util.IntRestaurant);
+  public boolean check();
+  static double access$100(edu.columbia.stat.wood.pub.sequencememoizer.util.IntSamplingNode);
+  static int access$200(edu.columbia.stat.wood.pub.sequencememoizer.util.IntSamplingNode);
+  static {};
+}
+Compiled from "IntSamplingNode.java"
+class edu.columbia.stat.wood.pub.sequencememoizer.util.IntSamplingNode$TypeSeatingArrangement {
+  public int typeCustomers;
+  public int typeTables;
+  static final boolean $assertionsDisabled;
+  final edu.columbia.stat.wood.pub.sequencememoizer.util.IntSamplingNode this$0;
+  public edu.columbia.stat.wood.pub.sequencememoizer.util.IntSamplingNode$TypeSeatingArrangement(edu.columbia.stat.wood.pub.sequencememoizer.util.IntSamplingNode, int[], int, int);
+  public boolean seat(double);
+  public boolean unseat();
+  public boolean check();
+  static int[] access$000(edu.columbia.stat.wood.pub.sequencememoizer.util.IntSamplingNode$TypeSeatingArrangement);
+  static int[] access$002(edu.columbia.stat.wood.pub.sequencememoizer.util.IntSamplingNode$TypeSeatingArrangement, int[]);
+  static {};
+}
+Compiled from "IntSequence.java"
+public class edu.columbia.stat.wood.pub.sequencememoizer.util.IntSequence implements java.io.Serializable {
+  static final long serialVersionUID;
+  public edu.columbia.stat.wood.pub.sequencememoizer.util.IntSequence(int);
+  public int blockSize();
+  public void append(int);
+  public int length();
+  public void shorten(edu.columbia.stat.wood.pub.sequencememoizer.util.MutableLong);
+  public edu.columbia.stat.wood.pub.sequencememoizer.util.IntSequence$BackwardsIterator backwardsIterator();
+  public int overlap(edu.columbia.stat.wood.pub.sequencememoizer.util.IntSequence$IntSeqNode, int, int, int[], int);
+  public edu.columbia.stat.wood.pub.sequencememoizer.util.IntSequence$IntSeqNode get(int);
+  static edu.columbia.stat.wood.pub.sequencememoizer.util.IntSequence$IntSeqNode access$300(edu.columbia.stat.wood.pub.sequencememoizer.util.IntSequence);
+  static int access$400(edu.columbia.stat.wood.pub.sequencememoizer.util.IntSequence);
+  static int access$500(edu.columbia.stat.wood.pub.sequencememoizer.util.IntSequence);
+}
+Compiled from "IntSequence.java"
+public class edu.columbia.stat.wood.pub.sequencememoizer.util.IntSequence$BackwardsIterator {
+  public edu.columbia.stat.wood.pub.sequencememoizer.util.IntSequence$IntSeqNode node;
+  public int ind;
+  final edu.columbia.stat.wood.pub.sequencememoizer.util.IntSequence this$0;
+  public edu.columbia.stat.wood.pub.sequencememoizer.util.IntSequence$BackwardsIterator(edu.columbia.stat.wood.pub.sequencememoizer.util.IntSequence);
+  public int peek();
+  public int next();
+  public boolean hasNext();
+  public int overlap(edu.columbia.stat.wood.pub.sequencememoizer.util.IntSequence$IntSeqNode, int, int, edu.columbia.stat.wood.pub.sequencememoizer.IntSequenceMemoizer$NewKey);
+  public int available(int);
+}
+Compiled from "IntSequence.java"
+public class edu.columbia.stat.wood.pub.sequencememoizer.util.IntSequence$IntSeqNode extends gnu.trove.set.hash.THashSet<edu.columbia.stat.wood.pub.sequencememoizer.util.IntRestaurant> {
+  final edu.columbia.stat.wood.pub.sequencememoizer.util.IntSequence this$0;
+  public edu.columbia.stat.wood.pub.sequencememoizer.util.IntSequence$IntSeqNode(edu.columbia.stat.wood.pub.sequencememoizer.util.IntSequence, edu.columbia.stat.wood.pub.sequencememoizer.util.IntSequence$IntSeqNode, edu.columbia.stat.wood.pub.sequencememoizer.util.IntSequence$IntSeqNode, int);
+  public edu.columbia.stat.wood.pub.sequencememoizer.util.IntSequence$IntSeqNode(java.util.Collection<edu.columbia.stat.wood.pub.sequencememoizer.util.IntRestaurant>);
+  public edu.columbia.stat.wood.pub.sequencememoizer.util.IntSequence$IntSeqNode previous();
+  public int[] intChunk();
+  public int getIndex();
+  static edu.columbia.stat.wood.pub.sequencememoizer.util.IntSequence$IntSeqNode access$002(edu.columbia.stat.wood.pub.sequencememoizer.util.IntSequence$IntSeqNode, edu.columbia.stat.wood.pub.sequencememoizer.util.IntSequence$IntSeqNode);
+  static edu.columbia.stat.wood.pub.sequencememoizer.util.IntSequence$IntSeqNode access$000(edu.columbia.stat.wood.pub.sequencememoizer.util.IntSequence$IntSeqNode);
+  static int[] access$100(edu.columbia.stat.wood.pub.sequencememoizer.util.IntSequence$IntSeqNode);
+  static edu.columbia.stat.wood.pub.sequencememoizer.util.IntSequence$IntSeqNode access$202(edu.columbia.stat.wood.pub.sequencememoizer.util.IntSequence$IntSeqNode, edu.columbia.stat.wood.pub.sequencememoizer.util.IntSequence$IntSeqNode);
+  static edu.columbia.stat.wood.pub.sequencememoizer.util.IntSequence$IntSeqNode access$200(edu.columbia.stat.wood.pub.sequencememoizer.util.IntSequence$IntSeqNode);
+  static int[] access$102(edu.columbia.stat.wood.pub.sequencememoizer.util.IntSequence$IntSeqNode, int[]);
+}
+Compiled from "IntUniformDiscreteDistribution.java"
+public class edu.columbia.stat.wood.pub.sequencememoizer.util.IntUniformDiscreteDistribution implements edu.columbia.stat.wood.pub.sequencememoizer.util.IntDiscreteDistribution,java.io.Serializable {
+  static final long serialVersionUID;
+  public edu.columbia.stat.wood.pub.sequencememoizer.util.IntUniformDiscreteDistribution(int);
+  public edu.columbia.stat.wood.pub.sequencememoizer.util.IntUniformDiscreteDistribution(int, int);
+  public double probability(int);
+  public java.util.Iterator<edu.columbia.stat.wood.pub.sequencememoizer.util.Pair<java.lang.Integer, java.lang.Double>> iterator();
+  static int access$100(edu.columbia.stat.wood.pub.sequencememoizer.util.IntUniformDiscreteDistribution);
+  static int access$200(edu.columbia.stat.wood.pub.sequencememoizer.util.IntUniformDiscreteDistribution);
+  static double access$300(edu.columbia.stat.wood.pub.sequencememoizer.util.IntUniformDiscreteDistribution);
+}
+Compiled from "IntUniformDiscreteDistribution.java"
+class edu.columbia.stat.wood.pub.sequencememoizer.util.IntUniformDiscreteDistribution$1 {
+}
+Compiled from "IntUniformDiscreteDistribution.java"
+class edu.columbia.stat.wood.pub.sequencememoizer.util.IntUniformDiscreteDistribution$UniformIterator implements java.util.Iterator<edu.columbia.stat.wood.pub.sequencememoizer.util.Pair<java.lang.Integer, java.lang.Double>> {
+  int type;
+  final edu.columbia.stat.wood.pub.sequencememoizer.util.IntUniformDiscreteDistribution this$0;
+  public boolean hasNext();
+  public edu.columbia.stat.wood.pub.sequencememoizer.util.Pair<java.lang.Integer, java.lang.Double> next();
+  public void remove();
+  public java.lang.Object next();
+  edu.columbia.stat.wood.pub.sequencememoizer.util.IntUniformDiscreteDistribution$UniformIterator(edu.columbia.stat.wood.pub.sequencememoizer.util.IntUniformDiscreteDistribution, edu.columbia.stat.wood.pub.sequencememoizer.util.IntUniformDiscreteDistribution$1);
+}
+Compiled from "LogAdd.java"
+public class edu.columbia.stat.wood.pub.sequencememoizer.util.LogAdd {
+  public edu.columbia.stat.wood.pub.sequencememoizer.util.LogAdd();
+  public static final double logAdd(double, double);
+}
+Compiled from "LogBracketFunction.java"
+public class edu.columbia.stat.wood.pub.sequencememoizer.util.LogBracketFunction {
+  public edu.columbia.stat.wood.pub.sequencememoizer.util.LogBracketFunction();
+  public static double logBracketFunction(double, int, double);
+}
+Compiled from "LogGeneralizedSterlingNumbers.java"
+public class edu.columbia.stat.wood.pub.sequencememoizer.util.LogGeneralizedSterlingNumbers {
+  public edu.columbia.stat.wood.pub.sequencememoizer.util.LogGeneralizedSterlingNumbers(double);
+  public double get(int, int);
+}
+Compiled from "MersenneTwisterFast.java"
+public class edu.columbia.stat.wood.pub.sequencememoizer.util.MersenneTwisterFast implements java.io.Serializable,java.lang.Cloneable {
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+  public boolean stateEquals(java.lang.Object);
+  public void readState(java.io.DataInputStream) throws java.io.IOException;
+  public void writeState(java.io.DataOutputStream) throws java.io.IOException;
+  public edu.columbia.stat.wood.pub.sequencememoizer.util.MersenneTwisterFast();
+  public edu.columbia.stat.wood.pub.sequencememoizer.util.MersenneTwisterFast(long);
+  public edu.columbia.stat.wood.pub.sequencememoizer.util.MersenneTwisterFast(int[]);
+  public synchronized void setSeed(long);
+  public synchronized void setSeed(int[]);
+  public final int nextInt();
+  public final short nextShort();
+  public final char nextChar();
+  public final boolean nextBoolean();
+  public final boolean nextBoolean(float);
+  public final boolean nextBoolean(double);
+  public final byte nextByte();
+  public final void nextBytes(byte[]);
+  public final long nextLong();
+  public final long nextLong(long);
+  public final double nextDouble();
+  public final double nextGaussian();
+  public final float nextFloat();
+  public final int nextInt(int);
+  public static void main(java.lang.String[]);
+}
+Compiled from "MutableDouble.java"
+public class edu.columbia.stat.wood.pub.sequencememoizer.util.MutableDouble {
+  public edu.columbia.stat.wood.pub.sequencememoizer.util.MutableDouble(double);
+  public void set(double);
+  public double value();
+  public void timesEquals(double);
+  public void plusEquals(double);
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+}
+Compiled from "MutableInt.java"
+public class edu.columbia.stat.wood.pub.sequencememoizer.util.MutableInt implements java.io.Serializable {
+  static final long serialVersionUID;
+  public edu.columbia.stat.wood.pub.sequencememoizer.util.MutableInt(int);
+  public void set(int);
+  public int value();
+  public void increment();
+  public void decrement();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+}
+Compiled from "MutableLong.java"
+public class edu.columbia.stat.wood.pub.sequencememoizer.util.MutableLong {
+  static final long serialVersionUID;
+  public edu.columbia.stat.wood.pub.sequencememoizer.util.MutableLong(long);
+  public void set(long);
+  public long value();
+  public void increment();
+  public void decrement();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+}
+Compiled from "Pair.java"
+public class edu.columbia.stat.wood.pub.sequencememoizer.util.Pair<F, S> {
+  public edu.columbia.stat.wood.pub.sequencememoizer.util.Pair(F, S);
+  public F first();
+  public S second();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+}
+Compiled from "SampleMultinomial.java"
+public class edu.columbia.stat.wood.pub.sequencememoizer.util.SampleMultinomial {
+  static final boolean $assertionsDisabled;
+  public edu.columbia.stat.wood.pub.sequencememoizer.util.SampleMultinomial();
+  public static int[] sampleMultinomial(int, double[], edu.columbia.stat.wood.pub.sequencememoizer.util.MersenneTwisterFast);
+  public static int[] deleteCustomersAtRandom(int, int[], int, edu.columbia.stat.wood.pub.sequencememoizer.util.MersenneTwisterFast);
+  public static boolean checkSample(int[], int[], int);
+  static {};
+}
+Compiled from "SampleWithoutReplacement.java"
+public class edu.columbia.stat.wood.pub.sequencememoizer.util.SampleWithoutReplacement {
+  public edu.columbia.stat.wood.pub.sequencememoizer.util.SampleWithoutReplacement();
+  public static int[] sampleWithoutReplacement(int, edu.columbia.stat.wood.pub.sequencememoizer.util.MersenneTwisterFast);
+}
+Compiled from "SeatingArranger.java"
+public class edu.columbia.stat.wood.pub.sequencememoizer.util.SeatingArranger {
+  public static edu.columbia.stat.wood.pub.sequencememoizer.util.MersenneTwisterFast rng;
+  static final boolean $assertionsDisabled;
+  public edu.columbia.stat.wood.pub.sequencememoizer.util.SeatingArranger();
+  public static int[] getSeatingArrangement(int, int, double);
+  public static double getM(int, int);
+  public static void setM(int);
+  public static boolean check(int[]);
+  static {};
+}

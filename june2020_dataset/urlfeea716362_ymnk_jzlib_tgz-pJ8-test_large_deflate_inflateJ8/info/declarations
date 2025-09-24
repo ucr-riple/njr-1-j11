@@ -1,0 +1,678 @@
+Compiled from "Adler32.java"
+public final class com.jcraft.jzlib.Adler32 implements com.jcraft.jzlib.Checksum {
+  public com.jcraft.jzlib.Adler32();
+  public void reset(long);
+  public void reset();
+  public long getValue();
+  public void update(byte[], int, int);
+  public com.jcraft.jzlib.Adler32 copy();
+  static long combine(long, long, long);
+  public com.jcraft.jzlib.Checksum copy();
+}
+Compiled from "CRC32.java"
+public final class com.jcraft.jzlib.CRC32 implements com.jcraft.jzlib.Checksum {
+  public com.jcraft.jzlib.CRC32();
+  public void update(byte[], int, int);
+  public void reset();
+  public void reset(long);
+  public long getValue();
+  static long combine(long, long, long);
+  static final void gf2_matrix_square(long[], long[]);
+  public com.jcraft.jzlib.CRC32 copy();
+  public static int[] getCRC32Table();
+  public com.jcraft.jzlib.Checksum copy();
+  static {};
+}
+Compiled from "Checksum.java"
+interface com.jcraft.jzlib.Checksum {
+  public abstract void update(byte[], int, int);
+  public abstract void reset();
+  public abstract void reset(long);
+  public abstract long getValue();
+  public abstract com.jcraft.jzlib.Checksum copy();
+}
+Compiled from "Deflate.java"
+public final class com.jcraft.jzlib.Deflate implements java.lang.Cloneable {
+  com.jcraft.jzlib.ZStream strm;
+  int status;
+  byte[] pending_buf;
+  int pending_buf_size;
+  int pending_out;
+  int pending;
+  int wrap;
+  byte data_type;
+  byte method;
+  int last_flush;
+  int w_size;
+  int w_bits;
+  int w_mask;
+  byte[] window;
+  int window_size;
+  short[] prev;
+  short[] head;
+  int ins_h;
+  int hash_size;
+  int hash_bits;
+  int hash_mask;
+  int hash_shift;
+  int block_start;
+  int match_length;
+  int prev_match;
+  int match_available;
+  int strstart;
+  int match_start;
+  int lookahead;
+  int prev_length;
+  int max_chain_length;
+  int max_lazy_match;
+  int level;
+  int strategy;
+  int good_match;
+  int nice_match;
+  short[] dyn_ltree;
+  short[] dyn_dtree;
+  short[] bl_tree;
+  com.jcraft.jzlib.Tree l_desc;
+  com.jcraft.jzlib.Tree d_desc;
+  com.jcraft.jzlib.Tree bl_desc;
+  short[] bl_count;
+  short[] next_code;
+  int[] heap;
+  int heap_len;
+  int heap_max;
+  byte[] depth;
+  byte[] l_buf;
+  int lit_bufsize;
+  int last_lit;
+  int d_buf;
+  int opt_len;
+  int static_len;
+  int matches;
+  int last_eob_len;
+  short bi_buf;
+  int bi_valid;
+  com.jcraft.jzlib.GZIPHeader gheader;
+  com.jcraft.jzlib.Deflate(com.jcraft.jzlib.ZStream);
+  void lm_init();
+  void tr_init();
+  void init_block();
+  void pqdownheap(short[], int);
+  static boolean smaller(short[], int, int, byte[]);
+  void scan_tree(short[], int);
+  int build_bl_tree();
+  void send_all_trees(int, int, int);
+  void send_tree(short[], int);
+  final void put_byte(byte[], int, int);
+  final void put_byte(byte);
+  final void put_short(int);
+  final void putShortMSB(int);
+  final void send_code(int, short[]);
+  void send_bits(int, int);
+  void _tr_align();
+  boolean _tr_tally(int, int);
+  void compress_block(short[], short[]);
+  void set_data_type();
+  void bi_flush();
+  void bi_windup();
+  void copy_block(int, int, boolean);
+  void flush_block_only(boolean);
+  int deflate_stored(int);
+  void _tr_stored_block(int, int, boolean);
+  void _tr_flush_block(int, int, boolean);
+  void fill_window();
+  int deflate_fast(int);
+  int deflate_slow(int);
+  int longest_match(int);
+  int deflateInit(int, int, int);
+  int deflateInit(int, int);
+  int deflateInit(int);
+  int deflateReset();
+  int deflateEnd();
+  int deflateParams(int, int);
+  int deflateSetDictionary(byte[], int);
+  int deflate(int);
+  static int deflateCopy(com.jcraft.jzlib.ZStream, com.jcraft.jzlib.ZStream);
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+  synchronized com.jcraft.jzlib.GZIPHeader getGZIPHeader();
+  static {};
+}
+Compiled from "Deflate.java"
+class com.jcraft.jzlib.Deflate$Config {
+  int good_length;
+  int max_lazy;
+  int nice_length;
+  int max_chain;
+  int func;
+  com.jcraft.jzlib.Deflate$Config(int, int, int, int, int);
+}
+Compiled from "Deflater.java"
+public final class com.jcraft.jzlib.Deflater extends com.jcraft.jzlib.ZStream {
+  public com.jcraft.jzlib.Deflater();
+  public com.jcraft.jzlib.Deflater(int) throws com.jcraft.jzlib.GZIPException;
+  public com.jcraft.jzlib.Deflater(int, boolean) throws com.jcraft.jzlib.GZIPException;
+  public com.jcraft.jzlib.Deflater(int, int) throws com.jcraft.jzlib.GZIPException;
+  public com.jcraft.jzlib.Deflater(int, int, boolean) throws com.jcraft.jzlib.GZIPException;
+  public com.jcraft.jzlib.Deflater(int, int, int, com.jcraft.jzlib.JZlib$WrapperType) throws com.jcraft.jzlib.GZIPException;
+  public com.jcraft.jzlib.Deflater(int, int, int) throws com.jcraft.jzlib.GZIPException;
+  public int init(int);
+  public int init(int, boolean);
+  public int init(int, int);
+  public int init(int, int, int, com.jcraft.jzlib.JZlib$WrapperType);
+  public int init(int, int, int);
+  public int init(int, int, boolean);
+  public int deflate(int);
+  public int end();
+  public int params(int, int);
+  public int setDictionary(byte[], int);
+  public boolean finished();
+  public int copy(com.jcraft.jzlib.Deflater);
+}
+Compiled from "DeflaterOutputStream.java"
+public class com.jcraft.jzlib.DeflaterOutputStream extends java.io.FilterOutputStream {
+  protected final com.jcraft.jzlib.Deflater deflater;
+  protected byte[] buffer;
+  protected boolean mydeflater;
+  protected static final int DEFAULT_BUFSIZE;
+  public com.jcraft.jzlib.DeflaterOutputStream(java.io.OutputStream) throws java.io.IOException;
+  public com.jcraft.jzlib.DeflaterOutputStream(java.io.OutputStream, com.jcraft.jzlib.Deflater) throws java.io.IOException;
+  public com.jcraft.jzlib.DeflaterOutputStream(java.io.OutputStream, com.jcraft.jzlib.Deflater, int) throws java.io.IOException;
+  public com.jcraft.jzlib.DeflaterOutputStream(java.io.OutputStream, com.jcraft.jzlib.Deflater, int, boolean) throws java.io.IOException;
+  public void write(int) throws java.io.IOException;
+  public void write(byte[], int, int) throws java.io.IOException;
+  public void finish() throws java.io.IOException;
+  public void close() throws java.io.IOException;
+  protected int deflate(int) throws java.io.IOException;
+  public void flush() throws java.io.IOException;
+  public long getTotalIn();
+  public long getTotalOut();
+  public void setSyncFlush(boolean);
+  public boolean getSyncFlush();
+  public com.jcraft.jzlib.Deflater getDeflater();
+}
+Compiled from "GZIPException.java"
+public class com.jcraft.jzlib.GZIPException extends java.io.IOException {
+  public com.jcraft.jzlib.GZIPException();
+  public com.jcraft.jzlib.GZIPException(java.lang.String);
+}
+Compiled from "GZIPHeader.java"
+public class com.jcraft.jzlib.GZIPHeader implements java.lang.Cloneable {
+  public static final byte OS_MSDOS;
+  public static final byte OS_AMIGA;
+  public static final byte OS_VMS;
+  public static final byte OS_UNIX;
+  public static final byte OS_ATARI;
+  public static final byte OS_OS2;
+  public static final byte OS_MACOS;
+  public static final byte OS_TOPS20;
+  public static final byte OS_WIN32;
+  public static final byte OS_VMCMS;
+  public static final byte OS_ZSYSTEM;
+  public static final byte OS_CPM;
+  public static final byte OS_QDOS;
+  public static final byte OS_RISCOS;
+  public static final byte OS_UNKNOWN;
+  boolean text;
+  long time;
+  int xflags;
+  int os;
+  byte[] extra;
+  byte[] name;
+  byte[] comment;
+  int hcrc;
+  long crc;
+  boolean done;
+  long mtime;
+  public com.jcraft.jzlib.GZIPHeader();
+  public void setModifiedTime(long);
+  public long getModifiedTime();
+  public void setOS(int);
+  public int getOS();
+  public void setName(java.lang.String);
+  public java.lang.String getName();
+  public void setComment(java.lang.String);
+  public java.lang.String getComment();
+  public void setCRC(long);
+  public long getCRC();
+  void put(com.jcraft.jzlib.Deflate);
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "GZIPInputStream.java"
+public class com.jcraft.jzlib.GZIPInputStream extends com.jcraft.jzlib.InflaterInputStream {
+  public com.jcraft.jzlib.GZIPInputStream(java.io.InputStream) throws java.io.IOException;
+  public com.jcraft.jzlib.GZIPInputStream(java.io.InputStream, int, boolean) throws java.io.IOException;
+  public com.jcraft.jzlib.GZIPInputStream(java.io.InputStream, com.jcraft.jzlib.Inflater, int, boolean) throws java.io.IOException;
+  public long getModifiedtime();
+  public int getOS();
+  public java.lang.String getName();
+  public java.lang.String getComment();
+  public long getCRC() throws com.jcraft.jzlib.GZIPException;
+  public void readHeader() throws java.io.IOException;
+}
+Compiled from "GZIPOutputStream.java"
+public class com.jcraft.jzlib.GZIPOutputStream extends com.jcraft.jzlib.DeflaterOutputStream {
+  public com.jcraft.jzlib.GZIPOutputStream(java.io.OutputStream) throws java.io.IOException;
+  public com.jcraft.jzlib.GZIPOutputStream(java.io.OutputStream, int) throws java.io.IOException;
+  public com.jcraft.jzlib.GZIPOutputStream(java.io.OutputStream, int, boolean) throws java.io.IOException;
+  public com.jcraft.jzlib.GZIPOutputStream(java.io.OutputStream, com.jcraft.jzlib.Deflater, int, boolean) throws java.io.IOException;
+  public void setModifiedTime(long) throws com.jcraft.jzlib.GZIPException;
+  public void setOS(int) throws com.jcraft.jzlib.GZIPException;
+  public void setName(java.lang.String) throws com.jcraft.jzlib.GZIPException;
+  public void setComment(java.lang.String) throws com.jcraft.jzlib.GZIPException;
+  public long getCRC() throws com.jcraft.jzlib.GZIPException;
+}
+Compiled from "InfBlocks.java"
+final class com.jcraft.jzlib.InfBlocks {
+  static final int[] border;
+  int mode;
+  int left;
+  int table;
+  int index;
+  int[] blens;
+  int[] bb;
+  int[] tb;
+  int[] bl;
+  int[] bd;
+  int[][] tl;
+  int[][] td;
+  int[] tli;
+  int[] tdi;
+  int last;
+  int bitk;
+  int bitb;
+  int[] hufts;
+  byte[] window;
+  int end;
+  int read;
+  int write;
+  com.jcraft.jzlib.InfBlocks(com.jcraft.jzlib.ZStream, int);
+  void reset();
+  int proc(int);
+  void free();
+  void set_dictionary(byte[], int, int);
+  int sync_point();
+  int inflate_flush(int);
+  static {};
+}
+Compiled from "InfCodes.java"
+final class com.jcraft.jzlib.InfCodes {
+  int mode;
+  int len;
+  int[] tree;
+  int tree_index;
+  int need;
+  int lit;
+  int get;
+  int dist;
+  byte lbits;
+  byte dbits;
+  int[] ltree;
+  int ltree_index;
+  int[] dtree;
+  int dtree_index;
+  com.jcraft.jzlib.InfCodes(com.jcraft.jzlib.ZStream, com.jcraft.jzlib.InfBlocks);
+  void init(int, int, int[], int, int[], int);
+  int proc(int);
+  void free(com.jcraft.jzlib.ZStream);
+  int inflate_fast(int, int, int[], int, int[], int, com.jcraft.jzlib.InfBlocks, com.jcraft.jzlib.ZStream);
+  static {};
+}
+Compiled from "InfTree.java"
+final class com.jcraft.jzlib.InfTree {
+  static final int fixed_bl;
+  static final int fixed_bd;
+  static final int[] fixed_tl;
+  static final int[] fixed_td;
+  static final int[] cplens;
+  static final int[] cplext;
+  static final int[] cpdist;
+  static final int[] cpdext;
+  static final int BMAX;
+  int[] hn;
+  int[] v;
+  int[] c;
+  int[] r;
+  int[] u;
+  int[] x;
+  com.jcraft.jzlib.InfTree();
+  int inflate_trees_bits(int[], int[], int[], int[], com.jcraft.jzlib.ZStream);
+  int inflate_trees_dynamic(int, int, int[], int[], int[], int[], int[], int[], com.jcraft.jzlib.ZStream);
+  static int inflate_trees_fixed(int[], int[], int[][], int[][], com.jcraft.jzlib.ZStream);
+  static {};
+}
+Compiled from "Inflate.java"
+final class com.jcraft.jzlib.Inflate {
+  static final int Z_NO_FLUSH;
+  static final int Z_PARTIAL_FLUSH;
+  static final int Z_SYNC_FLUSH;
+  static final int Z_FULL_FLUSH;
+  static final int Z_FINISH;
+  static final int INFLATE_ANY;
+  int mode;
+  int method;
+  long was;
+  long need;
+  int marker;
+  int wrap;
+  int wbits;
+  com.jcraft.jzlib.InfBlocks blocks;
+  com.jcraft.jzlib.GZIPHeader gheader;
+  int inflateReset();
+  int inflateEnd();
+  com.jcraft.jzlib.Inflate(com.jcraft.jzlib.ZStream);
+  int inflateInit(int);
+  int inflate(int);
+  int inflateSetDictionary(byte[], int);
+  int inflateSync();
+  int inflateSyncPoint();
+  public com.jcraft.jzlib.GZIPHeader getGZIPHeader();
+  boolean inParsingHeader();
+  static {};
+}
+Compiled from "Inflate.java"
+class com.jcraft.jzlib.Inflate$Return extends java.lang.Exception {
+  int r;
+  final com.jcraft.jzlib.Inflate this$0;
+  com.jcraft.jzlib.Inflate$Return(com.jcraft.jzlib.Inflate, int);
+}
+Compiled from "Inflater.java"
+public final class com.jcraft.jzlib.Inflater extends com.jcraft.jzlib.ZStream {
+  public com.jcraft.jzlib.Inflater();
+  public com.jcraft.jzlib.Inflater(com.jcraft.jzlib.JZlib$WrapperType) throws com.jcraft.jzlib.GZIPException;
+  public com.jcraft.jzlib.Inflater(int, com.jcraft.jzlib.JZlib$WrapperType) throws com.jcraft.jzlib.GZIPException;
+  public com.jcraft.jzlib.Inflater(int) throws com.jcraft.jzlib.GZIPException;
+  public com.jcraft.jzlib.Inflater(boolean) throws com.jcraft.jzlib.GZIPException;
+  public com.jcraft.jzlib.Inflater(int, boolean) throws com.jcraft.jzlib.GZIPException;
+  public int init();
+  public int init(com.jcraft.jzlib.JZlib$WrapperType);
+  public int init(int, com.jcraft.jzlib.JZlib$WrapperType);
+  public int init(boolean);
+  public int init(int);
+  public int init(int, boolean);
+  public int inflate(int);
+  public int end();
+  public int sync();
+  public int syncPoint();
+  public int setDictionary(byte[], int);
+  public boolean finished();
+}
+Compiled from "InflaterInputStream.java"
+public class com.jcraft.jzlib.InflaterInputStream extends java.io.FilterInputStream {
+  protected final com.jcraft.jzlib.Inflater inflater;
+  protected byte[] buf;
+  protected static final int DEFAULT_BUFSIZE;
+  protected boolean myinflater;
+  public com.jcraft.jzlib.InflaterInputStream(java.io.InputStream) throws java.io.IOException;
+  public com.jcraft.jzlib.InflaterInputStream(java.io.InputStream, boolean) throws java.io.IOException;
+  public com.jcraft.jzlib.InflaterInputStream(java.io.InputStream, com.jcraft.jzlib.Inflater) throws java.io.IOException;
+  public com.jcraft.jzlib.InflaterInputStream(java.io.InputStream, com.jcraft.jzlib.Inflater, int) throws java.io.IOException;
+  public com.jcraft.jzlib.InflaterInputStream(java.io.InputStream, com.jcraft.jzlib.Inflater, int, boolean) throws java.io.IOException;
+  public int read() throws java.io.IOException;
+  public int read(byte[], int, int) throws java.io.IOException;
+  public int available() throws java.io.IOException;
+  public long skip(long) throws java.io.IOException;
+  public void close() throws java.io.IOException;
+  protected void fill() throws java.io.IOException;
+  public boolean markSupported();
+  public synchronized void mark(int);
+  public synchronized void reset() throws java.io.IOException;
+  public long getTotalIn();
+  public long getTotalOut();
+  public byte[] getAvailIn();
+  public void readHeader() throws java.io.IOException;
+  public com.jcraft.jzlib.Inflater getInflater();
+}
+Compiled from "JZlib.java"
+public final class com.jcraft.jzlib.JZlib {
+  public static final int MAX_WBITS;
+  public static final int DEF_WBITS;
+  public static final com.jcraft.jzlib.JZlib$WrapperType W_NONE;
+  public static final com.jcraft.jzlib.JZlib$WrapperType W_ZLIB;
+  public static final com.jcraft.jzlib.JZlib$WrapperType W_GZIP;
+  public static final com.jcraft.jzlib.JZlib$WrapperType W_ANY;
+  public static final int Z_NO_COMPRESSION;
+  public static final int Z_BEST_SPEED;
+  public static final int Z_BEST_COMPRESSION;
+  public static final int Z_DEFAULT_COMPRESSION;
+  public static final int Z_FILTERED;
+  public static final int Z_HUFFMAN_ONLY;
+  public static final int Z_DEFAULT_STRATEGY;
+  public static final int Z_NO_FLUSH;
+  public static final int Z_PARTIAL_FLUSH;
+  public static final int Z_SYNC_FLUSH;
+  public static final int Z_FULL_FLUSH;
+  public static final int Z_FINISH;
+  public static final int Z_OK;
+  public static final int Z_STREAM_END;
+  public static final int Z_NEED_DICT;
+  public static final int Z_ERRNO;
+  public static final int Z_STREAM_ERROR;
+  public static final int Z_DATA_ERROR;
+  public static final int Z_MEM_ERROR;
+  public static final int Z_BUF_ERROR;
+  public static final int Z_VERSION_ERROR;
+  public static final byte Z_BINARY;
+  public static final byte Z_ASCII;
+  public static final byte Z_UNKNOWN;
+  public com.jcraft.jzlib.JZlib();
+  public static java.lang.String version();
+  public static long adler32_combine(long, long, long);
+  public static long crc32_combine(long, long, long);
+  static {};
+}
+Compiled from "JZlib.java"
+public final class com.jcraft.jzlib.JZlib$WrapperType extends java.lang.Enum<com.jcraft.jzlib.JZlib$WrapperType> {
+  public static final com.jcraft.jzlib.JZlib$WrapperType NONE;
+  public static final com.jcraft.jzlib.JZlib$WrapperType ZLIB;
+  public static final com.jcraft.jzlib.JZlib$WrapperType GZIP;
+  public static final com.jcraft.jzlib.JZlib$WrapperType ANY;
+  public static com.jcraft.jzlib.JZlib$WrapperType[] values();
+  public static com.jcraft.jzlib.JZlib$WrapperType valueOf(java.lang.String);
+  static {};
+}
+Compiled from "StaticTree.java"
+final class com.jcraft.jzlib.StaticTree {
+  static final int MAX_BL_BITS;
+  static final short[] static_ltree;
+  static final short[] static_dtree;
+  static com.jcraft.jzlib.StaticTree static_l_desc;
+  static com.jcraft.jzlib.StaticTree static_d_desc;
+  static com.jcraft.jzlib.StaticTree static_bl_desc;
+  short[] static_tree;
+  int[] extra_bits;
+  int extra_base;
+  int elems;
+  int max_length;
+  static {};
+}
+Compiled from "Tree.java"
+final class com.jcraft.jzlib.Tree {
+  static final int MAX_BL_BITS;
+  static final int END_BLOCK;
+  static final int REP_3_6;
+  static final int REPZ_3_10;
+  static final int REPZ_11_138;
+  static final int[] extra_lbits;
+  static final int[] extra_dbits;
+  static final int[] extra_blbits;
+  static final byte[] bl_order;
+  static final int Buf_size;
+  static final int DIST_CODE_LEN;
+  static final byte[] _dist_code;
+  static final byte[] _length_code;
+  static final int[] base_length;
+  static final int[] base_dist;
+  short[] dyn_tree;
+  int max_code;
+  com.jcraft.jzlib.StaticTree stat_desc;
+  com.jcraft.jzlib.Tree();
+  static int d_code(int);
+  void gen_bitlen(com.jcraft.jzlib.Deflate);
+  void build_tree(com.jcraft.jzlib.Deflate);
+  static {};
+}
+Compiled from "ZInputStream.java"
+public class com.jcraft.jzlib.ZInputStream extends java.io.FilterInputStream {
+  protected int flush;
+  protected boolean compress;
+  protected java.io.InputStream in;
+  protected com.jcraft.jzlib.Deflater deflater;
+  protected com.jcraft.jzlib.InflaterInputStream iis;
+  public com.jcraft.jzlib.ZInputStream(java.io.InputStream) throws java.io.IOException;
+  public com.jcraft.jzlib.ZInputStream(java.io.InputStream, boolean) throws java.io.IOException;
+  public com.jcraft.jzlib.ZInputStream(java.io.InputStream, int) throws java.io.IOException;
+  public int read() throws java.io.IOException;
+  public int read(byte[], int, int) throws java.io.IOException;
+  public long skip(long) throws java.io.IOException;
+  public int getFlushMode();
+  public void setFlushMode(int);
+  public long getTotalIn();
+  public long getTotalOut();
+  public void close() throws java.io.IOException;
+}
+Compiled from "ZOutputStream.java"
+public class com.jcraft.jzlib.ZOutputStream extends java.io.FilterOutputStream {
+  protected int bufsize;
+  protected int flush;
+  protected byte[] buf;
+  protected boolean compress;
+  protected java.io.OutputStream out;
+  public com.jcraft.jzlib.ZOutputStream(java.io.OutputStream) throws java.io.IOException;
+  public com.jcraft.jzlib.ZOutputStream(java.io.OutputStream, int) throws java.io.IOException;
+  public com.jcraft.jzlib.ZOutputStream(java.io.OutputStream, int, boolean) throws java.io.IOException;
+  public void write(int) throws java.io.IOException;
+  public void write(byte[], int, int) throws java.io.IOException;
+  public int getFlushMode();
+  public void setFlushMode(int);
+  public void finish() throws java.io.IOException;
+  public synchronized void end();
+  public void close() throws java.io.IOException;
+  public long getTotalIn();
+  public long getTotalOut();
+  public void flush() throws java.io.IOException;
+}
+Compiled from "ZStream.java"
+public class com.jcraft.jzlib.ZStream {
+  public byte[] next_in;
+  public int next_in_index;
+  public int avail_in;
+  public long total_in;
+  public byte[] next_out;
+  public int next_out_index;
+  public int avail_out;
+  public long total_out;
+  public java.lang.String msg;
+  com.jcraft.jzlib.Deflate dstate;
+  com.jcraft.jzlib.Inflate istate;
+  int data_type;
+  com.jcraft.jzlib.Checksum adler;
+  public com.jcraft.jzlib.ZStream();
+  public com.jcraft.jzlib.ZStream(com.jcraft.jzlib.Checksum);
+  public int inflateInit();
+  public int inflateInit(boolean);
+  public int inflateInit(int);
+  public int inflateInit(com.jcraft.jzlib.JZlib$WrapperType);
+  public int inflateInit(int, com.jcraft.jzlib.JZlib$WrapperType);
+  public int inflateInit(int, boolean);
+  public int inflate(int);
+  public int inflateEnd();
+  public int inflateSync();
+  public int inflateSyncPoint();
+  public int inflateSetDictionary(byte[], int);
+  public boolean inflateFinished();
+  public int deflateInit(int);
+  public int deflateInit(int, boolean);
+  public int deflateInit(int, int);
+  public int deflateInit(int, int, int, com.jcraft.jzlib.JZlib$WrapperType);
+  public int deflateInit(int, int, int);
+  public int deflateInit(int, int, boolean);
+  public int deflate(int);
+  public int deflateEnd();
+  public int deflateParams(int, int);
+  public int deflateSetDictionary(byte[], int);
+  void flush_pending();
+  int read_buf(byte[], int, int);
+  public long getAdler();
+  public void free();
+  public void setOutput(byte[]);
+  public void setOutput(byte[], int, int);
+  public void setInput(byte[]);
+  public void setInput(byte[], boolean);
+  public void setInput(byte[], int, int, boolean);
+  public byte[] getNextIn();
+  public void setNextIn(byte[]);
+  public int getNextInIndex();
+  public void setNextInIndex(int);
+  public int getAvailIn();
+  public void setAvailIn(int);
+  public byte[] getNextOut();
+  public void setNextOut(byte[]);
+  public int getNextOutIndex();
+  public void setNextOutIndex(int);
+  public int getAvailOut();
+  public void setAvailOut(int);
+  public long getTotalOut();
+  public long getTotalIn();
+  public java.lang.String getMessage();
+  public int end();
+  public boolean finished();
+}
+Compiled from "ZStreamException.java"
+public class com.jcraft.jzlib.ZStreamException extends java.io.IOException {
+  public com.jcraft.jzlib.ZStreamException();
+  public com.jcraft.jzlib.ZStreamException(java.lang.String);
+}
+Compiled from "test_deflate_inflate.java"
+class test_deflate_inflate {
+  static final byte[] hello;
+  test_deflate_inflate();
+  public static void main(java.lang.String[]);
+  static void CHECK_ERR(com.jcraft.jzlib.ZStream, int, java.lang.String);
+  static {};
+}
+Compiled from "test_dict_deflate_inflate.java"
+class test_dict_deflate_inflate {
+  static final byte[] dictionary;
+  static final byte[] hello;
+  test_dict_deflate_inflate();
+  public static void main(java.lang.String[]);
+  static void CHECK_ERR(com.jcraft.jzlib.ZStream, int, java.lang.String);
+  static {};
+}
+Compiled from "test_flush_sync.java"
+class test_flush_sync {
+  static final byte[] hello;
+  test_flush_sync();
+  public static void main(java.lang.String[]);
+  static void CHECK_ERR(com.jcraft.jzlib.ZStream, int, java.lang.String);
+  static {};
+}
+Compiled from "test_gzip_deflate_inflate.java"
+class test_gzip_deflate_inflate {
+  static final byte[] hello;
+  test_gzip_deflate_inflate();
+  public static void main(java.lang.String[]);
+  static void CHECK_ERR(com.jcraft.jzlib.ZStream, int, java.lang.String);
+  static {};
+}
+Compiled from "test_gzip_inflate.java"
+class test_gzip_inflate {
+  static final byte[] hello;
+  static final byte[] data;
+  test_gzip_inflate();
+  public static void main(java.lang.String[]);
+  static void CHECK_ERR(com.jcraft.jzlib.Inflater, int, java.lang.String);
+  static {};
+}
+Compiled from "test_large_deflate_inflate.java"
+class test_large_deflate_inflate {
+  static final byte[] hello;
+  test_large_deflate_inflate();
+  public static void main(java.lang.String[]);
+  static void CHECK_ERR(com.jcraft.jzlib.ZStream, int, java.lang.String);
+  static {};
+}
+Compiled from "test_stream_deflate_inflate.java"
+public class test_stream_deflate_inflate {
+  public test_stream_deflate_inflate();
+  public static void main(java.lang.String[]);
+}

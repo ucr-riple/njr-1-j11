@@ -1,0 +1,1226 @@
+Compiled from "CorrectionGenerationException.java"
+public class eu.fbk.soa.eventlog.CorrectionGenerationException extends java.lang.Exception {
+  public eu.fbk.soa.eventlog.CorrectionGenerationException(java.lang.String);
+}
+Compiled from "CorrectionGenerator.java"
+public class eu.fbk.soa.eventlog.CorrectionGenerator {
+  static org.apache.log4j.Logger logger;
+  public eu.fbk.soa.eventlog.CorrectionGenerator(eu.fbk.soa.process.ProcessModel, java.util.Set<eu.fbk.soa.process.Activity>, eu.fbk.soa.eventlog.LogExplorer);
+  public java.util.List<eu.fbk.soa.evolution.Correction> generateRelevantStrictCorrections() throws eu.fbk.soa.eventlog.CorrectionGenerationException;
+  public java.util.List<eu.fbk.soa.eventlog.TraceDifference> getDifferencesWithTraces(java.util.Map<eu.fbk.soa.eventlog.TraceDifference, java.lang.Double>);
+  public java.util.List<eu.fbk.soa.eventlog.TraceDifference> getDifferencesWithoutTraces(java.util.Map<eu.fbk.soa.eventlog.TraceDifference, java.lang.Double>);
+  public java.util.List<eu.fbk.soa.evolution.Correction> generateRelevantRelaxedCorrections(java.util.Map<eu.fbk.soa.eventlog.TraceDifference, java.lang.Double>, java.util.List<eu.fbk.soa.eventlog.TraceDifference>) throws eu.fbk.soa.eventlog.CorrectionGenerationException;
+  static {};
+}
+Compiled from "DifferenceAnalysis.java"
+public class eu.fbk.soa.eventlog.DifferenceAnalysis {
+  public static java.lang.Double minPercentageThreshold;
+  public static java.lang.Double maxPercentageThreshold;
+  public eu.fbk.soa.eventlog.DifferenceAnalysis(eu.fbk.soa.process.ProcessModel, java.util.Set<eu.fbk.soa.process.Activity>, eu.fbk.soa.eventlog.LogExplorer);
+  public java.util.Map<eu.fbk.soa.eventlog.TraceDifference, java.lang.Double> computeRelevantDifferences();
+  public void setStrictComparisons(boolean);
+  public java.util.List<eu.fbk.soa.eventlog.TraceDifference> orderByExecutedTraceSize(java.util.List<eu.fbk.soa.eventlog.TraceDifference>);
+  static {};
+}
+Compiled from "LogExplorer.java"
+public class eu.fbk.soa.eventlog.LogExplorer {
+  static org.apache.log4j.Logger logger;
+  public eu.fbk.soa.eventlog.LogExplorer(eu.fbk.soa.process.ProcessModel);
+  public void processEventLog(org.deckfour.xes.model.XLog);
+  public java.util.Set<java.lang.String> getDivergingTraces();
+  public int getTotalNrTraces();
+  public java.util.Map<java.lang.String, java.lang.Integer> getNrOfTracesByType();
+  public java.util.Map<java.lang.String, java.util.List<java.lang.String>> getTraceTypes();
+  static {};
+}
+Compiled from "TraceDifference.java"
+public class eu.fbk.soa.eventlog.TraceDifference {
+  public eu.fbk.soa.eventlog.TraceDifference(java.util.List<java.lang.String>, java.util.List<java.lang.String>, eu.fbk.soa.process.node.ActivityNode);
+  public eu.fbk.soa.eventlog.TraceDifference(java.util.List<java.lang.String>, java.util.List<java.lang.String>, eu.fbk.soa.process.node.ActivityNode, eu.fbk.soa.process.node.ActivityNode);
+  public java.lang.String getID();
+  public boolean equals(java.lang.Object);
+  public java.util.List<java.lang.String> getExecutedActivities();
+  public eu.fbk.soa.process.node.ActivityNode getFromNode();
+  public eu.fbk.soa.process.node.ActivityNode getToNode();
+  public java.util.List<java.lang.String> getActivities();
+  public void setExecutedActivities(java.util.List<java.lang.String>);
+  public void setFromNode(eu.fbk.soa.process.node.ActivityNode);
+  public void setToNode(eu.fbk.soa.process.node.ActivityNode);
+  public eu.fbk.soa.evolution.Correction generateRelaxedCorrection(int, eu.fbk.soa.process.ProcessModel, java.util.Collection<eu.fbk.soa.process.Activity>) throws eu.fbk.soa.eventlog.CorrectionGenerationException;
+  public java.util.List<eu.fbk.soa.evolution.Correction> generateCorrections(eu.fbk.soa.evolution.Correction$Type, eu.fbk.soa.process.ProcessModel, java.util.Collection<eu.fbk.soa.process.Activity>) throws eu.fbk.soa.eventlog.CorrectionGenerationException;
+  public boolean relaxedEquals(eu.fbk.soa.eventlog.TraceDifference);
+  public java.lang.String getShortDescr();
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "TraceReplay.java"
+public class eu.fbk.soa.eventlog.TraceReplay {
+  public eu.fbk.soa.eventlog.TraceReplay(eu.fbk.soa.process.ProcessModel, java.util.Set<eu.fbk.soa.process.Activity>);
+  public java.util.List<eu.fbk.soa.eventlog.TraceDifference> computeDifferences(java.util.List<java.lang.String>);
+  static {};
+}
+Compiled from "TraceReplayTest.java"
+public class eu.fbk.soa.eventlog.test.TraceReplayTest {
+  public eu.fbk.soa.eventlog.test.TraceReplayTest();
+  public void setUp();
+  public void testMatchingTrace();
+  public void testDifferentTrace();
+  public void testDifferenceAtEnd();
+}
+Compiled from "Correction.java"
+public class eu.fbk.soa.evolution.Correction {
+  public eu.fbk.soa.evolution.Correction$Type getType();
+  public eu.fbk.soa.process.Trace getTrace();
+  public eu.fbk.soa.process.StateFormula getCondition();
+  public eu.fbk.soa.evolution.Correction(eu.fbk.soa.evolution.Correction$Type, eu.fbk.soa.process.Trace, eu.fbk.soa.process.StateFormula, eu.fbk.soa.process.Adaptation);
+  public boolean isStrict();
+  public boolean isRelaxed();
+  public boolean isRelaxedWithConditions();
+  public boolean isApplicable(eu.fbk.soa.process.ProcessModel);
+  public java.util.Set<eu.fbk.soa.process.domain.DomainObject> getRelatedDomainObjects();
+  public eu.fbk.soa.process.Adaptation getAdaptation();
+  public java.lang.String toString();
+  public boolean hasSameSetting(eu.fbk.soa.evolution.Correction);
+  public boolean isAtSamePoint(eu.fbk.soa.evolution.Correction);
+  public boolean isSameExceptForFromNode(eu.fbk.soa.evolution.Correction);
+  public java.lang.String getName();
+  public boolean equals(java.lang.Object);
+  static {};
+}
+Compiled from "Correction.java"
+public final class eu.fbk.soa.evolution.Correction$Type extends java.lang.Enum<eu.fbk.soa.evolution.Correction$Type> {
+  public static final eu.fbk.soa.evolution.Correction$Type STRICT;
+  public static final eu.fbk.soa.evolution.Correction$Type RELAXED;
+  public static final eu.fbk.soa.evolution.Correction$Type WITH_CONDITIONS;
+  public static eu.fbk.soa.evolution.Correction$Type[] values();
+  public static eu.fbk.soa.evolution.Correction$Type valueOf(java.lang.String);
+  static {};
+}
+Compiled from "CorrectiveEvolution.java"
+public class eu.fbk.soa.evolution.CorrectiveEvolution {
+  public eu.fbk.soa.evolution.CorrectiveEvolution(java.lang.String);
+  public void setOutputPath(java.lang.String);
+  public void enableExperimentMode();
+  public java.util.Set<eu.fbk.soa.process.ProcessModel> evolveProcessModel(eu.fbk.soa.process.ProcessModel, eu.fbk.soa.process.Goal, java.util.List<eu.fbk.soa.evolution.Correction>);
+  static {};
+}
+Compiled from "AbstractEngine.java"
+public abstract class eu.fbk.soa.evolution.engine.AbstractEngine implements eu.fbk.soa.evolution.engine.CorrectiveEvolutionEngine {
+  protected static org.apache.log4j.Logger logger;
+  protected java.lang.String outputDir;
+  protected eu.fbk.soa.evolution.engine.impl.ProblemToSMV smvTranslator;
+  protected eu.fbk.soa.evolution.engine.impl.STSToProcessModel stsTranslator;
+  protected boolean intermediaryFiles;
+  public eu.fbk.soa.evolution.engine.AbstractEngine();
+  public void enableExperimentMode();
+  public void setOutputPath(java.lang.String);
+  protected void translateProblemToSMV(java.lang.String);
+  protected eu.fbk.soa.process.ProcessModel getCorrectedProcessModel(eu.fbk.soa.evolution.sts.STS);
+  protected void exportResultAsPetriNet(java.lang.String);
+  protected eu.fbk.soa.evolution.sts.STS getMinimizedSTS(eu.fbk.soa.evolution.sts.STS, java.lang.String);
+  protected eu.fbk.soa.evolution.sts.impl.NusmvSTS getMinimizedNusmvSTS(java.lang.String);
+  protected void handleIntermediarySTS(eu.fbk.soa.evolution.sts.STS, java.lang.String);
+  protected void handleIntermediaryDotFile(java.lang.String);
+  protected void handleIntermediaryFile(java.lang.String);
+  static {};
+}
+Compiled from "CorrectiveEvolutionEngine.java"
+public interface eu.fbk.soa.evolution.engine.CorrectiveEvolutionEngine {
+  public abstract java.util.Set<eu.fbk.soa.process.ProcessModel> solveProblem();
+  public abstract void setOutputPath(java.lang.String);
+  public abstract void enableExperimentMode();
+}
+Compiled from "EngineFactory.java"
+public class eu.fbk.soa.evolution.engine.EngineFactory {
+  public eu.fbk.soa.evolution.engine.EngineFactory();
+  public eu.fbk.soa.evolution.engine.CorrectiveEvolutionEngine getEngine(eu.fbk.soa.process.ProcessModel, eu.fbk.soa.process.Goal, java.util.List<eu.fbk.soa.evolution.Correction>);
+}
+Compiled from "RelaxedEngine.java"
+public class eu.fbk.soa.evolution.engine.RelaxedEngine extends eu.fbk.soa.evolution.engine.AbstractEngine {
+  static org.apache.log4j.Logger logger;
+  public eu.fbk.soa.evolution.engine.RelaxedEngine(eu.fbk.soa.process.ProcessModel, eu.fbk.soa.process.Goal, java.util.List<eu.fbk.soa.evolution.Correction>);
+  public java.util.Set<eu.fbk.soa.process.ProcessModel> solveProblem();
+  static {};
+}
+Compiled from "StrictEngine.java"
+public class eu.fbk.soa.evolution.engine.StrictEngine extends eu.fbk.soa.evolution.engine.AbstractEngine {
+  static org.apache.log4j.Logger logger;
+  public eu.fbk.soa.evolution.engine.StrictEngine(eu.fbk.soa.process.ProcessModel, java.util.List<eu.fbk.soa.evolution.Correction>);
+  public java.util.Set<eu.fbk.soa.process.ProcessModel> solveProblem();
+  static {};
+}
+Compiled from "Condition.java"
+public class eu.fbk.soa.evolution.engine.impl.Condition {
+  eu.fbk.soa.evolution.engine.impl.Condition();
+  public eu.fbk.soa.evolution.engine.impl.Condition(eu.fbk.soa.process.StateFormula, int);
+  public eu.fbk.soa.process.StateFormula getFormula();
+  public int getIndex();
+  public boolean isEmpty();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public eu.fbk.soa.evolution.engine.impl.Condition getNegation();
+  public java.lang.String toString();
+}
+Compiled from "ProblemToSMV.java"
+public class eu.fbk.soa.evolution.engine.impl.ProblemToSMV {
+  static org.apache.log4j.Logger logger;
+  public eu.fbk.soa.evolution.engine.impl.ProblemToSMV(eu.fbk.soa.process.ProcessModel, java.util.List<eu.fbk.soa.evolution.Correction>);
+  public eu.fbk.soa.evolution.engine.impl.ProblemToSMV(eu.fbk.soa.process.ProcessModel, eu.fbk.soa.process.Goal, java.util.List<eu.fbk.soa.evolution.Correction>);
+  public java.lang.String translateProblemToSMV();
+  public java.util.Map<java.lang.String, eu.fbk.soa.evolution.sts.STS> getIDToSTS();
+  public java.util.Map<eu.fbk.soa.evolution.sts.Action, eu.fbk.soa.process.Activity> getActionActivityCorrespondences();
+  public java.util.Map<eu.fbk.soa.evolution.sts.Action, eu.fbk.soa.evolution.engine.impl.Condition> getActionConditionCorrespondences();
+  static {};
+}
+Compiled from "ProblemToSTS.java"
+public class eu.fbk.soa.evolution.engine.impl.ProblemToSTS {
+  public eu.fbk.soa.evolution.engine.impl.ProblemToSTS(eu.fbk.soa.process.ProcessModel, java.util.List<eu.fbk.soa.evolution.Correction>, java.util.Set<eu.fbk.soa.evolution.engine.impl.Condition>);
+  public void translateProblem2STS();
+  public eu.fbk.soa.evolution.sts.STS getSemaphoreSTS();
+  public eu.fbk.soa.evolution.sts.STS getMainSTS();
+  public eu.fbk.soa.evolution.sts.STS getTraceSTS(eu.fbk.soa.process.Trace);
+  public eu.fbk.soa.evolution.sts.STS getAdaptationSTS(eu.fbk.soa.process.Adaptation);
+  public java.util.Map<eu.fbk.soa.evolution.sts.Action, eu.fbk.soa.process.Activity> getActionTable();
+  public eu.fbk.soa.evolution.sts.STS getConditionSTS(eu.fbk.soa.evolution.engine.impl.Condition);
+  public eu.fbk.soa.evolution.sts.STS getDomainObjectSTS(eu.fbk.soa.process.domain.DomainObject);
+  public eu.fbk.soa.evolution.sts.STS getProcessModelSTS(eu.fbk.soa.process.ProcessModel);
+  public java.util.Map<eu.fbk.soa.evolution.sts.Action, eu.fbk.soa.evolution.engine.impl.Condition> getActionConditionCorrespondences();
+  static {};
+}
+Compiled from "ProcessModelToSTS.java"
+public class eu.fbk.soa.evolution.engine.impl.ProcessModelToSTS {
+  public eu.fbk.soa.evolution.engine.impl.ProcessModelToSTS();
+  public eu.fbk.soa.evolution.sts.STS transformProcessModel(eu.fbk.soa.process.ProcessModel);
+  public eu.fbk.soa.evolution.sts.STS transformProcessModel(eu.fbk.soa.process.ProcessModel, eu.fbk.soa.process.node.ProcessNode);
+  public eu.fbk.soa.evolution.sts.Transition getCorrespondingTransition(eu.fbk.soa.process.node.ActivityNode);
+  public java.util.Map<eu.fbk.soa.evolution.sts.Action, eu.fbk.soa.process.Activity> getActionTable();
+  static {};
+}
+Compiled from "STSToProcessModel.java"
+public class eu.fbk.soa.evolution.engine.impl.STSToProcessModel {
+  static org.apache.log4j.Logger logger;
+  static int index;
+  public eu.fbk.soa.evolution.engine.impl.STSToProcessModel();
+  public eu.fbk.soa.process.ProcessModel sts2ProcessModel(eu.fbk.soa.evolution.sts.STS, java.util.Map<eu.fbk.soa.evolution.sts.Action, eu.fbk.soa.process.Activity>, java.util.Map<eu.fbk.soa.evolution.sts.Action, eu.fbk.soa.evolution.engine.impl.Condition>);
+  public eu.fbk.soa.evolution.sts.STS simplifySTS(eu.fbk.soa.evolution.sts.STS);
+  public eu.fbk.soa.evolution.sts.STS getSimplifiedSTS();
+  static {};
+}
+Compiled from "STSToSMV.java"
+public class eu.fbk.soa.evolution.engine.impl.STSToSMV {
+  public eu.fbk.soa.evolution.engine.impl.STSToSMV(java.util.Map<eu.fbk.soa.process.ProcessModel, java.lang.String>, java.util.Map<eu.fbk.soa.process.domain.DomainObject, java.lang.String>, java.util.Map<eu.fbk.soa.evolution.engine.impl.Condition, java.lang.String>, java.util.Map<java.lang.String, eu.fbk.soa.evolution.sts.STS>);
+  public java.lang.String translateSTS(eu.fbk.soa.evolution.sts.STS);
+  public java.lang.String translateSTS(eu.fbk.soa.evolution.sts.STS, java.lang.Object);
+  public java.lang.String translateStateFormula(eu.fbk.soa.process.StateFormula);
+}
+Compiled from "ProblemToSMVFuncTest.java"
+public class eu.fbk.soa.evolution.engine.impl.test.ProblemToSMVFuncTest {
+  public eu.fbk.soa.evolution.engine.impl.test.ProblemToSMVFuncTest();
+  public void translateProblemToSMV();
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+}
+Compiled from "ProblemToSMVTest.java"
+public class eu.fbk.soa.evolution.engine.impl.test.ProblemToSMVTest {
+  public eu.fbk.soa.evolution.engine.impl.test.ProblemToSMVTest();
+  public void setUpProblem();
+  public void testModules();
+  public void rountripTest() throws java.io.IOException;
+}
+Compiled from "ProblemToSTSTest.java"
+public class eu.fbk.soa.evolution.engine.impl.test.ProblemToSTSTest {
+  public eu.fbk.soa.evolution.engine.impl.test.ProblemToSTSTest();
+  public void setUpProblem();
+  public void testModelToSTS();
+  public void testXorToSTS();
+  public void testTraceToSTS();
+}
+Compiled from "TestInputProblem.java"
+public class eu.fbk.soa.evolution.engine.impl.test.TestInputProblem {
+  public eu.fbk.soa.evolution.Correction getCorrection();
+  public java.util.Set<eu.fbk.soa.evolution.engine.impl.Condition> getConditions();
+  public eu.fbk.soa.evolution.engine.impl.test.TestInputProblem();
+  public eu.fbk.soa.process.ProcessModel getProcessModel();
+}
+Compiled from "Action.java"
+public interface eu.fbk.soa.evolution.sts.Action {
+  public abstract java.lang.String getName();
+  public abstract boolean isInputAction();
+  public abstract java.lang.Object getRelatedEntity();
+  public abstract boolean isRelatedToAnActivity();
+}
+Compiled from "Clause.java"
+public interface eu.fbk.soa.evolution.sts.Clause<LiteralType extends eu.fbk.soa.evolution.sts.Literal> {
+  public abstract java.util.Set<LiteralType> getLiterals();
+  public abstract void removeLiteral(LiteralType);
+}
+Compiled from "Literal.java"
+public interface eu.fbk.soa.evolution.sts.Literal {
+  public abstract boolean isNegated();
+  public abstract void negate();
+  public abstract eu.fbk.soa.evolution.sts.Literal getNegation();
+  public abstract java.lang.String getProposition();
+}
+Compiled from "STS.java"
+public interface eu.fbk.soa.evolution.sts.STS {
+  public abstract void addState(eu.fbk.soa.evolution.sts.State);
+  public abstract void addStates(java.util.Collection<eu.fbk.soa.evolution.sts.State>);
+  public abstract void addInitialState(eu.fbk.soa.evolution.sts.State);
+  public abstract void addTransition(eu.fbk.soa.evolution.sts.Transition);
+  public abstract void addAction(eu.fbk.soa.evolution.sts.Action);
+  public abstract void addActions(java.util.Collection<eu.fbk.soa.evolution.sts.Action>);
+  public abstract eu.fbk.soa.evolution.sts.State getInitialState();
+  public abstract java.util.Set<eu.fbk.soa.evolution.sts.State> getStates();
+  public abstract java.util.Set<eu.fbk.soa.evolution.sts.Action> getActions();
+  public abstract java.util.Set<eu.fbk.soa.evolution.sts.Transition> getTransitions();
+  public abstract java.util.Set<eu.fbk.soa.evolution.sts.Transition> getTransitionsFromState(eu.fbk.soa.evolution.sts.State);
+  public abstract java.util.Set<eu.fbk.soa.evolution.sts.Action> getInputActions();
+  public abstract java.util.Set<eu.fbk.soa.evolution.sts.Action> getOutputActions();
+  public abstract java.util.Set<eu.fbk.soa.evolution.sts.State> getFinalStates();
+  public abstract eu.fbk.soa.evolution.sts.State getState(java.lang.String);
+  public abstract void labelState(eu.fbk.soa.evolution.sts.State, java.lang.String);
+  public abstract java.util.Set<eu.fbk.soa.evolution.sts.State> getStatesForLabel(java.lang.String);
+  public abstract void addTransitions(java.util.Collection<eu.fbk.soa.evolution.sts.Transition>);
+  public abstract eu.fbk.soa.evolution.sts.Action getAction(java.lang.String);
+  public abstract void setName(java.lang.String);
+  public abstract void setInitialState(eu.fbk.soa.evolution.sts.State);
+  public abstract void setInitialState(java.lang.String);
+  public abstract java.lang.String toDot();
+  public abstract eu.fbk.soa.evolution.sts.STS getCopy();
+  public abstract void replaceState(eu.fbk.soa.evolution.sts.State, eu.fbk.soa.evolution.sts.State);
+  public abstract java.util.Set<eu.fbk.soa.evolution.sts.Transition> getTransitionsToState(eu.fbk.soa.evolution.sts.State);
+  public abstract boolean removeTransition(eu.fbk.soa.evolution.sts.Transition);
+  public abstract boolean removeState(eu.fbk.soa.evolution.sts.State);
+  public abstract void removeUnusedActions();
+  public abstract void removeAction(eu.fbk.soa.evolution.sts.Action);
+  public abstract void removeUnusedStates();
+  public abstract boolean hasAlternativePath(eu.fbk.soa.evolution.sts.Transition);
+  public abstract void refreshStates();
+}
+Compiled from "State.java"
+public interface eu.fbk.soa.evolution.sts.State {
+  public abstract java.lang.String getName();
+  public abstract void setName(java.lang.String);
+}
+Compiled from "Transition.java"
+public interface eu.fbk.soa.evolution.sts.Transition {
+  public abstract eu.fbk.soa.evolution.sts.State getSource();
+  public abstract eu.fbk.soa.evolution.sts.Action getAction();
+  public abstract java.lang.String getActionName();
+  public abstract eu.fbk.soa.evolution.sts.State getTarget();
+  public abstract eu.fbk.soa.evolution.sts.Transition replaceState(eu.fbk.soa.evolution.sts.State, eu.fbk.soa.evolution.sts.State);
+  public abstract java.lang.String toDot();
+  public abstract eu.fbk.soa.process.StateFormula getCondition();
+  public abstract void setCondition(eu.fbk.soa.process.StateFormula);
+  public abstract java.util.Set<eu.fbk.soa.evolution.sts.Clause<? extends eu.fbk.soa.evolution.sts.Literal>> getGuardClauses();
+  public abstract void addGuardClause(eu.fbk.soa.evolution.sts.Clause<? extends eu.fbk.soa.evolution.sts.Literal>);
+  public abstract void addGuardClauses(java.util.Set<eu.fbk.soa.evolution.sts.Clause<? extends eu.fbk.soa.evolution.sts.Literal>>);
+}
+Compiled from "AbstractSTS.java"
+public abstract class eu.fbk.soa.evolution.sts.impl.AbstractSTS implements eu.fbk.soa.evolution.sts.STS {
+  static org.apache.log4j.Logger logger;
+  java.util.Set<eu.fbk.soa.evolution.sts.State> states;
+  eu.fbk.soa.evolution.sts.State initialState;
+  java.util.Set<eu.fbk.soa.evolution.sts.Transition> transitions;
+  public eu.fbk.soa.evolution.sts.impl.AbstractSTS();
+  public void addState(eu.fbk.soa.evolution.sts.State);
+  public void addInitialState(eu.fbk.soa.evolution.sts.State);
+  public void addStates(java.util.Collection<eu.fbk.soa.evolution.sts.State>);
+  public void addTransition(eu.fbk.soa.evolution.sts.Transition);
+  public void addTransitions(java.util.Collection<eu.fbk.soa.evolution.sts.Transition>);
+  public java.util.Set<eu.fbk.soa.evolution.sts.State> getFinalStates();
+  public eu.fbk.soa.evolution.sts.State getState(java.lang.String);
+  public java.util.Set<eu.fbk.soa.evolution.sts.State> getStates();
+  public java.util.Set<eu.fbk.soa.evolution.sts.State> getStatesForLabel(java.lang.String);
+  public java.util.Set<eu.fbk.soa.evolution.sts.Transition> getTransitions();
+  public java.util.Set<eu.fbk.soa.evolution.sts.Transition> getTransitionsFromState(eu.fbk.soa.evolution.sts.State);
+  public java.util.Set<eu.fbk.soa.evolution.sts.Transition> getTransitionsToState(eu.fbk.soa.evolution.sts.State);
+  public boolean hasAlternativePath(eu.fbk.soa.evolution.sts.Transition);
+  public void labelState(eu.fbk.soa.evolution.sts.State, java.lang.String);
+  public boolean removeState(eu.fbk.soa.evolution.sts.State);
+  public boolean removeTransition(eu.fbk.soa.evolution.sts.Transition);
+  public void removeUnusedActions();
+  public void removeUnusedStates();
+  public void refreshStates();
+  public void replaceState(eu.fbk.soa.evolution.sts.State, eu.fbk.soa.evolution.sts.State);
+  public void setInitialState(java.lang.String);
+  public void setName(java.lang.String);
+  public java.lang.String toDot();
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "DefaultAction.java"
+public class eu.fbk.soa.evolution.sts.impl.DefaultAction implements eu.fbk.soa.evolution.sts.Action {
+  public eu.fbk.soa.evolution.sts.impl.DefaultAction();
+  public eu.fbk.soa.evolution.sts.impl.DefaultAction(java.lang.String, boolean, eu.fbk.soa.process.Activity, eu.fbk.soa.process.ProcessModel);
+  public eu.fbk.soa.evolution.sts.impl.DefaultAction(java.lang.String, boolean, java.lang.Object);
+  public eu.fbk.soa.evolution.sts.impl.DefaultAction(java.lang.String, boolean);
+  public java.lang.String getName();
+  public java.lang.String toString();
+  public boolean isInputAction();
+  public eu.fbk.soa.process.Activity getRelatedActivity();
+  public java.lang.Object getRelatedEntity();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public boolean isRelatedToAnActivity();
+}
+Compiled from "DefaultClause.java"
+public class eu.fbk.soa.evolution.sts.impl.DefaultClause implements eu.fbk.soa.evolution.sts.Clause<eu.fbk.soa.evolution.sts.impl.DefaultLiteral> {
+  public eu.fbk.soa.evolution.sts.impl.DefaultClause(eu.fbk.soa.evolution.sts.impl.DefaultLiteral);
+  public void addLiteral(eu.fbk.soa.evolution.sts.impl.DefaultLiteral);
+  public eu.fbk.soa.evolution.sts.impl.DefaultClause(eu.fbk.soa.evolution.sts.impl.DefaultLiteral...);
+  public eu.fbk.soa.evolution.sts.impl.DefaultClause(java.util.Set<eu.fbk.soa.evolution.sts.impl.DefaultLiteral>);
+  public java.util.Set<eu.fbk.soa.evolution.sts.impl.DefaultLiteral> getLiterals();
+  public void removeLiteral(eu.fbk.soa.evolution.sts.impl.DefaultLiteral);
+  public void removeLiteral(eu.fbk.soa.evolution.sts.Literal);
+}
+Compiled from "DefaultLiteral.java"
+public class eu.fbk.soa.evolution.sts.impl.DefaultLiteral implements eu.fbk.soa.evolution.sts.Literal {
+  public eu.fbk.soa.evolution.sts.impl.DefaultLiteral(java.lang.String, boolean);
+  public eu.fbk.soa.evolution.sts.impl.DefaultLiteral(java.lang.String);
+  public boolean isNegated();
+  public void negate();
+  public eu.fbk.soa.evolution.sts.impl.DefaultLiteral getNegation();
+  public java.lang.String getProposition();
+  public eu.fbk.soa.evolution.sts.Literal getNegation();
+}
+Compiled from "DefaultSTS.java"
+public class eu.fbk.soa.evolution.sts.impl.DefaultSTS extends eu.fbk.soa.evolution.sts.impl.AbstractSTS implements eu.fbk.soa.evolution.sts.STS {
+  public eu.fbk.soa.evolution.sts.impl.DefaultSTS(java.util.Set<eu.fbk.soa.evolution.sts.State>, eu.fbk.soa.evolution.sts.State, java.util.Set<eu.fbk.soa.evolution.sts.Action>, java.util.Set<eu.fbk.soa.evolution.sts.Action>, java.util.Set<eu.fbk.soa.evolution.sts.Transition>);
+  public eu.fbk.soa.evolution.sts.impl.DefaultSTS();
+  public boolean isEmpty();
+  public eu.fbk.soa.evolution.sts.State getInitialState();
+  public java.util.Set<eu.fbk.soa.evolution.sts.Action> getInputActions();
+  public java.util.Set<eu.fbk.soa.evolution.sts.Action> getOutputActions();
+  public void setInitialState(eu.fbk.soa.evolution.sts.State);
+  public void addInputAction(eu.fbk.soa.evolution.sts.Action);
+  public void addOutputAction(eu.fbk.soa.evolution.sts.Action);
+  public void addAction(eu.fbk.soa.evolution.sts.Action);
+  public void addActions(java.util.Collection<eu.fbk.soa.evolution.sts.Action>);
+  public eu.fbk.soa.evolution.sts.Action searchAction(java.util.Set<eu.fbk.soa.evolution.sts.Action>, java.lang.String);
+  public java.util.Set<eu.fbk.soa.evolution.sts.Action> getActions();
+  public void labelState(eu.fbk.soa.evolution.sts.State, java.lang.String);
+  public java.util.Set<eu.fbk.soa.evolution.sts.State> getStatesForLabel(java.lang.String);
+  public eu.fbk.soa.evolution.sts.Action getAction(java.lang.String);
+  public eu.fbk.soa.evolution.sts.STS getCopy();
+  public void removeAction(eu.fbk.soa.evolution.sts.Action);
+}
+Compiled from "DefaultState.java"
+public class eu.fbk.soa.evolution.sts.impl.DefaultState implements eu.fbk.soa.evolution.sts.State {
+  public eu.fbk.soa.evolution.sts.impl.DefaultState(java.lang.String);
+  public java.lang.String toString();
+  public java.lang.String getName();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public void setName(java.lang.String);
+}
+Compiled from "DefaultTransition.java"
+public class eu.fbk.soa.evolution.sts.impl.DefaultTransition implements eu.fbk.soa.evolution.sts.Transition {
+  public eu.fbk.soa.evolution.sts.impl.DefaultTransition(eu.fbk.soa.evolution.sts.State, eu.fbk.soa.process.StateFormula, eu.fbk.soa.evolution.sts.Action, eu.fbk.soa.evolution.sts.State);
+  public eu.fbk.soa.evolution.sts.impl.DefaultTransition(eu.fbk.soa.evolution.sts.State, eu.fbk.soa.evolution.sts.Action, eu.fbk.soa.evolution.sts.State);
+  public eu.fbk.soa.evolution.sts.State getSource();
+  public eu.fbk.soa.process.StateFormula getCondition();
+  public eu.fbk.soa.evolution.sts.Action getAction();
+  public eu.fbk.soa.evolution.sts.State getTarget();
+  public java.lang.String toString();
+  public eu.fbk.soa.evolution.sts.impl.DefaultTransition replaceState(eu.fbk.soa.evolution.sts.State, eu.fbk.soa.evolution.sts.State);
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public java.lang.String toDot();
+  public void setCondition(eu.fbk.soa.process.StateFormula);
+  public java.util.Set<eu.fbk.soa.evolution.sts.Clause<? extends eu.fbk.soa.evolution.sts.Literal>> getGuardClauses();
+  public void addGuardClause(eu.fbk.soa.evolution.sts.Clause<? extends eu.fbk.soa.evolution.sts.Literal>);
+  public void addGuardClauses(java.util.Set<eu.fbk.soa.evolution.sts.Clause<? extends eu.fbk.soa.evolution.sts.Literal>>);
+  public java.lang.String getActionName();
+  public eu.fbk.soa.evolution.sts.Transition replaceState(eu.fbk.soa.evolution.sts.State, eu.fbk.soa.evolution.sts.State);
+}
+Compiled from "NusmvAction.java"
+public class eu.fbk.soa.evolution.sts.impl.NusmvAction implements eu.fbk.soa.evolution.sts.Action {
+  static org.apache.log4j.Logger logger;
+  public eu.fbk.soa.evolution.sts.impl.NusmvAction(java.util.Map<java.lang.String, java.lang.String>) throws java.lang.IllegalArgumentException;
+  public eu.fbk.soa.evolution.sts.impl.NusmvAction();
+  public java.lang.String toString();
+  public boolean equals(java.lang.Object);
+  protected java.lang.String getValue(java.lang.String);
+  public java.lang.String getName();
+  public boolean isInputAction();
+  public java.lang.Object getRelatedEntity();
+  public int hashCode();
+  public boolean isRelatedToAnActivity();
+  static {};
+}
+Compiled from "NusmvSTS.java"
+public class eu.fbk.soa.evolution.sts.impl.NusmvSTS extends eu.fbk.soa.evolution.sts.impl.AbstractSTS implements eu.fbk.soa.evolution.sts.STS {
+  public eu.fbk.soa.evolution.sts.impl.NusmvSTS();
+  public eu.fbk.soa.evolution.sts.impl.NusmvState addState(java.util.Map<java.lang.String, java.lang.String>);
+  public eu.fbk.soa.evolution.sts.Action addAction(java.util.Map<java.lang.String, java.lang.String>);
+  public eu.fbk.soa.evolution.sts.State getInitialState();
+  public java.util.Set<eu.fbk.soa.evolution.sts.Action> getActions();
+  public eu.fbk.soa.evolution.sts.impl.NusmvSTS getCopy();
+  public void addActions(java.util.Collection<eu.fbk.soa.evolution.sts.Action>);
+  public void addAction(eu.fbk.soa.evolution.sts.Action);
+  public java.util.Set<eu.fbk.soa.evolution.sts.Action> getInputActions();
+  public java.util.Set<eu.fbk.soa.evolution.sts.Action> getOutputActions();
+  public void setInitialState(eu.fbk.soa.evolution.sts.State);
+  public eu.fbk.soa.evolution.sts.Action getAction(java.lang.String);
+  public void removeAction(eu.fbk.soa.evolution.sts.Action);
+  public eu.fbk.soa.evolution.sts.STS getCopy();
+}
+Compiled from "NusmvState.java"
+public class eu.fbk.soa.evolution.sts.impl.NusmvState implements eu.fbk.soa.evolution.sts.State {
+  public eu.fbk.soa.evolution.sts.impl.NusmvState();
+  public eu.fbk.soa.evolution.sts.impl.NusmvState(java.util.Map<java.lang.String, java.lang.String>);
+  public int hashCode();
+  public void addVariableValue(java.lang.String, java.lang.String);
+  public java.lang.String toString();
+  public void addVariableValues(java.util.Map<java.lang.String, java.lang.String>);
+  public java.lang.String getValue(java.lang.String);
+  public int getIndex();
+  public boolean equals(java.lang.Object);
+  public java.util.Map<java.lang.String, java.lang.String> getVariableValues();
+  public java.lang.String getName();
+  public void setName(java.lang.String);
+  static {};
+}
+Compiled from "NusmvTransition.java"
+public class eu.fbk.soa.evolution.sts.impl.NusmvTransition implements eu.fbk.soa.evolution.sts.Transition {
+  public eu.fbk.soa.evolution.sts.impl.NusmvTransition(eu.fbk.soa.evolution.sts.State, eu.fbk.soa.evolution.sts.Action, eu.fbk.soa.evolution.sts.State);
+  public java.lang.String toDot();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public eu.fbk.soa.evolution.sts.Action getAction();
+  public eu.fbk.soa.evolution.sts.State getTarget();
+  public eu.fbk.soa.evolution.sts.State getSource();
+  public java.lang.String toString();
+  public eu.fbk.soa.evolution.sts.Transition replaceState(eu.fbk.soa.evolution.sts.State, eu.fbk.soa.evolution.sts.State);
+  public eu.fbk.soa.process.StateFormula getCondition();
+  public void setCondition(eu.fbk.soa.process.StateFormula);
+  public java.util.Set<eu.fbk.soa.evolution.sts.Clause<? extends eu.fbk.soa.evolution.sts.Literal>> getGuardClauses();
+  public void addGuardClause(eu.fbk.soa.evolution.sts.Clause<? extends eu.fbk.soa.evolution.sts.Literal>);
+  public void addGuardClauses(java.util.Set<eu.fbk.soa.evolution.sts.Clause<? extends eu.fbk.soa.evolution.sts.Literal>>);
+  public java.lang.String getActionName();
+}
+Compiled from "WildcardAction.java"
+public class eu.fbk.soa.evolution.sts.impl.WildcardAction implements eu.fbk.soa.evolution.sts.Action {
+  public eu.fbk.soa.evolution.sts.impl.WildcardAction(boolean, eu.fbk.soa.process.ProcessModel);
+  public eu.fbk.soa.evolution.sts.impl.WildcardAction(boolean, eu.fbk.soa.process.ProcessModel, java.util.Set<eu.fbk.soa.evolution.sts.Action>);
+  public java.lang.String getName();
+  public boolean isInputAction();
+  public eu.fbk.soa.process.ProcessModel getRelatedEntity();
+  public java.util.Set<eu.fbk.soa.evolution.sts.Action> getDifferentFrom();
+  public boolean isRelatedToAnActivity();
+  public java.lang.Object getRelatedEntity();
+  static {};
+}
+Compiled from "BisimulationMinimizer.java"
+public class eu.fbk.soa.evolution.sts.minimizer.BisimulationMinimizer implements eu.fbk.soa.evolution.sts.minimizer.STSMinimizer {
+  public eu.fbk.soa.evolution.sts.minimizer.BisimulationMinimizer();
+  public void minimizeSTS(eu.fbk.soa.evolution.sts.STS, java.io.File);
+  public void minimizeSTS(java.io.File, java.io.File);
+}
+Compiled from "Block.java"
+public class eu.fbk.soa.evolution.sts.minimizer.Block {
+  public eu.fbk.soa.evolution.sts.minimizer.Block();
+  public eu.fbk.soa.evolution.sts.minimizer.Block(eu.fbk.soa.evolution.sts.State);
+  public eu.fbk.soa.evolution.sts.minimizer.Block(java.util.Collection<eu.fbk.soa.evolution.sts.State>);
+  public java.util.Set<eu.fbk.soa.evolution.sts.State> getStates();
+  public int size();
+  public boolean containedIn(eu.fbk.soa.evolution.sts.minimizer.Block);
+  public boolean contains(eu.fbk.soa.evolution.sts.State);
+  public java.lang.String toString();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public boolean contains(eu.fbk.soa.evolution.sts.minimizer.Block);
+  public boolean contains(java.util.Collection<eu.fbk.soa.evolution.sts.State>);
+}
+Compiled from "Partition.java"
+public class eu.fbk.soa.evolution.sts.minimizer.Partition {
+  public eu.fbk.soa.evolution.sts.minimizer.Partition(java.util.Collection<eu.fbk.soa.evolution.sts.minimizer.Block>);
+  public eu.fbk.soa.evolution.sts.minimizer.Partition();
+  public eu.fbk.soa.evolution.sts.minimizer.Partition(eu.fbk.soa.evolution.sts.minimizer.Block);
+  public void addBlock(eu.fbk.soa.evolution.sts.minimizer.Block);
+  public java.util.List<eu.fbk.soa.evolution.sts.minimizer.Block> getBlocks();
+  public void removeBlock(eu.fbk.soa.evolution.sts.minimizer.Block);
+  public boolean equals(java.lang.Object);
+  public boolean includes(eu.fbk.soa.evolution.sts.minimizer.Partition);
+  public int hashCode();
+}
+Compiled from "STSMinimizer.java"
+public interface eu.fbk.soa.evolution.sts.minimizer.STSMinimizer {
+  public abstract void minimizeSTS(eu.fbk.soa.evolution.sts.STS, java.io.File);
+  public abstract void minimizeSTS(java.io.File, java.io.File);
+}
+Compiled from "TraceEquivalenceMinimizer.java"
+public class eu.fbk.soa.evolution.sts.minimizer.TraceEquivalenceMinimizer implements eu.fbk.soa.evolution.sts.minimizer.STSMinimizer {
+  static org.apache.log4j.Logger logger;
+  public eu.fbk.soa.evolution.sts.minimizer.TraceEquivalenceMinimizer();
+  public void minimizeSTS(eu.fbk.soa.evolution.sts.STS, java.io.File);
+  public void minimizeSTS(java.io.File, java.io.File);
+  static {};
+}
+Compiled from "TraceEquivalenceMinimizerTest.java"
+public class eu.fbk.soa.evolution.sts.minimizer.test.TraceEquivalenceMinimizerTest {
+  public eu.fbk.soa.evolution.sts.minimizer.test.TraceEquivalenceMinimizerTest();
+  public void setUp() throws java.io.IOException;
+  public void testMinimizeAlreadyMinimalSTS();
+  public void testMinimizeSTS();
+}
+Compiled from "PathExplorer.java"
+class eu.fbk.soa.evolution.sts.nusmv.ConsoleGobbler extends java.lang.Thread {
+  boolean run;
+  eu.fbk.soa.evolution.sts.nusmv.ConsoleGobbler(eu.fbk.soa.evolution.sts.nusmv.NuSMVConsole);
+  void setRun(boolean);
+  public void run();
+}
+Compiled from "StateTree.java"
+class eu.fbk.soa.evolution.sts.nusmv.Node {
+  eu.fbk.soa.evolution.sts.nusmv.Node(eu.fbk.soa.evolution.sts.nusmv.Node);
+  boolean isLeaf();
+  eu.fbk.soa.evolution.sts.nusmv.Node(eu.fbk.soa.evolution.sts.nusmv.Node, eu.fbk.soa.evolution.sts.State);
+  void setParent(eu.fbk.soa.evolution.sts.nusmv.Node);
+  void visit();
+  boolean subtreeIsVisited();
+  java.util.List<eu.fbk.soa.evolution.sts.nusmv.Node> addChildren(java.util.List<? extends eu.fbk.soa.evolution.sts.State>);
+  eu.fbk.soa.evolution.sts.nusmv.Node addChild(eu.fbk.soa.evolution.sts.State);
+  boolean pointsTo(eu.fbk.soa.evolution.sts.State);
+  eu.fbk.soa.evolution.sts.State getState();
+  java.util.List<eu.fbk.soa.evolution.sts.nusmv.Node> getChildren();
+  static {};
+}
+Compiled from "NuSMVConsole.java"
+class eu.fbk.soa.evolution.sts.nusmv.NuSMVConsole extends java.lang.Thread {
+  static int simulationSteps;
+  static org.apache.log4j.Logger logger;
+  eu.fbk.soa.evolution.sts.nusmv.NuSMVConsole(java.lang.String, java.lang.String, java.lang.String, eu.fbk.soa.evolution.sts.impl.NusmvSTS);
+  void readChars();
+  void closeConsole();
+  java.lang.String waitForCommandPrompt() throws java.io.IOException;
+  java.lang.String pickInitialState(eu.fbk.soa.evolution.sts.nusmv.StateTree) throws java.io.IOException;
+  java.lang.String simulateInteractively() throws java.io.IOException;
+  void loadConsole() throws java.io.IOException;
+  synchronized void execCommand(java.lang.String) throws java.io.IOException;
+  static {};
+}
+Compiled from "NuSMVOutputHandler.java"
+class eu.fbk.soa.evolution.sts.nusmv.NuSMVOutputHandler {
+  eu.fbk.soa.evolution.sts.nusmv.NuSMVOutputHandler();
+  static java.util.List<eu.fbk.soa.evolution.sts.State> addStatesToSTS(eu.fbk.soa.evolution.sts.impl.NusmvSTS, java.lang.String, java.lang.String);
+  static java.util.Map<java.lang.String, java.lang.String> getVariableValues(java.lang.String);
+  static java.util.List<eu.fbk.soa.evolution.sts.State> addInitialStatesToSTS(java.lang.String, eu.fbk.soa.evolution.sts.impl.NusmvSTS);
+  static java.util.List<eu.fbk.soa.evolution.sts.impl.NusmvState> addTransitionsFromState(java.lang.String, eu.fbk.soa.evolution.sts.impl.NusmvState, eu.fbk.soa.evolution.sts.impl.NusmvSTS);
+}
+Compiled from "PathExplorer.java"
+public class eu.fbk.soa.evolution.sts.nusmv.PathExplorer {
+  static org.apache.log4j.Logger logger;
+  public eu.fbk.soa.evolution.sts.nusmv.PathExplorer(java.lang.String);
+  public eu.fbk.soa.evolution.sts.impl.NusmvSTS explore(java.lang.String) throws java.io.IOException;
+  static {};
+}
+Compiled from "StateTree.java"
+class eu.fbk.soa.evolution.sts.nusmv.StateTree {
+  eu.fbk.soa.evolution.sts.nusmv.StateTree();
+  eu.fbk.soa.evolution.sts.nusmv.Node getRoot();
+  eu.fbk.soa.evolution.sts.nusmv.Node addNode(eu.fbk.soa.evolution.sts.nusmv.Node, eu.fbk.soa.evolution.sts.impl.NusmvState);
+  eu.fbk.soa.evolution.sts.nusmv.Node addNode(eu.fbk.soa.evolution.sts.nusmv.Node);
+  boolean isVisited();
+}
+Compiled from "BasicCorrectiveEvolutionScenario.java"
+public class eu.fbk.soa.evolution.test.BasicCorrectiveEvolutionScenario {
+  public eu.fbk.soa.evolution.test.BasicCorrectiveEvolutionScenario();
+  public void testCorrectiveEvolution(java.lang.String);
+  static {};
+}
+Compiled from "CarLogisticsScenario.java"
+public class eu.fbk.soa.evolution.test.CarLogisticsScenario {
+  public eu.fbk.soa.evolution.test.CarLogisticsScenario();
+  public void testCorrectiveEvolution(java.lang.String) throws eu.fbk.soa.xml.XMLParsingException;
+  static {};
+}
+Compiled from "FinancialScenario.java"
+public class eu.fbk.soa.evolution.test.FinancialScenario {
+  public eu.fbk.soa.evolution.test.FinancialScenario(java.lang.String);
+  public void testFinancialRelaxed() throws java.lang.Exception;
+  public void testFinancialStrict() throws java.lang.Exception;
+  static {};
+}
+Compiled from "InputConstructor.java"
+public class eu.fbk.soa.evolution.test.InputConstructor {
+  public eu.fbk.soa.evolution.test.InputConstructor();
+  public static eu.fbk.soa.process.domain.DomainObject constructSimpleDomainObject(java.lang.String, eu.fbk.soa.process.domain.ObjectState, eu.fbk.soa.process.domain.ObjectState, eu.fbk.soa.process.domain.ObjectEvent, eu.fbk.soa.process.domain.ObjectEvent);
+  public static eu.fbk.soa.process.domain.DomainObject constructSimpleDomainObject(java.lang.String, eu.fbk.soa.process.domain.ObjectState, eu.fbk.soa.process.domain.ObjectState);
+  public static eu.fbk.soa.process.ProcessModel construct2XorProcessModel();
+  public static eu.fbk.soa.process.ProcessModel constructSimpleLogisticsProcessModel();
+  public static java.util.Map<java.lang.String, eu.fbk.soa.process.ProcessModel> constructLogisticsProcessModels();
+  public static eu.fbk.soa.process.EaGLeGoal constructLogisticsGoal(java.util.Map<java.lang.String, eu.fbk.soa.process.ProcessModel>);
+  public static java.util.List<eu.fbk.soa.evolution.Correction> constructLogisticsCorrections(java.util.Map<java.lang.String, eu.fbk.soa.process.ProcessModel>, eu.fbk.soa.evolution.Correction$Type, eu.fbk.soa.evolution.Correction$Type);
+  public static java.util.List<eu.fbk.soa.evolution.Correction> constructLogisticsCorrectionsWithQueue(java.util.Set<eu.fbk.soa.process.domain.DomainObject>, java.util.Map<java.lang.String, eu.fbk.soa.process.ProcessModel>, eu.fbk.soa.evolution.Correction$Type, eu.fbk.soa.evolution.Correction$Type);
+  public static eu.fbk.soa.evolution.Correction constructSimpleLogisticsCorrection(eu.fbk.soa.process.ProcessModel);
+}
+Compiled from "ScenarioLauncher.java"
+public class eu.fbk.soa.evolution.test.ScenarioLauncher {
+  public eu.fbk.soa.evolution.test.ScenarioLauncher();
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+  static {};
+}
+Compiled from "Activity.java"
+public class eu.fbk.soa.process.Activity {
+  public eu.fbk.soa.process.Activity();
+  public eu.fbk.soa.process.Activity(java.lang.String, eu.fbk.soa.process.StateFormula, eu.fbk.soa.process.Effect);
+  public java.lang.String getName();
+  public static eu.fbk.soa.process.Activity getActivity(java.lang.String);
+  public static eu.fbk.soa.process.Activity getActivity(java.lang.String, eu.fbk.soa.process.StateFormula, eu.fbk.soa.process.Effect);
+  public boolean matches(java.lang.String, eu.fbk.soa.process.StateFormula, eu.fbk.soa.process.Effect);
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+  public java.util.Set<eu.fbk.soa.process.domain.DomainObject> getRelatedDomainObjects();
+  public eu.fbk.soa.process.StateFormula getPrecondition();
+  public boolean appearsAsNode(eu.fbk.soa.process.ProcessModel);
+  public eu.fbk.soa.process.Effect getEffect();
+  public void updateObjectReferences(java.util.Set<eu.fbk.soa.process.domain.DomainObject>);
+  public boolean hasUnresolvedReferences();
+  public boolean isLastNode(eu.fbk.soa.process.ProcessModel);
+  public boolean followsDirectly(eu.fbk.soa.process.Activity, eu.fbk.soa.process.ProcessModel);
+  public boolean isFirstNode(eu.fbk.soa.process.ProcessModel);
+  static {};
+}
+Compiled from "Adaptation.java"
+public class eu.fbk.soa.process.Adaptation {
+  public eu.fbk.soa.process.Adaptation(eu.fbk.soa.process.ProcessModel, eu.fbk.soa.process.node.ActivityNode, eu.fbk.soa.process.node.ActivityNode);
+  public eu.fbk.soa.process.node.ActivityNode getFromNode();
+  public eu.fbk.soa.process.node.ActivityNode getToNode();
+  public eu.fbk.soa.process.StateFormula getPreconditionOfToNode();
+  public eu.fbk.soa.process.ProcessModel getAdaptationModel();
+  public boolean isApplicable(eu.fbk.soa.process.ProcessModel, eu.fbk.soa.process.Trace);
+  public boolean isApplicable(eu.fbk.soa.process.ProcessModel, java.util.List<eu.fbk.soa.process.Adaptation>, eu.fbk.soa.process.Trace);
+  public boolean isApplicable(eu.fbk.soa.process.ProcessModel);
+  public java.lang.String toString();
+  public boolean equals(java.lang.Object);
+  public java.util.Set<eu.fbk.soa.process.domain.DomainObject> getRelatedDomainObjects();
+  static {};
+}
+Compiled from "DefaultProcessModel.java"
+public class eu.fbk.soa.process.DefaultProcessModel extends org.jgrapht.graph.DefaultDirectedGraph<eu.fbk.soa.process.node.ProcessNode, eu.fbk.soa.process.ProcessEdge> implements eu.fbk.soa.process.ProcessModel {
+  public eu.fbk.soa.process.DefaultProcessModel(java.lang.String);
+  public eu.fbk.soa.process.DefaultProcessModel(java.lang.String, java.util.Collection<eu.fbk.soa.process.node.ProcessNode>);
+  public boolean addNode(eu.fbk.soa.process.node.ProcessNode);
+  public eu.fbk.soa.process.ProcessEdge addEdge(eu.fbk.soa.process.node.ProcessNode, eu.fbk.soa.process.node.ProcessNode, eu.fbk.soa.process.StateFormula);
+  public java.util.Set<eu.fbk.soa.process.node.ProcessNode> getProcessNodes();
+  public java.util.Set<eu.fbk.soa.process.node.ProcessNode> getProcessNodes(eu.fbk.soa.process.Activity);
+  public java.util.Set<eu.fbk.soa.process.domain.DomainObject> getRelatedDomainObjects();
+  public boolean isRelatedTo(eu.fbk.soa.process.domain.DomainObject);
+  public java.lang.String getName();
+  public eu.fbk.soa.process.node.StartNode getStartNode();
+  public java.util.Set<eu.fbk.soa.process.Trace> getDistinctTraces();
+  public void setStartNode(eu.fbk.soa.process.node.ActivityNode);
+  public eu.fbk.soa.process.node.ActivityNode getLastActivityNode();
+  public eu.fbk.soa.process.node.AndSplit getContainingAndBlock(eu.fbk.soa.process.node.ActivityNode);
+  public eu.fbk.soa.process.node.ActivityNode getFirstActivityNode();
+  public boolean shallowEquals(eu.fbk.soa.process.ProcessModel);
+  public boolean containsProcessNode(eu.fbk.soa.process.node.ProcessNode);
+  public eu.fbk.soa.process.ProcessEdge addEdge(eu.fbk.soa.process.node.ProcessNode, eu.fbk.soa.process.node.ProcessNode);
+  public java.util.Set edgesOf(eu.fbk.soa.process.node.ProcessNode);
+  public int outDegreeOf(eu.fbk.soa.process.node.ProcessNode);
+  public int inDegreeOf(eu.fbk.soa.process.node.ProcessNode);
+  public java.util.Set incomingEdgesOf(eu.fbk.soa.process.node.ProcessNode);
+  public java.util.Set outgoingEdgesOf(eu.fbk.soa.process.node.ProcessNode);
+  public eu.fbk.soa.process.node.ProcessNode getEdgeTarget(eu.fbk.soa.process.ProcessEdge);
+  public eu.fbk.soa.process.node.ProcessNode getEdgeSource(eu.fbk.soa.process.ProcessEdge);
+  public eu.fbk.soa.process.ProcessEdge getEdge(eu.fbk.soa.process.node.ProcessNode, eu.fbk.soa.process.node.ProcessNode);
+  public boolean containsEdge(eu.fbk.soa.process.node.ProcessNode, eu.fbk.soa.process.node.ProcessNode);
+  static {};
+}
+Compiled from "EaGLeGoal.java"
+public class eu.fbk.soa.process.EaGLeGoal implements eu.fbk.soa.process.Goal {
+  public eu.fbk.soa.process.EaGLeGoal(eu.fbk.soa.process.StateFormula);
+  public eu.fbk.soa.process.EaGLeGoal(eu.fbk.soa.process.EaGLeGoal$Operator, eu.fbk.soa.process.StateFormula);
+  public eu.fbk.soa.process.EaGLeGoal();
+  public eu.fbk.soa.process.EaGLeGoal$Operator getOperator();
+  public eu.fbk.soa.process.StateFormula getFormula();
+  public boolean isEmpty();
+  public void updateObjectReferences(java.util.Set<eu.fbk.soa.process.domain.DomainObject>);
+}
+Compiled from "EaGLeGoal.java"
+public final class eu.fbk.soa.process.EaGLeGoal$Operator extends java.lang.Enum<eu.fbk.soa.process.EaGLeGoal$Operator> {
+  public static final eu.fbk.soa.process.EaGLeGoal$Operator Default;
+  public static final eu.fbk.soa.process.EaGLeGoal$Operator DoReach;
+  public static final eu.fbk.soa.process.EaGLeGoal$Operator TryReach;
+  public static final eu.fbk.soa.process.EaGLeGoal$Operator DoMaint;
+  public static final eu.fbk.soa.process.EaGLeGoal$Operator TryMaint;
+  public static eu.fbk.soa.process.EaGLeGoal$Operator[] values();
+  public static eu.fbk.soa.process.EaGLeGoal$Operator valueOf(java.lang.String);
+  static {};
+}
+Compiled from "Effect.java"
+public class eu.fbk.soa.process.Effect {
+  public eu.fbk.soa.process.Effect();
+  public eu.fbk.soa.process.Effect(eu.fbk.soa.process.domain.EventLiteral);
+  public eu.fbk.soa.process.Effect(eu.fbk.soa.process.domain.EventLiteral...);
+  public eu.fbk.soa.process.Effect(java.util.Collection<eu.fbk.soa.process.domain.EventLiteral>);
+  public java.util.Set<eu.fbk.soa.process.domain.EventLiteral> getEventLiterals();
+  public boolean isRelatedTo(eu.fbk.soa.process.domain.DomainObject);
+  public void add(eu.fbk.soa.process.domain.EventLiteral);
+  public boolean isEmpty();
+  public void addAll(java.util.Collection<eu.fbk.soa.process.domain.EventLiteral>);
+  public void addEffect(eu.fbk.soa.process.Effect);
+  public void updateObjectReferences(java.util.Set<eu.fbk.soa.process.domain.DomainObject>);
+  public java.util.Set<eu.fbk.soa.process.domain.DomainObject> getRelatedDomainObjects();
+  public boolean contains(eu.fbk.soa.process.domain.EventLiteral);
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+  public boolean hasUnresolvedReferences();
+}
+Compiled from "Goal.java"
+public interface eu.fbk.soa.process.Goal {
+  public abstract void updateObjectReferences(java.util.Set<eu.fbk.soa.process.domain.DomainObject>);
+}
+Compiled from "GoalWithPriorities.java"
+public class eu.fbk.soa.process.GoalWithPriorities implements eu.fbk.soa.process.Goal {
+  public eu.fbk.soa.process.GoalWithPriorities();
+  public eu.fbk.soa.process.GoalWithPriorities(eu.fbk.soa.process.StateFormula, java.util.List<eu.fbk.soa.process.StateFormula>);
+  public eu.fbk.soa.process.GoalWithPriorities(eu.fbk.soa.process.StateFormula, eu.fbk.soa.process.StateFormula);
+  public eu.fbk.soa.process.StateFormula getPremise();
+  public java.util.List<eu.fbk.soa.process.StateFormula> getResult();
+  public void updateObjectReferences(java.util.Set<eu.fbk.soa.process.domain.DomainObject>);
+  public void setResult(java.util.List<eu.fbk.soa.process.StateFormula>);
+}
+Compiled from "ProcessEdge.java"
+public class eu.fbk.soa.process.ProcessEdge extends org.jgrapht.graph.DefaultEdge {
+  public eu.fbk.soa.process.ProcessEdge();
+  public void setCondition(eu.fbk.soa.process.StateFormula);
+  public eu.fbk.soa.process.StateFormula getCondition();
+  public java.lang.String toString();
+}
+Compiled from "ProcessModel.java"
+public interface eu.fbk.soa.process.ProcessModel {
+  public abstract eu.fbk.soa.process.ProcessEdge addEdge(eu.fbk.soa.process.node.ProcessNode, eu.fbk.soa.process.node.ProcessNode, eu.fbk.soa.process.StateFormula);
+  public abstract boolean addNode(eu.fbk.soa.process.node.ProcessNode);
+  public abstract boolean containsEdge(eu.fbk.soa.process.node.ProcessNode, eu.fbk.soa.process.node.ProcessNode);
+  public abstract boolean containsProcessNode(eu.fbk.soa.process.node.ProcessNode);
+  public abstract java.util.Set<eu.fbk.soa.process.ProcessEdge> edgeSet();
+  public abstract eu.fbk.soa.process.node.AndSplit getContainingAndBlock(eu.fbk.soa.process.node.ActivityNode);
+  public abstract java.util.Set<eu.fbk.soa.process.Trace> getDistinctTraces();
+  public abstract eu.fbk.soa.process.ProcessEdge getEdge(eu.fbk.soa.process.node.ProcessNode, eu.fbk.soa.process.node.ProcessNode);
+  public abstract eu.fbk.soa.process.node.ProcessNode getEdgeSource(eu.fbk.soa.process.ProcessEdge);
+  public abstract eu.fbk.soa.process.node.ProcessNode getEdgeTarget(eu.fbk.soa.process.ProcessEdge);
+  public abstract eu.fbk.soa.process.node.ActivityNode getFirstActivityNode();
+  public abstract eu.fbk.soa.process.node.ActivityNode getLastActivityNode();
+  public abstract java.lang.String getName();
+  public abstract java.util.Set<eu.fbk.soa.process.node.ProcessNode> getProcessNodes();
+  public abstract java.util.Set<eu.fbk.soa.process.node.ProcessNode> getProcessNodes(eu.fbk.soa.process.Activity);
+  public abstract java.util.Set<eu.fbk.soa.process.domain.DomainObject> getRelatedDomainObjects();
+  public abstract eu.fbk.soa.process.node.StartNode getStartNode();
+  public abstract boolean isRelatedTo(eu.fbk.soa.process.domain.DomainObject);
+  public abstract void setStartNode(eu.fbk.soa.process.node.ActivityNode);
+  public abstract boolean shallowEquals(eu.fbk.soa.process.ProcessModel);
+  public abstract java.util.Set<eu.fbk.soa.process.ProcessEdge> outgoingEdgesOf(eu.fbk.soa.process.node.ProcessNode);
+  public abstract java.util.Set<eu.fbk.soa.process.ProcessEdge> incomingEdgesOf(eu.fbk.soa.process.node.ProcessNode);
+  public abstract int inDegreeOf(eu.fbk.soa.process.node.ProcessNode);
+  public abstract int outDegreeOf(eu.fbk.soa.process.node.ProcessNode);
+  public abstract java.util.Set<eu.fbk.soa.process.ProcessEdge> edgesOf(eu.fbk.soa.process.node.ProcessNode);
+  public abstract eu.fbk.soa.process.ProcessEdge addEdge(eu.fbk.soa.process.node.ProcessNode, eu.fbk.soa.process.node.ProcessNode);
+}
+Compiled from "StateFormula.java"
+public class eu.fbk.soa.process.StateFormula {
+  protected boolean isNegated;
+  public eu.fbk.soa.process.StateFormula();
+  public eu.fbk.soa.process.StateFormula(eu.fbk.soa.process.domain.StateLiteral);
+  public eu.fbk.soa.process.StateFormula(eu.fbk.soa.process.domain.StateLiteral...);
+  public eu.fbk.soa.process.StateFormula(eu.fbk.soa.process.StateLiteralClause);
+  public eu.fbk.soa.process.StateFormula(eu.fbk.soa.process.StateLiteralClause...);
+  public eu.fbk.soa.process.StateFormula(java.util.Collection<eu.fbk.soa.process.StateLiteralClause>);
+  public void addClause(eu.fbk.soa.process.StateLiteralClause);
+  public java.util.List<eu.fbk.soa.process.StateLiteralClause> getClauses();
+  public int getNumberOfClauses();
+  public boolean equalsTop();
+  public boolean isTriviallyFalse();
+  public java.lang.String toString();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public boolean isEmpty();
+  public void add(eu.fbk.soa.process.StateFormula);
+  public boolean containsClause(eu.fbk.soa.process.StateLiteralClause);
+  public void updateObjectReferences(java.util.Set<eu.fbk.soa.process.domain.DomainObject>);
+  public java.util.Set<eu.fbk.soa.process.domain.DomainObject> getRelatedDomainObjects();
+  public boolean isRelatedTo(eu.fbk.soa.process.domain.DomainObject);
+  public void negate();
+  public boolean isNegated();
+  public boolean hasUnresolvedReferences();
+  boolean hasOnlyUnitClauses();
+  boolean hasUnitClausesExceptOne();
+  public static eu.fbk.soa.process.StateFormula getTop();
+  public eu.fbk.soa.process.StateFormula getNegation();
+  public eu.fbk.soa.process.StateFormula getProjection(java.util.Set<eu.fbk.soa.process.domain.DomainObject>);
+  public eu.fbk.soa.process.StateFormula getEquivalentFormulaWithoutNegations();
+  public static eu.fbk.soa.process.StateFormula createDisjunction(eu.fbk.soa.process.StateFormula, eu.fbk.soa.process.StateFormula);
+  static {};
+}
+Compiled from "StateLiteralClause.java"
+public class eu.fbk.soa.process.StateLiteralClause implements eu.fbk.soa.evolution.sts.Clause<eu.fbk.soa.process.domain.StateLiteral> {
+  public eu.fbk.soa.process.StateLiteralClause();
+  public eu.fbk.soa.process.StateLiteralClause(eu.fbk.soa.process.domain.StateLiteral);
+  public eu.fbk.soa.process.StateLiteralClause(eu.fbk.soa.process.domain.StateLiteral...);
+  public eu.fbk.soa.process.StateLiteralClause(java.util.Set<eu.fbk.soa.process.domain.StateLiteral>);
+  public void addLiteral(eu.fbk.soa.process.domain.StateLiteral);
+  public java.util.Set<eu.fbk.soa.process.domain.StateLiteral> getLiterals();
+  public boolean isUnitClause();
+  public eu.fbk.soa.process.domain.StateLiteral getFirstLiteral();
+  public java.lang.String toString();
+  public boolean isRelatedTo(eu.fbk.soa.process.domain.DomainObject);
+  public eu.fbk.soa.process.StateLiteralClause getCopy();
+  public void removeLiteral(eu.fbk.soa.process.domain.StateLiteral);
+  public boolean isEmpty();
+  public void updateObjectReferences(java.util.Set<eu.fbk.soa.process.domain.DomainObject>);
+  public boolean containsLiteral(eu.fbk.soa.process.domain.StateLiteral);
+  public java.util.Set<eu.fbk.soa.process.domain.DomainObject> getRelatedDomainObjects();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public boolean hasUnresolvedReferences();
+  public void addLiterals(java.util.Set<eu.fbk.soa.process.domain.StateLiteral>);
+  public int getNumberOfLiterals();
+  public void removeLiteral(eu.fbk.soa.evolution.sts.Literal);
+}
+Compiled from "Trace.java"
+public class eu.fbk.soa.process.Trace {
+  public eu.fbk.soa.process.Trace();
+  public eu.fbk.soa.process.Trace(java.util.List<eu.fbk.soa.process.Activity>);
+  public eu.fbk.soa.process.Trace(eu.fbk.soa.process.Activity...);
+  public boolean isValidOnProcessModel(eu.fbk.soa.process.ProcessModel);
+  public boolean isComplete(eu.fbk.soa.process.ProcessModel);
+  public boolean isEmpty();
+  public int size();
+  public eu.fbk.soa.process.Activity getLastActivity();
+  public java.util.List<eu.fbk.soa.process.Activity> getActivities();
+  public void addActivity(eu.fbk.soa.process.Activity);
+  public void addAllActivities(java.util.List<eu.fbk.soa.process.Activity>);
+  public java.lang.String toString();
+  public boolean equals(java.lang.Object);
+  public eu.fbk.soa.process.Activity getActivity(int);
+  static {};
+}
+Compiled from "DomainObject.java"
+public class eu.fbk.soa.process.domain.DomainObject {
+  public eu.fbk.soa.process.domain.DomainObject(java.lang.String);
+  public eu.fbk.soa.process.domain.DomainObject(java.lang.String, java.util.Collection<eu.fbk.soa.process.domain.ObjectState>, java.util.Collection<eu.fbk.soa.process.domain.ObjectState>, java.util.Collection<eu.fbk.soa.process.domain.ObjectEvent>, java.util.Collection<eu.fbk.soa.process.domain.ObjectTransition>);
+  public eu.fbk.soa.process.domain.DomainObject();
+  public java.lang.String getName();
+  public java.util.Set<eu.fbk.soa.process.domain.ObjectState> getStates();
+  public java.util.Set<eu.fbk.soa.process.domain.ObjectEvent> getEvents();
+  public eu.fbk.soa.process.domain.ObjectState getInitialState();
+  public java.util.Set<eu.fbk.soa.process.domain.ObjectState> getInitialStates();
+  public java.util.Set<eu.fbk.soa.process.domain.ObjectTransition> getTransitions();
+  public void setInitialState(eu.fbk.soa.process.domain.ObjectState);
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public java.util.Set<eu.fbk.soa.process.domain.ObjectTransition> getTransitionsToState(eu.fbk.soa.process.domain.ObjectState);
+  public void updateEventReferences();
+  public eu.fbk.soa.process.domain.ObjectState getStateByName(java.lang.String);
+}
+Compiled from "EventLiteral.java"
+public class eu.fbk.soa.process.domain.EventLiteral extends eu.fbk.soa.process.domain.ObjectLiteral {
+  public eu.fbk.soa.process.domain.EventLiteral(eu.fbk.soa.process.domain.DomainObject, eu.fbk.soa.process.domain.ObjectEvent);
+  public eu.fbk.soa.process.domain.EventLiteral();
+  public eu.fbk.soa.process.domain.EventLiteral(java.lang.String, eu.fbk.soa.process.domain.ObjectEvent);
+  public eu.fbk.soa.process.domain.ObjectEvent getObjectEvent();
+  public java.lang.String getEventName();
+  public eu.fbk.soa.process.domain.EventLiteral getNegation();
+  public boolean equals(java.lang.Object);
+  public eu.fbk.soa.process.domain.ObjectEvent getEvent();
+  public java.lang.String getProposition();
+  public void updateObjectReferences(java.util.Set<eu.fbk.soa.process.domain.DomainObject>);
+  public boolean hasUnresolvedReferences();
+  public java.lang.String toString();
+  public int hashCode();
+  public eu.fbk.soa.process.domain.ObjectLiteral getNegation();
+  public eu.fbk.soa.evolution.sts.Literal getNegation();
+}
+Compiled from "ObjectEvent.java"
+public class eu.fbk.soa.process.domain.ObjectEvent {
+  public eu.fbk.soa.process.domain.ObjectEvent();
+  public eu.fbk.soa.process.domain.ObjectEvent(java.lang.String);
+  public eu.fbk.soa.process.domain.ObjectEvent(java.lang.String, boolean);
+  public java.lang.String getName();
+  public java.lang.String toString();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public void setControllable(boolean);
+  public boolean isControllable();
+}
+Compiled from "ObjectLiteral.java"
+public abstract class eu.fbk.soa.process.domain.ObjectLiteral implements eu.fbk.soa.evolution.sts.Literal {
+  eu.fbk.soa.process.domain.DomainObject object;
+  java.lang.String objectName;
+  boolean isNegated;
+  java.lang.String completeName;
+  public eu.fbk.soa.process.domain.ObjectLiteral();
+  public eu.fbk.soa.process.domain.DomainObject getDomainObject();
+  public java.lang.String getDomainObjectName();
+  public void setDomainObject(eu.fbk.soa.process.domain.DomainObject);
+  public boolean isRelatedTo(eu.fbk.soa.process.domain.DomainObject);
+  public void negate();
+  public boolean isNegated();
+  public abstract eu.fbk.soa.process.domain.ObjectLiteral getNegation();
+  public void updateObjectReferences(java.util.Set<eu.fbk.soa.process.domain.DomainObject>);
+  public boolean hasUnresolvedReferences();
+  public eu.fbk.soa.evolution.sts.Literal getNegation();
+}
+Compiled from "ObjectState.java"
+public class eu.fbk.soa.process.domain.ObjectState implements eu.fbk.soa.evolution.sts.State {
+  public eu.fbk.soa.process.domain.ObjectState(java.lang.String);
+  public eu.fbk.soa.process.domain.ObjectState();
+  public java.lang.String getName();
+  public java.lang.String toString();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public void setName(java.lang.String);
+}
+Compiled from "ObjectTransition.java"
+public class eu.fbk.soa.process.domain.ObjectTransition {
+  public eu.fbk.soa.process.domain.ObjectTransition();
+  public eu.fbk.soa.process.domain.ObjectTransition(eu.fbk.soa.process.domain.ObjectState, eu.fbk.soa.process.domain.ObjectEvent, eu.fbk.soa.process.domain.ObjectState);
+  public eu.fbk.soa.process.domain.ObjectState getStartState();
+  public eu.fbk.soa.process.domain.ObjectEvent getObjectEvent();
+  public eu.fbk.soa.process.domain.ObjectState getEndState();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public java.lang.String toString();
+  public void updateEventReference(java.util.Set<eu.fbk.soa.process.domain.ObjectEvent>);
+}
+Compiled from "StateLiteral.java"
+public class eu.fbk.soa.process.domain.StateLiteral extends eu.fbk.soa.process.domain.ObjectLiteral {
+  public eu.fbk.soa.process.domain.StateLiteral();
+  public eu.fbk.soa.process.domain.StateLiteral(eu.fbk.soa.process.domain.DomainObject, eu.fbk.soa.process.domain.ObjectState);
+  public eu.fbk.soa.process.domain.StateLiteral(eu.fbk.soa.process.domain.DomainObject, eu.fbk.soa.process.domain.ObjectState, boolean);
+  public eu.fbk.soa.process.domain.ObjectState getState();
+  public java.lang.String getStateName();
+  public eu.fbk.soa.process.domain.StateLiteral getNegation();
+  public boolean equals(java.lang.Object);
+  public java.lang.String getProposition();
+  public java.lang.String toString();
+  public int hashCode();
+  public eu.fbk.soa.process.domain.ObjectLiteral getNegation();
+  public eu.fbk.soa.evolution.sts.Literal getNegation();
+}
+Compiled from "ActivityNode.java"
+public class eu.fbk.soa.process.node.ActivityNode extends eu.fbk.soa.process.node.ProcessNode {
+  eu.fbk.soa.process.Activity activity;
+  public eu.fbk.soa.process.node.ActivityNode();
+  public java.lang.String getActivityName();
+  public eu.fbk.soa.process.node.ActivityNode(java.lang.String);
+  public eu.fbk.soa.process.node.ActivityNode(eu.fbk.soa.process.Activity);
+  public java.lang.String toString();
+  public boolean pointsTo(eu.fbk.soa.process.Activity);
+  public eu.fbk.soa.process.Activity getActivity();
+  public java.util.Set<eu.fbk.soa.process.domain.DomainObject> getRelatedDomainObjects();
+  public boolean equals(java.lang.Object);
+  public void setActivity(eu.fbk.soa.process.Activity);
+  public int hashCode();
+}
+Compiled from "AndJoin.java"
+public class eu.fbk.soa.process.node.AndJoin extends eu.fbk.soa.process.node.ControlConnector {
+  public eu.fbk.soa.process.node.AndJoin();
+  public java.lang.String toString();
+}
+Compiled from "AndSplit.java"
+public class eu.fbk.soa.process.node.AndSplit extends eu.fbk.soa.process.node.ControlConnector {
+  public eu.fbk.soa.process.node.AndSplit();
+  public java.lang.String toString();
+}
+Compiled from "ControlConnector.java"
+public abstract class eu.fbk.soa.process.node.ControlConnector extends eu.fbk.soa.process.node.ProcessNode {
+  int connectorId;
+  public eu.fbk.soa.process.node.ControlConnector();
+  static {};
+}
+Compiled from "EndNode.java"
+public class eu.fbk.soa.process.node.EndNode extends eu.fbk.soa.process.node.ActivityNode {
+  public eu.fbk.soa.process.node.EndNode();
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "ProcessNode.java"
+public abstract class eu.fbk.soa.process.node.ProcessNode {
+  int nodeNr;
+  public eu.fbk.soa.process.node.ProcessNode();
+  public java.util.Set<eu.fbk.soa.process.domain.DomainObject> getRelatedDomainObjects();
+  public java.lang.String getNodeID();
+  static {};
+}
+Compiled from "StartNode.java"
+public class eu.fbk.soa.process.node.StartNode extends eu.fbk.soa.process.node.ActivityNode {
+  public eu.fbk.soa.process.node.StartNode();
+  public eu.fbk.soa.process.node.StartNode(eu.fbk.soa.process.Activity);
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "XorJoin.java"
+public class eu.fbk.soa.process.node.XorJoin extends eu.fbk.soa.process.node.ControlConnector {
+  public eu.fbk.soa.process.node.XorJoin();
+  public java.lang.String toString();
+}
+Compiled from "XorSplit.java"
+public class eu.fbk.soa.process.node.XorSplit extends eu.fbk.soa.process.node.ControlConnector {
+  public eu.fbk.soa.process.node.XorSplit();
+  public java.lang.String toString();
+}
+Compiled from "StateFormulaTest.java"
+public class eu.fbk.soa.process.test.StateFormulaTest {
+  public eu.fbk.soa.process.test.StateFormulaTest();
+  public void setUpFormula();
+  public void testUnitPropagation();
+  public void testGetEquivalentFormulaWithoutNegations();
+}
+Compiled from "StateLiteralClauseTest.java"
+public class eu.fbk.soa.process.test.StateLiteralClauseTest {
+  public eu.fbk.soa.process.test.StateLiteralClauseTest();
+  public void setUp();
+  public void testStringRepresentation();
+}
+Compiled from "ArrayUtils.java"
+public class eu.fbk.soa.util.ArrayUtils<E> {
+  public eu.fbk.soa.util.ArrayUtils();
+  public java.util.List<java.util.List<E>> computePermutations(java.util.List<E>);
+}
+Compiled from "CollectionsUtils.java"
+public class eu.fbk.soa.util.CollectionsUtils {
+  public eu.fbk.soa.util.CollectionsUtils();
+  public static boolean nonEmptyIntersection(java.util.Collection<? extends java.lang.Object>, java.util.Collection<? extends java.lang.Object>);
+}
+Compiled from "ConditionEdgeNameProvider.java"
+public class eu.fbk.soa.util.ConditionEdgeNameProvider implements org.jgrapht.ext.EdgeNameProvider<eu.fbk.soa.process.ProcessEdge> {
+  public eu.fbk.soa.util.ConditionEdgeNameProvider();
+  public java.lang.String getEdgeName(eu.fbk.soa.process.ProcessEdge);
+  public java.lang.String getEdgeName(java.lang.Object);
+}
+Compiled from "ConfigUtils.java"
+public class eu.fbk.soa.util.ConfigUtils {
+  public eu.fbk.soa.util.ConfigUtils() throws java.io.IOException;
+  public static java.lang.String getProperty(java.lang.String) throws java.io.IOException;
+}
+Compiled from "CustomPrefixMapper.java"
+public class eu.fbk.soa.util.CustomPrefixMapper extends com.sun.xml.bind.marshaller.NamespacePrefixMapper {
+  public eu.fbk.soa.util.CustomPrefixMapper();
+  public java.lang.String getPreferredPrefix(java.lang.String, java.lang.String, boolean);
+}
+Compiled from "IOUtils.java"
+public class eu.fbk.soa.util.IOUtils {
+  static org.apache.log4j.Logger logger;
+  public eu.fbk.soa.util.IOUtils();
+  public static java.lang.String readFileAsString(java.io.File);
+  public static eu.fbk.soa.evolution.sts.impl.NusmvSTS readNusmvSTSFromFile(java.io.File);
+  public static eu.fbk.soa.evolution.sts.STS readSTSFromFile(java.io.File);
+  public static void writeStringToFile(java.lang.String, java.lang.String);
+  public static void exportSTSToDot(eu.fbk.soa.evolution.sts.STS, java.lang.String);
+  public static void exportSTSToDot(eu.fbk.soa.evolution.sts.STS, java.io.Writer);
+  public static void createImage(java.lang.String, java.lang.String);
+  public static void exportProcessModelToDot(eu.fbk.soa.process.ProcessModel, java.lang.String);
+  public static void exportSTSAsPNML(eu.fbk.soa.evolution.sts.STS, java.lang.String);
+  static {};
+}
+Compiled from "NodePropertiesProvider.java"
+public class eu.fbk.soa.util.NodePropertiesProvider implements org.jgrapht.ext.ComponentAttributeProvider<eu.fbk.soa.process.node.ProcessNode> {
+  public eu.fbk.soa.util.NodePropertiesProvider();
+  public java.util.Map<java.lang.String, java.lang.String> getComponentAttributes(eu.fbk.soa.process.node.ProcessNode);
+  public java.util.Map getComponentAttributes(java.lang.Object);
+}
+Compiled from "OrderedNodesDOTExporter.java"
+public class eu.fbk.soa.util.OrderedNodesDOTExporter {
+  public eu.fbk.soa.util.OrderedNodesDOTExporter();
+  public void export(java.io.Writer, eu.fbk.soa.process.ProcessModel);
+}
+Compiled from "ProcessNodeIdProvider.java"
+public class eu.fbk.soa.util.ProcessNodeIdProvider implements org.jgrapht.ext.VertexNameProvider<eu.fbk.soa.process.node.ProcessNode> {
+  public eu.fbk.soa.util.ProcessNodeIdProvider();
+  public java.lang.String getVertexName(eu.fbk.soa.process.node.ProcessNode);
+  public java.lang.String getVertexName(java.lang.Object);
+}
+Compiled from "ProcessNodeNameProvider.java"
+public class eu.fbk.soa.util.ProcessNodeNameProvider implements org.jgrapht.ext.VertexNameProvider<eu.fbk.soa.process.node.ProcessNode> {
+  public eu.fbk.soa.util.ProcessNodeNameProvider();
+  public java.lang.String getVertexName(eu.fbk.soa.process.node.ProcessNode);
+  public java.lang.String getVertexName(java.lang.Object);
+}
+Compiled from "StreamGobbler.java"
+public class eu.fbk.soa.util.StreamGobbler extends java.lang.Thread {
+  public eu.fbk.soa.util.StreamGobbler(java.io.InputStream, java.lang.String);
+  public eu.fbk.soa.util.StreamGobbler(java.io.InputStream, java.lang.String, java.io.OutputStream);
+  public eu.fbk.soa.util.StreamGobbler(java.io.InputStream, java.lang.String, java.io.PipedOutputStream);
+  public void run();
+}
+Compiled from "StringUtils.java"
+public final class eu.fbk.soa.util.StringUtils {
+  public static java.lang.String getCommaSeparatedString(java.util.Collection<? extends java.lang.Object>);
+}
+Compiled from "ArrayUtilsTest.java"
+public class eu.fbk.soa.util.test.ArrayUtilsTest {
+  public eu.fbk.soa.util.test.ArrayUtilsTest();
+  public void testPermutations();
+}
+Compiled from "IOUtilsTest.java"
+public class eu.fbk.soa.util.test.IOUtilsTest {
+  public eu.fbk.soa.util.test.IOUtilsTest();
+  public void setUpSimpleSTS();
+  public void testCreateImage();
+}
+Compiled from "StringUtilsTest.java"
+public class eu.fbk.soa.util.test.StringUtilsTest {
+  public eu.fbk.soa.util.test.StringUtilsTest();
+  public void testEmptyInput();
+  public void testIntegerSet();
+}
+Compiled from "XMLActivitySet.java"
+public class eu.fbk.soa.xml.XMLActivitySet {
+  public eu.fbk.soa.xml.XMLActivitySet();
+  public java.util.Set<eu.fbk.soa.process.Activity> getActivities();
+  public void setActivities(java.util.Set<eu.fbk.soa.process.Activity>);
+}
+Compiled from "XMLAdapter.java"
+public class eu.fbk.soa.xml.XMLAdapter {
+  public eu.fbk.soa.xml.XMLAdapter();
+  public static eu.fbk.soa.process.domain.DomainObject unmarshalDomainObject(java.io.File);
+  public static eu.fbk.soa.process.GoalWithPriorities unmarshalGoal(java.io.File);
+  public static java.lang.String marshal(java.lang.Object);
+  public static eu.fbk.soa.xml.XMLProcessModel unmarshalModel(java.io.File);
+  public static eu.fbk.soa.xml.XMLActivitySet unmarshalActivitySet(java.io.File);
+}
+Compiled from "XMLLoader.java"
+public class eu.fbk.soa.xml.XMLLoader {
+  static org.apache.log4j.Logger logger;
+  public eu.fbk.soa.xml.XMLLoader();
+  public static java.util.Set<eu.fbk.soa.process.domain.DomainObject> loadAllDomainObjects(java.lang.String);
+  public static eu.fbk.soa.process.domain.DomainObject loadDomainObject(java.lang.String, java.lang.String);
+  public static eu.fbk.soa.process.GoalWithPriorities loadGoal(java.lang.String, java.lang.String, java.util.Set<eu.fbk.soa.process.domain.DomainObject>);
+  public static eu.fbk.soa.process.DefaultProcessModel loadProcessModel(java.lang.String, java.lang.String, java.util.Set<eu.fbk.soa.process.domain.DomainObject>) throws eu.fbk.soa.xml.XMLParsingException;
+  public static java.util.Set<eu.fbk.soa.process.Activity> loadActivitySet(java.lang.String, java.util.Set<eu.fbk.soa.process.domain.DomainObject>);
+  public static java.util.Map<java.lang.String, eu.fbk.soa.process.ProcessModel> loadAllProcessModels(java.lang.String, java.util.Set<eu.fbk.soa.process.domain.DomainObject>) throws eu.fbk.soa.xml.XMLParsingException;
+  public static eu.fbk.soa.process.ProcessModel loadProcessModel(java.lang.String, java.lang.String, java.util.Set<eu.fbk.soa.process.domain.DomainObject>, java.util.Set<eu.fbk.soa.process.Activity>) throws eu.fbk.soa.xml.XMLParsingException;
+  static {};
+}
+Compiled from "XMLParsingException.java"
+public class eu.fbk.soa.xml.XMLParsingException extends java.lang.Exception {
+  public eu.fbk.soa.xml.XMLParsingException(java.lang.String);
+}
+Compiled from "XMLProcessEdge.java"
+public class eu.fbk.soa.xml.XMLProcessEdge {
+  public eu.fbk.soa.xml.XMLProcessEdge();
+  public void updateReferences(java.util.Set<eu.fbk.soa.process.node.ProcessNode>, java.util.Set<eu.fbk.soa.process.domain.DomainObject>) throws eu.fbk.soa.xml.XMLParsingException;
+  public eu.fbk.soa.process.node.ProcessNode getSource();
+  public eu.fbk.soa.process.node.ProcessNode getTarget();
+  public eu.fbk.soa.process.StateFormula getCondition();
+}
+Compiled from "XMLProcessModel.java"
+public class eu.fbk.soa.xml.XMLProcessModel {
+  public eu.fbk.soa.xml.XMLProcessModel();
+  public eu.fbk.soa.xml.XMLProcessModel(java.lang.String);
+  public java.lang.String getName();
+  public java.util.Set<eu.fbk.soa.process.Activity> getActivities();
+  public java.util.Set<eu.fbk.soa.process.node.ProcessNode> getNodes();
+  public java.util.Set<eu.fbk.soa.xml.XMLProcessEdge> getEdges();
+  public void updateReferences(java.util.Set<eu.fbk.soa.process.domain.DomainObject>) throws eu.fbk.soa.xml.XMLParsingException;
+  public void setActivities(java.util.Set<eu.fbk.soa.process.Activity>);
+}
+Compiled from "XMLLoaderTest.java"
+public class eu.fbk.soa.xml.test.XMLLoaderTest {
+  public eu.fbk.soa.xml.test.XMLLoaderTest();
+  public static void main(java.lang.String[]) throws eu.fbk.soa.xml.XMLParsingException;
+  static {};
+}

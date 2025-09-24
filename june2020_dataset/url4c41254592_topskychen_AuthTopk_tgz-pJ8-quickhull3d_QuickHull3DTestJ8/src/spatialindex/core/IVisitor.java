@@ -1,0 +1,54 @@
+//
+// This library is free software; you can redistribute it and/or
+// modify it under the terms of the GNU Lesser General Public
+// License as published by the Free Software Foundation; either
+// version 2.1 of the License, or (at your option) any later version.
+//
+// This library is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// Lesser General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public
+// License along with this library; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+//
+// Contact information:
+//  Mailing address:
+//    Marios Hadjieleftheriou
+//    University of California, Riverside
+//    Department of Computer Science
+//    Surge Building, Room 310
+//    Riverside, CA 92521
+//
+//  Email:
+//    marioh@cs.ucr.edu
+
+package spatialindex.core;
+
+import java.util.ArrayList;
+
+public interface IVisitor {
+
+	public static int TYPE_OUTSIDE = 0;
+	public static int TYPE_INTERSECT = 1;
+	public static int TYPE_INSIDE = 2;
+
+	public void visitData(final IData d);
+	
+	public void visitData(final IData d, int type);
+
+	public void setParentCellInside(boolean b);
+
+	public void searchFinished(int arg);
+
+	public ArrayList<String> getVOStringArray();
+
+	public void visitNode(final INode n);
+
+	public void visitNode(final INode n, int type);
+
+	public void visitNode(final INode n, int typeIntersect, int[] childTypes);
+
+	public void setParentNodeInside(boolean b);
+}

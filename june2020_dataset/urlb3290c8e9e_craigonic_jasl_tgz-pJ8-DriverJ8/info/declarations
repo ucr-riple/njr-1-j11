@@ -1,0 +1,432 @@
+Compiled from "Driver.java"
+public class Driver {
+  public Driver();
+  public static void main(java.lang.String[]);
+}
+Compiled from "BasicPointValue.java"
+public interface jasl.counters.BasicPointValue {
+  public static final java.lang.String BPV_LABEL;
+  public static final int MIN_BPV;
+  public abstract int basicPointValue();
+}
+Compiled from "Classification.java"
+public interface jasl.counters.Classification {
+  public static final java.lang.String CLASSIFICATION_LABEL;
+  public abstract java.lang.String classification();
+}
+Compiled from "Classification.java"
+public final class jasl.counters.Classification$Classifications extends java.lang.Enum<jasl.counters.Classification$Classifications> {
+  public static final jasl.counters.Classification$Classifications SS;
+  public static final jasl.counters.Classification$Classifications ELITE;
+  public static final jasl.counters.Classification$Classifications FIRST_LINE;
+  public static final jasl.counters.Classification$Classifications SECOND_LINE;
+  public static final jasl.counters.Classification$Classifications GREEN;
+  public static final jasl.counters.Classification$Classifications CONSCRIPT;
+  public static jasl.counters.Classification$Classifications[] values();
+  public static jasl.counters.Classification$Classifications valueOf(java.lang.String);
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "Description.java"
+public interface jasl.counters.Description {
+  public static final java.lang.String DESCRIPTION_LABEL;
+  public abstract java.lang.String description();
+}
+Compiled from "Description.java"
+public final class jasl.counters.Description$Descriptions extends java.lang.Enum<jasl.counters.Description$Descriptions> {
+  public static final jasl.counters.Description$Descriptions CREW;
+  public static final jasl.counters.Description$Descriptions HALF_SQUAD;
+  public static final jasl.counters.Description$Descriptions LEADER;
+  public static final jasl.counters.Description$Descriptions SQUAD;
+  public static jasl.counters.Description$Descriptions[] values();
+  public static jasl.counters.Description$Descriptions valueOf(java.lang.String);
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "ExperienceLevelRating.java"
+public interface jasl.counters.ExperienceLevelRating {
+  public static final java.lang.String ELR_LABEL;
+  public static final int MIN_ELR;
+  public static final int MAX_ELR;
+  public abstract int experienceLevelRating();
+}
+Compiled from "Fighting.java"
+abstract class jasl.counters.Fighting extends jasl.counters.Unit implements jasl.counters.Identity,jasl.counters.Nationality,jasl.counters.Status,jasl.counters.UnitType {
+  protected jasl.counters.Fighting(jasl.counters.Description$Descriptions, jasl.counters.Nationality$Nationalities, java.lang.String);
+  public java.lang.String toText();
+  public java.lang.String toJSON();
+  public final java.lang.String nationality();
+  public final java.lang.String unitType();
+  public final java.lang.String identity();
+  public final java.lang.String status();
+  public boolean isStatusSet(jasl.counters.Status$States);
+  public final void setIdentity(java.lang.String);
+  public final boolean clearStatus(jasl.counters.Status$States);
+  public final boolean setStatus(jasl.counters.Status$States);
+  protected final void appendIdentity(java.lang.StringBuffer);
+  static {};
+}
+Compiled from "Firepower.java"
+public interface jasl.counters.Firepower {
+  public static final java.lang.String FIREPOWER_LABEL;
+  public static final java.lang.String FIREPOWER_EQUIV_LABEL;
+  public static final java.lang.String NORMAL_RANGE_LABEL;
+  public static final int MIN_FIREPOWER;
+  public static final int MIN_RANGE;
+  public abstract java.lang.String firepower();
+  public abstract int firepowerEquivalent();
+  public abstract int normalRange();
+}
+Compiled from "Identity.java"
+public interface jasl.counters.Identity {
+  public static final java.lang.String IDENTITY_LABEL;
+  public abstract java.lang.String identity();
+  public abstract void setIdentity(java.lang.String);
+}
+Compiled from "Infantry.java"
+abstract class jasl.counters.Infantry extends jasl.counters.Mobile implements jasl.counters.Firepower,jasl.counters.Morale,jasl.counters.Portability,jasl.counters.BasicPointValue,jasl.counters.ExperienceLevelRating {
+  protected jasl.counters.Infantry(jasl.counters.Description$Descriptions, jasl.counters.Nationality$Nationalities, jasl.counters.UnitType$InfantryTypes, int, int, int, int, int, int, boolean, int, int, int);
+  public java.lang.String toText();
+  public java.lang.String toJSON();
+  public final java.lang.String firepower();
+  public final int firepowerEquivalent();
+  public final int normalRange();
+  public final int morale();
+  public final int brokenMorale();
+  public final boolean canSelfRally();
+  public final int portageValue();
+  public final int basicPointValue();
+  public final int experienceLevelRating();
+  public final boolean check(int);
+  public final boolean restore(boolean, int);
+  static {};
+}
+Compiled from "Leader.java"
+public final class jasl.counters.Leader extends jasl.counters.Infantry implements jasl.counters.Leadership {
+  public jasl.counters.Leader(jasl.counters.Nationality$Nationalities, jasl.counters.UnitType$InfantryTypes, int, int, int, int);
+  public java.lang.String toText();
+  public java.lang.String toString();
+  public java.lang.String toJSON();
+  public int modifier();
+  public boolean isStatusSet(jasl.counters.Status$States);
+  static {};
+}
+Compiled from "Leadership.java"
+public interface jasl.counters.Leadership {
+  public static final java.lang.String MODIFIER_LABEL;
+  public static final int MIN_LEADERSHIP_MODIFIER;
+  public static final int MAX_LEADERSHIP_MODIFIER;
+  public abstract int modifier();
+}
+Compiled from "MaximumELR.java"
+public interface jasl.counters.MaximumELR {
+  public static final java.lang.String HAS_MAXIMUM_ELR_LABEL;
+  public abstract boolean hasMaximumELR();
+}
+Compiled from "Mobile.java"
+abstract class jasl.counters.Mobile extends jasl.counters.Fighting implements jasl.counters.Mobility {
+  protected jasl.counters.Mobile(jasl.counters.Description$Descriptions, jasl.counters.Nationality$Nationalities, java.lang.String, int, int);
+  public java.lang.String toText();
+  public java.lang.String toJSON();
+  public final int movement();
+  public final int portageCapacity();
+  public final int portageLevel();
+  public final void setPortageLevel(int);
+  static {};
+}
+Compiled from "Mobility.java"
+public interface jasl.counters.Mobility {
+  public static final java.lang.String MOVEMENT_LABEL;
+  public static final java.lang.String PORTAGE_CAPACITY_LABEL;
+  public static final java.lang.String PORTAGE_LEVEL_LABEL;
+  public static final int MIN_MOVEMENT;
+  public static final int MIN_PORTAGE_CAPACITY;
+  public static final int MIN_PORTAGE_LEVEL;
+  public abstract int movement();
+  public abstract int portageCapacity();
+  public abstract int portageLevel();
+  public abstract void setPortageLevel(int);
+}
+Compiled from "Morale.java"
+public interface jasl.counters.Morale {
+  public static final java.lang.String MORALE_LABEL;
+  public static final java.lang.String BROKEN_MORALE_LABEL;
+  public static final java.lang.String CAN_SELF_RALLY_LABEL;
+  public static final int MIN_MORALE;
+  public static final int MAX_MORALE;
+  public abstract int morale();
+  public abstract int brokenMorale();
+  public abstract boolean canSelfRally();
+  public abstract boolean check(int);
+  public abstract boolean restore(boolean, int);
+}
+Compiled from "Nationality.java"
+public interface jasl.counters.Nationality {
+  public static final java.lang.String NATIONALITY_LABEL;
+  public abstract java.lang.String nationality();
+}
+Compiled from "Nationality.java"
+public final class jasl.counters.Nationality$Nationalities extends java.lang.Enum<jasl.counters.Nationality$Nationalities> {
+  public static final jasl.counters.Nationality$Nationalities ALLIED_MINOR;
+  public static final jasl.counters.Nationality$Nationalities AMERICAN;
+  public static final jasl.counters.Nationality$Nationalities AXIS_MINOR;
+  public static final jasl.counters.Nationality$Nationalities BRITISH;
+  public static final jasl.counters.Nationality$Nationalities FINNISH;
+  public static final jasl.counters.Nationality$Nationalities FRENCH;
+  public static final jasl.counters.Nationality$Nationalities GERMAN;
+  public static final jasl.counters.Nationality$Nationalities ITALIAN;
+  public static final jasl.counters.Nationality$Nationalities JAPANESE;
+  public static final jasl.counters.Nationality$Nationalities PARTISAN;
+  public static final jasl.counters.Nationality$Nationalities RUSSIAN;
+  public static jasl.counters.Nationality$Nationalities[] values();
+  public static jasl.counters.Nationality$Nationalities valueOf(java.lang.String);
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "Personnel.java"
+abstract class jasl.counters.Personnel extends jasl.counters.Infantry implements jasl.counters.MaximumELR,jasl.counters.Classification {
+  protected jasl.counters.Personnel(jasl.counters.Description$Descriptions, jasl.counters.Nationality$Nationalities, jasl.counters.UnitType$InfantryTypes, int, int, int, int, boolean, int, int, boolean, jasl.counters.Classification$Classifications);
+  public java.lang.String toText();
+  public java.lang.String toString();
+  public java.lang.String toJSON();
+  public final boolean hasMaximumELR();
+  public final java.lang.String classification();
+  static {};
+}
+Compiled from "Portability.java"
+public interface jasl.counters.Portability {
+  public static final java.lang.String PORTAGE_VALUE_LABEL;
+  public static final int MIN_PORTAGE_VALUE;
+  public static final int MAX_PORTAGE_VALUE;
+  public abstract int portageValue();
+}
+Compiled from "SprayingFire.java"
+public interface jasl.counters.SprayingFire {
+  public static final java.lang.String CAN_SPRAY_FIRE_LABEL;
+  public abstract boolean canSprayFire();
+}
+Compiled from "Squad.java"
+public final class jasl.counters.Squad extends jasl.counters.Personnel implements jasl.counters.SprayingFire {
+  public static final java.lang.String CAN_ASSAULT_FIRE_LABEL;
+  public static final java.lang.String SMOKE_PLACEMENT_EXP_LABEL;
+  public jasl.counters.Squad(jasl.counters.Nationality$Nationalities, jasl.counters.UnitType$InfantryTypes, int, int, int, int, boolean, int, int, boolean, jasl.counters.Classification$Classifications, boolean, boolean, int);
+  public java.lang.String toText();
+  public java.lang.String toJSON();
+  public boolean canAssaultFire();
+  public boolean canSprayFire();
+  public int smokePlacementExponent();
+  public java.lang.String toString();
+  public boolean isStatusSet(jasl.counters.Status$States);
+  static {};
+}
+Compiled from "Status.java"
+public interface jasl.counters.Status {
+  public static final java.lang.String STATUS_LABEL;
+  public abstract java.lang.String status();
+  public abstract boolean isStatusSet(jasl.counters.Status$States);
+  public abstract boolean clearStatus(jasl.counters.Status$States);
+  public abstract boolean setStatus(jasl.counters.Status$States);
+}
+Compiled from "Status.java"
+public final class jasl.counters.Status$States extends java.lang.Enum<jasl.counters.Status$States> {
+  public static final jasl.counters.Status$States NORMAL;
+  public static final jasl.counters.Status$States BROKEN;
+  public static final jasl.counters.Status$States DESPERATE;
+  public static jasl.counters.Status$States[] values();
+  public static jasl.counters.Status$States valueOf(java.lang.String);
+  public java.lang.String toString();
+  public int value();
+  static {};
+}
+Compiled from "TextOutput.java"
+public interface jasl.counters.TextOutput {
+  public static final int FIRST_COLUMN_LABEL_WIDTH;
+  public static final int SECOND_COLUMN_VALUE_WIDTH;
+  public static final int THIRD_COLUMN_LABEL_WIDTH;
+  public static final int FOURTH_COLUMN_VALUE_WIDTH;
+  public static final java.lang.String JSON_DOUBLE_QUOTE;
+  public static final java.lang.String JSON_KEY_OTHER_VALUE_SEPARATOR;
+  public static final java.lang.String JSON_KEY_STRING_VALUE_SEPARATOR;
+  public static final java.lang.String JSON_OBJECT_START;
+  public static final java.lang.String JSON_OBJECT_SEPARATOR;
+  public static final java.lang.String JSON_OBJECT_END;
+  public abstract java.lang.String toText();
+  public abstract java.lang.String toJSON();
+}
+Compiled from "Unit.java"
+public abstract class jasl.counters.Unit implements java.io.Serializable,jasl.counters.TextOutput,jasl.counters.Description {
+  public static final java.lang.String UNIT_LABEL;
+  protected jasl.counters.Unit(jasl.counters.Description$Descriptions);
+  protected jasl.counters.Unit();
+  public java.lang.String toText();
+  public java.lang.String toString();
+  public java.lang.String toJSON();
+  public final java.lang.String description();
+  protected final java.lang.String buildJSONPair(java.lang.String, java.lang.String);
+  protected final java.lang.String buildJSONPair(java.lang.String, int);
+  protected final java.lang.String buildJSONPair(java.lang.String, boolean);
+  static {};
+}
+Compiled from "UnitType.java"
+public interface jasl.counters.UnitType {
+  public static final java.lang.String UNIT_TYPE_LABEL;
+  public abstract java.lang.String unitType();
+}
+Compiled from "UnitType.java"
+public final class jasl.counters.UnitType$InfantryTypes extends java.lang.Enum<jasl.counters.UnitType$InfantryTypes> {
+  public static final jasl.counters.UnitType$InfantryTypes NONE;
+  public static final jasl.counters.UnitType$InfantryTypes PARATROOPS;
+  public static final jasl.counters.UnitType$InfantryTypes AIRBORNE;
+  public static final jasl.counters.UnitType$InfantryTypes ANZAC;
+  public static final jasl.counters.UnitType$InfantryTypes CANADIAN;
+  public static final jasl.counters.UnitType$InfantryTypes FREE_FRENCH;
+  public static final jasl.counters.UnitType$InfantryTypes FREE_POLISH;
+  public static final jasl.counters.UnitType$InfantryTypes GUARDSMEN;
+  public static final jasl.counters.UnitType$InfantryTypes GURKHA;
+  public static final jasl.counters.UnitType$InfantryTypes SISSI;
+  public static final jasl.counters.UnitType$InfantryTypes ENGINEERS;
+  public static final jasl.counters.UnitType$InfantryTypes COMMISSAR;
+  public static final jasl.counters.UnitType$InfantryTypes GUARDS;
+  public static jasl.counters.UnitType$InfantryTypes[] values();
+  public static jasl.counters.UnitType$InfantryTypes valueOf(java.lang.String);
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "Game.java"
+public final class jasl.ui.data.Game {
+  public static jasl.ui.data.Game game();
+  public jasl.ui.data.Side$Sides activeSide();
+  public void setStartingSide(jasl.ui.data.Side$Sides);
+  public java.util.ArrayList<jasl.counters.Nationality$Nationalities> nationalities(jasl.ui.data.Side$Sides);
+  public java.util.ArrayList<java.lang.String> availableUnits(jasl.counters.Nationality$Nationalities);
+  public boolean addPlayer(jasl.ui.data.Side$Sides, java.lang.String, jasl.counters.Nationality$Nationalities, int);
+  public java.util.List<java.lang.String> playerList(jasl.ui.data.Side$Sides);
+  public jasl.ui.data.Player player(jasl.ui.data.Side$Sides, java.lang.String);
+  public boolean setupComplete();
+  public void setSetupComplete();
+  public java.lang.String toText();
+  static {};
+}
+Compiled from "Phase.java"
+public interface jasl.ui.data.Phase {
+  public static final java.lang.String PHASE_LABEL;
+  public abstract java.lang.String phase();
+}
+Compiled from "Phase.java"
+public final class jasl.ui.data.Phase$Phases extends java.lang.Enum<jasl.ui.data.Phase$Phases> {
+  public static final jasl.ui.data.Phase$Phases RALLY;
+  public static final jasl.ui.data.Phase$Phases PREP_FIRE;
+  public static final jasl.ui.data.Phase$Phases MOVEMENT;
+  public static final jasl.ui.data.Phase$Phases DEFENSIVE_FIRE;
+  public static final jasl.ui.data.Phase$Phases ADVANCING_FIRE;
+  public static final jasl.ui.data.Phase$Phases ROUT;
+  public static final jasl.ui.data.Phase$Phases ADVANCE;
+  public static final jasl.ui.data.Phase$Phases CLOSE_COMBAT;
+  public static jasl.ui.data.Phase$Phases[] values();
+  public static jasl.ui.data.Phase$Phases valueOf(java.lang.String);
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "Player.java"
+public final class jasl.ui.data.Player {
+  public jasl.ui.data.Player(java.lang.String, jasl.counters.Nationality$Nationalities, int);
+  public java.lang.String toText();
+  public java.lang.String toString();
+  public java.lang.String nationality();
+  public int entryTurn();
+  public java.lang.String unit(int);
+  public java.util.List<java.lang.String> unitList();
+  public void addUnit(java.lang.String);
+  public void deleteUnit(int);
+  static {};
+}
+Compiled from "Position.java"
+public final class jasl.ui.data.Position implements java.io.Serializable {
+  public static final java.lang.String POSITION_LABEL;
+  public static final java.lang.String X_POSITION_LABEL;
+  public static final java.lang.String Y_POSITION_LABEL;
+  public jasl.ui.data.Position(java.lang.String, double, double);
+  public java.lang.String toText();
+  public java.lang.String toString();
+  public java.lang.String toJSON();
+  public final double xPosition();
+  public final double yPosition();
+  static {};
+}
+Compiled from "Scenario.java"
+public final class jasl.ui.data.Scenario {
+  public jasl.ui.data.Scenario();
+  public java.lang.String toText();
+  public java.lang.String toString();
+}
+Compiled from "Side.java"
+public final class jasl.ui.data.Side {
+  public jasl.ui.data.Side(jasl.ui.data.Side$Sides);
+  public java.lang.String toText();
+  public java.lang.String toString();
+  public java.util.ArrayList<java.lang.String> playerList();
+  public jasl.ui.data.Player player(java.lang.String);
+  public static java.util.ArrayList<jasl.counters.Nationality$Nationalities> alliedNationalities();
+  public static java.util.ArrayList<jasl.counters.Nationality$Nationalities> axisNationalities();
+  public static java.util.ArrayList<java.lang.String> unitList(jasl.counters.Nationality$Nationalities);
+  public boolean addPlayer(java.lang.String, jasl.counters.Nationality$Nationalities, int);
+}
+Compiled from "Side.java"
+public final class jasl.ui.data.Side$Sides extends java.lang.Enum<jasl.ui.data.Side$Sides> {
+  public static final jasl.ui.data.Side$Sides ALLIES;
+  public static final jasl.ui.data.Side$Sides AXIS;
+  public static jasl.ui.data.Side$Sides[] values();
+  public static jasl.ui.data.Side$Sides valueOf(java.lang.String);
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "Stack.java"
+public final class jasl.ui.data.Stack {
+  public jasl.ui.data.Stack(jasl.counters.Unit, int, int);
+  public jasl.ui.data.Stack(jasl.counters.Unit);
+  public jasl.ui.data.Stack(jasl.ui.data.Stack);
+  public java.lang.String toText();
+  public java.lang.String toString();
+  public int unitID();
+  public int stackID();
+  public java.lang.String positionLabel();
+  public void setPositionLabel(java.lang.String);
+  public jasl.counters.Unit unit();
+  public java.util.Map<java.lang.Integer, jasl.ui.data.Stack> portagedItems();
+  public java.util.Map<java.lang.Integer, jasl.ui.data.Stack> subStacks();
+  public boolean addPortagedItem(jasl.ui.data.Stack);
+  public jasl.ui.data.Stack takePortagedItem(java.lang.Integer);
+  public boolean addSubStack(jasl.ui.data.Stack);
+  public jasl.ui.data.Stack takeSubStack(java.lang.Integer);
+  static {};
+}
+Compiled from "Dice.java"
+public final class jasl.utilities.Dice {
+  public jasl.utilities.Dice();
+  public java.lang.String toText();
+  public int whiteDieValue();
+  public int coloredDieValue();
+  public int combinedResult();
+  static {};
+}
+Compiled from "Messages.java"
+public final class jasl.utilities.Messages {
+  public static final java.lang.String CONSTRUCTOR;
+  public static final java.lang.String AND_SEPARATOR;
+  public static final java.lang.String NULL_PARAMETER_MSG;
+  public static final java.lang.String ZERO_LENGTH_PARAMETER_MSG;
+  public static final java.lang.String INVALID_PARAMETER_MSG;
+  public jasl.utilities.Messages();
+  public static final java.lang.String buildErrorMessage(java.lang.String, java.lang.String, java.lang.String);
+  public static final java.lang.String formatTextString(java.lang.String, int, boolean, boolean);
+  public static java.lang.String getChoiceLabel(boolean);
+  public static java.lang.String getStateLabel(boolean);
+  public static java.lang.String getTruthLabel(boolean);
+  public static java.lang.String getNumericLabel(boolean);
+}
+Compiled from "Serialization.java"
+public final class jasl.utilities.Serialization {
+  public jasl.utilities.Serialization();
+  public static final void serializeToFile(java.lang.Object, java.lang.String);
+  public static final java.lang.Object deserializeFromFile(java.lang.String);
+}

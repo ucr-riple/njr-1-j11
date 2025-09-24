@@ -1,0 +1,809 @@
+Compiled from "ASTVisitor.java"
+public interface org.KonohaScript.CodeGen.ASTVisitor {
+  public abstract boolean Visit(org.KonohaScript.SyntaxTree.TypedNode);
+  public abstract void EnterDone(org.KonohaScript.SyntaxTree.DoneNode);
+  public abstract boolean ExitDone(org.KonohaScript.SyntaxTree.DoneNode);
+  public abstract void EnterConst(org.KonohaScript.SyntaxTree.ConstNode);
+  public abstract boolean ExitConst(org.KonohaScript.SyntaxTree.ConstNode);
+  public abstract void EnterNew(org.KonohaScript.SyntaxTree.NewNode);
+  public abstract boolean ExitNew(org.KonohaScript.SyntaxTree.NewNode);
+  public abstract void EnterNull(org.KonohaScript.SyntaxTree.NullNode);
+  public abstract boolean ExitNull(org.KonohaScript.SyntaxTree.NullNode);
+  public abstract void EnterLocal(org.KonohaScript.SyntaxTree.LocalNode);
+  public abstract boolean ExitLocal(org.KonohaScript.SyntaxTree.LocalNode);
+  public abstract void EnterField(org.KonohaScript.SyntaxTree.FieldNode);
+  public abstract boolean ExitField(org.KonohaScript.SyntaxTree.FieldNode);
+  public abstract void EnterBox(org.KonohaScript.SyntaxTree.BoxNode);
+  public abstract boolean ExitBox(org.KonohaScript.SyntaxTree.BoxNode);
+  public abstract void EnterMethodCall(org.KonohaScript.SyntaxTree.MethodCallNode);
+  public abstract boolean ExitMethodCall(org.KonohaScript.SyntaxTree.MethodCallNode);
+  public abstract void EnterAnd(org.KonohaScript.SyntaxTree.AndNode);
+  public abstract boolean ExitAnd(org.KonohaScript.SyntaxTree.AndNode);
+  public abstract void EnterOr(org.KonohaScript.SyntaxTree.OrNode);
+  public abstract boolean ExitOr(org.KonohaScript.SyntaxTree.OrNode);
+  public abstract void EnterAssign(org.KonohaScript.SyntaxTree.AssignNode);
+  public abstract boolean ExitAssign(org.KonohaScript.SyntaxTree.AssignNode);
+  public abstract void EnterLet(org.KonohaScript.SyntaxTree.LetNode);
+  public abstract boolean ExitLet(org.KonohaScript.SyntaxTree.LetNode);
+  public abstract void EnterBlock(org.KonohaScript.SyntaxTree.BlockNode);
+  public abstract boolean ExitBlock(org.KonohaScript.SyntaxTree.BlockNode);
+  public abstract void EnterIf(org.KonohaScript.SyntaxTree.IfNode);
+  public abstract boolean ExitIf(org.KonohaScript.SyntaxTree.IfNode);
+  public abstract void EnterSwitch(org.KonohaScript.SyntaxTree.SwitchNode);
+  public abstract boolean ExitSwitch(org.KonohaScript.SyntaxTree.SwitchNode);
+  public abstract void EnterLoop(org.KonohaScript.SyntaxTree.LoopNode);
+  public abstract boolean ExitLoop(org.KonohaScript.SyntaxTree.LoopNode);
+  public abstract void EnterReturn(org.KonohaScript.SyntaxTree.ReturnNode);
+  public abstract boolean ExitReturn(org.KonohaScript.SyntaxTree.ReturnNode);
+  public abstract void EnterLabel(org.KonohaScript.SyntaxTree.LabelNode);
+  public abstract boolean ExitLabel(org.KonohaScript.SyntaxTree.LabelNode);
+  public abstract void EnterJump(org.KonohaScript.SyntaxTree.JumpNode);
+  public abstract boolean ExitJump(org.KonohaScript.SyntaxTree.JumpNode);
+  public abstract void EnterTry(org.KonohaScript.SyntaxTree.TryNode);
+  public abstract boolean ExitTry(org.KonohaScript.SyntaxTree.TryNode);
+  public abstract void EnterThrow(org.KonohaScript.SyntaxTree.ThrowNode);
+  public abstract boolean ExitThrow(org.KonohaScript.SyntaxTree.ThrowNode);
+  public abstract void EnterFunction(org.KonohaScript.SyntaxTree.FunctionNode);
+  public abstract boolean ExitFunction(org.KonohaScript.SyntaxTree.FunctionNode);
+  public abstract void EnterError(org.KonohaScript.SyntaxTree.ErrorNode);
+  public abstract boolean ExitError(org.KonohaScript.SyntaxTree.ErrorNode);
+}
+Compiled from "CodeGenerator.java"
+public abstract class org.KonohaScript.CodeGen.CodeGenerator {
+  java.util.ArrayList<org.KonohaScript.CodeGen.Local> LocalVals;
+  org.KonohaScript.CodeGen.CodeGenerator();
+  org.KonohaScript.CodeGen.CompiledMethod Compile(org.KonohaScript.SyntaxTree.TypedNode);
+  org.KonohaScript.CodeGen.Local AddLocalVarIfNotDefined(java.lang.String);
+}
+Compiled from "CodeGenerator.java"
+class org.KonohaScript.CodeGen.CompiledMethod {
+  public java.lang.Object CompiledCode;
+  org.KonohaScript.CodeGen.CompiledMethod();
+  java.lang.Object Invoke(java.lang.Object[]);
+}
+Compiled from "CodeGenerator.java"
+class org.KonohaScript.CodeGen.Local {
+  int Index;
+  java.lang.String Name;
+  public org.KonohaScript.CodeGen.Local(int, java.lang.String);
+}
+Compiled from "SimpleVMCodeGen.java"
+public class org.KonohaScript.CodeGen.SimpleVMCodeGen extends org.KonohaScript.CodeGen.CodeGenerator implements org.KonohaScript.CodeGen.ASTVisitor {
+  java.util.ArrayList<java.lang.String> Program;
+  static final boolean $assertionsDisabled;
+  public org.KonohaScript.CodeGen.SimpleVMCodeGen();
+  boolean IsUnboxedType(org.KonohaScript.KClass);
+  public org.KonohaScript.CodeGen.CompiledMethod Compile(org.KonohaScript.SyntaxTree.TypedNode);
+  public boolean Visit(org.KonohaScript.SyntaxTree.TypedNode);
+  public void EnterDone(org.KonohaScript.SyntaxTree.DoneNode);
+  public boolean ExitDone(org.KonohaScript.SyntaxTree.DoneNode);
+  public void EnterConst(org.KonohaScript.SyntaxTree.ConstNode);
+  public boolean ExitConst(org.KonohaScript.SyntaxTree.ConstNode);
+  public void EnterNew(org.KonohaScript.SyntaxTree.NewNode);
+  public boolean ExitNew(org.KonohaScript.SyntaxTree.NewNode);
+  public void EnterNull(org.KonohaScript.SyntaxTree.NullNode);
+  public boolean ExitNull(org.KonohaScript.SyntaxTree.NullNode);
+  public void EnterLocal(org.KonohaScript.SyntaxTree.LocalNode);
+  public boolean ExitLocal(org.KonohaScript.SyntaxTree.LocalNode);
+  public void EnterField(org.KonohaScript.SyntaxTree.FieldNode);
+  public boolean ExitField(org.KonohaScript.SyntaxTree.FieldNode);
+  public void EnterBox(org.KonohaScript.SyntaxTree.BoxNode);
+  public boolean ExitBox(org.KonohaScript.SyntaxTree.BoxNode);
+  public void EnterMethodCall(org.KonohaScript.SyntaxTree.MethodCallNode);
+  public boolean ExitMethodCall(org.KonohaScript.SyntaxTree.MethodCallNode);
+  public void EnterAnd(org.KonohaScript.SyntaxTree.AndNode);
+  public boolean ExitAnd(org.KonohaScript.SyntaxTree.AndNode);
+  public void EnterOr(org.KonohaScript.SyntaxTree.OrNode);
+  public boolean ExitOr(org.KonohaScript.SyntaxTree.OrNode);
+  public void EnterAssign(org.KonohaScript.SyntaxTree.AssignNode);
+  public boolean ExitAssign(org.KonohaScript.SyntaxTree.AssignNode);
+  public void EnterLet(org.KonohaScript.SyntaxTree.LetNode);
+  public boolean ExitLet(org.KonohaScript.SyntaxTree.LetNode);
+  public void EnterBlock(org.KonohaScript.SyntaxTree.BlockNode);
+  public boolean ExitBlock(org.KonohaScript.SyntaxTree.BlockNode);
+  public void EnterIf(org.KonohaScript.SyntaxTree.IfNode);
+  public boolean ExitIf(org.KonohaScript.SyntaxTree.IfNode);
+  public void EnterSwitch(org.KonohaScript.SyntaxTree.SwitchNode);
+  public boolean ExitSwitch(org.KonohaScript.SyntaxTree.SwitchNode);
+  public void EnterLoop(org.KonohaScript.SyntaxTree.LoopNode);
+  public boolean ExitLoop(org.KonohaScript.SyntaxTree.LoopNode);
+  public void EnterReturn(org.KonohaScript.SyntaxTree.ReturnNode);
+  public boolean ExitReturn(org.KonohaScript.SyntaxTree.ReturnNode);
+  public void EnterLabel(org.KonohaScript.SyntaxTree.LabelNode);
+  public boolean ExitLabel(org.KonohaScript.SyntaxTree.LabelNode);
+  public void EnterJump(org.KonohaScript.SyntaxTree.JumpNode);
+  public boolean ExitJump(org.KonohaScript.SyntaxTree.JumpNode);
+  public void EnterTry(org.KonohaScript.SyntaxTree.TryNode);
+  public boolean ExitTry(org.KonohaScript.SyntaxTree.TryNode);
+  public void EnterThrow(org.KonohaScript.SyntaxTree.ThrowNode);
+  public boolean ExitThrow(org.KonohaScript.SyntaxTree.ThrowNode);
+  public void EnterFunction(org.KonohaScript.SyntaxTree.FunctionNode);
+  public boolean ExitFunction(org.KonohaScript.SyntaxTree.FunctionNode);
+  public void EnterError(org.KonohaScript.SyntaxTree.ErrorNode);
+  public boolean ExitError(org.KonohaScript.SyntaxTree.ErrorNode);
+  static {};
+}
+Compiled from "SimpleVMCodeGenTest.java"
+public class org.KonohaScript.CodeGen.SimpleVMCodeGenTest {
+  public org.KonohaScript.CodeGen.SimpleVMCodeGenTest();
+  public void testCompile();
+}
+Compiled from "KSyntax.java"
+class org.KonohaScript.CommonSyntax {
+  org.KonohaScript.CommonSyntax();
+  public int ParseErrorNode(org.KonohaScript.UntypedNode, java.util.ArrayList<org.KonohaScript.KToken>, int, int, int);
+  public org.KonohaScript.SyntaxTree.TypedNode TypeErrorNode(org.KonohaScript.KGamma, org.KonohaScript.UntypedNode);
+  public int ParseIndent(org.KonohaScript.UntypedNode, java.util.ArrayList<org.KonohaScript.KToken>, int, int, int);
+  public int ParseTypeStatement(org.KonohaScript.UntypedNode, java.util.ArrayList<org.KonohaScript.KToken>, int, int, int);
+  public int ParseValue(org.KonohaScript.UntypedNode, java.util.ArrayList<org.KonohaScript.KToken>, int, int, int);
+  public org.KonohaScript.SyntaxTree.TypedNode TypeValue(org.KonohaScript.KGamma, org.KonohaScript.UntypedNode, org.KonohaScript.KClass);
+  public org.KonohaScript.SyntaxTree.TypedNode TypeSymbol(org.KonohaScript.KGamma, org.KonohaScript.UntypedNode, org.KonohaScript.KClass);
+}
+Compiled from "MiniKonoha.java"
+public final class org.KonohaScript.GrammarSet.MiniKonoha implements org.KonohaScript.KonohaParserConst {
+  public static final int IfCond;
+  public static final int IfThen;
+  public static final int IfElse;
+  public static final int VarDeclName;
+  public static final int VarDeclValue;
+  public static final int MethodDeclReturn;
+  public static final int MethodDeclClass;
+  public static final int MethodDeclName;
+  public static final int MethodDeclBlock;
+  public static final int MethodDeclParam;
+  static final boolean $assertionsDisabled;
+  public org.KonohaScript.GrammarSet.MiniKonoha();
+  public int WhiteSpaceToken(org.KonohaScript.KNameSpace, java.lang.String, int, java.util.ArrayList<org.KonohaScript.KToken>);
+  public int IndentToken(org.KonohaScript.KNameSpace, java.lang.String, int, java.util.ArrayList<org.KonohaScript.KToken>);
+  public int SingleSymbolToken(org.KonohaScript.KNameSpace, java.lang.String, int, java.util.ArrayList<org.KonohaScript.KToken>);
+  public int SymbolToken(org.KonohaScript.KNameSpace, java.lang.String, int, java.util.ArrayList<org.KonohaScript.KToken>);
+  public int MemberToken(org.KonohaScript.KNameSpace, java.lang.String, int, java.util.ArrayList<org.KonohaScript.KToken>);
+  public int NumberLiteralToken(org.KonohaScript.KNameSpace, java.lang.String, int, java.util.ArrayList<org.KonohaScript.KToken>);
+  public int StringLiteralToken(org.KonohaScript.KNameSpace, java.lang.String, int, java.util.ArrayList<org.KonohaScript.KToken>);
+  public int OpenParenthesisMacro(org.KonohaScript.LexicalConverter, java.util.ArrayList<org.KonohaScript.KToken>, int, int, java.util.ArrayList<org.KonohaScript.KToken>);
+  public int CloseParenthesisMacro(org.KonohaScript.LexicalConverter, java.util.ArrayList<org.KonohaScript.KToken>, int, int, java.util.ArrayList<org.KonohaScript.KToken>);
+  public int OpenBraceMacro(org.KonohaScript.LexicalConverter, java.util.ArrayList<org.KonohaScript.KToken>, int, int, java.util.ArrayList<org.KonohaScript.KToken>);
+  public int CloseBraceMacro(org.KonohaScript.LexicalConverter, java.util.ArrayList<org.KonohaScript.KToken>, int, int, java.util.ArrayList<org.KonohaScript.KToken>);
+  public int OpenCloseBraceMacro(org.KonohaScript.LexicalConverter, java.util.ArrayList<org.KonohaScript.KToken>, int, int, java.util.ArrayList<org.KonohaScript.KToken>);
+  public int OpenBracketMacro(org.KonohaScript.LexicalConverter, java.util.ArrayList<org.KonohaScript.KToken>, int, int, java.util.ArrayList<org.KonohaScript.KToken>);
+  public int CloseBracketMacro(org.KonohaScript.LexicalConverter, java.util.ArrayList<org.KonohaScript.KToken>, int, int, java.util.ArrayList<org.KonohaScript.KToken>);
+  public int MergeOperatorMacro(org.KonohaScript.LexicalConverter, java.util.ArrayList<org.KonohaScript.KToken>, int, int, java.util.ArrayList<org.KonohaScript.KToken>);
+  public int ParseSymbol(org.KonohaScript.UntypedNode, java.util.ArrayList<org.KonohaScript.KToken>, int, int, int);
+  public int ParseUniaryOperator(org.KonohaScript.UntypedNode, java.util.ArrayList<org.KonohaScript.KToken>, int, int, int);
+  public int ParseParenthesis(org.KonohaScript.UntypedNode, java.util.ArrayList<org.KonohaScript.KToken>, int, int, int);
+  public int ParseIf(org.KonohaScript.UntypedNode, java.util.ArrayList<org.KonohaScript.KToken>, int, int, int);
+  public org.KonohaScript.SyntaxTree.TypedNode TypeIf(org.KonohaScript.KGamma, org.KonohaScript.UntypedNode, org.KonohaScript.KClass);
+  public int ParseReturn(org.KonohaScript.UntypedNode, java.util.ArrayList<org.KonohaScript.KToken>, int, int, int);
+  public org.KonohaScript.SyntaxTree.TypedNode TypeReturn(org.KonohaScript.KGamma, org.KonohaScript.UntypedNode, org.KonohaScript.KClass);
+  public int ParseVarDeclIteration(org.KonohaScript.UntypedNode, org.KonohaScript.KToken, java.util.ArrayList<org.KonohaScript.KToken>, int, int, int);
+  public int ParseVarDecl(org.KonohaScript.UntypedNode, java.util.ArrayList<org.KonohaScript.KToken>, int, int, int);
+  public org.KonohaScript.SyntaxTree.TypedNode TypeVarDecl(org.KonohaScript.KGamma, org.KonohaScript.UntypedNode, org.KonohaScript.KClass);
+  public int ParseMethodDecl(org.KonohaScript.UntypedNode, java.util.ArrayList<org.KonohaScript.KToken>, int, int, int);
+  public void LoadDefaultSyntax(org.KonohaScript.KNameSpace);
+  void DefineIntegerMethod(org.KonohaScript.KNameSpace);
+  public static int Plus(int);
+  public static int Add(int, int);
+  public static int Minus(int);
+  public static int Sub(int, int);
+  static {};
+}
+Compiled from "KClass.java"
+public class org.KonohaScript.KClass {
+  org.KonohaScript.Konoha KonohaContext;
+  org.KonohaScript.KPackage Package;
+  int ClassFlag;
+  public java.lang.String ShortClassName;
+  org.KonohaScript.KClass BaseClass;
+  org.KonohaScript.KClass SuperClass;
+  org.KonohaScript.KParam ClassParam;
+  org.KonohaScript.KClass SearchSimilarClass;
+  java.util.ArrayList<org.KonohaScript.KMethod> ClassMethodList;
+  org.KonohaScript.KClass SearchSuperMethodClass;
+  java.lang.Object DefaultNullValue;
+  java.lang.Object LocalSpec;
+  public static final java.util.ArrayList<org.KonohaScript.KMethod> EmptyMethodList;
+  java.lang.Class<?> HostedClassInfo;
+  public static org.KonohaScript.KClass VoidType;
+  public static org.KonohaScript.KClass ObjectType;
+  public static org.KonohaScript.KClass BooleanType;
+  public static org.KonohaScript.KClass IntType;
+  public static org.KonohaScript.KClass StringType;
+  public org.KonohaScript.KClass(org.KonohaScript.Konoha, org.KonohaScript.KPackage, int, java.lang.String, java.lang.Object);
+  public org.KonohaScript.KClass(org.KonohaScript.Konoha, java.lang.Class<?>);
+  static org.KonohaScript.KMethod ConvertMethod(org.KonohaScript.Konoha, java.lang.reflect.Method);
+  int CreateMethods(java.lang.String);
+  public boolean Accept(org.KonohaScript.KClass);
+  public void AddMethod(org.KonohaScript.KMethod);
+  public void DefineMethod(int, java.lang.String, org.KonohaScript.KParam, java.lang.Object, java.lang.String);
+  public org.KonohaScript.KMethod LookupMethod(java.lang.String, int);
+  static {};
+}
+Compiled from "KFunc.java"
+public final class org.KonohaScript.KFunc {
+  java.lang.Object callee;
+  java.lang.reflect.Method method;
+  org.KonohaScript.KFunc prev;
+  static java.lang.reflect.Method LookupMethod(java.lang.Object, java.lang.String);
+  org.KonohaScript.KFunc(java.lang.Object, java.lang.reflect.Method, org.KonohaScript.KFunc);
+  org.KonohaScript.KFunc(java.lang.Object, java.lang.String, org.KonohaScript.KFunc);
+  static boolean EqualsMethod(java.lang.reflect.Method, java.lang.reflect.Method);
+  static org.KonohaScript.KFunc NewFunc(java.lang.Object, java.lang.String, org.KonohaScript.KFunc);
+  org.KonohaScript.KFunc Pop();
+  org.KonohaScript.KFunc Duplicate();
+  org.KonohaScript.KFunc Merge(org.KonohaScript.KFunc);
+  int InvokeTokenFunc(org.KonohaScript.KNameSpace, java.lang.String, int, java.util.ArrayList<org.KonohaScript.KToken>);
+  int InvokeMacroFunc(org.KonohaScript.LexicalConverter, java.util.ArrayList<org.KonohaScript.KToken>, int, int, java.util.ArrayList<org.KonohaScript.KToken>);
+  public java.lang.String toString();
+}
+Compiled from "KGamma.java"
+public class org.KonohaScript.KGamma {
+  public org.KonohaScript.KGamma();
+  org.KonohaScript.KClass GetLocalType(java.lang.String);
+  int GetLocalIndex(java.lang.String);
+  public static org.KonohaScript.SyntaxTree.TypedNode TypeNode(org.KonohaScript.KGamma, org.KonohaScript.UntypedNode, org.KonohaScript.KClass);
+  public static org.KonohaScript.SyntaxTree.TypedNode TypeCheckNode(org.KonohaScript.KGamma, org.KonohaScript.UntypedNode, org.KonohaScript.KClass, int);
+  public static org.KonohaScript.SyntaxTree.TypedNode TypeCheckEachNode(org.KonohaScript.KGamma, org.KonohaScript.SyntaxTree.TypedNode, org.KonohaScript.KClass, int);
+}
+Compiled from "Konoha.java"
+class org.KonohaScript.KKeyIdMap {
+  org.KonohaScript.KKeyIdMap();
+  int GetId(java.lang.String);
+  void SetId(java.lang.String, int);
+}
+Compiled from "KMethod.java"
+public class org.KonohaScript.KMethod implements org.KonohaScript.KonohaParserConst {
+  int MethodFlag;
+  org.KonohaScript.KClass ClassInfo;
+  java.lang.String MethodName;
+  org.KonohaScript.KParam Param;
+  java.lang.reflect.Method MethodRef;
+  public org.KonohaScript.KMethod(int, org.KonohaScript.KClass, java.lang.String, org.KonohaScript.KParam, java.lang.reflect.Method);
+  public boolean Match(java.lang.String, int);
+  boolean IsStaticInvocation();
+  public java.lang.Object Eval(java.lang.Object[]);
+}
+Compiled from "KNameSpace.java"
+public final class org.KonohaScript.KNameSpace implements org.KonohaScript.KonohaParserConst {
+  public org.KonohaScript.Konoha KonohaContext;
+  org.KonohaScript.KNameSpace ParentNameSpace;
+  java.util.ArrayList<org.KonohaScript.KNameSpace> ImportedNameSpaceList;
+  org.KonohaScript.KFunc[] DefinedTokenMatrix;
+  org.KonohaScript.KFunc[] ImportedTokenMatrix;
+  static final java.lang.String MacroPrefix;
+  java.util.HashMap<java.lang.String, java.lang.Object> DefinedSymbolTable;
+  java.util.HashMap<java.lang.String, java.lang.Object> ImportedSymbolTable;
+  static final boolean $assertionsDisabled;
+  org.KonohaScript.KNameSpace(org.KonohaScript.Konoha, org.KonohaScript.KNameSpace);
+  public final org.KonohaScript.KClass LookupTypeInfo(java.lang.String);
+  public final org.KonohaScript.KClass LookupTypeInfo(java.lang.Class<?>);
+  org.KonohaScript.KFunc MergeFunc(org.KonohaScript.KFunc, org.KonohaScript.KFunc);
+  org.KonohaScript.KFunc GetDefinedTokenFunc(int);
+  org.KonohaScript.KFunc GetTokenFunc(int);
+  public void AddTokenFunc(java.lang.String, java.lang.Object, java.lang.String);
+  public java.util.ArrayList<org.KonohaScript.KToken> Tokenize(java.lang.String, long);
+  org.KonohaScript.KFunc GetDefinedMacroFunc(java.lang.String);
+  org.KonohaScript.KFunc GetMacroFunc(java.lang.String);
+  public void AddMacroFunc(java.lang.String, java.lang.Object, java.lang.String);
+  java.lang.Object GetDefinedSymbol(java.lang.String);
+  public java.lang.Object GetSymbol(java.lang.String);
+  public void DefineSymbol(java.lang.String, java.lang.Object);
+  public org.KonohaScript.KSyntax GetSyntax(java.lang.String);
+  public void AddSyntax(org.KonohaScript.KSyntax);
+  public void DefineSyntax(java.lang.String, int, java.lang.Object, java.lang.String, java.lang.String);
+  public void ImportNameSpace(org.KonohaScript.KNameSpace);
+  public int PreProcess(java.util.ArrayList<org.KonohaScript.KToken>, int, int, java.util.ArrayList<org.KonohaScript.KToken>);
+  java.lang.String GetSourcePosition(long);
+  public void Message(int, org.KonohaScript.KToken, java.lang.String);
+  public void Eval(java.lang.String, long);
+  static {};
+}
+Compiled from "KObject.java"
+public class org.KonohaScript.KObject {
+  java.util.HashMap<java.lang.String, java.lang.Object> prototypes;
+  public org.KonohaScript.KObject();
+}
+Compiled from "KPackage.java"
+public class org.KonohaScript.KPackage {
+  java.lang.String PackageName;
+  org.KonohaScript.KNameSpace PackageNameSpace;
+  int kickoutFileId;
+  public org.KonohaScript.KPackage(org.KonohaScript.Konoha, int, java.lang.String);
+}
+Compiled from "KParam.java"
+public class org.KonohaScript.KParam {
+  public static final int MAX;
+  public static final int VariableParamSize;
+  public int ReturnSize;
+  public org.KonohaScript.KClass[] Types;
+  public org.KonohaScript.KParam(int, org.KonohaScript.KClass[]);
+  public static org.KonohaScript.KParam ParseOf(org.KonohaScript.KNameSpace, java.lang.String);
+  public final int GetParamSize();
+}
+Compiled from "Konoha.java"
+class org.KonohaScript.KParamMap {
+  org.KonohaScript.KParamMap();
+  int GetId(int);
+  void SetId(int, int);
+}
+Compiled from "Konoha.java"
+class org.KonohaScript.KSymbolTable implements org.KonohaScript.KonohaParserConst {
+  java.util.ArrayList<org.KonohaScript.KClass> ClassList;
+  java.util.HashMap<java.lang.String, org.KonohaScript.KClass> ClassNameMap;
+  java.util.ArrayList<org.KonohaScript.KPackage> PackageList;
+  org.KonohaScript.KKeyIdMap PackageMap;
+  java.util.ArrayList<java.lang.String> FileIdList;
+  java.util.HashMap<java.lang.String, java.lang.Integer> FileIdMap;
+  java.util.ArrayList<java.lang.String> SymbolList;
+  java.util.HashMap<java.lang.String, java.lang.Integer> SymbolMap;
+  java.util.ArrayList<org.KonohaScript.KParam> ParamList;
+  org.KonohaScript.KParamMap ParamMap;
+  java.util.ArrayList<org.KonohaScript.KParam> SignatureList;
+  org.KonohaScript.KParamMap SignatureMap;
+  org.KonohaScript.KSymbolTable();
+  void Init(org.KonohaScript.Konoha);
+  long GetFileId(java.lang.String, int);
+  java.lang.String GetFileName(long);
+  public static final int MaskSymbol(int, int);
+  public static final int UnmaskSymbol(int);
+  public java.lang.String StringfySymbol(int);
+  public int GetSymbol(java.lang.String, int);
+  public static java.lang.String CanonicalSymbol(java.lang.String);
+  public int GetCanonicalSymbol(java.lang.String, int);
+  int GetSymbol(java.lang.String, boolean);
+  org.KonohaScript.KPackage NewPackage(org.KonohaScript.Konoha, java.lang.String);
+}
+Compiled from "KSyntax.java"
+public final class org.KonohaScript.KSyntax implements org.KonohaScript.KonohaParserConst {
+  public org.KonohaScript.KNameSpace PackageNameSpace;
+  public java.lang.String SyntaxName;
+  int SyntaxFlag;
+  public java.lang.Object ParseObject;
+  public java.lang.reflect.Method ParseMethod;
+  public java.lang.Object TypeObject;
+  public java.lang.reflect.Method TypeMethod;
+  public org.KonohaScript.KSyntax ParentSyntax;
+  public static final org.KonohaScript.KSyntax ErrorSyntax;
+  public static final org.KonohaScript.KSyntax IndentSyntax;
+  public static final org.KonohaScript.KSyntax EmptySyntax;
+  public static final org.KonohaScript.KSyntax TypeSyntax;
+  public static final org.KonohaScript.KSyntax ConstSyntax;
+  public static final org.KonohaScript.KSyntax MemberSyntax;
+  public static final org.KonohaScript.KSyntax ApplyMethodSyntax;
+  public java.lang.String toString();
+  public boolean IsBeginTerm();
+  public boolean IsBinaryOperator();
+  public boolean IsSuffixOperator();
+  public boolean IsDelim();
+  public static final boolean IsFlag(int, int);
+  public boolean IsLeftJoin(org.KonohaScript.KSyntax);
+  public org.KonohaScript.KSyntax(java.lang.String, int, java.lang.Object, java.lang.String, java.lang.String);
+  public boolean IsError();
+  int InvokeParseFunc(org.KonohaScript.UntypedNode, java.util.ArrayList<org.KonohaScript.KToken>, int, int, int);
+  static {};
+}
+Compiled from "KToken.java"
+public final class org.KonohaScript.KToken {
+  public long uline;
+  public java.lang.String ParsedText;
+  static final int ErrorTokenFlag;
+  static final int GroupTokenFlag;
+  int flag;
+  public org.KonohaScript.KSyntax ResolvedSyntax;
+  java.lang.Object ResolvedObject;
+  static final boolean $assertionsDisabled;
+  public boolean EqualsText(java.lang.String);
+  public org.KonohaScript.KToken(java.lang.String);
+  public org.KonohaScript.KToken(java.lang.String, long);
+  public boolean IsErrorToken();
+  public boolean IsGroupToken();
+  public void SetGroup(org.KonohaScript.KSyntax, java.util.ArrayList<org.KonohaScript.KToken>);
+  public java.util.ArrayList<org.KonohaScript.KToken> GetGroupList();
+  public java.lang.String SetErrorMessage(java.lang.String);
+  void Dump(int);
+  public static void DumpTokenList(int, java.lang.String, java.util.ArrayList<org.KonohaScript.KToken>, int, int);
+  public static void DumpTokenList(java.util.ArrayList<org.KonohaScript.KToken>);
+  static {};
+}
+Compiled from "KNameSpace.java"
+class org.KonohaScript.KTokenizer implements org.KonohaScript.KonohaParserConst {
+  org.KonohaScript.KNameSpace ns;
+  java.lang.String SourceText;
+  long CurrentLine;
+  java.util.ArrayList<org.KonohaScript.KToken> SourceList;
+  org.KonohaScript.KTokenizer(org.KonohaScript.KNameSpace, java.lang.String, long);
+  int TokenizeFirstToken(java.util.ArrayList<org.KonohaScript.KToken>);
+  int StampLine(int);
+  int DispatchFunc(int, int);
+  java.util.ArrayList<org.KonohaScript.KToken> Tokenize();
+}
+Compiled from "Konoha.java"
+public class org.KonohaScript.Konoha implements org.KonohaScript.KonohaParserConst {
+  org.KonohaScript.KNameSpace RootNameSpace;
+  org.KonohaScript.KNameSpace DefaultNameSpace;
+  org.KonohaScript.KSymbolTable SymbolTable;
+  public final org.KonohaScript.KClass VoidType;
+  public final org.KonohaScript.KClass BooleanType;
+  public org.KonohaScript.Konoha(org.KonohaScript.GrammarSet.MiniKonoha);
+  final org.KonohaScript.KClass LookupTypeInfo(java.lang.Class<?>);
+  public void Define(java.lang.String, java.lang.Object);
+  public void Eval(java.lang.String, long);
+  public void Load(java.lang.String);
+  public static void main(java.lang.String[]);
+}
+Compiled from "KonohaChar.java"
+public abstract class org.KonohaScript.KonohaChar {
+  public static final int Null;
+  public static final int Undefined;
+  public static final int Digit;
+  public static final int UpperAlpha;
+  public static final int LowerAlpha;
+  public static final int Unicode;
+  public static final int NewLine;
+  public static final int Tab;
+  public static final int Space;
+  public static final int OpenParenthesis;
+  public static final int CloseParenthesis;
+  public static final int OpenBracket;
+  public static final int CloseBracket;
+  public static final int OpenBrace;
+  public static final int CloseBrace;
+  public static final int LessThan;
+  public static final int GreaterThan;
+  public static final int Quote;
+  public static final int DoubleQuote;
+  public static final int BackQuote;
+  public static final int Surprised;
+  public static final int Sharp;
+  public static final int Dollar;
+  public static final int Percent;
+  public static final int And;
+  public static final int Star;
+  public static final int Plus;
+  public static final int Comma;
+  public static final int Minus;
+  public static final int Dot;
+  public static final int Slash;
+  public static final int Colon;
+  public static final int SemiColon;
+  public static final int Equal;
+  public static final int Question;
+  public static final int AtMark;
+  public static final int Var;
+  public static final int Childer;
+  public static final int BackSlash;
+  public static final int Hat;
+  public static final int UnderBar;
+  public static final int MAX;
+  static final int[] cMatrix;
+  public org.KonohaScript.KonohaChar();
+  static int JavaCharToKonohaChar(char);
+  static {};
+}
+Compiled from "KonohaDebug.java"
+public final class org.KonohaScript.KonohaDebug {
+  public static final boolean UseBuiltInTest;
+  public org.KonohaScript.KonohaDebug();
+  public static void P(java.lang.String);
+  public static void Indent(int, java.lang.String);
+}
+Compiled from "KonohaParserConst.java"
+public interface org.KonohaScript.KonohaParserConst {
+  public static final int PrivateClass;
+  public static final int SingletonClass;
+  public static final int FinalClass;
+  public static final int KonohaClass;
+  public static final int StaticClass;
+  public static final int ImmutableClass;
+  public static final int InterfaceClass;
+  public static final int PrivateMethod;
+  public static final int VirtualMethod;
+  public static final int FinalMethod;
+  public static final int ConstMethod;
+  public static final int StaticMethod;
+  public static final int ImmutableMethod;
+  public static final int TopLevelMethod;
+  public static final int CoercionMethod;
+  public static final int RestrictedMethod;
+  public static final int UncheckedMethod;
+  public static final int SmartReturnMethod;
+  public static final int VariadicMethod;
+  public static final int IterativeMethod;
+  public static final int UniversalMethod;
+  public static final int HiddenMethod;
+  public static final int AbstractMethod;
+  public static final int OverloadedMethod;
+  public static final int Override;
+  public static final int DynamicCall;
+  public static final int GetterSymbol;
+  public static final int SetterSymbol;
+  public static final int MetaSymbol;
+  public static final int AllowNewId;
+  public static final int NoMatch;
+  public static final int BreakPreProcess;
+  public static final int Error;
+  public static final int Warning;
+  public static final int Info;
+  public static final int Term;
+  public static final int BinaryOperator;
+  public static final int SuffixOperator;
+  public static final int LeftJoin;
+  public static final int PrecedenceShift;
+  public static final int Precedence_CStyleValue;
+  public static final int Precedence_CPPStyleScope;
+  public static final int Precedence_CStyleSuffixCall;
+  public static final int Precedence_CStylePrefixOperator;
+  public static final int Precedence_CStyleMUL;
+  public static final int Precedence_CStyleADD;
+  public static final int Precedence_CStyleSHIFT;
+  public static final int Precedence_CStyleCOMPARE;
+  public static final int Precedence_CStyleEquals;
+  public static final int Precedence_CStyleBITAND;
+  public static final int Precedence_CStyleBITXOR;
+  public static final int Precedence_CStyleBITOR;
+  public static final int Precedence_CStyleAND;
+  public static final int Precedence_CStyleOR;
+  public static final int Precedence_CStyleTRINARY;
+  public static final int Precedence_CStyleAssign;
+  public static final int Precedence_CStyleCOMMA;
+  public static final int Precedence_Error;
+  public static final int Precedence_Statement;
+  public static final int Precedence_CStyleDelim;
+  public static final int TermRequired;
+  public static final int AllowEmpty;
+  public static final int CreateNullNode;
+  public static final int AllowSkip;
+  public static final int HasNextPattern;
+  public static final int Preliminary;
+  public static final int TypeCheckPolicy_AllowEmpty;
+}
+Compiled from "KonohaParserException.java"
+public class org.KonohaScript.KonohaParserException extends java.lang.RuntimeException {
+  public org.KonohaScript.KonohaParserException(java.lang.String);
+}
+Compiled from "LexicalConverter.java"
+public final class org.KonohaScript.LexicalConverter implements org.KonohaScript.KonohaParserConst {
+  public boolean TopLevel;
+  public boolean SkipIndent;
+  int LastIndent;
+  org.KonohaScript.KNameSpace ns;
+  static final boolean $assertionsDisabled;
+  public org.KonohaScript.LexicalConverter(org.KonohaScript.KNameSpace, boolean, boolean);
+  public org.KonohaScript.KSyntax GetSyntax(java.lang.String);
+  public void ResolveTokenSyntax(org.KonohaScript.KToken);
+  static int Indent(java.lang.String);
+  public int Do(java.util.ArrayList<org.KonohaScript.KToken>, int, int, java.util.ArrayList<org.KonohaScript.KToken>);
+  static {};
+}
+Compiled from "AndNode.java"
+public class org.KonohaScript.SyntaxTree.AndNode extends org.KonohaScript.SyntaxTree.BinaryNode {
+  public org.KonohaScript.SyntaxTree.AndNode(org.KonohaScript.KClass, org.KonohaScript.SyntaxTree.TypedNode, org.KonohaScript.SyntaxTree.TypedNode);
+  public boolean Evaluate(org.KonohaScript.CodeGen.ASTVisitor);
+}
+Compiled from "AssignNode.java"
+public class org.KonohaScript.SyntaxTree.AssignNode extends org.KonohaScript.SyntaxTree.TypedNode {
+  public org.KonohaScript.KToken TermToken;
+  int Index;
+  org.KonohaScript.SyntaxTree.TypedNode Right;
+  public org.KonohaScript.SyntaxTree.AssignNode(org.KonohaScript.KClass, org.KonohaScript.KToken, int, org.KonohaScript.SyntaxTree.TypedNode);
+  public boolean Evaluate(org.KonohaScript.CodeGen.ASTVisitor);
+}
+Compiled from "BinaryNode.java"
+public abstract class org.KonohaScript.SyntaxTree.BinaryNode extends org.KonohaScript.SyntaxTree.TypedNode {
+  org.KonohaScript.SyntaxTree.TypedNode Left;
+  org.KonohaScript.SyntaxTree.TypedNode Right;
+  org.KonohaScript.SyntaxTree.BinaryNode(org.KonohaScript.KClass, org.KonohaScript.SyntaxTree.TypedNode, org.KonohaScript.SyntaxTree.TypedNode);
+}
+Compiled from "BlockNode.java"
+public class org.KonohaScript.SyntaxTree.BlockNode extends org.KonohaScript.SyntaxTree.TypedNode {
+  public java.util.ArrayList<org.KonohaScript.SyntaxTree.TypedNode> ExprList;
+  public org.KonohaScript.SyntaxTree.BlockNode(org.KonohaScript.KClass);
+  public org.KonohaScript.SyntaxTree.BlockNode(org.KonohaScript.KClass, org.KonohaScript.SyntaxTree.TypedNode);
+  public org.KonohaScript.SyntaxTree.BlockNode(org.KonohaScript.KClass, org.KonohaScript.SyntaxTree.TypedNode, org.KonohaScript.SyntaxTree.TypedNode);
+  public org.KonohaScript.SyntaxTree.BlockNode(org.KonohaScript.KClass, org.KonohaScript.SyntaxTree.TypedNode, org.KonohaScript.SyntaxTree.TypedNode, org.KonohaScript.SyntaxTree.TypedNode);
+  void init();
+  public boolean Evaluate(org.KonohaScript.CodeGen.ASTVisitor);
+}
+Compiled from "BoxNode.java"
+public class org.KonohaScript.SyntaxTree.BoxNode extends org.KonohaScript.SyntaxTree.UnaryNode {
+  public org.KonohaScript.SyntaxTree.BoxNode(org.KonohaScript.KClass, org.KonohaScript.SyntaxTree.TypedNode);
+  public boolean Evaluate(org.KonohaScript.CodeGen.ASTVisitor);
+}
+Compiled from "CallableNode.java"
+public interface org.KonohaScript.SyntaxTree.CallableNode {
+  public abstract void Append(org.KonohaScript.SyntaxTree.TypedNode);
+}
+Compiled from "ConstNode.java"
+public class org.KonohaScript.SyntaxTree.ConstNode extends org.KonohaScript.SyntaxTree.TypedNode {
+  public java.lang.Object ConstObject;
+  public long ConstValue;
+  public org.KonohaScript.SyntaxTree.ConstNode(org.KonohaScript.KClass, org.KonohaScript.KToken, java.lang.Object);
+  public org.KonohaScript.SyntaxTree.ConstNode(org.KonohaScript.KClass, long);
+  public org.KonohaScript.SyntaxTree.ConstNode(org.KonohaScript.KClass, int);
+  public org.KonohaScript.SyntaxTree.ConstNode(org.KonohaScript.KClass, float);
+  public org.KonohaScript.SyntaxTree.ConstNode(org.KonohaScript.KClass, boolean);
+  void init(java.lang.Object);
+  public boolean Evaluate(org.KonohaScript.CodeGen.ASTVisitor);
+}
+Compiled from "DoneNode.java"
+public class org.KonohaScript.SyntaxTree.DoneNode extends org.KonohaScript.SyntaxTree.TypedNode {
+  public org.KonohaScript.SyntaxTree.DoneNode(org.KonohaScript.KClass);
+  public boolean Evaluate(org.KonohaScript.CodeGen.ASTVisitor);
+}
+Compiled from "ErrorNode.java"
+public class org.KonohaScript.SyntaxTree.ErrorNode extends org.KonohaScript.SyntaxTree.TypedNode {
+  java.lang.String ErrorMessage;
+  public org.KonohaScript.SyntaxTree.ErrorNode(org.KonohaScript.KClass, org.KonohaScript.KToken, java.lang.String);
+  public boolean Evaluate(org.KonohaScript.CodeGen.ASTVisitor);
+}
+Compiled from "FieldNode.java"
+public class org.KonohaScript.SyntaxTree.FieldNode extends org.KonohaScript.SyntaxTree.TypedNode {
+  public org.KonohaScript.KToken TermToken;
+  int Index;
+  public int Xindex;
+  public org.KonohaScript.SyntaxTree.FieldNode(org.KonohaScript.KClass, org.KonohaScript.KToken, int, int);
+  public boolean Evaluate(org.KonohaScript.CodeGen.ASTVisitor);
+}
+Compiled from "FunctionNode.java"
+public class org.KonohaScript.SyntaxTree.FunctionNode extends org.KonohaScript.SyntaxTree.TypedNode implements org.KonohaScript.SyntaxTree.CallableNode {
+  java.util.ArrayList<org.KonohaScript.SyntaxTree.TypedNode> EnvList;
+  java.lang.reflect.Method Mtd;
+  public org.KonohaScript.SyntaxTree.FunctionNode(org.KonohaScript.KClass, java.lang.reflect.Method);
+  public void Append(org.KonohaScript.SyntaxTree.TypedNode);
+  public boolean Evaluate(org.KonohaScript.CodeGen.ASTVisitor);
+}
+Compiled from "IfNode.java"
+public class org.KonohaScript.SyntaxTree.IfNode extends org.KonohaScript.SyntaxTree.TypedNode {
+  public org.KonohaScript.SyntaxTree.TypedNode CondExpr;
+  public org.KonohaScript.SyntaxTree.TypedNode ThenNode;
+  public org.KonohaScript.SyntaxTree.TypedNode ElseNode;
+  public org.KonohaScript.SyntaxTree.IfNode(org.KonohaScript.KClass, org.KonohaScript.SyntaxTree.TypedNode, org.KonohaScript.SyntaxTree.TypedNode, org.KonohaScript.SyntaxTree.TypedNode);
+  public boolean Evaluate(org.KonohaScript.CodeGen.ASTVisitor);
+}
+Compiled from "JumpNode.java"
+public class org.KonohaScript.SyntaxTree.JumpNode extends org.KonohaScript.SyntaxTree.TypedNode {
+  public java.lang.String Label;
+  public org.KonohaScript.SyntaxTree.JumpNode(org.KonohaScript.KClass, java.lang.String);
+  public boolean Evaluate(org.KonohaScript.CodeGen.ASTVisitor);
+}
+Compiled from "LabelNode.java"
+public class org.KonohaScript.SyntaxTree.LabelNode extends org.KonohaScript.SyntaxTree.TypedNode {
+  public java.lang.String Label;
+  public org.KonohaScript.SyntaxTree.LabelNode(org.KonohaScript.KClass, java.lang.String);
+  public boolean Evaluate(org.KonohaScript.CodeGen.ASTVisitor);
+}
+Compiled from "LetNode.java"
+public class org.KonohaScript.SyntaxTree.LetNode extends org.KonohaScript.SyntaxTree.TypedNode {
+  public org.KonohaScript.KToken TermToken;
+  int Index;
+  org.KonohaScript.SyntaxTree.TypedNode Right;
+  org.KonohaScript.SyntaxTree.TypedNode Block;
+  public org.KonohaScript.SyntaxTree.LetNode(org.KonohaScript.KClass, org.KonohaScript.KToken, int, org.KonohaScript.SyntaxTree.TypedNode, org.KonohaScript.SyntaxTree.BlockNode);
+  public boolean Evaluate(org.KonohaScript.CodeGen.ASTVisitor);
+}
+Compiled from "LocalNode.java"
+public class org.KonohaScript.SyntaxTree.LocalNode extends org.KonohaScript.SyntaxTree.TypedNode {
+  int ClassicStackIndex;
+  public org.KonohaScript.SyntaxTree.LocalNode(org.KonohaScript.KClass, org.KonohaScript.KToken, int);
+  public boolean Evaluate(org.KonohaScript.CodeGen.ASTVisitor);
+}
+Compiled from "LoopNode.java"
+public class org.KonohaScript.SyntaxTree.LoopNode extends org.KonohaScript.SyntaxTree.TypedNode {
+  org.KonohaScript.SyntaxTree.TypedNode CondExpr;
+  org.KonohaScript.SyntaxTree.TypedNode LoopBody;
+  org.KonohaScript.SyntaxTree.TypedNode IterationExpr;
+  public org.KonohaScript.SyntaxTree.LoopNode(org.KonohaScript.KClass);
+  public boolean Evaluate(org.KonohaScript.CodeGen.ASTVisitor);
+}
+Compiled from "MethodCallNode.java"
+public class org.KonohaScript.SyntaxTree.MethodCallNode extends org.KonohaScript.SyntaxTree.TypedNode implements org.KonohaScript.SyntaxTree.CallableNode {
+  org.KonohaScript.KMethod Method;
+  public java.util.ArrayList<org.KonohaScript.SyntaxTree.TypedNode> Params;
+  public org.KonohaScript.SyntaxTree.MethodCallNode(org.KonohaScript.KClass, org.KonohaScript.KToken, org.KonohaScript.KMethod);
+  public void Append(org.KonohaScript.SyntaxTree.TypedNode);
+  public boolean Evaluate(org.KonohaScript.CodeGen.ASTVisitor);
+}
+Compiled from "NewNode.java"
+public class org.KonohaScript.SyntaxTree.NewNode extends org.KonohaScript.SyntaxTree.TypedNode {
+  public org.KonohaScript.SyntaxTree.NewNode(org.KonohaScript.KClass);
+  public boolean Evaluate(org.KonohaScript.CodeGen.ASTVisitor);
+}
+Compiled from "TypedNode.java"
+class org.KonohaScript.SyntaxTree.NotSupportedNodeError extends java.lang.RuntimeException {
+  org.KonohaScript.SyntaxTree.NotSupportedNodeError();
+}
+Compiled from "NullNode.java"
+public class org.KonohaScript.SyntaxTree.NullNode extends org.KonohaScript.SyntaxTree.TypedNode {
+  public org.KonohaScript.SyntaxTree.NullNode(org.KonohaScript.KClass);
+  public boolean Evaluate(org.KonohaScript.CodeGen.ASTVisitor);
+}
+Compiled from "OrNode.java"
+public class org.KonohaScript.SyntaxTree.OrNode extends org.KonohaScript.SyntaxTree.BinaryNode {
+  public org.KonohaScript.SyntaxTree.OrNode(org.KonohaScript.KClass, org.KonohaScript.SyntaxTree.TypedNode, org.KonohaScript.SyntaxTree.TypedNode);
+  public boolean Evaluate(org.KonohaScript.CodeGen.ASTVisitor);
+}
+Compiled from "ReturnNode.java"
+public class org.KonohaScript.SyntaxTree.ReturnNode extends org.KonohaScript.SyntaxTree.UnaryNode {
+  public org.KonohaScript.SyntaxTree.ReturnNode(org.KonohaScript.KClass, org.KonohaScript.SyntaxTree.TypedNode);
+  public boolean Evaluate(org.KonohaScript.CodeGen.ASTVisitor);
+}
+Compiled from "SwitchNode.java"
+public class org.KonohaScript.SyntaxTree.SwitchNode extends org.KonohaScript.SyntaxTree.TypedNode {
+  org.KonohaScript.SyntaxTree.TypedNode CondExpr;
+  public java.util.ArrayList<java.lang.String> Labels;
+  public java.util.ArrayList<org.KonohaScript.SyntaxTree.TypedNode> Blocks;
+  public org.KonohaScript.SyntaxTree.SwitchNode(org.KonohaScript.KClass);
+  public boolean Evaluate(org.KonohaScript.CodeGen.ASTVisitor);
+}
+Compiled from "ThrowNode.java"
+public class org.KonohaScript.SyntaxTree.ThrowNode extends org.KonohaScript.SyntaxTree.UnaryNode {
+  public org.KonohaScript.SyntaxTree.ThrowNode(org.KonohaScript.KClass, org.KonohaScript.SyntaxTree.TypedNode);
+  public boolean Evaluate(org.KonohaScript.CodeGen.ASTVisitor);
+}
+Compiled from "TryNode.java"
+public class org.KonohaScript.SyntaxTree.TryNode extends org.KonohaScript.SyntaxTree.TypedNode {
+  org.KonohaScript.SyntaxTree.TypedNode TryBlock;
+  java.util.ArrayList<org.KonohaScript.SyntaxTree.TypedNode> TargetException;
+  public java.util.ArrayList<org.KonohaScript.SyntaxTree.TypedNode> CatchBlock;
+  org.KonohaScript.SyntaxTree.TypedNode FinallyBlock;
+  public org.KonohaScript.SyntaxTree.TryNode(org.KonohaScript.KClass, org.KonohaScript.SyntaxTree.TypedNode, org.KonohaScript.SyntaxTree.TypedNode);
+  public boolean Evaluate(org.KonohaScript.CodeGen.ASTVisitor);
+}
+Compiled from "TypedNode.java"
+public abstract class org.KonohaScript.SyntaxTree.TypedNode {
+  org.KonohaScript.SyntaxTree.TypedNode ParentNode;
+  org.KonohaScript.SyntaxTree.TypedNode PreviousNode;
+  org.KonohaScript.SyntaxTree.TypedNode NextNode;
+  public org.KonohaScript.KClass TypeInfo;
+  public org.KonohaScript.KToken SourceToken;
+  public final org.KonohaScript.SyntaxTree.TypedNode GetHeadNode();
+  public final org.KonohaScript.SyntaxTree.TypedNode GetTailNode();
+  public final void LinkNode(org.KonohaScript.SyntaxTree.TypedNode);
+  public org.KonohaScript.SyntaxTree.TypedNode(org.KonohaScript.KClass);
+  public org.KonohaScript.SyntaxTree.TypedNode(org.KonohaScript.KClass, org.KonohaScript.KToken);
+  public boolean Evaluate(org.KonohaScript.CodeGen.ASTVisitor);
+  public final boolean IsError();
+}
+Compiled from "UnaryNode.java"
+public abstract class org.KonohaScript.SyntaxTree.UnaryNode extends org.KonohaScript.SyntaxTree.TypedNode {
+  org.KonohaScript.SyntaxTree.TypedNode Expr;
+  org.KonohaScript.SyntaxTree.UnaryNode(org.KonohaScript.KClass, org.KonohaScript.SyntaxTree.TypedNode);
+}
+Compiled from "UntypedNode.java"
+public class org.KonohaScript.UntypedNode implements org.KonohaScript.KonohaParserConst {
+  org.KonohaScript.UntypedNode Parent;
+  org.KonohaScript.UntypedNode PreviousNode;
+  org.KonohaScript.UntypedNode NextNode;
+  public org.KonohaScript.KNameSpace NodeNameSpace;
+  public org.KonohaScript.KSyntax Syntax;
+  public org.KonohaScript.KToken KeyToken;
+  java.util.ArrayList<java.lang.Object> NodeList;
+  public static final int LeftTerm;
+  public static final int RightTerm;
+  static final boolean $assertionsDisabled;
+  public java.lang.String toString();
+  public org.KonohaScript.UntypedNode(org.KonohaScript.KNameSpace, org.KonohaScript.KToken);
+  public void LinkNode(org.KonohaScript.UntypedNode);
+  public org.KonohaScript.UntypedNode AddParsedNode(org.KonohaScript.UntypedNode);
+  void SetAt(int, java.lang.Object);
+  public org.KonohaScript.UntypedNode SetAtNode(int, org.KonohaScript.UntypedNode);
+  public void SetAtToken(int, org.KonohaScript.KToken);
+  public int ReportError(org.KonohaScript.KToken, java.lang.String, int);
+  public static org.KonohaScript.UntypedNode NewNullNode(org.KonohaScript.KNameSpace, java.util.ArrayList<org.KonohaScript.KToken>, int);
+  public int ParseToken(org.KonohaScript.KToken, java.util.ArrayList<org.KonohaScript.KToken>, int, int);
+  public static org.KonohaScript.UntypedNode BinaryNode(org.KonohaScript.KNameSpace, org.KonohaScript.UntypedNode, org.KonohaScript.KToken, org.KonohaScript.UntypedNode);
+  int ReportExpectedAfter(java.util.ArrayList<org.KonohaScript.KToken>, int, int, java.lang.String, int);
+  public static org.KonohaScript.UntypedNode ParseNewNode2(org.KonohaScript.KNameSpace, org.KonohaScript.UntypedNode, java.util.ArrayList<org.KonohaScript.KToken>, int, int, int);
+  public static org.KonohaScript.UntypedNode ParseGroup(org.KonohaScript.KNameSpace, org.KonohaScript.KToken, int);
+  public org.KonohaScript.UntypedNode GetSuffixBodyNode();
+  public void AppendTokenList(java.lang.String, java.util.ArrayList<org.KonohaScript.KToken>, int, int, int);
+  public static final boolean IsAllowEmpty(int);
+  public static final boolean IsAllowNoMatch(int);
+  public static int FindDelim(java.util.ArrayList<org.KonohaScript.KToken>, int, int);
+  public int MatchCond(int, java.util.ArrayList<org.KonohaScript.KToken>, int, int, int);
+  public int MatchExpression(int, java.util.ArrayList<org.KonohaScript.KToken>, int, int, int);
+  public int MatchSingleBlock(int, java.util.ArrayList<org.KonohaScript.KToken>, int, int, int);
+  public int MatchKeyword(int, java.lang.String, java.util.ArrayList<org.KonohaScript.KToken>, int, int, int);
+  public int MatchSyntax(int, java.lang.String, java.util.ArrayList<org.KonohaScript.KToken>, int, int, int);
+  public final org.KonohaScript.SyntaxTree.TypedNode TypeNodeAt(int, org.KonohaScript.KGamma, org.KonohaScript.KClass, int);
+  static {};
+}

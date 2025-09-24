@@ -1,0 +1,3340 @@
+Compiled from "CMAEvolutionStrategy.java"
+public class fr.inria.optimization.cmaes.CMAEvolutionStrategy implements java.io.Serializable {
+  public final java.lang.String versionNumber;
+  public fr.inria.optimization.cmaes.CMAOptions options;
+  public fr.inria.optimization.cmaes.CMAParameters parameters;
+  public fr.inria.optimization.cmaes.CMAEvolutionStrategy$StopCondition stopConditions;
+  int N;
+  long seed;
+  java.util.Random rand;
+  final fr.inria.optimization.cmaes.CMAEvolutionStrategy$MyMath math;
+  double axisratio;
+  long counteval;
+  long countiter;
+  long bestever_eval;
+  double[] bestever_x;
+  double bestever_fit;
+  double sigma;
+  double[] typicalX;
+  double[] initialX;
+  double[] LBound;
+  double[] UBound;
+  double[] xmean;
+  double xmean_fit;
+  double[] pc;
+  double[] ps;
+  double[][] C;
+  double maxsqrtdiagC;
+  double minsqrtdiagC;
+  double[][] B;
+  double[] diagD;
+  boolean flgdiag;
+  double[] startsigma;
+  double maxstartsigma;
+  double minstartsigma;
+  boolean iniphase;
+  double state;
+  long citerlastwritten;
+  long countwritten;
+  int lockDimension;
+  int mode;
+  final int SINGLE_MODE;
+  final int PARALLEL_MODE;
+  long countCupdatesSinceEigenupdate;
+  protected fr.inria.optimization.cmaes.CMAEvolutionStrategy$FitnessCollector fit;
+  double recentFunctionValue;
+  double recentMaxFunctionValue;
+  double recentMinFunctionValue;
+  int idxRecentOffspring;
+  double[][] arx;
+  public double[][] population;
+  double[] xold;
+  double[] BDz;
+  double[] artmp;
+  java.lang.String propertiesFileName;
+  java.util.Properties properties;
+  fr.inria.optimization.cmaes.CMAEvolutionStrategy$Timing timings;
+  static final boolean $assertionsDisabled;
+  void testAndCorrectNumerics();
+  public fr.inria.optimization.cmaes.CMAEvolutionStrategy();
+  public fr.inria.optimization.cmaes.CMAEvolutionStrategy(java.util.Properties);
+  public fr.inria.optimization.cmaes.CMAEvolutionStrategy(java.lang.String);
+  public fr.inria.optimization.cmaes.CMAEvolutionStrategy(int);
+  public double[] init(int, double[], double[]);
+  public double[] init(int);
+  public double[] init();
+  public fr.inria.optimization.cmaes.CMAParameters getParameterDefaults();
+  public fr.inria.optimization.cmaes.CMAParameters getParameterDefaults(int);
+  public java.util.Properties readProperties();
+  public java.util.Properties readProperties(java.lang.String);
+  public void setFromProperties(java.util.Properties);
+  void eigendecomposition(int);
+  int checkEigenSystem(int, double[][], double[], double[][]);
+  double[][] genoPhenoTransformation(double[][], double[][]);
+  double[][] phenoGenoTransformation(double[][], double[][]);
+  double[] genoPhenoTransformation(double[], double[]);
+  double[] phenoGenoTransformation(double[], double[]);
+  public double[][] samplePopulation();
+  public double[] resampleSingle(int);
+  public double mahalanobisNorm(double[], double[]);
+  public void updateDistribution(double[][], double[]);
+  public void updateDistribution(double[][], double[], int);
+  public void updateDistribution(double[]);
+  double[] assignNew(double[], double[]);
+  void updateBestEver(double[], double, long);
+  public double getAxisRatio();
+  public fr.inria.optimization.cmaes.CMASolution getBestSolution();
+  public fr.inria.optimization.cmaes.CMASolution setFitnessOfMeanX(double);
+  public double[] getBestX();
+  public double getBestFunctionValue();
+  public long getBestEvaluationNumber();
+  public fr.inria.optimization.cmaes.ISolutionPoint getBestRecentSolution();
+  public double[] getBestRecentX();
+  public double getBestRecentFunctionValue();
+  public double getWorstRecentFunctionValue();
+  public double[] getMeanX();
+  public int getDimension();
+  public long getCountEval();
+  public long getCountIter();
+  public double[] getInitialX();
+  public java.util.Random getRand();
+  public java.util.Properties getProperties();
+  public long getSeed();
+  public long setCountEval(long);
+  public void setDimension(int);
+  public void setTypicalX(double);
+  public void setTypicalX(double[]);
+  public void setInitialStandardDeviation(double);
+  public void setInitialStandardDeviations(double[]);
+  public void setInitialX(double);
+  public void setInitialX(double, double);
+  public void setInitialX(double[], double[]);
+  public void setInitialX(double[]);
+  public void setRand(java.util.Random);
+  public void setSeed(long);
+  public java.lang.String getPrintLine();
+  public java.lang.String getPrintAnnotation();
+  public java.lang.String helloWorld();
+  public void println(java.lang.String);
+  public void println();
+  public void printlnAnnotation();
+  public void printlnHelloWorld();
+  public java.lang.String getDataRowFitness();
+  public java.lang.String getDataRowXRecentBest();
+  public java.lang.String getDataRowXMean();
+  public java.lang.String getDataRowAxlen();
+  public java.lang.String getDataRowStddev();
+  public java.lang.String getDataC();
+  public void writeToFile(java.lang.String, java.lang.String, int);
+  public void writeToDefaultFiles();
+  public void writeToDefaultFiles(int);
+  public void writeToDefaultFiles(java.lang.String);
+  public void writeToDefaultFilesHeaders(int);
+  public void writeToDefaultFilesHeaders(java.lang.String, int);
+  static {};
+}
+Compiled from "CMAEvolutionStrategy.java"
+public class fr.inria.optimization.cmaes.CMAEvolutionStrategy$CMAException extends java.lang.RuntimeException {
+  final fr.inria.optimization.cmaes.CMAEvolutionStrategy this$0;
+  fr.inria.optimization.cmaes.CMAEvolutionStrategy$CMAException(fr.inria.optimization.cmaes.CMAEvolutionStrategy, java.lang.String);
+}
+Compiled from "CMAEvolutionStrategy.java"
+class fr.inria.optimization.cmaes.CMAEvolutionStrategy$FitnessCollector {
+  double[] history;
+  fr.inria.optimization.cmaes.IntDouble[] fitness;
+  fr.inria.optimization.cmaes.IntDouble[] raw;
+  double[] deltaFitHist;
+  int idxDeltaFitHist;
+  final fr.inria.optimization.cmaes.CMAEvolutionStrategy this$0;
+  fr.inria.optimization.cmaes.CMAEvolutionStrategy$FitnessCollector(fr.inria.optimization.cmaes.CMAEvolutionStrategy);
+}
+Compiled from "CMAEvolutionStrategy.java"
+class fr.inria.optimization.cmaes.CMAEvolutionStrategy$MyMath {
+  int itest;
+  final fr.inria.optimization.cmaes.CMAEvolutionStrategy this$0;
+  fr.inria.optimization.cmaes.CMAEvolutionStrategy$MyMath(fr.inria.optimization.cmaes.CMAEvolutionStrategy);
+  double square(double);
+  double prod(double[]);
+  public double median(double[]);
+  public double max(double[]);
+  public double hypot(double, double);
+  public int minidx(double[]);
+  public int minidx(double[], int);
+  protected int minidx(fr.inria.optimization.cmaes.IntDouble[], int);
+  public int maxidx(double[]);
+  public double min(double[]);
+  public java.lang.Double max(java.lang.Double[], java.util.Comparator<java.lang.Double>);
+  public fr.inria.optimization.cmaes.IntDouble max(fr.inria.optimization.cmaes.IntDouble[]);
+  public fr.inria.optimization.cmaes.IntDouble min(fr.inria.optimization.cmaes.IntDouble[]);
+  public java.lang.Double min(java.lang.Double[], java.util.Comparator<java.lang.Double>);
+  public double[] diag(double[][]);
+  public double[] abs(double[]);
+}
+Compiled from "CMAEvolutionStrategy.java"
+public class fr.inria.optimization.cmaes.CMAEvolutionStrategy$StopCondition {
+  int index;
+  java.lang.String[] messages;
+  double lastcounteval;
+  final fr.inria.optimization.cmaes.CMAEvolutionStrategy this$0;
+  public fr.inria.optimization.cmaes.CMAEvolutionStrategy$StopCondition(fr.inria.optimization.cmaes.CMAEvolutionStrategy);
+  public boolean isTrue();
+  public boolean isFalse();
+  public int getNumber();
+  public java.lang.String[] getMessages();
+  public void clear();
+  int test();
+}
+Compiled from "CMAEvolutionStrategy.java"
+class fr.inria.optimization.cmaes.CMAEvolutionStrategy$Timing {
+  long birth;
+  long start;
+  long starteigen;
+  long eigendecomposition;
+  long writedefaultfiles;
+  final fr.inria.optimization.cmaes.CMAEvolutionStrategy this$0;
+  fr.inria.optimization.cmaes.CMAEvolutionStrategy$Timing(fr.inria.optimization.cmaes.CMAEvolutionStrategy);
+}
+Compiled from "CMAOptions.java"
+public class fr.inria.optimization.cmaes.CMAOptions implements java.io.Serializable {
+  public long diagonalCovarianceMatrix;
+  public double[] lowerStandardDeviations;
+  public double[] upperStandardDeviations;
+  public double stopFitness;
+  public double stopTolFun;
+  public double stopTolFunHist;
+  public double stopTolX;
+  public double stopTolXFactor;
+  public double stopTolUpXFactor;
+  public long stopMaxFunEvals;
+  public long stopMaxIter;
+  public boolean stopnow;
+  public int verbosity;
+  public java.lang.String outputFileNamesPrefix;
+  public int writeDisplayToFile;
+  public double maxTimeFractionForEigendecomposition;
+  public double maxTimeFractionForWriteToDefaultFiles;
+  public int checkEigenSystem;
+  public fr.inria.optimization.cmaes.CMAOptions();
+  void setOptions(java.util.Properties);
+  public java.lang.Double getFirstToken(java.lang.String, java.lang.Double);
+  public java.lang.String getFirstToken(java.lang.String);
+  public java.lang.Integer getFirstToken(java.lang.String, java.lang.Integer);
+  java.lang.String[] getAllToken(java.lang.String);
+  double[] parseDouble(java.lang.String[]);
+}
+Compiled from "CMAParameters.java"
+public class fr.inria.optimization.cmaes.CMAParameters implements java.io.Serializable {
+  int supplemented;
+  int locked;
+  int lambda;
+  int mu;
+  double mucov;
+  double mueff;
+  double[] weights;
+  double damps;
+  double cs;
+  double cc;
+  double ccov;
+  double ccovsep;
+  double chiN;
+  int flgLambdaChanged;
+  fr.inria.optimization.cmaes.CMAParameters$RecombinationType recombinationType;
+  static final boolean $assertionsDisabled;
+  public fr.inria.optimization.cmaes.CMAParameters();
+  public java.lang.String check();
+  public fr.inria.optimization.cmaes.CMAParameters getDefaults(int);
+  public fr.inria.optimization.cmaes.CMAParameters getDefaults(int, int);
+  public void supplementRemainders(int, fr.inria.optimization.cmaes.CMAOptions);
+  public int getMu();
+  public void setMu(int);
+  public int getLambda();
+  void setLambda(int);
+  public int getPopulationSize();
+  public void setPopulationSize(int);
+  public double[] getWeights();
+  public void setRecombinationWeights(fr.inria.optimization.cmaes.CMAParameters$RecombinationType);
+  public void setRecombination(int, fr.inria.optimization.cmaes.CMAParameters$RecombinationType);
+  protected void setWeights(double[]);
+  public double getMueff();
+  public double getMucov();
+  public void setMucov(double);
+  public double getCcov(boolean);
+  public double getCcov();
+  public void setCcov(double);
+  public double getDamps();
+  public void setDamps(double);
+  public double getCc();
+  public void setCc(double);
+  public double getCs();
+  public void setCs(double);
+  static {};
+}
+Compiled from "CMAParameters.java"
+public final class fr.inria.optimization.cmaes.CMAParameters$RecombinationType extends java.lang.Enum<fr.inria.optimization.cmaes.CMAParameters$RecombinationType> {
+  public static final fr.inria.optimization.cmaes.CMAParameters$RecombinationType superlinear;
+  public static final fr.inria.optimization.cmaes.CMAParameters$RecombinationType linear;
+  public static final fr.inria.optimization.cmaes.CMAParameters$RecombinationType equal;
+  public static fr.inria.optimization.cmaes.CMAParameters$RecombinationType[] values();
+  public static fr.inria.optimization.cmaes.CMAParameters$RecombinationType valueOf(java.lang.String);
+  static {};
+}
+Compiled from "CMASolution.java"
+public class fr.inria.optimization.cmaes.CMASolution implements fr.inria.optimization.cmaes.ISolutionPoint,java.io.Serializable {
+  public fr.inria.optimization.cmaes.CMASolution();
+  public fr.inria.optimization.cmaes.CMASolution(double[], double, long);
+  public fr.inria.optimization.cmaes.CMASolution deepCopy();
+  public fr.inria.optimization.cmaes.CMASolution(double[]);
+  public double getFitness();
+  public long getEvaluationNumber();
+  public double[] getX();
+  public void setFitness(double);
+  public void setEvaluationNumber(long);
+  public void setX(double[]);
+}
+Compiled from "ISolutionPoint.java"
+public interface fr.inria.optimization.cmaes.ISolutionPoint {
+  public abstract double getFitness();
+  public abstract long getEvaluationNumber();
+  public abstract double[] getX();
+  public abstract void setFitness(double);
+  public abstract void setEvaluationNumber(long);
+  public abstract void setX(double[]);
+}
+Compiled from "CMAEvolutionStrategy.java"
+class fr.inria.optimization.cmaes.IntDouble implements java.util.Comparator<fr.inria.optimization.cmaes.IntDouble> {
+  int i;
+  double val;
+  public fr.inria.optimization.cmaes.IntDouble(double, int);
+  public fr.inria.optimization.cmaes.IntDouble(double);
+  public fr.inria.optimization.cmaes.IntDouble();
+  public int compare(fr.inria.optimization.cmaes.IntDouble, fr.inria.optimization.cmaes.IntDouble);
+  public boolean equals(fr.inria.optimization.cmaes.IntDouble, fr.inria.optimization.cmaes.IntDouble);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "PrintfFormat.java"
+public class fr.inria.optimization.cmaes.PrintfFormat {
+  public fr.inria.optimization.cmaes.PrintfFormat(java.lang.String) throws java.lang.IllegalArgumentException;
+  public fr.inria.optimization.cmaes.PrintfFormat(java.util.Locale, java.lang.String) throws java.lang.IllegalArgumentException;
+  public java.lang.String sprintf(java.lang.Object[]);
+  public java.lang.String sprintf();
+  public java.lang.String sprintf(int) throws java.lang.IllegalArgumentException;
+  public java.lang.String sprintf(long) throws java.lang.IllegalArgumentException;
+  public java.lang.String sprintf(double) throws java.lang.IllegalArgumentException;
+  public java.lang.String sprintf(java.lang.String) throws java.lang.IllegalArgumentException;
+  public java.lang.String sprintf(java.lang.Object) throws java.lang.IllegalArgumentException;
+  static java.text.DecimalFormatSymbols access$000(fr.inria.optimization.cmaes.PrintfFormat);
+}
+Compiled from "PrintfFormat.java"
+class fr.inria.optimization.cmaes.PrintfFormat$ConversionSpecification {
+  final fr.inria.optimization.cmaes.PrintfFormat this$0;
+  fr.inria.optimization.cmaes.PrintfFormat$ConversionSpecification(fr.inria.optimization.cmaes.PrintfFormat);
+  fr.inria.optimization.cmaes.PrintfFormat$ConversionSpecification(fr.inria.optimization.cmaes.PrintfFormat, java.lang.String) throws java.lang.IllegalArgumentException;
+  void setLiteral(java.lang.String);
+  java.lang.String getLiteral();
+  char getConversionCharacter();
+  boolean isVariableFieldWidth();
+  void setFieldWidthWithArg(int);
+  boolean isVariablePrecision();
+  void setPrecisionWithArg(int);
+  java.lang.String internalsprintf(int) throws java.lang.IllegalArgumentException;
+  java.lang.String internalsprintf(long) throws java.lang.IllegalArgumentException;
+  java.lang.String internalsprintf(double) throws java.lang.IllegalArgumentException;
+  java.lang.String internalsprintf(java.lang.String) throws java.lang.IllegalArgumentException;
+  java.lang.String internalsprintf(java.lang.Object);
+  boolean isPositionalSpecification();
+  int getArgumentPosition();
+  boolean isPositionalFieldWidth();
+  int getArgumentPositionForFieldWidth();
+  boolean isPositionalPrecision();
+  int getArgumentPositionForPrecision();
+}
+Compiled from "CMAExample1.java"
+public class fr.inria.optimization.cmaes.examples.CMAExample1 {
+  public fr.inria.optimization.cmaes.examples.CMAExample1();
+  public static void main(java.lang.String[]);
+}
+Compiled from "CMAExample2.java"
+public class fr.inria.optimization.cmaes.examples.CMAExample2 {
+  public fr.inria.optimization.cmaes.examples.CMAExample2();
+  public static void main(java.lang.String[]);
+}
+Compiled from "CMAExample1.java"
+class fr.inria.optimization.cmaes.examples.Rosenbrock implements fr.inria.optimization.cmaes.fitness.IObjectiveFunction {
+  fr.inria.optimization.cmaes.examples.Rosenbrock();
+  public double valueOf(double[]);
+  public boolean isFeasible(double[]);
+}
+Compiled from "AbstractObjectiveFunction.java"
+public abstract class fr.inria.optimization.cmaes.fitness.AbstractObjectiveFunction implements fr.inria.optimization.cmaes.fitness.IObjectiveFunction,fr.inria.optimization.cmaes.fitness.IObjectiveFunctionParallel {
+  public fr.inria.optimization.cmaes.fitness.AbstractObjectiveFunction();
+  public abstract double valueOf(double[]);
+  public double[] valuesOf(double[][]);
+  public boolean isFeasible(double[]);
+}
+Compiled from "FunctionCollector.java"
+class fr.inria.optimization.cmaes.fitness.Ackley extends fr.inria.optimization.cmaes.fitness.AbstractObjectiveFunction {
+  double axisratio;
+  fr.inria.optimization.cmaes.fitness.Ackley(double);
+  public fr.inria.optimization.cmaes.fitness.Ackley();
+  public double valueOf(double[]);
+}
+Compiled from "FunctionCollector.java"
+class fr.inria.optimization.cmaes.fitness.Basis {
+  double[][] B;
+  java.util.Random rand;
+  fr.inria.optimization.cmaes.fitness.Basis();
+  double[] Rotate(double[]);
+  double[][] Rotate(double[][]);
+  void GenBasis(int);
+}
+Compiled from "FunctionCollector.java"
+class fr.inria.optimization.cmaes.fitness.CigTab extends fr.inria.optimization.cmaes.fitness.AbstractObjectiveFunction {
+  public double factor;
+  fr.inria.optimization.cmaes.fitness.CigTab();
+  fr.inria.optimization.cmaes.fitness.CigTab(double);
+  public double valueOf(double[]);
+}
+Compiled from "FunctionCollector.java"
+class fr.inria.optimization.cmaes.fitness.Cigar extends fr.inria.optimization.cmaes.fitness.AbstractObjectiveFunction {
+  public double factor;
+  fr.inria.optimization.cmaes.fitness.Cigar();
+  fr.inria.optimization.cmaes.fitness.Cigar(double);
+  public double valueOf(double[]);
+}
+Compiled from "FunctionCollector.java"
+class fr.inria.optimization.cmaes.fitness.DiffPow extends fr.inria.optimization.cmaes.fitness.AbstractObjectiveFunction {
+  fr.inria.optimization.cmaes.fitness.DiffPow();
+  public double valueOf(double[]);
+}
+Compiled from "FunctionCollector.java"
+class fr.inria.optimization.cmaes.fitness.Elli extends fr.inria.optimization.cmaes.fitness.AbstractObjectiveFunction {
+  public double factor;
+  fr.inria.optimization.cmaes.fitness.Elli();
+  fr.inria.optimization.cmaes.fitness.Elli(double);
+  public double valueOf(double[]);
+}
+Compiled from "FunctionCollector.java"
+class fr.inria.optimization.cmaes.fitness.ElliRotated extends fr.inria.optimization.cmaes.fitness.AbstractObjectiveFunction {
+  public fr.inria.optimization.cmaes.fitness.Basis B;
+  public double factor;
+  fr.inria.optimization.cmaes.fitness.ElliRotated();
+  fr.inria.optimization.cmaes.fitness.ElliRotated(double);
+  public double valueOf(double[]);
+}
+Compiled from "FunctionCollector.java"
+public class fr.inria.optimization.cmaes.fitness.FunctionCollector extends fr.inria.optimization.cmaes.fitness.AbstractObjectiveFunction {
+  final int maxFuncNumber;
+  fr.inria.optimization.cmaes.fitness.IObjectiveFunction[] funs;
+  int actFun;
+  int rotate;
+  double scaling;
+  fr.inria.optimization.cmaes.fitness.Basis B;
+  public fr.inria.optimization.cmaes.fitness.FunctionCollector(double, int, double);
+  public double valueOf(double[]);
+  public boolean isFeasible(double[]);
+}
+Compiled from "IObjectiveFunction.java"
+public interface fr.inria.optimization.cmaes.fitness.IObjectiveFunction {
+  public abstract double valueOf(double[]);
+  public abstract boolean isFeasible(double[]);
+}
+Compiled from "IObjectiveFunctionParallel.java"
+public interface fr.inria.optimization.cmaes.fitness.IObjectiveFunctionParallel {
+  public abstract double[] valuesOf(double[][]);
+}
+Compiled from "FunctionCollector.java"
+class fr.inria.optimization.cmaes.fitness.RandFun extends fr.inria.optimization.cmaes.fitness.AbstractObjectiveFunction {
+  java.util.Random rand;
+  fr.inria.optimization.cmaes.fitness.RandFun();
+  public double valueOf(double[]);
+}
+Compiled from "FunctionCollector.java"
+class fr.inria.optimization.cmaes.fitness.Rastrigin extends fr.inria.optimization.cmaes.fitness.AbstractObjectiveFunction {
+  public double axisratio;
+  public double amplitude;
+  fr.inria.optimization.cmaes.fitness.Rastrigin();
+  fr.inria.optimization.cmaes.fitness.Rastrigin(double, double);
+  public double valueOf(double[]);
+}
+Compiled from "FunctionCollector.java"
+class fr.inria.optimization.cmaes.fitness.Rosen extends fr.inria.optimization.cmaes.fitness.AbstractObjectiveFunction {
+  fr.inria.optimization.cmaes.fitness.Rosen();
+  public double valueOf(double[]);
+}
+Compiled from "FunctionCollector.java"
+class fr.inria.optimization.cmaes.fitness.Sphere extends fr.inria.optimization.cmaes.fitness.AbstractObjectiveFunction {
+  fr.inria.optimization.cmaes.fitness.Sphere();
+  public double valueOf(double[]);
+  public boolean isFeasible(double[]);
+}
+Compiled from "FunctionCollector.java"
+class fr.inria.optimization.cmaes.fitness.Tablet extends fr.inria.optimization.cmaes.fitness.AbstractObjectiveFunction {
+  public double factor;
+  fr.inria.optimization.cmaes.fitness.Tablet();
+  fr.inria.optimization.cmaes.fitness.Tablet(double);
+  public double valueOf(double[]);
+}
+Compiled from "FunctionCollector.java"
+class fr.inria.optimization.cmaes.fitness.TwoAxes extends fr.inria.optimization.cmaes.fitness.AbstractObjectiveFunction {
+  public double factor;
+  fr.inria.optimization.cmaes.fitness.TwoAxes();
+  fr.inria.optimization.cmaes.fitness.TwoAxes(double);
+  public double valueOf(double[]);
+}
+Compiled from "FunctionCollector.java"
+class fr.inria.optimization.cmaes.fitness.ssDiffPow extends fr.inria.optimization.cmaes.fitness.AbstractObjectiveFunction {
+  fr.inria.optimization.cmaes.fitness.ssDiffPow();
+  public double valueOf(double[]);
+}
+Compiled from "ContactFilter.java"
+public class org.jbox2d.callbacks.ContactFilter {
+  public org.jbox2d.callbacks.ContactFilter();
+  public boolean shouldCollide(org.jbox2d.dynamics.Fixture, org.jbox2d.dynamics.Fixture);
+}
+Compiled from "ContactImpulse.java"
+public class org.jbox2d.callbacks.ContactImpulse {
+  public float[] normalImpulses;
+  public float[] tangentImpulses;
+  public org.jbox2d.callbacks.ContactImpulse();
+}
+Compiled from "ContactListener.java"
+public interface org.jbox2d.callbacks.ContactListener {
+  public abstract void beginContact(org.jbox2d.dynamics.contacts.Contact);
+  public abstract void endContact(org.jbox2d.dynamics.contacts.Contact);
+  public abstract void preSolve(org.jbox2d.dynamics.contacts.Contact, org.jbox2d.collision.Manifold);
+  public abstract void postSolve(org.jbox2d.dynamics.contacts.Contact, org.jbox2d.callbacks.ContactImpulse);
+}
+Compiled from "DebugDraw.java"
+public abstract class org.jbox2d.callbacks.DebugDraw {
+  public static final int e_shapeBit;
+  public static final int e_jointBit;
+  public static final int e_aabbBit;
+  public static final int e_pairBit;
+  public static final int e_centerOfMassBit;
+  public static final int e_dynamicTreeBit;
+  protected int m_drawFlags;
+  protected final org.jbox2d.common.IViewportTransform viewportTransform;
+  public org.jbox2d.callbacks.DebugDraw(org.jbox2d.common.IViewportTransform);
+  public void setFlags(int);
+  public int getFlags();
+  public void appendFlags(int);
+  public void clearFlags(int);
+  public void drawPolygon(org.jbox2d.common.Vec2[], int, org.jbox2d.common.Color3f);
+  public void drawPolygon(org.jbox2d.common.Vec2[], int, org.jbox2d.common.Color3f, boolean);
+  public abstract void drawPoint(org.jbox2d.common.Vec2, float, org.jbox2d.common.Color3f);
+  public abstract void drawSolidPolygon(org.jbox2d.common.Vec2[], int, org.jbox2d.common.Color3f, boolean);
+  public abstract void drawSolidPolygon(org.jbox2d.common.Vec2[], int, org.jbox2d.common.Color3f);
+  public abstract void drawCircle(org.jbox2d.common.Vec2, float, org.jbox2d.common.Color3f);
+  public abstract void drawSolidCircle(org.jbox2d.common.Vec2, float, org.jbox2d.common.Vec2, org.jbox2d.common.Color3f);
+  public void drawSegment(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2, org.jbox2d.common.Color3f);
+  public abstract void drawSegment(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2, org.jbox2d.common.Color3f, boolean);
+  public abstract void drawTransform(org.jbox2d.common.Transform);
+  public abstract void drawString(float, float, java.lang.String, org.jbox2d.common.Color3f);
+  public org.jbox2d.common.IViewportTransform getViewportTranform();
+  public void setCamera(float, float, float);
+  public void getScreenToWorldToOut(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  public void getWorldToScreenToOut(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  public void getWorldToScreenToOut(float, float, org.jbox2d.common.Vec2);
+  public org.jbox2d.common.Vec2 getWorldToScreen(org.jbox2d.common.Vec2);
+  public org.jbox2d.common.Vec2 getWorldToScreen(float, float);
+  public void getScreenToWorldToOut(float, float, org.jbox2d.common.Vec2);
+  public org.jbox2d.common.Vec2 getScreenToWorld(org.jbox2d.common.Vec2);
+  public org.jbox2d.common.Vec2 getScreenToWorld(float, float);
+}
+Compiled from "DestructionListener.java"
+public interface org.jbox2d.callbacks.DestructionListener {
+  public abstract void sayGoodbye(org.jbox2d.dynamics.joints.Joint);
+  public abstract void sayGoodbye(org.jbox2d.dynamics.Fixture);
+}
+Compiled from "PairCallback.java"
+public interface org.jbox2d.callbacks.PairCallback {
+  public abstract void addPair(java.lang.Object, java.lang.Object);
+}
+Compiled from "QueryCallback.java"
+public interface org.jbox2d.callbacks.QueryCallback {
+  public abstract boolean reportFixture(org.jbox2d.dynamics.Fixture);
+}
+Compiled from "RayCastCallback.java"
+public interface org.jbox2d.callbacks.RayCastCallback {
+  public abstract float reportFixture(org.jbox2d.dynamics.Fixture, org.jbox2d.common.Vec2, org.jbox2d.common.Vec2, float);
+}
+Compiled from "TreeCallback.java"
+public interface org.jbox2d.callbacks.TreeCallback {
+  public abstract boolean treeCallback(org.jbox2d.collision.broadphase.DynamicTreeNode);
+}
+Compiled from "TreeRayCastCallback.java"
+public interface org.jbox2d.callbacks.TreeRayCastCallback {
+  public abstract float raycastCallback(org.jbox2d.collision.RayCastInput, org.jbox2d.collision.broadphase.DynamicTreeNode);
+}
+Compiled from "AABB.java"
+public class org.jbox2d.collision.AABB {
+  public final org.jbox2d.common.Vec2 lowerBound;
+  public final org.jbox2d.common.Vec2 upperBound;
+  public org.jbox2d.collision.AABB();
+  public org.jbox2d.collision.AABB(org.jbox2d.collision.AABB);
+  public org.jbox2d.collision.AABB(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  public final void set(org.jbox2d.collision.AABB);
+  public final boolean isValid();
+  public final org.jbox2d.common.Vec2 getCenter();
+  public final void getCenterToOut(org.jbox2d.common.Vec2);
+  public final org.jbox2d.common.Vec2 getExtents();
+  public final void getExtentsToOut(org.jbox2d.common.Vec2);
+  public final void getVertices(org.jbox2d.common.Vec2[]);
+  public final void combine(org.jbox2d.collision.AABB, org.jbox2d.collision.AABB);
+  public final boolean contains(org.jbox2d.collision.AABB);
+  public final boolean raycast(org.jbox2d.collision.RayCastOutput, org.jbox2d.collision.RayCastInput);
+  public final boolean raycast(org.jbox2d.collision.RayCastOutput, org.jbox2d.collision.RayCastInput, org.jbox2d.pooling.IWorldPool);
+  public static final boolean testOverlap(org.jbox2d.collision.AABB, org.jbox2d.collision.AABB);
+  public final java.lang.String toString();
+}
+Compiled from "Collision.java"
+public class org.jbox2d.collision.Collision {
+  public static final int NULL_FEATURE;
+  static final boolean $assertionsDisabled;
+  public org.jbox2d.collision.Collision(org.jbox2d.pooling.IWorldPool);
+  public final boolean testOverlap(org.jbox2d.collision.shapes.Shape, org.jbox2d.collision.shapes.Shape, org.jbox2d.common.Transform, org.jbox2d.common.Transform);
+  public static final void getPointStates(org.jbox2d.collision.Collision$PointState[], org.jbox2d.collision.Collision$PointState[], org.jbox2d.collision.Manifold, org.jbox2d.collision.Manifold);
+  public static final int clipSegmentToLine(org.jbox2d.collision.Collision$ClipVertex[], org.jbox2d.collision.Collision$ClipVertex[], org.jbox2d.common.Vec2, float);
+  public final void collideCircles(org.jbox2d.collision.Manifold, org.jbox2d.collision.shapes.CircleShape, org.jbox2d.common.Transform, org.jbox2d.collision.shapes.CircleShape, org.jbox2d.common.Transform);
+  public final void collidePolygonAndCircle(org.jbox2d.collision.Manifold, org.jbox2d.collision.shapes.PolygonShape, org.jbox2d.common.Transform, org.jbox2d.collision.shapes.CircleShape, org.jbox2d.common.Transform);
+  public final float edgeSeparation(org.jbox2d.collision.shapes.PolygonShape, org.jbox2d.common.Transform, int, org.jbox2d.collision.shapes.PolygonShape, org.jbox2d.common.Transform);
+  public final void findMaxSeparation(org.jbox2d.collision.Collision$EdgeResults, org.jbox2d.collision.shapes.PolygonShape, org.jbox2d.common.Transform, org.jbox2d.collision.shapes.PolygonShape, org.jbox2d.common.Transform);
+  public final void findIncidentEdge(org.jbox2d.collision.Collision$ClipVertex[], org.jbox2d.collision.shapes.PolygonShape, org.jbox2d.common.Transform, int, org.jbox2d.collision.shapes.PolygonShape, org.jbox2d.common.Transform);
+  public final void collidePolygons(org.jbox2d.collision.Manifold, org.jbox2d.collision.shapes.PolygonShape, org.jbox2d.common.Transform, org.jbox2d.collision.shapes.PolygonShape, org.jbox2d.common.Transform);
+  static {};
+}
+Compiled from "Collision.java"
+class org.jbox2d.collision.Collision$1 {
+}
+Compiled from "Collision.java"
+public class org.jbox2d.collision.Collision$ClipVertex {
+  public final org.jbox2d.common.Vec2 v;
+  public final org.jbox2d.collision.ContactID id;
+  public org.jbox2d.collision.Collision$ClipVertex();
+  public void set(org.jbox2d.collision.Collision$ClipVertex);
+}
+Compiled from "Collision.java"
+class org.jbox2d.collision.Collision$EdgeResults {
+  public float separation;
+  public int edgeIndex;
+  org.jbox2d.collision.Collision$EdgeResults(org.jbox2d.collision.Collision$1);
+}
+Compiled from "Collision.java"
+public final class org.jbox2d.collision.Collision$PointState extends java.lang.Enum<org.jbox2d.collision.Collision$PointState> {
+  public static final org.jbox2d.collision.Collision$PointState NULL_STATE;
+  public static final org.jbox2d.collision.Collision$PointState ADD_STATE;
+  public static final org.jbox2d.collision.Collision$PointState PERSIST_STATE;
+  public static final org.jbox2d.collision.Collision$PointState REMOVE_STATE;
+  public static org.jbox2d.collision.Collision$PointState[] values();
+  public static org.jbox2d.collision.Collision$PointState valueOf(java.lang.String);
+  static {};
+}
+Compiled from "ContactID.java"
+public class org.jbox2d.collision.ContactID {
+  public final org.jbox2d.collision.ContactID$Features features;
+  public boolean isEqual(org.jbox2d.collision.ContactID);
+  public org.jbox2d.collision.ContactID();
+  public org.jbox2d.collision.ContactID(org.jbox2d.collision.ContactID);
+  public void set(org.jbox2d.collision.ContactID);
+  public void zero();
+}
+Compiled from "ContactID.java"
+class org.jbox2d.collision.ContactID$1 {
+}
+Compiled from "ContactID.java"
+public class org.jbox2d.collision.ContactID$Features {
+  public int referenceEdge;
+  public int incidentEdge;
+  public int incidentVertex;
+  public int flip;
+  public org.jbox2d.collision.ContactID$Features();
+  public java.lang.String toString();
+  static boolean access$000(org.jbox2d.collision.ContactID$Features, org.jbox2d.collision.ContactID$Features);
+  org.jbox2d.collision.ContactID$Features(org.jbox2d.collision.ContactID$Features, org.jbox2d.collision.ContactID$1);
+  static void access$200(org.jbox2d.collision.ContactID$Features, org.jbox2d.collision.ContactID$Features);
+}
+Compiled from "Distance.java"
+public class org.jbox2d.collision.Distance {
+  public static int GJK_CALLS;
+  public static int GJK_ITERS;
+  public static int GJK_MAX_ITERS;
+  static final boolean $assertionsDisabled;
+  public org.jbox2d.collision.Distance();
+  public final void distance(org.jbox2d.collision.DistanceOutput, org.jbox2d.collision.Distance$SimplexCache, org.jbox2d.collision.DistanceInput);
+  static {};
+}
+Compiled from "Distance.java"
+class org.jbox2d.collision.Distance$1 {
+  static final int[] $SwitchMap$org$jbox2d$collision$shapes$ShapeType;
+  static {};
+}
+Compiled from "Distance.java"
+public class org.jbox2d.collision.Distance$DistanceProxy {
+  public final org.jbox2d.common.Vec2[] m_vertices;
+  public int m_count;
+  public float m_radius;
+  static final boolean $assertionsDisabled;
+  public org.jbox2d.collision.Distance$DistanceProxy();
+  public final void set(org.jbox2d.collision.shapes.Shape);
+  public final int getSupport(org.jbox2d.common.Vec2);
+  public final org.jbox2d.common.Vec2 getSupportVertex(org.jbox2d.common.Vec2);
+  public final int getVertexCount();
+  public final org.jbox2d.common.Vec2 getVertex(int);
+  static {};
+}
+Compiled from "Distance.java"
+class org.jbox2d.collision.Distance$Simplex {
+  public final org.jbox2d.collision.Distance$SimplexVertex m_v1;
+  public final org.jbox2d.collision.Distance$SimplexVertex m_v2;
+  public final org.jbox2d.collision.Distance$SimplexVertex m_v3;
+  public final org.jbox2d.collision.Distance$SimplexVertex[] vertices;
+  public int m_count;
+  static final boolean $assertionsDisabled;
+  final org.jbox2d.collision.Distance this$0;
+  public void readCache(org.jbox2d.collision.Distance$SimplexCache, org.jbox2d.collision.Distance$DistanceProxy, org.jbox2d.common.Transform, org.jbox2d.collision.Distance$DistanceProxy, org.jbox2d.common.Transform);
+  public void writeCache(org.jbox2d.collision.Distance$SimplexCache);
+  public final void getSearchDirection(org.jbox2d.common.Vec2);
+  public void getClosestPoint(org.jbox2d.common.Vec2);
+  public void getWitnessPoints(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  public float getMetric();
+  public void solve2();
+  public void solve3();
+  org.jbox2d.collision.Distance$Simplex(org.jbox2d.collision.Distance, org.jbox2d.collision.Distance$1);
+  static {};
+}
+Compiled from "Distance.java"
+public class org.jbox2d.collision.Distance$SimplexCache {
+  public float metric;
+  public int count;
+  public final int[] indexA;
+  public final int[] indexB;
+  public org.jbox2d.collision.Distance$SimplexCache();
+  public void set(org.jbox2d.collision.Distance$SimplexCache);
+}
+Compiled from "Distance.java"
+class org.jbox2d.collision.Distance$SimplexVertex {
+  public final org.jbox2d.common.Vec2 wA;
+  public final org.jbox2d.common.Vec2 wB;
+  public final org.jbox2d.common.Vec2 w;
+  public float a;
+  public int indexA;
+  public int indexB;
+  final org.jbox2d.collision.Distance this$0;
+  public void set(org.jbox2d.collision.Distance$SimplexVertex);
+  org.jbox2d.collision.Distance$SimplexVertex(org.jbox2d.collision.Distance, org.jbox2d.collision.Distance$1);
+}
+Compiled from "DistanceInput.java"
+public class org.jbox2d.collision.DistanceInput {
+  public org.jbox2d.collision.Distance$DistanceProxy proxyA;
+  public org.jbox2d.collision.Distance$DistanceProxy proxyB;
+  public org.jbox2d.common.Transform transformA;
+  public org.jbox2d.common.Transform transformB;
+  public boolean useRadii;
+  public org.jbox2d.collision.DistanceInput();
+}
+Compiled from "DistanceOutput.java"
+public class org.jbox2d.collision.DistanceOutput {
+  public final org.jbox2d.common.Vec2 pointA;
+  public final org.jbox2d.common.Vec2 pointB;
+  public float distance;
+  public int iterations;
+  public org.jbox2d.collision.DistanceOutput();
+}
+Compiled from "Manifold.java"
+public class org.jbox2d.collision.Manifold {
+  public final org.jbox2d.collision.ManifoldPoint[] points;
+  public final org.jbox2d.common.Vec2 localNormal;
+  public final org.jbox2d.common.Vec2 localPoint;
+  public org.jbox2d.collision.Manifold$ManifoldType type;
+  public int pointCount;
+  public org.jbox2d.collision.Manifold();
+  public org.jbox2d.collision.Manifold(org.jbox2d.collision.Manifold);
+  public void set(org.jbox2d.collision.Manifold);
+}
+Compiled from "Manifold.java"
+public final class org.jbox2d.collision.Manifold$ManifoldType extends java.lang.Enum<org.jbox2d.collision.Manifold$ManifoldType> {
+  public static final org.jbox2d.collision.Manifold$ManifoldType CIRCLES;
+  public static final org.jbox2d.collision.Manifold$ManifoldType FACE_A;
+  public static final org.jbox2d.collision.Manifold$ManifoldType FACE_B;
+  public static org.jbox2d.collision.Manifold$ManifoldType[] values();
+  public static org.jbox2d.collision.Manifold$ManifoldType valueOf(java.lang.String);
+  static {};
+}
+Compiled from "ManifoldPoint.java"
+public class org.jbox2d.collision.ManifoldPoint {
+  public final org.jbox2d.common.Vec2 localPoint;
+  public float normalImpulse;
+  public float tangentImpulse;
+  public final org.jbox2d.collision.ContactID id;
+  public org.jbox2d.collision.ManifoldPoint();
+  public org.jbox2d.collision.ManifoldPoint(org.jbox2d.collision.ManifoldPoint);
+  public void set(org.jbox2d.collision.ManifoldPoint);
+}
+Compiled from "RayCastInput.java"
+public class org.jbox2d.collision.RayCastInput {
+  public final org.jbox2d.common.Vec2 p1;
+  public final org.jbox2d.common.Vec2 p2;
+  public float maxFraction;
+  public org.jbox2d.collision.RayCastInput();
+  public void set(org.jbox2d.collision.RayCastInput);
+}
+Compiled from "RayCastOutput.java"
+public class org.jbox2d.collision.RayCastOutput {
+  public final org.jbox2d.common.Vec2 normal;
+  public float fraction;
+  public org.jbox2d.collision.RayCastOutput();
+  public void set(org.jbox2d.collision.RayCastOutput);
+}
+Compiled from "TimeOfImpact.java"
+class org.jbox2d.collision.SeparationFunction {
+  public org.jbox2d.collision.Distance$DistanceProxy m_proxyA;
+  public org.jbox2d.collision.Distance$DistanceProxy m_proxyB;
+  public org.jbox2d.collision.Type m_type;
+  public final org.jbox2d.common.Vec2 m_localPoint;
+  public final org.jbox2d.common.Vec2 m_axis;
+  public org.jbox2d.common.Sweep m_sweepA;
+  public org.jbox2d.common.Sweep m_sweepB;
+  static final boolean $assertionsDisabled;
+  org.jbox2d.collision.SeparationFunction();
+  public float initialize(org.jbox2d.collision.Distance$SimplexCache, org.jbox2d.collision.Distance$DistanceProxy, org.jbox2d.common.Sweep, org.jbox2d.collision.Distance$DistanceProxy, org.jbox2d.common.Sweep, float);
+  public float findMinSeparation(int[], float);
+  public float evaluate(int, int, float);
+  static {};
+}
+Compiled from "TimeOfImpact.java"
+class org.jbox2d.collision.SeparationFunction$1 {
+  static final int[] $SwitchMap$org$jbox2d$collision$Type;
+  static {};
+}
+Compiled from "TimeOfImpact.java"
+public class org.jbox2d.collision.TimeOfImpact {
+  public static final int MAX_ITERATIONS;
+  public static int toiCalls;
+  public static int toiIters;
+  public static int toiMaxIters;
+  public static int toiRootIters;
+  public static int toiMaxRootIters;
+  static final boolean $assertionsDisabled;
+  public org.jbox2d.collision.TimeOfImpact(org.jbox2d.pooling.IWorldPool);
+  public final void timeOfImpact(org.jbox2d.collision.TimeOfImpact$TOIOutput, org.jbox2d.collision.TimeOfImpact$TOIInput);
+  static {};
+}
+Compiled from "TimeOfImpact.java"
+public class org.jbox2d.collision.TimeOfImpact$TOIInput {
+  public final org.jbox2d.collision.Distance$DistanceProxy proxyA;
+  public final org.jbox2d.collision.Distance$DistanceProxy proxyB;
+  public final org.jbox2d.common.Sweep sweepA;
+  public final org.jbox2d.common.Sweep sweepB;
+  public float tMax;
+  public org.jbox2d.collision.TimeOfImpact$TOIInput();
+}
+Compiled from "TimeOfImpact.java"
+public class org.jbox2d.collision.TimeOfImpact$TOIOutput {
+  public org.jbox2d.collision.TimeOfImpact$TOIOutputState state;
+  public float t;
+  public org.jbox2d.collision.TimeOfImpact$TOIOutput();
+}
+Compiled from "TimeOfImpact.java"
+public final class org.jbox2d.collision.TimeOfImpact$TOIOutputState extends java.lang.Enum<org.jbox2d.collision.TimeOfImpact$TOIOutputState> {
+  public static final org.jbox2d.collision.TimeOfImpact$TOIOutputState UNKNOWN;
+  public static final org.jbox2d.collision.TimeOfImpact$TOIOutputState FAILED;
+  public static final org.jbox2d.collision.TimeOfImpact$TOIOutputState OVERLAPPED;
+  public static final org.jbox2d.collision.TimeOfImpact$TOIOutputState TOUCHING;
+  public static final org.jbox2d.collision.TimeOfImpact$TOIOutputState SEPARATED;
+  public static org.jbox2d.collision.TimeOfImpact$TOIOutputState[] values();
+  public static org.jbox2d.collision.TimeOfImpact$TOIOutputState valueOf(java.lang.String);
+  static {};
+}
+Compiled from "TimeOfImpact.java"
+final class org.jbox2d.collision.Type extends java.lang.Enum<org.jbox2d.collision.Type> {
+  public static final org.jbox2d.collision.Type POINTS;
+  public static final org.jbox2d.collision.Type FACE_A;
+  public static final org.jbox2d.collision.Type FACE_B;
+  public static org.jbox2d.collision.Type[] values();
+  public static org.jbox2d.collision.Type valueOf(java.lang.String);
+  static {};
+}
+Compiled from "WorldManifold.java"
+public class org.jbox2d.collision.WorldManifold {
+  public final org.jbox2d.common.Vec2 normal;
+  public final org.jbox2d.common.Vec2[] points;
+  public org.jbox2d.collision.WorldManifold();
+  public final void initialize(org.jbox2d.collision.Manifold, org.jbox2d.common.Transform, float, org.jbox2d.common.Transform, float);
+}
+Compiled from "WorldManifold.java"
+class org.jbox2d.collision.WorldManifold$1 {
+  static final int[] $SwitchMap$org$jbox2d$collision$Manifold$ManifoldType;
+  static {};
+}
+Compiled from "BroadPhase.java"
+public class org.jbox2d.collision.broadphase.BroadPhase implements org.jbox2d.callbacks.TreeCallback {
+  public static final int NULL_PROXY;
+  public org.jbox2d.collision.broadphase.BroadPhase();
+  public final org.jbox2d.collision.broadphase.DynamicTreeNode createProxy(org.jbox2d.collision.AABB, java.lang.Object);
+  public final void destroyProxy(org.jbox2d.collision.broadphase.DynamicTreeNode);
+  public final void moveProxy(org.jbox2d.collision.broadphase.DynamicTreeNode, org.jbox2d.collision.AABB, org.jbox2d.common.Vec2);
+  public boolean testOverlap(org.jbox2d.collision.broadphase.DynamicTreeNode, org.jbox2d.collision.broadphase.DynamicTreeNode);
+  public final int getProxyCount();
+  public void drawTree(org.jbox2d.callbacks.DebugDraw);
+  public final void updatePairs(org.jbox2d.callbacks.PairCallback);
+  public final void query(org.jbox2d.callbacks.TreeCallback, org.jbox2d.collision.AABB);
+  public final void raycast(org.jbox2d.callbacks.TreeRayCastCallback, org.jbox2d.collision.RayCastInput);
+  public final int computeHeight();
+  protected final void bufferMove(org.jbox2d.collision.broadphase.DynamicTreeNode);
+  protected final void unbufferMove(org.jbox2d.collision.broadphase.DynamicTreeNode);
+  public final boolean treeCallback(org.jbox2d.collision.broadphase.DynamicTreeNode);
+}
+Compiled from "DynamicTree.java"
+public class org.jbox2d.collision.broadphase.DynamicTree {
+  public static final int MAX_STACK_SIZE;
+  static final boolean $assertionsDisabled;
+  public org.jbox2d.collision.broadphase.DynamicTree();
+  public final org.jbox2d.collision.broadphase.DynamicTreeNode createProxy(org.jbox2d.collision.AABB, java.lang.Object);
+  public final void destroyProxy(org.jbox2d.collision.broadphase.DynamicTreeNode);
+  public final boolean moveProxy(org.jbox2d.collision.broadphase.DynamicTreeNode, org.jbox2d.collision.AABB, org.jbox2d.common.Vec2);
+  public final void rebalance(int);
+  public final void query(org.jbox2d.callbacks.TreeCallback, org.jbox2d.collision.AABB);
+  public void raycast(org.jbox2d.callbacks.TreeRayCastCallback, org.jbox2d.collision.RayCastInput);
+  public boolean raycast(org.jbox2d.collision.broadphase.DynamicTreeNode, org.jbox2d.collision.RayCastInput, int, org.jbox2d.collision.AABB, org.jbox2d.common.Vec2, org.jbox2d.common.Vec2, org.jbox2d.common.Vec2, org.jbox2d.common.Vec2, float[], org.jbox2d.callbacks.TreeRayCastCallback);
+  public final int computeHeight();
+  public int getInsertionCount();
+  public void drawTree(org.jbox2d.callbacks.DebugDraw);
+  public void drawTree(org.jbox2d.callbacks.DebugDraw, org.jbox2d.collision.broadphase.DynamicTreeNode, int, int);
+  static {};
+}
+Compiled from "DynamicTreeNode.java"
+public class org.jbox2d.collision.broadphase.DynamicTreeNode {
+  public final org.jbox2d.collision.AABB aabb;
+  public java.lang.Object userData;
+  protected org.jbox2d.collision.broadphase.DynamicTreeNode parent;
+  protected org.jbox2d.collision.broadphase.DynamicTreeNode next;
+  protected org.jbox2d.collision.broadphase.DynamicTreeNode child1;
+  protected org.jbox2d.collision.broadphase.DynamicTreeNode child2;
+  public int key;
+  public final boolean isLeaf();
+  public java.lang.Object getUserData();
+  public void setUserData(java.lang.Object);
+  protected org.jbox2d.collision.broadphase.DynamicTreeNode();
+}
+Compiled from "Pair.java"
+public class org.jbox2d.collision.broadphase.Pair implements java.lang.Comparable<org.jbox2d.collision.broadphase.Pair> {
+  public org.jbox2d.collision.broadphase.DynamicTreeNode proxyA;
+  public org.jbox2d.collision.broadphase.DynamicTreeNode proxyB;
+  public org.jbox2d.collision.broadphase.Pair();
+  public int compareTo(org.jbox2d.collision.broadphase.Pair);
+  public int compareTo(java.lang.Object);
+}
+Compiled from "CircleShape.java"
+public class org.jbox2d.collision.shapes.CircleShape extends org.jbox2d.collision.shapes.Shape {
+  public final org.jbox2d.common.Vec2 m_p;
+  static final boolean $assertionsDisabled;
+  public org.jbox2d.collision.shapes.CircleShape();
+  public final org.jbox2d.collision.shapes.Shape clone();
+  public final int getSupport(org.jbox2d.common.Vec2);
+  public final org.jbox2d.common.Vec2 getSupportVertex(org.jbox2d.common.Vec2);
+  public final int getVertexCount();
+  public final org.jbox2d.common.Vec2 getVertex(int);
+  public final boolean testPoint(org.jbox2d.common.Transform, org.jbox2d.common.Vec2);
+  public final boolean raycast(org.jbox2d.collision.RayCastOutput, org.jbox2d.collision.RayCastInput, org.jbox2d.common.Transform);
+  public final void computeAABB(org.jbox2d.collision.AABB, org.jbox2d.common.Transform);
+  public final void computeMass(org.jbox2d.collision.shapes.MassData, float);
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+  static {};
+}
+Compiled from "MassData.java"
+public class org.jbox2d.collision.shapes.MassData {
+  public float mass;
+  public final org.jbox2d.common.Vec2 center;
+  public float I;
+  public org.jbox2d.collision.shapes.MassData();
+  public org.jbox2d.collision.shapes.MassData(org.jbox2d.collision.shapes.MassData);
+  public void set(org.jbox2d.collision.shapes.MassData);
+  public org.jbox2d.collision.shapes.MassData clone();
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "PolygonShape.java"
+public class org.jbox2d.collision.shapes.PolygonShape extends org.jbox2d.collision.shapes.Shape {
+  public final org.jbox2d.common.Vec2 m_centroid;
+  public final org.jbox2d.common.Vec2[] m_vertices;
+  public final org.jbox2d.common.Vec2[] m_normals;
+  public int m_vertexCount;
+  static final boolean $assertionsDisabled;
+  public org.jbox2d.collision.shapes.PolygonShape();
+  public final org.jbox2d.collision.shapes.Shape clone();
+  public final int getSupport(org.jbox2d.common.Vec2);
+  public final org.jbox2d.common.Vec2 getSupportVertex(org.jbox2d.common.Vec2);
+  public final void set(org.jbox2d.common.Vec2[], int);
+  public final void setAsBox(float, float);
+  public final void setAsBox(float, float, org.jbox2d.common.Vec2, float);
+  public final void setAsEdge(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  public final boolean testPoint(org.jbox2d.common.Transform, org.jbox2d.common.Vec2);
+  public final void computeAABB(org.jbox2d.collision.AABB, org.jbox2d.common.Transform);
+  public final int getVertexCount();
+  public final org.jbox2d.common.Vec2 getVertex(int);
+  public final boolean raycast(org.jbox2d.collision.RayCastOutput, org.jbox2d.collision.RayCastInput, org.jbox2d.common.Transform);
+  public final void computeCentroidToOut(org.jbox2d.common.Vec2[], int, org.jbox2d.common.Vec2);
+  public void computeMass(org.jbox2d.collision.shapes.MassData, float);
+  public org.jbox2d.common.Vec2[] getVertices();
+  public org.jbox2d.common.Vec2[] getNormals();
+  public org.jbox2d.common.Vec2 centroid(org.jbox2d.common.Transform);
+  public org.jbox2d.common.Vec2 centroidToOut(org.jbox2d.common.Transform, org.jbox2d.common.Vec2);
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+  static {};
+}
+Compiled from "Shape.java"
+public abstract class org.jbox2d.collision.shapes.Shape {
+  public org.jbox2d.collision.shapes.ShapeType m_type;
+  public float m_radius;
+  public org.jbox2d.collision.shapes.Shape();
+  public org.jbox2d.collision.shapes.ShapeType getType();
+  public abstract boolean testPoint(org.jbox2d.common.Transform, org.jbox2d.common.Vec2);
+  public abstract boolean raycast(org.jbox2d.collision.RayCastOutput, org.jbox2d.collision.RayCastInput, org.jbox2d.common.Transform);
+  public abstract void computeAABB(org.jbox2d.collision.AABB, org.jbox2d.common.Transform);
+  public abstract void computeMass(org.jbox2d.collision.shapes.MassData, float);
+  public abstract org.jbox2d.collision.shapes.Shape clone();
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "ShapeType.java"
+public final class org.jbox2d.collision.shapes.ShapeType extends java.lang.Enum<org.jbox2d.collision.shapes.ShapeType> {
+  public static final org.jbox2d.collision.shapes.ShapeType UNKNOWN;
+  public static final org.jbox2d.collision.shapes.ShapeType CIRCLE;
+  public static final org.jbox2d.collision.shapes.ShapeType POLYGON;
+  public static final int TYPE_COUNT;
+  public final int intValue;
+  public static org.jbox2d.collision.shapes.ShapeType[] values();
+  public static org.jbox2d.collision.shapes.ShapeType valueOf(java.lang.String);
+  static {};
+}
+Compiled from "Color3f.java"
+public class org.jbox2d.common.Color3f {
+  public static final org.jbox2d.common.Color3f WHITE;
+  public static final org.jbox2d.common.Color3f BLACK;
+  public static final org.jbox2d.common.Color3f BLUE;
+  public static final org.jbox2d.common.Color3f GREEN;
+  public static final org.jbox2d.common.Color3f RED;
+  public float x;
+  public float y;
+  public float z;
+  public org.jbox2d.common.Color3f();
+  public org.jbox2d.common.Color3f(float, float, float);
+  public void set(float, float, float);
+  public void set(org.jbox2d.common.Color3f);
+  static {};
+}
+Compiled from "IViewportTransform.java"
+public interface org.jbox2d.common.IViewportTransform {
+  public abstract boolean isYFlip();
+  public abstract void setYFlip(boolean);
+  public abstract org.jbox2d.common.Vec2 getExtents();
+  public abstract void setExtents(org.jbox2d.common.Vec2);
+  public abstract void setExtents(float, float);
+  public abstract org.jbox2d.common.Vec2 getCenter();
+  public abstract void setCenter(org.jbox2d.common.Vec2);
+  public abstract void setCenter(float, float);
+  public abstract void setCamera(float, float, float);
+  public abstract void getWorldVectorToScreen(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  public abstract void getScreenVectorToWorld(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  public abstract void getWorldToScreen(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  public abstract void getScreenToWorld(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+}
+Compiled from "Mat22.java"
+public class org.jbox2d.common.Mat22 implements java.io.Serializable {
+  public final org.jbox2d.common.Vec2 col1;
+  public final org.jbox2d.common.Vec2 col2;
+  public java.lang.String toString();
+  public org.jbox2d.common.Mat22();
+  public org.jbox2d.common.Mat22(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  public org.jbox2d.common.Mat22(float, float, float, float);
+  public final org.jbox2d.common.Mat22 set(org.jbox2d.common.Mat22);
+  public final org.jbox2d.common.Mat22 set(float, float, float, float);
+  public final org.jbox2d.common.Mat22 clone();
+  public final void set(float);
+  public final void setIdentity();
+  public final void setZero();
+  public final float getAngle();
+  public final void set(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  public final org.jbox2d.common.Mat22 invert();
+  public final org.jbox2d.common.Mat22 invertLocal();
+  public final void invertToOut(org.jbox2d.common.Mat22);
+  public final org.jbox2d.common.Mat22 abs();
+  public final void absLocal();
+  public static final org.jbox2d.common.Mat22 abs(org.jbox2d.common.Mat22);
+  public static void absToOut(org.jbox2d.common.Mat22, org.jbox2d.common.Mat22);
+  public final org.jbox2d.common.Vec2 mul(org.jbox2d.common.Vec2);
+  public final void mulToOut(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  public final org.jbox2d.common.Mat22 mul(org.jbox2d.common.Mat22);
+  public final org.jbox2d.common.Mat22 mulLocal(org.jbox2d.common.Mat22);
+  public final void mulToOut(org.jbox2d.common.Mat22, org.jbox2d.common.Mat22);
+  public final org.jbox2d.common.Mat22 mulTrans(org.jbox2d.common.Mat22);
+  public final org.jbox2d.common.Mat22 mulTransLocal(org.jbox2d.common.Mat22);
+  public final void mulTransToOut(org.jbox2d.common.Mat22, org.jbox2d.common.Mat22);
+  public final org.jbox2d.common.Vec2 mulTrans(org.jbox2d.common.Vec2);
+  public final void mulTransToOut(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  public final org.jbox2d.common.Mat22 add(org.jbox2d.common.Mat22);
+  public final org.jbox2d.common.Mat22 addLocal(org.jbox2d.common.Mat22);
+  public final org.jbox2d.common.Vec2 solve(org.jbox2d.common.Vec2);
+  public final void solveToOut(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  public static final org.jbox2d.common.Vec2 mul(org.jbox2d.common.Mat22, org.jbox2d.common.Vec2);
+  public static final void mulToOut(org.jbox2d.common.Mat22, org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  public static final org.jbox2d.common.Mat22 mul(org.jbox2d.common.Mat22, org.jbox2d.common.Mat22);
+  public static final void mulToOut(org.jbox2d.common.Mat22, org.jbox2d.common.Mat22, org.jbox2d.common.Mat22);
+  public static final org.jbox2d.common.Vec2 mulTrans(org.jbox2d.common.Mat22, org.jbox2d.common.Vec2);
+  public static final void mulTransToOut(org.jbox2d.common.Mat22, org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  public static final org.jbox2d.common.Mat22 mulTrans(org.jbox2d.common.Mat22, org.jbox2d.common.Mat22);
+  public static final void mulTransToOut(org.jbox2d.common.Mat22, org.jbox2d.common.Mat22, org.jbox2d.common.Mat22);
+  public static final org.jbox2d.common.Mat22 createRotationalTransform(float);
+  public static final void createRotationalTransform(float, org.jbox2d.common.Mat22);
+  public static final org.jbox2d.common.Mat22 createScaleTransform(float);
+  public static final void createScaleTransform(float, org.jbox2d.common.Mat22);
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "Mat33.java"
+public class org.jbox2d.common.Mat33 implements java.io.Serializable {
+  public static final org.jbox2d.common.Mat33 IDENTITY;
+  public final org.jbox2d.common.Vec3 col1;
+  public final org.jbox2d.common.Vec3 col2;
+  public final org.jbox2d.common.Vec3 col3;
+  public org.jbox2d.common.Mat33();
+  public org.jbox2d.common.Mat33(org.jbox2d.common.Vec3, org.jbox2d.common.Vec3, org.jbox2d.common.Vec3);
+  public void setZero();
+  public static final org.jbox2d.common.Vec3 mul(org.jbox2d.common.Mat33, org.jbox2d.common.Vec3);
+  public static final void mulToOut(org.jbox2d.common.Mat33, org.jbox2d.common.Vec3, org.jbox2d.common.Vec3);
+  public final org.jbox2d.common.Vec2 solve22(org.jbox2d.common.Vec2);
+  public final void solve22ToOut(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  public final org.jbox2d.common.Vec3 solve33(org.jbox2d.common.Vec3);
+  public final void solve33ToOut(org.jbox2d.common.Vec3, org.jbox2d.common.Vec3);
+  static {};
+}
+Compiled from "MathUtils.java"
+public class org.jbox2d.common.MathUtils {
+  public static final float PI;
+  public static final float TWOPI;
+  public static final float INV_PI;
+  public static final float HALF_PI;
+  public static final float QUARTER_PI;
+  public static final float THREE_HALVES_PI;
+  public static final float DEG2RAD;
+  public static final float RAD2DEG;
+  public static final float[] sinLUT;
+  public static final float[] cosLUT;
+  public org.jbox2d.common.MathUtils();
+  public static final float sin(float);
+  public static final float sinLUT(float);
+  public static final float cos(float);
+  public static final float abs(float);
+  public static final int abs(int);
+  public static final int floor(float);
+  public static final int ceil(float);
+  public static final int round(float);
+  public static final int ceilPowerOf2(int);
+  public static final float max(float, float);
+  public static final int max(int, int);
+  public static final float min(float, float);
+  public static final float map(float, float, float, float, float);
+  public static final float clamp(float, float, float);
+  public static final org.jbox2d.common.Vec2 clamp(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  public static final void clampToOut(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2, org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  public static final int nextPowerOfTwo(int);
+  public static final boolean isPowerOfTwo(int);
+  public static final float fastPow(float, float);
+  public static final float atan2(float, float);
+  public static final float fastAtan2(float, float);
+  public static final float reduceAngle(float);
+  public static final float pow(float, float);
+  public static final float randomFloat(float, float);
+  public static final float randomFloat(java.util.Random, float, float);
+  public static final float sqrt(float);
+  public static final float distanceSquared(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  public static final float distance(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  static {};
+}
+Compiled from "OBBViewportTransform.java"
+public class org.jbox2d.common.OBBViewportTransform implements org.jbox2d.common.IViewportTransform {
+  protected final org.jbox2d.common.OBBViewportTransform$OBB box;
+  public org.jbox2d.common.OBBViewportTransform();
+  public void set(org.jbox2d.common.OBBViewportTransform);
+  public void setCamera(float, float, float);
+  public org.jbox2d.common.Vec2 getExtents();
+  public void setExtents(org.jbox2d.common.Vec2);
+  public void setExtents(float, float);
+  public org.jbox2d.common.Vec2 getCenter();
+  public void setCenter(org.jbox2d.common.Vec2);
+  public void setCenter(float, float);
+  public org.jbox2d.common.Mat22 getTransform();
+  public void setTransform(org.jbox2d.common.Mat22);
+  public void mulByTransform(org.jbox2d.common.Mat22);
+  public boolean isYFlip();
+  public void setYFlip(boolean);
+  public void getScreenVectorToWorld(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  public void getWorldVectorToScreen(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  public void getWorldToScreen(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  public void getScreenToWorld(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+}
+Compiled from "OBBViewportTransform.java"
+public class org.jbox2d.common.OBBViewportTransform$OBB {
+  public final org.jbox2d.common.Mat22 R;
+  public final org.jbox2d.common.Vec2 center;
+  public final org.jbox2d.common.Vec2 extents;
+  public org.jbox2d.common.OBBViewportTransform$OBB();
+}
+Compiled from "RaycastResult.java"
+public class org.jbox2d.common.RaycastResult {
+  public float lambda;
+  public final org.jbox2d.common.Vec2 normal;
+  public org.jbox2d.common.RaycastResult();
+  public org.jbox2d.common.RaycastResult set(org.jbox2d.common.RaycastResult);
+}
+Compiled from "Settings.java"
+public class org.jbox2d.common.Settings {
+  public static final float EPSILON;
+  public static final float PI;
+  public static final boolean FAST_MATH;
+  public static final int CONTACT_STACK_INIT_SIZE;
+  public static final boolean SINCOS_LUT_ENABLED;
+  public static final float SINCOS_LUT_PRECISION;
+  public static final int SINCOS_LUT_LENGTH;
+  public static final boolean SINCOS_LUT_LERP;
+  public static final int TREE_REBALANCE_STEPS;
+  public static int maxManifoldPoints;
+  public static int maxPolygonVertices;
+  public static float aabbExtension;
+  public static float aabbMultiplier;
+  public static float linearSlop;
+  public static float angularSlop;
+  public static float polygonRadius;
+  public static int maxTOIContacts;
+  public static float velocityThreshold;
+  public static float maxLinearCorrection;
+  public static float maxAngularCorrection;
+  public static float maxTranslation;
+  public static float maxTranslationSquared;
+  public static float maxRotation;
+  public static float maxRotationSquared;
+  public static float contactBaumgarte;
+  public static float timeToSleep;
+  public static float linearSleepTolerance;
+  public static float angularSleepTolerance;
+  public org.jbox2d.common.Settings();
+  public static final float mixFriction(float, float);
+  public static final float mixRestitution(float, float);
+  static {};
+}
+Compiled from "Sweep.java"
+public class org.jbox2d.common.Sweep implements java.io.Serializable {
+  public final org.jbox2d.common.Vec2 localCenter;
+  public final org.jbox2d.common.Vec2 c0;
+  public final org.jbox2d.common.Vec2 c;
+  public float a0;
+  public float a;
+  static final boolean $assertionsDisabled;
+  public java.lang.String toString();
+  public org.jbox2d.common.Sweep();
+  public final void normalize();
+  public final org.jbox2d.common.Sweep set(org.jbox2d.common.Sweep);
+  public final void getTransform(org.jbox2d.common.Transform, float);
+  public final void advance(float);
+  static {};
+}
+Compiled from "Transform.java"
+public class org.jbox2d.common.Transform implements java.io.Serializable {
+  public final org.jbox2d.common.Vec2 position;
+  public final org.jbox2d.common.Mat22 R;
+  public org.jbox2d.common.Transform();
+  public org.jbox2d.common.Transform(org.jbox2d.common.Transform);
+  public org.jbox2d.common.Transform(org.jbox2d.common.Vec2, org.jbox2d.common.Mat22);
+  public final org.jbox2d.common.Transform set(org.jbox2d.common.Transform);
+  public final void set(org.jbox2d.common.Vec2, float);
+  public final float getAngle();
+  public final void setIdentity();
+  public static final org.jbox2d.common.Vec2 mul(org.jbox2d.common.Transform, org.jbox2d.common.Vec2);
+  public static final void mulToOut(org.jbox2d.common.Transform, org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  public static final org.jbox2d.common.Vec2 mulTrans(org.jbox2d.common.Transform, org.jbox2d.common.Vec2);
+  public static final void mulTransToOut(org.jbox2d.common.Transform, org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  public final java.lang.String toString();
+}
+Compiled from "Vec2.java"
+public class org.jbox2d.common.Vec2 implements java.io.Serializable {
+  public float x;
+  public float y;
+  public org.jbox2d.common.Vec2();
+  public org.jbox2d.common.Vec2(float, float);
+  public org.jbox2d.common.Vec2(org.jbox2d.common.Vec2);
+  public final void setZero();
+  public final org.jbox2d.common.Vec2 set(float, float);
+  public final org.jbox2d.common.Vec2 set(org.jbox2d.common.Vec2);
+  public final org.jbox2d.common.Vec2 add(org.jbox2d.common.Vec2);
+  public final org.jbox2d.common.Vec2 sub(org.jbox2d.common.Vec2);
+  public final org.jbox2d.common.Vec2 mul(float);
+  public final org.jbox2d.common.Vec2 negate();
+  public final org.jbox2d.common.Vec2 negateLocal();
+  public final org.jbox2d.common.Vec2 addLocal(org.jbox2d.common.Vec2);
+  public final org.jbox2d.common.Vec2 addLocal(float, float);
+  public final org.jbox2d.common.Vec2 subLocal(org.jbox2d.common.Vec2);
+  public final org.jbox2d.common.Vec2 mulLocal(float);
+  public final float length();
+  public final float lengthSquared();
+  public final float normalize();
+  public final boolean isValid();
+  public final org.jbox2d.common.Vec2 abs();
+  public final void absLocal();
+  public final org.jbox2d.common.Vec2 clone();
+  public final java.lang.String toString();
+  public static final org.jbox2d.common.Vec2 abs(org.jbox2d.common.Vec2);
+  public static final void absToOut(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  public static final float dot(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  public static final float cross(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  public static final org.jbox2d.common.Vec2 cross(org.jbox2d.common.Vec2, float);
+  public static final void crossToOut(org.jbox2d.common.Vec2, float, org.jbox2d.common.Vec2);
+  public static final org.jbox2d.common.Vec2 cross(float, org.jbox2d.common.Vec2);
+  public static final void crossToOut(float, org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  public static final void negateToOut(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  public static final org.jbox2d.common.Vec2 min(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  public static final org.jbox2d.common.Vec2 max(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  public static final void minToOut(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  public static final void maxToOut(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "Vec3.java"
+public class org.jbox2d.common.Vec3 implements java.io.Serializable {
+  public float x;
+  public float y;
+  public float z;
+  public org.jbox2d.common.Vec3();
+  public org.jbox2d.common.Vec3(float, float, float);
+  public org.jbox2d.common.Vec3(org.jbox2d.common.Vec3);
+  public org.jbox2d.common.Vec3 set(org.jbox2d.common.Vec3);
+  public org.jbox2d.common.Vec3 set(float, float, float);
+  public org.jbox2d.common.Vec3 addLocal(org.jbox2d.common.Vec3);
+  public org.jbox2d.common.Vec3 add(org.jbox2d.common.Vec3);
+  public org.jbox2d.common.Vec3 subLocal(org.jbox2d.common.Vec3);
+  public org.jbox2d.common.Vec3 sub(org.jbox2d.common.Vec3);
+  public org.jbox2d.common.Vec3 mulLocal(float);
+  public org.jbox2d.common.Vec3 mul(float);
+  public org.jbox2d.common.Vec3 negate();
+  public org.jbox2d.common.Vec3 negateLocal();
+  public void setZero();
+  public org.jbox2d.common.Vec3 clone();
+  public java.lang.String toString();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public static final float dot(org.jbox2d.common.Vec3, org.jbox2d.common.Vec3);
+  public static final org.jbox2d.common.Vec3 cross(org.jbox2d.common.Vec3, org.jbox2d.common.Vec3);
+  public static final void crossToOut(org.jbox2d.common.Vec3, org.jbox2d.common.Vec3, org.jbox2d.common.Vec3);
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "Body.java"
+public class org.jbox2d.dynamics.Body {
+  public static final int e_islandFlag;
+  public static final int e_awakeFlag;
+  public static final int e_autoSleepFlag;
+  public static final int e_bulletFlag;
+  public static final int e_fixedRotationFlag;
+  public static final int e_activeFlag;
+  public static final int e_toiFlag;
+  public org.jbox2d.dynamics.BodyType m_type;
+  public int m_flags;
+  public int m_islandIndex;
+  public final org.jbox2d.common.Transform m_xf;
+  public final org.jbox2d.common.Sweep m_sweep;
+  public final org.jbox2d.common.Vec2 m_linearVelocity;
+  public float m_angularVelocity;
+  public final org.jbox2d.common.Vec2 m_force;
+  public float m_torque;
+  public org.jbox2d.dynamics.World m_world;
+  public org.jbox2d.dynamics.Body m_prev;
+  public org.jbox2d.dynamics.Body m_next;
+  public org.jbox2d.dynamics.Fixture m_fixtureList;
+  public int m_fixtureCount;
+  public org.jbox2d.dynamics.joints.JointEdge m_jointList;
+  public org.jbox2d.dynamics.contacts.ContactEdge m_contactList;
+  public float m_mass;
+  public float m_invMass;
+  public float m_I;
+  public float m_invI;
+  public float m_linearDamping;
+  public float m_angularDamping;
+  public float m_sleepTime;
+  public java.lang.Object m_userData;
+  static final boolean $assertionsDisabled;
+  public org.jbox2d.dynamics.Body(org.jbox2d.dynamics.BodyDef, org.jbox2d.dynamics.World);
+  public final org.jbox2d.dynamics.Fixture createFixture(org.jbox2d.dynamics.FixtureDef);
+  public final org.jbox2d.dynamics.Fixture createFixture(org.jbox2d.collision.shapes.Shape, float);
+  public final void destroyFixture(org.jbox2d.dynamics.Fixture);
+  public final void setTransform(org.jbox2d.common.Vec2, float);
+  public final org.jbox2d.common.Transform getTransform();
+  public final org.jbox2d.common.Vec2 getPosition();
+  public final float getAngle();
+  public final org.jbox2d.common.Vec2 getWorldCenter();
+  public final org.jbox2d.common.Vec2 getLocalCenter();
+  public final void setLinearVelocity(org.jbox2d.common.Vec2);
+  public final org.jbox2d.common.Vec2 getLinearVelocity();
+  public final void setAngularVelocity(float);
+  public final float getAngularVelocity();
+  public final void applyForce(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  public final void applyTorque(float);
+  public final void applyLinearImpulse(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  public void applyAngularImpulse(float);
+  public final float getMass();
+  public final float getInertia();
+  public final void getMassData(org.jbox2d.collision.shapes.MassData);
+  public final void setMassData(org.jbox2d.collision.shapes.MassData);
+  public final void resetMassData();
+  public final org.jbox2d.common.Vec2 getWorldPoint(org.jbox2d.common.Vec2);
+  public final void getWorldPointToOut(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  public final org.jbox2d.common.Vec2 getWorldVector(org.jbox2d.common.Vec2);
+  public final void getWorldVectorToOut(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  public final org.jbox2d.common.Vec2 getLocalPoint(org.jbox2d.common.Vec2);
+  public final void getLocalPointToOut(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  public final org.jbox2d.common.Vec2 getLocalVector(org.jbox2d.common.Vec2);
+  public final void getLocalVectorToOut(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  public final org.jbox2d.common.Vec2 getLinearVelocityFromWorldPoint(org.jbox2d.common.Vec2);
+  public final void getLinearVelocityFromWorldPointToOut(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  public final org.jbox2d.common.Vec2 getLinearVelocityFromLocalPoint(org.jbox2d.common.Vec2);
+  public final void getLinearVelocityFromLocalPointToOut(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  public final float getLinearDamping();
+  public final void setLinearDamping(float);
+  public final float getAngularDamping();
+  public final void setAngularDamping(float);
+  public org.jbox2d.dynamics.BodyType getType();
+  public void setType(org.jbox2d.dynamics.BodyType);
+  public final boolean isBullet();
+  public final void setBullet(boolean);
+  public void setSleepingAllowed(boolean);
+  public boolean isSleepingAllowed();
+  public void setAwake(boolean);
+  public boolean isAwake();
+  public void setActive(boolean);
+  public boolean isActive();
+  public void setFixedRotation(boolean);
+  public boolean isFixedRotation();
+  public final org.jbox2d.dynamics.Fixture getFixtureList();
+  public final org.jbox2d.dynamics.joints.JointEdge getJointList();
+  public final org.jbox2d.dynamics.contacts.ContactEdge getContactList();
+  public final org.jbox2d.dynamics.Body getNext();
+  public final java.lang.Object getUserData();
+  public final void setUserData(java.lang.Object);
+  public final org.jbox2d.dynamics.World getWorld();
+  protected final void synchronizeFixtures();
+  public final void synchronizeTransform();
+  public boolean shouldCollide(org.jbox2d.dynamics.Body);
+  protected final void advance(float);
+  static {};
+}
+Compiled from "BodyDef.java"
+public class org.jbox2d.dynamics.BodyDef {
+  public org.jbox2d.dynamics.BodyType type;
+  public java.lang.Object userData;
+  public org.jbox2d.common.Vec2 position;
+  public float angle;
+  public org.jbox2d.common.Vec2 linearVelocity;
+  public float angularVelocity;
+  public float linearDamping;
+  public float angularDamping;
+  public boolean allowSleep;
+  public boolean awake;
+  public boolean fixedRotation;
+  public boolean bullet;
+  public boolean active;
+  public float inertiaScale;
+  public org.jbox2d.dynamics.BodyDef();
+}
+Compiled from "BodyType.java"
+public final class org.jbox2d.dynamics.BodyType extends java.lang.Enum<org.jbox2d.dynamics.BodyType> {
+  public static final org.jbox2d.dynamics.BodyType STATIC;
+  public static final org.jbox2d.dynamics.BodyType KINEMATIC;
+  public static final org.jbox2d.dynamics.BodyType DYNAMIC;
+  public static org.jbox2d.dynamics.BodyType[] values();
+  public static org.jbox2d.dynamics.BodyType valueOf(java.lang.String);
+  static {};
+}
+Compiled from "ContactManager.java"
+public class org.jbox2d.dynamics.ContactManager implements org.jbox2d.callbacks.PairCallback {
+  public org.jbox2d.collision.broadphase.BroadPhase m_broadPhase;
+  public org.jbox2d.dynamics.contacts.Contact m_contactList;
+  public int m_contactCount;
+  public org.jbox2d.callbacks.ContactFilter m_contactFilter;
+  public org.jbox2d.callbacks.ContactListener m_contactListener;
+  public org.jbox2d.dynamics.ContactManager(org.jbox2d.dynamics.World);
+  public void addPair(java.lang.Object, java.lang.Object);
+  public void findNewContacts();
+  public void destroy(org.jbox2d.dynamics.contacts.Contact);
+  public void collide();
+}
+Compiled from "Filter.java"
+public class org.jbox2d.dynamics.Filter {
+  public int categoryBits;
+  public int maskBits;
+  public int groupIndex;
+  public org.jbox2d.dynamics.Filter();
+  public void set(org.jbox2d.dynamics.Filter);
+}
+Compiled from "Fixture.java"
+public class org.jbox2d.dynamics.Fixture {
+  public final org.jbox2d.collision.AABB m_aabb;
+  public float m_density;
+  public org.jbox2d.dynamics.Fixture m_next;
+  public org.jbox2d.dynamics.Body m_body;
+  public org.jbox2d.collision.shapes.Shape m_shape;
+  public float m_friction;
+  public float m_restitution;
+  public org.jbox2d.collision.broadphase.DynamicTreeNode m_proxy;
+  public final org.jbox2d.dynamics.Filter m_filter;
+  public boolean m_isSensor;
+  public java.lang.Object m_userData;
+  static final boolean $assertionsDisabled;
+  public org.jbox2d.dynamics.Fixture();
+  public org.jbox2d.collision.shapes.ShapeType getType();
+  public org.jbox2d.collision.shapes.Shape getShape();
+  public boolean isSensor();
+  public void setSensor(boolean);
+  public void setFilterData(org.jbox2d.dynamics.Filter);
+  public org.jbox2d.dynamics.Filter getFilterData();
+  public org.jbox2d.dynamics.Body getBody();
+  public org.jbox2d.dynamics.Fixture getNext();
+  public void setDensity(float);
+  public float getDensity();
+  public java.lang.Object getUserData();
+  public void setUserData(java.lang.Object);
+  public boolean testPoint(org.jbox2d.common.Vec2);
+  public boolean raycast(org.jbox2d.collision.RayCastOutput, org.jbox2d.collision.RayCastInput);
+  public void getMassData(org.jbox2d.collision.shapes.MassData);
+  public float getFriction();
+  public void setFriction(float);
+  public float getRestitution();
+  public void setRestitution(float);
+  public org.jbox2d.collision.AABB getAABB();
+  public void create(org.jbox2d.dynamics.Body, org.jbox2d.dynamics.FixtureDef);
+  public void destroy();
+  public void createProxy(org.jbox2d.collision.broadphase.BroadPhase, org.jbox2d.common.Transform);
+  public void destroyProxy(org.jbox2d.collision.broadphase.BroadPhase);
+  protected void synchronize(org.jbox2d.collision.broadphase.BroadPhase, org.jbox2d.common.Transform, org.jbox2d.common.Transform);
+  static {};
+}
+Compiled from "FixtureDef.java"
+public class org.jbox2d.dynamics.FixtureDef {
+  public org.jbox2d.collision.shapes.Shape shape;
+  public java.lang.Object userData;
+  public float friction;
+  public float restitution;
+  public float density;
+  public boolean isSensor;
+  public org.jbox2d.dynamics.Filter filter;
+  public org.jbox2d.dynamics.FixtureDef();
+}
+Compiled from "Island.java"
+public class org.jbox2d.dynamics.Island {
+  public org.jbox2d.callbacks.ContactListener m_listener;
+  public org.jbox2d.dynamics.Body[] m_bodies;
+  public org.jbox2d.dynamics.contacts.Contact[] m_contacts;
+  public org.jbox2d.dynamics.joints.Joint[] m_joints;
+  public org.jbox2d.dynamics.Position[] m_positions;
+  public org.jbox2d.dynamics.Velocity[] m_velocities;
+  public int m_bodyCount;
+  public int m_jointCount;
+  public int m_contactCount;
+  public int m_bodyCapacity;
+  public int m_contactCapacity;
+  public int m_jointCapacity;
+  public int m_positionIterationCount;
+  static final boolean $assertionsDisabled;
+  public org.jbox2d.dynamics.Island();
+  public void init(int, int, int, org.jbox2d.callbacks.ContactListener);
+  public void clear();
+  public void solve(org.jbox2d.dynamics.TimeStep, org.jbox2d.common.Vec2, boolean);
+  public void add(org.jbox2d.dynamics.Body);
+  public void add(org.jbox2d.dynamics.contacts.Contact);
+  public void add(org.jbox2d.dynamics.joints.Joint);
+  public void report(org.jbox2d.dynamics.contacts.ContactConstraint[]);
+  static {};
+}
+Compiled from "Island.java"
+class org.jbox2d.dynamics.Position {
+  final org.jbox2d.common.Vec2 x;
+  float a;
+  org.jbox2d.dynamics.Position();
+}
+Compiled from "TimeStep.java"
+public class org.jbox2d.dynamics.TimeStep {
+  public float dt;
+  public float inv_dt;
+  public float dtRatio;
+  public int velocityIterations;
+  public int positionIterations;
+  public boolean warmStarting;
+  public org.jbox2d.dynamics.TimeStep();
+}
+Compiled from "Island.java"
+class org.jbox2d.dynamics.Velocity {
+  final org.jbox2d.common.Vec2 v;
+  float a;
+  org.jbox2d.dynamics.Velocity();
+}
+Compiled from "World.java"
+public class org.jbox2d.dynamics.World {
+  public static final int WORLD_POOL_SIZE;
+  public static final int WORLD_POOL_CONTAINER_SIZE;
+  public static final int NEW_FIXTURE;
+  public static final int LOCKED;
+  public static final int CLEAR_FORCES;
+  public int activeContacts;
+  public int contactPoolCount;
+  protected int m_flags;
+  protected org.jbox2d.dynamics.ContactManager m_contactManager;
+  static final boolean $assertionsDisabled;
+  public org.jbox2d.dynamics.World(org.jbox2d.common.Vec2, boolean);
+  public org.jbox2d.dynamics.World(org.jbox2d.common.Vec2, boolean, org.jbox2d.pooling.IWorldPool);
+  public void setAllowSleep(boolean);
+  public boolean isAllowSleep();
+  public org.jbox2d.dynamics.contacts.Contact popContact(org.jbox2d.dynamics.Fixture, org.jbox2d.dynamics.Fixture);
+  public void pushContact(org.jbox2d.dynamics.contacts.Contact);
+  public org.jbox2d.pooling.IWorldPool getPool();
+  public void setDestructionListener(org.jbox2d.callbacks.DestructionListener);
+  public void setContactFilter(org.jbox2d.callbacks.ContactFilter);
+  public void setContactListener(org.jbox2d.callbacks.ContactListener);
+  public void setDebugDraw(org.jbox2d.callbacks.DebugDraw);
+  public org.jbox2d.dynamics.Body createBody(org.jbox2d.dynamics.BodyDef);
+  public void destroyBody(org.jbox2d.dynamics.Body);
+  public org.jbox2d.dynamics.joints.Joint createJoint(org.jbox2d.dynamics.joints.JointDef);
+  public void destroyJoint(org.jbox2d.dynamics.joints.Joint);
+  public void step(float, int, int);
+  public void clearForces();
+  public void drawDebugData();
+  public void queryAABB(org.jbox2d.callbacks.QueryCallback, org.jbox2d.collision.AABB);
+  public void raycast(org.jbox2d.callbacks.RayCastCallback, org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  public org.jbox2d.dynamics.Body getBodyList();
+  public org.jbox2d.dynamics.joints.Joint getJointList();
+  public org.jbox2d.dynamics.contacts.Contact getContactList();
+  public void setWarmStarting(boolean);
+  public boolean isWarmStarting();
+  public void setContinuousPhysics(boolean);
+  public boolean isContinuousPhysics();
+  public int getProxyCount();
+  public int getBodyCount();
+  public int getJointCount();
+  public int getContactCount();
+  public void setGravity(org.jbox2d.common.Vec2);
+  public org.jbox2d.common.Vec2 getGravity();
+  public boolean isLocked();
+  public void setAutoClearForces(boolean);
+  public boolean getAutoClearForces();
+  static {};
+}
+Compiled from "World.java"
+class org.jbox2d.dynamics.World$1 {
+  static final int[] $SwitchMap$org$jbox2d$dynamics$joints$JointType;
+  static final int[] $SwitchMap$org$jbox2d$collision$shapes$ShapeType;
+  static {};
+}
+Compiled from "World.java"
+class org.jbox2d.dynamics.WorldQueryWrapper implements org.jbox2d.callbacks.TreeCallback {
+  org.jbox2d.collision.broadphase.BroadPhase broadPhase;
+  org.jbox2d.callbacks.QueryCallback callback;
+  org.jbox2d.dynamics.WorldQueryWrapper();
+  public boolean treeCallback(org.jbox2d.collision.broadphase.DynamicTreeNode);
+}
+Compiled from "World.java"
+class org.jbox2d.dynamics.WorldRayCastWrapper implements org.jbox2d.callbacks.TreeRayCastCallback {
+  org.jbox2d.collision.broadphase.BroadPhase broadPhase;
+  org.jbox2d.callbacks.RayCastCallback callback;
+  org.jbox2d.dynamics.WorldRayCastWrapper();
+  public float raycastCallback(org.jbox2d.collision.RayCastInput, org.jbox2d.collision.broadphase.DynamicTreeNode);
+}
+Compiled from "CircleContact.java"
+public class org.jbox2d.dynamics.contacts.CircleContact extends org.jbox2d.dynamics.contacts.Contact {
+  static final boolean $assertionsDisabled;
+  public org.jbox2d.dynamics.contacts.CircleContact(org.jbox2d.pooling.IWorldPool);
+  public void init(org.jbox2d.dynamics.Fixture, org.jbox2d.dynamics.Fixture);
+  public void evaluate(org.jbox2d.collision.Manifold, org.jbox2d.common.Transform, org.jbox2d.common.Transform);
+  static {};
+}
+Compiled from "Contact.java"
+public abstract class org.jbox2d.dynamics.contacts.Contact {
+  public static final int ISLAND_FLAG;
+  public static final int TOUCHING_FLAG;
+  public static final int ENABLED_FLAG;
+  public static final int FILTER_FLAG;
+  public static final int BULLET_HIT_FLAG;
+  public int m_flags;
+  public org.jbox2d.dynamics.contacts.Contact m_prev;
+  public org.jbox2d.dynamics.contacts.Contact m_next;
+  public org.jbox2d.dynamics.contacts.ContactEdge m_nodeA;
+  public org.jbox2d.dynamics.contacts.ContactEdge m_nodeB;
+  public org.jbox2d.dynamics.Fixture m_fixtureA;
+  public org.jbox2d.dynamics.Fixture m_fixtureB;
+  public org.jbox2d.collision.Manifold m_manifold;
+  public float m_toiCount;
+  protected final org.jbox2d.pooling.IWorldPool pool;
+  protected org.jbox2d.dynamics.contacts.Contact(org.jbox2d.pooling.IWorldPool);
+  public void init(org.jbox2d.dynamics.Fixture, org.jbox2d.dynamics.Fixture);
+  public org.jbox2d.collision.Manifold getManifold();
+  public void getWorldManifold(org.jbox2d.collision.WorldManifold);
+  public boolean isTouching();
+  public void setEnabled(boolean);
+  public boolean isEnabled();
+  public org.jbox2d.dynamics.contacts.Contact getNext();
+  public org.jbox2d.dynamics.Fixture getFixtureA();
+  public org.jbox2d.dynamics.Fixture getFixtureB();
+  public abstract void evaluate(org.jbox2d.collision.Manifold, org.jbox2d.common.Transform, org.jbox2d.common.Transform);
+  public void flagForFiltering();
+  public void update(org.jbox2d.callbacks.ContactListener);
+}
+Compiled from "ContactConstraint.java"
+public class org.jbox2d.dynamics.contacts.ContactConstraint {
+  public final org.jbox2d.dynamics.contacts.ContactConstraintPoint[] points;
+  public final org.jbox2d.common.Vec2 localNormal;
+  public final org.jbox2d.common.Vec2 localPoint;
+  public final org.jbox2d.common.Vec2 normal;
+  public final org.jbox2d.common.Mat22 normalMass;
+  public final org.jbox2d.common.Mat22 K;
+  public org.jbox2d.dynamics.Body bodyA;
+  public org.jbox2d.dynamics.Body bodyB;
+  public org.jbox2d.collision.Manifold$ManifoldType type;
+  public float radius;
+  public float friction;
+  public float restitution;
+  public int pointCount;
+  public org.jbox2d.collision.Manifold manifold;
+  public org.jbox2d.dynamics.contacts.ContactConstraint();
+  public void set(org.jbox2d.dynamics.contacts.ContactConstraint);
+}
+Compiled from "ContactConstraintPoint.java"
+public class org.jbox2d.dynamics.contacts.ContactConstraintPoint {
+  public final org.jbox2d.common.Vec2 localPoint;
+  public final org.jbox2d.common.Vec2 rA;
+  public final org.jbox2d.common.Vec2 rB;
+  public float normalImpulse;
+  public float tangentImpulse;
+  public float normalMass;
+  public float tangentMass;
+  public float velocityBias;
+  public org.jbox2d.dynamics.contacts.ContactConstraintPoint();
+  public void set(org.jbox2d.dynamics.contacts.ContactConstraintPoint);
+}
+Compiled from "ContactCreator.java"
+public interface org.jbox2d.dynamics.contacts.ContactCreator {
+  public abstract org.jbox2d.dynamics.contacts.Contact contactCreateFcn(org.jbox2d.pooling.IWorldPool, org.jbox2d.dynamics.Fixture, org.jbox2d.dynamics.Fixture);
+  public abstract void contactDestroyFcn(org.jbox2d.pooling.IWorldPool, org.jbox2d.dynamics.contacts.Contact);
+}
+Compiled from "ContactEdge.java"
+public class org.jbox2d.dynamics.contacts.ContactEdge {
+  public org.jbox2d.dynamics.Body other;
+  public org.jbox2d.dynamics.contacts.Contact contact;
+  public org.jbox2d.dynamics.contacts.ContactEdge prev;
+  public org.jbox2d.dynamics.contacts.ContactEdge next;
+  public org.jbox2d.dynamics.contacts.ContactEdge();
+}
+Compiled from "ContactRegister.java"
+public class org.jbox2d.dynamics.contacts.ContactRegister {
+  public org.jbox2d.pooling.IDynamicStack<org.jbox2d.dynamics.contacts.Contact> creator;
+  public boolean primary;
+  public org.jbox2d.dynamics.contacts.ContactRegister();
+}
+Compiled from "ContactSolver.java"
+public class org.jbox2d.dynamics.contacts.ContactSolver {
+  public static final int INITIAL_NUM_CONSTRAINTS;
+  public static final float k_maxConditionNumber;
+  public org.jbox2d.dynamics.contacts.ContactConstraint[] m_constraints;
+  public int m_constraintCount;
+  static final boolean $assertionsDisabled;
+  public org.jbox2d.dynamics.contacts.ContactSolver();
+  public final void init(org.jbox2d.dynamics.contacts.Contact[], int, float);
+  public void warmStart();
+  public final void solveVelocityConstraints();
+  public void storeImpulses();
+  public final boolean solvePositionConstraints(float);
+  static {};
+}
+Compiled from "PolygonAndCircleContact.java"
+public class org.jbox2d.dynamics.contacts.PolygonAndCircleContact extends org.jbox2d.dynamics.contacts.Contact {
+  static final boolean $assertionsDisabled;
+  public org.jbox2d.dynamics.contacts.PolygonAndCircleContact(org.jbox2d.pooling.IWorldPool);
+  public void init(org.jbox2d.dynamics.Fixture, org.jbox2d.dynamics.Fixture);
+  public void evaluate(org.jbox2d.collision.Manifold, org.jbox2d.common.Transform, org.jbox2d.common.Transform);
+  static {};
+}
+Compiled from "PolygonContact.java"
+public class org.jbox2d.dynamics.contacts.PolygonContact extends org.jbox2d.dynamics.contacts.Contact {
+  static final boolean $assertionsDisabled;
+  public org.jbox2d.dynamics.contacts.PolygonContact(org.jbox2d.pooling.IWorldPool);
+  public void init(org.jbox2d.dynamics.Fixture, org.jbox2d.dynamics.Fixture);
+  public void evaluate(org.jbox2d.collision.Manifold, org.jbox2d.common.Transform, org.jbox2d.common.Transform);
+  static {};
+}
+Compiled from "ContactSolver.java"
+class org.jbox2d.dynamics.contacts.PositionSolverManifold {
+  public final org.jbox2d.common.Vec2 normal;
+  public final org.jbox2d.common.Vec2 point;
+  public float separation;
+  static final boolean $assertionsDisabled;
+  org.jbox2d.dynamics.contacts.PositionSolverManifold();
+  public void initialize(org.jbox2d.dynamics.contacts.ContactConstraint, int);
+  static {};
+}
+Compiled from "ContactSolver.java"
+class org.jbox2d.dynamics.contacts.PositionSolverManifold$1 {
+  static final int[] $SwitchMap$org$jbox2d$collision$Manifold$ManifoldType;
+  static {};
+}
+Compiled from "TOIConstraint.java"
+public class org.jbox2d.dynamics.contacts.TOIConstraint {
+  public final org.jbox2d.common.Vec2[] localPoints;
+  public final org.jbox2d.common.Vec2 localNormal;
+  public final org.jbox2d.common.Vec2 localPoint;
+  public org.jbox2d.collision.Manifold$ManifoldType type;
+  public float radius;
+  public int pointCount;
+  public org.jbox2d.dynamics.Body bodyA;
+  public org.jbox2d.dynamics.Body bodyB;
+  public org.jbox2d.dynamics.contacts.TOIConstraint();
+  public org.jbox2d.dynamics.contacts.TOIConstraint(org.jbox2d.dynamics.contacts.TOIConstraint);
+  public void set(org.jbox2d.dynamics.contacts.TOIConstraint);
+}
+Compiled from "TOISolver.java"
+public class org.jbox2d.dynamics.contacts.TOISolver {
+  static final boolean $assertionsDisabled;
+  public org.jbox2d.dynamics.contacts.TOISolver();
+  public void clear();
+  public void initialize(org.jbox2d.dynamics.contacts.Contact[], int, org.jbox2d.dynamics.Body);
+  public boolean solve(float);
+  static {};
+}
+Compiled from "TOISolver.java"
+class org.jbox2d.dynamics.contacts.TOISolverManifold {
+  public final org.jbox2d.common.Vec2 normal;
+  public final org.jbox2d.common.Vec2 point;
+  public float separation;
+  static final boolean $assertionsDisabled;
+  org.jbox2d.dynamics.contacts.TOISolverManifold();
+  public void initialize(org.jbox2d.dynamics.contacts.TOIConstraint, int);
+  static {};
+}
+Compiled from "TOISolver.java"
+class org.jbox2d.dynamics.contacts.TOISolverManifold$1 {
+  static final int[] $SwitchMap$org$jbox2d$collision$Manifold$ManifoldType;
+  static {};
+}
+Compiled from "ConstantVolumeJoint.java"
+public class org.jbox2d.dynamics.joints.ConstantVolumeJoint extends org.jbox2d.dynamics.joints.Joint {
+  public final org.jbox2d.dynamics.Body[] bodies;
+  float[] targetLengths;
+  public float targetVolume;
+  org.jbox2d.common.Vec2[] normals;
+  org.jbox2d.dynamics.TimeStep m_step;
+  org.jbox2d.dynamics.joints.DistanceJoint[] distanceJoints;
+  public final float frequencyHz;
+  public final float dampingRatio;
+  public org.jbox2d.dynamics.Body[] getBodies();
+  public org.jbox2d.dynamics.joints.DistanceJoint[] getJoints();
+  public void inflate(float);
+  public org.jbox2d.dynamics.joints.ConstantVolumeJoint(org.jbox2d.dynamics.World, org.jbox2d.dynamics.joints.ConstantVolumeJointDef);
+  public void destructor();
+  public boolean constrainEdges(org.jbox2d.dynamics.TimeStep);
+  public void initVelocityConstraints(org.jbox2d.dynamics.TimeStep);
+  public boolean solvePositionConstraints(float);
+  public void solveVelocityConstraints(org.jbox2d.dynamics.TimeStep);
+  public void getAnchorA(org.jbox2d.common.Vec2);
+  public void getAnchorB(org.jbox2d.common.Vec2);
+  public void getReactionForce(float, org.jbox2d.common.Vec2);
+  public float getReactionTorque(float);
+}
+Compiled from "ConstantVolumeJointDef.java"
+public class org.jbox2d.dynamics.joints.ConstantVolumeJointDef extends org.jbox2d.dynamics.joints.JointDef {
+  public float frequencyHz;
+  public float dampingRatio;
+  java.util.ArrayList<org.jbox2d.dynamics.Body> bodies;
+  java.util.ArrayList<org.jbox2d.dynamics.joints.DistanceJoint> joints;
+  public org.jbox2d.dynamics.joints.ConstantVolumeJointDef();
+  public void addBody(org.jbox2d.dynamics.Body);
+  public void addBodyAndJoint(org.jbox2d.dynamics.Body, org.jbox2d.dynamics.joints.DistanceJoint);
+}
+Compiled from "DistanceJoint.java"
+public class org.jbox2d.dynamics.joints.DistanceJoint extends org.jbox2d.dynamics.joints.Joint {
+  public final org.jbox2d.common.Vec2 m_localAnchor1;
+  public final org.jbox2d.common.Vec2 m_localAnchor2;
+  public final org.jbox2d.common.Vec2 m_u;
+  public float m_impulse;
+  public float m_mass;
+  public float m_length;
+  public float m_frequencyHz;
+  public float m_dampingRatio;
+  public float m_gamma;
+  public float m_bias;
+  static final boolean $assertionsDisabled;
+  public org.jbox2d.dynamics.joints.DistanceJoint(org.jbox2d.pooling.IWorldPool, org.jbox2d.dynamics.joints.DistanceJointDef);
+  public void setFrequency(float);
+  public float getFrequency();
+  public float getLength();
+  public void setLength(float);
+  public void setDampingRatio(float);
+  public float getDampingRatio();
+  public void getAnchorA(org.jbox2d.common.Vec2);
+  public void getAnchorB(org.jbox2d.common.Vec2);
+  public void getReactionForce(float, org.jbox2d.common.Vec2);
+  public float getReactionTorque(float);
+  public void initVelocityConstraints(org.jbox2d.dynamics.TimeStep);
+  public void solveVelocityConstraints(org.jbox2d.dynamics.TimeStep);
+  public boolean solvePositionConstraints(float);
+  static {};
+}
+Compiled from "DistanceJointDef.java"
+public class org.jbox2d.dynamics.joints.DistanceJointDef extends org.jbox2d.dynamics.joints.JointDef {
+  public final org.jbox2d.common.Vec2 localAnchorA;
+  public final org.jbox2d.common.Vec2 localAnchorB;
+  public float length;
+  public float frequencyHz;
+  public float dampingRatio;
+  public org.jbox2d.dynamics.joints.DistanceJointDef();
+  public void initialize(org.jbox2d.dynamics.Body, org.jbox2d.dynamics.Body, org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+}
+Compiled from "FrictionJoint.java"
+public class org.jbox2d.dynamics.joints.FrictionJoint extends org.jbox2d.dynamics.joints.Joint {
+  static final boolean $assertionsDisabled;
+  public org.jbox2d.dynamics.joints.FrictionJoint(org.jbox2d.pooling.IWorldPool, org.jbox2d.dynamics.joints.FrictionJointDef);
+  public org.jbox2d.common.Vec2 getLocalAnchorA();
+  public org.jbox2d.common.Vec2 getLocalAnchorB();
+  public void getAnchorA(org.jbox2d.common.Vec2);
+  public void getAnchorB(org.jbox2d.common.Vec2);
+  public void getReactionForce(float, org.jbox2d.common.Vec2);
+  public float getReactionTorque(float);
+  public void setMaxForce(float);
+  public float getMaxForce();
+  public void setMaxTorque(float);
+  public float getMaxTorque();
+  public void initVelocityConstraints(org.jbox2d.dynamics.TimeStep);
+  public void solveVelocityConstraints(org.jbox2d.dynamics.TimeStep);
+  public boolean solvePositionConstraints(float);
+  static {};
+}
+Compiled from "FrictionJointDef.java"
+public class org.jbox2d.dynamics.joints.FrictionJointDef extends org.jbox2d.dynamics.joints.JointDef {
+  public final org.jbox2d.common.Vec2 localAnchorA;
+  public final org.jbox2d.common.Vec2 localAnchorB;
+  public float maxForce;
+  public float maxTorque;
+  public org.jbox2d.dynamics.joints.FrictionJointDef();
+  public void initialize(org.jbox2d.dynamics.Body, org.jbox2d.dynamics.Body, org.jbox2d.common.Vec2);
+}
+Compiled from "GearJoint.java"
+public class org.jbox2d.dynamics.joints.GearJoint extends org.jbox2d.dynamics.joints.Joint {
+  public final org.jbox2d.common.Vec2 m_localAnchor1;
+  public final org.jbox2d.common.Vec2 m_localAnchor2;
+  static final boolean $assertionsDisabled;
+  public org.jbox2d.dynamics.joints.GearJoint(org.jbox2d.pooling.IWorldPool, org.jbox2d.dynamics.joints.GearJointDef);
+  public void getAnchorA(org.jbox2d.common.Vec2);
+  public void getAnchorB(org.jbox2d.common.Vec2);
+  public void getReactionForce(float, org.jbox2d.common.Vec2);
+  public float getReactionTorque(float);
+  public void setRatio(float);
+  public float getRatio();
+  public void initVelocityConstraints(org.jbox2d.dynamics.TimeStep);
+  public void solveVelocityConstraints(org.jbox2d.dynamics.TimeStep);
+  public org.jbox2d.dynamics.joints.Joint getJoint1();
+  public org.jbox2d.dynamics.joints.Joint getJoint2();
+  public boolean solvePositionConstraints(float);
+  static {};
+}
+Compiled from "GearJointDef.java"
+public class org.jbox2d.dynamics.joints.GearJointDef extends org.jbox2d.dynamics.joints.JointDef {
+  public org.jbox2d.dynamics.joints.Joint joint1;
+  public org.jbox2d.dynamics.joints.Joint joint2;
+  public float ratio;
+  public org.jbox2d.dynamics.joints.GearJointDef();
+}
+Compiled from "Jacobian.java"
+public class org.jbox2d.dynamics.joints.Jacobian {
+  public final org.jbox2d.common.Vec2 linearA;
+  public float angularA;
+  public final org.jbox2d.common.Vec2 linearB;
+  public float angularB;
+  public org.jbox2d.dynamics.joints.Jacobian();
+  public void setZero();
+  public void set(org.jbox2d.common.Vec2, float, org.jbox2d.common.Vec2, float);
+  public float compute(org.jbox2d.common.Vec2, float, org.jbox2d.common.Vec2, float);
+}
+Compiled from "Joint.java"
+public abstract class org.jbox2d.dynamics.joints.Joint {
+  public org.jbox2d.dynamics.joints.JointType m_type;
+  public org.jbox2d.dynamics.joints.Joint m_prev;
+  public org.jbox2d.dynamics.joints.Joint m_next;
+  public org.jbox2d.dynamics.joints.JointEdge m_edgeA;
+  public org.jbox2d.dynamics.joints.JointEdge m_edgeB;
+  public org.jbox2d.dynamics.Body m_bodyA;
+  public org.jbox2d.dynamics.Body m_bodyB;
+  public boolean m_islandFlag;
+  public boolean m_collideConnected;
+  public java.lang.Object m_userData;
+  protected org.jbox2d.pooling.IWorldPool pool;
+  final org.jbox2d.common.Vec2 m_localCenterA;
+  final org.jbox2d.common.Vec2 m_localCenterB;
+  float m_invMassA;
+  float m_invIA;
+  float m_invMassB;
+  float m_invIB;
+  static final boolean $assertionsDisabled;
+  public static org.jbox2d.dynamics.joints.Joint create(org.jbox2d.dynamics.World, org.jbox2d.dynamics.joints.JointDef);
+  public static void destroy(org.jbox2d.dynamics.joints.Joint);
+  protected org.jbox2d.dynamics.joints.Joint(org.jbox2d.pooling.IWorldPool, org.jbox2d.dynamics.joints.JointDef);
+  public org.jbox2d.dynamics.joints.JointType getType();
+  public org.jbox2d.dynamics.Body getBodyA();
+  public org.jbox2d.dynamics.Body getBodyB();
+  public abstract void getAnchorA(org.jbox2d.common.Vec2);
+  public abstract void getAnchorB(org.jbox2d.common.Vec2);
+  public abstract void getReactionForce(float, org.jbox2d.common.Vec2);
+  public abstract float getReactionTorque(float);
+  public org.jbox2d.dynamics.joints.Joint getNext();
+  public java.lang.Object getUserData();
+  public void setUserData(java.lang.Object);
+  public boolean IsActive();
+  public abstract void initVelocityConstraints(org.jbox2d.dynamics.TimeStep);
+  public abstract void solveVelocityConstraints(org.jbox2d.dynamics.TimeStep);
+  public abstract boolean solvePositionConstraints(float);
+  public void destructor();
+  static {};
+}
+Compiled from "Joint.java"
+class org.jbox2d.dynamics.joints.Joint$1 {
+  static final int[] $SwitchMap$org$jbox2d$dynamics$joints$JointType;
+  static {};
+}
+Compiled from "JointDef.java"
+public class org.jbox2d.dynamics.joints.JointDef {
+  public org.jbox2d.dynamics.joints.JointType type;
+  public java.lang.Object userData;
+  public org.jbox2d.dynamics.Body bodyA;
+  public org.jbox2d.dynamics.Body bodyB;
+  public boolean collideConnected;
+  public org.jbox2d.dynamics.joints.JointDef();
+}
+Compiled from "JointEdge.java"
+public class org.jbox2d.dynamics.joints.JointEdge {
+  public org.jbox2d.dynamics.Body other;
+  public org.jbox2d.dynamics.joints.Joint joint;
+  public org.jbox2d.dynamics.joints.JointEdge prev;
+  public org.jbox2d.dynamics.joints.JointEdge next;
+  public org.jbox2d.dynamics.joints.JointEdge();
+}
+Compiled from "JointType.java"
+public final class org.jbox2d.dynamics.joints.JointType extends java.lang.Enum<org.jbox2d.dynamics.joints.JointType> {
+  public static final org.jbox2d.dynamics.joints.JointType UNKNOWN;
+  public static final org.jbox2d.dynamics.joints.JointType REVOLUTE;
+  public static final org.jbox2d.dynamics.joints.JointType PRISMATIC;
+  public static final org.jbox2d.dynamics.joints.JointType DISTANCE;
+  public static final org.jbox2d.dynamics.joints.JointType PULLEY;
+  public static final org.jbox2d.dynamics.joints.JointType MOUSE;
+  public static final org.jbox2d.dynamics.joints.JointType GEAR;
+  public static final org.jbox2d.dynamics.joints.JointType LINE;
+  public static final org.jbox2d.dynamics.joints.JointType WELD;
+  public static final org.jbox2d.dynamics.joints.JointType FRICTION;
+  public static final org.jbox2d.dynamics.joints.JointType CONSTANT_VOLUME;
+  public static org.jbox2d.dynamics.joints.JointType[] values();
+  public static org.jbox2d.dynamics.joints.JointType valueOf(java.lang.String);
+  static {};
+}
+Compiled from "LimitState.java"
+public final class org.jbox2d.dynamics.joints.LimitState extends java.lang.Enum<org.jbox2d.dynamics.joints.LimitState> {
+  public static final org.jbox2d.dynamics.joints.LimitState INACTIVE;
+  public static final org.jbox2d.dynamics.joints.LimitState AT_LOWER;
+  public static final org.jbox2d.dynamics.joints.LimitState AT_UPPER;
+  public static final org.jbox2d.dynamics.joints.LimitState EQUAL;
+  public static org.jbox2d.dynamics.joints.LimitState[] values();
+  public static org.jbox2d.dynamics.joints.LimitState valueOf(java.lang.String);
+  static {};
+}
+Compiled from "LineJoint.java"
+public class org.jbox2d.dynamics.joints.LineJoint extends org.jbox2d.dynamics.joints.Joint {
+  public final org.jbox2d.common.Vec2 m_localAnchor1;
+  public final org.jbox2d.common.Vec2 m_localAnchor2;
+  public final org.jbox2d.common.Vec2 m_localXAxis1;
+  static final boolean $assertionsDisabled;
+  public org.jbox2d.dynamics.joints.LineJoint(org.jbox2d.pooling.IWorldPool, org.jbox2d.dynamics.joints.LineJointDef);
+  public void getAnchorA(org.jbox2d.common.Vec2);
+  public void getAnchorB(org.jbox2d.common.Vec2);
+  public void getReactionForce(float, org.jbox2d.common.Vec2);
+  public float getReactionTorque(float);
+  public float getJointTranslation();
+  public float getJointSpeed();
+  public boolean isLimitEnabled();
+  public void EnableLimit(boolean);
+  public float getLowerLimit();
+  public float getUpperLimit();
+  public void setLimits(float, float);
+  public boolean isMotorEnabled();
+  public void EnableMotor(boolean);
+  public void setMotorSpeed(float);
+  public float getMotorSpeed();
+  public void setMaxMotorForce(float);
+  public float getMaxMotorForce();
+  public float getMotorForce();
+  public void initVelocityConstraints(org.jbox2d.dynamics.TimeStep);
+  public void solveVelocityConstraints(org.jbox2d.dynamics.TimeStep);
+  public boolean solvePositionConstraints(float);
+  static {};
+}
+Compiled from "LineJointDef.java"
+public class org.jbox2d.dynamics.joints.LineJointDef extends org.jbox2d.dynamics.joints.JointDef {
+  public final org.jbox2d.common.Vec2 localAnchorA;
+  public final org.jbox2d.common.Vec2 localAnchorB;
+  public final org.jbox2d.common.Vec2 localAxisA;
+  public boolean enableLimit;
+  public float lowerTranslation;
+  public float upperTranslation;
+  public boolean enableMotor;
+  public float maxMotorForce;
+  public float motorSpeed;
+  public org.jbox2d.dynamics.joints.LineJointDef();
+  public void initialize(org.jbox2d.dynamics.Body, org.jbox2d.dynamics.Body, org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+}
+Compiled from "MouseJoint.java"
+public class org.jbox2d.dynamics.joints.MouseJoint extends org.jbox2d.dynamics.joints.Joint {
+  static final boolean $assertionsDisabled;
+  protected org.jbox2d.dynamics.joints.MouseJoint(org.jbox2d.pooling.IWorldPool, org.jbox2d.dynamics.joints.MouseJointDef);
+  public void getAnchorA(org.jbox2d.common.Vec2);
+  public void getAnchorB(org.jbox2d.common.Vec2);
+  public void getReactionForce(float, org.jbox2d.common.Vec2);
+  public float getReactionTorque(float);
+  public void setTarget(org.jbox2d.common.Vec2);
+  public org.jbox2d.common.Vec2 getTarget();
+  public void setMaxForce(float);
+  public float getMaxForce();
+  public void setFrequency(float);
+  public float getFrequency();
+  public void setDampingRatio(float);
+  public float getDampingRatio();
+  public void initVelocityConstraints(org.jbox2d.dynamics.TimeStep);
+  public boolean solvePositionConstraints(float);
+  public void solveVelocityConstraints(org.jbox2d.dynamics.TimeStep);
+  static {};
+}
+Compiled from "MouseJointDef.java"
+public class org.jbox2d.dynamics.joints.MouseJointDef extends org.jbox2d.dynamics.joints.JointDef {
+  public final org.jbox2d.common.Vec2 target;
+  public float maxForce;
+  public float frequencyHz;
+  public float dampingRatio;
+  public org.jbox2d.dynamics.joints.MouseJointDef();
+}
+Compiled from "PrismaticJoint.java"
+public class org.jbox2d.dynamics.joints.PrismaticJoint extends org.jbox2d.dynamics.joints.Joint {
+  public final org.jbox2d.common.Vec2 m_localAnchor1;
+  public final org.jbox2d.common.Vec2 m_localAnchor2;
+  public final org.jbox2d.common.Vec2 m_localXAxis1;
+  public final org.jbox2d.common.Vec2 m_localYAxis1;
+  public float m_refAngle;
+  public final org.jbox2d.common.Vec2 m_axis;
+  public final org.jbox2d.common.Vec2 m_perp;
+  public float m_s1;
+  public float m_s2;
+  public float m_a1;
+  public float m_a2;
+  public final org.jbox2d.common.Mat33 m_K;
+  public final org.jbox2d.common.Vec3 m_impulse;
+  public float m_motorMass;
+  public float m_motorImpulse;
+  public float m_lowerTranslation;
+  public float m_upperTranslation;
+  public float m_maxMotorForce;
+  public float m_motorSpeed;
+  public boolean m_enableLimit;
+  public boolean m_enableMotor;
+  public org.jbox2d.dynamics.joints.LimitState m_limitState;
+  static final boolean $assertionsDisabled;
+  public org.jbox2d.dynamics.joints.PrismaticJoint(org.jbox2d.pooling.IWorldPool, org.jbox2d.dynamics.joints.PrismaticJointDef);
+  public void getAnchorA(org.jbox2d.common.Vec2);
+  public void getAnchorB(org.jbox2d.common.Vec2);
+  public void getReactionForce(float, org.jbox2d.common.Vec2);
+  public float getReactionTorque(float);
+  public float getJointTranslation();
+  public float getJointSpeed();
+  public boolean isLimitEnabled();
+  public void enableLimit(boolean);
+  public float getLowerLimit();
+  public float getUpperLimit();
+  public void setLimits(float, float);
+  public boolean isMotorEnabled();
+  public void enableMotor(boolean);
+  public void setMotorSpeed(float);
+  public float getMotorSpeed();
+  public void setMaxMotorForce(float);
+  public float getMotorForce();
+  public void initVelocityConstraints(org.jbox2d.dynamics.TimeStep);
+  public boolean solvePositionConstraints(float);
+  public void solveVelocityConstraints(org.jbox2d.dynamics.TimeStep);
+  static {};
+}
+Compiled from "PrismaticJointDef.java"
+public class org.jbox2d.dynamics.joints.PrismaticJointDef extends org.jbox2d.dynamics.joints.JointDef {
+  public final org.jbox2d.common.Vec2 localAnchorA;
+  public final org.jbox2d.common.Vec2 localAnchorB;
+  public final org.jbox2d.common.Vec2 localAxis1;
+  public float referenceAngle;
+  public boolean enableLimit;
+  public float lowerTranslation;
+  public float upperTranslation;
+  public boolean enableMotor;
+  public float maxMotorForce;
+  public float motorSpeed;
+  public org.jbox2d.dynamics.joints.PrismaticJointDef();
+  public void initialize(org.jbox2d.dynamics.Body, org.jbox2d.dynamics.Body, org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+}
+Compiled from "PulleyJoint.java"
+public class org.jbox2d.dynamics.joints.PulleyJoint extends org.jbox2d.dynamics.joints.Joint {
+  public static final float MIN_PULLEY_LENGTH;
+  public final org.jbox2d.common.Vec2 m_groundAnchor1;
+  public final org.jbox2d.common.Vec2 m_groundAnchor2;
+  public final org.jbox2d.common.Vec2 m_localAnchor1;
+  public final org.jbox2d.common.Vec2 m_localAnchor2;
+  static final boolean $assertionsDisabled;
+  public org.jbox2d.dynamics.joints.PulleyJoint(org.jbox2d.pooling.IWorldPool, org.jbox2d.dynamics.joints.PulleyJointDef);
+  public float getOrigLength1();
+  public float getOrigLength2();
+  public float getMaxLength1();
+  public float getMaxLength2();
+  public void getAnchorA(org.jbox2d.common.Vec2);
+  public void getAnchorB(org.jbox2d.common.Vec2);
+  public void getReactionForce(float, org.jbox2d.common.Vec2);
+  public float getReactionTorque(float);
+  public org.jbox2d.common.Vec2 getGroundAnchorA();
+  public org.jbox2d.common.Vec2 getGroundAnchorB();
+  public float getLength1();
+  public float getLength2();
+  public float getRatio();
+  public void initVelocityConstraints(org.jbox2d.dynamics.TimeStep);
+  public void solveVelocityConstraints(org.jbox2d.dynamics.TimeStep);
+  public boolean solvePositionConstraints(float);
+  static {};
+}
+Compiled from "PulleyJointDef.java"
+public class org.jbox2d.dynamics.joints.PulleyJointDef extends org.jbox2d.dynamics.joints.JointDef {
+  public org.jbox2d.common.Vec2 groundAnchorA;
+  public org.jbox2d.common.Vec2 groundAnchorB;
+  public org.jbox2d.common.Vec2 localAnchorA;
+  public org.jbox2d.common.Vec2 localAnchorB;
+  public float lengthA;
+  public float maxLengthA;
+  public float lengthB;
+  public float maxLengthB;
+  public float ratio;
+  static final boolean $assertionsDisabled;
+  public org.jbox2d.dynamics.joints.PulleyJointDef();
+  public void initialize(org.jbox2d.dynamics.Body, org.jbox2d.dynamics.Body, org.jbox2d.common.Vec2, org.jbox2d.common.Vec2, org.jbox2d.common.Vec2, org.jbox2d.common.Vec2, float);
+  static {};
+}
+Compiled from "RevoluteJoint.java"
+public class org.jbox2d.dynamics.joints.RevoluteJoint extends org.jbox2d.dynamics.joints.Joint {
+  public final org.jbox2d.common.Vec2 m_localAnchor1;
+  public final org.jbox2d.common.Vec2 m_localAnchor2;
+  public final org.jbox2d.common.Vec3 m_impulse;
+  public float m_motorImpulse;
+  public final org.jbox2d.common.Mat33 m_mass;
+  public float m_motorMass;
+  public boolean m_enableMotor;
+  public float m_maxMotorTorque;
+  public float m_motorSpeed;
+  public boolean m_enableLimit;
+  public float m_referenceAngle;
+  public float m_lowerAngle;
+  public float m_upperAngle;
+  public org.jbox2d.dynamics.joints.LimitState m_limitState;
+  static final boolean $assertionsDisabled;
+  public org.jbox2d.dynamics.joints.RevoluteJoint(org.jbox2d.pooling.IWorldPool, org.jbox2d.dynamics.joints.RevoluteJointDef);
+  public void initVelocityConstraints(org.jbox2d.dynamics.TimeStep);
+  public void solveVelocityConstraints(org.jbox2d.dynamics.TimeStep);
+  public boolean solvePositionConstraints(float);
+  public void getAnchorA(org.jbox2d.common.Vec2);
+  public void getAnchorB(org.jbox2d.common.Vec2);
+  public void getReactionForce(float, org.jbox2d.common.Vec2);
+  public float getReactionTorque(float);
+  public float getJointAngle();
+  public float getJointSpeed();
+  public boolean isMotorEnabled();
+  public void enableMotor(boolean);
+  public float getMotorTorque();
+  public void setMotorSpeed(float);
+  public void setMaxMotorTorque(float);
+  public boolean isLimitEnabled();
+  public void enableLimit(boolean);
+  public float getLowerLimit();
+  public float getUpperLimit();
+  public void setLimits(float, float);
+  static {};
+}
+Compiled from "RevoluteJointDef.java"
+public class org.jbox2d.dynamics.joints.RevoluteJointDef extends org.jbox2d.dynamics.joints.JointDef {
+  public org.jbox2d.common.Vec2 localAnchorA;
+  public org.jbox2d.common.Vec2 localAnchorB;
+  public float referenceAngle;
+  public boolean enableLimit;
+  public float lowerAngle;
+  public float upperAngle;
+  public boolean enableMotor;
+  public float motorSpeed;
+  public float maxMotorTorque;
+  public org.jbox2d.dynamics.joints.RevoluteJointDef();
+  public void initialize(org.jbox2d.dynamics.Body, org.jbox2d.dynamics.Body, org.jbox2d.common.Vec2);
+}
+Compiled from "WeldJoint.java"
+public class org.jbox2d.dynamics.joints.WeldJoint extends org.jbox2d.dynamics.joints.Joint {
+  protected org.jbox2d.dynamics.joints.WeldJoint(org.jbox2d.pooling.IWorldPool, org.jbox2d.dynamics.joints.WeldJointDef);
+  public void getAnchorA(org.jbox2d.common.Vec2);
+  public void getAnchorB(org.jbox2d.common.Vec2);
+  public void getReactionForce(float, org.jbox2d.common.Vec2);
+  public float getReactionTorque(float);
+  public void initVelocityConstraints(org.jbox2d.dynamics.TimeStep);
+  public void solveVelocityConstraints(org.jbox2d.dynamics.TimeStep);
+  public boolean solvePositionConstraints(float);
+}
+Compiled from "WeldJointDef.java"
+public class org.jbox2d.dynamics.joints.WeldJointDef extends org.jbox2d.dynamics.joints.JointDef {
+  public final org.jbox2d.common.Vec2 localAnchorA;
+  public final org.jbox2d.common.Vec2 localAnchorB;
+  public float referenceAngle;
+  public org.jbox2d.dynamics.joints.WeldJointDef();
+  public void initialize(org.jbox2d.dynamics.Body, org.jbox2d.dynamics.Body, org.jbox2d.common.Vec2);
+}
+Compiled from "IDynamicStack.java"
+public interface org.jbox2d.pooling.IDynamicStack<E> {
+  public abstract E pop();
+  public abstract void push(E);
+}
+Compiled from "IOrderedStack.java"
+public interface org.jbox2d.pooling.IOrderedStack<E> {
+  public abstract E pop();
+  public abstract E[] pop(int);
+  public abstract void push(int);
+}
+Compiled from "IWorldPool.java"
+public interface org.jbox2d.pooling.IWorldPool {
+  public abstract org.jbox2d.pooling.IDynamicStack<org.jbox2d.dynamics.contacts.Contact> getPolyContactStack();
+  public abstract org.jbox2d.pooling.IDynamicStack<org.jbox2d.dynamics.contacts.Contact> getCircleContactStack();
+  public abstract org.jbox2d.pooling.IDynamicStack<org.jbox2d.dynamics.contacts.Contact> getPolyCircleContactStack();
+  public abstract org.jbox2d.common.Vec2 popVec2();
+  public abstract org.jbox2d.common.Vec2[] popVec2(int);
+  public abstract void pushVec2(int);
+  public abstract org.jbox2d.common.Vec3 popVec3();
+  public abstract org.jbox2d.common.Vec3[] popVec3(int);
+  public abstract void pushVec3(int);
+  public abstract org.jbox2d.common.Mat22 popMat22();
+  public abstract org.jbox2d.common.Mat22[] popMat22(int);
+  public abstract void pushMat22(int);
+  public abstract org.jbox2d.collision.AABB popAABB();
+  public abstract org.jbox2d.collision.AABB[] popAABB(int);
+  public abstract void pushAABB(int);
+  public abstract org.jbox2d.collision.Collision getCollision();
+  public abstract org.jbox2d.collision.TimeOfImpact getTimeOfImpact();
+  public abstract org.jbox2d.collision.Distance getDistance();
+  public abstract float[] getFloatArray(int);
+  public abstract int[] getIntArray(int);
+  public abstract org.jbox2d.common.Vec2[] getVec2Array(int);
+}
+Compiled from "TLMassData.java"
+public class org.jbox2d.pooling.TLMassData extends java.lang.ThreadLocal<org.jbox2d.collision.shapes.MassData> {
+  public org.jbox2d.pooling.TLMassData();
+  protected org.jbox2d.collision.shapes.MassData initialValue();
+  protected java.lang.Object initialValue();
+}
+Compiled from "TLVec2.java"
+public class org.jbox2d.pooling.TLVec2 extends java.lang.ThreadLocal<org.jbox2d.common.Vec2> {
+  public org.jbox2d.pooling.TLVec2();
+  protected org.jbox2d.common.Vec2 initialValue();
+  protected java.lang.Object initialValue();
+}
+Compiled from "FloatArray.java"
+public class org.jbox2d.pooling.arrays.FloatArray {
+  static final boolean $assertionsDisabled;
+  public org.jbox2d.pooling.arrays.FloatArray();
+  public float[] get(int);
+  protected float[] getInitializedArray(int);
+  static {};
+}
+Compiled from "IntArray.java"
+public class org.jbox2d.pooling.arrays.IntArray {
+  static final boolean $assertionsDisabled;
+  public org.jbox2d.pooling.arrays.IntArray();
+  public int[] get(int);
+  protected int[] getInitializedArray(int);
+  static {};
+}
+Compiled from "Vec2Array.java"
+public class org.jbox2d.pooling.arrays.Vec2Array {
+  static final boolean $assertionsDisabled;
+  public org.jbox2d.pooling.arrays.Vec2Array();
+  public org.jbox2d.common.Vec2[] get(int);
+  protected org.jbox2d.common.Vec2[] getInitializedArray(int);
+  static {};
+}
+Compiled from "CircleStack.java"
+public class org.jbox2d.pooling.normal.CircleStack<E> implements org.jbox2d.pooling.IOrderedStack<E> {
+  static final boolean $assertionsDisabled;
+  public org.jbox2d.pooling.normal.CircleStack(java.lang.Class<E>, int, int);
+  public final E pop();
+  public final E[] pop(int);
+  public void push(int);
+  static {};
+}
+Compiled from "DefaultWorldPool.java"
+public class org.jbox2d.pooling.normal.DefaultWorldPool implements org.jbox2d.pooling.IWorldPool {
+  static final boolean $assertionsDisabled;
+  public org.jbox2d.pooling.normal.DefaultWorldPool(int, int);
+  public final org.jbox2d.pooling.IDynamicStack<org.jbox2d.dynamics.contacts.Contact> getPolyContactStack();
+  public final org.jbox2d.pooling.IDynamicStack<org.jbox2d.dynamics.contacts.Contact> getCircleContactStack();
+  public final org.jbox2d.pooling.IDynamicStack<org.jbox2d.dynamics.contacts.Contact> getPolyCircleContactStack();
+  public final org.jbox2d.common.Vec2 popVec2();
+  public final org.jbox2d.common.Vec2[] popVec2(int);
+  public final void pushVec2(int);
+  public final org.jbox2d.common.Vec3 popVec3();
+  public final org.jbox2d.common.Vec3[] popVec3(int);
+  public final void pushVec3(int);
+  public final org.jbox2d.common.Mat22 popMat22();
+  public final org.jbox2d.common.Mat22[] popMat22(int);
+  public final void pushMat22(int);
+  public final org.jbox2d.collision.AABB popAABB();
+  public final org.jbox2d.collision.AABB[] popAABB(int);
+  public final void pushAABB(int);
+  public final org.jbox2d.collision.Collision getCollision();
+  public final org.jbox2d.collision.TimeOfImpact getTimeOfImpact();
+  public final org.jbox2d.collision.Distance getDistance();
+  public final float[] getFloatArray(int);
+  public final int[] getIntArray(int);
+  public final org.jbox2d.common.Vec2[] getVec2Array(int);
+  static {};
+}
+Compiled from "MutableStack.java"
+public class org.jbox2d.pooling.normal.MutableStack<E, T extends E> implements org.jbox2d.pooling.IDynamicStack<E> {
+  static final boolean $assertionsDisabled;
+  public org.jbox2d.pooling.normal.MutableStack(java.lang.Class<T>, int);
+  public org.jbox2d.pooling.normal.MutableStack(java.lang.Class<T>, int, java.lang.Class<?>[], java.lang.Object[]);
+  public final E pop();
+  public final void push(E);
+  static {};
+}
+Compiled from "OrderedStack.java"
+public class org.jbox2d.pooling.normal.OrderedStack<E> {
+  static final boolean $assertionsDisabled;
+  public org.jbox2d.pooling.normal.OrderedStack(java.lang.Class<E>, int, int);
+  public final E pop();
+  public final E[] pop(int);
+  public final void push(int);
+  static {};
+}
+Compiled from "SwimGUIMain.java"
+public class ubc.swim.SwimGUIMain {
+  public ubc.swim.SwimGUIMain();
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "SwimOptimizeMain.java"
+public class ubc.swim.SwimOptimizeMain {
+  public ubc.swim.SwimOptimizeMain();
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "DynamicsController.java"
+public class ubc.swim.dynamics.controllers.DynamicsController {
+  public org.jbox2d.dynamics.World world;
+  public java.util.ArrayList<org.jbox2d.dynamics.Body> bodies;
+  protected ubc.swim.dynamics.controllers.DynamicsController(ubc.swim.dynamics.controllers.DynamicsControllerDef);
+  public void step(ubc.swim.gui.SwimSettings);
+  public void draw(org.jbox2d.callbacks.DebugDraw, ubc.swim.gui.SwimSettings);
+  public void addBody(org.jbox2d.dynamics.Body);
+  public void removeBody(org.jbox2d.dynamics.Body);
+  public void clear();
+  public org.jbox2d.dynamics.World getWorld();
+  public java.util.List<org.jbox2d.dynamics.Body> getBodyList();
+}
+Compiled from "DynamicsControllerDef.java"
+public abstract class ubc.swim.dynamics.controllers.DynamicsControllerDef {
+  public ubc.swim.dynamics.controllers.DynamicsControllerDef();
+  public abstract ubc.swim.dynamics.controllers.DynamicsController create();
+}
+Compiled from "FluidController.java"
+public class ubc.swim.dynamics.controllers.FluidController extends ubc.swim.dynamics.controllers.DynamicsController {
+  public org.jbox2d.common.Vec2 normal;
+  public float fluidSurfaceOffset;
+  public float fluidDensity;
+  public org.jbox2d.common.Vec2 fluidVel;
+  public float linearDrag;
+  public boolean useDensity;
+  public boolean useWorldGravity;
+  public org.jbox2d.common.Vec2 gravity;
+  java.util.ArrayList<ubc.swim.world.Edge> subEdges;
+  java.util.ArrayList<ubc.swim.world.Edge> dragForces;
+  protected ubc.swim.dynamics.controllers.FluidController(ubc.swim.dynamics.controllers.FluidControllerDef);
+  public void step(ubc.swim.gui.SwimSettings);
+  public void draw(org.jbox2d.callbacks.DebugDraw, ubc.swim.gui.SwimSettings);
+}
+Compiled from "FluidControllerDef.java"
+public class ubc.swim.dynamics.controllers.FluidControllerDef extends ubc.swim.dynamics.controllers.DynamicsControllerDef {
+  public org.jbox2d.common.Vec2 normal;
+  public float offset;
+  public float density;
+  public org.jbox2d.common.Vec2 velocity;
+  public float linearDrag;
+  public boolean useDensity;
+  public boolean useWorldGravity;
+  public org.jbox2d.common.Vec2 gravity;
+  public ubc.swim.dynamics.controllers.FluidControllerDef();
+  public ubc.swim.dynamics.controllers.DynamicsController create();
+}
+Compiled from "FluidUtil.java"
+public class ubc.swim.dynamics.controllers.FluidUtil {
+  public ubc.swim.dynamics.controllers.FluidUtil();
+  public static float computeSubmergedArea(org.jbox2d.collision.shapes.Shape, org.jbox2d.common.Vec2, float, org.jbox2d.common.Transform, org.jbox2d.common.Vec2, java.util.List<ubc.swim.world.Edge>);
+  static {};
+}
+Compiled from "ContactPoint.java"
+public class ubc.swim.gui.ContactPoint {
+  public org.jbox2d.dynamics.Fixture fixtureA;
+  public org.jbox2d.dynamics.Fixture fixtureB;
+  public final org.jbox2d.common.Vec2 normal;
+  public final org.jbox2d.common.Vec2 position;
+  public org.jbox2d.collision.Collision$PointState state;
+  public ubc.swim.gui.ContactPoint();
+}
+Compiled from "JSliderDouble.java"
+class ubc.swim.gui.JSliderDouble extends javax.swing.JSlider {
+  protected double rangeScale;
+  public ubc.swim.gui.JSliderDouble(double, double, double, int);
+  public double getScaledValue();
+}
+Compiled from "SwimController.java"
+public class ubc.swim.gui.SwimController implements java.lang.Runnable {
+  public static final int DEFAULT_FPS;
+  public ubc.swim.gui.SwimController(ubc.swim.gui.SwimModel, ubc.swim.gui.SwimWorldPanel);
+  protected void loopInit();
+  protected void update();
+  public void nextTest();
+  public void resetTest();
+  public void lastTest();
+  public void playTest(int);
+  public void setFrameRate(int);
+  public int getFrameRate();
+  public float getCalculatedFrameRate();
+  public long getStartTime();
+  public long getFrameCount();
+  public boolean isAnimating();
+  public synchronized void start();
+  public synchronized void stop();
+  public void run();
+  static ubc.swim.tests.SwimTest access$002(ubc.swim.gui.SwimController, ubc.swim.tests.SwimTest);
+  static ubc.swim.gui.SwimPanel access$100(ubc.swim.gui.SwimController);
+  static ubc.swim.gui.SwimModel access$200(ubc.swim.gui.SwimController);
+  static {};
+}
+Compiled from "SwimController.java"
+class ubc.swim.gui.SwimController$1 implements ubc.swim.gui.SwimModel$TestChangedListener {
+  final ubc.swim.gui.SwimController this$0;
+  ubc.swim.gui.SwimController$1(ubc.swim.gui.SwimController);
+  public void testChanged(ubc.swim.tests.SwimTest, int);
+}
+Compiled from "SwimController.java"
+class ubc.swim.gui.SwimController$2 implements java.awt.event.KeyListener {
+  final ubc.swim.gui.SwimController this$0;
+  ubc.swim.gui.SwimController$2(ubc.swim.gui.SwimController);
+  public void keyTyped(java.awt.event.KeyEvent);
+  public void keyReleased(java.awt.event.KeyEvent);
+  public void keyPressed(java.awt.event.KeyEvent);
+}
+Compiled from "SwimController.java"
+class ubc.swim.gui.SwimController$3 extends java.awt.event.MouseAdapter {
+  final ubc.swim.gui.SwimController this$0;
+  ubc.swim.gui.SwimController$3(ubc.swim.gui.SwimController);
+  public void mouseReleased(java.awt.event.MouseEvent);
+  public void mousePressed(java.awt.event.MouseEvent);
+}
+Compiled from "SwimController.java"
+class ubc.swim.gui.SwimController$4 implements java.awt.event.MouseMotionListener {
+  final org.jbox2d.common.Vec2 posDif;
+  final org.jbox2d.common.Vec2 pos;
+  final org.jbox2d.common.Vec2 pos2;
+  final ubc.swim.gui.SwimController this$0;
+  ubc.swim.gui.SwimController$4(ubc.swim.gui.SwimController);
+  public void mouseDragged(java.awt.event.MouseEvent);
+  public void mouseMoved(java.awt.event.MouseEvent);
+}
+Compiled from "SwimDraw.java"
+public class ubc.swim.gui.SwimDraw extends org.jbox2d.callbacks.DebugDraw {
+  public static int circlePoints;
+  public ubc.swim.gui.SwimDraw(ubc.swim.gui.SwimWorldPanel);
+  public void drawCircle(org.jbox2d.common.Vec2, float, org.jbox2d.common.Color3f);
+  public void drawPoint(org.jbox2d.common.Vec2, float, org.jbox2d.common.Color3f);
+  public void drawSegment(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2, org.jbox2d.common.Color3f, boolean);
+  public void drawAABB(org.jbox2d.collision.AABB, org.jbox2d.common.Color3f);
+  public void drawSolidCircle(org.jbox2d.common.Vec2, float, org.jbox2d.common.Vec2, org.jbox2d.common.Color3f);
+  public void drawSolidPolygon(org.jbox2d.common.Vec2[], int, org.jbox2d.common.Color3f);
+  public void drawSolidPolygon(org.jbox2d.common.Vec2[], int, org.jbox2d.common.Color3f, boolean);
+  public void drawString(float, float, java.lang.String, org.jbox2d.common.Color3f);
+  public void drawTransform(org.jbox2d.common.Transform);
+  static {};
+}
+Compiled from "SwimFrame.java"
+public class ubc.swim.gui.SwimFrame extends javax.swing.JFrame {
+  public ubc.swim.gui.SwimFrame(ubc.swim.gui.SwimModel, ubc.swim.gui.SwimWorldPanel);
+}
+Compiled from "SwimModel.java"
+public class ubc.swim.gui.SwimModel {
+  public ubc.swim.gui.SwimModel();
+  public void setCalculatedFps(float);
+  public float getCalculatedFps();
+  public void setPanelWidth(float);
+  public float getPanelWidth();
+  public void setDebugDraw(org.jbox2d.callbacks.DebugDraw);
+  public org.jbox2d.callbacks.DebugDraw getDebugDraw();
+  public ubc.swim.tests.SwimTest getCurrTest();
+  public org.jbox2d.common.Vec2 getMouse();
+  public void setMouse(org.jbox2d.common.Vec2);
+  public boolean[] getKeys();
+  public boolean[] getCodedKeys();
+  public void setCurrTestIndex(int);
+  public int getCurrTestIndex();
+  public void addTestChangeListener(ubc.swim.gui.SwimModel$TestChangedListener);
+  public void removeTestChangeListener(ubc.swim.gui.SwimModel$TestChangedListener);
+  public void addTest(ubc.swim.tests.SwimTest);
+  public void addCategory(java.lang.String);
+  public ubc.swim.tests.SwimTest getTestAt(int);
+  public boolean isTestAt(int);
+  public void clearTestList();
+  public int getTestsSize();
+  public javax.swing.DefaultComboBoxModel getComboModel();
+  public ubc.swim.gui.SwimSettings getSettings();
+}
+Compiled from "SwimModel.java"
+public class ubc.swim.gui.SwimModel$ListItem {
+  public java.lang.String category;
+  public ubc.swim.tests.SwimTest test;
+  final ubc.swim.gui.SwimModel this$0;
+  public ubc.swim.gui.SwimModel$ListItem(ubc.swim.gui.SwimModel, java.lang.String);
+  public ubc.swim.gui.SwimModel$ListItem(ubc.swim.gui.SwimModel, ubc.swim.tests.SwimTest);
+  public boolean isCategory();
+  public java.lang.String toString();
+}
+Compiled from "SwimModel.java"
+public interface ubc.swim.gui.SwimModel$TestChangedListener {
+  public abstract void testChanged(ubc.swim.tests.SwimTest, int);
+}
+Compiled from "SwimPanel.java"
+public interface ubc.swim.gui.SwimPanel {
+  public abstract void addKeyListener(java.awt.event.KeyListener);
+  public abstract void addMouseListener(java.awt.event.MouseListener);
+  public abstract void addMouseMotionListener(java.awt.event.MouseMotionListener);
+  public abstract void grabFocus();
+  public abstract org.jbox2d.callbacks.DebugDraw getDebugDraw();
+  public abstract java.awt.Image getBufferedImage();
+  public abstract void render();
+  public abstract void paintScreen();
+}
+Compiled from "SwimSetting.java"
+public class ubc.swim.gui.SwimSetting {
+  public final java.lang.String name;
+  public final ubc.swim.gui.SwimSetting$SettingType settingsType;
+  public final ubc.swim.gui.SwimSetting$ConstraintType constraintType;
+  public boolean enabled;
+  public double value;
+  public final double min;
+  public final double max;
+  public final int sliderStops;
+  public ubc.swim.gui.SwimSetting(java.lang.String, ubc.swim.gui.SwimSetting$SettingType, boolean);
+  public ubc.swim.gui.SwimSetting(java.lang.String, ubc.swim.gui.SwimSetting$SettingType, double, double, double);
+  public ubc.swim.gui.SwimSetting(java.lang.String, ubc.swim.gui.SwimSetting$SettingType, double, double, double, int);
+  public int getIntValue();
+}
+Compiled from "SwimSetting.java"
+public final class ubc.swim.gui.SwimSetting$ConstraintType extends java.lang.Enum<ubc.swim.gui.SwimSetting$ConstraintType> {
+  public static final ubc.swim.gui.SwimSetting$ConstraintType BOOLEAN;
+  public static final ubc.swim.gui.SwimSetting$ConstraintType RANGE;
+  public static ubc.swim.gui.SwimSetting$ConstraintType[] values();
+  public static ubc.swim.gui.SwimSetting$ConstraintType valueOf(java.lang.String);
+  static {};
+}
+Compiled from "SwimSetting.java"
+public final class ubc.swim.gui.SwimSetting$SettingType extends java.lang.Enum<ubc.swim.gui.SwimSetting$SettingType> {
+  public static final ubc.swim.gui.SwimSetting$SettingType DRAWING;
+  public static final ubc.swim.gui.SwimSetting$SettingType ENGINE;
+  public static ubc.swim.gui.SwimSetting$SettingType[] values();
+  public static ubc.swim.gui.SwimSetting$SettingType valueOf(java.lang.String);
+  static {};
+}
+Compiled from "SwimSettings.java"
+public class ubc.swim.gui.SwimSettings {
+  public static final java.lang.String Hz;
+  public static final java.lang.String PositionIterations;
+  public static final java.lang.String VelocityIterations;
+  public static final java.lang.String WarmStarting;
+  public static final java.lang.String ContinuousCollision;
+  public static final java.lang.String DrawShapes;
+  public static final java.lang.String DrawJoints;
+  public static final java.lang.String DrawAABBs;
+  public static final java.lang.String DrawPairs;
+  public static final java.lang.String DrawContactPoints;
+  public static final java.lang.String DrawNormals;
+  public static final java.lang.String DrawCOMs;
+  public static final java.lang.String DrawStats;
+  public static final java.lang.String DrawHelp;
+  public static final java.lang.String DrawTree;
+  public static final java.lang.String DrawDragForces;
+  public static final java.lang.String DrawDebugChars;
+  public static final java.lang.String FluidDensity;
+  public static final java.lang.String FluidDrag;
+  public static final java.lang.String FluidVelocity;
+  public boolean pause;
+  public boolean recording;
+  public boolean singleStep;
+  public ubc.swim.gui.SwimSettings();
+  public void addSetting(ubc.swim.gui.SwimSetting);
+  public java.util.List<ubc.swim.gui.SwimSetting> getSettings();
+  public ubc.swim.gui.SwimSetting getSetting(java.lang.String);
+}
+Compiled from "SwimSidePanel.java"
+public class ubc.swim.gui.SwimSidePanel extends javax.swing.JPanel implements javax.swing.event.ChangeListener,java.awt.event.ActionListener {
+  final ubc.swim.gui.SwimModel model;
+  final ubc.swim.gui.SwimController controller;
+  public javax.swing.JComboBox tests;
+  public ubc.swim.gui.SwimSidePanel(ubc.swim.gui.SwimModel, ubc.swim.gui.SwimController);
+  public void initComponents();
+  public void addListeners();
+  public void stateChanged(javax.swing.event.ChangeEvent);
+  public void actionPerformed(java.awt.event.ActionEvent);
+  static javax.swing.JButton access$000(ubc.swim.gui.SwimSidePanel);
+  static javax.swing.JButton access$100(ubc.swim.gui.SwimSidePanel);
+}
+Compiled from "SwimSidePanel.java"
+class ubc.swim.gui.SwimSidePanel$1 implements ubc.swim.gui.SwimModel$TestChangedListener {
+  final ubc.swim.gui.SwimSidePanel this$0;
+  ubc.swim.gui.SwimSidePanel$1(ubc.swim.gui.SwimSidePanel);
+  public void testChanged(ubc.swim.tests.SwimTest, int);
+}
+Compiled from "SwimSidePanel.java"
+class ubc.swim.gui.SwimSidePanel$2 implements javax.swing.ListCellRenderer {
+  javax.swing.JLabel categoryLabel;
+  javax.swing.JLabel testLabel;
+  final ubc.swim.gui.SwimSidePanel this$0;
+  ubc.swim.gui.SwimSidePanel$2(ubc.swim.gui.SwimSidePanel);
+  public java.awt.Component getListCellRendererComponent(javax.swing.JList, java.lang.Object, int, boolean, boolean);
+}
+Compiled from "SwimSidePanel.java"
+class ubc.swim.gui.SwimSidePanel$3 implements java.awt.event.ActionListener {
+  final ubc.swim.gui.SwimSidePanel this$0;
+  ubc.swim.gui.SwimSidePanel$3(ubc.swim.gui.SwimSidePanel);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "SwimSidePanel.java"
+class ubc.swim.gui.SwimSidePanel$4 implements java.awt.event.ActionListener {
+  final ubc.swim.gui.SwimSidePanel this$0;
+  ubc.swim.gui.SwimSidePanel$4(ubc.swim.gui.SwimSidePanel);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "SwimSidePanel.java"
+class ubc.swim.gui.SwimSidePanel$5 implements java.awt.event.ActionListener {
+  final ubc.swim.gui.SwimSidePanel this$0;
+  ubc.swim.gui.SwimSidePanel$5(ubc.swim.gui.SwimSidePanel);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "SwimSidePanel.java"
+class ubc.swim.gui.SwimSidePanel$6 implements java.awt.event.ActionListener {
+  final ubc.swim.gui.SwimSidePanel this$0;
+  ubc.swim.gui.SwimSidePanel$6(ubc.swim.gui.SwimSidePanel);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "SwimSidePanel.java"
+class ubc.swim.gui.SwimSidePanel$7 implements java.awt.event.ActionListener {
+  final ubc.swim.gui.SwimSidePanel this$0;
+  ubc.swim.gui.SwimSidePanel$7(ubc.swim.gui.SwimSidePanel);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "SwimSidePanel.java"
+class ubc.swim.gui.SwimSidePanel$8 {
+  static final int[] $SwitchMap$ubc$swim$gui$SwimSetting$ConstraintType;
+  static {};
+}
+Compiled from "SwimTestList.java"
+public class ubc.swim.gui.SwimTestList {
+  public ubc.swim.gui.SwimTestList();
+  public static void populateModel(ubc.swim.gui.SwimModel);
+}
+Compiled from "SwimWorldPanel.java"
+public class ubc.swim.gui.SwimWorldPanel extends javax.swing.JPanel implements ubc.swim.gui.SwimPanel {
+  public static final int INIT_WIDTH;
+  public static final int INIT_HEIGHT;
+  public ubc.swim.gui.SwimWorldPanel(ubc.swim.gui.SwimModel);
+  public org.jbox2d.callbacks.DebugDraw getDebugDraw();
+  public java.awt.Image getBufferedImage();
+  public java.awt.Graphics2D getDBGraphics();
+  public void render();
+  public void paintScreen();
+  static ubc.swim.gui.SwimDraw access$000(ubc.swim.gui.SwimWorldPanel);
+  static ubc.swim.gui.SwimModel access$100(ubc.swim.gui.SwimWorldPanel);
+  static org.jbox2d.common.Vec2 access$200(ubc.swim.gui.SwimWorldPanel);
+  static boolean access$302(ubc.swim.gui.SwimWorldPanel, boolean);
+  static boolean access$300(ubc.swim.gui.SwimWorldPanel);
+  static void access$400(ubc.swim.gui.SwimWorldPanel, int, int);
+  static java.awt.Image access$502(ubc.swim.gui.SwimWorldPanel, java.awt.Image);
+  static {};
+}
+Compiled from "SwimWorldPanel.java"
+class ubc.swim.gui.SwimWorldPanel$1 implements java.awt.event.MouseWheelListener {
+  final ubc.swim.gui.SwimWorldPanel this$0;
+  ubc.swim.gui.SwimWorldPanel$1(ubc.swim.gui.SwimWorldPanel);
+  public void mouseWheelMoved(java.awt.event.MouseWheelEvent);
+}
+Compiled from "SwimWorldPanel.java"
+class ubc.swim.gui.SwimWorldPanel$2 extends java.awt.event.MouseAdapter {
+  final ubc.swim.gui.SwimWorldPanel this$0;
+  ubc.swim.gui.SwimWorldPanel$2(ubc.swim.gui.SwimWorldPanel);
+  public void mousePressed(java.awt.event.MouseEvent);
+}
+Compiled from "SwimWorldPanel.java"
+class ubc.swim.gui.SwimWorldPanel$3 extends java.awt.event.MouseMotionAdapter {
+  final ubc.swim.gui.SwimWorldPanel this$0;
+  ubc.swim.gui.SwimWorldPanel$3(ubc.swim.gui.SwimWorldPanel);
+  public void mouseDragged(java.awt.event.MouseEvent);
+}
+Compiled from "SwimWorldPanel.java"
+class ubc.swim.gui.SwimWorldPanel$4 extends java.awt.event.ComponentAdapter {
+  final ubc.swim.gui.SwimWorldPanel this$0;
+  ubc.swim.gui.SwimWorldPanel$4(ubc.swim.gui.SwimWorldPanel);
+  public void componentResized(java.awt.event.ComponentEvent);
+}
+Compiled from "SwimFitnessFunction.java"
+public abstract class ubc.swim.optimization.SwimFitnessFunction implements fr.inria.optimization.cmaes.fitness.IObjectiveFunction {
+  protected ubc.swim.world.characters.SwimCharacter character;
+  public ubc.swim.optimization.SwimFitnessFunction();
+  public abstract double valueOf(double[]);
+  public abstract boolean isFeasible(double[]);
+  public ubc.swim.world.characters.SwimCharacter getCharacter();
+  public abstract int getNumControlDimensions();
+}
+Compiled from "SwimFitnessFunctionA.java"
+public class ubc.swim.optimization.SwimFitnessFunctionA extends ubc.swim.optimization.SwimFitnessFunction {
+  protected static final float TWO_PI;
+  protected java.lang.String charID;
+  protected ubc.swim.world.scenario.Scenario scenario;
+  protected float goalSpeed;
+  protected float goalDisplacement;
+  protected float maxRuntime;
+  protected float speedTermWeight;
+  protected float displacementTermWeight;
+  protected float energyTermWeight;
+  protected float rootAngleTermWeight;
+  public ubc.swim.optimization.SwimFitnessFunctionA(java.lang.String);
+  public void setGoalSpeed(float);
+  public void setGoalDisplacement(float);
+  public void setMaxRuntime(float);
+  public void setSpeedTermWeight(float);
+  public void setDisplacementErrorTermWeight(float);
+  public void setEnergyTermWeight(float);
+  public void setRootAngleTermWeight(float);
+  public int getNumControlDimensions();
+  public double valueOf(double[]);
+  public boolean isFeasible(double[]);
+}
+Compiled from "SwimmerOptimization.java"
+public class ubc.swim.optimization.SwimmerOptimization {
+  protected int maxIters;
+  protected double minStoppingCost;
+  protected int iterationsPerOutput;
+  public ubc.swim.optimization.SwimmerOptimization();
+  public void setMaxIters(int);
+  public void setMinStoppingCost(double);
+  public void setIterationsPerOutput(int);
+  public double[] optimize(ubc.swim.optimization.SwimFitnessFunction);
+  public static void writeToCSV(double[], java.lang.String, java.lang.String);
+  public static double[] readFromCSV(java.lang.String, java.lang.String);
+}
+Compiled from "ColorPool.java"
+class ubc.swim.pooling.ColorKey {
+  float r;
+  float g;
+  float b;
+  float a;
+  ubc.swim.pooling.ColorKey();
+  public void set(float, float, float);
+  public void set(float, float, float, float);
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+}
+Compiled from "ColorPool.java"
+public class ubc.swim.pooling.ColorPool {
+  public ubc.swim.pooling.ColorPool();
+  public java.awt.Color getColor(float, float, float, float);
+  public java.awt.Color getColor(float, float, float);
+}
+Compiled from "BasicSwimTest.java"
+public class ubc.swim.tests.BasicSwimTest extends ubc.swim.tests.SwimTest {
+  public ubc.swim.tests.BasicSwimTest(java.lang.String, java.util.List<java.lang.String>, java.util.List<java.lang.String>);
+  public void initTest();
+  public void step(ubc.swim.gui.SwimSettings);
+  public void keyPressed(char, int);
+  public java.lang.String getTestName();
+  public java.lang.String getTestID();
+}
+Compiled from "PaddleTest.java"
+public class ubc.swim.tests.PaddleTest extends ubc.swim.tests.SwimTest {
+  public ubc.swim.tests.PaddleTest();
+  public void initTest();
+  public void step(ubc.swim.gui.SwimSettings);
+  public void keyPressed(char, int);
+  public java.lang.String getTestName();
+  public java.lang.String getTestID();
+}
+Compiled from "SwimTest.java"
+class ubc.swim.tests.QueueItem {
+  public ubc.swim.tests.QueueItemType type;
+  public org.jbox2d.common.Vec2 p;
+  public char c;
+  public int code;
+  public ubc.swim.tests.QueueItem(ubc.swim.tests.QueueItemType, org.jbox2d.common.Vec2);
+  public ubc.swim.tests.QueueItem(ubc.swim.tests.QueueItemType, char, int);
+}
+Compiled from "SwimTest.java"
+final class ubc.swim.tests.QueueItemType extends java.lang.Enum<ubc.swim.tests.QueueItemType> {
+  public static final ubc.swim.tests.QueueItemType MouseDown;
+  public static final ubc.swim.tests.QueueItemType MouseMove;
+  public static final ubc.swim.tests.QueueItemType MouseUp;
+  public static final ubc.swim.tests.QueueItemType ShiftMouseDown;
+  public static final ubc.swim.tests.QueueItemType KeyPressed;
+  public static final ubc.swim.tests.QueueItemType KeyReleased;
+  public static final ubc.swim.tests.QueueItemType CtrlMouseDown;
+  public static ubc.swim.tests.QueueItemType[] values();
+  public static ubc.swim.tests.QueueItemType valueOf(java.lang.String);
+  static {};
+}
+Compiled from "SliderCrankTest.java"
+public class ubc.swim.tests.SliderCrankTest extends ubc.swim.tests.SwimTest {
+  public ubc.swim.tests.SliderCrankTest();
+  public void initTest();
+  public void step(ubc.swim.gui.SwimSettings);
+  public void keyPressed(char, int);
+  public java.lang.String getTestName();
+  public java.lang.String getTestID();
+}
+Compiled from "SwimTest.java"
+public abstract class ubc.swim.tests.SwimTest implements org.jbox2d.callbacks.ContactListener {
+  public static final int MAX_CONTACT_POINTS;
+  protected static final long GROUND_BODY_TAG;
+  protected static final long BOMB_TAG;
+  protected static final long MOUSE_JOINT_TAG;
+  protected float defaultCameraScale;
+  protected org.jbox2d.common.Vec2 defaultCameraPos;
+  public static final ubc.swim.gui.ContactPoint[] points;
+  protected float runtime;
+  protected long frameCount;
+  protected ubc.swim.world.scenario.Scenario scenario;
+  protected int textLine;
+  protected java.util.ArrayList<java.lang.String> charIDs;
+  protected java.util.ArrayList<java.lang.String> suffixes;
+  public ubc.swim.tests.SwimTest();
+  public void init(ubc.swim.gui.SwimModel);
+  public org.jbox2d.dynamics.World getWorld();
+  public ubc.swim.gui.SwimModel getModel();
+  public static ubc.swim.gui.ContactPoint[] getContactPoints();
+  public long getFrameCount();
+  public org.jbox2d.dynamics.Body getGroundBody();
+  public org.jbox2d.callbacks.DebugDraw getDebugDraw();
+  public org.jbox2d.common.Vec2 getWorldMouse();
+  public int getStepCount();
+  public int getPointCount();
+  public org.jbox2d.dynamics.Body getBomb();
+  public float getCachedCameraScale();
+  public void setCachedCameraScale(float);
+  public org.jbox2d.common.Vec2 getCachedCameraPos();
+  public void setCachedCameraPos(org.jbox2d.common.Vec2);
+  public boolean isHasCachedCamera();
+  public void setHasCachedCamera(boolean);
+  public boolean isDialogOnSaveLoadErrors();
+  public void setDialogOnSaveLoadErrors(boolean);
+  public org.jbox2d.common.Vec2 getDefaultCameraPos();
+  public void setDefaultCameraPos(float, float);
+  public float getDefaultCameraScale();
+  public void setDefaultCameraScale(float);
+  public java.lang.String getFilename();
+  public void reset();
+  protected void _reset();
+  public void setCamera(org.jbox2d.common.Vec2, float);
+  public abstract void initTest();
+  public abstract java.lang.String getTestName();
+  public abstract java.lang.String getTestID();
+  public void exit();
+  public void update();
+  protected float getTimeStep(ubc.swim.gui.SwimSettings);
+  public synchronized void step(ubc.swim.gui.SwimSettings);
+  public void debugDraw(ubc.swim.gui.SwimSettings);
+  public void queueShiftMouseDown(org.jbox2d.common.Vec2);
+  public void queueCtrlMouseDown(org.jbox2d.common.Vec2);
+  public void queueMouseUp(org.jbox2d.common.Vec2);
+  public void queueMouseDown(org.jbox2d.common.Vec2);
+  public void queueMouseMove(org.jbox2d.common.Vec2);
+  public void queueKeyPressed(char, int);
+  public void queueKeyReleased(char, int);
+  public void shiftMouseDown(org.jbox2d.common.Vec2);
+  public void ctrlMouseDown(org.jbox2d.common.Vec2);
+  public void mouseUp(org.jbox2d.common.Vec2);
+  public void mouseDown(org.jbox2d.common.Vec2);
+  public void mouseMove(org.jbox2d.common.Vec2);
+  public void setTitle(java.lang.String);
+  public void addTextLine(java.lang.String);
+  public void lanchBomb();
+  public synchronized void launchBomb(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2);
+  public void setDrawingEnabled(boolean);
+  public synchronized void spawnBomb(org.jbox2d.common.Vec2);
+  public synchronized void completeBombSpawn(org.jbox2d.common.Vec2);
+  public boolean isSaveLoadEnabled();
+  public void jointDestroyed(org.jbox2d.dynamics.joints.Joint);
+  public void beginContact(org.jbox2d.dynamics.contacts.Contact);
+  public void endContact(org.jbox2d.dynamics.contacts.Contact);
+  public void postSolve(org.jbox2d.dynamics.contacts.Contact, org.jbox2d.callbacks.ContactImpulse);
+  public void preSolve(org.jbox2d.dynamics.contacts.Contact, org.jbox2d.collision.Manifold);
+  public void keyPressed(char, int);
+  public void keyReleased(char, int);
+  static org.jbox2d.dynamics.joints.MouseJoint access$000(ubc.swim.tests.SwimTest);
+  static org.jbox2d.dynamics.joints.MouseJoint access$002(ubc.swim.tests.SwimTest, org.jbox2d.dynamics.joints.MouseJoint);
+  static {};
+}
+Compiled from "SwimTest.java"
+class ubc.swim.tests.SwimTest$1 implements org.jbox2d.callbacks.DestructionListener {
+  final ubc.swim.tests.SwimTest this$0;
+  ubc.swim.tests.SwimTest$1(ubc.swim.tests.SwimTest);
+  public void sayGoodbye(org.jbox2d.dynamics.Fixture);
+  public void sayGoodbye(org.jbox2d.dynamics.joints.Joint);
+}
+Compiled from "SwimTest.java"
+class ubc.swim.tests.SwimTest$2 {
+  static final int[] $SwitchMap$ubc$swim$tests$QueueItemType;
+  static final int[] $SwitchMap$org$jbox2d$dynamics$BodyType;
+  static {};
+}
+Compiled from "SwimTest.java"
+class ubc.swim.tests.TestQueryCallback implements org.jbox2d.callbacks.QueryCallback {
+  public final org.jbox2d.common.Vec2 point;
+  public org.jbox2d.dynamics.Fixture fixture;
+  public ubc.swim.tests.TestQueryCallback();
+  public boolean reportFixture(org.jbox2d.dynamics.Fixture);
+}
+Compiled from "Edge.java"
+public class ubc.swim.world.Edge {
+  public org.jbox2d.common.Vec2 pA;
+  public org.jbox2d.common.Vec2 pB;
+  public ubc.swim.world.Edge(float, float, float, float);
+}
+Compiled from "HumanChar.java"
+public class ubc.swim.world.characters.HumanChar extends ubc.swim.world.characters.SwimCharacter {
+  protected static final int NUM_GAUSSIANS_PER_MOTOR;
+  protected static final int NUM_PARAMS_PER_GAUSSIAN;
+  protected static final int NUM_PARAMS_PER_MOTOR;
+  protected static final int NUM_CONTROL_DIMENSIONS;
+  protected static final int MAX_STROKE_PERIOD;
+  protected static final float MAX_DEFAULT_TORQUE;
+  protected float height;
+  protected float headHeight;
+  protected float headWidth;
+  protected float armLen;
+  protected float upperArmLen;
+  protected float upperArmWidth;
+  protected float lowerArmLen;
+  protected float lowerArmWidth;
+  protected float legLen;
+  protected float upperLegLen;
+  protected float upperLegWidth;
+  protected float lowerLegLen;
+  protected float lowerLegWidth;
+  protected float footLen;
+  protected ubc.swim.world.characters.Stroke stroke;
+  protected java.util.ArrayList<org.jbox2d.dynamics.Body> rightBodies;
+  protected java.util.ArrayList<org.jbox2d.dynamics.Body> leftBodies;
+  protected java.util.ArrayList<org.jbox2d.dynamics.joints.Joint> joints;
+  protected java.util.ArrayList<org.jbox2d.dynamics.joints.Joint> leftJoints;
+  protected java.util.ArrayList<org.jbox2d.dynamics.joints.Joint> rightJoints;
+  protected java.util.ArrayList<ubc.swim.world.motors.TorqueMotor> rightMotors;
+  protected java.util.ArrayList<ubc.swim.world.motors.TorqueMotor> leftMotors;
+  protected float prevTorque;
+  static final boolean $assertionsDisabled;
+  public ubc.swim.world.characters.HumanChar(ubc.swim.world.characters.Stroke);
+  public int getNumControlDimensions();
+  public void initialize(org.jbox2d.dynamics.World);
+  public void setControlParams(double[]);
+  public void step(ubc.swim.gui.SwimSettings, float);
+  public float getPrevTorque();
+  public void debugDraw(org.jbox2d.callbacks.DebugDraw);
+  static {};
+}
+Compiled from "HumanChar.java"
+class ubc.swim.world.characters.HumanChar$1 {
+  static final int[] $SwitchMap$ubc$swim$world$characters$Stroke;
+  static {};
+}
+Compiled from "PaddleChar.java"
+public class ubc.swim.world.characters.PaddleChar extends ubc.swim.world.characters.SwimCharacter {
+  protected static int NUM_REF_ANGLES;
+  protected static final float STROKE_PERIOD_SCALE;
+  protected static final float MIN_STROKE_PERIOD;
+  protected static final int NUM_GAUSSIANS_PER_MOTOR;
+  protected static final int NUM_PARAMS_PER_GAUSSIAN;
+  protected static final int NUM_PARAMS_PER_MOTOR;
+  protected static final int NUM_CONTROL_DIMENSIONS;
+  protected static final int MAX_STROKE_PERIOD;
+  protected static final float MAX_DEFAULT_TORQUE;
+  protected float deckLen;
+  protected float deckWidth;
+  protected float propLen;
+  protected float propWidth;
+  protected float prevTorque;
+  protected java.util.ArrayList<org.jbox2d.dynamics.joints.Joint> joints;
+  static final boolean $assertionsDisabled;
+  public ubc.swim.world.characters.PaddleChar();
+  public int getNumControlDimensions();
+  public void initialize(org.jbox2d.dynamics.World);
+  public void setControlParams(double[]);
+  public void step(ubc.swim.gui.SwimSettings, float);
+  public float getPrevTorque();
+  static {};
+}
+Compiled from "RefTrajHumanChar.java"
+public class ubc.swim.world.characters.RefTrajHumanChar extends ubc.swim.world.characters.SwimCharacter {
+  protected static final float TWO_PI;
+  protected static final int NUM_SINE_TRAJECTORIES_PER_SIDE;
+  protected static final int NUM_BASIS_FUNCS_PER_SINE_TRAJECTORY;
+  protected static final int NUM_PARAMS_PER_SINE_BASIS_FUNC;
+  protected static final int NUM_PARAMS_PER_SINE_TRAJECTORY;
+  protected static final int NUM_BASIS_FUNCS_PER_SHOULDER_TRAJECTORY;
+  protected static final int NUM_PARAMS_PER_SHOULDER_BASIS_FUNC;
+  protected static final int NUM_PARAMS_PER_SHOULDER_TRAJECTORY;
+  protected static final float MIN_STROKE_PERIOD;
+  protected static final boolean USE_RIGHT_SHOULDER_ANGLE_AS_PHASE;
+  protected float height;
+  protected float headHeight;
+  protected float headWidth;
+  protected float armLen;
+  protected float upperArmLen;
+  protected float upperArmWidth;
+  protected float lowerArmLen;
+  protected float lowerArmWidth;
+  protected float legLen;
+  protected float upperLegLen;
+  protected float upperLegWidth;
+  protected float lowerLegLen;
+  protected float lowerLegWidth;
+  protected float footLen;
+  protected ubc.swim.world.characters.Stroke stroke;
+  protected float shoulderPeriod;
+  protected java.util.ArrayList<org.jbox2d.dynamics.Body> rightBodies;
+  protected java.util.ArrayList<org.jbox2d.dynamics.Body> leftBodies;
+  protected java.util.ArrayList<org.jbox2d.dynamics.joints.Joint> joints;
+  protected java.util.ArrayList<org.jbox2d.dynamics.joints.Joint> leftJoints;
+  protected java.util.ArrayList<org.jbox2d.dynamics.joints.Joint> rightJoints;
+  protected org.jbox2d.dynamics.joints.RevoluteJoint rightShoulderJoint;
+  protected float prevTorque;
+  protected float targetRightShoulderPhase;
+  protected java.util.ArrayList<ubc.swim.world.trajectory.RefTrajectory> trajectories;
+  protected java.util.ArrayList<ubc.swim.world.trajectory.SineTrajectory> sineTrajectories;
+  protected java.util.ArrayList<ubc.swim.world.trajectory.PolynomialTrajectory> shoulderTrajectories;
+  static final boolean $assertionsDisabled;
+  public ubc.swim.world.characters.RefTrajHumanChar(ubc.swim.world.characters.Stroke, float);
+  public int getNumControlDimensions();
+  public void initialize(org.jbox2d.dynamics.World);
+  public void setControlParams(double[]);
+  public void step(ubc.swim.gui.SwimSettings, float);
+  public float getPrevTorque();
+  protected float getRightShoulderPhase();
+  public void debugDraw(org.jbox2d.callbacks.DebugDraw);
+  static {};
+}
+Compiled from "RefTrajPaddleChar.java"
+public class ubc.swim.world.characters.RefTrajPaddleChar extends ubc.swim.world.characters.SwimCharacter {
+  protected static int NUM_REF_ANGLES;
+  protected static final float STROKE_PERIOD_SCALE;
+  protected static final float MIN_STROKE_PERIOD;
+  protected static final float MAX_DEFAULT_TORQUE;
+  protected static final int NUM_CONTROL_DIMENSIONS;
+  protected float deckLen;
+  protected float deckWidth;
+  protected float propLen;
+  protected float propWidth;
+  protected float prevTorque;
+  protected java.util.ArrayList<org.jbox2d.dynamics.joints.Joint> joints;
+  public ubc.swim.world.characters.RefTrajPaddleChar();
+  public int getNumControlDimensions();
+  public void initialize(org.jbox2d.dynamics.World);
+  public void setControlParams(double[]);
+  public void step(ubc.swim.gui.SwimSettings, float);
+  public float getPrevTorque();
+  public void debugDraw(org.jbox2d.callbacks.DebugDraw);
+  static {};
+}
+Compiled from "Stroke.java"
+public final class ubc.swim.world.characters.Stroke extends java.lang.Enum<ubc.swim.world.characters.Stroke> {
+  public static final ubc.swim.world.characters.Stroke CRAWL;
+  public static final ubc.swim.world.characters.Stroke FLY;
+  public static ubc.swim.world.characters.Stroke[] values();
+  public static ubc.swim.world.characters.Stroke valueOf(java.lang.String);
+  static {};
+}
+Compiled from "SwimCharacter.java"
+public abstract class ubc.swim.world.characters.SwimCharacter {
+  public static final float ROOT_BODY_ANGLE_DEVIATION_THRESHOLD;
+  protected static final float TWO_PI;
+  protected org.jbox2d.dynamics.Body rootBody;
+  protected float rootAngleOrig;
+  protected boolean rootAngleOrigSet;
+  protected java.util.ArrayList<org.jbox2d.dynamics.Body> bodies;
+  protected java.util.ArrayList<ubc.swim.world.motors.TorqueMotor> motors;
+  protected double[] controlParams;
+  protected java.lang.String suffix;
+  protected float totalTorque;
+  protected float totalRootOrientationDeviation;
+  protected float totalRootBodySpeedTimesDt;
+  protected float runtime;
+  protected org.jbox2d.common.Color3f debugColor;
+  static final boolean $assertionsDisabled;
+  public ubc.swim.world.characters.SwimCharacter();
+  public java.util.List<org.jbox2d.dynamics.Body> getBodies();
+  public java.util.List<ubc.swim.world.motors.TorqueMotor> getMotors();
+  public org.jbox2d.dynamics.Body getRootBody();
+  public float getTotalTorque();
+  public float getTotalRootOrientationDeviation();
+  public float getAvgRootBodySpeed();
+  public abstract void initialize(org.jbox2d.dynamics.World);
+  public void setDebugColor(org.jbox2d.common.Color3f);
+  public abstract void setControlParams(double[]);
+  public void moveTo(float, float);
+  public void step(ubc.swim.gui.SwimSettings, float);
+  public void updateStats(float);
+  public abstract float getPrevTorque();
+  public abstract int getNumControlDimensions();
+  public java.lang.String getStatisticsString();
+  public void debugDraw(org.jbox2d.callbacks.DebugDraw);
+  protected void drawPolygon(org.jbox2d.collision.shapes.PolygonShape, org.jbox2d.common.Transform, org.jbox2d.common.Color3f, org.jbox2d.callbacks.DebugDraw, boolean);
+  static {};
+}
+Compiled from "TadpoleCharacter.java"
+public class ubc.swim.world.characters.TadpoleCharacter extends ubc.swim.world.characters.SwimCharacter {
+  protected static final int NUM_BASIS_FUNCS_PER_TRAJECTORY;
+  protected static final int NUM_PARAMS_PER_BASIS_FUNC;
+  protected static final int NUM_PARAMS_PER_TRAJECTORY;
+  protected static final float MIN_STROKE_PERIOD;
+  protected float headLen;
+  protected float headWidth;
+  protected float segLen;
+  protected float segWidth;
+  protected int numTailSegments;
+  protected float prevTorque;
+  protected java.util.ArrayList<org.jbox2d.dynamics.joints.Joint> joints;
+  protected java.util.ArrayList<ubc.swim.world.trajectory.RefTrajectory> trajectories;
+  static final boolean $assertionsDisabled;
+  public ubc.swim.world.characters.TadpoleCharacter(int);
+  public int getNumControlDimensions();
+  public void initialize(org.jbox2d.dynamics.World);
+  public void setControlParams(double[]);
+  public void step(ubc.swim.gui.SwimSettings, float);
+  public float getPrevTorque();
+  public void debugDraw(org.jbox2d.callbacks.DebugDraw);
+  static {};
+}
+Compiled from "GaussianTorqueMotor.java"
+public class ubc.swim.world.motors.GaussianTorqueMotor extends ubc.swim.world.motors.TorqueMotor {
+  protected float ONE_OVER_SQRT_TWO_PI;
+  protected static final float MIN_PERIOD;
+  protected static final float MIN_STD_DEV;
+  protected org.jbox2d.dynamics.Body bodyA;
+  protected org.jbox2d.dynamics.Body bodyB;
+  protected java.util.ArrayList<java.lang.Float> weights;
+  protected java.util.ArrayList<java.lang.Float> means;
+  protected java.util.ArrayList<java.lang.Float> stdDevs;
+  protected float maxTorque;
+  protected float prevTorque;
+  protected float period;
+  public ubc.swim.world.motors.GaussianTorqueMotor(org.jbox2d.dynamics.Body, org.jbox2d.dynamics.Body, float, int);
+  public float getPrevTorque();
+  public float setPeriod(float);
+  public void setGaussianParams(int, float, float, float);
+  public float applyTorque(float);
+}
+Compiled from "SineTorqueMotor.java"
+public class ubc.swim.world.motors.SineTorqueMotor extends ubc.swim.world.motors.TorqueMotor {
+  protected float ONE_OVER_SQRT_TWO_PI;
+  protected static final float MIN_PERIOD;
+  protected org.jbox2d.dynamics.Body bodyA;
+  protected org.jbox2d.dynamics.Body bodyB;
+  protected java.util.ArrayList<java.lang.Float> weights;
+  protected java.util.ArrayList<java.lang.Float> periods;
+  protected java.util.ArrayList<java.lang.Float> phaseOffsets;
+  protected float maxTorque;
+  protected float prevTorque;
+  public ubc.swim.world.motors.SineTorqueMotor(org.jbox2d.dynamics.Body, org.jbox2d.dynamics.Body, float, int);
+  public float getPrevTorque();
+  public void setSineParams(int, float, float, float);
+  public float applyTorque(float);
+}
+Compiled from "TorqueMotor.java"
+public abstract class ubc.swim.world.motors.TorqueMotor {
+  public ubc.swim.world.motors.TorqueMotor();
+  public abstract float applyTorque(float);
+  public abstract float getPrevTorque();
+}
+Compiled from "Scenario.java"
+public class ubc.swim.world.scenario.Scenario {
+  protected java.util.ArrayList<ubc.swim.world.characters.SwimCharacter> characters;
+  protected java.util.ArrayList<ubc.swim.dynamics.controllers.DynamicsController> dynControllers;
+  protected org.jbox2d.dynamics.World world;
+  protected float runtime;
+  public ubc.swim.world.scenario.Scenario();
+  public void initialize();
+  public org.jbox2d.dynamics.World getWorld();
+  public java.util.List<ubc.swim.dynamics.controllers.DynamicsController> getDynamicsControllers();
+  public java.util.List<ubc.swim.world.characters.SwimCharacter> getCharacters();
+  protected void createWorld();
+  public void addCharacter(ubc.swim.world.characters.SwimCharacter);
+  public void addBody(org.jbox2d.dynamics.Body);
+  public void step(ubc.swim.gui.SwimSettings, float);
+}
+Compiled from "ScenarioLibrary.java"
+public class ubc.swim.world.scenario.ScenarioLibrary {
+  public ubc.swim.world.scenario.ScenarioLibrary();
+  public static ubc.swim.world.scenario.Scenario getBasicScenario(java.util.List<java.lang.String>);
+  public static ubc.swim.world.characters.SwimCharacter getCharacterByID(java.lang.String);
+}
+Compiled from "PolynomialTrajectory.java"
+public class ubc.swim.world.trajectory.PolynomialTrajectory extends ubc.swim.world.trajectory.RefTrajectory {
+  protected static final float MIN_PERIOD;
+  protected java.util.ArrayList<ubc.swim.world.trajectory.PolynomialTrajectory$Term> terms;
+  public ubc.swim.world.trajectory.PolynomialTrajectory();
+  public void setTermCoefficient(int, float);
+  public float getValue(float);
+}
+Compiled from "PolynomialTrajectory.java"
+public class ubc.swim.world.trajectory.PolynomialTrajectory$Term {
+  public float coefficient;
+  public int exponent;
+  final ubc.swim.world.trajectory.PolynomialTrajectory this$0;
+  protected ubc.swim.world.trajectory.PolynomialTrajectory$Term(ubc.swim.world.trajectory.PolynomialTrajectory);
+}
+Compiled from "PolynomialTrajectory.java"
+public class ubc.swim.world.trajectory.PolynomialTrajectory$TermComparator implements java.util.Comparator<ubc.swim.world.trajectory.PolynomialTrajectory$Term> {
+  final ubc.swim.world.trajectory.PolynomialTrajectory this$0;
+  public ubc.swim.world.trajectory.PolynomialTrajectory$TermComparator(ubc.swim.world.trajectory.PolynomialTrajectory);
+  public int compare(ubc.swim.world.trajectory.PolynomialTrajectory$Term, ubc.swim.world.trajectory.PolynomialTrajectory$Term);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "RefTrajectory.java"
+public abstract class ubc.swim.world.trajectory.RefTrajectory {
+  protected org.jbox2d.dynamics.joints.RevoluteJoint joint;
+  public ubc.swim.world.trajectory.RefTrajectory();
+  public abstract float getValue(float);
+  public void setJoint(org.jbox2d.dynamics.joints.RevoluteJoint);
+  public org.jbox2d.dynamics.joints.RevoluteJoint getJoint();
+}
+Compiled from "SineTrajectory.java"
+public class ubc.swim.world.trajectory.SineTrajectory extends ubc.swim.world.trajectory.RefTrajectory {
+  protected static final float MIN_PERIOD;
+  protected java.util.ArrayList<java.lang.Float> weights;
+  protected java.util.ArrayList<java.lang.Float> periods;
+  protected java.util.ArrayList<java.lang.Float> phaseOffsets;
+  public ubc.swim.world.trajectory.SineTrajectory(int);
+  public void setSineParams(int, float, float, float);
+  public float getValue(float);
+}
+Compiled from "TrajectoryUtil.java"
+public class ubc.swim.world.trajectory.TrajectoryUtil {
+  protected static final float TWO_PI;
+  public ubc.swim.world.trajectory.TrajectoryUtil();
+  public static float distanceBetweenAngles(float, float);
+}

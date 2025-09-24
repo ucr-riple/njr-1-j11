@@ -1,0 +1,291 @@
+Compiled from "BPlusTree.java"
+public class uwm_cs557.BPlusTree {
+  public final uwm_cs557.MiniDB miniDB;
+  static final boolean $assertionsDisabled;
+  public java.lang.String getIndexedFileName();
+  public java.lang.String getIndexedFieldName();
+  protected int getIndexedFieldSize();
+  public uwm_cs557.BPlusTreeHeadBlock getHeadBlock();
+  public uwm_cs557.BPlusTreeNode getRootNode() throws uwm_cs557.MiniDB_Exception;
+  public uwm_cs557.BPlusTree(uwm_cs557.MiniDB);
+  public final int get_indexRecordSize();
+  public void init_existing(java.lang.String, java.lang.String, uwm_cs557.BPlusTreeHeadBlock);
+  public void init_new(java.lang.String, java.lang.String, int, uwm_cs557.BPlusTreeHeadBlock) throws uwm_cs557.MiniDB_Exception;
+  public uwm_cs557.BPlusTreeNode[] getPathForValue(long) throws uwm_cs557.MiniDB_Exception;
+  public void getAll(java.util.Vector<java.lang.Long>, java.util.Vector<java.lang.Integer>) throws uwm_cs557.MiniDB_Exception;
+  public int lookup(long) throws uwm_cs557.MiniDB_Exception;
+  public boolean insertRecord(long, int) throws uwm_cs557.MiniDB_Exception;
+  public void printAllRecords() throws uwm_cs557.MiniDB_Exception;
+  public int[] getLeafBlockIDs() throws uwm_cs557.MiniDB_Exception;
+  public java.lang.String allTreeValuesToString() throws uwm_cs557.MiniDB_Exception;
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "BPlusTreeHeadBlock.java"
+public class uwm_cs557.BPlusTreeHeadBlock extends uwm_cs557.MiniDB_Block {
+  public void setBPlusTree(uwm_cs557.BPlusTree);
+  public uwm_cs557.BPlusTree getBPlusTree();
+  public int offset_rootBlockID();
+  public int offset_firstLeafBlockID();
+  public int offset_indexedFieldSize();
+  public int offset_name();
+  public uwm_cs557.BPlusTreeHeadBlock(uwm_cs557.MiniDB_Block);
+  public void setRootBlockID(int);
+  public int getRootBlockID();
+  public void setFirstLeafBlockID(int);
+  public int getFirstLeafBlockID();
+  public void setIndexedFieldSize(int);
+  public int getIndexedFieldSize();
+  public void setIndexName(java.lang.String);
+  public java.lang.String getIndexName();
+}
+Compiled from "BPlusTreeInternalNode.java"
+public class uwm_cs557.BPlusTreeInternalNode extends uwm_cs557.BPlusTreeNode {
+  public static long pushedUpValue;
+  static final boolean $assertionsDisabled;
+  public java.lang.String recordsToString();
+  public uwm_cs557.BPlusTreeInternalNode(uwm_cs557.MiniDB_Block, uwm_cs557.BPlusTree, uwm_cs557.BPlusTreeNode, uwm_cs557.BPlusTreeNode);
+  public uwm_cs557.BPlusTreeInternalNode(uwm_cs557.MiniDB_Block, uwm_cs557.BPlusTree);
+  public uwm_cs557.BPlusTreeInternalNode(uwm_cs557.MiniDB_Block, uwm_cs557.BPlusTree, boolean);
+  public java.util.Vector children();
+  public uwm_cs557.BPlusTreeInternalNode split() throws uwm_cs557.MiniDB_Exception;
+  public int getNumChildren();
+  public int offset_data();
+  public int offset_valueSlot(int);
+  public int getChildBlockID(int);
+  public long getValue(int);
+  public void setValue(long, int);
+  public int getBlockID(int);
+  public void setBlockID(int, int);
+  public int getMaxNumRecordsOnBlock();
+  public uwm_cs557.BPlusTreeNode getChildNodeForValue(long) throws uwm_cs557.MiniDB_Exception;
+  public java.lang.String summaryToString();
+  public uwm_cs557.BPlusTreeNode split() throws uwm_cs557.MiniDB_Exception;
+  static {};
+}
+Compiled from "BPlusTreeLeafNode.java"
+public class uwm_cs557.BPlusTreeLeafNode extends uwm_cs557.BPlusTreeNode {
+  public uwm_cs557.BPlusTreeLeafNode(uwm_cs557.MiniDB_Block, uwm_cs557.BPlusTree, boolean);
+  public int offset_firstBlockPointer();
+  public int offset_data();
+  public int offset_blockIDSlot(int);
+  public int offset_valueSlot(int);
+  public int offset_nextLeafBlockID();
+  public void setNextLeafBlockID(int);
+  public int getNextLeafBlockID();
+  public int getMaxNumRecordsOnBlock();
+  public long getValue(int);
+  public void setValue(long, int);
+  public int getBlockID(int);
+  public void setBlockID(int, int);
+  public uwm_cs557.BPlusTreeLeafNode split() throws uwm_cs557.MiniDB_Exception;
+  public java.lang.String summaryToString();
+  public java.lang.String recordsToString();
+  public uwm_cs557.BPlusTreeNode split() throws uwm_cs557.MiniDB_Exception;
+}
+Compiled from "BPlusTreeNode.java"
+public abstract class uwm_cs557.BPlusTreeNode extends uwm_cs557.MiniDB_Block {
+  protected uwm_cs557.BPlusTree bpt;
+  public boolean isLeafNode();
+  public uwm_cs557.BPlusTreeNode(uwm_cs557.MiniDB_Block, uwm_cs557.BPlusTree, boolean);
+  public final boolean hasRoomForAnotherRecord();
+  public int offset_currNumRecordsOnBlock();
+  public void setCurrNumRecordsOnBlock(int);
+  public int getCurrNumRecordsOnBlock();
+  public abstract int offset_data();
+  public abstract int offset_valueSlot(int);
+  public int offset_record(int);
+  public abstract int getMaxNumRecordsOnBlock();
+  public abstract long getValue(int);
+  public abstract void setValue(long, int);
+  public abstract int getBlockID(int);
+  public abstract void setBlockID(int, int);
+  public abstract uwm_cs557.BPlusTreeNode split() throws uwm_cs557.MiniDB_Exception;
+  public java.lang.String summaryToString();
+  public long getMinValue();
+  public int getSlotForValue(long);
+  public boolean addRecord(long, int);
+  public abstract java.lang.String recordsToString();
+}
+Compiled from "BufMgr.java"
+public class uwm_cs557.BufMgr {
+  static final boolean $assertionsDisabled;
+  public uwm_cs557.BufMgr(uwm_cs557.MiniDB);
+  public boolean markDirty(int);
+  public uwm_cs557.MiniDB_Block pin_block(int) throws uwm_cs557.MiniDB_Exception;
+  public void unpin_block(int);
+  public void flushDirty();
+  public java.lang.String toString();
+  public java.lang.String bufMgrStateToString();
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "DBUtil.java"
+public class uwm_cs557.DBUtil {
+  public uwm_cs557.DBUtil();
+  public static boolean fileOrDirectoryExists(java.lang.String);
+  public static void main(java.lang.String[]);
+}
+Compiled from "Ex2.java"
+public class uwm_cs557.Ex2 {
+  public uwm_cs557.Ex2();
+  public static void main(java.lang.String[]);
+}
+Compiled from "MiniDB.java"
+public class uwm_cs557.MiniDB {
+  public byte[][] dbBlocks;
+  public boolean[] dbBlockUsed;
+  public static uwm_cs557.BufMgr bufMgr;
+  public uwm_cs557.MiniDB_Catalog catalog;
+  static final boolean $assertionsDisabled;
+  public java.lang.String osFilename();
+  public uwm_cs557.BufMgr getBufMgr();
+  public uwm_cs557.MiniDB_Catalog getCatalog();
+  public uwm_cs557.MiniDB(java.lang.String);
+  public int addBlockToDB() throws uwm_cs557.MiniDB_Exception;
+  public int numBlocksInDB();
+  protected static java.lang.String indexNameKey(java.lang.String, java.lang.String);
+  public uwm_cs557.BPlusTree loadExistingIndex(java.lang.String, java.lang.String) throws uwm_cs557.MiniDB_Exception;
+  public uwm_cs557.BPlusTree createNewBPlusTreeIndex(java.lang.String, java.lang.String, int) throws uwm_cs557.MiniDB_Exception;
+  public void writeDBToOSFile();
+  public java.lang.String allDBBlocksToString() throws uwm_cs557.MiniDB_Exception;
+  public java.lang.String getInfo();
+  public static java.lang.String log(java.lang.String);
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "MiniDB_Block.java"
+public class uwm_cs557.MiniDB_Block {
+  public static final int BLOCK_TYPE_UNKNOWN;
+  public static final int BLOCK_TYPE_CATALOG;
+  public static final int BLOCK_TYPE_BPT_HEADER;
+  public static final int BLOCK_TYPE_BPT_INTERNAL;
+  public static final int BLOCK_TYPE_BPT_LEAF;
+  public static int NUM_RESERVED_BYTES;
+  protected byte[] buffer;
+  protected final int blockID;
+  protected final uwm_cs557.MiniDB miniDB;
+  static final boolean $assertionsDisabled;
+  public byte[] getBuffer();
+  public int getThisBlockID();
+  public int offset_blockType();
+  public void setBlockType(int);
+  public int getBlockType();
+  public java.lang.String blockTypeToString();
+  public uwm_cs557.MiniDB_Block(uwm_cs557.MiniDB_Block);
+  public uwm_cs557.MiniDB_Block(byte[], int, uwm_cs557.MiniDB);
+  public void readBytes(byte[], int);
+  public void writeBytes(byte[], int);
+  public java.lang.String readString(int);
+  public java.lang.String readString(int, int);
+  public int writeString(int, java.lang.String);
+  public int writeString(int, java.lang.String, int);
+  public short readShort(int);
+  public void writeShort(int, short);
+  public int readInt(int);
+  public int writeInt(int, int);
+  public long readLong(int);
+  public int writeLong(int, long);
+  public java.lang.String toString();
+  public void set(byte);
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "MiniDB_Catalog.java"
+public class uwm_cs557.MiniDB_Catalog {
+  public void setHeadBlock(uwm_cs557.MiniDB_Block);
+  public void setNumIndexes(int);
+  public int getNumIndexes();
+  public int getNumberOfFiles();
+  public void addIndex(java.lang.String, int);
+  public int getIndexHeadBlockID(java.lang.String);
+  public static uwm_cs557.MiniDB_Catalog createFromExisting(uwm_cs557.MiniDB_Block, uwm_cs557.MiniDB);
+  public static uwm_cs557.MiniDB_Catalog createNewCatalog(uwm_cs557.MiniDB_Block, uwm_cs557.MiniDB);
+  static {};
+}
+Compiled from "MiniDB_Constants.java"
+public class uwm_cs557.MiniDB_Constants {
+  public static final int BLOCK_SIZE;
+  public static final int BUF_MGR_NUM_FRAMES;
+  public static final int DB_MAX_BLOCKS;
+  public static final int CATALOG_BLOCK_ID;
+  public static final int BLK_ID_SIZE;
+  public uwm_cs557.MiniDB_Constants();
+}
+Compiled from "MiniDB_Exception.java"
+public class uwm_cs557.MiniDB_Exception extends java.lang.Exception {
+  static final int DB_FULL;
+  static final int BUF_MGR_FULL;
+  int exCode;
+  public uwm_cs557.MiniDB_Exception(int);
+  public static void exDie(uwm_cs557.MiniDB_Exception);
+}
+Compiled from "MiniDB_Record.java"
+public class uwm_cs557.MiniDB_Record implements java.lang.Comparable {
+  java.lang.Long value;
+  java.lang.Integer blockID;
+  public uwm_cs557.MiniDB_Record(int, long);
+  public int compareTo(java.lang.Object);
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+}
+Compiled from "MiniDB_Util.java"
+public class uwm_cs557.MiniDB_Util {
+  public static boolean canWait;
+  public uwm_cs557.MiniDB_Util();
+  public static boolean fileOrDirectoryExists(java.lang.String);
+  public static void waitHere();
+  public static void waitHere(java.lang.String);
+  public static void waitComment(java.lang.String);
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "MiniDB_example.java"
+public class uwm_cs557.MiniDB_example {
+  public uwm_cs557.MiniDB_example();
+  public static void main(java.lang.String[]);
+}
+Compiled from "MiniDB_grade.java"
+public class uwm_cs557.MiniDB_grade {
+  public static java.lang.String[] testNames;
+  public static double[] maxByTest;
+  public static double maxTotal;
+  public static int NUM_TESTS;
+  static final boolean $assertionsDisabled;
+  uwm_cs557.MiniDB_grade();
+  uwm_cs557.MiniDB makeNewDB(java.lang.String);
+  int test1() throws uwm_cs557.MiniDB_Exception;
+  int test2() throws uwm_cs557.MiniDB_Exception;
+  int test3() throws uwm_cs557.MiniDB_Exception;
+  int test4() throws uwm_cs557.MiniDB_Exception;
+  int test5() throws uwm_cs557.MiniDB_Exception;
+  int test6() throws uwm_cs557.MiniDB_Exception;
+  double test7() throws uwm_cs557.MiniDB_Exception;
+  public double runTest(int);
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "MiniDB_test.java"
+public class uwm_cs557.MiniDB_test {
+  public uwm_cs557.MiniDB_test();
+}
+Compiled from "Sample1.java"
+public class uwm_cs557.Sample1 {
+  public uwm_cs557.Sample1();
+  public static void main(java.lang.String[]);
+}
+Compiled from "Sample2.java"
+public class uwm_cs557.Sample2 {
+  public uwm_cs557.Sample2();
+  public static void main(java.lang.String[]);
+}
+Compiled from "Sample3.java"
+public class uwm_cs557.Sample3 {
+  public uwm_cs557.Sample3();
+  public static void main(java.lang.String[]);
+}
+Compiled from "Sample4.java"
+public class uwm_cs557.Sample4 {
+  public uwm_cs557.Sample4();
+  public static void main(java.lang.String[]);
+}

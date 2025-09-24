@@ -1,0 +1,235 @@
+Compiled from "BF.java"
+public class rummyj.BF {
+  public rummyj.BF();
+  public static rummyj.nodes.Program parse(java.lang.String);
+  public static void main(java.lang.String[]);
+}
+Compiled from "FilePrinter.java"
+public class rummyj.FilePrinter {
+  static java.io.FileWriter fileStream;
+  static java.io.BufferedWriter outBuffer;
+  static int tabCount;
+  public rummyj.FilePrinter();
+  public static void increaseIndent();
+  public static void decreaseIndent();
+  public static void openBuffer(java.lang.String, java.lang.String);
+  public static void write(java.lang.String);
+  public static void write(char);
+  public static void writeLine();
+  public static void writeLine(char);
+  public static void writeLine(java.lang.String);
+  public static void closeBuffer();
+  static {};
+}
+Compiled from "Node.java"
+public interface rummyj.Node {
+  public abstract void accept(rummyj.Visitor);
+}
+Compiled from "Visitor.java"
+public interface rummyj.Visitor {
+  public abstract void visit(rummyj.nodes.Message);
+  public abstract void visit(rummyj.nodes.Procedure);
+  public abstract void visit(rummyj.nodes.ProcedureCall);
+  public abstract void visit(rummyj.nodes.Loop);
+  public abstract void visit(rummyj.nodes.Left);
+  public abstract void visit(rummyj.nodes.Right);
+  public abstract void visit(rummyj.nodes.Increment);
+  public abstract void visit(rummyj.nodes.Decrement);
+  public abstract void visit(rummyj.nodes.Number);
+  public abstract void visit(rummyj.nodes.Input);
+  public abstract void visit(rummyj.nodes.Output);
+  public abstract void visit(rummyj.nodes.Program);
+}
+Compiled from "Decrement.java"
+public class rummyj.nodes.Decrement implements rummyj.Node {
+  public rummyj.nodes.Decrement();
+  public void accept(rummyj.Visitor);
+}
+Compiled from "Increment.java"
+public class rummyj.nodes.Increment implements rummyj.Node {
+  public rummyj.nodes.Increment();
+  public void accept(rummyj.Visitor);
+}
+Compiled from "Input.java"
+public class rummyj.nodes.Input implements rummyj.Node {
+  public rummyj.nodes.Input();
+  public void accept(rummyj.Visitor);
+}
+Compiled from "Left.java"
+public class rummyj.nodes.Left implements rummyj.Node {
+  public rummyj.nodes.Left();
+  public void accept(rummyj.Visitor);
+}
+Compiled from "Loop.java"
+public class rummyj.nodes.Loop implements rummyj.Node {
+  public rummyj.Node body;
+  public rummyj.nodes.Loop(rummyj.Node);
+  public void accept(rummyj.Visitor);
+}
+Compiled from "Message.java"
+public class rummyj.nodes.Message implements rummyj.Node {
+  public java.lang.String character;
+  public rummyj.nodes.Message(java.lang.String);
+  public void accept(rummyj.Visitor);
+}
+Compiled from "Number.java"
+public class rummyj.nodes.Number implements rummyj.Node {
+  public int iterations;
+  public rummyj.Node command;
+  public rummyj.nodes.Number(int, rummyj.Node);
+  public void accept(rummyj.Visitor);
+}
+Compiled from "Output.java"
+public class rummyj.nodes.Output implements rummyj.Node {
+  public rummyj.nodes.Output();
+  public void accept(rummyj.Visitor);
+}
+Compiled from "Procedure.java"
+public class rummyj.nodes.Procedure implements rummyj.Node {
+  public rummyj.Node body;
+  public rummyj.nodes.Procedure(rummyj.Node);
+  public void accept(rummyj.Visitor);
+}
+Compiled from "ProcedureCall.java"
+public class rummyj.nodes.ProcedureCall implements rummyj.Node {
+  public rummyj.nodes.ProcedureCall();
+  public void accept(rummyj.Visitor);
+}
+Compiled from "Program.java"
+public class rummyj.nodes.Program implements rummyj.Node {
+  public rummyj.Node body;
+  public rummyj.nodes.Program(rummyj.Node);
+  public void accept(rummyj.Visitor);
+}
+Compiled from "Right.java"
+public class rummyj.nodes.Right implements rummyj.Node {
+  public rummyj.nodes.Right();
+  public void accept(rummyj.Visitor);
+}
+Compiled from "Sequence.java"
+public class rummyj.nodes.Sequence implements rummyj.Node {
+  public rummyj.nodes.Sequence();
+  public void accept(rummyj.Visitor);
+  public void add(rummyj.Node);
+}
+Compiled from "AnimationVisitor.java"
+public class rummyj.visitors.AnimationVisitor extends javax.swing.JPanel implements rummyj.Visitor {
+  public void visit(rummyj.nodes.Left);
+  public void visit(rummyj.nodes.Right);
+  public void visit(rummyj.nodes.Increment);
+  public void visit(rummyj.nodes.Decrement);
+  public void visit(rummyj.nodes.Input);
+  public void visit(rummyj.nodes.Output);
+  public void visit(rummyj.nodes.Loop);
+  public void visit(rummyj.nodes.Program);
+  public void visit(rummyj.nodes.Message);
+  public void visit(rummyj.nodes.Procedure);
+  public void visit(rummyj.nodes.ProcedureCall);
+  public void visit(rummyj.nodes.Number);
+  public rummyj.visitors.AnimationVisitor(java.lang.String);
+  public void animate();
+  public void updateAnimation();
+  static void access$000(rummyj.visitors.AnimationVisitor);
+}
+Compiled from "AnimationVisitor.java"
+class rummyj.visitors.AnimationVisitor$1 implements java.lang.Runnable {
+  final rummyj.visitors.AnimationVisitor this$0;
+  rummyj.visitors.AnimationVisitor$1(rummyj.visitors.AnimationVisitor);
+  public void run();
+}
+Compiled from "AnimationVisitor.java"
+class rummyj.visitors.AnimationVisitor$TableModel extends javax.swing.table.AbstractTableModel {
+  final rummyj.visitors.AnimationVisitor this$0;
+  public rummyj.visitors.AnimationVisitor$TableModel(rummyj.visitors.AnimationVisitor);
+  public int getColumnCount();
+  public int getRowCount();
+  public java.lang.String getColumnName(int);
+  public java.lang.Object getValueAt(int, int);
+  public java.lang.Class getColumnClass(int);
+  public void setValueAt(java.lang.Object, int, int);
+}
+Compiled from "CSharpVisitor.java"
+public class rummyj.visitors.CSharpVisitor implements rummyj.Visitor {
+  java.lang.String className;
+  public rummyj.visitors.CSharpVisitor(java.lang.String);
+  public void visit(rummyj.nodes.Message);
+  public void visit(rummyj.nodes.Procedure);
+  public void visit(rummyj.nodes.ProcedureCall);
+  public void visit(rummyj.nodes.Loop);
+  public void visit(rummyj.nodes.Left);
+  public void visit(rummyj.nodes.Right);
+  public void visit(rummyj.nodes.Increment);
+  public void visit(rummyj.nodes.Decrement);
+  public void visit(rummyj.nodes.Input);
+  public void visit(rummyj.nodes.Output);
+  public void visit(rummyj.nodes.Program);
+  public void visit(rummyj.nodes.Number);
+}
+Compiled from "InterpreterVisitor.java"
+public class rummyj.visitors.InterpreterVisitor implements rummyj.Visitor {
+  public rummyj.visitors.InterpreterVisitor();
+  public void visit(rummyj.nodes.Left);
+  public void visit(rummyj.nodes.Right);
+  public void visit(rummyj.nodes.Increment);
+  public void visit(rummyj.nodes.Decrement);
+  public void visit(rummyj.nodes.Input);
+  public void visit(rummyj.nodes.Output);
+  public void visit(rummyj.nodes.Loop);
+  public void visit(rummyj.nodes.Program);
+  public void visit(rummyj.nodes.Message);
+  public void visit(rummyj.nodes.Procedure);
+  public void visit(rummyj.nodes.ProcedureCall);
+  public void visit(rummyj.nodes.Number);
+}
+Compiled from "JavaVisitor.java"
+public class rummyj.visitors.JavaVisitor implements rummyj.Visitor {
+  java.lang.String className;
+  public rummyj.visitors.JavaVisitor(java.lang.String);
+  public void visit(rummyj.nodes.Message);
+  public void visit(rummyj.nodes.Procedure);
+  public void visit(rummyj.nodes.ProcedureCall);
+  public void visit(rummyj.nodes.Loop);
+  public void visit(rummyj.nodes.Left);
+  public void visit(rummyj.nodes.Right);
+  public void visit(rummyj.nodes.Increment);
+  public void visit(rummyj.nodes.Decrement);
+  public void visit(rummyj.nodes.Input);
+  public void visit(rummyj.nodes.Output);
+  public void visit(rummyj.nodes.Program);
+  public void visit(rummyj.nodes.Number);
+}
+Compiled from "OptimizationVisitor.java"
+public class rummyj.visitors.OptimizationVisitor implements rummyj.Visitor {
+  java.lang.String oldString;
+  public rummyj.visitors.OptimizationVisitor();
+  public void visit(rummyj.nodes.Left);
+  public void visit(rummyj.nodes.Right);
+  public void visit(rummyj.nodes.Increment);
+  public void visit(rummyj.nodes.Decrement);
+  public void visit(rummyj.nodes.Input);
+  public void visit(rummyj.nodes.Output);
+  public void visit(rummyj.nodes.Loop);
+  public void visit(rummyj.nodes.Program);
+  public void visit(rummyj.nodes.Message);
+  public void visit(rummyj.nodes.Number);
+  public void visit(rummyj.nodes.Procedure);
+  public void visit(rummyj.nodes.ProcedureCall);
+  public void optimize();
+}
+Compiled from "PrintVisitor.java"
+public class rummyj.visitors.PrintVisitor implements rummyj.Visitor {
+  java.lang.String fileName;
+  public rummyj.visitors.PrintVisitor(java.lang.String);
+  public void visit(rummyj.nodes.Left);
+  public void visit(rummyj.nodes.Right);
+  public void visit(rummyj.nodes.Increment);
+  public void visit(rummyj.nodes.Decrement);
+  public void visit(rummyj.nodes.Input);
+  public void visit(rummyj.nodes.Output);
+  public void visit(rummyj.nodes.Loop);
+  public void visit(rummyj.nodes.Program);
+  public void visit(rummyj.nodes.Message);
+  public void visit(rummyj.nodes.Number);
+  public void visit(rummyj.nodes.Procedure);
+  public void visit(rummyj.nodes.ProcedureCall);
+}

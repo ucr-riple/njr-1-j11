@@ -1,0 +1,1794 @@
+Compiled from "ExtensionException.java"
+public class com.sdicons.scripty.ExtensionException extends java.lang.Exception {
+  public com.sdicons.scripty.ExtensionException();
+  public com.sdicons.scripty.ExtensionException(java.lang.String);
+  public com.sdicons.scripty.ExtensionException(java.lang.String, java.lang.Throwable);
+  public com.sdicons.scripty.ExtensionException(java.lang.Throwable);
+}
+Compiled from "IContextHolder.java"
+public interface com.sdicons.scripty.IContextHolder {
+  public abstract com.sdicons.scripty.parser.IContext getContext();
+  public abstract void setContext(com.sdicons.scripty.parser.IContext);
+}
+Compiled from "IExtensions.java"
+public interface com.sdicons.scripty.IExtensions {
+  public abstract void addCommand(java.lang.String, com.sdicons.scripty.parser.ICommand) throws com.sdicons.scripty.ExtensionException;
+  public abstract void addMacro(java.lang.String, com.sdicons.scripty.parser.ICommand) throws com.sdicons.scripty.ExtensionException;
+  public abstract void addLibraryClasses(java.lang.Class...) throws com.sdicons.scripty.ExtensionException;
+  public abstract void addLibraryInstances(java.lang.Object...) throws com.sdicons.scripty.ExtensionException;
+}
+Compiled from "ProcessorException.java"
+public class com.sdicons.scripty.ProcessorException extends java.lang.Exception {
+  public com.sdicons.scripty.ProcessorException();
+  public com.sdicons.scripty.ProcessorException(java.lang.String);
+  public com.sdicons.scripty.ProcessorException(java.lang.String, java.lang.Throwable);
+  public com.sdicons.scripty.ProcessorException(java.lang.Throwable);
+}
+Compiled from "ScriptyEmbeddedRepl.java"
+class com.sdicons.scripty.ReplServer {
+  public com.sdicons.scripty.ReplServer(int, com.sdicons.scripty.repl.ReplEngine);
+  public void serveClients(java.lang.String, java.lang.String);
+}
+Compiled from "ScriptyEmbeddedRepl.java"
+class com.sdicons.scripty.RequestHandler implements java.lang.Runnable {
+  public com.sdicons.scripty.RequestHandler(java.net.Socket, com.sdicons.scripty.repl.ReplEngine, java.lang.String, java.lang.String);
+  public boolean login(java.io.InputStream, java.io.OutputStream, java.lang.String, java.lang.String);
+  public void run();
+}
+Compiled from "ScriptyAutoRepl.java"
+public class com.sdicons.scripty.ScriptyAutoRepl extends com.sdicons.scripty.ScriptyCapable {
+  public com.sdicons.scripty.ScriptyAutoRepl();
+  public com.sdicons.scripty.ScriptyAutoRepl(com.sdicons.scripty.ScriptyCapable);
+  public void setForceTextMode(boolean);
+  public void startLoop();
+  public static void main(java.lang.String[]) throws com.sdicons.scripty.ExtensionException;
+}
+Compiled from "ScriptyCapable.java"
+public abstract class com.sdicons.scripty.ScriptyCapable implements com.sdicons.scripty.IExtensions,com.sdicons.scripty.IContextHolder {
+  public com.sdicons.scripty.ScriptyCapable();
+  public com.sdicons.scripty.ScriptyCapable(com.sdicons.scripty.ScriptyCapable);
+  protected com.sdicons.scripty.repl.ReplEngine getReplEngine();
+  protected void setReplEngine(com.sdicons.scripty.repl.ReplEngine);
+  public com.sdicons.scripty.parser.IContext getContext();
+  public void setContext(com.sdicons.scripty.parser.IContext);
+  public void addCommand(java.lang.String, com.sdicons.scripty.parser.ICommand) throws com.sdicons.scripty.ExtensionException;
+  public void addMacro(java.lang.String, com.sdicons.scripty.parser.ICommand) throws com.sdicons.scripty.ExtensionException;
+  public void addLibraryClasses(java.lang.Class...) throws com.sdicons.scripty.ExtensionException;
+  public void addLibraryInstances(java.lang.Object...) throws com.sdicons.scripty.ExtensionException;
+}
+Compiled from "ScriptyEmbeddedRepl.java"
+public class com.sdicons.scripty.ScriptyEmbeddedRepl extends com.sdicons.scripty.ScriptyCapable {
+  public com.sdicons.scripty.ScriptyEmbeddedRepl();
+  public com.sdicons.scripty.ScriptyEmbeddedRepl(com.sdicons.scripty.ScriptyCapable);
+  public void startLoop(int, java.lang.String, java.lang.String);
+}
+Compiled from "ScriptyEmbeddedRepl.java"
+class com.sdicons.scripty.ScriptyEmbeddedRepl$1 extends java.lang.Thread {
+  final int val$aPort;
+  final java.lang.String val$aUid;
+  final java.lang.String val$aPwd;
+  final com.sdicons.scripty.ScriptyEmbeddedRepl this$0;
+  com.sdicons.scripty.ScriptyEmbeddedRepl$1(com.sdicons.scripty.ScriptyEmbeddedRepl, int, java.lang.String, java.lang.String);
+  public void run();
+}
+Compiled from "ScriptyGuiRepl.java"
+public class com.sdicons.scripty.ScriptyGuiRepl extends com.sdicons.scripty.ScriptyCapable {
+  public com.sdicons.scripty.ScriptyGuiRepl();
+  public com.sdicons.scripty.ScriptyGuiRepl(com.sdicons.scripty.ScriptyCapable);
+  public java.lang.String getTitle();
+  public void setTitle(java.lang.String);
+  public void startLoop();
+}
+Compiled from "ScriptyGuiRepl.java"
+class com.sdicons.scripty.ScriptyGuiRepl$1 extends java.awt.event.WindowAdapter {
+  final com.sdicons.scripty.ScriptyGuiRepl this$0;
+  com.sdicons.scripty.ScriptyGuiRepl$1(com.sdicons.scripty.ScriptyGuiRepl);
+  public void windowClosing(java.awt.event.WindowEvent);
+}
+Compiled from "ScriptyPanel.java"
+public class com.sdicons.scripty.ScriptyPanel extends javax.swing.JPanel {
+  public com.sdicons.scripty.ScriptyPanel();
+  public com.sdicons.scripty.ScriptyPanel(com.sdicons.scripty.ScriptyCapable);
+  public boolean isHorizontalLayout();
+  public void setHorizontalLayout();
+  public boolean isVerticalLayout();
+  public void setVerticalLayout();
+  static com.sdicons.scripty.ScriptyPanel$PanelEngine access$100(com.sdicons.scripty.ScriptyPanel);
+  static javax.swing.JSplitPane access$200(com.sdicons.scripty.ScriptyPanel);
+}
+Compiled from "ScriptyPanel.java"
+class com.sdicons.scripty.ScriptyPanel$1 extends javax.swing.AbstractAction {
+  final javax.swing.JTextPane val$lInputPane;
+  final com.sdicons.scripty.ScriptyPanel$TextPaneWriter val$lWriter;
+  final javax.swing.JTextPane val$lOutputPane;
+  final javax.swing.text.SimpleAttributeSet val$lErrAttrs;
+  final com.sdicons.scripty.ScriptyPanel this$0;
+  com.sdicons.scripty.ScriptyPanel$1(com.sdicons.scripty.ScriptyPanel, java.lang.String, javax.swing.JTextPane, com.sdicons.scripty.ScriptyPanel$TextPaneWriter, javax.swing.JTextPane, javax.swing.text.SimpleAttributeSet);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "ScriptyPanel.java"
+class com.sdicons.scripty.ScriptyPanel$2 extends javax.swing.AbstractAction {
+  final javax.swing.JTextPane val$lOutputPane;
+  final com.sdicons.scripty.ScriptyPanel this$0;
+  com.sdicons.scripty.ScriptyPanel$2(com.sdicons.scripty.ScriptyPanel, java.lang.String, javax.swing.JTextPane);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "ScriptyPanel.java"
+class com.sdicons.scripty.ScriptyPanel$3 extends java.awt.event.ComponentAdapter {
+  boolean firstTime;
+  final com.sdicons.scripty.ScriptyPanel this$0;
+  com.sdicons.scripty.ScriptyPanel$3(com.sdicons.scripty.ScriptyPanel);
+  public void componentResized(java.awt.event.ComponentEvent);
+}
+Compiled from "ScriptyPanel.java"
+class com.sdicons.scripty.ScriptyPanel$PanelEngine extends com.sdicons.scripty.ScriptyCapable {
+  com.sdicons.scripty.ScriptyPanel$PanelEngine(com.sdicons.scripty.ScriptyPanel$1);
+}
+Compiled from "ScriptyPanel.java"
+class com.sdicons.scripty.ScriptyPanel$TextPaneWriter extends java.io.Writer {
+  public com.sdicons.scripty.ScriptyPanel$TextPaneWriter(javax.swing.JTextPane);
+  public void flush();
+  public void close();
+  public void write(char[], int, int) throws java.io.IOException;
+}
+Compiled from "ScriptyStreamProcessor.java"
+public class com.sdicons.scripty.ScriptyStreamProcessor extends com.sdicons.scripty.ScriptyCapable {
+  public com.sdicons.scripty.ScriptyStreamProcessor();
+  public com.sdicons.scripty.ScriptyStreamProcessor(com.sdicons.scripty.ScriptyCapable);
+  public java.lang.Object process(java.lang.String) throws com.sdicons.scripty.ProcessorException;
+  public java.lang.Object process(java.io.InputStream) throws com.sdicons.scripty.ProcessorException;
+  public java.lang.Object process(java.io.Reader) throws com.sdicons.scripty.ProcessorException;
+}
+Compiled from "ScriptyTextRepl.java"
+public class com.sdicons.scripty.ScriptyTextRepl extends com.sdicons.scripty.ScriptyCapable {
+  public com.sdicons.scripty.ScriptyTextRepl();
+  public com.sdicons.scripty.ScriptyTextRepl(com.sdicons.scripty.ScriptyCapable);
+  public void startLoop();
+}
+Compiled from "TestFib.java"
+public class com.sdicons.scripty.TestFib {
+  public com.sdicons.scripty.TestFib();
+  public void setup() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public java.math.BigDecimal fib(int) throws com.sdicons.scripty.ProcessorException, com.sdicons.scripty.spec.type.TypeSpecException;
+  public java.math.BigDecimal fib2(int) throws com.sdicons.scripty.ProcessorException, com.sdicons.scripty.spec.type.TypeSpecException;
+  public void fib() throws com.sdicons.scripty.ProcessorException, com.sdicons.scripty.spec.type.TypeSpecException;
+}
+Compiled from "TestGcd.java"
+public class com.sdicons.scripty.TestGcd {
+  public com.sdicons.scripty.TestGcd();
+  public void setup() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public java.math.BigDecimal gcd(int, int) throws com.sdicons.scripty.ProcessorException;
+  public void gcd() throws com.sdicons.scripty.ProcessorException;
+}
+Compiled from "TestHanoi.java"
+public class com.sdicons.scripty.TestHanoi {
+  public com.sdicons.scripty.TestHanoi();
+  public void setup() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public int hanoi(int) throws com.sdicons.scripty.ProcessorException;
+  public void hanoi() throws com.sdicons.scripty.ProcessorException;
+}
+Compiled from "TestHanoi.java"
+public class com.sdicons.scripty.TestHanoi$PrintPlusCmd {
+  public com.sdicons.scripty.TestHanoi$PrintPlusCmd();
+  public void print();
+  public void println();
+  public int getCounter();
+  public void reset();
+}
+Compiled from "TestQueens.java"
+public class com.sdicons.scripty.TestQueens {
+  public com.sdicons.scripty.TestQueens();
+  public void setup() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public int queens(int) throws com.sdicons.scripty.ProcessorException;
+  public void queens() throws com.sdicons.scripty.ProcessorException;
+}
+Compiled from "TestQueens.java"
+public class com.sdicons.scripty.TestQueens$PrintPlusCmd {
+  public com.sdicons.scripty.TestQueens$PrintPlusCmd();
+  public void print();
+  public void println();
+  public int getCounter();
+  public void reset();
+}
+Compiled from "TestScriptyStreamProcessor.java"
+public class com.sdicons.scripty.TestScriptyStreamProcessor {
+  public com.sdicons.scripty.TestScriptyStreamProcessor();
+  public void initialize();
+  public void testMyCommandLib() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testMyCommandLib2() throws com.sdicons.scripty.ExtensionException;
+}
+Compiled from "TestScriptyTextRepl.java"
+public class com.sdicons.scripty.TestScriptyTextRepl {
+  public com.sdicons.scripty.TestScriptyTextRepl();
+  public void registerLib() throws com.sdicons.scripty.ExtensionException;
+}
+Compiled from "TestScriptyTextRepl.java"
+public class com.sdicons.scripty.TestScriptyTextRepl$MyTestCommandLib {
+  public com.sdicons.scripty.TestScriptyTextRepl$MyTestCommandLib();
+  public static void hello();
+}
+Compiled from "TestSqrt.java"
+public class com.sdicons.scripty.TestSqrt {
+  public com.sdicons.scripty.TestSqrt();
+  public void setup() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public java.math.BigDecimal sqrt(double) throws com.sdicons.scripty.ProcessorException;
+  public void sqrt() throws com.sdicons.scripty.ProcessorException;
+}
+Compiled from "ScriptyArg.java"
+public interface com.sdicons.scripty.annot.ScriptyArg extends java.lang.annotation.Annotation {
+  public abstract java.lang.String name();
+  public abstract java.lang.String type();
+  public abstract java.lang.String value();
+  public abstract boolean optional();
+}
+Compiled from "ScriptyBindingParam.java"
+public interface com.sdicons.scripty.annot.ScriptyBindingParam extends java.lang.annotation.Annotation {
+  public abstract java.lang.String value();
+  public abstract boolean unboundException();
+}
+Compiled from "ScriptyCommand.java"
+public interface com.sdicons.scripty.annot.ScriptyCommand extends java.lang.annotation.Annotation {
+  public abstract java.lang.String name();
+}
+Compiled from "ScriptyDefBinding.java"
+public interface com.sdicons.scripty.annot.ScriptyDefBinding extends java.lang.annotation.Annotation {
+  public abstract java.lang.String value();
+}
+Compiled from "ScriptyLibrary.java"
+public interface com.sdicons.scripty.annot.ScriptyLibrary extends java.lang.annotation.Annotation {
+  public abstract java.lang.String name();
+  public abstract com.sdicons.scripty.annot.ScriptyLibraryType type();
+}
+Compiled from "ScriptyLibraryType.java"
+public final class com.sdicons.scripty.annot.ScriptyLibraryType extends java.lang.Enum<com.sdicons.scripty.annot.ScriptyLibraryType> {
+  public static final com.sdicons.scripty.annot.ScriptyLibraryType INSTANCE;
+  public static final com.sdicons.scripty.annot.ScriptyLibraryType STATIC;
+  public static final com.sdicons.scripty.annot.ScriptyLibraryType AUTO;
+  public static com.sdicons.scripty.annot.ScriptyLibraryType[] values();
+  public static com.sdicons.scripty.annot.ScriptyLibraryType valueOf(java.lang.String);
+  static {};
+}
+Compiled from "ScriptyMacro.java"
+public interface com.sdicons.scripty.annot.ScriptyMacro extends java.lang.annotation.Annotation {
+  public abstract java.lang.String name();
+}
+Compiled from "ScriptyNamedArgLists.java"
+public interface com.sdicons.scripty.annot.ScriptyNamedArgLists extends java.lang.annotation.Annotation {
+  public abstract com.sdicons.scripty.annot.ScriptyStdArgList[] std();
+  public abstract com.sdicons.scripty.annot.ScriptyVarArgList[] var();
+}
+Compiled from "ScriptyParam.java"
+public interface com.sdicons.scripty.annot.ScriptyParam extends java.lang.annotation.Annotation {
+  public abstract java.lang.String value();
+}
+Compiled from "ScriptyRefArgList.java"
+public interface com.sdicons.scripty.annot.ScriptyRefArgList extends java.lang.annotation.Annotation {
+  public abstract java.lang.String ref();
+}
+Compiled from "ScriptySetBinding.java"
+public interface com.sdicons.scripty.annot.ScriptySetBinding extends java.lang.annotation.Annotation {
+  public abstract java.lang.String value();
+}
+Compiled from "ScriptyStdArgList.java"
+public interface com.sdicons.scripty.annot.ScriptyStdArgList extends java.lang.annotation.Annotation {
+  public abstract java.lang.String name();
+  public abstract com.sdicons.scripty.annot.ScriptyArg[] fixed();
+  public abstract com.sdicons.scripty.annot.ScriptyArg[] optional();
+  public abstract com.sdicons.scripty.annot.ScriptyArg[] named();
+}
+Compiled from "ScriptyVarArgList.java"
+public interface com.sdicons.scripty.annot.ScriptyVarArgList extends java.lang.annotation.Annotation {
+  public abstract java.lang.String name();
+  public abstract com.sdicons.scripty.annot.ScriptyArg[] fixed();
+  public abstract com.sdicons.scripty.annot.ScriptyArg[] named();
+  public abstract com.sdicons.scripty.annot.ScriptyArg vararg();
+  public abstract int minLength();
+  public abstract int maxLength();
+}
+Compiled from "BeanLibrary.java"
+public class com.sdicons.scripty.cmdlib.BeanLibrary {
+  public com.sdicons.scripty.cmdlib.BeanLibrary();
+  public java.lang.Object beanCd(java.lang.String, com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.parser.CommandException;
+  public java.lang.Object beanPwd(java.io.PrintWriter);
+  public java.lang.Object beanLs(java.lang.String, com.sdicons.scripty.parser.IContext, java.io.PrintWriter) throws com.sdicons.scripty.parser.CommandException;
+  public java.lang.Object beanCat(java.lang.String, com.sdicons.scripty.parser.IContext, java.io.PrintWriter) throws com.sdicons.scripty.parser.CommandException;
+  public java.lang.Object beanRslv(java.lang.String, com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.parser.CommandException;
+  public java.lang.Object beanCall(java.lang.Object[], com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.parser.CommandException;
+  public void beanUpd(java.lang.Object[], com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.parser.CommandException;
+  public com.sdicons.scripty.cmdlib.BeanLibrary$Resolution resolve(java.lang.String, com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.parser.CommandException;
+  static {};
+}
+Compiled from "BeanLibrary.java"
+public interface com.sdicons.scripty.cmdlib.BeanLibrary$IFilter {
+  public abstract boolean filter(java.lang.String, java.lang.Object);
+}
+Compiled from "BeanLibrary.java"
+class com.sdicons.scripty.cmdlib.BeanLibrary$Resolution {
+  public com.sdicons.scripty.cmdlib.BeanLibrary$Resolution(java.lang.String, java.lang.Object);
+  public java.lang.String getPath();
+  public java.lang.Object getVal();
+}
+Compiled from "CmdUtil.java"
+public class com.sdicons.scripty.cmdlib.CmdUtil {
+  public com.sdicons.scripty.cmdlib.CmdUtil();
+  public static java.lang.String concatExceptionMessages(java.lang.Throwable);
+}
+Compiled from "DebuggerLibrary.java"
+public class com.sdicons.scripty.cmdlib.DebuggerLibrary {
+  public com.sdicons.scripty.cmdlib.DebuggerLibrary();
+  public static java.util.List dbgExpr(java.lang.Object[]) throws com.sdicons.scripty.parser.CommandException;
+  public static java.util.List dbgEval(java.lang.Object[]) throws com.sdicons.scripty.parser.CommandException;
+  public static java.util.List bptWhen(java.lang.Object[]) throws com.sdicons.scripty.parser.CommandException;
+  public void dbgExprInternal(com.sdicons.scripty.parser.IEval, com.sdicons.scripty.parser.IContext, java.lang.Object);
+  public boolean dbgStepIn(java.io.PrintWriter) throws com.sdicons.scripty.parser.CommandException;
+  public boolean dbgStep(java.io.PrintWriter) throws com.sdicons.scripty.parser.CommandException;
+  public boolean dbgStepOut(java.io.PrintWriter) throws com.sdicons.scripty.parser.CommandException;
+  public boolean dbgStepOver(java.io.PrintWriter) throws com.sdicons.scripty.parser.CommandException;
+  public boolean dbgBack(java.io.PrintWriter) throws com.sdicons.scripty.parser.CommandException;
+  public boolean dbgRunResult(java.io.PrintWriter) throws com.sdicons.scripty.parser.CommandException;
+  public boolean dbgRunReady(java.io.PrintWriter) throws com.sdicons.scripty.parser.CommandException;
+  public boolean dbgRun(java.io.PrintWriter) throws com.sdicons.scripty.parser.CommandException;
+  public com.sdicons.scripty.parser.Eval2$EvalStack dbgStack(java.io.PrintWriter, boolean) throws com.sdicons.scripty.parser.CommandException;
+  public com.sdicons.scripty.parser.IContext dbgCtx(java.io.PrintWriter, boolean) throws com.sdicons.scripty.parser.CommandException;
+  public void dbgTerminate() throws com.sdicons.scripty.parser.CommandException;
+  public void dbgRaise(java.lang.Object[]) throws com.sdicons.scripty.parser.CommandException;
+  public void dbgRestart() throws com.sdicons.scripty.parser.CommandException;
+  public void dbgDropFrame() throws com.sdicons.scripty.parser.CommandException;
+  public java.lang.Object dbgEval(java.lang.Object, com.sdicons.scripty.parser.IEval) throws com.sdicons.scripty.parser.CommandException;
+  public boolean hasMoreSteps() throws com.sdicons.scripty.parser.CommandException;
+  public boolean hasResult() throws com.sdicons.scripty.parser.CommandException;
+  public java.lang.Object result() throws com.sdicons.scripty.parser.CommandException;
+  public boolean hasException() throws com.sdicons.scripty.parser.CommandException;
+  public java.lang.Exception exception() throws com.sdicons.scripty.parser.CommandException;
+  public com.sdicons.scripty.parser.EvalTrace$BreakpointSet addBreakpoint(com.sdicons.scripty.parser.EvalTrace$IBreakpoint);
+  public com.sdicons.scripty.parser.EvalTrace$BreakpointSet dbgBreakpoints(java.io.PrintWriter, boolean) throws com.sdicons.scripty.parser.CommandException;
+  public com.sdicons.scripty.parser.EvalTrace$BreakpointSet dbgRemoveBreakpoint(java.lang.String) throws com.sdicons.scripty.parser.CommandException;
+  public com.sdicons.scripty.parser.EvalTrace$BreakpointSet dbgEnableBreakpoint(java.lang.String, boolean) throws com.sdicons.scripty.parser.CommandException;
+  public com.sdicons.scripty.parser.EvalTrace$BreakpointSet dbgClearBreakpoints() throws com.sdicons.scripty.parser.CommandException;
+  public com.sdicons.scripty.parser.EvalTrace$IBreakpoint bptFunc(java.lang.String, java.lang.String);
+  public com.sdicons.scripty.parser.EvalTrace$IBreakpoint bptStackDepth(java.lang.Integer, java.lang.String);
+  public com.sdicons.scripty.parser.EvalTrace$IBreakpoint bptWhenImpl(java.lang.Object, java.lang.String);
+  public com.sdicons.scripty.parser.EvalTrace$IBreakpoint bptNot(com.sdicons.scripty.parser.EvalTrace$IBreakpoint, java.lang.String);
+  public com.sdicons.scripty.parser.EvalTrace$IBreakpoint bptAnd(java.lang.Object[], java.lang.String);
+  public com.sdicons.scripty.parser.EvalTrace$IBreakpoint bptOr(java.lang.Object[], java.lang.String);
+}
+Compiled from "DebuggerLibrary.java"
+class com.sdicons.scripty.cmdlib.DebuggerLibrary$1 {
+  static final int[] $SwitchMap$com$sdicons$scripty$cmdlib$DebuggerLibrary$StepType;
+  static {};
+}
+Compiled from "DebuggerLibrary.java"
+final class com.sdicons.scripty.cmdlib.DebuggerLibrary$StepType extends java.lang.Enum<com.sdicons.scripty.cmdlib.DebuggerLibrary$StepType> {
+  public static final com.sdicons.scripty.cmdlib.DebuggerLibrary$StepType STEPIN;
+  public static final com.sdicons.scripty.cmdlib.DebuggerLibrary$StepType STEPOVER;
+  public static final com.sdicons.scripty.cmdlib.DebuggerLibrary$StepType STEPOUT;
+  public static final com.sdicons.scripty.cmdlib.DebuggerLibrary$StepType RUN;
+  public static final com.sdicons.scripty.cmdlib.DebuggerLibrary$StepType RUNTORESULT;
+  public static final com.sdicons.scripty.cmdlib.DebuggerLibrary$StepType RUNTOREADY;
+  public static final com.sdicons.scripty.cmdlib.DebuggerLibrary$StepType BACKSTEP;
+  public static com.sdicons.scripty.cmdlib.DebuggerLibrary$StepType[] values();
+  public static com.sdicons.scripty.cmdlib.DebuggerLibrary$StepType valueOf(java.lang.String);
+  static {};
+}
+Compiled from "EditLibrary.java"
+class com.sdicons.scripty.cmdlib.EditDialog extends javax.swing.JDialog {
+  public com.sdicons.scripty.cmdlib.EditDialog(java.awt.Frame, java.lang.String, java.lang.String);
+  public com.sdicons.scripty.cmdlib.EditDialog(java.awt.Frame, java.lang.String);
+  public java.lang.String getContent();
+  static java.lang.String access$002(com.sdicons.scripty.cmdlib.EditDialog, java.lang.String);
+  static javax.swing.JTextArea access$100(com.sdicons.scripty.cmdlib.EditDialog);
+}
+Compiled from "EditLibrary.java"
+class com.sdicons.scripty.cmdlib.EditDialog$1 implements java.awt.event.ActionListener {
+  final com.sdicons.scripty.cmdlib.EditDialog this$0;
+  com.sdicons.scripty.cmdlib.EditDialog$1(com.sdicons.scripty.cmdlib.EditDialog);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "EditLibrary.java"
+class com.sdicons.scripty.cmdlib.EditDialog$2 implements java.awt.event.ActionListener {
+  final com.sdicons.scripty.cmdlib.EditDialog this$0;
+  com.sdicons.scripty.cmdlib.EditDialog$2(com.sdicons.scripty.cmdlib.EditDialog);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "EditLibrary.java"
+public class com.sdicons.scripty.cmdlib.EditLibrary {
+  public com.sdicons.scripty.cmdlib.EditLibrary();
+  public static java.lang.String edit(java.lang.String, java.lang.String) throws com.sdicons.scripty.parser.CommandException;
+  public static java.lang.Object editExpr(java.lang.String, java.lang.String) throws com.sdicons.scripty.parser.CommandException;
+}
+Compiled from "FileDialogLibrary.java"
+class com.sdicons.scripty.cmdlib.ExampleFileFilter extends javax.swing.filechooser.FileFilter {
+  public com.sdicons.scripty.cmdlib.ExampleFileFilter();
+  public com.sdicons.scripty.cmdlib.ExampleFileFilter(java.lang.String);
+  public com.sdicons.scripty.cmdlib.ExampleFileFilter(java.lang.String, java.lang.String);
+  public com.sdicons.scripty.cmdlib.ExampleFileFilter(java.lang.String[]);
+  public com.sdicons.scripty.cmdlib.ExampleFileFilter(java.lang.String[], java.lang.String);
+  public boolean accept(java.io.File);
+  public java.lang.String getExtension(java.io.File);
+  public void addExtension(java.lang.String);
+  public java.lang.String getDescription();
+  public void setDescription(java.lang.String);
+  public void setExtensionListInDescription(boolean);
+  public boolean isExtensionListInDescription();
+  static {};
+}
+Compiled from "ExitLibrary.java"
+public class com.sdicons.scripty.cmdlib.ExitLibrary {
+  public com.sdicons.scripty.cmdlib.ExitLibrary();
+  public static void exit(java.lang.Integer);
+}
+Compiled from "FileDialogLibrary.java"
+public class com.sdicons.scripty.cmdlib.FileDialogLibrary {
+  public com.sdicons.scripty.cmdlib.FileDialogLibrary();
+  public java.io.File fileDialog(java.lang.String, java.lang.String, java.lang.String, java.lang.Object[]) throws com.sdicons.scripty.parser.CommandException;
+}
+Compiled from "FileLibrary.java"
+public class com.sdicons.scripty.cmdlib.FileLibrary {
+  public com.sdicons.scripty.cmdlib.FileLibrary();
+  public java.io.File cd(java.lang.Object) throws com.sdicons.scripty.parser.CommandException;
+  public java.io.File pwd(boolean, java.io.PrintWriter) throws com.sdicons.scripty.parser.CommandException;
+  public java.lang.Object[] ls(boolean, java.lang.String, boolean, boolean, com.sdicons.scripty.parser.Lambda, boolean, java.lang.Object, java.io.PrintWriter, com.sdicons.scripty.parser.IContext, com.sdicons.scripty.parser.IEval) throws com.sdicons.scripty.parser.CommandException;
+  public void cat();
+  public java.io.File rslv(java.lang.Object) throws com.sdicons.scripty.parser.CommandException;
+  public java.io.File mv(java.lang.Object, java.lang.Object) throws com.sdicons.scripty.parser.CommandException;
+  static {};
+}
+Compiled from "RecEditLibrary.java"
+class com.sdicons.scripty.cmdlib.JPropTable extends javax.swing.JTable {
+  protected com.sdicons.scripty.cmdlib.RowEditorModel rm;
+  public com.sdicons.scripty.cmdlib.JPropTable();
+  public com.sdicons.scripty.cmdlib.JPropTable(javax.swing.table.TableModel);
+  public com.sdicons.scripty.cmdlib.JPropTable(javax.swing.table.TableModel, javax.swing.table.TableColumnModel);
+  public com.sdicons.scripty.cmdlib.JPropTable(javax.swing.table.TableModel, javax.swing.table.TableColumnModel, javax.swing.ListSelectionModel);
+  public com.sdicons.scripty.cmdlib.JPropTable(int, int);
+  public com.sdicons.scripty.cmdlib.JPropTable(java.util.Vector, java.util.Vector);
+  public com.sdicons.scripty.cmdlib.JPropTable(java.lang.Object[][], java.lang.Object[]);
+  public com.sdicons.scripty.cmdlib.JPropTable(javax.swing.table.TableModel, com.sdicons.scripty.cmdlib.RowEditorModel);
+  public void setRowEditorModel(com.sdicons.scripty.cmdlib.RowEditorModel);
+  public com.sdicons.scripty.cmdlib.RowEditorModel getRowEditorModel();
+  public javax.swing.table.TableCellEditor getCellEditor(int, int);
+  public void changeSelection(int, int, boolean, boolean);
+  int[] findNextEditableCell(int, int, int, int, int);
+  int findNextEditableRow(int, int, int, int, int);
+}
+Compiled from "ListLibrary.java"
+public class com.sdicons.scripty.cmdlib.ListLibrary {
+  public static java.util.List createList(java.lang.Object[]);
+  public static boolean isEmpty(java.util.List);
+  public static boolean isList(java.lang.Object);
+  public static boolean isMember(java.util.List, java.lang.Object);
+  public static java.lang.Object car(java.util.List);
+  public static java.util.List cdr(java.util.List);
+  public static java.lang.Object shift(java.util.List);
+  public static java.util.List unshift(java.util.List, java.lang.Object[]);
+  public static java.util.List cons(java.lang.Object, java.lang.Object);
+  public static java.lang.Object pop(java.util.List);
+  public static java.util.List push(java.util.List, java.lang.Object[]);
+  public static java.util.List append(java.lang.Object[]);
+  public static java.lang.String size(java.util.List);
+  public static java.util.List dup(java.util.List);
+  public static boolean isNull(java.lang.Object);
+}
+Compiled from "LoadLibrary.java"
+public class com.sdicons.scripty.cmdlib.LoadLibrary {
+  public com.sdicons.scripty.cmdlib.LoadLibrary();
+  public void load(java.lang.Object[], com.sdicons.scripty.parser.IContext, com.sdicons.scripty.parser.IEval) throws com.sdicons.scripty.parser.CommandException;
+  public void reload(com.sdicons.scripty.parser.IContext, com.sdicons.scripty.parser.IEval) throws com.sdicons.scripty.parser.CommandException;
+}
+Compiled from "LoadLibrary.java"
+public class com.sdicons.scripty.cmdlib.LoadLibrary$ClasspathLoader implements com.sdicons.scripty.cmdlib.LoadLibrary$Loader {
+  java.lang.String resource;
+  public com.sdicons.scripty.cmdlib.LoadLibrary$ClasspathLoader(java.lang.String);
+  public void checkValidity() throws com.sdicons.scripty.parser.CommandException;
+  public java.io.InputStream getStream() throws com.sdicons.scripty.parser.CommandException;
+  public java.lang.String toString();
+}
+Compiled from "LoadLibrary.java"
+public class com.sdicons.scripty.cmdlib.LoadLibrary$FileLoader implements com.sdicons.scripty.cmdlib.LoadLibrary$Loader {
+  public com.sdicons.scripty.cmdlib.LoadLibrary$FileLoader(java.io.File);
+  public com.sdicons.scripty.cmdlib.LoadLibrary$FileLoader(java.lang.String);
+  public void checkValidity() throws com.sdicons.scripty.parser.CommandException;
+  public java.io.InputStream getStream() throws com.sdicons.scripty.parser.CommandException;
+  public java.lang.String toString();
+}
+Compiled from "LoadLibrary.java"
+public interface com.sdicons.scripty.cmdlib.LoadLibrary$Loader {
+  public abstract java.io.InputStream getStream() throws com.sdicons.scripty.parser.CommandException;
+  public abstract void checkValidity() throws com.sdicons.scripty.parser.CommandException;
+}
+Compiled from "LoadLibrary.java"
+public class com.sdicons.scripty.cmdlib.LoadLibrary$LoaderType implements com.sdicons.scripty.spec.type.ITypeSpec {
+  public com.sdicons.scripty.cmdlib.LoadLibrary$LoaderType();
+  public java.lang.String getSpecName();
+  public java.lang.Object guard(java.lang.Object, com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.spec.type.TypeSpecException;
+}
+Compiled from "MapLibrary.java"
+public class com.sdicons.scripty.cmdlib.MapLibrary {
+  public com.sdicons.scripty.cmdlib.MapLibrary();
+  public static java.util.Map mapCreate(java.lang.Object[]) throws com.sdicons.scripty.parser.CommandException;
+  public static boolean isMap(java.lang.Object);
+  public static java.util.Map mapSet(java.util.Map<java.lang.Object, java.lang.Object>, java.lang.Object, java.lang.Object);
+  public static java.lang.Object mapGet(java.util.Map, java.lang.Object) throws com.sdicons.scripty.parser.CommandException;
+  public static boolean isKey(java.util.Map, java.lang.Object);
+  public static java.util.Set mapKeys(java.util.Map);
+  public static java.util.Collection mapValues(java.util.Map);
+  public static java.util.Map mapClear(java.util.Map);
+  public static int mapSize(java.util.Map);
+}
+Compiled from "MathLibrary.java"
+public class com.sdicons.scripty.cmdlib.MathLibrary {
+  public com.sdicons.scripty.cmdlib.MathLibrary();
+  public java.math.BigDecimal add(java.lang.Object[]);
+  public java.math.BigDecimal sub(java.lang.Object[]);
+  public java.math.BigDecimal div(java.lang.Object[]);
+  public java.math.BigDecimal mult(java.lang.Object[]);
+  public java.math.BigDecimal pow(java.math.BigDecimal, java.math.BigDecimal) throws com.sdicons.scripty.parser.CommandException;
+  public java.math.BigDecimal rem(java.math.BigDecimal, java.math.BigDecimal) throws com.sdicons.scripty.parser.CommandException;
+  public boolean isNumber(java.lang.Object, com.sdicons.scripty.parser.IContext);
+  public java.math.BigDecimal abs(java.math.BigDecimal);
+  public java.math.BigDecimal fin(java.math.BigDecimal);
+  public java.math.BigInteger toInt(java.math.BigDecimal);
+  public boolean isZero(java.math.BigDecimal);
+  public boolean isLT(java.math.BigDecimal, java.math.BigDecimal);
+  public boolean isLE(java.math.BigDecimal, java.math.BigDecimal);
+  public boolean isGT(java.math.BigDecimal, java.math.BigDecimal);
+  public boolean isGE(java.math.BigDecimal, java.math.BigDecimal);
+  public boolean isEQ(java.math.BigDecimal, java.math.BigDecimal);
+}
+Compiled from "PairLibrary.java"
+public class com.sdicons.scripty.cmdlib.PairLibrary {
+  public com.sdicons.scripty.cmdlib.PairLibrary();
+  public static boolean isPair(java.lang.Object[]) throws com.sdicons.scripty.parser.CommandException;
+  public static java.lang.Object pairLeft(java.lang.Object[]) throws com.sdicons.scripty.parser.CommandException;
+  public static java.lang.Object pairRight(java.lang.Object[]) throws com.sdicons.scripty.parser.CommandException;
+}
+Compiled from "PrintLibrary.java"
+public class com.sdicons.scripty.cmdlib.PrintLibrary {
+  public com.sdicons.scripty.cmdlib.PrintLibrary();
+  public static java.lang.String print(java.lang.Object[], java.io.PrintWriter);
+  public static java.lang.String println(java.lang.Object[], java.io.PrintWriter);
+}
+Compiled from "RecEditLibrary.java"
+class com.sdicons.scripty.cmdlib.PropertyPage extends javax.swing.JPanel {
+  public com.sdicons.scripty.cmdlib.PropertyPage(java.lang.String[], java.lang.Object[]);
+  public java.util.List<java.lang.Object> getValues();
+}
+Compiled from "RecEditLibrary.java"
+class com.sdicons.scripty.cmdlib.PropertyPage$1 extends javax.swing.table.DefaultTableModel {
+  public java.lang.String[] propNames;
+  final java.lang.String[] val$aPropNames;
+  final com.sdicons.scripty.cmdlib.PropertyPage this$0;
+  com.sdicons.scripty.cmdlib.PropertyPage$1(com.sdicons.scripty.cmdlib.PropertyPage, java.lang.Object[], int, java.lang.String[]);
+  public java.lang.Object getValueAt(int, int);
+  public boolean isCellEditable(int, int);
+}
+Compiled from "RecEditLibrary.java"
+public class com.sdicons.scripty.cmdlib.RecEditLibrary {
+  public com.sdicons.scripty.cmdlib.RecEditLibrary();
+  public static java.util.List recEdit(java.util.List<java.lang.String>, java.util.List<java.lang.Object>) throws com.sdicons.scripty.parser.CommandException;
+}
+Compiled from "RecEditLibrary.java"
+class com.sdicons.scripty.cmdlib.RowEditorModel {
+  public com.sdicons.scripty.cmdlib.RowEditorModel();
+  public void addEditorForRow(int, javax.swing.table.TableCellEditor);
+  public void removeEditorForRow(int);
+  public javax.swing.table.TableCellEditor getEditor(int);
+}
+Compiled from "StringLibrary.java"
+public class com.sdicons.scripty.cmdlib.StringLibrary {
+  public com.sdicons.scripty.cmdlib.StringLibrary();
+  public static boolean isString(java.lang.Object);
+  public static java.lang.String trim(java.lang.String);
+  public static java.lang.String format(java.lang.String, java.lang.Object[]);
+  public static java.util.List<java.lang.String> match(java.lang.String, java.lang.String);
+  public static java.util.List<java.util.List<java.lang.String>> matchRepeat(java.lang.String, java.lang.String);
+  public static boolean isMatch(java.lang.String, java.lang.String);
+}
+Compiled from "TeaLibrary.java"
+class com.sdicons.scripty.cmdlib.Tea {
+  public com.sdicons.scripty.cmdlib.Tea(int[]);
+  public com.sdicons.scripty.cmdlib.Tea(byte[]);
+  int[] encode(byte[], int);
+  public int[] encipher(int[]);
+  public byte[] decode(int[]);
+  public int[] decipher(int[]);
+}
+Compiled from "TeaLibrary.java"
+class com.sdicons.scripty.cmdlib.TeaEncrypter {
+  public com.sdicons.scripty.cmdlib.TeaEncrypter(byte[]);
+  public com.sdicons.scripty.cmdlib.TeaEncrypter();
+  public java.lang.String encrypt(java.lang.String);
+  public java.lang.String decrypt(java.lang.String);
+}
+Compiled from "TeaLibrary.java"
+public class com.sdicons.scripty.cmdlib.TeaLibrary {
+  public com.sdicons.scripty.cmdlib.TeaLibrary();
+  public static java.lang.String encrypt(java.lang.String, java.lang.String) throws com.sdicons.scripty.parser.CommandException;
+  public static java.lang.String decrypt(java.lang.String, java.lang.String) throws com.sdicons.scripty.parser.CommandException;
+}
+Compiled from "TestListLibrary.java"
+public class com.sdicons.scripty.cmdlib.TestListLibrary {
+  public com.sdicons.scripty.cmdlib.TestListLibrary();
+  public void initialize() throws com.sdicons.scripty.ExtensionException;
+  public void createList1() throws com.sdicons.scripty.ProcessorException;
+  public void createList2() throws com.sdicons.scripty.ProcessorException;
+  public void isEmpty1() throws com.sdicons.scripty.ProcessorException;
+  public void isEmpty2() throws com.sdicons.scripty.ProcessorException;
+  public void isEmpty3() throws com.sdicons.scripty.ProcessorException;
+  public void isList1() throws com.sdicons.scripty.ProcessorException;
+  public void isList2() throws com.sdicons.scripty.ProcessorException;
+  public void isList3() throws com.sdicons.scripty.ProcessorException;
+  public void isList4() throws com.sdicons.scripty.ProcessorException;
+  public void isList5() throws com.sdicons.scripty.ProcessorException;
+  public void isMember1() throws com.sdicons.scripty.ProcessorException;
+  public void isMember2() throws com.sdicons.scripty.ProcessorException;
+  public void car1() throws com.sdicons.scripty.ProcessorException;
+  public void car2() throws com.sdicons.scripty.ProcessorException;
+  public void car3() throws com.sdicons.scripty.ProcessorException;
+  public void car4() throws com.sdicons.scripty.ProcessorException;
+  public void cdr1() throws com.sdicons.scripty.ProcessorException;
+  public void cdr2() throws com.sdicons.scripty.ProcessorException;
+  public void shift1() throws com.sdicons.scripty.ProcessorException;
+  public void shift2() throws com.sdicons.scripty.ProcessorException;
+  public void shift3() throws com.sdicons.scripty.ProcessorException;
+  public void shift4() throws com.sdicons.scripty.ProcessorException;
+  public void unshift1() throws com.sdicons.scripty.ProcessorException;
+  public void cons1() throws com.sdicons.scripty.ProcessorException;
+  public void pop1() throws com.sdicons.scripty.ProcessorException;
+  public void pop2() throws com.sdicons.scripty.ProcessorException;
+  public void push1() throws com.sdicons.scripty.ProcessorException;
+  public void append1() throws com.sdicons.scripty.ProcessorException;
+  public void append2() throws com.sdicons.scripty.ProcessorException;
+  public void size1() throws com.sdicons.scripty.ProcessorException;
+  public void size2() throws com.sdicons.scripty.ProcessorException;
+  public void dup() throws com.sdicons.scripty.ProcessorException;
+  public void isNull() throws com.sdicons.scripty.ProcessorException;
+}
+Compiled from "TestMapLibrary.java"
+public class com.sdicons.scripty.cmdlib.TestMapLibrary {
+  public com.sdicons.scripty.cmdlib.TestMapLibrary();
+  public void initialize() throws com.sdicons.scripty.ExtensionException;
+  public void createMap1() throws com.sdicons.scripty.ProcessorException;
+  public void createMap2() throws com.sdicons.scripty.ProcessorException;
+  public void createMap3() throws com.sdicons.scripty.ProcessorException;
+  public void createMap4() throws com.sdicons.scripty.ProcessorException;
+  public void createMap5() throws com.sdicons.scripty.ProcessorException;
+  public void testMap1() throws com.sdicons.scripty.ProcessorException;
+  public void testMap2() throws com.sdicons.scripty.ProcessorException;
+  public void testMap3() throws com.sdicons.scripty.ProcessorException;
+  public void testMapSet1() throws com.sdicons.scripty.ProcessorException;
+  public void testMapGet1() throws com.sdicons.scripty.ProcessorException;
+  public void testMapGet2() throws com.sdicons.scripty.ProcessorException;
+  public void testMapKey1() throws com.sdicons.scripty.ProcessorException;
+  public void testMapKeys1() throws com.sdicons.scripty.ProcessorException;
+  public void testMapValues1() throws com.sdicons.scripty.ProcessorException;
+  public void testClear1() throws com.sdicons.scripty.ProcessorException;
+  public void testSize1() throws com.sdicons.scripty.ProcessorException;
+}
+Compiled from "TestMathLibrary.java"
+public class com.sdicons.scripty.cmdlib.TestMathLibrary {
+  public com.sdicons.scripty.cmdlib.TestMathLibrary();
+  public void initialize() throws com.sdicons.scripty.ExtensionException;
+  public void addNoArgs() throws com.sdicons.scripty.ProcessorException;
+  public void addOneArg() throws com.sdicons.scripty.ProcessorException;
+  public void addMultiple() throws com.sdicons.scripty.ProcessorException;
+  public void minusNoArg() throws com.sdicons.scripty.ProcessorException;
+  public void minusMultiple() throws com.sdicons.scripty.ProcessorException;
+  public void div() throws com.sdicons.scripty.ProcessorException;
+  public void mult() throws com.sdicons.scripty.ProcessorException;
+  public void pow1() throws com.sdicons.scripty.ProcessorException;
+  public void pow2() throws com.sdicons.scripty.ProcessorException;
+  public void rem() throws com.sdicons.scripty.ProcessorException;
+  public void abs1() throws com.sdicons.scripty.ProcessorException;
+  public void abs2() throws com.sdicons.scripty.ProcessorException;
+  public void test1() throws com.sdicons.scripty.ProcessorException;
+  public void test2() throws com.sdicons.scripty.ProcessorException;
+  public void lt1() throws com.sdicons.scripty.ProcessorException;
+  public void lt2() throws com.sdicons.scripty.ProcessorException;
+  public void lt3() throws com.sdicons.scripty.ProcessorException;
+  public void gt1() throws com.sdicons.scripty.ProcessorException;
+  public void gt2() throws com.sdicons.scripty.ProcessorException;
+  public void gt3() throws com.sdicons.scripty.ProcessorException;
+  public void le1() throws com.sdicons.scripty.ProcessorException;
+  public void le2() throws com.sdicons.scripty.ProcessorException;
+  public void le3() throws com.sdicons.scripty.ProcessorException;
+  public void ge1() throws com.sdicons.scripty.ProcessorException;
+  public void ge2() throws com.sdicons.scripty.ProcessorException;
+  public void ge3() throws com.sdicons.scripty.ProcessorException;
+  public void eq1() throws com.sdicons.scripty.ProcessorException;
+  public void eq2() throws com.sdicons.scripty.ProcessorException;
+  public void zero1() throws com.sdicons.scripty.ProcessorException;
+  public void zero2() throws com.sdicons.scripty.ProcessorException;
+  public void convert() throws com.sdicons.scripty.ProcessorException;
+  public void fin1() throws com.sdicons.scripty.ProcessorException;
+  public void fin2() throws com.sdicons.scripty.ProcessorException;
+}
+Compiled from "TestPairLibrary.java"
+public class com.sdicons.scripty.cmdlib.TestPairLibrary {
+  public com.sdicons.scripty.cmdlib.TestPairLibrary();
+  public void initialize() throws com.sdicons.scripty.ExtensionException;
+  public void testPairCreation() throws com.sdicons.scripty.ProcessorException;
+  public void isPair1() throws com.sdicons.scripty.ProcessorException;
+  public void isPair2() throws com.sdicons.scripty.ProcessorException;
+  public void isPair3() throws com.sdicons.scripty.ProcessorException;
+  public void pairLeft1() throws com.sdicons.scripty.ProcessorException;
+  public void pairRight1() throws com.sdicons.scripty.ProcessorException;
+}
+Compiled from "TestStringLibrary.java"
+public class com.sdicons.scripty.cmdlib.TestStringLibrary {
+  public com.sdicons.scripty.cmdlib.TestStringLibrary();
+  public void initialize() throws com.sdicons.scripty.ExtensionException;
+  public void isString1() throws com.sdicons.scripty.ProcessorException;
+  public void isString2() throws com.sdicons.scripty.ProcessorException;
+  public void isString3() throws com.sdicons.scripty.ProcessorException;
+  public void trim1() throws com.sdicons.scripty.ProcessorException;
+  public void format1() throws com.sdicons.scripty.ProcessorException;
+  public void match1() throws com.sdicons.scripty.ProcessorException;
+  public void match2() throws com.sdicons.scripty.ProcessorException;
+  public void isMatch1() throws com.sdicons.scripty.ProcessorException;
+  public void isMatch2() throws com.sdicons.scripty.ProcessorException;
+}
+Compiled from "TestTeaLibrary.java"
+public class com.sdicons.scripty.cmdlib.TestTeaLibrary {
+  public com.sdicons.scripty.cmdlib.TestTeaLibrary();
+  public void initialize() throws com.sdicons.scripty.ExtensionException;
+  public void encryptStandard() throws com.sdicons.scripty.ProcessorException;
+  public void decryptStandard() throws com.sdicons.scripty.ProcessorException;
+  public void encryptPwd() throws com.sdicons.scripty.ProcessorException;
+  public void decryptPwd() throws com.sdicons.scripty.ProcessorException;
+}
+Compiled from "AbstractEval.java"
+public abstract class com.sdicons.scripty.parser.AbstractEval implements com.sdicons.scripty.parser.IEval {
+  public com.sdicons.scripty.parser.AbstractEval(com.sdicons.scripty.parser.IContext);
+  public com.sdicons.scripty.parser.IContext getContext();
+  public void setContext(com.sdicons.scripty.parser.IContext);
+  protected static boolean boolEval(java.lang.Object);
+}
+Compiled from "Eval2.java"
+class com.sdicons.scripty.parser.AndHandler implements com.sdicons.scripty.parser.Eval2$IFrameHandler {
+  com.sdicons.scripty.parser.AndHandler();
+  public void init(com.sdicons.scripty.parser.Eval2$EvalStack, com.sdicons.scripty.parser.Eval2$StackFrame) throws com.sdicons.scripty.parser.CommandException;
+  public void handleFrame(com.sdicons.scripty.parser.IEval, com.sdicons.scripty.parser.Eval2$EvalStack, com.sdicons.scripty.parser.Eval2$StackFrame) throws com.sdicons.scripty.parser.CommandException;
+}
+Compiled from "Eval2.java"
+class com.sdicons.scripty.parser.AtomicHandler implements com.sdicons.scripty.parser.Eval2$IFrameHandler {
+  com.sdicons.scripty.parser.AtomicHandler();
+  public void init(com.sdicons.scripty.parser.Eval2$EvalStack, com.sdicons.scripty.parser.Eval2$StackFrame) throws com.sdicons.scripty.parser.CommandException;
+  public void handleFrame(com.sdicons.scripty.parser.IEval, com.sdicons.scripty.parser.Eval2$EvalStack, com.sdicons.scripty.parser.Eval2$StackFrame) throws com.sdicons.scripty.parser.CommandException;
+}
+Compiled from "BasicContext.java"
+public class com.sdicons.scripty.parser.BasicContext implements com.sdicons.scripty.parser.IContext {
+  public com.sdicons.scripty.parser.BasicContext();
+  public java.lang.Object getBinding(java.lang.String);
+  public void setBinding(java.lang.String, java.lang.Object) throws com.sdicons.scripty.parser.CommandException;
+  public boolean isBound(java.lang.String);
+  public void removeBinding(java.lang.String);
+  public com.sdicons.scripty.parser.IContext getRootContext();
+  public void defBinding(java.lang.String, java.lang.Object);
+  public java.util.Map<java.lang.String, java.lang.Object> dumpBindings();
+  public java.lang.String toString();
+}
+Compiled from "Buffer.java"
+public class com.sdicons.scripty.parser.Buffer implements com.sdicons.scripty.parser.IParserInput {
+  public com.sdicons.scripty.parser.Buffer(java.lang.String);
+  public char consumeChar();
+  public char peekChar();
+  public boolean eof();
+  public int getColNr();
+  public int getLineNr();
+}
+Compiled from "CommandException.java"
+public class com.sdicons.scripty.parser.CommandException extends java.lang.Exception {
+  public com.sdicons.scripty.parser.CommandException();
+  public com.sdicons.scripty.parser.CommandException(java.lang.String, java.lang.Throwable);
+  public com.sdicons.scripty.parser.CommandException(java.lang.String);
+  public com.sdicons.scripty.parser.CommandException(java.lang.Throwable);
+  public com.sdicons.scripty.parser.CommandException(com.sdicons.scripty.parser.Eval2$EvalStack);
+  public com.sdicons.scripty.parser.CommandException(java.lang.String, java.lang.Throwable, com.sdicons.scripty.parser.Eval2$EvalStack);
+  public com.sdicons.scripty.parser.CommandException(java.lang.String, com.sdicons.scripty.parser.Eval2$EvalStack);
+  public com.sdicons.scripty.parser.CommandException(java.lang.Throwable, com.sdicons.scripty.parser.Eval2$EvalStack);
+  public com.sdicons.scripty.parser.Eval2$EvalStack getStack();
+  public void setStack(com.sdicons.scripty.parser.Eval2$EvalStack);
+  public java.lang.String getMessage();
+}
+Compiled from "CommandRepository.java"
+public class com.sdicons.scripty.parser.CommandRepository {
+  protected java.util.Map<java.lang.String, com.sdicons.scripty.parser.ICommand> commands;
+  public com.sdicons.scripty.parser.CommandRepository();
+  public com.sdicons.scripty.parser.ICommand getCommand(java.lang.String);
+  public boolean hasCommand(java.lang.String);
+  public void registerCommand(java.lang.String, com.sdicons.scripty.parser.ICommand);
+  public java.util.Map<java.lang.String, com.sdicons.scripty.parser.ICommand> dumpCommands();
+}
+Compiled from "CompositeContext.java"
+public class com.sdicons.scripty.parser.CompositeContext implements com.sdicons.scripty.parser.IContext {
+  com.sdicons.scripty.parser.IContext main;
+  com.sdicons.scripty.parser.IContext backing;
+  public com.sdicons.scripty.parser.CompositeContext(com.sdicons.scripty.parser.IContext, com.sdicons.scripty.parser.IContext);
+  public java.lang.Object getBinding(java.lang.String);
+  public void removeBinding(java.lang.String);
+  public void setBinding(java.lang.String, java.lang.Object) throws com.sdicons.scripty.parser.CommandException;
+  public boolean isBound(java.lang.String);
+  public com.sdicons.scripty.parser.IContext getRootContext();
+  public void defBinding(java.lang.String, java.lang.Object);
+  public java.util.Map<java.lang.String, java.lang.Object> dumpBindings();
+  public java.lang.String toString();
+}
+Compiled from "Eval2.java"
+class com.sdicons.scripty.parser.DefunHandler implements com.sdicons.scripty.parser.Eval2$IFrameHandler {
+  com.sdicons.scripty.parser.DefunHandler();
+  public void init(com.sdicons.scripty.parser.Eval2$EvalStack, com.sdicons.scripty.parser.Eval2$StackFrame) throws com.sdicons.scripty.parser.CommandException;
+  public void handleFrame(com.sdicons.scripty.parser.IEval, com.sdicons.scripty.parser.Eval2$EvalStack, com.sdicons.scripty.parser.Eval2$StackFrame) throws com.sdicons.scripty.parser.CommandException;
+}
+Compiled from "Eval.java"
+public class com.sdicons.scripty.parser.Eval extends com.sdicons.scripty.parser.AbstractEval {
+  public com.sdicons.scripty.parser.Eval();
+  public com.sdicons.scripty.parser.Eval(com.sdicons.scripty.parser.IContext);
+  public void setCommandRepo(com.sdicons.scripty.parser.CommandRepository);
+  public com.sdicons.scripty.parser.CommandRepository getCommandRepo();
+  public void setMacroRepo(com.sdicons.scripty.parser.CommandRepository);
+  public com.sdicons.scripty.parser.CommandRepository getMacroRepo();
+  public java.lang.Object eval(java.lang.Object) throws com.sdicons.scripty.parser.CommandException;
+  public java.lang.Object eval(java.lang.Object, com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.parser.CommandException;
+}
+Compiled from "Eval2.java"
+public class com.sdicons.scripty.parser.Eval2 extends com.sdicons.scripty.parser.AbstractEval {
+  public com.sdicons.scripty.parser.Eval2();
+  public com.sdicons.scripty.parser.Eval2(com.sdicons.scripty.parser.IContext);
+  public void addEvalListener(com.sdicons.scripty.parser.Eval2$EvalListener);
+  public void removeEvalListener(com.sdicons.scripty.parser.Eval2$EvalListener);
+  public java.lang.Object eval(java.lang.Object) throws com.sdicons.scripty.parser.CommandException;
+  public java.lang.Object eval(java.lang.Object, com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.parser.CommandException;
+  protected java.lang.Object eval2(com.sdicons.scripty.parser.Eval2$EvalStack) throws com.sdicons.scripty.parser.CommandException;
+  public void setCommandRepo(com.sdicons.scripty.parser.CommandRepository);
+  public com.sdicons.scripty.parser.CommandRepository getCommandRepo();
+  public void setMacroRepo(com.sdicons.scripty.parser.CommandRepository);
+  public com.sdicons.scripty.parser.CommandRepository getMacroRepo();
+  public void step(com.sdicons.scripty.parser.Eval2$EvalStack) throws com.sdicons.scripty.parser.CommandException;
+  static {};
+}
+Compiled from "Eval2.java"
+public class com.sdicons.scripty.parser.Eval2$EvalEvent extends java.util.EventObject {
+  public com.sdicons.scripty.parser.Eval2$EvalEvent(java.lang.Object);
+  public com.sdicons.scripty.parser.Eval2$EvalStack getStack();
+  public java.lang.Object getResult();
+  public java.lang.Exception getException();
+  static com.sdicons.scripty.parser.Eval2$EvalStack access$102(com.sdicons.scripty.parser.Eval2$EvalEvent, com.sdicons.scripty.parser.Eval2$EvalStack);
+  static java.lang.Object access$202(com.sdicons.scripty.parser.Eval2$EvalEvent, java.lang.Object);
+  static java.lang.Exception access$302(com.sdicons.scripty.parser.Eval2$EvalEvent, java.lang.Exception);
+}
+Compiled from "Eval2.java"
+public interface com.sdicons.scripty.parser.Eval2$EvalListener {
+  public abstract void startEval(com.sdicons.scripty.parser.Eval2$EvalEvent);
+  public abstract void stepEvent(com.sdicons.scripty.parser.Eval2$EvalEvent);
+  public abstract void finishedEval(com.sdicons.scripty.parser.Eval2$EvalEvent);
+  public abstract void receivedException(com.sdicons.scripty.parser.Eval2$EvalEvent);
+}
+Compiled from "Eval2.java"
+public class com.sdicons.scripty.parser.Eval2$EvalStack {
+  public com.sdicons.scripty.parser.Eval2$EvalStack(com.sdicons.scripty.parser.Eval2$EvalStack);
+  public com.sdicons.scripty.parser.Eval2$EvalStack getPrevStack();
+  public boolean isEmpty();
+  public com.sdicons.scripty.parser.Eval2$StackFrame top();
+  public com.sdicons.scripty.parser.Eval2$StackFrame pop();
+  public void push(java.lang.Object, com.sdicons.scripty.parser.IContext);
+  public int size();
+  public com.sdicons.scripty.parser.Eval2$EvalStack merge(com.sdicons.scripty.parser.Eval2$EvalStack);
+  public boolean hasMoreSteps();
+  public void reset();
+  public void dropFrame();
+  public java.lang.String toString();
+}
+Compiled from "Eval2.java"
+public interface com.sdicons.scripty.parser.Eval2$IFrameHandler {
+  public abstract void init(com.sdicons.scripty.parser.Eval2$EvalStack, com.sdicons.scripty.parser.Eval2$StackFrame) throws com.sdicons.scripty.parser.CommandException;
+  public abstract void handleFrame(com.sdicons.scripty.parser.IEval, com.sdicons.scripty.parser.Eval2$EvalStack, com.sdicons.scripty.parser.Eval2$StackFrame) throws com.sdicons.scripty.parser.CommandException;
+}
+Compiled from "Eval2.java"
+public class com.sdicons.scripty.parser.Eval2$StackFrame {
+  public com.sdicons.scripty.parser.Eval2$StackFrame(java.lang.Object, com.sdicons.scripty.parser.IContext);
+  public com.sdicons.scripty.parser.IContext getCtx();
+  public int getDataptr();
+  public java.lang.Object getExpr();
+  public java.lang.Object[] getData();
+  public java.lang.Object getResult();
+  public boolean isEvaluated();
+  public void setResult(java.lang.Object);
+  public void pushData(java.lang.Object);
+  public void setDataPtr(int);
+  public void allocateData(int);
+  public void setHandler(com.sdicons.scripty.parser.Eval2$IFrameHandler);
+  public com.sdicons.scripty.parser.Eval2$IFrameHandler getHandler();
+  public void setCtx(com.sdicons.scripty.parser.IContext);
+  public void reset();
+  public void backStep();
+  static java.lang.Object[] access$000();
+  static {};
+}
+Compiled from "EvalTrace.java"
+public class com.sdicons.scripty.parser.EvalTrace {
+  public com.sdicons.scripty.parser.EvalTrace(com.sdicons.scripty.parser.Eval2, java.lang.Object);
+  public synchronized boolean hasMoreSteps();
+  public synchronized void step();
+  public synchronized com.sdicons.scripty.parser.Eval2$EvalStack getStack();
+  public synchronized java.lang.Object getResult();
+  public synchronized boolean hasResult();
+  public synchronized void terminate();
+  public synchronized boolean isTerminated();
+  public synchronized void reset();
+  public synchronized void dropFrame();
+  public synchronized void backStep();
+  public synchronized void run();
+  public synchronized void runToResult();
+  public synchronized void stepOut();
+  public synchronized void runToReady();
+  public synchronized void stepOver();
+  public synchronized boolean isExcepted();
+  public synchronized java.lang.Exception getException();
+  public com.sdicons.scripty.parser.EvalTrace$BreakpointSet getBreakpoints();
+  public void setBreakpoints(com.sdicons.scripty.parser.EvalTrace$BreakpointSet);
+  public boolean isBreakpointEncountered();
+  static boolean access$002(com.sdicons.scripty.parser.EvalTrace, boolean);
+  static boolean access$102(com.sdicons.scripty.parser.EvalTrace, boolean);
+  static boolean access$202(com.sdicons.scripty.parser.EvalTrace, boolean);
+  static java.lang.Object access$302(com.sdicons.scripty.parser.EvalTrace, java.lang.Object);
+  static com.sdicons.scripty.parser.Eval2$EvalStack access$402(com.sdicons.scripty.parser.EvalTrace, com.sdicons.scripty.parser.Eval2$EvalStack);
+  static java.lang.Exception access$502(com.sdicons.scripty.parser.EvalTrace, java.lang.Exception);
+  static com.sdicons.scripty.parser.Eval2$EvalStack access$400(com.sdicons.scripty.parser.EvalTrace);
+  static com.sdicons.scripty.parser.Eval2 access$600(com.sdicons.scripty.parser.EvalTrace);
+}
+Compiled from "EvalTrace.java"
+class com.sdicons.scripty.parser.EvalTrace$1 implements com.sdicons.scripty.parser.Eval2$EvalListener {
+  final com.sdicons.scripty.parser.EvalTrace this$0;
+  com.sdicons.scripty.parser.EvalTrace$1(com.sdicons.scripty.parser.EvalTrace);
+  public void finishedEval(com.sdicons.scripty.parser.Eval2$EvalEvent);
+  public void startEval(com.sdicons.scripty.parser.Eval2$EvalEvent);
+  public void stepEvent(com.sdicons.scripty.parser.Eval2$EvalEvent);
+  public void receivedException(com.sdicons.scripty.parser.Eval2$EvalEvent);
+}
+Compiled from "EvalTrace.java"
+class com.sdicons.scripty.parser.EvalTrace$2 extends java.lang.Thread {
+  final java.lang.Object val$aExpr;
+  final com.sdicons.scripty.parser.EvalTrace this$0;
+  com.sdicons.scripty.parser.EvalTrace$2(com.sdicons.scripty.parser.EvalTrace, java.lang.Object);
+  public void run();
+}
+Compiled from "EvalTrace.java"
+public class com.sdicons.scripty.parser.EvalTrace$BreakpointAnd implements com.sdicons.scripty.parser.EvalTrace$IBreakpoint {
+  public com.sdicons.scripty.parser.EvalTrace$BreakpointAnd(java.lang.String, java.util.List<com.sdicons.scripty.parser.EvalTrace$IBreakpoint>);
+  public java.lang.String getName();
+  public void setEnabled(boolean);
+  public boolean breakHere(com.sdicons.scripty.parser.Eval2$EvalStack);
+  public java.lang.String toString();
+}
+Compiled from "EvalTrace.java"
+public class com.sdicons.scripty.parser.EvalTrace$BreakpointFunc implements com.sdicons.scripty.parser.EvalTrace$IBreakpoint {
+  public com.sdicons.scripty.parser.EvalTrace$BreakpointFunc(java.lang.String, java.lang.String);
+  public void setEnabled(boolean);
+  public boolean breakHere(com.sdicons.scripty.parser.Eval2$EvalStack);
+  public java.lang.String getName();
+  public java.lang.String toString();
+}
+Compiled from "EvalTrace.java"
+public class com.sdicons.scripty.parser.EvalTrace$BreakpointNot implements com.sdicons.scripty.parser.EvalTrace$IBreakpoint {
+  public com.sdicons.scripty.parser.EvalTrace$BreakpointNot(java.lang.String, com.sdicons.scripty.parser.EvalTrace$IBreakpoint);
+  public java.lang.String getName();
+  public void setEnabled(boolean);
+  public boolean breakHere(com.sdicons.scripty.parser.Eval2$EvalStack);
+  public java.lang.String toString();
+}
+Compiled from "EvalTrace.java"
+public class com.sdicons.scripty.parser.EvalTrace$BreakpointOr implements com.sdicons.scripty.parser.EvalTrace$IBreakpoint {
+  public com.sdicons.scripty.parser.EvalTrace$BreakpointOr(java.lang.String, java.util.List<com.sdicons.scripty.parser.EvalTrace$IBreakpoint>);
+  public java.lang.String getName();
+  public void setEnabled(boolean);
+  public boolean breakHere(com.sdicons.scripty.parser.Eval2$EvalStack);
+  public java.lang.String toString();
+}
+Compiled from "EvalTrace.java"
+public class com.sdicons.scripty.parser.EvalTrace$BreakpointSet {
+  public com.sdicons.scripty.parser.EvalTrace$BreakpointSet();
+  public void addBreakpoint(com.sdicons.scripty.parser.EvalTrace$IBreakpoint);
+  public void removeBreakpoint(java.lang.String);
+  public void enableBreakpoint(java.lang.String, boolean);
+  public void removeAllBreakpoints();
+  public java.util.List<com.sdicons.scripty.parser.EvalTrace$IBreakpoint> findAllMatchingBreakpoints(com.sdicons.scripty.parser.Eval2$EvalStack);
+  public com.sdicons.scripty.parser.EvalTrace$IBreakpoint findFirstMatchingBreakpoint(com.sdicons.scripty.parser.Eval2$EvalStack);
+  public boolean breakHere(com.sdicons.scripty.parser.Eval2$EvalStack);
+  public java.lang.String toString();
+}
+Compiled from "EvalTrace.java"
+public class com.sdicons.scripty.parser.EvalTrace$BreakpointStackdepth implements com.sdicons.scripty.parser.EvalTrace$IBreakpoint {
+  public com.sdicons.scripty.parser.EvalTrace$BreakpointStackdepth(java.lang.String, int);
+  public java.lang.String getName();
+  public void setEnabled(boolean);
+  public boolean breakHere(com.sdicons.scripty.parser.Eval2$EvalStack);
+  public java.lang.String toString();
+}
+Compiled from "EvalTrace.java"
+public class com.sdicons.scripty.parser.EvalTrace$BreakpointWhen implements com.sdicons.scripty.parser.EvalTrace$IBreakpoint {
+  public com.sdicons.scripty.parser.EvalTrace$BreakpointWhen(java.lang.String, java.lang.Object);
+  public java.lang.String getName();
+  public void setEnabled(boolean);
+  public boolean breakHere(com.sdicons.scripty.parser.Eval2$EvalStack);
+  public java.lang.String toString();
+}
+Compiled from "EvalTrace.java"
+public interface com.sdicons.scripty.parser.EvalTrace$IBreakpoint {
+  public abstract java.lang.String getName();
+  public abstract void setEnabled(boolean);
+  public abstract boolean breakHere(com.sdicons.scripty.parser.Eval2$EvalStack);
+}
+Compiled from "Eval2.java"
+class com.sdicons.scripty.parser.GetHandler implements com.sdicons.scripty.parser.Eval2$IFrameHandler {
+  com.sdicons.scripty.parser.GetHandler();
+  public void init(com.sdicons.scripty.parser.Eval2$EvalStack, com.sdicons.scripty.parser.Eval2$StackFrame) throws com.sdicons.scripty.parser.CommandException;
+  public void handleFrame(com.sdicons.scripty.parser.IEval, com.sdicons.scripty.parser.Eval2$EvalStack, com.sdicons.scripty.parser.Eval2$StackFrame) throws com.sdicons.scripty.parser.CommandException;
+}
+Compiled from "ICommand.java"
+public interface com.sdicons.scripty.parser.ICommand {
+  public abstract java.lang.Object execute(com.sdicons.scripty.parser.IEval, com.sdicons.scripty.parser.IContext, java.lang.Object[]) throws com.sdicons.scripty.parser.CommandException;
+}
+Compiled from "IContext.java"
+public interface com.sdicons.scripty.parser.IContext {
+  public abstract void setBinding(java.lang.String, java.lang.Object) throws com.sdicons.scripty.parser.CommandException;
+  public abstract void defBinding(java.lang.String, java.lang.Object);
+  public abstract java.lang.Object getBinding(java.lang.String);
+  public abstract boolean isBound(java.lang.String);
+  public abstract void removeBinding(java.lang.String);
+  public abstract com.sdicons.scripty.parser.IContext getRootContext();
+  public abstract java.util.Map<java.lang.String, java.lang.Object> dumpBindings();
+}
+Compiled from "IEval.java"
+public interface com.sdicons.scripty.parser.IEval {
+  public abstract com.sdicons.scripty.parser.IContext getContext();
+  public abstract void setContext(com.sdicons.scripty.parser.IContext);
+  public abstract java.lang.Object eval(java.lang.Object) throws com.sdicons.scripty.parser.CommandException;
+  public abstract java.lang.Object eval(java.lang.Object, com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.parser.CommandException;
+  public abstract void setCommandRepo(com.sdicons.scripty.parser.CommandRepository);
+  public abstract com.sdicons.scripty.parser.CommandRepository getCommandRepo();
+  public abstract void setMacroRepo(com.sdicons.scripty.parser.CommandRepository);
+  public abstract com.sdicons.scripty.parser.CommandRepository getMacroRepo();
+}
+Compiled from "IParserInput.java"
+public interface com.sdicons.scripty.parser.IParserInput {
+  public abstract char consumeChar();
+  public abstract char peekChar();
+  public abstract boolean eof();
+  public abstract int getColNr();
+  public abstract int getLineNr();
+}
+Compiled from "Eval2.java"
+class com.sdicons.scripty.parser.IfHandler implements com.sdicons.scripty.parser.Eval2$IFrameHandler {
+  com.sdicons.scripty.parser.IfHandler();
+  public void init(com.sdicons.scripty.parser.Eval2$EvalStack, com.sdicons.scripty.parser.Eval2$StackFrame) throws com.sdicons.scripty.parser.CommandException;
+  public void handleFrame(com.sdicons.scripty.parser.IEval, com.sdicons.scripty.parser.Eval2$EvalStack, com.sdicons.scripty.parser.Eval2$StackFrame) throws com.sdicons.scripty.parser.CommandException;
+}
+Compiled from "Lambda.java"
+public class com.sdicons.scripty.parser.Lambda {
+  public com.sdicons.scripty.parser.Lambda(java.lang.String[], java.lang.Object, com.sdicons.scripty.parser.IContext);
+  public com.sdicons.scripty.parser.IContext createContext(java.lang.Object[], int, int) throws com.sdicons.scripty.parser.CommandException;
+  public java.lang.Object getExpr();
+}
+Compiled from "Eval2.java"
+class com.sdicons.scripty.parser.LambdaHandler implements com.sdicons.scripty.parser.Eval2$IFrameHandler {
+  com.sdicons.scripty.parser.LambdaHandler();
+  public void init(com.sdicons.scripty.parser.Eval2$EvalStack, com.sdicons.scripty.parser.Eval2$StackFrame) throws com.sdicons.scripty.parser.CommandException;
+  public void handleFrame(com.sdicons.scripty.parser.IEval, com.sdicons.scripty.parser.Eval2$EvalStack, com.sdicons.scripty.parser.Eval2$StackFrame) throws com.sdicons.scripty.parser.CommandException;
+}
+Compiled from "Eval2.java"
+class com.sdicons.scripty.parser.LetHandler implements com.sdicons.scripty.parser.Eval2$IFrameHandler {
+  com.sdicons.scripty.parser.LetHandler();
+  public void init(com.sdicons.scripty.parser.Eval2$EvalStack, com.sdicons.scripty.parser.Eval2$StackFrame) throws com.sdicons.scripty.parser.CommandException;
+  public void handleFrame(com.sdicons.scripty.parser.IEval, com.sdicons.scripty.parser.Eval2$EvalStack, com.sdicons.scripty.parser.Eval2$StackFrame) throws com.sdicons.scripty.parser.CommandException;
+}
+Compiled from "Eval2.java"
+class com.sdicons.scripty.parser.MacroHandler implements com.sdicons.scripty.parser.Eval2$IFrameHandler {
+  public com.sdicons.scripty.parser.MacroHandler();
+  public com.sdicons.scripty.parser.CommandRepository getMacros();
+  public void setMacros(com.sdicons.scripty.parser.CommandRepository);
+  public boolean hasMacro(java.lang.String);
+  public void init(com.sdicons.scripty.parser.Eval2$EvalStack, com.sdicons.scripty.parser.Eval2$StackFrame) throws com.sdicons.scripty.parser.CommandException;
+  public void handleFrame(com.sdicons.scripty.parser.IEval, com.sdicons.scripty.parser.Eval2$EvalStack, com.sdicons.scripty.parser.Eval2$StackFrame) throws com.sdicons.scripty.parser.CommandException;
+}
+Compiled from "MethodCommand.java"
+public class com.sdicons.scripty.parser.MethodCommand implements com.sdicons.scripty.parser.ICommand {
+  public com.sdicons.scripty.parser.MethodCommand(java.lang.reflect.Method);
+  public com.sdicons.scripty.parser.MethodCommand(java.lang.Object, java.lang.reflect.Method, com.sdicons.scripty.spec.args.IArgList, com.sdicons.scripty.spec.map.ArgListMapping, com.sdicons.scripty.spec.map.IResultMapping);
+  public java.lang.Object execute(com.sdicons.scripty.parser.IEval, com.sdicons.scripty.parser.IContext, java.lang.Object[]) throws com.sdicons.scripty.parser.CommandException;
+}
+Compiled from "Eval2.java"
+class com.sdicons.scripty.parser.NotHandler implements com.sdicons.scripty.parser.Eval2$IFrameHandler {
+  com.sdicons.scripty.parser.NotHandler();
+  public void init(com.sdicons.scripty.parser.Eval2$EvalStack, com.sdicons.scripty.parser.Eval2$StackFrame) throws com.sdicons.scripty.parser.CommandException;
+  public void handleFrame(com.sdicons.scripty.parser.IEval, com.sdicons.scripty.parser.Eval2$EvalStack, com.sdicons.scripty.parser.Eval2$StackFrame) throws com.sdicons.scripty.parser.CommandException;
+}
+Compiled from "Eval2.java"
+class com.sdicons.scripty.parser.OrHandler implements com.sdicons.scripty.parser.Eval2$IFrameHandler {
+  com.sdicons.scripty.parser.OrHandler();
+  public void init(com.sdicons.scripty.parser.Eval2$EvalStack, com.sdicons.scripty.parser.Eval2$StackFrame) throws com.sdicons.scripty.parser.CommandException;
+  public void handleFrame(com.sdicons.scripty.parser.IEval, com.sdicons.scripty.parser.Eval2$EvalStack, com.sdicons.scripty.parser.Eval2$StackFrame) throws com.sdicons.scripty.parser.CommandException;
+}
+Compiled from "Pair.java"
+public class com.sdicons.scripty.parser.Pair {
+  public com.sdicons.scripty.parser.Pair(java.lang.Object, java.lang.Object);
+  public java.lang.Object getLeft();
+  public java.lang.Object getRight();
+  public java.lang.String toString();
+}
+Compiled from "Eval2.java"
+class com.sdicons.scripty.parser.PairHandler implements com.sdicons.scripty.parser.Eval2$IFrameHandler {
+  com.sdicons.scripty.parser.PairHandler();
+  public void init(com.sdicons.scripty.parser.Eval2$EvalStack, com.sdicons.scripty.parser.Eval2$StackFrame) throws com.sdicons.scripty.parser.CommandException;
+  public void handleFrame(com.sdicons.scripty.parser.IEval, com.sdicons.scripty.parser.Eval2$EvalStack, com.sdicons.scripty.parser.Eval2$StackFrame) throws com.sdicons.scripty.parser.CommandException;
+}
+Compiled from "Parser.java"
+public class com.sdicons.scripty.parser.Parser {
+  public com.sdicons.scripty.parser.Parser();
+  public java.lang.Object parseExpression(com.sdicons.scripty.parser.IParserInput);
+  public java.lang.Object parseExpression(java.lang.String);
+  public void reset();
+}
+Compiled from "Eval2.java"
+class com.sdicons.scripty.parser.QuoteHandler implements com.sdicons.scripty.parser.Eval2$IFrameHandler {
+  com.sdicons.scripty.parser.QuoteHandler();
+  public void init(com.sdicons.scripty.parser.Eval2$EvalStack, com.sdicons.scripty.parser.Eval2$StackFrame) throws com.sdicons.scripty.parser.CommandException;
+  public void handleFrame(com.sdicons.scripty.parser.IEval, com.sdicons.scripty.parser.Eval2$EvalStack, com.sdicons.scripty.parser.Eval2$StackFrame) throws com.sdicons.scripty.parser.CommandException;
+}
+Compiled from "Eval2.java"
+class com.sdicons.scripty.parser.SetHandler implements com.sdicons.scripty.parser.Eval2$IFrameHandler {
+  com.sdicons.scripty.parser.SetHandler();
+  public void init(com.sdicons.scripty.parser.Eval2$EvalStack, com.sdicons.scripty.parser.Eval2$StackFrame) throws com.sdicons.scripty.parser.CommandException;
+  public void handleFrame(com.sdicons.scripty.parser.IEval, com.sdicons.scripty.parser.Eval2$EvalStack, com.sdicons.scripty.parser.Eval2$StackFrame) throws com.sdicons.scripty.parser.CommandException;
+  static {};
+}
+Compiled from "Eval2.java"
+class com.sdicons.scripty.parser.SetHandler$1 {
+}
+Compiled from "Eval2.java"
+class com.sdicons.scripty.parser.SetHandler$CoupleHandler implements com.sdicons.scripty.parser.Eval2$IFrameHandler {
+  public void handleFrame(com.sdicons.scripty.parser.IEval, com.sdicons.scripty.parser.Eval2$EvalStack, com.sdicons.scripty.parser.Eval2$StackFrame) throws com.sdicons.scripty.parser.CommandException;
+  public void init(com.sdicons.scripty.parser.Eval2$EvalStack, com.sdicons.scripty.parser.Eval2$StackFrame) throws com.sdicons.scripty.parser.CommandException;
+  com.sdicons.scripty.parser.SetHandler$CoupleHandler(com.sdicons.scripty.parser.SetHandler$1);
+}
+Compiled from "Eval2.java"
+class com.sdicons.scripty.parser.SetHandler$PairHandler implements com.sdicons.scripty.parser.Eval2$IFrameHandler {
+  public void handleFrame(com.sdicons.scripty.parser.IEval, com.sdicons.scripty.parser.Eval2$EvalStack, com.sdicons.scripty.parser.Eval2$StackFrame) throws com.sdicons.scripty.parser.CommandException;
+  public void init(com.sdicons.scripty.parser.Eval2$EvalStack, com.sdicons.scripty.parser.Eval2$StackFrame) throws com.sdicons.scripty.parser.CommandException;
+  com.sdicons.scripty.parser.SetHandler$PairHandler(com.sdicons.scripty.parser.SetHandler$1);
+}
+Compiled from "Eval2.java"
+class com.sdicons.scripty.parser.StandardHandler implements com.sdicons.scripty.parser.Eval2$IFrameHandler {
+  public com.sdicons.scripty.parser.StandardHandler();
+  public com.sdicons.scripty.parser.CommandRepository getCommands();
+  public void setCommands(com.sdicons.scripty.parser.CommandRepository);
+  public void init(com.sdicons.scripty.parser.Eval2$EvalStack, com.sdicons.scripty.parser.Eval2$StackFrame) throws com.sdicons.scripty.parser.CommandException;
+  public void handleFrame(com.sdicons.scripty.parser.IEval, com.sdicons.scripty.parser.Eval2$EvalStack, com.sdicons.scripty.parser.Eval2$StackFrame) throws com.sdicons.scripty.parser.CommandException;
+}
+Compiled from "StreamBuffer.java"
+public class com.sdicons.scripty.parser.StreamBuffer implements com.sdicons.scripty.parser.IParserInput {
+  public com.sdicons.scripty.parser.StreamBuffer(java.io.InputStream);
+  public com.sdicons.scripty.parser.StreamBuffer(java.io.Reader);
+  public char consumeChar();
+  public boolean eof();
+  public int getColNr();
+  public int getLineNr();
+  public char peekChar();
+}
+Compiled from "TestEval.java"
+public class com.sdicons.scripty.parser.TestEval {
+  protected com.sdicons.scripty.parser.Parser parser;
+  protected com.sdicons.scripty.parser.IEval eval;
+  public com.sdicons.scripty.parser.TestEval();
+  public void setup();
+  public void createBinding() throws com.sdicons.scripty.parser.CommandException;
+  public void changeBinding();
+  public void let() throws com.sdicons.scripty.parser.CommandException;
+  public void lambda() throws com.sdicons.scripty.parser.CommandException;
+  public void booleanstuff() throws com.sdicons.scripty.parser.CommandException, com.sdicons.scripty.ExtensionException;
+  public void call() throws com.sdicons.scripty.parser.CommandException, com.sdicons.scripty.ExtensionException;
+  public void eval() throws com.sdicons.scripty.parser.CommandException, com.sdicons.scripty.ExtensionException;
+  public void macro() throws com.sdicons.scripty.parser.CommandException;
+}
+Compiled from "TestEval.java"
+class com.sdicons.scripty.parser.TestEval$1 implements com.sdicons.scripty.parser.ICommand {
+  final com.sdicons.scripty.parser.TestEval this$0;
+  com.sdicons.scripty.parser.TestEval$1(com.sdicons.scripty.parser.TestEval);
+  public java.lang.Object execute(com.sdicons.scripty.parser.IEval, com.sdicons.scripty.parser.IContext, java.lang.Object[]) throws com.sdicons.scripty.parser.CommandException;
+}
+Compiled from "TestEval2.java"
+public class com.sdicons.scripty.parser.TestEval2 extends com.sdicons.scripty.parser.TestEval {
+  public com.sdicons.scripty.parser.TestEval2();
+  public void setup();
+}
+Compiled from "TestEvalTrace.java"
+public class com.sdicons.scripty.parser.TestEvalTrace {
+  public com.sdicons.scripty.parser.TestEvalTrace();
+  public void testTrace() throws com.sdicons.scripty.parser.CommandException, com.sdicons.scripty.ExtensionException, java.lang.InterruptedException;
+}
+Compiled from "TestParser.java"
+public class com.sdicons.scripty.parser.TestParser {
+  public com.sdicons.scripty.parser.TestParser();
+  public void setup();
+  public void atoms();
+  public void i18n();
+  public void simpleList();
+  public void simpleList2();
+  public void simpleList3();
+  public void nestedList();
+  public void quotedList();
+  public void pairing();
+  public void openList();
+  public void openList2();
+  public void parseFile();
+}
+Compiled from "Eval2.java"
+class com.sdicons.scripty.parser.TimerHandler implements com.sdicons.scripty.parser.Eval2$IFrameHandler {
+  com.sdicons.scripty.parser.TimerHandler();
+  public void init(com.sdicons.scripty.parser.Eval2$EvalStack, com.sdicons.scripty.parser.Eval2$StackFrame) throws com.sdicons.scripty.parser.CommandException;
+  public void handleFrame(com.sdicons.scripty.parser.IEval, com.sdicons.scripty.parser.Eval2$EvalStack, com.sdicons.scripty.parser.Eval2$StackFrame) throws com.sdicons.scripty.parser.CommandException;
+}
+Compiled from "Token.java"
+public class com.sdicons.scripty.parser.Token {
+  public com.sdicons.scripty.parser.Token(com.sdicons.scripty.parser.Token$TokenType, java.lang.String, int, int);
+  public com.sdicons.scripty.parser.Token$TokenType getType();
+  public java.lang.String getValue();
+  public boolean isWhitespace();
+  public boolean isErroneous();
+  public boolean isError();
+  public boolean isEof();
+  public boolean isBeginList();
+  public boolean isEndList();
+  public boolean isString();
+  public boolean isQuote();
+  public boolean isPair();
+  public int getCol();
+  public int getLine();
+}
+Compiled from "Token.java"
+public final class com.sdicons.scripty.parser.Token$TokenType extends java.lang.Enum<com.sdicons.scripty.parser.Token$TokenType> {
+  public static final com.sdicons.scripty.parser.Token$TokenType beginlist;
+  public static final com.sdicons.scripty.parser.Token$TokenType endlist;
+  public static final com.sdicons.scripty.parser.Token$TokenType string;
+  public static final com.sdicons.scripty.parser.Token$TokenType pair;
+  public static final com.sdicons.scripty.parser.Token$TokenType whitespace;
+  public static final com.sdicons.scripty.parser.Token$TokenType quote;
+  public static final com.sdicons.scripty.parser.Token$TokenType error;
+  public static final com.sdicons.scripty.parser.Token$TokenType eof;
+  public static com.sdicons.scripty.parser.Token$TokenType[] values();
+  public static com.sdicons.scripty.parser.Token$TokenType valueOf(java.lang.String);
+  static {};
+}
+Compiled from "Eval2.java"
+class com.sdicons.scripty.parser.WhileHandler implements com.sdicons.scripty.parser.Eval2$IFrameHandler {
+  com.sdicons.scripty.parser.WhileHandler();
+  public void init(com.sdicons.scripty.parser.Eval2$EvalStack, com.sdicons.scripty.parser.Eval2$StackFrame) throws com.sdicons.scripty.parser.CommandException;
+  public void handleFrame(com.sdicons.scripty.parser.IEval, com.sdicons.scripty.parser.Eval2$EvalStack, com.sdicons.scripty.parser.Eval2$StackFrame) throws com.sdicons.scripty.parser.CommandException;
+}
+Compiled from "ExtensionRepositoryBuilder.java"
+public class com.sdicons.scripty.repl.ExtensionRepositoryBuilder implements com.sdicons.scripty.IExtensions {
+  public com.sdicons.scripty.repl.ExtensionRepositoryBuilder();
+  public void addCommand(java.lang.String, com.sdicons.scripty.parser.ICommand) throws com.sdicons.scripty.ExtensionException;
+  public void addMacro(java.lang.String, com.sdicons.scripty.parser.ICommand) throws com.sdicons.scripty.ExtensionException;
+  public void addLibraryClasses(java.lang.Class...) throws com.sdicons.scripty.ExtensionException;
+  public void addLibraryInstances(java.lang.Object...) throws com.sdicons.scripty.ExtensionException;
+  public com.sdicons.scripty.parser.CommandRepository getCommandRepository();
+  public com.sdicons.scripty.parser.CommandRepository getMacroRepository();
+  public void setCommandRepository(com.sdicons.scripty.parser.CommandRepository);
+  public void setMacroRepository(com.sdicons.scripty.parser.CommandRepository);
+}
+Compiled from "ReplEngine.java"
+public class com.sdicons.scripty.repl.ReplEngine implements com.sdicons.scripty.IExtensions {
+  public static final java.lang.String INPUT;
+  public static final java.lang.String OUTPUT;
+  public static final java.lang.String ERROR;
+  public com.sdicons.scripty.repl.ReplEngine();
+  protected void handleLine(java.lang.String) throws com.sdicons.scripty.repl.ReplEngineException;
+  public void startInteractive();
+  public void startInteractive(java.io.InputStream, java.io.OutputStream, java.io.OutputStream);
+  public java.lang.Object startNonInteractive(java.lang.String) throws com.sdicons.scripty.repl.ReplEngineException;
+  public java.lang.Object startNonInteractive(java.io.InputStream, java.io.OutputStream, java.io.OutputStream) throws com.sdicons.scripty.repl.ReplEngineException;
+  public java.lang.Object startNonInteractive(java.io.InputStream) throws com.sdicons.scripty.repl.ReplEngineException;
+  public java.lang.Object startNonInteractive(java.io.Reader) throws com.sdicons.scripty.repl.ReplEngineException;
+  public java.lang.Object startNonInteractive(java.io.Reader, java.io.Writer, java.io.Writer) throws com.sdicons.scripty.repl.ReplEngineException;
+  public void stop();
+  public java.lang.String getPrompt();
+  public void setPrompt(java.lang.String);
+  public java.lang.Object exec(java.lang.String) throws com.sdicons.scripty.parser.CommandException;
+  public com.sdicons.scripty.parser.IContext getContext();
+  public void setContext(com.sdicons.scripty.parser.IContext);
+  public void addCommand(java.lang.String, com.sdicons.scripty.parser.ICommand) throws com.sdicons.scripty.ExtensionException;
+  public void addMacro(java.lang.String, com.sdicons.scripty.parser.ICommand) throws com.sdicons.scripty.ExtensionException;
+  public void addLibraryClasses(java.lang.Class...) throws com.sdicons.scripty.ExtensionException;
+  public void addLibraryInstances(java.lang.Object...) throws com.sdicons.scripty.ExtensionException;
+  public com.sdicons.scripty.parser.CommandRepository getCommandRepository();
+  public void setCommandRepository(com.sdicons.scripty.parser.CommandRepository);
+  public com.sdicons.scripty.parser.CommandRepository getMacroRepository();
+  public void setMacroRepository(com.sdicons.scripty.parser.CommandRepository);
+}
+Compiled from "ReplEngine.java"
+class com.sdicons.scripty.repl.ReplEngine$NullWriter extends java.io.Writer {
+  public com.sdicons.scripty.repl.ReplEngine$NullWriter();
+  public com.sdicons.scripty.repl.ReplEngine$NullWriter(java.lang.Object);
+  public com.sdicons.scripty.repl.ReplEngine$NullWriter(java.io.Writer);
+  public java.io.Writer getParentWriter();
+  public void write(int) throws java.io.IOException;
+  public void write(char[]) throws java.io.IOException;
+  public void write(java.lang.String) throws java.io.IOException;
+  public void write(java.lang.String, int, int) throws java.io.IOException;
+  public java.io.Writer append(java.lang.CharSequence) throws java.io.IOException;
+  public java.io.Writer append(java.lang.CharSequence, int, int) throws java.io.IOException;
+  public java.io.Writer append(char) throws java.io.IOException;
+  public void write(char[], int, int) throws java.io.IOException;
+  public void flush() throws java.io.IOException;
+  public void close() throws java.io.IOException;
+  public java.lang.Appendable append(char) throws java.io.IOException;
+  public java.lang.Appendable append(java.lang.CharSequence, int, int) throws java.io.IOException;
+  public java.lang.Appendable append(java.lang.CharSequence) throws java.io.IOException;
+}
+Compiled from "ReplEngineException.java"
+public class com.sdicons.scripty.repl.ReplEngineException extends java.lang.Exception {
+  public com.sdicons.scripty.repl.ReplEngineException();
+  public com.sdicons.scripty.repl.ReplEngineException(int, int, java.lang.String);
+  public com.sdicons.scripty.repl.ReplEngineException(int, int, java.lang.String, java.lang.Throwable);
+  public com.sdicons.scripty.repl.ReplEngineException(int, int, java.lang.Throwable);
+  public java.lang.String getMessage();
+}
+Compiled from "TestSpecs.java"
+public class com.sdicons.scripty.spec.TestSpecs {
+  public com.sdicons.scripty.spec.TestSpecs();
+  public void testClassSpec() throws com.sdicons.scripty.spec.type.TypeSpecException;
+  public void testIntList() throws com.sdicons.scripty.spec.type.TypeSpecException;
+  public void testNamedArgs() throws com.sdicons.scripty.spec.args.ArgSpecException;
+}
+Compiled from "ArgListBuilderUtil.java"
+public class com.sdicons.scripty.spec.args.ArgListBuilderUtil {
+  public com.sdicons.scripty.spec.args.ArgListBuilderUtil();
+  public static com.sdicons.scripty.spec.args.ArgListBuilderUtil$ArgListTuple buildArgList(com.sdicons.scripty.annot.ScriptyStdArgList) throws com.sdicons.scripty.spec.args.ArgSpecException;
+  public static com.sdicons.scripty.spec.args.ArgListBuilderUtil$ArgListTuple buildArgList(com.sdicons.scripty.annot.ScriptyVarArgList) throws com.sdicons.scripty.spec.args.ArgSpecException;
+  static {};
+}
+Compiled from "ArgListBuilderUtil.java"
+class com.sdicons.scripty.spec.args.ArgListBuilderUtil$1 {
+}
+Compiled from "ArgListBuilderUtil.java"
+public class com.sdicons.scripty.spec.args.ArgListBuilderUtil$ArgListTuple extends com.sdicons.scripty.spec.args.ArgListBuilderUtil$Tuple<com.sdicons.scripty.spec.args.IArgList, java.util.Map<java.lang.String, com.sdicons.scripty.spec.map.IArgMapping>> {
+  public com.sdicons.scripty.spec.args.ArgListBuilderUtil$ArgListTuple(com.sdicons.scripty.spec.args.IArgList, java.util.Map<java.lang.String, com.sdicons.scripty.spec.map.IArgMapping>);
+}
+Compiled from "ArgListBuilderUtil.java"
+public class com.sdicons.scripty.spec.args.ArgListBuilderUtil$Tuple<X, Y> {
+  public com.sdicons.scripty.spec.args.ArgListBuilderUtil$Tuple(X, Y);
+  public X getX();
+  public Y getY();
+}
+Compiled from "ArgListBuilderUtil.java"
+public class com.sdicons.scripty.spec.args.ArgListBuilderUtil$TypeCommands {
+  public com.sdicons.scripty.spec.args.ArgListBuilderUtil$TypeCommands();
+  public static com.sdicons.scripty.spec.args.ArgListBuilderUtil$TypeTuple bigDecimalType(java.lang.Object[], com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.parser.CommandException;
+  public static com.sdicons.scripty.spec.args.ArgListBuilderUtil$TypeTuple integerType(java.lang.Object[], com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.parser.CommandException;
+  public static com.sdicons.scripty.spec.args.ArgListBuilderUtil$TypeTuple bigIntegerType(java.lang.Object[], com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.parser.CommandException;
+  public static com.sdicons.scripty.spec.args.ArgListBuilderUtil$TypeTuple booleanType(java.lang.Object[], com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.parser.CommandException;
+  public static com.sdicons.scripty.spec.args.ArgListBuilderUtil$TypeTuple byteType(java.lang.Object[], com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.parser.CommandException;
+  public static com.sdicons.scripty.spec.args.ArgListBuilderUtil$TypeTuple listOfType(com.sdicons.scripty.parser.IContext, java.lang.Object[]) throws com.sdicons.scripty.parser.CommandException;
+  public static com.sdicons.scripty.spec.args.ArgListBuilderUtil$TypeTuple doubleType(java.lang.Object[], com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.parser.CommandException;
+  public static com.sdicons.scripty.spec.args.ArgListBuilderUtil$TypeTuple floatType(java.lang.Object[], com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.parser.CommandException;
+  public static com.sdicons.scripty.spec.args.ArgListBuilderUtil$TypeTuple instanceOrBindingType(com.sdicons.scripty.parser.IContext, java.lang.Object[]) throws com.sdicons.scripty.parser.CommandException;
+  public static com.sdicons.scripty.spec.args.ArgListBuilderUtil$TypeTuple instanceType(com.sdicons.scripty.parser.IContext, java.lang.Object[]) throws com.sdicons.scripty.parser.CommandException;
+  public static com.sdicons.scripty.spec.args.ArgListBuilderUtil$TypeTuple anyType(com.sdicons.scripty.parser.IContext, java.lang.Object[]) throws com.sdicons.scripty.parser.CommandException;
+  public static com.sdicons.scripty.spec.args.ArgListBuilderUtil$TypeTuple integerRangeType(com.sdicons.scripty.parser.IContext, java.lang.Object[]) throws com.sdicons.scripty.parser.CommandException;
+  public static com.sdicons.scripty.spec.args.ArgListBuilderUtil$TypeTuple longType(java.lang.Object[], com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.parser.CommandException;
+  public static com.sdicons.scripty.spec.args.ArgListBuilderUtil$TypeTuple shortType(java.lang.Object[], com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.parser.CommandException;
+  public static com.sdicons.scripty.spec.args.ArgListBuilderUtil$TypeTuple stringType(java.lang.Object[], com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.parser.CommandException;
+  public static com.sdicons.scripty.spec.args.ArgListBuilderUtil$TypeTuple oneOfType(com.sdicons.scripty.parser.IContext, java.lang.Object[]) throws com.sdicons.scripty.parser.CommandException;
+  public static com.sdicons.scripty.spec.args.ArgListBuilderUtil$TypeTuple customSpec(com.sdicons.scripty.parser.IContext, java.lang.Object[]) throws com.sdicons.scripty.parser.CommandException;
+  public static com.sdicons.scripty.spec.args.ArgListBuilderUtil$TypeTuple enumType(com.sdicons.scripty.parser.IContext, java.lang.Object[]) throws com.sdicons.scripty.parser.CommandException;
+  static {};
+}
+Compiled from "ArgListBuilderUtil.java"
+class com.sdicons.scripty.spec.args.ArgListBuilderUtil$TypeTuple extends com.sdicons.scripty.spec.args.ArgListBuilderUtil$Tuple<com.sdicons.scripty.spec.type.ITypeSpec, java.util.Map<java.lang.String, com.sdicons.scripty.spec.map.IArgMapping>> {
+  com.sdicons.scripty.spec.args.ArgListBuilderUtil$TypeTuple(com.sdicons.scripty.spec.type.ITypeSpec, java.util.Map, com.sdicons.scripty.spec.args.ArgListBuilderUtil$1);
+}
+Compiled from "ArgSpecException.java"
+public class com.sdicons.scripty.spec.args.ArgSpecException extends java.lang.Exception {
+  public com.sdicons.scripty.spec.args.ArgSpecException();
+  public com.sdicons.scripty.spec.args.ArgSpecException(java.lang.String);
+  public com.sdicons.scripty.spec.args.ArgSpecException(java.lang.Throwable);
+  public com.sdicons.scripty.spec.args.ArgSpecException(java.lang.String, java.lang.Throwable);
+}
+Compiled from "FixedArg.java"
+public class com.sdicons.scripty.spec.args.FixedArg implements com.sdicons.scripty.spec.args.IArgSpec {
+  public com.sdicons.scripty.spec.args.FixedArg(com.sdicons.scripty.spec.type.ITypeSpec);
+  public java.lang.String getSpecName();
+  public java.lang.Object guard(java.lang.Object[], int, com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.spec.args.ArgSpecException;
+}
+Compiled from "IArgList.java"
+public interface com.sdicons.scripty.spec.args.IArgList {
+  public abstract java.lang.Object[] guard(java.lang.Object[], com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.spec.args.ArgSpecException;
+}
+Compiled from "IArgSpec.java"
+public interface com.sdicons.scripty.spec.args.IArgSpec<T> {
+  public abstract T guard(java.lang.Object[], int, com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.spec.args.ArgSpecException;
+  public abstract java.lang.String getSpecName();
+}
+Compiled from "NamedArg.java"
+public class com.sdicons.scripty.spec.args.NamedArg implements com.sdicons.scripty.spec.args.IArgSpec {
+  public com.sdicons.scripty.spec.args.NamedArg(java.lang.String, com.sdicons.scripty.spec.type.ITypeSpec, java.lang.Object, boolean);
+  public java.lang.String getSpecName();
+  public java.lang.Object guard(java.lang.Object[], int, com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.spec.args.ArgSpecException;
+  public java.lang.String getName();
+}
+Compiled from "OptionalArg.java"
+public class com.sdicons.scripty.spec.args.OptionalArg implements com.sdicons.scripty.spec.args.IArgSpec {
+  public com.sdicons.scripty.spec.args.OptionalArg(com.sdicons.scripty.spec.type.ITypeSpec, java.lang.Object);
+  public java.lang.String getSpecName();
+  public java.lang.Object guard(java.lang.Object[], int, com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.spec.args.ArgSpecException;
+}
+Compiled from "StdArgList.java"
+public class com.sdicons.scripty.spec.args.StdArgList implements com.sdicons.scripty.spec.args.IArgList {
+  public static final com.sdicons.scripty.spec.args.IArgList NOARG;
+  public com.sdicons.scripty.spec.args.StdArgList(com.sdicons.scripty.spec.args.FixedArg[], com.sdicons.scripty.spec.args.OptionalArg[], com.sdicons.scripty.spec.args.NamedArg[]);
+  public java.lang.Object[] guard(java.lang.Object[], com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.spec.args.ArgSpecException;
+  static {};
+}
+Compiled from "TestArgListBuilderUtil.java"
+public class com.sdicons.scripty.spec.args.TestArgListBuilderUtil {
+  public com.sdicons.scripty.spec.args.TestArgListBuilderUtil();
+  public void initialize() throws com.sdicons.scripty.ExtensionException;
+  public void testAny1() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testAny2() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testAny3() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testBigDecimal1() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testBigDecimal2() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testInteger1() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testInteger2() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testIntegerRange1() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testIntegerRange2() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testIntegerRange3() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testBigInteger1() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testBigInteger2() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testBoolean1() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testBoolean2() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testBoolean3() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testByte1() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testByte2() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testByte3() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testDouble1() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testDouble2() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testFloat1() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testFloat2() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testLong1() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testLong2() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testShort1() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testShort2() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testString1() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testString2() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testList1() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testList2() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testList3() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testList4() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testList5() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testList6() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testList7() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testList8() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testList9() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testBinding1() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testBinding2() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testBinding3() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testBinding4() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testInstance1() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testInstance2() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testInstance3() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testInstance4() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testUnion1() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testUnion2() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testUnion3() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testUnion4() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testCustom1() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testCustom2() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testEnum1() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+  public void testEnum2() throws com.sdicons.scripty.ExtensionException, com.sdicons.scripty.ProcessorException;
+}
+Compiled from "TestArgListBuilderUtil.java"
+public class com.sdicons.scripty.spec.args.TestArgListBuilderUtil$AnyTypeLibrary {
+  public com.sdicons.scripty.spec.args.TestArgListBuilderUtil$AnyTypeLibrary();
+  public static java.lang.Object command(java.lang.Object);
+  public static java.lang.Object command2(java.lang.Object);
+}
+Compiled from "TestArgListBuilderUtil.java"
+public class com.sdicons.scripty.spec.args.TestArgListBuilderUtil$CustomSpec implements com.sdicons.scripty.spec.type.ITypeSpec {
+  public com.sdicons.scripty.spec.args.TestArgListBuilderUtil$CustomSpec();
+  public java.lang.Object guard(java.lang.Object, com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.spec.type.TypeSpecException;
+  public java.lang.String getSpecName();
+}
+Compiled from "TestArgListBuilderUtil.java"
+public class com.sdicons.scripty.spec.args.TestArgListBuilderUtil$CustomTypes {
+  public com.sdicons.scripty.spec.args.TestArgListBuilderUtil$CustomTypes();
+  public java.lang.Object custom(java.lang.Object);
+}
+Compiled from "TestArgListBuilderUtil.java"
+public class com.sdicons.scripty.spec.args.TestArgListBuilderUtil$EnumTypes {
+  public com.sdicons.scripty.spec.args.TestArgListBuilderUtil$EnumTypes();
+  public java.lang.Object enumtype(java.lang.Object);
+}
+Compiled from "TestArgListBuilderUtil.java"
+public class com.sdicons.scripty.spec.args.TestArgListBuilderUtil$InstanceTypes {
+  public com.sdicons.scripty.spec.args.TestArgListBuilderUtil$InstanceTypes();
+  public java.lang.Object binding(java.lang.Integer);
+  public java.lang.Object instance(java.util.List);
+  public java.lang.Object instance2(java.util.List);
+}
+Compiled from "TestArgListBuilderUtil.java"
+public class com.sdicons.scripty.spec.args.TestArgListBuilderUtil$ListTypes {
+  public com.sdicons.scripty.spec.args.TestArgListBuilderUtil$ListTypes();
+  public java.lang.Object unboundedList(java.util.List);
+  public java.lang.Object boundedList(java.util.List);
+}
+Compiled from "TestArgListBuilderUtil.java"
+public class com.sdicons.scripty.spec.args.TestArgListBuilderUtil$StandardTypes {
+  public com.sdicons.scripty.spec.args.TestArgListBuilderUtil$StandardTypes();
+  public java.lang.Object doBigDecimal(java.math.BigDecimal);
+  public java.lang.Object doInteger(java.lang.Integer);
+  public java.lang.Object doIntegerRange(java.lang.Integer);
+  public java.lang.Object doBigInteger(java.math.BigInteger);
+  public java.lang.Object doBoolean(java.lang.Boolean);
+  public java.lang.Object doByte(java.lang.Byte);
+  public java.lang.Object doByte(java.lang.Double);
+  public java.lang.Object doFloat(java.lang.Float);
+  public java.lang.Object doLong(java.lang.Long);
+  public java.lang.Object doShort(java.lang.Short);
+  public java.lang.Object doString(java.lang.String);
+}
+Compiled from "TestArgListBuilderUtil.java"
+public class com.sdicons.scripty.spec.args.TestArgListBuilderUtil$UnionTypes {
+  public com.sdicons.scripty.spec.args.TestArgListBuilderUtil$UnionTypes();
+  public java.lang.Object union(java.lang.Object);
+}
+Compiled from "VarArg.java"
+public class com.sdicons.scripty.spec.args.VarArg implements com.sdicons.scripty.spec.args.IArgSpec {
+  public com.sdicons.scripty.spec.args.VarArg(com.sdicons.scripty.spec.type.ITypeSpec);
+  public java.lang.String getSpecName();
+  public java.lang.Object guard(java.lang.Object[], int, com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.spec.args.ArgSpecException;
+}
+Compiled from "VarArgList.java"
+public class com.sdicons.scripty.spec.args.VarArgList implements com.sdicons.scripty.spec.args.IArgList {
+  int min;
+  int max;
+  public com.sdicons.scripty.spec.args.VarArgList(com.sdicons.scripty.spec.args.FixedArg[], com.sdicons.scripty.spec.args.VarArg, int, int, com.sdicons.scripty.spec.args.NamedArg[]);
+  public java.lang.Object[] guard(java.lang.Object[], com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.spec.args.ArgSpecException;
+}
+Compiled from "ArgListMapping.java"
+public class com.sdicons.scripty.spec.map.ArgListMapping {
+  public com.sdicons.scripty.spec.map.ArgListMapping();
+  public void addArgMapping(com.sdicons.scripty.spec.map.IArgMapping);
+  public java.lang.Object[] map(com.sdicons.scripty.parser.IEval, com.sdicons.scripty.parser.IContext, java.lang.Object[]) throws com.sdicons.scripty.spec.map.ArgMappingException;
+}
+Compiled from "ArgMappingBuilderUtil.java"
+public class com.sdicons.scripty.spec.map.ArgMappingBuilderUtil {
+  public com.sdicons.scripty.spec.map.ArgMappingBuilderUtil();
+  public static com.sdicons.scripty.spec.map.ArgListMapping buildArgMapping(java.lang.reflect.Method, java.util.Map<java.lang.String, com.sdicons.scripty.spec.map.IArgMapping>) throws com.sdicons.scripty.spec.map.ArgMappingException;
+}
+Compiled from "ArgMappingException.java"
+public class com.sdicons.scripty.spec.map.ArgMappingException extends java.lang.Exception {
+  public com.sdicons.scripty.spec.map.ArgMappingException();
+  public com.sdicons.scripty.spec.map.ArgMappingException(java.lang.String);
+  public com.sdicons.scripty.spec.map.ArgMappingException(java.lang.String, java.lang.Throwable);
+  public com.sdicons.scripty.spec.map.ArgMappingException(java.lang.Throwable);
+}
+Compiled from "BindingMapping.java"
+public class com.sdicons.scripty.spec.map.BindingMapping implements com.sdicons.scripty.spec.map.IArgMapping {
+  public com.sdicons.scripty.spec.map.BindingMapping(java.lang.String, boolean);
+  public java.lang.Object map(com.sdicons.scripty.parser.IEval, com.sdicons.scripty.parser.IContext, java.lang.Object) throws com.sdicons.scripty.spec.map.ArgMappingException;
+  public void setOffset(int);
+}
+Compiled from "CompleteMapping.java"
+public class com.sdicons.scripty.spec.map.CompleteMapping implements com.sdicons.scripty.spec.map.IArgMapping {
+  public com.sdicons.scripty.spec.map.CompleteMapping();
+  public java.lang.Object map(com.sdicons.scripty.parser.IEval, com.sdicons.scripty.parser.IContext, java.lang.Object) throws com.sdicons.scripty.spec.map.ArgMappingException;
+  public void setOffset(int);
+}
+Compiled from "ContextMapping.java"
+public class com.sdicons.scripty.spec.map.ContextMapping implements com.sdicons.scripty.spec.map.IArgMapping {
+  public com.sdicons.scripty.spec.map.ContextMapping();
+  public java.lang.Object map(com.sdicons.scripty.parser.IEval, com.sdicons.scripty.parser.IContext, java.lang.Object) throws com.sdicons.scripty.spec.map.ArgMappingException;
+  public void setOffset(int);
+}
+Compiled from "DefResultMapping.java"
+public class com.sdicons.scripty.spec.map.DefResultMapping implements com.sdicons.scripty.spec.map.IResultMapping {
+  public com.sdicons.scripty.spec.map.DefResultMapping(java.lang.String);
+  public void map(java.lang.Object, com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.spec.map.ResultMappingException;
+}
+Compiled from "EvalMapping.java"
+public class com.sdicons.scripty.spec.map.EvalMapping implements com.sdicons.scripty.spec.map.IArgMapping {
+  public com.sdicons.scripty.spec.map.EvalMapping();
+  public java.lang.Object map(com.sdicons.scripty.parser.IEval, com.sdicons.scripty.parser.IContext, java.lang.Object) throws com.sdicons.scripty.spec.map.ArgMappingException;
+  public void setOffset(int);
+}
+Compiled from "IArgMapping.java"
+public interface com.sdicons.scripty.spec.map.IArgMapping {
+  public abstract java.lang.Object map(com.sdicons.scripty.parser.IEval, com.sdicons.scripty.parser.IContext, java.lang.Object) throws com.sdicons.scripty.spec.map.ArgMappingException;
+  public abstract void setOffset(int);
+}
+Compiled from "IResultMapping.java"
+public interface com.sdicons.scripty.spec.map.IResultMapping {
+  public abstract void map(java.lang.Object, com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.spec.map.ResultMappingException;
+}
+Compiled from "IndexedMapping.java"
+public class com.sdicons.scripty.spec.map.IndexedMapping implements com.sdicons.scripty.spec.map.IArgMapping {
+  public com.sdicons.scripty.spec.map.IndexedMapping(int);
+  public java.lang.Object map(com.sdicons.scripty.parser.IEval, com.sdicons.scripty.parser.IContext, java.lang.Object) throws com.sdicons.scripty.spec.map.ArgMappingException;
+  public void setOffset(int);
+}
+Compiled from "NullMapping.java"
+public class com.sdicons.scripty.spec.map.NullMapping implements com.sdicons.scripty.spec.map.IArgMapping {
+  public com.sdicons.scripty.spec.map.NullMapping();
+  public java.lang.Object map(com.sdicons.scripty.parser.IEval, com.sdicons.scripty.parser.IContext, java.lang.Object) throws com.sdicons.scripty.spec.map.ArgMappingException;
+  public void setOffset(int);
+}
+Compiled from "PartialMapping.java"
+public class com.sdicons.scripty.spec.map.PartialMapping implements com.sdicons.scripty.spec.map.IArgMapping {
+  public com.sdicons.scripty.spec.map.PartialMapping(int, int);
+  public java.lang.Object map(com.sdicons.scripty.parser.IEval, com.sdicons.scripty.parser.IContext, java.lang.Object) throws com.sdicons.scripty.spec.map.ArgMappingException;
+  public void setOffset(int);
+}
+Compiled from "ResultMappingException.java"
+public class com.sdicons.scripty.spec.map.ResultMappingException extends java.lang.Exception {
+  public com.sdicons.scripty.spec.map.ResultMappingException();
+  public com.sdicons.scripty.spec.map.ResultMappingException(java.lang.String);
+  public com.sdicons.scripty.spec.map.ResultMappingException(java.lang.String, java.lang.Throwable);
+  public com.sdicons.scripty.spec.map.ResultMappingException(java.lang.Throwable);
+}
+Compiled from "SetResultMapping.java"
+public class com.sdicons.scripty.spec.map.SetResultMapping implements com.sdicons.scripty.spec.map.IResultMapping {
+  public com.sdicons.scripty.spec.map.SetResultMapping(java.lang.String);
+  public void map(java.lang.Object, com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.spec.map.ResultMappingException;
+}
+Compiled from "AnyType.java"
+public class com.sdicons.scripty.spec.type.AnyType extends com.sdicons.scripty.spec.type.InstanceType {
+  public com.sdicons.scripty.spec.type.AnyType(boolean);
+  public java.lang.String getSpecName();
+}
+Compiled from "BigDecimalType.java"
+public class com.sdicons.scripty.spec.type.BigDecimalType implements com.sdicons.scripty.spec.type.ITypeSpec<java.math.BigDecimal> {
+  public com.sdicons.scripty.spec.type.BigDecimalType();
+  public java.lang.String getSpecName();
+  public java.math.BigDecimal guard(java.lang.Object, com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.spec.type.TypeSpecException;
+  public java.lang.Object guard(java.lang.Object, com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.spec.type.TypeSpecException;
+}
+Compiled from "BigIntegerType.java"
+public class com.sdicons.scripty.spec.type.BigIntegerType implements com.sdicons.scripty.spec.type.ITypeSpec<java.math.BigInteger> {
+  public com.sdicons.scripty.spec.type.BigIntegerType();
+  public java.lang.String getSpecName();
+  public java.math.BigInteger guard(java.lang.Object, com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.spec.type.TypeSpecException;
+  public java.lang.Object guard(java.lang.Object, com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.spec.type.TypeSpecException;
+}
+Compiled from "BooleanType.java"
+public class com.sdicons.scripty.spec.type.BooleanType implements com.sdicons.scripty.spec.type.ITypeSpec<java.lang.Boolean> {
+  public static final com.sdicons.scripty.spec.type.ITypeSpec<java.lang.Boolean> BOOLEAN_TYPE;
+  public com.sdicons.scripty.spec.type.BooleanType();
+  public java.lang.String getSpecName();
+  public java.lang.Boolean guard(java.lang.Object, com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.spec.type.TypeSpecException;
+  public java.lang.Object guard(java.lang.Object, com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.spec.type.TypeSpecException;
+  static {};
+}
+Compiled from "ByteType.java"
+public class com.sdicons.scripty.spec.type.ByteType implements com.sdicons.scripty.spec.type.ITypeSpec<java.lang.Byte> {
+  public com.sdicons.scripty.spec.type.ByteType();
+  public java.lang.String getSpecName();
+  public java.lang.Byte guard(java.lang.Object, com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.spec.type.TypeSpecException;
+  public java.lang.Object guard(java.lang.Object, com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.spec.type.TypeSpecException;
+}
+Compiled from "CheckedListType.java"
+public class com.sdicons.scripty.spec.type.CheckedListType implements com.sdicons.scripty.spec.type.ITypeSpec {
+  public com.sdicons.scripty.spec.type.CheckedListType(com.sdicons.scripty.spec.type.ITypeSpec, int, int);
+  public com.sdicons.scripty.spec.type.CheckedListType(com.sdicons.scripty.spec.type.ITypeSpec);
+  public java.lang.String getSpecName();
+  public java.lang.Object guard(java.lang.Object, com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.spec.type.TypeSpecException;
+}
+Compiled from "DoubleType.java"
+public class com.sdicons.scripty.spec.type.DoubleType implements com.sdicons.scripty.spec.type.ITypeSpec {
+  public com.sdicons.scripty.spec.type.DoubleType();
+  public java.lang.String getSpecName();
+  public java.lang.Object guard(java.lang.Object, com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.spec.type.TypeSpecException;
+}
+Compiled from "EnumType.java"
+public class com.sdicons.scripty.spec.type.EnumType implements com.sdicons.scripty.spec.type.ITypeSpec {
+  public com.sdicons.scripty.spec.type.EnumType(java.util.List<java.lang.String>);
+  public com.sdicons.scripty.spec.type.EnumType(java.lang.String...);
+  public java.lang.Object guard(java.lang.Object, com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.spec.type.TypeSpecException;
+  public java.lang.String getSpecName();
+}
+Compiled from "FloatType.java"
+public class com.sdicons.scripty.spec.type.FloatType implements com.sdicons.scripty.spec.type.ITypeSpec {
+  public com.sdicons.scripty.spec.type.FloatType();
+  public java.lang.String getSpecName();
+  public java.lang.Object guard(java.lang.Object, com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.spec.type.TypeSpecException;
+}
+Compiled from "ITypeSpec.java"
+public interface com.sdicons.scripty.spec.type.ITypeSpec<T> {
+  public abstract T guard(java.lang.Object, com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.spec.type.TypeSpecException;
+  public abstract java.lang.String getSpecName();
+}
+Compiled from "InstanceOrBinding.java"
+public class com.sdicons.scripty.spec.type.InstanceOrBinding implements com.sdicons.scripty.spec.type.ITypeSpec {
+  public com.sdicons.scripty.spec.type.InstanceOrBinding(com.sdicons.scripty.spec.type.ITypeSpec);
+  public java.lang.Object guard(java.lang.Object, com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.spec.type.TypeSpecException;
+  public java.lang.String getSpecName();
+}
+Compiled from "InstanceType.java"
+public class com.sdicons.scripty.spec.type.InstanceType implements com.sdicons.scripty.spec.type.ITypeSpec {
+  public com.sdicons.scripty.spec.type.InstanceType(java.lang.Class, boolean);
+  public com.sdicons.scripty.spec.type.InstanceType(java.lang.Class, java.lang.String, boolean);
+  public java.lang.Object guard(java.lang.Object, com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.spec.type.TypeSpecException;
+  public java.lang.String getSpecName();
+}
+Compiled from "IntegerRangeType.java"
+public class com.sdicons.scripty.spec.type.IntegerRangeType implements com.sdicons.scripty.spec.type.ITypeSpec {
+  public com.sdicons.scripty.spec.type.IntegerRangeType(int, int);
+  public java.lang.String getSpecName();
+  public java.lang.Object guard(java.lang.Object, com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.spec.type.TypeSpecException;
+}
+Compiled from "IntegerType.java"
+public class com.sdicons.scripty.spec.type.IntegerType implements com.sdicons.scripty.spec.type.ITypeSpec {
+  public static final com.sdicons.scripty.spec.type.IntegerType INTEGER_TYPE;
+  public com.sdicons.scripty.spec.type.IntegerType();
+  public java.lang.String getSpecName();
+  public java.lang.Object guard(java.lang.Object, com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.spec.type.TypeSpecException;
+  static {};
+}
+Compiled from "LongType.java"
+public class com.sdicons.scripty.spec.type.LongType implements com.sdicons.scripty.spec.type.ITypeSpec<java.lang.Long> {
+  public com.sdicons.scripty.spec.type.LongType();
+  public java.lang.String getSpecName();
+  public java.lang.Long guard(java.lang.Object, com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.spec.type.TypeSpecException;
+  public java.lang.Object guard(java.lang.Object, com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.spec.type.TypeSpecException;
+}
+Compiled from "OrType.java"
+public class com.sdicons.scripty.spec.type.OrType implements com.sdicons.scripty.spec.type.ITypeSpec {
+  public com.sdicons.scripty.spec.type.OrType(com.sdicons.scripty.spec.type.ITypeSpec[]);
+  public java.lang.String getSpecName();
+  public java.lang.Object guard(java.lang.Object, com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.spec.type.TypeSpecException;
+}
+Compiled from "ShortType.java"
+public class com.sdicons.scripty.spec.type.ShortType implements com.sdicons.scripty.spec.type.ITypeSpec {
+  public com.sdicons.scripty.spec.type.ShortType();
+  public java.lang.String getSpecName();
+  public java.lang.Object guard(java.lang.Object, com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.spec.type.TypeSpecException;
+}
+Compiled from "StringType.java"
+public class com.sdicons.scripty.spec.type.StringType implements com.sdicons.scripty.spec.type.ITypeSpec {
+  public static final com.sdicons.scripty.spec.type.StringType STRING_TYPE;
+  public com.sdicons.scripty.spec.type.StringType();
+  public java.lang.String getSpecName();
+  public java.lang.Object guard(java.lang.Object, com.sdicons.scripty.parser.IContext) throws com.sdicons.scripty.spec.type.TypeSpecException;
+  static {};
+}
+Compiled from "TypeSpecException.java"
+public class com.sdicons.scripty.spec.type.TypeSpecException extends java.lang.Exception {
+  public com.sdicons.scripty.spec.type.TypeSpecException();
+  public com.sdicons.scripty.spec.type.TypeSpecException(java.lang.String, java.lang.Throwable);
+  public com.sdicons.scripty.spec.type.TypeSpecException(java.lang.String);
+  public com.sdicons.scripty.spec.type.TypeSpecException(java.lang.Throwable);
+}
+Compiled from "TypeUtil.java"
+public class com.sdicons.scripty.spec.type.TypeUtil {
+  public com.sdicons.scripty.spec.type.TypeUtil();
+  public static final java.lang.String msgExpectedOther(java.lang.String, java.lang.Object);
+  public static final java.lang.String msgBadRepr(java.lang.String, java.lang.String);
+}
+Compiled from "MyCommandLib.java"
+public class com.sdicons.scripty.testlib.MyCommandLib {
+  public com.sdicons.scripty.testlib.MyCommandLib();
+  public static void hello(java.io.PrintWriter, java.lang.Object...);
+  public static int add(java.lang.Object[], java.io.PrintWriter);
+  public static void add2(java.util.List<java.lang.Integer>, java.io.PrintWriter);
+  public static void sub(int, int, java.io.PrintWriter);
+  public static java.util.List omgekeerd(java.lang.Object[]);
+  public static java.lang.Object defBruno(java.lang.Object[]);
+  public static java.lang.Object setBruno(java.lang.Object[]);
+}
+Compiled from "MyCommandLib2.java"
+public class com.sdicons.scripty.testlib.MyCommandLib2 {
+  public com.sdicons.scripty.testlib.MyCommandLib2();
+  public void method123();
+  public void exit();
+}

@@ -1,0 +1,673 @@
+Compiled from "Callback.java"
+public interface event.Callback {
+  public static final event.Callback$ErrorCallback DEFAULT_ERROR_CB;
+  static {};
+}
+Compiled from "Callback.java"
+public class event.Callback$DefaultErrorCallback implements event.Callback$ErrorCallback {
+  public event.Callback$DefaultErrorCallback();
+  public void onError(event.Loop, java.lang.Throwable);
+  public void onError(event.Loop, java.lang.String);
+}
+Compiled from "Callback.java"
+public interface event.Callback$ErrorCallback extends event.Callback {
+  public abstract void onError(event.Loop, java.lang.Throwable);
+  public abstract void onError(event.Loop, java.lang.String);
+}
+Compiled from "Callback.java"
+public abstract class event.Callback$ErrorCallbackBase implements event.Callback$ErrorCallback {
+  public event.Callback$ErrorCallbackBase();
+  public void onError(event.Loop, java.lang.Throwable);
+  public void onError(event.Loop, java.lang.String);
+}
+Compiled from "Callback.java"
+public abstract class event.Callback$TCPClient extends event.Callback$ErrorCallbackBase {
+  public event.Callback$TCPClient();
+  public void onConnect(event.TCPClientLoop, java.nio.channels.SocketChannel);
+  public abstract void onData(event.TCPClientLoop, java.nio.channels.SocketChannel, java.nio.ByteBuffer);
+  public void onClose(event.TCPClientLoop, java.nio.channels.SocketChannel);
+  public void onEOF(event.TCPClientLoop, java.nio.channels.SocketChannel);
+  public void onError(event.TCPClientLoop, java.nio.channels.SocketChannel, java.lang.Throwable);
+  public void onWrite(event.TCPClientLoop, java.nio.channels.SocketChannel, java.nio.ByteBuffer, int, int);
+}
+Compiled from "Callback.java"
+public abstract class event.Callback$TCPServer extends event.Callback$ErrorCallbackBase {
+  public event.Callback$TCPServer();
+  public void onConnect(event.TCPServerLoop, java.nio.channels.ServerSocketChannel);
+  public abstract void onAccept(event.TCPServerLoop, java.nio.channels.ServerSocketChannel, java.nio.channels.SocketChannel);
+  public void onClose(event.TCPServerLoop, java.nio.channels.ServerSocketChannel);
+  public void onError(event.TCPServerLoop, java.nio.channels.ServerSocketChannel, java.lang.Throwable);
+}
+Compiled from "Callback.java"
+public abstract class event.Callback$Timeout extends event.Callback$ErrorCallbackBase {
+  public event.Callback$Timeout();
+  public abstract void go(event.TimeoutLoop) throws java.lang.Throwable;
+}
+Compiled from "CancelTimeoutTest.java"
+public class event.CancelTimeoutTest {
+  public event.CancelTimeoutTest();
+  static final void fail(java.lang.String);
+  static void testTimeoutCancel();
+  static boolean contains(java.util.Collection<event.TimeoutLoop$T>, event.Callback$Timeout);
+  static void testIntervalCancel();
+  static void testCancelinLoop();
+  static void p(java.lang.Object);
+  public static void main(java.lang.String[]);
+}
+Compiled from "CancelTimeoutTest.java"
+final class event.CancelTimeoutTest$1 extends event.Callback$Timeout {
+  event.CancelTimeoutTest$1();
+  public void go(event.TimeoutLoop);
+}
+Compiled from "CancelTimeoutTest.java"
+final class event.CancelTimeoutTest$2 extends event.Callback$Timeout {
+  final event.TimeoutLoop val$loop;
+  final event.Callback$Timeout val$toCancel;
+  event.CancelTimeoutTest$2(event.TimeoutLoop, event.Callback$Timeout);
+  public void go(event.TimeoutLoop);
+}
+Compiled from "CancelTimeoutTest.java"
+final class event.CancelTimeoutTest$3 extends event.Callback$Timeout {
+  final event.TimeoutLoop val$loop;
+  final event.Callback$Timeout val$toCancel;
+  event.CancelTimeoutTest$3(event.TimeoutLoop, event.Callback$Timeout);
+  public void go(event.TimeoutLoop);
+}
+Compiled from "CancelTimeoutTest.java"
+final class event.CancelTimeoutTest$4 extends event.Callback$Timeout {
+  event.CancelTimeoutTest$4();
+  public void go(event.TimeoutLoop);
+}
+Compiled from "CancelTimeoutTest.java"
+final class event.CancelTimeoutTest$5 extends event.Callback$Timeout {
+  static final boolean $assertionsDisabled;
+  final event.TimeoutLoop val$loop;
+  final event.Callback$Timeout val$toCancel;
+  event.CancelTimeoutTest$5(event.TimeoutLoop, event.Callback$Timeout);
+  public void go(event.TimeoutLoop);
+  static {};
+}
+Compiled from "CancelTimeoutTest.java"
+final class event.CancelTimeoutTest$6 extends event.Callback$Timeout {
+  event.CancelTimeoutTest$6();
+  public void go(event.TimeoutLoop);
+}
+Compiled from "CancelTimeoutTest.java"
+final class event.CancelTimeoutTest$7 extends event.Callback$Timeout {
+  final event.Callback$Timeout val$toCancel;
+  final event.TimeoutLoop val$loop;
+  event.CancelTimeoutTest$7(event.Callback$Timeout, event.TimeoutLoop);
+  public void go(event.TimeoutLoop);
+}
+Compiled from "CancelTimeoutTest.java"
+final class event.CancelTimeoutTest$8 extends event.Callback$Timeout {
+  static final boolean $assertionsDisabled;
+  final event.TimeoutLoop val$loop;
+  final event.Callback$Timeout val$toCancel;
+  event.CancelTimeoutTest$8(event.TimeoutLoop, event.Callback$Timeout);
+  public void go(event.TimeoutLoop);
+  static {};
+}
+Compiled from "CloseSemanticsTest.java"
+public class event.CloseSemanticsTest {
+  static final int NUM2;
+  static final int PORT;
+  static int numWritten;
+  static final event.TCPServerLoop server_loop;
+  public event.CloseSemanticsTest();
+  static void client();
+  static void clienteof();
+  static void client_server_closes();
+  static void clientShutdown();
+  static void server();
+  public static void main(java.lang.String[]);
+  static final void pass(java.lang.String);
+  static final void fail(java.lang.String);
+  static boolean contains(java.util.Collection<event.TimeoutLoop$T>, event.Callback$Timeout);
+  static void p(java.lang.Object);
+  static {};
+}
+Compiled from "CloseSemanticsTest.java"
+final class event.CloseSemanticsTest$1 extends event.Callback$TCPClient {
+  static final boolean $assertionsDisabled;
+  final event.TCPClientLoop val$client_loop;
+  event.CloseSemanticsTest$1(event.TCPClientLoop);
+  public void onConnect(event.TCPClientLoop, java.nio.channels.SocketChannel);
+  public void onData(event.TCPClientLoop, java.nio.channels.SocketChannel, java.nio.ByteBuffer);
+  public void onWrite(event.TCPClientLoop, java.nio.channels.SocketChannel, java.nio.ByteBuffer, int, int);
+  public void onClose(event.TCPClientLoop, java.nio.channels.SocketChannel);
+  public void onError(event.TCPClientLoop, java.nio.channels.SocketChannel, java.lang.Throwable);
+  static {};
+}
+Compiled from "CloseSemanticsTest.java"
+final class event.CloseSemanticsTest$2 extends event.Callback$TCPClient {
+  static final boolean $assertionsDisabled;
+  final event.TCPClientLoop val$client_loop;
+  event.CloseSemanticsTest$2(event.TCPClientLoop);
+  public void onConnect(event.TCPClientLoop, java.nio.channels.SocketChannel);
+  public void onData(event.TCPClientLoop, java.nio.channels.SocketChannel, java.nio.ByteBuffer);
+  public void onWrite(event.TCPClientLoop, java.nio.channels.SocketChannel, java.nio.ByteBuffer, int, int);
+  public void onClose(event.TCPClientLoop, java.nio.channels.SocketChannel);
+  public void onEOF(event.TCPClientLoop, java.nio.channels.SocketChannel);
+  public void onError(event.TCPClientLoop, java.nio.channels.SocketChannel, java.lang.Throwable);
+  static {};
+}
+Compiled from "CloseSemanticsTest.java"
+final class event.CloseSemanticsTest$3 extends event.Callback$TCPClient {
+  int errNo;
+  static final boolean $assertionsDisabled;
+  final event.TCPClientLoop val$client_loop;
+  event.CloseSemanticsTest$3(event.TCPClientLoop);
+  public void onConnect(event.TCPClientLoop, java.nio.channels.SocketChannel);
+  public void onData(event.TCPClientLoop, java.nio.channels.SocketChannel, java.nio.ByteBuffer);
+  public void onWrite(event.TCPClientLoop, java.nio.channels.SocketChannel, java.nio.ByteBuffer, int, int);
+  public void onClose(event.TCPClientLoop, java.nio.channels.SocketChannel);
+  public void onEOF(event.TCPClientLoop, java.nio.channels.SocketChannel);
+  public void check(java.lang.String);
+  public void onError(event.TCPClientLoop, java.nio.channels.SocketChannel, java.lang.Throwable);
+  static {};
+}
+Compiled from "CloseSemanticsTest.java"
+final class event.CloseSemanticsTest$4 extends event.Callback$TCPClient {
+  boolean subsequent;
+  static final boolean $assertionsDisabled;
+  final event.TCPClientLoop val$client_loop;
+  event.CloseSemanticsTest$4(event.TCPClientLoop);
+  public void onConnect(event.TCPClientLoop, java.nio.channels.SocketChannel);
+  public void onData(event.TCPClientLoop, java.nio.channels.SocketChannel, java.nio.ByteBuffer);
+  public void onWrite(event.TCPClientLoop, java.nio.channels.SocketChannel, java.nio.ByteBuffer, int, int);
+  public void onClose(event.TCPClientLoop, java.nio.channels.SocketChannel);
+  public void onError(event.TCPClientLoop, java.nio.channels.SocketChannel, java.lang.Throwable);
+  static {};
+}
+Compiled from "CloseSemanticsTest.java"
+final class event.CloseSemanticsTest$5 extends event.Callback$TCPClient {
+  event.CloseSemanticsTest$5();
+  public void onData(event.TCPClientLoop, java.nio.channels.SocketChannel, java.nio.ByteBuffer);
+}
+Compiled from "CloseSemanticsTest.java"
+final class event.CloseSemanticsTest$6 extends event.Callback$TCPServer {
+  final event.Callback$TCPClient val$client;
+  event.CloseSemanticsTest$6(event.Callback$TCPClient);
+  public void onConnect(event.TCPServerLoop, java.nio.channels.ServerSocketChannel);
+  public void onAccept(event.TCPServerLoop, java.nio.channels.ServerSocketChannel, java.nio.channels.SocketChannel);
+}
+Compiled from "DNSLoop.java"
+class event.DNSLoop extends event.TimeoutLoop {
+  event.DNSLoop();
+  void lookup(java.lang.String, event.DNSLoop$CB);
+  static void p(java.lang.Object);
+}
+Compiled from "DNSLoop.java"
+class event.DNSLoop$1 extends event.Callback$Timeout {
+  final java.lang.String val$host;
+  final event.DNSLoop$CB val$callback;
+  final event.DNSLoop this$0;
+  event.DNSLoop$1(event.DNSLoop, java.lang.String, event.DNSLoop$CB);
+  public void go(event.TimeoutLoop);
+}
+Compiled from "DNSLoop.java"
+interface event.DNSLoop$CB {
+  public abstract void addr(java.net.InetAddress, java.net.UnknownHostException);
+}
+Compiled from "EchoTest.java"
+public class event.EchoTest extends event.Test {
+  long start;
+  static event.util.BufferPool bPool;
+  public event.EchoTest();
+  static java.nio.ByteBuffer copyBuffer(java.nio.ByteBuffer);
+  public static void main(java.lang.String[]) throws java.lang.Throwable;
+  void minitest() throws java.lang.Throwable;
+  static boolean cmp(byte[], byte[]);
+  static {};
+}
+Compiled from "EchoTest.java"
+class event.EchoTest$Client extends event.Test$Client {
+  event.EchoTest$Random back;
+  event.EchoTest$Random forth;
+  final long TOT;
+  long count;
+  int NUM;
+  byte[] bytes;
+  int numRead;
+  event.util.ByteArrayPool pool;
+  final event.EchoTest this$0;
+  event.EchoTest$Client(event.EchoTest);
+  public void onConnect(event.TCPClientLoop, java.nio.channels.SocketChannel);
+  public void onWrite(event.TCPClientLoop, java.nio.channels.SocketChannel, java.nio.ByteBuffer, int, int);
+  public void onData(event.TCPClientLoop, java.nio.channels.SocketChannel, java.nio.ByteBuffer);
+  void check(java.nio.ByteBuffer);
+}
+Compiled from "EchoTest.java"
+class event.EchoTest$EchoClient extends event.Test$Client {
+  event.EchoTest$Random rnd;
+  static final boolean $assertionsDisabled;
+  final event.EchoTest this$0;
+  event.EchoTest$EchoClient(event.EchoTest);
+  public void onData(event.TCPClientLoop, java.nio.channels.SocketChannel, java.nio.ByteBuffer);
+  public void onWrite(event.TCPClientLoop, java.nio.channels.SocketChannel, java.nio.ByteBuffer, int, int);
+  static {};
+}
+Compiled from "EchoTest.java"
+class event.EchoTest$Random extends java.util.Random {
+  final event.EchoTest this$0;
+  public event.EchoTest$Random(event.EchoTest, long);
+  public void nextBytes(byte[]);
+}
+Compiled from "EchoTest.java"
+class event.EchoTest$Server extends event.Test$Server {
+  final event.EchoTest this$0;
+  event.EchoTest$Server(event.EchoTest);
+  public void onAccept(event.TCPServerLoop, java.nio.channels.ServerSocketChannel, java.nio.channels.SocketChannel);
+}
+Compiled from "Loop.java"
+public abstract class event.Loop extends java.lang.Thread {
+  protected long maxSleep;
+  volatile boolean stopped;
+  protected java.lang.Thread loopThread;
+  protected event.Callback$ErrorCallback errCB;
+  protected java.nio.channels.Selector selector;
+  public event.Loop();
+  public event.Loop(event.Callback$ErrorCallback);
+  public boolean isRunning();
+  public void run();
+  public boolean isLoopThread();
+  protected abstract void go() throws java.lang.Throwable;
+  protected void onError(java.lang.Throwable);
+  protected void onError(java.lang.String);
+  public void wake();
+  public void stopLoop();
+  public void setErrCB(event.Callback$ErrorCallback);
+  static void p(java.lang.Object);
+  static void st(java.lang.String);
+}
+Compiled from "OnWriteTest.java"
+public class event.OnWriteTest {
+  static final int NUM;
+  static final int NUM2;
+  static final int PORT;
+  static int numWritten;
+  public event.OnWriteTest();
+  static final void fail(java.lang.String);
+  static boolean contains(java.util.Collection<event.TimeoutLoop$T>, event.Callback$Timeout);
+  static void p(java.lang.Object);
+  static void client();
+  static void client2();
+  static void server();
+  static void usage();
+  public static void main(java.lang.String[]);
+}
+Compiled from "OnWriteTest.java"
+final class event.OnWriteTest$1 extends event.Callback$TCPClient {
+  static final boolean $assertionsDisabled;
+  final event.TCPClientLoop val$client_loop;
+  event.OnWriteTest$1(event.TCPClientLoop);
+  public void onConnect(event.TCPClientLoop, java.nio.channels.SocketChannel);
+  public void onData(event.TCPClientLoop, java.nio.channels.SocketChannel, java.nio.ByteBuffer);
+  public void onWrite(event.TCPClientLoop, java.nio.channels.SocketChannel, java.nio.ByteBuffer, int, int);
+  public void onError(event.TCPClientLoop, java.nio.channels.SocketChannel, java.io.IOException);
+  static {};
+}
+Compiled from "OnWriteTest.java"
+final class event.OnWriteTest$2 extends event.Callback$TCPClient {
+  static final boolean $assertionsDisabled;
+  final event.TCPClientLoop val$client_loop;
+  event.OnWriteTest$2(event.TCPClientLoop);
+  public void onConnect(event.TCPClientLoop, java.nio.channels.SocketChannel);
+  public void onData(event.TCPClientLoop, java.nio.channels.SocketChannel, java.nio.ByteBuffer);
+  public void onWrite(event.TCPClientLoop, java.nio.channels.SocketChannel, java.nio.ByteBuffer, int, int);
+  public void onError(event.TCPClientLoop, java.nio.channels.SocketChannel, java.io.IOException);
+  static {};
+}
+Compiled from "OnWriteTest.java"
+final class event.OnWriteTest$3 extends event.Callback$TCPClient {
+  event.OnWriteTest$3();
+  public void onData(event.TCPClientLoop, java.nio.channels.SocketChannel, java.nio.ByteBuffer);
+}
+Compiled from "OnWriteTest.java"
+final class event.OnWriteTest$4 extends event.Callback$TCPServer {
+  final event.TCPClientLoop val$clientLoop;
+  final event.Callback$TCPClient val$client;
+  event.OnWriteTest$4(event.TCPClientLoop, event.Callback$TCPClient);
+  public void onConnect(event.TCPServerLoop, java.nio.channels.ServerSocketChannel);
+  public void onAccept(event.TCPServerLoop, java.nio.channels.ServerSocketChannel, java.nio.channels.SocketChannel);
+}
+Compiled from "Speed.java"
+public class event.Speed {
+  static final int NUM;
+  static long time;
+  public event.Speed();
+  static void client();
+  static void classicClient();
+  static void server();
+  public static void main(java.lang.String[]);
+  static void p(java.lang.Object);
+}
+Compiled from "Speed.java"
+class event.Speed$Client extends event.Callback$TCPClient {
+  int count;
+  event.Speed$Client();
+  public void onConnect(event.TCPClientLoop, java.nio.channels.SocketChannel);
+  public void onData(event.TCPClientLoop, java.nio.channels.SocketChannel, java.nio.ByteBuffer);
+  public void onClose(event.TCPClientLoop, java.nio.channels.SocketChannel);
+}
+Compiled from "Speed.java"
+class event.Speed$Server extends event.Callback$TCPServer {
+  event.Speed$Server();
+  public void onAccept(event.TCPServerLoop, java.nio.channels.ServerSocketChannel, java.nio.channels.SocketChannel);
+}
+Compiled from "TCPClientLoop.java"
+public class event.TCPClientLoop extends event.TimeoutLoop {
+  static final boolean $assertionsDisabled;
+  public event.TCPClientLoop();
+  public void run();
+  public void stopLoop();
+  public void createTCPClient(event.Callback$TCPClient, java.lang.String, int);
+  public void createTCPClient(event.Callback$TCPClient, java.net.InetAddress, int);
+  public void createTCPClient(event.Callback$TCPClient, java.nio.channels.SocketChannel);
+  public void write(java.nio.channels.SocketChannel, event.Callback$TCPClient, byte[]);
+  public void write(java.nio.channels.SocketChannel, event.Callback$TCPClient, java.nio.ByteBuffer);
+  public void shutdown(java.nio.channels.SocketChannel, event.Callback$TCPClient, event.TCPClientLoop$Shutdown);
+  public void shutdownOutput(java.nio.channels.SocketChannel, event.Callback$TCPClient);
+  public void shutdownInput(java.nio.channels.SocketChannel, event.Callback$TCPClient);
+  public void close(java.nio.channels.SocketChannel, event.Callback$TCPClient);
+  event.TCPClientLoop$R r(java.nio.channels.SocketChannel);
+  void handleClose(java.nio.channels.SocketChannel);
+  protected void go();
+  static java.lang.String bin(int);
+  static java.lang.String to_s(java.nio.ByteBuffer);
+  public static void main(java.lang.String[]);
+  static void access$000(event.TCPClientLoop);
+  static void access$101(event.TCPClientLoop);
+  static {};
+}
+Compiled from "TCPClientLoop.java"
+class event.TCPClientLoop$1 extends event.Callback$Timeout {
+  final event.TCPClientLoop this$0;
+  event.TCPClientLoop$1(event.TCPClientLoop);
+  public void go(event.TimeoutLoop);
+}
+Compiled from "TCPClientLoop.java"
+class event.TCPClientLoop$10 {
+  static final int[] $SwitchMap$event$TCPClientLoop$Shutdown;
+  static {};
+}
+Compiled from "TCPClientLoop.java"
+class event.TCPClientLoop$2 implements event.DNSLoop$CB {
+  final event.Callback$TCPClient val$cb;
+  final int val$port;
+  final event.TCPClientLoop this$0;
+  event.TCPClientLoop$2(event.TCPClientLoop, event.Callback$TCPClient, int);
+  public void addr(java.net.InetAddress, java.net.UnknownHostException);
+}
+Compiled from "TCPClientLoop.java"
+class event.TCPClientLoop$3 extends event.Callback$Timeout {
+  final event.Callback$TCPClient val$cb;
+  final java.net.InetAddress val$host;
+  final int val$port;
+  final event.TCPClientLoop this$0;
+  event.TCPClientLoop$3(event.TCPClientLoop, event.Callback$TCPClient, java.net.InetAddress, int);
+  public void go(event.TimeoutLoop);
+}
+Compiled from "TCPClientLoop.java"
+class event.TCPClientLoop$4 extends event.Callback$Timeout {
+  final event.Callback$TCPClient val$cb;
+  final java.nio.channels.SocketChannel val$sc;
+  final event.TCPClientLoop this$0;
+  event.TCPClientLoop$4(event.TCPClientLoop, event.Callback$TCPClient, java.nio.channels.SocketChannel);
+  public void go(event.TimeoutLoop);
+}
+Compiled from "TCPClientLoop.java"
+class event.TCPClientLoop$5 extends event.Callback$Timeout {
+  final java.nio.channels.SocketChannel val$sc;
+  final event.Callback$TCPClient val$cb;
+  final java.nio.ByteBuffer val$buffer;
+  final event.TCPClientLoop this$0;
+  event.TCPClientLoop$5(event.TCPClientLoop, java.nio.channels.SocketChannel, event.Callback$TCPClient, java.nio.ByteBuffer);
+  public void go(event.TimeoutLoop);
+}
+Compiled from "TCPClientLoop.java"
+class event.TCPClientLoop$6 extends event.Callback$Timeout {
+  final java.nio.channels.SocketChannel val$sc;
+  final event.Callback$TCPClient val$cb;
+  final event.TCPClientLoop this$0;
+  event.TCPClientLoop$6(event.TCPClientLoop, java.nio.channels.SocketChannel, event.Callback$TCPClient);
+  public void go(event.TimeoutLoop);
+}
+Compiled from "TCPClientLoop.java"
+class event.TCPClientLoop$7 extends event.Callback$Timeout {
+  final java.nio.channels.SocketChannel val$sc;
+  final event.Callback$TCPClient val$cb;
+  final event.TCPClientLoop this$0;
+  event.TCPClientLoop$7(event.TCPClientLoop, java.nio.channels.SocketChannel, event.Callback$TCPClient);
+  public void go(event.TimeoutLoop);
+}
+Compiled from "TCPClientLoop.java"
+class event.TCPClientLoop$8 extends event.Callback$Timeout {
+  final java.nio.channels.SocketChannel val$sc;
+  final event.Callback$TCPClient val$client;
+  final event.TCPClientLoop this$0;
+  event.TCPClientLoop$8(event.TCPClientLoop, java.nio.channels.SocketChannel, event.Callback$TCPClient);
+  public void go(event.TimeoutLoop);
+}
+Compiled from "TCPClientLoop.java"
+final class event.TCPClientLoop$9 extends event.Callback$TCPClient {
+  event.TCPClientLoop$9();
+  public void onConnect(event.TCPClientLoop, java.nio.channels.SocketChannel);
+  public void onData(event.TCPClientLoop, java.nio.channels.SocketChannel, java.nio.ByteBuffer);
+  public void onClose(event.TCPClientLoop, java.nio.channels.SocketChannel);
+}
+Compiled from "TCPClientLoop.java"
+class event.TCPClientLoop$R {
+  java.nio.channels.SocketChannel channel;
+  event.Callback$TCPClient cb;
+  java.util.Queue<java.nio.ByteBuffer> bufferList;
+  boolean closePending;
+  final event.TCPClientLoop this$0;
+  event.TCPClientLoop$R(event.TCPClientLoop, java.nio.channels.SocketChannel, event.Callback$TCPClient);
+  void push(java.nio.ByteBuffer);
+  boolean dataPending();
+}
+Compiled from "TCPClientLoop.java"
+public final class event.TCPClientLoop$Shutdown extends java.lang.Enum<event.TCPClientLoop$Shutdown> {
+  public static final event.TCPClientLoop$Shutdown SHUT_RD;
+  public static final event.TCPClientLoop$Shutdown SHUT_WR;
+  public static final event.TCPClientLoop$Shutdown SHUT_RDWR;
+  public static event.TCPClientLoop$Shutdown[] values();
+  public static event.TCPClientLoop$Shutdown valueOf(java.lang.String);
+  static {};
+}
+Compiled from "TCPServerLoop.java"
+public class event.TCPServerLoop extends event.TCPClientLoop {
+  static final boolean $assertionsDisabled;
+  public event.TCPServerLoop();
+  public void createTCPServer(event.Callback$TCPServer, java.net.SocketAddress);
+  protected void go();
+  public void handleAccept(java.nio.channels.SelectionKey);
+  static {};
+}
+Compiled from "TCPServerLoop.java"
+class event.TCPServerLoop$1 extends event.Callback$Timeout {
+  final java.nio.channels.ServerSocketChannel val$ssc;
+  final event.Callback$TCPServer val$cb;
+  final event.TCPServerLoop this$0;
+  event.TCPServerLoop$1(event.TCPServerLoop, java.nio.channels.ServerSocketChannel, event.Callback$TCPServer);
+  public void go(event.TimeoutLoop);
+}
+Compiled from "Test.java"
+public class event.Test {
+  final event.TCPServerLoop serverL;
+  final event.TCPClientLoop clientL;
+  event.Callback$TCPClient client;
+  event.Callback$TCPServer server;
+  final int port;
+  final java.lang.String host;
+  public static void p(java.lang.Object);
+  public static void p(byte[]);
+  public static void dump(byte[], byte[]);
+  public event.Test();
+  public event.Test(event.Test$Client, event.Test$Server);
+  public void setClientServer(event.Test$Client, event.Test$Server);
+  public void runTest();
+  public void fail(java.lang.String);
+  public void done();
+  static java.nio.ByteBuffer copyBuffer(java.nio.ByteBuffer);
+}
+Compiled from "Test.java"
+class event.Test$AcceptServer extends event.Test$Server {
+  final event.Test this$0;
+  event.Test$AcceptServer(event.Test);
+  public void onAccept(event.TCPServerLoop, java.nio.channels.ServerSocketChannel, java.nio.channels.SocketChannel);
+}
+Compiled from "Test.java"
+class event.Test$Client extends event.Callback$TCPClient {
+  final event.Test this$0;
+  event.Test$Client(event.Test);
+  public void onData(event.TCPClientLoop, java.nio.channels.SocketChannel, java.nio.ByteBuffer);
+}
+Compiled from "Test.java"
+class event.Test$EchoClient extends event.Test$Client {
+  final event.Test this$0;
+  event.Test$EchoClient(event.Test);
+  public void onData(event.TCPClientLoop, java.nio.channels.SocketChannel, java.nio.ByteBuffer);
+}
+Compiled from "Test.java"
+class event.Test$EchoServer extends event.Test$Server {
+  final event.Test this$0;
+  event.Test$EchoServer(event.Test);
+  public void onAccept(event.TCPServerLoop, java.nio.channels.ServerSocketChannel, java.nio.channels.SocketChannel);
+}
+Compiled from "Test.java"
+class event.Test$Server extends event.Callback$TCPServer {
+  final event.Test this$0;
+  event.Test$Server(event.Test);
+  public void onConnect(event.TCPServerLoop, java.nio.channels.ServerSocketChannel);
+  public void onAccept(event.TCPServerLoop, java.nio.channels.ServerSocketChannel, java.nio.channels.SocketChannel);
+}
+Compiled from "TimeoutLoop.java"
+public class event.TimeoutLoop extends event.Loop {
+  protected java.util.Queue<event.TimeoutLoop$T> timeouts;
+  protected java.util.LinkedList<event.TimeoutLoop$T> newTimeouts;
+  long loopTime;
+  long idSeq;
+  static final boolean $assertionsDisabled;
+  public event.TimeoutLoop();
+  void dump(java.lang.String);
+  protected void go();
+  public long addTimeout(long, event.Callback$Timeout);
+  public long addTimeout(event.Callback$Timeout);
+  public long addInterval(long, event.Callback$Timeout);
+  public void cancelTimeout(long);
+  public static void main(java.lang.String[]) throws java.lang.Throwable;
+  static void p(java.lang.Object);
+  static {};
+}
+Compiled from "TimeoutLoop.java"
+class event.TimeoutLoop$1 extends event.Callback$Timeout {
+  final long val$id;
+  final event.TimeoutLoop this$0;
+  event.TimeoutLoop$1(event.TimeoutLoop, long);
+  public void go(event.TimeoutLoop);
+}
+Compiled from "TimeoutLoop.java"
+final class event.TimeoutLoop$2 extends event.Callback$Timeout {
+  event.TimeoutLoop$2();
+  public void go(event.TimeoutLoop);
+}
+Compiled from "TimeoutLoop.java"
+final class event.TimeoutLoop$3 extends event.Callback$Timeout {
+  event.TimeoutLoop$3();
+  public void go(event.TimeoutLoop);
+}
+Compiled from "TimeoutLoop.java"
+final class event.TimeoutLoop$4 extends event.Callback$Timeout {
+  event.TimeoutLoop$4();
+  public void go(event.TimeoutLoop);
+}
+Compiled from "TimeoutLoop.java"
+final class event.TimeoutLoop$5 extends event.Callback$Timeout {
+  int i;
+  event.TimeoutLoop$5();
+  public void go(event.TimeoutLoop);
+}
+Compiled from "TimeoutLoop.java"
+final class event.TimeoutLoop$6 extends event.Callback$Timeout {
+  event.TimeoutLoop$6();
+  public void go(event.TimeoutLoop);
+}
+Compiled from "TimeoutLoop.java"
+class event.TimeoutLoop$T implements java.lang.Comparable<event.TimeoutLoop$T> {
+  long id;
+  event.Callback$Timeout ev;
+  long time;
+  long timeout;
+  boolean interval;
+  final event.TimeoutLoop this$0;
+  event.TimeoutLoop$T(event.TimeoutLoop, long, event.Callback$Timeout, long, boolean);
+  public int compareTo(event.TimeoutLoop$T);
+  public int compareTo(java.lang.Object);
+}
+Compiled from "TimeoutStressTest.java"
+public class event.stress.TimeoutStressTest {
+  java.util.Queue<event.stress.TimeoutStressTest$Worker> queue;
+  event.TimeoutLoop loop;
+  int max;
+  int numCreated;
+  int numIterations;
+  int numHit;
+  int numMiss;
+  static int workerCount;
+  public event.stress.TimeoutStressTest(int, int);
+  void begin();
+  void stressTest();
+  event.stress.TimeoutStressTest$Worker getWorker();
+  void returnWorker(event.stress.TimeoutStressTest$Worker);
+  static void p(java.lang.Object);
+  public static void main(java.lang.String[]);
+}
+Compiled from "TimeoutStressTest.java"
+class event.stress.TimeoutStressTest$1 extends event.Callback$Timeout {
+  final event.stress.TimeoutStressTest this$0;
+  event.stress.TimeoutStressTest$1(event.stress.TimeoutStressTest);
+  public void go(event.TimeoutLoop);
+}
+Compiled from "TimeoutStressTest.java"
+class event.stress.TimeoutStressTest$Worker extends event.Callback$Timeout {
+  int id;
+  final event.stress.TimeoutStressTest this$0;
+  event.stress.TimeoutStressTest$Worker(event.stress.TimeoutStressTest);
+  public void go(event.TimeoutLoop);
+  void dump(int);
+}
+Compiled from "BufferPool.java"
+public class event.util.BufferPool {
+  int maxFree;
+  int numAllocated;
+  int numDestroyed;
+  static java.util.Random rnd;
+  static final boolean $assertionsDisabled;
+  public event.util.BufferPool();
+  public java.nio.ByteBuffer get(int);
+  public void putBack(java.nio.ByteBuffer);
+  static void p(java.lang.Object);
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "BufferPool.java"
+class event.util.BufferPool$ByteBufferCapComp implements java.util.Comparator<java.nio.ByteBuffer> {
+  final event.util.BufferPool this$0;
+  event.util.BufferPool$ByteBufferCapComp(event.util.BufferPool);
+  public int compare(java.nio.ByteBuffer, java.nio.ByteBuffer);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "ByteArrayPool.java"
+public class event.util.ByteArrayPool {
+  int maxFree;
+  int size;
+  java.util.Queue<byte[]> q;
+  static final boolean $assertionsDisabled;
+  public event.util.ByteArrayPool(int);
+  public byte[] get();
+  public void putBack(byte[]);
+  static {};
+}

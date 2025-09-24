@@ -1,0 +1,1487 @@
+Compiled from "BxTree.java"
+public class ru.spbau.tinydb.btree.BxTree {
+  public ru.spbau.tinydb.btree.BxTree(ru.spbau.tinydb.bufferManager.BufferManager, int);
+  public void insert(int, int);
+  public java.util.Iterator<ru.spbau.tinydb.btree.BxTreeEntry> find(int, int, boolean, boolean);
+}
+Compiled from "BxTree.java"
+class ru.spbau.tinydb.btree.BxTree$1 implements java.util.Iterator<ru.spbau.tinydb.btree.BxTreeEntry> {
+  final java.util.Iterator val$baseIter;
+  final boolean val$includeTo;
+  final int val$to;
+  final ru.spbau.tinydb.btree.BxTree this$0;
+  ru.spbau.tinydb.btree.BxTree$1(ru.spbau.tinydb.btree.BxTree, java.util.Iterator, boolean, int);
+  public ru.spbau.tinydb.btree.BxTreeEntry next();
+  public boolean hasNext();
+  public void remove();
+  public java.lang.Object next();
+}
+Compiled from "BxTreeEntry.java"
+public class ru.spbau.tinydb.btree.BxTreeEntry {
+  public final int key;
+  public final int value;
+  public ru.spbau.tinydb.btree.BxTreeEntry(int, int);
+}
+Compiled from "IndexNode.java"
+public class ru.spbau.tinydb.btree.IndexNode extends ru.spbau.tinydb.btree.Node {
+  protected ru.spbau.tinydb.btree.IndexNode(int, ru.spbau.tinydb.bufferManager.BufferManager);
+  public ru.spbau.tinydb.btree.IndexNode(int, ru.spbau.tinydb.bufferManager.BufferManager, ru.spbau.tinydb.btree.Split);
+  public ru.spbau.tinydb.btree.Split insert(int, int);
+  public java.util.Iterator<ru.spbau.tinydb.btree.BxTreeEntry> find(int, boolean);
+}
+Compiled from "LeafNode.java"
+public class ru.spbau.tinydb.btree.LeafNode extends ru.spbau.tinydb.btree.Node {
+  protected ru.spbau.tinydb.btree.LeafNode(int, ru.spbau.tinydb.bufferManager.BufferManager);
+  public ru.spbau.tinydb.btree.Split insert(int, int);
+  public java.util.Iterator<ru.spbau.tinydb.btree.BxTreeEntry> find(int, boolean);
+  static java.util.Iterator access$000(ru.spbau.tinydb.btree.LeafNode, int, boolean);
+}
+Compiled from "LeafNode.java"
+class ru.spbau.tinydb.btree.LeafNode$1 implements java.util.Iterator<ru.spbau.tinydb.btree.BxTreeEntry> {
+  final int val$key;
+  final boolean val$includeKey;
+  final ru.spbau.tinydb.btree.LeafNode this$0;
+  ru.spbau.tinydb.btree.LeafNode$1(ru.spbau.tinydb.btree.LeafNode, int, boolean);
+  public boolean hasNext();
+  public ru.spbau.tinydb.btree.BxTreeEntry next();
+  public void remove();
+  public java.lang.Object next();
+}
+Compiled from "LeafNode.java"
+class ru.spbau.tinydb.btree.LeafNode$2 implements java.util.Iterator<ru.spbau.tinydb.btree.BxTreeEntry> {
+  final int val$key;
+  final boolean val$includeKey;
+  final ru.spbau.tinydb.btree.LeafNode this$0;
+  ru.spbau.tinydb.btree.LeafNode$2(ru.spbau.tinydb.btree.LeafNode, int, boolean);
+  public boolean hasNext();
+  public ru.spbau.tinydb.btree.BxTreeEntry next();
+  public void remove();
+  public java.lang.Object next();
+}
+Compiled from "Node.java"
+public abstract class ru.spbau.tinydb.btree.Node {
+  protected static final int N;
+  protected final int pageIndex;
+  protected final ru.spbau.tinydb.bufferManager.BufferManager bm;
+  public ru.spbau.tinydb.btree.Node(int, ru.spbau.tinydb.bufferManager.BufferManager);
+  protected ru.spbau.tinydb.bufferManager.BufferView getDataView();
+  public abstract java.util.Iterator<ru.spbau.tinydb.btree.BxTreeEntry> find(int, boolean);
+  public abstract ru.spbau.tinydb.btree.Split insert(int, int);
+  protected int getSize();
+  protected void setSize(int);
+  protected int getLink();
+  protected void setLink(int);
+  protected int getType();
+  protected int findKey(int, boolean);
+  protected int getKey(int);
+  protected int getData(int);
+  protected void setData(int, int);
+  protected void insert(int, int, int);
+  protected void setIndexType();
+  public int getPageIndex();
+  protected static int getType(int, ru.spbau.tinydb.bufferManager.BufferManager);
+  public static ru.spbau.tinydb.btree.Node loadNode(int, ru.spbau.tinydb.bufferManager.BufferManager);
+}
+Compiled from "Split.java"
+class ru.spbau.tinydb.btree.Split {
+  public final int key;
+  public final int left;
+  public final int right;
+  public ru.spbau.tinydb.btree.Split(int, int, int);
+}
+Compiled from "BufferManager.java"
+public class ru.spbau.tinydb.bufferManager.BufferManager {
+  public static final long PAGE_SIZE;
+  public static final int METAINF_FIRST_PAGE;
+  public static final int INDEXES_FIRST_PAGE;
+  public ru.spbau.tinydb.bufferManager.BufferManager(java.lang.String) throws ru.spbau.tinydb.common.DBException;
+  public ru.spbau.tinydb.bufferManager.BufferManager(java.io.File) throws ru.spbau.tinydb.common.DBException;
+  public int getFreePage();
+  public ru.spbau.tinydb.bufferManager.BufferView getPage(int);
+  void onBufferViewCreated(int);
+  void onBufferViewRemoved(int);
+  public void onChanged(int);
+  public void flushBuffer();
+}
+Compiled from "BufferView.java"
+public class ru.spbau.tinydb.bufferManager.BufferView implements java.io.Closeable {
+  public ru.spbau.tinydb.bufferManager.BufferView(java.nio.ByteBuffer, int, int, ru.spbau.tinydb.bufferManager.BufferManager);
+  public byte getByte(int);
+  public void setByte(int, byte);
+  public byte[] getBytes(int, int);
+  public void setBytes(int, byte[]);
+  public int getInt(int);
+  public void setInt(int, int);
+  public ru.spbau.tinydb.bufferManager.BufferView getSubView(int, int);
+  public void close();
+  public void setChanged();
+}
+Compiled from "IndexTest.java"
+public class ru.spbau.tinydb.bufferManager.IndexTest {
+  public ru.spbau.tinydb.bufferManager.IndexTest();
+  public static void main(java.lang.String[]) throws java.io.IOException, java.util.concurrent.ExecutionException;
+}
+Compiled from "MetaInfTest.java"
+public class ru.spbau.tinydb.bufferManager.MetaInfTest {
+  public ru.spbau.tinydb.bufferManager.MetaInfTest();
+  public static void main(java.lang.String[]) throws java.io.FileNotFoundException, java.io.UnsupportedEncodingException, java.util.concurrent.ExecutionException;
+}
+Compiled from "TableTest.java"
+public class ru.spbau.tinydb.bufferManager.TableTest {
+  public ru.spbau.tinydb.bufferManager.TableTest();
+  public static void main(java.lang.String[]) throws java.io.IOException, java.util.concurrent.ExecutionException;
+}
+Compiled from "DBANTLRErrorListener.java"
+public class ru.spbau.tinydb.common.DBANTLRErrorListener extends org.antlr.v4.runtime.BaseErrorListener {
+  public static ru.spbau.tinydb.common.DBANTLRErrorListener getInstance();
+  public void syntaxError(org.antlr.v4.runtime.Recognizer<?, ?>, java.lang.Object, int, int, java.lang.String, org.antlr.v4.runtime.RecognitionException);
+  static {};
+}
+Compiled from "DBException.java"
+public class ru.spbau.tinydb.common.DBException extends java.lang.RuntimeException {
+  public ru.spbau.tinydb.common.DBException(java.lang.String);
+  public ru.spbau.tinydb.common.DBException(java.lang.String, java.lang.Throwable);
+  public ru.spbau.tinydb.common.DBException(java.lang.Throwable);
+}
+Compiled from "AtributesCursor.java"
+public class ru.spbau.tinydb.cursors.AtributesCursor implements java.util.Iterator<java.util.Map<ru.spbau.tinydb.queries.SecondLevelId, java.lang.Object>> {
+  public ru.spbau.tinydb.cursors.AtributesCursor(java.util.Iterator<ru.spbau.tinydb.table.Record>);
+  public boolean hasNext();
+  public java.util.Map<ru.spbau.tinydb.queries.SecondLevelId, java.lang.Object> next();
+  public void remove();
+  public java.lang.Object next();
+}
+Compiled from "IndexJoinCursor.java"
+public class ru.spbau.tinydb.cursors.IndexJoinCursor implements java.util.Iterator<java.util.Map<ru.spbau.tinydb.queries.SecondLevelId, java.lang.Object>> {
+  public ru.spbau.tinydb.cursors.IndexJoinCursor(java.util.Iterator<java.util.Map<ru.spbau.tinydb.queries.SecondLevelId, java.lang.Object>>, ru.spbau.tinydb.table.Table, ru.spbau.tinydb.btree.BxTree, ru.spbau.tinydb.queries.SecondLevelId);
+  public boolean hasNext();
+  public java.util.Map<ru.spbau.tinydb.queries.SecondLevelId, java.lang.Object> next();
+  public void remove();
+  public java.lang.Object next();
+}
+Compiled from "IndexJoinCursor.java"
+class ru.spbau.tinydb.cursors.IndexJoinCursor$1 implements java.util.Iterator<java.util.Map<ru.spbau.tinydb.queries.SecondLevelId, java.lang.Object>> {
+  final java.util.Iterator val$iter;
+  final java.util.Map val$tmp;
+  final ru.spbau.tinydb.cursors.IndexJoinCursor this$0;
+  ru.spbau.tinydb.cursors.IndexJoinCursor$1(ru.spbau.tinydb.cursors.IndexJoinCursor, java.util.Iterator, java.util.Map);
+  public boolean hasNext();
+  public java.util.Map<ru.spbau.tinydb.queries.SecondLevelId, java.lang.Object> next();
+  public void remove();
+  public java.lang.Object next();
+}
+Compiled from "NLJoinCursor.java"
+public class ru.spbau.tinydb.cursors.NLJoinCursor implements java.util.Iterator<java.util.Map<ru.spbau.tinydb.queries.SecondLevelId, java.lang.Object>> {
+  public ru.spbau.tinydb.cursors.NLJoinCursor(java.util.Iterator<java.util.Map<ru.spbau.tinydb.queries.SecondLevelId, java.lang.Object>>, java.lang.Iterable<java.util.Map<ru.spbau.tinydb.queries.SecondLevelId, java.lang.Object>>, ru.spbau.tinydb.expressions.comparison.JoinOnExpression);
+  public boolean hasNext();
+  public java.util.Map<ru.spbau.tinydb.queries.SecondLevelId, java.lang.Object> next();
+  public void remove();
+  public java.lang.Object next();
+}
+Compiled from "WhereCursor.java"
+public class ru.spbau.tinydb.cursors.WhereCursor implements java.util.Iterator<ru.spbau.tinydb.table.Record> {
+  public ru.spbau.tinydb.cursors.WhereCursor(java.util.Iterator<ru.spbau.tinydb.table.Record>, ru.spbau.tinydb.queries.WhereCondition);
+  public boolean hasNext();
+  public ru.spbau.tinydb.table.Record next();
+  public void remove();
+  public java.lang.Object next();
+}
+Compiled from "DataBaseEngine.java"
+public class ru.spbau.tinydb.engine.DataBaseEngine implements java.lang.AutoCloseable {
+  public static ru.spbau.tinydb.engine.DataBaseEngine getInstance();
+  public static ru.spbau.tinydb.engine.IDataBase getDBInstance(java.lang.String) throws ru.spbau.tinydb.common.DBException;
+  public void close() throws java.lang.Exception;
+  static {};
+}
+Compiled from "DataBaseEngine.java"
+public class ru.spbau.tinydb.engine.DataBaseEngine$DataBase implements ru.spbau.tinydb.engine.IDataBase {
+  public ru.spbau.tinydb.engine.DataBaseEngine$DataBase(java.lang.String) throws ru.spbau.tinydb.common.DBException;
+  public int delete(java.lang.String, ru.spbau.tinydb.queries.WhereCondition) throws ru.spbau.tinydb.common.DBException;
+  public int insert(java.lang.String, java.util.List<java.lang.String>, java.util.List<java.lang.Object>) throws ru.spbau.tinydb.common.DBException;
+  public boolean createTable(java.lang.String, java.util.Collection<ru.spbau.tinydb.queries.Attribute>) throws ru.spbau.tinydb.common.DBException;
+  public java.util.Collection<ru.spbau.tinydb.queries.Attribute> getTableSchema(java.lang.String);
+  public void close() throws java.lang.Exception;
+  public void flush();
+  public java.util.Iterator<java.util.Map<ru.spbau.tinydb.queries.SecondLevelId, java.lang.Object>> select(ru.spbau.tinydb.queries.SelectionTable, ru.spbau.tinydb.queries.WhereCondition);
+  public boolean createIndex(java.lang.String, java.util.List<java.lang.String>) throws ru.spbau.tinydb.common.DBException;
+}
+Compiled from "DataBaseEngine.java"
+class ru.spbau.tinydb.engine.DataBaseEngine$DataBase$1 implements java.lang.Iterable<java.util.Map<ru.spbau.tinydb.queries.SecondLevelId, java.lang.Object>> {
+  final ru.spbau.tinydb.table.Table val$joinTable;
+  final ru.spbau.tinydb.engine.DataBaseEngine$DataBase this$0;
+  ru.spbau.tinydb.engine.DataBaseEngine$DataBase$1(ru.spbau.tinydb.engine.DataBaseEngine$DataBase, ru.spbau.tinydb.table.Table);
+  public java.util.Iterator<java.util.Map<ru.spbau.tinydb.queries.SecondLevelId, java.lang.Object>> iterator();
+}
+Compiled from "IDataBase.java"
+public interface ru.spbau.tinydb.engine.IDataBase extends java.lang.AutoCloseable {
+  public abstract int insert(java.lang.String, java.util.List<java.lang.String>, java.util.List<java.lang.Object>) throws ru.spbau.tinydb.common.DBException;
+  public abstract int delete(java.lang.String, ru.spbau.tinydb.queries.WhereCondition) throws ru.spbau.tinydb.common.DBException;
+  public abstract boolean createTable(java.lang.String, java.util.Collection<ru.spbau.tinydb.queries.Attribute>) throws ru.spbau.tinydb.common.DBException;
+  public abstract void flush();
+  public abstract java.util.Iterator<java.util.Map<ru.spbau.tinydb.queries.SecondLevelId, java.lang.Object>> select(ru.spbau.tinydb.queries.SelectionTable, ru.spbau.tinydb.queries.WhereCondition);
+  public abstract boolean createIndex(java.lang.String, java.util.List<java.lang.String>) throws ru.spbau.tinydb.common.DBException;
+}
+Compiled from "AssignmentExpression.java"
+public class ru.spbau.tinydb.expressions.AssignmentExpression<V> implements ru.spbau.tinydb.expressions.PrintableOperation {
+  public ru.spbau.tinydb.expressions.AssignmentExpression(java.lang.String, V);
+  public java.lang.String toString();
+  public java.lang.String operationToString();
+}
+Compiled from "Expression.java"
+public interface ru.spbau.tinydb.expressions.Expression<V> {
+  public abstract V execute(java.util.Map<ru.spbau.tinydb.queries.SecondLevelId, java.lang.Object>);
+  public abstract java.util.List<ru.spbau.tinydb.queries.SecondLevelId> getIds();
+}
+Compiled from "PrintableOperation.java"
+public interface ru.spbau.tinydb.expressions.PrintableOperation {
+  public abstract java.lang.String operationToString();
+}
+Compiled from "AbstractBooleanExpression.java"
+public abstract class ru.spbau.tinydb.expressions.bool.AbstractBooleanExpression<V extends ru.spbau.tinydb.expressions.Expression<java.lang.Boolean>> implements ru.spbau.tinydb.expressions.Expression<java.lang.Boolean> {
+  public ru.spbau.tinydb.expressions.bool.AbstractBooleanExpression(V);
+  public V getFirst();
+  public java.util.List<ru.spbau.tinydb.queries.SecondLevelId> getIds();
+  public java.lang.String toString();
+}
+Compiled from "AndExpression.java"
+public class ru.spbau.tinydb.expressions.bool.AndExpression extends ru.spbau.tinydb.expressions.bool.AbstractBooleanExpression<ru.spbau.tinydb.expressions.bool.BooleanFactor> implements ru.spbau.tinydb.expressions.PrintableOperation {
+  public ru.spbau.tinydb.expressions.bool.AndExpression(ru.spbau.tinydb.expressions.bool.BooleanFactor, boolean);
+  public java.lang.Boolean execute(java.util.Map<ru.spbau.tinydb.queries.SecondLevelId, java.lang.Object>);
+  public java.lang.String toString();
+  public java.lang.String operationToString();
+  public java.lang.Object execute(java.util.Map);
+}
+Compiled from "BinaryBooleanExpression.java"
+public abstract class ru.spbau.tinydb.expressions.bool.BinaryBooleanExpression<V extends ru.spbau.tinydb.expressions.Expression<java.lang.Boolean>> extends ru.spbau.tinydb.expressions.bool.AbstractBooleanExpression<V> implements ru.spbau.tinydb.expressions.PrintableOperation {
+  public ru.spbau.tinydb.expressions.bool.BinaryBooleanExpression(V, V);
+  public V getSecond();
+  public java.lang.Boolean execute(java.util.Map<ru.spbau.tinydb.queries.SecondLevelId, java.lang.Object>);
+  protected abstract java.lang.Boolean executeBinaryOperation(java.lang.Boolean, java.lang.Boolean);
+  public java.util.List<ru.spbau.tinydb.queries.SecondLevelId> getIds();
+  public java.lang.String toString();
+  public java.lang.Object execute(java.util.Map);
+}
+Compiled from "BooleanExpression.java"
+public class ru.spbau.tinydb.expressions.bool.BooleanExpression extends ru.spbau.tinydb.expressions.bool.BinaryBooleanExpression<ru.spbau.tinydb.expressions.bool.OrExpression> {
+  public ru.spbau.tinydb.expressions.bool.BooleanExpression(ru.spbau.tinydb.expressions.bool.OrExpression, ru.spbau.tinydb.expressions.bool.OrExpression);
+  protected java.lang.Boolean executeBinaryOperation(java.lang.Boolean, java.lang.Boolean);
+  public java.lang.String operationToString();
+}
+Compiled from "BooleanFactor.java"
+public class ru.spbau.tinydb.expressions.bool.BooleanFactor extends ru.spbau.tinydb.expressions.bool.AbstractBooleanExpression<ru.spbau.tinydb.expressions.Expression<java.lang.Boolean>> {
+  public ru.spbau.tinydb.expressions.bool.BooleanFactor(ru.spbau.tinydb.expressions.Expression<java.lang.Boolean>);
+  public java.lang.Boolean execute(java.util.Map<ru.spbau.tinydb.queries.SecondLevelId, java.lang.Object>);
+  public java.lang.Object execute(java.util.Map);
+}
+Compiled from "BooleanLiteral.java"
+public abstract class ru.spbau.tinydb.expressions.bool.BooleanLiteral implements ru.spbau.tinydb.expressions.Expression<java.lang.Boolean> {
+  public ru.spbau.tinydb.expressions.bool.BooleanLiteral();
+  public java.util.List<ru.spbau.tinydb.queries.SecondLevelId> getIds();
+}
+Compiled from "BooleanLiteral.java"
+public class ru.spbau.tinydb.expressions.bool.BooleanLiteral$FalseBooleanLiteral extends ru.spbau.tinydb.expressions.bool.BooleanLiteral {
+  public static ru.spbau.tinydb.expressions.bool.BooleanLiteral$FalseBooleanLiteral getInstance();
+  public java.lang.Boolean execute(java.util.Map<ru.spbau.tinydb.queries.SecondLevelId, java.lang.Object>);
+  public java.lang.String toString();
+  public java.lang.Object execute(java.util.Map);
+  static {};
+}
+Compiled from "BooleanLiteral.java"
+public class ru.spbau.tinydb.expressions.bool.BooleanLiteral$TrueBooleanLiteral extends ru.spbau.tinydb.expressions.bool.BooleanLiteral {
+  public static ru.spbau.tinydb.expressions.bool.BooleanLiteral$TrueBooleanLiteral getInstance();
+  public java.lang.Boolean execute(java.util.Map<ru.spbau.tinydb.queries.SecondLevelId, java.lang.Object>);
+  public java.lang.String toString();
+  public java.lang.Object execute(java.util.Map);
+  static {};
+}
+Compiled from "OrExpression.java"
+public class ru.spbau.tinydb.expressions.bool.OrExpression extends ru.spbau.tinydb.expressions.bool.BinaryBooleanExpression<ru.spbau.tinydb.expressions.bool.AndExpression> {
+  public ru.spbau.tinydb.expressions.bool.OrExpression(ru.spbau.tinydb.expressions.bool.AndExpression, ru.spbau.tinydb.expressions.bool.AndExpression);
+  protected java.lang.Boolean executeBinaryOperation(java.lang.Boolean, java.lang.Boolean);
+  public java.lang.String operationToString();
+}
+Compiled from "ComparisonExpression.java"
+public abstract class ru.spbau.tinydb.expressions.comparison.ComparisonExpression<V extends java.lang.Comparable<V>> implements ru.spbau.tinydb.expressions.Expression<java.lang.Boolean>, ru.spbau.tinydb.expressions.PrintableOperation {
+  public ru.spbau.tinydb.expressions.comparison.ComparisonExpression(ru.spbau.tinydb.queries.SecondLevelId, V);
+  public ru.spbau.tinydb.queries.SecondLevelId getId();
+  public V getValue();
+  public java.lang.String toString();
+  public int compareWithValueFromMap(java.util.Map<ru.spbau.tinydb.queries.SecondLevelId, java.lang.Object>);
+  public java.util.List<ru.spbau.tinydb.queries.SecondLevelId> getIds();
+}
+Compiled from "EqualExpression.java"
+public class ru.spbau.tinydb.expressions.comparison.EqualExpression<V extends java.lang.Comparable<V>> extends ru.spbau.tinydb.expressions.comparison.ComparisonExpression<V> {
+  public ru.spbau.tinydb.expressions.comparison.EqualExpression(ru.spbau.tinydb.queries.SecondLevelId, V);
+  public java.lang.Boolean execute(java.util.Map<ru.spbau.tinydb.queries.SecondLevelId, java.lang.Object>);
+  public java.lang.String operationToString();
+  public java.lang.Object execute(java.util.Map);
+}
+Compiled from "GreaterExpression.java"
+public class ru.spbau.tinydb.expressions.comparison.GreaterExpression<V extends java.lang.Comparable<V>> extends ru.spbau.tinydb.expressions.comparison.ComparisonExpression<V> {
+  public ru.spbau.tinydb.expressions.comparison.GreaterExpression(ru.spbau.tinydb.queries.SecondLevelId, V);
+  public java.lang.Boolean execute(java.util.Map<ru.spbau.tinydb.queries.SecondLevelId, java.lang.Object>);
+  public java.lang.String operationToString();
+  public java.lang.Object execute(java.util.Map);
+}
+Compiled from "GreaterOrEqualExpression.java"
+public class ru.spbau.tinydb.expressions.comparison.GreaterOrEqualExpression<V extends java.lang.Comparable<V>> extends ru.spbau.tinydb.expressions.comparison.ComparisonExpression<V> {
+  public ru.spbau.tinydb.expressions.comparison.GreaterOrEqualExpression(ru.spbau.tinydb.queries.SecondLevelId, V);
+  public java.lang.Boolean execute(java.util.Map<ru.spbau.tinydb.queries.SecondLevelId, java.lang.Object>);
+  public java.lang.String operationToString();
+  public java.lang.Object execute(java.util.Map);
+}
+Compiled from "JoinOnExpression.java"
+public class ru.spbau.tinydb.expressions.comparison.JoinOnExpression implements ru.spbau.tinydb.expressions.Expression<java.lang.Boolean> {
+  public ru.spbau.tinydb.expressions.comparison.JoinOnExpression(java.lang.String, ru.spbau.tinydb.queries.SecondLevelId, ru.spbau.tinydb.queries.SecondLevelId);
+  public java.lang.String getTableName();
+  public ru.spbau.tinydb.queries.SecondLevelId getFirstId();
+  public ru.spbau.tinydb.queries.SecondLevelId getSecondId();
+  public java.lang.Boolean execute(java.util.Map<ru.spbau.tinydb.queries.SecondLevelId, java.lang.Object>);
+  public java.util.List<ru.spbau.tinydb.queries.SecondLevelId> getIds();
+  public java.lang.String toString();
+  public java.lang.Object execute(java.util.Map);
+}
+Compiled from "LessExpression.java"
+public class ru.spbau.tinydb.expressions.comparison.LessExpression<V extends java.lang.Comparable<V>> extends ru.spbau.tinydb.expressions.comparison.ComparisonExpression<V> {
+  public ru.spbau.tinydb.expressions.comparison.LessExpression(ru.spbau.tinydb.queries.SecondLevelId, V);
+  public java.lang.Boolean execute(java.util.Map<ru.spbau.tinydb.queries.SecondLevelId, java.lang.Object>);
+  public java.lang.String operationToString();
+  public java.lang.Object execute(java.util.Map);
+}
+Compiled from "LessOrEqualExpression.java"
+public class ru.spbau.tinydb.expressions.comparison.LessOrEqualExpression<V extends java.lang.Comparable<V>> extends ru.spbau.tinydb.expressions.comparison.ComparisonExpression<V> {
+  public ru.spbau.tinydb.expressions.comparison.LessOrEqualExpression(ru.spbau.tinydb.queries.SecondLevelId, V);
+  public java.lang.Boolean execute(java.util.Map<ru.spbau.tinydb.queries.SecondLevelId, java.lang.Object>);
+  public java.lang.String operationToString();
+  public java.lang.Object execute(java.util.Map);
+}
+Compiled from "NotEqualExpression.java"
+public class ru.spbau.tinydb.expressions.comparison.NotEqualExpression<V extends java.lang.Comparable<V>> extends ru.spbau.tinydb.expressions.comparison.ComparisonExpression<V> {
+  public ru.spbau.tinydb.expressions.comparison.NotEqualExpression(ru.spbau.tinydb.queries.SecondLevelId, V);
+  public java.lang.Boolean execute(java.util.Map<ru.spbau.tinydb.queries.SecondLevelId, java.lang.Object>);
+  public java.lang.String operationToString();
+  public java.lang.Object execute(java.util.Map);
+}
+Compiled from "GrammarTester.java"
+public class ru.spbau.tinydb.grammar.GrammarTester {
+  public static final java.lang.String TESTS_PATH;
+  public static final java.lang.String FILTER;
+  public ru.spbau.tinydb.grammar.GrammarTester();
+  public static void main(java.lang.String[]);
+}
+Compiled from "SQLGrammarBaseListener.java"
+public class ru.spbau.tinydb.grammar.SQLGrammarBaseListener implements ru.spbau.tinydb.grammar.SQLGrammarListener {
+  public ru.spbau.tinydb.grammar.SQLGrammarBaseListener();
+  public void enterIdSuffix(ru.spbau.tinydb.grammar.SQLGrammarParser$IdSuffixContext);
+  public void exitIdSuffix(ru.spbau.tinydb.grammar.SQLGrammarParser$IdSuffixContext);
+  public void enterCreateTable(ru.spbau.tinydb.grammar.SQLGrammarParser$CreateTableContext);
+  public void exitCreateTable(ru.spbau.tinydb.grammar.SQLGrammarParser$CreateTableContext);
+  public void enterSelectFrom(ru.spbau.tinydb.grammar.SQLGrammarParser$SelectFromContext);
+  public void exitSelectFrom(ru.spbau.tinydb.grammar.SQLGrammarParser$SelectFromContext);
+  public void enterUpdateSet(ru.spbau.tinydb.grammar.SQLGrammarParser$UpdateSetContext);
+  public void exitUpdateSet(ru.spbau.tinydb.grammar.SQLGrammarParser$UpdateSetContext);
+  public void enterLessExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$LessExpressionContext);
+  public void exitLessExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$LessExpressionContext);
+  public void enterComparisonExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$ComparisonExpressionContext);
+  public void exitComparisonExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$ComparisonExpressionContext);
+  public void enterJoinOnExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$JoinOnExpressionContext);
+  public void exitJoinOnExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$JoinOnExpressionContext);
+  public void enterDeleteFrom(ru.spbau.tinydb.grammar.SQLGrammarParser$DeleteFromContext);
+  public void exitDeleteFrom(ru.spbau.tinydb.grammar.SQLGrammarParser$DeleteFromContext);
+  public void enterSecondLevelId(ru.spbau.tinydb.grammar.SQLGrammarParser$SecondLevelIdContext);
+  public void exitSecondLevelId(ru.spbau.tinydb.grammar.SQLGrammarParser$SecondLevelIdContext);
+  public void enterAndExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$AndExpressionContext);
+  public void exitAndExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$AndExpressionContext);
+  public void enterVarCharType(ru.spbau.tinydb.grammar.SQLGrammarParser$VarCharTypeContext);
+  public void exitVarCharType(ru.spbau.tinydb.grammar.SQLGrammarParser$VarCharTypeContext);
+  public void enterAttribute(ru.spbau.tinydb.grammar.SQLGrammarParser$AttributeContext);
+  public void exitAttribute(ru.spbau.tinydb.grammar.SQLGrammarParser$AttributeContext);
+  public void enterBooleanFactor(ru.spbau.tinydb.grammar.SQLGrammarParser$BooleanFactorContext);
+  public void exitBooleanFactor(ru.spbau.tinydb.grammar.SQLGrammarParser$BooleanFactorContext);
+  public void enterValue(ru.spbau.tinydb.grammar.SQLGrammarParser$ValueContext);
+  public void exitValue(ru.spbau.tinydb.grammar.SQLGrammarParser$ValueContext);
+  public void enterBooleanLiteral(ru.spbau.tinydb.grammar.SQLGrammarParser$BooleanLiteralContext);
+  public void exitBooleanLiteral(ru.spbau.tinydb.grammar.SQLGrammarParser$BooleanLiteralContext);
+  public void enterEqualExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$EqualExpressionContext);
+  public void exitEqualExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$EqualExpressionContext);
+  public void enterFirstLevelId(ru.spbau.tinydb.grammar.SQLGrammarParser$FirstLevelIdContext);
+  public void exitFirstLevelId(ru.spbau.tinydb.grammar.SQLGrammarParser$FirstLevelIdContext);
+  public void enterWhereCondition(ru.spbau.tinydb.grammar.SQLGrammarParser$WhereConditionContext);
+  public void exitWhereCondition(ru.spbau.tinydb.grammar.SQLGrammarParser$WhereConditionContext);
+  public void enterQuery(ru.spbau.tinydb.grammar.SQLGrammarParser$QueryContext);
+  public void exitQuery(ru.spbau.tinydb.grammar.SQLGrammarParser$QueryContext);
+  public void enterDataType(ru.spbau.tinydb.grammar.SQLGrammarParser$DataTypeContext);
+  public void exitDataType(ru.spbau.tinydb.grammar.SQLGrammarParser$DataTypeContext);
+  public void enterInsertInto(ru.spbau.tinydb.grammar.SQLGrammarParser$InsertIntoContext);
+  public void exitInsertInto(ru.spbau.tinydb.grammar.SQLGrammarParser$InsertIntoContext);
+  public void enterLessOrEqualExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$LessOrEqualExpressionContext);
+  public void exitLessOrEqualExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$LessOrEqualExpressionContext);
+  public void enterAssignmentExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$AssignmentExpressionContext);
+  public void exitAssignmentExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$AssignmentExpressionContext);
+  public void enterNotEqualExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$NotEqualExpressionContext);
+  public void exitNotEqualExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$NotEqualExpressionContext);
+  public void enterVarCharLiteral(ru.spbau.tinydb.grammar.SQLGrammarParser$VarCharLiteralContext);
+  public void exitVarCharLiteral(ru.spbau.tinydb.grammar.SQLGrammarParser$VarCharLiteralContext);
+  public void enterCreateIndex(ru.spbau.tinydb.grammar.SQLGrammarParser$CreateIndexContext);
+  public void exitCreateIndex(ru.spbau.tinydb.grammar.SQLGrammarParser$CreateIndexContext);
+  public void enterBooleanExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$BooleanExpressionContext);
+  public void exitBooleanExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$BooleanExpressionContext);
+  public void enterScript(ru.spbau.tinydb.grammar.SQLGrammarParser$ScriptContext);
+  public void exitScript(ru.spbau.tinydb.grammar.SQLGrammarParser$ScriptContext);
+  public void enterFilter(ru.spbau.tinydb.grammar.SQLGrammarParser$FilterContext);
+  public void exitFilter(ru.spbau.tinydb.grammar.SQLGrammarParser$FilterContext);
+  public void enterOrExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$OrExpressionContext);
+  public void exitOrExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$OrExpressionContext);
+  public void enterGreaterExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$GreaterExpressionContext);
+  public void exitGreaterExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$GreaterExpressionContext);
+  public void enterDoubleLiteral(ru.spbau.tinydb.grammar.SQLGrammarParser$DoubleLiteralContext);
+  public void exitDoubleLiteral(ru.spbau.tinydb.grammar.SQLGrammarParser$DoubleLiteralContext);
+  public void enterGreaterOrEqualExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$GreaterOrEqualExpressionContext);
+  public void exitGreaterOrEqualExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$GreaterOrEqualExpressionContext);
+  public void enterIntegerLiteral(ru.spbau.tinydb.grammar.SQLGrammarParser$IntegerLiteralContext);
+  public void exitIntegerLiteral(ru.spbau.tinydb.grammar.SQLGrammarParser$IntegerLiteralContext);
+  public void enterSelectionTable(ru.spbau.tinydb.grammar.SQLGrammarParser$SelectionTableContext);
+  public void exitSelectionTable(ru.spbau.tinydb.grammar.SQLGrammarParser$SelectionTableContext);
+  public void enterEveryRule(org.antlr.v4.runtime.ParserRuleContext);
+  public void exitEveryRule(org.antlr.v4.runtime.ParserRuleContext);
+  public void visitTerminal(org.antlr.v4.runtime.tree.TerminalNode);
+  public void visitErrorNode(org.antlr.v4.runtime.tree.ErrorNode);
+}
+Compiled from "SQLGrammarLexer.java"
+public class ru.spbau.tinydb.grammar.SQLGrammarLexer extends org.antlr.v4.runtime.Lexer {
+  protected static final org.antlr.v4.runtime.dfa.DFA[] _decisionToDFA;
+  protected static final org.antlr.v4.runtime.atn.PredictionContextCache _sharedContextCache;
+  public static final int OR;
+  public static final int AND;
+  public static final int NOT;
+  public static final int TRUE;
+  public static final int FALSE;
+  public static final int INTEGER_TYPE;
+  public static final int DOUBLE_TYPE;
+  public static final int VAR_CHAR_TYPE;
+  public static final int CREATE;
+  public static final int UNIQUE;
+  public static final int INDEX;
+  public static final int USING;
+  public static final int BTREE;
+  public static final int HASH;
+  public static final int ASC;
+  public static final int DESC;
+  public static final int DELETE;
+  public static final int INSERT;
+  public static final int INTO;
+  public static final int VALUES;
+  public static final int UPDATE;
+  public static final int SET;
+  public static final int TABLE;
+  public static final int SELECT;
+  public static final int FROM;
+  public static final int WHERE;
+  public static final int INNER;
+  public static final int JOIN;
+  public static final int ON;
+  public static final int COMMA;
+  public static final int ASTERISC;
+  public static final int LEFT_PARENTHESIS;
+  public static final int RIGHT_PARENTHESIS;
+  public static final int SEMICOLON;
+  public static final int WHITE_SPACE;
+  public static final int LOWER_CASE;
+  public static final int UPPER_CASE;
+  public static final int UNDERLINE;
+  public static final int DECIMAL_DIGIT;
+  public static final int SIGN;
+  public static final int DECIMAL_POINT;
+  public static final int EQUAL;
+  public static final int NOT_EQUAL;
+  public static final int LESS;
+  public static final int LESS_OR_EQUAL;
+  public static final int GREATER;
+  public static final int GREATER_OR_EQUAL;
+  public static final int QUOTES;
+  public static java.lang.String[] modeNames;
+  public static final java.lang.String[] tokenNames;
+  public static final java.lang.String[] ruleNames;
+  public static final java.lang.String _serializedATN;
+  public static final org.antlr.v4.runtime.atn.ATN _ATN;
+  public ru.spbau.tinydb.grammar.SQLGrammarLexer(org.antlr.v4.runtime.CharStream);
+  public java.lang.String getGrammarFileName();
+  public java.lang.String[] getTokenNames();
+  public java.lang.String[] getRuleNames();
+  public java.lang.String getSerializedATN();
+  public java.lang.String[] getModeNames();
+  public org.antlr.v4.runtime.atn.ATN getATN();
+  public void action(org.antlr.v4.runtime.RuleContext, int, int);
+  static {};
+}
+Compiled from "SQLGrammarListener.java"
+public interface ru.spbau.tinydb.grammar.SQLGrammarListener extends org.antlr.v4.runtime.tree.ParseTreeListener {
+  public abstract void enterIdSuffix(ru.spbau.tinydb.grammar.SQLGrammarParser$IdSuffixContext);
+  public abstract void exitIdSuffix(ru.spbau.tinydb.grammar.SQLGrammarParser$IdSuffixContext);
+  public abstract void enterCreateTable(ru.spbau.tinydb.grammar.SQLGrammarParser$CreateTableContext);
+  public abstract void exitCreateTable(ru.spbau.tinydb.grammar.SQLGrammarParser$CreateTableContext);
+  public abstract void enterSelectFrom(ru.spbau.tinydb.grammar.SQLGrammarParser$SelectFromContext);
+  public abstract void exitSelectFrom(ru.spbau.tinydb.grammar.SQLGrammarParser$SelectFromContext);
+  public abstract void enterUpdateSet(ru.spbau.tinydb.grammar.SQLGrammarParser$UpdateSetContext);
+  public abstract void exitUpdateSet(ru.spbau.tinydb.grammar.SQLGrammarParser$UpdateSetContext);
+  public abstract void enterLessExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$LessExpressionContext);
+  public abstract void exitLessExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$LessExpressionContext);
+  public abstract void enterComparisonExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$ComparisonExpressionContext);
+  public abstract void exitComparisonExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$ComparisonExpressionContext);
+  public abstract void enterJoinOnExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$JoinOnExpressionContext);
+  public abstract void exitJoinOnExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$JoinOnExpressionContext);
+  public abstract void enterDeleteFrom(ru.spbau.tinydb.grammar.SQLGrammarParser$DeleteFromContext);
+  public abstract void exitDeleteFrom(ru.spbau.tinydb.grammar.SQLGrammarParser$DeleteFromContext);
+  public abstract void enterSecondLevelId(ru.spbau.tinydb.grammar.SQLGrammarParser$SecondLevelIdContext);
+  public abstract void exitSecondLevelId(ru.spbau.tinydb.grammar.SQLGrammarParser$SecondLevelIdContext);
+  public abstract void enterAndExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$AndExpressionContext);
+  public abstract void exitAndExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$AndExpressionContext);
+  public abstract void enterVarCharType(ru.spbau.tinydb.grammar.SQLGrammarParser$VarCharTypeContext);
+  public abstract void exitVarCharType(ru.spbau.tinydb.grammar.SQLGrammarParser$VarCharTypeContext);
+  public abstract void enterAttribute(ru.spbau.tinydb.grammar.SQLGrammarParser$AttributeContext);
+  public abstract void exitAttribute(ru.spbau.tinydb.grammar.SQLGrammarParser$AttributeContext);
+  public abstract void enterBooleanFactor(ru.spbau.tinydb.grammar.SQLGrammarParser$BooleanFactorContext);
+  public abstract void exitBooleanFactor(ru.spbau.tinydb.grammar.SQLGrammarParser$BooleanFactorContext);
+  public abstract void enterValue(ru.spbau.tinydb.grammar.SQLGrammarParser$ValueContext);
+  public abstract void exitValue(ru.spbau.tinydb.grammar.SQLGrammarParser$ValueContext);
+  public abstract void enterBooleanLiteral(ru.spbau.tinydb.grammar.SQLGrammarParser$BooleanLiteralContext);
+  public abstract void exitBooleanLiteral(ru.spbau.tinydb.grammar.SQLGrammarParser$BooleanLiteralContext);
+  public abstract void enterEqualExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$EqualExpressionContext);
+  public abstract void exitEqualExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$EqualExpressionContext);
+  public abstract void enterFirstLevelId(ru.spbau.tinydb.grammar.SQLGrammarParser$FirstLevelIdContext);
+  public abstract void exitFirstLevelId(ru.spbau.tinydb.grammar.SQLGrammarParser$FirstLevelIdContext);
+  public abstract void enterWhereCondition(ru.spbau.tinydb.grammar.SQLGrammarParser$WhereConditionContext);
+  public abstract void exitWhereCondition(ru.spbau.tinydb.grammar.SQLGrammarParser$WhereConditionContext);
+  public abstract void enterQuery(ru.spbau.tinydb.grammar.SQLGrammarParser$QueryContext);
+  public abstract void exitQuery(ru.spbau.tinydb.grammar.SQLGrammarParser$QueryContext);
+  public abstract void enterDataType(ru.spbau.tinydb.grammar.SQLGrammarParser$DataTypeContext);
+  public abstract void exitDataType(ru.spbau.tinydb.grammar.SQLGrammarParser$DataTypeContext);
+  public abstract void enterInsertInto(ru.spbau.tinydb.grammar.SQLGrammarParser$InsertIntoContext);
+  public abstract void exitInsertInto(ru.spbau.tinydb.grammar.SQLGrammarParser$InsertIntoContext);
+  public abstract void enterLessOrEqualExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$LessOrEqualExpressionContext);
+  public abstract void exitLessOrEqualExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$LessOrEqualExpressionContext);
+  public abstract void enterAssignmentExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$AssignmentExpressionContext);
+  public abstract void exitAssignmentExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$AssignmentExpressionContext);
+  public abstract void enterNotEqualExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$NotEqualExpressionContext);
+  public abstract void exitNotEqualExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$NotEqualExpressionContext);
+  public abstract void enterVarCharLiteral(ru.spbau.tinydb.grammar.SQLGrammarParser$VarCharLiteralContext);
+  public abstract void exitVarCharLiteral(ru.spbau.tinydb.grammar.SQLGrammarParser$VarCharLiteralContext);
+  public abstract void enterCreateIndex(ru.spbau.tinydb.grammar.SQLGrammarParser$CreateIndexContext);
+  public abstract void exitCreateIndex(ru.spbau.tinydb.grammar.SQLGrammarParser$CreateIndexContext);
+  public abstract void enterBooleanExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$BooleanExpressionContext);
+  public abstract void exitBooleanExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$BooleanExpressionContext);
+  public abstract void enterScript(ru.spbau.tinydb.grammar.SQLGrammarParser$ScriptContext);
+  public abstract void exitScript(ru.spbau.tinydb.grammar.SQLGrammarParser$ScriptContext);
+  public abstract void enterFilter(ru.spbau.tinydb.grammar.SQLGrammarParser$FilterContext);
+  public abstract void exitFilter(ru.spbau.tinydb.grammar.SQLGrammarParser$FilterContext);
+  public abstract void enterOrExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$OrExpressionContext);
+  public abstract void exitOrExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$OrExpressionContext);
+  public abstract void enterGreaterExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$GreaterExpressionContext);
+  public abstract void exitGreaterExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$GreaterExpressionContext);
+  public abstract void enterDoubleLiteral(ru.spbau.tinydb.grammar.SQLGrammarParser$DoubleLiteralContext);
+  public abstract void exitDoubleLiteral(ru.spbau.tinydb.grammar.SQLGrammarParser$DoubleLiteralContext);
+  public abstract void enterGreaterOrEqualExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$GreaterOrEqualExpressionContext);
+  public abstract void exitGreaterOrEqualExpression(ru.spbau.tinydb.grammar.SQLGrammarParser$GreaterOrEqualExpressionContext);
+  public abstract void enterIntegerLiteral(ru.spbau.tinydb.grammar.SQLGrammarParser$IntegerLiteralContext);
+  public abstract void exitIntegerLiteral(ru.spbau.tinydb.grammar.SQLGrammarParser$IntegerLiteralContext);
+  public abstract void enterSelectionTable(ru.spbau.tinydb.grammar.SQLGrammarParser$SelectionTableContext);
+  public abstract void exitSelectionTable(ru.spbau.tinydb.grammar.SQLGrammarParser$SelectionTableContext);
+}
+Compiled from "SQLGrammarParser.java"
+public class ru.spbau.tinydb.grammar.SQLGrammarParser extends org.antlr.v4.runtime.Parser {
+  protected static final org.antlr.v4.runtime.dfa.DFA[] _decisionToDFA;
+  protected static final org.antlr.v4.runtime.atn.PredictionContextCache _sharedContextCache;
+  public static final int OR;
+  public static final int AND;
+  public static final int NOT;
+  public static final int TRUE;
+  public static final int FALSE;
+  public static final int INTEGER_TYPE;
+  public static final int DOUBLE_TYPE;
+  public static final int VAR_CHAR_TYPE;
+  public static final int CREATE;
+  public static final int UNIQUE;
+  public static final int INDEX;
+  public static final int USING;
+  public static final int BTREE;
+  public static final int HASH;
+  public static final int ASC;
+  public static final int DESC;
+  public static final int DELETE;
+  public static final int INSERT;
+  public static final int INTO;
+  public static final int VALUES;
+  public static final int UPDATE;
+  public static final int SET;
+  public static final int TABLE;
+  public static final int SELECT;
+  public static final int FROM;
+  public static final int WHERE;
+  public static final int INNER;
+  public static final int JOIN;
+  public static final int ON;
+  public static final int COMMA;
+  public static final int ASTERISC;
+  public static final int LEFT_PARENTHESIS;
+  public static final int RIGHT_PARENTHESIS;
+  public static final int SEMICOLON;
+  public static final int WHITE_SPACE;
+  public static final int LOWER_CASE;
+  public static final int UPPER_CASE;
+  public static final int UNDERLINE;
+  public static final int DECIMAL_DIGIT;
+  public static final int SIGN;
+  public static final int DECIMAL_POINT;
+  public static final int EQUAL;
+  public static final int NOT_EQUAL;
+  public static final int LESS;
+  public static final int LESS_OR_EQUAL;
+  public static final int GREATER;
+  public static final int GREATER_OR_EQUAL;
+  public static final int QUOTES;
+  public static final java.lang.String[] tokenNames;
+  public static final int RULE_script;
+  public static final int RULE_query;
+  public static final int RULE_createTable;
+  public static final int RULE_attribute;
+  public static final int RULE_dataType;
+  public static final int RULE_varCharType;
+  public static final int RULE_value;
+  public static final int RULE_integerLiteral;
+  public static final int RULE_doubleLiteral;
+  public static final int RULE_varCharLiteral;
+  public static final int RULE_firstLevelId;
+  public static final int RULE_idSuffix;
+  public static final int RULE_createIndex;
+  public static final int RULE_selectFrom;
+  public static final int RULE_insertInto;
+  public static final int RULE_updateSet;
+  public static final int RULE_assignmentExpression;
+  public static final int RULE_deleteFrom;
+  public static final int RULE_filter;
+  public static final int RULE_whereCondition;
+  public static final int RULE_selectionTable;
+  public static final int RULE_joinOnExpression;
+  public static final int RULE_secondLevelId;
+  public static final int RULE_booleanExpression;
+  public static final int RULE_orExpression;
+  public static final int RULE_andExpression;
+  public static final int RULE_booleanFactor;
+  public static final int RULE_booleanLiteral;
+  public static final int RULE_comparisonExpression;
+  public static final int RULE_equalExpression;
+  public static final int RULE_notEqualExpression;
+  public static final int RULE_lessExpression;
+  public static final int RULE_lessOrEqualExpression;
+  public static final int RULE_greaterExpression;
+  public static final int RULE_greaterOrEqualExpression;
+  public static final java.lang.String[] ruleNames;
+  public static final java.lang.String _serializedATN;
+  public static final org.antlr.v4.runtime.atn.ATN _ATN;
+  public java.lang.String getGrammarFileName();
+  public java.lang.String[] getTokenNames();
+  public java.lang.String[] getRuleNames();
+  public java.lang.String getSerializedATN();
+  public org.antlr.v4.runtime.atn.ATN getATN();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser(org.antlr.v4.runtime.TokenStream);
+  public final ru.spbau.tinydb.grammar.SQLGrammarParser$ScriptContext script() throws org.antlr.v4.runtime.RecognitionException;
+  public final ru.spbau.tinydb.grammar.SQLGrammarParser$QueryContext query() throws org.antlr.v4.runtime.RecognitionException;
+  public final ru.spbau.tinydb.grammar.SQLGrammarParser$CreateTableContext createTable() throws org.antlr.v4.runtime.RecognitionException;
+  public final ru.spbau.tinydb.grammar.SQLGrammarParser$AttributeContext attribute() throws org.antlr.v4.runtime.RecognitionException;
+  public final ru.spbau.tinydb.grammar.SQLGrammarParser$DataTypeContext dataType() throws org.antlr.v4.runtime.RecognitionException;
+  public final ru.spbau.tinydb.grammar.SQLGrammarParser$VarCharTypeContext varCharType() throws org.antlr.v4.runtime.RecognitionException;
+  public final ru.spbau.tinydb.grammar.SQLGrammarParser$ValueContext value() throws org.antlr.v4.runtime.RecognitionException;
+  public final ru.spbau.tinydb.grammar.SQLGrammarParser$IntegerLiteralContext integerLiteral() throws org.antlr.v4.runtime.RecognitionException;
+  public final ru.spbau.tinydb.grammar.SQLGrammarParser$DoubleLiteralContext doubleLiteral() throws org.antlr.v4.runtime.RecognitionException;
+  public final ru.spbau.tinydb.grammar.SQLGrammarParser$VarCharLiteralContext varCharLiteral() throws org.antlr.v4.runtime.RecognitionException;
+  public final ru.spbau.tinydb.grammar.SQLGrammarParser$FirstLevelIdContext firstLevelId() throws org.antlr.v4.runtime.RecognitionException;
+  public final ru.spbau.tinydb.grammar.SQLGrammarParser$IdSuffixContext idSuffix() throws org.antlr.v4.runtime.RecognitionException;
+  public final ru.spbau.tinydb.grammar.SQLGrammarParser$CreateIndexContext createIndex() throws org.antlr.v4.runtime.RecognitionException;
+  public final ru.spbau.tinydb.grammar.SQLGrammarParser$SelectFromContext selectFrom() throws org.antlr.v4.runtime.RecognitionException;
+  public final ru.spbau.tinydb.grammar.SQLGrammarParser$InsertIntoContext insertInto() throws org.antlr.v4.runtime.RecognitionException;
+  public final ru.spbau.tinydb.grammar.SQLGrammarParser$UpdateSetContext updateSet() throws org.antlr.v4.runtime.RecognitionException;
+  public final ru.spbau.tinydb.grammar.SQLGrammarParser$AssignmentExpressionContext assignmentExpression() throws org.antlr.v4.runtime.RecognitionException;
+  public final ru.spbau.tinydb.grammar.SQLGrammarParser$DeleteFromContext deleteFrom() throws org.antlr.v4.runtime.RecognitionException;
+  public final ru.spbau.tinydb.grammar.SQLGrammarParser$FilterContext filter() throws org.antlr.v4.runtime.RecognitionException;
+  public final ru.spbau.tinydb.grammar.SQLGrammarParser$WhereConditionContext whereCondition() throws org.antlr.v4.runtime.RecognitionException;
+  public final ru.spbau.tinydb.grammar.SQLGrammarParser$SelectionTableContext selectionTable() throws org.antlr.v4.runtime.RecognitionException;
+  public final ru.spbau.tinydb.grammar.SQLGrammarParser$JoinOnExpressionContext joinOnExpression() throws org.antlr.v4.runtime.RecognitionException;
+  public final ru.spbau.tinydb.grammar.SQLGrammarParser$SecondLevelIdContext secondLevelId() throws org.antlr.v4.runtime.RecognitionException;
+  public final ru.spbau.tinydb.grammar.SQLGrammarParser$BooleanExpressionContext booleanExpression() throws org.antlr.v4.runtime.RecognitionException;
+  public final ru.spbau.tinydb.grammar.SQLGrammarParser$OrExpressionContext orExpression() throws org.antlr.v4.runtime.RecognitionException;
+  public final ru.spbau.tinydb.grammar.SQLGrammarParser$AndExpressionContext andExpression() throws org.antlr.v4.runtime.RecognitionException;
+  public final ru.spbau.tinydb.grammar.SQLGrammarParser$BooleanFactorContext booleanFactor() throws org.antlr.v4.runtime.RecognitionException;
+  public final ru.spbau.tinydb.grammar.SQLGrammarParser$BooleanLiteralContext booleanLiteral() throws org.antlr.v4.runtime.RecognitionException;
+  public final ru.spbau.tinydb.grammar.SQLGrammarParser$ComparisonExpressionContext comparisonExpression() throws org.antlr.v4.runtime.RecognitionException;
+  public final ru.spbau.tinydb.grammar.SQLGrammarParser$EqualExpressionContext equalExpression() throws org.antlr.v4.runtime.RecognitionException;
+  public final ru.spbau.tinydb.grammar.SQLGrammarParser$NotEqualExpressionContext notEqualExpression() throws org.antlr.v4.runtime.RecognitionException;
+  public final ru.spbau.tinydb.grammar.SQLGrammarParser$LessExpressionContext lessExpression() throws org.antlr.v4.runtime.RecognitionException;
+  public final ru.spbau.tinydb.grammar.SQLGrammarParser$LessOrEqualExpressionContext lessOrEqualExpression() throws org.antlr.v4.runtime.RecognitionException;
+  public final ru.spbau.tinydb.grammar.SQLGrammarParser$GreaterExpressionContext greaterExpression() throws org.antlr.v4.runtime.RecognitionException;
+  public final ru.spbau.tinydb.grammar.SQLGrammarParser$GreaterOrEqualExpressionContext greaterOrEqualExpression() throws org.antlr.v4.runtime.RecognitionException;
+  static {};
+}
+Compiled from "SQLGrammarParser.java"
+public class ru.spbau.tinydb.grammar.SQLGrammarParser$AndExpressionContext extends org.antlr.v4.runtime.ParserRuleContext {
+  public ru.spbau.tinydb.expressions.bool.AndExpression result;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$BooleanFactorContext booleanFactor;
+  public org.antlr.v4.runtime.tree.TerminalNode NOT();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$BooleanFactorContext booleanFactor();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$AndExpressionContext(org.antlr.v4.runtime.ParserRuleContext, int);
+  public int getRuleIndex();
+  public void enterRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+  public void exitRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+}
+Compiled from "SQLGrammarParser.java"
+public class ru.spbau.tinydb.grammar.SQLGrammarParser$AssignmentExpressionContext extends org.antlr.v4.runtime.ParserRuleContext {
+  public ru.spbau.tinydb.expressions.AssignmentExpression result;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$FirstLevelIdContext firstLevelId;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$ValueContext value;
+  public org.antlr.v4.runtime.tree.TerminalNode EQUAL();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$ValueContext value();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$FirstLevelIdContext firstLevelId();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$AssignmentExpressionContext(org.antlr.v4.runtime.ParserRuleContext, int);
+  public int getRuleIndex();
+  public void enterRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+  public void exitRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+}
+Compiled from "SQLGrammarParser.java"
+public class ru.spbau.tinydb.grammar.SQLGrammarParser$AttributeContext extends org.antlr.v4.runtime.ParserRuleContext {
+  public ru.spbau.tinydb.queries.Attribute result;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$FirstLevelIdContext firstLevelId;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$DataTypeContext dataType;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$FirstLevelIdContext firstLevelId();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$DataTypeContext dataType();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$AttributeContext(org.antlr.v4.runtime.ParserRuleContext, int);
+  public int getRuleIndex();
+  public void enterRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+  public void exitRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+}
+Compiled from "SQLGrammarParser.java"
+public class ru.spbau.tinydb.grammar.SQLGrammarParser$BooleanExpressionContext extends org.antlr.v4.runtime.ParserRuleContext {
+  public ru.spbau.tinydb.expressions.bool.BooleanExpression result;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$OrExpressionContext orExpression;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$OrExpressionContext orExpression(int);
+  public java.util.List<ru.spbau.tinydb.grammar.SQLGrammarParser$OrExpressionContext> orExpression();
+  public org.antlr.v4.runtime.tree.TerminalNode OR();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$BooleanExpressionContext(org.antlr.v4.runtime.ParserRuleContext, int);
+  public int getRuleIndex();
+  public void enterRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+  public void exitRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+}
+Compiled from "SQLGrammarParser.java"
+public class ru.spbau.tinydb.grammar.SQLGrammarParser$BooleanFactorContext extends org.antlr.v4.runtime.ParserRuleContext {
+  public ru.spbau.tinydb.expressions.bool.BooleanFactor result;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$BooleanLiteralContext booleanLiteral;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$BooleanExpressionContext booleanExpression;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$ComparisonExpressionContext comparisonExpression;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$ComparisonExpressionContext comparisonExpression();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$BooleanExpressionContext booleanExpression();
+  public org.antlr.v4.runtime.tree.TerminalNode LEFT_PARENTHESIS();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$BooleanLiteralContext booleanLiteral();
+  public org.antlr.v4.runtime.tree.TerminalNode RIGHT_PARENTHESIS();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$BooleanFactorContext(org.antlr.v4.runtime.ParserRuleContext, int);
+  public int getRuleIndex();
+  public void enterRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+  public void exitRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+}
+Compiled from "SQLGrammarParser.java"
+public class ru.spbau.tinydb.grammar.SQLGrammarParser$BooleanLiteralContext extends org.antlr.v4.runtime.ParserRuleContext {
+  public ru.spbau.tinydb.expressions.bool.BooleanLiteral result;
+  public org.antlr.v4.runtime.tree.TerminalNode FALSE();
+  public org.antlr.v4.runtime.tree.TerminalNode TRUE();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$BooleanLiteralContext(org.antlr.v4.runtime.ParserRuleContext, int);
+  public int getRuleIndex();
+  public void enterRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+  public void exitRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+}
+Compiled from "SQLGrammarParser.java"
+public class ru.spbau.tinydb.grammar.SQLGrammarParser$ComparisonExpressionContext extends org.antlr.v4.runtime.ParserRuleContext {
+  public ru.spbau.tinydb.expressions.comparison.ComparisonExpression result;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$EqualExpressionContext equalExpression;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$NotEqualExpressionContext notEqualExpression;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$LessExpressionContext lessExpression;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$LessOrEqualExpressionContext lessOrEqualExpression;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$GreaterExpressionContext greaterExpression;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$GreaterOrEqualExpressionContext greaterOrEqualExpression;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$LessExpressionContext lessExpression();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$GreaterExpressionContext greaterExpression();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$LessOrEqualExpressionContext lessOrEqualExpression();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$NotEqualExpressionContext notEqualExpression();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$EqualExpressionContext equalExpression();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$GreaterOrEqualExpressionContext greaterOrEqualExpression();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$ComparisonExpressionContext(org.antlr.v4.runtime.ParserRuleContext, int);
+  public int getRuleIndex();
+  public void enterRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+  public void exitRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+}
+Compiled from "SQLGrammarParser.java"
+public class ru.spbau.tinydb.grammar.SQLGrammarParser$CreateIndexContext extends org.antlr.v4.runtime.ParserRuleContext {
+  public ru.spbau.tinydb.queries.CreateIndexQuery result;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$FirstLevelIdContext firstLevelId;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$FirstLevelIdContext firstLevelId(int);
+  public org.antlr.v4.runtime.tree.TerminalNode ASC();
+  public org.antlr.v4.runtime.tree.TerminalNode ON();
+  public java.util.List<ru.spbau.tinydb.grammar.SQLGrammarParser$FirstLevelIdContext> firstLevelId();
+  public org.antlr.v4.runtime.tree.TerminalNode USING();
+  public org.antlr.v4.runtime.tree.TerminalNode DESC();
+  public org.antlr.v4.runtime.tree.TerminalNode COMMA(int);
+  public org.antlr.v4.runtime.tree.TerminalNode INDEX();
+  public org.antlr.v4.runtime.tree.TerminalNode UNIQUE();
+  public java.util.List<org.antlr.v4.runtime.tree.TerminalNode> COMMA();
+  public org.antlr.v4.runtime.tree.TerminalNode BTREE();
+  public org.antlr.v4.runtime.tree.TerminalNode CREATE();
+  public org.antlr.v4.runtime.tree.TerminalNode LEFT_PARENTHESIS();
+  public org.antlr.v4.runtime.tree.TerminalNode RIGHT_PARENTHESIS();
+  public org.antlr.v4.runtime.tree.TerminalNode HASH();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$CreateIndexContext(org.antlr.v4.runtime.ParserRuleContext, int);
+  public int getRuleIndex();
+  public void enterRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+  public void exitRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+}
+Compiled from "SQLGrammarParser.java"
+public class ru.spbau.tinydb.grammar.SQLGrammarParser$CreateTableContext extends org.antlr.v4.runtime.ParserRuleContext {
+  public ru.spbau.tinydb.queries.CreateTableQuery result;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$FirstLevelIdContext firstLevelId;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$AttributeContext attribute;
+  public java.util.List<ru.spbau.tinydb.grammar.SQLGrammarParser$AttributeContext> attribute();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$FirstLevelIdContext firstLevelId();
+  public java.util.List<org.antlr.v4.runtime.tree.TerminalNode> COMMA();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$AttributeContext attribute(int);
+  public org.antlr.v4.runtime.tree.TerminalNode CREATE();
+  public org.antlr.v4.runtime.tree.TerminalNode LEFT_PARENTHESIS();
+  public org.antlr.v4.runtime.tree.TerminalNode TABLE();
+  public org.antlr.v4.runtime.tree.TerminalNode COMMA(int);
+  public org.antlr.v4.runtime.tree.TerminalNode RIGHT_PARENTHESIS();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$CreateTableContext(org.antlr.v4.runtime.ParserRuleContext, int);
+  public int getRuleIndex();
+  public void enterRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+  public void exitRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+}
+Compiled from "SQLGrammarParser.java"
+public class ru.spbau.tinydb.grammar.SQLGrammarParser$DataTypeContext extends org.antlr.v4.runtime.ParserRuleContext {
+  public ru.spbau.tinydb.queries.Attribute$DataType result;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$VarCharTypeContext varCharType;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$VarCharTypeContext varCharType();
+  public org.antlr.v4.runtime.tree.TerminalNode DOUBLE_TYPE();
+  public org.antlr.v4.runtime.tree.TerminalNode INTEGER_TYPE();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$DataTypeContext(org.antlr.v4.runtime.ParserRuleContext, int);
+  public int getRuleIndex();
+  public void enterRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+  public void exitRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+}
+Compiled from "SQLGrammarParser.java"
+public class ru.spbau.tinydb.grammar.SQLGrammarParser$DeleteFromContext extends org.antlr.v4.runtime.ParserRuleContext {
+  public ru.spbau.tinydb.queries.DeleteFromQuery result;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$FirstLevelIdContext firstLevelId;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$WhereConditionContext whereCondition;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$FirstLevelIdContext firstLevelId();
+  public org.antlr.v4.runtime.tree.TerminalNode DELETE();
+  public org.antlr.v4.runtime.tree.TerminalNode FROM();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$WhereConditionContext whereCondition();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$DeleteFromContext(org.antlr.v4.runtime.ParserRuleContext, int);
+  public int getRuleIndex();
+  public void enterRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+  public void exitRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+}
+Compiled from "SQLGrammarParser.java"
+public class ru.spbau.tinydb.grammar.SQLGrammarParser$DoubleLiteralContext extends org.antlr.v4.runtime.ParserRuleContext {
+  public java.lang.Double result;
+  public java.util.List<org.antlr.v4.runtime.tree.TerminalNode> DECIMAL_DIGIT();
+  public org.antlr.v4.runtime.tree.TerminalNode DECIMAL_POINT();
+  public org.antlr.v4.runtime.tree.TerminalNode SIGN();
+  public org.antlr.v4.runtime.tree.TerminalNode DECIMAL_DIGIT(int);
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$DoubleLiteralContext(org.antlr.v4.runtime.ParserRuleContext, int);
+  public int getRuleIndex();
+  public void enterRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+  public void exitRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+}
+Compiled from "SQLGrammarParser.java"
+public class ru.spbau.tinydb.grammar.SQLGrammarParser$EqualExpressionContext extends org.antlr.v4.runtime.ParserRuleContext {
+  public ru.spbau.tinydb.expressions.comparison.EqualExpression result;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$SecondLevelIdContext secondLevelId;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$ValueContext value;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$SecondLevelIdContext secondLevelId();
+  public org.antlr.v4.runtime.tree.TerminalNode EQUAL();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$ValueContext value();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$EqualExpressionContext(org.antlr.v4.runtime.ParserRuleContext, int);
+  public int getRuleIndex();
+  public void enterRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+  public void exitRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+}
+Compiled from "SQLGrammarParser.java"
+public class ru.spbau.tinydb.grammar.SQLGrammarParser$FilterContext extends org.antlr.v4.runtime.ParserRuleContext {
+  public java.util.List<java.lang.String> result;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$FirstLevelIdContext firstLevelId;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$FirstLevelIdContext firstLevelId(int);
+  public org.antlr.v4.runtime.tree.TerminalNode ASTERISC();
+  public java.util.List<ru.spbau.tinydb.grammar.SQLGrammarParser$FirstLevelIdContext> firstLevelId();
+  public java.util.List<org.antlr.v4.runtime.tree.TerminalNode> COMMA();
+  public org.antlr.v4.runtime.tree.TerminalNode COMMA(int);
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$FilterContext(org.antlr.v4.runtime.ParserRuleContext, int);
+  public int getRuleIndex();
+  public void enterRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+  public void exitRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+}
+Compiled from "SQLGrammarParser.java"
+public class ru.spbau.tinydb.grammar.SQLGrammarParser$FirstLevelIdContext extends org.antlr.v4.runtime.ParserRuleContext {
+  public java.lang.String result;
+  public org.antlr.v4.runtime.tree.TerminalNode UPPER_CASE();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$IdSuffixContext idSuffix();
+  public org.antlr.v4.runtime.tree.TerminalNode UNDERLINE();
+  public org.antlr.v4.runtime.tree.TerminalNode LOWER_CASE();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$FirstLevelIdContext(org.antlr.v4.runtime.ParserRuleContext, int);
+  public int getRuleIndex();
+  public void enterRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+  public void exitRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+}
+Compiled from "SQLGrammarParser.java"
+public class ru.spbau.tinydb.grammar.SQLGrammarParser$GreaterExpressionContext extends org.antlr.v4.runtime.ParserRuleContext {
+  public ru.spbau.tinydb.expressions.comparison.GreaterExpression result;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$SecondLevelIdContext secondLevelId;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$ValueContext value;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$SecondLevelIdContext secondLevelId();
+  public org.antlr.v4.runtime.tree.TerminalNode LESS();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$ValueContext value();
+  public org.antlr.v4.runtime.tree.TerminalNode GREATER();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$GreaterExpressionContext(org.antlr.v4.runtime.ParserRuleContext, int);
+  public int getRuleIndex();
+  public void enterRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+  public void exitRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+}
+Compiled from "SQLGrammarParser.java"
+public class ru.spbau.tinydb.grammar.SQLGrammarParser$GreaterOrEqualExpressionContext extends org.antlr.v4.runtime.ParserRuleContext {
+  public ru.spbau.tinydb.expressions.comparison.GreaterOrEqualExpression result;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$SecondLevelIdContext secondLevelId;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$ValueContext value;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$SecondLevelIdContext secondLevelId();
+  public org.antlr.v4.runtime.tree.TerminalNode LESS_OR_EQUAL();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$ValueContext value();
+  public org.antlr.v4.runtime.tree.TerminalNode GREATER_OR_EQUAL();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$GreaterOrEqualExpressionContext(org.antlr.v4.runtime.ParserRuleContext, int);
+  public int getRuleIndex();
+  public void enterRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+  public void exitRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+}
+Compiled from "SQLGrammarParser.java"
+public class ru.spbau.tinydb.grammar.SQLGrammarParser$IdSuffixContext extends org.antlr.v4.runtime.ParserRuleContext {
+  public java.util.List<org.antlr.v4.runtime.tree.TerminalNode> UPPER_CASE();
+  public java.util.List<org.antlr.v4.runtime.tree.TerminalNode> DECIMAL_DIGIT();
+  public org.antlr.v4.runtime.tree.TerminalNode UPPER_CASE(int);
+  public java.util.List<org.antlr.v4.runtime.tree.TerminalNode> UNDERLINE();
+  public org.antlr.v4.runtime.tree.TerminalNode UNDERLINE(int);
+  public org.antlr.v4.runtime.tree.TerminalNode LOWER_CASE(int);
+  public java.util.List<org.antlr.v4.runtime.tree.TerminalNode> LOWER_CASE();
+  public org.antlr.v4.runtime.tree.TerminalNode DECIMAL_DIGIT(int);
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$IdSuffixContext(org.antlr.v4.runtime.ParserRuleContext, int);
+  public int getRuleIndex();
+  public void enterRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+  public void exitRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+}
+Compiled from "SQLGrammarParser.java"
+public class ru.spbau.tinydb.grammar.SQLGrammarParser$InsertIntoContext extends org.antlr.v4.runtime.ParserRuleContext {
+  public ru.spbau.tinydb.queries.InsertIntoQuery result;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$FirstLevelIdContext firstLevelId;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$ValueContext value;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$FirstLevelIdContext firstLevelId(int);
+  public org.antlr.v4.runtime.tree.TerminalNode RIGHT_PARENTHESIS(int);
+  public java.util.List<ru.spbau.tinydb.grammar.SQLGrammarParser$ValueContext> value();
+  public java.util.List<ru.spbau.tinydb.grammar.SQLGrammarParser$FirstLevelIdContext> firstLevelId();
+  public org.antlr.v4.runtime.tree.TerminalNode VALUES();
+  public org.antlr.v4.runtime.tree.TerminalNode LEFT_PARENTHESIS(int);
+  public org.antlr.v4.runtime.tree.TerminalNode COMMA(int);
+  public org.antlr.v4.runtime.tree.TerminalNode INTO();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$ValueContext value(int);
+  public java.util.List<org.antlr.v4.runtime.tree.TerminalNode> COMMA();
+  public java.util.List<org.antlr.v4.runtime.tree.TerminalNode> LEFT_PARENTHESIS();
+  public org.antlr.v4.runtime.tree.TerminalNode INSERT();
+  public java.util.List<org.antlr.v4.runtime.tree.TerminalNode> RIGHT_PARENTHESIS();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$InsertIntoContext(org.antlr.v4.runtime.ParserRuleContext, int);
+  public int getRuleIndex();
+  public void enterRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+  public void exitRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+}
+Compiled from "SQLGrammarParser.java"
+public class ru.spbau.tinydb.grammar.SQLGrammarParser$IntegerLiteralContext extends org.antlr.v4.runtime.ParserRuleContext {
+  public java.lang.Integer result;
+  public java.util.List<org.antlr.v4.runtime.tree.TerminalNode> DECIMAL_DIGIT();
+  public org.antlr.v4.runtime.tree.TerminalNode SIGN();
+  public org.antlr.v4.runtime.tree.TerminalNode DECIMAL_DIGIT(int);
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$IntegerLiteralContext(org.antlr.v4.runtime.ParserRuleContext, int);
+  public int getRuleIndex();
+  public void enterRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+  public void exitRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+}
+Compiled from "SQLGrammarParser.java"
+public class ru.spbau.tinydb.grammar.SQLGrammarParser$JoinOnExpressionContext extends org.antlr.v4.runtime.ParserRuleContext {
+  public ru.spbau.tinydb.expressions.comparison.JoinOnExpression result;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$FirstLevelIdContext firstLevelId;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$SecondLevelIdContext secondLevelId;
+  public java.util.List<ru.spbau.tinydb.grammar.SQLGrammarParser$SecondLevelIdContext> secondLevelId();
+  public org.antlr.v4.runtime.tree.TerminalNode EQUAL();
+  public org.antlr.v4.runtime.tree.TerminalNode ON();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$FirstLevelIdContext firstLevelId();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$SecondLevelIdContext secondLevelId(int);
+  public org.antlr.v4.runtime.tree.TerminalNode INNER();
+  public org.antlr.v4.runtime.tree.TerminalNode JOIN();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$JoinOnExpressionContext(org.antlr.v4.runtime.ParserRuleContext, int);
+  public int getRuleIndex();
+  public void enterRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+  public void exitRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+}
+Compiled from "SQLGrammarParser.java"
+public class ru.spbau.tinydb.grammar.SQLGrammarParser$LessExpressionContext extends org.antlr.v4.runtime.ParserRuleContext {
+  public ru.spbau.tinydb.expressions.comparison.LessExpression result;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$SecondLevelIdContext secondLevelId;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$ValueContext value;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$SecondLevelIdContext secondLevelId();
+  public org.antlr.v4.runtime.tree.TerminalNode LESS();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$ValueContext value();
+  public org.antlr.v4.runtime.tree.TerminalNode GREATER();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$LessExpressionContext(org.antlr.v4.runtime.ParserRuleContext, int);
+  public int getRuleIndex();
+  public void enterRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+  public void exitRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+}
+Compiled from "SQLGrammarParser.java"
+public class ru.spbau.tinydb.grammar.SQLGrammarParser$LessOrEqualExpressionContext extends org.antlr.v4.runtime.ParserRuleContext {
+  public ru.spbau.tinydb.expressions.comparison.LessOrEqualExpression result;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$SecondLevelIdContext secondLevelId;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$ValueContext value;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$SecondLevelIdContext secondLevelId();
+  public org.antlr.v4.runtime.tree.TerminalNode LESS_OR_EQUAL();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$ValueContext value();
+  public org.antlr.v4.runtime.tree.TerminalNode GREATER_OR_EQUAL();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$LessOrEqualExpressionContext(org.antlr.v4.runtime.ParserRuleContext, int);
+  public int getRuleIndex();
+  public void enterRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+  public void exitRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+}
+Compiled from "SQLGrammarParser.java"
+public class ru.spbau.tinydb.grammar.SQLGrammarParser$NotEqualExpressionContext extends org.antlr.v4.runtime.ParserRuleContext {
+  public ru.spbau.tinydb.expressions.comparison.NotEqualExpression result;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$SecondLevelIdContext secondLevelId;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$ValueContext value;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$SecondLevelIdContext secondLevelId();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$ValueContext value();
+  public org.antlr.v4.runtime.tree.TerminalNode NOT_EQUAL();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$NotEqualExpressionContext(org.antlr.v4.runtime.ParserRuleContext, int);
+  public int getRuleIndex();
+  public void enterRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+  public void exitRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+}
+Compiled from "SQLGrammarParser.java"
+public class ru.spbau.tinydb.grammar.SQLGrammarParser$OrExpressionContext extends org.antlr.v4.runtime.ParserRuleContext {
+  public ru.spbau.tinydb.expressions.bool.OrExpression result;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$AndExpressionContext andExpression;
+  public java.util.List<ru.spbau.tinydb.grammar.SQLGrammarParser$AndExpressionContext> andExpression();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$AndExpressionContext andExpression(int);
+  public org.antlr.v4.runtime.tree.TerminalNode AND();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$OrExpressionContext(org.antlr.v4.runtime.ParserRuleContext, int);
+  public int getRuleIndex();
+  public void enterRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+  public void exitRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+}
+Compiled from "SQLGrammarParser.java"
+public class ru.spbau.tinydb.grammar.SQLGrammarParser$QueryContext extends org.antlr.v4.runtime.ParserRuleContext {
+  public ru.spbau.tinydb.queries.IQuery result;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$CreateTableContext createTable;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$CreateIndexContext createIndex;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$SelectFromContext selectFrom;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$InsertIntoContext insertInto;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$UpdateSetContext updateSet;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$DeleteFromContext deleteFrom;
+  public org.antlr.v4.runtime.tree.TerminalNode SEMICOLON();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$CreateIndexContext createIndex();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$SelectFromContext selectFrom();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$DeleteFromContext deleteFrom();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$CreateTableContext createTable();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$InsertIntoContext insertInto();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$UpdateSetContext updateSet();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$QueryContext(org.antlr.v4.runtime.ParserRuleContext, int);
+  public int getRuleIndex();
+  public void enterRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+  public void exitRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+}
+Compiled from "SQLGrammarParser.java"
+public class ru.spbau.tinydb.grammar.SQLGrammarParser$ScriptContext extends org.antlr.v4.runtime.ParserRuleContext {
+  public java.util.List<ru.spbau.tinydb.queries.IQuery> result;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$QueryContext query;
+  public org.antlr.v4.runtime.tree.TerminalNode EOF();
+  public java.util.List<ru.spbau.tinydb.grammar.SQLGrammarParser$QueryContext> query();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$QueryContext query(int);
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$ScriptContext(org.antlr.v4.runtime.ParserRuleContext, int);
+  public int getRuleIndex();
+  public void enterRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+  public void exitRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+}
+Compiled from "SQLGrammarParser.java"
+public class ru.spbau.tinydb.grammar.SQLGrammarParser$SecondLevelIdContext extends org.antlr.v4.runtime.ParserRuleContext {
+  public ru.spbau.tinydb.queries.SecondLevelId result;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$FirstLevelIdContext firstLevelId;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$FirstLevelIdContext firstLevelId(int);
+  public java.util.List<ru.spbau.tinydb.grammar.SQLGrammarParser$FirstLevelIdContext> firstLevelId();
+  public org.antlr.v4.runtime.tree.TerminalNode DECIMAL_POINT();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$SecondLevelIdContext(org.antlr.v4.runtime.ParserRuleContext, int);
+  public int getRuleIndex();
+  public void enterRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+  public void exitRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+}
+Compiled from "SQLGrammarParser.java"
+public class ru.spbau.tinydb.grammar.SQLGrammarParser$SelectFromContext extends org.antlr.v4.runtime.ParserRuleContext {
+  public ru.spbau.tinydb.queries.SelectFromQuery result;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$FilterContext filter;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$SelectionTableContext selectionTable;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$WhereConditionContext whereCondition;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$FilterContext filter();
+  public org.antlr.v4.runtime.tree.TerminalNode FROM();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$SelectionTableContext selectionTable();
+  public org.antlr.v4.runtime.tree.TerminalNode SELECT();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$WhereConditionContext whereCondition();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$SelectFromContext(org.antlr.v4.runtime.ParserRuleContext, int);
+  public int getRuleIndex();
+  public void enterRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+  public void exitRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+}
+Compiled from "SQLGrammarParser.java"
+public class ru.spbau.tinydb.grammar.SQLGrammarParser$SelectionTableContext extends org.antlr.v4.runtime.ParserRuleContext {
+  public ru.spbau.tinydb.queries.SelectionTable result;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$FirstLevelIdContext firstLevelId;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$JoinOnExpressionContext joinOnExpression;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$FirstLevelIdContext firstLevelId();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$JoinOnExpressionContext joinOnExpression(int);
+  public java.util.List<ru.spbau.tinydb.grammar.SQLGrammarParser$JoinOnExpressionContext> joinOnExpression();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$SelectionTableContext(org.antlr.v4.runtime.ParserRuleContext, int);
+  public int getRuleIndex();
+  public void enterRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+  public void exitRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+}
+Compiled from "SQLGrammarParser.java"
+public class ru.spbau.tinydb.grammar.SQLGrammarParser$UpdateSetContext extends org.antlr.v4.runtime.ParserRuleContext {
+  public ru.spbau.tinydb.queries.UpdateTableQuery result;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$FirstLevelIdContext firstLevelId;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$AssignmentExpressionContext assignmentExpression;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$WhereConditionContext whereCondition;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$AssignmentExpressionContext assignmentExpression(int);
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$FirstLevelIdContext firstLevelId();
+  public org.antlr.v4.runtime.tree.TerminalNode UPDATE();
+  public java.util.List<org.antlr.v4.runtime.tree.TerminalNode> COMMA();
+  public java.util.List<ru.spbau.tinydb.grammar.SQLGrammarParser$AssignmentExpressionContext> assignmentExpression();
+  public org.antlr.v4.runtime.tree.TerminalNode SET();
+  public org.antlr.v4.runtime.tree.TerminalNode COMMA(int);
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$WhereConditionContext whereCondition();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$UpdateSetContext(org.antlr.v4.runtime.ParserRuleContext, int);
+  public int getRuleIndex();
+  public void enterRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+  public void exitRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+}
+Compiled from "SQLGrammarParser.java"
+public class ru.spbau.tinydb.grammar.SQLGrammarParser$ValueContext extends org.antlr.v4.runtime.ParserRuleContext {
+  public java.lang.Object result;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$IntegerLiteralContext integerLiteral;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$DoubleLiteralContext doubleLiteral;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$VarCharLiteralContext varCharLiteral;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$IntegerLiteralContext integerLiteral();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$DoubleLiteralContext doubleLiteral();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$VarCharLiteralContext varCharLiteral();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$ValueContext(org.antlr.v4.runtime.ParserRuleContext, int);
+  public int getRuleIndex();
+  public void enterRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+  public void exitRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+}
+Compiled from "SQLGrammarParser.java"
+public class ru.spbau.tinydb.grammar.SQLGrammarParser$VarCharLiteralContext extends org.antlr.v4.runtime.ParserRuleContext {
+  public java.lang.String result;
+  public java.util.List<org.antlr.v4.runtime.tree.TerminalNode> QUOTES();
+  public org.antlr.v4.runtime.tree.TerminalNode QUOTES(int);
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$VarCharLiteralContext(org.antlr.v4.runtime.ParserRuleContext, int);
+  public int getRuleIndex();
+  public void enterRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+  public void exitRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+}
+Compiled from "SQLGrammarParser.java"
+public class ru.spbau.tinydb.grammar.SQLGrammarParser$VarCharTypeContext extends org.antlr.v4.runtime.ParserRuleContext {
+  public int length;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$IntegerLiteralContext integerLiteral;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$IntegerLiteralContext integerLiteral();
+  public org.antlr.v4.runtime.tree.TerminalNode VAR_CHAR_TYPE();
+  public org.antlr.v4.runtime.tree.TerminalNode LEFT_PARENTHESIS();
+  public org.antlr.v4.runtime.tree.TerminalNode RIGHT_PARENTHESIS();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$VarCharTypeContext(org.antlr.v4.runtime.ParserRuleContext, int);
+  public int getRuleIndex();
+  public void enterRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+  public void exitRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+}
+Compiled from "SQLGrammarParser.java"
+public class ru.spbau.tinydb.grammar.SQLGrammarParser$WhereConditionContext extends org.antlr.v4.runtime.ParserRuleContext {
+  public ru.spbau.tinydb.queries.WhereCondition result;
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$BooleanExpressionContext booleanExpression;
+  public org.antlr.v4.runtime.tree.TerminalNode WHERE();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$BooleanExpressionContext booleanExpression();
+  public ru.spbau.tinydb.grammar.SQLGrammarParser$WhereConditionContext(org.antlr.v4.runtime.ParserRuleContext, int);
+  public int getRuleIndex();
+  public void enterRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+  public void exitRule(org.antlr.v4.runtime.tree.ParseTreeListener);
+}
+Compiled from "MetaInformationTable.java"
+public class ru.spbau.tinydb.metainformation.MetaInformationTable {
+  public ru.spbau.tinydb.metainformation.MetaInformationTable(ru.spbau.tinydb.bufferManager.BufferManager);
+  public ru.spbau.tinydb.table.Table loadTable(java.lang.String);
+  public boolean createIndex(java.lang.String, int, java.lang.String);
+  public ru.spbau.tinydb.table.Table createTable(java.lang.String, java.util.Collection<ru.spbau.tinydb.queries.Attribute>) throws java.io.UnsupportedEncodingException, java.util.concurrent.ExecutionException;
+  static {};
+}
+Compiled from "Attribute.java"
+public class ru.spbau.tinydb.queries.Attribute {
+  public ru.spbau.tinydb.queries.Attribute(java.lang.String, ru.spbau.tinydb.queries.Attribute$DataType);
+  public java.lang.String getAttributeName();
+  public ru.spbau.tinydb.queries.Attribute$DataType getDataType();
+  public java.lang.String toString();
+}
+Compiled from "Attribute.java"
+public abstract class ru.spbau.tinydb.queries.Attribute$DataType {
+  public ru.spbau.tinydb.queries.Attribute$DataType();
+}
+Compiled from "Attribute.java"
+public class ru.spbau.tinydb.queries.Attribute$DoubleType extends ru.spbau.tinydb.queries.Attribute$DataType {
+  public static ru.spbau.tinydb.queries.Attribute$DoubleType getInstance();
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "Attribute.java"
+public class ru.spbau.tinydb.queries.Attribute$IntegerType extends ru.spbau.tinydb.queries.Attribute$DataType {
+  public static ru.spbau.tinydb.queries.Attribute$IntegerType getInstance();
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "Attribute.java"
+public class ru.spbau.tinydb.queries.Attribute$VarcharType extends ru.spbau.tinydb.queries.Attribute$DataType {
+  public static final int MAX_LENGTH;
+  public ru.spbau.tinydb.queries.Attribute$VarcharType(int);
+  public ru.spbau.tinydb.queries.Attribute$VarcharType();
+  public int getLength();
+  public java.lang.String toString();
+}
+Compiled from "CreateIndexQuery.java"
+public class ru.spbau.tinydb.queries.CreateIndexQuery extends ru.spbau.tinydb.queries.TableNameContainer implements ru.spbau.tinydb.queries.IQuery<java.lang.Boolean> {
+  public ru.spbau.tinydb.queries.CreateIndexQuery(java.lang.String, java.lang.String, java.util.List<java.lang.String>, boolean, boolean, boolean);
+  public java.lang.String getIndexName();
+  public java.util.List<java.lang.String> getAttributeNames();
+  public boolean isUnique();
+  public boolean isAscending();
+  public boolean isUsingHash();
+  public java.lang.Boolean execute(ru.spbau.tinydb.engine.IDataBase) throws ru.spbau.tinydb.common.DBException;
+  public java.lang.String toString();
+  public java.lang.Object execute(ru.spbau.tinydb.engine.IDataBase) throws ru.spbau.tinydb.common.DBException;
+}
+Compiled from "CreateTableQuery.java"
+public class ru.spbau.tinydb.queries.CreateTableQuery extends ru.spbau.tinydb.queries.TableNameContainer implements ru.spbau.tinydb.queries.IQuery<java.lang.Boolean> {
+  public ru.spbau.tinydb.queries.CreateTableQuery(java.lang.String, java.util.List<ru.spbau.tinydb.queries.Attribute>);
+  public java.util.List<ru.spbau.tinydb.queries.Attribute> getAttributes();
+  public java.lang.Boolean execute(ru.spbau.tinydb.engine.IDataBase) throws ru.spbau.tinydb.common.DBException;
+  public java.lang.String toString();
+  public java.lang.Object execute(ru.spbau.tinydb.engine.IDataBase) throws ru.spbau.tinydb.common.DBException;
+}
+Compiled from "DeleteFromQuery.java"
+public class ru.spbau.tinydb.queries.DeleteFromQuery extends ru.spbau.tinydb.queries.TableNameContainer implements ru.spbau.tinydb.queries.IQuery<java.lang.Integer> {
+  public ru.spbau.tinydb.queries.DeleteFromQuery(java.lang.String, ru.spbau.tinydb.queries.WhereCondition);
+  public ru.spbau.tinydb.queries.WhereCondition getFilter();
+  public java.lang.Integer execute(ru.spbau.tinydb.engine.IDataBase) throws ru.spbau.tinydb.common.DBException;
+  public java.lang.String toString();
+  public java.lang.Object execute(ru.spbau.tinydb.engine.IDataBase) throws ru.spbau.tinydb.common.DBException;
+}
+Compiled from "IQuery.java"
+public interface ru.spbau.tinydb.queries.IQuery<R> {
+  public abstract R execute(ru.spbau.tinydb.engine.IDataBase) throws ru.spbau.tinydb.common.DBException;
+}
+Compiled from "InsertIntoQuery.java"
+public class ru.spbau.tinydb.queries.InsertIntoQuery extends ru.spbau.tinydb.queries.TableNameContainer implements ru.spbau.tinydb.queries.IQuery<java.lang.Integer> {
+  public ru.spbau.tinydb.queries.InsertIntoQuery(java.lang.String, java.util.List<java.lang.String>, java.util.List<java.lang.Object>);
+  public java.util.List<java.lang.String> getAttributes();
+  public java.util.List<java.lang.Object> getValues();
+  public java.lang.Integer execute(ru.spbau.tinydb.engine.IDataBase) throws ru.spbau.tinydb.common.DBException;
+  public java.lang.String toString();
+  public java.lang.Object execute(ru.spbau.tinydb.engine.IDataBase) throws ru.spbau.tinydb.common.DBException;
+}
+Compiled from "SecondLevelId.java"
+public class ru.spbau.tinydb.queries.SecondLevelId extends ru.spbau.tinydb.queries.TableNameContainer {
+  public ru.spbau.tinydb.queries.SecondLevelId(java.lang.String, java.lang.String);
+  public java.lang.String getAttributeName();
+  public java.lang.String toString();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+}
+Compiled from "SelectFromQuery.java"
+public class ru.spbau.tinydb.queries.SelectFromQuery implements ru.spbau.tinydb.queries.IQuery<java.util.Iterator<java.util.Map<ru.spbau.tinydb.queries.SecondLevelId, java.lang.Object>>> {
+  public ru.spbau.tinydb.queries.SelectFromQuery(ru.spbau.tinydb.queries.SelectionTable, java.util.List<java.lang.String>, ru.spbau.tinydb.queries.WhereCondition);
+  public ru.spbau.tinydb.queries.SelectionTable getTable();
+  public java.util.List<java.lang.String> getAttributes();
+  public ru.spbau.tinydb.queries.WhereCondition getFilter();
+  public java.util.Iterator<java.util.Map<ru.spbau.tinydb.queries.SecondLevelId, java.lang.Object>> execute(ru.spbau.tinydb.engine.IDataBase) throws ru.spbau.tinydb.common.DBException;
+  public java.lang.String toString();
+  public java.lang.Object execute(ru.spbau.tinydb.engine.IDataBase) throws ru.spbau.tinydb.common.DBException;
+}
+Compiled from "SelectionTable.java"
+public class ru.spbau.tinydb.queries.SelectionTable extends ru.spbau.tinydb.queries.TableNameContainer {
+  public ru.spbau.tinydb.queries.SelectionTable(java.lang.String, java.util.List<ru.spbau.tinydb.expressions.comparison.JoinOnExpression>);
+  public java.util.List<ru.spbau.tinydb.expressions.comparison.JoinOnExpression> getExpressions();
+  public java.lang.String toString();
+}
+Compiled from "TableNameContainer.java"
+public abstract class ru.spbau.tinydb.queries.TableNameContainer {
+  public ru.spbau.tinydb.queries.TableNameContainer(java.lang.String);
+  public java.lang.String getTableName();
+  public java.lang.String toString();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+}
+Compiled from "UpdateTableQuery.java"
+public class ru.spbau.tinydb.queries.UpdateTableQuery extends ru.spbau.tinydb.queries.TableNameContainer implements ru.spbau.tinydb.queries.IQuery<java.lang.Integer> {
+  public ru.spbau.tinydb.queries.UpdateTableQuery(java.lang.String, java.util.List<ru.spbau.tinydb.expressions.AssignmentExpression>, ru.spbau.tinydb.queries.WhereCondition);
+  public java.util.List<ru.spbau.tinydb.expressions.AssignmentExpression> getExpressions();
+  public ru.spbau.tinydb.queries.WhereCondition getFilter();
+  public java.lang.Integer execute(ru.spbau.tinydb.engine.IDataBase) throws ru.spbau.tinydb.common.DBException;
+  public java.lang.String toString();
+  public java.lang.Object execute(ru.spbau.tinydb.engine.IDataBase) throws ru.spbau.tinydb.common.DBException;
+}
+Compiled from "WhereCondition.java"
+public class ru.spbau.tinydb.queries.WhereCondition {
+  public ru.spbau.tinydb.queries.WhereCondition(ru.spbau.tinydb.expressions.bool.BooleanExpression);
+  public boolean check(java.util.Map<ru.spbau.tinydb.queries.SecondLevelId, java.lang.Object>);
+  public java.lang.String toString();
+}
+Compiled from "ConsoleREPLRunnable.java"
+public class ru.spbau.tinydb.repl.ConsoleREPLRunnable extends ru.spbau.tinydb.repl.REPLRunnable<java.lang.String> {
+  protected ru.spbau.tinydb.repl.ConsoleREPLRunnable(java.lang.String, java.lang.String, java.lang.String) throws java.io.FileNotFoundException;
+  public void innerRun();
+  public void setDbFileName(java.lang.String);
+  protected org.antlr.v4.runtime.ANTLRInputStream createANTLRInputStream(java.lang.String);
+  protected org.antlr.v4.runtime.ANTLRInputStream createANTLRInputStream(java.lang.Object) throws java.io.IOException;
+}
+Compiled from "REPL.java"
+public class ru.spbau.tinydb.repl.REPL {
+  public ru.spbau.tinydb.repl.REPL();
+  public static void main(java.lang.String[]) throws java.io.FileNotFoundException;
+}
+Compiled from "REPL.java"
+final class ru.spbau.tinydb.repl.REPL$1 extends java.lang.Thread {
+  ru.spbau.tinydb.repl.REPL$1();
+  public void run();
+}
+Compiled from "REPLRunnable.java"
+public abstract class ru.spbau.tinydb.repl.REPLRunnable<Q> implements java.lang.Runnable, java.lang.AutoCloseable {
+  protected ru.spbau.tinydb.repl.REPLRunnable(java.lang.String, java.io.InputStream, java.lang.String, java.lang.String) throws java.io.FileNotFoundException;
+  public java.lang.String getDbFileName();
+  public void setDbFileName(java.lang.String);
+  public java.io.BufferedReader getStdIn();
+  public java.io.PrintWriter getStdOut();
+  public java.io.PrintWriter getStdErr();
+  protected abstract void innerRun();
+  public void run();
+  protected void executeAndPrintResult(ru.spbau.tinydb.queries.IQuery);
+  protected void printSuccessMessage(java.lang.String);
+  protected void printFailureMessage(java.lang.String);
+  protected void handleException(java.lang.Exception);
+  protected abstract org.antlr.v4.runtime.ANTLRInputStream createANTLRInputStream(Q) throws java.io.IOException;
+  protected final ru.spbau.tinydb.grammar.SQLGrammarParser createParser(Q);
+  protected static ru.spbau.tinydb.grammar.SQLGrammarLexer createLexer(org.antlr.v4.runtime.ANTLRInputStream);
+  public void close() throws java.lang.Exception;
+}
+Compiled from "ScriptREPLRunnable.java"
+public class ru.spbau.tinydb.repl.ScriptREPLRunnable extends ru.spbau.tinydb.repl.REPLRunnable<java.io.FileInputStream> {
+  public ru.spbau.tinydb.repl.ScriptREPLRunnable(java.lang.String, java.lang.String, java.lang.String, java.lang.String) throws java.io.FileNotFoundException;
+  public void innerRun();
+  protected org.antlr.v4.runtime.ANTLRInputStream createANTLRInputStream(java.io.FileInputStream) throws java.io.IOException;
+  public void close() throws java.lang.Exception;
+  protected org.antlr.v4.runtime.ANTLRInputStream createANTLRInputStream(java.lang.Object) throws java.io.IOException;
+}
+Compiled from "Record.java"
+public class ru.spbau.tinydb.table.Record {
+  public ru.spbau.tinydb.table.Record(java.util.Map<ru.spbau.tinydb.queries.SecondLevelId, java.lang.Object>, int);
+  public int getRecordId();
+  public java.util.Map<ru.spbau.tinydb.queries.SecondLevelId, java.lang.Object> getAttributes();
+}
+Compiled from "Table.java"
+public class ru.spbau.tinydb.table.Table implements java.lang.Iterable<ru.spbau.tinydb.table.Record> {
+  public ru.spbau.tinydb.table.Table(ru.spbau.tinydb.bufferManager.BufferManager, int, java.util.Collection<ru.spbau.tinydb.queries.Attribute>, java.lang.String, java.util.Map<ru.spbau.tinydb.queries.Attribute, ru.spbau.tinydb.btree.BxTree>);
+  public ru.spbau.tinydb.queries.Attribute getAtrByName(java.lang.String);
+  public ru.spbau.tinydb.btree.BxTree getIndex(ru.spbau.tinydb.queries.Attribute);
+  public java.util.Collection<ru.spbau.tinydb.queries.Attribute> getSchema();
+  public int insertRecord(java.lang.Object[]) throws java.util.concurrent.ExecutionException, java.io.UnsupportedEncodingException;
+  public boolean remove(int);
+  public java.util.Map<ru.spbau.tinydb.queries.SecondLevelId, java.lang.Object> getRecord(int) throws java.util.concurrent.ExecutionException;
+  public java.util.Iterator<ru.spbau.tinydb.table.Record> iterator();
+  static ru.spbau.tinydb.table.TableBase access$000(ru.spbau.tinydb.table.Table);
+  static java.util.Map access$100(ru.spbau.tinydb.table.Table, ru.spbau.tinydb.bufferManager.BufferView);
+}
+Compiled from "Table.java"
+class ru.spbau.tinydb.table.Table$1 implements java.util.Iterator<ru.spbau.tinydb.table.Record> {
+  final ru.spbau.tinydb.table.Table this$0;
+  ru.spbau.tinydb.table.Table$1(ru.spbau.tinydb.table.Table);
+  public boolean hasNext();
+  public ru.spbau.tinydb.table.Record next();
+  public void remove();
+  public java.lang.Object next();
+}
+Compiled from "TableBase.java"
+public class ru.spbau.tinydb.table.TableBase implements java.lang.Iterable<ru.spbau.tinydb.table.ViewWithId> {
+  public ru.spbau.tinydb.table.TableBase(ru.spbau.tinydb.bufferManager.BufferManager, int, int);
+  public int insert(byte[]) throws java.util.concurrent.ExecutionException;
+  public boolean remove(int);
+  public ru.spbau.tinydb.bufferManager.BufferView get(int) throws java.util.concurrent.ExecutionException;
+  public java.util.Iterator<ru.spbau.tinydb.table.ViewWithId> iterator();
+  static int access$000(ru.spbau.tinydb.table.TableBase);
+  static int access$100(ru.spbau.tinydb.table.TableBase);
+  static ru.spbau.tinydb.bufferManager.BufferManager access$200(ru.spbau.tinydb.table.TableBase);
+  static int access$300(ru.spbau.tinydb.table.TableBase);
+  static int access$400(ru.spbau.tinydb.table.TableBase);
+  static boolean access$500(ru.spbau.tinydb.table.TableBase, ru.spbau.tinydb.bufferManager.BufferView, int);
+  static int access$600(ru.spbau.tinydb.table.TableBase);
+}
+Compiled from "TableBase.java"
+class ru.spbau.tinydb.table.TableBase$1 implements java.util.Iterator<ru.spbau.tinydb.table.ViewWithId> {
+  final ru.spbau.tinydb.table.TableBase this$0;
+  ru.spbau.tinydb.table.TableBase$1(ru.spbau.tinydb.table.TableBase);
+  public boolean hasNext();
+  public ru.spbau.tinydb.table.ViewWithId next();
+  public void remove();
+  public java.lang.Object next();
+}
+Compiled from "ViewWithId.java"
+public class ru.spbau.tinydb.table.ViewWithId {
+  public ru.spbau.tinydb.table.ViewWithId(ru.spbau.tinydb.bufferManager.BufferView, int);
+  public ru.spbau.tinydb.bufferManager.BufferView getView();
+  public int getId();
+}
+Compiled from "Utils.java"
+public class ru.spbau.tinydb.utils.Utils {
+  public ru.spbau.tinydb.utils.Utils();
+  public static byte[] intToBytes(int);
+  public static int bytesToInt(byte[]);
+  public static byte[] stringToBytes(java.lang.String, int) throws java.io.UnsupportedEncodingException;
+  public static java.lang.String bytesToString(byte[]);
+  public static byte[] doubleToBytes(double);
+  public static java.lang.Double bytesToDouble(byte[]);
+  public static void printSchema(java.util.Collection<ru.spbau.tinydb.queries.Attribute>);
+  public static void printAll(java.util.Iterator<java.lang.Object[]>);
+  public static java.util.Iterator<ru.spbau.tinydb.table.Record> indexIterToRecordIter(ru.spbau.tinydb.table.Table, java.util.Iterator<ru.spbau.tinydb.btree.BxTreeEntry>);
+  public static <T> java.util.Iterator<T> emptyIterator();
+  public static java.util.Map<ru.spbau.tinydb.queries.SecondLevelId, java.lang.Object> join(java.util.Map<ru.spbau.tinydb.queries.SecondLevelId, java.lang.Object>, java.util.Map<ru.spbau.tinydb.queries.SecondLevelId, java.lang.Object>);
+}
+Compiled from "Utils.java"
+final class ru.spbau.tinydb.utils.Utils$1 implements java.util.Iterator<ru.spbau.tinydb.table.Record> {
+  final java.util.Iterator val$indexIter;
+  final ru.spbau.tinydb.table.Table val$table;
+  ru.spbau.tinydb.utils.Utils$1(java.util.Iterator, ru.spbau.tinydb.table.Table);
+  public ru.spbau.tinydb.table.Record next();
+  public boolean hasNext();
+  public void remove();
+  public java.lang.Object next();
+}
+Compiled from "Utils.java"
+final class ru.spbau.tinydb.utils.Utils$2 implements java.util.Iterator<T> {
+  ru.spbau.tinydb.utils.Utils$2();
+  public boolean hasNext();
+  public T next();
+  public void remove();
+}

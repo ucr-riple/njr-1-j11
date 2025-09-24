@@ -1,0 +1,1493 @@
+Compiled from "Cancelable.java"
+public interface com.gamezgalaxy.GGS.API.Cancelable {
+  public abstract boolean isCancelled();
+  public abstract void Cancel(boolean);
+}
+Compiled from "CommandExecutor.java"
+public interface com.gamezgalaxy.GGS.API.CommandExecutor {
+  public abstract void sendMessage(java.lang.String);
+  public abstract com.gamezgalaxy.GGS.server.Server getServer();
+  public abstract com.gamezgalaxy.GGS.groups.Group getGroup();
+  public abstract java.lang.String getName();
+}
+Compiled from "Event.java"
+public abstract class com.gamezgalaxy.GGS.API.Event {
+  public com.gamezgalaxy.GGS.API.Event();
+  public abstract com.gamezgalaxy.GGS.API.EventList getEvents();
+  public java.lang.String getEventName();
+}
+Compiled from "EventHandler.java"
+public interface com.gamezgalaxy.GGS.API.EventHandler extends java.lang.annotation.Annotation {
+  public abstract com.gamezgalaxy.GGS.API.Priority priority();
+}
+Compiled from "EventList.java"
+public class com.gamezgalaxy.GGS.API.EventList {
+  public com.gamezgalaxy.GGS.API.EventList();
+  public synchronized void register(com.gamezgalaxy.GGS.API.RegisteredListener);
+  public void registerAll(java.util.Collection<com.gamezgalaxy.GGS.API.RegisteredListener>);
+  public com.gamezgalaxy.GGS.API.RegisteredListener[] getRegisteredListeners();
+  public synchronized void bake();
+  public synchronized void unregister(com.gamezgalaxy.GGS.API.Listener);
+  static {};
+}
+Compiled from "EventSystem.java"
+public class com.gamezgalaxy.GGS.API.EventSystem {
+  public com.gamezgalaxy.GGS.API.EventSystem(com.gamezgalaxy.GGS.server.Server);
+  public void callEvent(com.gamezgalaxy.GGS.API.Event);
+  public void registerEvents(com.gamezgalaxy.GGS.API.Listener);
+  public java.util.Map<java.lang.Class<? extends com.gamezgalaxy.GGS.API.Event>, java.util.Set<com.gamezgalaxy.GGS.API.RegisteredListener>> addMuffins(com.gamezgalaxy.GGS.API.Listener);
+}
+Compiled from "EventSystem.java"
+class com.gamezgalaxy.GGS.API.EventSystem$1 implements com.gamezgalaxy.GGS.API.Executor {
+  final java.lang.Class val$eventClass;
+  final java.lang.reflect.Method val$m;
+  final com.gamezgalaxy.GGS.API.EventSystem this$0;
+  com.gamezgalaxy.GGS.API.EventSystem$1(com.gamezgalaxy.GGS.API.EventSystem, java.lang.Class, java.lang.reflect.Method);
+  public void execute(com.gamezgalaxy.GGS.API.Listener, com.gamezgalaxy.GGS.API.Event);
+}
+Compiled from "Executor.java"
+public interface com.gamezgalaxy.GGS.API.Executor {
+  public abstract void execute(com.gamezgalaxy.GGS.API.Listener, com.gamezgalaxy.GGS.API.Event) throws java.lang.Exception;
+}
+Compiled from "Listener.java"
+public interface com.gamezgalaxy.GGS.API.Listener {
+}
+Compiled from "Priority.java"
+public final class com.gamezgalaxy.GGS.API.Priority extends java.lang.Enum<com.gamezgalaxy.GGS.API.Priority> {
+  public static final com.gamezgalaxy.GGS.API.Priority Low;
+  public static final com.gamezgalaxy.GGS.API.Priority Normal;
+  public static final com.gamezgalaxy.GGS.API.Priority High;
+  public static final com.gamezgalaxy.GGS.API.Priority System_Level;
+  public static com.gamezgalaxy.GGS.API.Priority[] values();
+  public static com.gamezgalaxy.GGS.API.Priority valueOf(java.lang.String);
+  public int getImportantance();
+  static {};
+}
+Compiled from "RegisteredListener.java"
+public class com.gamezgalaxy.GGS.API.RegisteredListener {
+  public com.gamezgalaxy.GGS.API.RegisteredListener(com.gamezgalaxy.GGS.API.Listener, com.gamezgalaxy.GGS.API.Executor, com.gamezgalaxy.GGS.API.Priority);
+  public com.gamezgalaxy.GGS.API.RegisteredListener(com.gamezgalaxy.GGS.API.Listener, com.gamezgalaxy.GGS.API.Executor);
+  public com.gamezgalaxy.GGS.API.Listener getListen();
+  public com.gamezgalaxy.GGS.API.Executor getExecutor();
+  public void execute(com.gamezgalaxy.GGS.API.Event) throws java.lang.Exception;
+  public com.gamezgalaxy.GGS.API.Priority getPriority();
+}
+Compiled from "Action.java"
+public abstract class com.gamezgalaxy.GGS.API.action.Action<T> implements com.gamezgalaxy.GGS.API.Cancelable {
+  public com.gamezgalaxy.GGS.API.action.Action();
+  public synchronized T waitForResponse() throws java.lang.InterruptedException, java.lang.IllegalAccessException;
+  protected synchronized void wakeUp();
+  public void setPlayer(com.gamezgalaxy.GGS.iomodel.Player);
+  public com.gamezgalaxy.GGS.iomodel.Player getPlayer();
+  protected abstract void setup();
+  protected abstract T getResponse();
+  public abstract boolean isCompleted();
+  public boolean isCancelled();
+  public void Cancel(boolean);
+}
+Compiled from "BlockChangeAction.java"
+public class com.gamezgalaxy.GGS.API.action.BlockChangeAction extends com.gamezgalaxy.GGS.API.action.Action<com.gamezgalaxy.GGS.API.action.BlockChangeAction> implements com.gamezgalaxy.GGS.API.Listener {
+  public com.gamezgalaxy.GGS.API.action.BlockChangeAction();
+  public int getX();
+  public int getY();
+  public int getZ();
+  public com.gamezgalaxy.GGS.world.Block getHolding();
+  public com.gamezgalaxy.GGS.world.Block getOrginalBlock();
+  public com.gamezgalaxy.GGS.world.PlaceMode getMode();
+  protected void setup();
+  protected com.gamezgalaxy.GGS.API.action.BlockChangeAction getResponse();
+  public boolean isCompleted();
+  public void onChat(com.gamezgalaxy.GGS.API.player.PlayerBlockChangeEvent);
+  protected java.lang.Object getResponse();
+}
+Compiled from "ChatAction.java"
+public class com.gamezgalaxy.GGS.API.action.ChatAction extends com.gamezgalaxy.GGS.API.action.Action<com.gamezgalaxy.GGS.API.action.ChatAction> implements com.gamezgalaxy.GGS.API.Listener {
+  public com.gamezgalaxy.GGS.API.action.ChatAction();
+  public java.lang.String getMessage();
+  protected void setup();
+  protected com.gamezgalaxy.GGS.API.action.ChatAction getResponse();
+  public boolean isCompleted();
+  public void onChat(com.gamezgalaxy.GGS.API.player.PlayerChatEvent);
+  protected java.lang.Object getResponse();
+}
+Compiled from "BrowserConnectEvent.java"
+public class com.gamezgalaxy.GGS.API.browser.BrowserConnectEvent extends com.gamezgalaxy.GGS.API.browser.BrowserEvent {
+  public com.gamezgalaxy.GGS.API.browser.BrowserConnectEvent(com.gamezgalaxy.GGS.iomodel.Browser);
+  public com.gamezgalaxy.GGS.API.EventList getEvents();
+  public static com.gamezgalaxy.GGS.API.EventList getEventList();
+  static {};
+}
+Compiled from "BrowserEvent.java"
+public abstract class com.gamezgalaxy.GGS.API.browser.BrowserEvent extends com.gamezgalaxy.GGS.API.Event {
+  public com.gamezgalaxy.GGS.API.browser.BrowserEvent(com.gamezgalaxy.GGS.iomodel.Browser);
+  public com.gamezgalaxy.GGS.iomodel.Browser getBrowserObject();
+}
+Compiled from "BrowserGETRequestEvent.java"
+public class com.gamezgalaxy.GGS.API.browser.BrowserGETRequestEvent extends com.gamezgalaxy.GGS.API.browser.BrowserEvent implements com.gamezgalaxy.GGS.API.Cancelable {
+  public com.gamezgalaxy.GGS.API.browser.BrowserGETRequestEvent(com.gamezgalaxy.GGS.iomodel.Browser);
+  public com.gamezgalaxy.GGS.API.browser.BrowserGETRequestEvent(com.gamezgalaxy.GGS.iomodel.Browser, java.lang.String, java.lang.String);
+  public java.lang.String getGETRequest();
+  public java.lang.String getFullRequest();
+  public void setResponse(java.lang.String);
+  public void setHTML(boolean);
+  public boolean isHTML();
+  public java.lang.String getResponse();
+  public com.gamezgalaxy.GGS.API.EventList getEvents();
+  public static com.gamezgalaxy.GGS.API.EventList getEventList();
+  public boolean isCancelled();
+  public void Cancel(boolean);
+  static {};
+}
+Compiled from "IOEvent.java"
+public abstract class com.gamezgalaxy.GGS.API.io.IOEvent extends com.gamezgalaxy.GGS.API.Event {
+  public com.gamezgalaxy.GGS.API.io.IOEvent(com.gamezgalaxy.GGS.networking.IOClient, com.gamezgalaxy.GGS.server.Server);
+  public com.gamezgalaxy.GGS.networking.IOClient getIOClient();
+  public com.gamezgalaxy.GGS.server.Server getServer();
+}
+Compiled from "PacketPrepareEvent.java"
+public class com.gamezgalaxy.GGS.API.io.PacketPrepareEvent extends com.gamezgalaxy.GGS.API.io.IOEvent implements com.gamezgalaxy.GGS.API.Cancelable {
+  public com.gamezgalaxy.GGS.API.io.PacketPrepareEvent(com.gamezgalaxy.GGS.networking.IOClient, com.gamezgalaxy.GGS.networking.packets.Packet, com.gamezgalaxy.GGS.server.Server);
+  public com.gamezgalaxy.GGS.API.EventList getEvents();
+  public static com.gamezgalaxy.GGS.API.EventList getEventList();
+  public com.gamezgalaxy.GGS.networking.packets.Packet getPacket();
+  public boolean isCancelled();
+  public void Cancel(boolean);
+  static {};
+}
+Compiled from "PacketReceivedEvent.java"
+public class com.gamezgalaxy.GGS.API.io.PacketReceivedEvent extends com.gamezgalaxy.GGS.API.io.IOEvent implements com.gamezgalaxy.GGS.API.Cancelable {
+  public com.gamezgalaxy.GGS.API.io.PacketReceivedEvent(com.gamezgalaxy.GGS.networking.IOClient, com.gamezgalaxy.GGS.server.Server, java.io.DataInputStream, byte);
+  public boolean isCancelled();
+  public void Cancel(boolean);
+  public com.gamezgalaxy.GGS.API.EventList getEvents();
+  public static com.gamezgalaxy.GGS.API.EventList getEventList();
+  public java.io.DataInputStream getReader();
+  public byte getOpCode();
+  static {};
+}
+Compiled from "PacketSentEvent.java"
+public class com.gamezgalaxy.GGS.API.io.PacketSentEvent extends com.gamezgalaxy.GGS.API.io.IOEvent {
+  public com.gamezgalaxy.GGS.API.io.PacketSentEvent(com.gamezgalaxy.GGS.networking.IOClient, com.gamezgalaxy.GGS.server.Server, com.gamezgalaxy.GGS.networking.packets.Packet);
+  public com.gamezgalaxy.GGS.API.EventList getEvents();
+  public static com.gamezgalaxy.GGS.API.EventList getEventList();
+  public com.gamezgalaxy.GGS.networking.packets.Packet getPacket();
+  static {};
+}
+Compiled from "PlayerJoinedLevel.java"
+public class com.gamezgalaxy.GGS.API.level.PlayerJoinedLevel extends com.gamezgalaxy.GGS.API.player.PlayerEvent {
+  com.gamezgalaxy.GGS.world.Level _level;
+  public com.gamezgalaxy.GGS.API.level.PlayerJoinedLevel(com.gamezgalaxy.GGS.iomodel.Player, com.gamezgalaxy.GGS.world.Level);
+  public com.gamezgalaxy.GGS.API.EventList getEvents();
+  public static com.gamezgalaxy.GGS.API.EventList getEventList();
+  public com.gamezgalaxy.GGS.world.Level getLevel();
+  static {};
+}
+Compiled from "PlayerBlockChangeEvent.java"
+public class com.gamezgalaxy.GGS.API.player.PlayerBlockChangeEvent extends com.gamezgalaxy.GGS.API.player.PlayerEvent implements com.gamezgalaxy.GGS.API.Cancelable {
+  public com.gamezgalaxy.GGS.API.player.PlayerBlockChangeEvent(com.gamezgalaxy.GGS.iomodel.Player, short, short, short, com.gamezgalaxy.GGS.world.Block, com.gamezgalaxy.GGS.world.Level, com.gamezgalaxy.GGS.server.Server, com.gamezgalaxy.GGS.world.PlaceMode);
+  public short getX();
+  public short getY();
+  public short getZ();
+  public com.gamezgalaxy.GGS.world.Level getLevel();
+  public com.gamezgalaxy.GGS.server.Server getServer();
+  public com.gamezgalaxy.GGS.API.EventList getEvents();
+  public static com.gamezgalaxy.GGS.API.EventList getEventList();
+  public com.gamezgalaxy.GGS.world.Block getBlock();
+  public com.gamezgalaxy.GGS.world.PlaceMode getPlaceType();
+  public void setBlock(com.gamezgalaxy.GGS.world.Block);
+  public boolean isCancelled();
+  public void Cancel(boolean);
+  static {};
+}
+Compiled from "PlayerChatEvent.java"
+public class com.gamezgalaxy.GGS.API.player.PlayerChatEvent extends com.gamezgalaxy.GGS.API.player.PlayerEvent implements com.gamezgalaxy.GGS.API.Cancelable {
+  public com.gamezgalaxy.GGS.API.player.PlayerChatEvent(com.gamezgalaxy.GGS.iomodel.Player, java.lang.String);
+  public com.gamezgalaxy.GGS.API.EventList getEvents();
+  public static com.gamezgalaxy.GGS.API.EventList getEventList();
+  public java.lang.String getMessage();
+  public java.lang.String getOrginalMessage();
+  public void setMessage(java.lang.String);
+  public boolean isCancelled();
+  public void Cancel(boolean);
+  static {};
+}
+Compiled from "PlayerCommandEvent.java"
+public class com.gamezgalaxy.GGS.API.player.PlayerCommandEvent extends com.gamezgalaxy.GGS.API.player.PlayerEvent implements com.gamezgalaxy.GGS.API.Cancelable {
+  public com.gamezgalaxy.GGS.API.player.PlayerCommandEvent(com.gamezgalaxy.GGS.iomodel.Player, java.lang.String);
+  public java.util.List<java.lang.String> parseCommand(java.lang.String);
+  public com.gamezgalaxy.GGS.API.EventList getEvents();
+  public static com.gamezgalaxy.GGS.API.EventList getEventList();
+  public java.lang.String getOrginalMessage();
+  public java.lang.String getCommand();
+  public java.util.List<java.lang.String> getArgs();
+  public void setCommand(java.util.List<java.lang.String>);
+  public boolean isCancelled();
+  public void Cancel(boolean);
+  static {};
+}
+Compiled from "PlayerConnectEvent.java"
+public class com.gamezgalaxy.GGS.API.player.PlayerConnectEvent extends com.gamezgalaxy.GGS.API.player.PlayerEvent implements com.gamezgalaxy.GGS.API.Cancelable {
+  public com.gamezgalaxy.GGS.API.player.PlayerConnectEvent(com.gamezgalaxy.GGS.iomodel.Player);
+  public com.gamezgalaxy.GGS.API.EventList getEvents();
+  public static com.gamezgalaxy.GGS.API.EventList getEventList();
+  public boolean isCancelled();
+  public void Cancel(boolean);
+  public void setKickMessage(java.lang.String);
+  public java.lang.String getKickMessage();
+  static {};
+}
+Compiled from "PlayerDisconnectEvent.java"
+public class com.gamezgalaxy.GGS.API.player.PlayerDisconnectEvent extends com.gamezgalaxy.GGS.API.player.PlayerEvent {
+  public com.gamezgalaxy.GGS.API.player.PlayerDisconnectEvent(com.gamezgalaxy.GGS.iomodel.Player);
+  public com.gamezgalaxy.GGS.API.EventList getEvents();
+  public static com.gamezgalaxy.GGS.API.EventList getEventList();
+  static {};
+}
+Compiled from "PlayerEvent.java"
+public abstract class com.gamezgalaxy.GGS.API.player.PlayerEvent extends com.gamezgalaxy.GGS.API.Event {
+  public com.gamezgalaxy.GGS.API.player.PlayerEvent(com.gamezgalaxy.GGS.iomodel.Player);
+  public com.gamezgalaxy.GGS.iomodel.Player getPlayer();
+  public abstract com.gamezgalaxy.GGS.API.EventList getEvents();
+}
+Compiled from "PlayerLoginEvent.java"
+public class com.gamezgalaxy.GGS.API.player.PlayerLoginEvent extends com.gamezgalaxy.GGS.API.player.PlayerEvent {
+  public com.gamezgalaxy.GGS.API.player.PlayerLoginEvent(com.gamezgalaxy.GGS.iomodel.Player);
+  public com.gamezgalaxy.GGS.API.EventList getEvents();
+  public static com.gamezgalaxy.GGS.API.EventList getEventList();
+  static {};
+}
+Compiled from "PlayerMoveEvent.java"
+public class com.gamezgalaxy.GGS.API.player.PlayerMoveEvent extends com.gamezgalaxy.GGS.API.player.PlayerEvent implements com.gamezgalaxy.GGS.API.Cancelable {
+  public com.gamezgalaxy.GGS.API.player.PlayerMoveEvent(com.gamezgalaxy.GGS.iomodel.Player);
+  public com.gamezgalaxy.GGS.API.player.PlayerMoveEvent(com.gamezgalaxy.GGS.iomodel.Player, short, short, short);
+  public com.gamezgalaxy.GGS.API.EventList getEvents();
+  public static com.gamezgalaxy.GGS.API.EventList getEventList();
+  public boolean isCancelled();
+  public void Cancel(boolean);
+  public short getX();
+  public short getY();
+  public short getZ();
+  static {};
+}
+Compiled from "Command.java"
+public abstract class com.gamezgalaxy.GGS.API.plugin.Command {
+  public com.gamezgalaxy.GGS.API.plugin.Command();
+  public abstract java.lang.String[] getShortcuts();
+  public abstract java.lang.String getName();
+  public abstract boolean isOpCommand();
+  public abstract int getDefaultPermissionLevel();
+  public abstract void execute(com.gamezgalaxy.GGS.API.CommandExecutor, java.lang.String[]);
+  public int getPermissionLevel();
+  public void setPermissionLevel(int);
+  public abstract void help(com.gamezgalaxy.GGS.API.CommandExecutor);
+}
+Compiled from "CommandHandler.java"
+public class com.gamezgalaxy.GGS.API.plugin.CommandHandler {
+  public java.util.ArrayList<com.gamezgalaxy.GGS.API.plugin.Command> commands;
+  public com.gamezgalaxy.GGS.API.plugin.CommandHandler(com.gamezgalaxy.GGS.server.Server);
+  public void execute(com.gamezgalaxy.GGS.API.CommandExecutor, java.lang.String, java.lang.String);
+  public com.gamezgalaxy.GGS.API.plugin.Command find(java.lang.String);
+  public void execute(com.gamezgalaxy.GGS.API.CommandExecutor, java.lang.String, java.lang.String[]);
+  public void addCommand(com.gamezgalaxy.GGS.API.plugin.Command);
+  public void removeCommand(com.gamezgalaxy.GGS.API.plugin.Command);
+  public void removeCommand(java.lang.String);
+}
+Compiled from "Game.java"
+public abstract class com.gamezgalaxy.GGS.API.plugin.Game extends com.gamezgalaxy.GGS.API.plugin.Plugin implements com.gamezgalaxy.GGS.server.Tick {
+  public com.gamezgalaxy.GGS.API.plugin.Game(com.gamezgalaxy.GGS.server.Server, java.util.Properties);
+  public com.gamezgalaxy.GGS.API.plugin.Game(com.gamezgalaxy.GGS.server.Server);
+  public abstract void tick();
+}
+Compiled from "PlayerCommand.java"
+public abstract class com.gamezgalaxy.GGS.API.plugin.PlayerCommand extends com.gamezgalaxy.GGS.API.plugin.Command {
+  public com.gamezgalaxy.GGS.API.plugin.PlayerCommand();
+  public void execute(com.gamezgalaxy.GGS.API.CommandExecutor, java.lang.String[]);
+  public abstract void execute(com.gamezgalaxy.GGS.iomodel.Player, java.lang.String[]);
+}
+Compiled from "Plugin.java"
+public abstract class com.gamezgalaxy.GGS.API.plugin.Plugin {
+  public com.gamezgalaxy.GGS.API.plugin.Plugin(com.gamezgalaxy.GGS.server.Server, java.util.Properties);
+  public com.gamezgalaxy.GGS.API.plugin.Plugin(com.gamezgalaxy.GGS.server.Server);
+  public abstract void onLoad(java.lang.String[]);
+  public abstract void onUnload();
+  public java.lang.String getName();
+  public void setProperties(java.util.Properties);
+  public java.lang.String getVersion();
+  public java.lang.String getAuthor();
+  public com.gamezgalaxy.GGS.server.Server getServer();
+  public java.util.Properties getProperties();
+}
+Compiled from "PluginHandler.java"
+public class com.gamezgalaxy.GGS.API.plugin.PluginHandler {
+  public com.gamezgalaxy.GGS.API.plugin.PluginHandler();
+  public void loadplugins(com.gamezgalaxy.GGS.server.Server);
+  public void loadplugin(java.io.File, java.lang.String, java.lang.String[], com.gamezgalaxy.GGS.server.Server, java.util.Properties);
+}
+Compiled from "ChatColor.java"
+public final class com.gamezgalaxy.GGS.chat.ChatColor extends java.lang.Enum<com.gamezgalaxy.GGS.chat.ChatColor> {
+  public static final com.gamezgalaxy.GGS.chat.ChatColor Black;
+  public static final com.gamezgalaxy.GGS.chat.ChatColor Dark_Blue;
+  public static final com.gamezgalaxy.GGS.chat.ChatColor Dark_Green;
+  public static final com.gamezgalaxy.GGS.chat.ChatColor Dark_Aqua;
+  public static final com.gamezgalaxy.GGS.chat.ChatColor Dark_Red;
+  public static final com.gamezgalaxy.GGS.chat.ChatColor Purple;
+  public static final com.gamezgalaxy.GGS.chat.ChatColor Orange;
+  public static final com.gamezgalaxy.GGS.chat.ChatColor Grey;
+  public static final com.gamezgalaxy.GGS.chat.ChatColor Dark_Grey;
+  public static final com.gamezgalaxy.GGS.chat.ChatColor Indigo;
+  public static final com.gamezgalaxy.GGS.chat.ChatColor Bright_Green;
+  public static final com.gamezgalaxy.GGS.chat.ChatColor Aqua;
+  public static final com.gamezgalaxy.GGS.chat.ChatColor Red;
+  public static final com.gamezgalaxy.GGS.chat.ChatColor Pink;
+  public static final com.gamezgalaxy.GGS.chat.ChatColor Yellow;
+  public static final com.gamezgalaxy.GGS.chat.ChatColor White;
+  public static com.gamezgalaxy.GGS.chat.ChatColor[] values();
+  public static com.gamezgalaxy.GGS.chat.ChatColor valueOf(java.lang.String);
+  public char getColor();
+  public char getID();
+  public java.lang.String toString();
+  public static com.gamezgalaxy.GGS.chat.ChatColor parse(java.lang.String);
+  public static com.gamezgalaxy.GGS.chat.ChatColor parse(char);
+  static {};
+}
+Compiled from "ColorFormatException.java"
+public class com.gamezgalaxy.GGS.chat.ColorFormatException extends java.lang.IllegalArgumentException {
+  public com.gamezgalaxy.GGS.chat.ColorFormatException(java.lang.String);
+  public static com.gamezgalaxy.GGS.chat.ColorFormatException forInputString(java.lang.String);
+}
+Compiled from "Messages.java"
+public class com.gamezgalaxy.GGS.chat.Messages {
+  protected com.gamezgalaxy.GGS.server.Server server;
+  public com.gamezgalaxy.GGS.chat.Messages(com.gamezgalaxy.GGS.server.Server);
+  public void serverBroadcast(java.lang.String);
+  public void worldBroadcast(java.lang.String, java.lang.String);
+  public void sendMessage(java.lang.String, java.lang.String);
+  public java.lang.String[] split(java.lang.String);
+}
+Compiled from "ActionExample.java"
+public class com.gamezgalaxy.GGS.defaults.commands.ActionExample extends com.gamezgalaxy.GGS.API.plugin.PlayerCommand {
+  public com.gamezgalaxy.GGS.defaults.commands.ActionExample();
+  public java.lang.String[] getShortcuts();
+  public java.lang.String getName();
+  public boolean isOpCommand();
+  public int getDefaultPermissionLevel();
+  public void execute(com.gamezgalaxy.GGS.iomodel.Player, java.lang.String[]);
+  public void help(com.gamezgalaxy.GGS.API.CommandExecutor);
+}
+Compiled from "ActionExample.java"
+public class com.gamezgalaxy.GGS.defaults.commands.ActionExample$Test extends java.lang.Thread {
+  public com.gamezgalaxy.GGS.iomodel.Player player;
+  final com.gamezgalaxy.GGS.defaults.commands.ActionExample this$0;
+  public com.gamezgalaxy.GGS.defaults.commands.ActionExample$Test(com.gamezgalaxy.GGS.defaults.commands.ActionExample);
+  public void run();
+}
+Compiled from "Afk.java"
+public class com.gamezgalaxy.GGS.defaults.commands.Afk extends com.gamezgalaxy.GGS.API.plugin.PlayerCommand {
+  public com.gamezgalaxy.GGS.defaults.commands.Afk();
+  public java.lang.String[] getShortcuts();
+  public java.lang.String getName();
+  public boolean isOpCommand();
+  public int getDefaultPermissionLevel();
+  public void execute(com.gamezgalaxy.GGS.iomodel.Player, java.lang.String[]);
+  public void help(com.gamezgalaxy.GGS.API.CommandExecutor);
+}
+Compiled from "Ban.java"
+public class com.gamezgalaxy.GGS.defaults.commands.Ban extends com.gamezgalaxy.GGS.API.plugin.PlayerCommand {
+  public com.gamezgalaxy.GGS.defaults.commands.Ban();
+  public java.lang.String[] getShortcuts();
+  public java.lang.String getName();
+  public boolean isOpCommand();
+  public int getDefaultPermissionLevel();
+  public void execute(com.gamezgalaxy.GGS.iomodel.Player, java.lang.String[]);
+  public void help(com.gamezgalaxy.GGS.API.CommandExecutor);
+}
+Compiled from "Goto.java"
+public class com.gamezgalaxy.GGS.defaults.commands.Goto extends com.gamezgalaxy.GGS.API.plugin.PlayerCommand {
+  public com.gamezgalaxy.GGS.defaults.commands.Goto();
+  public java.lang.String[] getShortcuts();
+  public java.lang.String getName();
+  public boolean isOpCommand();
+  public int getDefaultPermissionLevel();
+  public void execute(com.gamezgalaxy.GGS.iomodel.Player, java.lang.String[]);
+  public void help(com.gamezgalaxy.GGS.API.CommandExecutor);
+}
+Compiled from "Help.java"
+public class com.gamezgalaxy.GGS.defaults.commands.Help extends com.gamezgalaxy.GGS.API.plugin.Command {
+  public com.gamezgalaxy.GGS.defaults.commands.Help();
+  public java.lang.String[] getShortcuts();
+  public java.lang.String getName();
+  public boolean isOpCommand();
+  public int getDefaultPermissionLevel();
+  public void execute(com.gamezgalaxy.GGS.API.CommandExecutor, java.lang.String[]);
+  public void help(com.gamezgalaxy.GGS.API.CommandExecutor);
+}
+Compiled from "Load.java"
+public class com.gamezgalaxy.GGS.defaults.commands.Load extends com.gamezgalaxy.GGS.API.plugin.Command {
+  public com.gamezgalaxy.GGS.defaults.commands.Load();
+  public java.lang.String[] getShortcuts();
+  public java.lang.String getName();
+  public boolean isOpCommand();
+  public int getDefaultPermissionLevel();
+  public void execute(com.gamezgalaxy.GGS.API.CommandExecutor, java.lang.String[]);
+  public void help(com.gamezgalaxy.GGS.API.CommandExecutor);
+}
+Compiled from "Loaded.java"
+public class com.gamezgalaxy.GGS.defaults.commands.Loaded extends com.gamezgalaxy.GGS.API.plugin.Command {
+  public com.gamezgalaxy.GGS.defaults.commands.Loaded();
+  public java.lang.String[] getShortcuts();
+  public java.lang.String getName();
+  public boolean isOpCommand();
+  public int getDefaultPermissionLevel();
+  public void execute(com.gamezgalaxy.GGS.API.CommandExecutor, java.lang.String[]);
+  public void help(com.gamezgalaxy.GGS.API.CommandExecutor);
+}
+Compiled from "Maps.java"
+public class com.gamezgalaxy.GGS.defaults.commands.Maps extends com.gamezgalaxy.GGS.API.plugin.Command {
+  public com.gamezgalaxy.GGS.defaults.commands.Maps();
+  public java.lang.String[] getShortcuts();
+  public java.lang.String getName();
+  public boolean isOpCommand();
+  public int getDefaultPermissionLevel();
+  public void execute(com.gamezgalaxy.GGS.API.CommandExecutor, java.lang.String[]);
+  public void help(com.gamezgalaxy.GGS.API.CommandExecutor);
+}
+Compiled from "Newlvl.java"
+public class com.gamezgalaxy.GGS.defaults.commands.Newlvl extends com.gamezgalaxy.GGS.API.plugin.Command {
+  public com.gamezgalaxy.GGS.defaults.commands.Newlvl();
+  public java.lang.String[] getShortcuts();
+  public java.lang.String getName();
+  public boolean isOpCommand();
+  public int getDefaultPermissionLevel();
+  public void execute(com.gamezgalaxy.GGS.API.CommandExecutor, java.lang.String[]);
+  public void help(com.gamezgalaxy.GGS.API.CommandExecutor);
+}
+Compiled from "Spawn.java"
+public class com.gamezgalaxy.GGS.defaults.commands.Spawn extends com.gamezgalaxy.GGS.API.plugin.PlayerCommand {
+  public com.gamezgalaxy.GGS.defaults.commands.Spawn();
+  public java.lang.String[] getShortcuts();
+  public java.lang.String getName();
+  public boolean isOpCommand();
+  public int getDefaultPermissionLevel();
+  public void execute(com.gamezgalaxy.GGS.iomodel.Player, java.lang.String[]);
+  public void help(com.gamezgalaxy.GGS.API.CommandExecutor);
+}
+Compiled from "Stop.java"
+public class com.gamezgalaxy.GGS.defaults.commands.Stop extends com.gamezgalaxy.GGS.API.plugin.Command {
+  public com.gamezgalaxy.GGS.defaults.commands.Stop();
+  public java.lang.String[] getShortcuts();
+  public java.lang.String getName();
+  public boolean isOpCommand();
+  public int getDefaultPermissionLevel();
+  public void execute(com.gamezgalaxy.GGS.API.CommandExecutor, java.lang.String[]);
+  public void help(com.gamezgalaxy.GGS.API.CommandExecutor);
+}
+Compiled from "TP.java"
+public class com.gamezgalaxy.GGS.defaults.commands.TP extends com.gamezgalaxy.GGS.API.plugin.PlayerCommand {
+  public com.gamezgalaxy.GGS.defaults.commands.TP();
+  public java.lang.String[] getShortcuts();
+  public java.lang.String getName();
+  public boolean isOpCommand();
+  public int getDefaultPermissionLevel();
+  public void execute(com.gamezgalaxy.GGS.iomodel.Player, java.lang.String[]);
+  public void help(com.gamezgalaxy.GGS.API.CommandExecutor);
+}
+Compiled from "Unban.java"
+public class com.gamezgalaxy.GGS.defaults.commands.Unban extends com.gamezgalaxy.GGS.API.plugin.Command {
+  public com.gamezgalaxy.GGS.defaults.commands.Unban();
+  public java.lang.String[] getShortcuts();
+  public java.lang.String getName();
+  public boolean isOpCommand();
+  public int getDefaultPermissionLevel();
+  public void execute(com.gamezgalaxy.GGS.API.CommandExecutor, java.lang.String[]);
+  public void help(com.gamezgalaxy.GGS.API.CommandExecutor);
+}
+Compiled from "Group.java"
+public class com.gamezgalaxy.GGS.groups.Group {
+  static java.util.ArrayList<com.gamezgalaxy.GGS.groups.Group> groups;
+  static java.util.HashMap<com.gamezgalaxy.GGS.groups.Group, java.lang.String> temp;
+  public int permissionlevel;
+  public boolean isOP;
+  public java.lang.String name;
+  public com.gamezgalaxy.GGS.groups.Group parent;
+  public com.gamezgalaxy.GGS.groups.Group(java.lang.String, int, boolean, com.gamezgalaxy.GGS.groups.Group, com.gamezgalaxy.GGS.server.Server);
+  public com.gamezgalaxy.GGS.groups.Group(java.lang.String, int, boolean, com.gamezgalaxy.GGS.server.Server);
+  public com.gamezgalaxy.GGS.groups.Group(java.lang.String, com.gamezgalaxy.GGS.groups.Group, com.gamezgalaxy.GGS.server.Server);
+  public boolean canExecute(com.gamezgalaxy.GGS.API.plugin.Command);
+  public void removeMember(java.lang.String);
+  public void addMember(java.lang.String);
+  public void addPlayer(com.gamezgalaxy.GGS.iomodel.Player);
+  public void removePlayer(com.gamezgalaxy.GGS.iomodel.Player);
+  public void loadMembers() throws java.io.IOException;
+  public void saveMembers();
+  public static final java.util.ArrayList<com.gamezgalaxy.GGS.groups.Group> getGroupList();
+  public static com.gamezgalaxy.GGS.groups.Group find(java.lang.String);
+  public static com.gamezgalaxy.GGS.groups.Group getGroup(com.gamezgalaxy.GGS.iomodel.Player);
+  public static com.gamezgalaxy.GGS.groups.Group getDefault();
+  public static void Load(com.gamezgalaxy.GGS.server.Server);
+  static java.util.ArrayList access$100(com.gamezgalaxy.GGS.groups.Group);
+  static java.util.ArrayList access$200(com.gamezgalaxy.GGS.groups.Group);
+  static {};
+}
+Compiled from "Group.java"
+class com.gamezgalaxy.GGS.groups.Group$1 {
+}
+Compiled from "Group.java"
+class com.gamezgalaxy.GGS.groups.Group$Listen implements com.gamezgalaxy.GGS.API.Listener {
+  final com.gamezgalaxy.GGS.groups.Group this$0;
+  public void connect(com.gamezgalaxy.GGS.API.player.PlayerLoginEvent);
+  com.gamezgalaxy.GGS.groups.Group$Listen(com.gamezgalaxy.GGS.groups.Group, com.gamezgalaxy.GGS.groups.Group$1);
+}
+Compiled from "Browser.java"
+public class com.gamezgalaxy.GGS.iomodel.Browser extends com.gamezgalaxy.GGS.networking.IOClient {
+  public com.gamezgalaxy.GGS.iomodel.Browser(java.net.Socket, com.gamezgalaxy.GGS.networking.packets.PacketManager, byte);
+  public void GET(java.lang.String, java.lang.String, com.gamezgalaxy.GGS.server.Server);
+}
+Compiled from "Player.java"
+public class com.gamezgalaxy.GGS.iomodel.Player extends com.gamezgalaxy.GGS.networking.IOClient implements com.gamezgalaxy.GGS.API.CommandExecutor {
+  protected short X;
+  protected short Y;
+  protected short Z;
+  protected byte ID;
+  protected com.gamezgalaxy.GGS.world.Level level;
+  protected java.lang.Thread levelsender;
+  protected com.gamezgalaxy.GGS.chat.Messages chat;
+  protected java.util.ArrayList<com.gamezgalaxy.GGS.iomodel.Player> seeable;
+  protected com.gamezgalaxy.GGS.iomodel.Player$Ping tick;
+  protected com.gamezgalaxy.GGS.chat.ChatColor color;
+  public boolean isLoggedin;
+  public java.lang.String kickreason;
+  public java.lang.String username;
+  public java.lang.String world;
+  public java.lang.String mppass;
+  public java.lang.String message;
+  public boolean isConnected;
+  public boolean cc;
+  public byte ClientType;
+  public short oldX;
+  public short oldY;
+  public short oldZ;
+  public byte yaw;
+  public byte pitch;
+  public byte oldyaw;
+  public byte oldpitch;
+  public static java.security.MessageDigest digest;
+  public com.gamezgalaxy.GGS.iomodel.Player lastCommunication;
+  public com.gamezgalaxy.GGS.iomodel.Player(java.net.Socket, com.gamezgalaxy.GGS.networking.packets.PacketManager, com.gamezgalaxy.GGS.server.Server);
+  public com.gamezgalaxy.GGS.iomodel.Player(java.net.Socket, com.gamezgalaxy.GGS.networking.packets.PacketManager, byte, com.gamezgalaxy.GGS.server.Server);
+  public java.lang.String getDisplayName();
+  public com.gamezgalaxy.GGS.chat.ChatColor getDisplayColor();
+  public void setDisplayColor(com.gamezgalaxy.GGS.chat.ChatColor);
+  public boolean VerifyLogin();
+  public java.lang.String getRealmppass();
+  public java.lang.String getValue(java.lang.String);
+  public void setValue(java.lang.String, java.lang.Object);
+  public void saveValue(java.lang.String) throws java.sql.SQLException;
+  public void Login() throws java.lang.InterruptedException;
+  public com.gamezgalaxy.GGS.groups.Group getGroup();
+  public void setGroup(com.gamezgalaxy.GGS.groups.Group);
+  public void HandleBlockChange(short, short, short, com.gamezgalaxy.GGS.world.PlaceMode, byte);
+  public static void GlobalBlockChange(short, short, short, com.gamezgalaxy.GGS.world.Block, com.gamezgalaxy.GGS.world.Level, com.gamezgalaxy.GGS.server.Server, boolean);
+  public void SendBlockChange(short, short, short, com.gamezgalaxy.GGS.world.Block);
+  public static void GlobalBlockChange(short, short, short, com.gamezgalaxy.GGS.world.Block, com.gamezgalaxy.GGS.world.Level, com.gamezgalaxy.GGS.server.Server);
+  public java.util.ArrayList<com.gamezgalaxy.GGS.iomodel.Player> getSeeable();
+  public void sendMoTD(java.lang.String, java.lang.String);
+  public void UpdatePos() throws java.io.IOException;
+  public void spawnPlayer(com.gamezgalaxy.GGS.iomodel.Player);
+  public com.gamezgalaxy.GGS.world.Level getLevel();
+  public boolean isLoading();
+  public void waitForLoaded() throws java.lang.InterruptedException;
+  protected void SendWelcome();
+  public void Kick(java.lang.String);
+  public short getX();
+  public int getBlockX();
+  public short getY();
+  public int getBlockY();
+  public byte getID();
+  public short getZ();
+  public int getBlockZ();
+  public void setX(short);
+  public void setY(short);
+  public void setZ(short);
+  public void setPos(short, short, short, byte, byte);
+  public void setPos(short, short, short);
+  protected void TP();
+  public void sendMessage(java.lang.String);
+  public void changeLevel(com.gamezgalaxy.GGS.world.Level);
+  public void changeLevel(com.gamezgalaxy.GGS.world.Level, boolean);
+  public void clearChatScreen();
+  public void processCommand(java.lang.String);
+  public void recieveMessage(java.lang.String);
+  public com.gamezgalaxy.GGS.server.Server getServer();
+  public void Despawn(com.gamezgalaxy.GGS.iomodel.Player);
+  public void CloseConnection();
+  protected void finishLevel();
+  public com.gamezgalaxy.GGS.chat.Messages getChat();
+  public boolean isAfk();
+  public void setAfk(boolean);
+  public java.lang.String getName();
+  static com.gamezgalaxy.GGS.networking.packets.PacketManager access$000(com.gamezgalaxy.GGS.iomodel.Player);
+  static com.gamezgalaxy.GGS.networking.packets.PacketManager access$100(com.gamezgalaxy.GGS.iomodel.Player);
+  static com.gamezgalaxy.GGS.networking.packets.PacketManager access$200(com.gamezgalaxy.GGS.iomodel.Player);
+  static com.gamezgalaxy.GGS.networking.packets.PacketManager access$300(com.gamezgalaxy.GGS.iomodel.Player);
+  static com.gamezgalaxy.GGS.networking.packets.PacketManager access$400(com.gamezgalaxy.GGS.iomodel.Player);
+  static com.gamezgalaxy.GGS.networking.packets.PacketManager access$500(com.gamezgalaxy.GGS.iomodel.Player);
+  static com.gamezgalaxy.GGS.networking.packets.PacketManager access$600(com.gamezgalaxy.GGS.iomodel.Player);
+  static com.gamezgalaxy.GGS.networking.packets.PacketManager access$700(com.gamezgalaxy.GGS.iomodel.Player);
+}
+Compiled from "Player.java"
+public class com.gamezgalaxy.GGS.iomodel.Player$Ping implements com.gamezgalaxy.GGS.server.Tick {
+  com.gamezgalaxy.GGS.iomodel.Player p;
+  final com.gamezgalaxy.GGS.iomodel.Player this$0;
+  public com.gamezgalaxy.GGS.iomodel.Player$Ping(com.gamezgalaxy.GGS.iomodel.Player, com.gamezgalaxy.GGS.iomodel.Player);
+  public void tick();
+}
+Compiled from "Player.java"
+public class com.gamezgalaxy.GGS.iomodel.Player$SendLevel extends java.lang.Thread {
+  com.gamezgalaxy.GGS.iomodel.Player p;
+  final com.gamezgalaxy.GGS.iomodel.Player this$0;
+  public com.gamezgalaxy.GGS.iomodel.Player$SendLevel(com.gamezgalaxy.GGS.iomodel.Player, com.gamezgalaxy.GGS.iomodel.Player);
+  public void run();
+}
+Compiled from "Player.java"
+public class com.gamezgalaxy.GGS.iomodel.Player$asyncLevel extends java.lang.Thread {
+  com.gamezgalaxy.GGS.world.Level level;
+  final com.gamezgalaxy.GGS.iomodel.Player this$0;
+  public com.gamezgalaxy.GGS.iomodel.Player$asyncLevel(com.gamezgalaxy.GGS.iomodel.Player, com.gamezgalaxy.GGS.world.Level);
+  public void run();
+}
+Compiled from "IOClient.java"
+public class com.gamezgalaxy.GGS.networking.IOClient {
+  protected java.net.Socket client;
+  protected java.io.PrintStream writer;
+  protected java.io.DataInputStream reader;
+  protected java.lang.Thread readerthread;
+  protected com.gamezgalaxy.GGS.networking.packets.PacketManager pm;
+  protected long readID;
+  public long getReaderThreadID();
+  public com.gamezgalaxy.GGS.networking.IOClient(java.net.Socket, com.gamezgalaxy.GGS.networking.packets.PacketManager);
+  public void Listen();
+  public void CloseConnection();
+  public void WriteData(byte[]) throws java.io.IOException;
+}
+Compiled from "IOClient.java"
+class com.gamezgalaxy.GGS.networking.IOClient$Reader extends java.lang.Thread {
+  com.gamezgalaxy.GGS.networking.IOClient client;
+  final com.gamezgalaxy.GGS.networking.IOClient this$0;
+  public com.gamezgalaxy.GGS.networking.IOClient$Reader(com.gamezgalaxy.GGS.networking.IOClient, com.gamezgalaxy.GGS.networking.IOClient);
+  public void run();
+}
+Compiled from "Packet.java"
+public abstract class com.gamezgalaxy.GGS.networking.packets.Packet {
+  public byte ID;
+  public int length;
+  public com.gamezgalaxy.GGS.networking.packets.PacketType packetType;
+  public com.gamezgalaxy.GGS.networking.packets.PacketManager parent;
+  public java.lang.String name;
+  public abstract void Handle(byte[], com.gamezgalaxy.GGS.server.Server, com.gamezgalaxy.GGS.networking.IOClient);
+  public abstract void Write(com.gamezgalaxy.GGS.networking.IOClient, com.gamezgalaxy.GGS.server.Server);
+  public void Write(com.gamezgalaxy.GGS.networking.IOClient, com.gamezgalaxy.GGS.server.Server, java.lang.Object...);
+  public com.gamezgalaxy.GGS.networking.packets.Packet(java.lang.String, byte, com.gamezgalaxy.GGS.networking.packets.PacketManager, com.gamezgalaxy.GGS.networking.packets.PacketType);
+}
+Compiled from "PacketManager.java"
+public class com.gamezgalaxy.GGS.networking.packets.PacketManager {
+  protected com.gamezgalaxy.GGS.networking.packets.Packet[] packets;
+  protected java.net.ServerSocket serverSocket;
+  protected java.lang.Thread reader;
+  public com.gamezgalaxy.GGS.server.Server server;
+  public com.gamezgalaxy.GGS.networking.packets.PacketManager(com.gamezgalaxy.GGS.server.Server);
+  public com.gamezgalaxy.GGS.networking.packets.Packet getPacket(byte);
+  public com.gamezgalaxy.GGS.networking.packets.Packet getPacket(java.lang.String);
+  public void StartReading();
+  public void StopReading();
+  static void access$100(com.gamezgalaxy.GGS.networking.packets.PacketManager, java.net.Socket) throws java.io.IOException;
+}
+Compiled from "PacketManager.java"
+class com.gamezgalaxy.GGS.networking.packets.PacketManager$1 {
+}
+Compiled from "PacketManager.java"
+class com.gamezgalaxy.GGS.networking.packets.PacketManager$Read extends java.lang.Thread {
+  final com.gamezgalaxy.GGS.networking.packets.PacketManager this$0;
+  public void run();
+  com.gamezgalaxy.GGS.networking.packets.PacketManager$Read(com.gamezgalaxy.GGS.networking.packets.PacketManager, com.gamezgalaxy.GGS.networking.packets.PacketManager$1);
+}
+Compiled from "PacketType.java"
+public final class com.gamezgalaxy.GGS.networking.packets.PacketType extends java.lang.Enum<com.gamezgalaxy.GGS.networking.packets.PacketType> {
+  public static final com.gamezgalaxy.GGS.networking.packets.PacketType Server_to_Client;
+  public static final com.gamezgalaxy.GGS.networking.packets.PacketType Client_to_Server;
+  public static com.gamezgalaxy.GGS.networking.packets.PacketType[] values();
+  public static com.gamezgalaxy.GGS.networking.packets.PacketType valueOf(java.lang.String);
+  static {};
+}
+Compiled from "GET.java"
+public class com.gamezgalaxy.GGS.networking.packets.browser.GET extends com.gamezgalaxy.GGS.networking.packets.Packet {
+  public com.gamezgalaxy.GGS.networking.packets.browser.GET(java.lang.String, byte, com.gamezgalaxy.GGS.networking.packets.PacketManager, com.gamezgalaxy.GGS.networking.packets.PacketType);
+  public com.gamezgalaxy.GGS.networking.packets.browser.GET(com.gamezgalaxy.GGS.networking.packets.PacketManager);
+  public void Handle(byte[], com.gamezgalaxy.GGS.server.Server, com.gamezgalaxy.GGS.networking.IOClient);
+  public void Write(com.gamezgalaxy.GGS.networking.IOClient, com.gamezgalaxy.GGS.server.Server);
+}
+Compiled from "Connect.java"
+public class com.gamezgalaxy.GGS.networking.packets.minecraft.Connect extends com.gamezgalaxy.GGS.networking.packets.Packet {
+  public com.gamezgalaxy.GGS.networking.packets.minecraft.Connect(java.lang.String, byte, com.gamezgalaxy.GGS.networking.packets.PacketManager, com.gamezgalaxy.GGS.networking.packets.PacketType);
+  public com.gamezgalaxy.GGS.networking.packets.minecraft.Connect(com.gamezgalaxy.GGS.networking.packets.PacketManager);
+  public void Write(com.gamezgalaxy.GGS.networking.IOClient, com.gamezgalaxy.GGS.server.Server);
+  public void Handle(byte[], com.gamezgalaxy.GGS.server.Server, com.gamezgalaxy.GGS.networking.IOClient);
+}
+Compiled from "DespawnPlayer.java"
+public class com.gamezgalaxy.GGS.networking.packets.minecraft.DespawnPlayer extends com.gamezgalaxy.GGS.networking.packets.Packet {
+  public com.gamezgalaxy.GGS.networking.packets.minecraft.DespawnPlayer(java.lang.String, byte, com.gamezgalaxy.GGS.networking.packets.PacketManager, com.gamezgalaxy.GGS.networking.packets.PacketType);
+  public com.gamezgalaxy.GGS.networking.packets.minecraft.DespawnPlayer(com.gamezgalaxy.GGS.networking.packets.PacketManager);
+  public void Handle(byte[], com.gamezgalaxy.GGS.server.Server, com.gamezgalaxy.GGS.networking.IOClient);
+  public void Write(com.gamezgalaxy.GGS.networking.IOClient, com.gamezgalaxy.GGS.server.Server, java.lang.Object...);
+  public void Write(com.gamezgalaxy.GGS.networking.IOClient, com.gamezgalaxy.GGS.server.Server);
+}
+Compiled from "FinishLevelSend.java"
+public class com.gamezgalaxy.GGS.networking.packets.minecraft.FinishLevelSend extends com.gamezgalaxy.GGS.networking.packets.Packet {
+  public com.gamezgalaxy.GGS.networking.packets.minecraft.FinishLevelSend(java.lang.String, byte, com.gamezgalaxy.GGS.networking.packets.PacketManager, com.gamezgalaxy.GGS.networking.packets.PacketType);
+  public com.gamezgalaxy.GGS.networking.packets.minecraft.FinishLevelSend(com.gamezgalaxy.GGS.networking.packets.PacketManager);
+  public void Write(com.gamezgalaxy.GGS.networking.IOClient, com.gamezgalaxy.GGS.server.Server);
+  public void Handle(byte[], com.gamezgalaxy.GGS.server.Server, com.gamezgalaxy.GGS.networking.IOClient);
+  public byte[] HTNO(short) throws java.io.IOException;
+}
+Compiled from "GlobalPosUpdate.java"
+public class com.gamezgalaxy.GGS.networking.packets.minecraft.GlobalPosUpdate extends com.gamezgalaxy.GGS.networking.packets.Packet {
+  public com.gamezgalaxy.GGS.networking.packets.minecraft.GlobalPosUpdate(java.lang.String, byte, com.gamezgalaxy.GGS.networking.packets.PacketManager, com.gamezgalaxy.GGS.networking.packets.PacketType);
+  public com.gamezgalaxy.GGS.networking.packets.minecraft.GlobalPosUpdate(com.gamezgalaxy.GGS.networking.packets.PacketManager);
+  public byte[] toSend(com.gamezgalaxy.GGS.iomodel.Player);
+  public void Handle(byte[], com.gamezgalaxy.GGS.server.Server, com.gamezgalaxy.GGS.networking.IOClient);
+  public void Write(com.gamezgalaxy.GGS.networking.IOClient, com.gamezgalaxy.GGS.server.Server, java.lang.Object...);
+  public boolean posUpdate(com.gamezgalaxy.GGS.iomodel.Player);
+  public boolean rotUpdate(com.gamezgalaxy.GGS.iomodel.Player);
+  public void Write(com.gamezgalaxy.GGS.networking.IOClient, com.gamezgalaxy.GGS.server.Server);
+}
+Compiled from "Kick.java"
+public class com.gamezgalaxy.GGS.networking.packets.minecraft.Kick extends com.gamezgalaxy.GGS.networking.packets.Packet {
+  public com.gamezgalaxy.GGS.networking.packets.minecraft.Kick(java.lang.String, byte, com.gamezgalaxy.GGS.networking.packets.PacketManager, com.gamezgalaxy.GGS.networking.packets.PacketType);
+  public com.gamezgalaxy.GGS.networking.packets.minecraft.Kick(com.gamezgalaxy.GGS.networking.packets.PacketManager);
+  public void Handle(byte[], com.gamezgalaxy.GGS.server.Server, com.gamezgalaxy.GGS.networking.IOClient);
+  public void Write(com.gamezgalaxy.GGS.networking.IOClient, com.gamezgalaxy.GGS.server.Server);
+}
+Compiled from "LevelSend.java"
+public class com.gamezgalaxy.GGS.networking.packets.minecraft.LevelSend extends com.gamezgalaxy.GGS.networking.packets.Packet {
+  public com.gamezgalaxy.GGS.networking.packets.minecraft.LevelSend(java.lang.String, byte, com.gamezgalaxy.GGS.networking.packets.PacketManager, com.gamezgalaxy.GGS.networking.packets.PacketType);
+  public com.gamezgalaxy.GGS.networking.packets.minecraft.LevelSend(com.gamezgalaxy.GGS.networking.packets.PacketManager);
+  public void Write(com.gamezgalaxy.GGS.networking.IOClient, com.gamezgalaxy.GGS.server.Server);
+  public void Handle(byte[], com.gamezgalaxy.GGS.server.Server, com.gamezgalaxy.GGS.networking.IOClient);
+}
+Compiled from "LevelStartSend.java"
+public class com.gamezgalaxy.GGS.networking.packets.minecraft.LevelStartSend extends com.gamezgalaxy.GGS.networking.packets.Packet {
+  public com.gamezgalaxy.GGS.networking.packets.minecraft.LevelStartSend(java.lang.String, byte, com.gamezgalaxy.GGS.networking.packets.PacketManager, com.gamezgalaxy.GGS.networking.packets.PacketType);
+  public com.gamezgalaxy.GGS.networking.packets.minecraft.LevelStartSend(com.gamezgalaxy.GGS.networking.packets.PacketManager);
+  public void Write(com.gamezgalaxy.GGS.networking.IOClient, com.gamezgalaxy.GGS.server.Server);
+  public void Handle(byte[], com.gamezgalaxy.GGS.server.Server, com.gamezgalaxy.GGS.networking.IOClient);
+}
+Compiled from "MOTD.java"
+public class com.gamezgalaxy.GGS.networking.packets.minecraft.MOTD extends com.gamezgalaxy.GGS.networking.packets.Packet {
+  public com.gamezgalaxy.GGS.networking.packets.minecraft.MOTD(java.lang.String, byte, com.gamezgalaxy.GGS.networking.packets.PacketManager, com.gamezgalaxy.GGS.networking.packets.PacketType);
+  public com.gamezgalaxy.GGS.networking.packets.minecraft.MOTD(com.gamezgalaxy.GGS.networking.packets.PacketManager);
+  public void Write(com.gamezgalaxy.GGS.networking.IOClient, com.gamezgalaxy.GGS.server.Server, java.lang.Object...);
+  public void Handle(byte[], com.gamezgalaxy.GGS.server.Server, com.gamezgalaxy.GGS.networking.IOClient);
+  public void Write(com.gamezgalaxy.GGS.networking.IOClient, com.gamezgalaxy.GGS.server.Server);
+}
+Compiled from "Message.java"
+public class com.gamezgalaxy.GGS.networking.packets.minecraft.Message extends com.gamezgalaxy.GGS.networking.packets.Packet {
+  public com.gamezgalaxy.GGS.networking.packets.minecraft.Message(java.lang.String, byte, com.gamezgalaxy.GGS.networking.packets.PacketManager, com.gamezgalaxy.GGS.networking.packets.PacketType);
+  public com.gamezgalaxy.GGS.networking.packets.minecraft.Message(com.gamezgalaxy.GGS.networking.packets.PacketManager);
+  public void Write(com.gamezgalaxy.GGS.networking.IOClient, com.gamezgalaxy.GGS.server.Server);
+  public void Handle(byte[], com.gamezgalaxy.GGS.server.Server, com.gamezgalaxy.GGS.networking.IOClient);
+}
+Compiled from "Ping.java"
+public class com.gamezgalaxy.GGS.networking.packets.minecraft.Ping extends com.gamezgalaxy.GGS.networking.packets.Packet {
+  public com.gamezgalaxy.GGS.networking.packets.minecraft.Ping(java.lang.String, byte, com.gamezgalaxy.GGS.networking.packets.PacketManager, com.gamezgalaxy.GGS.networking.packets.PacketType);
+  public com.gamezgalaxy.GGS.networking.packets.minecraft.Ping(com.gamezgalaxy.GGS.networking.packets.PacketManager);
+  public void Write(com.gamezgalaxy.GGS.networking.IOClient, com.gamezgalaxy.GGS.server.Server);
+  public void Handle(byte[], com.gamezgalaxy.GGS.server.Server, com.gamezgalaxy.GGS.networking.IOClient);
+}
+Compiled from "PosUpdate.java"
+public class com.gamezgalaxy.GGS.networking.packets.minecraft.PosUpdate extends com.gamezgalaxy.GGS.networking.packets.Packet {
+  public com.gamezgalaxy.GGS.networking.packets.minecraft.PosUpdate(java.lang.String, byte, com.gamezgalaxy.GGS.networking.packets.PacketManager, com.gamezgalaxy.GGS.networking.packets.PacketType);
+  public com.gamezgalaxy.GGS.networking.packets.minecraft.PosUpdate(com.gamezgalaxy.GGS.networking.packets.PacketManager);
+  public void Write(com.gamezgalaxy.GGS.networking.IOClient, com.gamezgalaxy.GGS.server.Server);
+  public void Handle(byte[], com.gamezgalaxy.GGS.server.Server, com.gamezgalaxy.GGS.networking.IOClient);
+}
+Compiled from "SetBlock.java"
+public class com.gamezgalaxy.GGS.networking.packets.minecraft.SetBlock extends com.gamezgalaxy.GGS.networking.packets.Packet {
+  public com.gamezgalaxy.GGS.networking.packets.minecraft.SetBlock(java.lang.String, byte, com.gamezgalaxy.GGS.networking.packets.PacketManager, com.gamezgalaxy.GGS.networking.packets.PacketType);
+  public com.gamezgalaxy.GGS.networking.packets.minecraft.SetBlock(com.gamezgalaxy.GGS.networking.packets.PacketManager);
+  public void Write(com.gamezgalaxy.GGS.networking.IOClient, com.gamezgalaxy.GGS.server.Server, java.lang.Object...);
+  public void Handle(byte[], com.gamezgalaxy.GGS.server.Server, com.gamezgalaxy.GGS.networking.IOClient);
+  public void Write(com.gamezgalaxy.GGS.networking.IOClient, com.gamezgalaxy.GGS.server.Server);
+}
+Compiled from "SpawnPlayer.java"
+public class com.gamezgalaxy.GGS.networking.packets.minecraft.SpawnPlayer extends com.gamezgalaxy.GGS.networking.packets.Packet {
+  public com.gamezgalaxy.GGS.networking.packets.minecraft.SpawnPlayer(java.lang.String, byte, com.gamezgalaxy.GGS.networking.packets.PacketManager, com.gamezgalaxy.GGS.networking.packets.PacketType);
+  public com.gamezgalaxy.GGS.networking.packets.minecraft.SpawnPlayer(com.gamezgalaxy.GGS.networking.packets.PacketManager);
+  public void Handle(byte[], com.gamezgalaxy.GGS.server.Server, com.gamezgalaxy.GGS.networking.IOClient);
+  public void Write(com.gamezgalaxy.GGS.networking.IOClient, com.gamezgalaxy.GGS.server.Server, java.lang.Object...);
+  public byte[] HTNO(short) throws java.io.IOException;
+  public void Write(com.gamezgalaxy.GGS.networking.IOClient, com.gamezgalaxy.GGS.server.Server);
+}
+Compiled from "TP.java"
+public class com.gamezgalaxy.GGS.networking.packets.minecraft.TP extends com.gamezgalaxy.GGS.networking.packets.Packet {
+  public com.gamezgalaxy.GGS.networking.packets.minecraft.TP(java.lang.String, byte, com.gamezgalaxy.GGS.networking.packets.PacketManager, com.gamezgalaxy.GGS.networking.packets.PacketType);
+  public com.gamezgalaxy.GGS.networking.packets.minecraft.TP(com.gamezgalaxy.GGS.networking.packets.PacketManager);
+  public byte[] toSend(com.gamezgalaxy.GGS.iomodel.Player);
+  public void Handle(byte[], com.gamezgalaxy.GGS.server.Server, com.gamezgalaxy.GGS.networking.IOClient);
+  public void Write(com.gamezgalaxy.GGS.networking.IOClient, com.gamezgalaxy.GGS.server.Server, java.lang.Object...);
+  public byte[] HTNO(short) throws java.io.IOException;
+  public void Write(com.gamezgalaxy.GGS.networking.IOClient, com.gamezgalaxy.GGS.server.Server);
+}
+Compiled from "UpdateUser.java"
+public class com.gamezgalaxy.GGS.networking.packets.minecraft.UpdateUser extends com.gamezgalaxy.GGS.networking.packets.Packet {
+  public com.gamezgalaxy.GGS.networking.packets.minecraft.UpdateUser(java.lang.String, byte, com.gamezgalaxy.GGS.networking.packets.PacketManager, com.gamezgalaxy.GGS.networking.packets.PacketType);
+  public com.gamezgalaxy.GGS.networking.packets.minecraft.UpdateUser(com.gamezgalaxy.GGS.networking.packets.PacketManager);
+  public void Handle(byte[], com.gamezgalaxy.GGS.server.Server, com.gamezgalaxy.GGS.networking.IOClient);
+  public void Write(com.gamezgalaxy.GGS.networking.IOClient, com.gamezgalaxy.GGS.server.Server);
+}
+Compiled from "Welcome.java"
+public class com.gamezgalaxy.GGS.networking.packets.minecraft.Welcome extends com.gamezgalaxy.GGS.networking.packets.Packet {
+  public com.gamezgalaxy.GGS.networking.packets.minecraft.Welcome(java.lang.String, byte, com.gamezgalaxy.GGS.networking.packets.PacketManager, com.gamezgalaxy.GGS.networking.packets.PacketType);
+  public com.gamezgalaxy.GGS.networking.packets.minecraft.Welcome(com.gamezgalaxy.GGS.networking.packets.PacketManager);
+  public void Write(com.gamezgalaxy.GGS.networking.IOClient, com.gamezgalaxy.GGS.server.Server);
+  public void Handle(byte[], com.gamezgalaxy.GGS.server.Server, com.gamezgalaxy.GGS.networking.IOClient);
+}
+Compiled from "ClientInfo.java"
+public class com.gamezgalaxy.GGS.networking.packets.openclassic.ClientInfo extends com.gamezgalaxy.GGS.networking.packets.Packet {
+  public com.gamezgalaxy.GGS.networking.packets.openclassic.ClientInfo(java.lang.String, byte, com.gamezgalaxy.GGS.networking.packets.PacketManager, com.gamezgalaxy.GGS.networking.packets.PacketType);
+  public com.gamezgalaxy.GGS.networking.packets.openclassic.ClientInfo(com.gamezgalaxy.GGS.networking.packets.PacketManager);
+  public void Handle(byte[], com.gamezgalaxy.GGS.server.Server, com.gamezgalaxy.GGS.networking.IOClient);
+  public void Write(com.gamezgalaxy.GGS.networking.IOClient, com.gamezgalaxy.GGS.server.Server);
+}
+Compiled from "Server.java"
+public final class com.gamezgalaxy.GGS.server.Server implements com.gamezgalaxy.GGS.util.logger.LogInterface {
+  public java.util.ArrayList<com.gamezgalaxy.GGS.iomodel.Player> players;
+  public boolean Running;
+  public int Port;
+  public int MaxPlayers;
+  public java.lang.String Name;
+  public java.lang.String altName;
+  public java.lang.String description;
+  public java.lang.String flags;
+  public java.lang.String MOTD;
+  public com.gamezgalaxy.GGS.world.Level MainLevel;
+  public boolean Public;
+  public final java.lang.String configpath;
+  public final java.lang.String VERSION;
+  public final com.gamezgalaxy.GGS.world.LevelHandler getLevelHandler();
+  public final com.gamezgalaxy.GGS.API.EventSystem getEventSystem();
+  public final com.gamezgalaxy.GGS.networking.packets.PacketManager getPacketManager();
+  public final com.gamezgalaxy.GGS.API.plugin.CommandHandler getCommandHandler();
+  public final com.gamezgalaxy.GGS.API.plugin.PluginHandler getPluginHandler();
+  public final com.gamezgalaxy.GGS.sql.ISQL getSQL();
+  public final com.gamezgalaxy.GGS.util.properties.Properties getSystemProperties();
+  public com.gamezgalaxy.GGS.server.Server(java.lang.String, int, java.lang.String);
+  public final java.lang.String getSalt() throws java.lang.IllegalAccessException;
+  public void loadSystemProperties();
+  public void startLogger();
+  public void Start();
+  public com.gamezgalaxy.GGS.iomodel.Player findPlayer(java.lang.String);
+  public void Stop() throws java.lang.InterruptedException, java.io.IOException;
+  public void Log(java.lang.String);
+  public com.gamezgalaxy.GGS.util.logger.Logger getLogger();
+  public void Add(com.gamezgalaxy.GGS.server.Tick);
+  public void Remove(com.gamezgalaxy.GGS.server.Tick);
+  public void onLog(java.lang.String);
+  public void onError(java.lang.String);
+  public com.gamezgalaxy.GGS.iomodel.Player getPlayer(java.lang.String);
+  static java.util.ArrayList access$100(com.gamezgalaxy.GGS.server.Server);
+}
+Compiled from "Server.java"
+class com.gamezgalaxy.GGS.server.Server$1 {
+}
+Compiled from "Server.java"
+class com.gamezgalaxy.GGS.server.Server$Ticker extends java.lang.Thread {
+  final com.gamezgalaxy.GGS.server.Server this$0;
+  public void run();
+  com.gamezgalaxy.GGS.server.Server$Ticker(com.gamezgalaxy.GGS.server.Server, com.gamezgalaxy.GGS.server.Server$1);
+}
+Compiled from "Tick.java"
+public interface com.gamezgalaxy.GGS.server.Tick {
+  public abstract void tick();
+}
+Compiled from "ISQL.java"
+public interface com.gamezgalaxy.GGS.sql.ISQL {
+  public abstract void ExecuteQuery(java.lang.String);
+  public abstract void ExecuteQuery(java.lang.String[]);
+  public abstract java.sql.ResultSet fillData(java.lang.String);
+  public abstract void Connect(com.gamezgalaxy.GGS.server.Server);
+  public abstract void setPrefix(java.lang.String);
+  public abstract java.lang.String getPrefix();
+  public abstract java.sql.Connection getConnection();
+}
+Compiled from "MySQL.java"
+public class com.gamezgalaxy.GGS.sql.MySQL implements com.gamezgalaxy.GGS.sql.ISQL {
+  protected java.sql.Connection connection;
+  protected java.lang.String IP;
+  protected int port;
+  protected java.lang.String DB;
+  protected java.lang.String prefix;
+  protected java.lang.String username;
+  protected java.lang.String pass;
+  public com.gamezgalaxy.GGS.sql.MySQL();
+  public void ExecuteQuery(java.lang.String);
+  public void ExecuteQuery(java.lang.String[]);
+  public java.sql.ResultSet fillData(java.lang.String);
+  public void Connect(com.gamezgalaxy.GGS.server.Server);
+  public java.sql.Connection getConnection();
+  public java.lang.String getURL();
+  public java.lang.String getFullURL();
+  public void setPrefix(java.lang.String);
+  public java.lang.String getPrefix();
+  public void setUsername(java.lang.String);
+  public void setPassword(java.lang.String);
+  public void setDatabase(java.lang.String);
+}
+Compiled from "SQLite.java"
+public class com.gamezgalaxy.GGS.sql.SQLite implements com.gamezgalaxy.GGS.sql.ISQL {
+  protected java.sql.Connection connection;
+  public com.gamezgalaxy.GGS.sql.SQLite();
+  public void ExecuteQuery(java.lang.String);
+  public void ExecuteQuery(java.lang.String[]);
+  public java.sql.ResultSet fillData(java.lang.String);
+  public void Connect(com.gamezgalaxy.GGS.server.Server);
+  public java.sql.Connection getConnection();
+  public void setPrefix(java.lang.String);
+  public java.lang.String getPrefix();
+}
+Compiled from "BanHandler.java"
+public class com.gamezgalaxy.GGS.system.BanHandler {
+  static java.util.ArrayList<java.lang.String> banned;
+  public com.gamezgalaxy.GGS.system.BanHandler();
+  public static void init();
+  public static void save() throws java.io.FileNotFoundException;
+  public static java.lang.String getExpire(java.lang.String);
+  public static void ban(java.lang.String, java.lang.String);
+  public static void unban(java.lang.String);
+  public static void ban(java.lang.String);
+  public static void ban(java.lang.String, java.util.Date);
+  public static boolean pastDate(java.lang.String);
+  public static boolean isBanned(java.lang.String);
+  static {};
+}
+Compiled from "Beat.java"
+public class com.gamezgalaxy.GGS.system.heartbeat.Beat {
+  public com.gamezgalaxy.GGS.system.heartbeat.Beat(com.gamezgalaxy.GGS.server.Server);
+  public void addHeart(com.gamezgalaxy.GGS.system.heartbeat.Heart);
+  public void removeHeart(com.gamezgalaxy.GGS.system.heartbeat.Heart);
+  public void start();
+  public void stop();
+  public com.gamezgalaxy.GGS.server.Server getServer();
+  public void setServer(com.gamezgalaxy.GGS.server.Server);
+  public java.util.ArrayList<com.gamezgalaxy.GGS.system.heartbeat.Heart> getHearts();
+  public boolean isRunning();
+}
+Compiled from "Beater.java"
+final class com.gamezgalaxy.GGS.system.heartbeat.Beater extends java.lang.Thread {
+  public com.gamezgalaxy.GGS.system.heartbeat.Beater(com.gamezgalaxy.GGS.system.heartbeat.Beat);
+  public void run();
+}
+Compiled from "Heart.java"
+public abstract class com.gamezgalaxy.GGS.system.heartbeat.Heart {
+  public com.gamezgalaxy.GGS.system.heartbeat.Heart();
+  public abstract java.lang.String Prepare(com.gamezgalaxy.GGS.server.Server);
+  public abstract java.lang.String getURL();
+  public java.lang.String onPump(java.io.BufferedReader, com.gamezgalaxy.GGS.server.Server) throws java.io.IOException;
+}
+Compiled from "MBeat.java"
+public class com.gamezgalaxy.GGS.system.heartbeat.MBeat extends com.gamezgalaxy.GGS.system.heartbeat.Heart {
+  public com.gamezgalaxy.GGS.system.heartbeat.MBeat();
+  public java.lang.String Prepare(com.gamezgalaxy.GGS.server.Server);
+  public java.lang.String onPump(java.io.BufferedReader, com.gamezgalaxy.GGS.server.Server) throws java.io.IOException;
+  public java.lang.String getURL();
+}
+Compiled from "WBeat.java"
+public class com.gamezgalaxy.GGS.system.heartbeat.WBeat extends com.gamezgalaxy.GGS.system.heartbeat.MBeat {
+  public com.gamezgalaxy.GGS.system.heartbeat.WBeat();
+  public java.lang.String getURL();
+}
+Compiled from "FileUtils.java"
+public class com.gamezgalaxy.GGS.util.FileUtils {
+  public static final java.lang.String LOG_DIR;
+  public static final java.lang.String PROPS_DIR;
+  public static final java.lang.String BANNED_FILE;
+  public com.gamezgalaxy.GGS.util.FileUtils();
+  public static void CreateIfNotExist(java.lang.String, java.lang.String, java.lang.String) throws java.io.IOException;
+  public static void CreateIfNotExist(java.lang.String, java.lang.String) throws java.io.IOException;
+  public static void CreateIfNotExist(java.lang.String) throws java.io.IOException;
+  public static void DeleteIfExist(java.lang.String);
+  static {};
+}
+Compiled from "LogInterface.java"
+public interface com.gamezgalaxy.GGS.util.logger.LogInterface {
+  public abstract void onLog(java.lang.String);
+  public abstract void onError(java.lang.String);
+}
+Compiled from "Logger.java"
+public class com.gamezgalaxy.GGS.util.logger.Logger {
+  public com.gamezgalaxy.GGS.util.logger.Logger(java.lang.String, java.lang.Object);
+  public com.gamezgalaxy.GGS.util.logger.Logger(java.lang.String);
+  public com.gamezgalaxy.GGS.util.logger.Logger();
+  public void setParent(java.lang.Object);
+  public void Start(boolean) throws java.io.FileNotFoundException;
+  public void Stop() throws java.lang.InterruptedException;
+  public void Log(java.lang.String);
+  public void ChangeFilePath(java.lang.String) throws java.io.IOException;
+  public void ChangeFilePath(java.lang.String, java.lang.String) throws java.io.IOException;
+  static boolean access$100(com.gamezgalaxy.GGS.util.logger.Logger);
+  static java.util.Queue access$200(com.gamezgalaxy.GGS.util.logger.Logger);
+  static java.io.PrintWriter access$300(com.gamezgalaxy.GGS.util.logger.Logger);
+  static java.text.DateFormat access$400(com.gamezgalaxy.GGS.util.logger.Logger);
+  static java.lang.Object access$500(com.gamezgalaxy.GGS.util.logger.Logger);
+}
+Compiled from "Logger.java"
+class com.gamezgalaxy.GGS.util.logger.Logger$1 {
+}
+Compiled from "Logger.java"
+class com.gamezgalaxy.GGS.util.logger.Logger$Log extends java.lang.Thread {
+  final com.gamezgalaxy.GGS.util.logger.Logger this$0;
+  public void run();
+  com.gamezgalaxy.GGS.util.logger.Logger$Log(com.gamezgalaxy.GGS.util.logger.Logger, com.gamezgalaxy.GGS.util.logger.Logger$1);
+}
+Compiled from "Properties.java"
+public class com.gamezgalaxy.GGS.util.properties.Properties {
+  public com.gamezgalaxy.GGS.util.properties.Properties();
+  public static com.gamezgalaxy.GGS.util.properties.Properties init(com.gamezgalaxy.GGS.server.Server);
+  public void save(java.lang.String) throws java.io.IOException;
+  public void load(java.lang.String) throws java.io.IOException;
+  public boolean getBool(java.lang.String);
+  public int getInt(java.lang.String) throws java.lang.NumberFormatException;
+  public java.lang.String getValue(java.lang.String);
+  public void updateSetting(java.lang.String, boolean);
+  public void updateSetting(java.lang.String, int);
+  public void updateSetting(java.lang.String, java.lang.String);
+  public void addSetting(java.lang.String, boolean);
+  public void addSetting(java.lang.String, int);
+  public void addSetting(java.lang.String, java.lang.String);
+  public void removeSetting(java.lang.String);
+  static {};
+}
+Compiled from "Block.java"
+public abstract class com.gamezgalaxy.GGS.world.Block implements java.io.Serializable {
+  public byte ID;
+  public java.lang.String name;
+  public void onPlace(com.gamezgalaxy.GGS.world.Level, int, com.gamezgalaxy.GGS.server.Server);
+  public byte getVisableBlock();
+  public void onDelete(com.gamezgalaxy.GGS.world.Level, int, com.gamezgalaxy.GGS.server.Server);
+  public static void addBlock(com.gamezgalaxy.GGS.world.Block);
+  public static void removeBlock(com.gamezgalaxy.GGS.world.Block);
+  public com.gamezgalaxy.GGS.world.Block(byte, java.lang.String);
+  public static com.gamezgalaxy.GGS.world.Block getBlock(byte);
+  public static com.gamezgalaxy.GGS.world.Block getBlock(java.lang.String);
+  static {};
+}
+Compiled from "Generator.java"
+public interface com.gamezgalaxy.GGS.world.Generator {
+  public abstract void generate(com.gamezgalaxy.GGS.world.Level);
+  public abstract void generate(com.gamezgalaxy.GGS.world.Level, int, int, int);
+}
+Compiled from "Level.java"
+public class com.gamezgalaxy.GGS.world.Level implements java.io.Serializable {
+  java.util.ArrayList<com.gamezgalaxy.GGS.server.Tick> ticks;
+  public short width;
+  public short height;
+  public short depth;
+  public int spawnx;
+  public int spawny;
+  public int spawnz;
+  public java.lang.String name;
+  public com.gamezgalaxy.GGS.world.Level(short, short, short);
+  public com.gamezgalaxy.GGS.world.Level();
+  public void FlatGrass(com.gamezgalaxy.GGS.server.Server);
+  public void generateWorld(com.gamezgalaxy.GGS.world.Generator);
+  public void setTile(com.gamezgalaxy.GGS.world.Block, int, com.gamezgalaxy.GGS.server.Server);
+  public com.gamezgalaxy.GGS.world.Block getTile(int);
+  public com.gamezgalaxy.GGS.world.Block getTile(int, int, int);
+  public int getLength();
+  public void setTile(com.gamezgalaxy.GGS.world.Block, int, int, int, com.gamezgalaxy.GGS.server.Server);
+  public int PosToInt(int, int, int);
+  public int[] IntToPos(int);
+  public void Save() throws java.io.IOException;
+  public void Unload(com.gamezgalaxy.GGS.server.Server) throws java.io.IOException;
+  public void Unload(com.gamezgalaxy.GGS.server.Server, boolean) throws java.io.IOException;
+  public static com.gamezgalaxy.GGS.world.Level Load(java.lang.String) throws java.io.IOException, java.lang.ClassNotFoundException;
+  public static com.gamezgalaxy.GGS.world.Level Convert(java.lang.String) throws java.io.IOException;
+  static boolean access$100(com.gamezgalaxy.GGS.world.Level);
+}
+Compiled from "Level.java"
+class com.gamezgalaxy.GGS.world.Level$1 {
+}
+Compiled from "Level.java"
+class com.gamezgalaxy.GGS.world.Level$Ticker extends java.lang.Thread implements java.io.Serializable {
+  final com.gamezgalaxy.GGS.world.Level this$0;
+  public void run();
+  com.gamezgalaxy.GGS.world.Level$Ticker(com.gamezgalaxy.GGS.world.Level, com.gamezgalaxy.GGS.world.Level$1);
+}
+Compiled from "Level.java"
+class com.gamezgalaxy.GGS.world.Level$Ticker2 extends java.lang.Thread implements java.io.Serializable {
+  com.gamezgalaxy.GGS.world.PhysicsBlock pb;
+  final com.gamezgalaxy.GGS.world.Level this$0;
+  public com.gamezgalaxy.GGS.world.Level$Ticker2(com.gamezgalaxy.GGS.world.Level, com.gamezgalaxy.GGS.world.PhysicsBlock);
+  public void run();
+}
+Compiled from "LevelHandler.java"
+public class com.gamezgalaxy.GGS.world.LevelHandler {
+  public com.gamezgalaxy.GGS.world.LevelHandler(com.gamezgalaxy.GGS.server.Server);
+  public final java.util.List<com.gamezgalaxy.GGS.world.Level> getLevelList();
+  public void newLevel(java.lang.String, short, short, short);
+  public com.gamezgalaxy.GGS.world.Level findLevel(java.lang.String);
+  public java.util.ArrayList<com.gamezgalaxy.GGS.iomodel.Player> getPlayers(com.gamezgalaxy.GGS.world.Level);
+  public void loadLevels();
+  public com.gamezgalaxy.GGS.world.Level loadLevel(java.lang.String);
+  public void unloadLevel(com.gamezgalaxy.GGS.world.Level);
+  public void unloadLevel(com.gamezgalaxy.GGS.world.Level, boolean);
+  static java.util.List access$100(com.gamezgalaxy.GGS.world.LevelHandler);
+}
+Compiled from "LevelHandler.java"
+class com.gamezgalaxy.GGS.world.LevelHandler$1 {
+}
+Compiled from "LevelHandler.java"
+class com.gamezgalaxy.GGS.world.LevelHandler$Saver implements com.gamezgalaxy.GGS.server.Tick {
+  int temp;
+  final com.gamezgalaxy.GGS.world.LevelHandler this$0;
+  public void tick();
+  com.gamezgalaxy.GGS.world.LevelHandler$Saver(com.gamezgalaxy.GGS.world.LevelHandler, com.gamezgalaxy.GGS.world.LevelHandler$1);
+}
+Compiled from "PhysicsBlock.java"
+public abstract class com.gamezgalaxy.GGS.world.PhysicsBlock extends com.gamezgalaxy.GGS.world.Block implements com.gamezgalaxy.GGS.server.Tick {
+  public com.gamezgalaxy.GGS.world.PhysicsBlock(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.PhysicsBlock(byte, java.lang.String, com.gamezgalaxy.GGS.server.Server);
+  public void onDelete(com.gamezgalaxy.GGS.world.Level, int, com.gamezgalaxy.GGS.server.Server);
+  public abstract com.gamezgalaxy.GGS.world.PhysicsBlock clone(com.gamezgalaxy.GGS.server.Server);
+  public boolean runInSeperateThread();
+  public abstract void tick();
+  public void setPos(int, int, int);
+  public void setLevel(com.gamezgalaxy.GGS.world.Level);
+  public void move(int, int, int);
+  public void add(int, int, int);
+  public void remove(int, int, int);
+  public void stopTick();
+  public void remove();
+  public int getX();
+  public int getY();
+  public int getZ();
+  public com.gamezgalaxy.GGS.world.Level getLevel();
+  public boolean isBlockActive(com.gamezgalaxy.GGS.world.PhysicsBlock);
+  public boolean isBlockActive();
+  public com.gamezgalaxy.GGS.server.Server getServer();
+}
+Compiled from "PlaceMode.java"
+public final class com.gamezgalaxy.GGS.world.PlaceMode extends java.lang.Enum<com.gamezgalaxy.GGS.world.PlaceMode> {
+  public static final com.gamezgalaxy.GGS.world.PlaceMode BREAK;
+  public static final com.gamezgalaxy.GGS.world.PlaceMode PLACE;
+  public static com.gamezgalaxy.GGS.world.PlaceMode[] values();
+  public static com.gamezgalaxy.GGS.world.PlaceMode valueOf(java.lang.String);
+  public byte getType();
+  public static com.gamezgalaxy.GGS.world.PlaceMode parse(byte);
+  static {};
+}
+Compiled from "Air.java"
+public class com.gamezgalaxy.GGS.world.blocks.Air extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.Air(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.Air();
+}
+Compiled from "Aqua.java"
+public class com.gamezgalaxy.GGS.world.blocks.Aqua extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.Aqua(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.Aqua();
+}
+Compiled from "Bedrock.java"
+public class com.gamezgalaxy.GGS.world.blocks.Bedrock extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.Bedrock(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.Bedrock();
+}
+Compiled from "Black.java"
+public class com.gamezgalaxy.GGS.world.blocks.Black extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.Black(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.Black();
+}
+Compiled from "Blue.java"
+public class com.gamezgalaxy.GGS.world.blocks.Blue extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.Blue(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.Blue();
+}
+Compiled from "Bookshelf.java"
+public class com.gamezgalaxy.GGS.world.blocks.Bookshelf extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.Bookshelf(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.Bookshelf();
+}
+Compiled from "Brick.java"
+public class com.gamezgalaxy.GGS.world.blocks.Brick extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.Brick(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.Brick();
+}
+Compiled from "BrownShroom.java"
+public class com.gamezgalaxy.GGS.world.blocks.BrownShroom extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.BrownShroom(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.BrownShroom();
+}
+Compiled from "CoalOre.java"
+public class com.gamezgalaxy.GGS.world.blocks.CoalOre extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.CoalOre(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.CoalOre();
+}
+Compiled from "Cobblestone.java"
+public class com.gamezgalaxy.GGS.world.blocks.Cobblestone extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.Cobblestone(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.Cobblestone();
+}
+Compiled from "Cyan.java"
+public class com.gamezgalaxy.GGS.world.blocks.Cyan extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.Cyan(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.Cyan();
+}
+Compiled from "Dirt.java"
+public class com.gamezgalaxy.GGS.world.blocks.Dirt extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.Dirt(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.Dirt();
+}
+Compiled from "DoubleStair.java"
+public class com.gamezgalaxy.GGS.world.blocks.DoubleStair extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.DoubleStair(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.DoubleStair();
+}
+Compiled from "Glass.java"
+public class com.gamezgalaxy.GGS.world.blocks.Glass extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.Glass(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.Glass();
+}
+Compiled from "GoldBlock.java"
+public class com.gamezgalaxy.GGS.world.blocks.GoldBlock extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.GoldBlock(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.GoldBlock();
+}
+Compiled from "GoldOre.java"
+public class com.gamezgalaxy.GGS.world.blocks.GoldOre extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.GoldOre(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.GoldOre();
+}
+Compiled from "Grass.java"
+public class com.gamezgalaxy.GGS.world.blocks.Grass extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.Grass(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.Grass();
+  public void onPlace(com.gamezgalaxy.GGS.world.Level, int, com.gamezgalaxy.GGS.server.Server);
+}
+Compiled from "Gravel.java"
+public class com.gamezgalaxy.GGS.world.blocks.Gravel extends com.gamezgalaxy.GGS.world.PhysicsBlock {
+  int wait;
+  public com.gamezgalaxy.GGS.world.blocks.Gravel(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.Gravel();
+  public com.gamezgalaxy.GGS.world.blocks.Gravel(byte, java.lang.String, com.gamezgalaxy.GGS.server.Server);
+  public com.gamezgalaxy.GGS.world.PhysicsBlock clone(com.gamezgalaxy.GGS.server.Server);
+  public void tick();
+}
+Compiled from "Gray.java"
+public class com.gamezgalaxy.GGS.world.blocks.Gray extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.Gray(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.Gray();
+}
+Compiled from "Green.java"
+public class com.gamezgalaxy.GGS.world.blocks.Green extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.Green(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.Green();
+}
+Compiled from "Indigo.java"
+public class com.gamezgalaxy.GGS.world.blocks.Indigo extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.Indigo(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.Indigo();
+}
+Compiled from "IronBlock.java"
+public class com.gamezgalaxy.GGS.world.blocks.IronBlock extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.IronBlock(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.IronBlock();
+}
+Compiled from "IronOre.java"
+public class com.gamezgalaxy.GGS.world.blocks.IronOre extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.IronOre(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.IronOre();
+}
+Compiled from "Lava.java"
+public class com.gamezgalaxy.GGS.world.blocks.Lava extends com.gamezgalaxy.GGS.world.PhysicsBlock {
+  public com.gamezgalaxy.GGS.world.blocks.Lava(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.Lava();
+  public com.gamezgalaxy.GGS.world.blocks.Lava(byte, java.lang.String, com.gamezgalaxy.GGS.server.Server);
+  public com.gamezgalaxy.GGS.world.PhysicsBlock clone(com.gamezgalaxy.GGS.server.Server);
+  public void tick();
+  public boolean check(int, int, int);
+  public boolean check(int);
+  public boolean nearSponge(int);
+  public int IntOffset(int, int, int, int);
+}
+Compiled from "Leaves.java"
+public class com.gamezgalaxy.GGS.world.blocks.Leaves extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.Leaves(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.Leaves();
+}
+Compiled from "Lime.java"
+public class com.gamezgalaxy.GGS.world.blocks.Lime extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.Lime(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.Lime();
+}
+Compiled from "Magenta.java"
+public class com.gamezgalaxy.GGS.world.blocks.Magenta extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.Magenta(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.Magenta();
+}
+Compiled from "MossyCobblestone.java"
+public class com.gamezgalaxy.GGS.world.blocks.MossyCobblestone extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.MossyCobblestone(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.MossyCobblestone();
+}
+Compiled from "Obsidian.java"
+public class com.gamezgalaxy.GGS.world.blocks.Obsidian extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.Obsidian(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.Obsidian();
+}
+Compiled from "Orange.java"
+public class com.gamezgalaxy.GGS.world.blocks.Orange extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.Orange(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.Orange();
+}
+Compiled from "Pink.java"
+public class com.gamezgalaxy.GGS.world.blocks.Pink extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.Pink(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.Pink();
+}
+Compiled from "Purple.java"
+public class com.gamezgalaxy.GGS.world.blocks.Purple extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.Purple(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.Purple();
+}
+Compiled from "Red.java"
+public class com.gamezgalaxy.GGS.world.blocks.Red extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.Red(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.Red();
+}
+Compiled from "RedFlower.java"
+public class com.gamezgalaxy.GGS.world.blocks.RedFlower extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.RedFlower(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.RedFlower();
+}
+Compiled from "RedShroom.java"
+public class com.gamezgalaxy.GGS.world.blocks.RedShroom extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.RedShroom(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.RedShroom();
+}
+Compiled from "Sand.java"
+public class com.gamezgalaxy.GGS.world.blocks.Sand extends com.gamezgalaxy.GGS.world.PhysicsBlock {
+  int wait;
+  public com.gamezgalaxy.GGS.world.blocks.Sand(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.Sand();
+  public com.gamezgalaxy.GGS.world.blocks.Sand(byte, java.lang.String, com.gamezgalaxy.GGS.server.Server);
+  public com.gamezgalaxy.GGS.world.PhysicsBlock clone(com.gamezgalaxy.GGS.server.Server);
+  public void tick();
+}
+Compiled from "Sapling.java"
+public class com.gamezgalaxy.GGS.world.blocks.Sapling extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.Sapling(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.Sapling();
+}
+Compiled from "Sponge.java"
+public class com.gamezgalaxy.GGS.world.blocks.Sponge extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.Sponge(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.Sponge();
+}
+Compiled from "Stair.java"
+public class com.gamezgalaxy.GGS.world.blocks.Stair extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.Stair(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.Stair();
+}
+Compiled from "StationaryLava.java"
+public class com.gamezgalaxy.GGS.world.blocks.StationaryLava extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.StationaryLava(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.StationaryLava();
+}
+Compiled from "StationaryWater.java"
+public class com.gamezgalaxy.GGS.world.blocks.StationaryWater extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.StationaryWater(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.StationaryWater();
+}
+Compiled from "Stone.java"
+public class com.gamezgalaxy.GGS.world.blocks.Stone extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.Stone(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.Stone();
+}
+Compiled from "TNT.java"
+public class com.gamezgalaxy.GGS.world.blocks.TNT extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.TNT(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.TNT();
+}
+Compiled from "Unknown.java"
+public class com.gamezgalaxy.GGS.world.blocks.Unknown extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.Unknown(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.Unknown();
+}
+Compiled from "Violet.java"
+public class com.gamezgalaxy.GGS.world.blocks.Violet extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.Violet(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.Violet();
+}
+Compiled from "Water.java"
+public class com.gamezgalaxy.GGS.world.blocks.Water extends com.gamezgalaxy.GGS.world.PhysicsBlock {
+  public com.gamezgalaxy.GGS.world.blocks.Water(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.Water();
+  public com.gamezgalaxy.GGS.world.blocks.Water(byte, java.lang.String, com.gamezgalaxy.GGS.server.Server);
+  public com.gamezgalaxy.GGS.world.PhysicsBlock clone(com.gamezgalaxy.GGS.server.Server);
+  public void tick();
+}
+Compiled from "White.java"
+public class com.gamezgalaxy.GGS.world.blocks.White extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.White(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.White();
+}
+Compiled from "Wood.java"
+public class com.gamezgalaxy.GGS.world.blocks.Wood extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.Wood(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.Wood();
+}
+Compiled from "WoodenPlank.java"
+public class com.gamezgalaxy.GGS.world.blocks.WoodenPlank extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.WoodenPlank(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.WoodenPlank();
+}
+Compiled from "Yellow.java"
+public class com.gamezgalaxy.GGS.world.blocks.Yellow extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.Yellow(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.Yellow();
+}
+Compiled from "YellowFlower.java"
+public class com.gamezgalaxy.GGS.world.blocks.YellowFlower extends com.gamezgalaxy.GGS.world.Block {
+  public com.gamezgalaxy.GGS.world.blocks.YellowFlower(byte, java.lang.String);
+  public com.gamezgalaxy.GGS.world.blocks.YellowFlower();
+}
+Compiled from "DatToGGS.java"
+public class com.gamezgalaxy.GGS.world.convert.DatToGGS {
+  public com.mojang.minecraft.level.Level level;
+  public com.gamezgalaxy.GGS.world.convert.DatToGGS();
+  public void load(java.lang.String);
+  public void save(java.lang.String);
+  public void printInfo();
+  public boolean setTile(int, int, int, int);
+  public int[] getCoords(int);
+  public void clearBlocks();
+  public void floor(int, int);
+  public void wallX(int, int, int, int, int, int);
+  public void wallZ(int, int, int, int, int, int);
+  public int substitute(byte, byte);
+  public void setSize(int, int, int);
+}
+Compiled from "FlatGrass.java"
+public class com.gamezgalaxy.GGS.world.generator.FlatGrass implements com.gamezgalaxy.GGS.world.Generator {
+  public com.gamezgalaxy.GGS.world.generator.FlatGrass(com.gamezgalaxy.GGS.server.Server);
+  public void generate(com.gamezgalaxy.GGS.world.Level);
+  public void generate(com.gamezgalaxy.GGS.world.Level, int, int, int);
+}
+Compiled from "Main.java"
+public class com.gamezgalaxy.test.console.Main implements com.gamezgalaxy.GGS.API.CommandExecutor {
+  com.gamezgalaxy.GGS.server.Server s;
+  public com.gamezgalaxy.test.console.Main();
+  public static void main(java.lang.String[]);
+  public void sendMessage(java.lang.String);
+  public void start();
+  public com.gamezgalaxy.GGS.server.Server getServer();
+  public com.gamezgalaxy.GGS.groups.Group getGroup();
+  public java.lang.String getName();
+}

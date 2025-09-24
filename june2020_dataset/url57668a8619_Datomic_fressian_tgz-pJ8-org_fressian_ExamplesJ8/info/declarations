@@ -1,0 +1,649 @@
+Compiled from "Cached.java"
+public interface org.fressian.Cached {
+  public abstract java.lang.Object getObjectToCache();
+}
+Compiled from "CachedObject.java"
+public class org.fressian.CachedObject implements org.fressian.Cached {
+  public final java.lang.Object objectToCache;
+  public org.fressian.CachedObject(java.lang.Object);
+  public java.lang.Object getObjectToCache();
+  public static java.lang.Object unwrap(java.lang.Object);
+}
+Compiled from "Examples.java"
+public class org.fressian.Examples {
+  public org.fressian.Examples();
+  public static void main(java.lang.String[]) throws java.io.IOException;
+  public static java.util.Set set(java.lang.Object...);
+  public static java.util.Map map(java.lang.Object...);
+  public static java.util.Set bunchOfData();
+}
+Compiled from "Examples.java"
+final class org.fressian.Examples$1 implements org.fressian.handlers.ReadHandler {
+  static final boolean $assertionsDisabled;
+  org.fressian.Examples$1();
+  public java.lang.Object read(org.fressian.Reader, java.lang.Object, int) throws java.io.IOException;
+  static {};
+}
+Compiled from "Examples.java"
+final class org.fressian.Examples$2 implements org.fressian.handlers.ILookup<java.lang.Object, org.fressian.handlers.ReadHandler> {
+  final org.fressian.handlers.ReadHandler val$handler;
+  org.fressian.Examples$2(org.fressian.handlers.ReadHandler);
+  public org.fressian.handlers.ReadHandler valAt(java.lang.Object);
+  public java.lang.Object valAt(java.lang.Object);
+}
+Compiled from "Examples.java"
+final class org.fressian.Examples$3 implements org.fressian.handlers.WriteHandler {
+  org.fressian.Examples$3();
+  public void write(org.fressian.Writer, java.lang.Object) throws java.io.IOException;
+}
+Compiled from "Examples.java"
+final class org.fressian.Examples$4 implements org.fressian.handlers.ILookup<java.lang.Class, java.util.Map<java.lang.String, org.fressian.handlers.WriteHandler>> {
+  final org.fressian.handlers.WriteHandler val$handler;
+  org.fressian.Examples$4(org.fressian.handlers.WriteHandler);
+  public java.util.Map<java.lang.String, org.fressian.handlers.WriteHandler> valAt(java.lang.Class);
+  public java.lang.Object valAt(java.lang.Object);
+}
+Compiled from "Examples.java"
+public class org.fressian.Examples$Person {
+  public final java.lang.String firstName;
+  public final java.lang.String lastName;
+  public org.fressian.Examples$Person(java.lang.String, java.lang.String);
+  public java.lang.String toString();
+}
+Compiled from "FressianReader.java"
+public class org.fressian.FressianReader implements org.fressian.Reader,java.io.Closeable {
+  public final java.util.Map standardExtensionHandlers;
+  public static final java.util.Map coreHandlers;
+  public org.fressian.FressianReader(java.io.InputStream);
+  public org.fressian.FressianReader(java.io.InputStream, org.fressian.handlers.ILookup<java.lang.Object, org.fressian.handlers.ReadHandler>);
+  public org.fressian.FressianReader(java.io.InputStream, org.fressian.handlers.ILookup<java.lang.Object, org.fressian.handlers.ReadHandler>, boolean);
+  public boolean readBoolean() throws java.io.IOException;
+  public long readInt() throws java.io.IOException;
+  public double readDouble() throws java.io.IOException;
+  public float readFloat() throws java.io.IOException;
+  public java.lang.Object readObject() throws java.io.IOException;
+  public void close() throws java.io.IOException;
+  public void validateFooter() throws java.io.IOException;
+  static {};
+}
+Compiled from "FressianReader.java"
+final class org.fressian.FressianReader$1 implements org.fressian.handlers.ConvertList {
+  org.fressian.FressianReader$1();
+  public java.util.List convertList(java.lang.Object[]);
+}
+Compiled from "FressianReader.java"
+final class org.fressian.FressianReader$2 implements org.fressian.handlers.ConvertBytes {
+  org.fressian.FressianReader$2();
+  public java.lang.Object convertBytes(byte[]);
+}
+Compiled from "FressianReader.java"
+final class org.fressian.FressianReader$3 implements org.fressian.handlers.ConvertDouble {
+  org.fressian.FressianReader$3();
+  public java.lang.Object convertDouble(double);
+}
+Compiled from "FressianReader.java"
+final class org.fressian.FressianReader$4 implements org.fressian.handlers.ConvertFloat {
+  org.fressian.FressianReader$4();
+  public java.lang.Object convertFloat(float);
+}
+Compiled from "FressianReader.java"
+class org.fressian.FressianReader$MapEntry implements java.util.Map$Entry {
+  public final java.lang.Object key;
+  public final java.lang.Object value;
+  public org.fressian.FressianReader$MapEntry(java.lang.Object, java.lang.Object);
+  public java.lang.Object getKey();
+  public java.lang.Object getValue();
+  public java.lang.Object setValue(java.lang.Object);
+}
+Compiled from "FressianWriter.java"
+public class org.fressian.FressianWriter implements org.fressian.StreamingWriter,org.fressian.Writer,java.io.Closeable {
+  org.fressian.handlers.IWriteHandlerLookup writeHandlerLookup;
+  public org.fressian.FressianWriter(java.io.OutputStream);
+  public org.fressian.FressianWriter(java.io.OutputStream, org.fressian.handlers.ILookup<java.lang.Class, java.util.Map<java.lang.String, org.fressian.handlers.WriteHandler>>);
+  public org.fressian.Writer writeNull() throws java.io.IOException;
+  public org.fressian.Writer writeBoolean(boolean) throws java.io.IOException;
+  public org.fressian.Writer writeBoolean(java.lang.Object) throws java.io.IOException;
+  public org.fressian.Writer writeInt(long) throws java.io.IOException;
+  public org.fressian.Writer writeInt(java.lang.Object) throws java.io.IOException;
+  public org.fressian.Writer writeDouble(double) throws java.io.IOException;
+  public org.fressian.Writer writeDouble(java.lang.Object) throws java.io.IOException;
+  public org.fressian.Writer writeFloat(float) throws java.io.IOException;
+  public org.fressian.Writer writeFloat(java.lang.Object) throws java.io.IOException;
+  public org.fressian.Writer writeString(java.lang.Object) throws java.io.IOException;
+  public org.fressian.Writer writeList(java.lang.Object) throws java.io.IOException;
+  public org.fressian.Writer writeBytes(byte[]) throws java.io.IOException;
+  public org.fressian.Writer writeBytes(byte[], int, int) throws java.io.IOException;
+  public void writeFooterFor(java.nio.ByteBuffer) throws java.io.IOException;
+  public org.fressian.Writer writeFooter() throws java.io.IOException;
+  public org.fressian.Writer resetCaches() throws java.io.IOException;
+  public org.fressian.impl.InterleavedIndexHopMap getPriorityCache();
+  public org.fressian.impl.InterleavedIndexHopMap getStructCache();
+  public org.fressian.Writer writeTag(java.lang.Object, int) throws java.io.IOException;
+  public org.fressian.Writer writeExt(java.lang.Object, java.lang.Object...) throws java.io.IOException;
+  public void writeCount(int) throws java.io.IOException;
+  public org.fressian.Writer writeAs(java.lang.String, java.lang.Object, boolean) throws java.io.IOException;
+  public org.fressian.Writer writeAs(java.lang.String, java.lang.Object) throws java.io.IOException;
+  public org.fressian.Writer writeObject(java.lang.Object, boolean) throws java.io.IOException;
+  public org.fressian.Writer writeObject(java.lang.Object) throws java.io.IOException;
+  public void writeCode(int) throws java.io.IOException;
+  public void close() throws java.io.IOException;
+  public org.fressian.Writer beginClosedList() throws java.io.IOException;
+  public org.fressian.Writer endList() throws java.io.IOException;
+  public org.fressian.Writer beginOpenList() throws java.io.IOException;
+}
+Compiled from "Reader.java"
+public interface org.fressian.Reader {
+  public abstract boolean readBoolean() throws java.io.IOException;
+  public abstract long readInt() throws java.io.IOException;
+  public abstract double readDouble() throws java.io.IOException;
+  public abstract float readFloat() throws java.io.IOException;
+  public abstract java.lang.Object readObject() throws java.io.IOException;
+  public abstract void validateFooter() throws java.io.IOException;
+}
+Compiled from "StreamingWriter.java"
+public interface org.fressian.StreamingWriter {
+  public abstract org.fressian.Writer beginClosedList() throws java.io.IOException;
+  public abstract org.fressian.Writer endList() throws java.io.IOException;
+  public abstract org.fressian.Writer beginOpenList() throws java.io.IOException;
+  public abstract void writeFooterFor(java.nio.ByteBuffer) throws java.io.IOException;
+}
+Compiled from "Tagged.java"
+public interface org.fressian.Tagged {
+  public abstract java.lang.Object getTag();
+  public abstract java.lang.Object getValue();
+  public abstract java.util.Map getMeta();
+}
+Compiled from "TaggedObject.java"
+public class org.fressian.TaggedObject implements org.fressian.Tagged {
+  public final java.lang.Object tag;
+  public final java.lang.Object[] value;
+  public final java.util.Map meta;
+  public org.fressian.TaggedObject(java.lang.Object, java.lang.Object[]);
+  public org.fressian.TaggedObject(java.lang.Object, java.lang.Object[], java.util.Map);
+  public java.lang.Object getTag();
+  public java.lang.Object[] getValue();
+  public java.util.Map getMeta();
+  public java.lang.Object getValue();
+}
+Compiled from "Writer.java"
+public interface org.fressian.Writer {
+  public abstract org.fressian.Writer writeNull() throws java.io.IOException;
+  public abstract org.fressian.Writer writeBoolean(boolean) throws java.io.IOException;
+  public abstract org.fressian.Writer writeBoolean(java.lang.Object) throws java.io.IOException;
+  public abstract org.fressian.Writer writeInt(long) throws java.io.IOException;
+  public abstract org.fressian.Writer writeInt(java.lang.Object) throws java.io.IOException;
+  public abstract org.fressian.Writer writeDouble(double) throws java.io.IOException;
+  public abstract org.fressian.Writer writeDouble(java.lang.Object) throws java.io.IOException;
+  public abstract org.fressian.Writer writeFloat(float) throws java.io.IOException;
+  public abstract org.fressian.Writer writeFloat(java.lang.Object) throws java.io.IOException;
+  public abstract org.fressian.Writer writeString(java.lang.Object) throws java.io.IOException;
+  public abstract org.fressian.Writer writeList(java.lang.Object) throws java.io.IOException;
+  public abstract org.fressian.Writer writeBytes(byte[]) throws java.io.IOException;
+  public abstract org.fressian.Writer writeBytes(byte[], int, int) throws java.io.IOException;
+  public abstract org.fressian.Writer writeObject(java.lang.Object) throws java.io.IOException;
+  public abstract org.fressian.Writer writeObject(java.lang.Object, boolean) throws java.io.IOException;
+  public abstract org.fressian.Writer writeAs(java.lang.String, java.lang.Object) throws java.io.IOException;
+  public abstract org.fressian.Writer writeAs(java.lang.String, java.lang.Object, boolean) throws java.io.IOException;
+  public abstract org.fressian.Writer writeTag(java.lang.Object, int) throws java.io.IOException;
+  public abstract org.fressian.Writer resetCaches() throws java.io.IOException;
+  public abstract org.fressian.Writer writeFooter() throws java.io.IOException;
+}
+Compiled from "ConvertBytes.java"
+public interface org.fressian.handlers.ConvertBytes {
+  public abstract java.lang.Object convertBytes(byte[]);
+}
+Compiled from "ConvertDouble.java"
+public interface org.fressian.handlers.ConvertDouble {
+  public abstract java.lang.Object convertDouble(double);
+}
+Compiled from "ConvertFloat.java"
+public interface org.fressian.handlers.ConvertFloat {
+  public abstract java.lang.Object convertFloat(float);
+}
+Compiled from "ConvertList.java"
+public interface org.fressian.handlers.ConvertList {
+  public abstract java.util.List convertList(java.lang.Object[]);
+}
+Compiled from "ILookup.java"
+public interface org.fressian.handlers.ILookup<K, V> {
+  public abstract V valAt(K);
+}
+Compiled from "IWriteHandlerLookup.java"
+public interface org.fressian.handlers.IWriteHandlerLookup {
+  public abstract org.fressian.handlers.WriteHandler getWriteHandler(java.lang.String, java.lang.Object);
+  public abstract org.fressian.handlers.WriteHandler requireWriteHandler(java.lang.String, java.lang.Object);
+}
+Compiled from "ReadHandler.java"
+public interface org.fressian.handlers.ReadHandler {
+  public abstract java.lang.Object read(org.fressian.Reader, java.lang.Object, int) throws java.io.IOException;
+}
+Compiled from "WriteHandler.java"
+public interface org.fressian.handlers.WriteHandler {
+  public abstract void write(org.fressian.Writer, java.lang.Object) throws java.io.IOException;
+}
+Compiled from "WriteHandlerLookup.java"
+public class org.fressian.handlers.WriteHandlerLookup implements org.fressian.handlers.IWriteHandlerLookup {
+  public static org.fressian.handlers.ILookup<java.lang.Class, java.util.Map<java.lang.String, org.fressian.handlers.WriteHandler>> createLookupChain(org.fressian.handlers.ILookup<java.lang.Class, java.util.Map<java.lang.String, org.fressian.handlers.WriteHandler>>);
+  public org.fressian.handlers.WriteHandler getWriteHandler(java.lang.String, java.lang.Object);
+  public org.fressian.handlers.WriteHandler requireWriteHandler(java.lang.String, java.lang.Object);
+  public org.fressian.handlers.WriteHandlerLookup(org.fressian.handlers.ILookup<java.lang.Class, java.util.Map<java.lang.String, org.fressian.handlers.WriteHandler>>);
+}
+Compiled from "ByteBufferInputStream.java"
+public class org.fressian.impl.ByteBufferInputStream extends java.io.InputStream {
+  public org.fressian.impl.ByteBufferInputStream(java.nio.ByteBuffer);
+  public synchronized void reset() throws java.io.IOException;
+  public synchronized void mark(int);
+  public boolean markSupported();
+  public int read() throws java.io.IOException;
+  public int read(byte[], int, int) throws java.io.IOException;
+  public long skip(long) throws java.io.IOException;
+  public int available() throws java.io.IOException;
+}
+Compiled from "BytesOutputStream.java"
+public class org.fressian.impl.BytesOutputStream extends java.io.ByteArrayOutputStream {
+  public org.fressian.impl.BytesOutputStream();
+  public org.fressian.impl.BytesOutputStream(int);
+  public byte[] internalBuffer();
+  public int length();
+}
+Compiled from "CachingLookup.java"
+public class org.fressian.impl.CachingLookup<K, V> implements org.fressian.handlers.ILookup<K, V> {
+  public final org.fressian.handlers.ILookup<K, V> lookup;
+  public final java.util.concurrent.ConcurrentHashMap<K, V> map;
+  public final java.util.concurrent.atomic.AtomicReference<V> nullKeyValue;
+  public org.fressian.impl.CachingLookup(org.fressian.handlers.ILookup<K, V>);
+  public V valAt(K);
+}
+Compiled from "ChainedLookup.java"
+public class org.fressian.impl.ChainedLookup<K, V> implements org.fressian.handlers.ILookup<K, V> {
+  public final org.fressian.handlers.ILookup<K, V>[] lookups;
+  public org.fressian.impl.ChainedLookup(org.fressian.handlers.ILookup<K, V>...);
+  public V valAt(K);
+}
+Compiled from "Codes.java"
+public class org.fressian.impl.Codes {
+  public static final int PRIORITY_CACHE_PACKED_START;
+  public static final int PRIORITY_CACHE_PACKED_END;
+  public static final int STRUCT_CACHE_PACKED_START;
+  public static final int STRUCT_CACHE_PACKED_END;
+  public static final int LONG_ARRAY;
+  public static final int DOUBLE_ARRAY;
+  public static final int BOOLEAN_ARRAY;
+  public static final int INT_ARRAY;
+  public static final int FLOAT_ARRAY;
+  public static final int OBJECT_ARRAY;
+  public static final int MAP;
+  public static final int SET;
+  public static final int UUID;
+  public static final int REGEX;
+  public static final int URI;
+  public static final int BIGINT;
+  public static final int BIGDEC;
+  public static final int INST;
+  public static final int SYM;
+  public static final int KEY;
+  public static final int GET_PRIORITY_CACHE;
+  public static final int PUT_PRIORITY_CACHE;
+  public static final int PRECACHE;
+  public static final int FOOTER;
+  public static final int FOOTER_MAGIC;
+  public static final int BYTES_PACKED_LENGTH_START;
+  public static final int BYTES_PACKED_LENGTH_END;
+  public static final int BYTES_CHUNK;
+  public static final int BYTES;
+  public static final int STRING_PACKED_LENGTH_START;
+  public static final int STRING_PACKED_LENGTH_END;
+  public static final int STRING_CHUNK;
+  public static final int STRING;
+  public static final int LIST_PACKED_LENGTH_START;
+  public static final int LIST_PACKED_LENGTH_END;
+  public static final int LIST;
+  public static final int BEGIN_CLOSED_LIST;
+  public static final int BEGIN_OPEN_LIST;
+  public static final int STRUCTTYPE;
+  public static final int STRUCT;
+  public static final int META;
+  public static final int ANY;
+  public static final int TRUE;
+  public static final int FALSE;
+  public static final int NULL;
+  public static final int INT;
+  public static final int FLOAT;
+  public static final int DOUBLE;
+  public static final int DOUBLE_0;
+  public static final int DOUBLE_1;
+  public static final int END_COLLECTION;
+  public static final int RESET_CACHES;
+  public static final int INT_PACKED_1_START;
+  public static final int INT_PACKED_1_END;
+  public static final int INT_PACKED_2_START;
+  public static final int INT_PACKED_2_ZERO;
+  public static final int INT_PACKED_2_END;
+  public static final int INT_PACKED_3_START;
+  public static final int INT_PACKED_3_ZERO;
+  public static final int INT_PACKED_3_END;
+  public static final int INT_PACKED_4_START;
+  public static final int INT_PACKED_4_ZERO;
+  public static final int INT_PACKED_4_END;
+  public static final int INT_PACKED_5_START;
+  public static final int INT_PACKED_5_ZERO;
+  public static final int INT_PACKED_5_END;
+  public static final int INT_PACKED_6_START;
+  public static final int INT_PACKED_6_ZERO;
+  public static final int INT_PACKED_6_END;
+  public static final int INT_PACKED_7_START;
+  public static final int INT_PACKED_7_ZERO;
+  public static final int INT_PACKED_7_END;
+  public org.fressian.impl.Codes();
+}
+Compiled from "Fns.java"
+public class org.fressian.impl.Fns {
+  public org.fressian.impl.Fns();
+  public static java.lang.IllegalArgumentException expected(java.lang.Object, int);
+  public static java.lang.IllegalArgumentException expected(java.lang.Object, int, java.lang.Object);
+  public static <K, V> java.util.Map$Entry<K, V> soloEntry(java.util.Map<K, V>);
+  public static byte[] UUIDtoByteArray(java.util.UUID);
+  public static java.util.UUID byteArrayToUUID(byte[]);
+  public static <K, V> K soloKey(java.util.Map<K, V>);
+  public static <K, V> V soloVal(java.util.Map<K, V>);
+  public static <K, V> java.util.Map<K, V> soloMap(K, V);
+  public static <K, V> V lookup(org.fressian.handlers.ILookup<K, V>, K);
+  public static java.lang.Class getClassOrNull(java.lang.Object);
+  public static int intCast(long);
+  public static void readUTF8Chars(java.lang.StringBuffer, byte[], int, int);
+  public static int utf8EncodingSize(int);
+  public static int[] bufferStringChunkUTF8(java.lang.CharSequence, int, byte[]) throws java.io.IOException;
+}
+Compiled from "Handlers.java"
+public class org.fressian.impl.Handlers {
+  public static final java.util.Map<java.lang.String, java.lang.Integer> tagToCode;
+  public static final java.util.Map extendedReadHandlers;
+  public static final org.fressian.handlers.ILookup<java.lang.Class, java.util.Map<java.lang.String, org.fressian.handlers.WriteHandler>> coreWriteHandlers;
+  public static final org.fressian.handlers.ILookup<java.lang.Class, java.util.Map<java.lang.String, org.fressian.handlers.WriteHandler>> extendedWriteHandlers;
+  public org.fressian.impl.Handlers();
+  public static java.util.Map<java.lang.Class, java.util.Map<java.lang.String, org.fressian.handlers.WriteHandler>> installHandler(java.util.Map<java.lang.Class, java.util.Map<java.lang.String, org.fressian.handlers.WriteHandler>>, java.lang.Class, java.lang.String, org.fressian.handlers.WriteHandler);
+  public static org.fressian.handlers.ILookup<java.lang.Class, java.util.Map<java.lang.String, org.fressian.handlers.WriteHandler>> defaultWriteHandlers();
+  public static org.fressian.handlers.ILookup<java.lang.Class, java.util.Map<java.lang.String, org.fressian.handlers.WriteHandler>> customWriteHandlers(org.fressian.handlers.ILookup<java.lang.Class, java.util.Map<java.lang.String, org.fressian.handlers.WriteHandler>>);
+  static {};
+}
+Compiled from "Handlers.java"
+final class org.fressian.impl.Handlers$1 implements org.fressian.handlers.WriteHandler {
+  org.fressian.impl.Handlers$1();
+  public void write(org.fressian.Writer, java.lang.Object) throws java.io.IOException;
+}
+Compiled from "Handlers.java"
+final class org.fressian.impl.Handlers$10 implements org.fressian.handlers.WriteHandler {
+  org.fressian.impl.Handlers$10();
+  public void write(org.fressian.Writer, java.lang.Object) throws java.io.IOException;
+}
+Compiled from "Handlers.java"
+final class org.fressian.impl.Handlers$11 implements org.fressian.handlers.WriteHandler {
+  org.fressian.impl.Handlers$11();
+  public void write(org.fressian.Writer, java.lang.Object) throws java.io.IOException;
+}
+Compiled from "Handlers.java"
+final class org.fressian.impl.Handlers$12 implements org.fressian.handlers.WriteHandler {
+  org.fressian.impl.Handlers$12();
+  public void write(org.fressian.Writer, java.lang.Object) throws java.io.IOException;
+}
+Compiled from "Handlers.java"
+final class org.fressian.impl.Handlers$13 implements org.fressian.handlers.WriteHandler {
+  org.fressian.impl.Handlers$13();
+  public void write(org.fressian.Writer, java.lang.Object) throws java.io.IOException;
+}
+Compiled from "Handlers.java"
+final class org.fressian.impl.Handlers$14 implements org.fressian.handlers.WriteHandler {
+  org.fressian.impl.Handlers$14();
+  public void write(org.fressian.Writer, java.lang.Object) throws java.io.IOException;
+}
+Compiled from "Handlers.java"
+final class org.fressian.impl.Handlers$15 implements org.fressian.handlers.ReadHandler {
+  org.fressian.impl.Handlers$15();
+  public java.lang.Object read(org.fressian.Reader, java.lang.Object, int) throws java.io.IOException;
+}
+Compiled from "Handlers.java"
+final class org.fressian.impl.Handlers$16 implements org.fressian.handlers.ReadHandler {
+  org.fressian.impl.Handlers$16();
+  public java.lang.Object read(org.fressian.Reader, java.lang.Object, int) throws java.io.IOException;
+}
+Compiled from "Handlers.java"
+final class org.fressian.impl.Handlers$17 implements org.fressian.handlers.ReadHandler {
+  org.fressian.impl.Handlers$17();
+  public java.lang.Object read(org.fressian.Reader, java.lang.Object, int) throws java.io.IOException;
+}
+Compiled from "Handlers.java"
+final class org.fressian.impl.Handlers$18 implements org.fressian.handlers.ReadHandler {
+  org.fressian.impl.Handlers$18();
+  public java.lang.Object read(org.fressian.Reader, java.lang.Object, int) throws java.io.IOException;
+}
+Compiled from "Handlers.java"
+final class org.fressian.impl.Handlers$19 implements org.fressian.handlers.ReadHandler {
+  org.fressian.impl.Handlers$19();
+  public java.lang.Object read(org.fressian.Reader, java.lang.Object, int) throws java.io.IOException;
+}
+Compiled from "Handlers.java"
+final class org.fressian.impl.Handlers$2 implements org.fressian.handlers.WriteHandler {
+  org.fressian.impl.Handlers$2();
+  public void write(org.fressian.Writer, java.lang.Object) throws java.io.IOException;
+}
+Compiled from "Handlers.java"
+final class org.fressian.impl.Handlers$20 implements org.fressian.handlers.ReadHandler {
+  org.fressian.impl.Handlers$20();
+  public java.lang.Object read(org.fressian.Reader, java.lang.Object, int) throws java.io.IOException;
+}
+Compiled from "Handlers.java"
+final class org.fressian.impl.Handlers$21 implements org.fressian.handlers.ReadHandler {
+  org.fressian.impl.Handlers$21();
+  public java.lang.Object read(org.fressian.Reader, java.lang.Object, int) throws java.io.IOException;
+}
+Compiled from "Handlers.java"
+final class org.fressian.impl.Handlers$22 implements org.fressian.handlers.ReadHandler {
+  org.fressian.impl.Handlers$22();
+  public java.lang.Object read(org.fressian.Reader, java.lang.Object, int) throws java.io.IOException;
+}
+Compiled from "Handlers.java"
+final class org.fressian.impl.Handlers$23 implements org.fressian.handlers.ReadHandler {
+  org.fressian.impl.Handlers$23();
+  public java.lang.Object read(org.fressian.Reader, java.lang.Object, int) throws java.io.IOException;
+}
+Compiled from "Handlers.java"
+final class org.fressian.impl.Handlers$24 implements org.fressian.handlers.ReadHandler {
+  org.fressian.impl.Handlers$24();
+  public java.lang.Object read(org.fressian.Reader, java.lang.Object, int) throws java.io.IOException;
+}
+Compiled from "Handlers.java"
+final class org.fressian.impl.Handlers$25 implements org.fressian.handlers.ReadHandler {
+  org.fressian.impl.Handlers$25();
+  public java.lang.Object read(org.fressian.Reader, java.lang.Object, int) throws java.io.IOException;
+}
+Compiled from "Handlers.java"
+final class org.fressian.impl.Handlers$26 implements org.fressian.handlers.ReadHandler {
+  org.fressian.impl.Handlers$26();
+  public java.lang.Object read(org.fressian.Reader, java.lang.Object, int) throws java.io.IOException;
+}
+Compiled from "Handlers.java"
+final class org.fressian.impl.Handlers$27 implements org.fressian.handlers.ReadHandler {
+  org.fressian.impl.Handlers$27();
+  public java.lang.Object read(org.fressian.Reader, java.lang.Object, int) throws java.io.IOException;
+}
+Compiled from "Handlers.java"
+final class org.fressian.impl.Handlers$28 implements org.fressian.handlers.ReadHandler {
+  org.fressian.impl.Handlers$28();
+  public java.lang.Object read(org.fressian.Reader, java.lang.Object, int) throws java.io.IOException;
+}
+Compiled from "Handlers.java"
+final class org.fressian.impl.Handlers$29 implements org.fressian.handlers.WriteHandler {
+  org.fressian.impl.Handlers$29();
+  public void write(org.fressian.Writer, java.lang.Object) throws java.io.IOException;
+}
+Compiled from "Handlers.java"
+final class org.fressian.impl.Handlers$3 implements org.fressian.handlers.WriteHandler {
+  org.fressian.impl.Handlers$3();
+  public void write(org.fressian.Writer, java.lang.Object) throws java.io.IOException;
+}
+Compiled from "Handlers.java"
+final class org.fressian.impl.Handlers$30 implements org.fressian.handlers.WriteHandler {
+  org.fressian.impl.Handlers$30();
+  public void write(org.fressian.Writer, java.lang.Object) throws java.io.IOException;
+}
+Compiled from "Handlers.java"
+final class org.fressian.impl.Handlers$31 implements org.fressian.handlers.WriteHandler {
+  org.fressian.impl.Handlers$31();
+  public void write(org.fressian.Writer, java.lang.Object) throws java.io.IOException;
+}
+Compiled from "Handlers.java"
+final class org.fressian.impl.Handlers$32 implements org.fressian.handlers.WriteHandler {
+  org.fressian.impl.Handlers$32();
+  public void write(org.fressian.Writer, java.lang.Object) throws java.io.IOException;
+}
+Compiled from "Handlers.java"
+final class org.fressian.impl.Handlers$33 implements org.fressian.handlers.WriteHandler {
+  org.fressian.impl.Handlers$33();
+  public void write(org.fressian.Writer, java.lang.Object) throws java.io.IOException;
+}
+Compiled from "Handlers.java"
+final class org.fressian.impl.Handlers$34 implements org.fressian.handlers.WriteHandler {
+  org.fressian.impl.Handlers$34();
+  public void write(org.fressian.Writer, java.lang.Object) throws java.io.IOException;
+}
+Compiled from "Handlers.java"
+final class org.fressian.impl.Handlers$35 implements org.fressian.handlers.WriteHandler {
+  org.fressian.impl.Handlers$35();
+  public void write(org.fressian.Writer, java.lang.Object) throws java.io.IOException;
+}
+Compiled from "Handlers.java"
+final class org.fressian.impl.Handlers$36 implements org.fressian.handlers.WriteHandler {
+  org.fressian.impl.Handlers$36();
+  public void write(org.fressian.Writer, java.lang.Object) throws java.io.IOException;
+}
+Compiled from "Handlers.java"
+final class org.fressian.impl.Handlers$37 implements org.fressian.handlers.WriteHandler {
+  org.fressian.impl.Handlers$37();
+  public void write(org.fressian.Writer, java.lang.Object) throws java.io.IOException;
+}
+Compiled from "Handlers.java"
+final class org.fressian.impl.Handlers$4 implements org.fressian.handlers.WriteHandler {
+  org.fressian.impl.Handlers$4();
+  public void write(org.fressian.Writer, java.lang.Object) throws java.io.IOException;
+}
+Compiled from "Handlers.java"
+final class org.fressian.impl.Handlers$5 implements org.fressian.handlers.WriteHandler {
+  org.fressian.impl.Handlers$5();
+  public void write(org.fressian.Writer, java.lang.Object) throws java.io.IOException;
+}
+Compiled from "Handlers.java"
+final class org.fressian.impl.Handlers$6 implements org.fressian.handlers.WriteHandler {
+  org.fressian.impl.Handlers$6();
+  public void write(org.fressian.Writer, java.lang.Object) throws java.io.IOException;
+}
+Compiled from "Handlers.java"
+final class org.fressian.impl.Handlers$7 implements org.fressian.handlers.WriteHandler {
+  org.fressian.impl.Handlers$7();
+  public void write(org.fressian.Writer, java.lang.Object) throws java.io.IOException;
+}
+Compiled from "Handlers.java"
+final class org.fressian.impl.Handlers$8 implements org.fressian.handlers.WriteHandler {
+  org.fressian.impl.Handlers$8();
+  public void write(org.fressian.Writer, java.lang.Object) throws java.io.IOException;
+}
+Compiled from "Handlers.java"
+final class org.fressian.impl.Handlers$9 implements org.fressian.handlers.WriteHandler {
+  org.fressian.impl.Handlers$9();
+  public void write(org.fressian.Writer, java.lang.Object) throws java.io.IOException;
+}
+Compiled from "InheritanceLookup.java"
+public class org.fressian.impl.InheritanceLookup<V> implements org.fressian.handlers.ILookup<java.lang.Class, V> {
+  public org.fressian.impl.InheritanceLookup(org.fressian.handlers.ILookup);
+  public V checkBaseClasses(java.lang.Class);
+  public V checkBaseInterfaces(java.lang.Class);
+  public V valAt(java.lang.Class);
+  public static void main(java.lang.String[]);
+  public java.lang.Object valAt(java.lang.Object);
+}
+Compiled from "InterleavedIndexHopMap.java"
+public final class org.fressian.impl.InterleavedIndexHopMap {
+  public org.fressian.impl.InterleavedIndexHopMap();
+  public org.fressian.impl.InterleavedIndexHopMap(int);
+  public void clear();
+  public int get(java.lang.Object);
+  public int oldIndex(java.lang.Object);
+  public boolean isEmpty();
+  public int intern(java.lang.Object);
+  static void report(java.lang.String, long);
+  public static void main(java.lang.String[]);
+}
+Compiled from "MapLookup.java"
+public class org.fressian.impl.MapLookup<K, V> implements org.fressian.handlers.ILookup<K, V> {
+  public final java.util.Map<K, V> map;
+  public org.fressian.impl.MapLookup(java.util.Map<K, V>);
+  public V valAt(K);
+}
+Compiled from "Ranges.java"
+public class org.fressian.impl.Ranges {
+  public static final long PACKED_1_START;
+  public static final long PACKED_1_END;
+  public static final long PACKED_2_START;
+  public static final long PACKED_2_END;
+  public static final long PACKED_3_START;
+  public static final long PACKED_3_END;
+  public static final long PACKED_4_START;
+  public static final long PACKED_4_END;
+  public static final long PACKED_5_START;
+  public static final long PACKED_5_END;
+  public static final long PACKED_6_START;
+  public static final long PACKED_6_END;
+  public static final long PACKED_7_START;
+  public static final long PACKED_7_END;
+  public static final int PRIORITY_CACHE_PACKED_END;
+  public static final int STRUCT_CACHE_PACKED_END;
+  public static final int BYTES_PACKED_LENGTH_END;
+  public static final int STRING_PACKED_LENGTH_END;
+  public static final int LIST_PACKED_LENGTH_END;
+  public static final int BYTE_CHUNK_SIZE;
+  public org.fressian.impl.Ranges();
+}
+Compiled from "RawInput.java"
+public class org.fressian.impl.RawInput implements java.io.Closeable {
+  public org.fressian.impl.RawInput(java.io.InputStream);
+  public org.fressian.impl.RawInput(java.io.InputStream, boolean);
+  public int readRawByte() throws java.io.IOException;
+  public long readRawInt8() throws java.io.IOException;
+  public long readRawInt16() throws java.io.IOException;
+  public long readRawInt24() throws java.io.IOException;
+  public long readRawInt32() throws java.io.IOException;
+  public long readRawInt40() throws java.io.IOException;
+  public long readRawInt48() throws java.io.IOException;
+  public long readRawInt64() throws java.io.IOException;
+  public float readRawFloat() throws java.io.IOException;
+  public double readRawDouble() throws java.io.IOException;
+  public void readFully(byte[], int, int) throws java.io.IOException;
+  public int getBytesRead();
+  public void reset();
+  public void close() throws java.io.IOException;
+  public void validateChecksum() throws java.io.IOException;
+}
+Compiled from "RawOutput.java"
+public class org.fressian.impl.RawOutput implements java.io.Closeable {
+  byte[] buffer;
+  public org.fressian.impl.RawOutput(java.io.OutputStream);
+  public void writeRawByte(int) throws java.io.IOException;
+  public void writeRawInt16(int) throws java.io.IOException;
+  public void writeRawInt24(int) throws java.io.IOException;
+  public void writeRawInt32(int) throws java.io.IOException;
+  public void writeRawInt40(long) throws java.io.IOException;
+  public void writeRawInt48(long) throws java.io.IOException;
+  public void writeRawInt64(long) throws java.io.IOException;
+  public void writeRawDouble(double) throws java.io.IOException;
+  public void writeRawFloat(float) throws java.io.IOException;
+  public void writeRawBytes(byte[], int, int) throws java.io.IOException;
+  public java.util.zip.Checksum getChecksum();
+  public int getBytesWritten();
+  public void reset();
+  public void close() throws java.io.IOException;
+}
+Compiled from "StructType.java"
+public class org.fressian.impl.StructType {
+  public final java.lang.Object tag;
+  public final int fields;
+  public org.fressian.impl.StructType(java.lang.Object, int);
+}

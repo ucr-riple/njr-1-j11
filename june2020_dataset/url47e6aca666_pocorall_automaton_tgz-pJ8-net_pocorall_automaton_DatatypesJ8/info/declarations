@@ -1,0 +1,512 @@
+Compiled from "Automaton.java"
+public interface net.pocorall.automaton.Automaton {
+  public abstract java.lang.Object run(java.lang.String);
+}
+Compiled from "AutomatonProvider.java"
+public interface net.pocorall.automaton.AutomatonProvider {
+  public abstract net.pocorall.automaton.DefaultAutomaton getAutomaton(java.lang.String) throws java.io.IOException;
+}
+Compiled from "BasicAutomataFactory.java"
+public final class net.pocorall.automaton.BasicAutomataFactory {
+  public static net.pocorall.automaton.DefaultAutomaton makeEmpty();
+  public static net.pocorall.automaton.DefaultAutomaton makeEmptyString();
+  public static net.pocorall.automaton.DefaultAutomaton makeAnyString();
+  public static net.pocorall.automaton.DefaultAutomaton makeAnyChar();
+  public static net.pocorall.automaton.DefaultAutomaton makeChar(char);
+  public static net.pocorall.automaton.DefaultAutomaton makeCharRange(char, char);
+  public static net.pocorall.automaton.DefaultAutomaton makeCharSet(java.lang.String);
+  public static net.pocorall.automaton.DefaultAutomaton makeInterval(int, int, int) throws java.lang.IllegalArgumentException;
+  public static net.pocorall.automaton.DefaultAutomaton makeString(java.lang.String);
+  public static net.pocorall.automaton.DefaultAutomaton makeStringUnion(java.lang.CharSequence...);
+  public static net.pocorall.automaton.DefaultAutomaton makeMaxInteger(java.lang.String);
+  public static net.pocorall.automaton.DefaultAutomaton makeMinInteger(java.lang.String);
+  public static net.pocorall.automaton.DefaultAutomaton makeTotalDigits(int);
+  public static net.pocorall.automaton.DefaultAutomaton makeFractionDigits(int);
+  public static net.pocorall.automaton.DefaultAutomaton makeIntegerValue(java.lang.String);
+  public static net.pocorall.automaton.DefaultAutomaton makeDecimalValue(java.lang.String);
+  public static net.pocorall.automaton.DefaultAutomaton makeStringMatcher(java.lang.String);
+}
+Compiled from "BasicAutomataFactoryTest.java"
+public class net.pocorall.automaton.BasicAutomataFactoryTest {
+  public net.pocorall.automaton.BasicAutomataFactoryTest();
+  public void testMakeEmpty() throws java.lang.Exception;
+  public void testMakeEmptyString() throws java.lang.Exception;
+  public void testMakeAnyString() throws java.lang.Exception;
+  public void testMakeAnyChar() throws java.lang.Exception;
+  public void testMakeChar() throws java.lang.Exception;
+  public void testMakeCharRange() throws java.lang.Exception;
+  public void testMakeCharSet() throws java.lang.Exception;
+  public void testMakeInterval() throws java.lang.Exception;
+  public void testMakeString() throws java.lang.Exception;
+  public void testMakeStringUnion() throws java.lang.Exception;
+  public void testMakeMaxInteger() throws java.lang.Exception;
+  public void testMakeMinInteger() throws java.lang.Exception;
+  public void testMakeTotalDigits() throws java.lang.Exception;
+  public void testMakeFractionDigits() throws java.lang.Exception;
+  public void testMakeIntegerValue() throws java.lang.Exception;
+  public void testMakeDecimalValue() throws java.lang.Exception;
+  public void testMakeStringMatcher() throws java.lang.Exception;
+}
+Compiled from "BasicOperations.java"
+public final class net.pocorall.automaton.BasicOperations {
+  public static net.pocorall.automaton.DefaultAutomaton concatenate(net.pocorall.automaton.DefaultAutomaton, net.pocorall.automaton.DefaultAutomaton);
+  public static net.pocorall.automaton.DefaultAutomaton concatenate(java.util.List<net.pocorall.automaton.DefaultAutomaton>);
+  public static net.pocorall.automaton.DefaultAutomaton repeat(net.pocorall.automaton.DefaultAutomaton);
+  public static net.pocorall.automaton.DefaultAutomaton repeat(net.pocorall.automaton.DefaultAutomaton, int);
+  public static net.pocorall.automaton.DefaultAutomaton repeat(net.pocorall.automaton.DefaultAutomaton, int, int);
+  public static net.pocorall.automaton.DefaultAutomaton complement(net.pocorall.automaton.DefaultAutomaton);
+  public static net.pocorall.automaton.DefaultAutomaton minus(net.pocorall.automaton.DefaultAutomaton, net.pocorall.automaton.DefaultAutomaton);
+  public static net.pocorall.automaton.DefaultAutomaton intersection(net.pocorall.automaton.DefaultAutomaton, net.pocorall.automaton.DefaultAutomaton);
+  public static boolean subsetOf(net.pocorall.automaton.DefaultAutomaton, net.pocorall.automaton.DefaultAutomaton);
+  public static net.pocorall.automaton.DefaultAutomaton union(net.pocorall.automaton.DefaultAutomaton, net.pocorall.automaton.DefaultAutomaton);
+  public static net.pocorall.automaton.DefaultAutomaton union(java.util.Collection<net.pocorall.automaton.DefaultAutomaton>);
+  public static void determinize(net.pocorall.automaton.LinkedAutomaton);
+  static void determinize(net.pocorall.automaton.LinkedAutomaton, java.util.Set<net.pocorall.automaton.State>);
+  public static void addEpsilons(net.pocorall.automaton.LinkedAutomaton, java.util.Collection<net.pocorall.automaton.StatePair>);
+  public static boolean isEmptyString(net.pocorall.automaton.DefaultAutomaton);
+  public static boolean isTotal(net.pocorall.automaton.DefaultAutomaton);
+  public static java.lang.String getShortestExample(net.pocorall.automaton.DefaultAutomaton, boolean);
+  static java.lang.String getShortestExample(net.pocorall.automaton.State, boolean);
+}
+Compiled from "Datatypes.java"
+public final class net.pocorall.automaton.Datatypes {
+  public static void main(java.lang.String[]);
+  public static net.pocorall.automaton.DefaultAutomaton get(java.lang.String);
+  public static boolean isUnicodeBlockName(java.lang.String);
+  public static boolean isUnicodeCategoryName(java.lang.String);
+  public static boolean isXMLName(java.lang.String);
+  public static boolean exists(java.lang.String);
+  static net.pocorall.automaton.DefaultAutomaton getWhitespaceAutomaton();
+  static {};
+}
+Compiled from "DatatypesAutomatonProvider.java"
+public class net.pocorall.automaton.DatatypesAutomatonProvider implements net.pocorall.automaton.AutomatonProvider {
+  public net.pocorall.automaton.DatatypesAutomatonProvider();
+  public net.pocorall.automaton.DatatypesAutomatonProvider(boolean, boolean, boolean);
+  public net.pocorall.automaton.DefaultAutomaton getAutomaton(java.lang.String);
+}
+Compiled from "DefaultAutomaton.java"
+public class net.pocorall.automaton.DefaultAutomaton extends net.pocorall.automaton.LinkedAutomaton {
+  static final long serialVersionUID;
+  java.lang.String singleton;
+  public net.pocorall.automaton.DefaultAutomaton();
+  boolean isSingleton();
+  public java.lang.String getSingleton();
+  public void setInitialState(net.pocorall.automaton.State);
+  public net.pocorall.automaton.State getInitialState();
+  public void restoreInvariant();
+  public void reduce();
+  public java.util.Set<net.pocorall.automaton.State> getLiveStates();
+  public void removeDeadTransitions();
+  public void expandSingleton();
+  public int getNumberOfStates();
+  public int getNumberOfTransitions();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public java.lang.String toString();
+  net.pocorall.automaton.DefaultAutomaton cloneExpanded();
+  net.pocorall.automaton.DefaultAutomaton cloneExpandedIfRequired();
+  public net.pocorall.automaton.DefaultAutomaton clone();
+  net.pocorall.automaton.DefaultAutomaton cloneIfRequired();
+  public net.pocorall.automaton.DefaultAutomaton concatenate(net.pocorall.automaton.DefaultAutomaton);
+  public net.pocorall.automaton.DefaultAutomaton optional();
+  public net.pocorall.automaton.DefaultAutomaton repeat();
+  public net.pocorall.automaton.DefaultAutomaton complement();
+  public net.pocorall.automaton.DefaultAutomaton minus(net.pocorall.automaton.DefaultAutomaton);
+  public net.pocorall.automaton.DefaultAutomaton intersection(net.pocorall.automaton.DefaultAutomaton);
+  public boolean subsetOf(net.pocorall.automaton.DefaultAutomaton);
+  public net.pocorall.automaton.DefaultAutomaton union(net.pocorall.automaton.DefaultAutomaton);
+  public boolean isEmptyString();
+  public boolean isEmpty();
+  public java.lang.Object run(java.lang.String);
+  public net.pocorall.automaton.DefaultAutomaton minimize();
+  public net.pocorall.automaton.DefaultAutomaton subst(java.util.Map<java.lang.Character, java.util.Set<java.lang.Character>>);
+  public net.pocorall.automaton.LinkedAutomaton clone();
+  net.pocorall.automaton.LinkedAutomaton cloneIfRequired();
+  public net.pocorall.automaton.LinkedAutomaton minimize();
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "LinkedAutomaton.java"
+public class net.pocorall.automaton.LinkedAutomaton implements java.io.Serializable,java.lang.Cloneable,net.pocorall.automaton.Automaton {
+  net.pocorall.automaton.State initial;
+  boolean deterministic;
+  int hash_code;
+  static final long serialVersionUID;
+  public static final int MINIMIZE_HUFFMAN;
+  public static final int MINIMIZE_BRZOZOWSKI;
+  public static final int MINIMIZE_HOPCROFT;
+  static int minimization;
+  static boolean minimize_always;
+  static boolean allow_mutation;
+  static java.lang.Boolean is_debug;
+  public net.pocorall.automaton.LinkedAutomaton();
+  public boolean isDeterministic();
+  public void setDeterministic(boolean);
+  boolean isDebug();
+  void checkMinimizeAlways();
+  char[] getStartPoints();
+  public net.pocorall.automaton.LinkedAutomaton minimize();
+  void totalize();
+  void clearHashCode();
+  public void removeDeadTransitions();
+  public void reduce();
+  protected java.util.Set<net.pocorall.automaton.State> getLiveStates(java.util.Set<net.pocorall.automaton.State>);
+  public java.util.Set<net.pocorall.automaton.State> getAcceptStates();
+  public void recomputeHashCode();
+  net.pocorall.automaton.LinkedAutomaton cloneIfRequired();
+  public void setInitialState(net.pocorall.automaton.State);
+  public net.pocorall.automaton.LinkedAutomaton clone();
+  public java.lang.Object run(java.lang.String);
+  public int getNumberOfStates();
+  public int getNumberOfTransitions();
+  public void expandSingleton();
+  public java.util.Set<net.pocorall.automaton.State> getStates();
+  public java.lang.String toDot();
+  public static void setMinimization(int);
+  public static void setMinimizeAlways(boolean);
+  public static boolean setAllowMutate(boolean);
+  static boolean getAllowMutate();
+  static void setStateNumbers(java.util.Set<net.pocorall.automaton.State>);
+  static net.pocorall.automaton.Transition[][] getSortedTransitions(java.util.Set<net.pocorall.automaton.State>);
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+  static {};
+}
+Compiled from "MinimizationOperations.java"
+public final class net.pocorall.automaton.MinimizationOperations {
+  public static void minimizeHuffman(net.pocorall.automaton.LinkedAutomaton);
+  public static void minimizeBrzozowski(net.pocorall.automaton.LinkedAutomaton);
+  public static void minimizeHopcroft(net.pocorall.automaton.LinkedAutomaton);
+}
+Compiled from "MinimizationOperations.java"
+class net.pocorall.automaton.MinimizationOperations$IntPair {
+  int n1;
+  int n2;
+  net.pocorall.automaton.MinimizationOperations$IntPair(int, int);
+}
+Compiled from "MinimizationOperations.java"
+class net.pocorall.automaton.MinimizationOperations$StateList {
+  int size;
+  net.pocorall.automaton.MinimizationOperations$StateListNode first;
+  net.pocorall.automaton.MinimizationOperations$StateListNode last;
+  net.pocorall.automaton.MinimizationOperations$StateList();
+  net.pocorall.automaton.MinimizationOperations$StateListNode add(net.pocorall.automaton.State);
+}
+Compiled from "MinimizationOperations.java"
+class net.pocorall.automaton.MinimizationOperations$StateListNode {
+  net.pocorall.automaton.State q;
+  net.pocorall.automaton.MinimizationOperations$StateListNode next;
+  net.pocorall.automaton.MinimizationOperations$StateListNode prev;
+  net.pocorall.automaton.MinimizationOperations$StateList sl;
+  net.pocorall.automaton.MinimizationOperations$StateListNode(net.pocorall.automaton.State, net.pocorall.automaton.MinimizationOperations$StateList);
+  void remove();
+}
+Compiled from "RegExp.java"
+public class net.pocorall.automaton.RegExp {
+  public static final int INTERSECTION;
+  public static final int COMPLEMENT;
+  public static final int EMPTY;
+  public static final int ANYSTRING;
+  public static final int AUTOMATON;
+  public static final int INTERVAL;
+  public static final int ALL;
+  public static final int NONE;
+  net.pocorall.automaton.RegExp$Kind kind;
+  net.pocorall.automaton.RegExp exp1;
+  net.pocorall.automaton.RegExp exp2;
+  java.lang.String s;
+  char c;
+  int min;
+  int max;
+  int digits;
+  char from;
+  char to;
+  java.lang.String b;
+  int flags;
+  int pos;
+  net.pocorall.automaton.RegExp();
+  public net.pocorall.automaton.RegExp(java.lang.String) throws java.lang.IllegalArgumentException;
+  public net.pocorall.automaton.RegExp(java.lang.String, int) throws java.lang.IllegalArgumentException;
+  public net.pocorall.automaton.DefaultAutomaton toAutomaton();
+  public net.pocorall.automaton.DefaultAutomaton toAutomaton(boolean);
+  public net.pocorall.automaton.DefaultAutomaton toAutomaton(net.pocorall.automaton.AutomatonProvider) throws java.lang.IllegalArgumentException;
+  public net.pocorall.automaton.DefaultAutomaton toAutomaton(net.pocorall.automaton.AutomatonProvider, boolean) throws java.lang.IllegalArgumentException;
+  public net.pocorall.automaton.DefaultAutomaton toAutomaton(java.util.Map<java.lang.String, net.pocorall.automaton.DefaultAutomaton>) throws java.lang.IllegalArgumentException;
+  public net.pocorall.automaton.DefaultAutomaton toAutomaton(java.util.Map<java.lang.String, net.pocorall.automaton.DefaultAutomaton>, boolean) throws java.lang.IllegalArgumentException;
+  public boolean setAllowMutate(boolean);
+  public java.lang.String toString();
+  java.lang.StringBuilder toStringBuilder(java.lang.StringBuilder);
+  public java.util.Set<java.lang.String> getIdentifiers();
+  void getIdentifiers(java.util.Set<java.lang.String>);
+  static net.pocorall.automaton.RegExp makeUnion(net.pocorall.automaton.RegExp, net.pocorall.automaton.RegExp);
+  static net.pocorall.automaton.RegExp makeConcatenation(net.pocorall.automaton.RegExp, net.pocorall.automaton.RegExp);
+  static net.pocorall.automaton.RegExp makeIntersection(net.pocorall.automaton.RegExp, net.pocorall.automaton.RegExp);
+  static net.pocorall.automaton.RegExp makeOptional(net.pocorall.automaton.RegExp);
+  static net.pocorall.automaton.RegExp makeRepeat(net.pocorall.automaton.RegExp);
+  static net.pocorall.automaton.RegExp makeRepeat(net.pocorall.automaton.RegExp, int);
+  static net.pocorall.automaton.RegExp makeRepeat(net.pocorall.automaton.RegExp, int, int);
+  static net.pocorall.automaton.RegExp makeComplement(net.pocorall.automaton.RegExp);
+  static net.pocorall.automaton.RegExp makeChar(char);
+  static net.pocorall.automaton.RegExp makeCharRange(char, char);
+  static net.pocorall.automaton.RegExp makeAnyChar();
+  static net.pocorall.automaton.RegExp makeEmpty();
+  static net.pocorall.automaton.RegExp makeString(java.lang.String);
+  static net.pocorall.automaton.RegExp makeAnyString();
+  static net.pocorall.automaton.RegExp makeAutomaton(java.lang.String);
+  static net.pocorall.automaton.RegExp makeInterval(int, int, int);
+  final net.pocorall.automaton.RegExp parseUnionExp() throws java.lang.IllegalArgumentException;
+  final net.pocorall.automaton.RegExp parseInterExp() throws java.lang.IllegalArgumentException;
+  final net.pocorall.automaton.RegExp parseConcatExp() throws java.lang.IllegalArgumentException;
+  final net.pocorall.automaton.RegExp parseRepeatExp() throws java.lang.IllegalArgumentException;
+  final net.pocorall.automaton.RegExp parseComplExp() throws java.lang.IllegalArgumentException;
+  final net.pocorall.automaton.RegExp parseCharClassExp() throws java.lang.IllegalArgumentException;
+  final net.pocorall.automaton.RegExp parseCharClasses() throws java.lang.IllegalArgumentException;
+  final net.pocorall.automaton.RegExp parseCharClass() throws java.lang.IllegalArgumentException;
+  final net.pocorall.automaton.RegExp parseSimpleExp() throws java.lang.IllegalArgumentException;
+  final char parseCharExp() throws java.lang.IllegalArgumentException;
+  static {};
+}
+Compiled from "RegExp.java"
+class net.pocorall.automaton.RegExp$1 {
+  static final int[] $SwitchMap$net$pocorall$automaton$RegExp$Kind;
+  static {};
+}
+Compiled from "RegExp.java"
+final class net.pocorall.automaton.RegExp$Kind extends java.lang.Enum<net.pocorall.automaton.RegExp$Kind> {
+  public static final net.pocorall.automaton.RegExp$Kind REGEXP_UNION;
+  public static final net.pocorall.automaton.RegExp$Kind REGEXP_CONCATENATION;
+  public static final net.pocorall.automaton.RegExp$Kind REGEXP_INTERSECTION;
+  public static final net.pocorall.automaton.RegExp$Kind REGEXP_OPTIONAL;
+  public static final net.pocorall.automaton.RegExp$Kind REGEXP_REPEAT;
+  public static final net.pocorall.automaton.RegExp$Kind REGEXP_REPEAT_MIN;
+  public static final net.pocorall.automaton.RegExp$Kind REGEXP_REPEAT_MINMAX;
+  public static final net.pocorall.automaton.RegExp$Kind REGEXP_COMPLEMENT;
+  public static final net.pocorall.automaton.RegExp$Kind REGEXP_CHAR;
+  public static final net.pocorall.automaton.RegExp$Kind REGEXP_CHAR_RANGE;
+  public static final net.pocorall.automaton.RegExp$Kind REGEXP_ANYCHAR;
+  public static final net.pocorall.automaton.RegExp$Kind REGEXP_EMPTY;
+  public static final net.pocorall.automaton.RegExp$Kind REGEXP_STRING;
+  public static final net.pocorall.automaton.RegExp$Kind REGEXP_ANYSTRING;
+  public static final net.pocorall.automaton.RegExp$Kind REGEXP_AUTOMATON;
+  public static final net.pocorall.automaton.RegExp$Kind REGEXP_INTERVAL;
+  public static net.pocorall.automaton.RegExp$Kind[] values();
+  public static net.pocorall.automaton.RegExp$Kind valueOf(java.lang.String);
+  static {};
+}
+Compiled from "RegExpTest.java"
+public class net.pocorall.automaton.RegExpTest {
+  public net.pocorall.automaton.RegExpTest();
+  public void testRegExp() throws java.lang.Exception;
+}
+Compiled from "RunAutomaton.java"
+public class net.pocorall.automaton.RunAutomaton implements java.io.Serializable,net.pocorall.automaton.Automaton {
+  static final long serialVersionUID;
+  int size;
+  java.lang.Object[] accept;
+  int initial;
+  int[] transitions;
+  char[] points;
+  int[] classmap;
+  final void setAlphabet();
+  public java.lang.String toString();
+  public int getSize();
+  public java.lang.Object isAccept(int);
+  public int getInitialState();
+  public char[] getCharIntervals();
+  int getCharClass(char);
+  public net.pocorall.automaton.RunAutomaton(net.pocorall.automaton.DefaultAutomaton);
+  public net.pocorall.automaton.RunAutomaton(net.pocorall.automaton.DefaultAutomaton, boolean);
+  public int step(int, char);
+  public java.lang.Object run(java.lang.String);
+  public int run(java.lang.String, int);
+  public net.pocorall.automaton.RunAutomatonMatcher newMatcher(java.lang.CharSequence);
+  public net.pocorall.automaton.RunAutomatonMatcher newMatcher(java.lang.CharSequence, int, int);
+}
+Compiled from "RunAutomatonMatcher.java"
+public class net.pocorall.automaton.RunAutomatonMatcher implements java.util.regex.MatchResult {
+  net.pocorall.automaton.RunAutomatonMatcher(java.lang.CharSequence, net.pocorall.automaton.RunAutomaton);
+  public java.lang.Object find();
+  public int end() throws java.lang.IllegalStateException;
+  public int end(int) throws java.lang.IndexOutOfBoundsException, java.lang.IllegalStateException;
+  public java.lang.String group() throws java.lang.IllegalStateException;
+  public java.lang.String token();
+  public java.lang.String group(int) throws java.lang.IndexOutOfBoundsException, java.lang.IllegalStateException;
+  public int groupCount();
+  public int start() throws java.lang.IllegalStateException;
+  public int start(int) throws java.lang.IndexOutOfBoundsException, java.lang.IllegalStateException;
+  public java.util.regex.MatchResult toMatchResult();
+}
+Compiled from "RunAutomatonTest.java"
+public class net.pocorall.automaton.RunAutomatonTest {
+  public net.pocorall.automaton.RunAutomatonTest();
+  public void testSplit();
+}
+Compiled from "RunAutomatonTest.java"
+public class net.pocorall.automaton.RunAutomatonTest$PatternMatcher {
+  public net.pocorall.automaton.RunAutomatonTest$PatternMatcher();
+  public net.pocorall.automaton.RunAutomatonTest$PatternMatcher add(java.lang.String, java.lang.Object);
+  public net.pocorall.automaton.RunAutomaton build();
+}
+Compiled from "ShuffleOperations.java"
+public final class net.pocorall.automaton.ShuffleOperations {
+  public static net.pocorall.automaton.DefaultAutomaton shuffle(net.pocorall.automaton.DefaultAutomaton, net.pocorall.automaton.DefaultAutomaton);
+  public static java.lang.String shuffleSubsetOf(java.util.Collection<net.pocorall.automaton.DefaultAutomaton>, net.pocorall.automaton.DefaultAutomaton, java.lang.Character, java.lang.Character);
+}
+Compiled from "ShuffleOperations.java"
+class net.pocorall.automaton.ShuffleOperations$ShuffleConfiguration {
+  net.pocorall.automaton.ShuffleOperations$ShuffleConfiguration prev;
+  net.pocorall.automaton.State[] ca_states;
+  net.pocorall.automaton.State a_state;
+  char min;
+  int hash;
+  boolean shuffle_suspended;
+  boolean surrogate;
+  int suspended1;
+  net.pocorall.automaton.ShuffleOperations$ShuffleConfiguration(java.util.Collection<net.pocorall.automaton.DefaultAutomaton>, net.pocorall.automaton.DefaultAutomaton);
+  net.pocorall.automaton.ShuffleOperations$ShuffleConfiguration(net.pocorall.automaton.ShuffleOperations$ShuffleConfiguration, int, net.pocorall.automaton.State, char);
+  net.pocorall.automaton.ShuffleOperations$ShuffleConfiguration(net.pocorall.automaton.ShuffleOperations$ShuffleConfiguration, int, net.pocorall.automaton.State, net.pocorall.automaton.State, char);
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+}
+Compiled from "SpecialOperations.java"
+public final class net.pocorall.automaton.SpecialOperations {
+  public static java.util.Set<net.pocorall.automaton.State> reverse(net.pocorall.automaton.LinkedAutomaton);
+  public static net.pocorall.automaton.DefaultAutomaton overlap(net.pocorall.automaton.DefaultAutomaton, net.pocorall.automaton.DefaultAutomaton);
+  public static net.pocorall.automaton.DefaultAutomaton singleChars(net.pocorall.automaton.DefaultAutomaton);
+  public static net.pocorall.automaton.DefaultAutomaton trim(net.pocorall.automaton.DefaultAutomaton, java.lang.String, char);
+  public static net.pocorall.automaton.DefaultAutomaton compress(net.pocorall.automaton.DefaultAutomaton, java.lang.String, char);
+  public static net.pocorall.automaton.DefaultAutomaton subst(net.pocorall.automaton.DefaultAutomaton, java.util.Map<java.lang.Character, java.util.Set<java.lang.Character>>);
+  static int findIndex(char, char[]);
+  public static net.pocorall.automaton.DefaultAutomaton subst(net.pocorall.automaton.DefaultAutomaton, char, java.lang.String);
+  public static net.pocorall.automaton.DefaultAutomaton homomorph(net.pocorall.automaton.DefaultAutomaton, char[], char[]);
+  public static net.pocorall.automaton.DefaultAutomaton projectChars(net.pocorall.automaton.DefaultAutomaton, java.util.Set<java.lang.Character>);
+  public static boolean isFinite(net.pocorall.automaton.DefaultAutomaton);
+  public static java.util.Set<java.lang.String> getStrings(net.pocorall.automaton.DefaultAutomaton, int);
+  public static java.util.Set<java.lang.String> getFiniteStrings(net.pocorall.automaton.DefaultAutomaton);
+  public static java.util.Set<java.lang.String> getFiniteStrings(net.pocorall.automaton.DefaultAutomaton, int);
+  public static java.lang.String getCommonPrefix(net.pocorall.automaton.DefaultAutomaton);
+  public static void prefixClose(net.pocorall.automaton.DefaultAutomaton);
+  public static net.pocorall.automaton.DefaultAutomaton hexCases(net.pocorall.automaton.DefaultAutomaton);
+  public static net.pocorall.automaton.DefaultAutomaton replaceWhitespace(net.pocorall.automaton.DefaultAutomaton);
+}
+Compiled from "SpecialOperationsTest.java"
+public class net.pocorall.automaton.SpecialOperationsTest {
+  public net.pocorall.automaton.SpecialOperationsTest();
+  public void testReverse() throws java.lang.Exception;
+  public void testOverlap() throws java.lang.Exception;
+  public void testSingleChars() throws java.lang.Exception;
+  public void testTrim() throws java.lang.Exception;
+  public void testCompress() throws java.lang.Exception;
+  public void testSubst() throws java.lang.Exception;
+  public void testHomomorph() throws java.lang.Exception;
+  public void testProjectChars() throws java.lang.Exception;
+  public void testIsFinite() throws java.lang.Exception;
+  public void testGetStrings() throws java.lang.Exception;
+  public void testGetFiniteStrings() throws java.lang.Exception;
+  public void testGetCommonPrefix() throws java.lang.Exception;
+  public void testPrefixClose() throws java.lang.Exception;
+  public void testHexCases() throws java.lang.Exception;
+  public void testReplaceWhitespace() throws java.lang.Exception;
+}
+Compiled from "State.java"
+public class net.pocorall.automaton.State implements java.io.Serializable, java.lang.Comparable<net.pocorall.automaton.State> {
+  static final long serialVersionUID;
+  java.lang.Object accept;
+  java.util.Set<net.pocorall.automaton.Transition> transitions;
+  int number;
+  int id;
+  static int next_id;
+  public net.pocorall.automaton.State();
+  final void resetTransitions();
+  public java.util.Set<net.pocorall.automaton.Transition> getTransitions();
+  public void addTransition(net.pocorall.automaton.Transition);
+  public void setAccept(java.lang.Object);
+  public java.lang.Object isAccept();
+  public net.pocorall.automaton.State step(char);
+  public void step(char, java.util.Collection<net.pocorall.automaton.State>);
+  void addEpsilon(net.pocorall.automaton.State);
+  net.pocorall.automaton.Transition[] getSortedTransitionArray(boolean);
+  public java.util.List<net.pocorall.automaton.Transition> getSortedTransitions(boolean);
+  public java.lang.String toString();
+  public int compareTo(net.pocorall.automaton.State);
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public int compareTo(java.lang.Object);
+}
+Compiled from "StatePair.java"
+public class net.pocorall.automaton.StatePair {
+  net.pocorall.automaton.State s;
+  net.pocorall.automaton.State s1;
+  net.pocorall.automaton.State s2;
+  net.pocorall.automaton.StatePair(net.pocorall.automaton.State, net.pocorall.automaton.State, net.pocorall.automaton.State);
+  public net.pocorall.automaton.StatePair(net.pocorall.automaton.State, net.pocorall.automaton.State);
+  public net.pocorall.automaton.State getFirstState();
+  public net.pocorall.automaton.State getSecondState();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+}
+Compiled from "StringUnionOperations.java"
+public final class net.pocorall.automaton.StringUnionOperations {
+  public static final java.util.Comparator<java.lang.CharSequence> LEXICOGRAPHIC_ORDER;
+  static final boolean $assertionsDisabled;
+  public net.pocorall.automaton.StringUnionOperations();
+  public void addAll(java.lang.Object, java.lang.CharSequence...);
+  public void add(java.lang.Object, java.lang.CharSequence);
+  public net.pocorall.automaton.State complete();
+  public static net.pocorall.automaton.State build(java.lang.CharSequence[]);
+  static {};
+}
+Compiled from "StringUnionOperations.java"
+final class net.pocorall.automaton.StringUnionOperations$1 implements java.util.Comparator<java.lang.CharSequence> {
+  net.pocorall.automaton.StringUnionOperations$1();
+  public int compare(java.lang.CharSequence, java.lang.CharSequence);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "StringUnionOperations.java"
+final class net.pocorall.automaton.StringUnionOperations$CharState {
+  char[] labels;
+  net.pocorall.automaton.StringUnionOperations$CharState[] charStates;
+  java.lang.Object is_final;
+  static final boolean $assertionsDisabled;
+  public net.pocorall.automaton.StringUnionOperations$CharState getState(char);
+  public char[] getTransitionLabels();
+  public net.pocorall.automaton.StringUnionOperations$CharState[] getCharStates();
+  public boolean equals(java.lang.Object);
+  public boolean hasChildren();
+  public java.lang.Object isFinal();
+  public int hashCode();
+  net.pocorall.automaton.StringUnionOperations$CharState newState(char);
+  net.pocorall.automaton.StringUnionOperations$CharState lastChild();
+  net.pocorall.automaton.StringUnionOperations$CharState lastChild(char);
+  void replaceLastChild(net.pocorall.automaton.StringUnionOperations$CharState);
+  public net.pocorall.automaton.State toState();
+  public static net.pocorall.automaton.StringUnionOperations$CharState[] copyOf(net.pocorall.automaton.StringUnionOperations$CharState[], int);
+  net.pocorall.automaton.StringUnionOperations$CharState(net.pocorall.automaton.StringUnionOperations$1);
+  static {};
+}
+Compiled from "Transition.java"
+public class net.pocorall.automaton.Transition implements java.io.Serializable,java.lang.Cloneable {
+  static final long serialVersionUID;
+  char min;
+  char max;
+  net.pocorall.automaton.State to;
+  public net.pocorall.automaton.Transition(char, net.pocorall.automaton.State);
+  public net.pocorall.automaton.Transition(char, char, net.pocorall.automaton.State);
+  public char getMin();
+  public char getMax();
+  public net.pocorall.automaton.State getDest();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public net.pocorall.automaton.Transition clone();
+  static void appendCharString(char, java.lang.StringBuilder);
+  public java.lang.String toString();
+  void appendDot(java.lang.StringBuilder);
+  public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+}
+Compiled from "TransitionComparator.java"
+class net.pocorall.automaton.TransitionComparator implements java.util.Comparator<net.pocorall.automaton.Transition>, java.io.Serializable {
+  static final long serialVersionUID;
+  boolean to_first;
+  net.pocorall.automaton.TransitionComparator(boolean);
+  public int compare(net.pocorall.automaton.Transition, net.pocorall.automaton.Transition);
+  public int compare(java.lang.Object, java.lang.Object);
+}

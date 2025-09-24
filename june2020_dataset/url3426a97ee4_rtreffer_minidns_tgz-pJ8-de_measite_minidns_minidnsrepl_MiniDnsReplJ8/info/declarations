@@ -1,0 +1,1939 @@
+Compiled from "AbstractDNSClient.java"
+public abstract class de.measite.minidns.AbstractDNSClient {
+  protected static final de.measite.minidns.cache.LRUCache DEFAULT_CACHE;
+  protected static final java.util.logging.Logger LOGGER;
+  protected final java.util.Random random;
+  protected final java.util.Random insecureRandom;
+  protected final de.measite.minidns.DNSCache cache;
+  protected de.measite.minidns.source.DNSDataSource dataSource;
+  protected de.measite.minidns.AbstractDNSClient(de.measite.minidns.DNSCache);
+  protected de.measite.minidns.AbstractDNSClient();
+  public final de.measite.minidns.DNSMessage query(java.lang.String, de.measite.minidns.Record$TYPE, de.measite.minidns.Record$CLASS) throws java.io.IOException;
+  public final de.measite.minidns.DNSMessage query(de.measite.minidns.DNSName, de.measite.minidns.Record$TYPE) throws java.io.IOException;
+  public final de.measite.minidns.DNSMessage query(java.lang.CharSequence, de.measite.minidns.Record$TYPE) throws java.io.IOException;
+  public de.measite.minidns.DNSMessage query(de.measite.minidns.Question) throws java.io.IOException;
+  protected abstract de.measite.minidns.DNSMessage query(de.measite.minidns.DNSMessage$Builder) throws java.io.IOException;
+  public final de.measite.minidns.DNSMessage query(de.measite.minidns.Question, java.net.InetAddress, int) throws java.io.IOException;
+  public final de.measite.minidns.DNSMessage query(de.measite.minidns.DNSMessage, java.net.InetAddress, int) throws java.io.IOException;
+  protected boolean isResponseCacheable(de.measite.minidns.Question, de.measite.minidns.DNSMessage);
+  final de.measite.minidns.DNSMessage$Builder buildMessage(de.measite.minidns.Question);
+  protected abstract de.measite.minidns.DNSMessage$Builder newQuestion(de.measite.minidns.DNSMessage$Builder);
+  public de.measite.minidns.DNSMessage query(java.lang.String, de.measite.minidns.Record$TYPE, de.measite.minidns.Record$CLASS, java.net.InetAddress, int) throws java.io.IOException;
+  public de.measite.minidns.DNSMessage query(java.lang.String, de.measite.minidns.Record$TYPE, de.measite.minidns.Record$CLASS, java.net.InetAddress) throws java.io.IOException;
+  public de.measite.minidns.DNSMessage query(de.measite.minidns.DNSMessage, java.lang.String) throws java.io.IOException;
+  public final de.measite.minidns.DNSMessage query(de.measite.minidns.DNSMessage, java.net.InetAddress) throws java.io.IOException;
+  public de.measite.minidns.DNSMessage query(de.measite.minidns.Question, java.lang.String) throws java.io.IOException;
+  public de.measite.minidns.DNSMessage query(de.measite.minidns.Question, java.net.InetAddress) throws java.io.IOException;
+  public de.measite.minidns.source.DNSDataSource getDataSource();
+  public void setDataSource(de.measite.minidns.source.DNSDataSource);
+  public de.measite.minidns.DNSCache getCache();
+  protected de.measite.minidns.DNSMessage getQueryFor(de.measite.minidns.Question);
+  public java.util.Set<de.measite.minidns.record.NS> getCachedNameserverRecordsFor(de.measite.minidns.DNSName);
+  public java.util.Set<de.measite.minidns.record.A> getCachedIPv4AddressesFor(de.measite.minidns.DNSName);
+  public java.util.Set<de.measite.minidns.record.AAAA> getCachedIPv6AddressesFor(de.measite.minidns.DNSName);
+  public java.util.Set<de.measite.minidns.record.A> getCachedIPv4NameserverAddressesFor(de.measite.minidns.DNSName);
+  public java.util.Set<de.measite.minidns.record.AAAA> getCachedIPv6NameserverAddressesFor(de.measite.minidns.DNSName);
+  static {};
+}
+Compiled from "AbstractDNSClient.java"
+class de.measite.minidns.AbstractDNSClient$1 {
+  static final int[] $SwitchMap$de$measite$minidns$Record$TYPE;
+  static {};
+}
+Compiled from "Assert.java"
+public class de.measite.minidns.Assert {
+  public de.measite.minidns.Assert();
+  public static void assertCsEquals(java.lang.CharSequence, java.lang.CharSequence);
+  public static void assertCsEquals(java.lang.String, java.lang.CharSequence, java.lang.CharSequence);
+}
+Compiled from "DNSCache.java"
+public abstract class de.measite.minidns.DNSCache {
+  public de.measite.minidns.DNSCache();
+  public final void put(de.measite.minidns.DNSMessage, de.measite.minidns.DNSMessage);
+  protected abstract void putNormalized(de.measite.minidns.DNSMessage, de.measite.minidns.DNSMessage);
+  public abstract void offer(de.measite.minidns.DNSMessage, de.measite.minidns.DNSMessage, de.measite.minidns.DNSName);
+  public final de.measite.minidns.DNSMessage get(de.measite.minidns.DNSMessage);
+  protected abstract de.measite.minidns.DNSMessage getNormalized(de.measite.minidns.DNSMessage);
+}
+Compiled from "DNSClient.java"
+public class de.measite.minidns.DNSClient extends de.measite.minidns.AbstractDNSClient {
+  static final java.util.List<de.measite.minidns.dnsserverlookup.DNSServerLookupMechanism> LOOKUP_MECHANISMS;
+  public de.measite.minidns.DNSClient();
+  public de.measite.minidns.DNSClient(de.measite.minidns.DNSCache);
+  protected de.measite.minidns.DNSMessage$Builder newQuestion(de.measite.minidns.DNSMessage$Builder);
+  public de.measite.minidns.DNSMessage query(de.measite.minidns.DNSMessage$Builder) throws java.io.IOException;
+  public static synchronized java.lang.String[] findDNS();
+  public static synchronized void addDnsServerLookupMechanism(de.measite.minidns.dnsserverlookup.DNSServerLookupMechanism);
+  public static synchronized boolean removeDNSServerLookupMechanism(de.measite.minidns.dnsserverlookup.DNSServerLookupMechanism);
+  public boolean isAskForDnssec();
+  public void setAskForDnssec(boolean);
+  public boolean isDisableResultFilter();
+  public void setDisableResultFilter(boolean);
+  static {};
+}
+Compiled from "DNSClient.java"
+class de.measite.minidns.DNSClient$1 {
+  static final int[] $SwitchMap$de$measite$minidns$DNSMessage$RESPONSE_CODE;
+  static {};
+}
+Compiled from "DNSClientTest.java"
+public class de.measite.minidns.DNSClientTest {
+  public de.measite.minidns.DNSClientTest();
+  public void testLookupMechanismOrder();
+  public void testSingleRecordQuery() throws java.io.IOException;
+  public void testReturnNullSource() throws java.io.IOException;
+}
+Compiled from "DNSClientTest.java"
+class de.measite.minidns.DNSClientTest$1NullSource extends de.measite.minidns.source.DNSDataSource {
+  boolean queried;
+  final de.measite.minidns.DNSClientTest this$0;
+  de.measite.minidns.DNSClientTest$1NullSource(de.measite.minidns.DNSClientTest);
+  public de.measite.minidns.DNSMessage query(de.measite.minidns.DNSMessage, java.net.InetAddress, int);
+}
+Compiled from "DNSClientTest.java"
+class de.measite.minidns.DNSClientTest$TestDnsServerLookupMechanism extends de.measite.minidns.dnsserverlookup.AbstractDNSServerLookupMechanism {
+  protected de.measite.minidns.DNSClientTest$TestDnsServerLookupMechanism(de.measite.minidns.dnsserverlookup.DNSServerLookupMechanism);
+  public boolean isAvailable();
+  public java.lang.String[] getDnsServerAddresses();
+}
+Compiled from "DNSMessage.java"
+public class de.measite.minidns.DNSMessage {
+  public final int id;
+  public final de.measite.minidns.DNSMessage$OPCODE opcode;
+  public final de.measite.minidns.DNSMessage$RESPONSE_CODE responseCode;
+  public final boolean qr;
+  public final boolean authoritativeAnswer;
+  public final boolean truncated;
+  public final boolean recursionDesired;
+  public final boolean recursionAvailable;
+  public final boolean authenticData;
+  public final boolean checkingDisabled;
+  public final java.util.List<de.measite.minidns.Question> questions;
+  public final java.util.List<de.measite.minidns.Record<? extends de.measite.minidns.record.Data>> answerSection;
+  public final java.util.List<de.measite.minidns.Record<? extends de.measite.minidns.record.Data>> authoritySection;
+  public final java.util.List<de.measite.minidns.Record<? extends de.measite.minidns.record.Data>> additionalSection;
+  public final int optRrPosition;
+  public final long receiveTimestamp;
+  protected de.measite.minidns.DNSMessage(de.measite.minidns.DNSMessage$Builder);
+  public de.measite.minidns.DNSMessage(byte[]) throws java.io.IOException;
+  public byte[] toArray() throws java.io.IOException;
+  public java.net.DatagramPacket asDatagram(java.net.InetAddress, int);
+  public void writeTo(java.io.DataOutputStream) throws java.io.IOException;
+  int calculateHeaderBitmap();
+  public de.measite.minidns.Question getQuestion();
+  public java.util.List<de.measite.minidns.Question> copyQuestions();
+  public java.util.List<de.measite.minidns.Record<? extends de.measite.minidns.record.Data>> copyAnswers();
+  public java.util.List<de.measite.minidns.Record<? extends de.measite.minidns.record.Data>> copyAuthority();
+  public de.measite.minidns.EDNS getEdns();
+  public de.measite.minidns.Record<de.measite.minidns.record.OPT> getOptPseudoRecord();
+  public boolean isDnssecOk();
+  public java.lang.String toString();
+  public java.lang.String asTerminalOutput();
+  public <D extends de.measite.minidns.record.Data> java.util.Set<D> getAnswersFor(de.measite.minidns.Question);
+  public de.measite.minidns.DNSMessage$Builder asBuilder();
+  public de.measite.minidns.DNSMessage asNormalizedVersion();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public static de.measite.minidns.DNSMessage$Builder builder();
+  static {};
+}
+Compiled from "DNSMessage.java"
+class de.measite.minidns.DNSMessage$1 {
+}
+Compiled from "DNSMessage.java"
+public class de.measite.minidns.DNSMessage$Builder {
+  public de.measite.minidns.DNSMessage$Builder setId(int);
+  public de.measite.minidns.DNSMessage$Builder setOpcode(de.measite.minidns.DNSMessage$OPCODE);
+  public de.measite.minidns.DNSMessage$Builder setResponseCode(de.measite.minidns.DNSMessage$RESPONSE_CODE);
+  public de.measite.minidns.DNSMessage$Builder setQrFlag(boolean);
+  public de.measite.minidns.DNSMessage$Builder setAuthoritativeAnswer(boolean);
+  public de.measite.minidns.DNSMessage$Builder setTruncated(boolean);
+  public de.measite.minidns.DNSMessage$Builder setRecursionDesired(boolean);
+  public de.measite.minidns.DNSMessage$Builder setRecursionAvailable(boolean);
+  public de.measite.minidns.DNSMessage$Builder setAuthenticData(boolean);
+  public de.measite.minidns.DNSMessage$Builder setCheckDisabled(boolean);
+  public de.measite.minidns.DNSMessage$Builder setCheckingDisabled(boolean);
+  public void copyFlagsFrom(de.measite.minidns.DNSMessage);
+  public de.measite.minidns.DNSMessage$Builder setReceiveTimestamp(long);
+  public de.measite.minidns.DNSMessage$Builder addQuestion(de.measite.minidns.Question);
+  public de.measite.minidns.DNSMessage$Builder setQuestions(java.util.List<de.measite.minidns.Question>);
+  public de.measite.minidns.DNSMessage$Builder setQuestion(de.measite.minidns.Question);
+  public de.measite.minidns.DNSMessage$Builder addAnswer(de.measite.minidns.Record<? extends de.measite.minidns.record.Data>);
+  public de.measite.minidns.DNSMessage$Builder addAnswers(java.util.Collection<de.measite.minidns.Record<? extends de.measite.minidns.record.Data>>);
+  public de.measite.minidns.DNSMessage$Builder setAnswers(java.util.Collection<de.measite.minidns.Record<? extends de.measite.minidns.record.Data>>);
+  public java.util.List<de.measite.minidns.Record<? extends de.measite.minidns.record.Data>> getAnswers();
+  public de.measite.minidns.DNSMessage$Builder addNameserverRecords(de.measite.minidns.Record<? extends de.measite.minidns.record.Data>);
+  public de.measite.minidns.DNSMessage$Builder setNameserverRecords(java.util.Collection<de.measite.minidns.Record<? extends de.measite.minidns.record.Data>>);
+  public de.measite.minidns.DNSMessage$Builder setAdditionalResourceRecords(java.util.Collection<de.measite.minidns.Record<? extends de.measite.minidns.record.Data>>);
+  public de.measite.minidns.DNSMessage$Builder addAdditionalResourceRecord(de.measite.minidns.Record<? extends de.measite.minidns.record.Data>);
+  public de.measite.minidns.DNSMessage$Builder addAdditionalResourceRecords(java.util.List<de.measite.minidns.Record<? extends de.measite.minidns.record.Data>>);
+  public java.util.List<de.measite.minidns.Record<? extends de.measite.minidns.record.Data>> getAdditionalResourceRecords();
+  public de.measite.minidns.EDNS$Builder getEdnsBuilder();
+  public de.measite.minidns.DNSMessage build();
+  static int access$000(de.measite.minidns.DNSMessage$Builder);
+  static de.measite.minidns.DNSMessage$OPCODE access$100(de.measite.minidns.DNSMessage$Builder);
+  static de.measite.minidns.DNSMessage$RESPONSE_CODE access$200(de.measite.minidns.DNSMessage$Builder);
+  static long access$300(de.measite.minidns.DNSMessage$Builder);
+  static boolean access$400(de.measite.minidns.DNSMessage$Builder);
+  static boolean access$500(de.measite.minidns.DNSMessage$Builder);
+  static boolean access$600(de.measite.minidns.DNSMessage$Builder);
+  static boolean access$700(de.measite.minidns.DNSMessage$Builder);
+  static boolean access$800(de.measite.minidns.DNSMessage$Builder);
+  static boolean access$900(de.measite.minidns.DNSMessage$Builder);
+  static boolean access$1000(de.measite.minidns.DNSMessage$Builder);
+  static java.util.List access$1100(de.measite.minidns.DNSMessage$Builder);
+  static java.util.List access$1200(de.measite.minidns.DNSMessage$Builder);
+  static java.util.List access$1300(de.measite.minidns.DNSMessage$Builder);
+  static java.util.List access$1400(de.measite.minidns.DNSMessage$Builder);
+  static de.measite.minidns.EDNS$Builder access$1500(de.measite.minidns.DNSMessage$Builder);
+  de.measite.minidns.DNSMessage$Builder(de.measite.minidns.DNSMessage, de.measite.minidns.DNSMessage$1);
+  de.measite.minidns.DNSMessage$Builder(de.measite.minidns.DNSMessage$1);
+}
+Compiled from "DNSMessage.java"
+public final class de.measite.minidns.DNSMessage$OPCODE extends java.lang.Enum<de.measite.minidns.DNSMessage$OPCODE> {
+  public static final de.measite.minidns.DNSMessage$OPCODE QUERY;
+  public static final de.measite.minidns.DNSMessage$OPCODE INVERSE_QUERY;
+  public static final de.measite.minidns.DNSMessage$OPCODE STATUS;
+  public static final de.measite.minidns.DNSMessage$OPCODE UNASSIGNED3;
+  public static final de.measite.minidns.DNSMessage$OPCODE NOTIFY;
+  public static final de.measite.minidns.DNSMessage$OPCODE UPDATE;
+  public static de.measite.minidns.DNSMessage$OPCODE[] values();
+  public static de.measite.minidns.DNSMessage$OPCODE valueOf(java.lang.String);
+  public byte getValue();
+  public static de.measite.minidns.DNSMessage$OPCODE getOpcode(int) throws java.lang.IllegalArgumentException;
+  static {};
+}
+Compiled from "DNSMessage.java"
+public final class de.measite.minidns.DNSMessage$RESPONSE_CODE extends java.lang.Enum<de.measite.minidns.DNSMessage$RESPONSE_CODE> {
+  public static final de.measite.minidns.DNSMessage$RESPONSE_CODE NO_ERROR;
+  public static final de.measite.minidns.DNSMessage$RESPONSE_CODE FORMAT_ERR;
+  public static final de.measite.minidns.DNSMessage$RESPONSE_CODE SERVER_FAIL;
+  public static final de.measite.minidns.DNSMessage$RESPONSE_CODE NX_DOMAIN;
+  public static final de.measite.minidns.DNSMessage$RESPONSE_CODE NO_IMP;
+  public static final de.measite.minidns.DNSMessage$RESPONSE_CODE REFUSED;
+  public static final de.measite.minidns.DNSMessage$RESPONSE_CODE YXDOMAIN;
+  public static final de.measite.minidns.DNSMessage$RESPONSE_CODE YXRRSET;
+  public static final de.measite.minidns.DNSMessage$RESPONSE_CODE NXRRSET;
+  public static final de.measite.minidns.DNSMessage$RESPONSE_CODE NOT_AUTH;
+  public static final de.measite.minidns.DNSMessage$RESPONSE_CODE NOT_ZONE;
+  public static final de.measite.minidns.DNSMessage$RESPONSE_CODE BADVERS_BADSIG;
+  public static final de.measite.minidns.DNSMessage$RESPONSE_CODE BADKEY;
+  public static final de.measite.minidns.DNSMessage$RESPONSE_CODE BADTIME;
+  public static final de.measite.minidns.DNSMessage$RESPONSE_CODE BADMODE;
+  public static final de.measite.minidns.DNSMessage$RESPONSE_CODE BADNAME;
+  public static final de.measite.minidns.DNSMessage$RESPONSE_CODE BADALG;
+  public static final de.measite.minidns.DNSMessage$RESPONSE_CODE BADTRUNC;
+  public static final de.measite.minidns.DNSMessage$RESPONSE_CODE BADCOOKIE;
+  public static de.measite.minidns.DNSMessage$RESPONSE_CODE[] values();
+  public static de.measite.minidns.DNSMessage$RESPONSE_CODE valueOf(java.lang.String);
+  public byte getValue();
+  public static de.measite.minidns.DNSMessage$RESPONSE_CODE getResponseCode(int) throws java.lang.IllegalArgumentException;
+  static {};
+}
+Compiled from "DNSMessageTest.java"
+public class de.measite.minidns.DNSMessageTest {
+  public de.measite.minidns.DNSMessageTest();
+  de.measite.minidns.DNSMessage getMessageFromResource(java.lang.String) throws java.lang.Exception;
+  public void testALookup() throws java.lang.Exception;
+  public void testAAAALookup() throws java.lang.Exception;
+  public void testMXLookup() throws java.lang.Exception;
+  public void testSRVLookup() throws java.lang.Exception;
+  public void testTXTLookup() throws java.lang.Exception;
+  public void testSoaLookup() throws java.lang.Exception;
+  public void testComNsLookup() throws java.lang.Exception;
+  public void testRootDnskeyLookup() throws java.lang.Exception;
+  public void testComDsAndRrsigLookup() throws java.lang.Exception;
+  public void testExampleNsecLookup() throws java.lang.Exception;
+  public void testComNsec3Lookup() throws java.lang.Exception;
+  public void testMessageSelfQuestionReconstruction() throws java.lang.Exception;
+  public void testMessageSelfEasyAnswersReconstruction() throws java.lang.Exception;
+  public void testMessageSelfComplexReconstruction() throws java.lang.Exception;
+  public void testMessageSelfTruncatedReconstruction() throws java.lang.Exception;
+  public void testMessageSelfOptRecordReconstructione() throws java.lang.Exception;
+  public void testEmptyMessageToString() throws java.lang.Exception;
+  public void testFilledMessageToString() throws java.lang.Exception;
+  public void testEmptyMessageTerminalOutput() throws java.lang.Exception;
+  public void testFilledMessageTerminalOutput() throws java.lang.Exception;
+}
+Compiled from "DNSName.java"
+public class de.measite.minidns.DNSName implements java.lang.CharSequence, java.io.Serializable, java.lang.Comparable<de.measite.minidns.DNSName> {
+  public static final int MAX_LABELS;
+  public static final de.measite.minidns.DNSName EMPTY;
+  public static final de.measite.minidns.DNSName ROOT;
+  public final java.lang.String ace;
+  public void writeToStream(java.io.OutputStream) throws java.io.IOException;
+  public byte[] getBytes();
+  public java.lang.String asIdn();
+  public java.lang.String getDomainpart();
+  public java.lang.String getHostpart();
+  public int size();
+  public int length();
+  public char charAt(int);
+  public java.lang.CharSequence subSequence(int, int);
+  public java.lang.String toString();
+  public static de.measite.minidns.DNSName from(java.lang.CharSequence);
+  public static de.measite.minidns.DNSName from(java.lang.String);
+  public static de.measite.minidns.DNSName from(de.measite.minidns.DNSName, de.measite.minidns.DNSName);
+  public static de.measite.minidns.DNSName parse(java.io.DataInputStream, byte[]) throws java.io.IOException;
+  public int compareTo(de.measite.minidns.DNSName);
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public boolean isDirectChildOf(de.measite.minidns.DNSName);
+  public boolean isChildOf(de.measite.minidns.DNSName);
+  public int getLabelCount();
+  public de.measite.minidns.DNSName stripToLabels(int);
+  public de.measite.minidns.DNSName getParent();
+  public boolean isRootLabel();
+  public int compareTo(java.lang.Object);
+  static {};
+}
+Compiled from "DNSNameTest.java"
+public class de.measite.minidns.DNSNameTest {
+  public de.measite.minidns.DNSNameTest();
+  public void sizeTest();
+  public void toByteArrayTest();
+  public void parseTest() throws java.io.IOException;
+  public void equalsTest();
+  public void testStripToParts();
+  public void testStripToPartsIllegal();
+  public void testStripToPartsIllegalLong();
+  public void testConcact();
+}
+Compiled from "DNSSECConstants.java"
+public final class de.measite.minidns.DNSSECConstants {
+  static java.util.Map access$000();
+  static java.util.Map access$100();
+  static {};
+}
+Compiled from "DNSSECConstants.java"
+public final class de.measite.minidns.DNSSECConstants$DigestAlgorithm extends java.lang.Enum<de.measite.minidns.DNSSECConstants$DigestAlgorithm> {
+  public static final de.measite.minidns.DNSSECConstants$DigestAlgorithm SHA1;
+  public static final de.measite.minidns.DNSSECConstants$DigestAlgorithm SHA256;
+  public static final de.measite.minidns.DNSSECConstants$DigestAlgorithm GOST;
+  public static final de.measite.minidns.DNSSECConstants$DigestAlgorithm SHA384;
+  public final byte value;
+  public final java.lang.String description;
+  public static de.measite.minidns.DNSSECConstants$DigestAlgorithm[] values();
+  public static de.measite.minidns.DNSSECConstants$DigestAlgorithm valueOf(java.lang.String);
+  public static de.measite.minidns.DNSSECConstants$DigestAlgorithm forByte(byte);
+  static {};
+}
+Compiled from "DNSSECConstants.java"
+public final class de.measite.minidns.DNSSECConstants$SignatureAlgorithm extends java.lang.Enum<de.measite.minidns.DNSSECConstants$SignatureAlgorithm> {
+  public static final de.measite.minidns.DNSSECConstants$SignatureAlgorithm RSAMD5;
+  public static final de.measite.minidns.DNSSECConstants$SignatureAlgorithm DH;
+  public static final de.measite.minidns.DNSSECConstants$SignatureAlgorithm DSA;
+  public static final de.measite.minidns.DNSSECConstants$SignatureAlgorithm RSASHA1;
+  public static final de.measite.minidns.DNSSECConstants$SignatureAlgorithm DSA_NSEC3_SHA1;
+  public static final de.measite.minidns.DNSSECConstants$SignatureAlgorithm RSASHA1_NSEC3_SHA1;
+  public static final de.measite.minidns.DNSSECConstants$SignatureAlgorithm RSASHA256;
+  public static final de.measite.minidns.DNSSECConstants$SignatureAlgorithm RSASHA512;
+  public static final de.measite.minidns.DNSSECConstants$SignatureAlgorithm ECC_GOST;
+  public static final de.measite.minidns.DNSSECConstants$SignatureAlgorithm ECDSAP256SHA256;
+  public static final de.measite.minidns.DNSSECConstants$SignatureAlgorithm ECDSAP384SHA384;
+  public static final de.measite.minidns.DNSSECConstants$SignatureAlgorithm INDIRECT;
+  public static final de.measite.minidns.DNSSECConstants$SignatureAlgorithm PRIVATEDNS;
+  public static final de.measite.minidns.DNSSECConstants$SignatureAlgorithm PRIVATEOID;
+  public final byte number;
+  public final java.lang.String description;
+  public static de.measite.minidns.DNSSECConstants$SignatureAlgorithm[] values();
+  public static de.measite.minidns.DNSSECConstants$SignatureAlgorithm valueOf(java.lang.String);
+  public static de.measite.minidns.DNSSECConstants$SignatureAlgorithm forByte(byte);
+  static {};
+}
+Compiled from "DNSWorld.java"
+public class de.measite.minidns.DNSWorld extends de.measite.minidns.source.DNSDataSource {
+  public de.measite.minidns.DNSWorld();
+  public de.measite.minidns.DNSMessage query(de.measite.minidns.DNSMessage, java.net.InetAddress, int);
+  public void addPreparedResponse(de.measite.minidns.DNSWorld$PreparedResponse);
+  public static de.measite.minidns.DNSWorld applyZones(de.measite.minidns.AbstractDNSClient, de.measite.minidns.DNSWorld$Zone...);
+  static void attachSignatures(de.measite.minidns.DNSMessage$Builder, java.util.List<de.measite.minidns.Record<? extends de.measite.minidns.record.Data>>);
+  static void attachGlues(de.measite.minidns.DNSMessage$Builder, java.util.Collection<de.measite.minidns.Record<? extends de.measite.minidns.record.Data>>, java.util.List<de.measite.minidns.Record<? extends de.measite.minidns.record.Data>>);
+  public static de.measite.minidns.DNSWorld applyStubRecords(de.measite.minidns.AbstractDNSClient, de.measite.minidns.Record<de.measite.minidns.record.Data>...);
+  public static de.measite.minidns.DNSWorld$Zone rootZone(de.measite.minidns.Record<? extends de.measite.minidns.record.Data>...);
+  public static de.measite.minidns.DNSWorld$Zone rootZone(java.util.List<de.measite.minidns.Record<? extends de.measite.minidns.record.Data>>);
+  public static de.measite.minidns.DNSWorld$Zone zone(java.lang.String, java.lang.String, java.lang.String, de.measite.minidns.Record<? extends de.measite.minidns.record.Data>...);
+  public static de.measite.minidns.DNSWorld$Zone zone(java.lang.String, java.lang.String, java.lang.String, java.util.List<de.measite.minidns.Record<? extends de.measite.minidns.record.Data>>);
+  public static de.measite.minidns.DNSWorld$Zone zone(java.lang.String, java.net.InetAddress, java.util.List<de.measite.minidns.Record<? extends de.measite.minidns.record.Data>>);
+  public static de.measite.minidns.Record<de.measite.minidns.record.Data> record(java.lang.String, long, de.measite.minidns.record.Data);
+  public static de.measite.minidns.Record<de.measite.minidns.record.Data> record(de.measite.minidns.DNSName, long, de.measite.minidns.record.Data);
+  public static de.measite.minidns.Record<de.measite.minidns.record.Data> record(java.lang.String, de.measite.minidns.record.Data);
+  public static de.measite.minidns.record.A a(byte[]);
+  public static de.measite.minidns.record.A a(java.lang.String);
+  public static de.measite.minidns.record.AAAA aaaa(byte[]);
+  public static de.measite.minidns.record.AAAA aaaa(java.lang.String);
+  public static de.measite.minidns.record.CNAME cname(java.lang.String);
+  public static de.measite.minidns.record.CNAME cname(de.measite.minidns.DNSName);
+  public static de.measite.minidns.record.DNSKEY dnskey(int, int, de.measite.minidns.DNSSECConstants$SignatureAlgorithm, byte[]);
+  public static de.measite.minidns.record.DNSKEY dnskey(int, de.measite.minidns.DNSSECConstants$SignatureAlgorithm, byte[]);
+  public static de.measite.minidns.record.DS ds(int, de.measite.minidns.DNSSECConstants$SignatureAlgorithm, de.measite.minidns.DNSSECConstants$DigestAlgorithm, byte[]);
+  public static de.measite.minidns.record.DS ds(int, de.measite.minidns.DNSSECConstants$SignatureAlgorithm, byte, byte[]);
+  public static de.measite.minidns.record.DLV dlv(int, de.measite.minidns.DNSSECConstants$SignatureAlgorithm, de.measite.minidns.DNSSECConstants$DigestAlgorithm, byte[]);
+  public static de.measite.minidns.record.MX mx(int, java.lang.String);
+  public static de.measite.minidns.record.MX mx(int, de.measite.minidns.DNSName);
+  public static de.measite.minidns.record.MX mx(java.lang.String);
+  public static de.measite.minidns.record.NS ns(java.lang.String);
+  public static de.measite.minidns.record.NS ns(de.measite.minidns.DNSName);
+  public static de.measite.minidns.record.NSEC nsec(java.lang.String, de.measite.minidns.Record$TYPE...);
+  public static de.measite.minidns.record.NSEC nsec(de.measite.minidns.DNSName, de.measite.minidns.Record$TYPE...);
+  public static de.measite.minidns.record.NSEC3 nsec3(byte, byte, int, byte[], byte[], de.measite.minidns.Record$TYPE...);
+  public static de.measite.minidns.record.RRSIG rrsig(de.measite.minidns.Record$TYPE, de.measite.minidns.DNSSECConstants$SignatureAlgorithm, int, long, java.util.Date, java.util.Date, int, java.lang.String, byte[]);
+  public static de.measite.minidns.record.RRSIG rrsig(de.measite.minidns.Record$TYPE, de.measite.minidns.DNSSECConstants$SignatureAlgorithm, int, long, java.util.Date, java.util.Date, int, de.measite.minidns.DNSName, byte[]);
+  public static de.measite.minidns.record.RRSIG rrsig(de.measite.minidns.Record$TYPE, int, int, long, java.util.Date, java.util.Date, int, java.lang.String, byte[]);
+  public static de.measite.minidns.record.RRSIG rrsig(de.measite.minidns.Record$TYPE, int, int, long, java.util.Date, java.util.Date, int, de.measite.minidns.DNSName, byte[]);
+  public static de.measite.minidns.record.SOA soa(java.lang.String, java.lang.String, long, int, int, int, long);
+  public static de.measite.minidns.record.SOA soa(de.measite.minidns.DNSName, de.measite.minidns.DNSName, long, int, int, int, long);
+  public static de.measite.minidns.record.SRV srv(int, int, int, java.lang.String);
+  public static de.measite.minidns.record.SRV srv(int, int, int, de.measite.minidns.DNSName);
+  public static de.measite.minidns.record.SRV srv(int, java.lang.String);
+  public static byte[] parseIpV4(java.lang.String);
+  static byte[] parseIpV6(java.lang.String);
+}
+Compiled from "DNSWorld.java"
+public class de.measite.minidns.DNSWorld$AddressedAnswerResponse extends de.measite.minidns.DNSWorld$AnswerResponse {
+  final java.net.InetAddress address;
+  public de.measite.minidns.DNSWorld$AddressedAnswerResponse(java.net.InetAddress, de.measite.minidns.DNSMessage, de.measite.minidns.DNSMessage);
+  public boolean isResponse(de.measite.minidns.DNSMessage, java.net.InetAddress);
+  public java.lang.String toString();
+}
+Compiled from "DNSWorld.java"
+public class de.measite.minidns.DNSWorld$AddressedHintsResponse extends de.measite.minidns.DNSWorld$HintsResponse {
+  final java.net.InetAddress address;
+  public de.measite.minidns.DNSWorld$AddressedHintsResponse(java.net.InetAddress, de.measite.minidns.DNSName, de.measite.minidns.DNSMessage);
+  public boolean isResponse(de.measite.minidns.DNSMessage, java.net.InetAddress);
+  public java.lang.String toString();
+}
+Compiled from "DNSWorld.java"
+public class de.measite.minidns.DNSWorld$AnswerResponse implements de.measite.minidns.DNSWorld$PreparedResponse {
+  final de.measite.minidns.DNSMessage request;
+  final de.measite.minidns.DNSMessage response;
+  public de.measite.minidns.DNSWorld$AnswerResponse(de.measite.minidns.DNSMessage, de.measite.minidns.DNSMessage);
+  public boolean isResponse(de.measite.minidns.DNSMessage, java.net.InetAddress);
+  public de.measite.minidns.DNSMessage getResponse();
+  public java.lang.String toString();
+}
+Compiled from "DNSWorld.java"
+public abstract class de.measite.minidns.DNSWorld$HintsResponse implements de.measite.minidns.DNSWorld$PreparedResponse {
+  final de.measite.minidns.DNSName ending;
+  final de.measite.minidns.DNSMessage response;
+  public de.measite.minidns.DNSWorld$HintsResponse(de.measite.minidns.DNSName, de.measite.minidns.DNSMessage);
+  boolean questionHintable(de.measite.minidns.DNSMessage);
+  public de.measite.minidns.DNSMessage getResponse();
+  public java.lang.String toString();
+}
+Compiled from "DNSWorld.java"
+public interface de.measite.minidns.DNSWorld$PreparedResponse {
+  public abstract boolean isResponse(de.measite.minidns.DNSMessage, java.net.InetAddress);
+  public abstract de.measite.minidns.DNSMessage getResponse();
+}
+Compiled from "DNSWorld.java"
+public class de.measite.minidns.DNSWorld$RootAnswerResponse extends de.measite.minidns.DNSWorld$AnswerResponse {
+  public de.measite.minidns.DNSWorld$RootAnswerResponse(de.measite.minidns.DNSMessage, de.measite.minidns.DNSMessage);
+  public boolean isResponse(de.measite.minidns.DNSMessage, java.net.InetAddress);
+  public java.lang.String toString();
+}
+Compiled from "DNSWorld.java"
+public class de.measite.minidns.DNSWorld$RootHintsResponse extends de.measite.minidns.DNSWorld$HintsResponse {
+  public de.measite.minidns.DNSWorld$RootHintsResponse(de.measite.minidns.DNSName, de.measite.minidns.DNSMessage);
+  public boolean isResponse(de.measite.minidns.DNSMessage, java.net.InetAddress);
+}
+Compiled from "DNSWorld.java"
+public class de.measite.minidns.DNSWorld$Zone {
+  java.lang.String zoneName;
+  java.net.InetAddress address;
+  java.util.List<de.measite.minidns.Record<? extends de.measite.minidns.record.Data>> records;
+  public de.measite.minidns.DNSWorld$Zone(java.lang.String, java.net.InetAddress, java.util.List<de.measite.minidns.Record<? extends de.measite.minidns.record.Data>>);
+  public java.util.List<de.measite.minidns.RRSet> getRRSets();
+  boolean isRootZone();
+}
+Compiled from "EDNS.java"
+public class de.measite.minidns.EDNS {
+  public static final int FLAG_DNSSEC_OK;
+  public final int udpPayloadSize;
+  public final int extendedRcode;
+  public final int version;
+  public final int flags;
+  public final java.util.List<de.measite.minidns.edns.EDNSOption> variablePart;
+  public final boolean dnssecOk;
+  static final boolean $assertionsDisabled;
+  public de.measite.minidns.EDNS(de.measite.minidns.Record<de.measite.minidns.record.OPT>);
+  public de.measite.minidns.EDNS(de.measite.minidns.EDNS$Builder);
+  public <O extends de.measite.minidns.edns.EDNSOption> O getEdnsOption(de.measite.minidns.EDNS$OptionCode);
+  public de.measite.minidns.Record<de.measite.minidns.record.OPT> asRecord();
+  public java.lang.String asTerminalOutput();
+  public java.lang.String toString();
+  public static de.measite.minidns.EDNS fromRecord(de.measite.minidns.Record<? extends de.measite.minidns.record.Data>);
+  public static de.measite.minidns.EDNS$Builder builder();
+  static {};
+}
+Compiled from "EDNS.java"
+class de.measite.minidns.EDNS$1 {
+}
+Compiled from "EDNS.java"
+public class de.measite.minidns.EDNS$Builder {
+  public de.measite.minidns.EDNS$Builder setUdpPayloadSize(int);
+  public de.measite.minidns.EDNS$Builder setDnssecOk(boolean);
+  public de.measite.minidns.EDNS$Builder setDnssecOk();
+  public de.measite.minidns.EDNS$Builder addEdnsOption(de.measite.minidns.edns.EDNSOption);
+  public de.measite.minidns.EDNS build();
+  static int access$000(de.measite.minidns.EDNS$Builder);
+  static int access$100(de.measite.minidns.EDNS$Builder);
+  static int access$200(de.measite.minidns.EDNS$Builder);
+  static boolean access$300(de.measite.minidns.EDNS$Builder);
+  static java.util.List access$400(de.measite.minidns.EDNS$Builder);
+  de.measite.minidns.EDNS$Builder(de.measite.minidns.EDNS$1);
+}
+Compiled from "EDNS.java"
+public final class de.measite.minidns.EDNS$OptionCode extends java.lang.Enum<de.measite.minidns.EDNS$OptionCode> {
+  public static final de.measite.minidns.EDNS$OptionCode UNKNOWN;
+  public static final de.measite.minidns.EDNS$OptionCode NSID;
+  public final int asInt;
+  public final java.lang.Class<? extends de.measite.minidns.edns.EDNSOption> clazz;
+  public static de.measite.minidns.EDNS$OptionCode[] values();
+  public static de.measite.minidns.EDNS$OptionCode valueOf(java.lang.String);
+  public static de.measite.minidns.EDNS$OptionCode from(int);
+  static {};
+}
+Compiled from "LRUCacheTest.java"
+public class de.measite.minidns.LRUCacheTest {
+  public de.measite.minidns.LRUCacheTest();
+  public void setUp() throws java.lang.Exception;
+  public void testOutdatedCacheEntry();
+  public void testOverfilledCache();
+}
+Compiled from "MiniDNSConfiguration.java"
+public class de.measite.minidns.MiniDNSConfiguration {
+  public de.measite.minidns.MiniDNSConfiguration();
+  public static java.lang.String getVersion();
+}
+Compiled from "MiniDNSException.java"
+public abstract class de.measite.minidns.MiniDNSException extends java.io.IOException {
+  protected de.measite.minidns.MiniDNSException(java.lang.String);
+}
+Compiled from "MiniDNSException.java"
+public class de.measite.minidns.MiniDNSException$IdMismatch extends de.measite.minidns.MiniDNSException {
+  static final boolean $assertionsDisabled;
+  public de.measite.minidns.MiniDNSException$IdMismatch(de.measite.minidns.DNSMessage, de.measite.minidns.DNSMessage);
+  public de.measite.minidns.DNSMessage getRequest();
+  public de.measite.minidns.DNSMessage getResponse();
+  static {};
+}
+Compiled from "MiniDNSInitialization.java"
+public class de.measite.minidns.MiniDNSInitialization {
+  static final java.lang.String VERSION;
+  public de.measite.minidns.MiniDNSInitialization();
+  static {};
+}
+Compiled from "Question.java"
+public class de.measite.minidns.Question {
+  public final de.measite.minidns.DNSName name;
+  public final de.measite.minidns.Record$TYPE type;
+  public final de.measite.minidns.Record$CLASS clazz;
+  static final boolean $assertionsDisabled;
+  public de.measite.minidns.Question(java.lang.CharSequence, de.measite.minidns.Record$TYPE, de.measite.minidns.Record$CLASS, boolean);
+  public de.measite.minidns.Question(de.measite.minidns.DNSName, de.measite.minidns.Record$TYPE, de.measite.minidns.Record$CLASS, boolean);
+  public de.measite.minidns.Question(de.measite.minidns.DNSName, de.measite.minidns.Record$TYPE, de.measite.minidns.Record$CLASS);
+  public de.measite.minidns.Question(de.measite.minidns.DNSName, de.measite.minidns.Record$TYPE);
+  public de.measite.minidns.Question(java.lang.CharSequence, de.measite.minidns.Record$TYPE, de.measite.minidns.Record$CLASS);
+  public de.measite.minidns.Question(java.lang.CharSequence, de.measite.minidns.Record$TYPE);
+  public de.measite.minidns.Question(java.io.DataInputStream, byte[]) throws java.io.IOException;
+  public byte[] toByteArray();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+  public de.measite.minidns.DNSMessage$Builder asMessageBuilder();
+  public de.measite.minidns.DNSMessage asQueryMessage();
+  static {};
+}
+Compiled from "RRSet.java"
+public class de.measite.minidns.RRSet {
+  public final de.measite.minidns.DNSName name;
+  public final de.measite.minidns.Record$TYPE type;
+  public final de.measite.minidns.Record$CLASS clazz;
+  public final java.util.Set<de.measite.minidns.Record<? extends de.measite.minidns.record.Data>> records;
+  public static de.measite.minidns.RRSet$Builder builder();
+  de.measite.minidns.RRSet(de.measite.minidns.DNSName, de.measite.minidns.Record$TYPE, de.measite.minidns.Record$CLASS, java.util.Set, de.measite.minidns.RRSet$1);
+}
+Compiled from "RRSet.java"
+class de.measite.minidns.RRSet$1 {
+}
+Compiled from "RRSet.java"
+public class de.measite.minidns.RRSet$Builder {
+  java.util.Set<de.measite.minidns.Record<? extends de.measite.minidns.record.Data>> records;
+  static final boolean $assertionsDisabled;
+  public de.measite.minidns.RRSet$Builder addRecord(de.measite.minidns.Record<? extends de.measite.minidns.record.Data>);
+  public boolean couldContain(de.measite.minidns.Record<? extends de.measite.minidns.record.Data>);
+  public boolean addIfPossible(de.measite.minidns.Record<? extends de.measite.minidns.record.Data>);
+  public de.measite.minidns.RRSet build();
+  de.measite.minidns.RRSet$Builder(de.measite.minidns.RRSet$1);
+  static {};
+}
+Compiled from "Record.java"
+public final class de.measite.minidns.Record<D extends de.measite.minidns.record.Data> {
+  public final de.measite.minidns.DNSName name;
+  public final de.measite.minidns.Record$TYPE type;
+  public final de.measite.minidns.Record$CLASS clazz;
+  public final int clazzValue;
+  public final long ttl;
+  public final D payloadData;
+  protected final boolean unicastQuery;
+  public static de.measite.minidns.Record<de.measite.minidns.record.Data> parse(java.io.DataInputStream, byte[]) throws java.io.IOException;
+  public de.measite.minidns.Record(de.measite.minidns.DNSName, de.measite.minidns.Record$TYPE, de.measite.minidns.Record$CLASS, long, D, boolean);
+  public de.measite.minidns.Record(java.lang.String, de.measite.minidns.Record$TYPE, de.measite.minidns.Record$CLASS, long, D, boolean);
+  public de.measite.minidns.Record(java.lang.String, de.measite.minidns.Record$TYPE, int, long, D);
+  public de.measite.minidns.Record(de.measite.minidns.DNSName, de.measite.minidns.Record$TYPE, int, long, D);
+  public void toOutputStream(java.io.DataOutputStream) throws java.io.IOException;
+  public byte[] toByteArray();
+  public java.lang.String toString();
+  public boolean isAnswer(de.measite.minidns.Question);
+  public boolean isUnicastQuery();
+  public D getPayload();
+  public long getTtl();
+  public de.measite.minidns.Question getQuestion();
+  public de.measite.minidns.DNSMessage$Builder getQuestionMessage();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public <E extends de.measite.minidns.record.Data> de.measite.minidns.Record<E> ifPossibleAs(java.lang.Class<E>);
+  public static <E extends de.measite.minidns.record.Data> void filter(java.util.Collection<de.measite.minidns.Record<E>>, java.lang.Class<E>, java.util.Collection<de.measite.minidns.Record<? extends de.measite.minidns.record.Data>>);
+  public static <E extends de.measite.minidns.record.Data> java.util.List<de.measite.minidns.Record<E>> filter(java.lang.Class<E>, java.util.Collection<de.measite.minidns.Record<? extends de.measite.minidns.record.Data>>);
+}
+Compiled from "Record.java"
+class de.measite.minidns.Record$1 {
+  static final int[] $SwitchMap$de$measite$minidns$Record$TYPE;
+  static {};
+}
+Compiled from "Record.java"
+public final class de.measite.minidns.Record$CLASS extends java.lang.Enum<de.measite.minidns.Record$CLASS> {
+  public static final de.measite.minidns.Record$CLASS IN;
+  public static final de.measite.minidns.Record$CLASS CH;
+  public static final de.measite.minidns.Record$CLASS HS;
+  public static final de.measite.minidns.Record$CLASS NONE;
+  public static final de.measite.minidns.Record$CLASS ANY;
+  public static de.measite.minidns.Record$CLASS[] values();
+  public static de.measite.minidns.Record$CLASS valueOf(java.lang.String);
+  public int getValue();
+  public static de.measite.minidns.Record$CLASS getClass(int);
+  static {};
+}
+Compiled from "Record.java"
+public final class de.measite.minidns.Record$TYPE extends java.lang.Enum<de.measite.minidns.Record$TYPE> {
+  public static final de.measite.minidns.Record$TYPE UNKNOWN;
+  public static final de.measite.minidns.Record$TYPE A;
+  public static final de.measite.minidns.Record$TYPE NS;
+  public static final de.measite.minidns.Record$TYPE MD;
+  public static final de.measite.minidns.Record$TYPE MF;
+  public static final de.measite.minidns.Record$TYPE CNAME;
+  public static final de.measite.minidns.Record$TYPE SOA;
+  public static final de.measite.minidns.Record$TYPE MB;
+  public static final de.measite.minidns.Record$TYPE MG;
+  public static final de.measite.minidns.Record$TYPE MR;
+  public static final de.measite.minidns.Record$TYPE NULL;
+  public static final de.measite.minidns.Record$TYPE WKS;
+  public static final de.measite.minidns.Record$TYPE PTR;
+  public static final de.measite.minidns.Record$TYPE HINFO;
+  public static final de.measite.minidns.Record$TYPE MINFO;
+  public static final de.measite.minidns.Record$TYPE MX;
+  public static final de.measite.minidns.Record$TYPE TXT;
+  public static final de.measite.minidns.Record$TYPE RP;
+  public static final de.measite.minidns.Record$TYPE AFSDB;
+  public static final de.measite.minidns.Record$TYPE X25;
+  public static final de.measite.minidns.Record$TYPE ISDN;
+  public static final de.measite.minidns.Record$TYPE RT;
+  public static final de.measite.minidns.Record$TYPE NSAP;
+  public static final de.measite.minidns.Record$TYPE NSAP_PTR;
+  public static final de.measite.minidns.Record$TYPE SIG;
+  public static final de.measite.minidns.Record$TYPE KEY;
+  public static final de.measite.minidns.Record$TYPE PX;
+  public static final de.measite.minidns.Record$TYPE GPOS;
+  public static final de.measite.minidns.Record$TYPE AAAA;
+  public static final de.measite.minidns.Record$TYPE LOC;
+  public static final de.measite.minidns.Record$TYPE NXT;
+  public static final de.measite.minidns.Record$TYPE EID;
+  public static final de.measite.minidns.Record$TYPE NIMLOC;
+  public static final de.measite.minidns.Record$TYPE SRV;
+  public static final de.measite.minidns.Record$TYPE ATMA;
+  public static final de.measite.minidns.Record$TYPE NAPTR;
+  public static final de.measite.minidns.Record$TYPE KX;
+  public static final de.measite.minidns.Record$TYPE CERT;
+  public static final de.measite.minidns.Record$TYPE A6;
+  public static final de.measite.minidns.Record$TYPE DNAME;
+  public static final de.measite.minidns.Record$TYPE SINK;
+  public static final de.measite.minidns.Record$TYPE OPT;
+  public static final de.measite.minidns.Record$TYPE APL;
+  public static final de.measite.minidns.Record$TYPE DS;
+  public static final de.measite.minidns.Record$TYPE SSHFP;
+  public static final de.measite.minidns.Record$TYPE IPSECKEY;
+  public static final de.measite.minidns.Record$TYPE RRSIG;
+  public static final de.measite.minidns.Record$TYPE NSEC;
+  public static final de.measite.minidns.Record$TYPE DNSKEY;
+  public static final de.measite.minidns.Record$TYPE DHCID;
+  public static final de.measite.minidns.Record$TYPE NSEC3;
+  public static final de.measite.minidns.Record$TYPE NSEC3PARAM;
+  public static final de.measite.minidns.Record$TYPE TLSA;
+  public static final de.measite.minidns.Record$TYPE HIP;
+  public static final de.measite.minidns.Record$TYPE NINFO;
+  public static final de.measite.minidns.Record$TYPE RKEY;
+  public static final de.measite.minidns.Record$TYPE TALINK;
+  public static final de.measite.minidns.Record$TYPE CDS;
+  public static final de.measite.minidns.Record$TYPE CDNSKEY;
+  public static final de.measite.minidns.Record$TYPE OPENPGPKEY;
+  public static final de.measite.minidns.Record$TYPE CSYNC;
+  public static final de.measite.minidns.Record$TYPE SPF;
+  public static final de.measite.minidns.Record$TYPE UINFO;
+  public static final de.measite.minidns.Record$TYPE UID;
+  public static final de.measite.minidns.Record$TYPE GID;
+  public static final de.measite.minidns.Record$TYPE UNSPEC;
+  public static final de.measite.minidns.Record$TYPE NID;
+  public static final de.measite.minidns.Record$TYPE L32;
+  public static final de.measite.minidns.Record$TYPE L64;
+  public static final de.measite.minidns.Record$TYPE LP;
+  public static final de.measite.minidns.Record$TYPE EUI48;
+  public static final de.measite.minidns.Record$TYPE EUI64;
+  public static final de.measite.minidns.Record$TYPE TKEY;
+  public static final de.measite.minidns.Record$TYPE TSIG;
+  public static final de.measite.minidns.Record$TYPE IXFR;
+  public static final de.measite.minidns.Record$TYPE AXFR;
+  public static final de.measite.minidns.Record$TYPE MAILB;
+  public static final de.measite.minidns.Record$TYPE MAILA;
+  public static final de.measite.minidns.Record$TYPE ANY;
+  public static final de.measite.minidns.Record$TYPE URI;
+  public static final de.measite.minidns.Record$TYPE CAA;
+  public static final de.measite.minidns.Record$TYPE TA;
+  public static final de.measite.minidns.Record$TYPE DLV;
+  public static de.measite.minidns.Record$TYPE[] values();
+  public static de.measite.minidns.Record$TYPE valueOf(java.lang.String);
+  public int getValue();
+  public <D extends de.measite.minidns.record.Data> java.lang.Class<D> getDataClass();
+  public static de.measite.minidns.Record$TYPE getType(int);
+  public static <D extends de.measite.minidns.record.Data> de.measite.minidns.Record$TYPE getType(java.lang.Class<D>);
+  static java.lang.Class access$000(de.measite.minidns.Record$TYPE);
+  static {};
+}
+Compiled from "ExtendedLRUCache.java"
+public class de.measite.minidns.cache.ExtendedLRUCache extends de.measite.minidns.cache.LRUCache {
+  static final boolean $assertionsDisabled;
+  public de.measite.minidns.cache.ExtendedLRUCache();
+  public de.measite.minidns.cache.ExtendedLRUCache(int);
+  public de.measite.minidns.cache.ExtendedLRUCache(int, long);
+  protected void putNormalized(de.measite.minidns.DNSMessage, de.measite.minidns.DNSMessage);
+  public void offer(de.measite.minidns.DNSMessage, de.measite.minidns.DNSMessage, de.measite.minidns.DNSName);
+  protected boolean shouldGather(de.measite.minidns.Record<? extends de.measite.minidns.record.Data>, de.measite.minidns.Question, de.measite.minidns.DNSName);
+  static {};
+}
+Compiled from "FullLRUCache.java"
+public class de.measite.minidns.cache.FullLRUCache extends de.measite.minidns.cache.ExtendedLRUCache {
+  public de.measite.minidns.cache.FullLRUCache(int);
+  public de.measite.minidns.cache.FullLRUCache(int, long);
+  protected boolean shouldGather(de.measite.minidns.Record<? extends de.measite.minidns.record.Data>, de.measite.minidns.Question, de.measite.minidns.DNSName);
+}
+Compiled from "LRUCache.java"
+public class de.measite.minidns.cache.LRUCache extends de.measite.minidns.DNSCache {
+  protected long missCount;
+  protected long expireCount;
+  protected long hitCount;
+  protected int capacity;
+  protected long maxTTL;
+  protected java.util.LinkedHashMap<de.measite.minidns.DNSMessage, de.measite.minidns.DNSMessage> backend;
+  public de.measite.minidns.cache.LRUCache(int, long);
+  public de.measite.minidns.cache.LRUCache(int);
+  protected synchronized void putNormalized(de.measite.minidns.DNSMessage, de.measite.minidns.DNSMessage);
+  protected synchronized de.measite.minidns.DNSMessage getNormalized(de.measite.minidns.DNSMessage);
+  public synchronized void clear();
+  public long getMissCount();
+  public long getExpireCount();
+  public long getHitCount();
+  public java.lang.String toString();
+  public void offer(de.measite.minidns.DNSMessage, de.measite.minidns.DNSMessage, de.measite.minidns.DNSName);
+}
+Compiled from "LRUCache.java"
+class de.measite.minidns.cache.LRUCache$1 extends java.util.LinkedHashMap<de.measite.minidns.DNSMessage, de.measite.minidns.DNSMessage> {
+  final int val$capacity;
+  final de.measite.minidns.cache.LRUCache this$0;
+  de.measite.minidns.cache.LRUCache$1(de.measite.minidns.cache.LRUCache, int, float, boolean, int);
+  protected boolean removeEldestEntry(java.util.Map$Entry<de.measite.minidns.DNSMessage, de.measite.minidns.DNSMessage>);
+}
+Compiled from "DaneCertificateException.java"
+public abstract class de.measite.minidns.dane.DaneCertificateException extends java.security.cert.CertificateException {
+  protected de.measite.minidns.dane.DaneCertificateException();
+  protected de.measite.minidns.dane.DaneCertificateException(java.lang.String);
+}
+Compiled from "DaneCertificateException.java"
+public class de.measite.minidns.dane.DaneCertificateException$CertificateMismatch extends de.measite.minidns.dane.DaneCertificateException {
+  public final de.measite.minidns.record.TLSA tlsa;
+  public final byte[] computed;
+  public de.measite.minidns.dane.DaneCertificateException$CertificateMismatch(de.measite.minidns.record.TLSA, byte[]);
+}
+Compiled from "DaneCertificateException.java"
+public class de.measite.minidns.dane.DaneCertificateException$MultipleCertificateMismatchExceptions extends de.measite.minidns.dane.DaneCertificateException {
+  public final java.util.List<de.measite.minidns.dane.DaneCertificateException$CertificateMismatch> certificateMismatchExceptions;
+  static final boolean $assertionsDisabled;
+  public de.measite.minidns.dane.DaneCertificateException$MultipleCertificateMismatchExceptions(java.util.List<de.measite.minidns.dane.DaneCertificateException$CertificateMismatch>);
+  static {};
+}
+Compiled from "DaneVerifier.java"
+public class de.measite.minidns.dane.DaneVerifier {
+  public de.measite.minidns.dane.DaneVerifier();
+  public de.measite.minidns.dane.DaneVerifier(de.measite.minidns.AbstractDNSClient);
+  public boolean verify(javax.net.ssl.SSLSocket) throws java.security.cert.CertificateException;
+  public boolean verify(javax.net.ssl.SSLSession) throws java.security.cert.CertificateException;
+  public boolean verifyCertificateChain(java.security.cert.X509Certificate[], java.lang.String, int) throws java.security.cert.CertificateException;
+  public javax.net.ssl.HttpsURLConnection verifiedConnect(javax.net.ssl.HttpsURLConnection) throws java.io.IOException, java.security.cert.CertificateException;
+  public javax.net.ssl.HttpsURLConnection verifiedConnect(javax.net.ssl.HttpsURLConnection, javax.net.ssl.X509TrustManager) throws java.io.IOException, java.security.cert.CertificateException;
+  static {};
+}
+Compiled from "ExpectingTrustManager.java"
+public class de.measite.minidns.dane.ExpectingTrustManager implements javax.net.ssl.X509TrustManager {
+  public de.measite.minidns.dane.ExpectingTrustManager(javax.net.ssl.X509TrustManager);
+  public boolean hasException();
+  public java.security.cert.CertificateException getException();
+  public void checkClientTrusted(java.security.cert.X509Certificate[], java.lang.String) throws java.security.cert.CertificateException;
+  public void checkServerTrusted(java.security.cert.X509Certificate[], java.lang.String) throws java.security.cert.CertificateException;
+  public java.security.cert.X509Certificate[] getAcceptedIssuers();
+}
+Compiled from "DaneExtendedTrustManager.java"
+public class de.measite.minidns.dane.java7.DaneExtendedTrustManager extends javax.net.ssl.X509ExtendedTrustManager {
+  public static void inject();
+  public static void inject(de.measite.minidns.dane.java7.DaneExtendedTrustManager);
+  public de.measite.minidns.dane.java7.DaneExtendedTrustManager();
+  public de.measite.minidns.dane.java7.DaneExtendedTrustManager(de.measite.minidns.AbstractDNSClient);
+  public de.measite.minidns.dane.java7.DaneExtendedTrustManager(javax.net.ssl.X509TrustManager);
+  public de.measite.minidns.dane.java7.DaneExtendedTrustManager(de.measite.minidns.AbstractDNSClient, javax.net.ssl.X509TrustManager);
+  public de.measite.minidns.dane.java7.DaneExtendedTrustManager(de.measite.minidns.dane.DaneVerifier, javax.net.ssl.X509TrustManager);
+  public void checkClientTrusted(java.security.cert.X509Certificate[], java.lang.String, java.net.Socket) throws java.security.cert.CertificateException;
+  public void checkServerTrusted(java.security.cert.X509Certificate[], java.lang.String, java.net.Socket) throws java.security.cert.CertificateException;
+  public void checkClientTrusted(java.security.cert.X509Certificate[], java.lang.String, javax.net.ssl.SSLEngine) throws java.security.cert.CertificateException;
+  public void checkServerTrusted(java.security.cert.X509Certificate[], java.lang.String, javax.net.ssl.SSLEngine) throws java.security.cert.CertificateException;
+  public void checkClientTrusted(java.security.cert.X509Certificate[], java.lang.String) throws java.security.cert.CertificateException;
+  public void checkServerTrusted(java.security.cert.X509Certificate[], java.lang.String) throws java.security.cert.CertificateException;
+  public java.security.cert.X509Certificate[] getAcceptedIssuers();
+  static {};
+}
+Compiled from "DaneJava7Test.java"
+public class de.measite.minidns.dane.java7.DaneJava7Test {
+  public de.measite.minidns.dane.java7.DaneJava7Test();
+  public void emptyTest();
+}
+Compiled from "DNSSECClient.java"
+public class de.measite.minidns.dnssec.DNSSECClient extends de.measite.minidns.recursive.ReliableDNSClient {
+  public de.measite.minidns.dnssec.DNSSECClient();
+  public de.measite.minidns.dnssec.DNSSECClient(de.measite.minidns.DNSCache);
+  public de.measite.minidns.DNSMessage query(de.measite.minidns.Question) throws java.io.IOException;
+  public de.measite.minidns.dnssec.DNSSECMessage queryDnssec(java.lang.CharSequence, de.measite.minidns.Record$TYPE) throws java.io.IOException;
+  public de.measite.minidns.dnssec.DNSSECMessage queryDnssec(de.measite.minidns.Question) throws java.io.IOException;
+  protected boolean isResponseCacheable(de.measite.minidns.Question, de.measite.minidns.DNSMessage);
+  protected de.measite.minidns.DNSMessage$Builder newQuestion(de.measite.minidns.DNSMessage$Builder);
+  protected java.lang.String isResponseAcceptable(de.measite.minidns.DNSMessage);
+  public void addSecureEntryPoint(de.measite.minidns.DNSName, byte[]);
+  public void removeSecureEntryPoint(de.measite.minidns.DNSName);
+  public void clearSecureEntryPoints();
+  public boolean isStripSignatureRecords();
+  public void setStripSignatureRecords(boolean);
+  public void enableLookasideValidation();
+  public void disableLookasideValidation();
+  public void configureLookasideValidation(de.measite.minidns.DNSName);
+  static {};
+}
+Compiled from "DNSSECClient.java"
+class de.measite.minidns.dnssec.DNSSECClient$1 {
+  static final int[] $SwitchMap$de$measite$minidns$Record$TYPE;
+  static {};
+}
+Compiled from "DNSSECClient.java"
+class de.measite.minidns.dnssec.DNSSECClient$VerifySignaturesResult {
+  boolean sepSignatureRequired;
+  boolean sepSignaturePresent;
+  java.util.Set<de.measite.minidns.dnssec.UnverifiedReason> reasons;
+  final de.measite.minidns.dnssec.DNSSECClient this$0;
+  de.measite.minidns.dnssec.DNSSECClient$VerifySignaturesResult(de.measite.minidns.dnssec.DNSSECClient, de.measite.minidns.dnssec.DNSSECClient$1);
+}
+Compiled from "DNSSECClientTest.java"
+public class de.measite.minidns.dnssec.DNSSECClientTest {
+  public de.measite.minidns.dnssec.DNSSECClientTest();
+  public static void generateKeys();
+  public void setUp() throws java.lang.Exception;
+  void checkCorrectExampleMessage(de.measite.minidns.DNSMessage);
+  public void testBasicValid() throws java.io.IOException;
+  public void testNoSEPAtKSK() throws java.io.IOException;
+  public void testSingleZSK() throws java.io.IOException;
+  public void testMissingDelegation() throws java.io.IOException;
+  public void testUnsignedRoot() throws java.io.IOException;
+  public void testNoRootSecureEntryPoint() throws java.io.IOException;
+  public void testUnsignedZone() throws java.io.IOException;
+  public void testInvalidDNSKEY() throws java.io.IOException;
+  public void testNoDNSKEY() throws java.io.IOException;
+  public void testInvalidRRSIG() throws java.io.IOException;
+  public void testUnknownAlgorithm() throws java.io.IOException;
+  public void testInvalidDelegation() throws java.io.IOException;
+  public void testUnknownDelegationDigestType() throws java.io.IOException;
+  public void testSignatureOutOfDate() throws java.io.IOException;
+  public void testSignatureInFuture() throws java.io.IOException;
+  public void testValidNSEC() throws java.lang.Exception;
+  public void testValidDLV() throws java.io.IOException;
+  static {};
+}
+Compiled from "DNSSECMessage.java"
+public class de.measite.minidns.dnssec.DNSSECMessage extends de.measite.minidns.DNSMessage {
+  de.measite.minidns.dnssec.DNSSECMessage(de.measite.minidns.DNSMessage$Builder, java.util.Set<de.measite.minidns.Record<de.measite.minidns.record.RRSIG>>, java.util.Set<de.measite.minidns.dnssec.UnverifiedReason>);
+  public java.util.Set<de.measite.minidns.Record<de.measite.minidns.record.RRSIG>> getSignatures();
+  public java.util.Set<de.measite.minidns.dnssec.UnverifiedReason> getUnverifiedReasons();
+}
+Compiled from "DNSSECResultNotAuthenticException.java"
+public class de.measite.minidns.dnssec.DNSSECResultNotAuthenticException extends de.measite.minidns.MiniDNSException {
+  public static de.measite.minidns.dnssec.DNSSECResultNotAuthenticException from(java.util.Set<de.measite.minidns.dnssec.UnverifiedReason>);
+  public java.util.Set<de.measite.minidns.dnssec.UnverifiedReason> getUnverifiedReasons();
+}
+Compiled from "DNSSECValidationFailedException.java"
+public class de.measite.minidns.dnssec.DNSSECValidationFailedException extends java.lang.RuntimeException {
+  public de.measite.minidns.dnssec.DNSSECValidationFailedException(de.measite.minidns.Question, java.lang.String);
+  public de.measite.minidns.dnssec.DNSSECValidationFailedException(java.lang.String);
+  public de.measite.minidns.dnssec.DNSSECValidationFailedException(java.lang.String, java.lang.Throwable);
+  public de.measite.minidns.dnssec.DNSSECValidationFailedException(de.measite.minidns.Record<? extends de.measite.minidns.record.Data>, java.lang.String);
+  public de.measite.minidns.dnssec.DNSSECValidationFailedException(java.util.List<de.measite.minidns.Record<? extends de.measite.minidns.record.Data>>, java.lang.String);
+}
+Compiled from "DNSSECValidatorInitializationException.java"
+public class de.measite.minidns.dnssec.DNSSECValidatorInitializationException extends java.lang.RuntimeException {
+  public de.measite.minidns.dnssec.DNSSECValidatorInitializationException(java.lang.String, java.lang.Throwable);
+}
+Compiled from "DNSSECWorld.java"
+public class de.measite.minidns.dnssec.DNSSECWorld extends de.measite.minidns.DNSWorld {
+  public de.measite.minidns.dnssec.DNSSECWorld();
+  public static de.measite.minidns.DNSWorld$Zone signedRootZone(de.measite.minidns.dnssec.DNSSECWorld$SignedRRSet...);
+  public static de.measite.minidns.DNSWorld$Zone signedZone(java.lang.String, java.lang.String, java.lang.String, de.measite.minidns.dnssec.DNSSECWorld$SignedRRSet...);
+  public static de.measite.minidns.DNSWorld$Zone signedZone(java.lang.String, java.net.InetAddress, de.measite.minidns.dnssec.DNSSECWorld$SignedRRSet...);
+  public static java.util.List<de.measite.minidns.Record<? extends de.measite.minidns.record.Data>> merge(de.measite.minidns.dnssec.DNSSECWorld$SignedRRSet...);
+  public static de.measite.minidns.dnssec.DNSSECWorld$SignedRRSet sign(de.measite.minidns.record.DNSKEY, java.lang.String, java.security.PrivateKey, de.measite.minidns.DNSSECConstants$SignatureAlgorithm, de.measite.minidns.Record<? extends de.measite.minidns.record.Data>...);
+  public static de.measite.minidns.dnssec.DNSSECWorld$SignedRRSet sign(java.security.PrivateKey, de.measite.minidns.record.RRSIG, de.measite.minidns.Record<? extends de.measite.minidns.record.Data>...);
+  public static de.measite.minidns.Record<? extends de.measite.minidns.record.Data> rrsigRecord(de.measite.minidns.record.DNSKEY, java.lang.String, java.security.PrivateKey, de.measite.minidns.DNSSECConstants$SignatureAlgorithm, de.measite.minidns.Record<? extends de.measite.minidns.record.Data>...);
+  public static de.measite.minidns.Record<? extends de.measite.minidns.record.Data> rrsigRecord(java.security.PrivateKey, de.measite.minidns.record.RRSIG, de.measite.minidns.Record<? extends de.measite.minidns.record.Data>...);
+  public static de.measite.minidns.record.DS ds(java.lang.String, de.measite.minidns.DNSSECConstants$DigestAlgorithm, de.measite.minidns.record.DNSKEY);
+  public static de.measite.minidns.record.DS ds(de.measite.minidns.DNSName, de.measite.minidns.DNSSECConstants$DigestAlgorithm, de.measite.minidns.record.DNSKEY);
+  public static de.measite.minidns.record.DLV dlv(java.lang.String, de.measite.minidns.DNSSECConstants$DigestAlgorithm, de.measite.minidns.record.DNSKEY);
+  public static de.measite.minidns.record.DLV dlv(de.measite.minidns.DNSName, de.measite.minidns.DNSSECConstants$DigestAlgorithm, de.measite.minidns.record.DNSKEY);
+  public static byte[] calculateDsDigest(de.measite.minidns.DNSName, de.measite.minidns.DNSSECConstants$DigestAlgorithm, de.measite.minidns.record.DNSKEY);
+  public static byte[] sign(java.security.PrivateKey, de.measite.minidns.DNSSECConstants$SignatureAlgorithm, byte[]);
+  public static byte[] convertAsn1ToRFC(java.security.interfaces.DSAPrivateKey, byte[]) throws java.io.IOException;
+  public static void streamAsn1Int(java.io.DataInputStream, java.io.DataOutputStream, int) throws java.io.IOException;
+  public static java.security.PrivateKey generatePrivateKey(de.measite.minidns.DNSSECConstants$SignatureAlgorithm, int);
+  public static java.security.PrivateKey generateRSAPrivateKey(int, java.math.BigInteger);
+  public static java.security.PrivateKey generateDSAPrivateKey(int);
+  public static byte[] publicKey(de.measite.minidns.DNSSECConstants$SignatureAlgorithm, java.security.PrivateKey);
+  public static byte[] getRSAPublicKey(java.security.interfaces.RSAPrivateCrtKey);
+}
+Compiled from "DNSSECWorld.java"
+class de.measite.minidns.dnssec.DNSSECWorld$1 {
+  static final int[] $SwitchMap$de$measite$minidns$DNSSECConstants$SignatureAlgorithm;
+  static {};
+}
+Compiled from "DNSSECWorld.java"
+public class de.measite.minidns.dnssec.DNSSECWorld$AddressedNsecResponse implements de.measite.minidns.DNSWorld$PreparedResponse {
+  final java.net.InetAddress address;
+  final de.measite.minidns.DNSMessage nsecMessage;
+  public de.measite.minidns.dnssec.DNSSECWorld$AddressedNsecResponse(java.net.InetAddress, de.measite.minidns.DNSMessage);
+  public boolean isResponse(de.measite.minidns.DNSMessage, java.net.InetAddress);
+  public de.measite.minidns.DNSMessage getResponse();
+}
+Compiled from "DNSSECWorld.java"
+public class de.measite.minidns.dnssec.DNSSECWorld$SignedRRSet {
+  de.measite.minidns.Record<? extends de.measite.minidns.record.Data>[] records;
+  de.measite.minidns.Record<? extends de.measite.minidns.record.Data> signature;
+  public de.measite.minidns.dnssec.DNSSECWorld$SignedRRSet(de.measite.minidns.Record<? extends de.measite.minidns.record.Data>[], de.measite.minidns.Record<? extends de.measite.minidns.record.Data>);
+}
+Compiled from "DigestCalculator.java"
+public interface de.measite.minidns.dnssec.DigestCalculator {
+  public abstract byte[] digest(byte[]);
+}
+Compiled from "SignatureVerifier.java"
+public interface de.measite.minidns.dnssec.SignatureVerifier {
+  public abstract boolean verify(byte[], byte[], byte[]);
+}
+Compiled from "UnverifiedReason.java"
+public abstract class de.measite.minidns.dnssec.UnverifiedReason {
+  public de.measite.minidns.dnssec.UnverifiedReason();
+  public abstract java.lang.String getReasonString();
+  public java.lang.String toString();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+}
+Compiled from "UnverifiedReason.java"
+public class de.measite.minidns.dnssec.UnverifiedReason$AlgorithmExceptionThrownReason extends de.measite.minidns.dnssec.UnverifiedReason {
+  public de.measite.minidns.dnssec.UnverifiedReason$AlgorithmExceptionThrownReason(de.measite.minidns.DNSSECConstants$DigestAlgorithm, java.lang.String, de.measite.minidns.Record<? extends de.measite.minidns.record.Data>, java.lang.Exception);
+  public java.lang.String getReasonString();
+}
+Compiled from "UnverifiedReason.java"
+public class de.measite.minidns.dnssec.UnverifiedReason$AlgorithmNotSupportedReason extends de.measite.minidns.dnssec.UnverifiedReason {
+  public de.measite.minidns.dnssec.UnverifiedReason$AlgorithmNotSupportedReason(byte, java.lang.String, de.measite.minidns.Record<? extends de.measite.minidns.record.Data>);
+  public java.lang.String getReasonString();
+}
+Compiled from "UnverifiedReason.java"
+public class de.measite.minidns.dnssec.UnverifiedReason$ConflictsWithSep extends de.measite.minidns.dnssec.UnverifiedReason {
+  public de.measite.minidns.dnssec.UnverifiedReason$ConflictsWithSep(de.measite.minidns.Record<de.measite.minidns.record.DNSKEY>);
+  public java.lang.String getReasonString();
+}
+Compiled from "UnverifiedReason.java"
+public class de.measite.minidns.dnssec.UnverifiedReason$NSECDoesNotMatchReason extends de.measite.minidns.dnssec.UnverifiedReason {
+  public de.measite.minidns.dnssec.UnverifiedReason$NSECDoesNotMatchReason(de.measite.minidns.Question, de.measite.minidns.Record<? extends de.measite.minidns.record.Data>);
+  public java.lang.String getReasonString();
+}
+Compiled from "UnverifiedReason.java"
+public class de.measite.minidns.dnssec.UnverifiedReason$NoActiveSignaturesReason extends de.measite.minidns.dnssec.UnverifiedReason {
+  static final boolean $assertionsDisabled;
+  public de.measite.minidns.dnssec.UnverifiedReason$NoActiveSignaturesReason(de.measite.minidns.Question, java.util.List<de.measite.minidns.record.RRSIG>);
+  public java.lang.String getReasonString();
+  public java.util.List<de.measite.minidns.record.RRSIG> getOutdatedRrSigs();
+  static {};
+}
+Compiled from "UnverifiedReason.java"
+public class de.measite.minidns.dnssec.UnverifiedReason$NoRootSecureEntryPointReason extends de.measite.minidns.dnssec.UnverifiedReason {
+  public de.measite.minidns.dnssec.UnverifiedReason$NoRootSecureEntryPointReason();
+  public java.lang.String getReasonString();
+}
+Compiled from "UnverifiedReason.java"
+public class de.measite.minidns.dnssec.UnverifiedReason$NoSecureEntryPointReason extends de.measite.minidns.dnssec.UnverifiedReason {
+  public de.measite.minidns.dnssec.UnverifiedReason$NoSecureEntryPointReason(java.lang.String);
+  public java.lang.String getReasonString();
+}
+Compiled from "UnverifiedReason.java"
+public class de.measite.minidns.dnssec.UnverifiedReason$NoSignaturesReason extends de.measite.minidns.dnssec.UnverifiedReason {
+  public de.measite.minidns.dnssec.UnverifiedReason$NoSignaturesReason(de.measite.minidns.Question);
+  public java.lang.String getReasonString();
+}
+Compiled from "UnverifiedReason.java"
+public class de.measite.minidns.dnssec.UnverifiedReason$NoTrustAnchorReason extends de.measite.minidns.dnssec.UnverifiedReason {
+  public de.measite.minidns.dnssec.UnverifiedReason$NoTrustAnchorReason(java.lang.String);
+  public java.lang.String getReasonString();
+}
+Compiled from "Verifier.java"
+class de.measite.minidns.dnssec.Verifier {
+  de.measite.minidns.dnssec.Verifier();
+  public de.measite.minidns.dnssec.UnverifiedReason verify(de.measite.minidns.Record<de.measite.minidns.record.DNSKEY>, de.measite.minidns.record.DS);
+  public de.measite.minidns.dnssec.UnverifiedReason verify(java.util.List<de.measite.minidns.Record<? extends de.measite.minidns.record.Data>>, de.measite.minidns.record.RRSIG, de.measite.minidns.record.DNSKEY);
+  public de.measite.minidns.dnssec.UnverifiedReason verifyNsec(de.measite.minidns.Record<? extends de.measite.minidns.record.Data>, de.measite.minidns.Question);
+  public de.measite.minidns.dnssec.UnverifiedReason verifyNsec3(java.lang.CharSequence, de.measite.minidns.Record<? extends de.measite.minidns.record.Data>, de.measite.minidns.Question);
+  public de.measite.minidns.dnssec.UnverifiedReason verifyNsec3(de.measite.minidns.DNSName, de.measite.minidns.Record<? extends de.measite.minidns.record.Data>, de.measite.minidns.Question);
+  static byte[] combine(de.measite.minidns.record.RRSIG, java.util.List<de.measite.minidns.Record<? extends de.measite.minidns.record.Data>>);
+  static boolean nsecMatches(java.lang.String, java.lang.String, java.lang.String);
+  static boolean nsecMatches(de.measite.minidns.DNSName, de.measite.minidns.DNSName, de.measite.minidns.DNSName);
+  static java.lang.String stripToParts(java.lang.String, int);
+  static byte[] nsec3hash(de.measite.minidns.dnssec.DigestCalculator, byte[], byte[], int);
+}
+Compiled from "Verifier.java"
+final class de.measite.minidns.dnssec.Verifier$1 implements java.util.Comparator<byte[]> {
+  final int val$offset;
+  de.measite.minidns.dnssec.Verifier$1(int);
+  public int compare(byte[], byte[]);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "VerifierTest.java"
+public class de.measite.minidns.dnssec.VerifierTest {
+  public de.measite.minidns.dnssec.VerifierTest();
+  public void setUp() throws java.lang.Exception;
+  public void testNsecMatches();
+  public void testVerifyNsec();
+  public void testVerifyNsec3();
+  public void testNsec3hash() throws java.lang.Exception;
+}
+Compiled from "AlgorithmMap.java"
+public class de.measite.minidns.dnssec.algorithms.AlgorithmMap {
+  public static final de.measite.minidns.dnssec.algorithms.AlgorithmMap INSTANCE;
+  public de.measite.minidns.dnssec.DigestCalculator getDsDigestCalculator(de.measite.minidns.DNSSECConstants$DigestAlgorithm);
+  public de.measite.minidns.dnssec.SignatureVerifier getSignatureVerifier(de.measite.minidns.DNSSECConstants$SignatureAlgorithm);
+  public de.measite.minidns.dnssec.DigestCalculator getNsecDigestCalculator(de.measite.minidns.record.NSEC3$HashAlgorithm);
+  static {};
+}
+Compiled from "AlgorithmTest.java"
+public class de.measite.minidns.dnssec.algorithms.AlgorithmTest {
+  protected de.measite.minidns.dnssec.algorithms.AlgorithmMap algorithmMap;
+  public de.measite.minidns.dnssec.algorithms.AlgorithmTest();
+  public void setUp() throws java.lang.Exception;
+}
+Compiled from "DSASignatureVerifier.java"
+class de.measite.minidns.dnssec.algorithms.DSASignatureVerifier extends de.measite.minidns.dnssec.algorithms.JavaSecSignatureVerifier {
+  public de.measite.minidns.dnssec.algorithms.DSASignatureVerifier(java.lang.String) throws java.security.NoSuchAlgorithmException;
+  protected byte[] getSignature(byte[]);
+  protected java.security.PublicKey getPublicKey(byte[]);
+}
+Compiled from "DSASingatureVerifierTest.java"
+public class de.measite.minidns.dnssec.algorithms.DSASingatureVerifierTest extends de.measite.minidns.dnssec.algorithms.SignatureVerifierTest {
+  public de.measite.minidns.dnssec.algorithms.DSASingatureVerifierTest();
+  public void testDSA1024Valid();
+  public void testDSA512Valid();
+  public void testDSAIllegalSignature();
+  public void testDSAIllegalPublicKey();
+  public void testDSAWrongSignature();
+  static {};
+}
+Compiled from "DigestTest.java"
+public class de.measite.minidns.dnssec.algorithms.DigestTest extends de.measite.minidns.dnssec.algorithms.AlgorithmTest {
+  public de.measite.minidns.dnssec.algorithms.DigestTest();
+  public void testSha1DsDigest();
+  public void testSha256DsDigest();
+  public void testSha1nsec3Digest();
+}
+Compiled from "ECDSASignatureVerifier.java"
+abstract class de.measite.minidns.dnssec.algorithms.ECDSASignatureVerifier extends de.measite.minidns.dnssec.algorithms.JavaSecSignatureVerifier {
+  public de.measite.minidns.dnssec.algorithms.ECDSASignatureVerifier(java.math.BigInteger[], int, java.lang.String) throws java.security.NoSuchAlgorithmException;
+  public de.measite.minidns.dnssec.algorithms.ECDSASignatureVerifier(java.security.spec.ECParameterSpec, int, java.lang.String) throws java.security.NoSuchAlgorithmException;
+  protected byte[] getSignature(byte[]);
+  protected java.security.PublicKey getPublicKey(byte[]);
+}
+Compiled from "ECDSASignatureVerifier.java"
+public class de.measite.minidns.dnssec.algorithms.ECDSASignatureVerifier$P256SHA256 extends de.measite.minidns.dnssec.algorithms.ECDSASignatureVerifier {
+  public de.measite.minidns.dnssec.algorithms.ECDSASignatureVerifier$P256SHA256() throws java.security.NoSuchAlgorithmException;
+  static {};
+}
+Compiled from "ECDSASignatureVerifier.java"
+public class de.measite.minidns.dnssec.algorithms.ECDSASignatureVerifier$P384SHA284 extends de.measite.minidns.dnssec.algorithms.ECDSASignatureVerifier {
+  public de.measite.minidns.dnssec.algorithms.ECDSASignatureVerifier$P384SHA284() throws java.security.NoSuchAlgorithmException;
+  static {};
+}
+Compiled from "ECGOSTSignatureVerifier.java"
+class de.measite.minidns.dnssec.algorithms.ECGOSTSignatureVerifier extends de.measite.minidns.dnssec.algorithms.JavaSecSignatureVerifier {
+  public de.measite.minidns.dnssec.algorithms.ECGOSTSignatureVerifier() throws java.security.NoSuchAlgorithmException;
+  protected byte[] getSignature(byte[]);
+  protected java.security.PublicKey getPublicKey(byte[]);
+  static {};
+}
+Compiled from "JavaSecDigestCalculator.java"
+public class de.measite.minidns.dnssec.algorithms.JavaSecDigestCalculator implements de.measite.minidns.dnssec.DigestCalculator {
+  public de.measite.minidns.dnssec.algorithms.JavaSecDigestCalculator(java.lang.String) throws java.security.NoSuchAlgorithmException;
+  public byte[] digest(byte[]);
+}
+Compiled from "JavaSecSignatureVerifier.java"
+public abstract class de.measite.minidns.dnssec.algorithms.JavaSecSignatureVerifier implements de.measite.minidns.dnssec.SignatureVerifier {
+  public de.measite.minidns.dnssec.algorithms.JavaSecSignatureVerifier(java.lang.String, java.lang.String) throws java.security.NoSuchAlgorithmException;
+  public java.security.KeyFactory getKeyFactory();
+  public boolean verify(byte[], byte[], byte[]);
+  protected abstract byte[] getSignature(byte[]);
+  protected abstract java.security.PublicKey getPublicKey(byte[]);
+}
+Compiled from "RSASignatureVerifier.java"
+class de.measite.minidns.dnssec.algorithms.RSASignatureVerifier extends de.measite.minidns.dnssec.algorithms.JavaSecSignatureVerifier {
+  public de.measite.minidns.dnssec.algorithms.RSASignatureVerifier(java.lang.String) throws java.security.NoSuchAlgorithmException;
+  protected java.security.PublicKey getPublicKey(byte[]);
+  protected byte[] getSignature(byte[]);
+}
+Compiled from "RSASignatureVerifierTest.java"
+public class de.measite.minidns.dnssec.algorithms.RSASignatureVerifierTest extends de.measite.minidns.dnssec.algorithms.SignatureVerifierTest {
+  public de.measite.minidns.dnssec.algorithms.RSASignatureVerifierTest();
+  public void testShortExponentSHA1RSAValid();
+  public void testLongExponentSHA1RSAValid();
+  public void testSHA1RSAIllegalSignature();
+  public void testSHA1RSAIllegalPublicKey();
+  public void testSHA1RSAWrongSignature();
+  public void testMD5RSAValid();
+  public void testSHA256RSAValid();
+  public void testSHA512RSAValid();
+}
+Compiled from "SignatureVerifierTest.java"
+public class de.measite.minidns.dnssec.algorithms.SignatureVerifierTest extends de.measite.minidns.dnssec.algorithms.AlgorithmTest {
+  protected byte[] sample;
+  public de.measite.minidns.dnssec.algorithms.SignatureVerifierTest();
+  public void setUp() throws java.lang.Exception;
+  protected void verifierTest(int, de.measite.minidns.DNSSECConstants$SignatureAlgorithm);
+  protected void verifierTest(java.security.PrivateKey, de.measite.minidns.DNSSECConstants$SignatureAlgorithm);
+  protected void assertSignatureValid(byte[], de.measite.minidns.DNSSECConstants$SignatureAlgorithm, byte[]);
+  protected void assertSignatureInvalid(byte[], de.measite.minidns.DNSSECConstants$SignatureAlgorithm, byte[]);
+  static {};
+}
+Compiled from "AbstractDNSServerLookupMechanism.java"
+public abstract class de.measite.minidns.dnsserverlookup.AbstractDNSServerLookupMechanism implements de.measite.minidns.dnsserverlookup.DNSServerLookupMechanism {
+  protected static final java.util.logging.Logger LOGGER;
+  protected de.measite.minidns.dnsserverlookup.AbstractDNSServerLookupMechanism(java.lang.String, int);
+  public final java.lang.String getName();
+  public final int getPriority();
+  public final int compareTo(de.measite.minidns.dnsserverlookup.DNSServerLookupMechanism);
+  public abstract java.lang.String[] getDnsServerAddresses();
+  public int compareTo(java.lang.Object);
+  static {};
+}
+Compiled from "AndroidUsingExec.java"
+public class de.measite.minidns.dnsserverlookup.AndroidUsingExec extends de.measite.minidns.dnsserverlookup.AbstractDNSServerLookupMechanism {
+  public static final de.measite.minidns.dnsserverlookup.DNSServerLookupMechanism INSTANCE;
+  public static final int PRIORITY;
+  public java.lang.String[] getDnsServerAddresses();
+  public boolean isAvailable();
+  static {};
+}
+Compiled from "AndroidUsingReflection.java"
+public class de.measite.minidns.dnsserverlookup.AndroidUsingReflection extends de.measite.minidns.dnsserverlookup.AbstractDNSServerLookupMechanism {
+  public static final de.measite.minidns.dnsserverlookup.DNSServerLookupMechanism INSTANCE;
+  public static final int PRIORITY;
+  protected de.measite.minidns.dnsserverlookup.AndroidUsingReflection();
+  public java.lang.String[] getDnsServerAddresses();
+  public boolean isAvailable();
+  static {};
+}
+Compiled from "DNSServerLookupMechanism.java"
+public interface de.measite.minidns.dnsserverlookup.DNSServerLookupMechanism extends java.lang.Comparable<de.measite.minidns.dnsserverlookup.DNSServerLookupMechanism> {
+  public abstract java.lang.String getName();
+  public abstract int getPriority();
+  public abstract boolean isAvailable();
+  public abstract java.lang.String[] getDnsServerAddresses();
+}
+Compiled from "HardcodedDNSServerAddresses.java"
+public class de.measite.minidns.dnsserverlookup.HardcodedDNSServerAddresses extends de.measite.minidns.dnsserverlookup.AbstractDNSServerLookupMechanism {
+  public static final de.measite.minidns.dnsserverlookup.DNSServerLookupMechanism INSTANCE;
+  public static final int PRIORITY;
+  public java.lang.String[] getDnsServerAddresses();
+  public boolean isAvailable();
+  static {};
+}
+Compiled from "UnixUsingEtcResolvConf.java"
+public class de.measite.minidns.dnsserverlookup.UnixUsingEtcResolvConf extends de.measite.minidns.dnsserverlookup.AbstractDNSServerLookupMechanism {
+  public static final de.measite.minidns.dnsserverlookup.DNSServerLookupMechanism INSTANCE;
+  public static final int PRIORITY;
+  public java.lang.String[] getDnsServerAddresses();
+  public boolean isAvailable();
+  static {};
+}
+Compiled from "EDNSOption.java"
+public abstract class de.measite.minidns.edns.EDNSOption {
+  public final int optionCode;
+  public final int optionLength;
+  protected final byte[] optionData;
+  protected de.measite.minidns.edns.EDNSOption(int, byte[]);
+  protected de.measite.minidns.edns.EDNSOption(byte[]);
+  public final void writeToDos(java.io.DataOutputStream) throws java.io.IOException;
+  public abstract de.measite.minidns.EDNS$OptionCode getOptionCode();
+  public final java.lang.String toString();
+  protected abstract java.lang.CharSequence toStringInternal();
+  public final java.lang.String asTerminalOutput();
+  protected abstract java.lang.CharSequence asTerminalOutputInternal();
+  public static de.measite.minidns.edns.EDNSOption parse(int, byte[]);
+}
+Compiled from "EDNSOption.java"
+class de.measite.minidns.edns.EDNSOption$1 {
+  static final int[] $SwitchMap$de$measite$minidns$EDNS$OptionCode;
+  static {};
+}
+Compiled from "NSID.java"
+public class de.measite.minidns.edns.NSID extends de.measite.minidns.edns.EDNSOption {
+  public static final de.measite.minidns.edns.NSID REQUEST;
+  public de.measite.minidns.edns.NSID(byte[]);
+  public de.measite.minidns.EDNS$OptionCode getOptionCode();
+  protected java.lang.CharSequence toStringInternal();
+  protected java.lang.CharSequence asTerminalOutputInternal();
+  static {};
+}
+Compiled from "UnknownEDNSOption.java"
+public class de.measite.minidns.edns.UnknownEDNSOption extends de.measite.minidns.edns.EDNSOption {
+  protected de.measite.minidns.edns.UnknownEDNSOption(int, byte[]);
+  public de.measite.minidns.EDNS$OptionCode getOptionCode();
+  protected java.lang.CharSequence asTerminalOutputInternal();
+  protected java.lang.CharSequence toStringInternal();
+}
+Compiled from "ResolutionUnsuccessfulException.java"
+public class de.measite.minidns.hla.ResolutionUnsuccessfulException extends de.measite.minidns.MiniDNSException {
+  public final de.measite.minidns.Question question;
+  public final de.measite.minidns.DNSMessage$RESPONSE_CODE responseCode;
+  public de.measite.minidns.hla.ResolutionUnsuccessfulException(de.measite.minidns.Question, de.measite.minidns.DNSMessage$RESPONSE_CODE);
+}
+Compiled from "ResolverApi.java"
+public class de.measite.minidns.hla.ResolverApi {
+  public static final de.measite.minidns.hla.ResolverApi ITERATIVE_ONLY_DNSSEC;
+  public static final de.measite.minidns.hla.ResolverApi RECURSIVE_ONLY_DNSSEC;
+  public static final de.measite.minidns.hla.ResolverApi DNSSEC;
+  public static final de.measite.minidns.hla.ResolverApi NON_DNSSEC;
+  public de.measite.minidns.hla.ResolverApi(de.measite.minidns.AbstractDNSClient);
+  public <D extends de.measite.minidns.record.Data> de.measite.minidns.hla.ResolverResult<D> resolve(java.lang.String, java.lang.Class<D>) throws java.io.IOException;
+  public <D extends de.measite.minidns.record.Data> de.measite.minidns.hla.ResolverResult<D> resolve(de.measite.minidns.DNSName, java.lang.Class<D>) throws java.io.IOException;
+  public <D extends de.measite.minidns.record.Data> de.measite.minidns.hla.ResolverResult<D> resolve(de.measite.minidns.Question) throws java.io.IOException;
+  public static <D extends de.measite.minidns.record.Data> de.measite.minidns.hla.ResolverResult<D> resolveDnssec(java.lang.String, java.lang.Class<D>) throws java.io.IOException;
+  public static <D extends de.measite.minidns.record.Data> de.measite.minidns.hla.ResolverResult<D> resolveDnssec(de.measite.minidns.DNSName, java.lang.Class<D>) throws java.io.IOException;
+  public static <D extends de.measite.minidns.record.Data> de.measite.minidns.hla.ResolverResult<D> resolveDnssec(de.measite.minidns.Question) throws java.io.IOException;
+  public de.measite.minidns.AbstractDNSClient getClient();
+  static {};
+}
+Compiled from "ResolverResult.java"
+public class de.measite.minidns.hla.ResolverResult<D extends de.measite.minidns.record.Data> {
+  de.measite.minidns.hla.ResolverResult(de.measite.minidns.Question, de.measite.minidns.DNSMessage, java.util.Set<de.measite.minidns.dnssec.UnverifiedReason>);
+  public boolean wasSuccessful();
+  public java.util.Set<D> getAnswers();
+  public de.measite.minidns.DNSMessage$RESPONSE_CODE getResponseCode();
+  public boolean isAuthenticData();
+  public java.util.Set<de.measite.minidns.dnssec.UnverifiedReason> getUnverifiedReasons();
+  public de.measite.minidns.Question getQuestion();
+  public void throwIfErrorResponse() throws de.measite.minidns.hla.ResolutionUnsuccessfulException;
+  public de.measite.minidns.hla.ResolutionUnsuccessfulException getResolutionUnsuccessfulException();
+  public de.measite.minidns.dnssec.DNSSECResultNotAuthenticException getDnssecResultNotAuthenticException();
+}
+Compiled from "CoreTest.java"
+public class de.measite.minidns.integrationtest.CoreTest {
+  public de.measite.minidns.integrationtest.CoreTest();
+  public static void testExampleCom() throws java.io.IOException;
+  public static void testTcpAnswer() throws java.io.IOException;
+}
+Compiled from "DNSSECTest.java"
+public class de.measite.minidns.integrationtest.DNSSECTest {
+  public de.measite.minidns.integrationtest.DNSSECTest();
+  public static void testVerisignDaneBadSig() throws java.lang.Exception;
+  public static void testUniDueSigOk() throws java.io.IOException;
+  public static void testUniDueSigFail() throws java.io.IOException;
+  public static void testCloudFlare() throws java.io.IOException;
+}
+Compiled from "DaneTest.java"
+public class de.measite.minidns.integrationtest.DaneTest {
+  public de.measite.minidns.integrationtest.DaneTest();
+  public static void testVerisignDaneGood() throws java.io.IOException, java.security.cert.CertificateException;
+  public static void testVerisignDaneBadHash() throws java.io.IOException, java.security.cert.CertificateException;
+  public static void testVerisignDaneBadParams() throws java.io.IOException, java.security.cert.CertificateException;
+}
+Compiled from "HlaTest.java"
+public class de.measite.minidns.integrationtest.HlaTest {
+  public de.measite.minidns.integrationtest.HlaTest();
+  public static void resolverTest() throws java.io.IOException;
+}
+Compiled from "IntegrationTest.java"
+public interface de.measite.minidns.integrationtest.IntegrationTest extends java.lang.annotation.Annotation {
+  public abstract java.lang.Class<?> expected();
+}
+Compiled from "IntegrationTestHelper.java"
+public class de.measite.minidns.integrationtest.IntegrationTestHelper {
+  public static final de.measite.minidns.DNSName DNSSEC_DOMAIN;
+  public static final de.measite.minidns.Record$TYPE RR_TYPE;
+  public de.measite.minidns.integrationtest.IntegrationTestHelper();
+  public static void main(java.lang.String[]);
+  public static de.measite.minidns.integrationtest.IntegrationTestHelper$TestResult invokeTest(java.lang.reflect.Method, java.lang.Class<?>);
+  static {};
+}
+Compiled from "IntegrationTestHelper.java"
+class de.measite.minidns.integrationtest.IntegrationTestHelper$1 {
+  static final int[] $SwitchMap$de$measite$minidns$integrationtest$IntegrationTestHelper$TestResult;
+  static {};
+}
+Compiled from "IntegrationTestHelper.java"
+final class de.measite.minidns.integrationtest.IntegrationTestHelper$TestResult extends java.lang.Enum<de.measite.minidns.integrationtest.IntegrationTestHelper$TestResult> {
+  public static final de.measite.minidns.integrationtest.IntegrationTestHelper$TestResult Success;
+  public static final de.measite.minidns.integrationtest.IntegrationTestHelper$TestResult Failure;
+  public static de.measite.minidns.integrationtest.IntegrationTestHelper$TestResult[] values();
+  public static de.measite.minidns.integrationtest.IntegrationTestHelper$TestResult valueOf(java.lang.String);
+  static {};
+}
+Compiled from "IntegrationTestTest.java"
+public class de.measite.minidns.integrationtest.IntegrationTestTest {
+  public de.measite.minidns.integrationtest.IntegrationTestTest();
+  public void emptyTest();
+}
+Compiled from "IntegrationTestTools.java"
+public class de.measite.minidns.integrationtest.IntegrationTestTools {
+  public de.measite.minidns.integrationtest.IntegrationTestTools();
+  public static de.measite.minidns.dnssec.DNSSECClient getClient(de.measite.minidns.integrationtest.IntegrationTestTools$CacheConfig);
+}
+Compiled from "IntegrationTestTools.java"
+class de.measite.minidns.integrationtest.IntegrationTestTools$1 {
+  static final int[] $SwitchMap$de$measite$minidns$integrationtest$IntegrationTestTools$CacheConfig;
+  static {};
+}
+Compiled from "IntegrationTestTools.java"
+public final class de.measite.minidns.integrationtest.IntegrationTestTools$CacheConfig extends java.lang.Enum<de.measite.minidns.integrationtest.IntegrationTestTools$CacheConfig> {
+  public static final de.measite.minidns.integrationtest.IntegrationTestTools$CacheConfig without;
+  public static final de.measite.minidns.integrationtest.IntegrationTestTools$CacheConfig normal;
+  public static final de.measite.minidns.integrationtest.IntegrationTestTools$CacheConfig extended;
+  public static final de.measite.minidns.integrationtest.IntegrationTestTools$CacheConfig full;
+  public static de.measite.minidns.integrationtest.IntegrationTestTools$CacheConfig[] values();
+  public static de.measite.minidns.integrationtest.IntegrationTestTools$CacheConfig valueOf(java.lang.String);
+  static {};
+}
+Compiled from "IterativeDNSSECTest.java"
+public class de.measite.minidns.integrationtest.IterativeDNSSECTest {
+  public de.measite.minidns.integrationtest.IterativeDNSSECTest();
+  public static void shouldRequireLessQueries() throws java.io.IOException;
+  static {};
+}
+Compiled from "NSIDTest.java"
+public class de.measite.minidns.integrationtest.NSIDTest {
+  public de.measite.minidns.integrationtest.NSIDTest();
+  public static de.measite.minidns.edns.NSID testNsidLRoot();
+}
+Compiled from "NSIDTest.java"
+final class de.measite.minidns.integrationtest.NSIDTest$1 extends de.measite.minidns.DNSClient {
+  de.measite.minidns.integrationtest.NSIDTest$1(de.measite.minidns.DNSCache);
+  protected de.measite.minidns.DNSMessage$Builder newQuestion(de.measite.minidns.DNSMessage$Builder);
+}
+Compiled from "MiniDnsJul.java"
+public class de.measite.minidns.jul.MiniDnsJul {
+  public de.measite.minidns.jul.MiniDnsJul();
+  public static void enableMiniDnsTrace();
+  public static void enableMiniDnsTrace(boolean);
+  public static void disableMiniDnsTrace();
+  static boolean access$000();
+  static java.text.SimpleDateFormat access$100();
+  static java.text.SimpleDateFormat access$200();
+  static {};
+}
+Compiled from "MiniDnsJul.java"
+final class de.measite.minidns.jul.MiniDnsJul$1 extends java.util.logging.Formatter {
+  de.measite.minidns.jul.MiniDnsJul$1();
+  public java.lang.String format(java.util.logging.LogRecord);
+}
+Compiled from "DNSSECStats.java"
+public class de.measite.minidns.minidnsrepl.DNSSECStats {
+  public de.measite.minidns.minidnsrepl.DNSSECStats();
+  public static void iterativeDnssecLookupNormalVsExtendedCache() throws java.io.IOException;
+  public static void iterativeDnsssecTest() throws java.lang.SecurityException, java.lang.IllegalArgumentException, java.io.IOException;
+  static {};
+}
+Compiled from "MiniDNSStats.java"
+public class de.measite.minidns.minidnsrepl.MiniDNSStats {
+  public de.measite.minidns.minidnsrepl.MiniDNSStats();
+  public static void main(java.lang.String[]) throws java.io.IOException;
+  public static void showDnssecStats() throws java.io.IOException;
+  public static void showDnssecStats(java.lang.String, de.measite.minidns.Record$TYPE) throws java.io.IOException;
+  public static java.lang.StringBuilder gatherStatsFor(de.measite.minidns.dnssec.DNSSECClient, java.lang.String, java.lang.String, de.measite.minidns.Record$TYPE) throws java.io.IOException;
+  public static de.measite.minidns.dnssec.DNSSECClient getClient(de.measite.minidns.integrationtest.IntegrationTestTools$CacheConfig);
+  public static java.lang.StringBuilder getStats(de.measite.minidns.AbstractDNSClient);
+}
+Compiled from "MiniDnsRepl.java"
+public class de.measite.minidns.minidnsrepl.MiniDnsRepl {
+  public static final de.measite.minidns.DNSClient DNSCLIENT;
+  public static final de.measite.minidns.recursive.RecursiveDNSClient RECURSIVEDNSCLIENT;
+  public static final de.measite.minidns.dnssec.DNSSECClient DNSSECCLIENT;
+  public static final de.measite.minidns.cache.LRUCache DEFAULT_CACHE;
+  public de.measite.minidns.minidnsrepl.MiniDnsRepl();
+  public static void init();
+  public static void clearCache() throws java.lang.SecurityException, java.lang.IllegalArgumentException;
+  public static void main(java.lang.String[]) throws java.io.IOException, java.lang.SecurityException, java.lang.IllegalArgumentException;
+  static {};
+}
+Compiled from "ReplTest.java"
+public class de.measite.minidns.minidnsrepl.ReplTest {
+  public de.measite.minidns.minidnsrepl.ReplTest();
+  public void emptyTest();
+}
+Compiled from "A.java"
+public class de.measite.minidns.record.A extends de.measite.minidns.record.InternetAddressRR {
+  public de.measite.minidns.Record$TYPE getType();
+  public de.measite.minidns.record.A(int, int, int, int);
+  public de.measite.minidns.record.A(byte[]);
+  public static de.measite.minidns.record.A parse(java.io.DataInputStream) throws java.io.IOException;
+  public java.lang.String toString();
+}
+Compiled from "AAAA.java"
+public class de.measite.minidns.record.AAAA extends de.measite.minidns.record.InternetAddressRR {
+  public de.measite.minidns.Record$TYPE getType();
+  public de.measite.minidns.record.AAAA(byte[]);
+  public static de.measite.minidns.record.AAAA parse(java.io.DataInputStream) throws java.io.IOException;
+  public java.lang.String toString();
+}
+Compiled from "CNAME.java"
+public class de.measite.minidns.record.CNAME extends de.measite.minidns.record.Data {
+  public final de.measite.minidns.DNSName name;
+  public void serialize(java.io.DataOutputStream) throws java.io.IOException;
+  public static de.measite.minidns.record.CNAME parse(java.io.DataInputStream, byte[]) throws java.io.IOException;
+  public de.measite.minidns.record.CNAME(java.lang.String);
+  public de.measite.minidns.record.CNAME(de.measite.minidns.DNSName);
+  public de.measite.minidns.Record$TYPE getType();
+  public java.lang.String toString();
+}
+Compiled from "DLV.java"
+public class de.measite.minidns.record.DLV extends de.measite.minidns.record.DS {
+  public static de.measite.minidns.record.DLV parse(java.io.DataInputStream, int) throws java.io.IOException;
+  public de.measite.minidns.record.DLV(int, byte, byte, byte[]);
+  public de.measite.minidns.record.DLV(int, de.measite.minidns.DNSSECConstants$SignatureAlgorithm, de.measite.minidns.DNSSECConstants$DigestAlgorithm, byte[]);
+  public de.measite.minidns.Record$TYPE getType();
+}
+Compiled from "DNSKEY.java"
+public class de.measite.minidns.record.DNSKEY extends de.measite.minidns.record.Data {
+  public static final short FLAG_SECURE_ENTRY_POINT;
+  public static final short FLAG_REVOKE;
+  public static final short FLAG_ZONE;
+  public static final byte PROTOCOL_RFC4034;
+  public final short flags;
+  public final byte protocol;
+  public final de.measite.minidns.DNSSECConstants$SignatureAlgorithm algorithm;
+  public final byte algorithmByte;
+  static final boolean $assertionsDisabled;
+  public static de.measite.minidns.record.DNSKEY parse(java.io.DataInputStream, int) throws java.io.IOException;
+  public de.measite.minidns.record.DNSKEY(short, byte, byte, byte[]);
+  public de.measite.minidns.record.DNSKEY(short, byte, de.measite.minidns.DNSSECConstants$SignatureAlgorithm, byte[]);
+  public de.measite.minidns.Record$TYPE getType();
+  public int getKeyTag();
+  public void serialize(java.io.DataOutputStream) throws java.io.IOException;
+  public java.lang.String toString();
+  public int getKeyLength();
+  public byte[] getKey();
+  public java.lang.String getKeyBase64();
+  public boolean keyEquals(byte[]);
+  public boolean isSecureEntryPoint();
+  static {};
+}
+Compiled from "DS.java"
+public class de.measite.minidns.record.DS extends de.measite.minidns.record.Data {
+  public final int keyTag;
+  public final de.measite.minidns.DNSSECConstants$SignatureAlgorithm algorithm;
+  public final byte algorithmByte;
+  public final de.measite.minidns.DNSSECConstants$DigestAlgorithm digestType;
+  public final byte digestTypeByte;
+  protected final byte[] digest;
+  static final boolean $assertionsDisabled;
+  public static de.measite.minidns.record.DS parse(java.io.DataInputStream, int) throws java.io.IOException;
+  public de.measite.minidns.record.DS(int, byte, byte, byte[]);
+  public de.measite.minidns.record.DS(int, de.measite.minidns.DNSSECConstants$SignatureAlgorithm, byte, byte[]);
+  public de.measite.minidns.record.DS(int, de.measite.minidns.DNSSECConstants$SignatureAlgorithm, de.measite.minidns.DNSSECConstants$DigestAlgorithm, byte[]);
+  public de.measite.minidns.Record$TYPE getType();
+  public void serialize(java.io.DataOutputStream) throws java.io.IOException;
+  public java.lang.String toString();
+  public java.math.BigInteger getDigestBigInteger();
+  public java.lang.String getDigestHex();
+  public boolean digestEquals(byte[]);
+  static {};
+}
+Compiled from "Data.java"
+public abstract class de.measite.minidns.record.Data {
+  de.measite.minidns.record.Data();
+  public abstract de.measite.minidns.Record$TYPE getType();
+  protected abstract void serialize(java.io.DataOutputStream) throws java.io.IOException;
+  public final int length();
+  public void toOutputStream(java.io.DataOutputStream) throws java.io.IOException;
+  public final byte[] toByteArray();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+}
+Compiled from "InternetAddressRR.java"
+public abstract class de.measite.minidns.record.InternetAddressRR extends de.measite.minidns.record.Data {
+  protected final byte[] ip;
+  protected de.measite.minidns.record.InternetAddressRR(byte[]);
+  public final void serialize(java.io.DataOutputStream) throws java.io.IOException;
+  public final byte[] getIp();
+  public final java.net.InetAddress getInetAddress();
+}
+Compiled from "MX.java"
+public class de.measite.minidns.record.MX extends de.measite.minidns.record.Data {
+  public final int priority;
+  public final de.measite.minidns.DNSName name;
+  public static de.measite.minidns.record.MX parse(java.io.DataInputStream, byte[]) throws java.io.IOException;
+  public de.measite.minidns.record.MX(int, java.lang.String);
+  public de.measite.minidns.record.MX(int, de.measite.minidns.DNSName);
+  public void serialize(java.io.DataOutputStream) throws java.io.IOException;
+  public java.lang.String toString();
+  public de.measite.minidns.Record$TYPE getType();
+}
+Compiled from "NS.java"
+public class de.measite.minidns.record.NS extends de.measite.minidns.record.CNAME {
+  public static de.measite.minidns.record.NS parse(java.io.DataInputStream, byte[]) throws java.io.IOException;
+  public de.measite.minidns.record.NS(de.measite.minidns.DNSName);
+  public de.measite.minidns.Record$TYPE getType();
+}
+Compiled from "NSEC.java"
+public class de.measite.minidns.record.NSEC extends de.measite.minidns.record.Data {
+  public final de.measite.minidns.DNSName next;
+  public final de.measite.minidns.Record$TYPE[] types;
+  public static de.measite.minidns.record.NSEC parse(java.io.DataInputStream, byte[], int) throws java.io.IOException;
+  public de.measite.minidns.record.NSEC(java.lang.String, de.measite.minidns.Record$TYPE[]);
+  public de.measite.minidns.record.NSEC(de.measite.minidns.DNSName, de.measite.minidns.Record$TYPE[]);
+  public de.measite.minidns.Record$TYPE getType();
+  public void serialize(java.io.DataOutputStream) throws java.io.IOException;
+  public java.lang.String toString();
+  static byte[] createTypeBitMap(de.measite.minidns.Record$TYPE[]);
+  static de.measite.minidns.Record$TYPE[] readTypeBitMap(byte[]) throws java.io.IOException;
+}
+Compiled from "NSEC3.java"
+public class de.measite.minidns.record.NSEC3 extends de.measite.minidns.record.Data {
+  public static final byte FLAG_OPT_OUT;
+  public final de.measite.minidns.record.NSEC3$HashAlgorithm hashAlgorithm;
+  public final byte hashAlgorithmByte;
+  public final byte flags;
+  public final int iterations;
+  public final byte[] salt;
+  public final byte[] nextHashed;
+  public final de.measite.minidns.Record$TYPE[] types;
+  static final boolean $assertionsDisabled;
+  public static de.measite.minidns.record.NSEC3 parse(java.io.DataInputStream, int) throws java.io.IOException;
+  public de.measite.minidns.record.NSEC3(byte, byte, int, byte[], byte[], de.measite.minidns.Record$TYPE[]);
+  public de.measite.minidns.Record$TYPE getType();
+  public void serialize(java.io.DataOutputStream) throws java.io.IOException;
+  public java.lang.String toString();
+  static java.util.Map access$000();
+  static {};
+}
+Compiled from "NSEC3.java"
+public final class de.measite.minidns.record.NSEC3$HashAlgorithm extends java.lang.Enum<de.measite.minidns.record.NSEC3$HashAlgorithm> {
+  public static final de.measite.minidns.record.NSEC3$HashAlgorithm RESERVED;
+  public static final de.measite.minidns.record.NSEC3$HashAlgorithm SHA1;
+  public final byte value;
+  public final java.lang.String description;
+  public static de.measite.minidns.record.NSEC3$HashAlgorithm[] values();
+  public static de.measite.minidns.record.NSEC3$HashAlgorithm valueOf(java.lang.String);
+  public static de.measite.minidns.record.NSEC3$HashAlgorithm forByte(byte);
+  static {};
+}
+Compiled from "NSEC3PARAM.java"
+public class de.measite.minidns.record.NSEC3PARAM extends de.measite.minidns.record.Data {
+  public final de.measite.minidns.record.NSEC3$HashAlgorithm hashAlgorithm;
+  public final byte hashAlgorithmByte;
+  public final byte flags;
+  public final int iterations;
+  static final boolean $assertionsDisabled;
+  public static de.measite.minidns.record.NSEC3PARAM parse(java.io.DataInputStream) throws java.io.IOException;
+  de.measite.minidns.record.NSEC3PARAM(byte, byte, int, byte[]);
+  public de.measite.minidns.Record$TYPE getType();
+  public void serialize(java.io.DataOutputStream) throws java.io.IOException;
+  public java.lang.String toString();
+  public int getSaltLength();
+  static {};
+}
+Compiled from "OPENPGPKEY.java"
+public class de.measite.minidns.record.OPENPGPKEY extends de.measite.minidns.record.Data {
+  public static de.measite.minidns.record.OPENPGPKEY parse(java.io.DataInputStream, int) throws java.io.IOException;
+  de.measite.minidns.record.OPENPGPKEY(byte[]);
+  public de.measite.minidns.Record$TYPE getType();
+  public void serialize(java.io.DataOutputStream) throws java.io.IOException;
+  public java.lang.String toString();
+  public java.lang.String getPublicKeyPacketBase64();
+  public byte[] getPublicKeyPacket();
+}
+Compiled from "OPT.java"
+public class de.measite.minidns.record.OPT extends de.measite.minidns.record.Data {
+  public final java.util.List<de.measite.minidns.edns.EDNSOption> variablePart;
+  static final boolean $assertionsDisabled;
+  public de.measite.minidns.record.OPT();
+  public de.measite.minidns.record.OPT(java.util.List<de.measite.minidns.edns.EDNSOption>);
+  public static de.measite.minidns.record.OPT parse(java.io.DataInputStream, int) throws java.io.IOException;
+  public de.measite.minidns.Record$TYPE getType();
+  protected void serialize(java.io.DataOutputStream) throws java.io.IOException;
+  static {};
+}
+Compiled from "PTR.java"
+public class de.measite.minidns.record.PTR extends de.measite.minidns.record.CNAME {
+  public static de.measite.minidns.record.PTR parse(java.io.DataInputStream, byte[]) throws java.io.IOException;
+  de.measite.minidns.record.PTR(java.lang.String);
+  de.measite.minidns.record.PTR(de.measite.minidns.DNSName);
+  public de.measite.minidns.Record$TYPE getType();
+}
+Compiled from "RRSIG.java"
+public class de.measite.minidns.record.RRSIG extends de.measite.minidns.record.Data {
+  public final de.measite.minidns.Record$TYPE typeCovered;
+  public final de.measite.minidns.DNSSECConstants$SignatureAlgorithm algorithm;
+  public final byte algorithmByte;
+  public final byte labels;
+  public final long originalTtl;
+  public final java.util.Date signatureExpiration;
+  public final java.util.Date signatureInception;
+  public final int keyTag;
+  public final de.measite.minidns.DNSName signerName;
+  public final byte[] signature;
+  static final boolean $assertionsDisabled;
+  public static de.measite.minidns.record.RRSIG parse(java.io.DataInputStream, byte[], int) throws java.io.IOException;
+  public de.measite.minidns.record.RRSIG(de.measite.minidns.Record$TYPE, int, byte, long, java.util.Date, java.util.Date, int, de.measite.minidns.DNSName, byte[]);
+  public de.measite.minidns.record.RRSIG(de.measite.minidns.Record$TYPE, int, byte, long, java.util.Date, java.util.Date, int, java.lang.String, byte[]);
+  public de.measite.minidns.record.RRSIG(de.measite.minidns.Record$TYPE, de.measite.minidns.DNSSECConstants$SignatureAlgorithm, byte, long, java.util.Date, java.util.Date, int, de.measite.minidns.DNSName, byte[]);
+  public de.measite.minidns.record.RRSIG(de.measite.minidns.Record$TYPE, de.measite.minidns.DNSSECConstants$SignatureAlgorithm, byte, long, java.util.Date, java.util.Date, int, java.lang.String, byte[]);
+  public de.measite.minidns.Record$TYPE getType();
+  public void serialize(java.io.DataOutputStream) throws java.io.IOException;
+  public void writePartialSignature(java.io.DataOutputStream) throws java.io.IOException;
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "RecordsTest.java"
+public class de.measite.minidns.record.RecordsTest {
+  public de.measite.minidns.record.RecordsTest();
+  public void testARecord() throws java.lang.Exception;
+  public void testARecordInvalidIp() throws java.lang.Exception;
+  public void testAAAARecord() throws java.lang.Exception;
+  public void testAAAARecordInvalidIp() throws java.lang.Exception;
+  public void testCnameRecord() throws java.lang.Exception;
+  public void testDlvRecord() throws java.lang.Exception;
+  public void testDnskeyRecord() throws java.lang.Exception;
+  public void testDsRecord() throws java.lang.Exception;
+  public void testMxRecord() throws java.lang.Exception;
+  public void testNsecRecord() throws java.lang.Exception;
+  public void testNsec3Record() throws java.lang.Exception;
+  public void testNsec3ParamRecord() throws java.lang.Exception;
+  public void testOpenpgpkeyRecord() throws java.lang.Exception;
+  public void testPtrRecord() throws java.lang.Exception;
+  public void testRrsigRecord() throws java.lang.Exception;
+  public void testSoaRecord() throws java.lang.Exception;
+  public void testSrvRecord() throws java.lang.Exception;
+  public void testTlsaRecord() throws java.lang.Exception;
+}
+Compiled from "SOA.java"
+public class de.measite.minidns.record.SOA extends de.measite.minidns.record.Data {
+  public final de.measite.minidns.DNSName mname;
+  public final de.measite.minidns.DNSName rname;
+  public final long serial;
+  public final int refresh;
+  public final int retry;
+  public final int expire;
+  public final long minimum;
+  public static de.measite.minidns.record.SOA parse(java.io.DataInputStream, byte[]) throws java.io.IOException;
+  public de.measite.minidns.record.SOA(java.lang.String, java.lang.String, long, int, int, int, long);
+  public de.measite.minidns.record.SOA(de.measite.minidns.DNSName, de.measite.minidns.DNSName, long, int, int, int, long);
+  public de.measite.minidns.Record$TYPE getType();
+  public void serialize(java.io.DataOutputStream) throws java.io.IOException;
+  public java.lang.String toString();
+}
+Compiled from "SRV.java"
+public class de.measite.minidns.record.SRV extends de.measite.minidns.record.Data {
+  public final int priority;
+  public final int weight;
+  public final int port;
+  public final de.measite.minidns.DNSName name;
+  public static de.measite.minidns.record.SRV parse(java.io.DataInputStream, byte[]) throws java.io.IOException;
+  public de.measite.minidns.record.SRV(int, int, int, java.lang.String);
+  public de.measite.minidns.record.SRV(int, int, int, de.measite.minidns.DNSName);
+  public void serialize(java.io.DataOutputStream) throws java.io.IOException;
+  public java.lang.String toString();
+  public de.measite.minidns.Record$TYPE getType();
+}
+Compiled from "TLSA.java"
+public class de.measite.minidns.record.TLSA extends de.measite.minidns.record.Data {
+  public static final byte CERT_USAGE_CA_CONSTRAINT;
+  public static final byte CERT_USAGE_SERVICE_CERTIFICATE_CONSTRAINT;
+  public static final byte CRET_USAGE_TRUST_ANCHOR_ASSERTION;
+  public static final byte CERT_USAGE_DOMAIN_ISSUED_CERTIFICATE;
+  public static final byte SELECTOR_FULL_CERTIFICATE;
+  public static final byte SELECTOR_SUBJECT_PUBLIC_KEY_INFO;
+  public static final byte MATCHING_TYPE_NO_HASH;
+  public static final byte MATCHING_TYPE_SHA_256;
+  public static final byte MATCHING_TYPE_SHA_512;
+  public final byte certUsage;
+  public final byte selector;
+  public final byte matchingType;
+  public static de.measite.minidns.record.TLSA parse(java.io.DataInputStream, int) throws java.io.IOException;
+  de.measite.minidns.record.TLSA(byte, byte, byte, byte[]);
+  public de.measite.minidns.Record$TYPE getType();
+  public void serialize(java.io.DataOutputStream) throws java.io.IOException;
+  public java.lang.String toString();
+  public byte[] getCertificateAssociation();
+  public boolean certificateAssociationEquals(byte[]);
+}
+Compiled from "TXT.java"
+public class de.measite.minidns.record.TXT extends de.measite.minidns.record.Data {
+  public static de.measite.minidns.record.TXT parse(java.io.DataInputStream, int) throws java.io.IOException;
+  public de.measite.minidns.record.TXT(byte[]);
+  public byte[] getBlob();
+  public java.lang.String getText();
+  public java.util.List<byte[]> getExtents();
+  public void serialize(java.io.DataOutputStream) throws java.io.IOException;
+  public de.measite.minidns.Record$TYPE getType();
+  public java.lang.String toString();
+}
+Compiled from "UNKNOWN.java"
+public class de.measite.minidns.record.UNKNOWN extends de.measite.minidns.record.Data {
+  public de.measite.minidns.Record$TYPE getType();
+  public void serialize(java.io.DataOutputStream) throws java.io.IOException;
+  public static de.measite.minidns.record.UNKNOWN parse(java.io.DataInputStream, int, de.measite.minidns.Record$TYPE) throws java.io.IOException;
+}
+Compiled from "RecursionState.java"
+public class de.measite.minidns.recursive.RecursionState {
+  static final boolean $assertionsDisabled;
+  de.measite.minidns.recursive.RecursionState(de.measite.minidns.recursive.RecursiveDNSClient);
+  void recurse(java.net.InetAddress, de.measite.minidns.DNSMessage) throws de.measite.minidns.recursive.RecursiveClientException$LoopDetected, de.measite.minidns.recursive.RecursiveClientException$MaxRecursionStepsReached;
+  void decrementSteps();
+  static {};
+}
+Compiled from "RecursiveClientException.java"
+public abstract class de.measite.minidns.recursive.RecursiveClientException extends de.measite.minidns.MiniDNSException {
+  protected de.measite.minidns.recursive.RecursiveClientException(java.lang.String);
+}
+Compiled from "RecursiveClientException.java"
+public class de.measite.minidns.recursive.RecursiveClientException$LoopDetected extends de.measite.minidns.recursive.RecursiveClientException {
+  public de.measite.minidns.recursive.RecursiveClientException$LoopDetected();
+}
+Compiled from "RecursiveClientException.java"
+public class de.measite.minidns.recursive.RecursiveClientException$MaxRecursionStepsReached extends de.measite.minidns.recursive.RecursiveClientException {
+  public de.measite.minidns.recursive.RecursiveClientException$MaxRecursionStepsReached();
+}
+Compiled from "RecursiveDNSClient.java"
+public class de.measite.minidns.recursive.RecursiveDNSClient extends de.measite.minidns.AbstractDNSClient {
+  protected static final java.net.InetAddress[] IPV4_ROOT_SERVERS;
+  protected static final java.net.InetAddress[] IPV6_ROOT_SERVERS;
+  int maxSteps;
+  public de.measite.minidns.recursive.RecursiveDNSClient();
+  public de.measite.minidns.recursive.RecursiveDNSClient(de.measite.minidns.DNSCache);
+  protected de.measite.minidns.DNSMessage query(de.measite.minidns.DNSMessage$Builder) throws java.io.IOException;
+  public static void setPreferedIpVersion(de.measite.minidns.recursive.RecursiveDNSClient$IpVersionSetting);
+  public static java.util.List<java.net.InetAddress> getRootServer(char);
+  public static java.util.List<java.net.InetAddress> getRootServer(char, de.measite.minidns.recursive.RecursiveDNSClient$IpVersionSetting);
+  protected boolean isResponseCacheable(de.measite.minidns.Question, de.measite.minidns.DNSMessage);
+  protected de.measite.minidns.DNSMessage$Builder newQuestion(de.measite.minidns.DNSMessage$Builder);
+  protected static void abortIfFatal(java.io.IOException) throws java.io.IOException;
+  static de.measite.minidns.recursive.RecursiveDNSClient$IpVersionSetting access$300();
+  static {};
+}
+Compiled from "RecursiveDNSClient.java"
+class de.measite.minidns.recursive.RecursiveDNSClient$1 {
+  static final int[] $SwitchMap$de$measite$minidns$recursive$RecursiveDNSClient$IpVersionSetting;
+  static final int[] $SwitchMap$de$measite$minidns$Record$TYPE;
+  static {};
+}
+Compiled from "RecursiveDNSClient.java"
+class de.measite.minidns.recursive.RecursiveDNSClient$IpResultSet {
+  final java.util.List<java.net.InetAddress> addresses;
+  de.measite.minidns.recursive.RecursiveDNSClient$IpResultSet(java.util.List, java.util.List, java.util.Random, de.measite.minidns.recursive.RecursiveDNSClient$1);
+}
+Compiled from "RecursiveDNSClient.java"
+class de.measite.minidns.recursive.RecursiveDNSClient$IpResultSet$Builder {
+  public de.measite.minidns.recursive.RecursiveDNSClient$IpResultSet build();
+  static java.util.List access$000(de.measite.minidns.recursive.RecursiveDNSClient$IpResultSet$Builder);
+  static java.util.List access$100(de.measite.minidns.recursive.RecursiveDNSClient$IpResultSet$Builder);
+  de.measite.minidns.recursive.RecursiveDNSClient$IpResultSet$Builder(java.util.Random, de.measite.minidns.recursive.RecursiveDNSClient$1);
+}
+Compiled from "RecursiveDNSClient.java"
+public final class de.measite.minidns.recursive.RecursiveDNSClient$IpVersionSetting extends java.lang.Enum<de.measite.minidns.recursive.RecursiveDNSClient$IpVersionSetting> {
+  public static final de.measite.minidns.recursive.RecursiveDNSClient$IpVersionSetting v4only;
+  public static final de.measite.minidns.recursive.RecursiveDNSClient$IpVersionSetting v6only;
+  public static final de.measite.minidns.recursive.RecursiveDNSClient$IpVersionSetting v4v6;
+  public static final de.measite.minidns.recursive.RecursiveDNSClient$IpVersionSetting v6v4;
+  public static de.measite.minidns.recursive.RecursiveDNSClient$IpVersionSetting[] values();
+  public static de.measite.minidns.recursive.RecursiveDNSClient$IpVersionSetting valueOf(java.lang.String);
+  static {};
+}
+Compiled from "RecursiveDNSClientTest.java"
+public class de.measite.minidns.recursive.RecursiveDNSClientTest {
+  public de.measite.minidns.recursive.RecursiveDNSClientTest();
+  public void basicRecursionTest() throws java.io.IOException;
+  public void loopRecursionTest() throws java.io.IOException;
+  public void notGluedNsTest() throws java.io.IOException;
+}
+Compiled from "ReliableDNSClient.java"
+public class de.measite.minidns.recursive.ReliableDNSClient extends de.measite.minidns.AbstractDNSClient {
+  public de.measite.minidns.recursive.ReliableDNSClient(de.measite.minidns.DNSCache);
+  public de.measite.minidns.recursive.ReliableDNSClient();
+  protected de.measite.minidns.DNSMessage query(de.measite.minidns.DNSMessage$Builder) throws java.io.IOException;
+  protected de.measite.minidns.DNSMessage$Builder newQuestion(de.measite.minidns.DNSMessage$Builder);
+  protected boolean isResponseCacheable(de.measite.minidns.Question, de.measite.minidns.DNSMessage);
+  protected java.lang.String isResponseAcceptable(de.measite.minidns.DNSMessage);
+  public void setDataSource(de.measite.minidns.source.DNSDataSource);
+  public void setMode(de.measite.minidns.recursive.ReliableDNSClient$Mode);
+}
+Compiled from "ReliableDNSClient.java"
+class de.measite.minidns.recursive.ReliableDNSClient$1 extends de.measite.minidns.recursive.RecursiveDNSClient {
+  final de.measite.minidns.recursive.ReliableDNSClient this$0;
+  de.measite.minidns.recursive.ReliableDNSClient$1(de.measite.minidns.recursive.ReliableDNSClient, de.measite.minidns.DNSCache);
+  protected de.measite.minidns.DNSMessage$Builder newQuestion(de.measite.minidns.DNSMessage$Builder);
+  protected boolean isResponseCacheable(de.measite.minidns.Question, de.measite.minidns.DNSMessage);
+}
+Compiled from "ReliableDNSClient.java"
+class de.measite.minidns.recursive.ReliableDNSClient$2 extends de.measite.minidns.DNSClient {
+  final de.measite.minidns.recursive.ReliableDNSClient this$0;
+  de.measite.minidns.recursive.ReliableDNSClient$2(de.measite.minidns.recursive.ReliableDNSClient, de.measite.minidns.DNSCache);
+  protected de.measite.minidns.DNSMessage$Builder newQuestion(de.measite.minidns.DNSMessage$Builder);
+  protected boolean isResponseCacheable(de.measite.minidns.Question, de.measite.minidns.DNSMessage);
+}
+Compiled from "ReliableDNSClient.java"
+public final class de.measite.minidns.recursive.ReliableDNSClient$Mode extends java.lang.Enum<de.measite.minidns.recursive.ReliableDNSClient$Mode> {
+  public static final de.measite.minidns.recursive.ReliableDNSClient$Mode recursiveWithIterativeFallback;
+  public static final de.measite.minidns.recursive.ReliableDNSClient$Mode recursiveOnly;
+  public static final de.measite.minidns.recursive.ReliableDNSClient$Mode iterativeOnly;
+  public static de.measite.minidns.recursive.ReliableDNSClient$Mode[] values();
+  public static de.measite.minidns.recursive.ReliableDNSClient$Mode valueOf(java.lang.String);
+  static {};
+}
+Compiled from "DNSDataSource.java"
+public abstract class de.measite.minidns.source.DNSDataSource {
+  protected int udpPayloadSize;
+  protected int timeout;
+  public de.measite.minidns.source.DNSDataSource();
+  public abstract de.measite.minidns.DNSMessage query(de.measite.minidns.DNSMessage, java.net.InetAddress, int) throws java.io.IOException;
+  public int getTimeout();
+  public void setTimeout(int);
+  public int getUdpPayloadSize();
+  public void setUdpPayloadSize(int);
+}
+Compiled from "NetworkDataSource.java"
+public class de.measite.minidns.source.NetworkDataSource extends de.measite.minidns.source.DNSDataSource {
+  protected static final java.util.logging.Logger LOGGER;
+  static final boolean $assertionsDisabled;
+  public de.measite.minidns.source.NetworkDataSource();
+  public de.measite.minidns.DNSMessage query(de.measite.minidns.DNSMessage, java.net.InetAddress, int) throws java.io.IOException;
+  protected de.measite.minidns.DNSMessage queryUdp(de.measite.minidns.DNSMessage, java.net.InetAddress, int) throws java.io.IOException;
+  protected de.measite.minidns.DNSMessage queryTcp(de.measite.minidns.DNSMessage, java.net.InetAddress, int) throws java.io.IOException;
+  static {};
+}
+Compiled from "NetworkDataSourceTest.java"
+public class de.measite.minidns.source.NetworkDataSourceTest {
+  public de.measite.minidns.source.NetworkDataSourceTest();
+  public void udpTruncatedTcpFallbackTest() throws java.io.IOException;
+}
+Compiled from "NetworkDataSourceTest.java"
+class de.measite.minidns.source.NetworkDataSourceTest$1TestNetworkDataSource extends de.measite.minidns.source.NetworkDataSource {
+  boolean lastQueryUdp;
+  final de.measite.minidns.source.NetworkDataSourceTest this$0;
+  de.measite.minidns.source.NetworkDataSourceTest$1TestNetworkDataSource(de.measite.minidns.source.NetworkDataSourceTest);
+  protected de.measite.minidns.DNSMessage queryUdp(de.measite.minidns.DNSMessage, java.net.InetAddress, int) throws java.io.IOException;
+  protected de.measite.minidns.DNSMessage queryTcp(de.measite.minidns.DNSMessage, java.net.InetAddress, int) throws java.io.IOException;
+}
+Compiled from "NetworkDataSourceWithAccounting.java"
+public class de.measite.minidns.source.NetworkDataSourceWithAccounting extends de.measite.minidns.source.NetworkDataSource {
+  public de.measite.minidns.source.NetworkDataSourceWithAccounting();
+  public de.measite.minidns.DNSMessage query(de.measite.minidns.DNSMessage, java.net.InetAddress, int) throws java.io.IOException;
+  protected de.measite.minidns.DNSMessage queryUdp(de.measite.minidns.DNSMessage, java.net.InetAddress, int) throws java.io.IOException;
+  protected de.measite.minidns.DNSMessage queryTcp(de.measite.minidns.DNSMessage, java.net.InetAddress, int) throws java.io.IOException;
+  public de.measite.minidns.source.NetworkDataSourceWithAccounting$Stats getStats();
+  public static de.measite.minidns.source.NetworkDataSourceWithAccounting from(de.measite.minidns.AbstractDNSClient);
+  static java.util.concurrent.atomic.AtomicInteger access$100(de.measite.minidns.source.NetworkDataSourceWithAccounting);
+  static java.util.concurrent.atomic.AtomicInteger access$200(de.measite.minidns.source.NetworkDataSourceWithAccounting);
+  static java.util.concurrent.atomic.AtomicInteger access$300(de.measite.minidns.source.NetworkDataSourceWithAccounting);
+  static java.util.concurrent.atomic.AtomicInteger access$400(de.measite.minidns.source.NetworkDataSourceWithAccounting);
+  static java.util.concurrent.atomic.AtomicInteger access$500(de.measite.minidns.source.NetworkDataSourceWithAccounting);
+  static java.util.concurrent.atomic.AtomicInteger access$600(de.measite.minidns.source.NetworkDataSourceWithAccounting);
+  static java.util.concurrent.atomic.AtomicInteger access$700(de.measite.minidns.source.NetworkDataSourceWithAccounting);
+  static java.util.concurrent.atomic.AtomicInteger access$800(de.measite.minidns.source.NetworkDataSourceWithAccounting);
+  static java.util.concurrent.atomic.AtomicInteger access$900(de.measite.minidns.source.NetworkDataSourceWithAccounting);
+}
+Compiled from "NetworkDataSourceWithAccounting.java"
+class de.measite.minidns.source.NetworkDataSourceWithAccounting$1 {
+}
+Compiled from "NetworkDataSourceWithAccounting.java"
+public class de.measite.minidns.source.NetworkDataSourceWithAccounting$Stats {
+  public final int successfulQueries;
+  public final int responseSize;
+  public final int averageResponseSize;
+  public final int failedQueries;
+  public final int successfulUdpQueries;
+  public final int udpResponseSize;
+  public final int averageUdpResponseSize;
+  public final int failedUdpQueries;
+  public final int successfulTcpQueries;
+  public final int tcpResponseSize;
+  public final int averageTcpResponseSize;
+  public final int failedTcpQueries;
+  public java.lang.String toString();
+  de.measite.minidns.source.NetworkDataSourceWithAccounting$Stats(de.measite.minidns.source.NetworkDataSourceWithAccounting, de.measite.minidns.source.NetworkDataSourceWithAccounting$1);
+}
+Compiled from "Base32.java"
+public final class de.measite.minidns.util.Base32 {
+  public static java.lang.String encodeToString(byte[]);
+}
+Compiled from "Base32Test.java"
+public class de.measite.minidns.util.Base32Test {
+  public de.measite.minidns.util.Base32Test();
+  public void testEncodeToString();
+}
+Compiled from "Base64.java"
+public final class de.measite.minidns.util.Base64 {
+  public static java.lang.String encodeToString(byte[]);
+}
+Compiled from "Base64Test.java"
+public class de.measite.minidns.util.Base64Test {
+  public de.measite.minidns.util.Base64Test();
+  public void testEncodeToString();
+}
+Compiled from "Hex.java"
+public class de.measite.minidns.util.Hex {
+  public de.measite.minidns.util.Hex();
+  public static java.lang.StringBuilder from(byte[]);
+}
+Compiled from "MultipleIoException.java"
+public class de.measite.minidns.util.MultipleIoException extends java.io.IOException {
+  static final boolean $assertionsDisabled;
+  public java.util.List<java.io.IOException> getExceptions();
+  public static void throwIfRequired(java.util.List<? extends java.io.IOException>) throws java.io.IOException;
+  static {};
+}
+Compiled from "NameUtil.java"
+public final class de.measite.minidns.util.NameUtil {
+  public de.measite.minidns.util.NameUtil();
+  public static boolean idnEquals(java.lang.String, java.lang.String);
+}
+Compiled from "NameUtilTest.java"
+public class de.measite.minidns.util.NameUtilTest {
+  public de.measite.minidns.util.NameUtilTest();
+  public void idnEqualsTest();
+}
+Compiled from "PlatformDetection.java"
+public class de.measite.minidns.util.PlatformDetection {
+  public de.measite.minidns.util.PlatformDetection();
+  public static boolean isAndroid();
+}

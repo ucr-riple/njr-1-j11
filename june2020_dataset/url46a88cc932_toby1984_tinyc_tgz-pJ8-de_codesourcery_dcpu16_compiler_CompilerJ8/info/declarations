@@ -1,0 +1,1804 @@
+Compiled from "AST.java"
+public class de.codesourcery.dcpu16.ast.AST extends de.codesourcery.dcpu16.ast.ASTNodeImpl implements de.codesourcery.dcpu16.ast.IScopeDefinition {
+  public de.codesourcery.dcpu16.ast.AST();
+  public de.codesourcery.dcpu16.ast.AST(de.codesourcery.dcpu16.compiler.IScope);
+  public de.codesourcery.dcpu16.compiler.IScope getGlobalScope();
+  public java.lang.String toString();
+  protected de.codesourcery.dcpu16.ast.ASTNode createCopy();
+  public de.codesourcery.dcpu16.compiler.IScope getScope();
+}
+Compiled from "ASTNode.java"
+public interface de.codesourcery.dcpu16.ast.ASTNode {
+  public abstract void addChildren(java.util.Collection<? extends de.codesourcery.dcpu16.ast.ASTNode>);
+  public abstract void addChild(de.codesourcery.dcpu16.ast.ASTNode);
+  public abstract de.codesourcery.dcpu16.ast.ASTNode child(int);
+  public abstract de.codesourcery.dcpu16.ast.ASTNode createCopy(boolean);
+  public abstract de.codesourcery.dcpu16.compiler.IScope findScope();
+  public abstract int getChildCount();
+  public abstract java.util.List<de.codesourcery.dcpu16.ast.ASTNode> getChildren();
+  public abstract de.codesourcery.dcpu16.ast.ASTNode getParent();
+  public abstract de.codesourcery.dcpu16.util.ITextRegion getTextRegion();
+  public abstract boolean hasChildren();
+  public abstract boolean hasLeftChild();
+  public abstract boolean hasNoChildren();
+  public abstract boolean hasRightChild();
+  public abstract int indexOf(de.codesourcery.dcpu16.ast.ASTNode);
+  public abstract void insertChild(int, de.codesourcery.dcpu16.ast.ASTNode);
+  public abstract de.codesourcery.dcpu16.ast.ASTNode leftChild();
+  public abstract void merge(de.codesourcery.dcpu16.util.ITextRegion);
+  public abstract de.codesourcery.dcpu16.parser.Token merge(de.codesourcery.dcpu16.parser.Token);
+  public abstract void removeChild(de.codesourcery.dcpu16.ast.ASTNode);
+  public abstract void removeFromParent();
+  public abstract void replaceChild(de.codesourcery.dcpu16.ast.ASTNode, de.codesourcery.dcpu16.ast.ASTNode);
+  public abstract void replaceChild(de.codesourcery.dcpu16.ast.ASTNode, java.util.List<de.codesourcery.dcpu16.ast.ASTNode>);
+  public abstract void replaceWith(de.codesourcery.dcpu16.ast.ASTNode);
+  public abstract void replaceWith(java.util.List<de.codesourcery.dcpu16.ast.ASTNode>);
+  public abstract de.codesourcery.dcpu16.ast.ASTNode rightChild();
+  public abstract void setParent(de.codesourcery.dcpu16.ast.ASTNode);
+  public abstract void swapChildren(de.codesourcery.dcpu16.ast.ASTNode, de.codesourcery.dcpu16.ast.ASTNode);
+}
+Compiled from "ASTNodeImpl.java"
+public abstract class de.codesourcery.dcpu16.ast.ASTNodeImpl implements de.codesourcery.dcpu16.ast.ASTNode {
+  public de.codesourcery.dcpu16.ast.ASTNodeImpl();
+  public final de.codesourcery.dcpu16.ast.ASTNode createCopy(boolean);
+  public void swapChildren(de.codesourcery.dcpu16.ast.ASTNode, de.codesourcery.dcpu16.ast.ASTNode);
+  public de.codesourcery.dcpu16.compiler.IScope findScope();
+  public de.codesourcery.dcpu16.ast.ASTNode getParent();
+  public int indexOf(de.codesourcery.dcpu16.ast.ASTNode);
+  public boolean hasLeftChild();
+  public de.codesourcery.dcpu16.ast.ASTNode leftChild();
+  public boolean hasRightChild();
+  public de.codesourcery.dcpu16.ast.ASTNode rightChild();
+  protected abstract de.codesourcery.dcpu16.ast.ASTNode createCopy();
+  public de.codesourcery.dcpu16.ast.ASTNodeImpl(de.codesourcery.dcpu16.parser.Token);
+  public de.codesourcery.dcpu16.ast.ASTNodeImpl(de.codesourcery.dcpu16.util.ITextRegion);
+  public de.codesourcery.dcpu16.ast.ASTNode child(int);
+  public de.codesourcery.dcpu16.util.ITextRegion getTextRegion();
+  public boolean hasNoChildren();
+  public boolean hasChildren();
+  public int getChildCount();
+  public java.util.List<de.codesourcery.dcpu16.ast.ASTNode> getChildren();
+  public void addChildren(java.util.Collection<? extends de.codesourcery.dcpu16.ast.ASTNode>);
+  public void addChild(de.codesourcery.dcpu16.ast.ASTNode);
+  public void setParent(de.codesourcery.dcpu16.ast.ASTNode);
+  public de.codesourcery.dcpu16.parser.Token merge(de.codesourcery.dcpu16.parser.Token);
+  public void merge(de.codesourcery.dcpu16.util.ITextRegion);
+  public void insertChild(int, de.codesourcery.dcpu16.ast.ASTNode);
+  public void replaceWith(de.codesourcery.dcpu16.ast.ASTNode);
+  public void replaceWith(java.util.List<de.codesourcery.dcpu16.ast.ASTNode>);
+  public void replaceChild(de.codesourcery.dcpu16.ast.ASTNode, java.util.List<de.codesourcery.dcpu16.ast.ASTNode>);
+  public void replaceChild(de.codesourcery.dcpu16.ast.ASTNode, de.codesourcery.dcpu16.ast.ASTNode);
+  public void removeFromParent();
+  public void removeChild(de.codesourcery.dcpu16.ast.ASTNode);
+}
+Compiled from "ArrayInitializer.java"
+public class de.codesourcery.dcpu16.ast.ArrayInitializer extends de.codesourcery.dcpu16.ast.ASTNodeImpl {
+  public de.codesourcery.dcpu16.ast.ArrayInitializer(de.codesourcery.dcpu16.util.ITextRegion);
+  protected de.codesourcery.dcpu16.ast.ASTNode createCopy();
+  public java.lang.String toString();
+}
+Compiled from "Block.java"
+public class de.codesourcery.dcpu16.ast.Block extends de.codesourcery.dcpu16.ast.ASTNodeImpl implements de.codesourcery.dcpu16.ast.IScopeDefinition {
+  public de.codesourcery.dcpu16.ast.Block();
+  public java.lang.String toString();
+  public boolean isEmpty();
+  protected de.codesourcery.dcpu16.ast.ASTNode createCopy();
+  public de.codesourcery.dcpu16.compiler.IScope getScope();
+  public void setScope(de.codesourcery.dcpu16.compiler.IScope);
+  public boolean isNotEmpty();
+}
+Compiled from "ConstantDefinition.java"
+public class de.codesourcery.dcpu16.ast.ConstantDefinition extends de.codesourcery.dcpu16.ast.ASTNodeImpl {
+  public de.codesourcery.dcpu16.ast.ConstantDefinition(de.codesourcery.dcpu16.compiler.Identifier, de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.compiler.IScope, de.codesourcery.dcpu16.util.ITextRegion);
+  public de.codesourcery.dcpu16.compiler.Identifier getParameterName();
+  public de.codesourcery.dcpu16.compiler.IScope getScope();
+  public de.codesourcery.dcpu16.compiler.DataType getDataType();
+  public java.lang.String toString();
+  protected de.codesourcery.dcpu16.ast.ConstantDefinition createCopy();
+  protected de.codesourcery.dcpu16.ast.ASTNode createCopy();
+}
+Compiled from "DoLoopNode.java"
+public class de.codesourcery.dcpu16.ast.DoLoopNode extends de.codesourcery.dcpu16.ast.ASTNodeImpl {
+  public de.codesourcery.dcpu16.ast.DoLoopNode(de.codesourcery.dcpu16.util.ITextRegion);
+  public de.codesourcery.dcpu16.ast.DoLoopNode(de.codesourcery.dcpu16.parser.Token);
+  public java.lang.String toString();
+  protected de.codesourcery.dcpu16.ast.ASTNode createCopy();
+  public de.codesourcery.dcpu16.ast.TermNode getCondition();
+  public de.codesourcery.dcpu16.ast.Block getBody();
+}
+Compiled from "ExpressionNode.java"
+public class de.codesourcery.dcpu16.ast.ExpressionNode extends de.codesourcery.dcpu16.ast.TermNode {
+  public de.codesourcery.dcpu16.ast.ExpressionNode();
+  public boolean isAssignment();
+  protected de.codesourcery.dcpu16.ast.ASTNode createCopy();
+  public de.codesourcery.dcpu16.ast.TermNode reduce();
+  public boolean isLiteralValue();
+  protected de.codesourcery.dcpu16.compiler.DataType internalGetDataType();
+}
+Compiled from "ForLoopNode.java"
+public class de.codesourcery.dcpu16.ast.ForLoopNode extends de.codesourcery.dcpu16.ast.ASTNodeImpl implements de.codesourcery.dcpu16.ast.IScopeDefinition {
+  public de.codesourcery.dcpu16.ast.ForLoopNode(de.codesourcery.dcpu16.parser.Token);
+  public void setScope(de.codesourcery.dcpu16.compiler.IScope);
+  public de.codesourcery.dcpu16.ast.ForLoopNode(de.codesourcery.dcpu16.util.ITextRegion, de.codesourcery.dcpu16.compiler.IScope);
+  public java.lang.String toString();
+  public void setBody(de.codesourcery.dcpu16.ast.Block);
+  public void setCondition(de.codesourcery.dcpu16.ast.TermNode);
+  public void setIncrementBlock(de.codesourcery.dcpu16.ast.Block);
+  public void setInitializerBlock(de.codesourcery.dcpu16.ast.Block);
+  public java.util.List<de.codesourcery.dcpu16.ast.ASTNode> getChildren();
+  protected de.codesourcery.dcpu16.ast.ASTNode createCopy();
+  public de.codesourcery.dcpu16.compiler.IScope getScope();
+  public de.codesourcery.dcpu16.ast.Block getInitializerBlock();
+  public de.codesourcery.dcpu16.ast.TermNode getCondition();
+  public de.codesourcery.dcpu16.ast.Block getIncrementBlock();
+  public de.codesourcery.dcpu16.ast.Block getBody();
+  public boolean hasBody();
+  public boolean hasInitializerBlock();
+  public boolean hasIncrementBlock();
+  static de.codesourcery.dcpu16.ast.Block access$000(de.codesourcery.dcpu16.ast.ForLoopNode);
+  static de.codesourcery.dcpu16.ast.Block access$002(de.codesourcery.dcpu16.ast.ForLoopNode, de.codesourcery.dcpu16.ast.Block);
+  static de.codesourcery.dcpu16.ast.TermNode access$100(de.codesourcery.dcpu16.ast.ForLoopNode);
+  static de.codesourcery.dcpu16.ast.TermNode access$102(de.codesourcery.dcpu16.ast.ForLoopNode, de.codesourcery.dcpu16.ast.TermNode);
+  static de.codesourcery.dcpu16.ast.Block access$200(de.codesourcery.dcpu16.ast.ForLoopNode);
+  static de.codesourcery.dcpu16.ast.Block access$202(de.codesourcery.dcpu16.ast.ForLoopNode, de.codesourcery.dcpu16.ast.Block);
+  static de.codesourcery.dcpu16.ast.Block access$300(de.codesourcery.dcpu16.ast.ForLoopNode);
+  static de.codesourcery.dcpu16.ast.Block access$302(de.codesourcery.dcpu16.ast.ForLoopNode, de.codesourcery.dcpu16.ast.Block);
+}
+Compiled from "ForLoopNode.java"
+class de.codesourcery.dcpu16.ast.ForLoopNode$1 extends java.util.AbstractList<de.codesourcery.dcpu16.ast.ASTNode> {
+  final java.util.List val$tmp;
+  final de.codesourcery.dcpu16.ast.ForLoopNode this$0;
+  de.codesourcery.dcpu16.ast.ForLoopNode$1(de.codesourcery.dcpu16.ast.ForLoopNode, java.util.List);
+  public void add(int, de.codesourcery.dcpu16.ast.ASTNode);
+  public de.codesourcery.dcpu16.ast.ASTNode get(int);
+  public de.codesourcery.dcpu16.ast.ASTNode remove(int);
+  public int size();
+  public java.lang.Object remove(int);
+  public void add(int, java.lang.Object);
+  public java.lang.Object get(int);
+}
+Compiled from "FunctionDeclarationNode.java"
+public class de.codesourcery.dcpu16.ast.FunctionDeclarationNode extends de.codesourcery.dcpu16.ast.FunctionSymbol {
+  public de.codesourcery.dcpu16.ast.FunctionDeclarationNode(de.codesourcery.dcpu16.compiler.IScope, de.codesourcery.dcpu16.compiler.Identifier, boolean, de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.util.ITextRegion);
+  public de.codesourcery.dcpu16.ast.FunctionDeclarationNode(de.codesourcery.dcpu16.compiler.IScope, de.codesourcery.dcpu16.compiler.Identifier, boolean, de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.util.ITextRegion, boolean);
+  protected de.codesourcery.dcpu16.ast.FunctionDeclarationNode createCopy();
+  public boolean isExtern();
+  public boolean matches(de.codesourcery.dcpu16.ast.FunctionDefinitionNode);
+  public java.lang.String getSignatureAsString();
+  public java.util.List<de.codesourcery.dcpu16.ast.ParameterDeclaration> getParameters();
+  public de.codesourcery.dcpu16.compiler.Identifier getUniqueIdentifier();
+  public de.codesourcery.dcpu16.compiler.IScope getDefinitionScope();
+  public java.lang.String toString();
+  public boolean isImplicitlyGenerated();
+  protected de.codesourcery.dcpu16.ast.ASTNode createCopy();
+}
+Compiled from "FunctionDeclarationNode.java"
+class de.codesourcery.dcpu16.ast.FunctionDeclarationNode$1 extends de.codesourcery.dcpu16.compiler.MethodSignature {
+  final de.codesourcery.dcpu16.ast.FunctionDeclarationNode this$0;
+  de.codesourcery.dcpu16.ast.FunctionDeclarationNode$1(de.codesourcery.dcpu16.ast.FunctionDeclarationNode, de.codesourcery.dcpu16.compiler.Identifier, de.codesourcery.dcpu16.compiler.DataType);
+  public java.util.List<de.codesourcery.dcpu16.ast.ParameterDeclaration> getParameters();
+}
+Compiled from "FunctionDefinitionNode.java"
+public class de.codesourcery.dcpu16.ast.FunctionDefinitionNode extends de.codesourcery.dcpu16.ast.FunctionSymbol {
+  public de.codesourcery.dcpu16.ast.FunctionDefinitionNode(de.codesourcery.dcpu16.compiler.Identifier, de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.util.ITextRegion);
+  public de.codesourcery.dcpu16.compiler.Identifier getUniqueIdentifier();
+  protected de.codesourcery.dcpu16.ast.ASTNode createCopy();
+  public java.util.List<de.codesourcery.dcpu16.ast.ParameterDeclaration> getParameters();
+  public de.codesourcery.dcpu16.ast.Block getBody();
+  public de.codesourcery.dcpu16.compiler.IScope getDefinitionScope();
+  public java.lang.String toString();
+  public de.codesourcery.dcpu16.ast.FunctionDeclarationNode toImplicitFunctionDeclaration();
+  public de.codesourcery.dcpu16.ast.ParameterDeclaration getParameter(de.codesourcery.dcpu16.compiler.Identifier);
+}
+Compiled from "FunctionDefinitionNode.java"
+class de.codesourcery.dcpu16.ast.FunctionDefinitionNode$1 extends de.codesourcery.dcpu16.compiler.MethodSignature {
+  final de.codesourcery.dcpu16.ast.FunctionDefinitionNode this$0;
+  de.codesourcery.dcpu16.ast.FunctionDefinitionNode$1(de.codesourcery.dcpu16.ast.FunctionDefinitionNode, de.codesourcery.dcpu16.compiler.Identifier, de.codesourcery.dcpu16.compiler.DataType);
+  public java.util.List<de.codesourcery.dcpu16.ast.ParameterDeclaration> getParameters();
+}
+Compiled from "FunctionInvocation.java"
+public class de.codesourcery.dcpu16.ast.FunctionInvocation extends de.codesourcery.dcpu16.ast.TermNode {
+  public de.codesourcery.dcpu16.ast.FunctionInvocation(de.codesourcery.dcpu16.compiler.Identifier, de.codesourcery.dcpu16.util.ITextRegion);
+  public de.codesourcery.dcpu16.ast.FunctionInvocation(de.codesourcery.dcpu16.compiler.Identifier, de.codesourcery.dcpu16.parser.Token);
+  public de.codesourcery.dcpu16.compiler.Identifier getFunctionName();
+  public int getArgumentCount();
+  public java.lang.String toString();
+  protected de.codesourcery.dcpu16.ast.ASTNode createCopy();
+  public de.codesourcery.dcpu16.ast.TermNode reduce();
+  public boolean isLiteralValue();
+  protected de.codesourcery.dcpu16.compiler.DataType internalGetDataType();
+}
+Compiled from "FunctionSymbol.java"
+public abstract class de.codesourcery.dcpu16.ast.FunctionSymbol extends de.codesourcery.dcpu16.ast.ASTNodeImpl implements de.codesourcery.dcpu16.ast.IScopeDefinition,de.codesourcery.dcpu16.ast.ISymbol {
+  protected de.codesourcery.dcpu16.ast.FunctionSymbol(de.codesourcery.dcpu16.util.ITextRegion);
+  protected final void setSignature(de.codesourcery.dcpu16.compiler.MethodSignature);
+  public final void setScope(de.codesourcery.dcpu16.compiler.IScope);
+  public final boolean isVoidFunction();
+  public final de.codesourcery.dcpu16.compiler.MethodSignature getSignature();
+  public final boolean matches(de.codesourcery.dcpu16.ast.FunctionSymbol);
+  public final int getParameterCount();
+  public java.lang.String getSignatureAsString();
+  public final de.codesourcery.dcpu16.compiler.DataType getReturnType();
+  public final de.codesourcery.dcpu16.compiler.Identifier getName();
+  public final de.codesourcery.dcpu16.compiler.IScope getScope();
+  public int getParameterIndex(de.codesourcery.dcpu16.compiler.Identifier);
+}
+Compiled from "IScopeDefinition.java"
+public interface de.codesourcery.dcpu16.ast.IScopeDefinition {
+  public abstract de.codesourcery.dcpu16.compiler.IScope getScope();
+}
+Compiled from "ISymbol.java"
+public interface de.codesourcery.dcpu16.ast.ISymbol {
+  public abstract de.codesourcery.dcpu16.compiler.IScope getScope();
+  public abstract de.codesourcery.dcpu16.compiler.Identifier getName();
+  public abstract de.codesourcery.dcpu16.compiler.Identifier getUniqueIdentifier();
+}
+Compiled from "IfNode.java"
+public class de.codesourcery.dcpu16.ast.IfNode extends de.codesourcery.dcpu16.ast.ASTNodeImpl {
+  public de.codesourcery.dcpu16.ast.IfNode(de.codesourcery.dcpu16.util.ITextRegion);
+  public de.codesourcery.dcpu16.ast.IfNode(de.codesourcery.dcpu16.parser.Token);
+  public de.codesourcery.dcpu16.ast.TermNode getCondition();
+  public de.codesourcery.dcpu16.ast.Block getBody();
+  public boolean hasElseBlock();
+  public de.codesourcery.dcpu16.ast.Block getElseBlock();
+  public java.lang.String toString();
+  protected de.codesourcery.dcpu16.ast.IfNode createCopy();
+  protected de.codesourcery.dcpu16.ast.ASTNode createCopy();
+}
+Compiled from "InlineAssemblyNode.java"
+public class de.codesourcery.dcpu16.ast.InlineAssemblyNode extends de.codesourcery.dcpu16.ast.ASTNodeImpl {
+  public de.codesourcery.dcpu16.ast.InlineAssemblyNode(java.lang.String, de.codesourcery.dcpu16.util.ITextRegion);
+  public java.lang.String getCode();
+  public java.lang.String toString();
+  protected de.codesourcery.dcpu16.ast.ASTNode createCopy();
+}
+Compiled from "NumberLiteralNode.java"
+public class de.codesourcery.dcpu16.ast.NumberLiteralNode extends de.codesourcery.dcpu16.ast.TermNode {
+  public de.codesourcery.dcpu16.ast.NumberLiteralNode(long, de.codesourcery.dcpu16.util.ITextRegion);
+  public de.codesourcery.dcpu16.ast.NumberLiteralNode(long, de.codesourcery.dcpu16.parser.Token);
+  public long getValue();
+  public java.lang.String toString();
+  protected de.codesourcery.dcpu16.ast.ASTNode createCopy();
+  public de.codesourcery.dcpu16.ast.TermNode reduce();
+  public boolean isLiteralValue();
+  public de.codesourcery.dcpu16.compiler.DataType internalGetDataType();
+  public static java.lang.Long valueOf(de.codesourcery.dcpu16.ast.TermNode);
+  public static long parse(java.lang.String);
+  public static boolean isValidNumberLiteral(java.lang.String);
+  static {};
+}
+Compiled from "OperatorNode.java"
+public class de.codesourcery.dcpu16.ast.OperatorNode extends de.codesourcery.dcpu16.ast.TermNode {
+  public de.codesourcery.dcpu16.ast.OperatorNode(de.codesourcery.dcpu16.compiler.Operator, de.codesourcery.dcpu16.util.ITextRegion);
+  public de.codesourcery.dcpu16.ast.OperatorNode(de.codesourcery.dcpu16.compiler.Operator, de.codesourcery.dcpu16.parser.Token);
+  public de.codesourcery.dcpu16.compiler.Operator getOperator();
+  public boolean hasAllOperands();
+  public java.lang.String toString();
+  public boolean isAssignment();
+  public boolean isComparison();
+  protected de.codesourcery.dcpu16.ast.OperatorNode createCopy();
+  public de.codesourcery.dcpu16.ast.TermNode reduce();
+  public boolean isLiteralValue();
+  protected de.codesourcery.dcpu16.compiler.DataType internalGetDataType();
+  public boolean isAssignmentTo(de.codesourcery.dcpu16.ast.VariableDefinition);
+  public boolean isAssignmentTo(de.codesourcery.dcpu16.ast.VariableReferenceNode);
+  public boolean isAssignmentTo(de.codesourcery.dcpu16.compiler.Identifier, de.codesourcery.dcpu16.compiler.IScope);
+  protected de.codesourcery.dcpu16.ast.ASTNode createCopy();
+}
+Compiled from "OperatorNode.java"
+class de.codesourcery.dcpu16.ast.OperatorNode$1 implements de.codesourcery.dcpu16.parser.ASTUtils$IAdvancedVisitor {
+  final de.codesourcery.dcpu16.ast.ASTNode val$expectedDefinitionSite;
+  final java.util.concurrent.atomic.AtomicBoolean val$result;
+  final de.codesourcery.dcpu16.ast.OperatorNode this$0;
+  de.codesourcery.dcpu16.ast.OperatorNode$1(de.codesourcery.dcpu16.ast.OperatorNode, de.codesourcery.dcpu16.ast.ASTNode, java.util.concurrent.atomic.AtomicBoolean);
+  public void visit(de.codesourcery.dcpu16.ast.ASTNode, int, de.codesourcery.dcpu16.parser.ASTUtils$IIterationContext);
+}
+Compiled from "ParameterDeclaration.java"
+public class de.codesourcery.dcpu16.ast.ParameterDeclaration extends de.codesourcery.dcpu16.ast.VariableSymbolDefinition {
+  public de.codesourcery.dcpu16.ast.ParameterDeclaration(de.codesourcery.dcpu16.compiler.Identifier, de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.compiler.IScope, de.codesourcery.dcpu16.util.ITextRegion, boolean);
+  public java.lang.String toString();
+  public de.codesourcery.dcpu16.compiler.Identifier getUniqueIdentifier();
+  public de.codesourcery.dcpu16.ast.VariableSymbol getDefinitionSite();
+  protected de.codesourcery.dcpu16.ast.ParameterDeclaration createCopy();
+  public de.codesourcery.dcpu16.ast.FunctionSymbol getFunctionDeclaration();
+  protected de.codesourcery.dcpu16.ast.ASTNode createCopy();
+}
+Compiled from "ReturnNode.java"
+public class de.codesourcery.dcpu16.ast.ReturnNode extends de.codesourcery.dcpu16.ast.ASTNodeImpl {
+  public de.codesourcery.dcpu16.ast.ReturnNode(de.codesourcery.dcpu16.util.ITextRegion);
+  public java.lang.String toString();
+  public boolean returnsSomething();
+  public de.codesourcery.dcpu16.ast.TermNode getReturnValue();
+  public boolean matchesSignature(de.codesourcery.dcpu16.ast.FunctionDefinitionNode);
+  public de.codesourcery.dcpu16.compiler.DataType getReturnedDataType();
+  protected de.codesourcery.dcpu16.ast.ReturnNode createCopy();
+  protected de.codesourcery.dcpu16.ast.ASTNode createCopy();
+}
+Compiled from "StatementNode.java"
+public class de.codesourcery.dcpu16.ast.StatementNode extends de.codesourcery.dcpu16.ast.ASTNodeImpl {
+  public de.codesourcery.dcpu16.ast.StatementNode();
+  public de.codesourcery.dcpu16.ast.StatementNode(de.codesourcery.dcpu16.ast.ASTNode);
+  public java.lang.String toString();
+  public de.codesourcery.dcpu16.ast.StatementNode(de.codesourcery.dcpu16.util.ITextRegion);
+  public de.codesourcery.dcpu16.ast.StatementNode(de.codesourcery.dcpu16.parser.Token);
+  protected de.codesourcery.dcpu16.ast.ASTNode createCopy();
+}
+Compiled from "StringLiteralNode.java"
+public class de.codesourcery.dcpu16.ast.StringLiteralNode extends de.codesourcery.dcpu16.ast.TermNode {
+  public de.codesourcery.dcpu16.ast.StringLiteralNode(java.lang.String, boolean, de.codesourcery.dcpu16.util.ITextRegion);
+  public java.lang.String toString();
+  public java.lang.String getValue();
+  protected de.codesourcery.dcpu16.ast.StringLiteralNode createCopy();
+  public boolean isSingleCharacter();
+  public de.codesourcery.dcpu16.ast.TermNode reduce();
+  public static java.lang.String escapeQuotes(java.lang.String);
+  public boolean isLiteralValue();
+  protected de.codesourcery.dcpu16.compiler.DataType internalGetDataType();
+  protected de.codesourcery.dcpu16.ast.ASTNode createCopy();
+}
+Compiled from "TermNode.java"
+public abstract class de.codesourcery.dcpu16.ast.TermNode extends de.codesourcery.dcpu16.ast.ASTNodeImpl {
+  protected de.codesourcery.dcpu16.compiler.DataType dataType;
+  protected de.codesourcery.dcpu16.ast.TermNode();
+  protected de.codesourcery.dcpu16.ast.TermNode(de.codesourcery.dcpu16.util.ITextRegion);
+  protected de.codesourcery.dcpu16.ast.TermNode(de.codesourcery.dcpu16.parser.Token);
+  public abstract de.codesourcery.dcpu16.ast.TermNode reduce();
+  public abstract boolean isLiteralValue();
+  public final de.codesourcery.dcpu16.compiler.DataType getDataType();
+  protected abstract de.codesourcery.dcpu16.compiler.DataType internalGetDataType();
+  public void setDataType(de.codesourcery.dcpu16.compiler.DataType);
+  public final boolean isLValue();
+}
+Compiled from "VariableDefinition.java"
+public class de.codesourcery.dcpu16.ast.VariableDefinition extends de.codesourcery.dcpu16.ast.VariableSymbolDefinition {
+  public de.codesourcery.dcpu16.ast.VariableDefinition(de.codesourcery.dcpu16.compiler.IScope, de.codesourcery.dcpu16.compiler.Identifier, de.codesourcery.dcpu16.compiler.DataType, int, de.codesourcery.dcpu16.util.ITextRegion, boolean);
+  public int getElementCount();
+  public de.codesourcery.dcpu16.compiler.Identifier getUniqueIdentifier();
+  public de.codesourcery.dcpu16.ast.VariableSymbol getDefinitionSite();
+  public boolean hasArrayInitializer();
+  public de.codesourcery.dcpu16.ast.ArrayInitializer getArrayInitializer();
+  public java.lang.String toString();
+  public boolean hasInitializer();
+  public de.codesourcery.dcpu16.ast.TermNode getInitializer();
+  protected de.codesourcery.dcpu16.ast.VariableDefinition createCopy();
+  protected de.codesourcery.dcpu16.ast.ASTNode createCopy();
+}
+Compiled from "VariableReferenceNode.java"
+public class de.codesourcery.dcpu16.ast.VariableReferenceNode extends de.codesourcery.dcpu16.ast.TermNode implements de.codesourcery.dcpu16.ast.VariableSymbol {
+  public final de.codesourcery.dcpu16.compiler.Identifier identifier;
+  public final de.codesourcery.dcpu16.compiler.IScope scope;
+  public de.codesourcery.dcpu16.ast.VariableReferenceNode(de.codesourcery.dcpu16.compiler.Identifier, de.codesourcery.dcpu16.compiler.IScope, de.codesourcery.dcpu16.util.ITextRegion);
+  public de.codesourcery.dcpu16.compiler.IScope getScope();
+  public de.codesourcery.dcpu16.compiler.Identifier getName();
+  public java.lang.String toString();
+  protected de.codesourcery.dcpu16.ast.VariableReferenceNode createCopy();
+  public de.codesourcery.dcpu16.ast.TermNode reduce();
+  public boolean isLiteralValue();
+  public de.codesourcery.dcpu16.compiler.Identifier getUniqueIdentifier();
+  public de.codesourcery.dcpu16.ast.VariableSymbol getDefinitionSite();
+  protected de.codesourcery.dcpu16.compiler.DataType internalGetDataType();
+  public boolean isArrayDefinition();
+  public boolean isGlobalVariable();
+  protected de.codesourcery.dcpu16.ast.ASTNode createCopy();
+}
+Compiled from "VariableSymbol.java"
+public interface de.codesourcery.dcpu16.ast.VariableSymbol extends de.codesourcery.dcpu16.ast.ASTNode,de.codesourcery.dcpu16.ast.ISymbol {
+  public abstract boolean isArrayDefinition();
+  public abstract boolean isGlobalVariable();
+  public abstract de.codesourcery.dcpu16.compiler.DataType getDataType();
+  public abstract de.codesourcery.dcpu16.ast.VariableSymbol getDefinitionSite();
+}
+Compiled from "VariableSymbolDefinition.java"
+public abstract class de.codesourcery.dcpu16.ast.VariableSymbolDefinition extends de.codesourcery.dcpu16.ast.ASTNodeImpl implements de.codesourcery.dcpu16.ast.VariableSymbol {
+  protected de.codesourcery.dcpu16.ast.VariableSymbolDefinition(de.codesourcery.dcpu16.compiler.IScope, de.codesourcery.dcpu16.compiler.Identifier, de.codesourcery.dcpu16.compiler.DataType, boolean, de.codesourcery.dcpu16.util.ITextRegion);
+  public final boolean isArrayDefinition();
+  public final boolean isGlobalVariable();
+  public final de.codesourcery.dcpu16.compiler.IScope getScope();
+  public final de.codesourcery.dcpu16.compiler.Identifier getName();
+  public final de.codesourcery.dcpu16.compiler.DataType getDataType();
+  public final boolean isImmutable();
+}
+Compiled from "WhileLoopNode.java"
+public class de.codesourcery.dcpu16.ast.WhileLoopNode extends de.codesourcery.dcpu16.ast.ASTNodeImpl {
+  public de.codesourcery.dcpu16.ast.WhileLoopNode(de.codesourcery.dcpu16.util.ITextRegion);
+  public de.codesourcery.dcpu16.ast.WhileLoopNode(de.codesourcery.dcpu16.parser.Token);
+  public java.lang.String toString();
+  protected de.codesourcery.dcpu16.ast.ASTNode createCopy();
+  public de.codesourcery.dcpu16.ast.TermNode getCondition();
+  public boolean hasBody();
+  public de.codesourcery.dcpu16.ast.Block getBody();
+}
+Compiled from "CPUModel.java"
+public class de.codesourcery.dcpu16.codegeneration.CPUModel {
+  public static final boolean INSTRUCTION_QUEUE_DISABLED;
+  public static final boolean DEBUG_PEEPHOLE;
+  protected final de.codesourcery.dcpu16.codegeneration.CPUModel$RegisterTarget FRAME_POINTER;
+  protected final de.codesourcery.dcpu16.codegeneration.CPUModel$RegisterTarget ACCUMULATOR;
+  protected final de.codesourcery.dcpu16.codegeneration.CPUModel$RegisterTarget AUX_REGISTER;
+  protected final de.codesourcery.dcpu16.codegeneration.CPUModel$RegisterTarget PC;
+  protected final de.codesourcery.dcpu16.codegeneration.CPUModel$RegisterTarget SP;
+  public de.codesourcery.dcpu16.codegeneration.CPUModel(de.codesourcery.dcpu16.codegeneration.IAssemblyWriter);
+  protected final void pushAccumulator(java.lang.String...);
+  protected final void flushCommandQueue();
+  protected final void output(de.codesourcery.dcpu16.codegeneration.CPUModel$AssemblyCommand);
+}
+Compiled from "CPUModel.java"
+public final class de.codesourcery.dcpu16.codegeneration.CPUModel$AssemblyCommand {
+  protected final de.codesourcery.dcpu16.codegeneration.CPUModel$OpCode mnemonic;
+  protected final java.lang.String operand1;
+  protected de.codesourcery.dcpu16.codegeneration.CPUModel$SlotTarget operand1Target;
+  protected final java.lang.String operand2;
+  protected de.codesourcery.dcpu16.codegeneration.CPUModel$SlotTarget operand2Target;
+  final de.codesourcery.dcpu16.codegeneration.CPUModel this$0;
+  protected de.codesourcery.dcpu16.codegeneration.CPUModel$AssemblyCommand(de.codesourcery.dcpu16.codegeneration.CPUModel, de.codesourcery.dcpu16.codegeneration.CPUModel$OpCode);
+  public boolean isCommand(de.codesourcery.dcpu16.codegeneration.CPUModel$OpCode);
+  public de.codesourcery.dcpu16.codegeneration.CPUModel$AssemblyCommand(de.codesourcery.dcpu16.codegeneration.CPUModel, de.codesourcery.dcpu16.codegeneration.CPUModel$OpCode, de.codesourcery.dcpu16.codegeneration.CPUModel$SlotTarget);
+  public de.codesourcery.dcpu16.codegeneration.CPUModel$AssemblyCommand(de.codesourcery.dcpu16.codegeneration.CPUModel, de.codesourcery.dcpu16.codegeneration.CPUModel$OpCode, java.lang.String);
+  protected de.codesourcery.dcpu16.codegeneration.CPUModel$AssemblyCommand(de.codesourcery.dcpu16.codegeneration.CPUModel, de.codesourcery.dcpu16.codegeneration.CPUModel$OpCode, java.lang.String, de.codesourcery.dcpu16.codegeneration.CPUModel$SlotTarget);
+  protected de.codesourcery.dcpu16.codegeneration.CPUModel$AssemblyCommand(de.codesourcery.dcpu16.codegeneration.CPUModel, de.codesourcery.dcpu16.codegeneration.CPUModel$OpCode, de.codesourcery.dcpu16.codegeneration.CPUModel$SlotTarget, java.lang.String);
+  protected de.codesourcery.dcpu16.codegeneration.CPUModel$AssemblyCommand(de.codesourcery.dcpu16.codegeneration.CPUModel, de.codesourcery.dcpu16.codegeneration.CPUModel$OpCode, de.codesourcery.dcpu16.codegeneration.CPUModel$SlotTarget, de.codesourcery.dcpu16.codegeneration.CPUModel$SlotTarget);
+  public de.codesourcery.dcpu16.codegeneration.CPUModel$AssemblyCommand withComment(java.lang.String...);
+  protected de.codesourcery.dcpu16.codegeneration.CPUModel$AssemblyCommand(de.codesourcery.dcpu16.codegeneration.CPUModel, de.codesourcery.dcpu16.codegeneration.CPUModel$OpCode, java.lang.String, java.lang.String);
+  public java.lang.String toString();
+  static java.lang.String access$100(de.codesourcery.dcpu16.codegeneration.CPUModel$AssemblyCommand);
+}
+Compiled from "CPUModel.java"
+public final class de.codesourcery.dcpu16.codegeneration.CPUModel$ConstantValueTarget extends de.codesourcery.dcpu16.codegeneration.CPUModel$SlotTarget {
+  final de.codesourcery.dcpu16.codegeneration.CPUModel this$0;
+  public de.codesourcery.dcpu16.codegeneration.CPUModel$ConstantValueTarget(de.codesourcery.dcpu16.codegeneration.CPUModel, long);
+  public boolean isIndirect();
+  public java.lang.String toOperandString();
+  public de.codesourcery.dcpu16.codegeneration.CPUModel$SlotTarget indirect();
+}
+Compiled from "CPUModel.java"
+public class de.codesourcery.dcpu16.codegeneration.CPUModel$FunctionParameterTarget extends de.codesourcery.dcpu16.codegeneration.CPUModel$SlotTarget {
+  final de.codesourcery.dcpu16.codegeneration.CPUModel this$0;
+  public de.codesourcery.dcpu16.codegeneration.CPUModel$FunctionParameterTarget(de.codesourcery.dcpu16.codegeneration.CPUModel, int);
+  public boolean isIndirect();
+  public java.lang.String toOperandString();
+  public de.codesourcery.dcpu16.codegeneration.CPUModel$SlotTarget indirect();
+}
+Compiled from "CPUModel.java"
+public final class de.codesourcery.dcpu16.codegeneration.CPUModel$MemoryTarget extends de.codesourcery.dcpu16.codegeneration.CPUModel$SlotTarget {
+  final de.codesourcery.dcpu16.codegeneration.CPUModel this$0;
+  public de.codesourcery.dcpu16.codegeneration.CPUModel$MemoryTarget(de.codesourcery.dcpu16.codegeneration.CPUModel, java.lang.String, boolean);
+  public boolean isIndirect();
+  public java.lang.String toOperandString();
+  public de.codesourcery.dcpu16.codegeneration.CPUModel$SlotTarget indirect();
+  static java.lang.String access$000(de.codesourcery.dcpu16.codegeneration.CPUModel$MemoryTarget);
+}
+Compiled from "CPUModel.java"
+public final class de.codesourcery.dcpu16.codegeneration.CPUModel$OpCode extends java.lang.Enum<de.codesourcery.dcpu16.codegeneration.CPUModel$OpCode> {
+  public static final de.codesourcery.dcpu16.codegeneration.CPUModel$OpCode SET;
+  public static final de.codesourcery.dcpu16.codegeneration.CPUModel$OpCode SUB;
+  public static final de.codesourcery.dcpu16.codegeneration.CPUModel$OpCode ADD;
+  public static final de.codesourcery.dcpu16.codegeneration.CPUModel$OpCode MUL;
+  public static final de.codesourcery.dcpu16.codegeneration.CPUModel$OpCode DIV;
+  public static final de.codesourcery.dcpu16.codegeneration.CPUModel$OpCode BOR;
+  public static final de.codesourcery.dcpu16.codegeneration.CPUModel$OpCode HALT;
+  public static final de.codesourcery.dcpu16.codegeneration.CPUModel$OpCode IFN;
+  public static final de.codesourcery.dcpu16.codegeneration.CPUModel$OpCode IFE;
+  public static final de.codesourcery.dcpu16.codegeneration.CPUModel$OpCode IFG;
+  public static final de.codesourcery.dcpu16.codegeneration.CPUModel$OpCode IFL;
+  public static de.codesourcery.dcpu16.codegeneration.CPUModel$OpCode[] values();
+  public static de.codesourcery.dcpu16.codegeneration.CPUModel$OpCode valueOf(java.lang.String);
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "CPUModel.java"
+public final class de.codesourcery.dcpu16.codegeneration.CPUModel$RegisterTarget extends de.codesourcery.dcpu16.codegeneration.CPUModel$SlotTarget {
+  final de.codesourcery.dcpu16.codegeneration.CPUModel this$0;
+  public de.codesourcery.dcpu16.codegeneration.CPUModel$RegisterTarget(de.codesourcery.dcpu16.codegeneration.CPUModel, de.codesourcery.dcpu16.codegeneration.Register);
+  public boolean equals(java.lang.Object);
+  public de.codesourcery.dcpu16.codegeneration.Register getRegister();
+  public de.codesourcery.dcpu16.codegeneration.CPUModel$RegisterTarget(de.codesourcery.dcpu16.codegeneration.CPUModel, de.codesourcery.dcpu16.codegeneration.Register, boolean);
+  public java.lang.String toOperandString();
+  public de.codesourcery.dcpu16.codegeneration.CPUModel$SlotTarget indirect();
+  public boolean isIndirect();
+}
+Compiled from "CPUModel.java"
+public class de.codesourcery.dcpu16.codegeneration.CPUModel$SlotMapping {
+  public final de.codesourcery.dcpu16.codegeneration.CPUModel$SlotTarget target;
+  public de.codesourcery.dcpu16.codegeneration.CPUModel$SlotMapping(de.codesourcery.dcpu16.codegeneration.CPUModel$SlotTarget);
+}
+Compiled from "CPUModel.java"
+public abstract class de.codesourcery.dcpu16.codegeneration.CPUModel$SlotTarget {
+  final de.codesourcery.dcpu16.codegeneration.CPUModel this$0;
+  protected de.codesourcery.dcpu16.codegeneration.CPUModel$SlotTarget(de.codesourcery.dcpu16.codegeneration.CPUModel);
+  public abstract java.lang.String toOperandString();
+  public abstract de.codesourcery.dcpu16.codegeneration.CPUModel$SlotTarget indirect();
+  public abstract boolean isIndirect();
+  public java.lang.String toString();
+}
+Compiled from "CodeGenerator.java"
+public class de.codesourcery.dcpu16.codegeneration.CodeGenerator {
+  public de.codesourcery.dcpu16.codegeneration.CodeGenerator(de.codesourcery.dcpu16.codegeneration.IAssemblyWriter, de.codesourcery.dcpu16.ast.AST);
+  protected static de.codesourcery.dcpu16.ast.ASTNode unwrapStatement(de.codesourcery.dcpu16.ast.ASTNode);
+  public void generateCode();
+  protected de.codesourcery.dcpu16.ast.FunctionDefinitionNode findFunction(de.codesourcery.dcpu16.compiler.IScope, de.codesourcery.dcpu16.compiler.Identifier);
+  static de.codesourcery.dcpu16.codegeneration.LabelManager access$000(de.codesourcery.dcpu16.codegeneration.CodeGenerator);
+  static boolean access$100(de.codesourcery.dcpu16.ast.ASTNode);
+  static boolean access$200(de.codesourcery.dcpu16.ast.ASTNode);
+  static java.util.List access$300(de.codesourcery.dcpu16.codegeneration.CodeGenerator, java.util.List);
+  static void access$400(de.codesourcery.dcpu16.codegeneration.CodeGenerator, de.codesourcery.dcpu16.ast.FunctionDefinitionNode, de.codesourcery.dcpu16.compiler.IScope, de.codesourcery.dcpu16.ast.ASTNode, de.codesourcery.dcpu16.codegeneration.IAssemblyEmitter);
+  static void access$500(de.codesourcery.dcpu16.codegeneration.CodeGenerator, de.codesourcery.dcpu16.ast.FunctionDefinitionNode, de.codesourcery.dcpu16.codegeneration.IAssemblyEmitter);
+  static void access$600(de.codesourcery.dcpu16.codegeneration.CodeGenerator, de.codesourcery.dcpu16.ast.FunctionDefinitionNode, de.codesourcery.dcpu16.codegeneration.IAssemblyEmitter, de.codesourcery.dcpu16.ast.VariableDefinition);
+}
+Compiled from "CodeGenerator.java"
+class de.codesourcery.dcpu16.codegeneration.CodeGenerator$1 extends de.codesourcery.dcpu16.util.ExpressionPrinter {
+  final de.codesourcery.dcpu16.codegeneration.CodeGenerator this$0;
+  de.codesourcery.dcpu16.codegeneration.CodeGenerator$1(de.codesourcery.dcpu16.codegeneration.CodeGenerator);
+  protected java.lang.String getLabelForVariable(de.codesourcery.dcpu16.ast.VariableReferenceNode);
+}
+Compiled from "CodeGenerator.java"
+class de.codesourcery.dcpu16.codegeneration.CodeGenerator$2 extends de.codesourcery.dcpu16.codegeneration.DefaultAssemblyEmitter {
+  final de.codesourcery.dcpu16.codegeneration.CodeGenerator this$0;
+  de.codesourcery.dcpu16.codegeneration.CodeGenerator$2(de.codesourcery.dcpu16.codegeneration.CodeGenerator, de.codesourcery.dcpu16.codegeneration.IAssemblyWriter, de.codesourcery.dcpu16.compiler.IScope);
+  protected java.lang.String createLocalLabel(de.codesourcery.dcpu16.compiler.IScope);
+  protected java.lang.String getLabel(de.codesourcery.dcpu16.ast.ISymbol);
+}
+Compiled from "CodeGenerator.java"
+class de.codesourcery.dcpu16.codegeneration.CodeGenerator$3 implements de.codesourcery.dcpu16.parser.ASTUtils$IAdvancedVisitor {
+  final de.codesourcery.dcpu16.codegeneration.IAssemblyEmitter val$writer;
+  final de.codesourcery.dcpu16.compiler.IScope val$scope;
+  final de.codesourcery.dcpu16.ast.FunctionDefinitionNode val$currentFunction;
+  final de.codesourcery.dcpu16.codegeneration.CodeGenerator this$0;
+  de.codesourcery.dcpu16.codegeneration.CodeGenerator$3(de.codesourcery.dcpu16.codegeneration.CodeGenerator, de.codesourcery.dcpu16.codegeneration.IAssemblyEmitter, de.codesourcery.dcpu16.compiler.IScope, de.codesourcery.dcpu16.ast.FunctionDefinitionNode);
+  public void visit(de.codesourcery.dcpu16.ast.ASTNode, int, de.codesourcery.dcpu16.parser.ASTUtils$IIterationContext);
+}
+Compiled from "CodeGenerator.java"
+class de.codesourcery.dcpu16.codegeneration.CodeGenerator$4 {
+  static final int[] $SwitchMap$de$codesourcery$dcpu16$compiler$Operator;
+  static {};
+}
+Compiled from "DefaultAssemblyEmitter.java"
+public abstract class de.codesourcery.dcpu16.codegeneration.DefaultAssemblyEmitter extends de.codesourcery.dcpu16.codegeneration.CPUModel implements de.codesourcery.dcpu16.codegeneration.IAssemblyEmitter {
+  public de.codesourcery.dcpu16.codegeneration.DefaultAssemblyEmitter(de.codesourcery.dcpu16.codegeneration.IAssemblyWriter, de.codesourcery.dcpu16.compiler.IScope);
+  public void endOfStatement(de.codesourcery.dcpu16.ast.ASTNode);
+  public void discardAccumulator();
+  public void indirection();
+  public void load(de.codesourcery.dcpu16.codegeneration.LabelDefinition, de.codesourcery.dcpu16.ast.ASTNode);
+  protected void load(de.codesourcery.dcpu16.codegeneration.CPUModel$SlotMapping, java.lang.String...);
+  public void loadAddress(de.codesourcery.dcpu16.ast.ASTNode, java.lang.String...);
+  protected void load(de.codesourcery.dcpu16.codegeneration.CPUModel$SlotTarget, de.codesourcery.dcpu16.ast.ASTNode, java.lang.String...);
+  public de.codesourcery.dcpu16.codegeneration.CPUModel$SlotMapping getHandle(de.codesourcery.dcpu16.ast.ASTNode);
+  public void load(de.codesourcery.dcpu16.codegeneration.CPUModel$SlotMapping, de.codesourcery.dcpu16.ast.ASTNode, java.lang.String...);
+  public void load(de.codesourcery.dcpu16.ast.ASTNode, java.lang.String...);
+  public void loadIndirect(java.lang.String...);
+  protected abstract java.lang.String createLocalLabel(de.codesourcery.dcpu16.compiler.IScope);
+  protected abstract java.lang.String getLabel(de.codesourcery.dcpu16.ast.ISymbol);
+  protected de.codesourcery.dcpu16.codegeneration.CPUModel$SlotTarget slotTarget(de.codesourcery.dcpu16.ast.ASTNode, boolean);
+  public void close();
+  public void pushValue(de.codesourcery.dcpu16.codegeneration.CPUModel$SlotMapping, java.lang.String...);
+  public void pushValue(java.lang.String...);
+  public de.codesourcery.dcpu16.codegeneration.CPUModel$SlotMapping popValueToAux(java.lang.String...);
+  public void popValues(int, java.lang.String...);
+  public void jumpTo(de.codesourcery.dcpu16.codegeneration.CPUModel$SlotMapping, java.lang.String...);
+  public void jumpTo(de.codesourcery.dcpu16.codegeneration.LabelReference, java.lang.String...);
+  public void returnFromSubroutine(java.lang.String...);
+  public void storeValue(de.codesourcery.dcpu16.codegeneration.CPUModel$SlotMapping, java.lang.String...);
+  public void popValue(de.codesourcery.dcpu16.codegeneration.CPUModel$SlotMapping, java.lang.String...);
+  public void popValueIndirect(java.lang.String...);
+  public void popValueIndirect(de.codesourcery.dcpu16.codegeneration.CPUModel$SlotMapping, java.lang.String...);
+  public void storeValueIndirect(de.codesourcery.dcpu16.codegeneration.CPUModel$SlotMapping, java.lang.String...);
+  public void defineCodeLabel(de.codesourcery.dcpu16.codegeneration.LabelDefinition, java.lang.String...);
+  public void defineDataLabel(de.codesourcery.dcpu16.codegeneration.LabelDefinition, java.lang.String...);
+  public void bitwiseOr(java.lang.String...);
+  public void multiply(java.lang.String...);
+  public void add(java.lang.String...);
+  public void subtract(java.lang.String...);
+  public void outputCommentLine(java.lang.String);
+  public void halt(java.lang.String...);
+  public void branchOnBoolean(de.codesourcery.dcpu16.codegeneration.LabelReference, java.lang.String...);
+  public void compareEqualsWithResult(java.lang.String...);
+  public void compareGreaterThanWithResult(java.lang.String...);
+  public void compareLessThanWithResult(java.lang.String...);
+  public void compareGreaterThanEqual(de.codesourcery.dcpu16.codegeneration.LabelReference, java.lang.String...);
+  public void compareGreaterThanEqualWithResult(de.codesourcery.dcpu16.codegeneration.LabelReference, java.lang.String...);
+  public void compareNotEqualWithResult(java.lang.String...);
+  public void compareLessThanEqual(de.codesourcery.dcpu16.codegeneration.LabelReference, java.lang.String...);
+  public void compareLessThanEqualWithResult(de.codesourcery.dcpu16.codegeneration.LabelReference, java.lang.String...);
+  public void compareEquals(java.lang.String...);
+  public void compareNotEqual(java.lang.String...);
+  public void compareLessThan(java.lang.String...);
+  public void compareGreaterThan(java.lang.String...);
+  public void outputInlineAssembly(de.codesourcery.dcpu16.ast.InlineAssemblyNode);
+  public void outputValues(de.codesourcery.dcpu16.codegeneration.LabelDefinition, java.util.List<java.lang.String>, java.lang.String...);
+  public void reserveUninitializedMemory(de.codesourcery.dcpu16.codegeneration.LabelDefinition, int, java.lang.String...);
+  public void onFunctionEntry(java.lang.String...);
+  public void beforeFunctionExit(java.lang.String...);
+}
+Compiled from "DefaultAssemblyWriter.java"
+public class de.codesourcery.dcpu16.codegeneration.DefaultAssemblyWriter implements de.codesourcery.dcpu16.codegeneration.IAssemblyWriter {
+  public de.codesourcery.dcpu16.codegeneration.DefaultAssemblyWriter(java.io.OutputStream);
+  public de.codesourcery.dcpu16.codegeneration.DefaultAssemblyWriter(java.io.PrintWriter);
+  public void flush();
+  public void flushCodeSegment();
+  public void flushDataSegment();
+  public void codeSegment();
+  public void dataSegment();
+  public void write(java.lang.String);
+}
+Compiled from "DefaultAssemblyWriter.java"
+final class de.codesourcery.dcpu16.codegeneration.DefaultAssemblyWriter$Segment extends java.lang.Enum<de.codesourcery.dcpu16.codegeneration.DefaultAssemblyWriter$Segment> {
+  public static final de.codesourcery.dcpu16.codegeneration.DefaultAssemblyWriter$Segment CODE;
+  public static final de.codesourcery.dcpu16.codegeneration.DefaultAssemblyWriter$Segment DATA;
+  public static de.codesourcery.dcpu16.codegeneration.DefaultAssemblyWriter$Segment[] values();
+  public static de.codesourcery.dcpu16.codegeneration.DefaultAssemblyWriter$Segment valueOf(java.lang.String);
+  static {};
+}
+Compiled from "IAssemblyEmitter.java"
+public interface de.codesourcery.dcpu16.codegeneration.IAssemblyEmitter {
+  public static final de.codesourcery.dcpu16.codegeneration.Register METHOD_RESULT_REGISTER;
+  public abstract void discardAccumulator();
+  public abstract de.codesourcery.dcpu16.codegeneration.CPUModel$SlotMapping getHandle(de.codesourcery.dcpu16.ast.ASTNode);
+  public abstract void load(de.codesourcery.dcpu16.codegeneration.LabelDefinition, de.codesourcery.dcpu16.ast.ASTNode);
+  public abstract void load(de.codesourcery.dcpu16.codegeneration.CPUModel$SlotMapping, de.codesourcery.dcpu16.ast.ASTNode, java.lang.String...);
+  public abstract void endOfStatement(de.codesourcery.dcpu16.ast.ASTNode);
+  public abstract void indirection();
+  public abstract void loadIndirect(java.lang.String...);
+  public abstract void loadAddress(de.codesourcery.dcpu16.ast.ASTNode, java.lang.String...);
+  public abstract void load(de.codesourcery.dcpu16.ast.ASTNode, java.lang.String...);
+  public abstract void close();
+  public abstract void pushValue(java.lang.String...);
+  public abstract void pushValue(de.codesourcery.dcpu16.codegeneration.CPUModel$SlotMapping, java.lang.String...);
+  public abstract de.codesourcery.dcpu16.codegeneration.CPUModel$SlotMapping popValueToAux(java.lang.String...);
+  public abstract void popValues(int, java.lang.String...);
+  public abstract void jumpTo(de.codesourcery.dcpu16.codegeneration.CPUModel$SlotMapping, java.lang.String...);
+  public abstract void onFunctionEntry(java.lang.String...);
+  public abstract void beforeFunctionExit(java.lang.String...);
+  public abstract void jumpTo(de.codesourcery.dcpu16.codegeneration.LabelReference, java.lang.String...);
+  public abstract void returnFromSubroutine(java.lang.String...);
+  public abstract void popValue(de.codesourcery.dcpu16.codegeneration.CPUModel$SlotMapping, java.lang.String...);
+  public abstract void storeValue(de.codesourcery.dcpu16.codegeneration.CPUModel$SlotMapping, java.lang.String...);
+  public abstract void storeValueIndirect(de.codesourcery.dcpu16.codegeneration.CPUModel$SlotMapping, java.lang.String...);
+  public abstract void popValueIndirect(java.lang.String...);
+  public abstract void popValueIndirect(de.codesourcery.dcpu16.codegeneration.CPUModel$SlotMapping, java.lang.String...);
+  public abstract void defineCodeLabel(de.codesourcery.dcpu16.codegeneration.LabelDefinition, java.lang.String...);
+  public abstract void defineDataLabel(de.codesourcery.dcpu16.codegeneration.LabelDefinition, java.lang.String...);
+  public abstract void bitwiseOr(java.lang.String...);
+  public abstract void multiply(java.lang.String...);
+  public abstract void add(java.lang.String...);
+  public abstract void subtract(java.lang.String...);
+  public abstract void outputCommentLine(java.lang.String);
+  public abstract void halt(java.lang.String...);
+  public abstract void branchOnBoolean(de.codesourcery.dcpu16.codegeneration.LabelReference, java.lang.String...);
+  public abstract void compareEqualsWithResult(java.lang.String...);
+  public abstract void compareGreaterThanWithResult(java.lang.String...);
+  public abstract void compareLessThanWithResult(java.lang.String...);
+  public abstract void compareNotEqualWithResult(java.lang.String...);
+  public abstract void compareLessThanEqual(de.codesourcery.dcpu16.codegeneration.LabelReference, java.lang.String...);
+  public abstract void compareLessThanEqualWithResult(de.codesourcery.dcpu16.codegeneration.LabelReference, java.lang.String...);
+  public abstract void compareGreaterThanEqual(de.codesourcery.dcpu16.codegeneration.LabelReference, java.lang.String...);
+  public abstract void compareGreaterThanEqualWithResult(de.codesourcery.dcpu16.codegeneration.LabelReference, java.lang.String...);
+  public abstract void compareEquals(java.lang.String...);
+  public abstract void compareNotEqual(java.lang.String...);
+  public abstract void compareLessThan(java.lang.String...);
+  public abstract void compareGreaterThan(java.lang.String...);
+  public abstract void outputInlineAssembly(de.codesourcery.dcpu16.ast.InlineAssemblyNode);
+  public abstract void outputValues(de.codesourcery.dcpu16.codegeneration.LabelDefinition, java.util.List<java.lang.String>, java.lang.String...);
+  public abstract void reserveUninitializedMemory(de.codesourcery.dcpu16.codegeneration.LabelDefinition, int, java.lang.String...);
+  static {};
+}
+Compiled from "IAssemblyWriter.java"
+public interface de.codesourcery.dcpu16.codegeneration.IAssemblyWriter {
+  public abstract void codeSegment();
+  public abstract void dataSegment();
+  public abstract void write(java.lang.String);
+  public abstract void flush();
+  public abstract void flushCodeSegment();
+  public abstract void flushDataSegment();
+}
+Compiled from "LabelDefinition.java"
+public final class de.codesourcery.dcpu16.codegeneration.LabelDefinition {
+  public final java.lang.String identifier;
+  public de.codesourcery.dcpu16.codegeneration.LabelDefinition(java.lang.String);
+  public de.codesourcery.dcpu16.codegeneration.LabelReference ref();
+  public java.lang.String toString();
+}
+Compiled from "LabelManager.java"
+public class de.codesourcery.dcpu16.codegeneration.LabelManager {
+  public de.codesourcery.dcpu16.codegeneration.LabelManager();
+  public de.codesourcery.dcpu16.codegeneration.LabelDefinition defineLabel(de.codesourcery.dcpu16.ast.ISymbol);
+  public de.codesourcery.dcpu16.codegeneration.LabelDefinition defineLabel(de.codesourcery.dcpu16.compiler.IScope, de.codesourcery.dcpu16.compiler.Identifier);
+  public boolean isLabelDefined(de.codesourcery.dcpu16.ast.ISymbol);
+  public boolean isLabelDefined(de.codesourcery.dcpu16.compiler.IScope, de.codesourcery.dcpu16.compiler.Identifier);
+  public de.codesourcery.dcpu16.codegeneration.LabelDefinition defineTemporaryLabel(de.codesourcery.dcpu16.compiler.IScope);
+  public de.codesourcery.dcpu16.codegeneration.LabelDefinition getLabel(de.codesourcery.dcpu16.ast.ISymbol);
+  public de.codesourcery.dcpu16.codegeneration.LabelDefinition getOrDefineLabel(de.codesourcery.dcpu16.ast.ISymbol);
+}
+Compiled from "LabelReference.java"
+public final class de.codesourcery.dcpu16.codegeneration.LabelReference {
+  public final java.lang.String identifier;
+  public de.codesourcery.dcpu16.codegeneration.LabelReference(java.lang.String);
+  public java.lang.String toString();
+}
+Compiled from "Register.java"
+public final class de.codesourcery.dcpu16.codegeneration.Register extends java.lang.Enum<de.codesourcery.dcpu16.codegeneration.Register> {
+  public static final de.codesourcery.dcpu16.codegeneration.Register A;
+  public static final de.codesourcery.dcpu16.codegeneration.Register B;
+  public static final de.codesourcery.dcpu16.codegeneration.Register C;
+  public static final de.codesourcery.dcpu16.codegeneration.Register I;
+  public static final de.codesourcery.dcpu16.codegeneration.Register J;
+  public static final de.codesourcery.dcpu16.codegeneration.Register X;
+  public static final de.codesourcery.dcpu16.codegeneration.Register Y;
+  public static final de.codesourcery.dcpu16.codegeneration.Register Z;
+  public static final de.codesourcery.dcpu16.codegeneration.Register PC;
+  public static final de.codesourcery.dcpu16.codegeneration.Register SP;
+  public static de.codesourcery.dcpu16.codegeneration.Register[] values();
+  public static de.codesourcery.dcpu16.codegeneration.Register valueOf(java.lang.String);
+  public java.lang.String getIdentifier();
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "Compiler.java"
+public class de.codesourcery.dcpu16.compiler.Compiler {
+  public static final java.io.File DOT_OUTPUT;
+  public de.codesourcery.dcpu16.compiler.Compiler();
+  public static void main(java.lang.String[]) throws java.io.IOException;
+  public void compile(de.codesourcery.dcpu16.util.IInputStreamProvider) throws java.io.IOException;
+  static void access$000(de.codesourcery.dcpu16.compiler.Compiler, de.codesourcery.dcpu16.ast.FunctionDefinitionNode);
+  static void access$100(de.codesourcery.dcpu16.compiler.Compiler, de.codesourcery.dcpu16.ast.ASTNode);
+  static boolean access$200(de.codesourcery.dcpu16.compiler.Compiler, de.codesourcery.dcpu16.ast.FunctionDefinitionNode, de.codesourcery.dcpu16.ast.VariableDefinition, de.codesourcery.dcpu16.ast.TermNode);
+  static boolean access$300(de.codesourcery.dcpu16.ast.ASTNode);
+  static boolean access$400(de.codesourcery.dcpu16.ast.ASTNode);
+  static {};
+}
+Compiled from "Compiler.java"
+final class de.codesourcery.dcpu16.compiler.Compiler$1 implements de.codesourcery.dcpu16.util.IInputStreamProvider {
+  de.codesourcery.dcpu16.compiler.Compiler$1();
+  public java.io.InputStream createInputStream() throws java.io.IOException;
+}
+Compiled from "Compiler.java"
+class de.codesourcery.dcpu16.compiler.Compiler$10 extends de.codesourcery.dcpu16.compiler.Compiler$ASTRewriter {
+  final de.codesourcery.dcpu16.compiler.Compiler this$0;
+  de.codesourcery.dcpu16.compiler.Compiler$10(de.codesourcery.dcpu16.compiler.Compiler);
+  protected boolean rewriteNode(de.codesourcery.dcpu16.ast.ASTNode, de.codesourcery.dcpu16.parser.ASTUtils$IIterationContext);
+  protected void rewriteAST(de.codesourcery.dcpu16.ast.ASTNode);
+}
+Compiled from "Compiler.java"
+class de.codesourcery.dcpu16.compiler.Compiler$11 extends de.codesourcery.dcpu16.compiler.Compiler$ASTRewriter {
+  final de.codesourcery.dcpu16.compiler.Compiler this$0;
+  de.codesourcery.dcpu16.compiler.Compiler$11(de.codesourcery.dcpu16.compiler.Compiler);
+  protected boolean rewriteNode(de.codesourcery.dcpu16.ast.ASTNode, de.codesourcery.dcpu16.parser.ASTUtils$IIterationContext);
+  protected void rewriteAST(de.codesourcery.dcpu16.ast.ASTNode);
+}
+Compiled from "Compiler.java"
+class de.codesourcery.dcpu16.compiler.Compiler$11$1 implements de.codesourcery.dcpu16.parser.ASTUtils$IAdvancedVisitor {
+  final de.codesourcery.dcpu16.ast.FunctionDefinitionNode val$function;
+  final java.util.concurrent.atomic.AtomicBoolean val$variableInlined;
+  final de.codesourcery.dcpu16.compiler.Compiler$11 this$1;
+  de.codesourcery.dcpu16.compiler.Compiler$11$1(de.codesourcery.dcpu16.compiler.Compiler$11, de.codesourcery.dcpu16.ast.FunctionDefinitionNode, java.util.concurrent.atomic.AtomicBoolean);
+  public void visit(de.codesourcery.dcpu16.ast.ASTNode, int, de.codesourcery.dcpu16.parser.ASTUtils$IIterationContext);
+}
+Compiled from "Compiler.java"
+class de.codesourcery.dcpu16.compiler.Compiler$11$1$1 implements de.codesourcery.dcpu16.parser.ASTUtils$IAdvancedVisitor {
+  final de.codesourcery.dcpu16.ast.VariableDefinition val$var;
+  final java.util.concurrent.atomic.AtomicInteger val$assignmentCount;
+  final de.codesourcery.dcpu16.compiler.Compiler$11$1 this$2;
+  de.codesourcery.dcpu16.compiler.Compiler$11$1$1(de.codesourcery.dcpu16.compiler.Compiler$11$1, de.codesourcery.dcpu16.ast.VariableDefinition, java.util.concurrent.atomic.AtomicInteger);
+  public void visit(de.codesourcery.dcpu16.ast.ASTNode, int, de.codesourcery.dcpu16.parser.ASTUtils$IIterationContext);
+}
+Compiled from "Compiler.java"
+class de.codesourcery.dcpu16.compiler.Compiler$12 extends de.codesourcery.dcpu16.parser.ASTUtils$IVisitor {
+  final de.codesourcery.dcpu16.compiler.Compiler this$0;
+  de.codesourcery.dcpu16.compiler.Compiler$12(de.codesourcery.dcpu16.compiler.Compiler);
+  public boolean visit(de.codesourcery.dcpu16.ast.ASTNode, int);
+}
+Compiled from "Compiler.java"
+class de.codesourcery.dcpu16.compiler.Compiler$13 extends de.codesourcery.dcpu16.compiler.Compiler$ASTRewriter {
+  final de.codesourcery.dcpu16.compiler.Identifier val$varName;
+  final de.codesourcery.dcpu16.ast.VariableSymbol val$definitionSite;
+  final de.codesourcery.dcpu16.ast.TermNode val$newValue;
+  final de.codesourcery.dcpu16.compiler.Compiler this$0;
+  de.codesourcery.dcpu16.compiler.Compiler$13(de.codesourcery.dcpu16.compiler.Compiler, de.codesourcery.dcpu16.compiler.Identifier, de.codesourcery.dcpu16.ast.VariableSymbol, de.codesourcery.dcpu16.ast.TermNode);
+  protected boolean rewriteNode(de.codesourcery.dcpu16.ast.ASTNode, de.codesourcery.dcpu16.parser.ASTUtils$IIterationContext);
+  protected void rewriteAST(de.codesourcery.dcpu16.ast.ASTNode);
+}
+Compiled from "Compiler.java"
+class de.codesourcery.dcpu16.compiler.Compiler$14 extends de.codesourcery.dcpu16.compiler.Compiler$ASTRewriter {
+  final de.codesourcery.dcpu16.compiler.Compiler this$0;
+  de.codesourcery.dcpu16.compiler.Compiler$14(de.codesourcery.dcpu16.compiler.Compiler);
+  protected boolean rewriteNode(de.codesourcery.dcpu16.ast.ASTNode, de.codesourcery.dcpu16.parser.ASTUtils$IIterationContext);
+  protected void rewriteAST(de.codesourcery.dcpu16.ast.ASTNode);
+}
+Compiled from "Compiler.java"
+class de.codesourcery.dcpu16.compiler.Compiler$15 extends de.codesourcery.dcpu16.compiler.Compiler$ASTRewriter {
+  final de.codesourcery.dcpu16.compiler.Compiler this$0;
+  de.codesourcery.dcpu16.compiler.Compiler$15(de.codesourcery.dcpu16.compiler.Compiler);
+  protected boolean rewriteNode(de.codesourcery.dcpu16.ast.ASTNode, de.codesourcery.dcpu16.parser.ASTUtils$IIterationContext);
+  protected void rewriteAST(de.codesourcery.dcpu16.ast.ASTNode);
+}
+Compiled from "Compiler.java"
+class de.codesourcery.dcpu16.compiler.Compiler$2 extends de.codesourcery.dcpu16.optimizer.dataflow.DataFlowAnalyzer {
+  final de.codesourcery.dcpu16.compiler.Compiler this$0;
+  de.codesourcery.dcpu16.compiler.Compiler$2(de.codesourcery.dcpu16.compiler.Compiler);
+  protected de.codesourcery.dcpu16.optimizer.dataflow.InterferenceGraph$Node pickNodeToSpill(de.codesourcery.dcpu16.optimizer.dataflow.InterferenceGraph);
+}
+Compiled from "Compiler.java"
+class de.codesourcery.dcpu16.compiler.Compiler$3 implements java.util.Comparator<de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph$BasicBlock> {
+  final de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph val$graph;
+  final de.codesourcery.dcpu16.compiler.Compiler this$0;
+  de.codesourcery.dcpu16.compiler.Compiler$3(de.codesourcery.dcpu16.compiler.Compiler, de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph);
+  public int compare(de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph$BasicBlock, de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph$BasicBlock);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "Compiler.java"
+class de.codesourcery.dcpu16.compiler.Compiler$4 implements de.codesourcery.dcpu16.parser.ASTUtils$IAdvancedVisitor {
+  final de.codesourcery.dcpu16.compiler.Compiler this$0;
+  de.codesourcery.dcpu16.compiler.Compiler$4(de.codesourcery.dcpu16.compiler.Compiler);
+  public void visit(de.codesourcery.dcpu16.ast.ASTNode, int, de.codesourcery.dcpu16.parser.ASTUtils$IIterationContext);
+}
+Compiled from "Compiler.java"
+class de.codesourcery.dcpu16.compiler.Compiler$5 implements de.codesourcery.dcpu16.parser.ASTUtils$IAdvancedVisitor {
+  final de.codesourcery.dcpu16.compiler.Compiler this$0;
+  de.codesourcery.dcpu16.compiler.Compiler$5(de.codesourcery.dcpu16.compiler.Compiler);
+  public void visit(de.codesourcery.dcpu16.ast.ASTNode, int, de.codesourcery.dcpu16.parser.ASTUtils$IIterationContext);
+}
+Compiled from "Compiler.java"
+class de.codesourcery.dcpu16.compiler.Compiler$6 implements de.codesourcery.dcpu16.parser.ASTUtils$IASTNodeMatcher {
+  final de.codesourcery.dcpu16.compiler.Compiler this$0;
+  de.codesourcery.dcpu16.compiler.Compiler$6(de.codesourcery.dcpu16.compiler.Compiler);
+  public boolean matches(de.codesourcery.dcpu16.ast.ASTNode);
+}
+Compiled from "Compiler.java"
+class de.codesourcery.dcpu16.compiler.Compiler$7 implements de.codesourcery.dcpu16.parser.ASTUtils$IAdvancedVisitor {
+  final de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph val$cfg;
+  final java.util.concurrent.atomic.AtomicBoolean val$astModified;
+  final de.codesourcery.dcpu16.compiler.Compiler this$0;
+  de.codesourcery.dcpu16.compiler.Compiler$7(de.codesourcery.dcpu16.compiler.Compiler, de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph, java.util.concurrent.atomic.AtomicBoolean);
+  public void visit(de.codesourcery.dcpu16.ast.ASTNode, int, de.codesourcery.dcpu16.parser.ASTUtils$IIterationContext);
+}
+Compiled from "Compiler.java"
+class de.codesourcery.dcpu16.compiler.Compiler$7$1 implements de.codesourcery.dcpu16.parser.ASTUtils$IAdvancedVisitor {
+  final de.codesourcery.dcpu16.compiler.Compiler$7 this$1;
+  de.codesourcery.dcpu16.compiler.Compiler$7$1(de.codesourcery.dcpu16.compiler.Compiler$7);
+  public void visit(de.codesourcery.dcpu16.ast.ASTNode, int, de.codesourcery.dcpu16.parser.ASTUtils$IIterationContext);
+}
+Compiled from "Compiler.java"
+class de.codesourcery.dcpu16.compiler.Compiler$8 extends de.codesourcery.dcpu16.compiler.Compiler$ASTRewriter {
+  final de.codesourcery.dcpu16.compiler.Compiler this$0;
+  de.codesourcery.dcpu16.compiler.Compiler$8(de.codesourcery.dcpu16.compiler.Compiler);
+  protected boolean rewriteNode(de.codesourcery.dcpu16.ast.ASTNode, de.codesourcery.dcpu16.parser.ASTUtils$IIterationContext);
+  protected void rewriteAST(de.codesourcery.dcpu16.ast.ASTNode);
+}
+Compiled from "Compiler.java"
+class de.codesourcery.dcpu16.compiler.Compiler$9 extends de.codesourcery.dcpu16.compiler.Compiler$ASTRewriter {
+  final de.codesourcery.dcpu16.compiler.Compiler this$0;
+  de.codesourcery.dcpu16.compiler.Compiler$9(de.codesourcery.dcpu16.compiler.Compiler);
+  protected boolean rewriteNode(de.codesourcery.dcpu16.ast.ASTNode, de.codesourcery.dcpu16.parser.ASTUtils$IIterationContext);
+  protected void rewriteAST(de.codesourcery.dcpu16.ast.ASTNode);
+}
+Compiled from "Compiler.java"
+public abstract class de.codesourcery.dcpu16.compiler.Compiler$ASTRewriter implements de.codesourcery.dcpu16.parser.ASTUtils$IAdvancedVisitor {
+  protected de.codesourcery.dcpu16.compiler.Compiler$ASTRewriter();
+  public final boolean rewrite(de.codesourcery.dcpu16.ast.ASTNode);
+  public final void visit(de.codesourcery.dcpu16.ast.ASTNode, int, de.codesourcery.dcpu16.parser.ASTUtils$IIterationContext);
+  protected abstract boolean rewriteNode(de.codesourcery.dcpu16.ast.ASTNode, de.codesourcery.dcpu16.parser.ASTUtils$IIterationContext);
+  protected abstract void rewriteAST(de.codesourcery.dcpu16.ast.ASTNode);
+}
+Compiled from "DataType.java"
+public class de.codesourcery.dcpu16.compiler.DataType {
+  public static final de.codesourcery.dcpu16.compiler.Identifier UNKNOWN_TYPE;
+  public static final de.codesourcery.dcpu16.compiler.Identifier VOID_TYPE;
+  public static final de.codesourcery.dcpu16.compiler.Identifier BOOLEAN_TYPE;
+  public static final de.codesourcery.dcpu16.compiler.Identifier INTEGER_TYPE;
+  public static final de.codesourcery.dcpu16.compiler.Identifier CHAR_TYPE;
+  public static final de.codesourcery.dcpu16.compiler.DataType UNKNOWN;
+  public static final de.codesourcery.dcpu16.compiler.DataType VOID;
+  public static final de.codesourcery.dcpu16.compiler.DataType INTEGER;
+  public static final de.codesourcery.dcpu16.compiler.DataType CHAR;
+  public de.codesourcery.dcpu16.compiler.DataType(de.codesourcery.dcpu16.compiler.Identifier, boolean, int);
+  public static de.codesourcery.dcpu16.compiler.DataType getDataType(de.codesourcery.dcpu16.compiler.Identifier, boolean, int);
+  public static boolean isBuiltInType(de.codesourcery.dcpu16.compiler.Identifier);
+  protected java.lang.Object internalExtractValue(de.codesourcery.dcpu16.ast.ASTNode);
+  public final java.lang.Object extractValue(de.codesourcery.dcpu16.ast.ASTNode);
+  public boolean isArray();
+  public boolean isIntegerType();
+  public boolean isBuiltIn();
+  public de.codesourcery.dcpu16.compiler.Identifier getIdentifier();
+  public java.lang.String toString();
+  public int hashCode();
+  public final boolean isAssignableTo(de.codesourcery.dcpu16.compiler.DataType);
+  public final boolean isAssignableFrom(de.codesourcery.dcpu16.compiler.DataType);
+  public boolean canDereference();
+  public final de.codesourcery.dcpu16.compiler.DataType dereference();
+  public final boolean equals(java.lang.Object);
+  public int getPtrCount();
+  public boolean isPtr();
+  public boolean isBasicType();
+  public boolean isLValue();
+  public de.codesourcery.dcpu16.compiler.DataType getBaseType();
+  de.codesourcery.dcpu16.compiler.DataType(de.codesourcery.dcpu16.compiler.Identifier, de.codesourcery.dcpu16.compiler.DataType$1);
+  static {};
+}
+Compiled from "DataType.java"
+final class de.codesourcery.dcpu16.compiler.DataType$1 extends de.codesourcery.dcpu16.compiler.DataType {
+  de.codesourcery.dcpu16.compiler.DataType$1(de.codesourcery.dcpu16.compiler.Identifier);
+  protected java.lang.Object internalExtractValue(de.codesourcery.dcpu16.ast.ASTNode);
+}
+Compiled from "DataType.java"
+final class de.codesourcery.dcpu16.compiler.DataType$2 extends de.codesourcery.dcpu16.compiler.DataType {
+  de.codesourcery.dcpu16.compiler.DataType$2(de.codesourcery.dcpu16.compiler.Identifier);
+  protected java.lang.Object internalExtractValue(de.codesourcery.dcpu16.ast.ASTNode);
+}
+Compiled from "IScope.java"
+public interface de.codesourcery.dcpu16.compiler.IScope {
+  public static final de.codesourcery.dcpu16.compiler.Identifier GLOBAL_SCOPE;
+  public abstract de.codesourcery.dcpu16.compiler.Identifier getIdentifier();
+  public abstract de.codesourcery.dcpu16.compiler.Identifier getUniqueIdentifier();
+  public abstract de.codesourcery.dcpu16.compiler.IScope getParent();
+  public abstract boolean isGlobalScope();
+  public abstract de.codesourcery.dcpu16.compiler.IScope getTopLevelScope();
+  public abstract de.codesourcery.dcpu16.ast.ASTNode getDefinitionSite();
+  public abstract boolean isDefined(de.codesourcery.dcpu16.compiler.Identifier, boolean);
+  public abstract de.codesourcery.dcpu16.compiler.IScope getScope(de.codesourcery.dcpu16.compiler.Identifier);
+  public abstract de.codesourcery.dcpu16.ast.ASTNode getDefinitionSite(de.codesourcery.dcpu16.compiler.Identifier, boolean);
+  public abstract de.codesourcery.dcpu16.compiler.DataType defineDataType(de.codesourcery.dcpu16.compiler.Identifier, boolean, int);
+  public abstract de.codesourcery.dcpu16.compiler.DataType getDataType(de.codesourcery.dcpu16.compiler.Identifier, boolean, int);
+  public abstract boolean isDataTypeDefined(de.codesourcery.dcpu16.compiler.Identifier);
+  public abstract boolean isVariableDefined(de.codesourcery.dcpu16.compiler.Identifier);
+  public abstract boolean isFunctionDefined(de.codesourcery.dcpu16.compiler.Identifier);
+  public abstract boolean isFunctionDeclared(de.codesourcery.dcpu16.compiler.Identifier);
+  public abstract de.codesourcery.dcpu16.ast.FunctionDefinitionNode getFunction(de.codesourcery.dcpu16.compiler.Identifier);
+  public abstract void declareFunction(de.codesourcery.dcpu16.ast.FunctionDeclarationNode);
+  public abstract void defineFunction(de.codesourcery.dcpu16.ast.FunctionDefinitionNode);
+  public abstract void defineVariable(de.codesourcery.dcpu16.ast.ParameterDeclaration);
+  public abstract void defineVariable(de.codesourcery.dcpu16.ast.VariableDefinition);
+  public abstract void remove(de.codesourcery.dcpu16.compiler.Identifier);
+  static {};
+}
+Compiled from "Identifier.java"
+public class de.codesourcery.dcpu16.compiler.Identifier {
+  public de.codesourcery.dcpu16.compiler.Identifier(de.codesourcery.dcpu16.parser.Token);
+  public de.codesourcery.dcpu16.compiler.Identifier(java.lang.String);
+  public java.lang.String toString();
+  public java.lang.String getStringValue();
+  public static boolean isValidIdentifier(java.lang.String);
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+}
+Compiled from "MethodSignature.java"
+public class de.codesourcery.dcpu16.compiler.MethodSignature {
+  public de.codesourcery.dcpu16.compiler.MethodSignature(de.codesourcery.dcpu16.compiler.Identifier, de.codesourcery.dcpu16.compiler.DataType);
+  public de.codesourcery.dcpu16.compiler.MethodSignature(de.codesourcery.dcpu16.compiler.Identifier, de.codesourcery.dcpu16.compiler.DataType, java.util.List<de.codesourcery.dcpu16.ast.ParameterDeclaration>);
+  public de.codesourcery.dcpu16.compiler.Identifier getName();
+  public de.codesourcery.dcpu16.compiler.DataType getReturnType();
+  public boolean isVoidFunction();
+  public java.util.List<de.codesourcery.dcpu16.ast.ParameterDeclaration> getParameters();
+  public int getParameterCount();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+  public int getParameterIndex(de.codesourcery.dcpu16.compiler.Identifier);
+}
+Compiled from "Operator.java"
+public abstract class de.codesourcery.dcpu16.compiler.Operator extends java.lang.Enum<de.codesourcery.dcpu16.compiler.Operator> {
+  public static final de.codesourcery.dcpu16.compiler.Operator PLUS;
+  public static final de.codesourcery.dcpu16.compiler.Operator ARRAY_SUBSCRIPT;
+  public static final de.codesourcery.dcpu16.compiler.Operator BITWISE_OR;
+  public static final de.codesourcery.dcpu16.compiler.Operator BITWISE_NOT;
+  public static final de.codesourcery.dcpu16.compiler.Operator LOGICAL_NOT;
+  public static final de.codesourcery.dcpu16.compiler.Operator LOGICAL_OR;
+  public static final de.codesourcery.dcpu16.compiler.Operator LOGICAL_AND;
+  public static final de.codesourcery.dcpu16.compiler.Operator BITWISE_AND;
+  public static final de.codesourcery.dcpu16.compiler.Operator ADDRESS_OF;
+  public static final de.codesourcery.dcpu16.compiler.Operator MULTIPLY;
+  public static final de.codesourcery.dcpu16.compiler.Operator DEREFERENCE;
+  public static final de.codesourcery.dcpu16.compiler.Operator MINUS;
+  public static final de.codesourcery.dcpu16.compiler.Operator ASSIGNMENT;
+  public static final de.codesourcery.dcpu16.compiler.Operator NOT_EQUAL;
+  public static final de.codesourcery.dcpu16.compiler.Operator EQUALS;
+  public static final de.codesourcery.dcpu16.compiler.Operator LESS_THAN_EQUAL;
+  public static final de.codesourcery.dcpu16.compiler.Operator LESS_THAN;
+  public static final de.codesourcery.dcpu16.compiler.Operator GREATER_THAN_EQUAL;
+  public static final de.codesourcery.dcpu16.compiler.Operator GREATER_THAN;
+  public static de.codesourcery.dcpu16.compiler.Operator[] values();
+  public static de.codesourcery.dcpu16.compiler.Operator valueOf(java.lang.String);
+  public int getOperandCount();
+  public java.lang.String getLiteral();
+  public int getPrecedence();
+  public boolean hasHigherPrecedenceAs(de.codesourcery.dcpu16.compiler.Operator);
+  public boolean isLeftAssociative();
+  public java.lang.String toString();
+  public static de.codesourcery.dcpu16.compiler.Operator parseOperator(java.lang.String);
+  public static boolean isValidOperator(java.lang.String);
+  protected abstract boolean internalSupportsTypes(de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.compiler.DataType...);
+  protected abstract de.codesourcery.dcpu16.compiler.DataType internalInferType(de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.compiler.DataType);
+  public final boolean supportsTypes(de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.compiler.DataType...);
+  public final de.codesourcery.dcpu16.compiler.DataType inferType(de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.compiler.DataType);
+  public static boolean isOperatorPrefix(java.lang.String);
+  public boolean isCommutative();
+  protected abstract de.codesourcery.dcpu16.ast.TermNode internalApply(de.codesourcery.dcpu16.ast.TermNode, de.codesourcery.dcpu16.ast.TermNode...);
+  public final de.codesourcery.dcpu16.ast.ASTNode apply(de.codesourcery.dcpu16.ast.TermNode, de.codesourcery.dcpu16.ast.TermNode...);
+  public final de.codesourcery.dcpu16.ast.ASTNode reduce(de.codesourcery.dcpu16.ast.TermNode, de.codesourcery.dcpu16.ast.TermNode...);
+  protected de.codesourcery.dcpu16.ast.TermNode internalReduce(de.codesourcery.dcpu16.ast.TermNode, de.codesourcery.dcpu16.ast.TermNode...);
+  public final boolean isComparisonOperator();
+  public de.codesourcery.dcpu16.compiler.Operator getNegatedComparisonOperator();
+  public boolean mayBeParsedByLexer();
+  public static final de.codesourcery.dcpu16.compiler.DataType tryInferDataType(de.codesourcery.dcpu16.compiler.Operator, de.codesourcery.dcpu16.ast.TermNode, de.codesourcery.dcpu16.ast.TermNode...);
+  public final boolean isLValue(de.codesourcery.dcpu16.ast.TermNode, de.codesourcery.dcpu16.ast.TermNode...);
+  public boolean isLogicalOperator();
+  de.codesourcery.dcpu16.compiler.Operator(java.lang.String, int, java.lang.String, int, de.codesourcery.dcpu16.compiler.Operator$1);
+  static boolean access$100(de.codesourcery.dcpu16.ast.TermNode, de.codesourcery.dcpu16.ast.TermNode);
+  static boolean access$200(de.codesourcery.dcpu16.ast.TermNode);
+  static java.lang.Integer access$300(de.codesourcery.dcpu16.ast.TermNode, de.codesourcery.dcpu16.ast.TermNode[]);
+  static {};
+}
+Compiled from "Operator.java"
+final class de.codesourcery.dcpu16.compiler.Operator$1 extends de.codesourcery.dcpu16.compiler.Operator {
+  de.codesourcery.dcpu16.compiler.Operator$1(java.lang.String, int, java.lang.String, int);
+  public boolean internalSupportsTypes(de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.compiler.DataType...);
+  public de.codesourcery.dcpu16.compiler.DataType internalInferType(de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.compiler.DataType);
+  public boolean isCommutative();
+  protected de.codesourcery.dcpu16.ast.TermNode internalApply(de.codesourcery.dcpu16.ast.TermNode, de.codesourcery.dcpu16.ast.TermNode...);
+}
+Compiled from "Operator.java"
+final class de.codesourcery.dcpu16.compiler.Operator$10 extends de.codesourcery.dcpu16.compiler.Operator {
+  de.codesourcery.dcpu16.compiler.Operator$10(java.lang.String, int, java.lang.String, int);
+  public boolean mayBeParsedByLexer();
+  protected boolean internalSupportsTypes(de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.compiler.DataType...);
+  protected de.codesourcery.dcpu16.compiler.DataType internalInferType(de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.compiler.DataType);
+  protected de.codesourcery.dcpu16.ast.TermNode internalApply(de.codesourcery.dcpu16.ast.TermNode, de.codesourcery.dcpu16.ast.TermNode...);
+}
+Compiled from "Operator.java"
+final class de.codesourcery.dcpu16.compiler.Operator$11 extends de.codesourcery.dcpu16.compiler.Operator {
+  de.codesourcery.dcpu16.compiler.Operator$11(java.lang.String, int, java.lang.String, int);
+  public boolean mayBeParsedByLexer();
+  protected boolean internalSupportsTypes(de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.compiler.DataType...);
+  public int getOperandCount();
+  public boolean isLeftAssociative();
+  protected de.codesourcery.dcpu16.compiler.DataType internalInferType(de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.compiler.DataType);
+  protected de.codesourcery.dcpu16.ast.TermNode internalApply(de.codesourcery.dcpu16.ast.TermNode, de.codesourcery.dcpu16.ast.TermNode...);
+}
+Compiled from "Operator.java"
+final class de.codesourcery.dcpu16.compiler.Operator$12 extends de.codesourcery.dcpu16.compiler.Operator {
+  de.codesourcery.dcpu16.compiler.Operator$12(java.lang.String, int, java.lang.String, int);
+  public boolean internalSupportsTypes(de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.compiler.DataType...);
+  public de.codesourcery.dcpu16.compiler.DataType internalInferType(de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.compiler.DataType);
+  protected de.codesourcery.dcpu16.ast.TermNode internalApply(de.codesourcery.dcpu16.ast.TermNode, de.codesourcery.dcpu16.ast.TermNode...);
+}
+Compiled from "Operator.java"
+final class de.codesourcery.dcpu16.compiler.Operator$13 extends de.codesourcery.dcpu16.compiler.Operator {
+  de.codesourcery.dcpu16.compiler.Operator$13(java.lang.String, int, java.lang.String, int);
+  public boolean internalSupportsTypes(de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.compiler.DataType...);
+  public de.codesourcery.dcpu16.compiler.DataType internalInferType(de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.compiler.DataType);
+  protected de.codesourcery.dcpu16.ast.TermNode internalApply(de.codesourcery.dcpu16.ast.TermNode, de.codesourcery.dcpu16.ast.TermNode...);
+  protected de.codesourcery.dcpu16.ast.TermNode internalReduce(de.codesourcery.dcpu16.ast.TermNode, de.codesourcery.dcpu16.ast.TermNode...);
+}
+Compiled from "Operator.java"
+final class de.codesourcery.dcpu16.compiler.Operator$14 extends de.codesourcery.dcpu16.compiler.Operator {
+  de.codesourcery.dcpu16.compiler.Operator$14(java.lang.String, int, java.lang.String, int);
+  public boolean internalSupportsTypes(de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.compiler.DataType...);
+  public boolean isCommutative();
+  public de.codesourcery.dcpu16.compiler.DataType internalInferType(de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.compiler.DataType);
+  protected de.codesourcery.dcpu16.ast.TermNode internalApply(de.codesourcery.dcpu16.ast.TermNode, de.codesourcery.dcpu16.ast.TermNode...);
+}
+Compiled from "Operator.java"
+final class de.codesourcery.dcpu16.compiler.Operator$15 extends de.codesourcery.dcpu16.compiler.Operator {
+  de.codesourcery.dcpu16.compiler.Operator$15(java.lang.String, int, java.lang.String, int);
+  public boolean internalSupportsTypes(de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.compiler.DataType...);
+  public boolean isCommutative();
+  public de.codesourcery.dcpu16.compiler.DataType internalInferType(de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.compiler.DataType);
+  protected de.codesourcery.dcpu16.ast.TermNode internalApply(de.codesourcery.dcpu16.ast.TermNode, de.codesourcery.dcpu16.ast.TermNode...);
+}
+Compiled from "Operator.java"
+final class de.codesourcery.dcpu16.compiler.Operator$16 extends de.codesourcery.dcpu16.compiler.Operator {
+  de.codesourcery.dcpu16.compiler.Operator$16(java.lang.String, int, java.lang.String, int);
+  public boolean internalSupportsTypes(de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.compiler.DataType...);
+  public de.codesourcery.dcpu16.compiler.DataType internalInferType(de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.compiler.DataType);
+  protected de.codesourcery.dcpu16.ast.TermNode internalApply(de.codesourcery.dcpu16.ast.TermNode, de.codesourcery.dcpu16.ast.TermNode...);
+}
+Compiled from "Operator.java"
+final class de.codesourcery.dcpu16.compiler.Operator$17 extends de.codesourcery.dcpu16.compiler.Operator {
+  de.codesourcery.dcpu16.compiler.Operator$17(java.lang.String, int, java.lang.String, int);
+  public boolean internalSupportsTypes(de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.compiler.DataType...);
+  public de.codesourcery.dcpu16.compiler.DataType internalInferType(de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.compiler.DataType);
+  protected de.codesourcery.dcpu16.ast.TermNode internalApply(de.codesourcery.dcpu16.ast.TermNode, de.codesourcery.dcpu16.ast.TermNode...);
+}
+Compiled from "Operator.java"
+final class de.codesourcery.dcpu16.compiler.Operator$18 extends de.codesourcery.dcpu16.compiler.Operator {
+  de.codesourcery.dcpu16.compiler.Operator$18(java.lang.String, int, java.lang.String, int);
+  public boolean internalSupportsTypes(de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.compiler.DataType...);
+  public de.codesourcery.dcpu16.compiler.DataType internalInferType(de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.compiler.DataType);
+  protected de.codesourcery.dcpu16.ast.TermNode internalApply(de.codesourcery.dcpu16.ast.TermNode, de.codesourcery.dcpu16.ast.TermNode...);
+}
+Compiled from "Operator.java"
+final class de.codesourcery.dcpu16.compiler.Operator$19 extends de.codesourcery.dcpu16.compiler.Operator {
+  de.codesourcery.dcpu16.compiler.Operator$19(java.lang.String, int, java.lang.String, int);
+  public boolean internalSupportsTypes(de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.compiler.DataType...);
+  public de.codesourcery.dcpu16.compiler.DataType internalInferType(de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.compiler.DataType);
+  protected de.codesourcery.dcpu16.ast.TermNode internalApply(de.codesourcery.dcpu16.ast.TermNode, de.codesourcery.dcpu16.ast.TermNode...);
+}
+Compiled from "Operator.java"
+final class de.codesourcery.dcpu16.compiler.Operator$2 extends de.codesourcery.dcpu16.compiler.Operator {
+  de.codesourcery.dcpu16.compiler.Operator$2(java.lang.String, int, java.lang.String, int);
+  public boolean mayBeParsedByLexer();
+  protected boolean internalSupportsTypes(de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.compiler.DataType...);
+  public int getOperandCount();
+  public boolean isLeftAssociative();
+  protected de.codesourcery.dcpu16.ast.TermNode internalApply(de.codesourcery.dcpu16.ast.TermNode, de.codesourcery.dcpu16.ast.TermNode...);
+  protected de.codesourcery.dcpu16.compiler.DataType internalInferType(de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.compiler.DataType);
+}
+Compiled from "Operator.java"
+class de.codesourcery.dcpu16.compiler.Operator$20 {
+  static final int[] $SwitchMap$de$codesourcery$dcpu16$compiler$Operator;
+  static {};
+}
+Compiled from "Operator.java"
+final class de.codesourcery.dcpu16.compiler.Operator$3 extends de.codesourcery.dcpu16.compiler.Operator {
+  de.codesourcery.dcpu16.compiler.Operator$3(java.lang.String, int, java.lang.String, int);
+  public boolean mayBeParsedByLexer();
+  protected boolean internalSupportsTypes(de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.compiler.DataType...);
+  protected de.codesourcery.dcpu16.compiler.DataType internalInferType(de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.compiler.DataType);
+  protected de.codesourcery.dcpu16.ast.TermNode internalApply(de.codesourcery.dcpu16.ast.TermNode, de.codesourcery.dcpu16.ast.TermNode...);
+}
+Compiled from "Operator.java"
+final class de.codesourcery.dcpu16.compiler.Operator$4 extends de.codesourcery.dcpu16.compiler.Operator {
+  de.codesourcery.dcpu16.compiler.Operator$4(java.lang.String, int, java.lang.String, int);
+  public boolean mayBeParsedByLexer();
+  protected boolean internalSupportsTypes(de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.compiler.DataType...);
+  public int getOperandCount();
+  public boolean isLeftAssociative();
+  protected de.codesourcery.dcpu16.compiler.DataType internalInferType(de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.compiler.DataType);
+  protected de.codesourcery.dcpu16.ast.TermNode internalApply(de.codesourcery.dcpu16.ast.TermNode, de.codesourcery.dcpu16.ast.TermNode...);
+}
+Compiled from "Operator.java"
+final class de.codesourcery.dcpu16.compiler.Operator$5 extends de.codesourcery.dcpu16.compiler.Operator {
+  de.codesourcery.dcpu16.compiler.Operator$5(java.lang.String, int, java.lang.String, int);
+  public boolean mayBeParsedByLexer();
+  protected boolean internalSupportsTypes(de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.compiler.DataType...);
+  public int getOperandCount();
+  public boolean isLeftAssociative();
+  protected de.codesourcery.dcpu16.compiler.DataType internalInferType(de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.compiler.DataType);
+  protected de.codesourcery.dcpu16.ast.TermNode internalApply(de.codesourcery.dcpu16.ast.TermNode, de.codesourcery.dcpu16.ast.TermNode...);
+}
+Compiled from "Operator.java"
+final class de.codesourcery.dcpu16.compiler.Operator$6 extends de.codesourcery.dcpu16.compiler.Operator {
+  de.codesourcery.dcpu16.compiler.Operator$6(java.lang.String, int, java.lang.String, int);
+  public boolean mayBeParsedByLexer();
+  protected boolean internalSupportsTypes(de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.compiler.DataType...);
+  protected de.codesourcery.dcpu16.compiler.DataType internalInferType(de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.compiler.DataType);
+  protected de.codesourcery.dcpu16.ast.TermNode internalApply(de.codesourcery.dcpu16.ast.TermNode, de.codesourcery.dcpu16.ast.TermNode...);
+}
+Compiled from "Operator.java"
+final class de.codesourcery.dcpu16.compiler.Operator$7 extends de.codesourcery.dcpu16.compiler.Operator {
+  de.codesourcery.dcpu16.compiler.Operator$7(java.lang.String, int, java.lang.String, int);
+  public boolean mayBeParsedByLexer();
+  protected boolean internalSupportsTypes(de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.compiler.DataType...);
+  protected de.codesourcery.dcpu16.compiler.DataType internalInferType(de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.compiler.DataType);
+  protected de.codesourcery.dcpu16.ast.TermNode internalApply(de.codesourcery.dcpu16.ast.TermNode, de.codesourcery.dcpu16.ast.TermNode...);
+}
+Compiled from "Operator.java"
+final class de.codesourcery.dcpu16.compiler.Operator$8 extends de.codesourcery.dcpu16.compiler.Operator {
+  de.codesourcery.dcpu16.compiler.Operator$8(java.lang.String, int, java.lang.String, int);
+  public boolean mayBeParsedByLexer();
+  protected boolean internalSupportsTypes(de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.compiler.DataType...);
+  protected de.codesourcery.dcpu16.compiler.DataType internalInferType(de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.compiler.DataType);
+  protected de.codesourcery.dcpu16.ast.TermNode internalApply(de.codesourcery.dcpu16.ast.TermNode, de.codesourcery.dcpu16.ast.TermNode...);
+}
+Compiled from "Operator.java"
+final class de.codesourcery.dcpu16.compiler.Operator$9 extends de.codesourcery.dcpu16.compiler.Operator {
+  de.codesourcery.dcpu16.compiler.Operator$9(java.lang.String, int, java.lang.String, int);
+  public boolean mayBeParsedByLexer();
+  protected boolean internalSupportsTypes(de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.compiler.DataType...);
+  public int getOperandCount();
+  public boolean isLeftAssociative();
+  protected de.codesourcery.dcpu16.compiler.DataType internalInferType(de.codesourcery.dcpu16.compiler.DataType, de.codesourcery.dcpu16.compiler.DataType);
+  protected de.codesourcery.dcpu16.ast.TermNode internalApply(de.codesourcery.dcpu16.ast.TermNode, de.codesourcery.dcpu16.ast.TermNode...);
+}
+Compiled from "Scope.java"
+public class de.codesourcery.dcpu16.compiler.Scope implements de.codesourcery.dcpu16.compiler.IScope {
+  public de.codesourcery.dcpu16.compiler.Scope(de.codesourcery.dcpu16.compiler.Identifier, de.codesourcery.dcpu16.ast.ASTNode);
+  public void registerSymbol(de.codesourcery.dcpu16.compiler.Identifier, boolean);
+  public de.codesourcery.dcpu16.compiler.Scope(de.codesourcery.dcpu16.compiler.Identifier, de.codesourcery.dcpu16.ast.ASTNode, de.codesourcery.dcpu16.compiler.IScope);
+  public de.codesourcery.dcpu16.compiler.IScope getTopLevelScope();
+  public de.codesourcery.dcpu16.compiler.DataType getDataType(de.codesourcery.dcpu16.compiler.Identifier, boolean, int);
+  public boolean isDataTypeDefined(de.codesourcery.dcpu16.compiler.Identifier);
+  public de.codesourcery.dcpu16.compiler.DataType defineDataType(de.codesourcery.dcpu16.compiler.Identifier, boolean, int);
+  public boolean isVariableDefined(de.codesourcery.dcpu16.compiler.Identifier);
+  public boolean isFunctionDefined(de.codesourcery.dcpu16.compiler.Identifier);
+  public boolean isFunctionDeclared(de.codesourcery.dcpu16.compiler.Identifier);
+  public void defineFunction(de.codesourcery.dcpu16.ast.FunctionDefinitionNode);
+  public void defineVariable(de.codesourcery.dcpu16.ast.ParameterDeclaration);
+  public void defineVariable(de.codesourcery.dcpu16.ast.VariableDefinition);
+  public de.codesourcery.dcpu16.compiler.Identifier getIdentifier();
+  public de.codesourcery.dcpu16.compiler.IScope getParent();
+  public de.codesourcery.dcpu16.ast.ASTNode getDefinitionSite();
+  public de.codesourcery.dcpu16.ast.FunctionDefinitionNode getFunction(de.codesourcery.dcpu16.compiler.Identifier);
+  public java.lang.String toString();
+  public void declareFunction(de.codesourcery.dcpu16.ast.FunctionDeclarationNode);
+  public boolean isDefined(de.codesourcery.dcpu16.compiler.Identifier, boolean);
+  public de.codesourcery.dcpu16.ast.ASTNode getDefinitionSite(de.codesourcery.dcpu16.compiler.Identifier, boolean);
+  public de.codesourcery.dcpu16.compiler.IScope getScope(de.codesourcery.dcpu16.compiler.Identifier);
+  public void remove(de.codesourcery.dcpu16.compiler.Identifier);
+  public boolean isGlobalScope();
+  public de.codesourcery.dcpu16.compiler.Identifier getUniqueIdentifier();
+}
+Compiled from "ParseException.java"
+public class de.codesourcery.dcpu16.exceptions.ParseException extends java.lang.RuntimeException {
+  public de.codesourcery.dcpu16.exceptions.ParseException(java.lang.String, de.codesourcery.dcpu16.parser.Token);
+  public de.codesourcery.dcpu16.exceptions.ParseException(java.lang.String, de.codesourcery.dcpu16.util.ITextRegion);
+  public de.codesourcery.dcpu16.exceptions.ParseException(java.lang.String, int);
+  public int getOffset();
+  public de.codesourcery.dcpu16.util.ITextRegion getRegion();
+}
+Compiled from "ControlFlowAnalyzer.java"
+public class de.codesourcery.dcpu16.optimizer.cfg.ControlFlowAnalyzer {
+  public static boolean POST_PROCESS_GRAPH;
+  public de.codesourcery.dcpu16.optimizer.cfg.ControlFlowAnalyzer();
+  public de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph createGraph(de.codesourcery.dcpu16.ast.FunctionDefinitionNode);
+  static {};
+}
+Compiled from "ControlFlowAnalyzer.java"
+public final class de.codesourcery.dcpu16.optimizer.cfg.ControlFlowAnalyzer$NodeVisitor {
+  public de.codesourcery.dcpu16.optimizer.cfg.ControlFlowAnalyzer$NodeVisitor(de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph);
+  public void calc(de.codesourcery.dcpu16.ast.ASTNode);
+}
+Compiled from "ControlFlowGraph.java"
+public class de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph {
+  public de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph$BasicBlock newBlock();
+  public java.util.List<de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph$BasicBlock> getAllBlocks();
+  public java.lang.String toDOT();
+  public void removeBlock(de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph$BasicBlock);
+  public void postProcess();
+  public de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph$BasicBlock getFunctionEntry();
+  public de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph$BasicBlock getFunctionExit();
+  public de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph$BasicBlock addBlock(de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph$BasicBlock);
+  public de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph(de.codesourcery.dcpu16.ast.FunctionDefinitionNode);
+  public de.codesourcery.dcpu16.ast.FunctionDefinitionNode getFunction();
+  public de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph$BasicBlock findBasicBlock(de.codesourcery.dcpu16.ast.ASTNode);
+  public boolean isReachable(de.codesourcery.dcpu16.ast.ASTNode);
+  public boolean isReachable(de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph$BasicBlock, de.codesourcery.dcpu16.ast.ASTNode, java.util.Set<de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph$BasicBlock>);
+  static int access$000(de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph);
+  static int access$008(de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph);
+  static {};
+}
+Compiled from "ControlFlowGraph.java"
+class de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph$1 extends de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph$BasicBlock {
+  final de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph this$0;
+  de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph$1(de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph, java.lang.String);
+  public java.lang.String toString();
+}
+Compiled from "ControlFlowGraph.java"
+class de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph$2 extends de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph$BasicBlock {
+  final de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph this$0;
+  de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph$2(de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph, java.lang.String);
+  public java.lang.String toString();
+}
+Compiled from "ControlFlowGraph.java"
+public class de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph$BasicBlock {
+  final de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph this$0;
+  public de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph$BasicBlock(de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph);
+  public boolean hasSuccessor(de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph$BasicBlock);
+  public java.util.Map<java.lang.String, java.lang.Object> getMetaData();
+  public void blockRemoved(de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph$BasicBlock);
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph$BasicBlock(de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph, java.lang.String);
+  public java.util.Set<de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph$BasicBlock> getSuccessors();
+  public java.util.Set<de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph$BasicBlock> getPredecessors();
+  public java.util.List<de.codesourcery.dcpu16.ast.ASTNode> getASTNodes();
+  public java.lang.String toString();
+  public java.lang.String getIdentifier();
+  public void addPredecessors(java.util.Collection<de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph$BasicBlock>);
+  public void addPredecessor(de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph$BasicBlock);
+  public void addSuccessor(de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph$BasicBlock);
+  public void addASTNodes(java.util.List<de.codesourcery.dcpu16.ast.ASTNode>);
+  public void addASTNode(de.codesourcery.dcpu16.ast.ASTNode);
+  public boolean containsASTNode(de.codesourcery.dcpu16.ast.ASTNode);
+  public de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph$BasicBlock findBasicBlock(de.codesourcery.dcpu16.ast.ASTNode);
+  public de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph$BasicBlock findBasicBlock(de.codesourcery.dcpu16.ast.ASTNode, java.util.Set<de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph$BasicBlock>);
+}
+Compiled from "ControlFlowGraph.java"
+public final class de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph$Edge {
+  public final de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph$BasicBlock from;
+  public final de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph$BasicBlock to;
+  public de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph$Edge(de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph$BasicBlock, de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph$BasicBlock);
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+}
+Compiled from "DataFlowAnalyzer.java"
+public abstract class de.codesourcery.dcpu16.optimizer.dataflow.DataFlowAnalyzer {
+  public static final java.lang.String ALIVE_VARS_METADATA_KEY;
+  public de.codesourcery.dcpu16.optimizer.dataflow.DataFlowAnalyzer();
+  public de.codesourcery.dcpu16.optimizer.dataflow.InterferenceGraph createInterferenceGraph(de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph);
+  protected abstract de.codesourcery.dcpu16.optimizer.dataflow.InterferenceGraph$Node pickNodeToSpill(de.codesourcery.dcpu16.optimizer.dataflow.InterferenceGraph);
+  public java.util.List<de.codesourcery.dcpu16.optimizer.dataflow.InterferenceGraph$Node> colorGraph(de.codesourcery.dcpu16.optimizer.dataflow.InterferenceGraph, java.util.List<java.lang.Object>);
+  public void assignLiveVariables(de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph);
+  public static java.util.Set<de.codesourcery.dcpu16.optimizer.dataflow.DataFlowAnalyzer$AliveVar> getAliveVars(de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph$BasicBlock);
+}
+Compiled from "DataFlowAnalyzer.java"
+class de.codesourcery.dcpu16.optimizer.dataflow.DataFlowAnalyzer$1 {
+}
+Compiled from "DataFlowAnalyzer.java"
+public final class de.codesourcery.dcpu16.optimizer.dataflow.DataFlowAnalyzer$AliveVar {
+  public final de.codesourcery.dcpu16.ast.VariableSymbol definition;
+  public final java.lang.String identifier;
+  public int hashCode();
+  public java.lang.String toString();
+  public boolean equals(java.lang.Object);
+  de.codesourcery.dcpu16.optimizer.dataflow.DataFlowAnalyzer$AliveVar(de.codesourcery.dcpu16.ast.VariableSymbol, de.codesourcery.dcpu16.optimizer.dataflow.DataFlowAnalyzer$1);
+}
+Compiled from "DataFlowAnalyzer.java"
+public final class de.codesourcery.dcpu16.optimizer.dataflow.DataFlowAnalyzer$WorkListEntry {
+  public final java.util.Set<de.codesourcery.dcpu16.optimizer.dataflow.DataFlowAnalyzer$AliveVar> inState;
+  public final de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph$BasicBlock block;
+  public java.lang.String toString();
+  de.codesourcery.dcpu16.optimizer.dataflow.DataFlowAnalyzer$WorkListEntry(de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph$BasicBlock, java.util.Set, de.codesourcery.dcpu16.optimizer.dataflow.DataFlowAnalyzer$1);
+}
+Compiled from "InterferenceGraph.java"
+public class de.codesourcery.dcpu16.optimizer.dataflow.InterferenceGraph {
+  public de.codesourcery.dcpu16.optimizer.dataflow.InterferenceGraph(de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph);
+  public de.codesourcery.dcpu16.optimizer.cfg.ControlFlowGraph getControlFlowGraph();
+  public de.codesourcery.dcpu16.ast.FunctionDefinitionNode getFunction();
+  public java.util.Collection<de.codesourcery.dcpu16.optimizer.dataflow.InterferenceGraph$Node> getAllNodes();
+  public void addNode(de.codesourcery.dcpu16.optimizer.dataflow.InterferenceGraph$Node);
+  public java.lang.String toString();
+  public de.codesourcery.dcpu16.optimizer.dataflow.InterferenceGraph$Node getOrCreateNode(de.codesourcery.dcpu16.ast.VariableSymbol);
+  public void removeNode(de.codesourcery.dcpu16.optimizer.dataflow.InterferenceGraph$Node);
+}
+Compiled from "InterferenceGraph.java"
+class de.codesourcery.dcpu16.optimizer.dataflow.InterferenceGraph$1 implements java.util.Comparator<de.codesourcery.dcpu16.optimizer.dataflow.InterferenceGraph$Node> {
+  final de.codesourcery.dcpu16.optimizer.dataflow.InterferenceGraph this$0;
+  de.codesourcery.dcpu16.optimizer.dataflow.InterferenceGraph$1(de.codesourcery.dcpu16.optimizer.dataflow.InterferenceGraph);
+  public int compare(de.codesourcery.dcpu16.optimizer.dataflow.InterferenceGraph$Node, de.codesourcery.dcpu16.optimizer.dataflow.InterferenceGraph$Node);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "InterferenceGraph.java"
+public class de.codesourcery.dcpu16.optimizer.dataflow.InterferenceGraph$Node {
+  public final de.codesourcery.dcpu16.ast.VariableSymbol variable;
+  public final de.codesourcery.dcpu16.compiler.Identifier identifier;
+  public java.lang.Object getColor();
+  public boolean hasColor();
+  public void setColor(java.lang.Object);
+  public java.lang.String toString();
+  public de.codesourcery.dcpu16.optimizer.dataflow.InterferenceGraph$Node(de.codesourcery.dcpu16.ast.VariableSymbol);
+  public void addEdge(de.codesourcery.dcpu16.optimizer.dataflow.InterferenceGraph$Node);
+  public boolean hasEdges();
+  public java.util.Set<de.codesourcery.dcpu16.optimizer.dataflow.InterferenceGraph$Node> getEdges();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+}
+Compiled from "ASTUtils.java"
+public class de.codesourcery.dcpu16.parser.ASTUtils {
+  public de.codesourcery.dcpu16.parser.ASTUtils();
+  public static java.util.List<de.codesourcery.dcpu16.ast.ASTNode> collect(de.codesourcery.dcpu16.ast.ASTNode, de.codesourcery.dcpu16.parser.ASTUtils$IASTNodeMatcher);
+  public static void visitDepthFirst(de.codesourcery.dcpu16.ast.ASTNode, de.codesourcery.dcpu16.parser.ASTUtils$IAdvancedVisitor);
+  public static void visitDepthFirst(de.codesourcery.dcpu16.ast.ASTNode, de.codesourcery.dcpu16.parser.ASTUtils$IAdvancedVisitor, boolean);
+  public static void visitDepthFirst(de.codesourcery.dcpu16.ast.ASTNode, de.codesourcery.dcpu16.parser.ASTUtils$IAdvancedVisitor, de.codesourcery.dcpu16.parser.ASTUtils$IterationContext, int, boolean);
+  public static void visitInOrder(de.codesourcery.dcpu16.ast.ASTNode, de.codesourcery.dcpu16.parser.ASTUtils$IAdvancedVisitor);
+  public static void visitInOrder(de.codesourcery.dcpu16.ast.ASTNode, de.codesourcery.dcpu16.parser.ASTUtils$IAdvancedVisitor, boolean);
+  public static void visitInOrder(de.codesourcery.dcpu16.ast.ASTNode, de.codesourcery.dcpu16.parser.ASTUtils$IterationContext, de.codesourcery.dcpu16.parser.ASTUtils$IAdvancedVisitor, int, boolean);
+  public static java.lang.String toString(de.codesourcery.dcpu16.ast.ASTNode);
+  public static boolean isLiteralValue(de.codesourcery.dcpu16.ast.ASTNode);
+  public static de.codesourcery.dcpu16.ast.ASTNode getLastLeaf(de.codesourcery.dcpu16.ast.ASTNode);
+  static java.lang.String access$000(de.codesourcery.dcpu16.compiler.IScope);
+}
+Compiled from "ASTUtils.java"
+final class de.codesourcery.dcpu16.parser.ASTUtils$1 extends de.codesourcery.dcpu16.parser.ASTUtils$IVisitor {
+  final java.lang.StringBuilder val$b;
+  de.codesourcery.dcpu16.parser.ASTUtils$1(java.lang.StringBuilder);
+  public boolean visit(de.codesourcery.dcpu16.ast.ASTNode, int);
+}
+Compiled from "ASTUtils.java"
+final class de.codesourcery.dcpu16.parser.ASTUtils$2 extends de.codesourcery.dcpu16.parser.ASTUtils$IVisitor {
+  final de.codesourcery.dcpu16.ast.ASTNode[] val$lastLeaf;
+  de.codesourcery.dcpu16.parser.ASTUtils$2(de.codesourcery.dcpu16.ast.ASTNode[]);
+  public boolean visit(de.codesourcery.dcpu16.ast.ASTNode, int);
+}
+Compiled from "ASTUtils.java"
+public interface de.codesourcery.dcpu16.parser.ASTUtils$IASTNodeMatcher {
+  public abstract boolean matches(de.codesourcery.dcpu16.ast.ASTNode);
+}
+Compiled from "ASTUtils.java"
+public interface de.codesourcery.dcpu16.parser.ASTUtils$IAdvancedVisitor {
+  public abstract void visit(de.codesourcery.dcpu16.ast.ASTNode, int, de.codesourcery.dcpu16.parser.ASTUtils$IIterationContext);
+}
+Compiled from "ASTUtils.java"
+public interface de.codesourcery.dcpu16.parser.ASTUtils$IIterationContext {
+  public abstract void stop();
+  public abstract void dontGoDeeper();
+  public abstract void continueTraversal();
+}
+Compiled from "ASTUtils.java"
+public abstract class de.codesourcery.dcpu16.parser.ASTUtils$IVisitor implements de.codesourcery.dcpu16.parser.ASTUtils$IAdvancedVisitor {
+  public de.codesourcery.dcpu16.parser.ASTUtils$IVisitor();
+  public abstract boolean visit(de.codesourcery.dcpu16.ast.ASTNode, int);
+  public void visit(de.codesourcery.dcpu16.ast.ASTNode, int, de.codesourcery.dcpu16.parser.ASTUtils$IIterationContext);
+}
+Compiled from "ASTUtils.java"
+public final class de.codesourcery.dcpu16.parser.ASTUtils$IterationContext implements de.codesourcery.dcpu16.parser.ASTUtils$IIterationContext {
+  public de.codesourcery.dcpu16.parser.ASTUtils$State state;
+  protected de.codesourcery.dcpu16.parser.ASTUtils$IterationContext();
+  public void stop();
+  public void dontGoDeeper();
+  public void continueTraversal();
+}
+Compiled from "ASTUtils.java"
+public final class de.codesourcery.dcpu16.parser.ASTUtils$State extends java.lang.Enum<de.codesourcery.dcpu16.parser.ASTUtils$State> {
+  public static final de.codesourcery.dcpu16.parser.ASTUtils$State STOP;
+  public static final de.codesourcery.dcpu16.parser.ASTUtils$State CONTINUE;
+  public static final de.codesourcery.dcpu16.parser.ASTUtils$State DONT_GO_DEEPER;
+  public static de.codesourcery.dcpu16.parser.ASTUtils$State[] values();
+  public static de.codesourcery.dcpu16.parser.ASTUtils$State valueOf(java.lang.String);
+  static {};
+}
+Compiled from "ExpressionToken.java"
+public final class de.codesourcery.dcpu16.parser.ExpressionToken {
+  public de.codesourcery.dcpu16.parser.ExpressionToken(de.codesourcery.dcpu16.parser.ExpressionToken$ExpressionTokenType, de.codesourcery.dcpu16.util.ITextRegion);
+  public de.codesourcery.dcpu16.parser.ExpressionToken(de.codesourcery.dcpu16.parser.ExpressionToken$ExpressionTokenType, de.codesourcery.dcpu16.parser.Token);
+  public de.codesourcery.dcpu16.parser.ExpressionToken(de.codesourcery.dcpu16.parser.ExpressionToken$ExpressionTokenType, de.codesourcery.dcpu16.ast.ASTNode);
+  public de.codesourcery.dcpu16.util.ITextRegion getTextRegion();
+  public java.lang.String toString();
+  public boolean isArgumentDelimiter();
+  public boolean isFunction();
+  public boolean isOperator();
+  public boolean hasAllOperands();
+  public boolean isLeftAssociative();
+  public boolean isValue();
+  public boolean isParens();
+  public boolean isParensOpen();
+  public boolean isParensClose();
+  public de.codesourcery.dcpu16.ast.ASTNode getToken();
+  public boolean hasType(de.codesourcery.dcpu16.parser.ExpressionToken$ExpressionTokenType);
+  public de.codesourcery.dcpu16.parser.ExpressionToken$ExpressionTokenType getType();
+}
+Compiled from "ExpressionToken.java"
+class de.codesourcery.dcpu16.parser.ExpressionToken$1 {
+  static final int[] $SwitchMap$de$codesourcery$dcpu16$parser$ExpressionToken$ExpressionTokenType;
+  static {};
+}
+Compiled from "ExpressionToken.java"
+public final class de.codesourcery.dcpu16.parser.ExpressionToken$ExpressionTokenType extends java.lang.Enum<de.codesourcery.dcpu16.parser.ExpressionToken$ExpressionTokenType> {
+  public static final de.codesourcery.dcpu16.parser.ExpressionToken$ExpressionTokenType FUNCTION;
+  public static final de.codesourcery.dcpu16.parser.ExpressionToken$ExpressionTokenType ARGUMENT_DELIMITER;
+  public static final de.codesourcery.dcpu16.parser.ExpressionToken$ExpressionTokenType OPERATOR;
+  public static final de.codesourcery.dcpu16.parser.ExpressionToken$ExpressionTokenType PARENS_OPEN;
+  public static final de.codesourcery.dcpu16.parser.ExpressionToken$ExpressionTokenType PARENS_CLOSE;
+  public static final de.codesourcery.dcpu16.parser.ExpressionToken$ExpressionTokenType EXPRESSION;
+  public static final de.codesourcery.dcpu16.parser.ExpressionToken$ExpressionTokenType VALUE;
+  public static de.codesourcery.dcpu16.parser.ExpressionToken$ExpressionTokenType[] values();
+  public static de.codesourcery.dcpu16.parser.ExpressionToken$ExpressionTokenType valueOf(java.lang.String);
+  static {};
+}
+Compiled from "Lexer.java"
+public class de.codesourcery.dcpu16.parser.Lexer {
+  public java.lang.String toString();
+  public de.codesourcery.dcpu16.parser.Lexer(de.codesourcery.dcpu16.util.IInputStreamProvider, boolean) throws java.io.IOException;
+  public void mark();
+  public void dropMark();
+  public void reset() throws java.io.IOException;
+  public boolean eof();
+  public de.codesourcery.dcpu16.parser.Token read(de.codesourcery.dcpu16.parser.TokenType) throws java.io.IOException;
+  public int currentOffset() throws java.io.IOException;
+  public de.codesourcery.dcpu16.parser.Token read() throws java.io.IOException;
+  public boolean peek(de.codesourcery.dcpu16.parser.TokenType) throws java.io.IOException;
+  public de.codesourcery.dcpu16.parser.Token peek() throws java.io.IOException;
+  public void setIgnoreWhitespace(boolean) throws java.io.EOFException, java.io.IOException;
+  public boolean isIgnoreWhitespace();
+  static java.util.List access$000(de.codesourcery.dcpu16.parser.Lexer);
+  static boolean access$100(de.codesourcery.dcpu16.parser.Lexer);
+  static de.codesourcery.dcpu16.parser.Scanner access$200(de.codesourcery.dcpu16.parser.Lexer);
+  static boolean access$300(de.codesourcery.dcpu16.parser.Lexer);
+  static de.codesourcery.dcpu16.parser.Token access$400(de.codesourcery.dcpu16.parser.Lexer);
+  static boolean access$102(de.codesourcery.dcpu16.parser.Lexer, boolean);
+  static boolean access$302(de.codesourcery.dcpu16.parser.Lexer, boolean);
+  static de.codesourcery.dcpu16.parser.Token access$402(de.codesourcery.dcpu16.parser.Lexer, de.codesourcery.dcpu16.parser.Token);
+  static java.io.InputStream access$500(de.codesourcery.dcpu16.parser.Lexer, int) throws java.io.EOFException, java.io.IOException;
+  static de.codesourcery.dcpu16.parser.Scanner access$202(de.codesourcery.dcpu16.parser.Lexer, de.codesourcery.dcpu16.parser.Scanner);
+}
+Compiled from "Lexer.java"
+public final class de.codesourcery.dcpu16.parser.Lexer$State {
+  final de.codesourcery.dcpu16.parser.Lexer this$0;
+  protected de.codesourcery.dcpu16.parser.Lexer$State(de.codesourcery.dcpu16.parser.Lexer);
+  public void apply() throws java.io.IOException;
+}
+Compiled from "Parser.java"
+public class de.codesourcery.dcpu16.parser.Parser {
+  public de.codesourcery.dcpu16.parser.Parser(de.codesourcery.dcpu16.util.IInputStreamProvider) throws java.io.IOException;
+  public de.codesourcery.dcpu16.ast.AST parse() throws java.io.IOException;
+  static boolean access$000(de.codesourcery.dcpu16.parser.Parser);
+  static de.codesourcery.dcpu16.parser.Parser$ParserImpl access$100(de.codesourcery.dcpu16.parser.Parser, de.codesourcery.dcpu16.compiler.IScope) throws java.io.IOException;
+  static de.codesourcery.dcpu16.ast.ASTNode access$200(de.codesourcery.dcpu16.parser.Parser);
+  static de.codesourcery.dcpu16.parser.Parser$ParserImpl access$300(de.codesourcery.dcpu16.parser.Parser, de.codesourcery.dcpu16.compiler.IScope) throws java.io.IOException;
+  static de.codesourcery.dcpu16.parser.Parser$ParserImpl access$400(de.codesourcery.dcpu16.parser.Parser, de.codesourcery.dcpu16.compiler.IScope) throws java.io.IOException;
+  static de.codesourcery.dcpu16.parser.Lexer access$500(de.codesourcery.dcpu16.parser.Parser);
+  static void access$600(de.codesourcery.dcpu16.parser.Parser);
+  static de.codesourcery.dcpu16.ast.ASTNode access$202(de.codesourcery.dcpu16.parser.Parser, de.codesourcery.dcpu16.ast.ASTNode);
+  static void access$700(de.codesourcery.dcpu16.parser.Parser, java.lang.Exception) throws java.io.EOFException, java.io.IOException;
+  static void access$800(de.codesourcery.dcpu16.parser.Parser) throws java.io.IOException;
+  static void access$900(de.codesourcery.dcpu16.parser.Parser);
+  static de.codesourcery.dcpu16.compiler.DataType access$1000(de.codesourcery.dcpu16.parser.Parser, de.codesourcery.dcpu16.compiler.IScope, de.codesourcery.dcpu16.util.ITextRegion) throws java.io.IOException;
+  static de.codesourcery.dcpu16.compiler.IScope access$1100(de.codesourcery.dcpu16.parser.Parser, de.codesourcery.dcpu16.compiler.Identifier, de.codesourcery.dcpu16.ast.ASTNode, de.codesourcery.dcpu16.compiler.IScope);
+  static de.codesourcery.dcpu16.parser.Parser$ParserImpl access$1200(de.codesourcery.dcpu16.parser.Parser, de.codesourcery.dcpu16.compiler.IScope) throws java.io.IOException;
+  static de.codesourcery.dcpu16.parser.Parser$ParserImpl access$1300(de.codesourcery.dcpu16.parser.Parser, de.codesourcery.dcpu16.compiler.IScope, boolean) throws java.io.IOException;
+  static java.lang.String access$1400(java.lang.String);
+  static de.codesourcery.dcpu16.compiler.IScope access$1500(de.codesourcery.dcpu16.parser.Parser, java.lang.String, de.codesourcery.dcpu16.ast.ASTNode, de.codesourcery.dcpu16.compiler.IScope);
+  static de.codesourcery.dcpu16.ast.StatementNode access$1600(de.codesourcery.dcpu16.parser.Parser, de.codesourcery.dcpu16.ast.ASTNode);
+  static de.codesourcery.dcpu16.parser.Parser$ParserImpl access$1700(de.codesourcery.dcpu16.parser.Parser, de.codesourcery.dcpu16.compiler.IScope) throws java.io.IOException;
+  static de.codesourcery.dcpu16.parser.Parser$ParserImpl access$1800(de.codesourcery.dcpu16.parser.Parser, de.codesourcery.dcpu16.compiler.IScope) throws java.io.IOException;
+  static de.codesourcery.dcpu16.parser.Parser$ParserImpl access$1900(de.codesourcery.dcpu16.parser.Parser, de.codesourcery.dcpu16.compiler.IScope) throws java.io.IOException;
+  static de.codesourcery.dcpu16.parser.Parser$ParserImpl access$2000(de.codesourcery.dcpu16.parser.Parser, de.codesourcery.dcpu16.compiler.IScope) throws java.io.IOException;
+  static de.codesourcery.dcpu16.parser.Parser$ParserImpl access$2100(de.codesourcery.dcpu16.parser.Parser, de.codesourcery.dcpu16.compiler.IScope) throws java.io.IOException;
+  static de.codesourcery.dcpu16.parser.Parser$ParserImpl access$2200(de.codesourcery.dcpu16.parser.Parser, de.codesourcery.dcpu16.compiler.IScope) throws java.io.IOException;
+  static de.codesourcery.dcpu16.parser.Parser$ParserImpl access$2300(de.codesourcery.dcpu16.parser.Parser, de.codesourcery.dcpu16.compiler.IScope) throws java.io.IOException;
+  static de.codesourcery.dcpu16.parser.Parser$ParserImpl access$2400(de.codesourcery.dcpu16.parser.Parser, de.codesourcery.dcpu16.compiler.IScope, boolean) throws java.io.IOException;
+  static de.codesourcery.dcpu16.parser.Parser$ParserImpl access$2500(de.codesourcery.dcpu16.parser.Parser, de.codesourcery.dcpu16.compiler.IScope, boolean, boolean) throws java.io.IOException;
+  static de.codesourcery.dcpu16.parser.Parser$ParserImpl access$2600(de.codesourcery.dcpu16.parser.Parser, de.codesourcery.dcpu16.compiler.IScope, boolean, boolean) throws java.io.IOException;
+  static de.codesourcery.dcpu16.ast.StringLiteralNode access$2700(de.codesourcery.dcpu16.parser.Parser) throws java.io.IOException;
+  static de.codesourcery.dcpu16.ast.NumberLiteralNode access$2800(de.codesourcery.dcpu16.parser.Parser) throws java.io.IOException;
+  static boolean access$2900(de.codesourcery.dcpu16.parser.Token);
+  static de.codesourcery.dcpu16.ast.OperatorNode access$3000(de.codesourcery.dcpu16.parser.Parser) throws java.io.IOException;
+}
+Compiled from "Parser.java"
+class de.codesourcery.dcpu16.parser.Parser$1 extends de.codesourcery.dcpu16.parser.Parser$ParserImpl {
+  final de.codesourcery.dcpu16.compiler.IScope val$scope;
+  final de.codesourcery.dcpu16.parser.Parser this$0;
+  de.codesourcery.dcpu16.parser.Parser$1(de.codesourcery.dcpu16.parser.Parser, de.codesourcery.dcpu16.compiler.IScope);
+  public java.lang.String toString();
+  protected de.codesourcery.dcpu16.ast.ASTNode doParse() throws java.lang.Exception;
+}
+Compiled from "Parser.java"
+class de.codesourcery.dcpu16.parser.Parser$10 extends de.codesourcery.dcpu16.parser.Parser$ParserImpl {
+  final de.codesourcery.dcpu16.compiler.IScope val$blockScope;
+  final boolean val$variableDefinitionsAllowed;
+  final boolean val$failOnMismatchedClosingParens;
+  final de.codesourcery.dcpu16.parser.Parser this$0;
+  de.codesourcery.dcpu16.parser.Parser$10(de.codesourcery.dcpu16.parser.Parser, de.codesourcery.dcpu16.compiler.IScope, boolean, boolean);
+  public java.lang.String toString();
+  protected de.codesourcery.dcpu16.ast.ASTNode doParse() throws java.lang.Exception;
+}
+Compiled from "Parser.java"
+class de.codesourcery.dcpu16.parser.Parser$11 extends de.codesourcery.dcpu16.parser.Parser$ParserImpl {
+  final de.codesourcery.dcpu16.compiler.IScope val$scope;
+  final de.codesourcery.dcpu16.parser.Parser this$0;
+  de.codesourcery.dcpu16.parser.Parser$11(de.codesourcery.dcpu16.parser.Parser, de.codesourcery.dcpu16.compiler.IScope);
+  public java.lang.String toString();
+  protected de.codesourcery.dcpu16.ast.ASTNode doParse() throws java.lang.Exception;
+}
+Compiled from "Parser.java"
+class de.codesourcery.dcpu16.parser.Parser$12 extends de.codesourcery.dcpu16.parser.Parser$ParserImpl {
+  final de.codesourcery.dcpu16.compiler.IScope val$scope;
+  final de.codesourcery.dcpu16.parser.Parser this$0;
+  de.codesourcery.dcpu16.parser.Parser$12(de.codesourcery.dcpu16.parser.Parser, de.codesourcery.dcpu16.compiler.IScope);
+  public java.lang.String toString();
+  protected de.codesourcery.dcpu16.ast.ASTNode doParse() throws java.lang.Exception;
+}
+Compiled from "Parser.java"
+class de.codesourcery.dcpu16.parser.Parser$13 extends de.codesourcery.dcpu16.parser.Parser$ParserImpl {
+  final boolean val$failOnMismatchedClosingParens;
+  final boolean val$stopOnComma;
+  final de.codesourcery.dcpu16.compiler.IScope val$scope;
+  final de.codesourcery.dcpu16.parser.Parser this$0;
+  de.codesourcery.dcpu16.parser.Parser$13(de.codesourcery.dcpu16.parser.Parser, boolean, boolean, de.codesourcery.dcpu16.compiler.IScope);
+  public java.lang.String toString();
+  protected de.codesourcery.dcpu16.ast.ASTNode doParse() throws java.lang.Exception;
+}
+Compiled from "Parser.java"
+class de.codesourcery.dcpu16.parser.Parser$14 extends de.codesourcery.dcpu16.parser.Parser$ParserImpl {
+  final de.codesourcery.dcpu16.compiler.IScope val$scope;
+  final de.codesourcery.dcpu16.parser.Parser this$0;
+  de.codesourcery.dcpu16.parser.Parser$14(de.codesourcery.dcpu16.parser.Parser, de.codesourcery.dcpu16.compiler.IScope);
+  public java.lang.String toString();
+  protected de.codesourcery.dcpu16.ast.ASTNode doParse() throws java.lang.Exception;
+}
+Compiled from "Parser.java"
+class de.codesourcery.dcpu16.parser.Parser$2 extends de.codesourcery.dcpu16.parser.Parser$ParserImpl {
+  final de.codesourcery.dcpu16.compiler.IScope val$parentScope;
+  final de.codesourcery.dcpu16.parser.Parser this$0;
+  de.codesourcery.dcpu16.parser.Parser$2(de.codesourcery.dcpu16.parser.Parser, de.codesourcery.dcpu16.compiler.IScope);
+  public java.lang.String toString();
+  protected de.codesourcery.dcpu16.ast.ASTNode doParse() throws java.lang.Exception;
+}
+Compiled from "Parser.java"
+class de.codesourcery.dcpu16.parser.Parser$3 extends de.codesourcery.dcpu16.parser.Parser$ParserImpl {
+  final de.codesourcery.dcpu16.compiler.IScope val$scope;
+  final de.codesourcery.dcpu16.parser.Parser this$0;
+  de.codesourcery.dcpu16.parser.Parser$3(de.codesourcery.dcpu16.parser.Parser, de.codesourcery.dcpu16.compiler.IScope);
+  public java.lang.String toString();
+  protected de.codesourcery.dcpu16.ast.ASTNode doParse() throws java.lang.Exception;
+}
+Compiled from "Parser.java"
+class de.codesourcery.dcpu16.parser.Parser$4 extends de.codesourcery.dcpu16.parser.Parser$ParserImpl {
+  final de.codesourcery.dcpu16.parser.Parser this$0;
+  de.codesourcery.dcpu16.parser.Parser$4(de.codesourcery.dcpu16.parser.Parser);
+  public java.lang.String toString();
+  protected de.codesourcery.dcpu16.ast.ASTNode doParse() throws java.lang.Exception;
+}
+Compiled from "Parser.java"
+class de.codesourcery.dcpu16.parser.Parser$5 extends de.codesourcery.dcpu16.parser.Parser$ParserImpl {
+  final de.codesourcery.dcpu16.compiler.IScope val$parentScope;
+  final boolean val$variableDefinitionsAllowed;
+  final de.codesourcery.dcpu16.parser.Parser this$0;
+  de.codesourcery.dcpu16.parser.Parser$5(de.codesourcery.dcpu16.parser.Parser, de.codesourcery.dcpu16.compiler.IScope, boolean);
+  public java.lang.String toString();
+  protected de.codesourcery.dcpu16.ast.ASTNode doParse() throws java.lang.Exception;
+}
+Compiled from "Parser.java"
+class de.codesourcery.dcpu16.parser.Parser$6 extends de.codesourcery.dcpu16.parser.Parser$ParserImpl {
+  final de.codesourcery.dcpu16.compiler.IScope val$scope;
+  final de.codesourcery.dcpu16.parser.Parser this$0;
+  de.codesourcery.dcpu16.parser.Parser$6(de.codesourcery.dcpu16.parser.Parser, de.codesourcery.dcpu16.compiler.IScope);
+  public java.lang.String toString();
+  protected de.codesourcery.dcpu16.ast.ASTNode doParse() throws java.lang.Exception;
+}
+Compiled from "Parser.java"
+class de.codesourcery.dcpu16.parser.Parser$7 extends de.codesourcery.dcpu16.parser.Parser$ParserImpl {
+  final de.codesourcery.dcpu16.compiler.IScope val$scope;
+  final de.codesourcery.dcpu16.parser.Parser this$0;
+  de.codesourcery.dcpu16.parser.Parser$7(de.codesourcery.dcpu16.parser.Parser, de.codesourcery.dcpu16.compiler.IScope);
+  public java.lang.String toString();
+  protected de.codesourcery.dcpu16.ast.ASTNode doParse() throws java.lang.Exception;
+}
+Compiled from "Parser.java"
+class de.codesourcery.dcpu16.parser.Parser$8 extends de.codesourcery.dcpu16.parser.Parser$ParserImpl {
+  final de.codesourcery.dcpu16.compiler.IScope val$scope;
+  final de.codesourcery.dcpu16.parser.Parser this$0;
+  de.codesourcery.dcpu16.parser.Parser$8(de.codesourcery.dcpu16.parser.Parser, de.codesourcery.dcpu16.compiler.IScope);
+  public java.lang.String toString();
+  protected de.codesourcery.dcpu16.ast.ASTNode doParse() throws java.lang.Exception;
+}
+Compiled from "Parser.java"
+class de.codesourcery.dcpu16.parser.Parser$9 extends de.codesourcery.dcpu16.parser.Parser$ParserImpl {
+  final de.codesourcery.dcpu16.compiler.IScope val$currentScope;
+  final de.codesourcery.dcpu16.parser.Parser this$0;
+  de.codesourcery.dcpu16.parser.Parser$9(de.codesourcery.dcpu16.parser.Parser, de.codesourcery.dcpu16.compiler.IScope);
+  public java.lang.String toString();
+  protected de.codesourcery.dcpu16.ast.ASTNode doParse() throws java.lang.Exception;
+}
+Compiled from "Parser.java"
+public abstract class de.codesourcery.dcpu16.parser.Parser$ParserImpl {
+  final de.codesourcery.dcpu16.parser.Parser this$0;
+  protected de.codesourcery.dcpu16.parser.Parser$ParserImpl(de.codesourcery.dcpu16.parser.Parser);
+  public boolean parse() throws java.io.IOException;
+  protected abstract de.codesourcery.dcpu16.ast.ASTNode doParse() throws java.lang.Exception;
+}
+Compiled from "Scanner.java"
+public class de.codesourcery.dcpu16.parser.Scanner {
+  public de.codesourcery.dcpu16.parser.Scanner(java.lang.String) throws java.io.IOException;
+  public de.codesourcery.dcpu16.parser.Scanner(java.io.InputStream, int) throws java.io.IOException;
+  public de.codesourcery.dcpu16.parser.Scanner(java.io.InputStream) throws java.io.IOException;
+  public java.lang.String toString();
+  public int getOffset();
+  public boolean eof();
+  public char peek() throws java.io.IOException;
+  public char read() throws java.io.IOException;
+}
+Compiled from "ShuntingYard.java"
+public final class de.codesourcery.dcpu16.parser.ShuntingYard {
+  public de.codesourcery.dcpu16.parser.ShuntingYard();
+  public boolean isFunctionOnStack();
+  public boolean isEmpty();
+  public void pushValue(de.codesourcery.dcpu16.ast.ASTNode);
+  public void pushOperator(de.codesourcery.dcpu16.parser.ExpressionToken);
+  public boolean isStackContainsOpeningParens();
+  public de.codesourcery.dcpu16.ast.ASTNode getResult(int);
+}
+Compiled from "ShuntingYard.java"
+public final class de.codesourcery.dcpu16.parser.ShuntingYard$MismatchedClosingParensException extends de.codesourcery.dcpu16.exceptions.ParseException {
+  public de.codesourcery.dcpu16.parser.ShuntingYard$MismatchedClosingParensException(de.codesourcery.dcpu16.util.ITextRegion);
+}
+Compiled from "Token.java"
+public class de.codesourcery.dcpu16.parser.Token {
+  public de.codesourcery.dcpu16.parser.Token(de.codesourcery.dcpu16.parser.TokenType, int, java.lang.String);
+  public de.codesourcery.dcpu16.util.ITextRegion getTextRegion();
+  public int getOffset();
+  public de.codesourcery.dcpu16.parser.TokenType getType();
+  public boolean hasType(de.codesourcery.dcpu16.parser.TokenType);
+  public java.lang.String getValue();
+  public java.lang.String toString();
+}
+Compiled from "TokenType.java"
+public final class de.codesourcery.dcpu16.parser.TokenType extends java.lang.Enum<de.codesourcery.dcpu16.parser.TokenType> {
+  public static final de.codesourcery.dcpu16.parser.TokenType IDENTIFIER;
+  public static final de.codesourcery.dcpu16.parser.TokenType NUMBER_LITERAL;
+  public static final de.codesourcery.dcpu16.parser.TokenType PARENS_OPEN;
+  public static final de.codesourcery.dcpu16.parser.TokenType PARENS_CLOSE;
+  public static final de.codesourcery.dcpu16.parser.TokenType COMMA;
+  public static final de.codesourcery.dcpu16.parser.TokenType STAR;
+  public static final de.codesourcery.dcpu16.parser.TokenType ANGLE_BRACKETS_OPEN;
+  public static final de.codesourcery.dcpu16.parser.TokenType ANGLE_BRACKETS_CLOSE;
+  public static final de.codesourcery.dcpu16.parser.TokenType BRACE_OPEN;
+  public static final de.codesourcery.dcpu16.parser.TokenType BRACE_CLOSE;
+  public static final de.codesourcery.dcpu16.parser.TokenType DOUBLE_QUOTE;
+  public static final de.codesourcery.dcpu16.parser.TokenType SINGLE_QUOTE;
+  public static final de.codesourcery.dcpu16.parser.TokenType ESCAPE_CHARACTER;
+  public static final de.codesourcery.dcpu16.parser.TokenType AMPERSAND;
+  public static final de.codesourcery.dcpu16.parser.TokenType OPERATOR;
+  public static final de.codesourcery.dcpu16.parser.TokenType FOR;
+  public static final de.codesourcery.dcpu16.parser.TokenType RETURN;
+  public static final de.codesourcery.dcpu16.parser.TokenType WHILE;
+  public static final de.codesourcery.dcpu16.parser.TokenType IF;
+  public static final de.codesourcery.dcpu16.parser.TokenType ELSE;
+  public static final de.codesourcery.dcpu16.parser.TokenType SEMICOLON;
+  public static final de.codesourcery.dcpu16.parser.TokenType EXTERN;
+  public static final de.codesourcery.dcpu16.parser.TokenType TRUE;
+  public static final de.codesourcery.dcpu16.parser.TokenType FALSE;
+  public static final de.codesourcery.dcpu16.parser.TokenType CONST;
+  public static final de.codesourcery.dcpu16.parser.TokenType WHITESPACE;
+  public static final de.codesourcery.dcpu16.parser.TokenType EOL;
+  public static final de.codesourcery.dcpu16.parser.TokenType DO;
+  public static final de.codesourcery.dcpu16.parser.TokenType ASM;
+  public static final de.codesourcery.dcpu16.parser.TokenType UNKNOWN;
+  public static de.codesourcery.dcpu16.parser.TokenType[] values();
+  public static de.codesourcery.dcpu16.parser.TokenType valueOf(java.lang.String);
+  static {};
+}
+Compiled from "ExpressionPrinter.java"
+public abstract class de.codesourcery.dcpu16.util.ExpressionPrinter {
+  public de.codesourcery.dcpu16.util.ExpressionPrinter();
+  public static java.lang.String printDebug(de.codesourcery.dcpu16.ast.TermNode);
+  public java.lang.String print(de.codesourcery.dcpu16.ast.TermNode);
+  protected abstract java.lang.String getLabelForVariable(de.codesourcery.dcpu16.ast.VariableReferenceNode);
+}
+Compiled from "ExpressionPrinter.java"
+final class de.codesourcery.dcpu16.util.ExpressionPrinter$1 extends de.codesourcery.dcpu16.util.ExpressionPrinter {
+  de.codesourcery.dcpu16.util.ExpressionPrinter$1();
+  protected java.lang.String getLabelForVariable(de.codesourcery.dcpu16.ast.VariableReferenceNode);
+}
+Compiled from "ExpressionPrinter.java"
+class de.codesourcery.dcpu16.util.ExpressionPrinter$2 implements de.codesourcery.dcpu16.parser.ASTUtils$IAdvancedVisitor {
+  final java.lang.StringBuffer val$buffer;
+  final de.codesourcery.dcpu16.util.ExpressionPrinter this$0;
+  de.codesourcery.dcpu16.util.ExpressionPrinter$2(de.codesourcery.dcpu16.util.ExpressionPrinter, java.lang.StringBuffer);
+  public void visit(de.codesourcery.dcpu16.ast.ASTNode, int, de.codesourcery.dcpu16.parser.ASTUtils$IIterationContext);
+}
+Compiled from "ExpressionUtils.java"
+public class de.codesourcery.dcpu16.util.ExpressionUtils {
+  public de.codesourcery.dcpu16.util.ExpressionUtils();
+  public static de.codesourcery.dcpu16.ast.TermNode negate(de.codesourcery.dcpu16.ast.TermNode);
+}
+Compiled from "ExpressionUtils.java"
+class de.codesourcery.dcpu16.util.ExpressionUtils$1 {
+  static final int[] $SwitchMap$de$codesourcery$dcpu16$compiler$Operator;
+  static {};
+}
+Compiled from "IInputStreamProvider.java"
+public interface de.codesourcery.dcpu16.util.IInputStreamProvider {
+  public abstract java.io.InputStream createInputStream() throws java.io.IOException;
+}
+Compiled from "ITextRegion.java"
+public interface de.codesourcery.dcpu16.util.ITextRegion {
+  public abstract int getStartingOffset();
+  public abstract int getEndOffset();
+  public abstract int getLength();
+  public abstract void merge(de.codesourcery.dcpu16.util.ITextRegion);
+  public abstract de.codesourcery.dcpu16.parser.Token merge(de.codesourcery.dcpu16.parser.Token);
+  public abstract void merge(java.util.List<? extends de.codesourcery.dcpu16.util.ITextRegion>);
+  public abstract void intersect(de.codesourcery.dcpu16.util.ITextRegion) throws java.lang.IllegalArgumentException;
+  public abstract void subtract(de.codesourcery.dcpu16.util.ITextRegion) throws java.lang.UnsupportedOperationException;
+  public abstract boolean isSame(de.codesourcery.dcpu16.util.ITextRegion);
+  public abstract boolean contains(de.codesourcery.dcpu16.util.ITextRegion);
+  public abstract boolean overlaps(de.codesourcery.dcpu16.util.ITextRegion);
+  public abstract boolean contains(int);
+  public abstract java.lang.String apply(java.lang.String);
+}
+Compiled from "StringInterpolator.java"
+public class de.codesourcery.dcpu16.util.StringInterpolator {
+  public de.codesourcery.dcpu16.util.StringInterpolator();
+  public static java.lang.String interpolate(java.lang.String, java.lang.Object...);
+  static {};
+}
+Compiled from "TextRegion.java"
+public class de.codesourcery.dcpu16.util.TextRegion implements de.codesourcery.dcpu16.util.ITextRegion {
+  public de.codesourcery.dcpu16.util.TextRegion(java.util.List<? extends de.codesourcery.dcpu16.util.ITextRegion>);
+  public static int hashCode(de.codesourcery.dcpu16.util.ITextRegion);
+  public de.codesourcery.dcpu16.util.TextRegion(de.codesourcery.dcpu16.parser.Token);
+  public de.codesourcery.dcpu16.util.TextRegion(de.codesourcery.dcpu16.util.ITextRegion);
+  public de.codesourcery.dcpu16.util.TextRegion(int, int);
+  public int getStartingOffset();
+  public int getLength();
+  public de.codesourcery.dcpu16.parser.Token merge(de.codesourcery.dcpu16.parser.Token);
+  public void merge(de.codesourcery.dcpu16.util.ITextRegion);
+  public void subtract(de.codesourcery.dcpu16.util.ITextRegion);
+  public boolean contains(de.codesourcery.dcpu16.util.ITextRegion);
+  public boolean overlaps(de.codesourcery.dcpu16.util.ITextRegion);
+  public void intersect(de.codesourcery.dcpu16.util.ITextRegion);
+  public int getEndOffset();
+  public boolean contains(int);
+  public boolean isSame(de.codesourcery.dcpu16.util.ITextRegion);
+  public java.lang.String apply(java.lang.String);
+  public java.lang.String toString();
+  public void merge(java.util.List<? extends de.codesourcery.dcpu16.util.ITextRegion>);
+}

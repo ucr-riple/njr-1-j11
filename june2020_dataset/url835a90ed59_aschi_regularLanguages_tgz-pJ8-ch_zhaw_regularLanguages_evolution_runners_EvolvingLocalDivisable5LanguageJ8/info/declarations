@@ -1,0 +1,560 @@
+Compiled from "DeterministicFiniteAutomaton.java"
+public class ch.zhaw.regularLanguages.dfa.DeterministicFiniteAutomaton implements ch.zhaw.regularLanguages.graphicalOutput.GraphvizRenderable {
+  public ch.zhaw.regularLanguages.dfa.DeterministicFiniteAutomaton();
+  public ch.zhaw.regularLanguages.dfa.DeterministicFiniteAutomaton(java.util.Set<ch.zhaw.regularLanguages.dfa.State>, ch.zhaw.regularLanguages.dfa.State, java.util.Set<ch.zhaw.regularLanguages.dfa.State>, char[]);
+  public ch.zhaw.regularLanguages.dfa.State getStartState();
+  public void setStartState(ch.zhaw.regularLanguages.dfa.State);
+  public java.util.Set<ch.zhaw.regularLanguages.dfa.State> getStates();
+  public java.util.Set<ch.zhaw.regularLanguages.dfa.State> getAcceptingStates();
+  public char[] getAlphabet();
+  public void setStates(java.util.Set<ch.zhaw.regularLanguages.dfa.State>);
+  public void setAcceptingStates(java.util.Set<ch.zhaw.regularLanguages.dfa.State>);
+  public void setAlphabet(char[]);
+  public boolean isStateIdAvailable(java.lang.String);
+  public ch.zhaw.regularLanguages.dfa.State process(char[]);
+  public void changeLink(ch.zhaw.regularLanguages.dfa.State, java.lang.Character, ch.zhaw.regularLanguages.dfa.State);
+  public boolean isAcceptingState(ch.zhaw.regularLanguages.dfa.State);
+  public void minimizeAutomaton();
+  public java.lang.Object clone();
+  public ch.zhaw.regularLanguages.dfa.State getState(ch.zhaw.regularLanguages.dfa.State);
+  public ch.zhaw.regularLanguages.dfa.State getStateRef(java.util.Set<ch.zhaw.regularLanguages.dfa.State>, ch.zhaw.regularLanguages.dfa.State);
+  public ch.zhaw.regularLanguages.dfa.State getStateById(java.lang.String);
+  public java.lang.String generateDotString();
+}
+Compiled from "DeterministicFiniteAutomatonTest.java"
+public class ch.zhaw.regularLanguages.dfa.DeterministicFiniteAutomatonTest {
+  java.util.Set<ch.zhaw.regularLanguages.dfa.State> states;
+  ch.zhaw.regularLanguages.dfa.State startState;
+  java.util.Set<ch.zhaw.regularLanguages.dfa.State> acceptingStates;
+  char[] alphabet;
+  ch.zhaw.regularLanguages.dfa.DeterministicFiniteAutomaton dfa;
+  ch.zhaw.regularLanguages.dfa.State q0;
+  ch.zhaw.regularLanguages.dfa.State q1;
+  ch.zhaw.regularLanguages.dfa.State q2;
+  ch.zhaw.regularLanguages.dfa.State q3;
+  ch.zhaw.regularLanguages.dfa.State q4;
+  public ch.zhaw.regularLanguages.dfa.DeterministicFiniteAutomatonTest();
+  public void setUp();
+  public void testGetStartState();
+  public void testSetStartState();
+  public void testGetStates();
+  public void testGetAcceptingStates();
+  public void testGetAlphabet();
+  public void testSetStates();
+  public void testSetAcceptingStates();
+  public void testSetAlphabet();
+  public void testIsStateIdAvailableFalse();
+  public void testIsStateIdAvailableTrue();
+  public void testProcess0();
+  public void testProcess1();
+  public void testChangeLink();
+  public void testIsAcceptingStateFalse();
+  public void testIsAcceptingStateTrue();
+  public void testMinimizeAutomaton();
+  public void testCloneBasics();
+  public void testCloneDeepCopyTest1();
+  public void testCloneDeepCopyTest2();
+  public void testGetState();
+  public void testGetStateById();
+  public void testGenerateDotString();
+}
+Compiled from "DrawSpecificAutomatons.java"
+public class ch.zhaw.regularLanguages.dfa.DrawSpecificAutomatons {
+  public ch.zhaw.regularLanguages.dfa.DrawSpecificAutomatons();
+  public static void main(java.lang.String[]);
+}
+Compiled from "RandomDeterministicFiniteAutomaton.java"
+public class ch.zhaw.regularLanguages.dfa.RandomDeterministicFiniteAutomaton extends ch.zhaw.regularLanguages.dfa.DeterministicFiniteAutomaton implements ch.zhaw.regularLanguages.evolution.candidates.Mutable {
+  public ch.zhaw.regularLanguages.dfa.RandomDeterministicFiniteAutomaton(char[], int);
+  public ch.zhaw.regularLanguages.dfa.RandomDeterministicFiniteAutomaton(ch.zhaw.regularLanguages.dfa.DeterministicFiniteAutomaton);
+  public void mutate(int);
+  public java.lang.Object clone();
+}
+Compiled from "State.java"
+public class ch.zhaw.regularLanguages.dfa.State implements java.lang.Comparable<ch.zhaw.regularLanguages.dfa.State> {
+  public ch.zhaw.regularLanguages.dfa.State(java.lang.String, ch.zhaw.regularLanguages.dfa.TransitionTable);
+  public ch.zhaw.regularLanguages.dfa.State(java.lang.String);
+  public ch.zhaw.regularLanguages.dfa.TransitionTable getTransitionTable();
+  public void setTransitionTable(ch.zhaw.regularLanguages.dfa.TransitionTable);
+  public ch.zhaw.regularLanguages.dfa.State process(java.lang.Character);
+  public java.lang.String getId();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public java.lang.String toString();
+  public int compareTo(ch.zhaw.regularLanguages.dfa.State);
+  public int compareTo(java.lang.Object);
+}
+Compiled from "TransitionTable.java"
+public class ch.zhaw.regularLanguages.dfa.TransitionTable {
+  java.util.Map<java.lang.Character, ch.zhaw.regularLanguages.dfa.State> transitionTable;
+  public ch.zhaw.regularLanguages.dfa.TransitionTable();
+  public void addTransition(java.lang.Character, ch.zhaw.regularLanguages.dfa.State);
+  public void updateTransition(java.lang.Character, ch.zhaw.regularLanguages.dfa.State);
+  public void doubleCheckRemove(java.lang.Character);
+  public void replaceTarget(ch.zhaw.regularLanguages.dfa.State, ch.zhaw.regularLanguages.dfa.State);
+  public ch.zhaw.regularLanguages.dfa.State process(java.lang.Character);
+  public java.util.Map<java.lang.Character, ch.zhaw.regularLanguages.dfa.State> getTransitionTable();
+}
+Compiled from "AddRandomAcceptingStateMutation.java"
+public class ch.zhaw.regularLanguages.dfa.mutations.AddRandomAcceptingStateMutation implements ch.zhaw.regularLanguages.dfa.mutations.RandomMutation {
+  public ch.zhaw.regularLanguages.dfa.mutations.AddRandomAcceptingStateMutation();
+  public boolean mutate(ch.zhaw.regularLanguages.dfa.DeterministicFiniteAutomaton);
+}
+Compiled from "AddRandomStateMutation.java"
+public class ch.zhaw.regularLanguages.dfa.mutations.AddRandomStateMutation implements ch.zhaw.regularLanguages.dfa.mutations.RandomMutation {
+  public ch.zhaw.regularLanguages.dfa.mutations.AddRandomStateMutation();
+  public boolean mutate(ch.zhaw.regularLanguages.dfa.DeterministicFiniteAutomaton);
+}
+Compiled from "ChangeRandomLinkMutation.java"
+public class ch.zhaw.regularLanguages.dfa.mutations.ChangeRandomLinkMutation implements ch.zhaw.regularLanguages.dfa.mutations.RandomMutation {
+  public ch.zhaw.regularLanguages.dfa.mutations.ChangeRandomLinkMutation();
+  public boolean mutate(ch.zhaw.regularLanguages.dfa.DeterministicFiniteAutomaton);
+}
+Compiled from "MutationRegister.java"
+public class ch.zhaw.regularLanguages.dfa.mutations.MutationRegister implements ch.zhaw.regularLanguages.dfa.mutations.RandomMutation {
+  public ch.zhaw.regularLanguages.dfa.mutations.MutationRegister();
+  public boolean mutate(ch.zhaw.regularLanguages.dfa.DeterministicFiniteAutomaton);
+}
+Compiled from "RandomMutation.java"
+public interface ch.zhaw.regularLanguages.dfa.mutations.RandomMutation {
+  public abstract boolean mutate(ch.zhaw.regularLanguages.dfa.DeterministicFiniteAutomaton);
+}
+Compiled from "RemoveRandomAcceptingStateMutation.java"
+public class ch.zhaw.regularLanguages.dfa.mutations.RemoveRandomAcceptingStateMutation implements ch.zhaw.regularLanguages.dfa.mutations.RandomMutation {
+  public ch.zhaw.regularLanguages.dfa.mutations.RemoveRandomAcceptingStateMutation();
+  public boolean mutate(ch.zhaw.regularLanguages.dfa.DeterministicFiniteAutomaton);
+}
+Compiled from "RemoveRandomStateMutation.java"
+public class ch.zhaw.regularLanguages.dfa.mutations.RemoveRandomStateMutation implements ch.zhaw.regularLanguages.dfa.mutations.RandomMutation {
+  public ch.zhaw.regularLanguages.dfa.mutations.RemoveRandomStateMutation();
+  public boolean mutate(ch.zhaw.regularLanguages.dfa.DeterministicFiniteAutomaton);
+}
+Compiled from "Otpimiser.java"
+public interface ch.zhaw.regularLanguages.dfa.optimisation.Otpimiser<T> {
+  public abstract void optimise(T);
+}
+Compiled from "UnreachableStateRemover.java"
+public class ch.zhaw.regularLanguages.dfa.optimisation.UnreachableStateRemover implements ch.zhaw.regularLanguages.dfa.optimisation.Otpimiser<ch.zhaw.regularLanguages.dfa.DeterministicFiniteAutomaton> {
+  public ch.zhaw.regularLanguages.dfa.optimisation.UnreachableStateRemover();
+  public void optimise(ch.zhaw.regularLanguages.dfa.DeterministicFiniteAutomaton);
+  public void optimise(java.lang.Object);
+}
+Compiled from "TransformDFAToBricsAutomaton.java"
+public class ch.zhaw.regularLanguages.dfa.transformation.TransformDFAToBricsAutomaton implements ch.zhaw.regularLanguages.dfa.transformation.Transformer<ch.zhaw.regularLanguages.dfa.DeterministicFiniteAutomaton, dk.brics.automaton.Automaton> {
+  public ch.zhaw.regularLanguages.dfa.transformation.TransformDFAToBricsAutomaton();
+  public dk.brics.automaton.Automaton transform(ch.zhaw.regularLanguages.dfa.DeterministicFiniteAutomaton);
+  public java.lang.Object transform(java.lang.Object);
+}
+Compiled from "TransformDFAToBricsAutomatonTest.java"
+public class ch.zhaw.regularLanguages.dfa.transformation.TransformDFAToBricsAutomatonTest {
+  public ch.zhaw.regularLanguages.dfa.transformation.TransformDFAToBricsAutomatonTest();
+  public void setUp() throws java.lang.Exception;
+  public void testTransform();
+}
+Compiled from "Transformer.java"
+public interface ch.zhaw.regularLanguages.dfa.transformation.Transformer<S, T> {
+  public abstract T transform(S);
+}
+Compiled from "EAWithConsistentGlobalProblemSet.java"
+public class ch.zhaw.regularLanguages.evolution.EAWithConsistentGlobalProblemSet<E extends ch.zhaw.regularLanguages.evolution.candidates.EvolutionCandidate, PSI extends ch.zhaw.regularLanguages.helpers.PublicCloneable, PSO extends ch.zhaw.regularLanguages.helpers.PublicCloneable, R> implements ch.zhaw.regularLanguages.evolution.EvolutionaryAlgorithm<E> {
+  public ch.zhaw.regularLanguages.evolution.EAWithConsistentGlobalProblemSet(ch.zhaw.regularLanguages.evolution.problems.ProblemSet<PSI, PSO>, java.util.List<E>, R);
+  public E getWinner();
+  public int getMaxC();
+  public ch.zhaw.regularLanguages.evolution.problems.ProblemSet<PSI, PSO> getProblemSet();
+  public java.util.List<E> getCandidates();
+  public int getProblemSetSize();
+  public long startEvolution(long);
+}
+Compiled from "EAWithEvolvingGlobalProblemSet.java"
+public class ch.zhaw.regularLanguages.evolution.EAWithEvolvingGlobalProblemSet<E extends ch.zhaw.regularLanguages.evolution.candidates.EvolutionCandidate, PSI extends ch.zhaw.regularLanguages.helpers.PublicCloneable, PSO extends ch.zhaw.regularLanguages.helpers.PublicCloneable, R> implements ch.zhaw.regularLanguages.evolution.EvolutionaryAlgorithm<E> {
+  public ch.zhaw.regularLanguages.evolution.EAWithEvolvingGlobalProblemSet(ch.zhaw.regularLanguages.evolution.problems.EvolvingProblemSet<PSI, PSO>, java.util.List<E>, R);
+  public E getWinner();
+  public int getMaxC();
+  public ch.zhaw.regularLanguages.evolution.problems.ProblemSet<PSI, PSO> getProblemSet();
+  public java.util.List<E> getCandidates();
+  public int getProblemSetSize();
+  public long startEvolution(long);
+}
+Compiled from "EAWithEvolvingLocalProblemSets.java"
+public class ch.zhaw.regularLanguages.evolution.EAWithEvolvingLocalProblemSets<E extends ch.zhaw.regularLanguages.evolution.candidates.EvolutionCandidateWithProblemSet, R> implements ch.zhaw.regularLanguages.evolution.EvolutionaryAlgorithm<E> {
+  public ch.zhaw.regularLanguages.evolution.EAWithEvolvingLocalProblemSets(java.util.List<E>, R, int);
+  public E getWinner();
+  public int getMaxC();
+  public java.util.List<E> getCandidates();
+  public long startEvolution(long);
+  public ch.zhaw.regularLanguages.evolution.candidates.EvolutionCandidate getWinner();
+}
+Compiled from "EvolutionResult.java"
+public final class ch.zhaw.regularLanguages.evolution.EvolutionResult extends java.lang.Enum<ch.zhaw.regularLanguages.evolution.EvolutionResult> {
+  public static final ch.zhaw.regularLanguages.evolution.EvolutionResult FINAL_FORM;
+  public static final ch.zhaw.regularLanguages.evolution.EvolutionResult IN_PROGRESS;
+  public static ch.zhaw.regularLanguages.evolution.EvolutionResult[] values();
+  public static ch.zhaw.regularLanguages.evolution.EvolutionResult valueOf(java.lang.String);
+  static {};
+}
+Compiled from "EvolutionaryAlgorithm.java"
+public interface ch.zhaw.regularLanguages.evolution.EvolutionaryAlgorithm<E extends ch.zhaw.regularLanguages.evolution.candidates.EvolutionCandidate> {
+  public abstract long startEvolution(long);
+  public abstract E getWinner();
+  public abstract java.util.List<E> getCandidates();
+}
+Compiled from "RandomSearch.java"
+public class ch.zhaw.regularLanguages.evolution.RandomSearch<E extends ch.zhaw.regularLanguages.evolution.candidates.EvolutionCandidate, R> implements ch.zhaw.regularLanguages.evolution.EvolutionaryAlgorithm<E> {
+  java.util.List<E> candidates;
+  R reference;
+  E winner;
+  public ch.zhaw.regularLanguages.evolution.RandomSearch(java.util.List<E>, R);
+  public long startEvolution(long);
+  public E getWinner();
+  public java.util.List<E> getCandidates();
+}
+Compiled from "DFAEvolutionCandidate.java"
+public class ch.zhaw.regularLanguages.evolution.candidates.DFAEvolutionCandidate<AUTOMATON extends ch.zhaw.regularLanguages.dfa.DeterministicFiniteAutomaton & ch.zhaw.regularLanguages.evolution.candidates.Mutable> extends ch.zhaw.regularLanguages.evolution.candidates.EvolutionCandidate<AUTOMATON, ch.zhaw.regularLanguages.evolution.problems.ProblemSet<ch.zhaw.regularLanguages.language.CharArrayWrapper, ch.zhaw.regularLanguages.language.BooleanWrapper>, dk.brics.automaton.Automaton> {
+  public ch.zhaw.regularLanguages.evolution.candidates.DFAEvolutionCandidate(java.lang.Class<AUTOMATON>, char[]);
+  public ch.zhaw.regularLanguages.evolution.candidates.DFAEvolutionCandidate(java.lang.Class<AUTOMATON>, char[], AUTOMATON);
+  public int fitness(ch.zhaw.regularLanguages.evolution.problems.ProblemSet<ch.zhaw.regularLanguages.language.CharArrayWrapper, ch.zhaw.regularLanguages.language.BooleanWrapper>);
+  public AUTOMATON initObj();
+  public java.lang.Object cloneWithMutation();
+  public boolean checkValidity(dk.brics.automaton.Automaton);
+  public boolean checkValidity(java.lang.Object);
+  public int fitness(java.lang.Object);
+  public java.lang.Object initObj();
+}
+Compiled from "DFAEvolutionCandidateWithProblemSet.java"
+public class ch.zhaw.regularLanguages.evolution.candidates.DFAEvolutionCandidateWithProblemSet<AUTOMATON extends ch.zhaw.regularLanguages.dfa.DeterministicFiniteAutomaton & ch.zhaw.regularLanguages.evolution.candidates.Mutable> extends ch.zhaw.regularLanguages.evolution.candidates.EvolutionCandidateWithProblemSet<AUTOMATON, dk.brics.automaton.Automaton, ch.zhaw.regularLanguages.language.CharArrayWrapper, ch.zhaw.regularLanguages.language.BooleanWrapper> {
+  public ch.zhaw.regularLanguages.evolution.candidates.DFAEvolutionCandidateWithProblemSet(AUTOMATON, ch.zhaw.regularLanguages.evolution.problems.EvolvingProblemSet<ch.zhaw.regularLanguages.language.CharArrayWrapper, ch.zhaw.regularLanguages.language.BooleanWrapper>);
+  public ch.zhaw.regularLanguages.evolution.candidates.DFAEvolutionCandidateWithProblemSet(java.lang.Class<AUTOMATON>, char[], AUTOMATON, ch.zhaw.regularLanguages.evolution.problems.EvolvingProblemSet<ch.zhaw.regularLanguages.language.CharArrayWrapper, ch.zhaw.regularLanguages.language.BooleanWrapper>);
+  public AUTOMATON initObj();
+  public java.lang.Object cloneWithMutation();
+  public int fitness(ch.zhaw.regularLanguages.evolution.problems.EvolvingProblemSet<ch.zhaw.regularLanguages.language.CharArrayWrapper, ch.zhaw.regularLanguages.language.BooleanWrapper>);
+  public boolean checkValidity(dk.brics.automaton.Automaton);
+  public boolean checkValidity(java.lang.Object);
+  public int fitness(java.lang.Object);
+  public java.lang.Object initObj();
+}
+Compiled from "EvolutionCandidate.java"
+public abstract class ch.zhaw.regularLanguages.evolution.candidates.EvolutionCandidate<T, PS, R> implements java.lang.Comparable<ch.zhaw.regularLanguages.evolution.candidates.EvolutionCandidate<T, PS, R>> {
+  public ch.zhaw.regularLanguages.evolution.candidates.EvolutionCandidate(T, int);
+  public ch.zhaw.regularLanguages.evolution.candidates.EvolutionCandidate(java.lang.Class<T>);
+  public ch.zhaw.regularLanguages.evolution.candidates.EvolutionCandidate();
+  public void setObj(T);
+  public abstract T initObj();
+  public java.lang.Class<T> getClassTypeDef();
+  public void setClassTypeDef(java.lang.Class<T>);
+  public T getObj();
+  public int getFitness();
+  public void setFitness(int);
+  public abstract int fitness(PS);
+  public abstract java.lang.Object cloneWithMutation();
+  public abstract boolean checkValidity(R);
+  public int compareTo(ch.zhaw.regularLanguages.evolution.candidates.EvolutionCandidate<T, PS, R>);
+  public java.lang.String toString();
+  public int compareTo(java.lang.Object);
+}
+Compiled from "EvolutionCandidateWithProblemSet.java"
+public abstract class ch.zhaw.regularLanguages.evolution.candidates.EvolutionCandidateWithProblemSet<T, R, PSI extends ch.zhaw.regularLanguages.helpers.PublicCloneable, PSO extends ch.zhaw.regularLanguages.helpers.PublicCloneable> extends ch.zhaw.regularLanguages.evolution.candidates.EvolutionCandidate<T, ch.zhaw.regularLanguages.evolution.problems.EvolvingProblemSet<PSI, PSO>, R> {
+  public ch.zhaw.regularLanguages.evolution.candidates.EvolutionCandidateWithProblemSet(T, ch.zhaw.regularLanguages.evolution.problems.EvolvingProblemSet<PSI, PSO>);
+  public ch.zhaw.regularLanguages.evolution.candidates.EvolutionCandidateWithProblemSet(java.lang.Class<T>, ch.zhaw.regularLanguages.evolution.problems.EvolvingProblemSet<PSI, PSO>);
+  public ch.zhaw.regularLanguages.evolution.problems.EvolvingProblemSet<PSI, PSO> getProblemSet();
+}
+Compiled from "Mutable.java"
+public interface ch.zhaw.regularLanguages.evolution.candidates.Mutable {
+  public abstract void mutate(int);
+}
+Compiled from "ConsistentGlobalProblemSetInitialisation.java"
+public class ch.zhaw.regularLanguages.evolution.initialisation.ConsistentGlobalProblemSetInitialisation implements ch.zhaw.regularLanguages.evolution.initialisation.DFAEvolutionaryAlgorithmInitialisation<ch.zhaw.regularLanguages.evolution.EAWithConsistentGlobalProblemSet<ch.zhaw.regularLanguages.evolution.candidates.DFAEvolutionCandidate<ch.zhaw.regularLanguages.dfa.RandomDeterministicFiniteAutomaton>, ch.zhaw.regularLanguages.language.CharArrayWrapper, ch.zhaw.regularLanguages.language.BooleanWrapper, dk.brics.automaton.Automaton>, ch.zhaw.regularLanguages.evolution.candidates.DFAEvolutionCandidate<ch.zhaw.regularLanguages.dfa.RandomDeterministicFiniteAutomaton>> {
+  public ch.zhaw.regularLanguages.evolution.initialisation.ConsistentGlobalProblemSetInitialisation();
+  public void initLanguage(char[], int, java.lang.String);
+  public void initProblems(int);
+  public void initCandidates(int);
+  public long startEvolution(long);
+  public java.util.List<ch.zhaw.regularLanguages.evolution.candidates.DFAEvolutionCandidate<ch.zhaw.regularLanguages.dfa.RandomDeterministicFiniteAutomaton>> getCandidates();
+  public ch.zhaw.regularLanguages.evolution.candidates.DFAEvolutionCandidate<ch.zhaw.regularLanguages.dfa.RandomDeterministicFiniteAutomaton> getWinner();
+  public java.lang.Object getWinner();
+}
+Compiled from "DFAEvolutionaryAlgorithmInitialisation.java"
+public interface ch.zhaw.regularLanguages.evolution.initialisation.DFAEvolutionaryAlgorithmInitialisation<EAType, CandidateType> extends ch.zhaw.regularLanguages.evolution.initialisation.EvolutionaryAlgorithmInitialisation<EAType, CandidateType> {
+  public abstract void initLanguage(char[], int, java.lang.String);
+  public abstract void initProblems(int);
+  public abstract void initCandidates(int);
+}
+Compiled from "EvolutionaryAlgorithmInitialisation.java"
+public interface ch.zhaw.regularLanguages.evolution.initialisation.EvolutionaryAlgorithmInitialisation<EAType, CandidateType> {
+  public abstract long startEvolution(long);
+  public abstract java.util.List<CandidateType> getCandidates();
+  public abstract CandidateType getWinner();
+}
+Compiled from "EvolvingGlobalProblemSetInitialisation.java"
+public class ch.zhaw.regularLanguages.evolution.initialisation.EvolvingGlobalProblemSetInitialisation implements ch.zhaw.regularLanguages.evolution.initialisation.DFAEvolutionaryAlgorithmInitialisation<ch.zhaw.regularLanguages.evolution.EAWithConsistentGlobalProblemSet<ch.zhaw.regularLanguages.evolution.candidates.DFAEvolutionCandidate<ch.zhaw.regularLanguages.dfa.RandomDeterministicFiniteAutomaton>, ch.zhaw.regularLanguages.language.CharArrayWrapper, ch.zhaw.regularLanguages.language.BooleanWrapper, dk.brics.automaton.Automaton>, ch.zhaw.regularLanguages.evolution.candidates.DFAEvolutionCandidate<ch.zhaw.regularLanguages.dfa.RandomDeterministicFiniteAutomaton>> {
+  public ch.zhaw.regularLanguages.evolution.initialisation.EvolvingGlobalProblemSetInitialisation();
+  public void initLanguage(char[], int, java.lang.String);
+  public void initProblems(int);
+  public void initCandidates(int);
+  public long startEvolution(long);
+  public java.util.List<ch.zhaw.regularLanguages.evolution.candidates.DFAEvolutionCandidate<ch.zhaw.regularLanguages.dfa.RandomDeterministicFiniteAutomaton>> getCandidates();
+  public ch.zhaw.regularLanguages.evolution.candidates.DFAEvolutionCandidate<ch.zhaw.regularLanguages.dfa.RandomDeterministicFiniteAutomaton> getWinner();
+  public java.lang.Object getWinner();
+}
+Compiled from "EvolvingLocalProblemSetInitialisation.java"
+public class ch.zhaw.regularLanguages.evolution.initialisation.EvolvingLocalProblemSetInitialisation implements ch.zhaw.regularLanguages.evolution.initialisation.DFAEvolutionaryAlgorithmInitialisation<ch.zhaw.regularLanguages.evolution.EAWithEvolvingLocalProblemSets<ch.zhaw.regularLanguages.evolution.candidates.DFAEvolutionCandidateWithProblemSet<ch.zhaw.regularLanguages.dfa.RandomDeterministicFiniteAutomaton>, dk.brics.automaton.Automaton>, ch.zhaw.regularLanguages.evolution.candidates.DFAEvolutionCandidateWithProblemSet<ch.zhaw.regularLanguages.dfa.RandomDeterministicFiniteAutomaton>> {
+  public ch.zhaw.regularLanguages.evolution.initialisation.EvolvingLocalProblemSetInitialisation();
+  public void initLanguage(char[], int, java.lang.String);
+  public void initProblems(int);
+  public void initCandidates(int);
+  public long startEvolution(long);
+  public java.util.List<ch.zhaw.regularLanguages.evolution.candidates.DFAEvolutionCandidateWithProblemSet<ch.zhaw.regularLanguages.dfa.RandomDeterministicFiniteAutomaton>> getCandidates();
+  public ch.zhaw.regularLanguages.evolution.candidates.DFAEvolutionCandidateWithProblemSet<ch.zhaw.regularLanguages.dfa.RandomDeterministicFiniteAutomaton> getWinner();
+  public java.lang.Object getWinner();
+}
+Compiled from "RandomSearchInitialisation.java"
+public class ch.zhaw.regularLanguages.evolution.initialisation.RandomSearchInitialisation implements ch.zhaw.regularLanguages.evolution.initialisation.DFAEvolutionaryAlgorithmInitialisation<ch.zhaw.regularLanguages.evolution.EAWithConsistentGlobalProblemSet<ch.zhaw.regularLanguages.evolution.candidates.DFAEvolutionCandidate<ch.zhaw.regularLanguages.dfa.RandomDeterministicFiniteAutomaton>, ch.zhaw.regularLanguages.language.CharArrayWrapper, ch.zhaw.regularLanguages.language.BooleanWrapper, dk.brics.automaton.Automaton>, ch.zhaw.regularLanguages.evolution.candidates.DFAEvolutionCandidate<ch.zhaw.regularLanguages.dfa.RandomDeterministicFiniteAutomaton>> {
+  public ch.zhaw.regularLanguages.evolution.initialisation.RandomSearchInitialisation();
+  public void initLanguage(char[], int, java.lang.String);
+  public void initProblems(int);
+  public void initCandidates(int);
+  public long startEvolution(long);
+  public java.util.List<ch.zhaw.regularLanguages.evolution.candidates.DFAEvolutionCandidate<ch.zhaw.regularLanguages.dfa.RandomDeterministicFiniteAutomaton>> getCandidates();
+  public ch.zhaw.regularLanguages.evolution.candidates.DFAEvolutionCandidate<ch.zhaw.regularLanguages.dfa.RandomDeterministicFiniteAutomaton> getWinner();
+  public java.lang.Object getWinner();
+}
+Compiled from "EvolvingProblemSet.java"
+public class ch.zhaw.regularLanguages.evolution.problems.EvolvingProblemSet<P extends ch.zhaw.regularLanguages.helpers.PublicCloneable, S extends ch.zhaw.regularLanguages.helpers.PublicCloneable> extends ch.zhaw.regularLanguages.evolution.problems.ProblemSet<P, S> {
+  public ch.zhaw.regularLanguages.evolution.problems.EvolvingProblemSet(java.util.List<P>, java.util.List<S>, ch.zhaw.regularLanguages.evolution.problems.ProblemGenerator<P, S>);
+  public ch.zhaw.regularLanguages.evolution.problems.EvolvingProblemSet(ch.zhaw.regularLanguages.evolution.problems.ProblemSet<P, S>, ch.zhaw.regularLanguages.evolution.problems.ProblemGenerator<P, S>);
+  public void evolve(double);
+  public java.lang.Object clone();
+}
+Compiled from "ProblemGenerator.java"
+public interface ch.zhaw.regularLanguages.evolution.problems.ProblemGenerator<P, S> {
+  public abstract ch.zhaw.regularLanguages.helpers.Tuple<P, S> generateProblem();
+}
+Compiled from "ProblemSet.java"
+public class ch.zhaw.regularLanguages.evolution.problems.ProblemSet<P extends ch.zhaw.regularLanguages.helpers.PublicCloneable, S extends ch.zhaw.regularLanguages.helpers.PublicCloneable> {
+  public ch.zhaw.regularLanguages.evolution.problems.ProblemSet(java.util.List<P>, java.util.List<S>);
+  public S getSolution(P);
+  public boolean checkSolution(P, S);
+  public void updateMap();
+  public java.util.Set<P> getProblemSet();
+  public long[] getSolvedCounter();
+  public java.util.List<P> getProblems();
+  public void setProblems(java.util.List<P>);
+  public java.util.List<S> getSolutions();
+  public void setSolutions(java.util.List<S>);
+  public java.lang.String toString();
+  public java.lang.Object clone();
+}
+Compiled from "ConsitentGlobalABABLanguage.java"
+public class ch.zhaw.regularLanguages.evolution.runners.ConsitentGlobalABABLanguage {
+  public ch.zhaw.regularLanguages.evolution.runners.ConsitentGlobalABABLanguage();
+  public static void main(java.lang.String[]);
+}
+Compiled from "ConsitentGlobalDivisable3Language.java"
+public class ch.zhaw.regularLanguages.evolution.runners.ConsitentGlobalDivisable3Language {
+  public ch.zhaw.regularLanguages.evolution.runners.ConsitentGlobalDivisable3Language();
+  public static void main(java.lang.String[]);
+}
+Compiled from "ConsitentGlobalDivisable5Language.java"
+public class ch.zhaw.regularLanguages.evolution.runners.ConsitentGlobalDivisable5Language {
+  public ch.zhaw.regularLanguages.evolution.runners.ConsitentGlobalDivisable5Language();
+  public static void main(java.lang.String[]);
+}
+Compiled from "ConsitentGlobalDivisable5LanguageCScaling.java"
+public class ch.zhaw.regularLanguages.evolution.runners.ConsitentGlobalDivisable5LanguageCScaling {
+  public ch.zhaw.regularLanguages.evolution.runners.ConsitentGlobalDivisable5LanguageCScaling();
+  public static void main(java.lang.String[]);
+}
+Compiled from "ConsitentGlobalDivisable5LanguagePSScaling.java"
+public class ch.zhaw.regularLanguages.evolution.runners.ConsitentGlobalDivisable5LanguagePSScaling {
+  public ch.zhaw.regularLanguages.evolution.runners.ConsitentGlobalDivisable5LanguagePSScaling();
+  public static void main(java.lang.String[]);
+}
+Compiled from "EvolvingGlobalABABLanguage.java"
+public class ch.zhaw.regularLanguages.evolution.runners.EvolvingGlobalABABLanguage {
+  public ch.zhaw.regularLanguages.evolution.runners.EvolvingGlobalABABLanguage();
+  public static void main(java.lang.String[]);
+}
+Compiled from "EvolvingGlobalDivisable3Language.java"
+public class ch.zhaw.regularLanguages.evolution.runners.EvolvingGlobalDivisable3Language {
+  public ch.zhaw.regularLanguages.evolution.runners.EvolvingGlobalDivisable3Language();
+  public static void main(java.lang.String[]);
+}
+Compiled from "EvolvingGlobalDivisable3LanguageCSScaling.java"
+public class ch.zhaw.regularLanguages.evolution.runners.EvolvingGlobalDivisable3LanguageCSScaling {
+  public ch.zhaw.regularLanguages.evolution.runners.EvolvingGlobalDivisable3LanguageCSScaling();
+  public static void main(java.lang.String[]);
+}
+Compiled from "EvolvingGlobalDivisable3LanguagePSScaling.java"
+public class ch.zhaw.regularLanguages.evolution.runners.EvolvingGlobalDivisable3LanguagePSScaling {
+  public ch.zhaw.regularLanguages.evolution.runners.EvolvingGlobalDivisable3LanguagePSScaling();
+  public static void main(java.lang.String[]);
+}
+Compiled from "EvolvingGlobalDivisable5Language.java"
+public class ch.zhaw.regularLanguages.evolution.runners.EvolvingGlobalDivisable5Language {
+  public ch.zhaw.regularLanguages.evolution.runners.EvolvingGlobalDivisable5Language();
+  public static void main(java.lang.String[]);
+}
+Compiled from "EvolvingGlobalDivisable5LanguageCScaling.java"
+public class ch.zhaw.regularLanguages.evolution.runners.EvolvingGlobalDivisable5LanguageCScaling {
+  public ch.zhaw.regularLanguages.evolution.runners.EvolvingGlobalDivisable5LanguageCScaling();
+  public static void main(java.lang.String[]);
+}
+Compiled from "EvolvingGlobalDivisable5LanguagePSScaling.java"
+public class ch.zhaw.regularLanguages.evolution.runners.EvolvingGlobalDivisable5LanguagePSScaling {
+  public ch.zhaw.regularLanguages.evolution.runners.EvolvingGlobalDivisable5LanguagePSScaling();
+  public static void main(java.lang.String[]);
+}
+Compiled from "EvolvingGlobalPhoneNo.java"
+public class ch.zhaw.regularLanguages.evolution.runners.EvolvingGlobalPhoneNo {
+  public ch.zhaw.regularLanguages.evolution.runners.EvolvingGlobalPhoneNo();
+  public static void main(java.lang.String[]);
+}
+Compiled from "EvolvingLocalABABLanguage.java"
+public class ch.zhaw.regularLanguages.evolution.runners.EvolvingLocalABABLanguage {
+  public ch.zhaw.regularLanguages.evolution.runners.EvolvingLocalABABLanguage();
+  public static void main(java.lang.String[]);
+}
+Compiled from "EvolvingLocalDivisable3Language.java"
+public class ch.zhaw.regularLanguages.evolution.runners.EvolvingLocalDivisable3Language {
+  public ch.zhaw.regularLanguages.evolution.runners.EvolvingLocalDivisable3Language();
+  public static void main(java.lang.String[]);
+}
+Compiled from "EvolvingLocalDivisable5Language.java"
+public class ch.zhaw.regularLanguages.evolution.runners.EvolvingLocalDivisable5Language {
+  public ch.zhaw.regularLanguages.evolution.runners.EvolvingLocalDivisable5Language();
+  public static void main(java.lang.String[]);
+}
+Compiled from "EvolvingLocalPhoneNo.java"
+public class ch.zhaw.regularLanguages.evolution.runners.EvolvingLocalPhoneNo {
+  public ch.zhaw.regularLanguages.evolution.runners.EvolvingLocalPhoneNo();
+  public static void main(java.lang.String[]);
+}
+Compiled from "RandomABABLanguage.java"
+public class ch.zhaw.regularLanguages.evolution.runners.RandomABABLanguage {
+  public ch.zhaw.regularLanguages.evolution.runners.RandomABABLanguage();
+  public static void main(java.lang.String[]);
+}
+Compiled from "RandomDivisable3Language.java"
+public class ch.zhaw.regularLanguages.evolution.runners.RandomDivisable3Language {
+  public ch.zhaw.regularLanguages.evolution.runners.RandomDivisable3Language();
+  public static void main(java.lang.String[]);
+}
+Compiled from "RandomDivisable5Language.java"
+public class ch.zhaw.regularLanguages.evolution.runners.RandomDivisable5Language {
+  public ch.zhaw.regularLanguages.evolution.runners.RandomDivisable5Language();
+  public static void main(java.lang.String[]);
+}
+Compiled from "GraphvizRenderable.java"
+public interface ch.zhaw.regularLanguages.graphicalOutput.GraphvizRenderable {
+  public abstract java.lang.String generateDotString();
+}
+Compiled from "GraphvizRenderer.java"
+public class ch.zhaw.regularLanguages.graphicalOutput.GraphvizRenderer {
+  public ch.zhaw.regularLanguages.graphicalOutput.GraphvizRenderer();
+  public static void renderGraph(ch.zhaw.regularLanguages.graphicalOutput.GraphvizRenderable, java.lang.String);
+}
+Compiled from "BooleanWrapperTest.java"
+public class ch.zhaw.regularLanguages.helpers.BooleanWrapperTest {
+  public ch.zhaw.regularLanguages.helpers.BooleanWrapperTest();
+  public void testEqualsEqTT();
+  public void testEqualsEqFF();
+  public void testEqualsNEQ();
+}
+Compiled from "ListExporter.java"
+public class ch.zhaw.regularLanguages.helpers.ListExporter<T> {
+  public ch.zhaw.regularLanguages.helpers.ListExporter();
+  public void exportList(java.util.List<T>, java.lang.String);
+}
+Compiled from "Logger.java"
+public class ch.zhaw.regularLanguages.helpers.Logger {
+  public ch.zhaw.regularLanguages.helpers.Logger(java.lang.String, boolean);
+  public void log(java.lang.String);
+  public void finish();
+  protected void finalize();
+}
+Compiled from "ObjectWithCounter.java"
+public class ch.zhaw.regularLanguages.helpers.ObjectWithCounter<O> implements java.lang.Comparable<ch.zhaw.regularLanguages.helpers.ObjectWithCounter<O>> {
+  public ch.zhaw.regularLanguages.helpers.ObjectWithCounter(O, long);
+  public O getObject();
+  public long getCounter();
+  public int compareTo(ch.zhaw.regularLanguages.helpers.ObjectWithCounter<O>);
+  public java.lang.String toString();
+  public int compareTo(java.lang.Object);
+}
+Compiled from "PublicCloneable.java"
+public interface ch.zhaw.regularLanguages.helpers.PublicCloneable {
+  public abstract java.lang.Object clone();
+}
+Compiled from "Tuple.java"
+public class ch.zhaw.regularLanguages.helpers.Tuple<A, B> {
+  public ch.zhaw.regularLanguages.helpers.Tuple(A, B);
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+  public A getFirst();
+  public B getSecond();
+}
+Compiled from "BooleanWrapper.java"
+public class ch.zhaw.regularLanguages.language.BooleanWrapper implements ch.zhaw.regularLanguages.helpers.PublicCloneable {
+  public ch.zhaw.regularLanguages.language.BooleanWrapper(boolean);
+  public boolean getBooleanValue();
+  public java.lang.Object clone();
+  public boolean equals(java.lang.Object);
+}
+Compiled from "CharArrayWrapper.java"
+public class ch.zhaw.regularLanguages.language.CharArrayWrapper implements ch.zhaw.regularLanguages.helpers.PublicCloneable {
+  public ch.zhaw.regularLanguages.language.CharArrayWrapper(char[]);
+  public char[] getData();
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+  public int hashCode();
+  public java.lang.Object clone();
+}
+Compiled from "LanguageHelper.java"
+public class ch.zhaw.regularLanguages.language.LanguageHelper {
+  public ch.zhaw.regularLanguages.language.LanguageHelper();
+  public static ch.zhaw.regularLanguages.language.CharArrayWrapper generateSymbolList(java.lang.String);
+  public static ch.zhaw.regularLanguages.evolution.problems.ProblemSet<ch.zhaw.regularLanguages.language.CharArrayWrapper, ch.zhaw.regularLanguages.language.BooleanWrapper> generateLanguageProblemSet(java.lang.String, java.util.Set<ch.zhaw.regularLanguages.language.CharArrayWrapper>);
+  public static java.util.Set<ch.zhaw.regularLanguages.language.CharArrayWrapper> generateAllWords(char[], int);
+  public static void findWords(char[], java.util.Set<ch.zhaw.regularLanguages.language.CharArrayWrapper>, java.lang.StringBuffer, int);
+}
+Compiled from "WordProblemGenerator.java"
+public class ch.zhaw.regularLanguages.language.WordProblemGenerator implements ch.zhaw.regularLanguages.evolution.problems.ProblemGenerator<ch.zhaw.regularLanguages.language.CharArrayWrapper, ch.zhaw.regularLanguages.language.BooleanWrapper> {
+  public ch.zhaw.regularLanguages.language.WordProblemGenerator(char[], int, java.lang.String);
+  public ch.zhaw.regularLanguages.helpers.Tuple<ch.zhaw.regularLanguages.language.CharArrayWrapper, ch.zhaw.regularLanguages.language.BooleanWrapper> generateProblem();
+  public ch.zhaw.regularLanguages.evolution.problems.ProblemSet<ch.zhaw.regularLanguages.language.CharArrayWrapper, ch.zhaw.regularLanguages.language.BooleanWrapper> generateProblemSet(int, boolean);
+}
+Compiled from "CharArrayWrapperTest.java"
+public class ch.zhaw.regularLanguages.languages.CharArrayWrapperTest {
+  char[] testDataEmpty1;
+  char[] testDataEmpty2;
+  char[] testData1;
+  char[] testData1_1;
+  char[] testData2;
+  ch.zhaw.regularLanguages.language.CharArrayWrapper caw1;
+  ch.zhaw.regularLanguages.language.CharArrayWrapper caw2;
+  ch.zhaw.regularLanguages.language.CharArrayWrapper caw1_1;
+  ch.zhaw.regularLanguages.language.CharArrayWrapper cawE1;
+  ch.zhaw.regularLanguages.language.CharArrayWrapper cawE2;
+  public ch.zhaw.regularLanguages.languages.CharArrayWrapperTest();
+  public void testGetData();
+  public void testEqualsObject1();
+  public void testEqualsEmpty();
+  public void testEqualsEmptyNotEmpty();
+  public void testEqualsObject2();
+  public void testToString();
+}
+Compiled from "GraphViz.java"
+public class fr.loria.graphViz.GraphViz {
+  public fr.loria.graphViz.GraphViz();
+  public java.lang.String getDotSource();
+  public void add(java.lang.String);
+  public void addln(java.lang.String);
+  public void addln();
+  public byte[] getGraph(java.lang.String, java.lang.String);
+  public int writeGraphToFile(byte[], java.lang.String);
+  public int writeGraphToFile(byte[], java.io.File);
+  public java.lang.String start_graph();
+  public java.lang.String end_graph();
+  public void readSource(java.lang.String);
+  static {};
+}

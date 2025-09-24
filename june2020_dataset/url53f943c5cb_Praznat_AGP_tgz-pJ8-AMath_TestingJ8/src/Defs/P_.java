@@ -1,0 +1,32 @@
+package Defs;
+
+public enum P_ {
+	SANCP,
+	STRENGTH,
+	MARKSMANSHIP,
+	MASONRY,
+	ARTISTRY,
+	PROSE,
+	CARPENTRY,
+	SMITHING,
+	LOBOTOMY,
+	TRADEP,
+	INVESTP,
+	ARITHMETIC,
+	STRATEGYP,
+	TACTICSP,
+	COMBAT,
+	DANCE,
+	ARMORYP,
+	WPREDICTION,
+	MPREDICTION,
+	PREACHP,
+	RSPCP,
+	TYRRP,
+	BATTLEP,
+	CONFP,
+	SEXP,
+	HEALP;
+	
+	public static int length() {return values().length;}
+}

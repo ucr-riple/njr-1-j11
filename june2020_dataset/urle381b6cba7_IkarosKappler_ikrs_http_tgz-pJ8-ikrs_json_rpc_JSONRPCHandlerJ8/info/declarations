@@ -1,0 +1,2271 @@
+Compiled from "JSONRPCExampleHandler.java"
+public class JSONRPCExampleHandler extends ikrs.httpd.AbstractFileHandler implements ikrs.json.rpc.RPCInvocationTarget {
+  public JSONRPCExampleHandler();
+  public java.lang.String doAnything(java.lang.Integer, java.lang.String, java.lang.Boolean);
+  public boolean requiresExistingFile();
+  public ikrs.httpd.Resource process(java.util.UUID, ikrs.httpd.HTTPHeaders, ikrs.httpd.PostDataWrapper, java.io.File, java.net.URI) throws java.io.IOException, ikrs.httpd.HeaderFormatException, ikrs.httpd.DataFormatException, ikrs.httpd.UnsupportedFormatException;
+  public boolean checkMethodInvocation(java.lang.reflect.Method);
+}
+Compiled from "LightDBExampleHandler.java"
+public class LightDBExampleHandler extends ikrs.httpd.AbstractFileHandler implements ikrs.json.rpc.RPCInvocationTarget {
+  public LightDBExampleHandler();
+  public void put(ikrs.json.JSONValue, ikrs.json.JSONValue) throws ikrs.json.JSONException;
+  public ikrs.json.JSONValue get(ikrs.json.JSONValue) throws ikrs.json.JSONException;
+  public boolean requiresExistingFile();
+  public ikrs.httpd.Resource process(java.util.UUID, ikrs.httpd.HTTPHeaders, ikrs.httpd.PostDataWrapper, java.io.File, java.net.URI) throws java.io.IOException, ikrs.httpd.HeaderFormatException, ikrs.httpd.DataFormatException, ikrs.httpd.UnsupportedFormatException;
+  public boolean checkMethodInvocation(java.lang.reflect.Method);
+}
+Compiled from "LoggerTest.java"
+public class LoggerTest {
+  public LoggerTest();
+  public static void main(java.lang.String[]);
+}
+Compiled from "XMLExampleHandler.java"
+public class XMLExampleHandler extends ikrs.httpd.AbstractFileHandler {
+  public XMLExampleHandler();
+  public boolean requiresExistingFile();
+  public ikrs.httpd.Resource process(java.util.UUID, ikrs.httpd.HTTPHeaders, ikrs.httpd.PostDataWrapper, java.io.File, java.net.URI) throws java.io.IOException, ikrs.httpd.HeaderFormatException, ikrs.httpd.DataFormatException, ikrs.httpd.UnsupportedFormatException;
+}
+Compiled from "AbstractFileFilter.java"
+public abstract class ikrs.httpd.AbstractFileFilter implements ikrs.httpd.HTTPFileFilter {
+  public ikrs.httpd.AbstractFileFilter();
+  public abstract boolean acceptAccess(java.io.File);
+  public abstract boolean acceptListing(java.io.File);
+}
+Compiled from "AbstractFileHandler.java"
+public abstract class ikrs.httpd.AbstractFileHandler implements ikrs.httpd.FileHandler {
+  public ikrs.httpd.AbstractFileHandler() throws java.lang.NullPointerException;
+  public ikrs.httpd.HTTPHandler getHTTPHandler();
+  public void setHTTPHandler(ikrs.httpd.HTTPHandler) throws java.lang.NullPointerException;
+  public ikrs.util.CustomLogger getLogger();
+  public void setLogger(ikrs.util.CustomLogger) throws java.lang.NullPointerException;
+  public abstract boolean requiresExistingFile();
+  public abstract ikrs.httpd.Resource process(java.util.UUID, ikrs.httpd.HTTPHeaders, ikrs.httpd.PostDataWrapper, java.io.File, java.net.URI) throws java.io.IOException, ikrs.httpd.HeaderFormatException, ikrs.httpd.DataFormatException, ikrs.httpd.UnsupportedFormatException;
+}
+Compiled from "AbstractPostDataWrapper.java"
+public abstract class ikrs.httpd.AbstractPostDataWrapper implements ikrs.httpd.PostDataWrapper {
+  public ikrs.httpd.AbstractPostDataWrapper(ikrs.util.CustomLogger, ikrs.httpd.HTTPHeaders, java.io.InputStream) throws java.lang.NullPointerException;
+  public ikrs.util.CustomLogger getLogger();
+  public ikrs.httpd.HTTPHeaders getRequestHeaders();
+  public long getContentLength();
+  public java.io.InputStream getInputStream();
+  public long getBytePosition();
+  public abstract ikrs.httpd.datatype.FormData readFormData() throws java.io.IOException, ikrs.httpd.HeaderFormatException, ikrs.httpd.DataFormatException, ikrs.httpd.UnsupportedFormatException;
+}
+Compiled from "AbstractPreparedResponse.java"
+public abstract class ikrs.httpd.AbstractPreparedResponse implements ikrs.httpd.PreparedHTTPResponse {
+  public ikrs.httpd.AbstractPreparedResponse(ikrs.httpd.HTTPHandler, ikrs.httpd.HTTPHeaders, java.util.UUID, java.net.Socket, java.util.UUID, int, java.lang.String) throws java.lang.IllegalArgumentException;
+  protected ikrs.httpd.HTTPHandler getHTTPHandler();
+  protected ikrs.httpd.HTTPHeaders getRequestHeaders();
+  protected java.util.UUID getSocketID();
+  protected java.net.Socket getSocket();
+  protected java.util.UUID getSessionID();
+  public ikrs.httpd.HTTPHeaders getResponseHeaders();
+  public void addResponseHeader(java.lang.String, java.lang.String);
+  public void setResponseDataResource(ikrs.httpd.Resource);
+  public ikrs.httpd.Resource getResponseDataResource();
+  protected void setPrepared();
+  protected void setDisposed();
+  public java.lang.String getStatusCode();
+  protected void setStatusCode(java.lang.String);
+  public java.lang.String getReasonPhrase();
+  protected void setReasonPhrase(java.lang.String) throws java.lang.IllegalArgumentException;
+  public abstract void prepare(java.util.Map<java.lang.String, ikrs.typesystem.BasicType>) throws ikrs.httpd.MalformedRequestException, ikrs.httpd.UnsupportedVersionException, ikrs.httpd.UnsupportedMethodException, ikrs.httpd.UnknownMethodException, ikrs.httpd.ConfigurationException, java.util.MissingResourceException, ikrs.httpd.AuthorizationException, ikrs.httpd.HeaderFormatException, ikrs.httpd.DataFormatException, ikrs.httpd.UnsupportedFormatException, ikrs.httpd.ParametrizedHTTPException, java.lang.SecurityException, java.io.IOException;
+  public final void execute() throws java.io.IOException;
+  public abstract void dispose();
+  public boolean isPrepared();
+  public boolean isExecuted();
+  public boolean isDisposed();
+}
+Compiled from "AbstractResponseBuilder.java"
+public abstract class ikrs.httpd.AbstractResponseBuilder implements ikrs.httpd.ResponseBuilder {
+  protected ikrs.httpd.HTTPHandler httpHandler;
+  public ikrs.httpd.AbstractResponseBuilder(ikrs.httpd.HTTPHandler);
+  public ikrs.httpd.HTTPHandler getHTTPHandler();
+  public abstract ikrs.httpd.PreparedHTTPResponse create(ikrs.httpd.HTTPHeaders, ikrs.httpd.PostDataWrapper, java.util.UUID, java.net.Socket, java.util.UUID, java.util.Map<java.lang.String, ikrs.typesystem.BasicType>);
+}
+Compiled from "AuthorizationException.java"
+public class ikrs.httpd.AuthorizationException extends ikrs.httpd.HTTPException {
+  public static final int AUTHORIZATION_REQUIRED;
+  public static final int MISSING_PARAM;
+  public ikrs.httpd.AuthorizationException(int, java.lang.String);
+  public int getReasonID();
+}
+Compiled from "ConfigurationException.java"
+public class ikrs.httpd.ConfigurationException extends java.lang.Exception {
+  public ikrs.httpd.ConfigurationException(java.lang.String);
+  public ikrs.httpd.ConfigurationException(java.lang.String, java.lang.Throwable);
+}
+Compiled from "Constants.java"
+public class ikrs.httpd.Constants {
+  public static final byte CR;
+  public static final byte LF;
+  public static final java.lang.String VERSION;
+  public static final java.lang.String HTTP;
+  public static final java.lang.String SUPPORTED_HTTP_VERSION;
+  public static final java.lang.String HTTP_METHOD_GET;
+  public static final java.lang.String HTTP_METHOD_POST;
+  public static final java.lang.String HTTP_METHOD_HEAD;
+  public static final java.lang.String HTTP_METHOD_PUT;
+  public static final java.lang.String HTTP_METHOD_DELETE;
+  public static final java.lang.String HTTP_METHOD_TRACE;
+  public static final java.lang.String HTTP_METHOD_OPTIONS;
+  public static final java.lang.String HTTP_METHOD_CONNECT;
+  public static final java.lang.String NAME_DEFAULT_LOGGER;
+  public static final java.lang.String KEY_HTTPCONFIG;
+  public static final java.lang.String KEY_HTTPCONFIG_SETTINGS;
+  public static final java.lang.String KEY_HTTPCONFIG_SETTINGS_FILE;
+  public static final java.lang.String KEY_HTTPCONFIG_FILEHANDLERS;
+  public static final java.lang.String KEY_HTTPCONFIG_FILEHANDLERS_FILE;
+  public static final java.lang.String AKEY_HTACCESS_ERROR_DOCUMENT_BASE;
+  public static final java.lang.String CKEY_HTTPCONFIG_DISABLE_METHOD_BASE;
+  public static final java.lang.String CKEY_HTTPCONFIG_DOCUMENT_ROOT;
+  public static final java.lang.String CKEY_HTTPCONFIG_SESSION_TIMEOUT;
+  public static final java.lang.String CKEY_HTTPCONFIG_ERROR_DOCUMENT_BASE;
+  public static final java.lang.String CKEY_HTTPCONFIG_HEXDUMP_FORMAT;
+  public static final java.lang.String CKEY_HTTPCONFIG_SECTION_CGI_MAP_HEADERS;
+  public static final java.lang.String KEY_AUTHORIZATION_METHOD;
+  public static final java.lang.String KEY_AUTHORIZATION_USER;
+  public static final java.lang.String KEY_AUTHORIZATION_PASS;
+  public static final java.lang.String KEY_AUTHORIZATION_CHALLENGE;
+  public static final java.lang.String KEY_AUTHENTICATION_NONCE;
+  public static final java.lang.String KEY_AUTHENTICATION_DOMAIN;
+  public static final java.lang.String KEY_AUTHENTICATION_ALGORITHM;
+  public static final java.lang.String KEY_HTACCESS_AUTHTYPE;
+  public static final java.lang.String KEY_HTACCESS_AUTHNAME;
+  public static final java.lang.String KEY_HTACCESS_CHARSET;
+  public static final java.lang.String KEY_HTACCESS_ADDEDTYPE;
+  public static final java.lang.String KEY_HTPASSWD_ENCRYPTEDLINE;
+  public static final java.lang.String KEY_SESSIONID;
+  public static final java.lang.String KEY_SESSIONTIMEOUT;
+  public static final java.lang.String KEY_GENERATED_STATUS_CODE;
+  public static final java.lang.String KEY_GENERATED_REASON_PHRASE;
+  public static final java.lang.String KEY_DEFAULTCHARACTERSET;
+  public static final java.lang.String KEY_SOFTWARENAME;
+  public static final java.lang.String SKEY_REMOTE_ADDRESS;
+  public static final java.lang.String SKEY_REMOTE_HOST;
+  public static final java.lang.String SKEY_REMOTE_PORT;
+  public static final java.lang.String SKEY_REMOTE_IDENT;
+  public static final java.lang.String SKEY_REMOTE_USER;
+  public static final java.lang.String SKEY_LOCAL_ADDRESS;
+  public static final java.lang.String SKEY_LOCAL_HOST;
+  public static final java.lang.String SKEY_LOCAL_PORT;
+  public static final java.lang.String SESSION_NAME_INTERNAL;
+  public static final java.lang.String EKEY_GLOBALCONFIGURATION;
+  public static final java.lang.String EKEY_FILESYSTEMPRIVILEGUES;
+  public static final int HTTP_STATUS_INFORMATIONAL_CONTINUE;
+  public static final int HTTP_STATUS_INFORMATIONAL_SWITCHING_PROTOCOLS;
+  public static final int HTTP_STATUS_SUCCESSFUL_OK;
+  public static final int HTTP_STATUS_SUCCESSFUL_CREATED;
+  public static final int HTTP_STATUS_SUCCESSFUL_ACCEPTES;
+  public static final int HTTP_STATUS_SUCCESSFUL_NON_AUTHORATIVE_INFORMATION;
+  public static final int HTTP_STATUS_SUCCESSFUL_NO_CONTENT;
+  public static final int HTTP_STATUS_SUCCESSFUL_RESET_CONTENT;
+  public static final int HTTP_STATUS_SUCCESSFUL_PARTIAL_CONTENT;
+  public static final int HTTP_STATUS_REDIRECION_MULTIPLE_CHOICES;
+  public static final int HTTP_STATUS_REDIRECION_MOVED_PERMANENTLY;
+  public static final int HTTP_STATUS_REDIRECION_FOUND;
+  public static final int HTTP_STATUS_REDIRECION_SEE_OTHER;
+  public static final int HTTP_STATUS_REDIRECION_NOT_MODIFIED;
+  public static final int HTTP_STATUS_REDIRECION_USE_PROXY;
+  public static final int HTTP_STATUS_REDIRECION_TEMPORARY_REDIRECT;
+  public static final int HTTP_STATUS_CLIENTERROR_BAD_REQUEST;
+  public static final int HTTP_STATUS_CLIENTERROR_UNAUTHORIZED;
+  public static final int HTTP_STATUS_CLIENTERROR_PAYMENT_REQUIRED;
+  public static final int HTTP_STATUS_CLIENTERROR_FORBIDDEN;
+  public static final int HTTP_STATUS_CLIENTERROR_NOT_FOUND;
+  public static final int HTTP_STATUS_CLIENTERROR_METHOD_NOT_ALLOWED;
+  public static final int HTTP_STATUS_CLIENTERROR_NOT_ACCEPTABLE;
+  public static final int HTTP_STATUS_CLIENTERROR_PROXY_AUTHENTICATION_REQUIRED;
+  public static final int HTTP_STATUS_CLIENTERROR_REQUEST_TIMED_OUT;
+  public static final int HTTP_STATUS_CLIENTERROR_CONFLICT;
+  public static final int HTTP_STATUS_CLIENTERROR_GONE;
+  public static final int HTTP_STATUS_CLIENTERROR_LENGTH_REQUIRED;
+  public static final int HTTP_STATUS_CLIENTERROR_PRECONDITION_FAILED;
+  public static final int HTTP_STATUS_CLIENTERROR_REQUEST_ENTITY_TOO_LARGE;
+  public static final int HTTP_STATUS_CLIENTERROR_REQUEST_URI_TOO_LONG;
+  public static final int HTTP_STATUS_CLIENTERROR_UNSUPPORTED_MEDIA_TYPE;
+  public static final int HTTP_STATUS_CLIENTERROR_REQUEST_RANGE_NOT_SATISFIABLE;
+  public static final int HTTP_STATUS_CLIENTERROR_EXPECTATION_FAILED;
+  public static final int HTTP_STATUS_SERVERERROR_INTERNAL_SERVER_ERROR;
+  public static final int HTTP_STATUS_SERVERERROR_NOT_IMPLEMENTED;
+  public static final int HTTP_STATUS_SERVERERROR_BAD_GATEWAY;
+  public static final int HTTP_STATUS_SERVERERROR_SERVICE_UNAVAILABLE;
+  public static final int HTTP_STATUS_SERVERERROR_GATEWAY_TIMEOUT;
+  public static final int HTTP_STATUS_SERVERERROR_HTTP_VERSION_NOT_SUPPORTED;
+  public ikrs.httpd.Constants();
+}
+Compiled from "ContentRange.java"
+public class ikrs.httpd.ContentRange {
+  public static final java.lang.String NAME_BYTESUNIT_BYTES;
+  public ikrs.httpd.ContentRange(java.lang.String, long, long, long) throws java.lang.NullPointerException, java.lang.IllegalArgumentException;
+  public java.lang.String getBytesUnit();
+  public long getFirstBytePosition();
+  public long getLastBytePosition();
+  public long calculateLength();
+  public long getInstanceLength();
+  public static ikrs.httpd.ContentRange parse(java.lang.String) throws java.lang.NullPointerException, ikrs.httpd.MalformedRequestException;
+  public java.lang.String toString();
+  public static void main(java.lang.String[]);
+}
+Compiled from "CustomUtil.java"
+public class ikrs.httpd.CustomUtil {
+  public ikrs.httpd.CustomUtil();
+  public static boolean getBoolean(ikrs.util.CustomLogger, ikrs.typesystem.BasicType, boolean);
+  public static java.lang.String getFileExtension(java.io.File) throws java.lang.NullPointerException;
+  public static java.lang.String processCustomizedFilePath(java.lang.String);
+  public static boolean equalFileExtensions(java.lang.String, java.lang.String, boolean, boolean);
+  public static boolean classImplementsInterface(java.lang.Class<?>, java.lang.String, boolean);
+  public static boolean isMD5(java.lang.String) throws java.lang.NullPointerException;
+  public static boolean isApacheMD5(java.lang.String) throws java.lang.NullPointerException;
+  public static java.lang.String implode(java.lang.String[], java.lang.String);
+  public static java.lang.String implode(java.util.List<java.lang.String>, java.lang.String);
+  public static java.lang.String repeat(java.lang.String, int);
+  public static java.util.Map<java.lang.String, java.lang.String> parseDigestAuthorizationChallenge(java.lang.String);
+  public static java.lang.String stripQuotes(java.lang.String);
+  public static int[] string2int(java.lang.String[]) throws java.lang.NullPointerException, java.lang.NumberFormatException;
+  public static byte[] hex2bytes(java.lang.String) throws java.lang.NumberFormatException;
+  public static int hex2int(char) throws java.lang.NumberFormatException;
+  public static java.lang.String bytes2hexString(byte[]);
+  public static char lowerNibble2hexChar(byte);
+  public static char upperNibble2hexChar(byte);
+  public static long transfer(java.io.InputStream, java.io.OutputStream, long, int) throws java.lang.IllegalArgumentException, java.io.IOException;
+  public static void main(java.lang.String[]);
+}
+Compiled from "DataFormatException.java"
+public class ikrs.httpd.DataFormatException extends ikrs.httpd.HTTPException {
+  public ikrs.httpd.DataFormatException(java.lang.String);
+  public ikrs.httpd.DataFormatException(java.lang.String, long);
+  public long getErrorOffset();
+}
+Compiled from "DefaultFileFilter.java"
+public class ikrs.httpd.DefaultFileFilter extends ikrs.httpd.AbstractFileFilter {
+  public ikrs.httpd.DefaultFileFilter();
+  public boolean acceptAccess(java.io.File);
+  public boolean acceptListing(java.io.File);
+}
+Compiled from "DefaultPostDataWrapper.java"
+public class ikrs.httpd.DefaultPostDataWrapper extends ikrs.httpd.AbstractPostDataWrapper {
+  public ikrs.httpd.DefaultPostDataWrapper(ikrs.util.CustomLogger, ikrs.httpd.HTTPHeaders, java.io.InputStream) throws java.lang.NullPointerException;
+  public ikrs.httpd.datatype.FormData readFormData() throws java.io.IOException, ikrs.httpd.HeaderFormatException, ikrs.httpd.DataFormatException, ikrs.httpd.UnsupportedFormatException;
+}
+Compiled from "DefaultResponseBuilder.java"
+public class ikrs.httpd.DefaultResponseBuilder extends ikrs.httpd.AbstractResponseBuilder implements ikrs.httpd.ResponseBuilder {
+  public ikrs.httpd.DefaultResponseBuilder(ikrs.httpd.HTTPHandler);
+  protected ikrs.httpd.ErrorResponseBuilder getErrorResponseBuilder();
+  public ikrs.httpd.PreparedHTTPResponse create(ikrs.httpd.HTTPHeaders, ikrs.httpd.PostDataWrapper, java.util.UUID, java.net.Socket, java.util.UUID, java.util.Map<java.lang.String, ikrs.typesystem.BasicType>);
+  protected ikrs.httpd.PreparedHTTPResponse buildPreparedErrorResponse(ikrs.httpd.HTTPHeaders, ikrs.httpd.PostDataWrapper, java.util.UUID, java.net.Socket, java.util.UUID, java.lang.Exception, int, java.lang.String, java.lang.String, java.util.Map<java.lang.String, ikrs.typesystem.BasicType>, java.util.Map<java.lang.String, ikrs.typesystem.BasicType>);
+}
+Compiled from "ETag.java"
+public class ikrs.httpd.ETag {
+  public byte[] createRawHash() throws java.io.IOException, java.security.NoSuchAlgorithmException;
+  public java.lang.String createHexHash() throws java.io.IOException, java.security.NoSuchAlgorithmException;
+  public java.lang.String createHeaderValue() throws java.io.IOException, java.security.NoSuchAlgorithmException;
+  public static ikrs.httpd.ETag create(ikrs.httpd.Resource, java.net.URI) throws java.lang.NullPointerException;
+}
+Compiled from "ErrorResponseBuilder.java"
+public class ikrs.httpd.ErrorResponseBuilder extends ikrs.httpd.AbstractResponseBuilder implements ikrs.httpd.ResponseBuilder {
+  public ikrs.httpd.ErrorResponseBuilder(ikrs.httpd.HTTPHandler);
+  public ikrs.httpd.PreparedHTTPResponse create(ikrs.httpd.HTTPHeaders, ikrs.httpd.PostDataWrapper, java.util.UUID, java.net.Socket, java.util.UUID, java.util.Map<java.lang.String, ikrs.typesystem.BasicType>);
+  protected ikrs.httpd.PreparedHTTPResponse buildPreparedErrorResponse(ikrs.httpd.HTTPHeaders, java.util.UUID, java.net.Socket, java.util.UUID, int, java.lang.String, java.lang.String, java.util.Map<java.lang.String, ikrs.typesystem.BasicType>);
+}
+Compiled from "FileHandler.java"
+public interface ikrs.httpd.FileHandler {
+  public abstract ikrs.httpd.HTTPHandler getHTTPHandler();
+  public abstract void setHTTPHandler(ikrs.httpd.HTTPHandler) throws java.lang.NullPointerException;
+  public abstract ikrs.util.CustomLogger getLogger();
+  public abstract void setLogger(ikrs.util.CustomLogger) throws java.lang.NullPointerException;
+  public abstract boolean requiresExistingFile();
+  public abstract ikrs.httpd.Resource process(java.util.UUID, ikrs.httpd.HTTPHeaders, ikrs.httpd.PostDataWrapper, java.io.File, java.net.URI) throws java.io.IOException, ikrs.httpd.HeaderFormatException, ikrs.httpd.DataFormatException, ikrs.httpd.UnsupportedFormatException;
+}
+Compiled from "HTTPConfiguration.java"
+public class ikrs.httpd.HTTPConfiguration {
+  public ikrs.httpd.HTTPConfiguration(ikrs.httpd.HTTPHandler, ikrs.util.CustomLogger) throws java.lang.NullPointerException;
+  protected ikrs.httpd.HTTPHandler getHandler();
+  protected ikrs.util.CustomLogger getLogger();
+  public void applyConfiguration(ikrs.util.Environment<java.lang.String, ikrs.typesystem.BasicType>) throws ikrs.httpd.ConfigurationException, java.io.IOException;
+}
+Compiled from "HTTPConnectionUserID.java"
+public class ikrs.httpd.HTTPConnectionUserID implements java.lang.Comparable {
+  public ikrs.httpd.HTTPConnectionUserID(ikrs.yuccasrv.ConnectionUserID<ikrs.yuccasrv.ConnectionUserID>) throws java.lang.NullPointerException;
+  public boolean equals(java.lang.Object);
+  public boolean equals(ikrs.httpd.HTTPConnectionUserID);
+  public int compareTo(ikrs.httpd.HTTPConnectionUserID);
+  public int compareTo(java.lang.Object);
+  public java.lang.String toString();
+}
+Compiled from "HTTPDRuntimeStatistics.java"
+public class ikrs.httpd.HTTPDRuntimeStatistics {
+  public ikrs.httpd.HTTPDRuntimeStatistics(long);
+  public long getSystemStartedTime();
+  public long getUptime_ms();
+  public void reportSevere();
+  public int getReportedSevereCount();
+  public void reportWarning();
+  public int getReportedWarningCount();
+  public void reportInfo();
+  public int getReportedInfoCount();
+  public void reportConfig();
+  public int getReportedConfigCount();
+  public void reportFine();
+  public int getReportedFineCount();
+  public void reportFiner();
+  public int getReportedFinerCount();
+  public void reportFinest();
+  public int getReportedFinestCount();
+  public void reportHTTPRequest();
+  public int getHTTPRequestCount();
+}
+Compiled from "HTTPException.java"
+public class ikrs.httpd.HTTPException extends java.lang.Exception {
+  public ikrs.httpd.HTTPException(java.lang.String);
+  public ikrs.httpd.HTTPException(java.lang.String, java.lang.Throwable);
+}
+Compiled from "HTTPFileFilter.java"
+public interface ikrs.httpd.HTTPFileFilter {
+  public abstract boolean acceptAccess(java.io.File);
+  public abstract boolean acceptListing(java.io.File);
+}
+Compiled from "HTTPHandler.java"
+public class ikrs.httpd.HTTPHandler extends ikrs.yuccasrv.TCPAdapter implements java.util.concurrent.RejectedExecutionHandler {
+  protected static ikrs.httpd.HTTPHandler sharedInstance;
+  protected static final java.lang.String[] SUPPORTED_METHODS;
+  public ikrs.httpd.HTTPHandler();
+  protected void setDocumentRoot(java.io.File) throws java.lang.NullPointerException;
+  public boolean isInsideDocumentRoot(java.io.File) throws java.lang.NullPointerException;
+  protected void initFileHandlers(java.io.File);
+  public ikrs.util.Environment<java.lang.String, ikrs.typesystem.BasicType> getGlobalConfiguration();
+  protected ikrs.httpd.HTTPDRuntimeStatistics getRuntimeStatistics();
+  public java.io.File getDocumentRoot();
+  public boolean isDirectoryListingAllowed();
+  public boolean isSupportedMethod(java.lang.String);
+  public java.util.List<java.lang.String> getSupportedMethods();
+  public java.text.DateFormat getHTTPDateFormat();
+  public ikrs.util.HexDumpOutputStream createHexDumpOutputStream();
+  public java.lang.String getSoftwareName();
+  public ikrs.httpd.ResponseBuilder getResponseBuilder();
+  protected ikrs.httpd.DefaultResponseBuilder getDefaultResponseBuilder();
+  public ikrs.httpd.ResourceAccessor getResourceAccessor();
+  public ikrs.util.CustomLogger getLogger();
+  public ikrs.util.Environment<java.lang.String, ikrs.typesystem.BasicType> getEnvironment();
+  public ikrs.util.session.SessionManager<java.lang.String, ikrs.typesystem.BasicType, ikrs.httpd.HTTPConnectionUserID> getSessionManager();
+  public ikrs.httpd.HTTPFileFilter getFileFilter();
+  public ikrs.httpd.FileHandler getFileHandlerByExtension(java.lang.String);
+  public ikrs.httpd.FileHandler getFileHandlerByName(java.lang.String);
+  public java.net.URI getDefaultErrorDocumentURI(java.lang.Integer);
+  protected java.util.Map<java.lang.Integer, java.net.URI> getErrorDocumentMap();
+  protected java.util.Set<java.lang.String> getCGIMapHeadersSet();
+  public java.lang.Boolean mapHeaderToCGIEnvironment(java.lang.String);
+  public void rejectedExecution(java.lang.Runnable, java.util.concurrent.ThreadPoolExecutor);
+  public void init(ikrs.util.Environment<java.lang.String, ikrs.typesystem.BasicType>, ikrs.util.Environment<java.lang.String, ikrs.typesystem.BasicType>) throws java.lang.InstantiationException;
+  public void serverAcceptedTCPConnection(ikrs.yuccasrv.socketmngr.BindManager, java.util.UUID, java.net.Socket, ikrs.yuccasrv.ConnectionUserID<ikrs.yuccasrv.ConnectionUserID>);
+  public void finalize(long, java.util.concurrent.TimeUnit);
+  protected void perform_hexdumpFormat(java.lang.String);
+  protected void perform_status();
+  static {};
+}
+Compiled from "HTTPHeaderLine.java"
+public final class ikrs.httpd.HTTPHeaderLine extends ikrs.util.KeyValueStringPair implements java.lang.Comparable<ikrs.httpd.HTTPHeaderLine> {
+  public ikrs.httpd.HTTPHeaderLine(java.lang.String, java.lang.String);
+  public boolean isResponseStatus();
+  public int compareTo(ikrs.httpd.HTTPHeaderLine);
+  public byte[] getRawBytes(java.nio.charset.Charset);
+  public boolean equals(ikrs.httpd.HTTPHeaderLine);
+  public boolean equals(java.lang.Object);
+  public static ikrs.httpd.HTTPHeaderLine read(java.io.InputStream) throws java.io.EOFException, java.io.IOException;
+  public static ikrs.httpd.HTTPHeaderLine parse(java.lang.String);
+  public java.lang.String toString();
+  public int compareTo(java.lang.Object);
+}
+Compiled from "HTTPHeaders.java"
+public class ikrs.httpd.HTTPHeaders {
+  public static final java.lang.String NAME_ACCEPT;
+  public static final java.lang.String NAME_ACCEPT_CHARSET;
+  public static final java.lang.String NAME_ACCEPT_ENCODING;
+  public static final java.lang.String NAME_ACCEPT_LANGUAGE;
+  public static final java.lang.String NAME_CONNECTION;
+  public static final java.lang.String NAME_CONTENT_DISPOSITION;
+  public static final java.lang.String NAME_CONTENT_LENGTH;
+  public static final java.lang.String NAME_CONTENT_RANGE;
+  public static final java.lang.String NAME_CONTENT_TYPE;
+  public static final java.lang.String NAME_COOKIE;
+  public static final java.lang.String NAME_HOST;
+  public static final java.lang.String NAME_REFERER;
+  public static final java.lang.String NAME_USER_AGENT;
+  public static final java.lang.String NAME_ALLOW;
+  public static final java.lang.String NAME_WWW_AUTHENTICATE;
+  public ikrs.httpd.HTTPHeaders();
+  public java.lang.String getStringValue(java.lang.String);
+  public java.lang.Long getLongValue(java.lang.String);
+  public boolean isGETRequest();
+  public boolean isPOSTRequest();
+  public boolean isOPTIONSRequest();
+  public boolean isHEADRequest();
+  public boolean isTRACERequest();
+  public boolean replaceResponseLine(ikrs.httpd.HTTPHeaderLine) throws java.lang.NullPointerException, ikrs.httpd.HeaderFormatException;
+  public java.util.Set<ikrs.httpd.HTTPHeaderLine> getAll(java.lang.String) throws java.lang.NullPointerException;
+  public ikrs.httpd.HTTPHeaderLine get(java.lang.String) throws java.lang.NullPointerException;
+  public boolean add(java.lang.String, java.lang.String) throws java.lang.NullPointerException;
+  public boolean add(ikrs.httpd.HTTPHeaderLine) throws java.lang.NullPointerException;
+  public boolean add(ikrs.httpd.HTTPHeaderLine, boolean);
+  public boolean remove(java.lang.String) throws java.lang.NullPointerException;
+  public int removeAll(java.lang.String) throws java.lang.NullPointerException;
+  public int replaceAll(ikrs.httpd.HTTPHeaderLine) throws java.lang.NullPointerException;
+  public ikrs.httpd.HTTPHeaderLine get(int) throws java.lang.IndexOutOfBoundsException;
+  public java.util.Iterator<ikrs.httpd.HTTPHeaderLine> iterator();
+  public int size();
+  public java.lang.String getRequestMethod();
+  public java.lang.String getRequestProtocol();
+  public java.lang.String getRequestVersion();
+  public java.lang.String getRequestURI();
+  public java.lang.String getResponseStatus();
+  public java.lang.String getResponseReasonPhrase();
+  public static ikrs.httpd.HTTPHeaders read(java.io.InputStream) throws java.io.EOFException, java.io.IOException;
+  public java.lang.String toString();
+  public java.lang.StringBuffer toString(java.lang.StringBuffer);
+}
+Compiled from "HTTPLogger.java"
+public class ikrs.httpd.HTTPLogger extends ikrs.util.DefaultCustomLogger {
+  public ikrs.httpd.HTTPLogger(java.lang.String, ikrs.httpd.HTTPHandler);
+  public void log(java.util.logging.Level, java.lang.String, java.lang.String);
+}
+Compiled from "HTTPPackage.java"
+public interface ikrs.httpd.HTTPPackage {
+  public abstract ikrs.httpd.HTTPHeaders getHeaders();
+}
+Compiled from "HTTPRequestDistributor.java"
+public class ikrs.httpd.HTTPRequestDistributor implements java.lang.Runnable {
+  public ikrs.httpd.HTTPRequestDistributor(ikrs.httpd.HTTPHandler, ikrs.util.CustomLogger, java.util.UUID, java.net.Socket, ikrs.httpd.HTTPConnectionUserID) throws java.lang.NullPointerException;
+  public java.util.UUID getSocketID();
+  public java.net.Socket getSocket();
+  public ikrs.httpd.HTTPConnectionUserID getConnectionUserID();
+  public void run();
+}
+Compiled from "HTTPServerThread.java"
+public class ikrs.httpd.HTTPServerThread extends java.lang.Thread implements java.lang.Runnable {
+  public ikrs.httpd.HTTPServerThread(ikrs.httpd.HTTPHandler, ikrs.util.CustomLogger, java.lang.Runnable);
+  public void run();
+}
+Compiled from "HTTPServerThreadFactory.java"
+public class ikrs.httpd.HTTPServerThreadFactory implements java.util.concurrent.ThreadFactory {
+  public ikrs.httpd.HTTPServerThreadFactory(ikrs.httpd.HTTPHandler, ikrs.util.CustomLogger);
+  public ikrs.httpd.HTTPServerThread newThread(java.lang.Runnable);
+  public java.lang.Thread newThread(java.lang.Runnable);
+}
+Compiled from "HeaderFormatException.java"
+public class ikrs.httpd.HeaderFormatException extends ikrs.httpd.HTTPException {
+  public ikrs.httpd.HeaderFormatException(java.lang.String);
+  public ikrs.httpd.HeaderFormatException(java.lang.String, ikrs.httpd.HTTPHeaderLine);
+  public ikrs.httpd.HTTPHeaderLine getHeaderLine();
+}
+Compiled from "MD5.java"
+public class ikrs.httpd.MD5 {
+  public static final java.lang.String IDENTIFIER_STRING;
+  public static boolean isIKRSMD5(java.lang.String) throws java.lang.NullPointerException;
+  public static java.lang.String[] splitIKRSMD5(java.lang.String) throws java.lang.NumberFormatException;
+  public static java.lang.String ikrsMD5(java.lang.String, java.lang.String, java.lang.String, char[]) throws java.security.NoSuchAlgorithmException, java.io.UnsupportedEncodingException;
+  public static byte[] md5(byte[]) throws java.security.NoSuchAlgorithmException;
+  public static void main(java.lang.String[]);
+}
+Compiled from "MalformedRequestException.java"
+public class ikrs.httpd.MalformedRequestException extends ikrs.httpd.HTTPException {
+  public ikrs.httpd.MalformedRequestException(java.lang.String);
+}
+Compiled from "MissingParamException.java"
+public class ikrs.httpd.MissingParamException extends ikrs.httpd.HTTPException {
+  public ikrs.httpd.MissingParamException(java.lang.String);
+}
+Compiled from "ModuleCommand.java"
+public class ikrs.httpd.ModuleCommand extends ikrs.util.DefaultCommand {
+  public static final java.lang.String COMMAND_HEXDUMP;
+  public static final java.lang.String COMMAND_STATUS;
+  public ikrs.httpd.ModuleCommand(java.lang.String, ikrs.typesystem.BasicType[], int);
+  public int getOffset();
+  public int execute();
+}
+Compiled from "ModuleCommandFactory.java"
+public class ikrs.httpd.ModuleCommandFactory extends ikrs.util.DefaultCommandFactory {
+  public ikrs.httpd.ModuleCommandFactory();
+  public ikrs.httpd.ModuleCommand make(java.lang.String, ikrs.typesystem.BasicType[]) throws ikrs.util.UnknownCommandException, ikrs.util.CommandStringIncompleteException;
+  public ikrs.util.Command make(java.lang.String, ikrs.typesystem.BasicType[]) throws ikrs.util.UnknownCommandException, ikrs.util.CommandStringIncompleteException;
+}
+Compiled from "ParametrizedHTTPException.java"
+public class ikrs.httpd.ParametrizedHTTPException extends ikrs.httpd.HTTPException {
+  public ikrs.httpd.ParametrizedHTTPException(java.lang.String, int, java.lang.String);
+  public ikrs.httpd.ParametrizedHTTPException(java.lang.String, java.lang.Throwable, int, java.lang.String);
+  public int getStatusCode();
+  public java.lang.String getReasonPhrase();
+}
+Compiled from "PostDataWrapper.java"
+public interface ikrs.httpd.PostDataWrapper {
+  public abstract ikrs.httpd.HTTPHeaders getRequestHeaders();
+  public abstract long getContentLength();
+  public abstract java.io.InputStream getInputStream();
+  public abstract long getBytePosition();
+  public abstract ikrs.httpd.datatype.FormData readFormData() throws java.io.IOException, ikrs.httpd.HeaderFormatException, ikrs.httpd.DataFormatException, ikrs.httpd.UnsupportedFormatException;
+}
+Compiled from "PreparedHTTPResponse.java"
+public interface ikrs.httpd.PreparedHTTPResponse {
+  public abstract void prepare(java.util.Map<java.lang.String, ikrs.typesystem.BasicType>) throws ikrs.httpd.MalformedRequestException, ikrs.httpd.UnsupportedVersionException, ikrs.httpd.UnsupportedMethodException, ikrs.httpd.UnknownMethodException, ikrs.httpd.ConfigurationException, java.util.MissingResourceException, ikrs.httpd.AuthorizationException, ikrs.httpd.HeaderFormatException, ikrs.httpd.DataFormatException, ikrs.httpd.UnsupportedFormatException, ikrs.httpd.ParametrizedHTTPException, java.lang.SecurityException, java.io.IOException;
+  public abstract void execute() throws java.io.IOException;
+  public abstract void dispose();
+  public abstract boolean isPrepared();
+  public abstract boolean isExecuted();
+  public abstract boolean isDisposed();
+}
+Compiled from "ReadOnlyException.java"
+public class ikrs.httpd.ReadOnlyException extends java.io.IOException {
+  public ikrs.httpd.ReadOnlyException(java.lang.String);
+}
+Compiled from "Resource.java"
+public interface ikrs.httpd.Resource {
+  public abstract ikrs.httpd.ResourceMetaData getMetaData();
+  public abstract ikrs.io.fileio.htaccess.HypertextAccessFile getHypertextAccessFile();
+  public abstract java.util.concurrent.locks.ReentrantReadWriteLock$ReadLock getReadLock();
+  public abstract java.util.concurrent.locks.ReentrantReadWriteLock$WriteLock getWriteLock();
+  public abstract void open(boolean) throws java.io.IOException;
+  public abstract boolean isOpen() throws java.io.IOException;
+  public abstract boolean isReadOnly() throws java.io.IOException;
+  public abstract long getLength() throws java.io.IOException;
+  public abstract java.io.OutputStream getOutputStream() throws ikrs.httpd.ReadOnlyException, java.io.IOException;
+  public abstract java.io.InputStream getInputStream() throws java.io.IOException;
+  public abstract boolean close() throws java.io.IOException;
+}
+Compiled from "ResourceAccessor.java"
+public interface ikrs.httpd.ResourceAccessor {
+  public abstract ikrs.httpd.Resource locate(java.net.URI, ikrs.httpd.HTTPHeaders, ikrs.httpd.PostDataWrapper, java.util.Map<java.lang.String, ikrs.typesystem.BasicType>, java.util.Map<java.lang.String, ikrs.typesystem.BasicType>, java.util.UUID) throws java.util.MissingResourceException, ikrs.httpd.AuthorizationException, ikrs.httpd.HeaderFormatException, ikrs.httpd.DataFormatException, ikrs.httpd.UnsupportedFormatException, ikrs.httpd.ConfigurationException, java.lang.SecurityException, java.io.IOException;
+}
+Compiled from "ResourceMetaData.java"
+public class ikrs.httpd.ResourceMetaData {
+  public ikrs.httpd.ResourceMetaData();
+  public void setMIMEType(ikrs.util.MIMEType);
+  public ikrs.util.MIMEType getMIMEType();
+  public ikrs.httpd.HTTPHeaders getOverrideHeaders();
+  public void setLastModified(java.util.Date);
+  public java.util.Date getLastModified();
+  public void setCharsetName(java.lang.String);
+  public java.lang.String getCharsetName();
+}
+Compiled from "ResponseBuilder.java"
+public interface ikrs.httpd.ResponseBuilder {
+  public abstract ikrs.httpd.PreparedHTTPResponse create(ikrs.httpd.HTTPHeaders, ikrs.httpd.PostDataWrapper, java.util.UUID, java.net.Socket, java.util.UUID, java.util.Map<java.lang.String, ikrs.typesystem.BasicType>);
+}
+Compiled from "Run.java"
+public class ikrs.httpd.Run {
+  public ikrs.httpd.Run();
+  public static void main(java.lang.String[]);
+}
+Compiled from "UnknownMethodException.java"
+public class ikrs.httpd.UnknownMethodException extends ikrs.httpd.MalformedRequestException {
+  public ikrs.httpd.UnknownMethodException(java.lang.String);
+}
+Compiled from "UnsupportedFormatException.java"
+public class ikrs.httpd.UnsupportedFormatException extends ikrs.httpd.HTTPException {
+  public ikrs.httpd.UnsupportedFormatException(java.lang.String);
+  public ikrs.httpd.UnsupportedFormatException(java.lang.String, java.lang.Throwable);
+}
+Compiled from "UnsupportedMethodException.java"
+public class ikrs.httpd.UnsupportedMethodException extends ikrs.httpd.HTTPException {
+  public ikrs.httpd.UnsupportedMethodException(java.lang.String, java.lang.String);
+}
+Compiled from "UnsupportedVersionException.java"
+public class ikrs.httpd.UnsupportedVersionException extends ikrs.httpd.HTTPException {
+  public ikrs.httpd.UnsupportedVersionException(java.lang.String);
+}
+Compiled from "AbstractFormData.java"
+public abstract class ikrs.httpd.datatype.AbstractFormData implements ikrs.httpd.datatype.FormData {
+  public ikrs.httpd.datatype.AbstractFormData();
+  protected ikrs.httpd.datatype.AbstractFormData(java.lang.String);
+  public abstract ikrs.httpd.datatype.FormDataItem get(java.lang.String);
+  public abstract ikrs.httpd.datatype.FormDataItem get(int) throws java.lang.ArrayIndexOutOfBoundsException;
+  public abstract java.util.Set<java.lang.String> keySet();
+  public abstract int size();
+  public abstract void add(ikrs.httpd.datatype.FormDataItem) throws java.lang.NullPointerException;
+  public java.lang.String getMultipartBoundary();
+  protected void setMultipartBoundary(java.lang.String);
+}
+Compiled from "DefaultFormData.java"
+public class ikrs.httpd.datatype.DefaultFormData extends ikrs.httpd.datatype.AbstractFormData {
+  public ikrs.httpd.datatype.DefaultFormData();
+  public ikrs.httpd.datatype.DefaultFormData(java.lang.String);
+  public ikrs.httpd.datatype.FormDataItem get(java.lang.String);
+  public ikrs.httpd.datatype.FormDataItem get(int) throws java.lang.ArrayIndexOutOfBoundsException;
+  public java.util.Set<java.lang.String> keySet();
+  public int size();
+  public void add(ikrs.httpd.datatype.FormDataItem) throws java.lang.NullPointerException;
+}
+Compiled from "FormData.java"
+public interface ikrs.httpd.datatype.FormData {
+  public abstract ikrs.httpd.datatype.FormDataItem get(java.lang.String) throws java.lang.NullPointerException;
+  public abstract ikrs.httpd.datatype.FormDataItem get(int) throws java.lang.ArrayIndexOutOfBoundsException;
+  public abstract java.util.Set<java.lang.String> keySet();
+  public abstract int size();
+  public abstract void add(ikrs.httpd.datatype.FormDataItem) throws java.lang.NullPointerException;
+  public abstract java.lang.String getMultipartBoundary();
+}
+Compiled from "FormDataItem.java"
+public class ikrs.httpd.datatype.FormDataItem {
+  public ikrs.httpd.datatype.FormDataItem(ikrs.httpd.HTTPHeaders, java.io.InputStream);
+  public ikrs.httpd.HTTPHeaders getHeaders();
+  public java.io.InputStream getInputStream();
+  public java.lang.String toString();
+  public java.lang.StringBuffer toString(java.lang.StringBuffer);
+}
+Compiled from "HeaderParams.java"
+public class ikrs.httpd.datatype.HeaderParams {
+  public ikrs.httpd.datatype.HeaderParams(java.lang.String, java.lang.String) throws java.lang.NullPointerException;
+  public java.lang.String getMainToken();
+  public int getLevelCount();
+  public int getSublevelCount(int);
+  public int getSublevelCount(int, int);
+  public java.lang.String getToken(int, int);
+  public java.lang.String getToken(java.lang.String, boolean, int, int);
+  public java.lang.String getToken(int, int, int);
+  public java.lang.String getTokenValue(java.lang.String, java.lang.String, boolean);
+  public java.lang.String getTokenValue(java.lang.String, java.lang.String, boolean, int);
+  public static void parse(java.lang.String, java.util.List<java.util.List<java.util.List<java.lang.String>>>) throws java.lang.NullPointerException;
+  public java.lang.String toString();
+  public static void main(java.lang.String[]);
+}
+Compiled from "Query.java"
+public class ikrs.httpd.datatype.Query {
+  public ikrs.httpd.datatype.Query(java.lang.String) throws java.lang.NullPointerException, java.io.UnsupportedEncodingException;
+  public ikrs.httpd.datatype.Query(java.lang.String, java.lang.String, boolean) throws java.lang.NullPointerException, java.io.UnsupportedEncodingException;
+  public java.lang.String getParam(java.lang.String);
+  public java.lang.String addParam(java.lang.String, java.lang.String) throws java.lang.NullPointerException;
+  public java.util.Set<java.lang.String> keySet();
+  public int size();
+  public java.util.Iterator<java.lang.String> keyIterator();
+  public java.lang.String toString();
+  public static void parse(java.lang.String, java.lang.String, java.util.Map<java.lang.String, java.lang.String>) throws java.lang.NullPointerException, java.io.UnsupportedEncodingException;
+  public static void main(java.lang.String[]);
+}
+Compiled from "CGIHandler.java"
+public abstract class ikrs.httpd.filehandler.CGIHandler extends ikrs.httpd.AbstractFileHandler {
+  public static final java.lang.String CGI_ENV_AUTH_TYPE;
+  public static final java.lang.String CGI_ENV_CONTENT_LENGTH;
+  public static final java.lang.String CGI_ENV_CONTENT_TYPE;
+  public static final java.lang.String CGI_ENV_DOCUMENT_ROOT;
+  public static final java.lang.String CGI_ENV_GATEWAY_INTERFACE;
+  public static final java.lang.String CGI_ENV_PATH_INFO;
+  public static final java.lang.String CGI_ENV_PATH_TRANSLATED;
+  public static final java.lang.String CGI_ENV_QUERY_STRING;
+  public static final java.lang.String CGI_ENV_REMOTE_ADDR;
+  public static final java.lang.String CGI_ENV_REMOTE_HOST;
+  public static final java.lang.String CGI_ENV_REMOTE_IDENT;
+  public static final java.lang.String CGI_ENV_REMOTE_USER;
+  public static final java.lang.String CGI_ENV_REQUEST_METHOD;
+  public static final java.lang.String CGI_ENV_REQUEST_URI;
+  public static final java.lang.String CGI_ENV_SCRIPT_FILENAME;
+  public static final java.lang.String CGI_ENV_SCRIPT_NAME;
+  public static final java.lang.String CGI_ENV_SERVER_NAME;
+  public static final java.lang.String CGI_ENV_SERVER_PORT;
+  public static final java.lang.String CGI_ENV_SERVER_PROTOCOL;
+  public static final java.lang.String CGI_ENV_SERVER_SOFTWARE;
+  public static final java.lang.String CGI_ENV_HTTP_;
+  public ikrs.httpd.filehandler.CGIHandler() throws java.lang.NullPointerException;
+  protected java.util.Set<java.lang.String> getDefaultIncludeHeadersSet();
+  public abstract java.util.List<java.lang.String> buildCGISystemCommand(ikrs.httpd.HTTPHeaders, ikrs.httpd.PostDataWrapper, java.io.File, java.net.URI);
+  public abstract void buildAdditionalCGIEnvironmentVars(ikrs.httpd.HTTPHeaders, java.io.File, java.net.URI, java.util.Map<java.lang.String, java.lang.String>);
+  public abstract ikrs.httpd.Resource handleCGIOutput(ikrs.httpd.HTTPHeaders, java.io.File, java.net.URI, ikrs.httpd.PostDataWrapper, ikrs.httpd.resource.ProcessableResource) throws java.io.IOException;
+  public boolean requiresExistingFile();
+  public ikrs.httpd.Resource process(java.util.UUID, ikrs.httpd.HTTPHeaders, ikrs.httpd.PostDataWrapper, java.io.File, java.net.URI) throws java.io.IOException, ikrs.httpd.HeaderFormatException, ikrs.httpd.DataFormatException, ikrs.httpd.UnsupportedFormatException;
+}
+Compiled from "IkarosExampleHandler.java"
+public class ikrs.httpd.filehandler.IkarosExampleHandler extends ikrs.httpd.AbstractFileHandler {
+  public ikrs.httpd.filehandler.IkarosExampleHandler();
+  public boolean requiresExistingFile();
+  public ikrs.httpd.Resource process(java.util.UUID, ikrs.httpd.HTTPHeaders, ikrs.httpd.PostDataWrapper, java.io.File, java.net.URI) throws java.io.IOException, ikrs.httpd.HeaderFormatException, ikrs.httpd.DataFormatException, ikrs.httpd.UnsupportedFormatException;
+}
+Compiled from "PHPDirectoryResource.java"
+public class ikrs.httpd.filehandler.PHPDirectoryResource extends ikrs.httpd.resource.AbstractDirectoryResource {
+  public ikrs.httpd.filehandler.PHPDirectoryResource(ikrs.httpd.HTTPHandler, ikrs.util.CustomLogger, ikrs.httpd.HTTPFileFilter, java.io.File, java.net.URI, java.util.UUID, java.lang.String, boolean) throws java.lang.NullPointerException;
+  public void generateDirectoryListing(java.util.UUID, java.io.OutputStream) throws java.io.IOException;
+  public ikrs.util.MIMEType getDirectoryListingType();
+}
+Compiled from "PHPHandler.java"
+public class ikrs.httpd.filehandler.PHPHandler extends ikrs.httpd.filehandler.CGIHandler {
+  public ikrs.httpd.filehandler.PHPHandler() throws java.lang.NullPointerException;
+  public java.util.List<java.lang.String> buildCGISystemCommand(ikrs.httpd.HTTPHeaders, ikrs.httpd.PostDataWrapper, java.io.File, java.net.URI);
+  public void buildAdditionalCGIEnvironmentVars(ikrs.httpd.HTTPHeaders, java.io.File, java.net.URI, java.util.Map<java.lang.String, java.lang.String>);
+  public ikrs.httpd.Resource handleCGIOutput(ikrs.httpd.HTTPHeaders, java.io.File, java.net.URI, ikrs.httpd.PostDataWrapper, ikrs.httpd.resource.ProcessableResource) throws java.io.IOException;
+}
+Compiled from "AbstractDirectoryResource.java"
+public abstract class ikrs.httpd.resource.AbstractDirectoryResource extends ikrs.httpd.resource.AbstractResource implements ikrs.httpd.resource.DirectoryResource {
+  public ikrs.httpd.resource.AbstractDirectoryResource(ikrs.httpd.HTTPHandler, ikrs.util.CustomLogger, ikrs.httpd.HTTPFileFilter, java.io.File, java.net.URI, java.util.UUID, boolean) throws java.lang.NullPointerException;
+  public abstract void generateDirectoryListing(java.util.UUID, java.io.OutputStream) throws java.io.IOException;
+  public abstract ikrs.util.MIMEType getDirectoryListingType();
+  public java.io.File getDirectoryFile();
+  public java.net.URI getRequestURI();
+  public java.text.DateFormat getDateFormat();
+  public ikrs.httpd.HTTPFileFilter getFileFilter();
+  public boolean isOpen() throws java.io.IOException;
+  public void open(boolean) throws ikrs.httpd.ReadOnlyException, java.io.IOException;
+  public boolean isReadOnly() throws java.io.IOException;
+  public long getLength() throws java.io.IOException;
+  public java.io.OutputStream getOutputStream() throws ikrs.httpd.ReadOnlyException, java.io.IOException;
+  public java.io.InputStream getInputStream() throws java.io.IOException;
+  public boolean close() throws java.io.IOException;
+}
+Compiled from "AbstractResource.java"
+public abstract class ikrs.httpd.resource.AbstractResource implements ikrs.httpd.Resource {
+  public ikrs.httpd.resource.AbstractResource(ikrs.httpd.HTTPHandler, ikrs.util.CustomLogger, boolean);
+  public ikrs.httpd.HTTPHandler getHTTPHandler();
+  public ikrs.util.CustomLogger getLogger();
+  protected void setHypertextAccessFile(ikrs.io.fileio.htaccess.HypertextAccessFile);
+  public ikrs.httpd.ResourceMetaData getMetaData();
+  public ikrs.io.fileio.htaccess.HypertextAccessFile getHypertextAccessFile();
+  public java.util.concurrent.locks.ReentrantReadWriteLock$ReadLock getReadLock();
+  public java.util.concurrent.locks.ReentrantReadWriteLock$WriteLock getWriteLock();
+  public abstract void open(boolean) throws java.io.IOException;
+  public abstract boolean isOpen() throws java.io.IOException;
+  public abstract boolean isReadOnly() throws java.io.IOException;
+  public abstract long getLength() throws java.io.IOException;
+  public abstract java.io.OutputStream getOutputStream() throws ikrs.httpd.ReadOnlyException, java.io.IOException;
+  public abstract java.io.InputStream getInputStream() throws java.io.IOException;
+  public abstract boolean close() throws java.io.IOException;
+}
+Compiled from "AbstractResourceAccessor.java"
+public abstract class ikrs.httpd.resource.AbstractResourceAccessor implements ikrs.httpd.ResourceAccessor {
+  public ikrs.httpd.resource.AbstractResourceAccessor(ikrs.httpd.HTTPHandler);
+  public ikrs.httpd.HTTPHandler getHTTPHandler();
+  public abstract ikrs.httpd.Resource locate(java.net.URI, ikrs.httpd.HTTPHeaders, ikrs.httpd.PostDataWrapper, java.util.Map<java.lang.String, ikrs.typesystem.BasicType>, java.util.Map<java.lang.String, ikrs.typesystem.BasicType>, java.util.UUID) throws java.util.MissingResourceException, ikrs.httpd.AuthorizationException, ikrs.httpd.HeaderFormatException, ikrs.httpd.DataFormatException, ikrs.httpd.UnsupportedFormatException, ikrs.httpd.ConfigurationException, java.lang.SecurityException, java.io.IOException;
+}
+Compiled from "BufferedResource.java"
+public class ikrs.httpd.resource.BufferedResource extends ikrs.httpd.resource.AbstractResource {
+  public ikrs.httpd.resource.BufferedResource(ikrs.httpd.HTTPHandler, ikrs.util.CustomLogger, java.io.InputStream, boolean) throws java.lang.NullPointerException;
+  public void open(boolean) throws ikrs.httpd.ReadOnlyException, java.io.IOException;
+  public boolean isOpen() throws java.io.IOException;
+  public boolean isReadOnly() throws java.io.IOException;
+  public long getLength() throws java.io.IOException;
+  public java.io.OutputStream getOutputStream() throws ikrs.httpd.ReadOnlyException, java.io.IOException;
+  public java.io.InputStream getInputStream() throws java.io.IOException;
+  public boolean close() throws java.io.IOException;
+}
+Compiled from "ByteArrayResource.java"
+public class ikrs.httpd.resource.ByteArrayResource extends ikrs.httpd.resource.AbstractResource implements ikrs.httpd.Resource {
+  public ikrs.httpd.resource.ByteArrayResource(ikrs.httpd.HTTPHandler, ikrs.util.CustomLogger, byte[], boolean) throws java.lang.NullPointerException;
+  public ikrs.httpd.resource.ByteArrayResource(ikrs.httpd.HTTPHandler, ikrs.util.CustomLogger, byte[], int, int, boolean) throws java.lang.NullPointerException;
+  public boolean isOpen() throws java.io.IOException;
+  public void open(boolean) throws ikrs.httpd.ReadOnlyException, java.io.IOException;
+  public boolean isReadOnly() throws java.io.IOException;
+  public long getLength() throws java.io.IOException;
+  public java.io.OutputStream getOutputStream() throws ikrs.httpd.ReadOnlyException, java.io.IOException;
+  public java.io.InputStream getInputStream() throws java.io.IOException;
+  public boolean close() throws java.io.IOException;
+}
+Compiled from "DefaultDirectoryResource.java"
+public class ikrs.httpd.resource.DefaultDirectoryResource extends ikrs.httpd.resource.AbstractDirectoryResource {
+  public ikrs.httpd.resource.DefaultDirectoryResource(ikrs.httpd.HTTPHandler, ikrs.util.CustomLogger, ikrs.httpd.HTTPFileFilter, java.io.File, java.net.URI, java.util.UUID, java.lang.String, boolean) throws java.lang.NullPointerException;
+  public void generateDirectoryListing(java.util.UUID, java.io.OutputStream) throws java.io.IOException;
+  public ikrs.util.MIMEType getDirectoryListingType();
+}
+Compiled from "DirectoryResource.java"
+public interface ikrs.httpd.resource.DirectoryResource extends ikrs.httpd.Resource {
+  public abstract void generateDirectoryListing(java.util.UUID, java.io.OutputStream) throws java.io.IOException;
+  public abstract ikrs.util.MIMEType getDirectoryListingType();
+}
+Compiled from "FileResource.java"
+public class ikrs.httpd.resource.FileResource extends ikrs.httpd.resource.AbstractResource implements ikrs.httpd.Resource {
+  public ikrs.httpd.resource.FileResource(ikrs.httpd.HTTPHandler, ikrs.util.CustomLogger, java.io.File, boolean);
+  public boolean isOpen() throws java.io.IOException;
+  public void open(boolean) throws ikrs.httpd.ReadOnlyException, java.io.IOException;
+  public boolean isReadOnly() throws java.io.IOException;
+  public long getLength() throws java.io.IOException;
+  public java.io.OutputStream getOutputStream() throws ikrs.httpd.ReadOnlyException, java.io.IOException;
+  public java.io.InputStream getInputStream() throws java.io.IOException;
+  public boolean close() throws java.io.IOException;
+}
+Compiled from "FileSystemResourceAccessor.java"
+public class ikrs.httpd.resource.FileSystemResourceAccessor extends ikrs.httpd.resource.AbstractResourceAccessor implements ikrs.httpd.ResourceAccessor {
+  public ikrs.httpd.resource.FileSystemResourceAccessor(ikrs.httpd.HTTPHandler, ikrs.util.CustomLogger);
+  public ikrs.httpd.Resource locate(java.net.URI, ikrs.httpd.HTTPHeaders, ikrs.httpd.PostDataWrapper, java.util.Map<java.lang.String, ikrs.typesystem.BasicType>, java.util.Map<java.lang.String, ikrs.typesystem.BasicType>, java.util.UUID) throws java.util.MissingResourceException, ikrs.httpd.AuthorizationException, ikrs.httpd.HeaderFormatException, ikrs.httpd.DataFormatException, ikrs.httpd.UnsupportedFormatException, ikrs.httpd.ConfigurationException, java.lang.SecurityException, java.io.IOException;
+  public boolean isAccessible(java.io.File, java.net.URI);
+}
+Compiled from "HypertextAccessHandler.java"
+public class ikrs.httpd.resource.HypertextAccessHandler {
+  public ikrs.httpd.resource.HypertextAccessHandler(ikrs.util.CustomLogger, boolean);
+  public boolean isStrictMode();
+  public boolean accessGranted(java.net.URI, ikrs.httpd.HTTPHeaders, ikrs.io.fileio.htaccess.HypertextAccessFile, java.lang.String, java.util.Map<java.lang.String, ikrs.typesystem.BasicType>, java.util.Map<java.lang.String, ikrs.typesystem.BasicType>) throws java.io.IOException, ikrs.httpd.MissingParamException, ikrs.httpd.ConfigurationException;
+}
+Compiled from "InterruptableResource.java"
+public class ikrs.httpd.resource.InterruptableResource extends ikrs.httpd.resource.AbstractResource {
+  public ikrs.httpd.resource.InterruptableResource(ikrs.httpd.HTTPHandler, ikrs.util.CustomLogger, ikrs.httpd.Resource, boolean) throws java.lang.NullPointerException;
+  public long getBytePosition();
+  public long resetBytePosition();
+  public void open(boolean) throws ikrs.httpd.ReadOnlyException, java.io.IOException;
+  public boolean isOpen() throws java.io.IOException;
+  public boolean isReadOnly() throws java.io.IOException;
+  public long getLength() throws java.io.IOException;
+  public java.io.OutputStream getOutputStream() throws ikrs.httpd.ReadOnlyException, java.io.IOException;
+  public ikrs.io.BytePositionInputStream getInputStream() throws java.io.IOException;
+  public boolean close() throws java.io.IOException;
+  public java.io.InputStream getInputStream() throws java.io.IOException;
+}
+Compiled from "ProcessableResource.java"
+public class ikrs.httpd.resource.ProcessableResource extends ikrs.httpd.resource.AbstractResource {
+  public ikrs.httpd.resource.ProcessableResource(ikrs.httpd.HTTPHandler, ikrs.util.CustomLogger, java.lang.ProcessBuilder, ikrs.httpd.PostDataWrapper, boolean) throws java.lang.NullPointerException;
+  public int getExitValue();
+  public void open(boolean) throws ikrs.httpd.ReadOnlyException, java.io.IOException;
+  public boolean isOpen() throws java.io.IOException;
+  public boolean isReadOnly() throws java.io.IOException;
+  public long getLength() throws java.io.IOException;
+  public java.io.OutputStream getOutputStream() throws ikrs.httpd.ReadOnlyException, java.io.IOException;
+  public java.io.InputStream getInputStream() throws java.io.IOException;
+  public boolean close() throws java.io.IOException;
+  public static void main(java.lang.String[]);
+}
+Compiled from "RangedResource.java"
+public class ikrs.httpd.resource.RangedResource extends ikrs.httpd.resource.ResourceDelegation {
+  public ikrs.httpd.resource.RangedResource(ikrs.httpd.Resource, ikrs.httpd.ContentRange, ikrs.httpd.HTTPHandler, ikrs.util.CustomLogger) throws java.lang.NullPointerException, java.lang.IndexOutOfBoundsException;
+  public void open(boolean) throws java.io.IOException;
+  public java.io.InputStream getInputStream() throws java.io.IOException;
+  public long getLength() throws java.io.IOException;
+  public static void main(java.lang.String[]);
+}
+Compiled from "ReplacingResource.java"
+public class ikrs.httpd.resource.ReplacingResource extends ikrs.httpd.resource.BufferedResource {
+  public ikrs.httpd.resource.ReplacingResource(ikrs.httpd.HTTPHandler, ikrs.util.CustomLogger, java.io.InputStream, boolean, java.util.Map<byte[], byte[]>) throws java.lang.NullPointerException;
+  public static void main(java.lang.String[]);
+}
+Compiled from "ResourceDelegation.java"
+public abstract class ikrs.httpd.resource.ResourceDelegation extends ikrs.httpd.resource.AbstractResource {
+  public ikrs.httpd.resource.ResourceDelegation(ikrs.httpd.Resource, ikrs.httpd.HTTPHandler, ikrs.util.CustomLogger);
+  protected ikrs.httpd.Resource getCoreResource();
+  public ikrs.httpd.ResourceMetaData getMetaData();
+  public ikrs.io.fileio.htaccess.HypertextAccessFile getHypertextAccessFile();
+  public java.util.concurrent.locks.ReentrantReadWriteLock$ReadLock getReadLock();
+  public java.util.concurrent.locks.ReentrantReadWriteLock$WriteLock getWriteLock();
+  public void open(boolean) throws java.io.IOException;
+  public boolean isOpen() throws java.io.IOException;
+  public boolean isReadOnly() throws java.io.IOException;
+  public long getLength() throws java.io.IOException;
+  public java.io.OutputStream getOutputStream() throws ikrs.httpd.ReadOnlyException, java.io.IOException;
+  public java.io.InputStream getInputStream() throws java.io.IOException;
+  public boolean close() throws java.io.IOException;
+}
+Compiled from "GeneralPreparedResponse.java"
+public class ikrs.httpd.response.GeneralPreparedResponse extends ikrs.httpd.AbstractPreparedResponse {
+  public ikrs.httpd.response.GeneralPreparedResponse(ikrs.httpd.HTTPHandler, ikrs.httpd.HTTPHeaders, java.util.UUID, java.net.Socket, java.util.UUID, int, java.lang.String) throws java.lang.IllegalArgumentException;
+  public void prepare(java.util.Map<java.lang.String, ikrs.typesystem.BasicType>) throws ikrs.httpd.MalformedRequestException, ikrs.httpd.UnsupportedVersionException, ikrs.httpd.UnsupportedMethodException, ikrs.httpd.UnknownMethodException, ikrs.httpd.ConfigurationException, java.util.MissingResourceException, ikrs.httpd.AuthorizationException, ikrs.httpd.HeaderFormatException, ikrs.httpd.DataFormatException, ikrs.httpd.UnsupportedFormatException, ikrs.httpd.ParametrizedHTTPException, java.lang.SecurityException, java.io.IOException;
+  public void dispose();
+}
+Compiled from "OK.java"
+public class ikrs.httpd.response.successful.OK extends ikrs.httpd.response.GeneralPreparedResponse {
+  public ikrs.httpd.response.successful.OK(ikrs.httpd.HTTPHandler, ikrs.httpd.HTTPHeaders, ikrs.httpd.PostDataWrapper, java.util.UUID, java.net.Socket, java.util.UUID);
+  protected ikrs.httpd.PostDataWrapper getPostData();
+  public void prepare(java.util.Map<java.lang.String, ikrs.typesystem.BasicType>) throws ikrs.httpd.MalformedRequestException, ikrs.httpd.UnsupportedVersionException, ikrs.httpd.UnsupportedMethodException, ikrs.httpd.UnknownMethodException, ikrs.httpd.ConfigurationException, java.util.MissingResourceException, ikrs.httpd.AuthorizationException, ikrs.httpd.HeaderFormatException, ikrs.httpd.DataFormatException, ikrs.httpd.UnsupportedFormatException, ikrs.httpd.ParametrizedHTTPException, java.lang.SecurityException, java.io.IOException;
+  public void dispose();
+}
+Compiled from "BytePositionInputStream.java"
+public class ikrs.io.BytePositionInputStream extends java.io.InputStream {
+  public ikrs.io.BytePositionInputStream(java.io.InputStream) throws java.lang.NullPointerException;
+  public long getBytePosition();
+  public long resetBytePosition();
+  public long getAbsoluteBytePosition();
+  public synchronized int available() throws java.io.IOException;
+  public synchronized void close() throws java.io.IOException;
+  public void mark(int);
+  public boolean markSupported();
+  public synchronized int read() throws java.io.IOException;
+  public synchronized int read(byte[]) throws java.io.IOException;
+  public synchronized int read(byte[], int, int) throws java.io.IOException;
+  public void reset() throws java.io.IOException;
+  public synchronized long skip(long) throws java.io.IOException;
+  public java.lang.String toString();
+}
+Compiled from "ByteSequenceTokenizer.java"
+public class ikrs.io.ByteSequenceTokenizer {
+  public ikrs.io.ByteSequenceTokenizer(java.io.InputStream, byte[]) throws java.lang.NullPointerException;
+  public java.io.InputStream getNextToken() throws java.io.IOException;
+  public static void main(java.lang.String[]);
+}
+Compiled from "CircularFIFO.java"
+public class ikrs.io.CircularFIFO {
+  public ikrs.io.CircularFIFO(int) throws java.lang.IllegalArgumentException;
+  public int capacity();
+  public int length();
+  public boolean isEmpty();
+  public boolean isFull();
+  public synchronized byte read() throws java.nio.BufferUnderflowException;
+  public synchronized int read(byte[], int, int);
+  public synchronized void write(byte) throws java.nio.BufferOverflowException;
+  public synchronized int write(byte[], int, int);
+  public synchronized void clear();
+  public byte peek(int) throws java.lang.IndexOutOfBoundsException;
+  public java.lang.String toString();
+  public java.lang.StringBuffer toString(java.lang.StringBuffer);
+  public static void main(java.lang.String[]);
+}
+Compiled from "MultiStopMarkInputStream.java"
+public class ikrs.io.MultiStopMarkInputStream extends java.io.InputStream {
+  public ikrs.io.MultiStopMarkInputStream(java.io.InputStream, java.util.List<byte[]>) throws java.lang.NullPointerException;
+  public ikrs.io.MultiStopMarkInputStream(java.io.InputStream, java.util.List<byte[]>, boolean) throws java.lang.NullPointerException;
+  public int read() throws java.io.IOException;
+  public int available() throws java.io.IOException;
+  public void close() throws java.io.IOException;
+  public void mark(int);
+  public boolean markSupported();
+  public void reset() throws java.io.IOException;
+  public long skip(long) throws java.io.IOException;
+  public boolean isClosed();
+  public boolean continueStream();
+  public boolean stopMarkReached();
+  public int getReachedStopMarkIndex();
+  public byte[] getReachedStopMark();
+  public boolean eoiReached();
+  public static void main(java.lang.String[]);
+}
+Compiled from "MultipartMIMETokenizer.java"
+public class ikrs.io.MultipartMIMETokenizer extends ikrs.io.ByteSequenceTokenizer {
+  public static final int CR;
+  public static final int LF;
+  public ikrs.io.MultipartMIMETokenizer(java.io.InputStream, java.lang.String) throws java.lang.NullPointerException;
+  public java.io.InputStream getNextToken() throws java.io.IOException;
+  public java.lang.String toString();
+  public static void main(java.lang.String[]);
+}
+Compiled from "ReadLimitInputStream.java"
+public class ikrs.io.ReadLimitInputStream extends ikrs.io.BytePositionInputStream {
+  public ikrs.io.ReadLimitInputStream(java.io.InputStream, long) throws java.lang.NullPointerException, java.lang.IllegalArgumentException;
+  protected long getMaxAvailable();
+  public synchronized int available() throws java.io.IOException;
+  public synchronized void close() throws java.io.IOException;
+  public void mark(int);
+  public boolean markSupported();
+  public synchronized int read() throws java.io.IOException;
+  public synchronized int read(byte[]) throws java.io.IOException;
+  public synchronized int read(byte[], int, int) throws java.io.IOException;
+  public void reset() throws java.io.IOException;
+  public synchronized long skip(long) throws java.io.IOException;
+  public java.lang.String toString();
+}
+Compiled from "ReplacingInputStream.java"
+public class ikrs.io.ReplacingInputStream extends java.io.InputStream {
+  public ikrs.io.ReplacingInputStream(java.io.InputStream, java.util.Map<byte[], byte[]>) throws java.lang.NullPointerException;
+  public int read() throws java.io.IOException;
+  public int available() throws java.io.IOException;
+  public void close() throws java.io.IOException;
+  public boolean isClosed();
+  public static void main(java.lang.String[]);
+}
+Compiled from "StopMarkInputStream.java"
+public class ikrs.io.StopMarkInputStream extends java.io.InputStream {
+  public ikrs.io.StopMarkInputStream(java.io.InputStream, byte[]) throws java.lang.NullPointerException, java.lang.IllegalArgumentException;
+  public boolean continueStream();
+  protected boolean continueStream(boolean);
+  public boolean isClosed();
+  public boolean stopMarkReached();
+  public boolean eoiReached();
+  public int available() throws java.io.IOException;
+  public void close() throws java.io.IOException;
+  public void mark(int);
+  public boolean markSupported();
+  public int read() throws java.io.IOException;
+  public void reset() throws java.io.IOException;
+  public long skip(long) throws java.io.IOException;
+  public java.lang.String toString();
+  public static void main(java.lang.String[]);
+}
+Compiled from "FileCopy.java"
+public class ikrs.io.fileio.FileCopy {
+  public static final int DEFAULT_BUFFER_SIZE;
+  public ikrs.io.fileio.FileCopy();
+  public static boolean copy(java.io.File, java.io.File) throws java.lang.NullPointerException, java.io.IOException;
+  public static long transfer(java.io.File, java.io.File, int) throws java.lang.NullPointerException, java.lang.IllegalArgumentException, java.io.IOException;
+  public static long transfer(java.io.InputStream, java.io.OutputStream, int) throws java.lang.NullPointerException, java.lang.IllegalArgumentException, java.io.IOException;
+  public static void main(java.lang.String[]);
+}
+Compiled from "HypertextAccessFile.java"
+public class ikrs.io.fileio.htaccess.HypertextAccessFile {
+  protected ikrs.io.fileio.htaccess.HypertextAccessFile();
+  public static ikrs.io.fileio.htaccess.HypertextAccessFile read(java.io.File, boolean) throws java.io.IOException, java.text.ParseException;
+  public static ikrs.io.fileio.htaccess.HypertextAccessFile read(java.io.InputStream, boolean) throws java.io.IOException, java.text.ParseException;
+  public static ikrs.io.fileio.htaccess.HypertextAccessFile read(java.io.LineNumberReader, boolean) throws java.io.IOException, java.text.ParseException;
+  public java.io.File getSourceFile();
+  public java.lang.String getAuthType();
+  public java.lang.String getAuthName();
+  public java.io.File getAuthUserFile();
+  public java.io.File getAuthGroupFile();
+  public java.util.List<java.lang.String> getRequiredGroups();
+  public java.util.List<java.lang.String> getRequiredUsers();
+  public boolean requiresValidUser();
+  public java.util.Map<java.lang.String, java.lang.String> getAddedTypes();
+  public java.util.Map<java.lang.String, java.lang.Boolean> getOptions();
+  public java.lang.String getSetHandler();
+  public java.util.Map<java.lang.String, java.util.List<java.lang.String>> getAddedHandlers();
+  public java.lang.String getDefaultCharset();
+  public java.util.Map<java.lang.String, java.lang.String> getAddedCharsets();
+  public java.util.List<java.lang.String> getDirectoryIndexList();
+  public java.util.Map<java.lang.Integer, java.lang.String> getErrorDocumentMap();
+  public void merge(ikrs.io.fileio.htaccess.HypertextAccessFile) throws java.lang.NullPointerException;
+  public java.lang.String toString();
+  public java.lang.StringBuffer toString(java.lang.StringBuffer);
+  public static void main(java.lang.String[]);
+}
+Compiled from "HypertextPasswordFile.java"
+public class ikrs.io.fileio.htaccess.HypertextPasswordFile {
+  public static char[] getPasswordData(java.io.File, java.lang.String, boolean) throws java.io.IOException, java.text.ParseException;
+  public static char[] getPasswordData(java.io.InputStream, java.lang.String, boolean) throws java.io.IOException, java.text.ParseException;
+  public static char[] getPasswordData(java.io.LineNumberReader, java.lang.String, boolean) throws java.io.IOException, java.text.ParseException;
+  public static void main(java.lang.String[]);
+}
+Compiled from "IniFile.java"
+public class ikrs.io.fileio.inifile.IniFile {
+  public ikrs.io.fileio.inifile.IniFile();
+  public ikrs.io.fileio.inifile.IniFile(java.util.Comparator<java.lang.String>) throws java.lang.NullPointerException;
+  public ikrs.io.fileio.inifile.IniFile(ikrs.util.EnvironmentFactory<java.lang.String, ikrs.typesystem.BasicType>) throws java.lang.NullPointerException;
+  public ikrs.util.Environment<java.lang.String, ikrs.typesystem.BasicType> read(java.io.File) throws java.io.IOException;
+  public void read(java.io.File, ikrs.util.Environment<java.lang.String, ikrs.typesystem.BasicType>) throws java.io.IOException;
+  public void read(java.io.BufferedReader, ikrs.util.Environment<java.lang.String, ikrs.typesystem.BasicType>) throws java.io.IOException;
+  public static void main(java.lang.String[]);
+}
+Compiled from "AbstractJSONValue.java"
+public abstract class ikrs.json.AbstractJSONValue implements ikrs.json.JSONValue {
+  protected ikrs.json.AbstractJSONValue(int) throws java.lang.IllegalArgumentException;
+  public boolean isNumber();
+  public boolean isBoolean();
+  public boolean isString();
+  public boolean isArray();
+  public boolean isObject();
+  public boolean isNull();
+  public java.lang.Number getNumber() throws ikrs.json.JSONException;
+  public java.lang.Boolean getBoolean() throws ikrs.json.JSONException;
+  public java.lang.String getString() throws ikrs.json.JSONException;
+  public java.util.List<ikrs.json.JSONValue> getArray() throws ikrs.json.JSONException;
+  public java.util.Map<java.lang.String, ikrs.json.JSONValue> getObject() throws ikrs.json.JSONException;
+  public ikrs.json.JSONBoolean asJSONBoolean() throws ikrs.json.JSONException;
+  public ikrs.json.JSONNumber asJSONNumber() throws ikrs.json.JSONException;
+  public ikrs.json.JSONString asJSONString() throws ikrs.json.JSONException;
+  public ikrs.json.JSONArray asJSONArray() throws ikrs.json.JSONException;
+  public ikrs.json.JSONObject asJSONObject() throws ikrs.json.JSONException;
+  public abstract void write(java.io.Writer) throws java.io.IOException;
+  public java.lang.String toJSONString();
+  public boolean isValidTypeID(int);
+  public java.lang.String getTypeName();
+}
+Compiled from "JSONArray.java"
+public class ikrs.json.JSONArray extends ikrs.json.AbstractJSONValue {
+  public ikrs.json.JSONArray();
+  public ikrs.json.JSONArray(java.util.List<ikrs.json.JSONValue>) throws java.lang.NullPointerException;
+  public java.util.List<ikrs.json.JSONValue> getArray() throws ikrs.json.JSONException;
+  public ikrs.json.JSONArray asJSONArray() throws ikrs.json.JSONException;
+  public ikrs.json.JSONObject asJSONObject() throws ikrs.json.JSONException;
+  public void write(java.io.Writer) throws java.io.IOException;
+  protected java.util.List<ikrs.json.JSONValue> getList();
+  public java.lang.String toString();
+}
+Compiled from "JSONBoolean.java"
+public class ikrs.json.JSONBoolean extends ikrs.json.AbstractJSONValue {
+  public ikrs.json.JSONBoolean(java.lang.Boolean) throws java.lang.NullPointerException;
+  public java.lang.Boolean getBoolean() throws ikrs.json.JSONException;
+  public ikrs.json.JSONBoolean asJSONBoolean() throws ikrs.json.JSONException;
+  public ikrs.json.JSONString asJSONString() throws ikrs.json.JSONException;
+  public ikrs.json.JSONArray asJSONArray() throws ikrs.json.JSONException;
+  public void write(java.io.Writer) throws java.io.IOException;
+  public java.lang.String toString();
+  public static java.lang.Boolean parseBoolean(java.lang.String, boolean) throws java.lang.NullPointerException, java.lang.NumberFormatException;
+  public static ikrs.json.JSONBoolean parseJSONBoolean(java.lang.String, boolean) throws java.lang.NullPointerException, ikrs.json.JSONException;
+}
+Compiled from "JSONException.java"
+public class ikrs.json.JSONException extends java.lang.Exception {
+  public ikrs.json.JSONException(java.lang.String);
+}
+Compiled from "JSONNull.java"
+public class ikrs.json.JSONNull extends ikrs.json.AbstractJSONValue {
+  public ikrs.json.JSONNull() throws java.lang.NullPointerException;
+  public void write(java.io.Writer) throws java.io.IOException;
+  public java.lang.String toString();
+}
+Compiled from "JSONNumber.java"
+public class ikrs.json.JSONNumber extends ikrs.json.AbstractJSONValue {
+  public ikrs.json.JSONNumber(java.lang.Number) throws java.lang.NullPointerException;
+  public java.lang.Number getNumber() throws ikrs.json.JSONException;
+  public ikrs.json.JSONNumber asJSONNumber() throws ikrs.json.JSONException;
+  public ikrs.json.JSONString asJSONString() throws ikrs.json.JSONException;
+  public ikrs.json.JSONArray asJSONArray() throws ikrs.json.JSONException;
+  public void write(java.io.Writer) throws java.io.IOException;
+  public java.lang.String toString();
+  public static java.lang.Number parseNumber(java.lang.String) throws java.lang.NullPointerException, java.lang.NumberFormatException;
+  public static ikrs.json.JSONNumber parseJSONNumber(java.lang.String) throws java.lang.NullPointerException, ikrs.json.JSONException;
+}
+Compiled from "JSONObject.java"
+public class ikrs.json.JSONObject extends ikrs.json.AbstractJSONValue {
+  public ikrs.json.JSONObject();
+  public ikrs.json.JSONObject(java.util.Map<java.lang.String, ikrs.json.JSONValue>) throws java.lang.NullPointerException;
+  public java.util.Map<java.lang.String, ikrs.json.JSONValue> getObject() throws ikrs.json.JSONException;
+  public ikrs.json.JSONArray asJSONArray() throws ikrs.json.JSONException;
+  public ikrs.json.JSONObject asJSONObject() throws ikrs.json.JSONException;
+  public void write(java.io.Writer) throws java.io.IOException;
+  protected java.util.Map<java.lang.String, ikrs.json.JSONValue> getMap();
+  public java.lang.String toString();
+  public static void main(java.lang.String[]);
+}
+Compiled from "JSONString.java"
+public class ikrs.json.JSONString extends ikrs.json.AbstractJSONValue {
+  public ikrs.json.JSONString(java.lang.String) throws java.lang.NullPointerException;
+  public java.lang.String getString() throws ikrs.json.JSONException;
+  public ikrs.json.JSONBoolean asJSONBoolean() throws ikrs.json.JSONException;
+  public ikrs.json.JSONNumber asJSONNumber() throws ikrs.json.JSONException;
+  public ikrs.json.JSONString asJSONString() throws ikrs.json.JSONException;
+  public ikrs.json.JSONArray asJSONArray() throws ikrs.json.JSONException;
+  public void write(java.io.Writer) throws java.io.IOException;
+  public java.lang.String toString();
+  public static void writeJSON(java.io.Writer, java.lang.String) throws java.io.IOException;
+}
+Compiled from "JSONValue.java"
+public interface ikrs.json.JSONValue {
+  public static final ikrs.json.JSONNull NULL;
+  public static final ikrs.json.JSONBoolean TRUE;
+  public static final ikrs.json.JSONBoolean FALSE;
+  public static final int TYPE_NULL;
+  public static final int TYPE_NUMBER;
+  public static final int TYPE_BOOLEAN;
+  public static final int TYPE_STRING;
+  public static final int TYPE_ARRAY;
+  public static final int TYPE_OBJECT;
+  public abstract boolean isNull();
+  public abstract boolean isNumber();
+  public abstract boolean isBoolean();
+  public abstract boolean isString();
+  public abstract boolean isArray();
+  public abstract boolean isObject();
+  public abstract java.lang.Number getNumber() throws ikrs.json.JSONException;
+  public abstract java.lang.Boolean getBoolean() throws ikrs.json.JSONException;
+  public abstract java.lang.String getString() throws ikrs.json.JSONException;
+  public abstract java.util.List<ikrs.json.JSONValue> getArray() throws ikrs.json.JSONException;
+  public abstract java.util.Map<java.lang.String, ikrs.json.JSONValue> getObject() throws ikrs.json.JSONException;
+  public abstract ikrs.json.JSONBoolean asJSONBoolean() throws ikrs.json.JSONException;
+  public abstract ikrs.json.JSONNumber asJSONNumber() throws ikrs.json.JSONException;
+  public abstract ikrs.json.JSONString asJSONString() throws ikrs.json.JSONException;
+  public abstract ikrs.json.JSONArray asJSONArray() throws ikrs.json.JSONException;
+  public abstract ikrs.json.JSONObject asJSONObject() throws ikrs.json.JSONException;
+  public abstract void write(java.io.Writer) throws java.io.IOException;
+  public abstract java.lang.String toJSONString();
+  static {};
+}
+Compiled from "ConfigurableJSONBuilder.java"
+public class ikrs.json.parser.ConfigurableJSONBuilder extends ikrs.json.parser.JSONParser {
+  public ikrs.json.parser.ConfigurableJSONBuilder(java.io.Reader, ikrs.json.parser.JSONValueFactory) throws java.lang.NullPointerException;
+  public ikrs.json.parser.ConfigurableJSONBuilder(java.io.Reader, boolean, ikrs.json.parser.JSONValueFactory) throws java.lang.NullPointerException;
+  protected void fireJSONBegin();
+  protected void fireJSONEnd();
+  protected void fireArrayBegin();
+  protected void fireArrayElementEnd();
+  protected void fireArrayEnd();
+  protected void fireObjectBegin();
+  protected void fireObjectEnd();
+  protected void fireMemberBegin();
+  protected void fireMemberNameRead(java.lang.String);
+  protected void fireMemberEnd();
+  protected void fireNumberRead(java.lang.String);
+  protected void fireStringRead(java.lang.String);
+  protected void fireTrueRead(java.lang.String);
+  protected void fireFalseRead(java.lang.String);
+  protected void fireNullRead(java.lang.String);
+  public ikrs.json.JSONValue getResult();
+  public static void main(java.lang.String[]);
+}
+Compiled from "DefaultJSONValueFactory.java"
+public class ikrs.json.parser.DefaultJSONValueFactory implements ikrs.json.parser.JSONValueFactory {
+  public ikrs.json.parser.DefaultJSONValueFactory();
+  public ikrs.json.JSONNumber createNumber(java.lang.Number);
+  public ikrs.json.JSONNumber createNumber(java.lang.Number, int);
+  public ikrs.json.JSONNumber createNumber(java.lang.Number, java.lang.String);
+  public ikrs.json.JSONBoolean createBoolean(java.lang.Boolean);
+  public ikrs.json.JSONBoolean createBoolean(java.lang.Boolean, int);
+  public ikrs.json.JSONBoolean createBoolean(java.lang.Boolean, java.lang.String);
+  public ikrs.json.JSONString createString(java.lang.String);
+  public ikrs.json.JSONString createString(java.lang.String, int);
+  public ikrs.json.JSONString createString(java.lang.String, java.lang.String);
+  public ikrs.json.JSONNull createNull();
+  public ikrs.json.JSONNull createNull(int);
+  public ikrs.json.JSONNull createNull(java.lang.String);
+  public ikrs.json.JSONArray createArray();
+  public ikrs.json.JSONArray createArray(int);
+  public ikrs.json.JSONArray createArray(java.lang.String);
+  public ikrs.json.JSONObject createObject();
+  public ikrs.json.JSONObject createObject(int);
+  public ikrs.json.JSONObject createObject(java.lang.String);
+}
+Compiled from "JSONBuilder.java"
+public class ikrs.json.parser.JSONBuilder extends ikrs.json.parser.JSONParser {
+  public ikrs.json.parser.JSONBuilder(java.io.Reader) throws java.lang.NullPointerException;
+  public ikrs.json.parser.JSONBuilder(java.io.Reader, boolean) throws java.lang.NullPointerException;
+  protected void fireJSONBegin();
+  protected void fireJSONEnd();
+  protected void fireArrayBegin();
+  protected void fireArrayElementEnd();
+  protected void fireArrayEnd();
+  protected void fireObjectBegin();
+  protected void fireObjectEnd();
+  protected void fireMemberBegin();
+  protected void fireMemberNameRead(java.lang.String);
+  protected void fireMemberEnd();
+  protected void fireNumberRead(java.lang.String);
+  protected void fireStringRead(java.lang.String);
+  protected void fireTrueRead(java.lang.String);
+  protected void fireFalseRead(java.lang.String);
+  protected void fireNullRead(java.lang.String);
+  public static void main(java.lang.String[]);
+}
+Compiled from "JSONBuilderExample.java"
+public class ikrs.json.parser.JSONBuilderExample extends ikrs.json.parser.JSONParser {
+  public ikrs.json.parser.JSONBuilderExample(java.io.Reader) throws java.lang.NullPointerException;
+  public ikrs.json.parser.JSONBuilderExample(java.io.Reader, boolean) throws java.lang.NullPointerException;
+  protected void fireJSONBegin();
+  protected void fireJSONEnd();
+  protected void fireArrayBegin();
+  protected void fireArrayElementEnd();
+  protected void fireArrayEnd();
+  protected void fireObjectBegin();
+  protected void fireObjectEnd();
+  protected void fireMemberBegin();
+  protected void fireMemberNameRead(java.lang.String);
+  protected void fireMemberEnd();
+  protected void fireNumberRead(java.lang.String);
+  protected void fireStringRead(java.lang.String);
+  protected void fireTrueRead(java.lang.String);
+  protected void fireFalseRead(java.lang.String);
+  protected void fireNullRead(java.lang.String);
+  public static void main(java.lang.String[]);
+}
+Compiled from "JSONParser.java"
+public class ikrs.json.parser.JSONParser {
+  public ikrs.json.parser.JSONParser(java.io.Reader) throws java.lang.NullPointerException;
+  public ikrs.json.parser.JSONParser(java.io.Reader, boolean) throws java.lang.NullPointerException;
+  protected void fireJSONBegin();
+  protected void fireJSONEnd();
+  protected void fireArrayBegin();
+  protected void fireArrayElementEnd();
+  protected void fireArrayEnd();
+  protected void fireObjectBegin();
+  protected void fireObjectEnd();
+  protected void fireMemberBegin();
+  protected void fireMemberNameRead(java.lang.String);
+  protected void fireMemberEnd();
+  protected void fireNumberRead(java.lang.String);
+  protected void fireStringRead(java.lang.String);
+  protected void fireTrueRead(java.lang.String);
+  protected void fireFalseRead(java.lang.String);
+  protected void fireNullRead(java.lang.String);
+  public int getReadPosition();
+  public int getLineNumber();
+  public int getColumnNumber();
+  public boolean parse() throws java.io.IOException, ikrs.json.parser.JSONSyntaxException;
+  public static void main(java.lang.String[]);
+}
+Compiled from "JSONSyntaxException.java"
+public class ikrs.json.parser.JSONSyntaxException extends java.lang.Exception {
+  public ikrs.json.parser.JSONSyntaxException(java.lang.String);
+  public ikrs.json.parser.JSONSyntaxException(java.lang.String, int, int, int);
+  public int getReadPosition();
+  public int getLineNumber();
+  public int getColumnNumber();
+  public void printStackTrace();
+}
+Compiled from "JSONValueFactory.java"
+public interface ikrs.json.parser.JSONValueFactory {
+  public abstract ikrs.json.JSONNumber createNumber(java.lang.Number);
+  public abstract ikrs.json.JSONNumber createNumber(java.lang.Number, int);
+  public abstract ikrs.json.JSONNumber createNumber(java.lang.Number, java.lang.String);
+  public abstract ikrs.json.JSONBoolean createBoolean(java.lang.Boolean);
+  public abstract ikrs.json.JSONBoolean createBoolean(java.lang.Boolean, int);
+  public abstract ikrs.json.JSONBoolean createBoolean(java.lang.Boolean, java.lang.String);
+  public abstract ikrs.json.JSONString createString(java.lang.String);
+  public abstract ikrs.json.JSONString createString(java.lang.String, int);
+  public abstract ikrs.json.JSONString createString(java.lang.String, java.lang.String);
+  public abstract ikrs.json.JSONNull createNull();
+  public abstract ikrs.json.JSONNull createNull(int);
+  public abstract ikrs.json.JSONNull createNull(java.lang.String);
+  public abstract ikrs.json.JSONArray createArray();
+  public abstract ikrs.json.JSONArray createArray(int);
+  public abstract ikrs.json.JSONArray createArray(java.lang.String);
+  public abstract ikrs.json.JSONObject createObject();
+  public abstract ikrs.json.JSONObject createObject(int);
+  public abstract ikrs.json.JSONObject createObject(java.lang.String);
+}
+Compiled from "AbstractInvocationTarget.java"
+public abstract class ikrs.json.rpc.AbstractInvocationTarget implements ikrs.json.rpc.RPCInvocationTarget {
+  public ikrs.json.rpc.AbstractInvocationTarget();
+  public boolean checkMethodInvocation(java.lang.reflect.Method);
+}
+Compiled from "DefaultJSONRPCError.java"
+public class ikrs.json.rpc.DefaultJSONRPCError extends ikrs.json.JSONObject implements ikrs.json.rpc.JSONRPCError {
+  public static final int CODE_PARSE_ERROR;
+  public static final int CODE_INVALID_REQUEST;
+  public static final int CODE_METHOD_NOT_FOUND;
+  public static final int CODE_INVALID_PARAMS;
+  public static final int CODE_INTERNAL_JSON_ERROR;
+  public static final int CODE_SERVER_ERROR_MIN;
+  public ikrs.json.rpc.DefaultJSONRPCError();
+  public ikrs.json.rpc.DefaultJSONRPCError(ikrs.json.JSONValue, ikrs.json.JSONValue, ikrs.json.JSONValue);
+  public ikrs.json.JSONValue getCode();
+  public ikrs.json.JSONValue getMessage();
+  public ikrs.json.JSONValue getData();
+}
+Compiled from "DefaultJSONRPCRequest.java"
+public class ikrs.json.rpc.DefaultJSONRPCRequest extends ikrs.json.JSONObject implements ikrs.json.rpc.JSONRPCRequest {
+  public ikrs.json.rpc.DefaultJSONRPCRequest();
+  public ikrs.json.rpc.DefaultJSONRPCRequest(java.lang.String, ikrs.json.JSONArray, java.lang.Number);
+  public ikrs.json.JSONValue getVersion();
+  public ikrs.json.JSONValue getMethod();
+  public ikrs.json.JSONValue getParams();
+  public ikrs.json.JSONValue getID();
+}
+Compiled from "DefaultJSONRPCResponse.java"
+public class ikrs.json.rpc.DefaultJSONRPCResponse extends ikrs.json.JSONObject implements ikrs.json.rpc.JSONRPCResponse {
+  public ikrs.json.rpc.DefaultJSONRPCResponse(ikrs.json.JSONValue, ikrs.json.JSONValue, ikrs.json.JSONValue);
+  public ikrs.json.JSONValue getVersion();
+  public ikrs.json.JSONValue getResult();
+  public ikrs.json.JSONValue getError();
+  public ikrs.json.JSONValue getID();
+}
+Compiled from "JSONRPCError.java"
+public interface ikrs.json.rpc.JSONRPCError extends ikrs.json.JSONValue {
+  public static final int CODE_PARSE_ERROR;
+  public static final int CODE_INVALID_REQUEST;
+  public static final int CODE_METHOD_NOT_FOUND;
+  public static final int CODE_INVALID_PARAMS;
+  public static final int CODE_INTERNAL_JSON_ERROR;
+  public static final int CODE_SERVER_ERROR_MIN;
+  public abstract ikrs.json.JSONValue getCode();
+  public abstract ikrs.json.JSONValue getMessage();
+  public abstract ikrs.json.JSONValue getData();
+}
+Compiled from "JSONRPCException.java"
+public class ikrs.json.rpc.JSONRPCException extends java.lang.Exception {
+  public ikrs.json.rpc.JSONRPCException(java.lang.String);
+}
+Compiled from "JSONRPCHandler.java"
+public class ikrs.json.rpc.JSONRPCHandler {
+  public ikrs.json.rpc.JSONRPCHandler();
+  public void unwrapJSONValues(boolean);
+  public boolean unwrapJSONValues();
+  public boolean addInvocationTarget(java.lang.String, ikrs.json.rpc.RPCInvocationTarget, boolean) throws java.lang.NullPointerException;
+  public boolean removeInvocationTarget(java.lang.String);
+  public ikrs.json.rpc.JSONRPCResponse call(java.lang.String) throws java.lang.NullPointerException;
+  public ikrs.json.rpc.JSONRPCResponse call(java.io.Reader) throws java.lang.NullPointerException;
+  public ikrs.json.rpc.JSONRPCResponse call(ikrs.json.rpc.JSONRPCRequest) throws java.lang.NullPointerException;
+  public ikrs.json.rpc.JSONRPCRequest buildRPCRequest(java.io.Reader) throws java.lang.NullPointerException, ikrs.json.parser.JSONSyntaxException, ikrs.json.rpc.JSONRPCException, ikrs.json.JSONException, java.io.IOException;
+  public static void main(java.lang.String[]);
+}
+Compiled from "JSONRPCRequest.java"
+public interface ikrs.json.rpc.JSONRPCRequest extends ikrs.json.JSONValue {
+  public abstract ikrs.json.JSONValue getVersion();
+  public abstract ikrs.json.JSONValue getMethod();
+  public abstract ikrs.json.JSONValue getParams();
+  public abstract ikrs.json.JSONValue getID();
+}
+Compiled from "JSONRPCResponse.java"
+public interface ikrs.json.rpc.JSONRPCResponse extends ikrs.json.JSONValue {
+  public abstract ikrs.json.JSONValue getVersion();
+  public abstract ikrs.json.JSONValue getResult();
+  public abstract ikrs.json.JSONValue getError();
+  public abstract ikrs.json.JSONValue getID();
+}
+Compiled from "JSONRPCValueFactory.java"
+public class ikrs.json.rpc.JSONRPCValueFactory extends ikrs.json.parser.DefaultJSONValueFactory {
+  public ikrs.json.rpc.JSONRPCValueFactory();
+  public ikrs.json.JSONObject createObject();
+}
+Compiled from "RPCInvocationTarget.java"
+public interface ikrs.json.rpc.RPCInvocationTarget {
+  public abstract boolean checkMethodInvocation(java.lang.reflect.Method);
+}
+Compiled from "TestInvocationTarget.java"
+public class ikrs.json.rpc.TestInvocationTarget extends ikrs.json.rpc.AbstractInvocationTarget {
+  public ikrs.json.rpc.TestInvocationTarget();
+  public boolean checkMethodInvocation(java.lang.reflect.Method);
+  public void doAnything(java.lang.Integer, java.lang.String, java.lang.Boolean);
+  public void doSomething();
+  public void printJSONArray(ikrs.json.JSONArray);
+  public void printJSONObject(ikrs.json.JSONObject);
+}
+Compiled from "InetAddressTest.java"
+public class ikrs.tests.InetAddressTest {
+  public ikrs.tests.InetAddressTest();
+  public static void main(java.lang.String[]);
+}
+Compiled from "BasicArrayType.java"
+public class ikrs.typesystem.BasicArrayType extends ikrs.typesystem.BasicTypeAdapter implements ikrs.typesystem.BasicType {
+  public ikrs.typesystem.BasicArrayType();
+  public ikrs.typesystem.BasicArrayType getArray() throws ikrs.typesystem.BasicTypeException;
+  public int getArraySize();
+  public ikrs.typesystem.BasicType getArrayElementAt(int) throws java.lang.ArrayIndexOutOfBoundsException;
+  protected ikrs.typesystem.BasicType setArrayElementAt(int, ikrs.typesystem.BasicType) throws ikrs.typesystem.BasicTypeException, java.lang.ArrayIndexOutOfBoundsException;
+  protected void addArrayElement(ikrs.typesystem.BasicType) throws ikrs.typesystem.BasicTypeException;
+  public ikrs.typesystem.BasicType[] getObjectArray();
+  public boolean equals(ikrs.typesystem.BasicArrayType);
+}
+Compiled from "BasicBooleanType.java"
+public class ikrs.typesystem.BasicBooleanType extends ikrs.typesystem.BasicTypeAdapter implements ikrs.typesystem.BasicType {
+  public ikrs.typesystem.BasicBooleanType(boolean);
+  public boolean getBoolean() throws ikrs.typesystem.BasicTypeException;
+  public byte getByte() throws ikrs.typesystem.BasicTypeException;
+  public short getShort() throws ikrs.typesystem.BasicTypeException;
+  public int getInt() throws ikrs.typesystem.BasicTypeException;
+  public long getLong() throws ikrs.typesystem.BasicTypeException;
+  public float getFloat() throws ikrs.typesystem.BasicTypeException;
+  public double getDouble() throws ikrs.typesystem.BasicTypeException;
+  public java.lang.String getString();
+  public java.lang.String toString();
+}
+Compiled from "BasicCharType.java"
+public class ikrs.typesystem.BasicCharType extends ikrs.typesystem.BasicTypeAdapter implements ikrs.typesystem.BasicType {
+  public ikrs.typesystem.BasicCharType(char);
+  public char getChar() throws ikrs.typesystem.BasicTypeException;
+  public java.lang.String getString() throws ikrs.typesystem.BasicTypeException;
+}
+Compiled from "BasicNumberType.java"
+public class ikrs.typesystem.BasicNumberType extends ikrs.typesystem.BasicTypeAdapter implements ikrs.typesystem.BasicType {
+  public ikrs.typesystem.BasicNumberType(byte);
+  public ikrs.typesystem.BasicNumberType(short);
+  public ikrs.typesystem.BasicNumberType(int);
+  public ikrs.typesystem.BasicNumberType(long);
+  public ikrs.typesystem.BasicNumberType(float);
+  public ikrs.typesystem.BasicNumberType(double);
+  public boolean getBoolean() throws ikrs.typesystem.BasicTypeException;
+  public byte getByte() throws ikrs.typesystem.BasicTypeException;
+  public short getShort() throws ikrs.typesystem.BasicTypeException;
+  public int getInt() throws ikrs.typesystem.BasicTypeException;
+  public long getLong() throws ikrs.typesystem.BasicTypeException;
+  public float getFloat() throws ikrs.typesystem.BasicTypeException;
+  public double getDouble() throws ikrs.typesystem.BasicTypeException;
+  public java.lang.String getString() throws ikrs.typesystem.BasicTypeException;
+  public java.lang.String toString();
+}
+Compiled from "BasicStringType.java"
+public class ikrs.typesystem.BasicStringType extends ikrs.typesystem.BasicTypeAdapter implements ikrs.typesystem.BasicType {
+  public ikrs.typesystem.BasicStringType(java.lang.String);
+  public boolean getBoolean() throws ikrs.typesystem.BasicTypeException;
+  public byte getByte() throws ikrs.typesystem.BasicTypeException;
+  public short getShort() throws ikrs.typesystem.BasicTypeException;
+  public int getInt() throws ikrs.typesystem.BasicTypeException;
+  public long getLong() throws ikrs.typesystem.BasicTypeException;
+  public float getFloat() throws ikrs.typesystem.BasicTypeException;
+  public double getDouble() throws ikrs.typesystem.BasicTypeException;
+  public char getChar() throws ikrs.typesystem.BasicTypeException;
+  public java.lang.String getString() throws ikrs.typesystem.BasicTypeException;
+  public java.util.UUID getUUID() throws ikrs.typesystem.BasicTypeException;
+  public java.lang.String toString();
+  public static ikrs.typesystem.BasicStringType[] buildArray(java.lang.String[]);
+  public static ikrs.typesystem.BasicStringType[] buildArray(java.lang.String[], int, int);
+}
+Compiled from "BasicType.java"
+public interface ikrs.typesystem.BasicType {
+  public static final int TYPE_BOOLEAN;
+  public static final int TYPE_BYTE;
+  public static final int TYPE_SHORT;
+  public static final int TYPE_INT;
+  public static final int TYPE_LONG;
+  public static final int TYPE_FLOAT;
+  public static final int TYPE_DOUBLE;
+  public static final int TYPE_CHAR;
+  public static final int TYPE_STRING;
+  public static final int TYPE_UUID;
+  public static final int TYPE_ARRAY;
+  public abstract int getType();
+  public abstract boolean getBoolean() throws ikrs.typesystem.BasicTypeException;
+  public abstract boolean getBoolean(boolean);
+  public abstract byte getByte() throws ikrs.typesystem.BasicTypeException;
+  public abstract byte getByte(byte);
+  public abstract short getShort() throws ikrs.typesystem.BasicTypeException;
+  public abstract short getShort(short);
+  public abstract int getInt() throws ikrs.typesystem.BasicTypeException;
+  public abstract int getInt(int);
+  public abstract long getLong() throws ikrs.typesystem.BasicTypeException;
+  public abstract long getLong(long);
+  public abstract float getFloat() throws ikrs.typesystem.BasicTypeException;
+  public abstract float getFloat(float);
+  public abstract double getDouble() throws ikrs.typesystem.BasicTypeException;
+  public abstract double getDouble(double);
+  public abstract char getChar() throws ikrs.typesystem.BasicTypeException;
+  public abstract char getChar(char);
+  public abstract java.lang.String getString() throws ikrs.typesystem.BasicTypeException;
+  public abstract java.lang.String getString(java.lang.String);
+  public abstract java.util.UUID getUUID() throws ikrs.typesystem.BasicTypeException;
+  public abstract java.util.UUID getUUID(java.util.UUID);
+  public abstract ikrs.typesystem.BasicArrayType getArray() throws ikrs.typesystem.BasicTypeException;
+  public abstract ikrs.typesystem.BasicArrayType getArray(ikrs.typesystem.BasicArrayType);
+  public abstract int getArraySize() throws ikrs.typesystem.BasicTypeException;
+  public abstract ikrs.typesystem.BasicType getArrayElementAt(int) throws ikrs.typesystem.BasicTypeException, java.lang.ArrayIndexOutOfBoundsException;
+  public abstract boolean equals(ikrs.typesystem.BasicType);
+  public abstract boolean equals(boolean);
+  public abstract boolean equals(byte);
+  public abstract boolean equals(short);
+  public abstract boolean equals(int);
+  public abstract boolean equals(long);
+  public abstract boolean equals(float);
+  public abstract boolean equals(double);
+  public abstract boolean equals(char);
+  public abstract boolean equals(java.lang.String);
+  public abstract boolean equals(java.util.UUID);
+  public abstract boolean equals(ikrs.typesystem.BasicArrayType);
+}
+Compiled from "BasicTypeAdapter.java"
+public abstract class ikrs.typesystem.BasicTypeAdapter implements ikrs.typesystem.BasicType {
+  public ikrs.typesystem.BasicTypeAdapter(int);
+  public int getType();
+  public boolean getBoolean() throws ikrs.typesystem.BasicTypeException;
+  public boolean getBoolean(boolean);
+  public byte getByte() throws ikrs.typesystem.BasicTypeException;
+  public byte getByte(byte);
+  public short getShort() throws ikrs.typesystem.BasicTypeException;
+  public short getShort(short);
+  public int getInt() throws ikrs.typesystem.BasicTypeException;
+  public int getInt(int);
+  public long getLong() throws ikrs.typesystem.BasicTypeException;
+  public long getLong(long);
+  public float getFloat() throws ikrs.typesystem.BasicTypeException;
+  public float getFloat(float);
+  public double getDouble() throws ikrs.typesystem.BasicTypeException;
+  public double getDouble(double);
+  public char getChar() throws ikrs.typesystem.BasicTypeException;
+  public char getChar(char);
+  public java.lang.String getString() throws ikrs.typesystem.BasicTypeException;
+  public java.lang.String getString(java.lang.String);
+  public java.util.UUID getUUID() throws ikrs.typesystem.BasicTypeException;
+  public java.util.UUID getUUID(java.util.UUID);
+  public ikrs.typesystem.BasicArrayType getArray() throws ikrs.typesystem.BasicTypeException;
+  public ikrs.typesystem.BasicArrayType getArray(ikrs.typesystem.BasicArrayType);
+  public int getArraySize() throws ikrs.typesystem.BasicTypeException;
+  public ikrs.typesystem.BasicType getArrayElementAt(int) throws ikrs.typesystem.BasicTypeException, java.lang.ArrayIndexOutOfBoundsException;
+  public boolean equals(ikrs.typesystem.BasicType);
+  public boolean equals(boolean);
+  public boolean equals(byte);
+  public boolean equals(short);
+  public boolean equals(int);
+  public boolean equals(long);
+  public boolean equals(float);
+  public boolean equals(double);
+  public boolean equals(char);
+  public boolean equals(java.lang.String);
+  public boolean equals(java.util.UUID);
+  public boolean equals(ikrs.typesystem.BasicArrayType);
+}
+Compiled from "BasicTypeException.java"
+public class ikrs.typesystem.BasicTypeException extends java.lang.RuntimeException {
+  public ikrs.typesystem.BasicTypeException(java.lang.String);
+}
+Compiled from "BasicUUIDType.java"
+public class ikrs.typesystem.BasicUUIDType extends ikrs.typesystem.BasicTypeAdapter implements ikrs.typesystem.BasicType {
+  public ikrs.typesystem.BasicUUIDType(java.util.UUID);
+  public java.lang.String getString();
+  public java.util.UUID getUUID();
+  public java.lang.String toString();
+}
+Compiled from "AbstractCommand.java"
+public abstract class ikrs.util.AbstractCommand implements ikrs.util.Command {
+  public ikrs.util.AbstractCommand(java.lang.String, ikrs.typesystem.BasicType[]);
+  protected void setName(java.lang.String);
+  protected void setParams(ikrs.typesystem.BasicType[]);
+  public java.lang.String getName();
+  public int getParamCount();
+  public ikrs.typesystem.BasicType getParamAt(int) throws java.lang.IndexOutOfBoundsException;
+  public java.lang.StringBuffer toString(java.lang.StringBuffer);
+  public abstract int execute();
+  public java.lang.String toString();
+}
+Compiled from "AbstractCommandFactory.java"
+public abstract class ikrs.util.AbstractCommandFactory<C extends ikrs.util.Command> implements ikrs.util.CommandFactory<C> {
+  public ikrs.util.AbstractCommandFactory();
+  public abstract java.util.Set<C> getSupportedCommands();
+  public ikrs.util.CommandFactory<C> getParentFactory();
+  public void setParentFactory(ikrs.util.CommandFactory<C>);
+  public C make(java.lang.String, java.lang.String[]) throws ikrs.util.UnknownCommandException, ikrs.util.CommandStringIncompleteException;
+  public abstract C make(java.lang.String, ikrs.typesystem.BasicType[]) throws ikrs.util.UnknownCommandException, ikrs.util.CommandStringIncompleteException;
+  public C parse(java.lang.String) throws java.lang.UnsupportedOperationException, ikrs.util.UnknownCommandException, ikrs.util.CommandStringIncompleteException, java.text.ParseException;
+  public C make(java.lang.String, java.lang.String[], int, int) throws ikrs.util.UnknownCommandException, ikrs.util.CommandStringIncompleteException;
+}
+Compiled from "AbstractCommandLine.java"
+public class ikrs.util.AbstractCommandLine<C extends ikrs.util.Command> extends java.lang.Thread {
+  public ikrs.util.AbstractCommandLine(ikrs.util.CommandFactory<C>);
+  public ikrs.util.AbstractCommandLine(ikrs.util.CommandFactory<C>, java.lang.String);
+  public ikrs.util.CommandFactory<C> getCommandFactory();
+  public void run();
+  public void runCommandLine() throws java.io.IOException;
+  public void interrupt();
+  public static void main(java.lang.String[]);
+}
+Compiled from "AbstractMapDelegation.java"
+public abstract class ikrs.util.AbstractMapDelegation<K, V> implements java.util.Map<K, V> {
+  protected java.util.Map<K, V> baseMap;
+  public ikrs.util.AbstractMapDelegation(ikrs.util.MapFactory<K, V>);
+  public void clear();
+  public boolean containsKey(java.lang.Object);
+  public boolean containsValue(java.lang.Object);
+  public java.util.Set<java.util.Map$Entry<K, V>> entrySet();
+  public boolean equals(java.lang.Object);
+  public V get(java.lang.Object);
+  public int hashCode();
+  public boolean isEmpty();
+  public java.util.Set<K> keySet();
+  public V put(K, V);
+  public void putAll(java.util.Map<? extends K, ? extends V>);
+  public V remove(java.lang.Object);
+  public int size();
+  public java.util.Collection<V> values();
+  public java.lang.StringBuffer toString(java.lang.StringBuffer);
+  public static <K, V> void toString(java.util.Map<K, V>, java.lang.StringBuffer);
+  public static <K, V> void toString(java.util.Map<K, V>, java.lang.StringBuffer, int);
+  public static java.lang.StringBuffer makeIndent(java.lang.StringBuffer, int, char);
+}
+Compiled from "ByteArrayComparator.java"
+public class ikrs.util.ByteArrayComparator implements java.util.Comparator<byte[]> {
+  public ikrs.util.ByteArrayComparator();
+  public int compare(byte[], byte[]);
+  public boolean equals(java.lang.Object);
+  public static int compareArrays(byte[], byte[]);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "CRLFLineReader.java"
+public class ikrs.util.CRLFLineReader {
+  public ikrs.util.CRLFLineReader();
+  public static java.lang.String readLine(java.io.InputStream) throws java.io.EOFException, java.io.IOException;
+}
+Compiled from "CaseInsensitiveComparator.java"
+public class ikrs.util.CaseInsensitiveComparator implements java.util.Comparator<java.lang.String> {
+  public static final java.util.Comparator<java.lang.String> sharedInstance;
+  public int compare(java.lang.String, java.lang.String);
+  public boolean equals(java.lang.Object);
+  public static ikrs.util.CaseInsensitiveComparator createCaseInsensitiveCollator();
+  public int compare(java.lang.Object, java.lang.Object);
+  static {};
+}
+Compiled from "Command.java"
+public interface ikrs.util.Command {
+  public abstract java.lang.String getName();
+  public abstract int getParamCount();
+  public abstract ikrs.typesystem.BasicType getParamAt(int) throws java.lang.IndexOutOfBoundsException;
+  public abstract java.lang.StringBuffer toString(java.lang.StringBuffer);
+  public abstract int execute();
+}
+Compiled from "CommandFactory.java"
+public interface ikrs.util.CommandFactory<C extends ikrs.util.Command> {
+  public abstract java.util.Set<C> getSupportedCommands();
+  public abstract ikrs.util.CommandFactory<C> getParentFactory();
+  public abstract void setParentFactory(ikrs.util.CommandFactory<C>);
+  public abstract C make(java.lang.String, java.lang.String[]) throws ikrs.util.UnknownCommandException, ikrs.util.CommandStringIncompleteException;
+  public abstract C make(java.lang.String, ikrs.typesystem.BasicType[]) throws ikrs.util.UnknownCommandException, ikrs.util.CommandStringIncompleteException;
+  public abstract C parse(java.lang.String) throws java.lang.UnsupportedOperationException, ikrs.util.UnknownCommandException, ikrs.util.CommandStringIncompleteException, java.text.ParseException;
+}
+Compiled from "CommandStringIncompleteException.java"
+public class ikrs.util.CommandStringIncompleteException extends java.lang.Exception {
+  public ikrs.util.CommandStringIncompleteException(java.lang.String);
+}
+Compiled from "CustomLogger.java"
+public interface ikrs.util.CustomLogger {
+  public abstract void log(java.util.logging.Level, java.lang.String, java.lang.String);
+  public abstract void setLevel(java.util.logging.Level);
+}
+Compiled from "DefaultCommand.java"
+public class ikrs.util.DefaultCommand extends ikrs.util.AbstractCommand implements ikrs.util.Command, java.lang.Comparable<ikrs.util.Command> {
+  public ikrs.util.DefaultCommand(java.lang.String, ikrs.typesystem.BasicType[]);
+  public int execute();
+  public int compareTo(ikrs.util.Command);
+  public int compareTo(java.lang.Object);
+}
+Compiled from "DefaultCommandFactory.java"
+public class ikrs.util.DefaultCommandFactory extends ikrs.util.AbstractCommandFactory<ikrs.util.Command> implements ikrs.util.CommandFactory<ikrs.util.Command> {
+  public ikrs.util.DefaultCommandFactory();
+  protected void addSupportedCommand(ikrs.util.Command);
+  public ikrs.util.Command make(java.lang.String, ikrs.typesystem.BasicType[]) throws ikrs.util.UnknownCommandException, ikrs.util.CommandStringIncompleteException;
+  public java.util.Set<ikrs.util.Command> getSupportedCommands();
+}
+Compiled from "DefaultCustomLogger.java"
+public class ikrs.util.DefaultCustomLogger implements ikrs.util.CustomLogger {
+  public ikrs.util.DefaultCustomLogger(java.lang.String);
+  public void log(java.util.logging.Level, java.lang.String, java.lang.String);
+  public void setLevel(java.util.logging.Level);
+}
+Compiled from "DefaultEnvironment.java"
+public class ikrs.util.DefaultEnvironment<K, V> extends ikrs.util.AbstractMapDelegation<K, V> implements ikrs.util.Environment<K, V> {
+  public ikrs.util.DefaultEnvironment() throws java.lang.NullPointerException;
+  public ikrs.util.DefaultEnvironment(ikrs.util.MapFactory<K, V>) throws java.lang.NullPointerException;
+  public ikrs.util.DefaultEnvironment(ikrs.util.MapFactory<K, V>, boolean) throws java.lang.NullPointerException;
+  public ikrs.util.DefaultEnvironment(ikrs.util.MapFactory<K, V>, java.util.Comparator<K>, boolean) throws java.lang.NullPointerException;
+  public ikrs.util.DefaultEnvironment(ikrs.util.MapFactory<K, V>, java.util.Comparator<K>, ikrs.util.Environment<K, V>, boolean) throws java.lang.NullPointerException;
+  public boolean allowsMultipleChildNames();
+  public ikrs.util.Environment<K, V> getParent();
+  public ikrs.util.Environment<K, V> getChild(java.lang.String);
+  public ikrs.util.Environment<K, V> locateChild(ikrs.util.Path<java.lang.String>);
+  public java.util.List<ikrs.util.Environment<K, V>> getAllChildren();
+  public java.util.List<ikrs.util.Environment<K, V>> getChildren(java.lang.String);
+  public ikrs.util.Environment<K, V> createChild(java.lang.String);
+  public ikrs.util.Environment<K, V> removeChild(java.lang.String);
+  public void removeAllChildren();
+  public int getChildCount();
+  public java.lang.String toString();
+  public java.lang.StringBuffer toString(java.lang.StringBuffer);
+  protected java.lang.StringBuffer toString(java.lang.StringBuffer, int);
+}
+Compiled from "DefaultEnvironmentFactory.java"
+public class ikrs.util.DefaultEnvironmentFactory<K, V> implements ikrs.util.EnvironmentFactory<K, V> {
+  public ikrs.util.DefaultEnvironmentFactory(ikrs.util.MapFactory<K, V>) throws java.lang.NullPointerException;
+  public ikrs.util.DefaultEnvironmentFactory(ikrs.util.MapFactory<K, V>, boolean) throws java.lang.NullPointerException;
+  public ikrs.util.Environment<K, V> create();
+}
+Compiled from "Environment.java"
+public interface ikrs.util.Environment<K, V> extends java.util.Map<K, V> {
+  public abstract boolean allowsMultipleChildNames();
+  public abstract ikrs.util.Environment<K, V> getParent();
+  public abstract ikrs.util.Environment<K, V> getChild(java.lang.String);
+  public abstract ikrs.util.Environment<K, V> locateChild(ikrs.util.Path<java.lang.String>);
+  public abstract java.util.List<ikrs.util.Environment<K, V>> getAllChildren();
+  public abstract java.util.List<ikrs.util.Environment<K, V>> getChildren(java.lang.String);
+  public abstract ikrs.util.Environment<K, V> createChild(java.lang.String);
+  public abstract ikrs.util.Environment<K, V> removeChild(java.lang.String);
+  public abstract void removeAllChildren();
+  public abstract int getChildCount();
+}
+Compiled from "EnvironmentDelegation.java"
+public class ikrs.util.EnvironmentDelegation<K, V> extends ikrs.util.MapDelegation<K, V> implements ikrs.util.Environment<K, V> {
+  public ikrs.util.EnvironmentDelegation(ikrs.util.Environment<K, V>) throws java.lang.NullPointerException;
+  public boolean allowsMultipleChildNames();
+  public ikrs.util.Environment<K, V> getParent();
+  public ikrs.util.Environment<K, V> getChild(java.lang.String);
+  public ikrs.util.Environment<K, V> locateChild(ikrs.util.Path<java.lang.String>);
+  public java.util.List<ikrs.util.Environment<K, V>> getAllChildren();
+  public java.util.List<ikrs.util.Environment<K, V>> getChildren(java.lang.String);
+  public ikrs.util.Environment<K, V> createChild(java.lang.String);
+  public ikrs.util.Environment<K, V> removeChild(java.lang.String);
+  public void removeAllChildren();
+  public int getChildCount();
+}
+Compiled from "EnvironmentFactory.java"
+public interface ikrs.util.EnvironmentFactory<K, V> {
+  public abstract ikrs.util.Environment<K, V> create();
+}
+Compiled from "FileExtensionKeyMap.java"
+public class ikrs.util.FileExtensionKeyMap<V> extends java.util.TreeMap<java.lang.String, V> {
+  public ikrs.util.FileExtensionKeyMap();
+  public ikrs.util.FileExtensionKeyMap(boolean, boolean);
+  public V get(java.lang.Object);
+  protected V get(java.lang.String);
+  public static void main(java.lang.String[]);
+}
+Compiled from "FileLogHandler.java"
+public class ikrs.util.FileLogHandler extends java.util.logging.StreamHandler implements ikrs.util.LogHandler {
+  public static final java.lang.String DEFAULT_DATE_FORMAT_PATTERN;
+  public ikrs.util.FileLogHandler(java.lang.String, boolean, int) throws java.lang.NullPointerException, java.lang.IllegalArgumentException;
+  public ikrs.util.FileLogHandler(java.lang.String, boolean, int, java.text.DateFormat) throws java.lang.NullPointerException, java.lang.IllegalArgumentException;
+  public void close() throws java.lang.SecurityException;
+  public void flush() throws java.lang.SecurityException;
+  public void publish(java.util.logging.LogRecord);
+  protected java.io.File getNextFileInCycle();
+  public static java.lang.String getNextFilename(java.lang.String, java.text.DateFormat, int, int);
+  public static void main(java.lang.String[]);
+}
+Compiled from "HexDumpOutputStream.java"
+public class ikrs.util.HexDumpOutputStream extends java.io.OutputStream {
+  public ikrs.util.HexDumpOutputStream(java.io.Writer) throws java.lang.NullPointerException;
+  public ikrs.util.HexDumpOutputStream(java.io.Writer, int[]) throws java.lang.NullPointerException, java.lang.IllegalArgumentException;
+  public boolean isClosed();
+  public void close() throws java.io.IOException;
+  public void flush() throws java.io.IOException;
+  public void write(int) throws java.io.IOException;
+  public static void main(java.lang.String[]);
+}
+Compiled from "KeyValuePair.java"
+public class ikrs.util.KeyValuePair<K, V> {
+  public ikrs.util.KeyValuePair(K, V);
+  public K getKey();
+  public V getValue();
+  public java.lang.String toString();
+  public static ikrs.util.KeyValuePair<java.lang.String, java.lang.String> splitLine(java.lang.String, java.lang.String, boolean);
+}
+Compiled from "KeyValueStringPair.java"
+public class ikrs.util.KeyValueStringPair extends ikrs.util.KeyValuePair<java.lang.String, java.lang.String> {
+  public ikrs.util.KeyValueStringPair(java.lang.String, java.lang.String);
+  public static ikrs.util.KeyValueStringPair split(java.lang.String);
+  public static ikrs.util.KeyValueStringPair split(java.lang.String, boolean);
+  public static ikrs.util.KeyValueStringPair split(java.lang.String, boolean, java.lang.String);
+  public static void main(java.lang.String[]);
+}
+Compiled from "ListPathAdapter.java"
+public class ikrs.util.ListPathAdapter<T> implements ikrs.util.Path<T> {
+  public ikrs.util.ListPathAdapter(java.util.List<T>) throws java.lang.NullPointerException;
+  public ikrs.util.ListPathAdapter(java.util.List<T>, int) throws java.lang.NullPointerException;
+  public int getLength();
+  public T getFirstElement();
+  public ikrs.util.Path<T> getTrailingPath();
+  public java.lang.String toString();
+  public static void main(java.lang.String[]);
+}
+Compiled from "LogHandler.java"
+public interface ikrs.util.LogHandler {
+}
+Compiled from "MIMEType.java"
+public class ikrs.util.MIMEType {
+  public ikrs.util.MIMEType(java.lang.String);
+  public java.lang.String getContentType();
+  public java.lang.String toString();
+  public static ikrs.util.MIMEType getByFileExtension(java.lang.String);
+  static {};
+}
+Compiled from "MapDelegation.java"
+public class ikrs.util.MapDelegation<K, V> extends java.util.AbstractMap<K, V> {
+  public ikrs.util.MapDelegation(java.util.Map<K, V>) throws java.lang.NullPointerException;
+  public void clear();
+  public java.util.Set<java.util.Map$Entry<K, V>> entrySet();
+  public V put(K, V);
+  public void putAll(java.util.Map<? extends K, ? extends V>);
+  public V remove(java.lang.Object);
+  public java.lang.String toString();
+}
+Compiled from "MapFactory.java"
+public interface ikrs.util.MapFactory<K, V> {
+  public abstract java.util.Map<K, V> createMap();
+}
+Compiled from "ModelBasedMapFactory.java"
+public class ikrs.util.ModelBasedMapFactory<K, V> implements ikrs.util.MapFactory<K, V> {
+  public ikrs.util.ModelBasedMapFactory(java.util.Map<K, V>) throws java.lang.NullPointerException;
+  public java.util.Map<K, V> createMap();
+}
+Compiled from "ObjectWithUUID.java"
+public interface ikrs.util.ObjectWithUUID {
+  public abstract java.util.UUID getUUID();
+}
+Compiled from "Path.java"
+public interface ikrs.util.Path<T> {
+  public abstract int getLength();
+  public abstract T getFirstElement();
+  public abstract ikrs.util.Path<T> getTrailingPath();
+}
+Compiled from "TreeMapFactory.java"
+public class ikrs.util.TreeMapFactory<K, V> implements ikrs.util.MapFactory<K, V> {
+  public ikrs.util.TreeMapFactory();
+  public ikrs.util.TreeMapFactory(java.util.Comparator<K>);
+  public java.util.Map<K, V> createMap();
+}
+Compiled from "UnknownCommandException.java"
+public class ikrs.util.UnknownCommandException extends java.lang.Exception {
+  public ikrs.util.UnknownCommandException(java.lang.String);
+  public ikrs.util.UnknownCommandException(java.lang.String, java.lang.String);
+  public java.lang.String getCommand();
+}
+Compiled from "XMLEnvironmentReader.java"
+public class ikrs.util.XMLEnvironmentReader {
+  public static final java.lang.String TEXT_NODE_KEY;
+  protected ikrs.util.XMLEnvironmentReader();
+  public static ikrs.util.Environment<java.lang.String, ikrs.typesystem.BasicType> read(java.io.File) throws java.io.IOException;
+  public static ikrs.util.Environment<java.lang.String, ikrs.typesystem.BasicType> read(java.io.File, boolean) throws java.io.IOException;
+  protected static void read(org.w3c.dom.Document, ikrs.util.Environment<java.lang.String, ikrs.typesystem.BasicType>, boolean);
+  protected static void read(org.w3c.dom.Node, ikrs.util.Environment<java.lang.String, ikrs.typesystem.BasicType>, boolean);
+  public static void main(java.lang.String[]);
+}
+Compiled from "AbstractSession.java"
+public abstract class ikrs.util.session.AbstractSession<K, V, U> extends ikrs.util.EnvironmentDelegation<K, V> implements ikrs.util.session.Session<K, V, U> {
+  public java.util.UUID sessionID;
+  public ikrs.util.session.AbstractSession(U, ikrs.util.EnvironmentFactory<K, V>) throws java.lang.NullPointerException;
+  public ikrs.util.session.AbstractSession(U, ikrs.util.Environment<K, V>) throws java.lang.NullPointerException;
+  public java.util.UUID getSessionID();
+  public U getUserID();
+  public java.util.Date getCreationTime();
+  public java.util.Date getLastModified();
+  public java.util.Date getLastAccessTime();
+  public boolean allowsMultipleChildNames();
+  public ikrs.util.Environment<K, V> getParent();
+  public ikrs.util.Environment<K, V> getChild(java.lang.String);
+  public java.util.List<ikrs.util.Environment<K, V>> getAllChildren();
+  public java.util.List<ikrs.util.Environment<K, V>> getChildren(java.lang.String);
+  public ikrs.util.Environment<K, V> createChild(java.lang.String);
+  public ikrs.util.Environment<K, V> removeChild(java.lang.String);
+  public int getChildCount();
+  public void clear();
+  public boolean containsKey(java.lang.Object);
+  public boolean containsValue(java.lang.Object);
+  public java.util.Set<java.util.Map$Entry<K, V>> entrySet();
+  public boolean equals(java.lang.Object);
+  public V get(java.lang.Object);
+  public int hashCode();
+  public boolean isEmpty();
+  public java.util.Set<K> keySet();
+  public V put(K, V);
+  public void putAll(java.util.Map<? extends K, ? extends V>);
+  public V remove(java.lang.Object);
+  public int size();
+  public java.util.Collection<V> values();
+  public java.lang.String toString();
+  public java.lang.StringBuffer toString(java.lang.StringBuffer);
+}
+Compiled from "AbstractSessionManager.java"
+public abstract class ikrs.util.session.AbstractSessionManager<K, V, U> implements ikrs.util.session.SessionManager<K, V, U> {
+  protected ikrs.util.session.AbstractSessionManager(ikrs.util.session.SessionFactory<K, V, U>, int) throws java.lang.NullPointerException;
+  protected ikrs.util.session.AbstractSessionManager(ikrs.util.session.SessionFactory<K, V, U>, int, boolean) throws java.lang.NullPointerException;
+  protected java.util.Map<java.util.UUID, ikrs.util.session.Session<K, V, U>> getSessionIDMap();
+  protected java.util.Map<U, ikrs.util.session.Session<K, V, U>> getSessionUserMap();
+  public ikrs.util.session.SessionFactory<K, V, U> getSessionFactory();
+  public int getSessionTimeout();
+  public void setSessionTimeout(int) throws java.lang.IllegalArgumentException;
+  public ikrs.util.session.Session<K, V, U> get(java.util.UUID);
+  public boolean destroy(java.util.UUID);
+  public ikrs.util.session.Session<K, V, U> bind(U);
+}
+Compiled from "DefaultSession.java"
+public class ikrs.util.session.DefaultSession<K, V, U> extends ikrs.util.session.AbstractSession<K, V, U> {
+  public ikrs.util.session.DefaultSession(U, ikrs.util.EnvironmentFactory<K, V>) throws java.lang.NullPointerException;
+  public ikrs.util.session.DefaultSession(U, ikrs.util.Environment<K, V>) throws java.lang.NullPointerException;
+}
+Compiled from "DefaultSessionFactory.java"
+public class ikrs.util.session.DefaultSessionFactory<K, V, U> implements ikrs.util.session.SessionFactory<K, V, U> {
+  public ikrs.util.session.DefaultSessionFactory(ikrs.util.EnvironmentFactory<K, V>) throws java.lang.NullPointerException;
+  public ikrs.util.session.DefaultSession<K, V, U> create(U);
+  public ikrs.util.session.Session create(java.lang.Object);
+}
+Compiled from "DefaultSessionManager.java"
+public class ikrs.util.session.DefaultSessionManager<K, V, U> extends ikrs.util.session.AbstractSessionManager<K, V, U> {
+  public ikrs.util.session.DefaultSessionManager(ikrs.util.session.SessionFactory<K, V, U>, int) throws java.lang.NullPointerException, java.lang.IllegalArgumentException;
+  public ikrs.util.session.DefaultSessionManager(ikrs.util.session.SessionFactory<K, V, U>, int, boolean) throws java.lang.NullPointerException, java.lang.IllegalArgumentException;
+  public ikrs.util.session.Session<K, V, U> get(java.util.UUID);
+  public boolean destroy(java.util.UUID);
+  public ikrs.util.session.Session<K, V, U> bind(U);
+}
+Compiled from "Session.java"
+public interface ikrs.util.session.Session<K, V, U> extends ikrs.util.Environment<K, V> {
+  public abstract java.util.UUID getSessionID();
+  public abstract U getUserID();
+  public abstract java.util.Date getCreationTime();
+  public abstract java.util.Date getLastModified();
+  public abstract java.util.Date getLastAccessTime();
+}
+Compiled from "SessionFactory.java"
+public interface ikrs.util.session.SessionFactory<K, V, U> {
+  public abstract ikrs.util.session.Session<K, V, U> create(U);
+}
+Compiled from "SessionManager.java"
+public interface ikrs.util.session.SessionManager<K, V, U> {
+  public abstract ikrs.util.session.SessionFactory<K, V, U> getSessionFactory();
+  public abstract int getSessionTimeout();
+  public abstract void setSessionTimeout(int) throws java.lang.IllegalArgumentException;
+  public abstract ikrs.util.session.Session<K, V, U> get(java.util.UUID);
+  public abstract boolean destroy(java.util.UUID);
+  public abstract ikrs.util.session.Session<K, V, U> bind(U);
+}
+Compiled from "SynchronizedSessionManagerDelegation.java"
+public class ikrs.util.session.SynchronizedSessionManagerDelegation<K, V, U> extends ikrs.util.session.AbstractSessionManager<K, V, U> {
+  public ikrs.util.session.SynchronizedSessionManagerDelegation(ikrs.util.session.SessionManager<K, V, U>) throws java.lang.NullPointerException;
+  public ikrs.util.session.Session<K, V, U> get(java.util.UUID);
+  public boolean destroy(java.util.UUID);
+  public ikrs.util.session.Session<K, V, U> bind(U);
+}
+Compiled from "TestSessionManager.java"
+public class ikrs.util.session.TestSessionManager {
+  public ikrs.util.session.TestSessionManager();
+  public static void main(java.lang.String[]);
+}
+Compiled from "SocketSession.java"
+public interface ikrs.yucca.SocketSession {
+}
+Compiled from "ConnectionHandler.java"
+public abstract class ikrs.yuccasrv.ConnectionHandler implements ikrs.yuccasrv.socketmngr.BindListener,ikrs.util.ObjectWithUUID {
+  public ikrs.yuccasrv.ConnectionHandler();
+  public abstract void init(ikrs.util.Environment<java.lang.String, ikrs.typesystem.BasicType>, ikrs.util.Environment<java.lang.String, ikrs.typesystem.BasicType>) throws java.lang.InstantiationException;
+  public void serverCreated(ikrs.yuccasrv.socketmngr.BindManager, java.util.UUID);
+  public void serverError(ikrs.yuccasrv.socketmngr.BindManager, java.util.UUID, java.lang.Exception, boolean);
+  public abstract void serverAcceptedTCPConnection(ikrs.yuccasrv.socketmngr.BindManager, java.util.UUID, java.net.Socket, ikrs.yuccasrv.ConnectionUserID<ikrs.yuccasrv.ConnectionUserID>);
+  public abstract void serverAcceptedUDPConnection(ikrs.yuccasrv.socketmngr.BindManager, java.util.UUID, java.net.DatagramSocket, ikrs.yuccasrv.ConnectionUserID<ikrs.yuccasrv.ConnectionUserID>);
+  public void serverClosed(ikrs.yuccasrv.socketmngr.BindManager, java.util.UUID);
+  public abstract void finalize(long, java.util.concurrent.TimeUnit);
+  public java.util.UUID getUUID();
+}
+Compiled from "ConnectionUserID.java"
+public interface ikrs.yuccasrv.ConnectionUserID<T extends ikrs.yuccasrv.ConnectionUserID> extends java.lang.Comparable<T> {
+  public abstract boolean equals(java.lang.Object);
+  public abstract boolean equals(T);
+  public abstract int compareTo(T);
+  public int compareTo(java.lang.Object);
+}
+Compiled from "Constants.java"
+public class ikrs.yuccasrv.Constants {
+  public static final java.lang.String VERSION;
+  public static final java.lang.String KEY_ID;
+  public static final java.lang.String KEY_CONNECTION_COUNT;
+  public static final java.lang.String KEY_CONNECTION_HANDLERID;
+  public static final java.lang.String KEY_STARTUP_COMMANDLINE;
+  public static final java.lang.String KEY_STARTUP_LOGLEVEL;
+  public static final java.lang.String KEY_PROTOCOL;
+  public static final java.lang.String NAME_PROTOCOL_TCP;
+  public static final java.lang.String NAME_PROTOCOL_UDP;
+  public static final java.lang.String CONFIG_SERVER_NAME;
+  public static final java.lang.String CONFIG_SERVER_HANDLERCLASS;
+  public static final java.lang.String CONFIG_SERVER_ADDRESS;
+  public static final java.lang.String CONFIG_SERVER_PORT;
+  public static final java.lang.String CONFIG_SERVER_PROTOCOL;
+  public static final java.lang.String CONFIG_SERVER_BACKLOG;
+  public static final java.lang.String CONFIG_SERVER_AUTOBIND;
+  public static final java.lang.String CONFIG_SERVER_SSL;
+  public static final java.lang.String CONFIG_SERVER_SHAREDHANDLERINSTANCE;
+  public static final java.lang.String CONFIG_SERVER_LISTEN_PROPERTY;
+  public static final java.lang.String CONFIG_SERVER_LISTEN_PROPERTY_NAME;
+  public static final java.lang.String CONFIG_SERVER_LISTEN_PROPERTY_VALUE;
+  public static final java.lang.String CONFIG_SERVER_SSL_KEYSTORE;
+  public static final java.lang.String CONFIG_SERVER_SSL_KEYSTOREPASSWORD;
+  public static final java.lang.String CONFIG_SERVER_SSL_KEYSTORETYPE;
+  public static final java.lang.String CONFIG_SERVER_SSL_TRUSTSTORE;
+  public static final java.lang.String CONFIG_SERVER_SSL_TRUSTSTOREPASSWORD;
+  public static final java.lang.String CONFIG_SERVER_SSL_TRUSTSTORETYPE;
+  public static final java.lang.String CONFIG_SERVER_SSL_NEEDCLIENTAUTH;
+  public static final java.lang.String CONFIG_SERVER_SSL_WANTCLIENTAUTH;
+  public static final java.lang.String DEFAULT_LOGGER_NAME;
+  public ikrs.yuccasrv.Constants();
+}
+Compiled from "DefaultConnectionUserID.java"
+public class ikrs.yuccasrv.DefaultConnectionUserID {
+  public ikrs.yuccasrv.DefaultConnectionUserID(java.util.UUID, java.net.InetAddress, int, java.net.InetAddress) throws java.lang.NullPointerException;
+  public boolean equals(java.lang.Object);
+  public boolean equals(ikrs.yuccasrv.DefaultConnectionUserID);
+  public int compareTo(ikrs.yuccasrv.DefaultConnectionUserID);
+  public java.lang.String toString();
+  public java.lang.StringBuffer toString(java.lang.StringBuffer);
+}
+Compiled from "SocketWrapper.java"
+public class ikrs.yuccasrv.SocketWrapper {
+  public ikrs.yuccasrv.SocketWrapper(java.net.Socket);
+  public java.net.Socket getSocket();
+}
+Compiled from "TCPAdapter.java"
+public abstract class ikrs.yuccasrv.TCPAdapter extends ikrs.yuccasrv.ConnectionHandler {
+  public ikrs.yuccasrv.TCPAdapter();
+  public abstract void init(ikrs.util.Environment<java.lang.String, ikrs.typesystem.BasicType>, ikrs.util.Environment<java.lang.String, ikrs.typesystem.BasicType>) throws java.lang.InstantiationException;
+  public void serverCreated(ikrs.yuccasrv.socketmngr.BindManager, java.util.UUID);
+  public void serverError(ikrs.yuccasrv.socketmngr.BindManager, java.util.UUID, java.lang.Exception, boolean);
+  public abstract void serverAcceptedTCPConnection(ikrs.yuccasrv.socketmngr.BindManager, java.util.UUID, java.net.Socket, ikrs.yuccasrv.ConnectionUserID<ikrs.yuccasrv.ConnectionUserID>);
+  public final void serverAcceptedUDPConnection(ikrs.yuccasrv.socketmngr.BindManager, java.util.UUID, java.net.DatagramSocket, ikrs.yuccasrv.ConnectionUserID<ikrs.yuccasrv.ConnectionUserID>);
+  public void serverClosed(ikrs.yuccasrv.socketmngr.BindManager, java.util.UUID);
+  public abstract void finalize(long, java.util.concurrent.TimeUnit);
+}
+Compiled from "TCPConnectionUserID.java"
+public class ikrs.yuccasrv.TCPConnectionUserID extends ikrs.yuccasrv.DefaultConnectionUserID implements ikrs.yuccasrv.ConnectionUserID<ikrs.yuccasrv.TCPConnectionUserID> {
+  public ikrs.yuccasrv.TCPConnectionUserID(java.util.UUID, java.net.InetAddress, int, java.net.InetAddress) throws java.lang.NullPointerException;
+  public boolean equals(java.lang.Object);
+  public boolean equals(ikrs.yuccasrv.TCPConnectionUserID);
+  public int compareTo(ikrs.yuccasrv.TCPConnectionUserID);
+  public int compareTo(ikrs.yuccasrv.ConnectionUserID);
+  public boolean equals(ikrs.yuccasrv.ConnectionUserID);
+  public int compareTo(java.lang.Object);
+}
+Compiled from "UDPConnectionUserID.java"
+public class ikrs.yuccasrv.UDPConnectionUserID extends ikrs.yuccasrv.DefaultConnectionUserID implements ikrs.yuccasrv.ConnectionUserID<ikrs.yuccasrv.UDPConnectionUserID> {
+  public ikrs.yuccasrv.UDPConnectionUserID(java.util.UUID, java.net.InetAddress, int, java.net.InetAddress) throws java.lang.NullPointerException;
+  public boolean equals(java.lang.Object);
+  public boolean equals(ikrs.yuccasrv.UDPConnectionUserID);
+  public int compareTo(ikrs.yuccasrv.UDPConnectionUserID);
+  public int compareTo(ikrs.yuccasrv.ConnectionUserID);
+  public boolean equals(ikrs.yuccasrv.ConnectionUserID);
+  public int compareTo(java.lang.Object);
+}
+Compiled from "Yucca.java"
+public class ikrs.yuccasrv.Yucca extends java.lang.Thread implements ikrs.yuccasrv.socketmngr.BindListener {
+  public ikrs.yuccasrv.Yucca(ikrs.util.Environment<java.lang.String, ikrs.typesystem.BasicType>) throws java.io.IOException;
+  public java.util.logging.Logger getLogger();
+  public ikrs.util.AbstractCommandLine<ikrs.util.Command> getCommandLine();
+  public void performQuit(boolean);
+  public void performStatus();
+  public void performPrintLicense();
+  public void performPrintWarranty();
+  public static void printWarranty();
+  public void serverCreated(ikrs.yuccasrv.socketmngr.BindManager, java.util.UUID);
+  public void serverError(ikrs.yuccasrv.socketmngr.BindManager, java.util.UUID, java.lang.Exception, boolean);
+  public void serverAcceptedTCPConnection(ikrs.yuccasrv.socketmngr.BindManager, java.util.UUID, java.net.Socket, ikrs.yuccasrv.ConnectionUserID);
+  public void serverAcceptedUDPConnection(ikrs.yuccasrv.socketmngr.BindManager, java.util.UUID, java.net.DatagramSocket, ikrs.yuccasrv.ConnectionUserID);
+  public void serverClosed(ikrs.yuccasrv.socketmngr.BindManager, java.util.UUID);
+  public void finalize(long, java.util.concurrent.TimeUnit);
+  protected void performAutoBind();
+  protected void performAutoBind(ikrs.util.Environment<java.lang.String, ikrs.typesystem.BasicType>);
+  protected boolean performAutoBind(ikrs.util.Environment<java.lang.String, ikrs.typesystem.BasicType>, ikrs.util.Environment<java.lang.String, ikrs.typesystem.BasicType>, java.util.Map<java.lang.String, ikrs.yuccasrv.ConnectionHandler>);
+  public void performListen(ikrs.typesystem.BasicType, ikrs.typesystem.BasicType, ikrs.util.Environment<java.lang.String, ikrs.typesystem.BasicType>) throws java.net.UnknownHostException, ikrs.typesystem.BasicTypeException, java.io.IOException, java.security.GeneralSecurityException;
+  public void performUnlisten(ikrs.typesystem.BasicType) throws ikrs.typesystem.BasicTypeException, java.io.IOException;
+  public void run();
+  public static java.lang.String processCustomizedFilePath(java.lang.String);
+  public static ikrs.yuccasrv.Yucca runYucca(java.lang.String[]);
+  public static void main(java.lang.String[]);
+}
+Compiled from "CommandHelp.java"
+public class ikrs.yuccasrv.commandline.CommandHelp extends ikrs.yuccasrv.commandline.YuccaCommand {
+  public ikrs.yuccasrv.commandline.CommandHelp(ikrs.yuccasrv.commandline.YuccaCommandFactory, java.lang.String, ikrs.typesystem.BasicType[]);
+  public int execute();
+}
+Compiled from "CommandLicense.java"
+public class ikrs.yuccasrv.commandline.CommandLicense extends ikrs.yuccasrv.commandline.YuccaCommand {
+  public ikrs.yuccasrv.commandline.CommandLicense();
+  public int execute();
+}
+Compiled from "CommandListen.java"
+public class ikrs.yuccasrv.commandline.CommandListen extends ikrs.yuccasrv.commandline.YuccaCommand {
+  public ikrs.yuccasrv.commandline.CommandListen();
+  public int execute();
+}
+Compiled from "CommandLogLevel.java"
+public class ikrs.yuccasrv.commandline.CommandLogLevel extends ikrs.yuccasrv.commandline.YuccaCommand {
+  public ikrs.yuccasrv.commandline.CommandLogLevel();
+  public int execute();
+}
+Compiled from "CommandQuit.java"
+public class ikrs.yuccasrv.commandline.CommandQuit extends ikrs.yuccasrv.commandline.YuccaCommand {
+  public ikrs.yuccasrv.commandline.CommandQuit();
+  public int execute();
+}
+Compiled from "CommandStatus.java"
+public class ikrs.yuccasrv.commandline.CommandStatus extends ikrs.yuccasrv.commandline.YuccaCommand {
+  public ikrs.yuccasrv.commandline.CommandStatus();
+  public int execute();
+}
+Compiled from "CommandUnlisten.java"
+public class ikrs.yuccasrv.commandline.CommandUnlisten extends ikrs.yuccasrv.commandline.YuccaCommand {
+  public ikrs.yuccasrv.commandline.CommandUnlisten();
+  public int execute();
+}
+Compiled from "CommandVersion.java"
+public class ikrs.yuccasrv.commandline.CommandVersion extends ikrs.yuccasrv.commandline.YuccaCommand {
+  public ikrs.yuccasrv.commandline.CommandVersion();
+  public int execute();
+}
+Compiled from "CommandWarranty.java"
+public class ikrs.yuccasrv.commandline.CommandWarranty extends ikrs.yuccasrv.commandline.YuccaCommand {
+  public ikrs.yuccasrv.commandline.CommandWarranty();
+  public int execute();
+}
+Compiled from "YuccaCommand.java"
+public class ikrs.yuccasrv.commandline.YuccaCommand extends ikrs.util.DefaultCommand implements ikrs.util.Command {
+  protected ikrs.yuccasrv.commandline.YuccaCommand(java.lang.String);
+  public ikrs.yuccasrv.commandline.YuccaCommand(ikrs.yuccasrv.commandline.YuccaCommandFactory, java.lang.String, ikrs.typesystem.BasicType[]);
+  protected void setFactory(ikrs.yuccasrv.commandline.YuccaCommandFactory);
+  protected ikrs.yuccasrv.commandline.YuccaCommandFactory getFactory();
+  protected void setName(java.lang.String);
+  protected void setParams(ikrs.typesystem.BasicType[]);
+  public int execute();
+}
+Compiled from "YuccaCommandFactory.java"
+public class ikrs.yuccasrv.commandline.YuccaCommandFactory extends ikrs.util.DefaultCommandFactory implements ikrs.util.CommandFactory<ikrs.util.Command> {
+  public ikrs.yuccasrv.commandline.YuccaCommandFactory(ikrs.yuccasrv.Yucca);
+  protected ikrs.yuccasrv.Yucca getServer();
+  public ikrs.util.Command make(java.lang.String, ikrs.typesystem.BasicType[]) throws ikrs.util.UnknownCommandException, ikrs.util.CommandStringIncompleteException;
+  public static java.lang.String[] getImplementedCommands();
+}
+Compiled from "YuccaLine.java"
+public class ikrs.yuccasrv.commandline.YuccaLine extends ikrs.util.AbstractCommandLine<ikrs.util.Command> implements java.lang.Runnable {
+  public ikrs.yuccasrv.commandline.YuccaLine(ikrs.util.CommandFactory<ikrs.util.Command>);
+  public void run();
+  public static void main(java.lang.String[]);
+}
+Compiled from "BindAdapter.java"
+public abstract class ikrs.yuccasrv.socketmngr.BindAdapter implements ikrs.yuccasrv.socketmngr.BindListener {
+  public ikrs.yuccasrv.socketmngr.BindAdapter();
+  public void serverCreated(ikrs.yuccasrv.socketmngr.BindManager, java.util.UUID);
+  public void serverError(ikrs.yuccasrv.socketmngr.BindManager, java.util.UUID, java.lang.Exception, boolean);
+  public void serverAcceptedTCPConnection(ikrs.yuccasrv.socketmngr.BindManager, java.util.UUID, java.net.Socket);
+  public void serverAcceptedUDPConnection(ikrs.yuccasrv.socketmngr.BindManager, java.util.UUID, java.net.DatagramSocket);
+  public void serverClosed(ikrs.yuccasrv.socketmngr.BindManager, java.util.UUID);
+}
+Compiled from "BindListener.java"
+public interface ikrs.yuccasrv.socketmngr.BindListener {
+  public abstract void serverCreated(ikrs.yuccasrv.socketmngr.BindManager, java.util.UUID);
+  public abstract void serverError(ikrs.yuccasrv.socketmngr.BindManager, java.util.UUID, java.lang.Exception, boolean);
+  public abstract void serverAcceptedTCPConnection(ikrs.yuccasrv.socketmngr.BindManager, java.util.UUID, java.net.Socket, ikrs.yuccasrv.ConnectionUserID<ikrs.yuccasrv.ConnectionUserID>);
+  public abstract void serverAcceptedUDPConnection(ikrs.yuccasrv.socketmngr.BindManager, java.util.UUID, java.net.DatagramSocket, ikrs.yuccasrv.ConnectionUserID<ikrs.yuccasrv.ConnectionUserID>);
+  public abstract void serverClosed(ikrs.yuccasrv.socketmngr.BindManager, java.util.UUID);
+  public abstract void finalize(long, java.util.concurrent.TimeUnit);
+}
+Compiled from "BindManager.java"
+public class ikrs.yuccasrv.socketmngr.BindManager implements java.lang.Runnable,ikrs.yuccasrv.socketmngr.ServerSocketThreadObserver {
+  public ikrs.yuccasrv.socketmngr.BindManager();
+  public ikrs.yuccasrv.socketmngr.BindManager(ikrs.util.CustomLogger);
+  public void setLogger(ikrs.util.CustomLogger) throws java.lang.NullPointerException;
+  protected ikrs.util.CustomLogger getLogger();
+  public boolean addBindListener(ikrs.yuccasrv.socketmngr.BindListener) throws java.lang.NullPointerException;
+  public boolean removeBindListener(ikrs.yuccasrv.socketmngr.BindListener);
+  public void incomingTCPConnection(ikrs.yuccasrv.socketmngr.ServerSocketThread, java.net.Socket);
+  public void incomingUDPConnection(ikrs.yuccasrv.socketmngr.ServerSocketThread, java.net.DatagramSocket);
+  public void serverSocketClosed(ikrs.yuccasrv.socketmngr.ServerSocketThread);
+  public void serverSocketException(ikrs.yuccasrv.socketmngr.ServerSocketThread, java.io.IOException);
+  public void serverSocketException(ikrs.yuccasrv.socketmngr.ServerSocketThread, java.lang.SecurityException);
+  public void serverSocketException(ikrs.yuccasrv.socketmngr.ServerSocketThread, java.net.SocketTimeoutException);
+  public void serverSocketException(ikrs.yuccasrv.socketmngr.ServerSocketThread, java.nio.channels.IllegalBlockingModeException);
+  public synchronized java.util.UUID bind(java.net.InetAddress, int, ikrs.util.Environment<java.lang.String, ikrs.typesystem.BasicType>) throws java.io.IOException, java.security.GeneralSecurityException;
+  public synchronized void release(java.util.UUID) throws java.io.IOException;
+  public java.util.Map<java.lang.String, ikrs.typesystem.BasicType> getServerSettings(java.util.UUID);
+  public synchronized void closeAllServerSockets();
+  public void finalize(long, java.util.concurrent.TimeUnit);
+  public void run();
+  public java.lang.String getStatusString();
+}
+Compiled from "ServerSocketThread.java"
+public class ikrs.yuccasrv.socketmngr.ServerSocketThread extends java.lang.Thread implements java.lang.Runnable {
+  public static final int DEFAULT_BACKLOG;
+  protected ikrs.yuccasrv.socketmngr.ServerSocketThread(ikrs.util.CustomLogger, java.net.InetAddress, int, ikrs.util.Environment<java.lang.String, ikrs.typesystem.BasicType>, ikrs.yuccasrv.socketmngr.ServerSocketThreadObserver) throws java.io.IOException, java.security.GeneralSecurityException;
+  public java.util.UUID getUUID();
+  public java.net.InetAddress getBindAddress();
+  public int getBindPort();
+  public java.util.Map<java.lang.String, ikrs.typesystem.BasicType> getServerSettings();
+  public void run();
+  public void interrupt();
+  public void finalize();
+  public java.lang.String getStatusString();
+}
+Compiled from "ServerSocketThreadObserver.java"
+public interface ikrs.yuccasrv.socketmngr.ServerSocketThreadObserver {
+  public abstract void incomingTCPConnection(ikrs.yuccasrv.socketmngr.ServerSocketThread, java.net.Socket);
+  public abstract void incomingUDPConnection(ikrs.yuccasrv.socketmngr.ServerSocketThread, java.net.DatagramSocket);
+  public abstract void serverSocketClosed(ikrs.yuccasrv.socketmngr.ServerSocketThread);
+  public abstract void serverSocketException(ikrs.yuccasrv.socketmngr.ServerSocketThread, java.io.IOException);
+  public abstract void serverSocketException(ikrs.yuccasrv.socketmngr.ServerSocketThread, java.lang.SecurityException);
+  public abstract void serverSocketException(ikrs.yuccasrv.socketmngr.ServerSocketThread, java.net.SocketTimeoutException);
+  public abstract void serverSocketException(ikrs.yuccasrv.socketmngr.ServerSocketThread, java.nio.channels.IllegalBlockingModeException);
+}
+Compiled from "InetAddressComboBoxModel.java"
+public class ikrs.yuccasrv.ui.InetAddressComboBoxModel extends javax.swing.AbstractListModel implements javax.swing.ComboBoxModel {
+  public ikrs.yuccasrv.ui.InetAddressComboBoxModel() throws java.net.SocketException;
+  public java.net.InetAddress getSelectedAddress();
+  public java.net.InetAddress getSelectedItem();
+  public void setSelectedItem(java.lang.Object);
+  public java.net.InetAddress getElementAt(int);
+  public int getSize();
+  public java.lang.Object getElementAt(int);
+  public java.lang.Object getSelectedItem();
+}
+Compiled from "NewServerDialog.java"
+public class ikrs.yuccasrv.ui.NewServerDialog extends javax.swing.JDialog implements java.awt.event.ActionListener {
+  public ikrs.yuccasrv.ui.NewServerDialog(ikrs.yuccasrv.ui.ServerManagerDialog);
+  public void actionPerformed(java.awt.event.ActionEvent);
+  public void setStatus(java.lang.String);
+  public void setStatus(java.lang.String, boolean);
+}
+Compiled from "ServerManagerDialog.java"
+public class ikrs.yuccasrv.ui.ServerManagerDialog extends javax.swing.JDialog implements java.awt.event.ActionListener {
+  public ikrs.yuccasrv.ui.ServerManagerDialog(ikrs.yuccasrv.socketmngr.BindManager);
+  public void actionPerformed(java.awt.event.ActionEvent);
+  protected boolean performStartServer(java.net.InetAddress, int, ikrs.util.Environment<java.lang.String, ikrs.typesystem.BasicType>);
+  public void setStatus(java.lang.String);
+  public void setStatus(java.lang.String, boolean);
+  public void addInfo(java.lang.String);
+  public static void main(java.lang.String[]);
+}
+Compiled from "ServerSocketTableModel.java"
+public class ikrs.yuccasrv.ui.ServerSocketTableModel extends javax.swing.table.AbstractTableModel implements ikrs.yuccasrv.socketmngr.BindListener {
+  public ikrs.yuccasrv.ui.ServerSocketTableModel();
+  protected java.util.Map<java.lang.String, ikrs.typesystem.BasicType> getRow(int);
+  public synchronized int resolveTableRowBySocketID(java.util.UUID);
+  public void serverCreated(ikrs.yuccasrv.socketmngr.BindManager, java.util.UUID);
+  public void serverError(ikrs.yuccasrv.socketmngr.BindManager, java.util.UUID, java.lang.Exception, boolean);
+  public void serverAcceptedTCPConnection(ikrs.yuccasrv.socketmngr.BindManager, java.util.UUID, java.net.Socket, ikrs.yuccasrv.ConnectionUserID);
+  public void serverAcceptedUDPConnection(ikrs.yuccasrv.socketmngr.BindManager, java.util.UUID, java.net.DatagramSocket, ikrs.yuccasrv.ConnectionUserID);
+  public synchronized void serverClosed(ikrs.yuccasrv.socketmngr.BindManager, java.util.UUID);
+  public void finalize(long, java.util.concurrent.TimeUnit);
+  public java.lang.String getColumnName(int);
+  public int getRowCount();
+  public int getColumnCount();
+  public java.lang.Object getValueAt(int, int);
+}
+Compiled from "ConfigReader.java"
+public class ikrs.yuccasrv.util.ConfigReader {
+  public ikrs.yuccasrv.util.ConfigReader();
+  public static ikrs.util.Environment<java.lang.String, ikrs.typesystem.BasicType> read(java.io.File) throws java.io.IOException;
+  public static void main(java.lang.String[]);
+}
+Compiled from "YuccaLogFormatter.java"
+public class ikrs.yuccasrv.util.YuccaLogFormatter extends java.util.logging.SimpleFormatter {
+  public ikrs.yuccasrv.util.YuccaLogFormatter();
+  public java.lang.String format(java.util.logging.LogRecord);
+}

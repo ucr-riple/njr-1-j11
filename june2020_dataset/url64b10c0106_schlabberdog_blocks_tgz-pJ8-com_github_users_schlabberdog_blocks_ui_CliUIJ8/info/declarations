@@ -1,0 +1,407 @@
+Compiled from "RectTest.java"
+public class com.github.users.schlabberdog.blocks.RectTest {
+  public com.github.users.schlabberdog.blocks.RectTest();
+  public void testIntersection() throws java.lang.Exception;
+}
+Compiled from "Block.java"
+public abstract class com.github.users.schlabberdog.blocks.board.Block {
+  public final int width;
+  public final int height;
+  protected com.github.users.schlabberdog.blocks.board.Block(int, int);
+  public abstract java.awt.Color getColor();
+  public abstract char getRepresentation();
+  public boolean coversArea(com.github.users.schlabberdog.blocks.mccs.Coord, com.github.users.schlabberdog.blocks.mccs.Rect);
+  public boolean coversArea(com.github.users.schlabberdog.blocks.mccs.Coord, com.github.users.schlabberdog.blocks.mccs.Rect[]);
+  public com.github.users.schlabberdog.blocks.mccs.Rect[] getRectSet(com.github.users.schlabberdog.blocks.mccs.Coord);
+  public void printOntoMap(com.github.users.schlabberdog.blocks.mccs.Coord, char[][]);
+  public java.awt.geom.Area drawShape(com.github.users.schlabberdog.blocks.mccs.Coord, double, double);
+  public void addAlts(com.github.users.schlabberdog.blocks.mccs.Coord, com.github.users.schlabberdog.blocks.board.Board, java.util.ArrayList<com.github.users.schlabberdog.blocks.board.moves.IMove>);
+}
+Compiled from "Board.java"
+public class com.github.users.schlabberdog.blocks.board.Board {
+  public final int width;
+  public final int height;
+  public com.github.users.schlabberdog.blocks.board.Board(int, int);
+  public synchronized void insertBlockAt(com.github.users.schlabberdog.blocks.board.Block, com.github.users.schlabberdog.blocks.mccs.Coord);
+  public void insertBlockAt(com.github.users.schlabberdog.blocks.board.Block, int, int);
+  public synchronized void removeBlock(com.github.users.schlabberdog.blocks.board.Block);
+  public synchronized boolean intersectsWithRectSet(com.github.users.schlabberdog.blocks.mccs.Rect[]);
+  public synchronized boolean intersectsWithRect(com.github.users.schlabberdog.blocks.mccs.Rect);
+  public com.github.users.schlabberdog.blocks.board.Block getBlockOriginatingAt(com.github.users.schlabberdog.blocks.mccs.Coord);
+  public synchronized com.github.users.schlabberdog.blocks.board.Block getBlockOriginatingAt(int, int);
+  public synchronized com.github.users.schlabberdog.blocks.board.Block getBlockCovering(int, int);
+  public synchronized java.lang.String getBoardHash();
+  public synchronized void print(java.io.PrintStream);
+  public synchronized java.util.ArrayList<com.github.users.schlabberdog.blocks.board.moves.IMove> getAlternatives();
+  public synchronized com.github.users.schlabberdog.blocks.board.BoardSave getSave();
+  public void applyMove(com.github.users.schlabberdog.blocks.board.moves.IMove);
+  public synchronized void clear();
+  public synchronized void applySave(com.github.users.schlabberdog.blocks.board.BoardSave);
+  public synchronized com.github.users.schlabberdog.blocks.mccs.Coord getBlockCoord(com.github.users.schlabberdog.blocks.board.Block);
+  public com.github.users.schlabberdog.blocks.board.Board copy();
+}
+Compiled from "BoardSave.java"
+public class com.github.users.schlabberdog.blocks.board.BoardSave extends java.util.HashMap<com.github.users.schlabberdog.blocks.board.Block, com.github.users.schlabberdog.blocks.mccs.Coord> {
+  public com.github.users.schlabberdog.blocks.board.BoardSave();
+}
+Compiled from "ImBlock.java"
+public class com.github.users.schlabberdog.blocks.board.ImBlock extends com.github.users.schlabberdog.blocks.board.Block {
+  public com.github.users.schlabberdog.blocks.board.ImBlock(int, int);
+  public java.awt.Color getColor();
+  public char getRepresentation();
+  public void addAlts(com.github.users.schlabberdog.blocks.mccs.Coord, com.github.users.schlabberdog.blocks.board.Board, java.util.ArrayList<com.github.users.schlabberdog.blocks.board.moves.IMove>);
+}
+Compiled from "IMove.java"
+public interface com.github.users.schlabberdog.blocks.board.moves.IMove {
+  public abstract void apply(com.github.users.schlabberdog.blocks.board.Board);
+  public abstract com.github.users.schlabberdog.blocks.board.moves.IMove mergeWith(com.github.users.schlabberdog.blocks.board.moves.IMove);
+}
+Compiled from "Move.java"
+public class com.github.users.schlabberdog.blocks.board.moves.Move implements com.github.users.schlabberdog.blocks.board.moves.IMove {
+  public final com.github.users.schlabberdog.blocks.board.Block block;
+  public final int deltaX;
+  public final int deltaY;
+  public final java.lang.String debugMsg;
+  public com.github.users.schlabberdog.blocks.board.moves.Move(com.github.users.schlabberdog.blocks.board.Block, int, int);
+  public com.github.users.schlabberdog.blocks.board.moves.Move(com.github.users.schlabberdog.blocks.board.Block, int, int, java.lang.String);
+  public void apply(com.github.users.schlabberdog.blocks.board.Board);
+  public com.github.users.schlabberdog.blocks.board.moves.IMove mergeWith(com.github.users.schlabberdog.blocks.board.moves.IMove);
+  public java.lang.String toString();
+}
+Compiled from "MultiMove.java"
+public class com.github.users.schlabberdog.blocks.board.moves.MultiMove implements com.github.users.schlabberdog.blocks.board.moves.IMove {
+  public com.github.users.schlabberdog.blocks.board.moves.MultiMove();
+  public com.github.users.schlabberdog.blocks.board.moves.MultiMove(com.github.users.schlabberdog.blocks.board.Block, int, int);
+  public void add(com.github.users.schlabberdog.blocks.board.Block, int, int);
+  public void apply(com.github.users.schlabberdog.blocks.board.Board);
+  public com.github.users.schlabberdog.blocks.board.moves.IMove mergeWith(com.github.users.schlabberdog.blocks.board.moves.IMove);
+  public java.lang.String toString();
+}
+Compiled from "MultiMove.java"
+class com.github.users.schlabberdog.blocks.board.moves.MultiMove$1 {
+}
+Compiled from "MultiMove.java"
+class com.github.users.schlabberdog.blocks.board.moves.MultiMove$SMove {
+  com.github.users.schlabberdog.blocks.board.Block block;
+  int deltaX;
+  int deltaY;
+  com.github.users.schlabberdog.blocks.board.moves.MultiMove$SMove(com.github.users.schlabberdog.blocks.board.Block, int, int, com.github.users.schlabberdog.blocks.board.moves.MultiMove$1);
+}
+Compiled from "Coord.java"
+public class com.github.users.schlabberdog.blocks.mccs.Coord {
+  public final int x;
+  public final int y;
+  public com.github.users.schlabberdog.blocks.mccs.Coord(int, int);
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+}
+Compiled from "CoordTest.java"
+public class com.github.users.schlabberdog.blocks.mccs.CoordTest {
+  public com.github.users.schlabberdog.blocks.mccs.CoordTest();
+  public void testOrderOfArguments();
+  public void testEquals();
+}
+Compiled from "Rect.java"
+public class com.github.users.schlabberdog.blocks.mccs.Rect {
+  public final com.github.users.schlabberdog.blocks.mccs.Coord origin;
+  public final com.github.users.schlabberdog.blocks.mccs.Size size;
+  public com.github.users.schlabberdog.blocks.mccs.Rect(com.github.users.schlabberdog.blocks.mccs.Coord, com.github.users.schlabberdog.blocks.mccs.Size);
+  public com.github.users.schlabberdog.blocks.mccs.Rect(com.github.users.schlabberdog.blocks.mccs.Coord, int, int);
+  public com.github.users.schlabberdog.blocks.mccs.Rect(int, int, com.github.users.schlabberdog.blocks.mccs.Size);
+  public com.github.users.schlabberdog.blocks.mccs.Rect(int, int, int, int);
+  public static com.github.users.schlabberdog.blocks.mccs.Rect intersection(com.github.users.schlabberdog.blocks.mccs.Rect, com.github.users.schlabberdog.blocks.mccs.Rect);
+  public int getX();
+  public int getY();
+  public int getWidth();
+  public int getHeight();
+  public boolean equals(java.lang.Object);
+  public com.github.users.schlabberdog.blocks.mccs.Rect copy();
+  public java.lang.String toString();
+  public com.github.users.schlabberdog.blocks.mccs.Rect intersect(com.github.users.schlabberdog.blocks.mccs.Rect);
+}
+Compiled from "Size.java"
+public class com.github.users.schlabberdog.blocks.mccs.Size {
+  public final int width;
+  public final int height;
+  public com.github.users.schlabberdog.blocks.mccs.Size(int, int);
+  public boolean equals(java.lang.Object);
+}
+Compiled from "KBlock.java"
+public class com.github.users.schlabberdog.blocks.r010.KBlock extends com.github.users.schlabberdog.blocks.board.Block {
+  public com.github.users.schlabberdog.blocks.r010.KBlock();
+  public char getRepresentation();
+  public java.awt.Color getColor();
+  public java.lang.String toString();
+}
+Compiled from "LBlock.java"
+public class com.github.users.schlabberdog.blocks.r010.LBlock extends com.github.users.schlabberdog.blocks.board.Block {
+  public com.github.users.schlabberdog.blocks.r010.LBlock();
+  public char getRepresentation();
+  public java.awt.Color getColor();
+  public java.lang.String toString();
+}
+Compiled from "LUBlock.java"
+public class com.github.users.schlabberdog.blocks.r010.LUBlock extends com.github.users.schlabberdog.blocks.board.Block {
+  public com.github.users.schlabberdog.blocks.r010.LUBlock();
+  public void printOntoMap(com.github.users.schlabberdog.blocks.mccs.Coord, char[][]);
+  public java.awt.Color getColor();
+  public java.lang.String toString();
+  public com.github.users.schlabberdog.blocks.mccs.Rect[] getRectSet(com.github.users.schlabberdog.blocks.mccs.Coord);
+  public char getRepresentation();
+  public void addAlts(com.github.users.schlabberdog.blocks.mccs.Coord, com.github.users.schlabberdog.blocks.board.Board, java.util.ArrayList<com.github.users.schlabberdog.blocks.board.moves.IMove>);
+}
+Compiled from "R010Game.java"
+public class com.github.users.schlabberdog.blocks.r010.R010Game implements com.github.users.schlabberdog.blocks.ui.IGame,com.github.users.schlabberdog.blocks.solver.ISolutionChecker {
+  public com.github.users.schlabberdog.blocks.r010.R010Game();
+  public com.github.users.schlabberdog.blocks.board.Board getBoard();
+  public com.github.users.schlabberdog.blocks.solver.ISolutionChecker getChecker();
+  public java.lang.String getTitle();
+  public boolean checkBoard(com.github.users.schlabberdog.blocks.board.Board);
+}
+Compiled from "RLBlock.java"
+public class com.github.users.schlabberdog.blocks.r010.RLBlock extends com.github.users.schlabberdog.blocks.board.Block {
+  public com.github.users.schlabberdog.blocks.r010.RLBlock();
+  public void printOntoMap(com.github.users.schlabberdog.blocks.mccs.Coord, char[][]);
+  public void addAlts(com.github.users.schlabberdog.blocks.mccs.Coord, com.github.users.schlabberdog.blocks.board.Board, java.util.ArrayList<com.github.users.schlabberdog.blocks.board.moves.IMove>);
+  public java.lang.String toString();
+  public java.awt.Color getColor();
+  public com.github.users.schlabberdog.blocks.mccs.Rect[] getRectSet(com.github.users.schlabberdog.blocks.mccs.Coord);
+  public char getRepresentation();
+}
+Compiled from "RUBlock.java"
+public class com.github.users.schlabberdog.blocks.r010.RUBlock extends com.github.users.schlabberdog.blocks.board.Block {
+  public com.github.users.schlabberdog.blocks.r010.RUBlock();
+  public void printOntoMap(com.github.users.schlabberdog.blocks.mccs.Coord, char[][]);
+  public java.awt.Color getColor();
+  public java.lang.String toString();
+  public com.github.users.schlabberdog.blocks.mccs.Rect[] getRectSet(com.github.users.schlabberdog.blocks.mccs.Coord);
+  public char getRepresentation();
+  public void addAlts(com.github.users.schlabberdog.blocks.mccs.Coord, com.github.users.schlabberdog.blocks.board.Board, java.util.ArrayList<com.github.users.schlabberdog.blocks.board.moves.IMove>);
+}
+Compiled from "Backtrack.java"
+class com.github.users.schlabberdog.blocks.solver.Backtrack {
+  public final com.github.users.schlabberdog.blocks.board.BoardSave initialState;
+  public final java.util.ArrayList<com.github.users.schlabberdog.blocks.board.moves.IMove> alternatives;
+  public com.github.users.schlabberdog.blocks.board.moves.IMove selected;
+  public com.github.users.schlabberdog.blocks.solver.Backtrack(com.github.users.schlabberdog.blocks.board.BoardSave, java.util.ArrayList<com.github.users.schlabberdog.blocks.board.moves.IMove>);
+}
+Compiled from "ISolutionChecker.java"
+public interface com.github.users.schlabberdog.blocks.solver.ISolutionChecker {
+  public abstract boolean checkBoard(com.github.users.schlabberdog.blocks.board.Board);
+}
+Compiled from "ISolverDelegate.java"
+public interface com.github.users.schlabberdog.blocks.solver.ISolverDelegate {
+  public abstract void solverStarted(com.github.users.schlabberdog.blocks.solver.Solver);
+  public abstract void solutionImproved(com.github.users.schlabberdog.blocks.solver.Solver, int);
+  public abstract void solverDone(com.github.users.schlabberdog.blocks.solver.Solver);
+}
+Compiled from "LeveledSteps.java"
+class com.github.users.schlabberdog.blocks.solver.LeveledSteps {
+  com.github.users.schlabberdog.blocks.solver.LeveledSteps();
+  public synchronized void clear();
+  public synchronized void pushOnLevel(java.lang.String, int);
+  public synchronized boolean containsOnBetterLevel(java.lang.String, int);
+}
+Compiled from "Solver.java"
+public class com.github.users.schlabberdog.blocks.solver.Solver {
+  public com.github.users.schlabberdog.blocks.solver.Solver(com.github.users.schlabberdog.blocks.board.Board, com.github.users.schlabberdog.blocks.solver.ISolutionChecker);
+  public synchronized void solve();
+  public long getCheckCount();
+  public int getStackDepth();
+  public int getSolutionCount();
+  public int getSolutionImprovedCount();
+  public int getBestPathLength();
+  public int getWorstStack();
+  public boolean shouldAvoidWorseStacks();
+  public synchronized java.util.List<com.github.users.schlabberdog.blocks.board.moves.IMove> getStepList();
+  public synchronized void setDelegate(com.github.users.schlabberdog.blocks.solver.ISolverDelegate);
+  public synchronized void setAvoidWorseStacks(boolean);
+  public synchronized void setStackDepthLimit(int);
+}
+Compiled from "BoardView.java"
+public class com.github.users.schlabberdog.blocks.ui.BoardView extends javax.swing.JComponent {
+  static final boolean $assertionsDisabled;
+  public com.github.users.schlabberdog.blocks.ui.BoardView(com.github.users.schlabberdog.blocks.board.Board);
+  public java.awt.Dimension getMinimumSize();
+  protected void paintComponent(java.awt.Graphics);
+  static {};
+}
+Compiled from "CliUI.java"
+public class com.github.users.schlabberdog.blocks.ui.CliUI implements com.github.users.schlabberdog.blocks.solver.ISolverDelegate {
+  final com.github.users.schlabberdog.blocks.board.Board replayBoard;
+  final com.github.users.schlabberdog.blocks.board.BoardSave initialState;
+  public com.github.users.schlabberdog.blocks.ui.CliUI();
+  public void solve();
+  public static void main(java.lang.String[]);
+  public void solverStarted(com.github.users.schlabberdog.blocks.solver.Solver);
+  public void solutionImproved(com.github.users.schlabberdog.blocks.solver.Solver, int);
+  public void solverDone(com.github.users.schlabberdog.blocks.solver.Solver);
+}
+Compiled from "GamePicker.java"
+public class com.github.users.schlabberdog.blocks.ui.GamePicker {
+  public com.github.users.schlabberdog.blocks.ui.GamePicker();
+  public static void main(java.lang.String[]);
+  static void access$000(com.github.users.schlabberdog.blocks.ui.GamePicker);
+}
+Compiled from "GamePicker.java"
+class com.github.users.schlabberdog.blocks.ui.GamePicker$1 implements java.awt.event.ActionListener {
+  final com.github.users.schlabberdog.blocks.ui.GamePicker this$0;
+  com.github.users.schlabberdog.blocks.ui.GamePicker$1(com.github.users.schlabberdog.blocks.ui.GamePicker);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GamePicker.java"
+class com.github.users.schlabberdog.blocks.ui.GamePicker$GameDropdownItem {
+  final com.github.users.schlabberdog.blocks.ui.IGame game;
+  com.github.users.schlabberdog.blocks.ui.GamePicker$GameDropdownItem(com.github.users.schlabberdog.blocks.ui.IGame);
+  public java.lang.String toString();
+}
+Compiled from "IGame.java"
+public interface com.github.users.schlabberdog.blocks.ui.IGame {
+  public abstract com.github.users.schlabberdog.blocks.board.Board getBoard();
+  public abstract com.github.users.schlabberdog.blocks.solver.ISolutionChecker getChecker();
+  public abstract java.lang.String getTitle();
+}
+Compiled from "IJGUI.java"
+public class com.github.users.schlabberdog.blocks.ui.IJGUI implements com.github.users.schlabberdog.blocks.solver.ISolverDelegate,java.lang.Thread$UncaughtExceptionHandler {
+  public synchronized void validateButtons();
+  public synchronized void doNext();
+  public synchronized void startSolve();
+  public synchronized void doStep();
+  public static com.github.users.schlabberdog.blocks.ui.IJGUI Create(com.github.users.schlabberdog.blocks.board.Board, com.github.users.schlabberdog.blocks.solver.Solver);
+  public synchronized void solverStarted(com.github.users.schlabberdog.blocks.solver.Solver);
+  public void solutionImproved(com.github.users.schlabberdog.blocks.solver.Solver, int);
+  public synchronized void solverDone(com.github.users.schlabberdog.blocks.solver.Solver);
+  public void uncaughtException(java.lang.Thread, java.lang.Throwable);
+  static com.github.users.schlabberdog.blocks.solver.Solver access$000(com.github.users.schlabberdog.blocks.ui.IJGUI);
+  static com.github.users.schlabberdog.blocks.board.Board access$100(com.github.users.schlabberdog.blocks.ui.IJGUI);
+  static com.github.users.schlabberdog.blocks.board.BoardSave access$200(com.github.users.schlabberdog.blocks.ui.IJGUI);
+  static java.util.List access$300(com.github.users.schlabberdog.blocks.ui.IJGUI);
+  static javax.swing.JButton access$400(com.github.users.schlabberdog.blocks.ui.IJGUI);
+  static javax.swing.JSpinner access$500(com.github.users.schlabberdog.blocks.ui.IJGUI);
+  static javax.swing.JFrame access$600(com.github.users.schlabberdog.blocks.ui.IJGUI);
+}
+Compiled from "IJGUI.java"
+class com.github.users.schlabberdog.blocks.ui.IJGUI$1 implements java.awt.event.ActionListener {
+  final com.github.users.schlabberdog.blocks.ui.IJGUI this$0;
+  com.github.users.schlabberdog.blocks.ui.IJGUI$1(com.github.users.schlabberdog.blocks.ui.IJGUI);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "IJGUI.java"
+class com.github.users.schlabberdog.blocks.ui.IJGUI$2 implements java.awt.event.ActionListener {
+  final com.github.users.schlabberdog.blocks.ui.IJGUI this$0;
+  com.github.users.schlabberdog.blocks.ui.IJGUI$2(com.github.users.schlabberdog.blocks.ui.IJGUI);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "IJGUI.java"
+class com.github.users.schlabberdog.blocks.ui.IJGUI$3 implements java.awt.event.ActionListener {
+  final com.github.users.schlabberdog.blocks.ui.IJGUI this$0;
+  com.github.users.schlabberdog.blocks.ui.IJGUI$3(com.github.users.schlabberdog.blocks.ui.IJGUI);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "IJGUI.java"
+class com.github.users.schlabberdog.blocks.ui.IJGUI$4 implements java.awt.event.ActionListener {
+  final com.github.users.schlabberdog.blocks.ui.IJGUI this$0;
+  com.github.users.schlabberdog.blocks.ui.IJGUI$4(com.github.users.schlabberdog.blocks.ui.IJGUI);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "IJGUI.java"
+class com.github.users.schlabberdog.blocks.ui.IJGUI$5 implements java.lang.Runnable {
+  final com.github.users.schlabberdog.blocks.ui.IJGUI this$0;
+  com.github.users.schlabberdog.blocks.ui.IJGUI$5(com.github.users.schlabberdog.blocks.ui.IJGUI);
+  public void run();
+}
+Compiled from "IJGUI.java"
+class com.github.users.schlabberdog.blocks.ui.IJGUI$6 implements java.lang.Runnable {
+  final com.github.users.schlabberdog.blocks.ui.IJGUI this$0;
+  com.github.users.schlabberdog.blocks.ui.IJGUI$6(com.github.users.schlabberdog.blocks.ui.IJGUI);
+  public void run();
+}
+Compiled from "IJGUI.java"
+class com.github.users.schlabberdog.blocks.ui.IJGUI$7 implements java.lang.Runnable {
+  final com.github.users.schlabberdog.blocks.ui.IJGUI this$0;
+  com.github.users.schlabberdog.blocks.ui.IJGUI$7(com.github.users.schlabberdog.blocks.ui.IJGUI);
+  public void run();
+}
+Compiled from "IJGUI.java"
+class com.github.users.schlabberdog.blocks.ui.IJGUI$8 implements java.lang.Runnable {
+  final java.lang.String val$stackTrace;
+  final com.github.users.schlabberdog.blocks.ui.IJGUI this$0;
+  com.github.users.schlabberdog.blocks.ui.IJGUI$8(com.github.users.schlabberdog.blocks.ui.IJGUI, java.lang.String);
+  public void run();
+}
+Compiled from "IJSolutionBrowser.java"
+public class com.github.users.schlabberdog.blocks.ui.IJSolutionBrowser {
+  public static com.github.users.schlabberdog.blocks.ui.IJSolutionBrowser Create(com.github.users.schlabberdog.blocks.board.Board, com.github.users.schlabberdog.blocks.board.BoardSave, java.util.List<com.github.users.schlabberdog.blocks.board.moves.IMove>);
+  static void access$000(com.github.users.schlabberdog.blocks.ui.IJSolutionBrowser);
+  static void access$100(com.github.users.schlabberdog.blocks.ui.IJSolutionBrowser);
+  static void access$200(com.github.users.schlabberdog.blocks.ui.IJSolutionBrowser);
+  static void access$300(com.github.users.schlabberdog.blocks.ui.IJSolutionBrowser);
+}
+Compiled from "IJSolutionBrowser.java"
+class com.github.users.schlabberdog.blocks.ui.IJSolutionBrowser$1 implements java.awt.event.ActionListener {
+  final com.github.users.schlabberdog.blocks.ui.IJSolutionBrowser this$0;
+  com.github.users.schlabberdog.blocks.ui.IJSolutionBrowser$1(com.github.users.schlabberdog.blocks.ui.IJSolutionBrowser);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "IJSolutionBrowser.java"
+class com.github.users.schlabberdog.blocks.ui.IJSolutionBrowser$2 implements java.awt.event.ActionListener {
+  final com.github.users.schlabberdog.blocks.ui.IJSolutionBrowser this$0;
+  com.github.users.schlabberdog.blocks.ui.IJSolutionBrowser$2(com.github.users.schlabberdog.blocks.ui.IJSolutionBrowser);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "IJSolutionBrowser.java"
+class com.github.users.schlabberdog.blocks.ui.IJSolutionBrowser$3 implements java.awt.event.ActionListener {
+  final com.github.users.schlabberdog.blocks.ui.IJSolutionBrowser this$0;
+  com.github.users.schlabberdog.blocks.ui.IJSolutionBrowser$3(com.github.users.schlabberdog.blocks.ui.IJSolutionBrowser);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "IJSolutionBrowser.java"
+class com.github.users.schlabberdog.blocks.ui.IJSolutionBrowser$4 implements java.awt.event.ActionListener {
+  final com.github.users.schlabberdog.blocks.ui.IJSolutionBrowser this$0;
+  com.github.users.schlabberdog.blocks.ui.IJSolutionBrowser$4(com.github.users.schlabberdog.blocks.ui.IJSolutionBrowser);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "Stopwatch.java"
+public class com.github.users.schlabberdog.blocks.ui.Stopwatch {
+  public com.github.users.schlabberdog.blocks.ui.Stopwatch();
+  public synchronized void start();
+  public synchronized void stop();
+  public synchronized void reset();
+  public synchronized long getElapsedTime();
+}
+Compiled from "BlueBlock.java"
+public class com.github.users.schlabberdog.blocks.w32.BlueBlock extends com.github.users.schlabberdog.blocks.board.Block {
+  public com.github.users.schlabberdog.blocks.w32.BlueBlock();
+  public char getRepresentation();
+  public java.awt.Color getColor();
+  public java.lang.String toString();
+}
+Compiled from "GreenBlock.java"
+public class com.github.users.schlabberdog.blocks.w32.GreenBlock extends com.github.users.schlabberdog.blocks.board.Block {
+  public com.github.users.schlabberdog.blocks.w32.GreenBlock();
+  public char getRepresentation();
+  public java.awt.Color getColor();
+  public java.lang.String toString();
+}
+Compiled from "RedBlock.java"
+public class com.github.users.schlabberdog.blocks.w32.RedBlock extends com.github.users.schlabberdog.blocks.board.Block {
+  public com.github.users.schlabberdog.blocks.w32.RedBlock();
+  public char getRepresentation();
+  public java.awt.Color getColor();
+  public java.lang.String toString();
+}
+Compiled from "W32Game.java"
+public class com.github.users.schlabberdog.blocks.w32.W32Game implements com.github.users.schlabberdog.blocks.ui.IGame,com.github.users.schlabberdog.blocks.solver.ISolutionChecker {
+  public com.github.users.schlabberdog.blocks.w32.W32Game();
+  public com.github.users.schlabberdog.blocks.board.Board getBoard();
+  public com.github.users.schlabberdog.blocks.solver.ISolutionChecker getChecker();
+  public java.lang.String getTitle();
+  public boolean checkBoard(com.github.users.schlabberdog.blocks.board.Board);
+}
+Compiled from "YellowBlock.java"
+public class com.github.users.schlabberdog.blocks.w32.YellowBlock extends com.github.users.schlabberdog.blocks.board.Block {
+  public com.github.users.schlabberdog.blocks.w32.YellowBlock();
+  public char getRepresentation();
+  public java.awt.Color getColor();
+  public java.lang.String toString();
+}

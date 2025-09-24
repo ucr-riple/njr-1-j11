@@ -1,0 +1,996 @@
+Compiled from "AbstractGraphBuilder.java"
+public abstract class signature.AbstractGraphBuilder {
+  public signature.AbstractGraphBuilder();
+  public void makeFromColoredTree(signature.ColoredTree);
+  public abstract void makeGraph();
+  public abstract void makeVertex(java.lang.String);
+  public abstract void makeEdge(int, int, java.lang.String, java.lang.String, java.lang.String);
+}
+Compiled from "AbstractGraphSignature.java"
+public abstract class signature.AbstractGraphSignature {
+  public signature.AbstractGraphSignature();
+  public signature.AbstractGraphSignature(java.lang.String);
+  public signature.AbstractGraphSignature(int);
+  public signature.AbstractGraphSignature(java.lang.String, int);
+  public int getHeight();
+  protected abstract int getVertexCount();
+  public abstract java.lang.String signatureStringForVertex(int);
+  public abstract java.lang.String signatureStringForVertex(int, int);
+  public abstract signature.AbstractVertexSignature signatureForVertex(int);
+  public java.lang.String toCanonicalString();
+  public java.util.List<signature.SymmetryClass> getSymmetryClasses();
+  public java.util.List<signature.SymmetryClass> getSymmetryClasses(int);
+  public java.lang.String toFullString();
+  public java.lang.String getGraphSignature();
+  public java.util.List<java.lang.String> getSortedSignatures();
+  public java.lang.String getMinimalSignature();
+  public java.lang.String getMaximalSignature();
+  public java.util.List<java.lang.String> getVertexSignatureStrings();
+  public java.util.List<signature.AbstractVertexSignature> getVertexSignatures();
+  public boolean isCanonicallyLabelled();
+  public void reconstructCanonicalGraph(signature.AbstractVertexSignature, signature.AbstractGraphBuilder);
+  public int[] getCanonicalLabels();
+  public java.lang.String reconstructCanonicalEdgeString();
+}
+Compiled from "AbstractQuotientGraph.java"
+public abstract class signature.AbstractQuotientGraph {
+  public signature.AbstractQuotientGraph();
+  public int getVertexCount();
+  public int getEdgeCount();
+  public int numberOfLoopEdges();
+  public abstract boolean isConnected(int, int);
+  public java.util.List<java.lang.String> getVertexSignatureStrings();
+  public void construct(java.util.List<signature.SymmetryClass>);
+  public java.lang.String toString();
+}
+Compiled from "AbstractQuotientGraph.java"
+class signature.AbstractQuotientGraph$Edge {
+  public int count;
+  public int vertexIndexA;
+  public int vertexIndexB;
+  final signature.AbstractQuotientGraph this$0;
+  public signature.AbstractQuotientGraph$Edge(signature.AbstractQuotientGraph, int, int, int);
+  public boolean isLoop();
+  public java.lang.String toString();
+}
+Compiled from "AbstractQuotientGraph.java"
+class signature.AbstractQuotientGraph$Vertex {
+  public java.util.List<java.lang.Integer> members;
+  public java.lang.String signature;
+  final signature.AbstractQuotientGraph this$0;
+  public signature.AbstractQuotientGraph$Vertex(java.util.List<java.lang.Integer>, java.lang.String);
+  public java.lang.String toString();
+}
+Compiled from "AbstractVertexSignature.java"
+public abstract class signature.AbstractVertexSignature {
+  public static final char START_BRANCH_SYMBOL;
+  public static final char END_BRANCH_SYMBOL;
+  public static final char START_NODE_SYMBOL;
+  public static final char END_NODE_SYMBOL;
+  public int TMP_COLORING_COUNT;
+  public signature.AbstractVertexSignature();
+  public signature.AbstractVertexSignature(signature.AbstractVertexSignature$InvariantType);
+  public int getHeight();
+  public int getOriginalVertexIndex(int);
+  public void createMaximumHeight(int, int);
+  public void create(int, int, int);
+  public java.lang.String toCanonicalString();
+  public void canonize(int, java.lang.StringBuffer);
+  public int[] getCanonicalLabelling(int);
+  public void accept(signature.DAGVisitor);
+  public int getVertexCount();
+  protected abstract int convertEdgeLabelToColor(java.lang.String);
+  protected abstract int getIntLabel(int);
+  protected abstract java.lang.String getVertexSymbol(int);
+  protected abstract int[] getConnected(int);
+  protected abstract java.lang.String getEdgeLabel(int, int);
+  public java.lang.String toString();
+  public static signature.ColoredTree parse(java.lang.String);
+}
+Compiled from "AbstractVertexSignature.java"
+public final class signature.AbstractVertexSignature$InvariantType extends java.lang.Enum<signature.AbstractVertexSignature$InvariantType> {
+  public static final signature.AbstractVertexSignature$InvariantType STRING;
+  public static final signature.AbstractVertexSignature$InvariantType INTEGER;
+  public static signature.AbstractVertexSignature$InvariantType[] values();
+  public static signature.AbstractVertexSignature$InvariantType valueOf(java.lang.String);
+  static {};
+}
+Compiled from "CanonicalLabellingVisitor.java"
+public class signature.CanonicalLabellingVisitor implements signature.DAGVisitor {
+  public signature.CanonicalLabellingVisitor(int, java.util.Comparator<signature.DAG$Node>);
+  public void visit(signature.DAG$Node);
+  public int[] getLabelling();
+}
+Compiled from "ColoredTree.java"
+public class signature.ColoredTree {
+  public signature.ColoredTree(java.lang.String);
+  public void accept(signature.ColoredTreeVisitor);
+  public signature.ColoredTree$Node getRoot();
+  public signature.ColoredTree$Node makeNode(java.lang.String, signature.ColoredTree$Node, int, int);
+  public signature.ColoredTree$Node makeNode(java.lang.String, signature.ColoredTree$Node, int, int, java.lang.String);
+  public void updateHeight(int);
+  public java.lang.String toString();
+  public int getHeight();
+  public int numberOfColors();
+}
+Compiled from "ColoredTree.java"
+public class signature.ColoredTree$Node implements signature.VisitableColoredTree {
+  public java.util.List<signature.ColoredTree$Node> children;
+  public final java.lang.String label;
+  public final java.lang.String edgeLabel;
+  public final signature.ColoredTree$Node parent;
+  public final int color;
+  public final int height;
+  final signature.ColoredTree this$0;
+  public signature.ColoredTree$Node(signature.ColoredTree, java.lang.String, signature.ColoredTree$Node, int);
+  public signature.ColoredTree$Node(signature.ColoredTree, java.lang.String, signature.ColoredTree$Node, int, int);
+  public signature.ColoredTree$Node(signature.ColoredTree, java.lang.String, signature.ColoredTree$Node, int, int, java.lang.String);
+  public void accept(signature.ColoredTreeVisitor);
+  public boolean isColored();
+  public void buildString(java.lang.StringBuilder);
+  public java.lang.String toString();
+}
+Compiled from "ColoredTreeVisitor.java"
+public interface signature.ColoredTreeVisitor {
+  public abstract void visit(signature.ColoredTree$Node);
+}
+Compiled from "DAG.java"
+public class signature.DAG implements java.lang.Iterable<java.util.List<signature.DAG$Node>> {
+  public java.util.Comparator<signature.DAG$Node> nodeComparator;
+  public signature.DAG(int, int);
+  public java.util.Iterator<java.util.List<signature.DAG$Node>> iterator();
+  public java.util.List<signature.DAG$Node> getRootLayer();
+  public signature.DAG$Node getRoot();
+  public signature.Invariants copyInvariants();
+  public void initializeWithStringLabels(java.lang.String[]);
+  public void initializeWithIntLabels(int[]);
+  public void setColor(int, int);
+  public int occurences(int);
+  public void setInvariants(signature.Invariants);
+  public signature.DAG$Node makeNode(int, int);
+  public signature.DAG$Node makeNodeInLayer(int, int);
+  public void addRelation(signature.DAG$Node, signature.DAG$Node);
+  public int[] getParentsInFinalString();
+  public int[] getOccurrences();
+  public java.util.List<signature.InvariantInt> getInvariantPairs(int[]);
+  public int colorFor(int);
+  public void accept(signature.DAGVisitor);
+  public void addLayer(java.util.List<signature.DAG$Node>);
+  public java.util.List<java.lang.Integer> createOrbit(int[]);
+  public void computeVertexInvariants();
+  public void updateVertexInvariants();
+  public boolean checkInvariantChange(int[], int[]);
+  public void updateNodeInvariants(signature.DAG$Direction);
+  public void updateLayer(java.util.List<signature.DAG$Node>, signature.DAG$Direction);
+  public java.lang.String toString();
+}
+Compiled from "DAG.java"
+public class signature.DAG$Arc {
+  public final int a;
+  public final int b;
+  final signature.DAG this$0;
+  public signature.DAG$Arc(signature.DAG, int, int);
+  public boolean equals(java.lang.Object);
+}
+Compiled from "DAG.java"
+public final class signature.DAG$Direction extends java.lang.Enum<signature.DAG$Direction> {
+  public static final signature.DAG$Direction UP;
+  public static final signature.DAG$Direction DOWN;
+  public static signature.DAG$Direction[] values();
+  public static signature.DAG$Direction valueOf(java.lang.String);
+  static {};
+}
+Compiled from "DAG.java"
+public class signature.DAG$Node implements signature.VisitableDAG {
+  public final int vertexIndex;
+  public final java.util.List<signature.DAG$Node> parents;
+  public final java.util.List<signature.DAG$Node> children;
+  public final int layer;
+  public final java.util.Map<java.lang.Integer, java.lang.Integer> edgeColors;
+  public int invariant;
+  final signature.DAG this$0;
+  public signature.DAG$Node(signature.DAG, int, int);
+  public void addParent(signature.DAG$Node);
+  public void addChild(signature.DAG$Node);
+  public void addEdgeColor(int, int);
+  public void accept(signature.DAGVisitor);
+  public java.lang.String toString();
+}
+Compiled from "DAG.java"
+public class signature.DAG$NodeIntegerLabelComparator implements java.util.Comparator<signature.DAG$Node> {
+  public int[] vertexLabels;
+  final signature.DAG this$0;
+  public signature.DAG$NodeIntegerLabelComparator(signature.DAG, int[]);
+  public int compare(signature.DAG$Node, signature.DAG$Node);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "DAG.java"
+public class signature.DAG$NodeStringLabelComparator implements java.util.Comparator<signature.DAG$Node> {
+  public java.lang.String[] vertexLabels;
+  final signature.DAG this$0;
+  public signature.DAG$NodeStringLabelComparator(signature.DAG, java.lang.String[]);
+  public int compare(signature.DAG$Node, signature.DAG$Node);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "DAGTester.java"
+public class signature.DAGTester {
+  public signature.DAGTester();
+  public void testInvariants(int[], int[], signature.Invariants);
+  public void testColoring();
+  public void testColoringForUnlabelledThreeCycle();
+  public void testSimpleUnlabelledDAG();
+  public void testSimpleLabelledDAG();
+  public void dagWithEdgeLabels();
+}
+Compiled from "DAGVisitor.java"
+public interface signature.DAGVisitor {
+  public abstract void visit(signature.DAG$Node);
+}
+Compiled from "HeightTest.java"
+public class signature.HeightTest {
+  public signature.HeightTest();
+  public signature.simple.SimpleGraph makeTorus(int, int);
+  public void regularGraphTest(signature.simple.SimpleGraph, int);
+  public void torusTest();
+  public signature.simple.SimpleGraph makeCompleteGraph(int);
+  public void completeGraphTest();
+  public static void main(java.lang.String[]);
+}
+Compiled from "InvariantArray.java"
+public class signature.InvariantArray implements java.lang.Comparable<signature.InvariantArray> {
+  public final int[] invariants;
+  public final int originalIndex;
+  public signature.InvariantArray(int[], int);
+  public boolean equals(int[]);
+  public boolean equals(java.lang.Object);
+  public int compareTo(signature.InvariantArray);
+  public java.lang.String toString();
+  public int compareTo(java.lang.Object);
+}
+Compiled from "InvariantArrayTest.java"
+public class signature.InvariantArrayTest {
+  public signature.InvariantArrayTest();
+  public java.util.List<signature.InvariantArray> makeUnsortedList();
+  public void testSort();
+  public void testRank();
+}
+Compiled from "InvariantInt.java"
+public class signature.InvariantInt implements java.lang.Comparable<signature.InvariantInt> {
+  public int invariant;
+  public int index;
+  public signature.InvariantInt(int, int);
+  public int compareTo(signature.InvariantInt);
+  public java.lang.String toString();
+  public int compareTo(java.lang.Object);
+}
+Compiled from "InvariantIntIntPair.java"
+public class signature.InvariantIntIntPair implements java.lang.Comparable<signature.InvariantIntIntPair> {
+  public int label;
+  public int value;
+  public int originalIndex;
+  public signature.InvariantIntIntPair(int, int, int);
+  public boolean equals(int, int);
+  public boolean equals(signature.InvariantIntIntPair);
+  public int compareTo(signature.InvariantIntIntPair);
+  public int getOriginalIndex();
+  public java.lang.String toString();
+  public int compareTo(java.lang.Object);
+}
+Compiled from "InvariantIntStringPair.java"
+public class signature.InvariantIntStringPair implements java.lang.Comparable<signature.InvariantIntStringPair> {
+  public java.lang.String string;
+  public int value;
+  public int originalIndex;
+  public signature.InvariantIntStringPair(java.lang.String, int, int);
+  public boolean equals(java.lang.String, int);
+  public boolean equals(signature.InvariantIntStringPair);
+  public int compareTo(signature.InvariantIntStringPair);
+  public int getOriginalIndex();
+  public java.lang.String toString();
+  public int compareTo(java.lang.Object);
+}
+Compiled from "InvariantList.java"
+public class signature.InvariantList implements java.lang.Comparable<signature.InvariantList> {
+  public java.util.List<java.lang.Integer> invariants;
+  public int originalIndex;
+  public signature.InvariantList(int);
+  public boolean equals(java.util.List<java.lang.Integer>);
+  public void add(int);
+  public void addAll(java.util.Collection<java.lang.Integer>);
+  public boolean equals(java.lang.Object);
+  public int compareTo(signature.InvariantList);
+  public java.lang.String toString();
+  public int compareTo(java.lang.Object);
+}
+Compiled from "Invariants.java"
+public class signature.Invariants implements java.lang.Cloneable {
+  public int[] colors;
+  public int[] nodeInvariants;
+  public int[] vertexInvariants;
+  public signature.Invariants(int, int);
+  public int getColor(int);
+  public void setColor(int, int);
+  public int getVertexInvariant(int);
+  public int[] getVertexInvariants();
+  public int[] getVertexInvariantCopy();
+  public void setVertexInvariant(int, int);
+  public int getNodeInvariant(int);
+  public void setNodeInvariant(int, int);
+  public java.lang.Object clone();
+  public java.lang.String toString();
+}
+Compiled from "ParsingTest.java"
+public class signature.ParsingTest {
+  public signature.ParsingTest();
+  public void basicParseTest();
+  public void multipleChildrenParseTest();
+  public void multipleLevelsParseTest();
+  public void edgeLabelParseTest();
+  public void edgeLabelMultipleChildrenParseTest();
+  public void edgeLabelMultipleLevelsParseTest();
+}
+Compiled from "PermutationTest.java"
+public class signature.PermutationTest {
+  public signature.PermutationTest();
+  public java.lang.String toSignatureString(signature.chemistry.Molecule);
+  public void printIdentity(signature.chemistry.Molecule, java.lang.String);
+  public void testSpecificPermutation(signature.chemistry.Molecule, int[]);
+  public void permuteCompletely(signature.chemistry.Molecule);
+  public void permuteCNOMolecule();
+  public void permuteOCCCSC();
+  public void permuteOCCOCO();
+  public void doubleBondChainTest();
+}
+Compiled from "Permutor.java"
+public class signature.Permutor {
+  public signature.Permutor(int);
+  public boolean hasNext();
+  public void setRank(int);
+  public int getRank();
+  public void setPermutation(int[]);
+  public int[] getRandomNextPermutation();
+  public int[] getNextPermutation();
+  public int[] getCurrentPermutation();
+  public int calculateMaxRank();
+}
+Compiled from "SymmetryClass.java"
+public class signature.SymmetryClass implements java.lang.Comparable<signature.SymmetryClass>, java.lang.Iterable<java.lang.Integer> {
+  public signature.SymmetryClass(java.lang.String);
+  public java.util.Iterator<java.lang.Integer> iterator();
+  public int size();
+  public java.lang.String getSignatureString();
+  public boolean hasSignature(java.lang.String);
+  public void addIndex(int);
+  public int getMinimal(int, java.util.List<java.lang.Integer>);
+  public int compareTo(signature.SymmetryClass);
+  public java.lang.String toString();
+  public int compareTo(java.lang.Object);
+}
+Compiled from "VirtualGraphBuilder.java"
+public class signature.VirtualGraphBuilder extends signature.AbstractGraphBuilder {
+  public signature.VirtualGraphBuilder();
+  public java.lang.String toEdgeString();
+  public void makeEdge(int, int, java.lang.String, java.lang.String, java.lang.String);
+  public void makeGraph();
+  public void makeVertex(java.lang.String);
+}
+Compiled from "VirtualGraphBuilder.java"
+class signature.VirtualGraphBuilder$VirtualEdge implements java.lang.Comparable<signature.VirtualGraphBuilder$VirtualEdge> {
+  public final int lowerVertexIndex;
+  public final int upperVertexIndex;
+  public final java.lang.String lowerVertexSymbol;
+  public final java.lang.String upperVertexSymbol;
+  public final java.lang.String edgeLabel;
+  final signature.VirtualGraphBuilder this$0;
+  public signature.VirtualGraphBuilder$VirtualEdge(signature.VirtualGraphBuilder, int, int, java.lang.String, java.lang.String, java.lang.String);
+  public int compareTo(signature.VirtualGraphBuilder$VirtualEdge);
+  public java.lang.String toString();
+  public int compareTo(java.lang.Object);
+}
+Compiled from "VisitableColoredTree.java"
+public interface signature.VisitableColoredTree {
+  public abstract void accept(signature.ColoredTreeVisitor);
+}
+Compiled from "VisitableDAG.java"
+public interface signature.VisitableDAG {
+  public abstract void accept(signature.DAGVisitor);
+}
+Compiled from "AtomPermutor.java"
+public class signature.chemistry.AtomPermutor extends signature.Permutor implements java.util.Iterator<signature.chemistry.Molecule> {
+  public signature.chemistry.AtomPermutor(signature.chemistry.Molecule);
+  public signature.chemistry.Molecule next();
+  public void remove();
+  public java.lang.Object next();
+}
+Compiled from "AtomSignature.java"
+public class signature.chemistry.AtomSignature extends signature.AbstractVertexSignature {
+  public signature.chemistry.AtomSignature(signature.chemistry.Molecule, int);
+  public signature.chemistry.AtomSignature(signature.chemistry.Molecule, int, int);
+  public signature.chemistry.AtomSignature(signature.chemistry.Molecule, int, int, signature.AbstractVertexSignature$InvariantType);
+  public int getIntLabel(int);
+  public int[] getConnected(int);
+  public java.lang.String getEdgeLabel(int, int);
+  public java.lang.String getVertexSymbol(int);
+  protected int convertEdgeLabelToColor(java.lang.String);
+}
+Compiled from "AtomSignature.java"
+class signature.chemistry.AtomSignature$1 {
+  static final int[] $SwitchMap$signature$chemistry$Molecule$BondOrder;
+  static {};
+}
+Compiled from "ChiralCenterFinder.java"
+public class signature.chemistry.ChiralCenterFinder {
+  public signature.chemistry.ChiralCenterFinder();
+  public static java.util.List<java.lang.Integer> findTetrahedralChiralCenters(signature.chemistry.Molecule);
+}
+Compiled from "ChiralityTest.java"
+public class signature.chemistry.ChiralityTest {
+  public signature.chemistry.ChiralityTest();
+  public void spiranTest();
+  public void dichlorocyclopropaneTest();
+  public void dihydroxyCyclohexane();
+}
+Compiled from "LargeMoleculeTest.java"
+public class signature.chemistry.LargeMoleculeTest {
+  public signature.chemistry.LargeMoleculeTest();
+  public void addRing(int, int, signature.chemistry.Molecule);
+  public signature.chemistry.Molecule makeMinimalMultiRing(int, int);
+  public signature.chemistry.Molecule makeTetrakisTriphenylPhosphoranylRhodium();
+  public void dodecahedraneTest();
+  public void ttprTest();
+  public void testMinimalMol();
+  public signature.chemistry.Molecule makeChain(int);
+  public void testLongChains();
+  public void drawTrees(signature.chemistry.MoleculeQuotientGraph, java.lang.String);
+  public void buckyballTest();
+  public void buckyballWithoutMultipleBonds();
+  public void faulonsBuckySignatures();
+  public java.util.List<java.lang.String> readSigs(java.lang.String) throws java.lang.Exception;
+  public java.util.List<java.lang.String> readSigs2(java.lang.String) throws java.lang.Exception;
+  public static void main(java.lang.String[]);
+}
+Compiled from "Molecule.java"
+public class signature.chemistry.Molecule {
+  public java.lang.String name;
+  public signature.chemistry.Molecule();
+  public signature.chemistry.Molecule(java.lang.String, int);
+  public signature.chemistry.Molecule(signature.chemistry.Molecule);
+  public signature.chemistry.Molecule(signature.chemistry.Molecule, int[]);
+  public int getAtomCount();
+  public int getBondCount();
+  public java.util.List<signature.chemistry.Molecule$Bond> bonds();
+  public int[] getConnected(int);
+  public boolean isConnected(int, int);
+  public signature.chemistry.Molecule$BondOrder getBondOrder(int, int);
+  public int convertBondOrderToInt(signature.chemistry.Molecule$BondOrder);
+  public int getTotalOrder(int);
+  public java.lang.String getSymbolFor(int);
+  public java.lang.String toString();
+  public void addAtom(java.lang.String);
+  public void addAtom(int, java.lang.String);
+  public void addMultipleAtoms(int, java.lang.String);
+  public void addSingleBond(int, int);
+  public void addMultipleSingleBonds(int, int...);
+  public void addBond(int, int, signature.chemistry.Molecule$BondOrder);
+  public boolean identical(signature.chemistry.Molecule);
+  public boolean bondsOrdered();
+  public java.lang.String toEdgeString();
+  public int getFirstInBond(int);
+  public int getSecondInBond(int);
+  public signature.chemistry.Molecule$BondOrder getBondOrder(int);
+  public int getBondOrderAsInt(int);
+}
+Compiled from "Molecule.java"
+class signature.chemistry.Molecule$1 {
+  static final int[] $SwitchMap$signature$chemistry$Molecule$BondOrder;
+  static {};
+}
+Compiled from "Molecule.java"
+public class signature.chemistry.Molecule$Atom {
+  public int index;
+  public java.lang.String symbol;
+  final signature.chemistry.Molecule this$0;
+  public signature.chemistry.Molecule$Atom(signature.chemistry.Molecule, int, java.lang.String);
+  public signature.chemistry.Molecule$Atom(signature.chemistry.Molecule, signature.chemistry.Molecule$Atom);
+  public boolean equals(signature.chemistry.Molecule$Atom);
+  public java.lang.String toString();
+}
+Compiled from "Molecule.java"
+public class signature.chemistry.Molecule$Bond implements java.lang.Comparable<signature.chemistry.Molecule$Bond> {
+  public signature.chemistry.Molecule$Atom a;
+  public signature.chemistry.Molecule$Atom b;
+  public signature.chemistry.Molecule$BondOrder order;
+  final signature.chemistry.Molecule this$0;
+  public signature.chemistry.Molecule$Bond(signature.chemistry.Molecule, signature.chemistry.Molecule$Atom, signature.chemistry.Molecule$Atom, signature.chemistry.Molecule$BondOrder);
+  public signature.chemistry.Molecule$Bond(signature.chemistry.Molecule, signature.chemistry.Molecule$Bond);
+  public int getConnected(int);
+  public boolean equals(java.lang.Object);
+  public boolean hasBoth(int, int);
+  public java.lang.String toString();
+  public int compareTo(signature.chemistry.Molecule$Bond);
+  public int compareTo(java.lang.Object);
+}
+Compiled from "Molecule.java"
+public final class signature.chemistry.Molecule$BondOrder extends java.lang.Enum<signature.chemistry.Molecule$BondOrder> {
+  public static final signature.chemistry.Molecule$BondOrder NONE;
+  public static final signature.chemistry.Molecule$BondOrder SINGLE;
+  public static final signature.chemistry.Molecule$BondOrder DOUBLE;
+  public static final signature.chemistry.Molecule$BondOrder TRIPLE;
+  public static final signature.chemistry.Molecule$BondOrder AROMATIC;
+  public static signature.chemistry.Molecule$BondOrder[] values();
+  public static signature.chemistry.Molecule$BondOrder valueOf(java.lang.String);
+  static {};
+}
+Compiled from "MoleculeBuilder.java"
+public class signature.chemistry.MoleculeBuilder extends signature.AbstractGraphBuilder {
+  public signature.chemistry.MoleculeBuilder();
+  public void makeEdge(int, int, java.lang.String, java.lang.String, java.lang.String);
+  public void makeGraph();
+  public void makeVertex(java.lang.String);
+  public signature.chemistry.Molecule fromTree(signature.ColoredTree);
+  public signature.chemistry.Molecule getMolecule();
+}
+Compiled from "MoleculeFactory.java"
+public class signature.chemistry.MoleculeFactory {
+  public signature.chemistry.MoleculeFactory();
+  public static signature.chemistry.Molecule methane();
+  public static signature.chemistry.Molecule threeCycle();
+  public static signature.chemistry.Molecule fourCycle();
+  public static signature.chemistry.Molecule fiveCycle();
+  public static signature.chemistry.Molecule sixCycle();
+  public static signature.chemistry.Molecule threeStar();
+  public static signature.chemistry.Molecule fourStar();
+  public static signature.chemistry.Molecule fiveStar();
+  public static signature.chemistry.Molecule propellane();
+  public static signature.chemistry.Molecule methylatedCyclobutane();
+  public static signature.chemistry.Molecule pseudopropellane();
+  public static signature.chemistry.Molecule sixCage();
+}
+Compiled from "MoleculeQuotientGraph.java"
+public class signature.chemistry.MoleculeQuotientGraph extends signature.AbstractQuotientGraph {
+  public signature.chemistry.MoleculeQuotientGraph(signature.chemistry.Molecule);
+  public signature.chemistry.MoleculeQuotientGraph(signature.chemistry.Molecule, java.util.List<java.lang.String>);
+  public boolean isConnected(int, int);
+}
+Compiled from "MoleculeReader.java"
+public class signature.chemistry.MoleculeReader {
+  public signature.chemistry.MoleculeReader();
+  public static signature.chemistry.Molecule readMolfile(java.lang.String);
+  public static java.util.List<signature.chemistry.Molecule> readSDFFile(java.lang.String);
+  public static java.util.List<signature.chemistry.Molecule> readSDFfromStream(java.io.InputStream);
+}
+Compiled from "MoleculeSignature.java"
+public class signature.chemistry.MoleculeSignature extends signature.AbstractGraphSignature {
+  public signature.chemistry.MoleculeSignature(signature.chemistry.Molecule);
+  public signature.chemistry.MoleculeSignature(signature.chemistry.Molecule, signature.AbstractVertexSignature$InvariantType);
+  public static boolean isCanonicallyLabelled(signature.chemistry.Molecule);
+  public java.lang.String getMolecularSignature();
+  public int getVertexCount();
+  public java.lang.String signatureStringForVertex(int);
+  public java.lang.String signatureStringForVertex(int, int);
+  public signature.AbstractVertexSignature signatureForVertex(int);
+}
+Compiled from "MoleculeSignatureTest.java"
+public class signature.chemistry.MoleculeSignatureTest {
+  public signature.chemistry.MoleculeSignatureTest();
+  public void minimalTest();
+  public void testColoredTreeCreation();
+  public void testOddCycleReadin();
+  public void testCage();
+  public void testRoundtrip();
+  public void testLargeExample();
+  public void testSDF();
+  public void testCanonicalLabelling();
+  public void testCanonicalIsUnique(signature.chemistry.Molecule);
+  public void testFourCycle();
+  public void testFiveCycle();
+  public void testThreeStarCanonicalUnique();
+  public void testFourStarCanonicalUnique();
+  public void testFiveStarCanonicalUnique();
+  public void testTriangleCanonicalIsUnique();
+  public void testSquareCanonicalIsUnique();
+  public void testPentagonCanonicalIsUnique();
+  public void testHexagonCanonicalIsUnique();
+  public void testPropellaneCanonicalIsUnique();
+  public void testPseudopropellaneCanonicalIsUnique();
+  public void testMethylCyclobutaneCanonicalIsUnique();
+  public void testSixcageCanonicalIsUnique();
+  public void testCarbonChainUnique();
+  public void testCarbonHydrogenCanonicalChain();
+  public void testMetheneFragmentIsCanonicallyUnique();
+  public void testMethaneIsCanonicallyUnique();
+  public void testMethaneSignatures();
+  public void testMetheneFragmentSignatures();
+  public void testMethyneFragmentSignatures();
+  public void testCanonicalIsUnique();
+}
+Compiled from "MoleculeWriter.java"
+public class signature.chemistry.MoleculeWriter {
+  public signature.chemistry.MoleculeWriter();
+  public static void writeMolfile(java.lang.String, signature.chemistry.Molecule);
+  public static void writeToStream(java.io.OutputStream, signature.chemistry.Molecule);
+}
+Compiled from "MultipleBondTest.java"
+public class signature.chemistry.MultipleBondTest {
+  public signature.chemistry.MultipleBondTest();
+  public void aromaticTest();
+  public void cocoTest();
+  public void multipleBondedFragmentTest();
+  public void cyclobut_1_ene();
+  public void cyclobut_2_ene();
+  public void benzeneTest();
+}
+Compiled from "NumberLabelsTest.java"
+public class signature.chemistry.NumberLabelsTest {
+  public signature.chemistry.NumberLabelsTest();
+  public void choTest();
+}
+Compiled from "SDFToSignatures.java"
+public class signature.chemistry.SDFToSignatures {
+  public signature.chemistry.SDFToSignatures();
+  public static void main(java.lang.String[]);
+}
+Compiled from "WriterTest.java"
+public class signature.chemistry.WriterTest {
+  public signature.chemistry.WriterTest();
+  public void minimalTest();
+}
+Compiled from "ColoredTreePanel.java"
+public class signature.display.ColoredTreePanel extends javax.swing.JPanel {
+  public int maxDepth;
+  public signature.display.ColoredTreePanel(int, int);
+  public signature.display.ColoredTreePanel(signature.ColoredTree, int, int);
+  public void setDrawKey(boolean);
+  public void setTree(signature.ColoredTree);
+  public void paint(java.awt.Graphics);
+  public void clear();
+}
+Compiled from "DisplayableColoredTree.java"
+public class signature.display.DisplayableColoredTree {
+  public int maxDepth;
+  public signature.display.DisplayableColoredTree(int, int);
+  public signature.display.DisplayableColoredTree(signature.ColoredTree, int, int);
+  public void setDrawKey(boolean);
+  public void makeFromColoredTree(signature.ColoredTree);
+  public void paint(java.awt.Graphics);
+  public void paintKey(java.awt.Graphics);
+  public void paint(java.awt.Graphics, signature.display.DisplayableColoredTree$DrawNode);
+}
+Compiled from "DisplayableColoredTree.java"
+public class signature.display.DisplayableColoredTree$DrawNode {
+  public int x;
+  public int y;
+  public int depth;
+  public int color;
+  public java.util.List<signature.display.DisplayableColoredTree$DrawNode> children;
+  public java.lang.String label;
+  public signature.display.DisplayableColoredTree$DrawNode parent;
+  public java.lang.String edgeLabel;
+  final signature.display.DisplayableColoredTree this$0;
+  public signature.display.DisplayableColoredTree$DrawNode(signature.display.DisplayableColoredTree, java.lang.String, signature.display.DisplayableColoredTree$DrawNode, int, int);
+  public signature.display.DisplayableColoredTree$DrawNode(signature.display.DisplayableColoredTree, java.lang.String, signature.display.DisplayableColoredTree$DrawNode, int, int, java.lang.String);
+  public int countLeaves();
+  public boolean isLeaf();
+  public java.lang.String toString();
+}
+Compiled from "DisplayableColoredTree.java"
+public class signature.display.DisplayableColoredTree$TreeLayout {
+  public int totalLeafCount;
+  public int xSep;
+  public int ySep;
+  final signature.display.DisplayableColoredTree this$0;
+  public signature.display.DisplayableColoredTree$TreeLayout(signature.display.DisplayableColoredTree);
+  public void layoutTree(signature.display.DisplayableColoredTree$DrawNode, int, int);
+  public int layout(signature.display.DisplayableColoredTree$DrawNode);
+}
+Compiled from "SignatureViewer.java"
+public class signature.display.SignatureViewer extends javax.swing.JPanel implements java.awt.event.ActionListener {
+  public signature.display.SignatureViewer();
+  public void actionPerformed(java.awt.event.ActionEvent);
+  public static void main(java.lang.String[]);
+}
+Compiled from "TestColoredTreePanel.java"
+public class signature.display.TestColoredTreePanel {
+  public signature.display.TestColoredTreePanel();
+  public void dummyTest();
+  public static signature.ColoredTree makeColoredTree(java.lang.String);
+  public static void main(java.lang.String[]);
+}
+Compiled from "TestMultipleTrees.java"
+public class signature.display.TestMultipleTrees {
+  public signature.display.TestMultipleTrees();
+  public void dummyTest();
+  public static void makePanel(javax.swing.JFrame, java.lang.String, int, int);
+  public static void main(java.lang.String[]);
+}
+Compiled from "TreeDrawer.java"
+public class signature.display.TreeDrawer {
+  public signature.display.TreeDrawer();
+  public static void makeTreeImages(java.util.List<java.lang.String>, java.lang.String, int, int);
+  public static void makeImage(signature.ColoredTree, java.io.File, int, int);
+}
+Compiled from "BasicTests.java"
+public class signature.edgecolored.BasicTests {
+  public static final java.util.Map<java.lang.String, java.lang.Integer> colorMap;
+  public signature.edgecolored.BasicTests();
+  public void twoColoredCycle();
+  static {};
+}
+Compiled from "BasicTests.java"
+final class signature.edgecolored.BasicTests$1 extends java.util.HashMap<java.lang.String, java.lang.Integer> {
+  signature.edgecolored.BasicTests$1();
+}
+Compiled from "BipartiteGraphTests.java"
+public class signature.edgecolored.BipartiteGraphTests {
+  public static final java.util.Map<java.lang.String, java.lang.Integer> colorMap;
+  public signature.edgecolored.BipartiteGraphTests();
+  public signature.edgecolored.EdgeColoredGraph makeBipartiteGraph(int, int);
+  public void printSym(java.util.List<signature.SymmetryClass>);
+  public void bipOn3By4();
+  public void bipOn4By4();
+  static {};
+}
+Compiled from "BipartiteGraphTests.java"
+final class signature.edgecolored.BipartiteGraphTests$1 extends java.util.HashMap<java.lang.String, java.lang.Integer> {
+  signature.edgecolored.BipartiteGraphTests$1();
+}
+Compiled from "CompleteGraphTests.java"
+public class signature.edgecolored.CompleteGraphTests {
+  public static final java.util.Map<java.lang.String, java.lang.Integer> colorMap;
+  public signature.edgecolored.CompleteGraphTests();
+  public signature.edgecolored.EdgeColoredGraph makeCompleteGraphOnN(int, int);
+  public void printSym(java.util.List<signature.SymmetryClass>);
+  public void k4Test();
+  public void k5Test();
+  public void k6Test();
+  public void k7Test();
+  public void k8Test();
+  public void k9Test();
+  public void k10Test();
+  public void k11Test();
+  public void k12Test();
+  static {};
+}
+Compiled from "CompleteGraphTests.java"
+final class signature.edgecolored.CompleteGraphTests$1 extends java.util.HashMap<java.lang.String, java.lang.Integer> {
+  signature.edgecolored.CompleteGraphTests$1();
+}
+Compiled from "EdgeColoredGraph.java"
+public class signature.edgecolored.EdgeColoredGraph {
+  public java.util.List<signature.edgecolored.EdgeColoredGraph$Edge> edges;
+  public int maxVertexIndex;
+  public java.lang.String name;
+  public signature.edgecolored.EdgeColoredGraph();
+  public signature.edgecolored.EdgeColoredGraph(signature.edgecolored.EdgeColoredGraph, int[]);
+  public signature.edgecolored.EdgeColoredGraph$Edge getEdge(int, int);
+  public void makeEdge(int, int, java.lang.String);
+  public int getVertexCount();
+  public boolean isConnected(int, int);
+  public int[] getConnected(int);
+  public int degree(int);
+  public java.lang.String toString();
+}
+Compiled from "EdgeColoredGraph.java"
+public class signature.edgecolored.EdgeColoredGraph$Edge implements java.lang.Comparable<signature.edgecolored.EdgeColoredGraph$Edge> {
+  public int a;
+  public int b;
+  public java.lang.String edgeLabel;
+  final signature.edgecolored.EdgeColoredGraph this$0;
+  public signature.edgecolored.EdgeColoredGraph$Edge(signature.edgecolored.EdgeColoredGraph, int, int, java.lang.String);
+  public int compareTo(signature.edgecolored.EdgeColoredGraph$Edge);
+  public java.lang.String toString();
+  public int compareTo(java.lang.Object);
+}
+Compiled from "EdgeColoredGraphBuilder.java"
+public class signature.edgecolored.EdgeColoredGraphBuilder extends signature.AbstractGraphBuilder {
+  public signature.edgecolored.EdgeColoredGraphBuilder();
+  public void makeEdge(int, int, java.lang.String, java.lang.String, java.lang.String);
+  public void makeGraph();
+  public void makeVertex(java.lang.String);
+  public signature.edgecolored.EdgeColoredGraph fromTree(signature.ColoredTree);
+}
+Compiled from "EdgeColoredGraphFactory.java"
+public class signature.edgecolored.EdgeColoredGraphFactory {
+  public signature.edgecolored.EdgeColoredGraphFactory();
+  public static signature.edgecolored.EdgeColoredGraph makeHyperGraph();
+}
+Compiled from "EdgeColoredGraphPermutor.java"
+public class signature.edgecolored.EdgeColoredGraphPermutor extends signature.Permutor implements java.util.Iterator<signature.edgecolored.EdgeColoredGraph> {
+  public signature.edgecolored.EdgeColoredGraphPermutor(signature.edgecolored.EdgeColoredGraph);
+  public signature.edgecolored.EdgeColoredGraph next();
+  public void remove();
+  public java.lang.Object next();
+}
+Compiled from "EdgeColoredGraphSignature.java"
+public class signature.edgecolored.EdgeColoredGraphSignature extends signature.AbstractGraphSignature {
+  public signature.edgecolored.EdgeColoredGraph graph;
+  public signature.edgecolored.EdgeColoredGraphSignature(signature.edgecolored.EdgeColoredGraph, java.util.Map<java.lang.String, java.lang.Integer>);
+  public int getVertexCount();
+  public java.lang.String signatureStringForVertex(int);
+  public java.lang.String signatureStringForVertex(int, int);
+  public java.lang.String toCanonicalString();
+  public signature.AbstractVertexSignature signatureForVertex(int);
+}
+Compiled from "EdgeColoredQuotientGraph.java"
+public class signature.edgecolored.EdgeColoredQuotientGraph extends signature.AbstractQuotientGraph {
+  public signature.edgecolored.EdgeColoredQuotientGraph(signature.edgecolored.EdgeColoredGraph, java.util.Map<java.lang.String, java.lang.Integer>);
+  public signature.edgecolored.EdgeColoredQuotientGraph(signature.edgecolored.EdgeColoredGraph, java.util.Map<java.lang.String, java.lang.Integer>, int);
+  public boolean isConnected(int, int);
+}
+Compiled from "EdgeColoredVertexSignature.java"
+public class signature.edgecolored.EdgeColoredVertexSignature extends signature.AbstractVertexSignature {
+  public signature.edgecolored.EdgeColoredVertexSignature(int, signature.edgecolored.EdgeColoredGraph, java.util.Map<java.lang.String, java.lang.Integer>);
+  public signature.edgecolored.EdgeColoredVertexSignature(int, int, signature.edgecolored.EdgeColoredGraph, java.util.Map<java.lang.String, java.lang.Integer>);
+  public int[] getConnected(int);
+  public java.lang.String getEdgeLabel(int, int);
+  public java.lang.String getVertexSymbol(int);
+  protected int getIntLabel(int);
+  protected int convertEdgeLabelToColor(java.lang.String);
+}
+Compiled from "CanonicalLabellingTest.java"
+public class signature.simple.CanonicalLabellingTest {
+  public signature.simple.CanonicalLabellingTest();
+  public int[] getLabels(signature.simple.SimpleGraph);
+  public void permuteTest(signature.simple.SimpleGraph);
+  public boolean isIdentity(int[]);
+  public void testSimpleGraphLabelling();
+  public void fourCycleTest();
+  public void fiveCycleTest();
+  public void threeFourFusedCycle();
+  public void threeThreeFusedCycle();
+  public void largePermuteTestA();
+  public void largePermuteTestB();
+  public void tmpOrbitsTest();
+  public void isomorphicPair();
+}
+Compiled from "ReconstructionTest.java"
+public class signature.simple.ReconstructionTest {
+  public signature.simple.ReconstructionTest();
+  public void reconstruct(signature.simple.SimpleGraph);
+  public void bowtieaneTest();
+}
+Compiled from "SimpleGraph.java"
+public class signature.simple.SimpleGraph {
+  public java.util.List<signature.simple.SimpleGraph$Edge> edges;
+  public int maxVertexIndex;
+  public java.lang.String name;
+  public signature.simple.SimpleGraph();
+  public signature.simple.SimpleGraph(java.lang.String);
+  public signature.simple.SimpleGraph(signature.simple.SimpleGraph, int[]);
+  public void makeEdge(int, int);
+  public void makeEdges(int, int...);
+  public int getVertexCount();
+  public boolean isConnected(int, int);
+  public int[] getConnected(int);
+  public int degree(int);
+  public java.lang.String toString();
+}
+Compiled from "SimpleGraph.java"
+public class signature.simple.SimpleGraph$Edge implements java.lang.Comparable<signature.simple.SimpleGraph$Edge> {
+  public int a;
+  public int b;
+  final signature.simple.SimpleGraph this$0;
+  public signature.simple.SimpleGraph$Edge(signature.simple.SimpleGraph, int, int);
+  public int compareTo(signature.simple.SimpleGraph$Edge);
+  public java.lang.String toString();
+  public int compareTo(java.lang.Object);
+}
+Compiled from "SimpleGraphBuilder.java"
+public class signature.simple.SimpleGraphBuilder extends signature.AbstractGraphBuilder {
+  public signature.simple.SimpleGraphBuilder();
+  public void makeEdge(int, int, java.lang.String, java.lang.String, java.lang.String);
+  public void makeGraph();
+  public void makeVertex(java.lang.String);
+  public signature.simple.SimpleGraph fromTree(signature.ColoredTree);
+}
+Compiled from "SimpleGraphFactory.java"
+public class signature.simple.SimpleGraphFactory {
+  public signature.simple.SimpleGraphFactory();
+  public static signature.simple.SimpleGraph make4Cube();
+  public static signature.simple.SimpleGraph makeHerschelGraph();
+  public static signature.simple.SimpleGraph makeGrotschGraph();
+  public static signature.simple.SimpleGraph makeQuadricyclane();
+  public static signature.simple.SimpleGraph makeFourRegularExample();
+  public static signature.simple.SimpleGraph makeThreeFourFiveTwisted();
+  public static signature.simple.SimpleGraph makeSpiroPentagons();
+  public static signature.simple.SimpleGraph makePrism(int);
+  public static signature.simple.SimpleGraph makeSandwich(int);
+  public static signature.simple.SimpleGraph makePetersensGraph();
+  public static signature.simple.SimpleGraph makePappusGraph();
+  public static signature.simple.SimpleGraph makeTietzesGraph();
+  public static signature.simple.SimpleGraph makeTruncatedTetrahedron();
+  public static signature.simple.SimpleGraph makeDoubleBridgedPentagon();
+  public static signature.simple.SimpleGraph makeAdamantane();
+  public static signature.simple.SimpleGraph makeDiamantane();
+  public static signature.simple.SimpleGraph makeCuneane();
+  public static signature.simple.SimpleGraph makeTwistane();
+  public static signature.simple.SimpleGraph makeSymmetric1Twistane();
+  public static signature.simple.SimpleGraph makeSymmetric2Twistane();
+  public static signature.simple.SimpleGraph makeNapthalene();
+  public static signature.simple.SimpleGraph makeSquareQuotientGraph();
+  public static signature.simple.SimpleGraph makeBowtieane();
+  public static signature.simple.SimpleGraph makeDiSpiroOctane();
+  public static signature.simple.SimpleGraph make26Fullerene();
+  public static signature.simple.SimpleGraph makeTricycloPropaIndene();
+}
+Compiled from "SimpleGraphPermutor.java"
+public class signature.simple.SimpleGraphPermutor extends signature.Permutor implements java.util.Iterator<signature.simple.SimpleGraph> {
+  public signature.simple.SimpleGraphPermutor(signature.simple.SimpleGraph);
+  public signature.simple.SimpleGraph next();
+  public void remove();
+  public java.lang.Object next();
+}
+Compiled from "SimpleGraphSignature.java"
+public class signature.simple.SimpleGraphSignature extends signature.AbstractGraphSignature {
+  public signature.simple.SimpleGraph graph;
+  public signature.simple.SimpleGraphSignature(signature.simple.SimpleGraph);
+  public int getVertexCount();
+  public java.lang.String signatureStringForVertex(int);
+  public java.lang.String signatureStringForVertex(int, int);
+  public java.lang.String toCanonicalString();
+  public signature.AbstractVertexSignature signatureForVertex(int);
+}
+Compiled from "SimpleGraphTest.java"
+public class signature.simple.SimpleGraphTest {
+  public signature.simple.SimpleGraphTest();
+  public signature.simple.SimpleGraphSignature signatureFromString(java.lang.String);
+  public void testChain();
+  public void testColoredTreeRoundtrip();
+  public void testVertexCount();
+  public void signatureHeightTest();
+}
+Compiled from "SimpleQuotientGraph.java"
+public class signature.simple.SimpleQuotientGraph extends signature.AbstractQuotientGraph {
+  public signature.simple.SimpleQuotientGraph(signature.simple.SimpleGraph);
+  public signature.simple.SimpleQuotientGraph(signature.simple.SimpleGraph, int);
+  public boolean isConnected(int, int);
+}
+Compiled from "SimpleQuotientGraphTest.java"
+public class signature.simple.SimpleQuotientGraphTest {
+  public signature.simple.SimpleQuotientGraphTest();
+  public void draw(signature.simple.SimpleQuotientGraph);
+  public void check3Regularity(signature.simple.SimpleGraph);
+  public void check4Regularity(signature.simple.SimpleGraph);
+  public void checkParameters(signature.simple.SimpleQuotientGraph, int, int, int);
+  public void fourCubeTest();
+  public void fourRegularExampleTest();
+  public void petersensGraphTest();
+  public void pappusGraphTest();
+  public void triangularPrismTest();
+  public void cubeTest();
+  public void pentagonalPrismTest();
+  public void truncatedTetrahedronTest();
+  public void adamantaneTest();
+  public void triangleSandwichTest();
+  public void squareSandwichTest();
+  public void pentagonalSandwichTest();
+  public void hexagonalSandwichTest();
+  public void symmetric1TwistaneTest();
+  public void symmetric2TwistaneTest();
+  public void herschelGraphTest();
+  public void diamantaneTest();
+  public void grotschGraphTest();
+  public void quadricyclaneTest();
+  public void spiroPentagonTest();
+  public void threeFourFiveTwistedGraphTest();
+  public void twistaneTest();
+  public void napthaleneTest();
+  public void tietzesGraphTest();
+  public void cuneaneTest();
+  public void squareQuotientGraphTest();
+  public void doubleBridgedPentagonTest();
+  public void bowtieaneQuotientGraphTest();
+  public void fullerene26Test();
+  public void diSpiroOctaneQuotientGraphTest();
+  public void tricycloPropaIndeneQuotientGraphTest();
+}
+Compiled from "SimpleVertexSignature.java"
+public class signature.simple.SimpleVertexSignature extends signature.AbstractVertexSignature {
+  public signature.simple.SimpleVertexSignature(int, signature.simple.SimpleGraph);
+  public signature.simple.SimpleVertexSignature(int, int, signature.simple.SimpleGraph);
+  public int[] getConnected(int);
+  public java.lang.String getEdgeLabel(int, int);
+  public java.lang.String getVertexSymbol(int);
+  protected int getIntLabel(int);
+  protected int convertEdgeLabelToColor(java.lang.String);
+}

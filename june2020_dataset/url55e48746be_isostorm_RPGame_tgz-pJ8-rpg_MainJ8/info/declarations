@@ -1,0 +1,470 @@
+Compiled from "Main.java"
+public class rpg.Main {
+  public rpg.Main();
+  public static void main(java.lang.String[]);
+}
+Compiled from "Anchor.java"
+public class rpg.creature.Anchor implements rpg.item.Parent {
+  public rpg.creature.Anchor(rpg.creature.Creature, java.lang.String, rpg.item.Item);
+  public rpg.creature.Anchor(rpg.creature.Creature, java.lang.String);
+  public rpg.creature.Anchor(rpg.creature.Creature, rpg.item.Item);
+  public boolean canHaveAsHolder(rpg.creature.Creature);
+  public boolean isTerminated();
+  void terminate();
+  public rpg.creature.Creature getHolder();
+  public java.lang.String getName();
+  public rpg.item.Item getItem();
+  public void addItem(rpg.item.Item) throws rpg.exception.IllegalAddItemException;
+  public boolean canAddItem(rpg.item.Item);
+  public void swap(rpg.item.Item) throws rpg.exception.IllegalAddItemException, java.lang.IllegalArgumentException;
+  public void removeItem();
+  public boolean containsDirectItem(rpg.item.Item);
+  public void removeDirectItem(rpg.item.Item) throws rpg.exception.NoSuchItemException, java.lang.IllegalArgumentException;
+}
+Compiled from "Creature.java"
+public abstract class rpg.creature.Creature {
+  public rpg.creature.Creature(java.lang.String, int);
+  public java.util.ArrayList<rpg.creature.Anchor> getAnchors();
+  public int getNbAnchors();
+  public rpg.creature.Anchor getAnchorAt(int);
+  public static void setStrengthPrecision(int);
+  public static int getStrengthPrecision();
+  protected static double getAverageStrength();
+  public double getStrength();
+  protected void setStrength(double);
+  public void multiplyStrength(int);
+  public void divideStrength(int);
+  public abstract rpg.item.Weight getCapacity();
+  public rpg.item.Weight getTotalWeight();
+  public int getTotalValue();
+  public abstract int getProtection();
+  public java.lang.String getName();
+  public boolean canHaveAsName(java.lang.String);
+  public boolean hasValidName();
+  public int getHitpoints();
+  protected void setHitpoints(int);
+  public boolean canHaveAsHitpoints(int);
+  public boolean hasValidHitpoints();
+  public abstract void hit(rpg.creature.Creature);
+  public java.util.ArrayList<rpg.item.Item> getTreasure();
+  void destroyTreasure();
+  public boolean treasureContains(rpg.item.Item);
+  public int getNbTreasures();
+  protected void makeTreasure();
+  public boolean weaken(int);
+  protected void collect(rpg.creature.Creature, java.util.ArrayList<rpg.item.Item>);
+  public void setMaximumHitpoints(int);
+  public int getMaximumHitpoints();
+  public static boolean isValidMaximumHitpoints(int);
+  public boolean hasValidMaximumHitpoints();
+  protected static boolean isPrime(int);
+  protected int nearestLargerPrime(int);
+  public rpg.creature.Anchor getAnchor(java.lang.String);
+  void addAnchor(rpg.creature.Anchor);
+  public boolean canAddItem(rpg.item.Item);
+  public boolean canHaveAsAnchor(rpg.creature.Anchor);
+  public boolean hasProperAnchors();
+  void removeAnchor(rpg.creature.Anchor);
+  public boolean hasAsAnchor(rpg.creature.Anchor);
+  public boolean isTerminated();
+  public void terminate();
+  static {};
+}
+Compiled from "Hero.java"
+public class rpg.creature.Hero extends rpg.creature.Creature {
+  public rpg.creature.Hero(java.lang.String, int, rpg.item.Item...);
+  public static boolean isValidStandardProtection(int);
+  public static void setStandardProtection(int);
+  public static int getStandardProtection();
+  public int getProtection();
+  public static void addCharacter(char);
+  public static void setAllowApostrophes(boolean);
+  public boolean canHaveAsName(java.lang.String);
+  public rpg.item.Weight getCapacity();
+  public double getTotalStrength();
+  void destroyTreasure();
+  public void hit(rpg.creature.Creature);
+  public void collect(rpg.creature.Creature, java.util.ArrayList<rpg.item.Item>);
+  static {};
+}
+Compiled from "Monster.java"
+public class rpg.creature.Monster extends rpg.creature.Creature {
+  public rpg.creature.Monster(java.lang.String, int, int, int, rpg.item.Item...);
+  public static void addCharacter(char);
+  public boolean canHaveAsName(java.lang.String);
+  public rpg.item.Weight getCapacity();
+  public int getProtection();
+  public int getDamage();
+  public void hit(rpg.creature.Creature);
+  static {};
+}
+Compiled from "IllegalAddItemException.java"
+public class rpg.exception.IllegalAddItemException extends java.lang.RuntimeException {
+  public rpg.exception.IllegalAddItemException(rpg.item.Parent, rpg.item.Item);
+  public rpg.item.Parent getParent();
+  public rpg.item.Item getItem();
+}
+Compiled from "IllegalNameException.java"
+public class rpg.exception.IllegalNameException extends java.lang.RuntimeException {
+  public rpg.exception.IllegalNameException(java.lang.String, rpg.creature.Creature);
+  public java.lang.String getName();
+  public rpg.creature.Creature getCreature();
+}
+Compiled from "NoParentException.java"
+public class rpg.exception.NoParentException extends java.lang.RuntimeException {
+  public rpg.exception.NoParentException(rpg.item.Item);
+  public rpg.item.Item getItem();
+}
+Compiled from "NoSuchItemException.java"
+public class rpg.exception.NoSuchItemException extends java.lang.RuntimeException {
+  public rpg.exception.NoSuchItemException(rpg.item.Item);
+  public rpg.item.Item getItem();
+}
+Compiled from "Armor.java"
+public class rpg.item.Armor extends rpg.item.ItemImplementation {
+  public rpg.item.Armor(long, rpg.item.Weight, int, int, int);
+  public boolean canHaveAsId(long);
+  protected void setId(long);
+  public int getMaxValue();
+  public static boolean isValidMaxValue(int);
+  public boolean hasValidMaxValue();
+  public int getValue();
+  public int getMaxProtection();
+  public static boolean isValidMaxProtection(int);
+  public boolean hasValidMaxProtection();
+  public int getProtection();
+  public void setProtection(int);
+  public boolean canHaveAsProtection(int);
+  public boolean hasValidProtection();
+}
+Compiled from "BackPack.java"
+public class rpg.item.BackPack extends rpg.item.Container {
+  public rpg.item.BackPack(rpg.item.Weight, rpg.item.Weight, int);
+  public void addItem(rpg.item.Item);
+  public boolean canHaveAsValue(int);
+  public void setValue(int);
+  static {};
+}
+Compiled from "Container.java"
+public abstract class rpg.item.Container extends rpg.item.ItemImplementation implements rpg.item.Parent {
+  protected rpg.item.Container(long, rpg.item.Weight, rpg.item.Weight, int);
+  public rpg.item.Container(long, rpg.item.Weight, rpg.item.Weight);
+  public rpg.item.Weight getCapacity();
+  protected void setCapacity(rpg.item.Weight) throws java.lang.IllegalArgumentException;
+  public boolean canHaveAsCapacity(rpg.item.Weight);
+  public boolean hasValidCapacity();
+  public rpg.item.Weight getTotalWeight();
+  public int getTotalValue();
+  protected void addItem(rpg.item.Item);
+  public boolean canAddItemToContainer(rpg.item.Item);
+  public boolean canAddItem(rpg.item.Item);
+  public boolean hasProperDirectItems();
+  public boolean containsDirectItem(rpg.item.Item) throws java.lang.IllegalArgumentException;
+  public void removeDirectItem(rpg.item.Item) throws rpg.exception.NoSuchItemException, java.lang.IllegalArgumentException;
+  public java.util.ArrayList<rpg.item.Item> getDirectItems();
+  public java.util.Enumeration<rpg.item.Item> getItems();
+  public void terminate();
+  public boolean equalsOrIsDirectOrIndirectParentOf(rpg.item.Container);
+}
+Compiled from "Container.java"
+class rpg.item.Container$1 implements java.util.Enumeration<rpg.item.Item> {
+  final rpg.item.Container this$0;
+  rpg.item.Container$1(rpg.item.Container);
+  public boolean hasMoreElements();
+  public rpg.item.Item nextElement() throws java.util.NoSuchElementException;
+  public java.lang.Object nextElement();
+}
+Compiled from "Dukat.java"
+public class rpg.item.Dukat implements rpg.item.Item {
+  public rpg.item.Dukat();
+  public long getId();
+  public int getValue();
+  public rpg.item.Weight getWeight();
+  public boolean canHaveAsId(long);
+  public boolean hasValidId();
+  public boolean canHaveAsValue(int);
+  public boolean hasValidValue();
+  static {};
+}
+Compiled from "Item.java"
+public interface rpg.item.Item {
+  public abstract long getId();
+  public abstract boolean canHaveAsId(long);
+  public abstract boolean hasValidId();
+  public abstract int getValue();
+  public abstract boolean canHaveAsValue(int);
+  public abstract boolean hasValidValue();
+  public abstract rpg.item.Weight getWeight();
+}
+Compiled from "ItemImplementation.java"
+public abstract class rpg.item.ItemImplementation implements rpg.item.Item {
+  protected long id;
+  protected rpg.item.ItemImplementation(long, rpg.item.Weight, int);
+  protected rpg.item.ItemImplementation(rpg.item.Weight);
+  protected void setValue(int);
+  public int getValue();
+  public boolean canHaveAsValue(int);
+  public boolean hasValidValue();
+  public rpg.item.Weight getWeight();
+  public long getId();
+  protected void setId(long);
+  public boolean canHaveAsId(long);
+  public boolean hasValidId();
+  public void setParent(rpg.item.Parent);
+  public rpg.item.Parent getParent();
+  public boolean hasParent();
+  public boolean hasProperParent();
+  public boolean hasHolder();
+  public rpg.creature.Creature getHolder();
+  public boolean isTerminated();
+  public void terminate();
+  public boolean canHaveAsParent(rpg.item.Parent);
+}
+Compiled from "Parent.java"
+public interface rpg.item.Parent {
+  public abstract rpg.creature.Creature getHolder();
+  public abstract boolean canAddItem(rpg.item.Item);
+  public abstract boolean containsDirectItem(rpg.item.Item);
+  public abstract void removeDirectItem(rpg.item.Item) throws rpg.exception.NoSuchItemException, java.lang.IllegalArgumentException;
+}
+Compiled from "Purse.java"
+public class rpg.item.Purse extends rpg.item.Container {
+  public rpg.item.Purse(rpg.item.Weight, rpg.item.Weight, int);
+  public rpg.item.Purse(rpg.item.Weight, rpg.item.Weight);
+  public boolean canHaveAsId(long);
+  public void addDukat(rpg.item.Dukat);
+  public void setCapacity(rpg.item.Weight);
+  public void addPurse(rpg.item.Purse);
+  public int getValue();
+  static {};
+}
+Compiled from "Weapon.java"
+public class rpg.item.Weapon extends rpg.item.ItemImplementation {
+  public rpg.item.Weapon(rpg.item.Weight, int, int);
+  public rpg.item.Weapon(rpg.item.Weight, int);
+  public static int getMaxDamage();
+  public static void setMaxDamage(int);
+  public static boolean isValidMaxDamage(int);
+  public boolean hasValidMaxDamage();
+  public int getDamage();
+  public void setDamage(int);
+  public static boolean isValidDamage(int);
+  public boolean hasValidDamage();
+  public static void setDamageValueFactor(double);
+  public static double getDamageValueFactor();
+  public static void setUseFormula(boolean);
+  public static boolean getUseFormula();
+  public int getValue();
+  public boolean canHaveAsValue(int);
+  public boolean hasValidValue();
+  static {};
+}
+Compiled from "Weight.java"
+public class rpg.item.Weight implements java.lang.Comparable<rpg.item.Weight> {
+  public rpg.item.Weight(double, rpg.item.WeightUnit);
+  public int compareTo(rpg.item.Weight);
+  public static boolean isValidUnit(rpg.item.WeightUnit);
+  public static boolean isValidNumeral(double);
+  public rpg.item.Weight toUnit(rpg.item.WeightUnit);
+  public double getNumeral();
+  public rpg.item.WeightUnit getUnit();
+  public rpg.item.Weight add(rpg.item.Weight);
+  public rpg.item.Weight subtract(rpg.item.Weight);
+  public rpg.item.Weight multiply(double);
+  public int hashCode();
+  public java.lang.String toString();
+  public boolean equals(java.lang.Object);
+  public int compareTo(java.lang.Object);
+}
+Compiled from "WeightUnit.java"
+public final class rpg.item.WeightUnit extends java.lang.Enum<rpg.item.WeightUnit> {
+  public static final rpg.item.WeightUnit KG;
+  public static final rpg.item.WeightUnit G;
+  public static final rpg.item.WeightUnit POUND;
+  public static rpg.item.WeightUnit[] values();
+  public static rpg.item.WeightUnit valueOf(java.lang.String);
+  public double toUnit(rpg.item.WeightUnit);
+  static {};
+}
+Compiled from "AnchorTest.java"
+public class rpg.test.AnchorTest {
+  rpg.creature.Anchor a1;
+  rpg.creature.Anchor a2;
+  rpg.creature.Hero hero1;
+  rpg.creature.Hero hero2;
+  rpg.item.Weapon weapon1;
+  rpg.item.Weapon weapon2;
+  public rpg.test.AnchorTest();
+  public void setUp() throws java.lang.Exception;
+  public void testAnchorCreatureStringItem();
+  public void testCanHaveAsHolder();
+  public void testAddItem();
+  public void testAddItemIllegalAddItemException();
+  public void testCanAddItem();
+  public void testSwap();
+  public void testRemoveItem();
+  public void testContainsDirectItem();
+  public void testRemoveDirectItem();
+}
+Compiled from "ArmorTest.java"
+public class rpg.test.ArmorTest {
+  rpg.item.Armor armor1;
+  rpg.item.Armor armor2;
+  public rpg.test.ArmorTest();
+  public void setUp() throws java.lang.Exception;
+  public void testArmor();
+  public void testCanHaveAsId();
+  public void testIsValidMaxValue();
+  public void testIsValidMaxProtection();
+  public void testCanHaveAsProtection();
+  public void testGetValue();
+}
+Compiled from "BackPackTest.java"
+public class rpg.test.BackPackTest {
+  static rpg.item.BackPack firstBackPack;
+  static rpg.item.BackPack secondBackPack;
+  rpg.item.BackPack backpack1;
+  rpg.item.BackPack backpack2;
+  rpg.item.BackPack backpack3;
+  public rpg.test.BackPackTest();
+  public static void setUpBeforeClass();
+  public void setUp() throws java.lang.Exception;
+  public void testGenerateId();
+  public void testCanHaveAsValue();
+  public void testGetTotalWeight();
+  public void testGetTotalValue();
+  public void testAddItem_LegalCase();
+  public void testAddItem_IllegalCase();
+  public void testContainsDirectItem();
+  public void testRemoveItem();
+  public void testGetDirectItems();
+  public void testGetItems();
+  public void testEqualsOrIsDirectOrIndirectParentOf();
+}
+Compiled from "ContainerTest.java"
+public class rpg.test.ContainerTest {
+  rpg.item.BackPack backpack1;
+  rpg.item.BackPack backpack2;
+  rpg.item.BackPack backpack3;
+  public rpg.test.ContainerTest();
+  public static void setUpBeforeClass() throws java.lang.Exception;
+  public void setUp() throws java.lang.Exception;
+  public void testGetTotalWeight();
+  public void testGetTotalValue();
+  public void testAddItem_LegalCase();
+  public void testAddItem_IllegalCase();
+  public void testContainsDirectItem();
+  public void testRemoveItem();
+  public void testGetDirectItems();
+  public void testGetItems();
+}
+Compiled from "CreatureTest.java"
+public class rpg.test.CreatureTest {
+  rpg.creature.Creature hero1;
+  rpg.creature.Creature monster1;
+  public rpg.test.CreatureTest();
+  public void setUp() throws java.lang.Exception;
+  public void testGetStrength();
+  public void testMultiplyStrength();
+  public void testDivideStrength();
+  public void testGetTotalWeight();
+  public void testGetTotalValue();
+  public void testHasValidName();
+  public void testCanHaveAsHitpoints();
+  public void testHasValidHitpoints();
+  public void testHit();
+  public void testWeaken();
+  public void testIsValidMaximumHitpoints();
+  public void testHasValidMaximumHitpoints();
+  public void testCanAddItem();
+  public void testCanHaveAsAnchor();
+  public void testHasProperAnchors();
+  public void testHasAsAnchor();
+  public void testTerminate();
+}
+Compiled from "HeroTest.java"
+public class rpg.test.HeroTest {
+  rpg.creature.Hero hero1;
+  public rpg.test.HeroTest();
+  public void setUp() throws java.lang.Exception;
+  public void testGetCapacity();
+  public void testGetProtection();
+  public void testTreasureContains();
+  public void testCanHaveAsName();
+  public void testHero();
+  public void testIsValidStandardProtection();
+  public void testGetTotalStrength();
+}
+Compiled from "ItemImplementationTest.java"
+public class rpg.test.ItemImplementationTest {
+  rpg.item.ItemImplementation item1;
+  rpg.item.ItemImplementation item2;
+  static rpg.item.BackPack backpack1;
+  static rpg.item.BackPack backpack2;
+  rpg.creature.Creature holder;
+  public rpg.test.ItemImplementationTest();
+  public void setUp() throws java.lang.Exception;
+  public void testCanHaveAsValue();
+  public void testHasValidValue();
+  public void testCanHaveAsId();
+  public void testHasValidId();
+  public void testGetParent();
+  public void testHasParent();
+  public void testHasHolder();
+  public void testGetHolder();
+  public void testTerminate();
+  public void testCanHaveAsParent();
+}
+Compiled from "MonsterTest.java"
+public class rpg.test.MonsterTest {
+  rpg.creature.Monster monster1;
+  public rpg.test.MonsterTest();
+  public void setUp() throws java.lang.Exception;
+  public void testGetCapacity();
+  public void testCanHaveAsName();
+  public void testTreasureContains();
+  public void testMonster();
+}
+Compiled from "PurseTest.java"
+public class rpg.test.PurseTest {
+  rpg.item.Purse purse1;
+  rpg.item.Purse purse2;
+  public rpg.test.PurseTest();
+  public static void setUpBeforeClass() throws java.lang.Exception;
+  public void setUp() throws java.lang.Exception;
+  public void testCanHaveAsId();
+  public void testPurse();
+  public void testAddDukat();
+  public void testAddPurse_overflow();
+  public void testAddPurse();
+}
+Compiled from "WeaponTest.java"
+public class rpg.test.WeaponTest {
+  rpg.item.Weapon weapon1;
+  rpg.item.Weapon weapon2;
+  rpg.item.Weapon weapon3;
+  public rpg.test.WeaponTest();
+  public static void setUpBeforeClass() throws java.lang.Exception;
+  public void setUp() throws java.lang.Exception;
+  public void testCanHaveAsValue();
+  public void testGetValue();
+  public void testIsValidMaxDamage();
+  public void testHasValidMaxDamage();
+  public void testIsValidDamage();
+  public void testHasValidDamage();
+}
+Compiled from "WeightTest.java"
+public class rpg.test.WeightTest {
+  public rpg.item.Weight kg1000;
+  public rpg.item.Weight g100;
+  public rpg.item.Weight pounds500;
+  public rpg.test.WeightTest();
+  public void setUp() throws java.lang.Exception;
+  public void testWeight();
+  public void testCompareTo();
+  public void testToUnit();
+  public void testAdd();
+  public void testsubtract();
+  public void testToString();
+  public void testEqualsObject();
+}

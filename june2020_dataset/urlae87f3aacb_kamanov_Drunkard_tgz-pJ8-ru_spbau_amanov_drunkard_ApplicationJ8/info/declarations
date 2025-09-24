@@ -1,0 +1,231 @@
+Compiled from "AbstractField.java"
+public abstract class ru.spbau.amanov.drunkard.AbstractField {
+  protected final int WIDTH;
+  protected final int HEIGHT;
+  protected ru.spbau.amanov.drunkard.GameObjects.GameObject[][] field;
+  public ru.spbau.amanov.drunkard.AbstractField();
+  public void visitFieldObjects(ru.spbau.amanov.drunkard.ICollisionVisitor);
+  public boolean validatePosition(ru.spbau.amanov.drunkard.Position);
+  public void addObject(ru.spbau.amanov.drunkard.GameObjects.GameObject, ru.spbau.amanov.drunkard.Position);
+  public void removeObject(ru.spbau.amanov.drunkard.Position);
+  public ru.spbau.amanov.drunkard.GameObjects.GameObject getObject(ru.spbau.amanov.drunkard.Position);
+  public ru.spbau.amanov.drunkard.GameObjects.GameObject getObject(int, int);
+  public void initFieldObjects();
+  public java.util.List<ru.spbau.amanov.drunkard.Position> getPossibleSteps(ru.spbau.amanov.drunkard.Position);
+  public int getHeight();
+  public abstract int getWidth(int);
+  public abstract boolean isShift(int);
+}
+Compiled from "Application.java"
+public class ru.spbau.amanov.drunkard.Application {
+  public ru.spbau.amanov.drunkard.Application();
+  public static void main(java.lang.String[]);
+}
+Compiled from "CollisionAdaptor.java"
+public class ru.spbau.amanov.drunkard.CollisionAdaptor implements ru.spbau.amanov.drunkard.ICollisionVisitor {
+  public ru.spbau.amanov.drunkard.CollisionAdaptor();
+  public void collisionWith(ru.spbau.amanov.drunkard.GameObjects.Drunkard);
+  public void collisionWith(ru.spbau.amanov.drunkard.GameObjects.Column);
+  public void collisionWith(ru.spbau.amanov.drunkard.GameObjects.Bottle);
+  public void collisionWith(ru.spbau.amanov.drunkard.GameObjects.Empty);
+  public void collisionWith(ru.spbau.amanov.drunkard.GameObjects.Lantern);
+  public void collisionWith(ru.spbau.amanov.drunkard.GameObjects.Policeman);
+  public void collisionWith(ru.spbau.amanov.drunkard.GameObjects.Beggar);
+}
+Compiled from "Game.java"
+public final class ru.spbau.amanov.drunkard.Game {
+  public ru.spbau.amanov.drunkard.Game();
+  public void run();
+}
+Compiled from "GameConfig.java"
+public class ru.spbau.amanov.drunkard.GameConfig {
+  public static final ru.spbau.amanov.drunkard.Position COLUMN_POS;
+  public static final ru.spbau.amanov.drunkard.Position PUB_POS;
+  public static final ru.spbau.amanov.drunkard.Position LANTERN_POS;
+  public static final ru.spbau.amanov.drunkard.Position POLICE_STATION_POS;
+  public static final int FIELD_WIDTH;
+  public static final int FIELD_HEIGHT;
+  public static final int BOTTLE_LOOSE_PROBABILITY;
+  public static final int DRUNKARD_FREQ;
+  public static final int LANTERN_RADIUS;
+  public static final ru.spbau.amanov.drunkard.Position BOTTLE_STORE_POS;
+  public static final int BEGGAR_PERIOD;
+  public static final int MAX_GAME_STEPS;
+  public ru.spbau.amanov.drunkard.GameConfig();
+  static {};
+}
+Compiled from "GameLogic.java"
+public final class ru.spbau.amanov.drunkard.GameLogic extends ru.spbau.amanov.drunkard.CollisionAdaptor {
+  public ru.spbau.amanov.drunkard.GameLogic(ru.spbau.amanov.drunkard.AbstractField);
+  public void nextStep();
+  public void collisionWith(ru.spbau.amanov.drunkard.GameObjects.Drunkard);
+}
+Compiled from "ActiveGameObject.java"
+public abstract class ru.spbau.amanov.drunkard.GameObjects.ActiveGameObject extends ru.spbau.amanov.drunkard.GameObjects.GameObject {
+  protected ru.spbau.amanov.drunkard.AbstractField field;
+  protected ru.spbau.amanov.drunkard.GameObjects.ActiveGameObject$State state;
+  public ru.spbau.amanov.drunkard.GameObjects.ActiveGameObject(ru.spbau.amanov.drunkard.AbstractField, ru.spbau.amanov.drunkard.Position);
+  public abstract void update();
+  protected abstract void lookForTarget();
+  protected abstract void hide();
+  protected abstract void tryToAppear();
+  protected abstract void pathNotFound();
+  protected void move();
+  protected void hide(ru.spbau.amanov.drunkard.GameObjects.ActiveGameObject$State);
+  protected void targetReached();
+  protected void tryToAppear(ru.spbau.amanov.drunkard.GameObjects.ActiveGameObject$State);
+  protected void setTarget(ru.spbau.amanov.drunkard.Position);
+}
+Compiled from "ActiveGameObject.java"
+final class ru.spbau.amanov.drunkard.GameObjects.ActiveGameObject$State extends java.lang.Enum<ru.spbau.amanov.drunkard.GameObjects.ActiveGameObject$State> {
+  public static final ru.spbau.amanov.drunkard.GameObjects.ActiveGameObject$State GO_TO_TARGET;
+  public static final ru.spbau.amanov.drunkard.GameObjects.ActiveGameObject$State GO_TO_INIT_POS;
+  public static final ru.spbau.amanov.drunkard.GameObjects.ActiveGameObject$State LOOK_FOR_TARGET;
+  public static final ru.spbau.amanov.drunkard.GameObjects.ActiveGameObject$State INIT_POS;
+  public static final ru.spbau.amanov.drunkard.GameObjects.ActiveGameObject$State HIDE;
+  public static ru.spbau.amanov.drunkard.GameObjects.ActiveGameObject$State[] values();
+  public static ru.spbau.amanov.drunkard.GameObjects.ActiveGameObject$State valueOf(java.lang.String);
+  static {};
+}
+Compiled from "Beggar.java"
+public class ru.spbau.amanov.drunkard.GameObjects.Beggar extends ru.spbau.amanov.drunkard.GameObjects.ActiveGameObject {
+  public ru.spbau.amanov.drunkard.GameObjects.Beggar(ru.spbau.amanov.drunkard.AbstractField);
+  public void update();
+  protected void pathNotFound();
+  protected void hide();
+  protected void lookForTarget();
+  protected void tryToAppear();
+  public void accept(ru.spbau.amanov.drunkard.ICollisionVisitor);
+  public void collisionWith(ru.spbau.amanov.drunkard.GameObjects.Bottle);
+}
+Compiled from "Bottle.java"
+public class ru.spbau.amanov.drunkard.GameObjects.Bottle extends ru.spbau.amanov.drunkard.GameObjects.GameObject {
+  public ru.spbau.amanov.drunkard.GameObjects.Bottle();
+  public void accept(ru.spbau.amanov.drunkard.ICollisionVisitor);
+}
+Compiled from "Column.java"
+public class ru.spbau.amanov.drunkard.GameObjects.Column extends ru.spbau.amanov.drunkard.GameObjects.GameObject {
+  public ru.spbau.amanov.drunkard.GameObjects.Column();
+  public void accept(ru.spbau.amanov.drunkard.ICollisionVisitor);
+}
+Compiled from "Drunkard.java"
+public class ru.spbau.amanov.drunkard.GameObjects.Drunkard extends ru.spbau.amanov.drunkard.GameObjects.GameObject {
+  public ru.spbau.amanov.drunkard.GameObjects.Drunkard(ru.spbau.amanov.drunkard.AbstractField, ru.spbau.amanov.drunkard.Position);
+  public void accept(ru.spbau.amanov.drunkard.ICollisionVisitor);
+  public void randomMove();
+  public void setState(ru.spbau.amanov.drunkard.GameObjects.Drunkard$State);
+  public ru.spbau.amanov.drunkard.GameObjects.Drunkard$State getState();
+  public void collisionWith(ru.spbau.amanov.drunkard.GameObjects.Drunkard);
+  public void collisionWith(ru.spbau.amanov.drunkard.GameObjects.Column);
+  public void collisionWith(ru.spbau.amanov.drunkard.GameObjects.Bottle);
+  public void collisionWith(ru.spbau.amanov.drunkard.GameObjects.Empty);
+  public boolean isLying();
+  public boolean isSleep();
+}
+Compiled from "Drunkard.java"
+class ru.spbau.amanov.drunkard.GameObjects.Drunkard$1 {
+  static final int[] $SwitchMap$ru$spbau$amanov$drunkard$GameObjects$Drunkard$State;
+  static {};
+}
+Compiled from "Drunkard.java"
+public final class ru.spbau.amanov.drunkard.GameObjects.Drunkard$State extends java.lang.Enum<ru.spbau.amanov.drunkard.GameObjects.Drunkard$State> {
+  public static final ru.spbau.amanov.drunkard.GameObjects.Drunkard$State ACTIVE;
+  public static final ru.spbau.amanov.drunkard.GameObjects.Drunkard$State SLEEP;
+  public static final ru.spbau.amanov.drunkard.GameObjects.Drunkard$State LYING;
+  public static ru.spbau.amanov.drunkard.GameObjects.Drunkard$State[] values();
+  public static ru.spbau.amanov.drunkard.GameObjects.Drunkard$State valueOf(java.lang.String);
+  static {};
+}
+Compiled from "Empty.java"
+public class ru.spbau.amanov.drunkard.GameObjects.Empty extends ru.spbau.amanov.drunkard.GameObjects.GameObject {
+  public ru.spbau.amanov.drunkard.GameObjects.Empty();
+  public void accept(ru.spbau.amanov.drunkard.ICollisionVisitor);
+}
+Compiled from "GameObject.java"
+public abstract class ru.spbau.amanov.drunkard.GameObjects.GameObject extends ru.spbau.amanov.drunkard.CollisionAdaptor {
+  protected ru.spbau.amanov.drunkard.Position position;
+  public ru.spbau.amanov.drunkard.GameObjects.GameObject();
+  public abstract void accept(ru.spbau.amanov.drunkard.ICollisionVisitor);
+  public ru.spbau.amanov.drunkard.Position getPos();
+  public void setPosition(ru.spbau.amanov.drunkard.Position);
+  public void setPrev(ru.spbau.amanov.drunkard.Position);
+  public ru.spbau.amanov.drunkard.Position getPrev();
+  public void setVisited(boolean);
+  public boolean isVisited();
+}
+Compiled from "Lantern.java"
+public class ru.spbau.amanov.drunkard.GameObjects.Lantern extends ru.spbau.amanov.drunkard.GameObjects.GameObject {
+  ru.spbau.amanov.drunkard.AbstractField field;
+  public ru.spbau.amanov.drunkard.GameObjects.Lantern(ru.spbau.amanov.drunkard.AbstractField, ru.spbau.amanov.drunkard.Position, int);
+  public java.util.List<ru.spbau.amanov.drunkard.GameObjects.GameObject> getAlightObjects();
+  public void accept(ru.spbau.amanov.drunkard.ICollisionVisitor);
+}
+Compiled from "Policeman.java"
+public class ru.spbau.amanov.drunkard.GameObjects.Policeman extends ru.spbau.amanov.drunkard.GameObjects.ActiveGameObject {
+  public ru.spbau.amanov.drunkard.GameObjects.Policeman(ru.spbau.amanov.drunkard.AbstractField, ru.spbau.amanov.drunkard.GameObjects.Lantern);
+  public void update();
+  protected void pathNotFound();
+  protected void tryToAppear();
+  public void accept(ru.spbau.amanov.drunkard.ICollisionVisitor);
+  protected void lookForTarget();
+  protected void hide();
+  public void collisionWith(ru.spbau.amanov.drunkard.GameObjects.Drunkard);
+}
+Compiled from "HexagonalField.java"
+public class ru.spbau.amanov.drunkard.HexagonalField extends ru.spbau.amanov.drunkard.AbstractField {
+  public ru.spbau.amanov.drunkard.HexagonalField();
+  public java.util.List<ru.spbau.amanov.drunkard.Position> getPossibleSteps(ru.spbau.amanov.drunkard.Position);
+  public int getWidth(int);
+  public boolean isShift(int);
+}
+Compiled from "ICollisionVisitor.java"
+public interface ru.spbau.amanov.drunkard.ICollisionVisitor {
+  public abstract void collisionWith(ru.spbau.amanov.drunkard.GameObjects.Drunkard);
+  public abstract void collisionWith(ru.spbau.amanov.drunkard.GameObjects.Column);
+  public abstract void collisionWith(ru.spbau.amanov.drunkard.GameObjects.Bottle);
+  public abstract void collisionWith(ru.spbau.amanov.drunkard.GameObjects.Empty);
+  public abstract void collisionWith(ru.spbau.amanov.drunkard.GameObjects.Lantern);
+  public abstract void collisionWith(ru.spbau.amanov.drunkard.GameObjects.Policeman);
+  public abstract void collisionWith(ru.spbau.amanov.drunkard.GameObjects.Beggar);
+}
+Compiled from "PathHelper.java"
+public class ru.spbau.amanov.drunkard.PathHelper {
+  public ru.spbau.amanov.drunkard.PathHelper(ru.spbau.amanov.drunkard.AbstractField);
+  public ru.spbau.amanov.drunkard.Position getNextPos(ru.spbau.amanov.drunkard.Position, ru.spbau.amanov.drunkard.Position);
+  public ru.spbau.amanov.drunkard.Position generateRandomMove(ru.spbau.amanov.drunkard.Position);
+}
+Compiled from "Position.java"
+public class ru.spbau.amanov.drunkard.Position {
+  public ru.spbau.amanov.drunkard.Position(int, int);
+  public ru.spbau.amanov.drunkard.Position(ru.spbau.amanov.drunkard.Position);
+  public int getRow();
+  public int getColumn();
+  public ru.spbau.amanov.drunkard.Position incRow();
+  public ru.spbau.amanov.drunkard.Position incColumn();
+  public ru.spbau.amanov.drunkard.Position decrRow();
+  public ru.spbau.amanov.drunkard.Position decrColumn();
+  public boolean equals(ru.spbau.amanov.drunkard.Position);
+}
+Compiled from "Printer.java"
+public class ru.spbau.amanov.drunkard.Printer implements ru.spbau.amanov.drunkard.ICollisionVisitor {
+  public ru.spbau.amanov.drunkard.Printer(ru.spbau.amanov.drunkard.AbstractField);
+  public void reprintField();
+  public void collisionWith(ru.spbau.amanov.drunkard.GameObjects.Drunkard);
+  public void collisionWith(ru.spbau.amanov.drunkard.GameObjects.Column);
+  public void collisionWith(ru.spbau.amanov.drunkard.GameObjects.Bottle);
+  public void collisionWith(ru.spbau.amanov.drunkard.GameObjects.Empty);
+  public void collisionWith(ru.spbau.amanov.drunkard.GameObjects.Lantern);
+  public void collisionWith(ru.spbau.amanov.drunkard.GameObjects.Policeman);
+  public void collisionWith(ru.spbau.amanov.drunkard.GameObjects.Beggar);
+}
+Compiled from "Printer.java"
+class ru.spbau.amanov.drunkard.Printer$1 {
+  static final int[] $SwitchMap$ru$spbau$amanov$drunkard$GameObjects$Drunkard$State;
+  static {};
+}
+Compiled from "RectangleField.java"
+public class ru.spbau.amanov.drunkard.RectangleField extends ru.spbau.amanov.drunkard.AbstractField {
+  public ru.spbau.amanov.drunkard.RectangleField();
+  public int getWidth(int);
+  public boolean isShift(int);
+}

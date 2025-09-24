@@ -1,0 +1,2325 @@
+Compiled from "COA.java"
+public class bbms.COA {
+  public java.util.Vector<unit.Unit> unitList;
+  public java.lang.String name;
+  public bbms.COA(java.lang.String);
+  public void SaveCOA();
+  public void LoadCOA();
+  public bbms.COA(bbms.COA, java.lang.String);
+  public bbms.COA(java.io.BufferedReader, java.lang.String);
+  public java.lang.String PrintCOA();
+}
+Compiled from "DebugFuncs.java"
+public class bbms.DebugFuncs {
+  public static double debugRotateHull;
+  public static double debugRotateTurret;
+  public static int debugRotateX;
+  public static int debugRotateY;
+  public bbms.DebugFuncs();
+  public static void rotateDebugDisplay();
+  static {};
+}
+Compiled from "FOVj.java"
+public class bbms.FOVj {
+  public bbms.FOVj();
+  public static void main(java.lang.String[]);
+  public static void JWindowLook();
+  public static void test1();
+  public static void test2();
+  public static void test3();
+  public static void test4();
+  public static void test5();
+  public static void test6();
+  public static void test7();
+  public static void test8();
+}
+Compiled from "GlobalFuncs.java"
+public class bbms.GlobalFuncs {
+  public static gui.GUI_NB gui;
+  public static hex.HexMap scenMap;
+  public static boolean mapInitialized;
+  public static boolean clockInitialized;
+  public static int placeUnit;
+  public static boolean showShaded;
+  public static boolean showVapor;
+  public static boolean showLOS;
+  public static boolean showFOW;
+  public static boolean showWPs;
+  public static int miniMapSize;
+  public static boolean updateVapor;
+  public static boolean shareTeamFit;
+  public static boolean RotateHull;
+  public static boolean runningTest;
+  public static boolean displayMiniMap;
+  public static hex.MiniMapEnum MiniMapType;
+  public static double networkResultThreshold;
+  public static double mutateProbability;
+  public static int epochInterval;
+  public static java.lang.String dirPrefix;
+  public static double deathPenalty;
+  public static unit.FitnessTypeEnum defaultFitType;
+  public static java.util.Vector<unit.Unit> unitList;
+  public static java.util.Vector<unit.Unit> friendlyUnitList;
+  public static java.util.Vector<unit.Unit> enemyUnitList;
+  public static java.util.Vector<unit.Unit> destroyedUnitList;
+  public static hex.Hex selectedHex;
+  public static unit.Unit selectedUnit;
+  public static unit.OrganismTypeEnum defaultOrgType;
+  public static boolean calcShared;
+  public static boolean forceTreePlacement;
+  public static jneat.Population currentPop;
+  public static java.lang.String tempStr;
+  public static int orgAssignNum;
+  public static int maxRunsPerOrg;
+  public static int numTests;
+  public static int numDifferentTests;
+  public static java.nio.file.Path detailedOutput;
+  public static java.nio.file.Path summaryOutput;
+  public static java.nio.file.Path fullIterOutput;
+  public static java.nio.file.Path targetPop;
+  public static java.nio.file.Path currentTestPath;
+  public static java.lang.String outputPrefix;
+  public static java.lang.String inputPrefix;
+  public static double percentPerRun;
+  public static int currentRunsPerOrg;
+  public static int iterationCount;
+  public static int numScoutsPer;
+  public static int curEpoch;
+  public static int maxEpochs;
+  public static boolean pauseNewIter;
+  public static boolean pauseNewEpoch;
+  public static boolean newEpoch;
+  public static boolean randCOAEpoch;
+  public static int currentPopEpochNum;
+  public static int spottedSoFar;
+  public static int maxPossibleSpots;
+  public static double moveRateMult;
+  public static int COAIndex;
+  public static bbms.COA curCOA;
+  public static java.util.Vector<bbms.COA> allCOAs;
+  public static java.lang.Thread GameClock;
+  public static boolean runtoEq;
+  public static int dvTolerance;
+  public static int visibility;
+  public static double maxSpottedDV;
+  public static double maxSpottedDV60;
+  public static double maxsingleDV;
+  public static double flowRate;
+  public static double flowRateCap;
+  public static double flowStep;
+  public static int flowCheck;
+  public static boolean reduceRate;
+  public static boolean fixSlowRate;
+  public static int maxDelta;
+  public static int ticksStable;
+  public static long totalVapor;
+  public static int totalVaporDelta;
+  public static spotting.SpotRecords allSpots;
+  public static utilities.MersenneTwister randGen;
+  public bbms.GlobalFuncs();
+  public static int randRange(int, int);
+  public static int randMean(int, int);
+  public static float randFloat();
+  public static int randPosNeg();
+  public static double randGauss();
+  public static void initializeMap(int, int, boolean);
+  public static java.lang.String saveMapCharacteristics();
+  public static boolean loadMapCharacteristics(java.io.BufferedReader);
+  public static void initializeMap(int, int);
+  public static java.lang.String whiteFill(java.lang.String, int);
+  public static int getUnitCount();
+  public static java.util.Vector<unit.Unit> duplicateUnitVec(java.util.Vector<unit.Unit>);
+  public static int getNewUnitCount();
+  public static int normalizeAngle(int);
+  public static double normalizeAngle(double);
+  public static boolean saveState();
+  public static boolean saveScen(java.lang.String);
+  public static boolean loadState();
+  static {};
+}
+Compiled from "Clock.java"
+public class clock.Clock {
+  public static int hour;
+  public static int minute;
+  public static int second;
+  public static int ms;
+  public static int time;
+  public clock.Clock();
+  public static void moveAllUnits(int);
+  public static void updateLOSFriendly();
+  public static void updateFitnessFriendly();
+  public static void ClockLoop(int);
+  public static void IncrementMs(int);
+  public static void IncrementSec(int);
+  public static void ClockSimplify();
+  public static void SetTime(int, int, int);
+  public static void SetTime(int, int, int, int);
+  public static java.lang.String DisplayTimeFull();
+  public static java.lang.String DisplayTimeNorm();
+  public static java.lang.String DisplayTime();
+  static {};
+}
+Compiled from "ClockControl.java"
+public class clock.ClockControl {
+  public static final int CLOCK_STEP;
+  static byte timescale;
+  public static boolean paused;
+  public clock.ClockControl();
+  public static int GetClockDelay();
+  public static void SetPaused(boolean);
+  public static void Pause();
+  public static void AdjustDelayScale();
+  public static void AccelTime();
+  public static void DecelTime();
+  public static void SetTimeScale(byte);
+  public static java.lang.String PrintTimeScale();
+  public static double NumTimeScale();
+  static {};
+}
+Compiled from "ClockThread.java"
+public class clock.ClockThread implements java.lang.Runnable {
+  long startCycle;
+  long endCycle;
+  long durationCycle;
+  public clock.ClockThread();
+  public void run();
+}
+Compiled from "Clock.java"
+class clock.HourBoundsException extends java.lang.Exception {
+  clock.HourBoundsException(int);
+}
+Compiled from "Clock.java"
+class clock.MinuteBoundsException extends java.lang.Exception {
+  clock.MinuteBoundsException(int);
+}
+Compiled from "Clock.java"
+class clock.MsBoundsException extends java.lang.Exception {
+  clock.MsBoundsException(int);
+}
+Compiled from "Clock.java"
+class clock.SecondBoundsException extends java.lang.Exception {
+  clock.SecondBoundsException(int);
+}
+Compiled from "DetailedInfoEnum.java"
+public final class gui.DetailedInfoEnum extends java.lang.Enum<gui.DetailedInfoEnum> {
+  public static final gui.DetailedInfoEnum UNIT;
+  public static final gui.DetailedInfoEnum VAPOR;
+  public static final gui.DetailedInfoEnum JNEAT;
+  public static final gui.DetailedInfoEnum DEBUG;
+  public static gui.DetailedInfoEnum[] values();
+  public static gui.DetailedInfoEnum valueOf(java.lang.String);
+  static {};
+}
+Compiled from "DialogFileName.java"
+public class gui.DialogFileName extends javax.swing.JDialog {
+  public gui.DialogFileName(java.awt.Frame, boolean, java.lang.String);
+  public static void main(java.lang.String[]);
+  static void access$000(gui.DialogFileName, java.awt.event.KeyEvent);
+  static void access$100(gui.DialogFileName, java.awt.event.MouseEvent);
+}
+Compiled from "DialogFileName.java"
+class gui.DialogFileName$1 extends java.awt.event.KeyAdapter {
+  final gui.DialogFileName this$0;
+  gui.DialogFileName$1(gui.DialogFileName);
+  public void keyPressed(java.awt.event.KeyEvent);
+}
+Compiled from "DialogFileName.java"
+class gui.DialogFileName$2 extends java.awt.event.MouseAdapter {
+  final gui.DialogFileName this$0;
+  gui.DialogFileName$2(gui.DialogFileName);
+  public void mouseClicked(java.awt.event.MouseEvent);
+}
+Compiled from "DialogFileName.java"
+final class gui.DialogFileName$3 implements java.lang.Runnable {
+  gui.DialogFileName$3();
+  public void run();
+}
+Compiled from "DialogFileName.java"
+class gui.DialogFileName$3$1 extends java.awt.event.WindowAdapter {
+  final gui.DialogFileName$3 this$0;
+  gui.DialogFileName$3$1(gui.DialogFileName$3);
+  public void windowClosing(java.awt.event.WindowEvent);
+}
+Compiled from "DialogLoadScen.java"
+public class gui.DialogLoadScen extends javax.swing.JDialog {
+  public gui.DialogLoadScen(java.awt.Frame, boolean);
+  public static void main(java.lang.String[]);
+  static void access$000(gui.DialogLoadScen, java.awt.event.MouseEvent);
+  static void access$100(gui.DialogLoadScen, java.awt.event.MouseEvent);
+  static void access$200(gui.DialogLoadScen, java.awt.event.ItemEvent);
+  static void access$300(gui.DialogLoadScen, java.awt.event.ItemEvent);
+  static void access$400(gui.DialogLoadScen, java.awt.event.ItemEvent);
+  static void access$500(gui.DialogLoadScen, java.awt.event.ItemEvent);
+  static void access$600(gui.DialogLoadScen, java.awt.event.ItemEvent);
+  static void access$700(gui.DialogLoadScen, java.awt.event.ItemEvent);
+}
+Compiled from "DialogLoadScen.java"
+class gui.DialogLoadScen$1 extends java.awt.event.MouseAdapter {
+  final gui.DialogLoadScen this$0;
+  gui.DialogLoadScen$1(gui.DialogLoadScen);
+  public void mouseClicked(java.awt.event.MouseEvent);
+}
+Compiled from "DialogLoadScen.java"
+class gui.DialogLoadScen$2 extends java.awt.event.MouseAdapter {
+  final gui.DialogLoadScen this$0;
+  gui.DialogLoadScen$2(gui.DialogLoadScen);
+  public void mouseClicked(java.awt.event.MouseEvent);
+}
+Compiled from "DialogLoadScen.java"
+class gui.DialogLoadScen$3 implements java.awt.event.ItemListener {
+  final gui.DialogLoadScen this$0;
+  gui.DialogLoadScen$3(gui.DialogLoadScen);
+  public void itemStateChanged(java.awt.event.ItemEvent);
+}
+Compiled from "DialogLoadScen.java"
+class gui.DialogLoadScen$4 implements java.awt.event.ItemListener {
+  final gui.DialogLoadScen this$0;
+  gui.DialogLoadScen$4(gui.DialogLoadScen);
+  public void itemStateChanged(java.awt.event.ItemEvent);
+}
+Compiled from "DialogLoadScen.java"
+class gui.DialogLoadScen$5 implements java.awt.event.ItemListener {
+  final gui.DialogLoadScen this$0;
+  gui.DialogLoadScen$5(gui.DialogLoadScen);
+  public void itemStateChanged(java.awt.event.ItemEvent);
+}
+Compiled from "DialogLoadScen.java"
+class gui.DialogLoadScen$6 implements java.awt.event.ItemListener {
+  final gui.DialogLoadScen this$0;
+  gui.DialogLoadScen$6(gui.DialogLoadScen);
+  public void itemStateChanged(java.awt.event.ItemEvent);
+}
+Compiled from "DialogLoadScen.java"
+class gui.DialogLoadScen$7 implements java.awt.event.ItemListener {
+  final gui.DialogLoadScen this$0;
+  gui.DialogLoadScen$7(gui.DialogLoadScen);
+  public void itemStateChanged(java.awt.event.ItemEvent);
+}
+Compiled from "DialogLoadScen.java"
+class gui.DialogLoadScen$8 implements java.awt.event.ItemListener {
+  final gui.DialogLoadScen this$0;
+  gui.DialogLoadScen$8(gui.DialogLoadScen);
+  public void itemStateChanged(java.awt.event.ItemEvent);
+}
+Compiled from "DialogLoadScen.java"
+final class gui.DialogLoadScen$9 implements java.lang.Runnable {
+  gui.DialogLoadScen$9();
+  public void run();
+}
+Compiled from "DialogLoadScen.java"
+class gui.DialogLoadScen$9$1 extends java.awt.event.WindowAdapter {
+  final gui.DialogLoadScen$9 this$0;
+  gui.DialogLoadScen$9$1(gui.DialogLoadScen$9);
+  public void windowClosing(java.awt.event.WindowEvent);
+}
+Compiled from "DialogNewMap.java"
+public class gui.DialogNewMap extends javax.swing.JDialog {
+  boolean blankMap;
+  public gui.DialogNewMap(java.awt.Frame, boolean, boolean);
+  public static void main(java.lang.String[]);
+  static void access$000(gui.DialogNewMap, java.awt.event.MouseEvent);
+}
+Compiled from "DialogNewMap.java"
+class gui.DialogNewMap$1 extends java.awt.event.MouseAdapter {
+  final gui.DialogNewMap this$0;
+  gui.DialogNewMap$1(gui.DialogNewMap);
+  public void mouseClicked(java.awt.event.MouseEvent);
+}
+Compiled from "DialogNewMap.java"
+final class gui.DialogNewMap$2 implements java.lang.Runnable {
+  gui.DialogNewMap$2();
+  public void run();
+}
+Compiled from "DialogNewMap.java"
+class gui.DialogNewMap$2$1 extends java.awt.event.WindowAdapter {
+  final gui.DialogNewMap$2 this$0;
+  gui.DialogNewMap$2$1(gui.DialogNewMap$2);
+  public void windowClosing(java.awt.event.WindowEvent);
+}
+Compiled from "DialogNewPop.java"
+public class gui.DialogNewPop extends javax.swing.JDialog {
+  public gui.DialogNewPop(java.awt.Frame, boolean);
+  public static void main(java.lang.String[]);
+  static void access$000(gui.DialogNewPop, java.awt.event.MouseEvent);
+}
+Compiled from "DialogNewPop.java"
+class gui.DialogNewPop$1 extends java.awt.event.MouseAdapter {
+  final gui.DialogNewPop this$0;
+  gui.DialogNewPop$1(gui.DialogNewPop);
+  public void mouseClicked(java.awt.event.MouseEvent);
+}
+Compiled from "DialogNewPop.java"
+final class gui.DialogNewPop$2 implements java.lang.Runnable {
+  gui.DialogNewPop$2();
+  public void run();
+}
+Compiled from "DialogNewPop.java"
+class gui.DialogNewPop$2$1 extends java.awt.event.WindowAdapter {
+  final gui.DialogNewPop$2 this$0;
+  gui.DialogNewPop$2$1(gui.DialogNewPop$2);
+  public void windowClosing(java.awt.event.WindowEvent);
+}
+Compiled from "DialogTestPop.java"
+public class gui.DialogTestPop extends javax.swing.JDialog {
+  public gui.DialogTestPop(java.awt.Frame, boolean);
+  public static void main(java.lang.String[]);
+  static void access$000(gui.DialogTestPop, java.awt.event.MouseEvent);
+  static void access$100(gui.DialogTestPop, java.awt.event.ItemEvent);
+  static void access$200(gui.DialogTestPop, java.awt.event.ItemEvent);
+  static void access$300(gui.DialogTestPop, java.awt.event.ItemEvent);
+  static void access$400(gui.DialogTestPop, java.awt.event.ItemEvent);
+  static void access$500(gui.DialogTestPop, java.awt.event.ItemEvent);
+  static void access$600(gui.DialogTestPop, java.awt.event.ActionEvent);
+  static void access$700(gui.DialogTestPop, java.awt.event.ActionEvent);
+}
+Compiled from "DialogTestPop.java"
+class gui.DialogTestPop$1 extends java.awt.event.MouseAdapter {
+  final gui.DialogTestPop this$0;
+  gui.DialogTestPop$1(gui.DialogTestPop);
+  public void mouseClicked(java.awt.event.MouseEvent);
+}
+Compiled from "DialogTestPop.java"
+class gui.DialogTestPop$2 implements java.awt.event.ItemListener {
+  final gui.DialogTestPop this$0;
+  gui.DialogTestPop$2(gui.DialogTestPop);
+  public void itemStateChanged(java.awt.event.ItemEvent);
+}
+Compiled from "DialogTestPop.java"
+class gui.DialogTestPop$3 implements java.awt.event.ItemListener {
+  final gui.DialogTestPop this$0;
+  gui.DialogTestPop$3(gui.DialogTestPop);
+  public void itemStateChanged(java.awt.event.ItemEvent);
+}
+Compiled from "DialogTestPop.java"
+class gui.DialogTestPop$4 implements java.awt.event.ItemListener {
+  final gui.DialogTestPop this$0;
+  gui.DialogTestPop$4(gui.DialogTestPop);
+  public void itemStateChanged(java.awt.event.ItemEvent);
+}
+Compiled from "DialogTestPop.java"
+class gui.DialogTestPop$5 implements java.awt.event.ItemListener {
+  final gui.DialogTestPop this$0;
+  gui.DialogTestPop$5(gui.DialogTestPop);
+  public void itemStateChanged(java.awt.event.ItemEvent);
+}
+Compiled from "DialogTestPop.java"
+class gui.DialogTestPop$6 implements java.awt.event.ItemListener {
+  final gui.DialogTestPop this$0;
+  gui.DialogTestPop$6(gui.DialogTestPop);
+  public void itemStateChanged(java.awt.event.ItemEvent);
+}
+Compiled from "DialogTestPop.java"
+class gui.DialogTestPop$7 implements java.awt.event.ActionListener {
+  final gui.DialogTestPop this$0;
+  gui.DialogTestPop$7(gui.DialogTestPop);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "DialogTestPop.java"
+class gui.DialogTestPop$8 implements java.awt.event.ActionListener {
+  final gui.DialogTestPop this$0;
+  gui.DialogTestPop$8(gui.DialogTestPop);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "DialogTestPop.java"
+final class gui.DialogTestPop$9 implements java.lang.Runnable {
+  gui.DialogTestPop$9();
+  public void run();
+}
+Compiled from "DialogTestPop.java"
+class gui.DialogTestPop$9$1 extends java.awt.event.WindowAdapter {
+  final gui.DialogTestPop$9 this$0;
+  gui.DialogTestPop$9$1(gui.DialogTestPop$9);
+  public void windowClosing(java.awt.event.WindowEvent);
+}
+Compiled from "GUIBasicInfo.java"
+public class gui.GUIBasicInfo extends javax.swing.JPanel {
+  static java.lang.String hexCoords;
+  static java.lang.String terrainType;
+  static java.lang.String elev;
+  static java.lang.String obsc;
+  static java.lang.String dens;
+  static java.lang.String obsH;
+  static java.lang.String spots;
+  static java.lang.String unitCallsign;
+  static java.lang.String unitType;
+  static java.lang.String unitSubLoc;
+  public static int mouseX;
+  public static int mouseY;
+  public static int uniMouseX;
+  public static int uniMouseY;
+  public static hex.Hex lastHex;
+  public gui.GUIBasicInfo();
+  public static void UpdateHexInfo(int, int);
+  public static void UpdateHexUnit();
+  public void paintComponent(java.awt.Graphics);
+  static {};
+}
+Compiled from "GUIInfoPane.java"
+public class gui.GUIInfoPane extends javax.swing.JPanel {
+  public static int mouseX;
+  public static int mouseY;
+  public static int uniMouseX;
+  public static int uniMouseY;
+  public static gui.DetailedInfoEnum mode;
+  public gui.GUIInfoPane();
+  public static void renamePane(java.lang.String);
+  public static void changePaneMode(gui.DetailedInfoEnum);
+  public void paintComponent(java.awt.Graphics);
+  static {};
+}
+Compiled from "GUIInfoPane.java"
+class gui.GUIInfoPane$1 {
+  static final int[] $SwitchMap$gui$DetailedInfoEnum;
+  static {};
+}
+Compiled from "GUIKeyboard.java"
+public class gui.GUIKeyboard {
+  public gui.GUIKeyboard();
+  public static void initializeKeyCommands();
+  public static void graphicsShifting();
+}
+Compiled from "GUIKeyboard.java"
+public class gui.GUIKeyboard$AccelerateTime extends javax.swing.AbstractAction {
+  public gui.GUIKeyboard$AccelerateTime();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIKeyboard.java"
+public class gui.GUIKeyboard$AddWaypoint extends javax.swing.AbstractAction {
+  public gui.GUIKeyboard$AddWaypoint();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIKeyboard.java"
+public class gui.GUIKeyboard$CheckZones extends javax.swing.AbstractAction {
+  public gui.GUIKeyboard$CheckZones();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIKeyboard.java"
+public class gui.GUIKeyboard$ClearHexes extends javax.swing.AbstractAction {
+  public gui.GUIKeyboard$ClearHexes();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIKeyboard.java"
+public class gui.GUIKeyboard$ClearWaypoints extends javax.swing.AbstractAction {
+  public gui.GUIKeyboard$ClearWaypoints();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIKeyboard.java"
+public class gui.GUIKeyboard$ClockStep extends javax.swing.AbstractAction {
+  public gui.GUIKeyboard$ClockStep();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIKeyboard.java"
+public class gui.GUIKeyboard$DecelerateTime extends javax.swing.AbstractAction {
+  public gui.GUIKeyboard$DecelerateTime();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIKeyboard.java"
+public class gui.GUIKeyboard$DisplayCircularLOS extends javax.swing.AbstractAction {
+  public gui.GUIKeyboard$DisplayCircularLOS();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIKeyboard.java"
+public class gui.GUIKeyboard$DisplayLOStoEnemy extends javax.swing.AbstractAction {
+  public gui.GUIKeyboard$DisplayLOStoEnemy();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIKeyboard.java"
+public class gui.GUIKeyboard$DisplayLOStoHex extends javax.swing.AbstractAction {
+  public gui.GUIKeyboard$DisplayLOStoHex();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIKeyboard.java"
+public class gui.GUIKeyboard$DisplayWaypoints extends javax.swing.AbstractAction {
+  public gui.GUIKeyboard$DisplayWaypoints();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIKeyboard.java"
+public class gui.GUIKeyboard$HelpKeyboardShortcuts extends javax.swing.AbstractAction {
+  public gui.GUIKeyboard$HelpKeyboardShortcuts();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIKeyboard.java"
+public class gui.GUIKeyboard$MiniMapToggle extends javax.swing.AbstractAction {
+  public gui.GUIKeyboard$MiniMapToggle();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIKeyboard.java"
+public class gui.GUIKeyboard$OrientUnit extends javax.swing.AbstractAction {
+  public gui.GUIKeyboard$OrientUnit();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIKeyboard.java"
+public class gui.GUIKeyboard$PauseTime extends javax.swing.AbstractAction {
+  public gui.GUIKeyboard$PauseTime();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIKeyboard.java"
+public class gui.GUIKeyboard$RemoveWaypoint extends javax.swing.AbstractAction {
+  public gui.GUIKeyboard$RemoveWaypoint();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIKeyboard.java"
+public class gui.GUIKeyboard$RotateLeft extends javax.swing.AbstractAction {
+  public gui.GUIKeyboard$RotateLeft();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIKeyboard.java"
+public class gui.GUIKeyboard$RotateRight extends javax.swing.AbstractAction {
+  public gui.GUIKeyboard$RotateRight();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIKeyboard.java"
+public class gui.GUIKeyboard$ScrollDown extends javax.swing.AbstractAction {
+  public gui.GUIKeyboard$ScrollDown();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIKeyboard.java"
+public class gui.GUIKeyboard$ScrollLeft extends javax.swing.AbstractAction {
+  public gui.GUIKeyboard$ScrollLeft();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIKeyboard.java"
+public class gui.GUIKeyboard$ScrollRight extends javax.swing.AbstractAction {
+  public gui.GUIKeyboard$ScrollRight();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIKeyboard.java"
+public class gui.GUIKeyboard$ScrollUp extends javax.swing.AbstractAction {
+  public gui.GUIKeyboard$ScrollUp();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIKeyboard.java"
+public class gui.GUIKeyboard$ToggleFogofWar extends javax.swing.AbstractAction {
+  public gui.GUIKeyboard$ToggleFogofWar();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIKeyboard.java"
+public class gui.GUIKeyboard$ToggleRotation extends javax.swing.AbstractAction {
+  public gui.GUIKeyboard$ToggleRotation();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIKeyboard.java"
+public class gui.GUIKeyboard$ToggleThrottle extends javax.swing.AbstractAction {
+  public gui.GUIKeyboard$ToggleThrottle();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIKeyboard.java"
+public class gui.GUIKeyboard$ToggleVapor extends javax.swing.AbstractAction {
+  public gui.GUIKeyboard$ToggleVapor();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIKeyboard.java"
+public class gui.GUIKeyboard$ToggleVisibility extends javax.swing.AbstractAction {
+  public gui.GUIKeyboard$ToggleVisibility();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMainDisp.java"
+public class gui.GUIMainDisp extends javax.swing.JPanel {
+  public static int defaultHexSize;
+  public int mapDisplayX;
+  public int mapDisplayY;
+  public gui.GUIMainDisp();
+  public static hex.HexOff pixelToMiniHex(int, int);
+  public static hex.HexOff pixelToHexOff(int, int, int, int);
+  public static void MouseMotionEvents(java.awt.event.MouseEvent);
+  public static void KeyReleasedEvents(java.awt.event.KeyEvent);
+  public void MouseClickedEvents(java.awt.event.MouseEvent);
+  public java.awt.Polygon genHex(int, int, int);
+  public void drawHexMap(int, int, int, int, int);
+  public void drawHexMapMini(hex.HexMap, int, java.awt.Graphics);
+  public void drawHexMapComposite(hex.HexMap, int, java.awt.Graphics);
+  public void drawHexMapComposite(int, int, int, java.awt.Graphics);
+  public void moveSquare(int, int);
+  public void centerView(hex.Hex);
+  public void drawUnits(java.awt.Graphics, int);
+  public void paintComponent(java.awt.Graphics);
+  static {};
+}
+Compiled from "GUIMainDisp.java"
+class gui.GUIMainDisp$1 extends java.awt.event.MouseAdapter {
+  final gui.GUIMainDisp this$0;
+  gui.GUIMainDisp$1(gui.GUIMainDisp);
+  public void mousePressed(java.awt.event.MouseEvent);
+}
+Compiled from "GUIMainDisp.java"
+class gui.GUIMainDisp$2 extends java.awt.event.MouseAdapter {
+  final gui.GUIMainDisp this$0;
+  gui.GUIMainDisp$2(gui.GUIMainDisp);
+  public void mouseDragged(java.awt.event.MouseEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu extends javax.swing.JMenuBar {
+  public gui.GUIMenu();
+  public void GenerateMenu();
+  public void ScenarioMenu();
+  public void DisplayMenu();
+  public void FileMenu();
+  public void SetupMenu();
+  public void ActionsMenu();
+  public void NeuralNetMenu();
+  public void MapMenu();
+  public void HelpMenu();
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$AddOrg implements java.awt.event.ActionListener {
+  public gui.GUIMenu$AddOrg();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$CopyCOA implements java.awt.event.ActionListener {
+  public gui.GUIMenu$CopyCOA();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$CopyConsole implements java.awt.event.ActionListener {
+  public gui.GUIMenu$CopyConsole();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$CycleFitnessType implements java.awt.event.ActionListener {
+  public gui.GUIMenu$CycleFitnessType();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$DelCOA implements java.awt.event.ActionListener {
+  public gui.GUIMenu$DelCOA();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$DisplayAllSpots implements java.awt.event.ActionListener {
+  public gui.GUIMenu$DisplayAllSpots();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$DisplayAllSpotsForUnit implements java.awt.event.ActionListener {
+  public gui.GUIMenu$DisplayAllSpotsForUnit();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$DisplayModeDebug implements java.awt.event.ActionListener {
+  public gui.GUIMenu$DisplayModeDebug();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$DisplayModeJNEAT implements java.awt.event.ActionListener {
+  public gui.GUIMenu$DisplayModeJNEAT();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$DisplayModeUnit implements java.awt.event.ActionListener {
+  public gui.GUIMenu$DisplayModeUnit();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$DisplayModeVapor implements java.awt.event.ActionListener {
+  public gui.GUIMenu$DisplayModeVapor();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$DisplaySideWP implements java.awt.event.ActionListener {
+  public gui.GUIMenu$DisplaySideWP();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$DisplaySpotsThisTurn implements java.awt.event.ActionListener {
+  public gui.GUIMenu$DisplaySpotsThisTurn();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$ExitGame implements java.awt.event.ActionListener {
+  public gui.GUIMenu$ExitGame();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$HelpAbout implements java.awt.event.ActionListener {
+  public gui.GUIMenu$HelpAbout();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$HexSensorCheck implements java.awt.event.ActionListener {
+  public gui.GUIMenu$HexSensorCheck();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$LoadGame implements java.awt.event.ActionListener {
+  public gui.GUIMenu$LoadGame();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$LoadPopulation implements java.awt.event.ActionListener {
+  public gui.GUIMenu$LoadPopulation();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$LoadScenario implements java.awt.event.ActionListener {
+  public gui.GUIMenu$LoadScenario();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$MiniMap implements java.awt.event.ActionListener {
+  public gui.GUIMenu$MiniMap();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$MiniTerrain implements java.awt.event.ActionListener {
+  public gui.GUIMenu$MiniTerrain();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$MiniVaporAmt implements java.awt.event.ActionListener {
+  public gui.GUIMenu$MiniVaporAmt();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$MiniVaporDV implements java.awt.event.ActionListener {
+  public gui.GUIMenu$MiniVaporDV();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$ModeAddM1A2 implements java.awt.event.ActionListener {
+  public gui.GUIMenu$ModeAddM1A2();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$ModeAddT72 implements java.awt.event.ActionListener {
+  public gui.GUIMenu$ModeAddT72();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$ModePaintClear implements java.awt.event.ActionListener {
+  public gui.GUIMenu$ModePaintClear();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$ModePaintTallGrass implements java.awt.event.ActionListener {
+  public gui.GUIMenu$ModePaintTallGrass();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$ModePaintTrees implements java.awt.event.ActionListener {
+  public gui.GUIMenu$ModePaintTrees();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$ModeSelectUnit implements java.awt.event.ActionListener {
+  public gui.GUIMenu$ModeSelectUnit();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$ModeSetVaporNorm implements java.awt.event.ActionListener {
+  public gui.GUIMenu$ModeSetVaporNorm();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$ModeSetVaporSink implements java.awt.event.ActionListener {
+  public gui.GUIMenu$ModeSetVaporSink();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$ModeSetVaporSource implements java.awt.event.ActionListener {
+  public gui.GUIMenu$ModeSetVaporSource();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$NewBlankMap implements java.awt.event.ActionListener {
+  public gui.GUIMenu$NewBlankMap();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$NewCOA implements java.awt.event.ActionListener {
+  public gui.GUIMenu$NewCOA();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$NewMap implements java.awt.event.ActionListener {
+  public gui.GUIMenu$NewMap();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$NextCOA implements java.awt.event.ActionListener {
+  public gui.GUIMenu$NextCOA();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$NormFlowRate implements java.awt.event.ActionListener {
+  public gui.GUIMenu$NormFlowRate();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$PlaceAllNN implements java.awt.event.ActionListener {
+  public gui.GUIMenu$PlaceAllNN();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$PlaceUnitNN implements java.awt.event.ActionListener {
+  public gui.GUIMenu$PlaceUnitNN();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$PopDialog implements java.awt.event.ActionListener {
+  public gui.GUIMenu$PopDialog();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$PredictVapor implements java.awt.event.ActionListener {
+  public gui.GUIMenu$PredictVapor();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$PrevCOA implements java.awt.event.ActionListener {
+  public gui.GUIMenu$PrevCOA();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$RandAddOrg implements java.awt.event.ActionListener {
+  public gui.GUIMenu$RandAddOrg();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$ReinitCOA implements java.awt.event.ActionListener {
+  public gui.GUIMenu$ReinitCOA();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$RemoveAllOrg implements java.awt.event.ActionListener {
+  public gui.GUIMenu$RemoveAllOrg();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$RemoveOrg implements java.awt.event.ActionListener {
+  public gui.GUIMenu$RemoveOrg();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$RemoveUnit implements java.awt.event.ActionListener {
+  public gui.GUIMenu$RemoveUnit();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$RenameCOA implements java.awt.event.ActionListener {
+  public gui.GUIMenu$RenameCOA();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$ResetVapor implements java.awt.event.ActionListener {
+  public gui.GUIMenu$ResetVapor();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$RuntoEquilibrium implements java.awt.event.ActionListener {
+  public gui.GUIMenu$RuntoEquilibrium();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$SaveCOA implements java.awt.event.ActionListener {
+  public gui.GUIMenu$SaveCOA();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$SaveGame implements java.awt.event.ActionListener {
+  public gui.GUIMenu$SaveGame();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$SavePopulation implements java.awt.event.ActionListener {
+  public gui.GUIMenu$SavePopulation();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$SaveScenario implements java.awt.event.ActionListener {
+  public gui.GUIMenu$SaveScenario();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$SeqAddOrg implements java.awt.event.ActionListener {
+  public gui.GUIMenu$SeqAddOrg();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$SetEnemyZone implements java.awt.event.ActionListener {
+  public gui.GUIMenu$SetEnemyZone();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$SetFriendlyZone implements java.awt.event.ActionListener {
+  public gui.GUIMenu$SetFriendlyZone();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$TeleportUnit implements java.awt.event.ActionListener {
+  public gui.GUIMenu$TeleportUnit();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$TestFunc implements java.awt.event.ActionListener {
+  public gui.GUIMenu$TestFunc();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$TestPopulation implements java.awt.event.ActionListener {
+  public gui.GUIMenu$TestPopulation();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$ToggleFixedSlowVapor implements java.awt.event.ActionListener {
+  public gui.GUIMenu$ToggleFixedSlowVapor();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$ToggleVaporUpdate implements java.awt.event.ActionListener {
+  public gui.GUIMenu$ToggleVaporUpdate();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$UnitSensorCheck implements java.awt.event.ActionListener {
+  public gui.GUIMenu$UnitSensorCheck();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$ViewOrg implements java.awt.event.ActionListener {
+  public gui.GUIMenu$ViewOrg();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMenu.java"
+public class gui.GUIMenu$VisDialog implements java.awt.event.ActionListener {
+  public gui.GUIMenu$VisDialog();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "GUIMouse.java"
+public class gui.GUIMouse {
+  public gui.GUIMouse();
+  public static void SetPaintTerrain(java.awt.event.MouseEvent, terrain.TerrainEnum);
+  public static void SetPaintTerrainBlob(java.awt.event.MouseEvent, terrain.TerrainEnum);
+  public static void PaintHex(hex.Hex, terrain.TerrainEnum);
+  public static void SetPlaceUnit(java.awt.event.MouseEvent, java.lang.String, unit.SideEnum);
+  public static void SetVaporType(java.awt.event.MouseEvent, hex.VaporEnum);
+}
+Compiled from "GUIMouse.java"
+class gui.GUIMouse$1 {
+  static final int[] $SwitchMap$hex$VaporEnum;
+  static {};
+}
+Compiled from "GUI_NB.java"
+public class gui.GUI_NB extends javax.swing.JFrame {
+  public gui.GUIMainDisp GMD;
+  public javax.swing.JPanel BasicInfoPane;
+  public javax.swing.JPanel DetailedInfoPane;
+  public static javax.swing.JTextArea GUIConsole;
+  public javax.swing.JPanel MainDisplay;
+  public gui.GUI_NB();
+  public static void main(java.lang.String[]);
+  public static void GCO(java.lang.String);
+  public static void GCODTG(java.lang.String);
+  static void access$000(gui.GUI_NB, java.awt.event.MouseEvent);
+  static void access$100(gui.GUI_NB, java.awt.event.MouseEvent);
+  static void access$200(gui.GUI_NB, java.awt.event.MouseEvent);
+  static void access$300(gui.GUI_NB, java.awt.event.MouseEvent);
+  static void access$400(gui.GUI_NB, java.awt.event.MouseEvent);
+}
+Compiled from "GUI_NB.java"
+class gui.GUI_NB$1 extends java.awt.event.MouseMotionAdapter {
+  final gui.GUI_NB this$0;
+  gui.GUI_NB$1(gui.GUI_NB);
+  public void mouseMoved(java.awt.event.MouseEvent);
+}
+Compiled from "GUI_NB.java"
+class gui.GUI_NB$2 extends java.awt.event.MouseAdapter {
+  final gui.GUI_NB this$0;
+  gui.GUI_NB$2(gui.GUI_NB);
+  public void mouseClicked(java.awt.event.MouseEvent);
+}
+Compiled from "GUI_NB.java"
+class gui.GUI_NB$3 extends java.awt.event.MouseMotionAdapter {
+  final gui.GUI_NB this$0;
+  gui.GUI_NB$3(gui.GUI_NB);
+  public void mouseMoved(java.awt.event.MouseEvent);
+}
+Compiled from "GUI_NB.java"
+class gui.GUI_NB$4 extends java.awt.event.MouseMotionAdapter {
+  final gui.GUI_NB this$0;
+  gui.GUI_NB$4(gui.GUI_NB);
+  public void mouseMoved(java.awt.event.MouseEvent);
+}
+Compiled from "GUI_NB.java"
+class gui.GUI_NB$5 extends java.awt.event.MouseMotionAdapter {
+  final gui.GUI_NB this$0;
+  gui.GUI_NB$5(gui.GUI_NB);
+  public void mouseMoved(java.awt.event.MouseEvent);
+}
+Compiled from "GUI_NB.java"
+final class gui.GUI_NB$6 implements java.lang.Runnable {
+  gui.GUI_NB$6();
+  public void run();
+}
+Compiled from "BrightnessFilter.java"
+public class hex.BrightnessFilter extends java.awt.image.RGBImageFilter {
+  int brightness;
+  public hex.BrightnessFilter(int);
+  public int filterRGB(int, int, int);
+}
+Compiled from "Hex.java"
+public class hex.Hex {
+  public int x;
+  public int y;
+  public terrain.TerrainType tType;
+  public terrain.TerrainEnum tEnum;
+  public int elevation;
+  public int obsHeight;
+  public int density;
+  public int vapor;
+  public int vaporOut;
+  public int vaporIn;
+  public int deltaVapor;
+  public int numSpots;
+  public hex.VaporEnum vaporType;
+  public boolean shaded;
+  public java.awt.Color shadedColor;
+  public boolean displayText;
+  public java.lang.String hexText;
+  public java.awt.Color textColor;
+  public boolean highlighted;
+  public int obscuration;
+  public unit.Unit HexUnit;
+  public hex.Hex(int, int, terrain.TerrainEnum, int);
+  public hex.Hex(int, int, terrain.TerrainEnum, int, int, int, int, int, int, hex.VaporEnum);
+  public void CloneHexData(hex.Hex);
+  public void DisplayInfo();
+  public void GCODisplay();
+  public void SetVapor(int);
+  public void UpdateVapor();
+  public void SetVaporSink();
+  public void SetVaporSource();
+  public void SetVaporNormal();
+  public int ReturnVaporCalc();
+  public int CalcVaporOneHex(hex.Hex, hex.Hex);
+  public void CalcVapor();
+  public double CalcSharedDV();
+  public void PredictVaporLevel();
+  public void DrawHexMini(int, int, int, java.awt.Graphics);
+  public void DrawHex(int, int, int, java.awt.Graphics);
+  public static java.awt.image.BufferedImage convertType(java.awt.image.BufferedImage, int);
+  public static java.awt.image.IndexColorModel rescale(java.awt.image.IndexColorModel, float, float);
+  public static void rescale(byte[], float, float);
+  public static java.awt.image.BufferedImage rescale(java.awt.image.BufferedImage, float, float);
+  public hex.HexOff toHO();
+  public java.lang.String saveHexHeader();
+  public java.lang.String saveHex();
+  public hex.Hex(int, int, java.lang.String);
+  public int DirectionTo(hex.Hex);
+  public java.lang.String DisplayCoords();
+}
+Compiled from "Hex.java"
+class hex.Hex$1 {
+  static final int[] $SwitchMap$hex$VaporEnum;
+  static final int[] $SwitchMap$hex$MiniMapEnum;
+  static {};
+}
+Compiled from "HexAx.java"
+public class hex.HexAx {
+  int x;
+  int y;
+  public hex.HexAx(int, int);
+  public static int DistAx(hex.HexAx, hex.HexAx);
+  public int DistFrom(hex.HexAx);
+  public static double AzimuthAx(hex.HexAx, hex.HexAx);
+  public double AzimuthTo(hex.HexAx);
+  public static hex.HexAx RoundAx(double, double, double);
+  public static hex.HexDouble HexIs(hex.HexAx);
+  public hex.HexDouble ThisHexIs();
+  public static hex.HexAx HexAt(hex.HexDouble);
+  public static void HexesBetween(hex.HexAx, hex.HexAx);
+  public static void HexCast(hex.HexAx, double, int);
+  public hex.HexCube ConvertToCube();
+  public hex.HexOff ConvertToOff();
+  public void DisplayHex();
+  public java.lang.String DisplayHexStr();
+  public void DisplayType();
+  public int getX();
+  public int getY();
+}
+Compiled from "HexCube.java"
+public class hex.HexCube {
+  int x;
+  int y;
+  int z;
+  public hex.HexCube(int, int, int);
+  public static int DistCube(hex.HexCube, hex.HexCube);
+  public int DistFrom(hex.HexCube);
+  public static double AzimuthCube(hex.HexCube, hex.HexCube);
+  public double AzimuthTo(hex.HexCube);
+  public static hex.HexCube RoundCube(double, double, double);
+  public static hex.HexDouble HexIs(hex.HexCube);
+  public hex.HexDouble ThisHexIs();
+  public static hex.HexCube HexAt(hex.HexDouble);
+  public hex.HexAx ConvertToAx();
+  public hex.HexOff ConvertToOff();
+  public static void HexesBetween(hex.HexCube, hex.HexCube);
+  public static void HexCast(hex.HexCube, double, int);
+  public void DisplayHex();
+  public void DisplayType();
+}
+Compiled from "HexDouble.java"
+public class hex.HexDouble {
+  double x;
+  double y;
+  public hex.HexDouble(double, double);
+  public double CalcHexAtX();
+  public double CalcHexAtY();
+  public void DisplayHex();
+  public void DisplayType();
+}
+Compiled from "HexMap.java"
+public class hex.HexMap {
+  public int xDim;
+  public int yDim;
+  public hex.Hex[][] hexArray;
+  public int friendlyZone;
+  public int enemyZone;
+  java.util.Vector<hex.Hex> shadedHexList;
+  java.util.Vector<hex.Hex> textHexList;
+  public java.util.Vector<hex.Hex> vaporSourceList;
+  public java.util.Vector<hex.Hex> vaporSinkList;
+  public static int chanceTrees;
+  public static int chanceHighGrass;
+  public static int chanceClear;
+  public static int totalWeight;
+  public static final int SUBHEX_SIZE;
+  public hex.HexMap(int, int, boolean);
+  public hex.HexMap(int, int);
+  public boolean inEnemyZone(hex.Hex);
+  public boolean inFriendlyZone(hex.Hex);
+  public boolean inReconZone(hex.Hex);
+  public void calcAllVapor();
+  public double CalcApproxDVNorm(int);
+  public void UpdateExactDVNorm();
+  public hex.Hex RandomHexReconZone();
+  public void updateVaporSS();
+  public void predictVaporMap();
+  public void StandardVaporMap();
+  public void recalcFlowRate();
+  public void resetSpotCounts();
+  public void updateAllVapor();
+  public void ShowSideWaypoints(unit.SideEnum);
+  public void shadeHex(hex.Hex, java.awt.Color);
+  public void unshadeHex(hex.Hex);
+  public void setHexText(hex.Hex, java.lang.String, java.awt.Color);
+  public java.lang.String getHexText(hex.Hex);
+  public void showHexText(hex.Hex);
+  public void hideHexText(hex.Hex);
+  public void removeHexText(hex.Hex);
+  public void displayShadedList();
+  public void unshadeAll();
+  public void hideTextAll();
+  public void clearTextAll();
+  public terrain.TerrainEnum chooseTerrain(int);
+  public boolean TerrainEval(int, int);
+  public void GenerateMap();
+  public void GenerateBlankMap();
+  public hex.Hex getHex(int, int);
+  public void storeHex(int, int, hex.Hex);
+  public hex.Hex getHex(hex.HexOff);
+  public int getXDim();
+  public int getYDim();
+  public static boolean checkMapBounds(int, int);
+  public void saveMap(java.nio.file.Path);
+  public boolean loadMap(java.io.BufferedReader);
+  public java.lang.String saveMap();
+  public void UpdateSourceSink();
+  static {};
+}
+Compiled from "HexMap.java"
+class hex.HexMap$1 {
+  static final int[] $SwitchMap$unit$SideEnum;
+  static {};
+}
+Compiled from "HexOff.java"
+public class hex.HexOff {
+  int x;
+  int y;
+  public static int[][][] neighbors;
+  public hex.HexOff(int, int);
+  public static int DistOff(hex.HexOff, hex.HexOff);
+  public int DistFrom(hex.HexOff);
+  public static double AzimuthOff(hex.HexOff, hex.HexOff);
+  public double AzimuthTo(hex.HexOff);
+  public static hex.HexOff RoundOff(double, double, double);
+  public static hex.HexDouble HexIs(hex.HexOff);
+  public hex.HexDouble ThisHexIs();
+  public static hex.HexOff HexAt(hex.HexDouble);
+  public hex.HexAx ConvertToAx();
+  public hex.HexCube ConvertToCube();
+  public static java.util.Vector<hex.Hex> HexesBetween(hex.HexOff, hex.HexOff);
+  public static java.util.Vector<hex.Hex> HexRing(int, int, int);
+  public static hex.HexOff HexCast(hex.HexOff, double, int);
+  public static hex.HexOff NeighborOff(hex.HexOff, int);
+  public hex.HexOff findNeighbor(int);
+  public hex.HexOff neighborW();
+  public hex.HexOff neighborE();
+  public hex.HexOff neighborNW();
+  public hex.HexOff neighborNE();
+  public hex.HexOff neighborSW();
+  public hex.HexOff neighborSE();
+  public void DisplayHex();
+  public java.lang.String DisplayHexStr();
+  public void DisplayType();
+  public int getX();
+  public int getY();
+  static {};
+}
+Compiled from "MiniMapEnum.java"
+public final class hex.MiniMapEnum extends java.lang.Enum<hex.MiniMapEnum> {
+  public static final hex.MiniMapEnum TERRAIN;
+  public static final hex.MiniMapEnum VAPOR_AMT;
+  public static final hex.MiniMapEnum VAPOR_DV;
+  public static hex.MiniMapEnum[] values();
+  public static hex.MiniMapEnum valueOf(java.lang.String);
+  static {};
+}
+Compiled from "Transparency.java"
+public class hex.Transparency {
+  public hex.Transparency();
+  public static java.awt.Image makeColorTransparent(java.awt.Image, java.awt.Color);
+}
+Compiled from "Transparency.java"
+final class hex.Transparency$1 extends java.awt.image.RGBImageFilter {
+  public int markerRGB;
+  final java.awt.Color val$color;
+  hex.Transparency$1(java.awt.Color);
+  public final int filterRGB(int, int, int);
+}
+Compiled from "VaporEnum.java"
+public final class hex.VaporEnum extends java.lang.Enum<hex.VaporEnum> {
+  public static final hex.VaporEnum NONE;
+  public static final hex.VaporEnum SOURCE;
+  public static final hex.VaporEnum SINK;
+  public final int id;
+  public static hex.VaporEnum[] values();
+  public static hex.VaporEnum valueOf(java.lang.String);
+  public static hex.VaporEnum loadEnum(int);
+  static {};
+}
+Compiled from "Gene.java"
+public class jneat.Gene {
+  jneat.Link lnk;
+  int innovation_num;
+  double mutation_num;
+  boolean enabled;
+  public jneat.Gene(jneat.Gene, jneat.Trait, jneat.NNode, jneat.NNode);
+  public jneat.Gene(jneat.Trait, jneat.NNode, jneat.NNode, double, boolean, double);
+  public jneat.Gene(jneat.Trait, double, jneat.NNode, jneat.NNode, boolean, int, double);
+  public jneat.Gene(jneat.NNode, jneat.NNode, double);
+  public jneat.Gene(jneat.Trait, jneat.NNode, jneat.NNode, double);
+  public java.lang.String PrintGene();
+  public java.lang.String SaveGeneHeader();
+  public java.lang.String SaveGene();
+  jneat.Gene(java.lang.String[], jneat.NNode, jneat.NNode);
+}
+Compiled from "Genome.java"
+public class jneat.Genome {
+  jneat.Network phenotype;
+  public int genome_id;
+  public java.util.Vector<jneat.Gene> genes;
+  public java.util.Vector<jneat.Trait> traits;
+  public java.util.Vector<jneat.NNode> nodes;
+  public jneat.Genome duplicate(int);
+  public void MutateLinkWeight(double, double, jneat.MutationTypeEnum);
+  public void MutateLinkTrait(int);
+  public void MutateNodeTrait(int);
+  public void MutateRandomTrait();
+  public void MutateToggleEnable(int);
+  public boolean MutateAddLink(jneat.Population, int);
+  public boolean MutateAddNode(jneat.Population);
+  public void MutateGene_Reenable();
+  public jneat.Network Genesis(int);
+  public double Compatibility(jneat.Genome);
+  public java.util.Vector<jneat.Trait> AverageTraits(jneat.Genome);
+  public jneat.Gene AverageGenes(jneat.Gene, jneat.Gene);
+  public boolean CheckGeneConflict(java.util.Vector<jneat.Gene>, jneat.Gene);
+  public void AddGene(java.util.Vector<jneat.NNode>, java.util.Vector<jneat.Trait>, java.util.Vector<jneat.Gene>, jneat.Gene, boolean);
+  public jneat.Genome MateMultipoint(int, jneat.Genome, double, double);
+  public jneat.Genome MateMultiAverage(jneat.Genome, int, double, double);
+  public jneat.Genome MateSinglePoint(jneat.Genome, int);
+  public void node_insert(java.util.Vector<jneat.NNode>, jneat.NNode);
+  public int get_next_gene_innovnum();
+  public int get_next_nodeID();
+  public boolean verify();
+  public boolean verify(boolean);
+  public java.lang.String PrintGenome();
+  public java.lang.String Debug_DisplayConnectionMatrix(boolean[], int);
+  public jneat.Genome(int, int, int, int, int, boolean, double);
+  public jneat.Genome(java.util.Vector<jneat.Gene>, java.util.Vector<jneat.Trait>, java.util.Vector<jneat.NNode>, int);
+  public jneat.Genome();
+  public jneat.Genome(java.util.Vector<jneat.Gene>, java.util.Vector<jneat.Trait>, java.util.Vector<jneat.NNode>);
+  public java.lang.String SaveGenomeHeader();
+  public java.lang.String SaveGenome();
+}
+Compiled from "Innovation.java"
+public class jneat.Innovation {
+  jneat.InnovationTypeEnum innovation_type;
+  jneat.NNode inNode;
+  jneat.NNode outNode;
+  int innovation_num1;
+  int innovation_num2;
+  double new_weight;
+  jneat.Trait newTrait;
+  jneat.NNode newNode;
+  int old_innovation_num;
+  boolean recurrent;
+  public jneat.Innovation(jneat.NNode, jneat.NNode, int, double, jneat.Trait);
+  public jneat.Innovation(jneat.NNode, jneat.NNode, int, int, jneat.NNode, int);
+  public java.lang.String SaveInnovHeader();
+  public java.lang.String SaveInnov();
+}
+Compiled from "InnovationTypeEnum.java"
+public final class jneat.InnovationTypeEnum extends java.lang.Enum<jneat.InnovationTypeEnum> {
+  public static final jneat.InnovationTypeEnum NEW_NODE;
+  public static final jneat.InnovationTypeEnum NEW_LINK;
+  public static jneat.InnovationTypeEnum[] values();
+  public static jneat.InnovationTypeEnum valueOf(java.lang.String);
+  static {};
+}
+Compiled from "JNEATGlobal.java"
+public class jneat.JNEATGlobal {
+  static int numGenes;
+  static int numGenomes;
+  static int numNetworks;
+  static int numNodes;
+  static int numLinks;
+  static int numSpecies;
+  static int numTraits;
+  static double p_disjoint_coeff;
+  static double p_excess_coeff;
+  static double p_mutdiff_coeff;
+  static int p_dropoff_age;
+  static double p_dropoff_coeff;
+  static int p_age_youngOrganism;
+  static double p_age_significance;
+  static double p_survival_threshold;
+  static double p_mutate_add_link_prob;
+  static double p_mutate_add_node_prob;
+  static double p_mutate_gene_reenable_prob;
+  static double p_mutate_link_trait_prob;
+  static double p_mutate_link_weights_prob;
+  static double p_mutate_node_trait_prob;
+  static double p_mutate_only_prob;
+  static double p_mutate_random_trait_prob;
+  static double p_mutate_toggle_enable_prob;
+  static double p_mutate_toggle_reenable_prob;
+  static double p_mutate_weight_power;
+  static int p_newlink_tries;
+  static double p_interspecies_mate_rate;
+  static double p_mate_multipoint_prob;
+  static double p_mate_multipoint_avg_prob;
+  static double p_mate_singlepoint_prob;
+  static double p_mate_only_prob;
+  static double p_recur_only_prob;
+  static int p_babies_stolen;
+  static double p_compat_threshold;
+  static int numTraitParams;
+  static double traitParamMutProb;
+  static double traitMutationPower;
+  static int maxActivationCycles;
+  public jneat.JNEATGlobal();
+  public static int NewSpeciesID();
+  public static int NewGeneID();
+  public static int NewGenomeID();
+  public static int NewNetworkID();
+  public static int NewNodeID();
+  public static int NewLinkID();
+  public static int NewTraitID();
+  public static double fsigmoid(double, double);
+  public static jneat.Trait derive_trait(jneat.Trait);
+  static {};
+}
+Compiled from "Link.java"
+public class jneat.Link {
+  int id;
+  double weight;
+  double bias;
+  jneat.NNode in_node;
+  jneat.NNode out_node;
+  jneat.Trait linkTrait;
+  boolean recurrent;
+  boolean time_delay;
+  boolean is_traversed;
+  double[] params;
+  public jneat.Link(double, jneat.NNode, jneat.NNode, boolean);
+  public jneat.Link(jneat.Trait, double, jneat.NNode, jneat.NNode, boolean);
+  public void DeriveTrait(jneat.Trait);
+  public java.lang.String PrintLink();
+  public java.lang.String SaveLinkHeader();
+  public java.lang.String SaveLink();
+  jneat.Link(java.lang.String[], jneat.NNode, jneat.NNode);
+}
+Compiled from "MutationTypeEnum.java"
+public final class jneat.MutationTypeEnum extends java.lang.Enum<jneat.MutationTypeEnum> {
+  public static final jneat.MutationTypeEnum GAUSSIAN;
+  public static final jneat.MutationTypeEnum COLD_GAUSSIAN;
+  public static jneat.MutationTypeEnum[] values();
+  public static jneat.MutationTypeEnum valueOf(java.lang.String);
+  static {};
+}
+Compiled from "NNode.java"
+public class jneat.NNode {
+  jneat.NodeFuncEnum fType;
+  jneat.NodeTypeEnum nType;
+  jneat.NodeLabelEnum gNodeLabel;
+  double activesum;
+  public double activation;
+  public double last_activation;
+  public double prior_activation;
+  boolean active_flag;
+  boolean is_traversed;
+  public int id;
+  int activation_count;
+  int inner_level;
+  java.util.Vector<jneat.Link> incoming;
+  java.util.Vector<jneat.Link> outgoing;
+  jneat.Trait nodeTrait;
+  jneat.NNode dup;
+  jneat.NNode analogue;
+  double[] params;
+  public jneat.NNode(jneat.NodeTypeEnum, jneat.NodeLabelEnum, jneat.Trait, int);
+  public jneat.NNode(jneat.NodeTypeEnum, int, jneat.NodeLabelEnum);
+  public jneat.NNode(jneat.NodeTypeEnum, jneat.NodeLabelEnum, jneat.Trait);
+  public jneat.NNode(jneat.NodeTypeEnum, jneat.NodeLabelEnum);
+  public jneat.NNode(jneat.NodeTypeEnum);
+  public jneat.NNode(jneat.NNode, jneat.Trait);
+  public void AddIncomingLink(jneat.Link);
+  public void AddOutgoingLink(jneat.Link);
+  public void resetNode();
+  public double getTimeDelayActivation();
+  public double getActivation();
+  public void derive_trait(jneat.Trait);
+  public boolean mark(int);
+  public boolean LoadSensor(double);
+  public int depth(int, int);
+  public java.lang.String PrintNode();
+  public java.lang.String PrintNode(boolean);
+  public java.lang.String SaveNodeHeader();
+  public java.lang.String SaveNode();
+  jneat.NNode(java.lang.String[]);
+}
+Compiled from "NNode.java"
+class jneat.NNode$1 {
+  static final int[] $SwitchMap$jneat$NodeLabelEnum;
+  static {};
+}
+Compiled from "Network.java"
+public class jneat.Network {
+  public java.util.Vector<jneat.NNode> inputs;
+  public java.util.Vector<jneat.NNode> outputs;
+  public java.util.Vector<jneat.NNode> allNodes;
+  jneat.Genome genotype;
+  int net_id;
+  jneat.NetworkStatusEnum status;
+  public jneat.Network(java.util.Vector<jneat.NNode>, java.util.Vector<jneat.NNode>, int);
+  public jneat.Network(java.util.Vector<jneat.NNode>, java.util.Vector<jneat.NNode>);
+  public jneat.Network();
+  public jneat.Network(int);
+  public void attachHidden(jneat.NNode);
+  public void attachInput(jneat.NNode);
+  public void attachOutput(jneat.NNode);
+  public void linkNodes(jneat.NNode, jneat.NNode, double);
+  public boolean ActivateNetwork();
+  public boolean OutputsOff();
+  public boolean IsRecurrent(jneat.NNode, jneat.NNode, int, int);
+  public boolean IsMinimal();
+  public int IsStabilized(int);
+  public int max_depth();
+  public boolean HasPath(jneat.NNode, jneat.NNode, int, int);
+  public java.lang.String PrintNetwork();
+  public java.lang.String PrintNetwork(boolean);
+  public void flush();
+}
+Compiled from "NetworkStatusEnum.java"
+public final class jneat.NetworkStatusEnum extends java.lang.Enum<jneat.NetworkStatusEnum> {
+  public static final jneat.NetworkStatusEnum NORMAL;
+  public static final jneat.NetworkStatusEnum HAS_LOOP;
+  public static jneat.NetworkStatusEnum[] values();
+  public static jneat.NetworkStatusEnum valueOf(java.lang.String);
+  static {};
+}
+Compiled from "NodeFuncEnum.java"
+public final class jneat.NodeFuncEnum extends java.lang.Enum<jneat.NodeFuncEnum> {
+  public static final jneat.NodeFuncEnum SIGMOID;
+  public static final jneat.NodeFuncEnum OTHER;
+  public static jneat.NodeFuncEnum[] values();
+  public static jneat.NodeFuncEnum valueOf(java.lang.String);
+  static {};
+}
+Compiled from "NodeLabelEnum.java"
+public final class jneat.NodeLabelEnum extends java.lang.Enum<jneat.NodeLabelEnum> {
+  public static final jneat.NodeLabelEnum INPUT;
+  public static final jneat.NodeLabelEnum BIAS;
+  public static final jneat.NodeLabelEnum HIDDEN;
+  public static final jneat.NodeLabelEnum OUTPUT;
+  public static jneat.NodeLabelEnum[] values();
+  public static jneat.NodeLabelEnum valueOf(java.lang.String);
+  static {};
+}
+Compiled from "NodeTypeEnum.java"
+public final class jneat.NodeTypeEnum extends java.lang.Enum<jneat.NodeTypeEnum> {
+  public static final jneat.NodeTypeEnum NEURON;
+  public static final jneat.NodeTypeEnum SENSOR;
+  public static jneat.NodeTypeEnum[] values();
+  public static jneat.NodeTypeEnum valueOf(java.lang.String);
+  static {};
+}
+Compiled from "Organism.java"
+public class jneat.Organism {
+  int generation;
+  public boolean checkout;
+  public double fitness;
+  public int fitAveragedOver;
+  double high_fit;
+  double orig_fitness;
+  double error;
+  boolean winner;
+  boolean champion;
+  boolean pop_champ;
+  boolean pop_champ_child;
+  boolean mut_struct_baby;
+  boolean mate_baby;
+  boolean eliminate;
+  public jneat.Network net;
+  public jneat.Genome genome;
+  public jneat.Species species;
+  double expected_offspring;
+  int super_champ_offspring;
+  public jneat.Organism(double, jneat.Genome, int);
+  public java.lang.String PrintOrganism();
+  jneat.Organism(java.io.BufferedReader, java.lang.String[]);
+  public void AverageFitness(double);
+  public void ResetAvgFitness();
+  public java.lang.String SaveOrgHeader();
+  public java.lang.String SaveOrganism();
+}
+Compiled from "OrganismComparator.java"
+public class jneat.OrganismComparator implements java.util.Comparator<jneat.Organism> {
+  public jneat.OrganismComparator();
+  public int compare(jneat.Organism, jneat.Organism);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "Population.java"
+public class jneat.Population {
+  public java.util.Vector<jneat.Organism> organisms;
+  public java.util.Vector<jneat.Species> species;
+  public java.util.Vector<jneat.Innovation> innovations;
+  int population_size;
+  int last_species;
+  int final_gen;
+  public double mean_fitness;
+  public double max_fitness_this_epoch;
+  double variance;
+  double standard_deviation;
+  public double avg_fit_eliminated;
+  int winnergen;
+  public double highest_fitness;
+  int highest_last_changed;
+  public jneat.Population(jneat.Genome, int);
+  public jneat.Population(int, int, int, int, boolean, double);
+  public void spawn(jneat.Genome, int);
+  public java.lang.String epoch();
+  public void speciate();
+  public void AddSpecies(jneat.Species, jneat.Organism);
+  public void Verify();
+  public int getCurNodeID_Inc();
+  public int getCurInnov_Inc();
+  public java.lang.String PrintPopulation();
+  public jneat.Population(java.nio.file.Path);
+  public boolean LoadSpecies(java.io.BufferedReader);
+  public int PopulationSlice(double);
+  public boolean LoadOrganisms(java.io.BufferedReader);
+  public java.lang.String SavePopHeader();
+  public java.lang.String SavePopulation();
+  public void SavePopulationToFile(java.nio.file.Path);
+}
+Compiled from "Species.java"
+public class jneat.Species {
+  public int id;
+  int age;
+  double avg_fitness;
+  double max_fitness;
+  double max_fitness_ever;
+  int age_lastimprovement;
+  int expected_offspring;
+  boolean newSpecies;
+  boolean beenChecked;
+  java.util.Vector<jneat.Organism> organisms;
+  public jneat.Species(int, boolean);
+  public jneat.Species();
+  public jneat.Species(int);
+  public int TimeSinceImprovement();
+  public void AdjustFitness();
+  public void ComputeAvgFitness();
+  public void ComputeMaxFitness();
+  public double CountOffspringFloat();
+  public double CountOffspring(double);
+  public boolean reproduce(int, jneat.Population, java.util.Vector<jneat.Species>);
+  public int last_improved();
+  public void RemoveOrganism(jneat.Organism);
+  public java.lang.String PrintSpecies();
+  public java.lang.String SaveSpeciesHeader();
+  public java.lang.String SaveSpecies();
+  public jneat.Species(java.lang.String[]);
+}
+Compiled from "SpeciesComparator.java"
+public class jneat.SpeciesComparator implements java.util.Comparator<jneat.Species> {
+  public jneat.SpeciesComparator();
+  public int compare(jneat.Species, jneat.Species);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "Trait.java"
+public class jneat.Trait {
+  int id;
+  double[] params;
+  public jneat.Trait();
+  public jneat.Trait(jneat.Trait);
+  public jneat.Trait(jneat.Trait, jneat.Trait);
+  public void setTraitParam(int, double);
+  public void Mutate();
+  public java.lang.String PrintTrait();
+}
+Compiled from "SpotRecords.java"
+public class spotting.SpotRecords {
+  public java.util.Vector<spotting.SpotReport> records;
+  public spotting.SpotRecords();
+  public spotting.SpotReport getReport(int);
+  public void addReport(spotting.SpotReport);
+  public spotting.SpotRecords getReportsTime(int);
+  public spotting.SpotRecords getReportsTime(int, int);
+  public spotting.SpotRecords getReportsTarget(unit.Unit);
+  public java.lang.String DisplayRecords();
+  public void SaveSpots(java.nio.file.Path);
+}
+Compiled from "SpotReport.java"
+public class spotting.SpotReport {
+  public int timeSpotted;
+  public unit.Unit spotter;
+  public unit.Unit target;
+  public hex.HexOff targetLoc;
+  public spotting.SpotReport(int, unit.Unit, unit.Unit, hex.HexOff);
+  public java.lang.String displaySPOTREP();
+  public java.lang.String saveSPOTREP();
+}
+Compiled from "ClearTerrain.java"
+public class terrain.ClearTerrain extends terrain.TerrainType {
+  public terrain.ClearTerrain();
+  public int getMoveCost(unit.MoveClass);
+  public java.lang.String displayType();
+  public char displayChar();
+  public int generateDensity();
+  public int generateObsHeight();
+  public int generateHeight();
+  public terrain.TerrainEnum getTerrainEnum();
+  public java.awt.Color getColor();
+}
+Compiled from "ClearTerrain.java"
+class terrain.ClearTerrain$1 {
+  static final int[] $SwitchMap$unit$MoveClass;
+  static {};
+}
+Compiled from "InvalidTerrain.java"
+public class terrain.InvalidTerrain extends terrain.TerrainType {
+  public terrain.InvalidTerrain();
+  public int getMoveCost(unit.MoveClass);
+  public java.lang.String displayType();
+  public char displayChar();
+  public int generateDensity();
+  public int generateObsHeight();
+  public int generateHeight();
+  public terrain.TerrainEnum getTerrainEnum();
+  public java.awt.Color getColor();
+}
+Compiled from "InvalidTerrain.java"
+class terrain.InvalidTerrain$1 {
+  static final int[] $SwitchMap$unit$MoveClass;
+  static {};
+}
+Compiled from "TallGrassTerrain.java"
+public class terrain.TallGrassTerrain extends terrain.TerrainType {
+  public terrain.TallGrassTerrain();
+  public int getMoveCost(unit.MoveClass);
+  public java.lang.String displayType();
+  public char displayChar();
+  public int generateDensity();
+  public int generateObsHeight();
+  public int generateHeight();
+  public terrain.TerrainEnum getTerrainEnum();
+  public java.awt.Color getColor();
+}
+Compiled from "TallGrassTerrain.java"
+class terrain.TallGrassTerrain$1 {
+  static final int[] $SwitchMap$unit$MoveClass;
+  static {};
+}
+Compiled from "TerrainEnum.java"
+public final class terrain.TerrainEnum extends java.lang.Enum<terrain.TerrainEnum> {
+  public static final terrain.TerrainEnum CLEAR;
+  public static final terrain.TerrainEnum TREES;
+  public static final terrain.TerrainEnum T_GRASS;
+  public static final terrain.TerrainEnum INVALID;
+  public final int id;
+  public final java.lang.String backgroundFile;
+  public final java.lang.String foregroundFile;
+  public final terrain.TerrainType tType;
+  public static terrain.TerrainEnum[] values();
+  public static terrain.TerrainEnum valueOf(java.lang.String);
+  public static terrain.TerrainEnum loadEnum(int);
+  static {};
+}
+Compiled from "TerrainType.java"
+public abstract class terrain.TerrainType {
+  public terrain.TerrainType();
+  public abstract int getMoveCost(unit.MoveClass);
+  public abstract terrain.TerrainEnum getTerrainEnum();
+  public abstract java.lang.String displayType();
+  public abstract char displayChar();
+  public abstract int generateDensity();
+  public abstract int generateObsHeight();
+  public abstract int generateHeight();
+  public abstract java.awt.Color getColor();
+}
+Compiled from "TreesTerrain.java"
+public class terrain.TreesTerrain extends terrain.TerrainType {
+  public terrain.TreesTerrain();
+  public int getMoveCost(unit.MoveClass);
+  public java.lang.String displayType();
+  public char displayChar();
+  public int generateDensity();
+  public int generateObsHeight();
+  public int generateHeight();
+  public terrain.TerrainEnum getTerrainEnum();
+  public java.awt.Color getColor();
+}
+Compiled from "TreesTerrain.java"
+class terrain.TreesTerrain$1 {
+  static final int[] $SwitchMap$unit$MoveClass;
+  static {};
+}
+Compiled from "AWTmouse.java"
+public class testbed.AWTmouse extends java.awt.Frame {
+  java.lang.String keymsg;
+  java.lang.String mousemsg;
+  int mouseX;
+  int mouseY;
+  public testbed.AWTmouse();
+  public void paint(java.awt.Graphics);
+  public static void main(java.lang.String[]);
+}
+Compiled from "SwingTabs.java"
+class testbed.CitiesPanel extends javax.swing.JPanel {
+  public testbed.CitiesPanel();
+}
+Compiled from "GUIMainDisp.java"
+class testbed.CitiesPanelX extends javax.swing.JPanel {
+  public testbed.CitiesPanelX();
+}
+Compiled from "SwingTabs.java"
+class testbed.ColorsPanel extends javax.swing.JPanel {
+  public testbed.ColorsPanel();
+}
+Compiled from "SwingTabs.java"
+class testbed.FlavorsPanel extends javax.swing.JPanel {
+  public testbed.FlavorsPanel();
+}
+Compiled from "GUIConsole.java"
+public class testbed.GUIConsole extends javax.swing.JPanel {
+  javax.swing.JTextField textField;
+  javax.swing.JTextArea textArea;
+  public testbed.GUIConsole();
+  public void GCOutput(java.lang.String);
+}
+Compiled from "GUIInfoDisp.java"
+public class testbed.GUIInfoDisp extends javax.swing.JPanel {
+  public testbed.GUIInfoDisp();
+}
+Compiled from "GUIMain.java"
+public class testbed.GUIMain {
+  public static testbed.GUIConsole GC;
+  testbed.GUIMain();
+  public static void main(java.lang.String[]);
+  public static void GCO(java.lang.String);
+  static {};
+}
+Compiled from "GUIMain.java"
+final class testbed.GUIMain$1 implements java.lang.Runnable {
+  testbed.GUIMain$1();
+  public void run();
+}
+Compiled from "GUIMainDisp.java"
+public class testbed.GUIMainDisp extends javax.swing.JPanel {
+  public testbed.GUIMainDisp();
+}
+Compiled from "JNEATtest.java"
+public class testbed.JNEATtest {
+  public testbed.JNEATtest();
+  public static void test1();
+  public static void test2();
+  public static void test3();
+  public static void test4();
+  public static double test5fitness(double, boolean);
+  public static void test5sensors(jneat.Population, int);
+  public static void test5();
+  public static jneat.Population testLoad(java.lang.String);
+  public static void testSave(java.lang.String, jneat.Population);
+  public static void test6();
+  public static void test7();
+  public static void main(java.lang.String[]);
+  public static void testX();
+}
+Compiled from "AWTmouse.java"
+class testbed.MyKeyAdapter extends java.awt.event.KeyAdapter {
+  testbed.AWTmouse appWindow;
+  public testbed.MyKeyAdapter(testbed.AWTmouse);
+  public void keyTyped(java.awt.event.KeyEvent);
+}
+Compiled from "AWTmouse.java"
+class testbed.MyMouseAdapter extends java.awt.event.MouseAdapter {
+  testbed.AWTmouse appWindow;
+  public testbed.MyMouseAdapter(testbed.AWTmouse);
+  public void mousePressed(java.awt.event.MouseEvent);
+}
+Compiled from "AWTmouse.java"
+class testbed.MyWindowAdapter extends java.awt.event.WindowAdapter {
+  testbed.MyWindowAdapter();
+  public void windowClosing(java.awt.event.WindowEvent);
+}
+Compiled from "NetBeansImport.java"
+public class testbed.NetBeansImport extends javax.swing.JFrame {
+  public testbed.NetBeansImport();
+  public static void main(java.lang.String[]);
+  static void access$000(testbed.NetBeansImport, java.awt.event.ActionEvent);
+  static void access$100(testbed.NetBeansImport, java.awt.event.ActionEvent);
+  static void access$200(testbed.NetBeansImport, java.awt.event.ActionEvent);
+}
+Compiled from "NetBeansImport.java"
+class testbed.NetBeansImport$1 implements java.awt.event.ActionListener {
+  final testbed.NetBeansImport this$0;
+  testbed.NetBeansImport$1(testbed.NetBeansImport);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "NetBeansImport.java"
+class testbed.NetBeansImport$2 implements java.awt.event.ActionListener {
+  final testbed.NetBeansImport this$0;
+  testbed.NetBeansImport$2(testbed.NetBeansImport);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "NetBeansImport.java"
+class testbed.NetBeansImport$3 extends javax.swing.AbstractListModel {
+  java.lang.String[] strings;
+  final testbed.NetBeansImport this$0;
+  testbed.NetBeansImport$3(testbed.NetBeansImport);
+  public int getSize();
+  public java.lang.Object getElementAt(int);
+}
+Compiled from "NetBeansImport.java"
+class testbed.NetBeansImport$4 implements java.awt.event.ActionListener {
+  final testbed.NetBeansImport this$0;
+  testbed.NetBeansImport$4(testbed.NetBeansImport);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "NetBeansImport.java"
+final class testbed.NetBeansImport$5 implements java.lang.Runnable {
+  testbed.NetBeansImport$5();
+  public void run();
+}
+Compiled from "SwingPaint.java"
+class testbed.PaintPanel extends javax.swing.JPanel {
+  java.awt.Insets ins;
+  java.util.Random rand;
+  testbed.PaintPanel();
+  protected void paintComponent(java.awt.Graphics);
+}
+Compiled from "RandomTest.java"
+public class testbed.RandomTest {
+  public testbed.RandomTest();
+  public static void main(java.lang.String[]);
+}
+Compiled from "SwingEvent.java"
+public class testbed.SwingEvent {
+  javax.swing.JLabel jlab;
+  testbed.SwingEvent();
+  public static void main(java.lang.String[]);
+}
+Compiled from "SwingEvent.java"
+class testbed.SwingEvent$1 implements java.awt.event.ActionListener {
+  final testbed.SwingEvent this$0;
+  testbed.SwingEvent$1(testbed.SwingEvent);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "SwingEvent.java"
+class testbed.SwingEvent$2 implements java.awt.event.ActionListener {
+  final testbed.SwingEvent this$0;
+  testbed.SwingEvent$2(testbed.SwingEvent);
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "SwingEvent.java"
+final class testbed.SwingEvent$3 implements java.lang.Runnable {
+  testbed.SwingEvent$3();
+  public void run();
+}
+Compiled from "SwingPaint.java"
+public class testbed.SwingPaint {
+  javax.swing.JLabel jlab;
+  testbed.PaintPanel pp;
+  testbed.SwingPaint();
+  public static void main(java.lang.String[]);
+}
+Compiled from "SwingPaint.java"
+final class testbed.SwingPaint$1 implements java.lang.Runnable {
+  testbed.SwingPaint$1();
+  public void run();
+}
+Compiled from "SwingScroll.java"
+public class testbed.SwingScroll {
+  testbed.SwingScroll();
+  public static void main(java.lang.String[]);
+}
+Compiled from "SwingScroll.java"
+final class testbed.SwingScroll$1 implements java.lang.Runnable {
+  testbed.SwingScroll$1();
+  public void run();
+}
+Compiled from "SwingTabs.java"
+public class testbed.SwingTabs {
+  testbed.SwingTabs();
+  public static void main(java.lang.String[]);
+}
+Compiled from "SwingTabs.java"
+final class testbed.SwingTabs$1 implements java.lang.Runnable {
+  testbed.SwingTabs$1();
+  public void run();
+}
+Compiled from "SwingTest.java"
+public class testbed.SwingTest {
+  testbed.SwingTest();
+  public static void main(java.lang.String[]);
+}
+Compiled from "SwingTest.java"
+final class testbed.SwingTest$1 implements java.lang.Runnable {
+  testbed.SwingTest$1();
+  public void run();
+}
+Compiled from "SwingScroll.java"
+class testbed.TextDemo extends javax.swing.JPanel implements java.awt.event.ActionListener {
+  protected javax.swing.JTextField textField;
+  protected javax.swing.JTextArea textArea;
+  public testbed.TextDemo();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "bbmsGUI.java"
+public class testbed.bbmsGUI {
+  static javax.swing.JFrame MainGUIframe;
+  static java.awt.event.ActionListener FileNewListener;
+  static java.awt.event.ActionListener FileExitListener;
+  static java.awt.event.ActionListener Test7Listener;
+  static java.awt.event.ActionListener Test8Listener;
+  static java.awt.event.ActionListener HelpAboutListener;
+  public testbed.bbmsGUI();
+  public static void main(java.lang.String[]);
+  public static void GuiMainWindow();
+  public static void JWindowLook();
+  public static void test7();
+  public static void test8();
+  static {};
+}
+Compiled from "bbmsGUI.java"
+final class testbed.bbmsGUI$1 implements java.awt.event.ActionListener {
+  testbed.bbmsGUI$1();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "bbmsGUI.java"
+final class testbed.bbmsGUI$2 implements java.awt.event.ActionListener {
+  testbed.bbmsGUI$2();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "bbmsGUI.java"
+final class testbed.bbmsGUI$3 implements java.awt.event.ActionListener {
+  testbed.bbmsGUI$3();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "bbmsGUI.java"
+final class testbed.bbmsGUI$4 implements java.awt.event.ActionListener {
+  testbed.bbmsGUI$4();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "bbmsGUI.java"
+final class testbed.bbmsGUI$5 implements java.awt.event.ActionListener {
+  testbed.bbmsGUI$5();
+  public void actionPerformed(java.awt.event.ActionEvent);
+}
+Compiled from "bbmsGUI.java"
+final class testbed.bbmsGUI$6 implements java.awt.event.MouseListener {
+  int mouseX;
+  int mouseY;
+  testbed.bbmsGUI$6();
+  public void mouseClicked(java.awt.event.MouseEvent);
+  public void mouseEntered(java.awt.event.MouseEvent);
+  public void mouseExited(java.awt.event.MouseEvent);
+  public void mousePressed(java.awt.event.MouseEvent);
+  public void mouseReleased(java.awt.event.MouseEvent);
+}
+Compiled from "FitnessTypeEnum.java"
+public final class unit.FitnessTypeEnum extends java.lang.Enum<unit.FitnessTypeEnum> {
+  public static final unit.FitnessTypeEnum SIMPLE_GREEDY;
+  public static final unit.FitnessTypeEnum SHARED_SPOTTING;
+  public static final unit.FitnessTypeEnum SOVIET_COMMUNISM;
+  public static final unit.FitnessTypeEnum FULL_COMMUNISM;
+  public static unit.FitnessTypeEnum[] values();
+  public static unit.FitnessTypeEnum valueOf(java.lang.String);
+  public double EvaluateFitness(unit.Unit);
+  public static unit.FitnessTypeEnum CycleFitType(unit.FitnessTypeEnum);
+  static {};
+}
+Compiled from "FitnessTypeEnum.java"
+class unit.FitnessTypeEnum$1 {
+  static final int[] $SwitchMap$unit$FitnessTypeEnum;
+  static {};
+}
+Compiled from "JNEATIntegration.java"
+public class unit.JNEATIntegration {
+  static double death_sum;
+  static int death_count;
+  static double epoch_spotted;
+  static int epoch_possibleSpot;
+  static int testNumber;
+  static double teamPerformance;
+  public unit.JNEATIntegration();
+  public static void EndofTest();
+  public static void EndofScenario();
+  public static void FillScoutsRandomly(int);
+  public static void FillAllScouts();
+  public static void DeployAll();
+  public static void DeployRandomly(unit.Unit);
+  public static void DeployMaxView(unit.Unit, int);
+  public static void DeployOne(unit.Unit);
+  public static void PrintSummaryOutput();
+  public static void PrintTestSummary();
+  public static java.lang.String PrintTestSummaryKey();
+  public static void PrintTestDetailed();
+  public static java.lang.String PrintTestDetailedKey();
+  public static java.lang.String PrintSummaryLine();
+  public static java.lang.String PrintSummaryKey();
+  public static void PrintDetailedIter();
+  public static java.lang.String PrintDetailedIterKey();
+  public static java.lang.String PrintDetailedItrLine(unit.Unit);
+  public static void ScenIterationSetup();
+  public static void ClearAllData();
+  public static void RunNextTest();
+  public static void PopTestFromDir(int, int);
+  public static void PopTestOn(int, int, java.lang.String);
+  public static void PopTestNewEpoch(int);
+  public static void ScenIterationFromFile();
+  public static void TestIterationSetup(int);
+  public static void ScenIterationSetup(int);
+  static {};
+}
+Compiled from "MoveClass.java"
+public final class unit.MoveClass extends java.lang.Enum<unit.MoveClass> {
+  public static final unit.MoveClass FOOT;
+  public static final unit.MoveClass WHEEL;
+  public static final unit.MoveClass AT_WHEEL;
+  public static final unit.MoveClass TRACK;
+  public static final unit.MoveClass BOAT;
+  public static unit.MoveClass[] values();
+  public static unit.MoveClass valueOf(java.lang.String);
+  static {};
+}
+Compiled from "OrganismTypeEnum.java"
+public final class unit.OrganismTypeEnum extends java.lang.Enum<unit.OrganismTypeEnum> {
+  public static final unit.OrganismTypeEnum SIMPLE_SINGLE;
+  public static final unit.OrganismTypeEnum SIMPLE_DUAL;
+  public static final unit.OrganismTypeEnum SIX_DIRECTIONAL;
+  public static final unit.OrganismTypeEnum BASE_RANDOM;
+  public static final unit.OrganismTypeEnum BASE_MAXHEX;
+  public static double maxObservedDV;
+  public static unit.OrganismTypeEnum[] values();
+  public static unit.OrganismTypeEnum valueOf(java.lang.String);
+  public static double SenseFlowFOV(hex.Hex, unit.FitnessTypeEnum);
+  public static double SenseFlowMax(hex.Hex, unit.FitnessTypeEnum);
+  public static double SenseFlowLocation(hex.Hex, unit.FitnessTypeEnum);
+  public static double[] SenseFlow60(hex.Hex, unit.FitnessTypeEnum);
+  public static double NormalizedSenseFlowSingle(hex.Hex, unit.FitnessTypeEnum);
+  static {};
+}
+Compiled from "SideEnum.java"
+public final class unit.SideEnum extends java.lang.Enum<unit.SideEnum> {
+  public static final unit.SideEnum FRIENDLY;
+  public static final unit.SideEnum ENEMY;
+  public static final unit.SideEnum NEUTRAL;
+  public final int id;
+  public static unit.SideEnum[] values();
+  public static unit.SideEnum valueOf(java.lang.String);
+  static {};
+}
+Compiled from "Unit.java"
+public class unit.Unit {
+  public hex.Hex location;
+  public hex.HexOff HullOffset;
+  public hex.HexOff TurretOffset;
+  public hex.HexOff TurretRing;
+  public jneat.Organism org;
+  public int orgGenome;
+  public unit.OrganismTypeEnum orgType;
+  public unit.FitnessTypeEnum fitType;
+  public double curFitness;
+  public double spotCredits;
+  public boolean destroyed;
+  public boolean emplaced;
+  public double hullOrientation;
+  public double turretOrientation;
+  public int movePoints;
+  public int moveRate;
+  public unit.MoveClass moveMode;
+  public int subHexDirection;
+  public int subHexLocation;
+  public boolean spotted;
+  public unit.WaypointList waypointList;
+  public unit.Unit target;
+  public java.lang.String type;
+  public java.lang.String callsign;
+  public int unitID;
+  public unit.SideEnum side;
+  public void AddtoSide(unit.SideEnum);
+  public void RemoveUnit();
+  public void RemovefromSide(unit.SideEnum);
+  public void ChangeSide(unit.SideEnum);
+  public void RefreshUnitInfo();
+  public unit.Unit(unit.Unit);
+  public unit.Unit(hex.Hex, unit.SideEnum, java.lang.String, java.lang.String, double, double, unit.WaypointList, boolean);
+  public java.lang.String DispUnitInfo();
+  public java.lang.String DispSubHexMovement();
+  public void DrawUnit(int, int, java.awt.Graphics);
+  public double getAzimuth(int, int, int, int);
+  public void OrientHullTo(int, int);
+  public void OrientTurretTo(int, int);
+  public void OrientTurretToTarget();
+  public static void DisplayLOSBetween(hex.Hex, hex.Hex, boolean);
+  public void DisplayLOSTo(int, int, boolean);
+  public static boolean LOSBetween(hex.Hex, hex.Hex);
+  public boolean HasLOSTo(int, int);
+  public void DisplayLOSToTarget();
+  public void DisplayLOSToEnemies();
+  public void FindLOSToEnemies();
+  public static void DisplayLOSToRange(hex.Hex, int);
+  public void DisplayLOSToRange(int);
+  public static java.util.Vector<hex.Hex> GetLOSToRange(hex.Hex, int);
+  public void UpdateSharedSpotting();
+  public void RemoveSharedSpotting();
+  public java.util.Vector<hex.Hex> GetLOSToRange(int);
+  public void DisplayWaypoints();
+  public void MoveUnit(int);
+  public void MoveUnitSubHex(int);
+  public void MoveToWaypoint();
+  public void TeleportTo(hex.Hex);
+  public java.lang.String SaveUnit();
+  public unit.Unit(java.lang.String);
+  public java.lang.String SaveTarget();
+  public int CalcMoveRate();
+  public double UseSensors(hex.Hex);
+}
+Compiled from "Unit.java"
+class unit.Unit$1 {
+  static final int[] $SwitchMap$unit$SideEnum;
+  static final int[] $SwitchMap$unit$OrganismTypeEnum;
+  static {};
+}
+Compiled from "WaypointList.java"
+public class unit.WaypointList {
+  public java.util.LinkedList<hex.HexOff> waypointList;
+  public unit.WaypointList();
+  public unit.WaypointList(unit.WaypointList);
+  public boolean addWaypoint(int, int);
+  public boolean addFirstWaypoint(int, int);
+  public boolean removeLastWaypoint();
+  public boolean removeFirstWaypoint();
+  public hex.HexOff getFirstWaypoint();
+  public hex.HexOff getLastWaypoint();
+  public java.lang.String displayWaypoints();
+  public java.lang.String saveWaypoints();
+  public unit.WaypointList(java.lang.String[], int);
+  public static hex.HexOff readWaypoint(java.lang.String);
+}
+Compiled from "FIO.java"
+public class utilities.FIO {
+  static java.nio.charset.Charset cSet;
+  static int readFinger;
+  public utilities.FIO();
+  public static boolean BWriteFile(java.nio.file.Path, java.lang.String, java.nio.file.StandardOpenOption);
+  public static boolean BWriteFile(java.nio.file.Path, java.lang.String, java.nio.file.StandardOpenOption, boolean);
+  public static boolean newDirectory(java.lang.String);
+  public static java.io.File newFile(java.lang.String);
+  public static java.lang.String BReadFile(java.nio.file.Path, java.lang.String);
+  public static boolean SaveScen(java.nio.file.Path);
+  public static boolean SaveFile(java.nio.file.Path);
+  public static boolean CopyPop(int);
+  public static java.nio.file.Path PoppyCock(int);
+  public static boolean LoadTest(java.nio.file.Path);
+  public static boolean LoadScen(java.nio.file.Path);
+  public static boolean LoadFile(java.nio.file.Path);
+  public static java.lang.String ReadNextChunk(java.lang.String, char);
+  public static java.lang.String ReadNextChunk(java.lang.String, char, boolean);
+  public static boolean overwriteFile(java.nio.file.Path, java.lang.String);
+  public static boolean appendFile(java.nio.file.Path, java.lang.String);
+  public static boolean appendFile(java.nio.file.Path, java.lang.String, boolean);
+  static {};
+}
+Compiled from "MersenneTwister.java"
+public class utilities.MersenneTwister extends java.util.Random implements java.io.Serializable,java.lang.Cloneable {
+  public strictfp java.lang.Object clone();
+  public strictfp boolean stateEquals(java.lang.Object);
+  public strictfp void readState(java.io.DataInputStream) throws java.io.IOException;
+  public strictfp void writeState(java.io.DataOutputStream) throws java.io.IOException;
+  public strictfp utilities.MersenneTwister();
+  public strictfp utilities.MersenneTwister(long);
+  public strictfp utilities.MersenneTwister(int[]);
+  public synchronized strictfp void setSeed(long);
+  public synchronized strictfp void setSeed(int[]);
+  protected synchronized strictfp int next(int);
+  public strictfp boolean nextBoolean();
+  public strictfp boolean nextBoolean(float);
+  public strictfp boolean nextBoolean(double);
+  public strictfp int nextInt(int);
+  public strictfp long nextLong(long);
+  public strictfp double nextDouble();
+  public strictfp double nextDouble(boolean, boolean);
+  public strictfp float nextFloat();
+  public strictfp float nextFloat(boolean, boolean);
+  public strictfp void nextBytes(byte[]);
+  public strictfp char nextChar();
+  public strictfp short nextShort();
+  public strictfp byte nextByte();
+  public synchronized strictfp double nextGaussian();
+  public static strictfp void main(java.lang.String[]);
+}
+Compiled from "MersenneTwisterFast.java"
+public class utilities.MersenneTwisterFast implements java.io.Serializable,java.lang.Cloneable {
+  public strictfp java.lang.Object clone();
+  public strictfp boolean stateEquals(java.lang.Object);
+  public strictfp void readState(java.io.DataInputStream) throws java.io.IOException;
+  public strictfp void writeState(java.io.DataOutputStream) throws java.io.IOException;
+  public strictfp utilities.MersenneTwisterFast();
+  public strictfp utilities.MersenneTwisterFast(long);
+  public strictfp utilities.MersenneTwisterFast(int[]);
+  public synchronized strictfp void setSeed(long);
+  public synchronized strictfp void setSeed(int[]);
+  public strictfp int nextInt();
+  public strictfp short nextShort();
+  public strictfp char nextChar();
+  public strictfp boolean nextBoolean();
+  public strictfp boolean nextBoolean(float);
+  public strictfp boolean nextBoolean(double);
+  public strictfp byte nextByte();
+  public strictfp void nextBytes(byte[]);
+  public strictfp long nextLong();
+  public strictfp long nextLong(long);
+  public strictfp double nextDouble();
+  public strictfp double nextDouble(boolean, boolean);
+  public strictfp double nextGaussian();
+  public strictfp float nextFloat();
+  public strictfp float nextFloat(boolean, boolean);
+  public strictfp int nextInt(int);
+  public static strictfp void main(java.lang.String[]);
+}

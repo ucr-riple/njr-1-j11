@@ -1,0 +1,397 @@
+Compiled from "CRS.java"
+public class de.hrw.mdbt.CRS {
+  public de.hrw.mdbt.CRS();
+  public static void main(java.lang.String[]);
+}
+Compiled from "CRSOperations.java"
+public class de.hrw.mdbt.CRSOperations {
+  com.db4o.ObjectContainer db;
+  com.db4o.config.CommonConfigurationProvider config;
+  public com.db4o.ObjectContainer getDb();
+  public com.db4o.config.CommonConfigurationProvider getConfig();
+  public de.hrw.mdbt.CRSOperations(java.lang.String);
+  public void fillDBDefaults();
+  public com.db4o.ObjectSet<de.hrw.mdbt.model.VehicleGroup> createOffer(de.hrw.mdbt.model.Branch, java.util.Date, java.util.Date, de.hrw.mdbt.model.PriceClass);
+  public boolean createReservation(de.hrw.mdbt.model.Customer, de.hrw.mdbt.model.Branch, de.hrw.mdbt.model.VehicleGroup, java.util.Date, java.util.Date);
+  public static void configureAll(com.db4o.config.CommonConfigurationProvider);
+  public static void fillDBDefaults(com.db4o.ObjectContainer);
+  public static com.db4o.ObjectSet<de.hrw.mdbt.model.VehicleGroup> createOffer(com.db4o.ObjectContainer, de.hrw.mdbt.model.Branch, java.util.Date, java.util.Date, de.hrw.mdbt.model.PriceClass);
+  public static boolean createReservation(com.db4o.ObjectContainer, de.hrw.mdbt.model.Customer, de.hrw.mdbt.model.Branch, de.hrw.mdbt.model.VehicleGroup, java.util.Date, java.util.Date);
+}
+Compiled from "CRSOperations.java"
+final class de.hrw.mdbt.CRSOperations$1 extends com.db4o.query.Predicate<de.hrw.mdbt.model.VehicleGroup> {
+  final de.hrw.mdbt.model.PriceClass val$pc;
+  final de.hrw.mdbt.model.Branch val$b;
+  final java.util.Date val$endDate;
+  final java.util.Date val$startDate;
+  de.hrw.mdbt.CRSOperations$1(de.hrw.mdbt.model.PriceClass, de.hrw.mdbt.model.Branch, java.util.Date, java.util.Date);
+  public boolean match(de.hrw.mdbt.model.VehicleGroup);
+  public boolean match(java.lang.Object);
+}
+Compiled from "Address.java"
+public class de.hrw.mdbt.model.Address {
+  public de.hrw.mdbt.model.Address(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String);
+  public de.hrw.mdbt.model.Address();
+  public java.lang.String getState();
+  public void setState(java.lang.String);
+  public java.lang.String getCity();
+  public void setCity(java.lang.String);
+  public java.lang.String getStreet();
+  public void setStreet(java.lang.String);
+  public java.lang.String getZip();
+  public void setZip(java.lang.String);
+  public java.lang.String getType();
+  public void setType(java.lang.String);
+}
+Compiled from "Branch.java"
+public class de.hrw.mdbt.model.Branch {
+  public de.hrw.mdbt.model.Branch(java.lang.String, de.hrw.mdbt.model.Address, java.sql.Time, java.sql.Time, java.lang.String);
+  public de.hrw.mdbt.model.Branch();
+  public java.lang.String getName();
+  public void setName(java.lang.String);
+  public de.hrw.mdbt.model.Address getAddress();
+  public void setAddress(de.hrw.mdbt.model.Address);
+  public java.sql.Time getOpeningTime();
+  public void setOpeningTime(java.sql.Time);
+  public java.sql.Time getClosingTime();
+  public void setClosingTime(java.sql.Time);
+  public java.lang.String getPhone();
+  public void setPhone(java.lang.String);
+  public java.util.ArrayList<de.hrw.mdbt.model.Vehicle> getVehicles();
+  protected void addVehicle(de.hrw.mdbt.model.Vehicle);
+  protected void removeVehicle(de.hrw.mdbt.model.Vehicle);
+  public static void configure(com.db4o.config.CommonConfigurationProvider);
+  public boolean objectCanNew(com.db4o.ObjectContainer);
+  public boolean objectCanUpdate(com.db4o.ObjectContainer);
+  public void objectOnDelete(com.db4o.ObjectContainer);
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "Company.java"
+public class de.hrw.mdbt.model.Company extends de.hrw.mdbt.model.Customer {
+  public de.hrw.mdbt.model.Company(int, java.lang.String);
+  public void addRepresentative(de.hrw.mdbt.model.Person);
+  public void removeRepresentative(de.hrw.mdbt.model.Person);
+  public java.lang.String getName();
+  public void setName(java.lang.String);
+}
+Compiled from "Customer.java"
+public class de.hrw.mdbt.model.Customer {
+  public de.hrw.mdbt.model.Customer();
+  public de.hrw.mdbt.model.Customer(int);
+  public int getId();
+  public void setId(int);
+  public java.util.Date getRegisterDate();
+  public void setRegisterDate(java.util.Date);
+  public float getDiscount();
+  public void setDiscount(float);
+  public java.util.ArrayList<de.hrw.mdbt.model.LicenseClass> getLicenses();
+  public void addLicense(de.hrw.mdbt.model.LicenseClass);
+  public void removeLicense(de.hrw.mdbt.model.LicenseClass);
+  public java.lang.String toString();
+}
+Compiled from "Employee.java"
+public class de.hrw.mdbt.model.Employee extends de.hrw.mdbt.model.Person {
+  public de.hrw.mdbt.model.Employee(int, java.lang.String);
+  public void addTask(de.hrw.mdbt.model.Task);
+  public void removeTask(de.hrw.mdbt.model.Task);
+  public float getSalary();
+  public void setSalary(float);
+  public java.lang.String getSsn();
+  public void setSsn(java.lang.String);
+  public de.hrw.mdbt.model.Branch getBranch();
+  public void setBranch(de.hrw.mdbt.model.Branch);
+  public de.hrw.mdbt.model.Employee getSupervisor();
+  public void setSupervisor(de.hrw.mdbt.model.Employee);
+  public static void configure(com.db4o.config.CommonConfigurationProvider);
+  public boolean objectCanNew(com.db4o.ObjectContainer) throws com.db4o.ext.Db4oException;
+  public boolean objectCanUpdate(com.db4o.ObjectContainer) throws com.db4o.ext.Db4oException;
+}
+Compiled from "Equipment.java"
+public class de.hrw.mdbt.model.Equipment {
+  public de.hrw.mdbt.model.Equipment();
+  public java.lang.String getName();
+  public void setName(java.lang.String);
+  public java.lang.String getDescription();
+  public void setDescription(java.lang.String);
+  public float getPrice();
+  public void setPrice(float);
+}
+Compiled from "LicenseClass.java"
+public class de.hrw.mdbt.model.LicenseClass {
+  public de.hrw.mdbt.model.LicenseClass();
+  public de.hrw.mdbt.model.LicenseClass(java.lang.String, java.lang.String);
+  public java.lang.String getAbbreviation();
+  public void setAbbreviation(java.lang.String);
+  public java.lang.String getDescription();
+  public void setDescription(java.lang.String);
+}
+Compiled from "Model.java"
+public class de.hrw.mdbt.model.Model {
+  public de.hrw.mdbt.model.Model();
+  public de.hrw.mdbt.model.Model(java.lang.String, java.lang.String, int, java.lang.String, de.hrw.mdbt.model.LicenseClass);
+  public java.lang.String getManufacturer();
+  public void setManufacturer(java.lang.String);
+  public java.lang.String getName();
+  public void setName(java.lang.String);
+  public int getCapacity();
+  public void setCapacity(int);
+  public java.lang.String getMeasure();
+  public void setMeasure(java.lang.String);
+  public de.hrw.mdbt.model.LicenseClass getRequiredLicense();
+  public void setRequiredLicense(de.hrw.mdbt.model.LicenseClass);
+}
+Compiled from "Person.java"
+public class de.hrw.mdbt.model.Person extends de.hrw.mdbt.model.Customer {
+  public de.hrw.mdbt.model.Person();
+  public de.hrw.mdbt.model.Person(int, java.lang.String);
+  public de.hrw.mdbt.model.Person(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Date, java.lang.String);
+  public void addAddress(de.hrw.mdbt.model.Address);
+  public void removeAddress(de.hrw.mdbt.model.Address);
+  public void addPhone(de.hrw.mdbt.model.Phone);
+  public void removePhone(de.hrw.mdbt.model.Phone);
+  public java.lang.String getFirstname();
+  public void setFirstname(java.lang.String);
+  public java.lang.String getSecondname();
+  public void setSecondname(java.lang.String);
+  public java.lang.String getLastname();
+  public void setLastname(java.lang.String);
+  public java.lang.String getSalutation();
+  public void setSalutation(java.lang.String);
+  public java.lang.String getTitle();
+  public void setTitle(java.lang.String);
+  public java.util.Date getDateOfBirth();
+  public void setDateOfBirth(java.util.Date);
+  public java.lang.String getEmail();
+  public void setEmail(java.lang.String);
+  public java.lang.String getSex();
+  public void setSex(java.lang.String);
+  public static void configure(com.db4o.config.CommonConfigurationProvider);
+  public boolean objectCanNew(com.db4o.ObjectContainer) throws com.db4o.ext.Db4oException;
+  public boolean objectCanUpdate(com.db4o.ObjectContainer) throws com.db4o.ext.Db4oException;
+}
+Compiled from "Phone.java"
+public class de.hrw.mdbt.model.Phone {
+  public de.hrw.mdbt.model.Phone(java.lang.String, java.lang.String, java.lang.String);
+  public java.lang.String getType();
+  public void setType(java.lang.String);
+  public java.lang.String getPrefix();
+  public void setPrefix(java.lang.String);
+  public java.lang.String getNumber();
+  public void setNumber(java.lang.String);
+}
+Compiled from "PriceClass.java"
+public class de.hrw.mdbt.model.PriceClass {
+  public de.hrw.mdbt.model.PriceClass(java.lang.String, java.lang.String, int, int, int);
+  public de.hrw.mdbt.model.PriceClass();
+  public void addModel(de.hrw.mdbt.model.Model);
+  public void removeModel(de.hrw.mdbt.model.Model);
+  public java.lang.String getName();
+  public void setName(java.lang.String);
+  public java.lang.String getDescription();
+  public void setDescription(java.lang.String);
+  public float getFreeKm();
+  public void setFreeKm(float);
+  public float getPriceKm();
+  public void setPriceKm(float);
+  public float getPriceDay();
+  public void setPriceDay(float);
+}
+Compiled from "Rental.java"
+public class de.hrw.mdbt.model.Rental {
+  public de.hrw.mdbt.model.Rental(java.util.Date, java.util.Date, de.hrw.mdbt.model.Vehicle, de.hrw.mdbt.model.Customer);
+  public java.util.Date getStartDate();
+  public void setStartDate(java.util.Date);
+  public java.util.Date getEndDate();
+  public void setEndDate(java.util.Date);
+  public int getStartKm();
+  public void setStartKm(int);
+  public int getEndKm();
+  public void setEndKm(int);
+  public de.hrw.mdbt.model.Vehicle getVehicle();
+  public void setVehicle(de.hrw.mdbt.model.Vehicle);
+  public java.lang.String getStatus();
+  public void setStatus(java.lang.String);
+  public de.hrw.mdbt.model.Customer getCustomer();
+  public void setCustomer(de.hrw.mdbt.model.Customer);
+  public static void configure(com.db4o.config.CommonConfigurationProvider);
+  public boolean objectCanNew(com.db4o.ObjectContainer) throws com.db4o.ext.Db4oException;
+  public java.lang.String toString();
+}
+Compiled from "Report.java"
+public class de.hrw.mdbt.model.Report {
+  public de.hrw.mdbt.model.Report();
+  public java.util.Date getDate();
+  public void setDate(java.util.Date);
+  public java.lang.String getText();
+  public void setText(java.lang.String);
+}
+Compiled from "Task.java"
+public class de.hrw.mdbt.model.Task {
+  public de.hrw.mdbt.model.Task();
+  public java.lang.String getName();
+  public void setName(java.lang.String);
+  public java.lang.String getDescription();
+  public void setDescription(java.lang.String);
+  public float getPercentage();
+  public void setPercentage(float);
+}
+Compiled from "Vehicle.java"
+public class de.hrw.mdbt.model.Vehicle {
+  public de.hrw.mdbt.model.Vehicle(java.lang.String, java.lang.String, int, de.hrw.mdbt.model.Branch, de.hrw.mdbt.model.VehicleGroup);
+  public java.lang.String getLicenseNumber();
+  public void setLicenseNumber(java.lang.String);
+  public java.lang.String getInsuranceNumber();
+  public void setInsuranceNumber(java.lang.String);
+  public int getActualKm();
+  public void setActualKm(int);
+  public de.hrw.mdbt.model.Branch getBranch();
+  public void setBranch(de.hrw.mdbt.model.Branch);
+  public de.hrw.mdbt.model.VehicleGroup getVehicleGroup();
+  public void setVehicleGroup(de.hrw.mdbt.model.VehicleGroup);
+  public java.util.ArrayList<de.hrw.mdbt.model.Report> getReports();
+  public void setReports(java.util.ArrayList<de.hrw.mdbt.model.Report>);
+  public java.util.ArrayList<de.hrw.mdbt.model.Rental> getRentals();
+  protected void addRental(de.hrw.mdbt.model.Rental);
+  protected void removeRental(de.hrw.mdbt.model.Rental);
+  public static void configure(com.db4o.config.CommonConfigurationProvider);
+  public boolean objectCanNew(com.db4o.ObjectContainer);
+  public boolean objectCanUpdate(com.db4o.ObjectContainer);
+  public void objectOnDelete(com.db4o.ObjectContainer);
+  public java.lang.String toString();
+}
+Compiled from "VehicleGroup.java"
+public class de.hrw.mdbt.model.VehicleGroup {
+  public de.hrw.mdbt.model.VehicleGroup();
+  public de.hrw.mdbt.model.VehicleGroup(int, java.lang.String, java.util.Date, java.lang.String, de.hrw.mdbt.model.Model, de.hrw.mdbt.model.PriceClass);
+  public int getPower();
+  public void setPower(int);
+  public java.lang.String getFuelType();
+  public void setFuelType(java.lang.String);
+  public java.util.Date getPurchaseDate();
+  public void setPurchaseDate(java.util.Date);
+  public java.lang.String getColor();
+  public void setColor(java.lang.String);
+  public de.hrw.mdbt.model.Model getModel();
+  public void setModel(de.hrw.mdbt.model.Model);
+  public de.hrw.mdbt.model.PriceClass getPriceClass();
+  public void setPriceClass(de.hrw.mdbt.model.PriceClass);
+  public java.util.ArrayList<de.hrw.mdbt.model.Equipment> getEquipment();
+  public void setEquipment(java.util.ArrayList<de.hrw.mdbt.model.Equipment>);
+  public java.util.ArrayList<de.hrw.mdbt.model.Vehicle> getVehicles();
+  protected void setVehicles(java.util.ArrayList<de.hrw.mdbt.model.Vehicle>);
+  protected void addVehicle(de.hrw.mdbt.model.Vehicle);
+  protected void removeVehicle(de.hrw.mdbt.model.Vehicle);
+  public boolean objectCanNew(com.db4o.ObjectContainer);
+  public boolean objectCanUpdate(com.db4o.ObjectContainer);
+  public void objectOnDelete(com.db4o.ObjectContainer);
+}
+Compiled from "BranchTest.java"
+public class de.hrw.mdbt.model.test.BranchTest {
+  public org.junit.rules.ExpectedException exception;
+  public de.hrw.mdbt.model.test.BranchTest();
+  public static void setUpBeforeClass() throws java.lang.Exception;
+  public static void tearDownAfterClass() throws java.lang.Exception;
+  public void setUp() throws java.lang.Exception;
+  public void tearDown() throws java.lang.Exception;
+  public void testGetName();
+  public void testSetName();
+  public void testGetAddress();
+  public void testSetAddress();
+  public void testGetOpeningTime();
+  public void testGetClosingTime();
+  public void testSetOpeningTime();
+  public void testSetClosingTime();
+  public void testGetPhone();
+  public void testSetPhone();
+  public void testGetVehicles();
+  public void testStore();
+  public void testStoreDuplicate();
+  public void testStoreNullNameFails();
+  public void testStoreNullOpeningTime();
+  public void testStoreNullClosingTime();
+  public void testStoreNullPhoneFails();
+  public void testAddMultipleVehicles();
+  public void testRemoveMultipleVehicles();
+  public void testStoreMultipleVehicles();
+  public void testDeleteMultipleVehicles();
+  public void testDelete();
+  static {};
+}
+Compiled from "EmployeeTest.java"
+public class de.hrw.mdbt.model.test.EmployeeTest {
+  public de.hrw.mdbt.model.test.EmployeeTest();
+  public static void setUpBeforeClass() throws java.lang.Exception;
+  public static void tearDownAfterClass();
+  public void setUp() throws java.lang.Exception;
+  public void tearDown() throws java.lang.Exception;
+  public void testEmployee();
+  public void testEmployeeWithMail();
+  public void testEmployeeWithInvalidMail();
+}
+Compiled from "PersonTest.java"
+public class de.hrw.mdbt.model.test.PersonTest {
+  public de.hrw.mdbt.model.test.PersonTest();
+  public static void setUpBeforeClass() throws java.lang.Exception;
+  public static void tearDownAfterClass();
+  public void setUp() throws java.lang.Exception;
+  public void tearDown() throws java.lang.Exception;
+  public void testSimplePerson();
+  public void testPersonNoName();
+  public void testPersonNotYetBorn();
+  public void testPersonOK();
+  public void testPersonIdDuplicate();
+  static {};
+}
+Compiled from "RentalTest.java"
+public class de.hrw.mdbt.model.test.RentalTest {
+  public de.hrw.mdbt.model.test.RentalTest();
+  public static void setUpBeforeClass() throws java.lang.Exception;
+  public static void tearDownAfterClass();
+  public void setUp() throws java.lang.Exception;
+  public void tearDown() throws java.lang.Exception;
+  public void testRental();
+  public void testRentalNoVehicle();
+  public void testRentalNoCustomer();
+}
+Compiled from "VehicleGroupTest.java"
+public class de.hrw.mdbt.model.test.VehicleGroupTest {
+  public de.hrw.mdbt.model.test.VehicleGroupTest();
+  public static void setUpBeforeClass() throws java.lang.Exception;
+  public static void tearDownAfterClass() throws java.lang.Exception;
+  public void setUp() throws java.lang.Exception;
+  public void tearDown() throws java.lang.Exception;
+  public void testStore();
+  public void testStoreMultipleVehicleGroups();
+  public void testDelete();
+}
+Compiled from "VehicleTest.java"
+public class de.hrw.mdbt.model.test.VehicleTest {
+  public org.junit.rules.ExpectedException exception;
+  public de.hrw.mdbt.model.test.VehicleTest();
+  public static void setUpBeforeClass() throws java.lang.Exception;
+  public static void tearDownAfterClass() throws java.lang.Exception;
+  public void setUp() throws java.lang.Exception;
+  public void tearDown() throws java.lang.Exception;
+  public void testStoreNegativeActualKmFail();
+  public void testStoreLicenseNumberUnique();
+  public void testStore();
+  public void testStoreMultipleVehicles();
+  public void testDelete();
+}
+Compiled from "CRSOperationsTest.java"
+public class de.hrw.mdbt.test.CRSOperationsTest {
+  public de.hrw.mdbt.test.CRSOperationsTest();
+  public static void setUpBeforeClass() throws java.lang.Exception;
+  public static void tearDownAfterClass() throws java.lang.Exception;
+  public void setUp() throws java.lang.Exception;
+  public void tearDown() throws java.lang.Exception;
+  public void testDefaultDBNotEmpty();
+  public void testCreateOfferReturnsMultipleVehicleGroups();
+  public void testCreateOfferDateRangesAreExclusive();
+  public void testCreateOfferNoDateMatch();
+  public void testCreateOfferInvalidDate();
+  public void testCreateReservation();
+  public void testCreateReservationNullCustomer();
+  public void testCreateReservationInvalidDate();
+}

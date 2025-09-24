@@ -1,0 +1,2498 @@
+Compiled from "AbstractBinaryOperator.java"
+public abstract class org.boris.expr.AbstractBinaryOperator extends org.boris.expr.ExprEvaluatable implements org.boris.expr.IBinaryOperator {
+  protected org.boris.expr.Expr lhs;
+  protected org.boris.expr.Expr rhs;
+  public org.boris.expr.AbstractBinaryOperator(org.boris.expr.ExprType, org.boris.expr.Expr, org.boris.expr.Expr);
+  public org.boris.expr.Expr getLHS();
+  public void setLHS(org.boris.expr.Expr);
+  public org.boris.expr.Expr getRHS();
+  public void setRHS(org.boris.expr.Expr);
+  public void validate() throws org.boris.expr.ExprException;
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+}
+Compiled from "AbstractComparisonOperator.java"
+public abstract class org.boris.expr.AbstractComparisonOperator extends org.boris.expr.AbstractBinaryOperator {
+  public org.boris.expr.AbstractComparisonOperator(org.boris.expr.ExprType, org.boris.expr.Expr, org.boris.expr.Expr);
+  protected double compare(org.boris.expr.IEvaluationContext) throws org.boris.expr.ExprException;
+}
+Compiled from "AbstractMathematicalOperator.java"
+public abstract class org.boris.expr.AbstractMathematicalOperator extends org.boris.expr.AbstractBinaryOperator {
+  public org.boris.expr.AbstractMathematicalOperator(org.boris.expr.ExprType, org.boris.expr.Expr, org.boris.expr.Expr);
+  protected double evaluateExpr(org.boris.expr.Expr, org.boris.expr.IEvaluationContext) throws org.boris.expr.ExprException;
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext) throws org.boris.expr.ExprException;
+  protected abstract org.boris.expr.Expr evaluate(double, double) throws org.boris.expr.ExprException;
+}
+Compiled from "AllTests.java"
+public class org.boris.expr.AllTests {
+  public org.boris.expr.AllTests();
+  public static junit.framework.Test suite();
+}
+Compiled from "BasicEngineProvider.java"
+public class org.boris.expr.BasicEngineProvider implements org.boris.expr.engine.EngineProvider {
+  public org.boris.expr.BasicEngineProvider();
+  public void inputChanged(org.boris.expr.engine.Range, org.boris.expr.Expr);
+  public void valueChanged(org.boris.expr.engine.Range, org.boris.expr.Expr);
+  public void validate(org.boris.expr.ExprVariable) throws org.boris.expr.ExprException;
+  public org.boris.expr.Expr evaluateFunction(org.boris.expr.IEvaluationContext, org.boris.expr.ExprFunction) throws org.boris.expr.ExprException;
+  public org.boris.expr.Expr evaluateVariable(org.boris.expr.IEvaluationContext, org.boris.expr.ExprVariable) throws org.boris.expr.ExprException;
+  static {};
+}
+Compiled from "BasicEvaluationCallback.java"
+public class org.boris.expr.BasicEvaluationCallback implements org.boris.expr.IEvaluationContext,org.boris.expr.parser.IParserVisitor {
+  public org.boris.expr.BasicEvaluationCallback();
+  public void addVariable(java.lang.String, org.boris.expr.Expr);
+  public void addFunction(java.lang.String, org.boris.expr.IExprFunction);
+  public org.boris.expr.Expr evaluateFunction(org.boris.expr.ExprFunction) throws org.boris.expr.ExprException;
+  public org.boris.expr.Expr evaluateVariable(org.boris.expr.ExprVariable) throws org.boris.expr.ExprException;
+  public org.boris.expr.Expr parse(java.lang.String) throws java.io.IOException, org.boris.expr.ExprException;
+  public void set(java.lang.String, java.lang.Object) throws org.boris.expr.ExprException;
+  public void set(org.boris.expr.engine.Range, org.boris.expr.Expr);
+  public void set(org.boris.expr.ExprArray);
+  public void annotateFunction(org.boris.expr.ExprFunction) throws org.boris.expr.ExprException;
+  public void annotateVariable(org.boris.expr.ExprVariable) throws org.boris.expr.ExprException;
+}
+Compiled from "DependencyEngineTest.java"
+public class org.boris.expr.DependencyEngineTest extends junit.framework.TestCase {
+  public org.boris.expr.DependencyEngineTest();
+  public void testBasic() throws java.lang.Exception;
+  public void testRangeDependencies() throws java.lang.Exception;
+  public void testFunction() throws java.lang.Exception;
+  public void testArrays() throws java.lang.Exception;
+  public void testAliases() throws java.lang.Exception;
+  public void testInvalidReference() throws java.lang.Exception;
+  public void testCircular() throws java.lang.Exception;
+  public void testManualCalculate() throws java.lang.Exception;
+}
+Compiled from "DependencyExample.java"
+public class org.boris.expr.DependencyExample {
+  public org.boris.expr.DependencyExample();
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+}
+Compiled from "ExcelCompatTest.java"
+public class org.boris.expr.ExcelCompatTest extends org.boris.expr.TH {
+  public org.boris.expr.ExcelCompatTest();
+  public void test1() throws java.lang.Exception;
+  public void testReferences() throws java.lang.Exception;
+  public void testSumIf() throws java.lang.Exception;
+}
+Compiled from "ExcelDatabaseFunctionsTest.java"
+public class org.boris.expr.ExcelDatabaseFunctionsTest extends org.boris.expr.TH {
+  public org.boris.expr.ExcelDatabaseFunctionsTest();
+  public void testDatabase() throws java.lang.Exception;
+  public void testDAVERAGE() throws java.lang.Exception;
+  public void testDCOUNT() throws java.lang.Exception;
+  public void testDCOUNTA() throws java.lang.Exception;
+  public void testDGET() throws java.lang.Exception;
+  public void testDMAX() throws java.lang.Exception;
+  public void testDMIN() throws java.lang.Exception;
+  public void testDPRODUCT() throws java.lang.Exception;
+  public void testDSTDEV() throws java.lang.Exception;
+  public void testDSTDEVP() throws java.lang.Exception;
+  public void testDSUM() throws java.lang.Exception;
+  public void testDVAR() throws java.lang.Exception;
+  public void testDVARP() throws java.lang.Exception;
+}
+Compiled from "ExcelDateAndTimeFunctionsTest.java"
+public class org.boris.expr.ExcelDateAndTimeFunctionsTest extends org.boris.expr.TH {
+  public org.boris.expr.ExcelDateAndTimeFunctionsTest();
+  public void testDATE() throws java.lang.Exception;
+  public void testDATEVALUE() throws java.lang.Exception;
+  public void testDAY() throws java.lang.Exception;
+  public void testDAYS360() throws java.lang.Exception;
+  public void testHOUR() throws java.lang.Exception;
+  public void testMINUTE() throws java.lang.Exception;
+  public void testMONTH() throws java.lang.Exception;
+  public void testNOW() throws java.lang.Exception;
+  public void testSECOND() throws java.lang.Exception;
+  public void testTIME() throws java.lang.Exception;
+  public void testTIMEVALUE() throws java.lang.Exception;
+  public void testTODAY() throws java.lang.Exception;
+  public void testWEEKDAY() throws java.lang.Exception;
+  public void testYEAR() throws java.lang.Exception;
+  public void test() throws java.lang.Exception;
+}
+Compiled from "ExcelDateTest.java"
+public class org.boris.expr.ExcelDateTest extends junit.framework.TestCase {
+  public org.boris.expr.ExcelDateTest();
+  public void test11() throws java.lang.Exception;
+  public void test1() throws java.lang.Exception;
+  public void test2() throws java.lang.Exception;
+  public void test22() throws java.lang.Exception;
+  public void test3() throws java.lang.Exception;
+  public static boolean assertEquals(double, double);
+}
+Compiled from "ExcelFinancialFunctionsTest.java"
+public class org.boris.expr.ExcelFinancialFunctionsTest extends org.boris.expr.TH {
+  public org.boris.expr.ExcelFinancialFunctionsTest();
+  public void testDB() throws java.lang.Exception;
+  public void testDDB() throws java.lang.Exception;
+  public void testFV() throws java.lang.Exception;
+  public void testIPMT() throws java.lang.Exception;
+  public void testIRR() throws java.lang.Exception;
+  public void testISPMT() throws java.lang.Exception;
+  public void testMIRR() throws java.lang.Exception;
+  public void testNPER() throws java.lang.Exception;
+  public void testNPV() throws java.lang.Exception;
+  public void testPMT() throws java.lang.Exception;
+  public void testPPMT() throws java.lang.Exception;
+  public void testPV() throws java.lang.Exception;
+  public void testRATE() throws java.lang.Exception;
+  public void testSLN() throws java.lang.Exception;
+  public void testSYD() throws java.lang.Exception;
+  public void testVDB() throws java.lang.Exception;
+}
+Compiled from "ExcelInformationFunctionsTest.java"
+public class org.boris.expr.ExcelInformationFunctionsTest extends org.boris.expr.TH {
+  public org.boris.expr.ExcelInformationFunctionsTest();
+  public void testCELL() throws java.lang.Exception;
+  public void testERRORTYPE() throws java.lang.Exception;
+  public void testINFO() throws java.lang.Exception;
+  public void testISBLANK() throws java.lang.Exception;
+  public void testISERR() throws java.lang.Exception;
+  public void testISLOGICAL() throws java.lang.Exception;
+  public void testISNA() throws java.lang.Exception;
+  public void testISNONTEXT() throws java.lang.Exception;
+  public void testISNUMBER() throws java.lang.Exception;
+  public void testISREF() throws java.lang.Exception;
+  public void testISTEXT() throws java.lang.Exception;
+  public void testN() throws java.lang.Exception;
+  public void testNA() throws java.lang.Exception;
+  public void testTYPE() throws java.lang.Exception;
+}
+Compiled from "ExcelLogicalFunctionsTest.java"
+public class org.boris.expr.ExcelLogicalFunctionsTest extends org.boris.expr.TH {
+  public org.boris.expr.ExcelLogicalFunctionsTest();
+  public void testAND() throws java.lang.Exception;
+  public void testFALSE() throws java.lang.Exception;
+  public void testIF() throws java.lang.Exception;
+  public void testNOT() throws java.lang.Exception;
+  public void testOR() throws java.lang.Exception;
+  public void testTRUE() throws java.lang.Exception;
+}
+Compiled from "ExcelLookupAndReferenceFunctionsTest.java"
+public class org.boris.expr.ExcelLookupAndReferenceFunctionsTest extends org.boris.expr.TH {
+  public org.boris.expr.ExcelLookupAndReferenceFunctionsTest();
+  public void testADDRESS() throws java.lang.Exception;
+  public void testAREAS() throws java.lang.Exception;
+  public void testCHOOSE() throws java.lang.Exception;
+  public void testCOLUMN() throws java.lang.Exception;
+  public void testCOLUMNS() throws java.lang.Exception;
+  public void testGETPIVOTDATA() throws java.lang.Exception;
+  public void testHLOOKUP() throws java.lang.Exception;
+  public void testHYPERLINK() throws java.lang.Exception;
+  public void testINDEX() throws java.lang.Exception;
+  public void testINDIRECT() throws java.lang.Exception;
+  public void testLOOKUP() throws java.lang.Exception;
+  public void testMATCH() throws java.lang.Exception;
+  public void testOFFSET() throws java.lang.Exception;
+  public void testROW() throws java.lang.Exception;
+  public void testROWS() throws java.lang.Exception;
+  public void testRTD() throws java.lang.Exception;
+  public void testTRANSPOSE() throws java.lang.Exception;
+  public void testVLOOKUP() throws java.lang.Exception;
+}
+Compiled from "ExcelMathAndTrigFunctionsTest.java"
+public class org.boris.expr.ExcelMathAndTrigFunctionsTest extends org.boris.expr.TH {
+  public org.boris.expr.ExcelMathAndTrigFunctionsTest();
+  public void testABS() throws java.lang.Exception;
+  public void testACOS() throws java.lang.Exception;
+  public void testACOSH() throws java.lang.Exception;
+  public void testASIN() throws java.lang.Exception;
+  public void testASINH() throws java.lang.Exception;
+  public void testATAN() throws java.lang.Exception;
+  public void testATAN2() throws java.lang.Exception;
+  public void testATANH() throws java.lang.Exception;
+  public void testCEILING() throws java.lang.Exception;
+  public void testCOMBIN() throws java.lang.Exception;
+  public void testCOS() throws java.lang.Exception;
+  public void testCOSH() throws java.lang.Exception;
+  public void testDEGREES() throws java.lang.Exception;
+  public void testEVEN() throws java.lang.Exception;
+  public void testEXP() throws java.lang.Exception;
+  public void testFACT() throws java.lang.Exception;
+  public void testFLOOR() throws java.lang.Exception;
+  public void testINT() throws java.lang.Exception;
+  public void testLN() throws java.lang.Exception;
+  public void testLOG() throws java.lang.Exception;
+  public void testLOG10() throws java.lang.Exception;
+  public void testMDETERM() throws java.lang.Exception;
+  public void testMINVERSE() throws java.lang.Exception;
+  public void testMMULT() throws java.lang.Exception;
+  public void testMOD() throws java.lang.Exception;
+  public void testODD() throws java.lang.Exception;
+  public void testPI() throws java.lang.Exception;
+  public void testPOWER() throws java.lang.Exception;
+  public void testPRODUCT() throws java.lang.Exception;
+  public void testRADIANS() throws java.lang.Exception;
+  public void testRAND() throws java.lang.Exception;
+  public void testROMAN() throws java.lang.Exception;
+  public void testROUND() throws java.lang.Exception;
+  public void testROUNDDOWN() throws java.lang.Exception;
+  public void testROUNDUP() throws java.lang.Exception;
+  public void testSIGN() throws java.lang.Exception;
+  public void testSIN() throws java.lang.Exception;
+  public void testSINH() throws java.lang.Exception;
+  public void testSQRT() throws java.lang.Exception;
+  public void testSUBTOTAL() throws java.lang.Exception;
+  public void testSUM() throws java.lang.Exception;
+  public void testSUMIF() throws java.lang.Exception;
+  public void testSUMPRODUCT() throws java.lang.Exception;
+  public void testSUMSQ() throws java.lang.Exception;
+  public void testSUMX2MY2() throws java.lang.Exception;
+  public void testSUMX2PY2() throws java.lang.Exception;
+  public void testSUMXMY2() throws java.lang.Exception;
+  public void testTAN() throws java.lang.Exception;
+  public void testTANH() throws java.lang.Exception;
+  public void testTRUNC() throws java.lang.Exception;
+}
+Compiled from "ExcelStatisticalFunctionsTest.java"
+public class org.boris.expr.ExcelStatisticalFunctionsTest extends org.boris.expr.TH {
+  public org.boris.expr.ExcelStatisticalFunctionsTest();
+  public void testAVEDEV() throws java.lang.Exception;
+  public void testAVERAGE() throws java.lang.Exception;
+  public void testAVERAGEA() throws java.lang.Exception;
+  public void testBETADIST() throws java.lang.Exception;
+  public void testBETAINV() throws java.lang.Exception;
+  public void testBINOMDIST() throws java.lang.Exception;
+  public void testCHIDIST() throws java.lang.Exception;
+  public void testCHIINV() throws java.lang.Exception;
+  public void testCHITEST() throws java.lang.Exception;
+  public void testCONFIDENCE() throws java.lang.Exception;
+  public void testCORREL() throws java.lang.Exception;
+  public void testCOUNT() throws java.lang.Exception;
+  public void testCOUNTA() throws java.lang.Exception;
+  public void testCOUNTBLANK() throws java.lang.Exception;
+  public void testCOUNTIF() throws java.lang.Exception;
+  public void testCOVAR() throws java.lang.Exception;
+  public void testCRITBINOM() throws java.lang.Exception;
+  public void testDEVSQ() throws java.lang.Exception;
+  public void testEXPONDIST() throws java.lang.Exception;
+  public void testFDIST() throws java.lang.Exception;
+  public void testFINV() throws java.lang.Exception;
+  public void testFISHER() throws java.lang.Exception;
+  public void testFISHERNV() throws java.lang.Exception;
+  public void testFORECAST() throws java.lang.Exception;
+  public void testFREQUENCY() throws java.lang.Exception;
+  public void testFTEST() throws java.lang.Exception;
+  public void testGAMMADIST() throws java.lang.Exception;
+  public void testGAMMAINV() throws java.lang.Exception;
+  public void testGAMMALN() throws java.lang.Exception;
+  public void testGEOMEAN() throws java.lang.Exception;
+  public void testGROWTH() throws java.lang.Exception;
+  public void testHARMEAN() throws java.lang.Exception;
+  public void testHYPGEOMDIST() throws java.lang.Exception;
+  public void testINTERCEPT() throws java.lang.Exception;
+  public void testKURT() throws java.lang.Exception;
+  public void testLARGE() throws java.lang.Exception;
+  public void testLINEST() throws java.lang.Exception;
+  public void testLOGEST() throws java.lang.Exception;
+  public void testMAX() throws java.lang.Exception;
+  public void testMAXA() throws java.lang.Exception;
+  public void testMEDIAN() throws java.lang.Exception;
+  public void testLOGINV() throws java.lang.Exception;
+  public void testLOGNORMDIST() throws java.lang.Exception;
+  public void testMIN() throws java.lang.Exception;
+  public void testMINA() throws java.lang.Exception;
+  public void testMODE() throws java.lang.Exception;
+  public void testNEGBINOMDIST() throws java.lang.Exception;
+  public void testNORMDIST() throws java.lang.Exception;
+  public void testNORMINV() throws java.lang.Exception;
+  public void testNORMSDIST() throws java.lang.Exception;
+  public void testNORMSINV() throws java.lang.Exception;
+  public void testPEARSON() throws java.lang.Exception;
+  public void testPERCENTILE() throws java.lang.Exception;
+  public void testPERCENTRANK() throws java.lang.Exception;
+  public void testPERMUT() throws java.lang.Exception;
+  public void testPOISSON() throws java.lang.Exception;
+  public void testPROB() throws java.lang.Exception;
+  public void testQUARTILE() throws java.lang.Exception;
+  public void testRANK() throws java.lang.Exception;
+  public void testRSQ() throws java.lang.Exception;
+  public void testSKEW() throws java.lang.Exception;
+  public void testSLOPE() throws java.lang.Exception;
+  public void testSMALL() throws java.lang.Exception;
+  public void testSTANDARDIZE() throws java.lang.Exception;
+  public void testSTDEV() throws java.lang.Exception;
+  public void testSTDEVA() throws java.lang.Exception;
+  public void testSTDEVP() throws java.lang.Exception;
+  public void testSTDEVPA() throws java.lang.Exception;
+  public void testSTEYX() throws java.lang.Exception;
+  public void testTDIST() throws java.lang.Exception;
+  public void testTINV() throws java.lang.Exception;
+  public void testTREND() throws java.lang.Exception;
+  public void testTRIMMEAN() throws java.lang.Exception;
+  public void testTTEST() throws java.lang.Exception;
+  public void testVAR() throws java.lang.Exception;
+  public void testVARA() throws java.lang.Exception;
+  public void testVARP() throws java.lang.Exception;
+  public void testVARPA() throws java.lang.Exception;
+  public void testWEIBULL() throws java.lang.Exception;
+  public void testZTEST() throws java.lang.Exception;
+}
+Compiled from "ExcelTextFunctionsTest.java"
+public class org.boris.expr.ExcelTextFunctionsTest extends org.boris.expr.TH {
+  public org.boris.expr.ExcelTextFunctionsTest();
+  public void testBAHTTEXT() throws java.lang.Exception;
+  public void testCHAR() throws java.lang.Exception;
+  public void testCLEAN() throws java.lang.Exception;
+  public void testCODE() throws java.lang.Exception;
+  public void testCONCATENATE() throws java.lang.Exception;
+  public void testDOLLAR() throws java.lang.Exception;
+  public void testEXACT() throws java.lang.Exception;
+  public void testFIND() throws java.lang.Exception;
+  public void testFIXED() throws java.lang.Exception;
+  public void testLEFT() throws java.lang.Exception;
+  public void testLEN() throws java.lang.Exception;
+  public void testLOWER() throws java.lang.Exception;
+  public void testMID() throws java.lang.Exception;
+  public void testPROPER() throws java.lang.Exception;
+  public void testREPLACE() throws java.lang.Exception;
+  public void testREPT() throws java.lang.Exception;
+  public void testRIGHT() throws java.lang.Exception;
+  public void testSEARCH() throws java.lang.Exception;
+  public void testSUBSTITUE() throws java.lang.Exception;
+  public void testT() throws java.lang.Exception;
+  public void testTEXT() throws java.lang.Exception;
+  public void testTRIM() throws java.lang.Exception;
+  public void testUPPER() throws java.lang.Exception;
+  public void testVALUE() throws java.lang.Exception;
+}
+Compiled from "Expr.java"
+public abstract class org.boris.expr.Expr {
+  public final org.boris.expr.ExprType type;
+  public final boolean evaluatable;
+  org.boris.expr.Expr(org.boris.expr.ExprType, boolean);
+  public boolean isVolatile();
+  public void validate() throws org.boris.expr.ExprException;
+  protected org.boris.expr.Expr eval(org.boris.expr.Expr, org.boris.expr.IEvaluationContext) throws org.boris.expr.ExprException;
+  protected org.boris.expr.ExprBoolean bool(boolean);
+}
+Compiled from "ExprAddition.java"
+public class org.boris.expr.ExprAddition extends org.boris.expr.AbstractMathematicalOperator {
+  public org.boris.expr.ExprAddition(org.boris.expr.Expr, org.boris.expr.Expr);
+  protected org.boris.expr.Expr evaluate(double, double) throws org.boris.expr.ExprException;
+  public void validate() throws org.boris.expr.ExprException;
+  public java.lang.String toString();
+}
+Compiled from "ExprArray.java"
+public class org.boris.expr.ExprArray extends org.boris.expr.Expr {
+  public org.boris.expr.ExprArray(int, int);
+  public int rows();
+  public int columns();
+  public int length();
+  public org.boris.expr.Expr get(int);
+  public org.boris.expr.Expr get(int, int);
+  public void set(int, org.boris.expr.Expr);
+  public void set(int, int, org.boris.expr.Expr);
+  public org.boris.expr.Expr[] getInternalArray();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+}
+Compiled from "ExprBoolean.java"
+public class org.boris.expr.ExprBoolean extends org.boris.expr.ExprNumber {
+  public static final org.boris.expr.ExprBoolean TRUE;
+  public static final org.boris.expr.ExprBoolean FALSE;
+  public final boolean value;
+  public org.boris.expr.ExprBoolean(boolean);
+  public boolean booleanValue();
+  public double doubleValue();
+  public int intValue();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "ExprDivision.java"
+public class org.boris.expr.ExprDivision extends org.boris.expr.AbstractMathematicalOperator {
+  public org.boris.expr.ExprDivision(org.boris.expr.Expr, org.boris.expr.Expr);
+  protected org.boris.expr.Expr evaluate(double, double) throws org.boris.expr.ExprException;
+  public java.lang.String toString();
+}
+Compiled from "ExprDouble.java"
+public class org.boris.expr.ExprDouble extends org.boris.expr.ExprNumber {
+  public static final org.boris.expr.ExprDouble ZERO;
+  public static final org.boris.expr.ExprDouble PI;
+  public static final org.boris.expr.ExprDouble E;
+  public final double value;
+  public org.boris.expr.ExprDouble(double);
+  public int intValue();
+  public double doubleValue();
+  public java.lang.String toString();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  static {};
+}
+Compiled from "ExprEqual.java"
+public class org.boris.expr.ExprEqual extends org.boris.expr.AbstractComparisonOperator {
+  public org.boris.expr.ExprEqual(org.boris.expr.Expr, org.boris.expr.Expr);
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext) throws org.boris.expr.ExprException;
+  public java.lang.String toString();
+}
+Compiled from "ExprError.java"
+public class org.boris.expr.ExprError extends org.boris.expr.Expr {
+  public static final org.boris.expr.Expr NULL;
+  public static final org.boris.expr.Expr DIV0;
+  public static final org.boris.expr.Expr VALUE;
+  public static final org.boris.expr.Expr REF;
+  public static final org.boris.expr.Expr NAME;
+  public static final org.boris.expr.Expr NUM;
+  public static final org.boris.expr.Expr NA;
+  public org.boris.expr.ExprError(java.lang.String, java.lang.String);
+  public java.lang.String getErrType();
+  public java.lang.String getMessage();
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "ExprEvaluatable.java"
+public abstract class org.boris.expr.ExprEvaluatable extends org.boris.expr.Expr {
+  org.boris.expr.ExprEvaluatable(org.boris.expr.ExprType);
+  public boolean isVolatile();
+  public abstract org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext) throws org.boris.expr.ExprException;
+}
+Compiled from "ExprException.java"
+public class org.boris.expr.ExprException extends java.lang.Exception {
+  public org.boris.expr.ExprException();
+  public org.boris.expr.ExprException(java.lang.String, java.lang.Throwable);
+  public org.boris.expr.ExprException(java.lang.String);
+  public org.boris.expr.ExprException(java.lang.Throwable);
+}
+Compiled from "ExprExpression.java"
+public class org.boris.expr.ExprExpression extends org.boris.expr.ExprEvaluatable {
+  public org.boris.expr.ExprExpression(org.boris.expr.Expr);
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext) throws org.boris.expr.ExprException;
+  public org.boris.expr.Expr getChild();
+  public java.lang.String toString();
+  public void validate() throws org.boris.expr.ExprException;
+}
+Compiled from "ExprFunction.java"
+public class org.boris.expr.ExprFunction extends org.boris.expr.ExprEvaluatable {
+  public org.boris.expr.ExprFunction(java.lang.String, org.boris.expr.Expr[]);
+  public java.lang.String getName();
+  public void setName(java.lang.String);
+  public int size();
+  public org.boris.expr.Expr getArg(int);
+  public org.boris.expr.Expr[] getArgs();
+  public void setAnnotation(java.lang.Object);
+  public java.lang.Object getAnnotation();
+  public void setImplementation(org.boris.expr.IExprFunction);
+  public org.boris.expr.IExprFunction getImplementation();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext) throws org.boris.expr.ExprException;
+  public java.lang.String toString();
+  public void validate() throws org.boris.expr.ExprException;
+}
+Compiled from "ExprFunctionTest.java"
+public class org.boris.expr.ExprFunctionTest extends junit.framework.TestCase {
+  public org.boris.expr.ExprFunctionTest();
+  public void testArgs() throws java.lang.Exception;
+  public void testMissing() throws java.lang.Exception;
+}
+Compiled from "ExprGreaterThan.java"
+public class org.boris.expr.ExprGreaterThan extends org.boris.expr.AbstractComparisonOperator {
+  public org.boris.expr.ExprGreaterThan(org.boris.expr.Expr, org.boris.expr.Expr);
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext) throws org.boris.expr.ExprException;
+  public java.lang.String toString();
+}
+Compiled from "ExprGreaterThanOrEqualTo.java"
+public class org.boris.expr.ExprGreaterThanOrEqualTo extends org.boris.expr.AbstractComparisonOperator {
+  public org.boris.expr.ExprGreaterThanOrEqualTo(org.boris.expr.Expr, org.boris.expr.Expr);
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext) throws org.boris.expr.ExprException;
+  public java.lang.String toString();
+}
+Compiled from "ExprInteger.java"
+public class org.boris.expr.ExprInteger extends org.boris.expr.ExprNumber {
+  public static final org.boris.expr.ExprInteger ZERO;
+  public final int value;
+  public org.boris.expr.ExprInteger(int);
+  public int intValue();
+  public double doubleValue();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "ExprLessThan.java"
+public class org.boris.expr.ExprLessThan extends org.boris.expr.AbstractComparisonOperator {
+  public org.boris.expr.ExprLessThan(org.boris.expr.Expr, org.boris.expr.Expr);
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext) throws org.boris.expr.ExprException;
+  public java.lang.String toString();
+}
+Compiled from "ExprLessThanOrEqualTo.java"
+public class org.boris.expr.ExprLessThanOrEqualTo extends org.boris.expr.AbstractComparisonOperator {
+  public org.boris.expr.ExprLessThanOrEqualTo(org.boris.expr.Expr, org.boris.expr.Expr);
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext) throws org.boris.expr.ExprException;
+  public java.lang.String toString();
+}
+Compiled from "ExprMissing.java"
+public class org.boris.expr.ExprMissing extends org.boris.expr.Expr {
+  public static final org.boris.expr.ExprMissing MISSING;
+  public org.boris.expr.ExprMissing();
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "ExprMultiplication.java"
+public class org.boris.expr.ExprMultiplication extends org.boris.expr.AbstractMathematicalOperator {
+  public org.boris.expr.ExprMultiplication(org.boris.expr.Expr, org.boris.expr.Expr);
+  protected org.boris.expr.Expr evaluate(double, double) throws org.boris.expr.ExprException;
+  public java.lang.String toString();
+}
+Compiled from "ExprNotEqual.java"
+public class org.boris.expr.ExprNotEqual extends org.boris.expr.AbstractComparisonOperator {
+  public org.boris.expr.ExprNotEqual(org.boris.expr.Expr, org.boris.expr.Expr);
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext) throws org.boris.expr.ExprException;
+  public java.lang.String toString();
+}
+Compiled from "ExprNumber.java"
+public abstract class org.boris.expr.ExprNumber extends org.boris.expr.Expr {
+  org.boris.expr.ExprNumber(org.boris.expr.ExprType);
+  public void validate() throws org.boris.expr.ExprException;
+  public boolean booleanValue();
+  public abstract int intValue();
+  public abstract double doubleValue();
+}
+Compiled from "ExprPower.java"
+public class org.boris.expr.ExprPower extends org.boris.expr.AbstractMathematicalOperator {
+  public org.boris.expr.ExprPower(org.boris.expr.Expr, org.boris.expr.Expr);
+  protected org.boris.expr.Expr evaluate(double, double) throws org.boris.expr.ExprException;
+  public java.lang.String toString();
+}
+Compiled from "ExprString.java"
+public class org.boris.expr.ExprString extends org.boris.expr.Expr {
+  public static final org.boris.expr.ExprString EMPTY;
+  public final java.lang.String str;
+  public org.boris.expr.ExprString(java.lang.String);
+  public java.lang.String toString();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  static {};
+}
+Compiled from "ExprStringConcat.java"
+public class org.boris.expr.ExprStringConcat extends org.boris.expr.AbstractBinaryOperator {
+  public org.boris.expr.ExprStringConcat(org.boris.expr.Expr, org.boris.expr.Expr);
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext) throws org.boris.expr.ExprException;
+  public java.lang.String toString();
+}
+Compiled from "ExprSubtraction.java"
+public class org.boris.expr.ExprSubtraction extends org.boris.expr.AbstractMathematicalOperator {
+  public org.boris.expr.ExprSubtraction(org.boris.expr.Expr, org.boris.expr.Expr);
+  protected org.boris.expr.Expr evaluate(double, double) throws org.boris.expr.ExprException;
+  public void validate() throws org.boris.expr.ExprException;
+  public java.lang.String toString();
+}
+Compiled from "ExprTest.java"
+public class org.boris.expr.ExprTest extends org.boris.expr.TH {
+  public org.boris.expr.ExprTest();
+  public void test1() throws java.lang.Exception;
+  public void test2() throws java.lang.Exception;
+  public void testUnary() throws java.lang.Exception;
+  public void testExpressions() throws java.lang.Exception;
+  public void testVariables() throws java.lang.Exception;
+  public void testStrings() throws java.lang.Exception;
+}
+Compiled from "ExprType.java"
+public final class org.boris.expr.ExprType extends java.lang.Enum<org.boris.expr.ExprType> {
+  public static final org.boris.expr.ExprType Double;
+  public static final org.boris.expr.ExprType Integer;
+  public static final org.boris.expr.ExprType Boolean;
+  public static final org.boris.expr.ExprType String;
+  public static final org.boris.expr.ExprType Addition;
+  public static final org.boris.expr.ExprType Subtraction;
+  public static final org.boris.expr.ExprType Multiplication;
+  public static final org.boris.expr.ExprType Division;
+  public static final org.boris.expr.ExprType Function;
+  public static final org.boris.expr.ExprType Variable;
+  public static final org.boris.expr.ExprType Expression;
+  public static final org.boris.expr.ExprType StringConcat;
+  public static final org.boris.expr.ExprType Error;
+  public static final org.boris.expr.ExprType Array;
+  public static final org.boris.expr.ExprType Missing;
+  public static final org.boris.expr.ExprType LessThan;
+  public static final org.boris.expr.ExprType LessThanOrEqualTo;
+  public static final org.boris.expr.ExprType GreaterThan;
+  public static final org.boris.expr.ExprType GreaterThanOrEqualTo;
+  public static final org.boris.expr.ExprType NotEqual;
+  public static final org.boris.expr.ExprType Equal;
+  public static final org.boris.expr.ExprType Power;
+  public static org.boris.expr.ExprType[] values();
+  public static org.boris.expr.ExprType valueOf(java.lang.String);
+  static {};
+}
+Compiled from "ExprTypes.java"
+public class org.boris.expr.ExprTypes {
+  public org.boris.expr.ExprTypes();
+  public static void assertType(org.boris.expr.Expr, org.boris.expr.ExprType...) throws org.boris.expr.ExprException;
+}
+Compiled from "ExprVariable.java"
+public class org.boris.expr.ExprVariable extends org.boris.expr.ExprEvaluatable {
+  public org.boris.expr.ExprVariable(java.lang.String);
+  public java.lang.String getName();
+  public void setName(java.lang.String);
+  public void setAnnotation(java.lang.Object);
+  public java.lang.Object getAnnotation();
+  public void setConstantValue(org.boris.expr.Expr);
+  public org.boris.expr.Expr getConstantValue();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext) throws org.boris.expr.ExprException;
+  public java.lang.String toString();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public static org.boris.expr.ExprVariable[] findVariables(org.boris.expr.Expr);
+  public static void findVariables(org.boris.expr.Expr, java.util.List<org.boris.expr.ExprVariable>);
+  public void validate() throws org.boris.expr.ExprException;
+}
+Compiled from "FunctionTestRange.java"
+public class org.boris.expr.FunctionTestRange extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.FunctionTestRange();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "GridReferenceTest.java"
+public class org.boris.expr.GridReferenceTest extends junit.framework.TestCase {
+  public org.boris.expr.GridReferenceTest();
+  public void test1() throws java.lang.Exception;
+  public void test2() throws java.lang.Exception;
+}
+Compiled from "IBinaryOperator.java"
+public interface org.boris.expr.IBinaryOperator {
+  public abstract org.boris.expr.Expr getLHS();
+  public abstract void setLHS(org.boris.expr.Expr);
+  public abstract org.boris.expr.Expr getRHS();
+  public abstract void setRHS(org.boris.expr.Expr);
+}
+Compiled from "IEvaluationContext.java"
+public interface org.boris.expr.IEvaluationContext {
+  public abstract org.boris.expr.Expr evaluateFunction(org.boris.expr.ExprFunction) throws org.boris.expr.ExprException;
+  public abstract org.boris.expr.Expr evaluateVariable(org.boris.expr.ExprVariable) throws org.boris.expr.ExprException;
+}
+Compiled from "IExprFunction.java"
+public interface org.boris.expr.IExprFunction {
+  public abstract org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+  public abstract boolean isVolatile();
+}
+Compiled from "IterationEngineTest.java"
+public class org.boris.expr.IterationEngineTest extends junit.framework.TestCase {
+  public org.boris.expr.IterationEngineTest();
+  public void testBasic() throws java.lang.Exception;
+  public void testRangeDependencies() throws java.lang.Exception;
+  public void testFunction() throws java.lang.Exception;
+  public void testArrays() throws java.lang.Exception;
+  public void testAliases() throws java.lang.Exception;
+  public void testInvalidReference() throws java.lang.Exception;
+  public void testCircular() throws java.lang.Exception;
+  public void testManualCalculate() throws java.lang.Exception;
+}
+Compiled from "LexerTest.java"
+public class org.boris.expr.LexerTest extends junit.framework.TestCase {
+  public org.boris.expr.LexerTest();
+  public void testString() throws java.lang.Exception;
+  public void testDecimal() throws java.lang.Exception;
+  public void testQuotedReferences() throws java.lang.Exception;
+  public void testOperators() throws java.lang.Exception;
+  public void testArrays() throws java.lang.Exception;
+}
+Compiled from "ParserTest.java"
+public class org.boris.expr.ParserTest extends org.boris.expr.TH {
+  public org.boris.expr.ParserTest();
+  public void testArrays() throws java.lang.Exception;
+  public void testPower() throws java.lang.Exception;
+  public void testNegative() throws java.lang.Exception;
+}
+Compiled from "RangeTest.java"
+public class org.boris.expr.RangeTest extends junit.framework.TestCase {
+  public org.boris.expr.RangeTest();
+  public void test1();
+  public void testRange() throws java.lang.Exception;
+  public void testSplit() throws java.lang.Exception;
+  public static void out(org.boris.expr.engine.GridReference);
+}
+Compiled from "TH.java"
+public class org.boris.expr.TH extends junit.framework.TestCase {
+  public org.boris.expr.TH();
+  public static void assertException(java.lang.String) throws java.lang.Exception;
+  public static void assertResult(java.lang.String, java.lang.Object) throws java.lang.Exception;
+  public static org.boris.expr.Expr parse(java.lang.String) throws java.io.IOException, org.boris.expr.ExprException;
+  public static void assertResult(java.lang.String, org.boris.expr.Expr) throws java.lang.Exception;
+  public static void assertResult(java.lang.String, org.boris.expr.Expr, boolean) throws java.lang.Exception;
+  public static void assertResult(org.boris.expr.BasicEvaluationCallback, java.lang.String, java.lang.Object) throws java.lang.Exception;
+  public static void assertResult(org.boris.expr.BasicEvaluationCallback, java.lang.String, java.lang.Object, boolean) throws java.lang.Exception;
+  public static void testDoubleInOutFunction(org.boris.expr.function.DoubleInOutFunction) throws java.lang.Exception;
+  public static java.lang.Object eval(org.boris.expr.IExprFunction, java.lang.Object...) throws org.boris.expr.ExprException;
+  public static java.lang.Object eval(org.boris.expr.IEvaluationContext, org.boris.expr.IExprFunction, java.lang.Object...) throws org.boris.expr.ExprException;
+  public static void assertException(org.boris.expr.IExprFunction, java.lang.Object...);
+  public static void assertException(org.boris.expr.IExprFunction, org.boris.expr.Expr...);
+  public static boolean assertEquals(java.lang.Double, java.lang.Double);
+  public static void assertEquals(org.boris.expr.Expr, java.lang.Object) throws org.boris.expr.ExprException;
+  public static void assertEquals(java.lang.Object, java.lang.Double);
+  public static org.boris.expr.ExprArray toArray(java.lang.Object...);
+  public static org.boris.expr.ExprVariable var(java.lang.String) throws org.boris.expr.ExprException;
+  public static org.boris.expr.ExprArray loadArray(java.lang.String) throws java.io.IOException;
+}
+Compiled from "TestGen.java"
+public class org.boris.expr.TestGen {
+  public org.boris.expr.TestGen();
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+}
+Compiled from "ValueParserTest.java"
+public class org.boris.expr.ValueParserTest extends org.boris.expr.TH {
+  public org.boris.expr.ValueParserTest();
+  public void testDates() throws java.lang.Exception;
+}
+Compiled from "AbstractCalculationEngine.java"
+public abstract class org.boris.expr.engine.AbstractCalculationEngine implements org.boris.expr.parser.IParserVisitor,org.boris.expr.IEvaluationContext {
+  protected org.boris.expr.engine.EngineProvider provider;
+  protected java.util.Map<org.boris.expr.engine.Range, java.lang.String> rawInputs;
+  protected org.boris.expr.engine.GridMap inputs;
+  protected org.boris.expr.engine.GridMap values;
+  protected java.util.Map<java.lang.String, org.boris.expr.engine.Range> aliases;
+  protected org.boris.expr.ExprMissing MISSING;
+  protected boolean autoCalculate;
+  protected java.lang.String namespace;
+  public org.boris.expr.engine.AbstractCalculationEngine(org.boris.expr.engine.EngineProvider);
+  public org.boris.expr.engine.EngineProvider getProvider();
+  public void setAutoCalculate(boolean);
+  public void setNamespace(java.lang.String);
+  public void addAlias(java.lang.String, org.boris.expr.engine.Range);
+  public void removeAlias(java.lang.String);
+  public org.boris.expr.engine.Range getAlias(java.lang.String);
+  public void set(java.lang.String, java.lang.String) throws org.boris.expr.ExprException;
+  protected abstract void set(org.boris.expr.engine.Range, java.lang.String) throws org.boris.expr.ExprException;
+  public java.util.Set<org.boris.expr.engine.Range> getInputRanges();
+  public java.lang.String getInput(org.boris.expr.engine.Range);
+  public org.boris.expr.Expr getValue(org.boris.expr.engine.Range);
+  public abstract void calculate(boolean) throws org.boris.expr.ExprException;
+  public void annotateFunction(org.boris.expr.ExprFunction) throws org.boris.expr.ExprException;
+  public void annotateVariable(org.boris.expr.ExprVariable) throws org.boris.expr.ExprException;
+  public org.boris.expr.Expr evaluateFunction(org.boris.expr.ExprFunction) throws org.boris.expr.ExprException;
+  public org.boris.expr.Expr evaluateVariable(org.boris.expr.ExprVariable) throws org.boris.expr.ExprException;
+  protected void updateAliasedRange(org.boris.expr.engine.Range) throws org.boris.expr.ExprException;
+  protected void validateRange(org.boris.expr.engine.Range) throws org.boris.expr.ExprException;
+  protected org.boris.expr.Expr parseExpression(java.lang.String) throws org.boris.expr.ExprException;
+}
+Compiled from "DependencyEngine.java"
+public class org.boris.expr.engine.DependencyEngine extends org.boris.expr.engine.AbstractCalculationEngine implements org.boris.expr.parser.IParserVisitor,org.boris.expr.IEvaluationContext,org.boris.expr.util.GraphTraversalListener {
+  public org.boris.expr.engine.DependencyEngine(org.boris.expr.engine.EngineProvider);
+  public void calculate(boolean) throws org.boris.expr.ExprException;
+  public void set(org.boris.expr.engine.Range, java.lang.String) throws org.boris.expr.ExprException;
+  public void traverse(java.lang.Object);
+}
+Compiled from "EngineProvider.java"
+public interface org.boris.expr.engine.EngineProvider {
+  public abstract void validate(org.boris.expr.ExprVariable) throws org.boris.expr.ExprException;
+  public abstract void inputChanged(org.boris.expr.engine.Range, org.boris.expr.Expr);
+  public abstract void valueChanged(org.boris.expr.engine.Range, org.boris.expr.Expr);
+  public abstract org.boris.expr.Expr evaluateFunction(org.boris.expr.IEvaluationContext, org.boris.expr.ExprFunction) throws org.boris.expr.ExprException;
+  public abstract org.boris.expr.Expr evaluateVariable(org.boris.expr.IEvaluationContext, org.boris.expr.ExprVariable) throws org.boris.expr.ExprException;
+}
+Compiled from "GridMap.java"
+public class org.boris.expr.engine.GridMap {
+  static final boolean $assertionsDisabled;
+  public org.boris.expr.engine.GridMap();
+  public void put(org.boris.expr.engine.Range, org.boris.expr.Expr);
+  public void remove(org.boris.expr.engine.Range);
+  public org.boris.expr.Expr get(int, int);
+  public org.boris.expr.Expr get(org.boris.expr.engine.Range);
+  static {};
+}
+Compiled from "GridReference.java"
+public class org.boris.expr.engine.GridReference {
+  public org.boris.expr.engine.GridReference(int, int);
+  public org.boris.expr.engine.GridReference(int, boolean, int, boolean);
+  public void setColumn(int);
+  public int getColumn();
+  public void setColumnFixed(boolean);
+  public boolean isColumnFixed();
+  public void setRow(int);
+  public int getRow();
+  public void setRowFixed(boolean);
+  public boolean isRowFixed();
+  public static org.boris.expr.engine.GridReference valueOf(java.lang.String);
+  public static int toColumnIndex(java.lang.String);
+  public static java.lang.String toColumnName(int);
+  public static boolean isValidVariable(java.lang.String);
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+}
+Compiled from "IterationEngine.java"
+public class org.boris.expr.engine.IterationEngine extends org.boris.expr.engine.AbstractCalculationEngine {
+  public org.boris.expr.engine.IterationEngine(org.boris.expr.engine.EngineProvider);
+  public void setMaxIterations(int);
+  public void setMaxChange(double);
+  public void calculate(boolean) throws org.boris.expr.ExprException;
+  public void set(org.boris.expr.engine.Range, java.lang.String) throws org.boris.expr.ExprException;
+}
+Compiled from "Range.java"
+public class org.boris.expr.engine.Range {
+  static final boolean $assertionsDisabled;
+  public org.boris.expr.engine.Range(java.lang.String, org.boris.expr.engine.GridReference);
+  public org.boris.expr.engine.Range(java.lang.String, org.boris.expr.engine.GridReference, org.boris.expr.engine.GridReference);
+  public org.boris.expr.engine.Range(java.lang.String, java.lang.String, org.boris.expr.engine.GridReference, java.lang.String, org.boris.expr.engine.GridReference);
+  public boolean isArray();
+  public void setNamespace(java.lang.String);
+  public java.lang.String getNamespace();
+  public java.lang.String getDimension1Name();
+  public org.boris.expr.engine.GridReference getDimension1();
+  public void setDimension1(org.boris.expr.engine.GridReference);
+  public java.lang.String getDimension2Name();
+  public org.boris.expr.engine.GridReference getDimension2();
+  public void setDimension2(org.boris.expr.engine.GridReference);
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+  public static org.boris.expr.engine.Range valueOf(java.lang.String) throws org.boris.expr.ExprException;
+  public static org.boris.expr.engine.Range toRange(org.boris.expr.ExprArray, org.boris.expr.engine.GridReference);
+  public org.boris.expr.engine.Range[] split();
+  static {};
+}
+Compiled from "AbstractDatabaseFunction.java"
+public abstract class org.boris.expr.function.AbstractDatabaseFunction extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.AbstractDatabaseFunction();
+  public final org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+  protected abstract org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.util.Database, java.lang.String, org.boris.expr.util.Criteria) throws org.boris.expr.ExprException;
+}
+Compiled from "AbstractFunction.java"
+public abstract class org.boris.expr.function.AbstractFunction implements org.boris.expr.IExprFunction {
+  public org.boris.expr.function.AbstractFunction();
+  public boolean isVolatile();
+  protected void assertArgCount(org.boris.expr.Expr[], int) throws org.boris.expr.ExprException;
+  protected void assertArgTypes(org.boris.expr.Expr[], org.boris.expr.ExprType...) throws org.boris.expr.ExprException;
+  protected double asDouble(org.boris.expr.IEvaluationContext, org.boris.expr.Expr, boolean) throws org.boris.expr.ExprException;
+  protected int asInteger(org.boris.expr.IEvaluationContext, org.boris.expr.Expr, boolean) throws org.boris.expr.ExprException;
+  protected boolean asBoolean(org.boris.expr.IEvaluationContext, org.boris.expr.Expr, boolean) throws org.boris.expr.ExprException;
+  protected java.lang.String asString(org.boris.expr.IEvaluationContext, org.boris.expr.Expr, boolean) throws org.boris.expr.ExprException;
+  protected void assertArgType(org.boris.expr.Expr, org.boris.expr.ExprType) throws org.boris.expr.ExprException;
+  protected void assertArgCount(org.boris.expr.Expr[], int, int) throws org.boris.expr.ExprException;
+  protected void assertMinArgCount(org.boris.expr.Expr[], int) throws org.boris.expr.ExprException;
+  protected void assertMaxArgCount(org.boris.expr.Expr[], int) throws org.boris.expr.ExprException;
+  public static org.boris.expr.Expr evalArg(org.boris.expr.IEvaluationContext, org.boris.expr.Expr) throws org.boris.expr.ExprException;
+  protected int getLength(org.boris.expr.Expr);
+  protected org.boris.expr.Expr get(org.boris.expr.Expr, int);
+  protected org.boris.expr.ExprBoolean bool(boolean);
+  protected double asDouble(org.boris.expr.IEvaluationContext, org.boris.expr.ExprArray, int) throws org.boris.expr.ExprException;
+  protected boolean isOneOf(org.boris.expr.Expr, org.boris.expr.ExprType...);
+  protected org.boris.expr.ExprArray asArray(org.boris.expr.IEvaluationContext, org.boris.expr.Expr, boolean) throws org.boris.expr.ExprException;
+  protected boolean isNumber(org.boris.expr.Expr);
+}
+Compiled from "AbstractVarianceFunction.java"
+public class org.boris.expr.function.AbstractVarianceFunction extends org.boris.expr.function.ForEachFunction {
+  public org.boris.expr.function.AbstractVarianceFunction(boolean, boolean);
+  protected void iteration(org.boris.expr.util.Counter);
+  protected void value(org.boris.expr.util.Counter, double);
+  protected org.boris.expr.Expr evaluate(org.boris.expr.util.Counter) throws org.boris.expr.ExprException;
+  protected void initialize(org.boris.expr.util.Counter) throws org.boris.expr.ExprException;
+  protected void value(org.boris.expr.util.Counter, org.boris.expr.Expr) throws org.boris.expr.ExprException;
+}
+Compiled from "DoubleInOutFunction.java"
+public abstract class org.boris.expr.function.DoubleInOutFunction extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.DoubleInOutFunction();
+  public final org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+  protected abstract double evaluate(double) throws org.boris.expr.ExprException;
+}
+Compiled from "DoubleInOutFunctionErr.java"
+public abstract class org.boris.expr.function.DoubleInOutFunctionErr extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.DoubleInOutFunctionErr();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+  protected abstract double evaluate(double) throws org.boris.expr.ExprException;
+}
+Compiled from "ExcelFunctionProvider.java"
+public class org.boris.expr.function.ExcelFunctionProvider implements org.boris.expr.function.IFunctionProvider {
+  public org.boris.expr.function.ExcelFunctionProvider();
+  public boolean hasFunction(org.boris.expr.ExprFunction);
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.ExprFunction) throws org.boris.expr.ExprException;
+  static {};
+}
+Compiled from "ExprAlias.java"
+public class org.boris.expr.function.ExprAlias {
+  public org.boris.expr.function.ExprAlias();
+  public void setText(java.lang.String) throws java.io.IOException, org.boris.expr.ExprException;
+  public java.lang.String getText();
+  public synchronized org.boris.expr.Expr evaluate(org.boris.expr.Expr[], org.boris.expr.IEvaluationContext) throws org.boris.expr.ExprException;
+  public org.boris.expr.Expr evaluateFunction(org.boris.expr.ExprFunction) throws org.boris.expr.ExprException;
+  public org.boris.expr.Expr evaluateVariable(org.boris.expr.ExprVariable) throws org.boris.expr.ExprException;
+}
+Compiled from "ForEachFunction.java"
+public abstract class org.boris.expr.function.ForEachFunction extends org.boris.expr.function.AbstractFunction {
+  protected int iterations;
+  public org.boris.expr.function.ForEachFunction();
+  protected void setIterations(int);
+  public final org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+  protected abstract void initialize(org.boris.expr.util.Counter) throws org.boris.expr.ExprException;
+  protected abstract void iteration(org.boris.expr.util.Counter);
+  protected abstract void value(org.boris.expr.util.Counter, org.boris.expr.Expr) throws org.boris.expr.ExprException;
+  protected abstract org.boris.expr.Expr evaluate(org.boris.expr.util.Counter) throws org.boris.expr.ExprException;
+}
+Compiled from "ForEachNumberAFunction.java"
+public abstract class org.boris.expr.function.ForEachNumberAFunction extends org.boris.expr.function.ForEachFunction {
+  public org.boris.expr.function.ForEachNumberAFunction();
+  protected void initialize(org.boris.expr.util.Counter) throws org.boris.expr.ExprException;
+  protected void iteration(org.boris.expr.util.Counter);
+  protected final void value(org.boris.expr.util.Counter, org.boris.expr.Expr) throws org.boris.expr.ExprException;
+  protected abstract void value(org.boris.expr.util.Counter, double);
+}
+Compiled from "ForEachNumberFunction.java"
+public abstract class org.boris.expr.function.ForEachNumberFunction extends org.boris.expr.function.ForEachFunction {
+  public org.boris.expr.function.ForEachNumberFunction();
+  protected void initialize(org.boris.expr.util.Counter) throws org.boris.expr.ExprException;
+  protected void iteration(org.boris.expr.util.Counter);
+  protected final void value(org.boris.expr.util.Counter, org.boris.expr.Expr) throws org.boris.expr.ExprException;
+  protected abstract void value(org.boris.expr.util.Counter, double);
+}
+Compiled from "FunctionManager.java"
+public class org.boris.expr.function.FunctionManager implements org.boris.expr.function.IFunctionProvider {
+  public org.boris.expr.function.FunctionManager();
+  public org.boris.expr.function.FunctionManager(boolean);
+  public void add(java.lang.String, org.boris.expr.IExprFunction);
+  public void add(org.boris.expr.function.IFunctionProvider);
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.ExprFunction) throws org.boris.expr.ExprException;
+  public boolean hasFunction(org.boris.expr.ExprFunction);
+}
+Compiled from "FunctionMap.java"
+public class org.boris.expr.function.FunctionMap implements org.boris.expr.function.IFunctionProvider {
+  public org.boris.expr.function.FunctionMap();
+  public org.boris.expr.function.FunctionMap(boolean);
+  public void add(java.lang.String, org.boris.expr.IExprFunction);
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.ExprFunction) throws org.boris.expr.ExprException;
+  public boolean hasFunction(org.boris.expr.ExprFunction);
+}
+Compiled from "IFunctionProvider.java"
+public interface org.boris.expr.function.IFunctionProvider {
+  public abstract boolean hasFunction(org.boris.expr.ExprFunction);
+  public abstract org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.ExprFunction) throws org.boris.expr.ExprException;
+}
+Compiled from "SimpleDatabaseFunction.java"
+public abstract class org.boris.expr.function.SimpleDatabaseFunction extends org.boris.expr.function.AbstractDatabaseFunction {
+  public org.boris.expr.function.SimpleDatabaseFunction();
+  protected final org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.util.Database, java.lang.String, org.boris.expr.util.Criteria) throws org.boris.expr.ExprException;
+  protected abstract org.boris.expr.Expr evaluateMatches(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "ABS.java"
+public class org.boris.expr.function.excel.ABS extends org.boris.expr.function.DoubleInOutFunction {
+  public org.boris.expr.function.excel.ABS();
+  protected double evaluate(double) throws org.boris.expr.ExprException;
+}
+Compiled from "ACOS.java"
+public class org.boris.expr.function.excel.ACOS extends org.boris.expr.function.DoubleInOutFunction {
+  public org.boris.expr.function.excel.ACOS();
+  protected double evaluate(double) throws org.boris.expr.ExprException;
+}
+Compiled from "ACOSH.java"
+public class org.boris.expr.function.excel.ACOSH extends org.boris.expr.function.DoubleInOutFunction {
+  public org.boris.expr.function.excel.ACOSH();
+  protected double evaluate(double) throws org.boris.expr.ExprException;
+}
+Compiled from "ADDRESS.java"
+public class org.boris.expr.function.excel.ADDRESS extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.ADDRESS();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "AND.java"
+public class org.boris.expr.function.excel.AND extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.AND();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+  protected boolean eval(org.boris.expr.IEvaluationContext, org.boris.expr.Expr, boolean) throws org.boris.expr.ExprException;
+}
+Compiled from "AREAS.java"
+public class org.boris.expr.function.excel.AREAS extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.AREAS();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "ASIN.java"
+public class org.boris.expr.function.excel.ASIN extends org.boris.expr.function.DoubleInOutFunction {
+  public org.boris.expr.function.excel.ASIN();
+  protected double evaluate(double) throws org.boris.expr.ExprException;
+}
+Compiled from "ASINH.java"
+public class org.boris.expr.function.excel.ASINH extends org.boris.expr.function.DoubleInOutFunction {
+  public org.boris.expr.function.excel.ASINH();
+  protected double evaluate(double) throws org.boris.expr.ExprException;
+}
+Compiled from "ATAN.java"
+public class org.boris.expr.function.excel.ATAN extends org.boris.expr.function.DoubleInOutFunction {
+  public org.boris.expr.function.excel.ATAN();
+  protected double evaluate(double) throws org.boris.expr.ExprException;
+}
+Compiled from "ATAN2.java"
+public class org.boris.expr.function.excel.ATAN2 extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.ATAN2();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "ATANH.java"
+public class org.boris.expr.function.excel.ATANH extends org.boris.expr.function.DoubleInOutFunction {
+  public org.boris.expr.function.excel.ATANH();
+  protected double evaluate(double) throws org.boris.expr.ExprException;
+}
+Compiled from "AVEDEV.java"
+public class org.boris.expr.function.excel.AVEDEV extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.AVEDEV();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+  public static void eval(org.boris.expr.IEvaluationContext, org.boris.expr.Expr, double, double[], boolean) throws org.boris.expr.ExprException;
+}
+Compiled from "AVERAGE.java"
+public class org.boris.expr.function.excel.AVERAGE extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.AVERAGE();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+  public static org.boris.expr.Expr average(org.boris.expr.IEvaluationContext, org.boris.expr.Expr...) throws org.boris.expr.ExprException;
+  public static void eval(org.boris.expr.IEvaluationContext, org.boris.expr.Expr, double[], boolean) throws org.boris.expr.ExprException;
+}
+Compiled from "AVERAGEA.java"
+public class org.boris.expr.function.excel.AVERAGEA extends org.boris.expr.function.ForEachNumberAFunction {
+  public org.boris.expr.function.excel.AVERAGEA();
+  protected void value(org.boris.expr.util.Counter, double);
+  protected org.boris.expr.Expr evaluate(org.boris.expr.util.Counter) throws org.boris.expr.ExprException;
+}
+Compiled from "BAHTTEXT.java"
+public class org.boris.expr.function.excel.BAHTTEXT extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.BAHTTEXT();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "BETADIST.java"
+public class org.boris.expr.function.excel.BETADIST extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.BETADIST();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "BETAINV.java"
+public class org.boris.expr.function.excel.BETAINV extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.BETAINV();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "BINOMDIST.java"
+public class org.boris.expr.function.excel.BINOMDIST extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.BINOMDIST();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "CEILING.java"
+public class org.boris.expr.function.excel.CEILING extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.CEILING();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+  public boolean equalish(double, double);
+}
+Compiled from "CELL.java"
+public class org.boris.expr.function.excel.CELL extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.CELL();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "CHAR.java"
+public class org.boris.expr.function.excel.CHAR extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.CHAR();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "CHIDIST.java"
+public class org.boris.expr.function.excel.CHIDIST extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.CHIDIST();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "CHIINV.java"
+public class org.boris.expr.function.excel.CHIINV extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.CHIINV();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "CHITEST.java"
+public class org.boris.expr.function.excel.CHITEST extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.CHITEST();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "CHOOSE.java"
+public class org.boris.expr.function.excel.CHOOSE extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.CHOOSE();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "CLEAN.java"
+public class org.boris.expr.function.excel.CLEAN extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.CLEAN();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "CODE.java"
+public class org.boris.expr.function.excel.CODE extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.CODE();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "COLUMN.java"
+public class org.boris.expr.function.excel.COLUMN extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.COLUMN();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "COLUMNS.java"
+public class org.boris.expr.function.excel.COLUMNS extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.COLUMNS();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+  public static org.boris.expr.Expr columnsOrRows(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[], boolean) throws org.boris.expr.ExprException;
+}
+Compiled from "COMBIN.java"
+public class org.boris.expr.function.excel.COMBIN extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.COMBIN();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "CONCATENATE.java"
+public class org.boris.expr.function.excel.CONCATENATE extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.CONCATENATE();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "CONFIDENCE.java"
+public class org.boris.expr.function.excel.CONFIDENCE extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.CONFIDENCE();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "CORREL.java"
+public class org.boris.expr.function.excel.CORREL extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.CORREL();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "COS.java"
+public class org.boris.expr.function.excel.COS extends org.boris.expr.function.DoubleInOutFunction {
+  public org.boris.expr.function.excel.COS();
+  protected double evaluate(double) throws org.boris.expr.ExprException;
+}
+Compiled from "COSH.java"
+public class org.boris.expr.function.excel.COSH extends org.boris.expr.function.DoubleInOutFunction {
+  public org.boris.expr.function.excel.COSH();
+  protected double evaluate(double) throws org.boris.expr.ExprException;
+}
+Compiled from "COUNT.java"
+public class org.boris.expr.function.excel.COUNT extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.COUNT();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+  public static int count(org.boris.expr.IEvaluationContext, org.boris.expr.Expr, boolean) throws org.boris.expr.ExprException;
+}
+Compiled from "COUNTA.java"
+public class org.boris.expr.function.excel.COUNTA extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.COUNTA();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "COUNTBLANK.java"
+public class org.boris.expr.function.excel.COUNTBLANK extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.COUNTBLANK();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+  public static int count(org.boris.expr.IEvaluationContext, org.boris.expr.Expr) throws org.boris.expr.ExprException;
+}
+Compiled from "COUNTIF.java"
+public class org.boris.expr.function.excel.COUNTIF extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.COUNTIF();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "COVAR.java"
+public class org.boris.expr.function.excel.COVAR extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.COVAR();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "CRITBINOM.java"
+public class org.boris.expr.function.excel.CRITBINOM extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.CRITBINOM();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "DATE.java"
+public class org.boris.expr.function.excel.DATE extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.DATE();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "DATEVALUE.java"
+public class org.boris.expr.function.excel.DATEVALUE extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.DATEVALUE();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "DAVERAGE.java"
+public class org.boris.expr.function.excel.DAVERAGE extends org.boris.expr.function.SimpleDatabaseFunction {
+  public org.boris.expr.function.excel.DAVERAGE();
+  protected org.boris.expr.Expr evaluateMatches(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "DAY.java"
+public class org.boris.expr.function.excel.DAY extends org.boris.expr.function.DoubleInOutFunction {
+  public org.boris.expr.function.excel.DAY();
+  protected double evaluate(double) throws org.boris.expr.ExprException;
+}
+Compiled from "DAYS360.java"
+public class org.boris.expr.function.excel.DAYS360 extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.DAYS360();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "DB.java"
+public class org.boris.expr.function.excel.DB extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.DB();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "DCOUNT.java"
+public class org.boris.expr.function.excel.DCOUNT extends org.boris.expr.function.SimpleDatabaseFunction {
+  public org.boris.expr.function.excel.DCOUNT();
+  protected org.boris.expr.Expr evaluateMatches(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "DCOUNTA.java"
+public class org.boris.expr.function.excel.DCOUNTA extends org.boris.expr.function.SimpleDatabaseFunction {
+  public org.boris.expr.function.excel.DCOUNTA();
+  protected org.boris.expr.Expr evaluateMatches(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "DDB.java"
+public class org.boris.expr.function.excel.DDB extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.DDB();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "DEGREES.java"
+public class org.boris.expr.function.excel.DEGREES extends org.boris.expr.function.DoubleInOutFunction {
+  public org.boris.expr.function.excel.DEGREES();
+  protected double evaluate(double) throws org.boris.expr.ExprException;
+}
+Compiled from "DEVSQ.java"
+public class org.boris.expr.function.excel.DEVSQ extends org.boris.expr.function.ForEachNumberFunction {
+  public org.boris.expr.function.excel.DEVSQ();
+  protected void value(org.boris.expr.util.Counter, double);
+  protected org.boris.expr.Expr evaluate(org.boris.expr.util.Counter) throws org.boris.expr.ExprException;
+}
+Compiled from "DGET.java"
+public class org.boris.expr.function.excel.DGET extends org.boris.expr.function.SimpleDatabaseFunction {
+  public org.boris.expr.function.excel.DGET();
+  protected org.boris.expr.Expr evaluateMatches(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "DMAX.java"
+public class org.boris.expr.function.excel.DMAX extends org.boris.expr.function.SimpleDatabaseFunction {
+  public org.boris.expr.function.excel.DMAX();
+  protected org.boris.expr.Expr evaluateMatches(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "DMIN.java"
+public class org.boris.expr.function.excel.DMIN extends org.boris.expr.function.SimpleDatabaseFunction {
+  public org.boris.expr.function.excel.DMIN();
+  protected org.boris.expr.Expr evaluateMatches(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "DOLLAR.java"
+public class org.boris.expr.function.excel.DOLLAR extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.DOLLAR();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "DPRODUCT.java"
+public class org.boris.expr.function.excel.DPRODUCT extends org.boris.expr.function.SimpleDatabaseFunction {
+  public org.boris.expr.function.excel.DPRODUCT();
+  protected org.boris.expr.Expr evaluateMatches(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "DSTDEV.java"
+public class org.boris.expr.function.excel.DSTDEV extends org.boris.expr.function.SimpleDatabaseFunction {
+  public org.boris.expr.function.excel.DSTDEV();
+  protected org.boris.expr.Expr evaluateMatches(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "DSTDEVP.java"
+public class org.boris.expr.function.excel.DSTDEVP extends org.boris.expr.function.SimpleDatabaseFunction {
+  public org.boris.expr.function.excel.DSTDEVP();
+  protected org.boris.expr.Expr evaluateMatches(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "DSUM.java"
+public class org.boris.expr.function.excel.DSUM extends org.boris.expr.function.SimpleDatabaseFunction {
+  public org.boris.expr.function.excel.DSUM();
+  protected org.boris.expr.Expr evaluateMatches(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "DVAR.java"
+public class org.boris.expr.function.excel.DVAR extends org.boris.expr.function.SimpleDatabaseFunction {
+  public org.boris.expr.function.excel.DVAR();
+  protected org.boris.expr.Expr evaluateMatches(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "DVARP.java"
+public class org.boris.expr.function.excel.DVARP extends org.boris.expr.function.SimpleDatabaseFunction {
+  public org.boris.expr.function.excel.DVARP();
+  protected org.boris.expr.Expr evaluateMatches(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "ERRORTYPE.java"
+public class org.boris.expr.function.excel.ERRORTYPE extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.ERRORTYPE();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "EVEN.java"
+public class org.boris.expr.function.excel.EVEN extends org.boris.expr.function.DoubleInOutFunction {
+  public org.boris.expr.function.excel.EVEN();
+  protected double evaluate(double) throws org.boris.expr.ExprException;
+}
+Compiled from "EXACT.java"
+public class org.boris.expr.function.excel.EXACT extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.EXACT();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "EXP.java"
+public class org.boris.expr.function.excel.EXP extends org.boris.expr.function.DoubleInOutFunction {
+  public org.boris.expr.function.excel.EXP();
+  protected double evaluate(double) throws org.boris.expr.ExprException;
+}
+Compiled from "EXPONDIST.java"
+public class org.boris.expr.function.excel.EXPONDIST extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.EXPONDIST();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "FACT.java"
+public class org.boris.expr.function.excel.FACT extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.FACT();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "FALSE.java"
+public class org.boris.expr.function.excel.FALSE extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.FALSE();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "FDIST.java"
+public class org.boris.expr.function.excel.FDIST extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.FDIST();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "FIND.java"
+public class org.boris.expr.function.excel.FIND extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.FIND();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "FINV.java"
+public class org.boris.expr.function.excel.FINV extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.FINV();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "FISHER.java"
+public class org.boris.expr.function.excel.FISHER extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.FISHER();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "FISHERNV.java"
+public class org.boris.expr.function.excel.FISHERNV extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.FISHERNV();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "FIXED.java"
+public class org.boris.expr.function.excel.FIXED extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.FIXED();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "FLOOR.java"
+public class org.boris.expr.function.excel.FLOOR extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.FLOOR();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+  public boolean equalish(double, double);
+}
+Compiled from "FORECAST.java"
+public class org.boris.expr.function.excel.FORECAST extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.FORECAST();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "FREQUENCY.java"
+public class org.boris.expr.function.excel.FREQUENCY extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.FREQUENCY();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+  double[] asArray(org.boris.expr.IEvaluationContext, org.boris.expr.Expr) throws org.boris.expr.ExprException;
+}
+Compiled from "FTEST.java"
+public class org.boris.expr.function.excel.FTEST extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.FTEST();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "FV.java"
+public class org.boris.expr.function.excel.FV extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.FV();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "GAMMADIST.java"
+public class org.boris.expr.function.excel.GAMMADIST extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.GAMMADIST();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "GAMMAINV.java"
+public class org.boris.expr.function.excel.GAMMAINV extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.GAMMAINV();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "GAMMALN.java"
+public class org.boris.expr.function.excel.GAMMALN extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.GAMMALN();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "GEOMEAN.java"
+public class org.boris.expr.function.excel.GEOMEAN extends org.boris.expr.function.ForEachNumberFunction {
+  public org.boris.expr.function.excel.GEOMEAN();
+  protected void initialize(org.boris.expr.util.Counter) throws org.boris.expr.ExprException;
+  protected void value(org.boris.expr.util.Counter, double);
+  protected org.boris.expr.Expr evaluate(org.boris.expr.util.Counter) throws org.boris.expr.ExprException;
+}
+Compiled from "GETPIVOTDATA.java"
+public class org.boris.expr.function.excel.GETPIVOTDATA extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.GETPIVOTDATA();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "GROWTH.java"
+public class org.boris.expr.function.excel.GROWTH extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.GROWTH();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "HARMEAN.java"
+public class org.boris.expr.function.excel.HARMEAN extends org.boris.expr.function.ForEachNumberFunction {
+  public org.boris.expr.function.excel.HARMEAN();
+  protected void value(org.boris.expr.util.Counter, double);
+  protected org.boris.expr.Expr evaluate(org.boris.expr.util.Counter) throws org.boris.expr.ExprException;
+}
+Compiled from "HLOOKUP.java"
+public class org.boris.expr.function.excel.HLOOKUP extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.HLOOKUP();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "HOUR.java"
+public class org.boris.expr.function.excel.HOUR extends org.boris.expr.function.DoubleInOutFunction {
+  public org.boris.expr.function.excel.HOUR();
+  protected double evaluate(double) throws org.boris.expr.ExprException;
+}
+Compiled from "HYPERLINK.java"
+public class org.boris.expr.function.excel.HYPERLINK extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.HYPERLINK();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "HYPGEOMDIST.java"
+public class org.boris.expr.function.excel.HYPGEOMDIST extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.HYPGEOMDIST();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "IF.java"
+public class org.boris.expr.function.excel.IF extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.IF();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "INDEX.java"
+public class org.boris.expr.function.excel.INDEX extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.INDEX();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "INDIRECT.java"
+public class org.boris.expr.function.excel.INDIRECT extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.INDIRECT();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "INFO.java"
+public class org.boris.expr.function.excel.INFO extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.INFO();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "INT.java"
+public class org.boris.expr.function.excel.INT extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.INT();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "INTERCEPT.java"
+public class org.boris.expr.function.excel.INTERCEPT extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.INTERCEPT();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "IPMT.java"
+public class org.boris.expr.function.excel.IPMT extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.IPMT();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "IRR.java"
+public class org.boris.expr.function.excel.IRR extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.IRR();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "ISBLANK.java"
+public class org.boris.expr.function.excel.ISBLANK extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.ISBLANK();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "ISERR.java"
+public class org.boris.expr.function.excel.ISERR extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.ISERR();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "ISLOGICAL.java"
+public class org.boris.expr.function.excel.ISLOGICAL extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.ISLOGICAL();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "ISNA.java"
+public class org.boris.expr.function.excel.ISNA extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.ISNA();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "ISNONTEXT.java"
+public class org.boris.expr.function.excel.ISNONTEXT extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.ISNONTEXT();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "ISNUMBER.java"
+public class org.boris.expr.function.excel.ISNUMBER extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.ISNUMBER();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "ISPMT.java"
+public class org.boris.expr.function.excel.ISPMT extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.ISPMT();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "ISREF.java"
+public class org.boris.expr.function.excel.ISREF extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.ISREF();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "ISTEXT.java"
+public class org.boris.expr.function.excel.ISTEXT extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.ISTEXT();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "KURT.java"
+public class org.boris.expr.function.excel.KURT extends org.boris.expr.function.ForEachNumberFunction {
+  public org.boris.expr.function.excel.KURT();
+  protected void value(org.boris.expr.util.Counter, double);
+  protected void iteration(org.boris.expr.util.Counter);
+  protected org.boris.expr.Expr evaluate(org.boris.expr.util.Counter) throws org.boris.expr.ExprException;
+}
+Compiled from "LARGE.java"
+public class org.boris.expr.function.excel.LARGE extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.LARGE();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "LEFT.java"
+public class org.boris.expr.function.excel.LEFT extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.LEFT();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "LEN.java"
+public class org.boris.expr.function.excel.LEN extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.LEN();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "LINEST.java"
+public class org.boris.expr.function.excel.LINEST extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.LINEST();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "LN.java"
+public class org.boris.expr.function.excel.LN extends org.boris.expr.function.DoubleInOutFunction {
+  public org.boris.expr.function.excel.LN();
+  protected double evaluate(double) throws org.boris.expr.ExprException;
+}
+Compiled from "LOG.java"
+public class org.boris.expr.function.excel.LOG extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.LOG();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "LOG10.java"
+public class org.boris.expr.function.excel.LOG10 extends org.boris.expr.function.DoubleInOutFunction {
+  public org.boris.expr.function.excel.LOG10();
+  protected double evaluate(double) throws org.boris.expr.ExprException;
+}
+Compiled from "LOGEST.java"
+public class org.boris.expr.function.excel.LOGEST extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.LOGEST();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "LOGINV.java"
+public class org.boris.expr.function.excel.LOGINV extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.LOGINV();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "LOGNORMDIST.java"
+public class org.boris.expr.function.excel.LOGNORMDIST extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.LOGNORMDIST();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "LOOKUP.java"
+public class org.boris.expr.function.excel.LOOKUP extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.LOOKUP();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+  public static org.boris.expr.Expr vectorLookup(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+  public static org.boris.expr.Expr arrayLookup(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]);
+}
+Compiled from "LOWER.java"
+public class org.boris.expr.function.excel.LOWER extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.LOWER();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "MATCH.java"
+public class org.boris.expr.function.excel.MATCH extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.MATCH();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "MAX.java"
+public class org.boris.expr.function.excel.MAX extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.MAX();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+  public static org.boris.expr.Expr max(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+  public static org.boris.expr.Expr max(org.boris.expr.IEvaluationContext, org.boris.expr.Expr) throws org.boris.expr.ExprException;
+}
+Compiled from "MAXA.java"
+public class org.boris.expr.function.excel.MAXA extends org.boris.expr.function.ForEachNumberAFunction {
+  public org.boris.expr.function.excel.MAXA();
+  protected void initialize(org.boris.expr.util.Counter) throws org.boris.expr.ExprException;
+  protected void value(org.boris.expr.util.Counter, double);
+  protected org.boris.expr.Expr evaluate(org.boris.expr.util.Counter) throws org.boris.expr.ExprException;
+}
+Compiled from "MDETERM.java"
+public class org.boris.expr.function.excel.MDETERM extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.MDETERM();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "MEDIAN.java"
+public class org.boris.expr.function.excel.MEDIAN extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.MEDIAN();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "MID.java"
+public class org.boris.expr.function.excel.MID extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.MID();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "MIN.java"
+public class org.boris.expr.function.excel.MIN extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.MIN();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+  public static org.boris.expr.Expr min(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+  public static org.boris.expr.Expr min(org.boris.expr.IEvaluationContext, org.boris.expr.Expr) throws org.boris.expr.ExprException;
+}
+Compiled from "MINA.java"
+public class org.boris.expr.function.excel.MINA extends org.boris.expr.function.ForEachNumberAFunction {
+  public org.boris.expr.function.excel.MINA();
+  protected void initialize(org.boris.expr.util.Counter) throws org.boris.expr.ExprException;
+  protected void value(org.boris.expr.util.Counter, double);
+  protected org.boris.expr.Expr evaluate(org.boris.expr.util.Counter) throws org.boris.expr.ExprException;
+}
+Compiled from "MINUTE.java"
+public class org.boris.expr.function.excel.MINUTE extends org.boris.expr.function.DoubleInOutFunction {
+  public org.boris.expr.function.excel.MINUTE();
+  protected double evaluate(double) throws org.boris.expr.ExprException;
+}
+Compiled from "MINVERSE.java"
+public class org.boris.expr.function.excel.MINVERSE extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.MINVERSE();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "MIRR.java"
+public class org.boris.expr.function.excel.MIRR extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.MIRR();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "MMULT.java"
+public class org.boris.expr.function.excel.MMULT extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.MMULT();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "MOD.java"
+public class org.boris.expr.function.excel.MOD extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.MOD();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "MODE.java"
+public class org.boris.expr.function.excel.MODE extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.MODE();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "MONTH.java"
+public class org.boris.expr.function.excel.MONTH extends org.boris.expr.function.DoubleInOutFunction {
+  public org.boris.expr.function.excel.MONTH();
+  protected double evaluate(double) throws org.boris.expr.ExprException;
+}
+Compiled from "N.java"
+public class org.boris.expr.function.excel.N extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.N();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "NA.java"
+public class org.boris.expr.function.excel.NA extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.NA();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "NEGBINOMDIST.java"
+public class org.boris.expr.function.excel.NEGBINOMDIST extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.NEGBINOMDIST();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "NORMDIST.java"
+public class org.boris.expr.function.excel.NORMDIST extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.NORMDIST();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "NORMINV.java"
+public class org.boris.expr.function.excel.NORMINV extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.NORMINV();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "NORMSDIST.java"
+public class org.boris.expr.function.excel.NORMSDIST extends org.boris.expr.function.DoubleInOutFunctionErr {
+  public org.boris.expr.function.excel.NORMSDIST();
+  protected double evaluate(double) throws org.boris.expr.ExprException;
+}
+Compiled from "NORMSINV.java"
+public class org.boris.expr.function.excel.NORMSINV extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.NORMSINV();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "NOT.java"
+public class org.boris.expr.function.excel.NOT extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.NOT();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "NOW.java"
+public class org.boris.expr.function.excel.NOW extends org.boris.expr.function.excel.TODAY {
+  public org.boris.expr.function.excel.NOW();
+}
+Compiled from "NPER.java"
+public class org.boris.expr.function.excel.NPER extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.NPER();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "NPV.java"
+public class org.boris.expr.function.excel.NPV extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.NPV();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "ODD.java"
+public class org.boris.expr.function.excel.ODD extends org.boris.expr.function.DoubleInOutFunction {
+  public org.boris.expr.function.excel.ODD();
+  protected double evaluate(double) throws org.boris.expr.ExprException;
+}
+Compiled from "OFFSET.java"
+public class org.boris.expr.function.excel.OFFSET extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.OFFSET();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "OR.java"
+public class org.boris.expr.function.excel.OR extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.OR();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+  protected boolean eval(org.boris.expr.IEvaluationContext, org.boris.expr.Expr, boolean) throws org.boris.expr.ExprException;
+}
+Compiled from "PEARSON.java"
+public class org.boris.expr.function.excel.PEARSON extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.PEARSON();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "PERCENTILE.java"
+public class org.boris.expr.function.excel.PERCENTILE extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.PERCENTILE();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "PERCENTRANK.java"
+public class org.boris.expr.function.excel.PERCENTRANK extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.PERCENTRANK();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "PERMUT.java"
+public class org.boris.expr.function.excel.PERMUT extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.PERMUT();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "PI.java"
+public class org.boris.expr.function.excel.PI extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.PI();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "PMT.java"
+public class org.boris.expr.function.excel.PMT extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.PMT();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "POISSON.java"
+public class org.boris.expr.function.excel.POISSON extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.POISSON();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "POWER.java"
+public class org.boris.expr.function.excel.POWER extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.POWER();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "PPMT.java"
+public class org.boris.expr.function.excel.PPMT extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.PPMT();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "PROB.java"
+public class org.boris.expr.function.excel.PROB extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.PROB();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "PRODUCT.java"
+public class org.boris.expr.function.excel.PRODUCT extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.PRODUCT();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+  public static org.boris.expr.Expr product(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+  public static double product(org.boris.expr.IEvaluationContext, org.boris.expr.Expr) throws org.boris.expr.ExprException;
+}
+Compiled from "PROPER.java"
+public class org.boris.expr.function.excel.PROPER extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.PROPER();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "PV.java"
+public class org.boris.expr.function.excel.PV extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.PV();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "QUARTILE.java"
+public class org.boris.expr.function.excel.QUARTILE extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.QUARTILE();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "RADIANS.java"
+public class org.boris.expr.function.excel.RADIANS extends org.boris.expr.function.DoubleInOutFunction {
+  public org.boris.expr.function.excel.RADIANS();
+  protected double evaluate(double) throws org.boris.expr.ExprException;
+}
+Compiled from "RAND.java"
+public class org.boris.expr.function.excel.RAND extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.RAND();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "RANK.java"
+public class org.boris.expr.function.excel.RANK extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.RANK();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "RATE.java"
+public class org.boris.expr.function.excel.RATE extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.RATE();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "REPLACE.java"
+public class org.boris.expr.function.excel.REPLACE extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.REPLACE();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "REPT.java"
+public class org.boris.expr.function.excel.REPT extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.REPT();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "RIGHT.java"
+public class org.boris.expr.function.excel.RIGHT extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.RIGHT();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "ROMAN.java"
+public class org.boris.expr.function.excel.ROMAN extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.ROMAN();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "ROUND.java"
+public class org.boris.expr.function.excel.ROUND extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.ROUND();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "ROUNDDOWN.java"
+public class org.boris.expr.function.excel.ROUNDDOWN extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.ROUNDDOWN();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "ROUNDUP.java"
+public class org.boris.expr.function.excel.ROUNDUP extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.ROUNDUP();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "ROW.java"
+public class org.boris.expr.function.excel.ROW extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.ROW();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "ROWS.java"
+public class org.boris.expr.function.excel.ROWS extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.ROWS();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "RSQ.java"
+public class org.boris.expr.function.excel.RSQ extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.RSQ();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "RTD.java"
+public class org.boris.expr.function.excel.RTD extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.RTD();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "SEARCH.java"
+public class org.boris.expr.function.excel.SEARCH extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.SEARCH();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "SECOND.java"
+public class org.boris.expr.function.excel.SECOND extends org.boris.expr.function.DoubleInOutFunction {
+  public org.boris.expr.function.excel.SECOND();
+  protected double evaluate(double) throws org.boris.expr.ExprException;
+}
+Compiled from "SIGN.java"
+public class org.boris.expr.function.excel.SIGN extends org.boris.expr.function.DoubleInOutFunction {
+  public org.boris.expr.function.excel.SIGN();
+  protected double evaluate(double) throws org.boris.expr.ExprException;
+}
+Compiled from "SIN.java"
+public class org.boris.expr.function.excel.SIN extends org.boris.expr.function.DoubleInOutFunction {
+  public org.boris.expr.function.excel.SIN();
+  protected double evaluate(double) throws org.boris.expr.ExprException;
+}
+Compiled from "SINH.java"
+public class org.boris.expr.function.excel.SINH extends org.boris.expr.function.DoubleInOutFunction {
+  public org.boris.expr.function.excel.SINH();
+  protected double evaluate(double) throws org.boris.expr.ExprException;
+}
+Compiled from "SKEW.java"
+public class org.boris.expr.function.excel.SKEW extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.SKEW();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "SLN.java"
+public class org.boris.expr.function.excel.SLN extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.SLN();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "SLOPE.java"
+public class org.boris.expr.function.excel.SLOPE extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.SLOPE();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "SMALL.java"
+public class org.boris.expr.function.excel.SMALL extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.SMALL();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "SQRT.java"
+public class org.boris.expr.function.excel.SQRT extends org.boris.expr.function.DoubleInOutFunction {
+  public org.boris.expr.function.excel.SQRT();
+  protected double evaluate(double) throws org.boris.expr.ExprException;
+}
+Compiled from "STANDARDIZE.java"
+public class org.boris.expr.function.excel.STANDARDIZE extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.STANDARDIZE();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "STDEV.java"
+public class org.boris.expr.function.excel.STDEV extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.STDEV();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+  public static org.boris.expr.Expr stdev(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+  protected static org.boris.expr.Expr variance(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[], boolean) throws org.boris.expr.ExprException;
+  public static org.boris.expr.Expr stdev(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[], boolean) throws org.boris.expr.ExprException;
+  protected static void eval(org.boris.expr.IEvaluationContext, org.boris.expr.Expr, double, double[], boolean) throws org.boris.expr.ExprException;
+}
+Compiled from "STDEVA.java"
+public class org.boris.expr.function.excel.STDEVA extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.STDEVA();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "STDEVP.java"
+public class org.boris.expr.function.excel.STDEVP extends org.boris.expr.function.excel.STDEV {
+  public org.boris.expr.function.excel.STDEVP();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+  public static org.boris.expr.Expr stdevp(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "STDEVPA.java"
+public class org.boris.expr.function.excel.STDEVPA extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.STDEVPA();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "STEYX.java"
+public class org.boris.expr.function.excel.STEYX extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.STEYX();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "SUBSTITUTE.java"
+public class org.boris.expr.function.excel.SUBSTITUTE extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.SUBSTITUTE();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "SUBTOTAL.java"
+public class org.boris.expr.function.excel.SUBTOTAL extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.SUBTOTAL();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "SUM.java"
+public class org.boris.expr.function.excel.SUM extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.SUM();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+  public static org.boris.expr.Expr sum(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+  public static double sum(org.boris.expr.IEvaluationContext, org.boris.expr.Expr) throws org.boris.expr.ExprException;
+}
+Compiled from "SUMIF.java"
+public class org.boris.expr.function.excel.SUMIF extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.SUMIF();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+  protected double eval(org.boris.expr.Expr, org.boris.expr.util.Condition, org.boris.expr.Expr) throws org.boris.expr.ExprException;
+}
+Compiled from "SUMPRODUCT.java"
+public class org.boris.expr.function.excel.SUMPRODUCT extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.SUMPRODUCT();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "SUMSQ.java"
+public class org.boris.expr.function.excel.SUMSQ extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.SUMSQ();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "SUMX2MY2.java"
+public class org.boris.expr.function.excel.SUMX2MY2 extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.SUMX2MY2();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+  protected double eval(double, double);
+}
+Compiled from "SUMX2PY2.java"
+public class org.boris.expr.function.excel.SUMX2PY2 extends org.boris.expr.function.excel.SUMX2MY2 {
+  public org.boris.expr.function.excel.SUMX2PY2();
+  protected double eval(double, double);
+}
+Compiled from "SUMXMY2.java"
+public class org.boris.expr.function.excel.SUMXMY2 extends org.boris.expr.function.excel.SUMX2MY2 {
+  public org.boris.expr.function.excel.SUMXMY2();
+  protected double eval(double, double);
+}
+Compiled from "SYD.java"
+public class org.boris.expr.function.excel.SYD extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.SYD();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "T.java"
+public class org.boris.expr.function.excel.T extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.T();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+  static {};
+}
+Compiled from "TAN.java"
+public class org.boris.expr.function.excel.TAN extends org.boris.expr.function.DoubleInOutFunction {
+  public org.boris.expr.function.excel.TAN();
+  protected double evaluate(double) throws org.boris.expr.ExprException;
+}
+Compiled from "TANH.java"
+public class org.boris.expr.function.excel.TANH extends org.boris.expr.function.DoubleInOutFunction {
+  public org.boris.expr.function.excel.TANH();
+  protected double evaluate(double) throws org.boris.expr.ExprException;
+}
+Compiled from "TDIST.java"
+public class org.boris.expr.function.excel.TDIST extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.TDIST();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "TEXT.java"
+public class org.boris.expr.function.excel.TEXT extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.TEXT();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "TIME.java"
+public class org.boris.expr.function.excel.TIME extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.TIME();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "TIMEVALUE.java"
+public class org.boris.expr.function.excel.TIMEVALUE extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.TIMEVALUE();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "TINV.java"
+public class org.boris.expr.function.excel.TINV extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.TINV();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "TODAY.java"
+public class org.boris.expr.function.excel.TODAY extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.TODAY();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+  public boolean isVolatile();
+}
+Compiled from "TRANSPOSE.java"
+public class org.boris.expr.function.excel.TRANSPOSE extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.TRANSPOSE();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+  public static org.boris.expr.Expr transpose(org.boris.expr.ExprArray) throws org.boris.expr.ExprException;
+}
+Compiled from "TREND.java"
+public class org.boris.expr.function.excel.TREND extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.TREND();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "TRIM.java"
+public class org.boris.expr.function.excel.TRIM extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.TRIM();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "TRIMMEAN.java"
+public class org.boris.expr.function.excel.TRIMMEAN extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.TRIMMEAN();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "TRUE.java"
+public class org.boris.expr.function.excel.TRUE extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.TRUE();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "TRUNC.java"
+public class org.boris.expr.function.excel.TRUNC extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.TRUNC();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "TTEST.java"
+public class org.boris.expr.function.excel.TTEST extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.TTEST();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "TYPE.java"
+public class org.boris.expr.function.excel.TYPE extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.TYPE();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "UPPER.java"
+public class org.boris.expr.function.excel.UPPER extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.UPPER();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "VALUE.java"
+public class org.boris.expr.function.excel.VALUE extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.VALUE();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "VAR.java"
+public class org.boris.expr.function.excel.VAR extends org.boris.expr.function.AbstractVarianceFunction {
+  public org.boris.expr.function.excel.VAR();
+}
+Compiled from "VARA.java"
+public class org.boris.expr.function.excel.VARA extends org.boris.expr.function.AbstractVarianceFunction {
+  public org.boris.expr.function.excel.VARA();
+}
+Compiled from "VARP.java"
+public class org.boris.expr.function.excel.VARP extends org.boris.expr.function.AbstractVarianceFunction {
+  public org.boris.expr.function.excel.VARP();
+}
+Compiled from "VARPA.java"
+public class org.boris.expr.function.excel.VARPA extends org.boris.expr.function.AbstractVarianceFunction {
+  public org.boris.expr.function.excel.VARPA();
+}
+Compiled from "VDB.java"
+public class org.boris.expr.function.excel.VDB extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.VDB();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "VLOOKUP.java"
+public class org.boris.expr.function.excel.VLOOKUP extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.VLOOKUP();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "WEEKDAY.java"
+public class org.boris.expr.function.excel.WEEKDAY extends org.boris.expr.function.DoubleInOutFunction {
+  public org.boris.expr.function.excel.WEEKDAY();
+  protected double evaluate(double) throws org.boris.expr.ExprException;
+}
+Compiled from "WEIBULL.java"
+public class org.boris.expr.function.excel.WEIBULL extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.WEIBULL();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "YEAR.java"
+public class org.boris.expr.function.excel.YEAR extends org.boris.expr.function.DoubleInOutFunction {
+  public org.boris.expr.function.excel.YEAR();
+  protected double evaluate(double) throws org.boris.expr.ExprException;
+}
+Compiled from "ZTEST.java"
+public class org.boris.expr.function.excel.ZTEST extends org.boris.expr.function.AbstractFunction {
+  public org.boris.expr.function.excel.ZTEST();
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+}
+Compiled from "ExprLexer.java"
+public class org.boris.expr.parser.ExprLexer {
+  public org.boris.expr.parser.ExprLexer(java.io.BufferedReader);
+  public org.boris.expr.parser.ExprLexer(java.io.Reader);
+  public org.boris.expr.parser.ExprLexer(java.lang.String);
+  public org.boris.expr.parser.ExprToken next() throws java.io.IOException;
+  public static java.lang.String escapeString(java.lang.String);
+}
+Compiled from "ExprParser.java"
+public class org.boris.expr.parser.ExprParser {
+  public org.boris.expr.parser.ExprParser();
+  public static org.boris.expr.Expr parse(java.lang.String) throws java.io.IOException, org.boris.expr.ExprException;
+  public void setParserVisitor(org.boris.expr.parser.IParserVisitor);
+  public void parse(org.boris.expr.parser.ExprLexer) throws java.io.IOException, org.boris.expr.ExprException;
+  public org.boris.expr.Expr get();
+}
+Compiled from "ExprParser.java"
+class org.boris.expr.parser.ExprParser$1 {
+  static final int[] $SwitchMap$org$boris$expr$parser$ExprTokenType;
+  static {};
+}
+Compiled from "ExprToken.java"
+public class org.boris.expr.parser.ExprToken {
+  public static final org.boris.expr.parser.ExprToken OPEN_BRACKET;
+  public static final org.boris.expr.parser.ExprToken CLOSE_BRACKET;
+  public static final org.boris.expr.parser.ExprToken PLUS;
+  public static final org.boris.expr.parser.ExprToken MINUS;
+  public static final org.boris.expr.parser.ExprToken MULTIPLY;
+  public static final org.boris.expr.parser.ExprToken DIVIDE;
+  public static final org.boris.expr.parser.ExprToken COMMA;
+  public static final org.boris.expr.parser.ExprToken STRING_CONCAT;
+  public static final org.boris.expr.parser.ExprToken LESS_THAN;
+  public static final org.boris.expr.parser.ExprToken LESS_THAN_EQUAL;
+  public static final org.boris.expr.parser.ExprToken GREATER_THAN;
+  public static final org.boris.expr.parser.ExprToken GREATER_THAN_EQUAL;
+  public static final org.boris.expr.parser.ExprToken NOT_EQUAL;
+  public static final org.boris.expr.parser.ExprToken EQUAL;
+  public static final org.boris.expr.parser.ExprToken OPEN_BRACE;
+  public static final org.boris.expr.parser.ExprToken CLOSE_BRACE;
+  public static final org.boris.expr.parser.ExprToken SEMI_COLON;
+  public static final org.boris.expr.parser.ExprToken POWER;
+  public final org.boris.expr.parser.ExprTokenType type;
+  public final java.lang.String val;
+  public final double doubleValue;
+  public final int integerValue;
+  public org.boris.expr.parser.ExprToken(org.boris.expr.parser.ExprTokenType, java.lang.String);
+  public org.boris.expr.parser.ExprToken(java.lang.String, double);
+  public org.boris.expr.parser.ExprToken(java.lang.String, int);
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "ExprTokenType.java"
+public final class org.boris.expr.parser.ExprTokenType extends java.lang.Enum<org.boris.expr.parser.ExprTokenType> {
+  public static final org.boris.expr.parser.ExprTokenType Decimal;
+  public static final org.boris.expr.parser.ExprTokenType Integer;
+  public static final org.boris.expr.parser.ExprTokenType String;
+  public static final org.boris.expr.parser.ExprTokenType Variable;
+  public static final org.boris.expr.parser.ExprTokenType Function;
+  public static final org.boris.expr.parser.ExprTokenType Plus;
+  public static final org.boris.expr.parser.ExprTokenType Minus;
+  public static final org.boris.expr.parser.ExprTokenType Multiply;
+  public static final org.boris.expr.parser.ExprTokenType Divide;
+  public static final org.boris.expr.parser.ExprTokenType OpenBracket;
+  public static final org.boris.expr.parser.ExprTokenType CloseBracket;
+  public static final org.boris.expr.parser.ExprTokenType Comma;
+  public static final org.boris.expr.parser.ExprTokenType StringConcat;
+  public static final org.boris.expr.parser.ExprTokenType GreaterThan;
+  public static final org.boris.expr.parser.ExprTokenType GreaterThanOrEqualTo;
+  public static final org.boris.expr.parser.ExprTokenType LessThan;
+  public static final org.boris.expr.parser.ExprTokenType LessThanOrEqualTo;
+  public static final org.boris.expr.parser.ExprTokenType NotEqual;
+  public static final org.boris.expr.parser.ExprTokenType Equal;
+  public static final org.boris.expr.parser.ExprTokenType OpenBrace;
+  public static final org.boris.expr.parser.ExprTokenType CloseBrace;
+  public static final org.boris.expr.parser.ExprTokenType SemiColon;
+  public static final org.boris.expr.parser.ExprTokenType Power;
+  public static org.boris.expr.parser.ExprTokenType[] values();
+  public static org.boris.expr.parser.ExprTokenType valueOf(java.lang.String);
+  static {};
+}
+Compiled from "IParserVisitor.java"
+public interface org.boris.expr.parser.IParserVisitor {
+  public abstract void annotateVariable(org.boris.expr.ExprVariable) throws org.boris.expr.ExprException;
+  public abstract void annotateFunction(org.boris.expr.ExprFunction) throws org.boris.expr.ExprException;
+}
+Compiled from "TokenReader.java"
+public class org.boris.expr.parser.TokenReader extends java.io.Reader {
+  public org.boris.expr.parser.TokenReader(java.io.Reader);
+  public void close() throws java.io.IOException;
+  public int read(char[], int, int) throws java.io.IOException;
+  public char ignoreWhitespace() throws java.io.IOException;
+  public int peek() throws java.io.IOException;
+  public java.lang.String readUntil(char) throws java.io.IOException;
+}
+Compiled from "CSV.java"
+public class org.boris.expr.util.CSV {
+  public org.boris.expr.util.CSV();
+  public static java.lang.String[] parseLine(java.lang.String);
+  public static java.lang.String[] parseLine(java.lang.String, char, boolean);
+  public static java.lang.String toCSV(java.util.Iterator);
+  public static java.lang.String toCSV(java.lang.String[]);
+}
+Compiled from "Condition.java"
+public class org.boris.expr.util.Condition {
+  public org.boris.expr.util.Condition();
+  public static org.boris.expr.util.Condition valueOf(org.boris.expr.Expr);
+  public boolean eval(org.boris.expr.Expr) throws org.boris.expr.ExprException;
+  public void add(org.boris.expr.util.Condition);
+}
+Compiled from "Counter.java"
+public class org.boris.expr.util.Counter {
+  public int count;
+  public double value;
+  public double value2;
+  public double value3;
+  public boolean doit;
+  public org.boris.expr.Expr result;
+  public int iteration;
+  public boolean flag;
+  public java.lang.Object any;
+  public org.boris.expr.util.Counter();
+}
+Compiled from "Criteria.java"
+public class org.boris.expr.util.Criteria {
+  public org.boris.expr.util.Criteria(java.lang.String[], java.util.Map<java.lang.String, org.boris.expr.util.Condition>[]);
+  public int size();
+  public int getColumnCount();
+  public java.lang.String getColumnName(int);
+  public static org.boris.expr.util.Criteria valueOf(org.boris.expr.IEvaluationContext, org.boris.expr.ExprArray) throws org.boris.expr.ExprException;
+  public boolean matches(org.boris.expr.util.Database, int) throws org.boris.expr.ExprException;
+}
+Compiled from "Database.java"
+public class org.boris.expr.util.Database {
+  public org.boris.expr.util.Database(java.lang.String[], java.util.Map<java.lang.String, org.boris.expr.Expr>[]);
+  public int size();
+  public int getColumnCount();
+  public java.lang.String getColumnName(int);
+  public org.boris.expr.Expr get(int, java.lang.String);
+  public static org.boris.expr.util.Database valueOf(org.boris.expr.IEvaluationContext, org.boris.expr.ExprArray) throws org.boris.expr.ExprException;
+}
+Compiled from "Edge.java"
+public class org.boris.expr.util.Edge {
+  public final java.lang.Object source;
+  public final java.lang.Object target;
+  public final java.lang.Object data;
+  public org.boris.expr.util.Edge(java.lang.Object, java.lang.Object, java.lang.Object);
+  public org.boris.expr.util.Edge(java.lang.Object, java.lang.Object);
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public java.lang.String toString();
+}
+Compiled from "ExcelDate.java"
+public class org.boris.expr.util.ExcelDate {
+  public static final double MS_IN_DAY;
+  public org.boris.expr.util.ExcelDate();
+  public static long toJavaDate(double);
+  public static double toExcelDate(long);
+  public static int getDayOfMonth(double);
+  public static int getMonth(double);
+  public static int getYear(double);
+  public static int getWeekday(double);
+  public static int getHour(double);
+  public static int getMinute(double);
+  public static int getSecond(double);
+  public static double date(double, double, double);
+  public static double time(double, double, double);
+}
+Compiled from "ExprArrayBuilder.java"
+public class org.boris.expr.util.ExprArrayBuilder {
+  public org.boris.expr.util.ExprArrayBuilder();
+  public void addRow(org.boris.expr.Expr[]);
+  public org.boris.expr.ExprArray toArray();
+}
+Compiled from "ExprEvaluator.java"
+public class org.boris.expr.util.ExprEvaluator {
+  public org.boris.expr.util.ExprEvaluator();
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+}
+Compiled from "Exprs.java"
+public class org.boris.expr.util.Exprs {
+  public org.boris.expr.util.Exprs();
+  public static org.boris.expr.Expr[] parseValues(java.lang.String[]);
+  public static org.boris.expr.Expr parseValue(java.lang.String);
+  public static java.lang.String getString(org.boris.expr.IEvaluationContext, org.boris.expr.Expr) throws org.boris.expr.ExprException;
+  public static java.lang.Object convertExpr(org.boris.expr.IEvaluationContext, org.boris.expr.Expr) throws org.boris.expr.ExprException;
+  public static org.boris.expr.Expr convertObject(java.lang.Object);
+  public static org.boris.expr.Expr[] convertArgs(java.lang.Object[]);
+  public static org.boris.expr.ExprArray toArray(java.lang.Object...);
+  public static void toUpperCase(org.boris.expr.Expr);
+}
+Compiled from "Financials.java"
+public class org.boris.expr.util.Financials {
+  public org.boris.expr.util.Financials();
+  public static double db(double, double, int, int, int);
+  public static double ddb(double, double, int, int, double);
+  public static double vdb(double, double, int, double, double, double, boolean);
+}
+Compiled from "Graph.java"
+public class org.boris.expr.util.Graph implements java.lang.Iterable {
+  public org.boris.expr.util.Graph();
+  public void setIncludeEdges(boolean);
+  public void add(java.lang.Object);
+  public java.util.Set getInbounds(java.lang.Object);
+  public java.util.Set getOutbounds(java.lang.Object);
+  public void clearOutbounds(java.lang.Object);
+  public void clearInbounds(java.lang.Object);
+  public void remove(java.lang.Object);
+  public void add(org.boris.expr.util.Edge) throws org.boris.expr.util.GraphCycleException;
+  public void checkCycle(org.boris.expr.util.Edge) throws org.boris.expr.util.GraphCycleException;
+  public void remove(org.boris.expr.util.Edge);
+  public void sort();
+  public void clear();
+  public java.util.Iterator iterator();
+  public void traverse(java.lang.Object, org.boris.expr.util.GraphTraversalListener);
+  public java.lang.String toString();
+}
+Compiled from "GraphCycleException.java"
+public class org.boris.expr.util.GraphCycleException extends java.lang.Exception {
+  public org.boris.expr.util.GraphCycleException();
+  public org.boris.expr.util.GraphCycleException(java.lang.String);
+  public org.boris.expr.util.GraphCycleException(java.lang.Throwable);
+  public org.boris.expr.util.GraphCycleException(java.lang.String, java.lang.Throwable);
+}
+Compiled from "GraphTraversalListener.java"
+public interface org.boris.expr.util.GraphTraversalListener {
+  public abstract void traverse(java.lang.Object);
+}
+Compiled from "IO.java"
+public class org.boris.expr.util.IO {
+  public org.boris.expr.util.IO();
+  public static java.lang.String toString(java.io.Reader) throws java.io.IOException;
+  public static java.lang.String toString(java.io.InputStream) throws java.io.IOException;
+  public static java.lang.String toString(java.io.File) throws java.io.IOException;
+  public static void copy(java.io.Reader, java.io.Writer, boolean) throws java.io.IOException;
+  public static void copy(java.io.InputStream, java.io.OutputStream, boolean) throws java.io.IOException;
+  public static java.lang.String getExtension(java.io.File);
+  public static java.lang.String removeExtension(java.io.File);
+  public static byte[] toBytes(java.io.File) throws java.io.IOException;
+  public static java.io.BufferedReader openUrl(java.lang.String) throws java.io.IOException;
+  public static java.lang.String[] readLines(java.io.Reader) throws java.io.IOException;
+  public static java.lang.String[] readLines(java.io.InputStream) throws java.io.IOException;
+  public static java.lang.String[] readLines(java.lang.Class, java.lang.String) throws java.io.IOException;
+  public static java.lang.String[] toArray(java.util.StringTokenizer);
+}
+Compiled from "LongMap.java"
+public class org.boris.expr.util.LongMap {
+  public org.boris.expr.util.LongMap();
+  public org.boris.expr.util.LongMap(int);
+  public void remove(long);
+  public void put(long, java.lang.Object);
+  public java.lang.Object get(long);
+  public long[] keySet();
+  public int size();
+}
+Compiled from "LongMap.java"
+class org.boris.expr.util.LongMap$Entry {
+  public long key;
+  public java.lang.Object value;
+  public org.boris.expr.util.LongMap$Entry next;
+  final org.boris.expr.util.LongMap this$0;
+  public org.boris.expr.util.LongMap$Entry(org.boris.expr.util.LongMap, long, java.lang.Object);
+}
+Compiled from "Maths.java"
+public class org.boris.expr.util.Maths {
+  public org.boris.expr.util.Maths();
+  public static double acosh(double);
+  public static double asinh(double);
+  public static double atanh(double);
+  public static double round(double, int);
+  public static double roundDown(double, int);
+  public static double roundUp(double, int);
+  public static double log(double, double);
+}
+Compiled from "Reflect.java"
+public class org.boris.expr.util.Reflect {
+  public org.boris.expr.util.Reflect();
+  public static void setField(java.lang.reflect.Field, java.lang.Object, java.lang.String) throws java.lang.NumberFormatException, java.lang.IllegalArgumentException, java.lang.IllegalAccessException;
+  public static boolean equals(java.lang.Object, java.lang.Object);
+}
+Compiled from "SimpleEvaluationContext.java"
+public class org.boris.expr.util.SimpleEvaluationContext implements org.boris.expr.IEvaluationContext {
+  public org.boris.expr.util.SimpleEvaluationContext();
+  public void setVariable(java.lang.String, org.boris.expr.Expr);
+  public org.boris.expr.Expr evaluateFunction(org.boris.expr.ExprFunction) throws org.boris.expr.ExprException;
+  public org.boris.expr.Expr evaluateVariable(org.boris.expr.ExprVariable) throws org.boris.expr.ExprException;
+  static java.util.Map access$100(org.boris.expr.util.SimpleEvaluationContext);
+}
+Compiled from "SimpleEvaluationContext.java"
+class org.boris.expr.util.SimpleEvaluationContext$1 {
+}
+Compiled from "SimpleEvaluationContext.java"
+class org.boris.expr.util.SimpleEvaluationContext$SetVarFunction extends org.boris.expr.function.AbstractFunction {
+  final org.boris.expr.util.SimpleEvaluationContext this$0;
+  public org.boris.expr.Expr evaluate(org.boris.expr.IEvaluationContext, org.boris.expr.Expr[]) throws org.boris.expr.ExprException;
+  org.boris.expr.util.SimpleEvaluationContext$SetVarFunction(org.boris.expr.util.SimpleEvaluationContext, org.boris.expr.util.SimpleEvaluationContext$1);
+}
+Compiled from "Statistics.java"
+public class org.boris.expr.util.Statistics {
+  public org.boris.expr.util.Statistics();
+  public static java.math.BigInteger factorial(int);
+  public static double combin(int, int);
+  public static double permut(int, int);
+  public static double binomDist(int, int, double, boolean);
+  public static double critBinom(int, double, double);
+  public static double exponDist(double, double, boolean);
+  public static double confidence(double, double, int);
+  public static double betaDist(double, double, double, double, double);
+  public static double betaInv(double, double, double, double, double);
+  public static double chiDist(double, int);
+  public static double chiInv(double, int);
+  public static double normDensity(double);
+  public static double normsDist(double);
+  static double N(double);
+}
+Compiled from "ValueFormatter.java"
+public class org.boris.expr.util.ValueFormatter {
+  public org.boris.expr.util.ValueFormatter();
+  public static java.lang.String format(double, java.lang.String);
+}
+Compiled from "ValueParser.java"
+public class org.boris.expr.util.ValueParser {
+  public org.boris.expr.util.ValueParser();
+  public static java.lang.Double parse(java.lang.String);
+  public static java.lang.Double parseDate(java.lang.String);
+  public static java.lang.Double parseNumber(java.lang.String);
+}

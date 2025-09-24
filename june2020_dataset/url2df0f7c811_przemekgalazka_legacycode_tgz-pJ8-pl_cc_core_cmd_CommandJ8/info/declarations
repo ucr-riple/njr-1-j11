@@ -1,0 +1,1635 @@
+Compiled from "AgentConnection.java"
+public class ccproxy.AgentConnection extends java.lang.Thread {
+  org.apache.log4j.Logger logping;
+  public static final org.apache.log4j.Logger log;
+  java.lang.String ip;
+  int port;
+  java.lang.String agentName;
+  java.lang.String agentExten;
+  java.lang.String agentNumber;
+  java.lang.String idConnection;
+  boolean paused;
+  boolean supervisor;
+  boolean loggedout;
+  boolean clearexit;
+  boolean isSerwis;
+  ccproxy.AgentConnectionPing agentConnectionPing;
+  java.nio.channels.SocketChannel sChannel;
+  ccproxy.ChannelWriter out;
+  ccproxy.ChannelReader in;
+  ccproxy.Parametry p;
+  java.util.Date last_ping;
+  java.util.Date last_db_activity;
+  java.util.HashMap<java.lang.String, java.lang.String> queuePenalty;
+  java.text.SimpleDateFormat dateFormat;
+  java.text.SimpleDateFormat dateFormatsec;
+  boolean newConnected;
+  public ccproxy.AgentConnection(java.nio.channels.SocketChannel, ccproxy.Parametry);
+  public ccproxy.AgentConnection(java.lang.String, java.lang.String);
+  public void printCallInProgress();
+  public void run();
+  public boolean checkPing(java.lang.Thread, java.lang.Thread);
+  public boolean isNewConnected();
+  public void setNewConnected(boolean);
+  static {};
+}
+Compiled from "AgentConnectionList.java"
+public class ccproxy.AgentConnectionList {
+  pl.cc.SystemCoreState coreState;
+  public ccproxy.AgentConnectionList(pl.cc.SystemCoreState);
+  public synchronized int size();
+  public synchronized ccproxy.AgentConnection get(int);
+  public synchronized boolean contains(java.lang.Object);
+  public synchronized void add(ccproxy.AgentConnection);
+  public synchronized void remove(ccproxy.AgentConnection);
+  public synchronized void remove(int);
+  public synchronized ccproxy.AgentConnection getByIP(java.lang.String);
+  public synchronized ccproxy.AgentConnection getAgentConnectionByNumer(java.lang.String);
+  public synchronized ccproxy.AgentConnection getAgentConnectionByExten(java.lang.String);
+  public synchronized void pushSupervisorMessage(java.lang.String);
+  public synchronized void pushMessage(java.lang.String);
+  public void pushMessage(java.lang.String, ccproxy.AgentConnection);
+  public void pushQueueMessage(java.lang.String);
+  public void pushSuperMessage(java.lang.String);
+  public synchronized void pushSuperMessage(java.lang.String, boolean);
+}
+Compiled from "AgentConnectionPing.java"
+public class ccproxy.AgentConnectionPing extends java.lang.Thread {
+  static org.apache.log4j.Logger log;
+  ccproxy.AgentConnection ac;
+  java.lang.Thread pingThread;
+  java.lang.Thread mainThread;
+  public ccproxy.AgentConnectionPing(ccproxy.AgentConnection, java.lang.Thread);
+  public void stopThread();
+  public void run();
+  static {};
+}
+Compiled from "AgentResponseProcessor.java"
+public class ccproxy.AgentResponseProcessor {
+  public ccproxy.AgentResponseProcessor(ccproxy.Parametry, ccproxy.Events);
+  protected boolean processMessage(java.lang.String, ccproxy.AgentConnection, boolean, ccproxy.WiadomoscOdAsteriska);
+}
+Compiled from "AgentResponseProcessor.java"
+class ccproxy.AgentResponseProcessor$1 implements ccproxy.AgentResponseProcessor$ProcessorAction {
+  final ccproxy.Events val$events;
+  final ccproxy.AgentResponseProcessor this$0;
+  ccproxy.AgentResponseProcessor$1(ccproxy.AgentResponseProcessor, ccproxy.Events);
+  public void process(ccproxy.WiadomoscOdAsteriska, ccproxy.AgentConnection);
+}
+Compiled from "AgentResponseProcessor.java"
+class ccproxy.AgentResponseProcessor$2 implements ccproxy.AgentResponseProcessor$ProcessorAction {
+  final ccproxy.Parametry val$parametry;
+  final ccproxy.Events val$events;
+  final ccproxy.AgentResponseProcessor this$0;
+  ccproxy.AgentResponseProcessor$2(ccproxy.AgentResponseProcessor, ccproxy.Parametry, ccproxy.Events);
+  public void process(ccproxy.WiadomoscOdAsteriska, ccproxy.AgentConnection);
+}
+Compiled from "AgentResponseProcessor.java"
+class ccproxy.AgentResponseProcessor$3 implements ccproxy.AgentResponseProcessor$ProcessorAction {
+  final ccproxy.Events val$events;
+  final ccproxy.AgentResponseProcessor this$0;
+  ccproxy.AgentResponseProcessor$3(ccproxy.AgentResponseProcessor, ccproxy.Events);
+  public void process(ccproxy.WiadomoscOdAsteriska, ccproxy.AgentConnection);
+}
+Compiled from "AgentResponseProcessor.java"
+interface ccproxy.AgentResponseProcessor$ProcessorAction {
+  public abstract void process(ccproxy.WiadomoscOdAsteriska, ccproxy.AgentConnection);
+}
+Compiled from "AsteriskCmd.java"
+public class ccproxy.AsteriskCmd {
+  org.apache.log4j.Logger log;
+  org.apache.log4j.Logger loge;
+  ccproxy.Parametry p;
+  public ccproxy.AsteriskCmd(ccproxy.Parametry);
+  public boolean login(java.lang.String, java.lang.String, java.lang.String);
+  public java.lang.String saveAgentExten(java.lang.String, java.lang.String);
+  public java.lang.String delAgentExten(java.lang.String);
+  public java.lang.String saveAgentNumber(java.lang.String, java.lang.String);
+  public java.lang.String delAgentNumber(java.lang.String);
+  public boolean logout(java.lang.String, java.lang.String);
+  public java.lang.String pause(int, java.lang.String, java.lang.String, java.lang.String);
+  public java.lang.String setPause(java.lang.String);
+  public java.lang.String setUnpause(java.lang.String);
+  public java.lang.String unpause(int, java.lang.String, java.lang.String);
+  public java.lang.String addToQueue(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String, boolean);
+  public java.lang.String removeFromQueue(int, java.lang.String, java.lang.String, java.lang.String);
+  public java.lang.String spy(int, java.lang.String, java.lang.String, java.lang.String);
+}
+Compiled from "AsteriskMessages.java"
+public class ccproxy.AsteriskMessages {
+  public ccproxy.AsteriskMessages();
+}
+Compiled from "AsteriskQueue.java"
+public class ccproxy.AsteriskQueue {
+  java.lang.String nazwa;
+  java.lang.String ilosc;
+  ccproxy.QueueMemberList agenci;
+  java.lang.String customType;
+  public ccproxy.AsteriskQueue(java.lang.String, java.lang.String);
+  public ccproxy.AsteriskQueue(java.lang.String, java.lang.String, java.lang.String);
+}
+Compiled from "AsteriskQueueList.java"
+public class ccproxy.AsteriskQueueList extends java.util.ArrayList<ccproxy.AsteriskQueue> {
+  org.apache.log4j.Logger log;
+  public ccproxy.AsteriskQueueList(pl.cc.SystemCoreState);
+  public boolean add(ccproxy.AsteriskQueue);
+  public boolean updateFromDb();
+  public void updateQueue(java.lang.String, java.lang.String);
+  public void printAllLogedAgents(ccproxy.AgentConnection);
+  public void printAgentQueuesToAgent(ccproxy.AgentConnection);
+  public void printAllQueuesToAgent(ccproxy.AgentConnection);
+  public void showQueues();
+  public ccproxy.AsteriskQueue getQueueByName(java.lang.String);
+  public synchronized void updateQueueMember(ccproxy.Parametry, java.lang.String, java.lang.String, java.lang.String, java.lang.String);
+  public synchronized void updateQueueMemberStatus(ccproxy.Parametry, java.lang.String, java.lang.String, java.lang.String, java.lang.String);
+  public synchronized void removeQueueMember(ccproxy.Parametry, java.lang.String, java.lang.String);
+  public synchronized void removeAgentConnection(ccproxy.AgentConnection);
+  public boolean add(java.lang.Object);
+}
+Compiled from "CCproxy.java"
+public class ccproxy.CCproxy extends java.lang.Thread {
+  static final java.lang.String VERSION;
+  static ccproxy.Parametry p;
+  static java.lang.String version;
+  org.apache.log4j.Logger log;
+  public void start(java.lang.String) throws java.io.IOException;
+  public ccproxy.CCproxy() throws java.io.IOException;
+  public ccproxy.CCproxy(java.lang.String) throws java.io.IOException;
+  static boolean checkLicense(java.lang.String, java.lang.String, java.lang.String);
+  static java.lang.String MD5calc(byte[]);
+  public static void main(java.lang.String[]) throws java.io.IOException;
+  static {};
+}
+Compiled from "ChannelReader.java"
+public class ccproxy.ChannelReader {
+  java.util.LinkedList<java.lang.String> listToRead;
+  java.nio.ByteBuffer b;
+  java.lang.String partial;
+  java.nio.channels.SocketChannel channel;
+  java.nio.charset.Charset charset;
+  public ccproxy.ChannelReader(java.nio.channels.SocketChannel);
+  public java.lang.String readLine() throws java.io.IOException;
+  public void close();
+}
+Compiled from "ChannelWriter.java"
+public class ccproxy.ChannelWriter {
+  java.nio.channels.Selector selector;
+  java.util.LinkedList<java.lang.String> listToSend;
+  java.nio.channels.SocketChannel channel;
+  boolean writePaused;
+  java.nio.ByteBuffer b;
+  public ccproxy.ChannelWriter(java.nio.channels.SocketChannel, java.nio.channels.Selector);
+  public void println(java.lang.String);
+  public void close();
+}
+Compiled from "GadajAsterisk.java"
+class ccproxy.Commands extends java.util.ArrayList<java.lang.String> {
+  public static final ccproxy.Commands COMMANDS;
+  public ccproxy.Commands();
+  static {};
+}
+Compiled from "DBConnection.java"
+public class ccproxy.DBConnection {
+  java.sql.Connection conn;
+  public ccproxy.DBConnection(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String);
+  public synchronized java.lang.String quickQuery(java.lang.String);
+  public synchronized java.sql.ResultSet query(java.lang.String);
+}
+Compiled from "Events.java"
+public class ccproxy.Events {
+  org.apache.log4j.Logger log;
+  ccproxy.Parametry p;
+  public ccproxy.Events(ccproxy.Parametry);
+  public void login(ccproxy.AgentConnection);
+  public void logout(ccproxy.AgentConnection);
+  public void loginIncorrect(ccproxy.AgentConnection);
+  public void removeQueueFailed(ccproxy.AgentConnection);
+  public void pause(ccproxy.AgentConnection, java.lang.String, int, int, int);
+  public void pause(ccproxy.AgentConnection);
+  public void unpause(ccproxy.AgentConnection);
+  public void addQueue(ccproxy.AgentConnection, java.lang.String, java.lang.String);
+  public void removeQueue(ccproxy.AgentConnection, java.lang.String);
+  public void addQueueFailed(ccproxy.AgentConnection, java.lang.String, java.lang.String);
+  public void unknownResponse(ccproxy.AgentConnection, java.lang.String, java.lang.String);
+  public void joinORleave(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String);
+  public void queueMemberStatus(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String);
+  public void newCall(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String);
+  public void agentConnect(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String);
+  public void agentComplete(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String);
+  public void hangup(java.lang.String, java.lang.String, java.lang.String);
+  public void newSomeCall(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String);
+}
+Compiled from "GadajAsterisk.java"
+public class ccproxy.GadajAsterisk extends java.lang.Thread {
+  static org.apache.log4j.Logger logMessageFromAsterisk;
+  static org.apache.log4j.Logger log;
+  static java.lang.String asteriskPort;
+  static int numer;
+  static java.lang.String asteriskIP;
+  static java.lang.String asteriskUser;
+  static java.lang.String asteriskPass;
+  static java.net.Socket echoSocket;
+  static java.io.PrintWriter out;
+  static java.io.BufferedReader in;
+  boolean asteriskReader;
+  static boolean connected;
+  static ccproxy.Parametry p;
+  static ccproxy.WiadomoscOdAgentLlist wiadomosciOdAgenta;
+  static ccproxy.WiadomoscOdAsteriskaList wiadomosciOdAsteriska;
+  static java.util.concurrent.locks.ReentrantLock agentListLock;
+  public ccproxy.GadajAsterisk();
+  public ccproxy.GadajAsterisk(java.lang.String, java.lang.String, java.lang.String, java.lang.String, ccproxy.Parametry) throws java.lang.Exception;
+  public void close();
+  public void sendAction(java.lang.String);
+  public void run();
+  public void sendMessage(ccproxy.AgentConnection, java.lang.String);
+  public void sendMessage(ccproxy.AgentConnection, java.lang.String, boolean);
+  public boolean wyslijWiadomosci();
+  public boolean wyslijOdpowiedz();
+  public ccproxy.WiadomoscOdAgenta getWiadomoscByNumer(int);
+  static {};
+}
+Compiled from "Listener.java"
+public class ccproxy.Listener extends java.lang.Thread {
+  static org.apache.log4j.Logger log;
+  java.nio.channels.ServerSocketChannel serverChan;
+  ccproxy.GadajAsterisk polaczenieAsterisk;
+  ccproxy.AgentConnectionList agenci;
+  ccproxy.DBConnection dbConn;
+  ccproxy.Parametry p;
+  public ccproxy.Listener(java.lang.String, ccproxy.Parametry);
+  public void run();
+  static {};
+}
+Compiled from "MessageFromAsterisk.java"
+public class ccproxy.MessageFromAsterisk {
+  org.apache.log4j.Logger log;
+  java.lang.String eventMsg;
+  java.lang.String exten;
+  java.lang.String event;
+  java.lang.String response;
+  ccproxy.Events e;
+  boolean showQueueMember;
+  java.util.HashMap<java.lang.String, java.lang.String> messageHash;
+  ccproxy.Parametry p;
+  ccproxy.AgentResponseProcessor agentResponsProcessor;
+  public ccproxy.MessageFromAsterisk(ccproxy.Parametry);
+  public ccproxy.MessageFromAsterisk(ccproxy.Parametry, ccproxy.Events);
+  public void parseLine(java.lang.String);
+  public void showEvent();
+  public void parseEvent(ccproxy.WiadomoscOdAsteriskaList);
+  protected boolean agentLogout(java.lang.String, ccproxy.AgentConnection, boolean, ccproxy.WiadomoscOdAsteriska);
+  public void send();
+}
+Compiled from "MessageFromAsteriskTest.java"
+public class ccproxy.MessageFromAsteriskTest {
+  ccproxy.MessageFromAsterisk sut;
+  ccproxy.Parametry parametry;
+  ccproxy.Events events;
+  ccproxy.AgentConnection agentConnection;
+  ccproxy.WiadomoscOdAsteriska wiadomosc;
+  public ccproxy.MessageFromAsteriskTest();
+  public void setUp() throws java.lang.Exception;
+  public void shouldCharacteriseMessageProcessing() throws java.lang.Exception;
+  public void shouldProcessLogin() throws java.lang.Exception;
+  public void shouldNotProcessAgentLoginIn() throws java.lang.Exception;
+  public void shouldProcessAgentAlreadyLoggedIn() throws java.lang.Exception;
+  public void shouldProcessAgentLogout() throws java.lang.Exception;
+}
+Compiled from "NullChannelWriter.java"
+public class ccproxy.NullChannelWriter extends ccproxy.ChannelWriter {
+  public ccproxy.NullChannelWriter();
+  public void println(java.lang.String);
+  public void close();
+}
+Compiled from "Parametry.java"
+public class ccproxy.Parametry {
+  pl.cc.core.PauseTypeList pauseTypeList;
+  pl.cc.SystemCoreState coreState;
+  ccproxy.AgentConnectionList agenci;
+  ccproxy.AsteriskQueueList asteriskQueueList;
+  ccproxy.DBConnection dbConn;
+  ccproxy.GadajAsterisk gadajAsterisk;
+  ccproxy.ReadConfig c;
+  org.apache.log4j.Logger log;
+  public ccproxy.Parametry();
+  public ccproxy.Parametry(pl.cc.core.PauseTypeList, pl.cc.SystemCoreState, ccproxy.AgentConnectionList, ccproxy.AsteriskQueueList);
+  protected synchronized void removeAgentFromQueues(int);
+}
+Compiled from "QueueMember.java"
+public class ccproxy.QueueMember {
+  ccproxy.AgentConnection ac;
+  java.lang.String penalty;
+  java.lang.String status;
+  boolean paused;
+  public ccproxy.QueueMember(ccproxy.AgentConnection, java.lang.String);
+}
+Compiled from "QueueMemberList.java"
+public class ccproxy.QueueMemberList {
+  java.util.List<ccproxy.QueueMember> aclist;
+  public ccproxy.QueueMemberList();
+  public synchronized int size();
+  public synchronized ccproxy.QueueMember get(int);
+  public synchronized boolean contains(java.lang.Object);
+  public synchronized boolean containsNumer(java.lang.String);
+  public synchronized void add(ccproxy.QueueMember);
+  public synchronized void remove(ccproxy.QueueMember);
+  public synchronized void remove(int);
+  public synchronized ccproxy.QueueMember getByIP(java.lang.String);
+  public synchronized ccproxy.QueueMember getQueueMemberByNumer(java.lang.String);
+  public synchronized void pushMessage(java.lang.String);
+  public void pushMessage(java.lang.String, ccproxy.QueueMember);
+  public void pushQueueMessage(java.lang.String);
+  public synchronized void pushSuperMessage(java.lang.String);
+  public void remove(ccproxy.AgentConnection);
+}
+Compiled from "ReadConfig.java"
+public class ccproxy.ReadConfig {
+  boolean configOk;
+  java.lang.String pghost;
+  java.lang.String pgport;
+  java.lang.String pguser;
+  java.lang.String pgpass;
+  java.lang.String pgdbname;
+  java.lang.String asteriskHost;
+  java.lang.String asteriskPort;
+  java.lang.String asteriskUser;
+  java.lang.String asteriskSecret;
+  java.lang.String listenPort;
+  java.lang.String licensedAgents;
+  java.lang.String licenseKey;
+  java.lang.String licenseExpires;
+  java.lang.String agentVersion;
+  java.lang.String agentUpdateURL;
+  java.lang.String agentContext;
+  boolean pauseAfterConnection;
+  boolean pauseWhenStartup;
+  boolean logAsteriskEvents;
+  java.lang.String externAuthURL;
+  boolean monitorDbActivity;
+  boolean pauseWhenUnavailable;
+  boolean requestCallTag;
+  java.lang.String configFile;
+  java.lang.String spyMode;
+  org.apache.log4j.Logger log;
+  public ccproxy.ReadConfig(ccproxy.Parametry, java.lang.String);
+}
+Compiled from "WiadomoscOdAgentLlist.java"
+public class ccproxy.WiadomoscOdAgentLlist extends java.util.ArrayList<ccproxy.WiadomoscOdAgenta> {
+  public ccproxy.WiadomoscOdAgentLlist();
+}
+Compiled from "WiadomoscOdAgenta.java"
+public class ccproxy.WiadomoscOdAgenta {
+  ccproxy.AgentConnection agent;
+  java.lang.String wiadomosc;
+  java.lang.String param;
+  int numer;
+  boolean wyslana;
+  java.util.Date time;
+  pl.cc.core.cmd.Command cmd;
+  public ccproxy.WiadomoscOdAgenta(ccproxy.AgentConnection, int, java.util.Date, pl.cc.core.cmd.Command);
+  public ccproxy.WiadomoscOdAgenta(ccproxy.AgentConnection, java.lang.String, int);
+  public ccproxy.WiadomoscOdAgenta(ccproxy.AgentConnection, java.lang.String, java.lang.String, int);
+  public pl.cc.core.cmd.Command getCmd();
+}
+Compiled from "WiadomoscOdAsteriska.java"
+public class ccproxy.WiadomoscOdAsteriska {
+  java.lang.String wiadomosc;
+  int numer;
+  boolean wyslana;
+  public ccproxy.WiadomoscOdAsteriska();
+  public java.lang.String getWiadomosc();
+  public void setWiadomosc(java.lang.String);
+  public int getNumer();
+  public void setNumer(int);
+  public boolean isWyslana();
+  public void setWyslana(boolean);
+}
+Compiled from "WiadomoscOdAsteriskaList.java"
+public class ccproxy.WiadomoscOdAsteriskaList extends java.util.Vector<ccproxy.WiadomoscOdAsteriska> {
+  public ccproxy.WiadomoscOdAsteriskaList();
+}
+Compiled from "Localization.java"
+public class pl.cc.Localization {
+  static java.util.ResourceBundle rb;
+  public pl.cc.Localization();
+  public static void initLocalization(java.lang.String);
+  public static java.lang.String getText(java.lang.String);
+}
+Compiled from "ProxyEventListenerList.java"
+class pl.cc.PendingModificaton {
+  boolean toAdd;
+  pl.cc.ProxyEventListener listener;
+  public pl.cc.PendingModificaton(boolean, pl.cc.ProxyEventListener);
+}
+Compiled from "Ping.java"
+public class pl.cc.Ping extends java.lang.Thread implements pl.cc.ProxyEventListener {
+  static final org.apache.log4j.Logger log;
+  boolean stop;
+  pl.cc.ProxyEventListenerList proxyEventListenerList;
+  pl.cc.Ping$CheckPingThread checkPingThread;
+  pl.cc.core.NetPrintWriter out;
+  java.util.Date lastPong;
+  java.util.Date lastPing;
+  int noPongCount;
+  int interval;
+  int timeOut;
+  public pl.cc.Ping(pl.cc.ProxyEventListenerList, pl.cc.core.NetPrintWriter);
+  public pl.cc.Ping(pl.cc.ProxyEventListenerList, pl.cc.core.NetPrintWriter, int, int);
+  public void run();
+  public void stopThread();
+  public void setLastPong(java.util.Date);
+  public java.util.Date getLastPong();
+  public void onAuthorized(pl.cc.core.cmd.OkWelcome);
+  public void onAuthResponse(boolean);
+  public void onDisconnect();
+  public void onEvent(pl.cc.core.cmd.Command);
+  public void onInfoVersion(pl.cc.core.cmd.InfoVersion);
+  public void onPong(java.util.Date);
+  public void onProblemWithPing();
+  public void onTryConnect(boolean, java.lang.String);
+  public void onWelcome();
+  public void onInvalidVersion(java.lang.String, pl.cc.core.cmd.InfoVersion);
+  public void onStartReconnectProcedure(int);
+  public void onConnectionReplaced(pl.cc.core.cmd.ErrSameAgentConnection);
+  public void onInfoType(pl.cc.core.cmd.InfoType);
+  static void access$000(pl.cc.Ping);
+  static {};
+}
+Compiled from "Ping.java"
+class pl.cc.Ping$CheckPingThread extends java.lang.Thread {
+  final pl.cc.Ping this$0;
+  pl.cc.Ping$CheckPingThread(pl.cc.Ping);
+  public void run();
+}
+Compiled from "ProxyEventListener.java"
+public interface pl.cc.ProxyEventListener {
+  public abstract void onProblemWithPing();
+  public abstract void onTryConnect(boolean, java.lang.String);
+  public abstract void onDisconnect();
+  public abstract void onEvent(pl.cc.core.cmd.Command);
+  public abstract void onAuthResponse(boolean);
+  public abstract void onInfoVersion(pl.cc.core.cmd.InfoVersion);
+  public abstract void onAuthorized(pl.cc.core.cmd.OkWelcome);
+  public abstract void onPong(java.util.Date);
+  public abstract void onWelcome();
+  public abstract void onInvalidVersion(java.lang.String, pl.cc.core.cmd.InfoVersion);
+  public abstract void onStartReconnectProcedure(int);
+  public abstract void onConnectionReplaced(pl.cc.core.cmd.ErrSameAgentConnection);
+  public abstract void onInfoType(pl.cc.core.cmd.InfoType);
+}
+Compiled from "ProxyEventListenerList.java"
+public class pl.cc.ProxyEventListenerList extends java.util.ArrayList<pl.cc.ProxyEventListener> implements pl.cc.ProxyEventListener {
+  static final org.apache.log4j.Logger log;
+  public pl.cc.ProxyEventListenerList();
+  public synchronized boolean add(pl.cc.ProxyEventListener);
+  public synchronized boolean remove(java.lang.Object);
+  public void onInfoType(pl.cc.core.cmd.InfoType);
+  public void onEvent(pl.cc.core.cmd.Command);
+  public void onAuthResponse(boolean);
+  public void onInfoVersion(pl.cc.core.cmd.InfoVersion);
+  public void onProblemWithPing();
+  public void onTryConnect(boolean, java.lang.String);
+  public void onAuthorized(pl.cc.core.cmd.OkWelcome);
+  public void onDisconnect();
+  public void onPong(java.util.Date);
+  public void onWelcome();
+  public void onInvalidVersion(java.lang.String, pl.cc.core.cmd.InfoVersion);
+  public void onStartReconnectProcedure(int);
+  public void onConnectionReplaced(pl.cc.core.cmd.ErrSameAgentConnection);
+  public boolean add(java.lang.Object);
+  static {};
+}
+Compiled from "ProxyHandler.java"
+public class pl.cc.ProxyHandler implements pl.cc.ProxyEventListener,pl.cc.ProxyTasks,pl.cc.events.real.RealAgentListener {
+  static final org.apache.log4j.Logger log;
+  pl.cc.ProxyEventListenerList listenerList;
+  protected pl.cc.core.cmd.OkWelcome selfInfo;
+  protected java.lang.String host;
+  protected pl.cc.real.RealAgent connectedAgent;
+  protected pl.cc.events.real.RealAgentListener connectedAgentListener;
+  protected pl.cc.core.NetPrintWriter out;
+  pl.cc.core.PauseType lastPauseType;
+  boolean lastPaused;
+  protected pl.cc.SystemCoreState systemState;
+  protected int port;
+  public pl.cc.ProxyHandler(java.lang.String, boolean, java.lang.String, int, boolean, boolean);
+  public void addEventListener(pl.cc.ProxyEventListener);
+  public boolean removeEventListener(pl.cc.ProxyEventListener);
+  public pl.cc.SystemCoreState getSystemState();
+  public pl.cc.real.RealAgent getConnectedAgent();
+  public void doSendCallTag(java.lang.String[]);
+  public void onProblemWithPing();
+  public void onAuthorized(pl.cc.core.cmd.OkWelcome);
+  public void onAuthResponse(boolean);
+  public void onDisconnect();
+  public void onEvent(pl.cc.core.cmd.Command);
+  public void onInfoVersion(pl.cc.core.cmd.InfoVersion);
+  public void onTryConnect(boolean, java.lang.String);
+  public void onPong(java.util.Date);
+  public void onWelcome();
+  protected boolean sendLoginCredentials();
+  public void onInvalidVersion(java.lang.String, pl.cc.core.cmd.InfoVersion);
+  public void onStartReconnectProcedure(int);
+  public void onInfoType(pl.cc.core.cmd.InfoType);
+  public void onConnectionReplaced(pl.cc.core.cmd.ErrSameAgentConnection);
+  protected void getCmdUnpaused();
+  protected void getCmdPaused(pl.cc.core.PauseType, int, int, int);
+  public static void main(java.lang.String[]);
+  public void doConnect(pl.cc.core.LoginCredentials);
+  public void doSpyAgent(pl.cc.real.RealAgent);
+  public void doDisconnect();
+  public void doPauseAgent(pl.cc.real.RealAgent, boolean, pl.cc.core.PauseType);
+  public void doPauseAgentAdministrative(pl.cc.real.RealAgent, boolean);
+  protected pl.cc.core.PauseType getPauseTypeDefault();
+  protected pl.cc.core.PauseType getPauseTypeAdministrative();
+  public pl.cc.core.PauseTypeList getPauseTypeList();
+  public pl.cc.core.LoginCredentials getCredentials();
+  public void onAgentConnect(pl.cc.real.RealAgent, pl.cc.real.RealCall, pl.cc.real.RealQueue);
+  public void onAgentNewCall(pl.cc.real.RealCall, pl.cc.real.RealQueue);
+  public void onCallLeave(pl.cc.real.RealAgent, pl.cc.real.RealCall, pl.cc.real.RealQueue);
+  public void onChangeStatusAsQueueMember(pl.cc.real.RealAgent, pl.cc.real.RealQueue, pl.cc.core.AgentStatusInQueue);
+  public void onHangeup(pl.cc.real.RealAgent, pl.cc.real.RealCall);
+  public void onPause(pl.cc.real.RealAgent, boolean, pl.cc.core.PauseType, int, int, int);
+  static {};
+}
+Compiled from "ProxyHandler.java"
+class pl.cc.ProxyHandler$1 implements javax.net.ssl.X509TrustManager {
+  final pl.cc.ProxyHandler this$0;
+  pl.cc.ProxyHandler$1(pl.cc.ProxyHandler);
+  public java.security.cert.X509Certificate[] getAcceptedIssuers();
+  public void checkClientTrusted(java.security.cert.X509Certificate[], java.lang.String);
+  public void checkServerTrusted(java.security.cert.X509Certificate[], java.lang.String);
+}
+Compiled from "ProxyHandler.java"
+class pl.cc.ProxyHandler$ReconnectThread extends java.lang.Thread {
+  pl.cc.ProxyHandler proxyHandler;
+  int sleepTime;
+  final pl.cc.ProxyHandler this$0;
+  public pl.cc.ProxyHandler$ReconnectThread(pl.cc.ProxyHandler, pl.cc.ProxyHandler, int);
+  public void run();
+}
+Compiled from "ProxyTasks.java"
+public interface pl.cc.ProxyTasks {
+  public abstract void doConnect(pl.cc.core.LoginCredentials);
+  public abstract void doDisconnect();
+  public abstract void doSpyAgent(pl.cc.real.RealAgent);
+  public abstract void doPauseAgent(pl.cc.real.RealAgent, boolean, pl.cc.core.PauseType);
+  public abstract void doPauseAgentAdministrative(pl.cc.real.RealAgent, boolean);
+}
+Compiled from "ReaderThread.java"
+public class pl.cc.ReaderThread extends java.lang.Thread {
+  static final org.apache.log4j.Logger log;
+  public pl.cc.ReaderThread(pl.cc.ProxyEventListenerList, java.io.BufferedReader, java.lang.String);
+  protected void cmd(java.lang.String);
+  public void run();
+  public void closeInputStream() throws java.io.IOException;
+  static {};
+}
+Compiled from "SystemCoreState.java"
+public class pl.cc.SystemCoreState {
+  public static final org.apache.log4j.Logger log;
+  public pl.cc.SystemCoreState();
+  public pl.cc.SystemCoreState(pl.cc.core.PauseTypeList);
+  public pl.cc.real.RealAgentList getLoggedAgentList();
+  public pl.cc.real.RealQueueList getQueueList();
+  public pl.cc.real.RealCallList getCallList();
+  pl.cc.core.PauseTypeList getPauseTypeList();
+  public boolean hasPrivilegeForAgent(pl.cc.real.RealAgent);
+  public boolean process(pl.cc.core.cmd.Command, pl.cc.ProxyTasks);
+  public pl.cc.real.RealAgent findAgent(pl.cc.real.RealAgent) throws pl.cc.exceptions.AgentNotFoundException;
+  public pl.cc.real.RealAgent findAgent(java.lang.Integer) throws pl.cc.exceptions.AgentNotFoundException;
+  public pl.cc.real.RealQueue findQueue(pl.cc.real.RealQueue) throws pl.cc.exceptions.QueueNotFoundException;
+  public pl.cc.real.RealAgent findAgent(pl.cc.real.RealAgent, pl.cc.real.RealQueue) throws pl.cc.exceptions.AgentNotFoundException, pl.cc.exceptions.QueueNotFoundException;
+  public pl.cc.real.RealQueueList findQueuesForAgent(pl.cc.real.RealAgent);
+  public pl.cc.real.RealAgent findAgentConnectedWithCall(pl.cc.real.RealCall);
+  public pl.cc.core.PauseType findPauseTypeByValue(java.lang.String);
+  public pl.cc.core.PauseType findAutoPauseDef();
+  static {};
+}
+Compiled from "AgentStatusInQueue.java"
+public final class pl.cc.core.AgentStatusInQueue extends java.lang.Enum<pl.cc.core.AgentStatusInQueue> {
+  public static final pl.cc.core.AgentStatusInQueue RINGING;
+  public static final pl.cc.core.AgentStatusInQueue IN_USE;
+  public static final pl.cc.core.AgentStatusInQueue NOT_INUSE;
+  public static final pl.cc.core.AgentStatusInQueue UNKNOWN;
+  public static final pl.cc.core.AgentStatusInQueue RINGINUSE;
+  java.lang.String status;
+  java.lang.String desc;
+  public static pl.cc.core.AgentStatusInQueue[] values();
+  public static pl.cc.core.AgentStatusInQueue valueOf(java.lang.String);
+  public static pl.cc.core.AgentStatusInQueue find(java.lang.String);
+  public java.lang.String getStatus();
+  public java.lang.String getDesc();
+  static {};
+}
+Compiled from "CallStatus.java"
+public final class pl.cc.core.CallStatus extends java.lang.Enum<pl.cc.core.CallStatus> {
+  public static final pl.cc.core.CallStatus RINGING;
+  public static final pl.cc.core.CallStatus ANSWERED;
+  public static final pl.cc.core.CallStatus UNKNOWN;
+  java.lang.String status;
+  java.lang.String desc;
+  public static pl.cc.core.CallStatus[] values();
+  public static pl.cc.core.CallStatus valueOf(java.lang.String);
+  public static pl.cc.core.CallStatus find(java.lang.String);
+  public java.lang.String getStatus();
+  public java.lang.String getDesc();
+  static {};
+}
+Compiled from "ExtraFieldData.java"
+public class pl.cc.core.ExtraFieldData {
+  java.lang.String name;
+  java.lang.String mask;
+  public pl.cc.core.ExtraFieldData(java.lang.String, java.lang.String);
+  public java.lang.String toString();
+  public java.lang.String getName();
+  public java.lang.String getMask();
+}
+Compiled from "GroupData.java"
+public class pl.cc.core.GroupData {
+  java.lang.String name;
+  public pl.cc.core.GroupData(java.lang.String, java.util.ArrayList<java.lang.String>);
+  public java.lang.String toString();
+  public java.util.ArrayList<java.lang.String> getTopicList();
+  public void setTopicList(java.util.ArrayList<java.lang.String>);
+}
+Compiled from "LoginCredentials.java"
+public class pl.cc.core.LoginCredentials {
+  public java.lang.String username;
+  public java.lang.String password;
+  public java.lang.String exten;
+  public java.lang.String host;
+  public pl.cc.core.LoginCredentials(java.lang.String, java.lang.String, java.lang.String);
+  public pl.cc.core.LoginCredentials(pl.cc.core.LoginCredentials);
+  public pl.cc.core.LoginCredentials(java.lang.String, java.lang.String);
+  public pl.cc.core.LoginCredentials();
+  public pl.cc.core.LoginCredentials(java.lang.String[]);
+  public java.lang.String toString();
+  public boolean areComplete();
+}
+Compiled from "NetPrintWriter.java"
+public class pl.cc.core.NetPrintWriter extends java.io.PrintWriter {
+  static final org.apache.log4j.Logger log;
+  public pl.cc.core.NetPrintWriter(java.io.OutputStream);
+  public synchronized void println(java.lang.String);
+  public void print(java.lang.String);
+  static {};
+}
+Compiled from "PauseType.java"
+public class pl.cc.core.PauseType {
+  public static final int ID_AUTO;
+  public static final int ID_ADMINISTRATIVE;
+  public static final int ID_DEFAULT;
+  public static final int PAUSE_FOREVER;
+  public pl.cc.core.PauseType(int, java.lang.String);
+  public boolean isAdministrative();
+  public boolean isAuto();
+  public boolean isDefault();
+  public java.lang.String getName();
+  public java.lang.String getDisplayName();
+  public int getId();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+}
+Compiled from "PauseTypeList.java"
+public class pl.cc.core.PauseTypeList extends java.util.ArrayList<pl.cc.core.PauseType> {
+  static final org.apache.log4j.Logger log;
+  public pl.cc.core.PauseTypeList();
+  public pl.cc.core.PauseType findByValue(java.lang.String);
+  public pl.cc.core.PauseType findById(int);
+  public pl.cc.core.PauseType getDefault();
+  public java.util.ArrayList<pl.cc.core.PauseType> getNoAdministrative();
+  public void sort();
+  public pl.cc.core.PauseType getAutoPauseDef();
+  static {};
+}
+Compiled from "PauseTypeList.java"
+class pl.cc.core.PauseTypeList$1Com implements java.util.Comparator<pl.cc.core.PauseType> {
+  final pl.cc.core.PauseTypeList this$0;
+  pl.cc.core.PauseTypeList$1Com(pl.cc.core.PauseTypeList);
+  public int compare(pl.cc.core.PauseType, pl.cc.core.PauseType);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "AbstractCommandFactory.java"
+public class pl.cc.core.cmd.AbstractCommandFactory {
+  protected java.util.Map<pl.cc.core.cmd.AbstractCommandFactory$MatchFunction, pl.cc.core.cmd.AbstractCommandFactory$CommandBuilder> functionCommandMap;
+  public pl.cc.core.cmd.AbstractCommandFactory();
+  public void registerCommand(pl.cc.core.cmd.AbstractCommandFactory$MatchFunction, pl.cc.core.cmd.AbstractCommandFactory$CommandBuilder);
+  public pl.cc.core.cmd.Command matchBy(java.lang.String);
+}
+Compiled from "AbstractCommandFactory.java"
+interface pl.cc.core.cmd.AbstractCommandFactory$CommandBuilder {
+  public abstract pl.cc.core.cmd.Command buildUsing(java.lang.String);
+}
+Compiled from "AbstractCommandFactory.java"
+interface pl.cc.core.cmd.AbstractCommandFactory$MatchFunction {
+  public abstract boolean checkIfLineMatch(java.lang.String);
+}
+Compiled from "Command.java"
+public abstract class pl.cc.core.cmd.Command {
+  protected static final org.apache.log4j.Logger log;
+  public static final int CMD_UNKNOWN;
+  public static final int CMD_INFO_QUEUE;
+  public static final int CMD_INFO_AGENT;
+  public static final int CMD_INFO_PRIVILEGE;
+  public static final int CMD_INFO_PAUSETYPE;
+  public static final int CMD_INFO_VERSION;
+  public static final int CMD_INFO_TYPE;
+  public static final int CMD_EVENT_QUEUE_JOIN;
+  public static final int CMD_EVENT_QUEUE_LEAVE;
+  public static final int CMD_EVENT_AGENT_ADD_TO_QUEUE;
+  public static final int CMD_EVENT_AGENT_REMOVE_FROM_QUEUE;
+  public static final int CMD_EVENT_AGENT_NEW_CALL;
+  public static final int CMD_EVENT_AGENT_HANGUP;
+  public static final int CMD_EVENT_AGENT_CONNECT;
+  public static final int CMD_EVENT_AGENT_PAUSE;
+  public static final int CMD_EVENT_AGENT_UNPAUSE;
+  public static final int CMD_EVENT_AGENT_LOGIN;
+  public static final int CMD_EVENT_AGENT_LOGOUT;
+  public static final int CMD_EVENT_AGENT_QUEUE_MEMBER;
+  public static final int CMD_EVENT_AGENT_COMPLETED;
+  public static final int CMD_EVENT_AGENT_CALL_TIME_BAD;
+  public static final int CMD_WELCOME;
+  public static final int CMD_PONG;
+  public static final int CMD_OK_LOGGING_OK;
+  public static final int CMD_OK_LOGGING_OK_SUPERVISOR;
+  public static final int CMD_OK_LOGGING_ERROR;
+  public static final int CMD_OK_LOGGED_OUT;
+  public static final int CMD_QUEUE_ACTION_ADD;
+  public static final int CMD_QUEUE_ACTION_REMOVE;
+  public static final int CMD_OK_WELCOME;
+  public static final int CMD_OK_PAUSED;
+  public static final int CMD_ERR_CONNECTION_REPLACED;
+  public static final int CMD_EVENT_CALL_TAG;
+  public static final int CMD_EVENT_PROXYCLIENT_CALL_TAG;
+  public static final int CMD_EVENT_PROXYCLIENT_PAUSE;
+  static java.util.regex.Pattern p;
+  public static final java.lang.String REGEX_CHARACTERS_INFO;
+  public static final java.lang.String REGEX_CHARACTERS_EVENT;
+  public abstract int getType();
+  public pl.cc.core.cmd.Command(java.lang.String, java.lang.String);
+  protected pl.cc.core.cmd.Command(java.lang.String);
+  protected static boolean equalsExtended(java.lang.String, java.lang.String);
+  protected static java.lang.String[] getValuesINFO(java.lang.String, java.lang.String[], boolean[]);
+  protected static java.lang.String[] getValuesINFO(java.lang.String, java.lang.String[]);
+  protected static boolean getValuesINFO(java.lang.String);
+  protected static java.lang.String[] getValues(java.lang.String, java.lang.String[], int);
+  public static java.lang.String[] getValues(java.lang.String, java.lang.String[], boolean[]);
+  public static java.lang.String[] getValues(java.lang.String, java.lang.String[]);
+  public java.lang.String serializeToString();
+  public static pl.cc.core.cmd.Command factory(java.lang.String, java.lang.String);
+  public static void main(java.lang.String[]);
+  public java.lang.String getOrginalLine();
+  public java.lang.String getConnectionId();
+  static {};
+}
+Compiled from "Command.java"
+final class pl.cc.core.cmd.Command$CmdType extends java.lang.Enum<pl.cc.core.cmd.Command$CmdType> {
+  public static final pl.cc.core.cmd.Command$CmdType INFO;
+  public static final pl.cc.core.cmd.Command$CmdType EVENT;
+  public static final pl.cc.core.cmd.Command$CmdType UNKNOWN;
+  public static pl.cc.core.cmd.Command$CmdType[] values();
+  public static pl.cc.core.cmd.Command$CmdType valueOf(java.lang.String);
+  static {};
+}
+Compiled from "CommandAuthError.java"
+public class pl.cc.core.cmd.CommandAuthError extends pl.cc.core.cmd.Command {
+  public pl.cc.core.cmd.CommandAuthError(java.lang.String);
+  public static pl.cc.core.cmd.Command factoryInt(java.lang.String);
+  public int getType();
+}
+Compiled from "CommandFactory.java"
+public class pl.cc.core.cmd.CommandFactory extends pl.cc.core.cmd.AbstractCommandFactory {
+  public pl.cc.core.cmd.CommandFactory();
+}
+Compiled from "CommandFactory.java"
+class pl.cc.core.cmd.CommandFactory$1 implements pl.cc.core.cmd.AbstractCommandFactory$MatchFunction {
+  final pl.cc.core.cmd.CommandFactory this$0;
+  pl.cc.core.cmd.CommandFactory$1(pl.cc.core.cmd.CommandFactory);
+  public boolean checkIfLineMatch(java.lang.String);
+}
+Compiled from "CommandFactory.java"
+class pl.cc.core.cmd.CommandFactory$2 implements pl.cc.core.cmd.AbstractCommandFactory$CommandBuilder {
+  final pl.cc.core.cmd.CommandFactory this$0;
+  pl.cc.core.cmd.CommandFactory$2(pl.cc.core.cmd.CommandFactory);
+  public pl.cc.core.cmd.Command buildUsing(java.lang.String);
+}
+Compiled from "CommandFactory.java"
+class pl.cc.core.cmd.CommandFactory$3 implements pl.cc.core.cmd.AbstractCommandFactory$MatchFunction {
+  final pl.cc.core.cmd.CommandFactory this$0;
+  pl.cc.core.cmd.CommandFactory$3(pl.cc.core.cmd.CommandFactory);
+  public boolean checkIfLineMatch(java.lang.String);
+}
+Compiled from "CommandFactory.java"
+class pl.cc.core.cmd.CommandFactory$4 implements pl.cc.core.cmd.AbstractCommandFactory$CommandBuilder {
+  final pl.cc.core.cmd.CommandFactory this$0;
+  pl.cc.core.cmd.CommandFactory$4(pl.cc.core.cmd.CommandFactory);
+  public pl.cc.core.cmd.Command buildUsing(java.lang.String);
+}
+Compiled from "CommandFactory.java"
+class pl.cc.core.cmd.CommandFactory$5 implements pl.cc.core.cmd.AbstractCommandFactory$MatchFunction {
+  final pl.cc.core.cmd.CommandFactory this$0;
+  pl.cc.core.cmd.CommandFactory$5(pl.cc.core.cmd.CommandFactory);
+  public boolean checkIfLineMatch(java.lang.String);
+}
+Compiled from "CommandFactory.java"
+class pl.cc.core.cmd.CommandFactory$6 implements pl.cc.core.cmd.AbstractCommandFactory$CommandBuilder {
+  final pl.cc.core.cmd.CommandFactory this$0;
+  pl.cc.core.cmd.CommandFactory$6(pl.cc.core.cmd.CommandFactory);
+  public pl.cc.core.cmd.Command buildUsing(java.lang.String);
+}
+Compiled from "CommandLoggedIn.java"
+public class pl.cc.core.cmd.CommandLoggedIn extends pl.cc.core.cmd.Command {
+  public pl.cc.core.cmd.CommandLoggedIn(java.lang.String);
+  public int getType();
+}
+Compiled from "CommandLoggedInSupervisor.java"
+public class pl.cc.core.cmd.CommandLoggedInSupervisor extends pl.cc.core.cmd.Command {
+  public pl.cc.core.cmd.CommandLoggedInSupervisor(java.lang.String);
+  public static pl.cc.core.cmd.Command factoryInt(java.lang.String);
+  public int getType();
+}
+Compiled from "CommandLoggedOut.java"
+public class pl.cc.core.cmd.CommandLoggedOut extends pl.cc.core.cmd.Command {
+  public pl.cc.core.cmd.CommandLoggedOut(java.lang.String);
+  public static pl.cc.core.cmd.Command factoryInt(java.lang.String);
+  public int getType();
+}
+Compiled from "CommandPong.java"
+public class pl.cc.core.cmd.CommandPong extends pl.cc.core.cmd.Command {
+  public pl.cc.core.cmd.CommandPong(java.lang.String);
+  public static pl.cc.core.cmd.Command factoryInt(java.lang.String);
+  public int getType();
+}
+Compiled from "CommandTest.java"
+public class pl.cc.core.cmd.CommandTest {
+  public pl.cc.core.cmd.CommandTest();
+  public void shouldWorkSmokeTest() throws java.lang.Exception;
+  public void shouldWorkSmokeTest2() throws java.lang.Exception;
+  public void shouldWorkSmokeTest3() throws java.lang.Exception;
+}
+Compiled from "CommandUnknown.java"
+public class pl.cc.core.cmd.CommandUnknown extends pl.cc.core.cmd.Command {
+  public pl.cc.core.cmd.CommandUnknown(java.lang.String, java.lang.String);
+  public int getType();
+}
+Compiled from "CommandWelcome.java"
+public class pl.cc.core.cmd.CommandWelcome extends pl.cc.core.cmd.Command {
+  public pl.cc.core.cmd.CommandWelcome(java.lang.String);
+  public static pl.cc.core.cmd.Command factoryInt(java.lang.String);
+  public int getType();
+}
+Compiled from "ErrSameAgentConnection.java"
+public class pl.cc.core.cmd.ErrSameAgentConnection extends pl.cc.core.cmd.Command {
+  java.lang.String ip;
+  java.lang.String message;
+  public static pl.cc.core.cmd.Command factoryInt(java.lang.String);
+  public int getType();
+  public java.lang.String getIp();
+}
+Compiled from "EventAgentAddToQueue.java"
+public class pl.cc.core.cmd.EventAgentAddToQueue extends pl.cc.core.cmd.Command {
+  pl.cc.real.RealQueue queue;
+  pl.cc.real.RealAgent agent;
+  public static pl.cc.core.cmd.Command factoryInt(java.lang.String);
+  public int getType();
+  public pl.cc.real.RealQueue getQueue();
+  public pl.cc.real.RealAgent getAgent();
+}
+Compiled from "EventAgentCallTimeBad.java"
+public class pl.cc.core.cmd.EventAgentCallTimeBad extends pl.cc.core.cmd.Command {
+  pl.cc.real.RealAgent agent;
+  int time;
+  public static pl.cc.core.cmd.Command factoryInt(java.lang.String);
+  public int getTime();
+  public int getType();
+  public pl.cc.real.RealAgent getAgent();
+}
+Compiled from "EventAgentComplete.java"
+public class pl.cc.core.cmd.EventAgentComplete extends pl.cc.core.cmd.Command {
+  pl.cc.real.RealQueue queue;
+  pl.cc.real.RealAgent agent;
+  pl.cc.real.RealCall call;
+  public static pl.cc.core.cmd.Command factoryInt(java.lang.String);
+  public int getType();
+  public pl.cc.real.RealQueue getQueue();
+  public pl.cc.real.RealAgent getAgent();
+  public pl.cc.real.RealCall getCall();
+}
+Compiled from "EventAgentConnect.java"
+public class pl.cc.core.cmd.EventAgentConnect extends pl.cc.core.cmd.Command {
+  pl.cc.real.RealQueue queue;
+  pl.cc.real.RealAgent agent;
+  pl.cc.real.RealCall call;
+  public static pl.cc.core.cmd.Command factoryInt(java.lang.String);
+  public int getType();
+  public pl.cc.real.RealQueue getQueue();
+  public pl.cc.real.RealAgent getAgent();
+  public pl.cc.real.RealCall getCall();
+}
+Compiled from "EventAgentHangup.java"
+public class pl.cc.core.cmd.EventAgentHangup extends pl.cc.core.cmd.Command {
+  pl.cc.real.RealAgent agent;
+  pl.cc.real.RealCall call;
+  public static pl.cc.core.cmd.Command factoryInt(java.lang.String);
+  public int getType();
+  public pl.cc.real.RealAgent getAgent();
+  public pl.cc.real.RealCall getCall();
+}
+Compiled from "EventAgentLogin.java"
+public class pl.cc.core.cmd.EventAgentLogin extends pl.cc.core.cmd.Command {
+  pl.cc.real.RealAgent agent;
+  public static pl.cc.core.cmd.Command factoryInt(java.lang.String);
+  public int getType();
+  public pl.cc.real.RealAgent getAgent();
+}
+Compiled from "EventAgentLogout.java"
+public class pl.cc.core.cmd.EventAgentLogout extends pl.cc.core.cmd.Command {
+  pl.cc.real.RealAgent agent;
+  public static pl.cc.core.cmd.Command factoryInt(java.lang.String);
+  public int getType();
+  public pl.cc.real.RealAgent getAgent();
+}
+Compiled from "EventAgentNewCall.java"
+public class pl.cc.core.cmd.EventAgentNewCall extends pl.cc.core.cmd.Command {
+  pl.cc.real.RealQueue queue;
+  pl.cc.real.RealAgent agent;
+  pl.cc.real.RealCall call;
+  public static pl.cc.core.cmd.Command factoryInt(java.lang.String);
+  public int getType();
+  public pl.cc.real.RealQueue getQueue();
+  public pl.cc.real.RealAgent getAgent();
+  public pl.cc.real.RealCall getCall();
+}
+Compiled from "EventAgentPause.java"
+public class pl.cc.core.cmd.EventAgentPause extends pl.cc.core.cmd.Command {
+  pl.cc.real.RealAgent agent;
+  java.lang.String pauseType;
+  int pauseTime;
+  java.util.Date since;
+  int timePoor;
+  int timeBad;
+  public java.util.Date getSince();
+  public int getPauseTime();
+  public static pl.cc.core.cmd.Command factoryInt(java.lang.String);
+  public int getType();
+  public pl.cc.real.RealAgent getAgent();
+  public java.lang.String getPauseType();
+  public int getTimePoor();
+  public int getTimeBad();
+}
+Compiled from "EventAgentQueueMember.java"
+public class pl.cc.core.cmd.EventAgentQueueMember extends pl.cc.core.cmd.Command {
+  pl.cc.real.RealQueue queue;
+  pl.cc.real.RealAgent agent;
+  pl.cc.core.AgentStatusInQueue status;
+  public static pl.cc.core.cmd.Command factoryInt(java.lang.String);
+  public int getType();
+  public pl.cc.real.RealQueue getQueue();
+  public pl.cc.real.RealAgent getAgent();
+  public pl.cc.core.AgentStatusInQueue getStatus();
+}
+Compiled from "EventAgentRemoveFromQueue.java"
+public class pl.cc.core.cmd.EventAgentRemoveFromQueue extends pl.cc.core.cmd.Command {
+  pl.cc.real.RealQueue queue;
+  pl.cc.real.RealAgent agent;
+  public static pl.cc.core.cmd.Command factoryInt(java.lang.String);
+  public int getType();
+  public pl.cc.real.RealQueue getQueue();
+  public pl.cc.real.RealAgent getAgent();
+}
+Compiled from "EventAgentUnPause.java"
+public class pl.cc.core.cmd.EventAgentUnPause extends pl.cc.core.cmd.Command {
+  pl.cc.real.RealAgent agent;
+  java.util.Date since;
+  public static pl.cc.core.cmd.Command factoryInt(java.lang.String);
+  public java.util.Date getSince();
+  public int getType();
+  public pl.cc.real.RealAgent getAgent();
+}
+Compiled from "EventCallTag.java"
+public class pl.cc.core.cmd.EventCallTag extends pl.cc.core.cmd.Command {
+  pl.cc.real.RealQueue queue;
+  pl.cc.real.RealAgent agent;
+  pl.cc.real.RealCall call;
+  java.lang.String callID;
+  java.util.ArrayList<pl.cc.core.GroupData> topiclist;
+  java.util.ArrayList<pl.cc.core.ExtraFieldData> fieldlist;
+  public static pl.cc.core.cmd.Command factoryInt(java.lang.String);
+  public static void main(java.lang.String[]);
+  public int getType();
+  public pl.cc.real.RealQueue getQueue();
+  public pl.cc.real.RealAgent getAgent();
+  public pl.cc.real.RealCall getCall();
+  public java.lang.String getCallID();
+  public java.util.ArrayList<pl.cc.core.GroupData> getTopicList();
+  public java.util.ArrayList<pl.cc.core.ExtraFieldData> getFieldList();
+}
+Compiled from "EventProxyClientCallTag.java"
+public class pl.cc.core.cmd.EventProxyClientCallTag extends pl.cc.core.cmd.Command {
+  public static pl.cc.core.cmd.Command factoryInt(java.lang.String);
+  public static void main(java.lang.String[]);
+  public int getType();
+  public java.lang.String getCallID();
+  public java.lang.String getGroup();
+  public java.lang.String getTopic();
+  public java.lang.String getComment();
+  public java.lang.String getExtraFields();
+}
+Compiled from "EventProxyClientPause.java"
+public class pl.cc.core.cmd.EventProxyClientPause extends pl.cc.core.cmd.Command {
+  boolean pause;
+  java.lang.String type;
+  pl.cc.real.RealAgent agent;
+  int pauseTime;
+  int timePoor;
+  int timeBad;
+  public pl.cc.core.cmd.EventProxyClientPause(java.lang.String, boolean, java.lang.String, pl.cc.real.RealAgent, int, int, int);
+  public static pl.cc.core.cmd.Command factoryInt(java.lang.String);
+  public int getType();
+  public boolean isPause();
+  public int getTimePoor();
+  public int getTimeBad();
+  public void setPause(boolean);
+  public pl.cc.real.RealAgent getAgent();
+  public void setAgent(pl.cc.real.RealAgent);
+  public void setType(java.lang.String);
+  public java.lang.String getPauseType();
+  public int getPauseTime();
+}
+Compiled from "EventQueueJoin.java"
+public class pl.cc.core.cmd.EventQueueJoin extends pl.cc.core.cmd.Command {
+  pl.cc.real.RealQueue queue;
+  pl.cc.real.RealCall call;
+  public static pl.cc.core.cmd.Command factoryInt(java.lang.String);
+  public int getType();
+  public pl.cc.real.RealQueue getQueue();
+  public pl.cc.real.RealCall getCall();
+}
+Compiled from "EventQueueLeave.java"
+public class pl.cc.core.cmd.EventQueueLeave extends pl.cc.core.cmd.Command {
+  pl.cc.real.RealQueue queue;
+  pl.cc.real.RealCall call;
+  public static pl.cc.core.cmd.Command factoryInt(java.lang.String);
+  public int getType();
+  public pl.cc.real.RealQueue getQueue();
+  public pl.cc.real.RealCall getCall();
+}
+Compiled from "InfoAgent.java"
+public class pl.cc.core.cmd.InfoAgent extends pl.cc.core.cmd.Command {
+  pl.cc.real.RealQueue queue;
+  pl.cc.real.RealAgent agent;
+  public static pl.cc.core.cmd.Command factoryInt(java.lang.String);
+  public int getType();
+  public pl.cc.real.RealQueue getQueue();
+  public pl.cc.real.RealAgent getAgent();
+}
+Compiled from "InfoPauseDefinition.java"
+public class pl.cc.core.cmd.InfoPauseDefinition extends pl.cc.core.cmd.Command {
+  pl.cc.core.PauseType pauseType;
+  public pl.cc.core.cmd.InfoPauseDefinition(pl.cc.core.PauseType);
+  public static pl.cc.core.cmd.InfoPauseDefinition factoryInt(java.lang.String);
+  public java.lang.String serializeToString();
+  public int getType();
+  public pl.cc.core.PauseType getPauseType();
+}
+Compiled from "InfoPrivilege.java"
+public class pl.cc.core.cmd.InfoPrivilege extends pl.cc.core.cmd.Command {
+  pl.cc.real.RealAgent agent;
+  boolean havePermission;
+  public static pl.cc.core.cmd.InfoPrivilege factoryInt(java.lang.String);
+  public int getType();
+  public boolean getPermission();
+  public pl.cc.real.RealAgent getAgent();
+}
+Compiled from "InfoQueue.java"
+public class pl.cc.core.cmd.InfoQueue extends pl.cc.core.cmd.Command {
+  pl.cc.real.RealQueue queue;
+  public static pl.cc.core.cmd.Command factoryInt(java.lang.String);
+  public int getType();
+  public pl.cc.real.RealQueue getQueue();
+  public java.lang.String serializeToString();
+}
+Compiled from "InfoQueueActionAdd.java"
+public class pl.cc.core.cmd.InfoQueueActionAdd extends pl.cc.core.cmd.Command {
+  pl.cc.real.RealQueue queue;
+  java.lang.String action;
+  public static pl.cc.core.cmd.Command factoryInt(java.lang.String);
+  public int getType();
+  public pl.cc.real.RealQueue getQueue();
+}
+Compiled from "InfoQueueActionRemove.java"
+public class pl.cc.core.cmd.InfoQueueActionRemove extends pl.cc.core.cmd.Command {
+  pl.cc.real.RealQueue queue;
+  java.lang.String action;
+  public static pl.cc.core.cmd.Command factoryInt(java.lang.String);
+  public int getType();
+  public pl.cc.real.RealQueue getQueue();
+}
+Compiled from "InfoType.java"
+public class pl.cc.core.cmd.InfoType extends pl.cc.core.cmd.Command {
+  java.lang.String message;
+  boolean reconnect;
+  public boolean getReconnect();
+  public static pl.cc.core.cmd.Command factoryInt(java.lang.String);
+  public int getType();
+  public java.lang.String getMessage();
+}
+Compiled from "InfoVersion.java"
+public class pl.cc.core.cmd.InfoVersion extends pl.cc.core.cmd.Command {
+  java.lang.String version;
+  java.lang.String url;
+  public pl.cc.core.cmd.InfoVersion(java.lang.String);
+  public int getType();
+  public java.lang.String getVersion();
+  public int getVersionAsInt();
+  public void setVersion(java.lang.String);
+  public java.lang.String getUrl();
+  public void setUrl(java.lang.String);
+  public java.lang.String toString();
+}
+Compiled from "InfoVersionFactory.java"
+public class pl.cc.core.cmd.InfoVersionFactory {
+  public pl.cc.core.cmd.InfoVersionFactory();
+}
+Compiled from "OkWelcome.java"
+public class pl.cc.core.cmd.OkWelcome extends pl.cc.core.cmd.Command {
+  java.lang.String name;
+  java.lang.String extension;
+  int agentNumber;
+  java.lang.String type;
+  public static pl.cc.core.cmd.Command factoryInt(java.lang.String);
+  public int getType();
+  public java.lang.String getName();
+  public java.lang.String getExtension();
+  public java.lang.String getAgentType();
+  public int getAgentNumber();
+  public boolean isSupervisor();
+  public boolean isNormalAgent();
+}
+Compiled from "AuthAsSupervisor.java"
+public class pl.cc.core.cmd.dummy.AuthAsSupervisor extends pl.cc.core.cmd.Command {
+  boolean supervisor;
+  public pl.cc.core.cmd.dummy.AuthAsSupervisor(boolean);
+  public int getType();
+  public boolean isSupervisor();
+}
+Compiled from "AuthFailed.java"
+public class pl.cc.core.cmd.dummy.AuthFailed extends pl.cc.core.cmd.Command {
+  public pl.cc.core.cmd.dummy.AuthFailed();
+  public int getType();
+}
+Compiled from "Loggedout.java"
+public class pl.cc.core.cmd.dummy.Loggedout extends pl.cc.core.cmd.Command {
+  public pl.cc.core.cmd.dummy.Loggedout();
+  public int getType();
+}
+Compiled from "RealAgentListListener.java"
+public interface pl.cc.events.real.RealAgentListListener {
+  public abstract void onAgentAdd(pl.cc.real.RealAgent);
+  public abstract void onAgentRemoved(pl.cc.real.RealAgent);
+  public abstract void onClear();
+}
+Compiled from "RealAgentListListenerList.java"
+public class pl.cc.events.real.RealAgentListListenerList extends java.util.Vector<pl.cc.events.real.RealAgentListListener> implements pl.cc.events.real.RealAgentListListener {
+  public pl.cc.events.real.RealAgentListListenerList();
+  public void onAgentAdd(pl.cc.real.RealAgent);
+  public void onAgentRemoved(pl.cc.real.RealAgent);
+  public void onClear();
+}
+Compiled from "RealAgentListener.java"
+public interface pl.cc.events.real.RealAgentListener {
+  public abstract void onPause(pl.cc.real.RealAgent, boolean, pl.cc.core.PauseType, int, int, int);
+  public abstract void onChangeStatusAsQueueMember(pl.cc.real.RealAgent, pl.cc.real.RealQueue, pl.cc.core.AgentStatusInQueue);
+  public abstract void onAgentNewCall(pl.cc.real.RealCall, pl.cc.real.RealQueue);
+  public abstract void onAgentConnect(pl.cc.real.RealAgent, pl.cc.real.RealCall, pl.cc.real.RealQueue);
+  public abstract void onCallLeave(pl.cc.real.RealAgent, pl.cc.real.RealCall, pl.cc.real.RealQueue);
+  public abstract void onHangeup(pl.cc.real.RealAgent, pl.cc.real.RealCall);
+}
+Compiled from "RealAgentListenerList.java"
+public class pl.cc.events.real.RealAgentListenerList extends java.util.Vector<pl.cc.events.real.RealAgentListener> implements pl.cc.events.real.RealAgentListener {
+  static org.apache.log4j.Logger log;
+  public pl.cc.events.real.RealAgentListenerList();
+  public boolean add(pl.cc.events.real.RealAgentListener);
+  public void onPause(pl.cc.real.RealAgent, boolean, pl.cc.core.PauseType, int, int, int);
+  public void onAgentNewCall(pl.cc.real.RealCall, pl.cc.real.RealQueue);
+  public void onHangeup(pl.cc.real.RealAgent, pl.cc.real.RealCall);
+  public void onAgentConnect(pl.cc.real.RealAgent, pl.cc.real.RealCall, pl.cc.real.RealQueue);
+  public void onCallLeave(pl.cc.real.RealAgent, pl.cc.real.RealCall, pl.cc.real.RealQueue);
+  public void onChangeStatusAsQueueMember(pl.cc.real.RealAgent, pl.cc.real.RealQueue, pl.cc.core.AgentStatusInQueue);
+  public boolean add(java.lang.Object);
+  static {};
+}
+Compiled from "RealCallListListener.java"
+public interface pl.cc.events.real.RealCallListListener {
+  public abstract void onCallAdd(pl.cc.real.RealCall);
+  public abstract void onCallRemoved(pl.cc.real.RealCall);
+}
+Compiled from "RealCallListListenerList.java"
+public class pl.cc.events.real.RealCallListListenerList extends java.util.Vector<pl.cc.events.real.RealCallListListener> implements pl.cc.events.real.RealCallListListener {
+  public pl.cc.events.real.RealCallListListenerList();
+  public void onCallAdd(pl.cc.real.RealCall);
+  public void onCallRemoved(pl.cc.real.RealCall);
+}
+Compiled from "RealCallListener.java"
+public interface pl.cc.events.real.RealCallListener {
+  public abstract void onAgentConnect(pl.cc.real.RealCall, pl.cc.real.RealAgent, pl.cc.real.RealQueue);
+  public abstract void onAgentHangeup(pl.cc.real.RealCall, pl.cc.real.RealAgent, pl.cc.real.RealQueue);
+}
+Compiled from "RealCallListenerList.java"
+public class pl.cc.events.real.RealCallListenerList extends java.util.Vector<pl.cc.events.real.RealCallListener> implements pl.cc.events.real.RealCallListener {
+  public static final org.apache.log4j.Logger log;
+  public pl.cc.events.real.RealCallListenerList();
+  public void onAgentConnect(pl.cc.real.RealCall, pl.cc.real.RealAgent, pl.cc.real.RealQueue);
+  public void onAgentHangeup(pl.cc.real.RealCall, pl.cc.real.RealAgent, pl.cc.real.RealQueue);
+  public boolean add(pl.cc.events.real.RealCallListener);
+  public boolean remove(java.lang.Object);
+  public boolean add(java.lang.Object);
+  static {};
+}
+Compiled from "RealQueueListListener.java"
+public interface pl.cc.events.real.RealQueueListListener {
+  public abstract void onQueueAdd(pl.cc.real.RealQueue);
+  public abstract void onQueueRemoved(pl.cc.real.RealQueue);
+  public abstract void onClear();
+}
+Compiled from "RealQueueListListenerList.java"
+public class pl.cc.events.real.RealQueueListListenerList extends java.util.Vector<pl.cc.events.real.RealQueueListListener> implements pl.cc.events.real.RealQueueListListener {
+  public pl.cc.events.real.RealQueueListListenerList();
+  public void onQueueAdd(pl.cc.real.RealQueue);
+  public void onQueueRemoved(pl.cc.real.RealQueue);
+  public void onClear();
+}
+Compiled from "RealQueueListener.java"
+public interface pl.cc.events.real.RealQueueListener {
+  public abstract void onWaitCountChange(int);
+  public abstract void onQueueLeave(pl.cc.real.RealCall);
+  public abstract void onTalkingAgentCountChange(int);
+  public abstract void onFreeAgentCountChange(int);
+}
+Compiled from "RealQueueListenerList.java"
+public class pl.cc.events.real.RealQueueListenerList extends java.util.Vector<pl.cc.events.real.RealQueueListener> implements pl.cc.events.real.RealQueueListener {
+  public pl.cc.events.real.RealQueueListenerList();
+  public void onWaitCountChange(int);
+  public void onQueueLeave(pl.cc.real.RealCall);
+  public void onFreeAgentCountChange(int);
+  public void onTalkingAgentCountChange(int);
+}
+Compiled from "RealAgentUIEvents.java"
+public interface pl.cc.events.ui.RealAgentUIEvents {
+  public abstract void onSpy();
+  public abstract void doPauseAdministrative(boolean);
+}
+Compiled from "RealQueueUIEvents.java"
+public interface pl.cc.events.ui.RealQueueUIEvents {
+  public abstract void onFeedback(int);
+}
+Compiled from "AgentNotFoundException.java"
+public class pl.cc.exceptions.AgentNotFoundException extends java.lang.Exception {
+  pl.cc.real.RealAgent agent;
+  pl.cc.real.RealQueue queue;
+  public pl.cc.exceptions.AgentNotFoundException(pl.cc.real.RealAgent);
+  public pl.cc.exceptions.AgentNotFoundException(pl.cc.real.RealAgent, pl.cc.real.RealQueue);
+  public java.lang.String getMessage();
+}
+Compiled from "CallNotFoundException.java"
+public class pl.cc.exceptions.CallNotFoundException extends java.lang.Exception {
+  pl.cc.real.RealCall call;
+  public pl.cc.exceptions.CallNotFoundException(pl.cc.real.RealCall);
+  public java.lang.String getMessage();
+}
+Compiled from "QueueNotFoundException.java"
+public class pl.cc.exceptions.QueueNotFoundException extends java.lang.Exception {
+  pl.cc.real.RealQueue queue;
+  public pl.cc.exceptions.QueueNotFoundException(pl.cc.real.RealQueue);
+  public java.lang.String getMessage();
+}
+Compiled from "RealAgent.java"
+public class pl.cc.real.RealAgent implements pl.cc.events.ui.RealAgentUIEvents {
+  public static final org.apache.log4j.Logger log;
+  protected java.lang.Integer id;
+  protected java.lang.String name;
+  protected java.lang.String extension;
+  protected boolean isPaused;
+  pl.cc.real.RealCall connectedCall;
+  pl.cc.real.RealCall ringingCall;
+  pl.cc.real.RealCall lastCall;
+  pl.cc.core.AgentStatusInQueue status;
+  protected java.util.ArrayList<java.lang.String> allowedPauseTypes;
+  public void setProxyTasks(pl.cc.ProxyTasks);
+  public pl.cc.real.RealAgent(pl.cc.real.RealAgent, boolean);
+  public pl.cc.real.RealAgent(pl.cc.real.RealAgent);
+  public pl.cc.real.RealAgent(pl.cc.real.RealAgent, pl.cc.ProxyTasks);
+  public pl.cc.real.RealAgent(java.lang.String, java.lang.String, java.lang.String);
+  public pl.cc.real.RealAgent(java.lang.Integer, java.lang.String, java.lang.String);
+  public pl.cc.real.RealAgent(java.lang.Integer);
+  public pl.cc.real.RealAgent(java.lang.String, java.lang.String, java.lang.String, boolean);
+  public pl.cc.real.RealAgent(pl.cc.core.LoginCredentials);
+  public void addAgentListener(pl.cc.events.real.RealAgentListener);
+  public void removeAgentListener(pl.cc.events.real.RealAgentListener);
+  public pl.cc.real.RealAgent(pl.cc.core.cmd.OkWelcome);
+  public java.lang.Integer getId();
+  public java.lang.String getName();
+  public java.lang.String getExtension();
+  public int getPauseTime();
+  public int getTimePoor();
+  public int getTimeBad();
+  public boolean setPaused(boolean, pl.cc.core.PauseType);
+  public boolean setPaused(boolean, pl.cc.core.PauseType, int, int, int);
+  public java.util.Date getLastStateChange();
+  public int getTimeInLastState();
+  public void setLastStateChange(java.util.Date);
+  public void onSpy();
+  public void doPause(boolean, pl.cc.core.PauseType);
+  public void doPauseAdministrative(boolean);
+  public void onAgentNewCall(pl.cc.real.RealCall, pl.cc.real.RealQueue);
+  public void onCallLeave(pl.cc.real.RealCall, pl.cc.real.RealQueue);
+  public void onHangeup(pl.cc.real.RealCall);
+  public void onAgentConnect(pl.cc.real.RealCall, pl.cc.real.RealQueue);
+  public void onChangeStatusAsQueueMember(pl.cc.real.RealQueue, pl.cc.core.AgentStatusInQueue);
+  public pl.cc.real.RealCall getConnectedCall();
+  public pl.cc.core.AgentStatusInQueue getStatus();
+  public boolean equals(java.lang.Object);
+  public boolean isPaused();
+  public java.lang.String toString();
+  public void dumpListenerList();
+  public pl.cc.real.RealCall getCall();
+  public pl.cc.core.PauseType getPauseType();
+  public pl.cc.real.RealQueue getConnectedInQueue();
+  public void setAllowedPauseTypes(java.util.ArrayList<java.lang.String>);
+  public java.util.ArrayList<java.lang.String> getAllowedPauseTypes();
+  public boolean isAllowedPauseType(java.lang.String);
+  static {};
+}
+Compiled from "RealAgentCallState.java"
+public final class pl.cc.real.RealAgentCallState extends java.lang.Enum<pl.cc.real.RealAgentCallState> {
+  public static final pl.cc.real.RealAgentCallState NEW_CALL;
+  public static final pl.cc.real.RealAgentCallState CONNECT;
+  public static final pl.cc.real.RealAgentCallState HANGEUP;
+  public static pl.cc.real.RealAgentCallState[] values();
+  public static pl.cc.real.RealAgentCallState valueOf(java.lang.String);
+  static {};
+}
+Compiled from "RealAgentList.java"
+public class pl.cc.real.RealAgentList {
+  public static final org.apache.log4j.Logger log;
+  public pl.cc.real.RealAgentList();
+  public pl.cc.real.RealAgentList(pl.cc.real.RealAgentList);
+  public synchronized java.util.Collection<pl.cc.real.RealAgent> getValues();
+  public void addAgenteListListener(pl.cc.events.real.RealAgentListListener);
+  public void removeAgentListListener(pl.cc.events.real.RealAgentListListener);
+  public synchronized boolean add(pl.cc.real.RealAgent);
+  public synchronized pl.cc.real.RealAgent remove(pl.cc.real.RealAgent);
+  public synchronized pl.cc.real.RealAgent remove(java.lang.Object);
+  public synchronized void clear();
+  public synchronized pl.cc.real.RealAgent get(pl.cc.real.RealAgent);
+  public synchronized boolean addAgent(pl.cc.real.RealAgent);
+  public synchronized int getPositionByName(pl.cc.real.RealAgent);
+  public synchronized int getPosition(pl.cc.real.RealAgent, java.util.Comparator<pl.cc.real.RealAgent>);
+  public synchronized pl.cc.real.RealAgent getByPosition(int, java.util.Comparator<pl.cc.real.RealAgent>);
+  public synchronized pl.cc.real.RealAgent getByExtension(java.lang.String);
+  public synchronized pl.cc.real.RealAgent get(java.lang.Integer);
+  public synchronized void onCallLeave(pl.cc.real.RealCall, pl.cc.real.RealQueue);
+  public synchronized int getFreeAgentCount();
+  public int getPausedAgentCount();
+  public synchronized int getPausedAgentCount(int);
+  public synchronized int getTalkingAgentCount();
+  public synchronized boolean containsValue(pl.cc.real.RealAgent);
+  public synchronized pl.cc.real.RealAgent findAgentConnectedWithCall(pl.cc.real.RealCall);
+  public synchronized int size();
+  static {};
+}
+Compiled from "RealCall.java"
+public class pl.cc.real.RealCall {
+  public static final org.apache.log4j.Logger log;
+  protected java.lang.String callerID;
+  protected java.lang.String uniqueID;
+  pl.cc.real.RealQueue queue;
+  java.util.Date crationTime;
+  public java.lang.String getCrationTimeFormated();
+  public pl.cc.real.RealCall(java.lang.String, java.lang.String);
+  public pl.cc.real.RealCall(java.lang.String, java.lang.String, pl.cc.real.RealQueue, java.util.Date);
+  public boolean callsWithId(java.lang.String);
+  public java.lang.String toString();
+  public java.lang.String getUniqueID();
+  public java.lang.String getCallerID();
+  public long getSecElapsed();
+  public java.lang.String getTimeElapsed();
+  public pl.cc.real.RealAgent getConnectedAgent();
+  public void resetTimer();
+  public void leaveQueue();
+  public void hangup();
+  public long getLeaveQueueAfrer();
+  public long getHangupQueueAfrer();
+  public boolean equals(java.lang.Object);
+  public void addCallListener(pl.cc.events.real.RealCallListener);
+  public void removeCallListener(pl.cc.events.real.RealCallListener);
+  public void agentConnect(pl.cc.real.RealAgent, pl.cc.real.RealQueue);
+  public void agentHangeup(pl.cc.real.RealAgent, pl.cc.real.RealQueue);
+  public void setQueue(pl.cc.real.RealQueue);
+  public pl.cc.real.RealQueue getQueue();
+  public pl.cc.real.RealQueue getconnectedQueue();
+  public pl.cc.core.CallStatus getStatus();
+  public void setCreationTimeAsString(java.lang.String);
+  static {};
+}
+Compiled from "RealCallList.java"
+public class pl.cc.real.RealCallList {
+  static org.apache.log4j.Logger log;
+  public pl.cc.real.RealCallList();
+  public void addCallListListener(pl.cc.events.real.RealCallListListener);
+  public void removeCallListListener(pl.cc.events.real.RealCallListListener);
+  public synchronized void add(pl.cc.real.RealCall);
+  public synchronized void remove(pl.cc.real.RealCall);
+  public synchronized pl.cc.real.RealCall getByUniqueID(java.lang.String);
+  public synchronized pl.cc.real.RealCall getByPosition(int);
+  public synchronized boolean containsCall(pl.cc.real.RealCall);
+  public synchronized java.util.Collection<pl.cc.real.RealCall> getValues();
+  public synchronized int size();
+  static {};
+}
+Compiled from "RealQueue.java"
+public class pl.cc.real.RealQueue implements pl.cc.events.ui.RealQueueUIEvents {
+  public static final org.apache.log4j.Logger log;
+  protected java.lang.String name;
+  protected int waitCount;
+  protected pl.cc.real.RealAgentList agentList;
+  protected pl.cc.real.RealCallList callsList;
+  protected java.lang.String customType;
+  protected java.lang.Integer penalty;
+  protected boolean predefined;
+  protected java.lang.Boolean paused;
+  protected int wrapup;
+  protected int wrapupTimePoor;
+  protected int wrapupTimeBad;
+  protected int talkTimePoor;
+  protected int talkTimeBad;
+  protected java.util.ArrayList<java.lang.String> allowedPauseTypes;
+  public int getTalkTimeBad();
+  public void setTalkTimeBad(int);
+  public int getWrapupTimePoor();
+  public void setWrapupTimePoor(int);
+  public int getWrapupTimeBad();
+  public void setWrapupTimeBad(int);
+  public int getTalkTimePoor();
+  public void setTalkTimePoor(int);
+  public pl.cc.real.RealQueue(pl.cc.real.RealQueue);
+  public pl.cc.real.RealQueue(java.lang.String, int);
+  public pl.cc.real.RealQueue(java.lang.String, java.lang.String);
+  public pl.cc.real.RealQueue(java.lang.String, java.lang.String, boolean);
+  public pl.cc.real.RealQueue(java.lang.String, java.lang.String, java.lang.String);
+  public void addQueueListListener(pl.cc.events.real.RealQueueListener);
+  public void removeQueueListListener(pl.cc.events.real.RealQueueListener);
+  public java.lang.String getName();
+  public int getWrapup();
+  public void setWaitCount(int);
+  public void onFeedback(int);
+  public pl.cc.real.RealAgentList getAgentList();
+  public pl.cc.real.RealAgent getAgentByID(java.lang.Integer);
+  public void onQueueLeave(pl.cc.real.RealCall);
+  public void updateAgentCounts();
+  public int getFreeAgentCount();
+  public int getPausedAgentCount();
+  public int getTalkingAgentCount();
+  public int getWaitCount();
+  public pl.cc.real.RealCallList getCallList();
+  public void setPredefined(boolean);
+  public java.lang.Integer getPenalty();
+  public boolean isPredefined();
+  public java.lang.String getCustomType();
+  public void setCustomType(java.lang.String);
+  public java.lang.String toString();
+  public boolean containsCall(pl.cc.real.RealCall);
+  public boolean addAgent(pl.cc.real.RealAgent);
+  public java.lang.Boolean isPaused();
+  public void setPaused(java.lang.Boolean);
+  public java.lang.Object getPausedAgentCount(int);
+  public void setWrapup(int);
+  public void setAllowedPauseTypes(java.util.ArrayList<java.lang.String>);
+  public java.util.ArrayList<java.lang.String> getAllowedPauseTypes();
+  public boolean isAllowedPauseType(java.lang.String);
+  static {};
+}
+Compiled from "RealQueueList.java"
+public class pl.cc.real.RealQueueList {
+  public static final org.apache.log4j.Logger log;
+  public pl.cc.real.RealQueueList();
+  public void addQueueListListener(pl.cc.events.real.RealQueueListListener);
+  public void removeQueueListListener(pl.cc.events.real.RealQueueListListener);
+  public synchronized pl.cc.real.RealQueue get(java.lang.String);
+  public synchronized pl.cc.real.RealQueue get(pl.cc.real.RealQueue);
+  public synchronized boolean add(pl.cc.real.RealQueue);
+  public synchronized pl.cc.real.RealQueue remove(java.lang.String);
+  public synchronized void clear();
+  public synchronized boolean addAgentToQueue(pl.cc.real.RealAgent, pl.cc.real.RealQueue);
+  public synchronized java.util.List<pl.cc.real.RealAgent> getAgentsByID(java.lang.Integer);
+  public synchronized pl.cc.real.RealCall getCallByUniqueID(java.lang.String);
+  public synchronized pl.cc.real.RealQueue findQueueForCall(pl.cc.real.RealCall) throws pl.cc.exceptions.CallNotFoundException;
+  public synchronized int size();
+  public synchronized java.util.Collection<pl.cc.real.RealQueue> getValues();
+  public synchronized boolean isPausedInAllQueues();
+  public synchronized void remove(pl.cc.real.RealCall);
+  static {};
+}
+Compiled from "AgentComparator.java"
+public class pl.cc.real.comparator.AgentComparator implements java.util.Comparator<pl.cc.real.RealAgent> {
+  public static final pl.cc.real.comparator.AgentComparator CONNECTED_STATE_NAME;
+  public static final pl.cc.real.comparator.AgentComparator NAME;
+  public static final pl.cc.real.comparator.AgentComparator ID;
+  public pl.cc.real.comparator.AgentComparator();
+  public void addComparator(java.util.Comparator<pl.cc.real.RealAgent>);
+  public int compare(pl.cc.real.RealAgent, pl.cc.real.RealAgent);
+  public int compare(java.lang.Object, java.lang.Object);
+  static {};
+}
+Compiled from "AgentComparatorByCall.java"
+public class pl.cc.real.comparator.AgentComparatorByCall implements java.util.Comparator<pl.cc.real.RealAgent> {
+  static final org.apache.log4j.Logger log;
+  public pl.cc.real.comparator.AgentComparatorByCall();
+  public int compare(pl.cc.real.RealAgent, pl.cc.real.RealAgent);
+  public int compare(java.lang.Object, java.lang.Object);
+  static {};
+}
+Compiled from "AgentComparatorById.java"
+public class pl.cc.real.comparator.AgentComparatorById implements java.util.Comparator<pl.cc.real.RealAgent> {
+  static final org.apache.log4j.Logger log;
+  public pl.cc.real.comparator.AgentComparatorById();
+  public int compare(pl.cc.real.RealAgent, pl.cc.real.RealAgent);
+  public int compare(java.lang.Object, java.lang.Object);
+  static {};
+}
+Compiled from "AgentComparatorByName.java"
+public class pl.cc.real.comparator.AgentComparatorByName implements java.util.Comparator<pl.cc.real.RealAgent> {
+  static final org.apache.log4j.Logger log;
+  public pl.cc.real.comparator.AgentComparatorByName();
+  public int compare(pl.cc.real.RealAgent, pl.cc.real.RealAgent);
+  public int compare(java.lang.Object, java.lang.Object);
+  static {};
+}
+Compiled from "AgentComparatorByState.java"
+public class pl.cc.real.comparator.AgentComparatorByState implements java.util.Comparator<pl.cc.real.RealAgent> {
+  static final org.apache.log4j.Logger log;
+  public pl.cc.real.comparator.AgentComparatorByState();
+  public int compare(pl.cc.real.RealAgent, pl.cc.real.RealAgent);
+  public int compare(java.lang.Object, java.lang.Object);
+  static {};
+}
+Compiled from "CallComparatorByUniqueId.java"
+public class pl.cc.real.comparator.CallComparatorByUniqueId implements java.util.Comparator<pl.cc.real.RealCall> {
+  static final org.apache.log4j.Logger log;
+  public pl.cc.real.comparator.CallComparatorByUniqueId();
+  public int compare(pl.cc.real.RealCall, pl.cc.real.RealCall);
+  public int compare(java.lang.Object, java.lang.Object);
+  static {};
+}
+Compiled from "IniFile.java"
+public class pl.cc.utils.IniFile {
+  java.util.Hashtable<java.lang.String, java.util.Hashtable<java.lang.String, java.lang.String>> sections;
+  public pl.cc.utils.IniFile();
+  public pl.cc.utils.IniFile(java.lang.String) throws java.io.FileNotFoundException;
+  public pl.cc.utils.IniFile(java.net.URL) throws java.io.IOException;
+  public pl.cc.utils.IniFile(java.io.InputStream) throws java.io.IOException;
+  public void setKeyValue(java.lang.String, java.lang.String, java.lang.String);
+  public java.util.Hashtable<java.lang.String, java.util.Hashtable<java.lang.String, java.lang.String>> getSections();
+  public java.util.Hashtable<java.lang.String, java.lang.String> getSection(java.lang.String);
+  public boolean isNullOrEmpty(java.lang.String, java.lang.String);
+  public java.lang.String getKeyValue(java.lang.String, java.lang.String);
+  public int getKeyIntValue(java.lang.String, java.lang.String);
+  public int getKeyIntValue(java.lang.String, java.lang.String, int);
+  public java.lang.String[][] getKeysAndValues(java.lang.String);
+  public void load(java.lang.String) throws java.io.FileNotFoundException;
+  public void save(java.lang.String) throws java.io.IOException;
+  public void load(java.io.InputStream);
+  public void save(java.io.OutputStream);
+  public void addSection(java.lang.String);
+  public void removeSection(java.lang.String);
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+}
+Compiled from "MD5Crypt.java"
+public final class pl.cc.utils.MD5Crypt {
+  public pl.cc.utils.MD5Crypt();
+  public static void main(java.lang.String[]) throws java.security.NoSuchAlgorithmException;
+  public static final java.lang.String crypt(java.lang.String) throws java.security.NoSuchAlgorithmException;
+  public static final java.lang.String crypt(java.lang.String, java.lang.String) throws java.security.NoSuchAlgorithmException;
+}
+Compiled from "Resources.java"
+public class pl.cc.utils.Resources {
+  public pl.cc.utils.Resources();
+  public static java.io.InputStream getInputStream(java.lang.String) throws java.io.IOException;
+}
+Compiled from "Utils.java"
+public class pl.cc.utils.Utils {
+  public static final org.apache.log4j.Logger log;
+  public static final java.lang.String NULL;
+  public pl.cc.utils.Utils();
+  public static java.lang.String getNumber(java.lang.String);
+  public static java.lang.String[] getInfo(java.lang.String);
+  public static java.util.Date getNow();
+  public static java.lang.String getNowFormated();
+  public static java.lang.String formatDate(java.util.Date);
+  public static java.lang.String secToString(long);
+  public static java.util.Date parseDate(java.lang.String);
+  public static java.lang.String toPL(java.lang.Boolean);
+  static {};
+}

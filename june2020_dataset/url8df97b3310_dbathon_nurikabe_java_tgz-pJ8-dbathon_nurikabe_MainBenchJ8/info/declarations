@@ -1,0 +1,209 @@
+Compiled from "Main.java"
+public class dbathon.nurikabe.Main {
+  public static final java.lang.String[] BOARDS_9x9;
+  public dbathon.nurikabe.Main();
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "Main.java"
+class dbathon.nurikabe.Main$1 {
+}
+Compiled from "Main.java"
+class dbathon.nurikabe.Main$LoggingEvents implements dbathon.nurikabe.solver.SolverEvents {
+  public void onBeginSolve(dbathon.nurikabe.board.Board, dbathon.nurikabe.solver.Solver);
+  public void onStrategyExecuted(dbathon.nurikabe.board.Board, dbathon.nurikabe.solver.SolverStrategy, long, dbathon.nurikabe.solver.Solver);
+  dbathon.nurikabe.Main$LoggingEvents(dbathon.nurikabe.Main$1);
+}
+Compiled from "MainBench.java"
+public class dbathon.nurikabe.MainBench {
+  public dbathon.nurikabe.MainBench();
+  public static void main(java.lang.String[]);
+  static {};
+}
+Compiled from "Board.java"
+public class dbathon.nurikabe.board.Board implements java.lang.Iterable<dbathon.nurikabe.board.Cell> {
+  final dbathon.nurikabe.board.Cell[] cells;
+  public dbathon.nurikabe.board.Board(dbathon.nurikabe.board.BoardBuilder);
+  int coordsToIndex(int, int);
+  public boolean isLegalCoord(int, int);
+  public int getWidth();
+  public int getHeight();
+  public dbathon.nurikabe.board.Cell getCell(int, int);
+  public int getCellCount();
+  public int getSolutionWhiteCount();
+  public int getSolutionBlackCount();
+  public java.util.stream.Stream<dbathon.nurikabe.board.Cell> getCells();
+  public java.util.stream.Stream<dbathon.nurikabe.board.Cell> getWhiteCells();
+  public java.util.stream.Stream<dbathon.nurikabe.board.Cell> getBlackCells();
+  public java.util.stream.Stream<dbathon.nurikabe.board.Cell> getUnknownCells();
+  public int getCount(dbathon.nurikabe.board.CellColor);
+  public int getMaxNumber();
+  public java.util.Set<dbathon.nurikabe.board.Cell> getNeighborsSet(dbathon.nurikabe.board.Cell);
+  public java.util.stream.Stream<dbathon.nurikabe.board.Cell> getNeighbors(dbathon.nurikabe.board.Cell);
+  public void connectWhiteCells();
+  public java.util.Map<dbathon.nurikabe.board.FixedCell, java.util.Set<dbathon.nurikabe.board.Cell>> getWhiteGroupsWithFixedCell();
+  public java.util.Set<java.util.Set<dbathon.nurikabe.board.Cell>> getGroups(dbathon.nurikabe.board.CellColor);
+  public boolean isSolution();
+  public java.util.Iterator<dbathon.nurikabe.board.Cell> iterator();
+  public java.lang.String toString(boolean);
+  public java.lang.String toString();
+}
+Compiled from "BoardBuilder.java"
+public class dbathon.nurikabe.board.BoardBuilder {
+  public dbathon.nurikabe.board.BoardBuilder(int, int);
+  public int getWidth();
+  public int getHeight();
+  public void setNumber(int, int, int);
+  public int getNumber(int, int);
+}
+Compiled from "BoardState.java"
+public class dbathon.nurikabe.board.BoardState {
+  public dbathon.nurikabe.board.BoardState(dbathon.nurikabe.board.Board);
+  public dbathon.nurikabe.board.Board getBoard();
+  public void restoreState();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+}
+Compiled from "BoardState.java"
+class dbathon.nurikabe.board.BoardState$CellState {
+  final dbathon.nurikabe.board.Cell cell;
+  final dbathon.nurikabe.board.CellColor color;
+  final dbathon.nurikabe.board.FixedCell fixedCell;
+  public dbathon.nurikabe.board.BoardState$CellState(dbathon.nurikabe.board.Cell, dbathon.nurikabe.board.CellColor, dbathon.nurikabe.board.FixedCell);
+  void restore();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+}
+Compiled from "BoardUtil.java"
+public final class dbathon.nurikabe.board.BoardUtil {
+  public static dbathon.nurikabe.board.BoardBuilder parseStringToBoardBuilder(java.lang.String, boolean);
+  public static dbathon.nurikabe.board.Board parseStringToBoard(java.lang.String, boolean);
+  static {};
+}
+Compiled from "Cell.java"
+public abstract class dbathon.nurikabe.board.Cell {
+  public dbathon.nurikabe.board.Cell(dbathon.nurikabe.board.Board, int, int);
+  public dbathon.nurikabe.board.Board getBoard();
+  public int getX();
+  public int getY();
+  public abstract boolean isFixed();
+  public abstract boolean isWhite();
+  public abstract void setWhite();
+  public abstract boolean isBlack();
+  public abstract void setBlack();
+  public boolean isUnknown();
+  public abstract void setUnknown();
+  public abstract dbathon.nurikabe.board.FixedCell getFixedCell();
+  public abstract void setFixedCell(dbathon.nurikabe.board.FixedCell);
+  public boolean isNeighbor(dbathon.nurikabe.board.Cell);
+  public dbathon.nurikabe.board.CellColor getColor();
+  public void setColor(dbathon.nurikabe.board.CellColor);
+}
+Compiled from "CellColor.java"
+public final class dbathon.nurikabe.board.CellColor extends java.lang.Enum<dbathon.nurikabe.board.CellColor> {
+  public static final dbathon.nurikabe.board.CellColor BLACK;
+  public static final dbathon.nurikabe.board.CellColor WHITE;
+  public static final dbathon.nurikabe.board.CellColor UNKNOWN;
+  public static dbathon.nurikabe.board.CellColor[] values();
+  public static dbathon.nurikabe.board.CellColor valueOf(java.lang.String);
+  public java.lang.String getShortName();
+  static {};
+}
+Compiled from "CellSet.java"
+public class dbathon.nurikabe.board.CellSet extends java.util.AbstractSet<dbathon.nurikabe.board.Cell> {
+  public dbathon.nurikabe.board.CellSet(dbathon.nurikabe.board.Board);
+  public dbathon.nurikabe.board.CellSet(java.util.Collection<? extends dbathon.nurikabe.board.Cell>);
+  public boolean contains(java.lang.Object);
+  public boolean add(dbathon.nurikabe.board.Cell);
+  public boolean remove(java.lang.Object);
+  public void clear();
+  public java.util.Iterator<dbathon.nurikabe.board.Cell> iterator();
+  public int size();
+  public boolean equals(java.lang.Object);
+  public boolean add(java.lang.Object);
+  static java.util.BitSet access$000(dbathon.nurikabe.board.CellSet);
+  static dbathon.nurikabe.board.Board access$100(dbathon.nurikabe.board.CellSet);
+}
+Compiled from "CellSet.java"
+class dbathon.nurikabe.board.CellSet$1 implements java.util.Iterator<dbathon.nurikabe.board.Cell> {
+  final dbathon.nurikabe.board.CellSet this$0;
+  dbathon.nurikabe.board.CellSet$1(dbathon.nurikabe.board.CellSet);
+  public boolean hasNext();
+  public dbathon.nurikabe.board.Cell next();
+  public void remove();
+  public java.lang.Object next();
+}
+Compiled from "FixedCell.java"
+public class dbathon.nurikabe.board.FixedCell extends dbathon.nurikabe.board.Cell {
+  public dbathon.nurikabe.board.FixedCell(dbathon.nurikabe.board.Board, int, int, int);
+  public boolean isFixed();
+  public boolean isWhite();
+  public boolean isBlack();
+  public void setWhite();
+  public void setBlack();
+  public void setUnknown();
+  public dbathon.nurikabe.board.FixedCell getFixedCell();
+  public void setFixedCell(dbathon.nurikabe.board.FixedCell);
+  public int getNumber();
+  public java.lang.String toString();
+}
+Compiled from "SimpleCell.java"
+public class dbathon.nurikabe.board.SimpleCell extends dbathon.nurikabe.board.Cell {
+  public dbathon.nurikabe.board.SimpleCell(dbathon.nurikabe.board.Board, int, int);
+  public boolean isFixed();
+  public boolean isWhite();
+  public void setWhite();
+  public boolean isBlack();
+  public void setBlack();
+  public void setUnknown();
+  public dbathon.nurikabe.board.FixedCell getFixedCell();
+  public void setFixedCell(dbathon.nurikabe.board.FixedCell);
+  public java.lang.String toString();
+}
+Compiled from "Solver.java"
+public class dbathon.nurikabe.solver.Solver {
+  public dbathon.nurikabe.solver.Solver(java.util.List<dbathon.nurikabe.solver.SolverStrategy>);
+  public boolean tryToSolve(dbathon.nurikabe.board.Board, java.util.Collection<dbathon.nurikabe.solver.SolverEvents>);
+  public boolean tryToSolve(dbathon.nurikabe.board.Board);
+}
+Compiled from "SolverEvents.java"
+public interface dbathon.nurikabe.solver.SolverEvents {
+  public abstract void onBeginSolve(dbathon.nurikabe.board.Board, dbathon.nurikabe.solver.Solver);
+  public abstract void onStrategyExecuted(dbathon.nurikabe.board.Board, dbathon.nurikabe.solver.SolverStrategy, long, dbathon.nurikabe.solver.Solver);
+}
+Compiled from "SolverStrategy.java"
+public interface dbathon.nurikabe.solver.SolverStrategy {
+  public abstract void improveSolution(dbathon.nurikabe.board.Board);
+}
+Compiled from "AllValidIslandsStrategy.java"
+public class dbathon.nurikabe.solver.strategy.AllValidIslandsStrategy implements dbathon.nurikabe.solver.SolverStrategy {
+  static final boolean $assertionsDisabled;
+  public dbathon.nurikabe.solver.strategy.AllValidIslandsStrategy();
+  public void improveSolution(dbathon.nurikabe.board.Board);
+  static {};
+}
+Compiled from "BlackConnectStrategy.java"
+public class dbathon.nurikabe.solver.strategy.BlackConnectStrategy implements dbathon.nurikabe.solver.SolverStrategy {
+  public dbathon.nurikabe.solver.strategy.BlackConnectStrategy();
+  public void improveSolution(dbathon.nurikabe.board.Board);
+}
+Compiled from "ExpandStrategy.java"
+public class dbathon.nurikabe.solver.strategy.ExpandStrategy implements dbathon.nurikabe.solver.SolverStrategy {
+  public dbathon.nurikabe.solver.strategy.ExpandStrategy();
+  public void improveSolution(dbathon.nurikabe.board.Board);
+}
+Compiled from "NoBlackBlockStrategy.java"
+public class dbathon.nurikabe.solver.strategy.NoBlackBlockStrategy implements dbathon.nurikabe.solver.SolverStrategy {
+  public dbathon.nurikabe.solver.strategy.NoBlackBlockStrategy();
+  public void improveSolution(dbathon.nurikabe.board.Board);
+}
+Compiled from "TwoAndBlackStrategy.java"
+public class dbathon.nurikabe.solver.strategy.TwoAndBlackStrategy implements dbathon.nurikabe.solver.SolverStrategy {
+  public dbathon.nurikabe.solver.strategy.TwoAndBlackStrategy();
+  public void improveSolution(dbathon.nurikabe.board.Board);
+}
+Compiled from "Utils.java"
+public final class dbathon.nurikabe.solver.strategy.Utils {
+  public static java.util.Set<dbathon.nurikabe.board.Cell> unknownNeighbors(dbathon.nurikabe.board.Board, java.util.Collection<dbathon.nurikabe.board.Cell>);
+}

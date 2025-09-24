@@ -1,0 +1,431 @@
+Compiled from "AbstractConfig.java"
+public abstract class com.github.lindenb.dataindexer.AbstractConfig<T> {
+  public com.github.lindenb.dataindexer.AbstractConfig();
+  public java.io.File getIndexFile();
+  public java.io.File getHomeDirectory();
+  public void setHomeDirectory(java.io.File);
+  public java.lang.String getName();
+  public void setName(java.lang.String);
+  public java.io.File getDataFile();
+  public java.io.File getSummaryFile();
+  public java.lang.Integer getSizeOfItem();
+  public void setSizeOfItem(java.lang.Integer);
+  public boolean isFixedSizeof();
+  public void setRandomAccessFactory(com.github.lindenb.dataindexer.RandomAccessFactory);
+  public com.github.lindenb.dataindexer.RandomAccessFactory getRandomAccessFactory();
+  public abstract com.github.lindenb.dataindexer.TupleBinding<T> getDataBinding();
+  public void setLogger(java.util.logging.Logger);
+  public java.util.logging.Logger getLogger();
+  protected void validate() throws java.io.IOException;
+  public void validateForReading() throws java.io.IOException;
+  public void validateForWriting() throws java.io.IOException;
+}
+Compiled from "AbstractDataIndexer.java"
+public abstract class com.github.lindenb.dataindexer.AbstractDataIndexer<T, CONFIG extends com.github.lindenb.dataindexer.AbstractConfig<T>> implements java.io.Closeable {
+  protected static final java.util.logging.Logger LOG;
+  protected long numberOfItems;
+  protected com.github.lindenb.dataindexer.AbstractDataIndexer(CONFIG);
+  protected void checkConfig() throws java.io.IOException;
+  public abstract void close() throws java.io.IOException;
+  public final CONFIG getConfig();
+  protected final com.github.lindenb.dataindexer.TupleBinding<T> getDataBinding();
+  protected void writeSummary() throws java.io.IOException;
+  static {};
+}
+Compiled from "AbstractDatabaseReader.java"
+public class com.github.lindenb.dataindexer.AbstractDatabaseReader<T, CONFIG extends com.github.lindenb.dataindexer.AbstractConfig<T>> implements java.io.Closeable {
+  protected static final java.util.logging.Logger LOG;
+  protected com.github.lindenb.dataindexer.AbstractDatabaseReader(CONFIG) throws java.io.IOException;
+  public boolean isOpen();
+  protected void validateConfig() throws java.io.IOException;
+  public void open() throws java.io.IOException;
+  public CONFIG getConfig();
+  public long size();
+  protected int getSizeOf();
+  protected boolean isFixedSizeOf();
+  T getItemFromOffset(long) throws java.io.IOException;
+  public T get(long) throws java.io.IOException;
+  public void close() throws java.io.IOException;
+  protected void apply(long, long, com.github.lindenb.dataindexer.Function<T>) throws java.io.IOException;
+  public void forEach(long, long, com.github.lindenb.dataindexer.PrimaryForEach<T>) throws java.io.IOException;
+  public java.util.List<T> asList();
+  static {};
+}
+Compiled from "AbstractDatabaseReader.java"
+class com.github.lindenb.dataindexer.AbstractDatabaseReader$1 extends java.util.AbstractList<T> {
+  final com.github.lindenb.dataindexer.AbstractDatabaseReader this$0;
+  com.github.lindenb.dataindexer.AbstractDatabaseReader$1(com.github.lindenb.dataindexer.AbstractDatabaseReader);
+  public T get(int);
+  public int size();
+}
+Compiled from "BlockCompressedRandomAccessFactory.java"
+public class com.github.lindenb.dataindexer.BlockCompressedRandomAccessFactory implements com.github.lindenb.dataindexer.RandomAccessFactory {
+  public com.github.lindenb.dataindexer.BlockCompressedRandomAccessFactory();
+  public com.github.lindenb.dataindexer.RandomAccessOutput openForWriting(java.io.File) throws java.io.IOException;
+  public com.github.lindenb.dataindexer.RandomAccessInput openForReading(java.io.File) throws java.io.IOException;
+  public java.lang.String toString();
+}
+Compiled from "BlockCompressedRandomAccessFactory.java"
+class com.github.lindenb.dataindexer.BlockCompressedRandomAccessFactory$BlockCompressedInputStreamProxy extends com.github.lindenb.dataindexer.RandomAccessInput {
+  com.github.lindenb.dataindexer.BlockCompressedRandomAccessFactory$BlockCompressedInputStreamProxy(java.io.File) throws java.io.IOException;
+  public void seek(long) throws java.io.IOException;
+  public int read(byte[], int, int) throws java.io.IOException;
+  public void close() throws java.io.IOException;
+  public int read(byte[]) throws java.io.IOException;
+  public int read() throws java.io.IOException;
+}
+Compiled from "BlockCompressedRandomAccessFactory.java"
+class com.github.lindenb.dataindexer.BlockCompressedRandomAccessFactory$BlockCompressedOutputStreamProxy extends com.github.lindenb.dataindexer.RandomAccessOutput {
+  com.github.lindenb.dataindexer.BlockCompressedRandomAccessFactory$BlockCompressedOutputStreamProxy(java.io.File) throws java.io.IOException;
+  public long getOffset() throws java.io.IOException;
+  public void flush() throws java.io.IOException;
+  public void close() throws java.io.IOException;
+  public void write(byte[], int, int) throws java.io.IOException;
+  public final void write(byte[]) throws java.io.IOException;
+  public final void write(int) throws java.io.IOException;
+}
+Compiled from "DefaultRandomAccessFactory.java"
+public class com.github.lindenb.dataindexer.DefaultRandomAccessFactory implements com.github.lindenb.dataindexer.RandomAccessFactory {
+  public com.github.lindenb.dataindexer.DefaultRandomAccessFactory();
+  public com.github.lindenb.dataindexer.RandomAccessOutput openForWriting(java.io.File) throws java.io.IOException;
+  public com.github.lindenb.dataindexer.RandomAccessInput openForReading(java.io.File) throws java.io.IOException;
+  public java.lang.String toString();
+}
+Compiled from "DefaultRandomAccessInput.java"
+public class com.github.lindenb.dataindexer.DefaultRandomAccessInput extends com.github.lindenb.dataindexer.RandomAccessInput {
+  public com.github.lindenb.dataindexer.DefaultRandomAccessInput(java.io.File) throws java.io.IOException;
+  protected java.io.RandomAccessFile getDelegate();
+  public void seek(long) throws java.io.IOException;
+  public int read() throws java.io.IOException;
+  public int read(byte[], int, int) throws java.io.IOException;
+  public int read(byte[]) throws java.io.IOException;
+  public void close() throws java.io.IOException;
+  public java.lang.String toString();
+}
+Compiled from "DefaultRandomAccessOutput.java"
+public class com.github.lindenb.dataindexer.DefaultRandomAccessOutput extends com.github.lindenb.dataindexer.RandomAccessOutput {
+  public com.github.lindenb.dataindexer.DefaultRandomAccessOutput(java.io.File) throws java.io.IOException;
+  public long getOffset();
+  public void write(byte[], int, int) throws java.io.IOException;
+  protected java.io.OutputStream getDelegate();
+  public final void write(byte[]) throws java.io.IOException;
+  public final void write(int) throws java.io.IOException;
+  public void flush() throws java.io.IOException;
+  public void close() throws java.io.IOException;
+}
+Compiled from "Function.java"
+public interface com.github.lindenb.dataindexer.Function<T> {
+  public abstract int apply(T) throws java.io.IOException;
+}
+Compiled from "Interval.java"
+public class com.github.lindenb.dataindexer.Interval extends com.github.lindenb.dataindexer.Pair<java.lang.Long, java.lang.Long> implements java.lang.Iterable<java.lang.Long> {
+  public com.github.lindenb.dataindexer.Interval(long, long);
+  public boolean isEmpty();
+  public long distance();
+  public java.lang.String toString();
+  public java.util.Iterator<java.lang.Long> iterator();
+}
+Compiled from "Interval.java"
+class com.github.lindenb.dataindexer.Interval$Iter implements java.util.Iterator<java.lang.Long> {
+  final com.github.lindenb.dataindexer.Interval this$0;
+  com.github.lindenb.dataindexer.Interval$Iter(com.github.lindenb.dataindexer.Interval);
+  public boolean hasNext();
+  public java.lang.Long next();
+  public void remove();
+  public java.lang.String toString();
+  public java.lang.Object next();
+}
+Compiled from "NaturalComparator.java"
+public class com.github.lindenb.dataindexer.NaturalComparator<T extends java.lang.Comparable<T>> implements java.util.Comparator<T> {
+  public com.github.lindenb.dataindexer.NaturalComparator();
+  public int compare(T, T);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "ObjectAndOffset.java"
+class com.github.lindenb.dataindexer.ObjectAndOffset<T> extends com.github.lindenb.dataindexer.Pair<T, java.lang.Long> {
+  public com.github.lindenb.dataindexer.ObjectAndOffset(T, long);
+  public T getObject();
+  public long getOffset();
+}
+Compiled from "Pair.java"
+public class com.github.lindenb.dataindexer.Pair<K, V> {
+  public com.github.lindenb.dataindexer.Pair(K, V);
+  public K getFirst();
+  public V getSecond();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+}
+Compiled from "PrimaryConfig.java"
+public class com.github.lindenb.dataindexer.PrimaryConfig<T> extends com.github.lindenb.dataindexer.AbstractConfig<T> {
+  public com.github.lindenb.dataindexer.PrimaryConfig();
+  public void setDataBinding(com.github.lindenb.dataindexer.TupleBinding<T>);
+  public com.github.lindenb.dataindexer.TupleBinding<T> getDataBinding();
+}
+Compiled from "PrimaryDataIndexWriter.java"
+public class com.github.lindenb.dataindexer.PrimaryDataIndexWriter<T> extends com.github.lindenb.dataindexer.AbstractDataIndexer<T, com.github.lindenb.dataindexer.PrimaryConfig<T>> {
+  public com.github.lindenb.dataindexer.PrimaryDataIndexWriter(com.github.lindenb.dataindexer.PrimaryConfig<T>);
+  protected void checkConfig() throws java.io.IOException;
+  void addSecondary(com.github.lindenb.dataindexer.SecondaryDataWriter<T, ?>);
+  public void insert(T) throws java.io.IOException;
+  public void close() throws java.io.IOException;
+}
+Compiled from "PrimaryDatabaseReader.java"
+public class com.github.lindenb.dataindexer.PrimaryDatabaseReader<T> extends com.github.lindenb.dataindexer.AbstractDatabaseReader<T, com.github.lindenb.dataindexer.PrimaryConfig<T>> implements java.io.Closeable {
+  public com.github.lindenb.dataindexer.PrimaryDatabaseReader(com.github.lindenb.dataindexer.PrimaryConfig<T>) throws java.io.IOException;
+  protected void validateConfig() throws java.io.IOException;
+}
+Compiled from "PrimaryForEach.java"
+public interface com.github.lindenb.dataindexer.PrimaryForEach<T> {
+  public abstract void onBegin() throws java.io.IOException;
+  public abstract int apply(T) throws java.io.IOException;
+  public abstract void onEnd() throws java.io.IOException;
+}
+Compiled from "RandomAccessFactory.java"
+public interface com.github.lindenb.dataindexer.RandomAccessFactory {
+  public abstract com.github.lindenb.dataindexer.RandomAccessOutput openForWriting(java.io.File) throws java.io.IOException;
+  public abstract com.github.lindenb.dataindexer.RandomAccessInput openForReading(java.io.File) throws java.io.IOException;
+}
+Compiled from "RandomAccessInput.java"
+public abstract class com.github.lindenb.dataindexer.RandomAccessInput extends java.io.InputStream {
+  public com.github.lindenb.dataindexer.RandomAccessInput();
+  public abstract void seek(long) throws java.io.IOException;
+}
+Compiled from "RandomAccessOutput.java"
+public abstract class com.github.lindenb.dataindexer.RandomAccessOutput extends java.io.OutputStream {
+  public com.github.lindenb.dataindexer.RandomAccessOutput();
+  public abstract long getOffset() throws java.io.IOException;
+}
+Compiled from "SecondaryConfig.java"
+public class com.github.lindenb.dataindexer.SecondaryConfig<PRIMARY, K> extends com.github.lindenb.dataindexer.AbstractConfig<com.github.lindenb.dataindexer.ObjectAndOffset<K>> {
+  protected com.github.lindenb.dataindexer.SecondaryKeyCreator<PRIMARY, K> keyCreator;
+  public com.github.lindenb.dataindexer.SecondaryConfig();
+  protected void validate() throws java.io.IOException;
+  public void setBufferSize(int);
+  public int getBufferSize();
+  public void validateForWriting() throws java.io.IOException;
+  public com.github.lindenb.dataindexer.SecondaryKeyCreator<PRIMARY, K> getKeyCreator();
+  public void setKeyCreator(com.github.lindenb.dataindexer.SecondaryKeyCreator<PRIMARY, K>);
+  public java.util.Comparator<K> getComparator();
+  public void setComparator(java.util.Comparator<K>);
+  public void setKeyBinding(com.github.lindenb.dataindexer.TupleBinding<K>);
+  public com.github.lindenb.dataindexer.TupleBinding<K> getKeyBinding();
+  public com.github.lindenb.dataindexer.TupleBinding<com.github.lindenb.dataindexer.ObjectAndOffset<K>> getDataBinding();
+  java.util.Comparator<com.github.lindenb.dataindexer.ObjectAndOffset<K>> createObjectAndOffsetComparator();
+}
+Compiled from "SecondaryConfig.java"
+class com.github.lindenb.dataindexer.SecondaryConfig$1 implements com.github.lindenb.dataindexer.TupleBinding<com.github.lindenb.dataindexer.ObjectAndOffset<K>> {
+  final com.github.lindenb.dataindexer.SecondaryConfig this$0;
+  com.github.lindenb.dataindexer.SecondaryConfig$1(com.github.lindenb.dataindexer.SecondaryConfig);
+  public com.github.lindenb.dataindexer.ObjectAndOffset<K> readObject(java.io.DataInputStream) throws java.io.IOException;
+  public void writeObject(com.github.lindenb.dataindexer.ObjectAndOffset<K>, java.io.DataOutputStream) throws java.io.IOException;
+  public java.lang.Object readObject(java.io.DataInputStream) throws java.io.IOException;
+  public void writeObject(java.lang.Object, java.io.DataOutputStream) throws java.io.IOException;
+}
+Compiled from "SecondaryConfig.java"
+class com.github.lindenb.dataindexer.SecondaryConfig$2 implements java.util.Comparator<com.github.lindenb.dataindexer.ObjectAndOffset<K>> {
+  final com.github.lindenb.dataindexer.SecondaryConfig this$0;
+  com.github.lindenb.dataindexer.SecondaryConfig$2(com.github.lindenb.dataindexer.SecondaryConfig);
+  public int compare(com.github.lindenb.dataindexer.ObjectAndOffset<K>, com.github.lindenb.dataindexer.ObjectAndOffset<K>);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "SecondaryDataWriter.java"
+public class com.github.lindenb.dataindexer.SecondaryDataWriter<PRIMARY, K> extends com.github.lindenb.dataindexer.AbstractDataIndexer<com.github.lindenb.dataindexer.ObjectAndOffset<K>, com.github.lindenb.dataindexer.SecondaryConfig<PRIMARY, K>> {
+  public com.github.lindenb.dataindexer.PrimaryDataIndexWriter<PRIMARY> getOwner();
+  public com.github.lindenb.dataindexer.SecondaryDataWriter(com.github.lindenb.dataindexer.SecondaryConfig<PRIMARY, K>, com.github.lindenb.dataindexer.PrimaryDataIndexWriter<PRIMARY>) throws java.io.IOException;
+  public void put(PRIMARY, long) throws java.io.IOException;
+  public void close() throws java.io.IOException;
+}
+Compiled from "SecondaryDataWriter.java"
+class com.github.lindenb.dataindexer.SecondaryDataWriter$1 {
+}
+Compiled from "SecondaryDataWriter.java"
+class com.github.lindenb.dataindexer.SecondaryDataWriter$FileAndSize {
+  java.io.File file;
+  long count;
+  java.io.DataInputStream in;
+  java.io.DataOutputStream out;
+  final com.github.lindenb.dataindexer.SecondaryDataWriter this$0;
+  void openRead() throws java.io.IOException;
+  void openWrite() throws java.io.IOException;
+  com.github.lindenb.dataindexer.ObjectAndOffset<K> read() throws java.io.IOException;
+  void write(com.github.lindenb.dataindexer.ObjectAndOffset<K>) throws java.io.IOException;
+  void close() throws java.io.IOException;
+  public java.lang.String toString();
+  com.github.lindenb.dataindexer.SecondaryDataWriter$FileAndSize(com.github.lindenb.dataindexer.SecondaryDataWriter, com.github.lindenb.dataindexer.SecondaryDataWriter$1);
+}
+Compiled from "SecondaryDatabaseReader.java"
+public class com.github.lindenb.dataindexer.SecondaryDatabaseReader<PRIMARY, T> extends com.github.lindenb.dataindexer.AbstractDatabaseReader<com.github.lindenb.dataindexer.ObjectAndOffset<T>, com.github.lindenb.dataindexer.SecondaryConfig<PRIMARY, T>> {
+  public com.github.lindenb.dataindexer.SecondaryDatabaseReader(com.github.lindenb.dataindexer.PrimaryDatabaseReader<PRIMARY>, com.github.lindenb.dataindexer.SecondaryConfig<PRIMARY, T>) throws java.io.IOException;
+  public com.github.lindenb.dataindexer.PrimaryDatabaseReader<PRIMARY> getOwner();
+  protected int getSizeOf();
+  protected long lower_bound(T) throws java.io.IOException;
+  public boolean contains(T) throws java.io.IOException;
+  protected com.github.lindenb.dataindexer.Interval equal_range(T) throws java.io.IOException;
+  protected long lower_bound(long, long, T) throws java.io.IOException;
+  public java.util.List<T> getList(T) throws java.io.IOException;
+  public java.util.List<com.github.lindenb.dataindexer.Pair<PRIMARY, T>> getPrimaryList(T) throws java.io.IOException;
+  public java.util.List<PRIMARY> getPrimaryKeyList(T) throws java.io.IOException;
+}
+Compiled from "SecondaryDatabaseReader.java"
+abstract class com.github.lindenb.dataindexer.SecondaryDatabaseReader$AbstractIntervalIterator<Z> implements java.util.Iterator<Z> {
+  protected java.util.Iterator<java.lang.Long> delegate;
+  final com.github.lindenb.dataindexer.SecondaryDatabaseReader this$0;
+  com.github.lindenb.dataindexer.SecondaryDatabaseReader$AbstractIntervalIterator(com.github.lindenb.dataindexer.SecondaryDatabaseReader, com.github.lindenb.dataindexer.Interval);
+  public boolean hasNext();
+  public void remove();
+  protected abstract Z priv_next() throws java.io.IOException;
+  public Z next();
+}
+Compiled from "SecondaryDatabaseReader.java"
+abstract class com.github.lindenb.dataindexer.SecondaryDatabaseReader$AbstractIntervalList<Z> extends java.util.AbstractList<Z> {
+  protected com.github.lindenb.dataindexer.Interval interval;
+  final com.github.lindenb.dataindexer.SecondaryDatabaseReader this$0;
+  public com.github.lindenb.dataindexer.SecondaryDatabaseReader$AbstractIntervalList(com.github.lindenb.dataindexer.SecondaryDatabaseReader, com.github.lindenb.dataindexer.Interval);
+  protected abstract Z priv_get(long) throws java.io.IOException;
+  public Z get(int);
+  public int size();
+}
+Compiled from "SecondaryDatabaseReader.java"
+class com.github.lindenb.dataindexer.SecondaryDatabaseReader$IntervalIterator extends com.github.lindenb.dataindexer.SecondaryDatabaseReader<PRIMARY, T>.AbstractIntervalIterator<T> {
+  final com.github.lindenb.dataindexer.SecondaryDatabaseReader this$0;
+  com.github.lindenb.dataindexer.SecondaryDatabaseReader$IntervalIterator(com.github.lindenb.dataindexer.SecondaryDatabaseReader, com.github.lindenb.dataindexer.Interval);
+  public T priv_next() throws java.io.IOException;
+}
+Compiled from "SecondaryDatabaseReader.java"
+class com.github.lindenb.dataindexer.SecondaryDatabaseReader$IntervalList extends com.github.lindenb.dataindexer.SecondaryDatabaseReader<PRIMARY, T>.AbstractIntervalList<T> {
+  final com.github.lindenb.dataindexer.SecondaryDatabaseReader this$0;
+  public com.github.lindenb.dataindexer.SecondaryDatabaseReader$IntervalList(com.github.lindenb.dataindexer.SecondaryDatabaseReader, com.github.lindenb.dataindexer.Interval);
+  protected T priv_get(long) throws java.io.IOException;
+  public java.util.Iterator<T> iterator();
+}
+Compiled from "SecondaryDatabaseReader.java"
+class com.github.lindenb.dataindexer.SecondaryDatabaseReader$PrimaryIterator extends com.github.lindenb.dataindexer.SecondaryDatabaseReader<PRIMARY, T>.AbstractIntervalIterator<com.github.lindenb.dataindexer.Pair<PRIMARY, T>> {
+  final com.github.lindenb.dataindexer.SecondaryDatabaseReader this$0;
+  com.github.lindenb.dataindexer.SecondaryDatabaseReader$PrimaryIterator(com.github.lindenb.dataindexer.SecondaryDatabaseReader, com.github.lindenb.dataindexer.Interval);
+  public com.github.lindenb.dataindexer.Pair<PRIMARY, T> priv_next() throws java.io.IOException;
+  public java.lang.Object priv_next() throws java.io.IOException;
+}
+Compiled from "SecondaryDatabaseReader.java"
+class com.github.lindenb.dataindexer.SecondaryDatabaseReader$PrimaryKeyIterator extends com.github.lindenb.dataindexer.SecondaryDatabaseReader<PRIMARY, T>.AbstractIntervalIterator<PRIMARY> {
+  final com.github.lindenb.dataindexer.SecondaryDatabaseReader this$0;
+  com.github.lindenb.dataindexer.SecondaryDatabaseReader$PrimaryKeyIterator(com.github.lindenb.dataindexer.SecondaryDatabaseReader, com.github.lindenb.dataindexer.Interval);
+  public PRIMARY priv_next() throws java.io.IOException;
+}
+Compiled from "SecondaryDatabaseReader.java"
+class com.github.lindenb.dataindexer.SecondaryDatabaseReader$PrimaryKeyList extends com.github.lindenb.dataindexer.SecondaryDatabaseReader<PRIMARY, T>.AbstractIntervalList<PRIMARY> {
+  final com.github.lindenb.dataindexer.SecondaryDatabaseReader this$0;
+  public com.github.lindenb.dataindexer.SecondaryDatabaseReader$PrimaryKeyList(com.github.lindenb.dataindexer.SecondaryDatabaseReader, com.github.lindenb.dataindexer.Interval);
+  protected PRIMARY priv_get(long) throws java.io.IOException;
+  public java.util.Iterator<PRIMARY> iterator();
+}
+Compiled from "SecondaryDatabaseReader.java"
+class com.github.lindenb.dataindexer.SecondaryDatabaseReader$PrimaryList extends com.github.lindenb.dataindexer.SecondaryDatabaseReader<PRIMARY, T>.AbstractIntervalList<com.github.lindenb.dataindexer.Pair<PRIMARY, T>> {
+  final com.github.lindenb.dataindexer.SecondaryDatabaseReader this$0;
+  public com.github.lindenb.dataindexer.SecondaryDatabaseReader$PrimaryList(com.github.lindenb.dataindexer.SecondaryDatabaseReader, com.github.lindenb.dataindexer.Interval);
+  protected com.github.lindenb.dataindexer.Pair<PRIMARY, T> priv_get(long) throws java.io.IOException;
+  public java.util.Iterator<com.github.lindenb.dataindexer.Pair<PRIMARY, T>> iterator();
+  protected java.lang.Object priv_get(long) throws java.io.IOException;
+}
+Compiled from "SecondaryForEach.java"
+public interface com.github.lindenb.dataindexer.SecondaryForEach<PRIMARY, T> {
+  public abstract void onBegin() throws java.io.IOException;
+  public abstract int apply(PRIMARY, T) throws java.io.IOException;
+  public abstract void onEnd() throws java.io.IOException;
+}
+Compiled from "SecondaryKeyCreator.java"
+public interface com.github.lindenb.dataindexer.SecondaryKeyCreator<T, K> {
+  public abstract java.util.Set<K> getSecondaryKeys(T);
+}
+Compiled from "TupleBinding.java"
+public interface com.github.lindenb.dataindexer.TupleBinding<T> {
+  public abstract void writeObject(T, java.io.DataOutputStream) throws java.io.IOException;
+  public abstract T readObject(java.io.DataInputStream) throws java.io.IOException;
+}
+Compiled from "SimpleInteger.java"
+public class test.github.lindenb.dataindexer.SimpleInteger {
+  public test.github.lindenb.dataindexer.SimpleInteger();
+  public static void main(java.lang.String[]);
+}
+Compiled from "SimpleInteger.java"
+class test.github.lindenb.dataindexer.SimpleInteger$1 implements com.github.lindenb.dataindexer.TupleBinding<java.lang.Integer> {
+  final test.github.lindenb.dataindexer.SimpleInteger this$0;
+  test.github.lindenb.dataindexer.SimpleInteger$1(test.github.lindenb.dataindexer.SimpleInteger);
+  public void writeObject(java.lang.Integer, java.io.DataOutputStream) throws java.io.IOException;
+  public java.lang.Integer readObject(java.io.DataInputStream) throws java.io.IOException;
+  public java.lang.Object readObject(java.io.DataInputStream) throws java.io.IOException;
+  public void writeObject(java.lang.Object, java.io.DataOutputStream) throws java.io.IOException;
+}
+Compiled from "SimpleInteger.java"
+class test.github.lindenb.dataindexer.SimpleInteger$2 implements com.github.lindenb.dataindexer.TupleBinding<java.lang.Integer> {
+  final test.github.lindenb.dataindexer.SimpleInteger this$0;
+  test.github.lindenb.dataindexer.SimpleInteger$2(test.github.lindenb.dataindexer.SimpleInteger);
+  public void writeObject(java.lang.Integer, java.io.DataOutputStream) throws java.io.IOException;
+  public java.lang.Integer readObject(java.io.DataInputStream) throws java.io.IOException;
+  public java.lang.Object readObject(java.io.DataInputStream) throws java.io.IOException;
+  public void writeObject(java.lang.Object, java.io.DataOutputStream) throws java.io.IOException;
+}
+Compiled from "SimpleInteger.java"
+class test.github.lindenb.dataindexer.SimpleInteger$3 implements com.github.lindenb.dataindexer.SecondaryKeyCreator<java.lang.Integer, java.lang.Integer> {
+  final test.github.lindenb.dataindexer.SimpleInteger this$0;
+  test.github.lindenb.dataindexer.SimpleInteger$3(test.github.lindenb.dataindexer.SimpleInteger);
+  public java.util.Set<java.lang.Integer> getSecondaryKeys(java.lang.Integer);
+  public java.util.Set getSecondaryKeys(java.lang.Object);
+}
+Compiled from "DBSnpLoader.java"
+public class test.github.lindenb.dataindexer.dbsnp.DBSnpLoader {
+  protected static final java.util.logging.Logger LOG;
+  public test.github.lindenb.dataindexer.dbsnp.DBSnpLoader();
+  public void test() throws java.io.IOException;
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+  static {};
+}
+Compiled from "DBSnpLoader.java"
+class test.github.lindenb.dataindexer.dbsnp.DBSnpLoader$1 implements java.util.Comparator<test.github.lindenb.dataindexer.dbsnp.DBSnpLoader$Rs> {
+  final test.github.lindenb.dataindexer.dbsnp.DBSnpLoader this$0;
+  test.github.lindenb.dataindexer.dbsnp.DBSnpLoader$1(test.github.lindenb.dataindexer.dbsnp.DBSnpLoader);
+  public int compare(test.github.lindenb.dataindexer.dbsnp.DBSnpLoader$Rs, test.github.lindenb.dataindexer.dbsnp.DBSnpLoader$Rs);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "DBSnpLoader.java"
+class test.github.lindenb.dataindexer.dbsnp.DBSnpLoader$2 implements com.github.lindenb.dataindexer.TupleBinding<test.github.lindenb.dataindexer.dbsnp.DBSnpLoader$Rs> {
+  final test.github.lindenb.dataindexer.dbsnp.DBSnpLoader this$0;
+  test.github.lindenb.dataindexer.dbsnp.DBSnpLoader$2(test.github.lindenb.dataindexer.dbsnp.DBSnpLoader);
+  public test.github.lindenb.dataindexer.dbsnp.DBSnpLoader$Rs readObject(java.io.DataInputStream) throws java.io.IOException;
+  public void writeObject(test.github.lindenb.dataindexer.dbsnp.DBSnpLoader$Rs, java.io.DataOutputStream) throws java.io.IOException;
+  public java.lang.Object readObject(java.io.DataInputStream) throws java.io.IOException;
+  public void writeObject(java.lang.Object, java.io.DataOutputStream) throws java.io.IOException;
+}
+Compiled from "DBSnpLoader.java"
+class test.github.lindenb.dataindexer.dbsnp.DBSnpLoader$3 implements com.github.lindenb.dataindexer.SecondaryKeyCreator<test.github.lindenb.dataindexer.dbsnp.DBSnpLoader$Snp, test.github.lindenb.dataindexer.dbsnp.DBSnpLoader$Rs> {
+  final test.github.lindenb.dataindexer.dbsnp.DBSnpLoader this$0;
+  test.github.lindenb.dataindexer.dbsnp.DBSnpLoader$3(test.github.lindenb.dataindexer.dbsnp.DBSnpLoader);
+  public java.util.Set<test.github.lindenb.dataindexer.dbsnp.DBSnpLoader$Rs> getSecondaryKeys(test.github.lindenb.dataindexer.dbsnp.DBSnpLoader$Snp);
+  public java.util.Set getSecondaryKeys(java.lang.Object);
+}
+Compiled from "DBSnpLoader.java"
+class test.github.lindenb.dataindexer.dbsnp.DBSnpLoader$Rs {
+  int rs_id;
+  test.github.lindenb.dataindexer.dbsnp.DBSnpLoader$Rs(int);
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+}
+Compiled from "DBSnpLoader.java"
+class test.github.lindenb.dataindexer.dbsnp.DBSnpLoader$Snp {
+  int bin;
+  java.lang.String chrom;
+  int chromStart;
+  int chromEnd;
+  test.github.lindenb.dataindexer.dbsnp.DBSnpLoader$Rs rs_id;
+  public java.lang.String toString();
+  test.github.lindenb.dataindexer.dbsnp.DBSnpLoader$Snp(test.github.lindenb.dataindexer.dbsnp.DBSnpLoader$1);
+}
+Compiled from "DBSnpLoader.java"
+class test.github.lindenb.dataindexer.dbsnp.DBSnpLoader$SnpBinding implements com.github.lindenb.dataindexer.TupleBinding<test.github.lindenb.dataindexer.dbsnp.DBSnpLoader$Snp> {
+  public test.github.lindenb.dataindexer.dbsnp.DBSnpLoader$Snp readObject(java.io.DataInputStream) throws java.io.IOException;
+  public void writeObject(test.github.lindenb.dataindexer.dbsnp.DBSnpLoader$Snp, java.io.DataOutputStream) throws java.io.IOException;
+  public java.lang.Object readObject(java.io.DataInputStream) throws java.io.IOException;
+  public void writeObject(java.lang.Object, java.io.DataOutputStream) throws java.io.IOException;
+  test.github.lindenb.dataindexer.dbsnp.DBSnpLoader$SnpBinding(test.github.lindenb.dataindexer.dbsnp.DBSnpLoader$1);
+}
