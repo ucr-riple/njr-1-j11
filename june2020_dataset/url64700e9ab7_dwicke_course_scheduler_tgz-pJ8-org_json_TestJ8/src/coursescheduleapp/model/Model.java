@@ -19,7 +19,6 @@ public class Model extends Observable implements Subscriber{
 	private Scheduler scheduler;
 	private PreferenceSet prefSet;
 	private Thread schedulerThread;
-	private int numEquivCourses, numSelection;
 
 	/**
 	 *
@@ -28,8 +27,6 @@ public class Model extends Observable implements Subscriber{
 	 */
 	public Model(int numEquivCourses, int numSelection)
 	{
-		this.numEquivCourses = numEquivCourses;
-		this.numSelection = numSelection;
 		prefSet = new PreferenceSet(numEquivCourses, numSelection);
 
 		CourseCollectionFactory courseFac = new CourseCollectionFactory();

@@ -12,7 +12,8 @@ public class Peer implements Runnable, ReadEventListener {
 	private MulticastSocket socket;
 	private ByteArrayOutputStream baos;
 	private ByteArrayInputStream bais;
-	private DatagramPacket incomingPacket, outgoingPacket;
+	private DatagramPacket incomingPacket;
+	private DatagramPacket outgoingPacket;
 	private ObjectOutputStream outgoingObject;
 	private ObjectInputStream incomingObject;
 	private UUID peerID;

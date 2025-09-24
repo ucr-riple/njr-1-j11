@@ -6,7 +6,6 @@ import DrunkardGame.GameObjects.CommonObjects.GameObject;
 import DrunkardGame.GameObjects.MovableObjects.Policeman;
 import DrunkardGame.States.DrunkardStates.DrunkardLyingState;
 import DrunkardGame.Strategies.PolicemanStrategy.WaitingStrategy;
-import com.sun.jndi.url.dns.dnsURLContext;
 
 /**
  * Created by novokrest on 4/16/14.

@@ -419,7 +419,7 @@ public class HistroyMsgCache {
 			}
 		}
 
-		private void closeConn() {
+		public void closeConn() {
 			try {
 				if (pstmtOne != null)
 					pstmtOne.close();

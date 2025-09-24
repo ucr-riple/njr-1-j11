@@ -221,7 +221,7 @@ public class RAIclient extends Thread{
 	/**
 	 * Closes the sockets and the streams before exiting the thread
 	 */
-	private void endGame() {
+	public void endGame() {
 		String finalScores;
 		
 		try{

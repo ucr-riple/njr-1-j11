@@ -241,7 +241,7 @@ public final class Server implements IServer {
          * METHOD: Disconnect client from server
          * AUTHOR: Eliseev Dmitry
          * */
-        private void disconnectClient() {
+        public void disconnectClient() {
             /* Remove client from internal data structure */
             removeClient(m_ID);
 

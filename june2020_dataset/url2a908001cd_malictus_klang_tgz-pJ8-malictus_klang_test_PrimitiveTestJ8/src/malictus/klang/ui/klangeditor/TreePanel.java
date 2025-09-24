@@ -73,17 +73,22 @@ public class TreePanel extends JScrollPane {
 	 */
 	protected void updatePanelToNewByte() {
 		dontTrigger = true;
-		Enumeration<DefaultMutableTreeNode> numer = ((DefaultMutableTreeNode)tree.getModel().getRoot()).depthFirstEnumeration();
+		Enumeration<TreeNode> numer =
+        ((DefaultMutableTreeNode) tree.getModel().getRoot()).depthFirstEnumeration();
 		while (numer.hasMoreElements()) {
-			DefaultMutableTreeNode node = numer.nextElement();
-			if (node.getUserObject() instanceof Chunk) {
-				Chunk z = (Chunk)node.getUserObject();
-				if (z.equals(parent.getCurrentChunk())) {
-					tree.setSelectionPath(new TreePath(node.getPath()));
-					break;
+			TreeNode node = numer.nextElement();
+			if (node instanceof DefaultMutableTreeNode) {
+				DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) node;
+				Object userObj = dmtn.getUserObject();
+				if (userObj instanceof Chunk) {
+					Chunk z = (Chunk) userObj;
+					if (z.equals(parent.getCurrentChunk())) {
+						tree.setSelectionPath(new TreePath(dmtn.getPath()));
+						break;
+					}
 				}
 			}
-		}
+    	}
 		dontTrigger = false;
 	}
 	

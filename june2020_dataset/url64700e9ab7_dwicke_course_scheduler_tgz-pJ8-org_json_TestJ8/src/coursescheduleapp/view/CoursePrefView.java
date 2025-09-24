@@ -20,9 +20,6 @@ import coursescheduleapp.model.CoursePref;
  */
 public class CoursePrefView extends javax.swing.JPanel {
 
-	private CoursePref coursePref;
-	private int numEquiv, numSelect;
-	private CourseCollectionDB courseDB;
     /** Creates new form CoursePrefView */
     public CoursePrefView() {
         initComponents();
@@ -31,10 +28,6 @@ public class CoursePrefView extends javax.swing.JPanel {
     
     public void setCoursePref(CoursePref coursePref, int numEquiv, int numSelect, CourseCollectionDB courseDB )
     {
-    	this.coursePref = coursePref;
-    	this.numEquiv = numEquiv;
-    	this.numSelect = numSelect;
-    	this.courseDB = courseDB;
     	
     	equivCourseSelectView1.setEquiv(coursePref.getEquivCourses(0), 0, courseDB);
         equivCourseSelectView2.setEquiv(coursePref.getEquivCourses(1), 1, courseDB);

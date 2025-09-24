@@ -2,6 +2,7 @@ package com.ctriposs.bigcache.storage;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
 
 /**
@@ -27,8 +28,11 @@ public class AlignOffHeapStorage extends OffHeapStorage {
 		try {
 			Field cleanerField = byteBuffer.getClass().getDeclaredField("cleaner");
 			cleanerField.setAccessible(true);
-			sun.misc.Cleaner cleaner = (sun.misc.Cleaner) cleanerField.get(byteBuffer);
-			cleaner.clean();
+			Object cleaner = cleanerField.get(byteBuffer);
+            if (cleaner != null) {
+                Method cleanMethod = cleaner.getClass().getMethod("clean");
+                cleanMethod.invoke(cleaner);
+            }
 		} catch (Exception e) {
 			throw new Error(e);
 		}

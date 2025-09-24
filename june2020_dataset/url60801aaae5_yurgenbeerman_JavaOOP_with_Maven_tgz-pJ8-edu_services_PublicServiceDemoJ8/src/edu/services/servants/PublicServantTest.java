@@ -4,7 +4,6 @@ import edu.services.execution.ExecutionEnvironment;
 import edu.services.orgs.PublicService;
 import edu.services.orgs.PublicServiceDepartment;
 import junit.framework.TestCase;
-import org.omg.CORBA.Environment;
 import org.junit.Test;
 
 /**

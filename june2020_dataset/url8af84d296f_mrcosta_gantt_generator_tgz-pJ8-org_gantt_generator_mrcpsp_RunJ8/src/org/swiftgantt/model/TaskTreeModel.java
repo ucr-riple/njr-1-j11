@@ -130,11 +130,11 @@ public class TaskTreeModel extends DefaultTreeModel implements PropertyChangeLis
 	/*
 	 * Get task by task id from given task node includes his sub-trees.
 	 */
-	@SuppressWarnings("unchecked")
 	private Task getTaskFrom(MutableTreeNode parent, int id) {
-		Enumeration<Task> tasks = parent.children();
+		Enumeration<? extends TreeNode> tasks = parent.children();
 		while (tasks.hasMoreElements()) {
-			Task task = (Task) tasks.nextElement();
+			TreeNode node = tasks.nextElement();
+			Task task = (Task) node;
 			if (task.getId() == id) {
 				return task; // Find in current level.
 			}
@@ -151,10 +151,9 @@ public class TaskTreeModel extends DefaultTreeModel implements PropertyChangeLis
 	 * 
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	public List<Task> getChildren() {
 		List<Task> ret = new ArrayList<Task>();
-		Enumeration e = this.root.children();
+		Enumeration<? extends TreeNode> e = this.root.children();
 		while (e.hasMoreElements()) {
 			Task t = (Task) e.nextElement();
 			ret.add(t);
@@ -176,11 +175,10 @@ public class TaskTreeModel extends DefaultTreeModel implements PropertyChangeLis
 	/*
 	 * Called by getTasksByDFS().
 	 */
-	@SuppressWarnings("unchecked")
 	private void getTasksByDFS(MutableTreeNode parent, List<Task> result) {
-		Enumeration<Task> enu = parent.children();
+		Enumeration<? extends TreeNode> enu = parent.children();
 		while (enu.hasMoreElements()) {
-			Task cur = enu.nextElement();
+			Task cur = (Task) enu.nextElement();
 			result.add(cur);
 			if (cur.isLeaf() == false) {
 				getTasksByDFS(cur, result); // Recursive
@@ -199,16 +197,14 @@ public class TaskTreeModel extends DefaultTreeModel implements PropertyChangeLis
 		return tasks;
 	}
 
-	@SuppressWarnings("unchecked")
 	private void getTasksByBFS(MutableTreeNode parent, List<Task> result) {
-		Enumeration<Task> enu = parent.children();
+		Enumeration<? extends TreeNode> enu = parent.children();
 		while (enu.hasMoreElements()) {
-			Task t = enu.nextElement();
-			result.add(t);
+			result.add((Task) enu.nextElement());
 		}
 		enu = parent.children();
 		while (enu.hasMoreElements()) {
-			Task t = enu.nextElement();
+			Task t = (Task) enu.nextElement();
 			if (t.isLeaf() == false) {
 				getTasksByBFS(t, result); // Recursive
 			}
@@ -268,5 +264,4 @@ public class TaskTreeModel extends DefaultTreeModel implements PropertyChangeLis
 	public void setTimeUnit(TimeUnit timeUnit) {
 		this.timeUnit = timeUnit;
 	}
-
 }

@@ -40,7 +40,7 @@ public final class FileLoader {
      * METHOD: Closes file
      * AUTHOR: Eliseev Dmitry
      * */
-    private void close() {
+    public void close() {
         try {
             if (m_ObjectInputStream != null)
                 m_ObjectInputStream.close();

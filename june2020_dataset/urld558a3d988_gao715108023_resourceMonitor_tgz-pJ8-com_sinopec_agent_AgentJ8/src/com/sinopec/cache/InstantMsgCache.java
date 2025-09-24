@@ -301,7 +301,7 @@ public class InstantMsgCache implements ICache<String, Object> {
 			}
 		}
 
-		private void closeConn() {
+		public void closeConn() {
 			try {
 				if (stmt != null)
 					stmt.close();

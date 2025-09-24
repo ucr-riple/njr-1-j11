@@ -37,9 +37,7 @@ public class AccessTest {
 
 
     /** reflection factory for forcing default constructors */
-    private static final ReflectionFactory reflFactory = (ReflectionFactory)
-            AccessController.doPrivileged(
-                    new ReflectionFactory.GetReflectionFactoryAction());
+    private static final ReflectionFactory reflFactory = ReflectionFactory.getReflectionFactory();
 
 
     public static class Sub extends Super {

@@ -1,7 +1,5 @@
 package kth.game.othello.board;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import java.util.*;
 import java.util.stream.Collectors;
 

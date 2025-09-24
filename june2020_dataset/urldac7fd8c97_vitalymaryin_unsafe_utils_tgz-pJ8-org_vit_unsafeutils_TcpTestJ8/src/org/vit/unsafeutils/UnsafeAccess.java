@@ -27,8 +27,7 @@ public class UnsafeAccess {
             Field field = Unsafe.class.getDeclaredField("theUnsafe");
             field.setAccessible(true);
             unsafe = (Unsafe) field.get(null);
-            String arch = java.security.AccessController.doPrivileged
-                    (new sun.security.action.GetPropertyAction("os.arch", ""));
+            String arch = System.getProperty("os.arch", "");
             isAligned = arch.equals("i386") || arch.equals("x86") || arch.equals("amd64")
                     || arch.equals("x86_64");
         } catch (Exception e) {

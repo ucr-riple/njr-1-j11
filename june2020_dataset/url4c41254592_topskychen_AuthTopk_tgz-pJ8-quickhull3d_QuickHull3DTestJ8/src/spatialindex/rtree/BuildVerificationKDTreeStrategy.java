@@ -6,8 +6,6 @@ package spatialindex.rtree;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.jws.Oneway;
-
 import spatialindex.core.IData;
 import spatialindex.core.IEntry;
 import spatialindex.core.INode;

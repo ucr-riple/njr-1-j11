@@ -363,7 +363,7 @@ public class ApplicationConnection extends Thread implements A2SMessageReceiver,
 		
 	}
 	
-	private void close() {
+	public void close() {
 		try {
 			socket.close();
 		} catch (IOException e) {

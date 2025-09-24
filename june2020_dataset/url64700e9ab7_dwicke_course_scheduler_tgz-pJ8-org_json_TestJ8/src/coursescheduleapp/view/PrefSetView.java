@@ -37,8 +37,6 @@ import java.awt.Insets;
 public class PrefSetView extends javax.swing.JPanel {
 
 	private PreferenceSet prefSet;
-	private int numEquiv, numSelect;
-	private CourseCollectionDB courseDB;
     /** Creates new form PrefSetView */
     public PrefSetView() {
         initComponents();
@@ -48,9 +46,6 @@ public class PrefSetView extends javax.swing.JPanel {
     public void setPrefSet(PreferenceSet prefSet, int numEquiv, int numSelect, CourseCollectionDB courseDB)
     {
     	this.prefSet = prefSet;
-    	this.numEquiv = numEquiv;
-    	this.numSelect = numSelect;
-    	this.courseDB = courseDB;
     	coursePrefView1.setCoursePref(prefSet.getCoursePref(), numEquiv, numSelect, courseDB);
     	schedPrefView1.setSchedPref(prefSet.getSchedulePref());
     }

@@ -36,8 +36,6 @@ import javax.swing.event.PopupMenuEvent;
 public class CourseSelectView extends javax.swing.JPanel implements ListSelectionListener, Subscriber {
 
 
-	private CourseSelection courseSelect;
-	private int whichCourse, whichEquiv;
 
 	private CourseCollectionDB courseDB;
 	private CourseSelectControl control;
@@ -53,9 +51,6 @@ public class CourseSelectView extends javax.swing.JPanel implements ListSelectio
 
 	public void setCoursePref(CourseSelection courseSelect, int whichCourse, int whichEquiv, CourseCollectionDB courseDB) throws SQLException
 	{
-		this.courseSelect = courseSelect;
-		this.whichCourse = whichCourse;
-		this.whichEquiv = whichEquiv;
 		this.courseDB = courseDB;
 		try {
 			this.courseDB.addSubscriber(this);

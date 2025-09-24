@@ -7,9 +7,9 @@ public class VirtualFileSystem implements FileAlterationListener {
 
 	private File directory;
 
-	public VirtualFileSystem(String directory) {
-		this.directory = new File(directory);
-		FileAlterationObserver observer = new FileAlterationObserver(directory);
+	public VirtualFileSystem(String dir) {
+		this.directory = new File(dir);
+		FileAlterationObserver observer = new FileAlterationObserver(dir);
 		observer.addListener(this);
 		FileAlterationMonitor monitor = new FileAlterationMonitor(10);
 		monitor.addObserver(observer);

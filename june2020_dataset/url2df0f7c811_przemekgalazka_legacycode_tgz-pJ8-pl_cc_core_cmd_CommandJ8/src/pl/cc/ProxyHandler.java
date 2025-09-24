@@ -117,7 +117,7 @@ public class ProxyHandler implements ProxyEventListener, ProxyTasks, RealAgentLi
 		return connectedAgent;
 	}
 	
-	private void disconnectAndCleanup(){
+	public void disconnectAndCleanup(){
 		log.debug("cleanupAfterDisconnect - started ...");
 		if (connectedAgent!=null){
 			lastPauseType=connectedAgent.getPauseType();
@@ -139,7 +139,7 @@ public class ProxyHandler implements ProxyEventListener, ProxyTasks, RealAgentLi
 	/**
 	 * Zamkniďż˝cie i posprzďż˝tanie po TCP Socket do poďż˝ďż˝czenia z CCProxy
 	 */
-	private void closeTCPSocket() {
+	public void closeTCPSocket() {
 		if (closingSocket || socket == null) {
 			return;
 		} else {

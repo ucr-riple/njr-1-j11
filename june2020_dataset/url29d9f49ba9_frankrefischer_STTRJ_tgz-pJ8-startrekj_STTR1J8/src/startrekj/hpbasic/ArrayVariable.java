@@ -9,7 +9,6 @@ public class ArrayVariable {
 	private String name;
 
 	private int size1=0;
-	private int size2=0;
 	
 	private Vector<Number> array = new Vector<Number>();
 	
@@ -18,7 +17,7 @@ public class ArrayVariable {
 	}
 	public void setSize(int size1, int size2) {
 		this.size1 = size1 < 2 ? 1 : size1;
-		this.size2 = size2 < 2 ? 1 : size2;
+		size2 = size2 < 2 ? 1 : size2;
 		array.setSize(size1*size2);
 	}
 	public String getName() {

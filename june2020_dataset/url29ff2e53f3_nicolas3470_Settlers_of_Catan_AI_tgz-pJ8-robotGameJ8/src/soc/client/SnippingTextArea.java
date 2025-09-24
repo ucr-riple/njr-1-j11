@@ -191,11 +191,6 @@ public class SnippingTextArea extends TextArea
             lines--;
         }
         // java 1.2 deprecated getPeer, adding isDisplayable()
-
-        if (getPeer() != null)
-        {
-            setCaretPosition(getText().length());
-        }
     }
 
 }

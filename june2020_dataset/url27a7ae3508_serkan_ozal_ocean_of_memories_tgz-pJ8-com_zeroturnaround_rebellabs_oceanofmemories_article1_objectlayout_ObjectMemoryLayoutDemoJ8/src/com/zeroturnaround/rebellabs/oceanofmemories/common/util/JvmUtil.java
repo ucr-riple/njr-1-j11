@@ -34,7 +34,6 @@ import javax.management.openmbean.CompositeDataSupport;
 
 import org.apache.log4j.Logger;
 
-import sun.management.VMManagement;
 import sun.misc.Unsafe;
 
 import com.google.common.collect.HashMultiset;
@@ -1434,15 +1433,9 @@ public class JvmUtil {
         return "0x" + Long.toBinaryString(address).toUpperCase();
     }
 
-    private static void findProcessId() throws Exception {
-        RuntimeMXBean mxbean = ManagementFactory.getRuntimeMXBean();
-        Field jvmField = mxbean.getClass().getDeclaredField("jvm");
-
-        jvmField.setAccessible(true);
-        VMManagement management = (VMManagement) jvmField.get(mxbean);
-        Method method = management.getClass().getDeclaredMethod("getProcessId");
-        method.setAccessible(true);
-        processId = (Integer) method.invoke(management);
+    private static void findProcessId() {
+        long pid = ProcessHandle.current().pid();
+        processId = (int) pid;
     }
 
     public static Integer getProcessId() throws Exception {

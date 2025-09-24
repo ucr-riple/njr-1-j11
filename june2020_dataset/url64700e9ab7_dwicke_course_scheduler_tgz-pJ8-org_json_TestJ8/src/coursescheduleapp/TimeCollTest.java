@@ -24,7 +24,8 @@ public class TimeCollTest extends TestCase{
     
     private TimePeriod morning, afternoon, evening, allDay;
     
-	private TimeCollection blank, coll;
+	private TimeCollection blank;
+	private TimeCollection coll;
 	
 	@Override
 	protected void setUp(){

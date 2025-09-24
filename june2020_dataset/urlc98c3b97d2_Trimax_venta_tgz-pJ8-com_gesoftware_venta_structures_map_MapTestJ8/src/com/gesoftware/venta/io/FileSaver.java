@@ -45,7 +45,7 @@ public final class FileSaver {
      * METHOD: Closes file
      * AUTHOR: Eliseev Dmitry
      * */
-    private void close() {
+    public void close() {
         try {
             if (m_ObjectOutputStream != null)
                 m_ObjectOutputStream.close();

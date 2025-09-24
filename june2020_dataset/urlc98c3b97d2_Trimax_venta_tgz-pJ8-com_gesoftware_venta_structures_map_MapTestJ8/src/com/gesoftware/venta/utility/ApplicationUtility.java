@@ -57,7 +57,7 @@ public final class ApplicationUtility {
     } /* End of 'ApplicationUtility::ApplicationUtility' method */
 
     @SuppressWarnings("all")
-    private void release() throws Throwable {
+    public void release() throws Throwable {
         if (m_Lock.isValid())
             m_Lock.release();
 

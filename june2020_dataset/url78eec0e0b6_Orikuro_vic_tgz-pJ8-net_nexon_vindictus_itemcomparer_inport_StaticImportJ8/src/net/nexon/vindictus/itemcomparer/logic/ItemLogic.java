@@ -5,8 +5,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
-import javax.xml.ws.handler.MessageContext.Scope;
-
 import net.nexon.vindictus.itemcomparer.inport.ScrollProperty;
 import net.nexon.vindictus.itemcomparer.inport.StaticScrolls;
 import net.nexon.vindictus.itemcomparer.logic.comparators.ItemLevelComparator;

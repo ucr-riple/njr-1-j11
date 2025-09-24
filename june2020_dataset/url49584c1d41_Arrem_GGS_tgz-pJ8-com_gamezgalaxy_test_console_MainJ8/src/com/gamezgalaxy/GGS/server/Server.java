@@ -310,7 +310,7 @@ public final class Server implements LogInterface {
 		for (int i = 0; i < 100; i++) {
 			byte[] seedb = new byte[16];
 			sr.nextBytes(seedb);
-			Salt = new sun.misc.BASE64Encoder().encode(seedb).replace("=", "" + ((Salt != null) ? Salt.toCharArray()[0] : "A"));
+			Salt = Base64.getEncoder().encodeToString(seedb).replace("=", "" + ((Salt != null) ? Salt.toCharArray()[0] : "A"));;
 			if (new Random().nextDouble() < .3)
 				break;
 		}

@@ -10,7 +10,6 @@ import java.net.URLConnection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import sun.net.www.http.HttpClient;
 
 import wikipedia.Main;
 

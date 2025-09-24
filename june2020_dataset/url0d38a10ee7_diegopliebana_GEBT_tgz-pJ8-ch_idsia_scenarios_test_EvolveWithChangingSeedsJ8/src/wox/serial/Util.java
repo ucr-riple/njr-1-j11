@@ -17,9 +17,8 @@ import java.lang.reflect.Constructor;
 public class Util implements Serial {
 
     /** reflection factory for forcing default constructors */
-    private static final ReflectionFactory reflFactory = (ReflectionFactory)
-            AccessController.doPrivileged(
-                    new ReflectionFactory.GetReflectionFactoryAction());
+    private static final ReflectionFactory reflFactory = ReflectionFactory.getReflectionFactory();
+                    
 
 
 

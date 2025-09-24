@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.omg.DynamicAny.DynAnyPackage.TypeMismatch;
-
 /**
  * Represents the Symbol Table, as a hash map of string => hash map.
  * Each entry in the hash map represents a scope, with a string key, and a hash map value;

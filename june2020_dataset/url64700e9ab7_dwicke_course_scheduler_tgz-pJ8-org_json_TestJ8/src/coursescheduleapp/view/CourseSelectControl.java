@@ -9,15 +9,12 @@ import coursescheduleapp.model.CourseSelection;
 public class CourseSelectControl {
 	
 	private CourseSelection courseSelect;
-	private int whichCourse, whichEquiv;
 
 	private CourseCollectionDB courseDB;
 	
 	public CourseSelectControl(CourseSelection courseSelect, int whichCourse, int whichEquiv, CourseCollectionDB courseDB)
     {
     	this.courseSelect = courseSelect;
-    	this.whichCourse = whichCourse;
-    	this.whichEquiv = whichEquiv;
     	this.courseDB = courseDB;
     }
 	

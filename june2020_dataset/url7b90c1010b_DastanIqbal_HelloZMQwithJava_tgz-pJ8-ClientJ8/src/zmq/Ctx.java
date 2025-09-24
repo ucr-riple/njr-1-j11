@@ -132,7 +132,7 @@ public class Ctx {
         endpoints = new HashMap<String, Endpoint>();
     }
     
-    protected void destroy() {
+    public void destroy() {
         
         for  (IOThread it: io_threads) {
             it.stop();

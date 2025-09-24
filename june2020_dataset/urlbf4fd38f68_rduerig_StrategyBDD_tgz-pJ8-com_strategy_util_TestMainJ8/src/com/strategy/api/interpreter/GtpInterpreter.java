@@ -78,7 +78,7 @@ public class GtpInterpreter extends Thread {
 		exit();
 	}
 
-	private void exit() {
+	public void exit() {
 		out.println("Bye");
 		interrupt();
 		scanner.close();

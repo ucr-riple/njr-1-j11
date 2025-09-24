@@ -19,7 +19,6 @@ public class CtrlServer implements Runnable {
 	
 	private int connCount = 0;
 
-	private boolean serverListening;
 
 	private final ArrayList<CtrlServerThread> serverThreads;
 
@@ -42,7 +41,7 @@ public class CtrlServer implements Runnable {
 	 */
 	@Override
 	public void run() {
-
+		boolean serverListening = false;
 		try
 		{
 			serverSocket = new ServerSocket(port);
@@ -103,7 +102,7 @@ public class CtrlServer implements Runnable {
 	 */
 	public synchronized void stopServer() {
 
-		serverListening = false;
+		boolean serverListening = false;
 
 		try
 		{

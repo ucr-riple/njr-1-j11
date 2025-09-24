@@ -377,7 +377,7 @@ public final class DBConnection {
      *  PARAM: [IN] sql - prepared statement
      * AUTHOR: Dmitry Eliseev
      * */
-    private void closeStatement(final DBStatement query) {
+    public void closeStatement(final DBStatement query) {
         if (query == null)
             return;
 
@@ -399,7 +399,7 @@ public final class DBConnection {
      *  PARAM: [IN] query - multiple query
      * AUTHOR: Dmitry Eliseev
      * */
-    private void closeStatement(final DBMultipleStatement query) {
+    public void closeStatement(final DBMultipleStatement query) {
         if (query == null)
             return;
 
