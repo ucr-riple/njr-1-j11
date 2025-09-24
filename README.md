@@ -3,7 +3,7 @@
 This repository provides a Java 11–compatible edition of the NJR benchmark suite. The original NJR suite targeted Java 8 and is widely used for evaluating program-analysis and tooling workflows. Many modern tools and environments have moved beyond Java 8, so this edition updates the benchmarks to compile and run on Java 11 while preserving the original structure and intent.
 
 > Please cite the original NJR release by Jens et al. ([DOI: 10.5281/zenodo.8015477](https://doi.org/10.5281/zenodo.8015477)). See **Credits & Citation** below.
-r
+
 ## Why Java 11?
 
 * Many analysis and build tools no longer support Java 8 out of the box.
