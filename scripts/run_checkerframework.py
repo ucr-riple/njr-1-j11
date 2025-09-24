@@ -6,12 +6,26 @@ the top of the file before executing.
 import os
 import shutil
 
-BENCHMARKS_FOLDER = "../final_dataset"
+BENCHMARKS_FOLDER = "../june2020_dataset"
 RESULTS_FOLDER = "checkerframework_results"
 COMPILED_CLASSES_FOLDER = "cf_classes"
 SRC_FILES = "cf_srcs.txt"
-CF_BINARY = "tools/checker-framework-3.11.0/checker/bin/javac"
-CF_COMMAND = "-processor org.checkerframework.checker.nullness.NullnessChecker"
+JAVAC_WITH_FLAGS = (
+    "javac "
+    "-J--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED "
+    "-J--add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED "
+    "-J--add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED "
+    "-J--add-exports=jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED "
+    "-J--add-exports=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED "
+    "-J--add-exports=jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED "
+    "-J--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED "
+    "-J--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED "
+    "-J--add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED"
+)
+CF_ROOT = "tools/checker-framework-3.49.0"
+CF_COMMAND = "-processor org.checkerframework.checker.resourceleak.ResourceLeakChecker"
+CF_DIST_JAR_ARG = f"-processorpath {CF_ROOT}/checker/dist/checker.jar"
+CHECKER_QUAL_JAR = f"{CF_ROOT}/checker/dist/checker-qual.jar"
 SKIP_COMPLETED = True #skips if the output file is already there.
 TIMEOUT = 1800
 TIMEOUT_CMD = "timeout"
@@ -46,11 +60,15 @@ for benchmark in os.listdir(BENCHMARKS_FOLDER):
     #execute infer on the source files
     command = (TIMEOUT_CMD 
         + " " + str(TIMEOUT)
-        + " " + CF_BINARY
+        + " " + JAVAC_WITH_FLAGS
+        + " " + CF_DIST_JAR_ARG
         + " " + CF_COMMAND
         + " " + "-d"
         + " " + COMPILED_CLASSES_FOLDER
-        + " " + " -cp " + lib_folder
+        + " " + " -cp " + lib_folder + ":" + CHECKER_QUAL_JAR
+        + " " + "-Adetailedmsgtext"
+        + " " + "-Awarns"
+        + " " + "-Xmaxwarns 10000"
         + " @" + SRC_FILES
         + " 2> " +  RESULTS_FOLDER
         + "/" + benchmark + ".txt"
@@ -59,3 +77,5 @@ for benchmark in os.listdir(BENCHMARKS_FOLDER):
 
     #remove the classes folder
     shutil.rmtree(COMPILED_CLASSES_FOLDER)
+    #remove the src files list
+    os.remove(SRC_FILES)
